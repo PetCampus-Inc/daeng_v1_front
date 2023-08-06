@@ -1,5 +1,9 @@
+import SignIn from "./components/signInForm";
+
 const App = () => {
-  return <></>;
+  return (
+    <SignIn />
+  );
 };
 
 export default App;
