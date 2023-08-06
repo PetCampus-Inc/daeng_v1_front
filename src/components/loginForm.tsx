@@ -20,7 +20,7 @@ class LoginForm extends React.Component {
           <Submit
             type="submit"
             value="Submit"
-            onClick={() => window.alert("Login info has submitted.")}
+            onClick={() => window.alert("Login has requested.")}
           />
         </form>
       </Wrapper>
@@ -29,6 +29,7 @@ class LoginForm extends React.Component {
 }
 export const Wrapper = styled.div`
   width: 100%;
+  min-width: 300px;
   max-width: 400px;
   margin: 0 auto;
   padding: 40px;
