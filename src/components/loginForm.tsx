@@ -1,6 +1,6 @@
 import React from "react";
 
-class SignIn extends React.Component {
+class LoginForm extends React.Component {
     render() {
         return (
             <div className="login-wrapper">
@@ -18,4 +18,4 @@ class SignIn extends React.Component {
     }
 }
 
-export default SignIn;
+export default LoginForm;

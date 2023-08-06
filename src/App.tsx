@@ -1,8 +1,8 @@
-import SignIn from "./components/signInForm";
+import LoginForm from "./components/loginForm";
 
 const App = () => {
   return (
-    <SignIn />
+    <LoginForm />
   );
 };
 
