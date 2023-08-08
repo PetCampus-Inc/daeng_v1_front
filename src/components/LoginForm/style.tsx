@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const StyledWrapper = styled.div`
   width: 100%;
   min-width: 300px;
   max-width: 400px;
@@ -13,14 +13,14 @@ export const Wrapper = styled.div`
   font-family: "Roboto", sans-serif;
 `;
 
-export const Title = styled.h2`
+export const StyledTitle = styled.h2`
   margin-bottom: 15px;
   font-size: 30px;
   font-weight: 900;
   color: #6a24fe;
 `;
 
-export const AccountInput = styled.input`
+export const StyledInputBox = styled.input`
   width: 100%;
   height: 45px;
   padding: 0 10px;
@@ -34,7 +34,7 @@ export const AccountInput = styled.input`
   }
 `;
 
-export const RememberCheckLabel = styled.label`
+export const StyledCheckbox = styled.label`
   height: 20px;
   display: flex;
   align-items: center;
@@ -44,13 +44,13 @@ export const RememberCheckLabel = styled.label`
   color: #999999;
 `;
 
-export const CheckboxInput = styled(AccountInput)`
+export const StyledCheckboxLabel = styled(StyledInputBox)`
   width: auto;
   height: auto;
   margin-right: 10px;
 `;
 
-export const Submit = styled.input`
+export const StyledButton = styled.input`
   width: 100%;
   height: 45px;
   color: #fff;

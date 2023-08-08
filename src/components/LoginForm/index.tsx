@@ -1,36 +1,36 @@
 import React from "react";
 import {
-  Wrapper,
-  Title,
-  AccountInput,
-  CheckboxInput,
-  RememberCheckLabel,
-  Submit,
+  StyledWrapper,
+  StyledTitle,
+  StyledInputBox,
+  StyledCheckboxLabel,
+  StyledCheckbox,
+  StyledButton,
 } from "./style";
 
 class LoginForm extends React.Component {
   render() {
     return (
-      <Wrapper>
-        <Title>Login</Title>
+      <StyledWrapper>
+        <StyledTitle>Login</StyledTitle>
         <form>
-          <AccountInput type="text" name="userName" placeholder="Email" />
-          <AccountInput
+          <StyledInputBox type="text" name="userName" placeholder="Email" />
+          <StyledInputBox
             type="password"
             name="userPassword"
             placeholder="Password"
           />
-          <RememberCheckLabel htmlFor="remember-check">
-            <CheckboxInput type="checkbox" id="remember-check" />
+          <StyledCheckbox htmlFor="remember-check">
+            <StyledCheckboxLabel type="checkbox" id="remember-check" />
             아이디 저장하기
-          </RememberCheckLabel>
-          <Submit
+          </StyledCheckbox>
+          <StyledButton
             type="submit"
             value="Submit"
             onClick={() => window.alert("Login has requested.")}
           />
         </form>
-      </Wrapper>
+      </StyledWrapper>
     );
   }
 }
