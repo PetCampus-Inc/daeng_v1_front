@@ -8,7 +8,7 @@ import {
   StyledButton,
 } from "./styles";
 
-class LoginForm extends React.Component {
+class loginForm extends React.Component {
   render() {
     return (
       <StyledWrapper>
@@ -35,4 +35,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default loginForm;
