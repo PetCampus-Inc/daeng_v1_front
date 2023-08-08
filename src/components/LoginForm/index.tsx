@@ -6,7 +6,7 @@ import {
   StyledCheckboxLabel,
   StyledCheckbox,
   StyledButton,
-} from "./style";
+} from "./styles";
 
 class LoginForm extends React.Component {
   render() {
