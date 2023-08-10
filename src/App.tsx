@@ -1,5 +1,11 @@
+import * as Pages from "pages";
+
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <Pages.HomePage />
+    </>
+  );
 };
 
 export default App;
