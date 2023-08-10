@@ -7,15 +7,15 @@ import {
   StyledCheckbox,
   StyledButton,
 } from "./styles";
-import { handleChange } from "hooks/handleChange";
+
 
 const LoginForm: React.FC = () => {
-  const [credentials, setCredentials] = useState({ id: "", pw: "" });
+  const [credentials, setCredentials] = useState({ userName: "", userPassword: "" });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = handleChange(e);
+    const { name, value } = e.target;
     setCredentials((prevCredentials) => ({
-      ...prevCredentials,
-      [name]: value,
+      ...prevCredentials, [name]: value
     }));
   };
 
@@ -29,14 +29,14 @@ const LoginForm: React.FC = () => {
           type="text"
           name="userName"
           placeholder="Email"
-          value={credentials.id}
+          value={credentials.userName}
           onChange={handleInputChange}
         />
         <StyledInputBox
           type="password"
           name="userPassword"
           placeholder="Password"
-          value={credentials.pw}
+          value={credentials.userPassword}
           onChange={handleInputChange}
         />
         <StyledCheckbox htmlFor="remember-check">
