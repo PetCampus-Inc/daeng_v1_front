@@ -46,7 +46,7 @@ const LoginForm: React.FC = () => {
         <StyledButton
           type="submit"
           value="Submit"
-          onClick={() => window.alert("Login has requested.")}
+          onClick={() => window.alert(`Login has requested.\nID: ${credentials.userName}\nPassword: ${credentials.userPassword}`)}
         />
       </form>
     </StyledWrapper>
