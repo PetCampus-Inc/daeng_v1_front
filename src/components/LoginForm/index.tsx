@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   StyledWrapper,
   StyledTitle,
@@ -19,7 +19,6 @@ const LoginForm: React.FC = () => {
     }));
   };
 
-  useEffect(() => { });
 
   return (
     <StyledWrapper>
