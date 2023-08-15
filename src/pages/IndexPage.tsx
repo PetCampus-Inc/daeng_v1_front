@@ -1,22 +1,37 @@
 import { LoadingIndicator } from "components/index";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import useLoadingStatus from "hooks/useLoadingStatus";
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const IndexPage = () => {
-    const [isLoading, setLoading] = useState(true);
+    const { loadingStatus, setLoadingStatus } = useLoadingStatus();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setLoading(false);
+            setLoadingStatus("Loading Completed!")
         }, 2000);
         return () => clearTimeout(timer);
-    }, []);
+    });
+
+    const handleButtonClick = () => {
+        setLoadingStatus("Navigating to login page...")
+        const timer = setTimeout(() => {
+            navigate("/login");
+        }, 1000);
+        return () => clearTimeout(timer);
+    };
 
     return (
         <div>
-            <LoadingIndicator isLoading={isLoading} />
-            {!isLoading && <Link to="/login"><StyledButton>Go to Login Page</StyledButton></Link>}
+            <LoadingIndicator message={loadingStatus} />
+            {
+                loadingStatus === "Loading Completed!" &&
+                <StyledButton onClick={handleButtonClick}>
+                    Go to Login Page
+                </StyledButton>
+            }
         </div>
     );
 };

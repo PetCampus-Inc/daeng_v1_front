@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyledWrapper,
   StyledTitle,
@@ -7,18 +7,11 @@ import {
   StyledCheckbox,
   StyledButton,
 } from "./styles";
+import useLoginCredentials from "hooks/useLoginCredentials";
 
 
 const LoginForm: React.FC = () => {
-  const [credentials, setCredentials] = useState({ userName: "", userPassword: "" });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCredentials((prevCredentials) => ({
-      ...prevCredentials, [name]: value
-    }));
-  };
-
+  const { credentials, handleCredentialChange, handleSubmit } = useLoginCredentials();
 
   return (
     <StyledWrapper>
@@ -29,14 +22,14 @@ const LoginForm: React.FC = () => {
           name="userName"
           placeholder="Email"
           value={credentials.userName}
-          onChange={handleInputChange}
+          onChange={handleCredentialChange}
         />
         <StyledInputBox
           type="password"
           name="userPassword"
           placeholder="Password"
           value={credentials.userPassword}
-          onChange={handleInputChange}
+          onChange={handleCredentialChange}
         />
         <StyledCheckbox htmlFor="remember-check">
           <StyledCheckboxLabel type="checkbox" id="remember-check" />
@@ -45,7 +38,7 @@ const LoginForm: React.FC = () => {
         <StyledButton
           type="submit"
           value="Submit"
-          onClick={() => window.alert(`Login has requested.\nID: ${credentials.userName}\nPassword: ${credentials.userPassword}`)}
+          onClick={handleSubmit}
         />
       </form>
     </StyledWrapper>

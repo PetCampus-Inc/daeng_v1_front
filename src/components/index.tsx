@@ -1,4 +1,4 @@
 import LoginForm from "./LoginForm";
-import LoadingIndicator from "./LoadingView";
+import LoadingIndicator from "./LoadingIndicator";
 
 export { LoginForm, LoadingIndicator };

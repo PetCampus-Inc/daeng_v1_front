@@ -2,11 +2,7 @@ import { LoginForm } from "components/index";
 
 const LoginPage = () => {
 
-  return (
-    <div>
-      <LoginForm />
-    </div>
-  );
+  return <LoginForm />;
 };
 
 export default LoginPage;
