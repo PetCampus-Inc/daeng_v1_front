@@ -5,17 +5,16 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 import { ThemeConfig } from "./styles/ThemeConfig";
 import { ThemeProvider } from "styled-components";
 import router from "router";
+import App from "App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <BrowserRouter>
-    <ThemeProvider theme={ThemeConfig}>
-      <RecoilRoot>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </RecoilRoot>
-    </ThemeProvider>
-  </BrowserRouter>
+  <ThemeProvider theme={ThemeConfig}>
+    <RecoilRoot>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </RecoilRoot>
+  </ThemeProvider>
 );
