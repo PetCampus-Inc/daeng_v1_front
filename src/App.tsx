@@ -1,18 +1,23 @@
 import React from "react";
-import Components from "components";
+import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import Navbar from "components/NavBar";
+import Navbar from "components/Layout/NavBar";
+import Header from "components/Layout/Header";
 
 const App = () => {
   return (
     <>
-      <header>헤더</header>
-      <main>
+      <Header />
+      <Main>
         <Outlet />
-      </main>
+      </Main>
       <Navbar />
     </>
   );
 };
 
 export default App;
+
+const Main = styled.main`
+  position: relative;
+`;
