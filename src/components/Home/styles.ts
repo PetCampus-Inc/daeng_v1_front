@@ -1,3 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const MainWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;

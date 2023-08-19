@@ -19,5 +19,8 @@ const App = () => {
 export default App;
 
 const Main = styled.main`
-  position: relative;
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  margin-top: 5vh;
 `;
