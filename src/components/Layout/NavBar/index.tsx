@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, StyledNavBtn } from "./styles";
-import { Link } from "react-router-dom";
 
 // **경로 수정 필요** //
 const Navbar = () => {
