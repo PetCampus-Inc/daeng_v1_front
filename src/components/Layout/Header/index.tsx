@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, HeaderWrapper, IconsWrapper, LogoWrapper } from "./styles";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 const Header = () => {
   return (
@@ -12,10 +13,10 @@ const Header = () => {
         </LogoWrapper>
         <IconsWrapper>
           <Link to={"/"}>
-            <img src="images/foot-icon.png" alt="logo" />
+            <img src="images/foot-icon.png" alt="foot-icon" />
           </Link>
           <Link to={"/"}>
-            <img src="images/bell-icon.png" alt="yellow-dot" />
+            <img src="images/bell-icon.png" alt="bell-icon" />
           </Link>
         </IconsWrapper>
       </HeaderWrapper>
@@ -23,4 +24,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
