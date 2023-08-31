@@ -1,6 +1,5 @@
-import React from "react";
 import { Container, StyledNavBtn } from "./styles";
-import { Link } from "react-router-dom";
+import { memo } from "react";
 
 // **경로 수정 필요** //
 const Navbar = () => {
@@ -14,4 +13,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

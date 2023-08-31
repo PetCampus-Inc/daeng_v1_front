@@ -1,8 +1,27 @@
 import React from "react";
-import { Container } from "./styles";
+import { Container, HeaderWrapper, IconsWrapper, LogoWrapper } from "./styles";
+import { Link } from "react-router-dom";
+import { memo } from "react";
 
 const Header = () => {
-  return <Container>Header</Container>;
+  return (
+    <Container>
+      <HeaderWrapper>
+        <LogoWrapper to={"/home"}>
+          <img src="images/knock-dog-logo.png" alt="logo" />
+          <img src="images/yellow-dot.png" alt="yellow-dot" />
+        </LogoWrapper>
+        <IconsWrapper>
+          <Link to={"/"}>
+            <img src="images/foot-icon.png" alt="foot-icon" />
+          </Link>
+          <Link to={"/"}>
+            <img src="images/bell-icon.png" alt="bell-icon" />
+          </Link>
+        </IconsWrapper>
+      </HeaderWrapper>
+    </Container>
+  );
 };
 
-export default Header;
+export default memo(Header);

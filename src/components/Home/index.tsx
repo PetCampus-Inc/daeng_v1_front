@@ -1,8 +1,8 @@
 import { memo } from "react";
-import { MainWrapper } from "./styles";
+import { Container } from "./styles";
 
 const Home = () => {
-  return <MainWrapper>home</MainWrapper>;
+  return <Container>home</Container>;
 };
 
 export default memo(Home);
