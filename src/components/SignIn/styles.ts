@@ -7,6 +7,7 @@ export const Container = styled.div`
   padding-left: 5%;
   padding-right: 5%;
   background-color: white;
+  justify-content: space-evenly;
 `;
 
 export const TextWrapper = styled.div`
@@ -14,7 +15,7 @@ export const TextWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const Text = styled.text`
+export const StyledTitleText = styled.text`
   font-weight: 700;
   font-size: 24px;
   margin-bottom: 5px;
