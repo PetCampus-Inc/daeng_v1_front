@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import Navbar from "components/Layout/NavBar";
-import Header from "components/Layout/Header";
+import Navbar from "components/common/NavBar";
+import Header from "components/common/Header";
 
 const App = () => {
   return (
     <>
-      <Header />
+      <Header type="main" />
       <Main>
         <Outlet />
       </Main>
