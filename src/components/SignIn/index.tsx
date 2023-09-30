@@ -18,6 +18,7 @@ import useSignIn from "hooks/useSignIn";
 import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
 import RoleBox from "./RoleBox";
+import { RoleConstants } from "constants/index";
 
 const SignIn = () => {
   const {
@@ -93,8 +94,22 @@ const SignIn = () => {
 
         {currentMainStep === 2 && (
           <StyledSelectRoleWrapper>
-            <RoleBox selected={selectedRole}></RoleBox>
-            <RoleBox selected={selectedRole}></RoleBox>
+            <RoleBox
+              selected={selectedRole === 0 ? true : false}
+              mainText={RoleConstants[0].role}
+              subText={RoleConstants[0].description}
+              handleClick={() => {
+                selectedRole === 0 ? setSelectedRole(-1) : setSelectedRole(0);
+              }}
+            />
+            <RoleBox
+              selected={selectedRole === 1 ? true : false}
+              mainText={RoleConstants[1].role}
+              subText={RoleConstants[1].description}
+              handleClick={() => {
+                selectedRole === 1 ? setSelectedRole(-1) : setSelectedRole(1);
+              }}
+            />
           </StyledSelectRoleWrapper>
         )}
 
@@ -148,6 +163,8 @@ const SignIn = () => {
               handleClick={() => {
                 setCurrentMainStep(currentMainStep + 1);
               }}
+              backColor={selectedRole !== -1 ? undefined : "#E9E9E9"}
+              textColor={selectedRole !== -1 ? undefined : "#B5B5B5"}
             />
           )}
         </StyledBottomWrapper>
