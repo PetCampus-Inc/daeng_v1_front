@@ -75,3 +75,8 @@ export const TryButton = styled.button`
   background-color: white;
   color: #525252;
 `;
+
+export const StyledInputBoxTitleText = styled.text`
+  font-size: 1.2rem;
+  font-weight: 400;
+`;
