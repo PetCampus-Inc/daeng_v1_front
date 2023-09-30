@@ -12,13 +12,13 @@ export const Container = styled.div`
   background-color: white;
 `;
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div<{ type: string }>`
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: space-between;
   align-items: center;
-  margin-left: 5%;
+  margin-left: ${(props) => (props.type === "main" ? "5%" : undefined)};
   margin-right: 6%;
 `;
 
@@ -32,4 +32,10 @@ export const IconsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20%;
+`;
+
+export const BackIconWrapper = styled.div`
+  display: flex;
+  height: 70%;
+  cursor: pointer;
 `;

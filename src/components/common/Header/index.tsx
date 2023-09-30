@@ -1,4 +1,10 @@
-import { Container, HeaderWrapper, IconsWrapper, LogoWrapper } from "./styles";
+import {
+  Container,
+  HeaderWrapper,
+  IconsWrapper,
+  LogoWrapper,
+  BackIconWrapper,
+} from "./styles";
 import { Link } from "react-router-dom";
 import { memo } from "react";
 
@@ -10,12 +16,14 @@ header type
 
 interface Props {
   type: string;
+  handleClick?: () => void | Promise<void>;
+  text?: string;
 }
 
-const Header = ({ type }: Props) => {
+const Header = ({ type, handleClick, text }: Props) => {
   return (
     <Container>
-      <HeaderWrapper>
+      <HeaderWrapper type={type}>
         {type === "main" && (
           <>
             <LogoWrapper to={"/home"}>
@@ -31,6 +39,11 @@ const Header = ({ type }: Props) => {
               </Link>
             </IconsWrapper>
           </>
+        )}
+        {type === "back" && (
+          <BackIconWrapper onClick={handleClick}>
+            <img src="images/chevron-left.png" alt="logo" />
+          </BackIconWrapper>
         )}
       </HeaderWrapper>
     </Container>
