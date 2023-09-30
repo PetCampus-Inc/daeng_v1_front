@@ -13,6 +13,7 @@ export const Container = styled.div`
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 10%;
 `;
 
 export const StyledTitleText = styled.text`
@@ -76,7 +77,17 @@ export const TryButton = styled.button`
   color: #525252;
 `;
 
-export const StyledInputBoxTitleText = styled.text`
-  font-size: 1.2rem;
-  font-weight: 400;
+export const StyledBottomWrapper = styled.div`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+`;
+
+export const StyledInputBoxWrapper = styled.div`
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
