@@ -11,11 +11,13 @@ import {
   StyledBottomWrapper,
   StyledInputBoxWrapper,
   StyledSignInButton,
+  StyledSelectRoleWrapper,
 } from "./styles";
 import Button from "components/common/Button";
 import useSignIn from "hooks/useSignIn";
 import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
+import RoleBox from "./RoleBox";
 
 const SignIn = () => {
   const {
@@ -25,27 +27,34 @@ const SignIn = () => {
     setInputId,
     inputPw,
     setInputPw,
+    selectedRole,
+    setSelectedRole,
   } = useSignIn();
 
   return (
     <>
       {currentMainStep !== 0 && (
         <Header
-          type="back"
+          type={currentMainStep === 1 ? "back" : "text"}
+          text={currentMainStep === 2 ? "역할 선택" : undefined}
           handleClick={() => {
             setCurrentMainStep(currentMainStep - 1);
           }}
         />
       )}
-      <Container>
-        <TextWrapper>
-          <StyledTitleText>
-            {currentMainStep === 0 ? "반려견의 유치원" : "똑독 관리자 시작하기"}
-          </StyledTitleText>
-          <StyledTitleText>
-            {currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}
-          </StyledTitleText>
-        </TextWrapper>
+      <Container step={currentMainStep}>
+        {currentMainStep !== 2 && (
+          <TextWrapper>
+            <StyledTitleText>
+              {currentMainStep === 0
+                ? "반려견의 유치원"
+                : "똑독 관리자 시작하기"}
+            </StyledTitleText>
+            <StyledTitleText>
+              {currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}
+            </StyledTitleText>
+          </TextWrapper>
+        )}
 
         {currentMainStep === 0 && (
           <ButtonWrapper>
@@ -83,20 +92,10 @@ const SignIn = () => {
         )}
 
         {currentMainStep === 2 && (
-          <StyledInputBoxWrapper>
-            <InputBoxAndText
-              text="아이디"
-              type="text"
-              inputValue={inputId}
-              setInputValue={setInputId}
-            />
-            <InputBoxAndText
-              text="비밀번호"
-              type="password"
-              inputValue={inputPw}
-              setInputValue={setInputPw}
-            />
-          </StyledInputBoxWrapper>
+          <StyledSelectRoleWrapper>
+            <RoleBox selected={selectedRole}></RoleBox>
+            <RoleBox selected={selectedRole}></RoleBox>
+          </StyledSelectRoleWrapper>
         )}
 
         <StyledBottomWrapper>

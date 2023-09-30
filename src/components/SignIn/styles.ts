@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ step: number }>`
   width: 100%;
   height: 100%;
-  padding-top: 40%;
+  padding-top: ${(props) => (props.step === 2 ? "20%" : "40%")};
   padding-left: 5%;
   padding-right: 5%;
   background-color: white;
@@ -101,4 +101,10 @@ export const StyledSignInButton = styled.div`
   display: flex;
   margin-bottom: 5%;
   cursor: pointer;
+`;
+
+export const StyledSelectRoleWrapper = styled.div`
+  width: 100%;
+  height: 75%;
+  display: flex;
 `;

@@ -4,6 +4,8 @@ import {
   IconsWrapper,
   LogoWrapper,
   BackIconWrapper,
+  TitleText,
+  TextWrapper,
 } from "./styles";
 import { Link } from "react-router-dom";
 import { memo } from "react";
@@ -44,6 +46,15 @@ const Header = ({ type, handleClick, text }: Props) => {
           <BackIconWrapper onClick={handleClick}>
             <img src="images/chevron-left.png" alt="logo" />
           </BackIconWrapper>
+        )}
+        {type === "text" && (
+          <TextWrapper>
+            <BackIconWrapper onClick={handleClick}>
+              <img src="images/chevron-left.png" alt="logo" />
+            </BackIconWrapper>
+            <TitleText>{text}</TitleText>
+            <div style={{ width: "5%" }} />
+          </TextWrapper>
         )}
       </HeaderWrapper>
     </Container>
