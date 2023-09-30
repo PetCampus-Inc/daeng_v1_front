@@ -10,13 +10,21 @@ import {
   TryButton,
   StyledBottomWrapper,
   StyledInputBoxWrapper,
+  StyledSignInButton,
 } from "./styles";
 import Button from "components/common/Button";
 import useSignIn from "hooks/useSignIn";
 import InputBoxAndText from "./InputBoxAndText";
 
 const SignIn = () => {
-  const { currentMainStep, setCurrentMainStep } = useSignIn();
+  const {
+    currentMainStep,
+    setCurrentMainStep,
+    inputId,
+    setInputId,
+    inputPw,
+    setInputPw,
+  } = useSignIn();
 
   return (
     <Container>
@@ -49,22 +57,57 @@ const SignIn = () => {
 
       {currentMainStep === 1 && (
         <StyledInputBoxWrapper>
-          <InputBoxAndText text="아이디" />
-          <InputBoxAndText text="비밀번호" />
+          <InputBoxAndText
+            text="아이디"
+            type="text"
+            inputValue={inputId}
+            setInputValue={setInputId}
+          />
+          <InputBoxAndText
+            text="비밀번호"
+            type="password"
+            inputValue={inputPw}
+            setInputValue={setInputPw}
+          />
         </StyledInputBoxWrapper>
       )}
 
       <StyledBottomWrapper>
-        <Button
-          width="100%"
-          height="30%"
-          text="관리자로 시작하기"
-          weight="bold"
-          size="1.1rem"
-          handleClick={() => {
-            setCurrentMainStep(currentMainStep + 1);
-          }}
-        />
+        {currentMainStep === 0 && (
+          <Button
+            width="100%"
+            height="30%"
+            text="관리자로 시작하기"
+            weight="bold"
+            size="1.1rem"
+            handleClick={() => {
+              setCurrentMainStep(currentMainStep + 1);
+            }}
+          />
+        )}
+        {currentMainStep === 1 && (
+          <>
+            <StyledSignInButton>
+              {"처음이신가요? 회원가입하기"}
+            </StyledSignInButton>
+            <Button
+              width="100%"
+              height="30%"
+              text="로그인"
+              weight="bold"
+              size="1.1rem"
+              handleClick={() => {
+                setCurrentMainStep(currentMainStep + 1);
+              }}
+              backColor={
+                inputId.length > 4 && inputPw.length > 4 ? undefined : "#E9E9E9"
+              }
+              textColor={
+                inputId.length > 4 && inputPw.length > 4 ? undefined : "#B5B5B5"
+              }
+            />
+          </>
+        )}
       </StyledBottomWrapper>
     </Container>
   );

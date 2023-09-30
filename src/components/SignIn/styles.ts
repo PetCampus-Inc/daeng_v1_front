@@ -81,8 +81,9 @@ export const StyledBottomWrapper = styled.div`
   width: 100%;
   height: 20%;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const StyledInputBoxWrapper = styled.div`
@@ -90,4 +91,14 @@ export const StyledInputBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+`;
+
+export const StyledSignInButton = styled.div`
+  height: 10%;
+  font-size: 1rem;
+  color: #b5b5b5;
+  text-decoration: underline;
+  display: flex;
+  margin-bottom: 5%;
+  cursor: pointer;
 `;
