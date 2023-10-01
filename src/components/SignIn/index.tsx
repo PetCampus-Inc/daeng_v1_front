@@ -19,6 +19,7 @@ import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
 import RoleBox from "./RoleBox";
 import { RoleConstants } from "constants/index";
+import Teacher from "./Teacher";
 
 const SignIn = () => {
   const {
@@ -30,11 +31,13 @@ const SignIn = () => {
     setInputPw,
     selectedRole,
     setSelectedRole,
+    searchText,
+    setSearchText,
   } = useSignIn();
 
   return (
     <>
-      {currentMainStep !== 0 && (
+      {currentMainStep !== 0 && currentMainStep < 3 && (
         <Header
           type={currentMainStep === 1 ? "back" : "text"}
           text={currentMainStep === 2 ? "역할 선택" : undefined}
@@ -43,6 +46,11 @@ const SignIn = () => {
           }}
         />
       )}
+
+      {currentMainStep === 3 && selectedRole === 0 && (
+        <Teacher searchText={searchText} setSearchText={setSearchText} />
+      )}
+
       <Container step={currentMainStep}>
         {currentMainStep !== 2 && (
           <TextWrapper>
@@ -128,7 +136,11 @@ const SignIn = () => {
           )}
           {currentMainStep === 1 && (
             <>
-              <StyledSignInButton>
+              <StyledSignInButton
+                onClick={() => {
+                  setCurrentMainStep(currentMainStep + 1);
+                }}
+              >
                 {"처음이신가요? 회원가입하기"}
               </StyledSignInButton>
               <Button
@@ -138,7 +150,8 @@ const SignIn = () => {
                 weight="bold"
                 size="1.1rem"
                 handleClick={() => {
-                  setCurrentMainStep(currentMainStep + 1);
+                  //todo login
+                  //setCurrentMainStep(currentMainStep + 1);
                 }}
                 backColor={
                   inputId.length > 4 && inputPw.length > 4

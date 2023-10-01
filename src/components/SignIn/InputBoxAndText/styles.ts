@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledMainWrapper = styled.div`
   height: 18%;
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 5%;

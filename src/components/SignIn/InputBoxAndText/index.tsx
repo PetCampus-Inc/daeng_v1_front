@@ -16,7 +16,7 @@ const InputBoxAndText = ({ text, type, inputValue, setInputValue }: Props) => {
       <InputBox
         height="100%"
         width="100%"
-        placeholdText={"아이디를 입력해주세요"}
+        placeholdText={text + "를 입력해주세요"}
         type={type}
         inputValue={inputValue}
         setInputValue={(e: ChangeEvent<HTMLInputElement>) =>

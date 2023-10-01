@@ -6,11 +6,12 @@ interface Props {
   size?: string;
   weight?: string;
   color?: string;
+  height?: string;
 }
 
-const Text = ({ text, size, weight, color }: Props) => {
+const Text = ({ text, size, weight, color, height }: Props) => {
   return (
-    <StyledText size={size} weight={weight} color={color}>
+    <StyledText size={size} weight={weight} color={color} height={height}>
       {text}
     </StyledText>
   );

@@ -1,8 +1,13 @@
-import { memo } from "react";
+import { memo, Dispatch, SetStateAction } from "react";
 import Step1 from "../Step/step1";
 
-const Teacher = () => {
-  return <Step1></Step1>;
+interface Props {
+  searchText: string;
+  setSearchText: Dispatch<SetStateAction<string>>;
+}
+
+const Teacher = ({ searchText, setSearchText }: Props) => {
+  return <Step1 searchText={searchText} setSearchText={setSearchText} />;
 };
 
 export default memo(Teacher);

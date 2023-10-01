@@ -5,6 +5,7 @@ const useSignIn = () => {
   const [inputId, setInputId] = useState<string>("");
   const [inputPw, setInputPw] = useState<string>("");
   const [selectedRole, setSelectedRole] = useState<number>(-1);
+  const [searchText, setSearchText] = useState<string>("");
 
   return {
     currentMainStep,
@@ -15,6 +16,8 @@ const useSignIn = () => {
     setInputPw,
     selectedRole,
     setSelectedRole,
+    searchText,
+    setSearchText,
   };
 };
 

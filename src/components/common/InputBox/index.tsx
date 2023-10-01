@@ -1,5 +1,9 @@
 import { memo, SetStateAction } from "react";
-import { StyledWrapper } from "./styles";
+import {
+  StyledWrapper,
+  StyledButtonWrapper,
+  StyledMainWrapper,
+} from "./styles";
 
 interface Props {
   width: string;
@@ -19,14 +23,19 @@ const InputBox = ({
   type,
 }: Props) => {
   return (
-    <StyledWrapper
-      width={width}
-      height={height}
-      placeholder={placeholdText}
-      type={type}
-      value={inputValue}
-      onChange={setInputValue}
-    />
+    <StyledMainWrapper width={width} height={height}>
+      <StyledWrapper
+        placeholder={placeholdText}
+        type={type}
+        value={inputValue}
+        onChange={setInputValue}
+      />
+      {type === "search" && (
+        <StyledButtonWrapper>
+          <img src="images/search.png" alt="bell-icon" />
+        </StyledButtonWrapper>
+      )}
+    </StyledMainWrapper>
   );
 };
 
