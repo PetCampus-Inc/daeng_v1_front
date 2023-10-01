@@ -67,6 +67,13 @@ input[type="checkbox"] {
   accent-color:#ff9248;
 };
 
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration{
+    display:none;
+}
+
 body {
   scrollbar-width: none; 
   margin: 0;
