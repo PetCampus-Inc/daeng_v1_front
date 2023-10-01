@@ -12,6 +12,7 @@ interface Props {
   inputValue: any;
   setInputValue: (e: any) => void | SetStateAction<any>;
   type?: string;
+  handleClick?: () => void | Promise<void>;
 }
 
 const InputBox = ({
@@ -21,6 +22,7 @@ const InputBox = ({
   inputValue,
   setInputValue,
   type,
+  handleClick,
 }: Props) => {
   return (
     <StyledMainWrapper width={width} height={height}>
@@ -31,7 +33,7 @@ const InputBox = ({
         onChange={setInputValue}
       />
       {type === "search" && (
-        <StyledButtonWrapper>
+        <StyledButtonWrapper onClick={handleClick}>
           <img src="images/search.png" alt="bell-icon" />
         </StyledButtonWrapper>
       )}

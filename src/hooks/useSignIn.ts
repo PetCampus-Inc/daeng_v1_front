@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { handleGetSearchResult } from "apis/school.api";
 
 const useSignIn = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
@@ -8,6 +9,14 @@ const useSignIn = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [searchResultText, setSearchResultText] = useState<string[]>([]);
   const [selectedSearchText, setSelectedSearchText] = useState<string>("");
+
+  const handlerGetSearchResult = useCallback(async () => {
+    try {
+      console.log("done");
+      // const data = await handleGetSearchResult(searchText);
+      // console.log(data);
+    } catch (error) {}
+  }, [searchText, setSearchText, searchResultText, setSearchResultText]);
 
   return {
     currentMainStep,
@@ -24,6 +33,7 @@ const useSignIn = () => {
     setSearchResultText,
     selectedSearchText,
     setSelectedSearchText,
+    handlerGetSearchResult,
   };
 };
 

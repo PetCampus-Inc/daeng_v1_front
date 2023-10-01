@@ -1,23 +1,17 @@
 import { memo, Dispatch, SetStateAction } from "react";
 import Step1 from "../Step/step1";
+import useSignIn from "hooks/useSignIn";
 
-interface Props {
-  searchText: string;
-  setSearchText: Dispatch<SetStateAction<string>>;
-  searchResultText: string[];
-  setSearchResultText: Dispatch<SetStateAction<string[]>>;
-  selectedSearchText: string;
-  setSelectedSearchText: Dispatch<SetStateAction<string>>;
-}
-
-const Teacher = ({
-  searchText,
-  setSearchText,
-  searchResultText,
-  setSearchResultText,
-  selectedSearchText,
-  setSelectedSearchText,
-}: Props) => {
+const Teacher = () => {
+  const {
+    searchText,
+    setSearchText,
+    searchResultText,
+    setSearchResultText,
+    selectedSearchText,
+    setSelectedSearchText,
+    handlerGetSearchResult,
+  } = useSignIn();
   return (
     <Step1
       searchText={searchText}
@@ -26,6 +20,7 @@ const Teacher = ({
       setSearchResultText={setSearchResultText}
       selectedSearchText={selectedSearchText}
       setSelectedSearchText={setSelectedSearchText}
+      handlerGetSearchResult={handlerGetSearchResult}
     />
   );
 };

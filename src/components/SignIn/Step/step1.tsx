@@ -17,6 +17,7 @@ interface Props {
   setSearchResultText: Dispatch<SetStateAction<string[]>>;
   selectedSearchText: string;
   setSelectedSearchText: Dispatch<SetStateAction<string>>;
+  handlerGetSearchResult: () => void | Promise<void>;
 }
 
 const Step1 = ({
@@ -26,6 +27,7 @@ const Step1 = ({
   setSearchResultText,
   selectedSearchText,
   setSelectedSearchText,
+  handlerGetSearchResult,
 }: Props) => {
   return (
     <>
@@ -50,6 +52,7 @@ const Step1 = ({
             setInputValue={(e: ChangeEvent<HTMLInputElement>) =>
               setSearchText(e.target.value)
             }
+            handleClick={handlerGetSearchResult}
           />
         </InputBoxWrapper>
 
