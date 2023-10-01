@@ -33,6 +33,10 @@ const SignIn = () => {
     setSelectedRole,
     searchText,
     setSearchText,
+    searchResultText,
+    setSearchResultText,
+    selectedSearchText,
+    setSelectedSearchText,
   } = useSignIn();
 
   return (
@@ -48,7 +52,14 @@ const SignIn = () => {
       )}
 
       {currentMainStep === 3 && selectedRole === 0 && (
-        <Teacher searchText={searchText} setSearchText={setSearchText} />
+        <Teacher
+          searchText={searchText}
+          setSearchText={setSearchText}
+          searchResultText={searchResultText}
+          setSearchResultText={setSearchResultText}
+          selectedSearchText={selectedSearchText}
+          setSelectedSearchText={setSelectedSearchText}
+        />
       )}
 
       {currentMainStep < 3 && (

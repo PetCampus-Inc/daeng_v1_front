@@ -13,9 +13,20 @@ import Button from "components/common/Button";
 interface Props {
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
+  searchResultText: string[];
+  setSearchResultText: Dispatch<SetStateAction<string[]>>;
+  selectedSearchText: string;
+  setSelectedSearchText: Dispatch<SetStateAction<string>>;
 }
 
-const Step1 = ({ searchText, setSearchText }: Props) => {
+const Step1 = ({
+  searchText,
+  setSearchText,
+  searchResultText,
+  setSearchResultText,
+  selectedSearchText,
+  setSelectedSearchText,
+}: Props) => {
   return (
     <>
       <Header type="back" />
@@ -49,11 +60,11 @@ const Step1 = ({ searchText, setSearchText }: Props) => {
             text="다음"
             weight="bold"
             size="1.1rem"
-            // handleClick={() => {
-            //   setCurrentMainStep(currentMainStep + 1);
-            // }}
-            // backColor={selectedRole !== -1 ? undefined : "#E9E9E9"}
-            // textColor={selectedRole !== -1 ? undefined : "#B5B5B5"}
+            handleClick={() => {
+              //setCurrentMainStep(currentMainStep + 1);
+            }}
+            backColor={selectedSearchText === "" ? "#F6F6F6" : "#525252"}
+            textColor={selectedSearchText === "" ? "#B5B5B5" : "#FFFFFF"}
           />
         </StyledBottomWrapper>
       </Container>

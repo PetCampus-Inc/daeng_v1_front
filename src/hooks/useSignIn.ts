@@ -6,6 +6,8 @@ const useSignIn = () => {
   const [inputPw, setInputPw] = useState<string>("");
   const [selectedRole, setSelectedRole] = useState<number>(-1);
   const [searchText, setSearchText] = useState<string>("");
+  const [searchResultText, setSearchResultText] = useState<string[]>([]);
+  const [selectedSearchText, setSelectedSearchText] = useState<string>("");
 
   return {
     currentMainStep,
@@ -18,6 +20,10 @@ const useSignIn = () => {
     setSelectedRole,
     searchText,
     setSearchText,
+    searchResultText,
+    setSearchResultText,
+    selectedSearchText,
+    setSelectedSearchText,
   };
 };
 
