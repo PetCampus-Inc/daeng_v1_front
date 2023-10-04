@@ -16,7 +16,7 @@ export const TextWrapper = styled.div`
   height: 10%;
 `;
 
-export const StyledTitleText = styled.text`
+export const StyledTitleText = styled.div`
   font-weight: 700;
   font-size: 24px;
   margin-bottom: 5px;
@@ -29,52 +29,13 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-export const KakaoButton = styled.button`
-  width: 100%;
-  height: 10%;
-  margin-bottom: 10px;
-  border-radius: 7px;
-  border-style: none;
-  background-color: #fee500;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const GoogleButton = styled.button`
-  width: 100%;
-  height: 10%;
-  margin-bottom: 10px;
-  border: solid 1px #cccccc;
-  border-radius: 7px;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const AppleButton = styled.button`
-  width: 100%;
-  height: 10%;
-  margin-bottom: 10px;
-  border-radius: 7px;
-  border-style: none;
-  background-color: black;
-  color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const TryButton = styled.button`
-  width: 100%;
-  height: 10%;
-  border-style: none;
-  background-color: white;
-  color: #525252;
+export const StyledImage = styled.img<{
+  src: string;
+  alt: string;
+}>`
+  position: absolute;
+  left: 0;
+  padding-left: 5%;
 `;
 
 export const StyledBottomWrapper = styled.div`

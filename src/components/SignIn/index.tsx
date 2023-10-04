@@ -1,17 +1,14 @@
 import { memo } from "react";
 import {
-  AppleButton,
   ButtonWrapper,
   Container,
-  GoogleButton,
-  KakaoButton,
   StyledTitleText,
   TextWrapper,
-  TryButton,
   StyledBottomWrapper,
   StyledInputBoxWrapper,
   StyledSignInButton,
   StyledSelectRoleWrapper,
+  StyledImage,
 } from "./styles";
 import Button from "components/common/Button";
 import useSignIn from "hooks/useSignIn";
@@ -64,19 +61,43 @@ const SignIn = () => {
 
           {currentMainStep === 0 && (
             <ButtonWrapper>
-              <KakaoButton>
-                <img src="images/kakao-logo.png" alt="logo" />
-                카카오로 시작하기
-              </KakaoButton>
-              <GoogleButton>
-                <img src="images/google-logo.png" alt="logo" />
-                구글로 시작하기
-              </GoogleButton>
-              <AppleButton>
-                <img src="images/apple-logo.png" alt="logo" />
-                Apple로 시작하기
-              </AppleButton>
-              <TryButton>서비스 체험하기</TryButton>
+              <Button
+                width="100%"
+                height="10%"
+                text="카카오로 시작하기"
+                backColor="#fee500"
+                textColor="#000000"
+                marginBottom="3%"
+              >
+                <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
+              </Button>
+              <Button
+                width="100%"
+                height="10%"
+                text="구글로 시작하기"
+                backColor="#ffffff"
+                textColor="#000000"
+                border="solid 1px #cccccc"
+                marginBottom="3%"
+              >
+                <StyledImage src="images/google-logo.png" alt="google-logo" />
+              </Button>
+              <Button
+                width="100%"
+                height="10%"
+                text="Apple로 시작하기"
+                backColor="#000000"
+                marginBottom="3%"
+              >
+                <StyledImage src="images/apple-logo.png" alt="apple-logo" />
+              </Button>
+              <Button
+                width="100%"
+                height="10%"
+                text="서비스 체험하기"
+                backColor="#fffff"
+                textColor="#525252"
+              />
             </ButtonWrapper>
           )}
 
