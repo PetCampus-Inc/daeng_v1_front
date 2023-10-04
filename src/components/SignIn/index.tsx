@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import {
   ButtonWrapper,
   Container,
@@ -29,6 +29,20 @@ const SignIn = () => {
     selectedRole,
     setSelectedRole,
   } = useSignIn();
+
+  const [showPw, setShowPw] = useState({
+    type: "password",
+    className: "password",
+  });
+
+  const handleToggle = () => {
+    setShowPw(() => {
+      if (showPw.type === "password") {
+        return { type: "text", className: "text" };
+      }
+      return { type: "password", className: "password" };
+    });
+  };
 
   return (
     <>
@@ -110,10 +124,12 @@ const SignIn = () => {
                 setInputValue={setInputId}
               />
               <InputBoxAndText
+                className={showPw.className}
                 text="비밀번호"
-                type="password"
+                type={showPw.type}
                 inputValue={inputPw}
                 setInputValue={setInputPw}
+                handleClick={handleToggle}
               />
             </StyledInputBoxWrapper>
           )}

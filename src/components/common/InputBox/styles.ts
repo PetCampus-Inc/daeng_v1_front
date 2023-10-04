@@ -25,3 +25,8 @@ export const StyledButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const StyledImage = styled.img<{
+  src: string;
+  alt: string;
+}>``;
