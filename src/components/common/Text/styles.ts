@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledText = styled.text<{
+export const StyledText = styled.div<{
   size?: string;
   weight?: string;
   color?: string;

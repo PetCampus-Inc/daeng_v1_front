@@ -66,8 +66,8 @@ const Step1 = ({
             handleClick={() => {
               //setCurrentMainStep(currentMainStep + 1);
             }}
-            backColor={selectedSearchText === "" ? "#F6F6F6" : "#525252"}
-            textColor={selectedSearchText === "" ? "#B5B5B5" : "#FFFFFF"}
+            backcolor={selectedSearchText === "" ? "#F6F6F6" : "#525252"}
+            textcolor={selectedSearchText === "" ? "#B5B5B5" : "#FFFFFF"}
           />
         </StyledBottomWrapper>
       </Container>

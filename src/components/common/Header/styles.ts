@@ -38,7 +38,8 @@ export const BackIconWrapper = styled.div`
   display: flex;
   height: 70%;
   cursor: pointer;
-  width: 5%;
+  width: 10%;
+  padding-left: 2%;
 `;
 
 export const TextWrapper = styled.div`
@@ -48,7 +49,7 @@ export const TextWrapper = styled.div`
   width: 100%;
 `;
 
-export const TitleText = styled.text`
+export const TitleText = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
 `;

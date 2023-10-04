@@ -18,7 +18,7 @@ export const TextWrapper = styled.div`
 
 export const StyledTitleText = styled.div`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-bottom: 5px;
 `;
 

@@ -3,25 +3,25 @@ import styled from "styled-components";
 export const StyledMainWrapper = styled.div<{
   height: string;
   width: string;
-  textColor?: string;
-  backColor?: string;
+  textcolor?: string;
+  backcolor?: string;
   border?: string;
   radius?: string;
   weight?: string;
   size?: string;
-  marginBottom?: string;
+  marginbottom?: string;
 }>`
   height: ${(props) => props.height};
   width: ${(props) => props.width};
-  margin-bottom: ${(props) => props.marginBottom};
+  margin-bottom: ${(props) => props.marginbottom};
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: ${(props) => (props.textColor ? props.textColor : "white")};
+  color: ${(props) => (props.textcolor ? props.textcolor : "white")};
   background-color: ${(props) =>
-    props.backColor ? props.backColor : props.theme.mainColor};
+    props.backcolor ? props.backcolor : props.theme.mainColor};
   border: ${(props) => (props.border ? props.border : "none")};
   border-radius: ${(props) => (props.radius ? props.radius : "8px")};
   font-weight: ${(props) => (props.weight ? props.weight : "400")};

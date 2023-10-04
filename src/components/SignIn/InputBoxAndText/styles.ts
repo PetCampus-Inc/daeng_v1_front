@@ -8,7 +8,7 @@ export const StyledMainWrapper = styled.div`
   margin-bottom: 5%;
 `;
 
-export const StyledMainText = styled.text`
+export const StyledMainText = styled.div`
   font-size: 1rem;
   font-weight: 400;
   display: flex;

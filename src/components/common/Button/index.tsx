@@ -1,18 +1,18 @@
-import { Children, memo } from "react";
+import { memo } from "react";
 import { StyledMainWrapper } from "./styles";
 
 interface Props {
   height: string;
   width: string;
   text?: string;
-  textColor?: string;
-  backColor?: string;
+  textcolor?: string;
+  backcolor?: string;
   handleClick?: () => void | Promise<void>;
   border?: string;
   radius?: string;
   weight?: string;
   size?: string;
-  marginBottom?: string;
+  marginbottom?: string;
   children?: React.ReactNode;
 }
 
@@ -20,28 +20,28 @@ const Button = ({
   height,
   width,
   text,
-  textColor,
-  backColor,
+  textcolor,
+  backcolor,
   handleClick,
   border,
   radius,
   weight,
   size,
-  marginBottom,
+  marginbottom,
   children,
 }: Props) => {
   return (
     <StyledMainWrapper
       height={height}
       width={width}
-      textColor={textColor}
-      backColor={backColor}
+      textcolor={textcolor}
+      backcolor={backcolor}
       onClick={handleClick}
       border={border}
       radius={radius}
       weight={weight}
       size={size}
-      marginBottom={marginBottom}
+      marginbottom={marginbottom}
     >
       {children}
       {text}

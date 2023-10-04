@@ -65,9 +65,9 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="카카오로 시작하기"
-                backColor="#fee500"
-                textColor="#000000"
-                marginBottom="3%"
+                backcolor="#fee500"
+                textcolor="#000000"
+                marginbottom="3%"
               >
                 <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
               </Button>
@@ -75,10 +75,10 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="구글로 시작하기"
-                backColor="#ffffff"
-                textColor="#000000"
+                backcolor="#ffffff"
+                textcolor="#000000"
                 border="solid 1px #cccccc"
-                marginBottom="3%"
+                marginbottom="3%"
               >
                 <StyledImage src="images/google-logo.png" alt="google-logo" />
               </Button>
@@ -86,8 +86,8 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="Apple로 시작하기"
-                backColor="#000000"
-                marginBottom="3%"
+                backcolor="#000000"
+                marginbottom="3%"
               >
                 <StyledImage src="images/apple-logo.png" alt="apple-logo" />
               </Button>
@@ -95,8 +95,8 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="서비스 체험하기"
-                backColor="#fffff"
-                textColor="#525252"
+                backcolor="#fffff"
+                textcolor="#525252"
               />
             </ButtonWrapper>
           )}
@@ -143,10 +143,9 @@ const SignIn = () => {
             {currentMainStep === 0 && (
               <Button
                 width="100%"
-                height="30%"
+                height="32%"
                 text="관리자로 시작하기"
                 weight="bold"
-                size="1.1rem"
                 handleClick={() => {
                   setCurrentMainStep(currentMainStep + 1);
                 }}
@@ -171,12 +170,12 @@ const SignIn = () => {
                     //todo login
                     //setCurrentMainStep(currentMainStep + 1);
                   }}
-                  backColor={
+                  backcolor={
                     inputId.length > 4 && inputPw.length > 4
                       ? undefined
                       : "#E9E9E9"
                   }
-                  textColor={
+                  textcolor={
                     inputId.length > 4 && inputPw.length > 4
                       ? undefined
                       : "#B5B5B5"
@@ -194,8 +193,8 @@ const SignIn = () => {
                 handleClick={() => {
                   setCurrentMainStep(currentMainStep + 1);
                 }}
-                backColor={selectedRole !== -1 ? undefined : "#E9E9E9"}
-                textColor={selectedRole !== -1 ? undefined : "#B5B5B5"}
+                backcolor={selectedRole !== -1 ? undefined : "#E9E9E9"}
+                textcolor={selectedRole !== -1 ? undefined : "#B5B5B5"}
               />
             )}
           </StyledBottomWrapper>
