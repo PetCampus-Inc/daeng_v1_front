@@ -6,6 +6,7 @@ import {
   BackIconWrapper,
   TitleText,
   TextWrapper,
+  StyledImage,
 } from "./styles";
 import { Link } from "react-router-dom";
 import { memo } from "react";
@@ -29,28 +30,28 @@ const Header = ({ type, handleClick, text }: Props) => {
         {type === "main" && (
           <>
             <LogoWrapper to={"/home"}>
-              <img src="images/knock-dog-logo.png" alt="logo" />
-              <img src="images/yellow-dot.png" alt="yellow-dot" />
+              <StyledImage src="images/knock-dog-logo.png" alt="logo" />
+              <StyledImage src="images/yellow-dot.png" alt="yellow-dot" />
             </LogoWrapper>
             <IconsWrapper>
               <Link to={"/"}>
-                <img src="images/foot-icon.png" alt="foot-icon" />
+                <StyledImage src="images/foot-icon.png" alt="foot-icon" />
               </Link>
               <Link to={"/"}>
-                <img src="images/bell-icon.png" alt="bell-icon" />
+                <StyledImage src="images/bell-icon.png" alt="bell-icon" />
               </Link>
             </IconsWrapper>
           </>
         )}
         {type === "back" && (
           <BackIconWrapper onClick={handleClick}>
-            <img src="images/chevron-left.png" alt="logo" />
+            <StyledImage src="images/chevron-left.png" alt="chevron-left" />
           </BackIconWrapper>
         )}
         {type === "text" && (
           <TextWrapper>
             <BackIconWrapper onClick={handleClick}>
-              <img src="images/chevron-left.png" alt="logo" />
+              <StyledImage src="images/chevron-left.png" alt="chevron-left" />
             </BackIconWrapper>
             <TitleText>{text}</TitleText>
             <div style={{ width: "5%" }} />

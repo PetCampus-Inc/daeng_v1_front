@@ -52,3 +52,8 @@ export const TitleText = styled.text`
   font-size: 1.5rem;
   font-weight: bold;
 `;
+
+export const StyledImage = styled.img<{
+  src: string;
+  alt: string;
+}>``;
