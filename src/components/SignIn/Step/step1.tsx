@@ -4,17 +4,20 @@ import {
   TextWrapper,
   StyledBottomWrapper,
   InputBoxWrapper,
+  StyledSearchResultWrapper,
+  StyledSearchResult,
 } from "./styles";
 import Text from "components/common/Text";
 import Header from "components/common/Header";
 import InputBox from "components/common/InputBox";
 import Button from "components/common/Button";
+import { ISchoolInfo } from "types/School.type";
 
 interface Props {
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
-  searchResultText: string[];
-  setSearchResultText: Dispatch<SetStateAction<string[]>>;
+  searchResultText: ISchoolInfo[];
+  setSearchResultText: Dispatch<SetStateAction<ISchoolInfo[]>>;
   selectedSearchText: string;
   setSelectedSearchText: Dispatch<SetStateAction<string>>;
   handlerGetSearchResult: () => void | Promise<void>;
@@ -55,6 +58,24 @@ const Step1 = ({
             handleClick={handlerGetSearchResult}
           />
         </InputBoxWrapper>
+
+        <StyledSearchResultWrapper>
+          {searchResultText.map((item: ISchoolInfo, index: number) => {
+            return (
+              <StyledSearchResult
+                radius={
+                  index === 0
+                    ? "first"
+                    : index === searchResultText.length - 1
+                    ? "last"
+                    : ""
+                }
+              >
+                <Text text={item.name} />
+              </StyledSearchResult>
+            );
+          })}
+        </StyledSearchResultWrapper>
 
         <StyledBottomWrapper>
           <Button
