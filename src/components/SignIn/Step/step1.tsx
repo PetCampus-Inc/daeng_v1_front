@@ -21,6 +21,8 @@ interface Props {
   selectedSearchText: string;
   setSelectedSearchText: Dispatch<SetStateAction<string>>;
   handlerGetSearchResult: () => void | Promise<void>;
+  currentMainStep: number;
+  setCurrentMainStep: Dispatch<SetStateAction<number>>;
 }
 
 const Step1 = ({
@@ -31,11 +33,18 @@ const Step1 = ({
   selectedSearchText,
   setSelectedSearchText,
   handlerGetSearchResult,
+  currentMainStep,
+  setCurrentMainStep,
 }: Props) => {
   return (
     <>
-      <Header type="back" />
       <Container>
+        <Header
+          type="back"
+          handleClick={() => {
+            setCurrentMainStep(currentMainStep - 1);
+          }}
+        />
         <TextWrapper>
           <Text
             text={"안녕하세요 선생님\n어떤 유치원을 찾고계신가요?"}

@@ -42,12 +42,12 @@ const InputBox = ({
       )}
       {className === "password" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="images/closed-eye.png" alt="closed-eye" />
+          <StyledImage src="images/opened-eye.png" alt="opened-eye" />
         </StyledButtonWrapper>
       )}
       {className === "text" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="images/opened-eye.png" alt="opened-eye" />
+          <StyledImage src="images/closed-eye.png" alt="closed-eye" />
         </StyledButtonWrapper>
       )}
     </StyledMainWrapper>

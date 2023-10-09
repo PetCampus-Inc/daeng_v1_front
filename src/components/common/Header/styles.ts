@@ -47,11 +47,16 @@ export const TextWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 100%;
 `;
 
 export const TitleText = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  padding-top: 1.5%;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledImage = styled.img<{

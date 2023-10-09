@@ -56,11 +56,12 @@ export const StyledInputBoxWrapper = styled.div`
 
 export const StyledSignInButton = styled.div`
   height: 10%;
-  font-size: 1rem;
-  color: #b5b5b5;
-  text-decoration: underline;
+  font-size: 0.9rem;
+  color: #858585;
+  border-bottom: 1px solid #b5b5b5;
   display: flex;
   margin-bottom: 5%;
+  padding-bottom: 6%;
   cursor: pointer;
 `;
 

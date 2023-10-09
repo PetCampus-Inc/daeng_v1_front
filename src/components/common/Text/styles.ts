@@ -10,5 +10,6 @@ export const StyledText = styled.div<{
   font-weight: ${(props) => (props.weight ? props.weight : "400")};
   color: ${(props) => (props.color ? props.color : "black")};
   white-space: pre-wrap;
-  line-height: ${(props) => (props.height ? props.height : undefined)};
+  height: ${(props) => (props.height ? props.height : undefined)};
+  line-height: 1.3;
 `;

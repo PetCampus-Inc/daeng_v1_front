@@ -56,7 +56,12 @@ const SignIn = () => {
         />
       )}
 
-      {currentMainStep === 3 && selectedRole === 0 && <Teacher />}
+      {currentMainStep === 3 && selectedRole === 0 && (
+        <Teacher
+          currentMainStep={currentMainStep}
+          setCurrentMainStep={setCurrentMainStep}
+        />
+      )}
 
       {currentMainStep < 3 && (
         <Container step={currentMainStep}>
