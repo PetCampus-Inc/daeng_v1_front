@@ -16,7 +16,7 @@ import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
 import RoleBox from "./RoleBox";
 import { RoleConstants } from "constants/index";
-import Teacher from "./Teacher";
+import Teacher from "../SignUp/Teacher";
 
 const SignIn = () => {
   const {

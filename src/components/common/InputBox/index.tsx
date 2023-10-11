@@ -37,7 +37,7 @@ const InputBox = ({
       />
       {type === "search" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="images/search.png" alt="bell-icon" />
+          <StyledImage src="images/search.png" alt="search-icon" />
         </StyledButtonWrapper>
       )}
       {className === "password" && (
