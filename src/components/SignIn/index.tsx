@@ -17,6 +17,7 @@ import Header from "components/common/Header";
 import RoleBox from "./RoleBox";
 import { RoleConstants } from "constants/index";
 import Teacher from "../SignUp/Teacher";
+import SignUp from "components/SignUp";
 
 const SignIn = () => {
   const {
@@ -56,10 +57,11 @@ const SignIn = () => {
         />
       )}
 
-      {currentMainStep === 3 && selectedRole === 0 && (
-        <Teacher
+      {currentMainStep === 3 && (
+        <SignUp
           currentMainStep={currentMainStep}
           setCurrentMainStep={setCurrentMainStep}
+          selectedRole={selectedRole}
         />
       )}
 
