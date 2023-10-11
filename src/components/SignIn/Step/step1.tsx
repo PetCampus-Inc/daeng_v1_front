@@ -16,13 +16,15 @@ import { ISchoolInfo } from "types/School.type";
 interface Props {
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
-  searchResultText: ISchoolInfo[];
+  searchResultText: ISchoolInfo[] | any;
   setSearchResultText: Dispatch<SetStateAction<ISchoolInfo[]>>;
   selectedSearchText: string;
   setSelectedSearchText: Dispatch<SetStateAction<string>>;
   handlerGetSearchResult: () => void | Promise<void>;
   currentMainStep: number;
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
+  currentStep: number;
+  setCurrentStep: Dispatch<SetStateAction<number>>;
 }
 
 const Step1 = ({
@@ -33,6 +35,8 @@ const Step1 = ({
   selectedSearchText,
   setSelectedSearchText,
   handlerGetSearchResult,
+  currentStep,
+  setCurrentStep,
   currentMainStep,
   setCurrentMainStep,
 }: Props) => {
@@ -61,29 +65,38 @@ const Step1 = ({
             placeholdText={"유치원을 입력해주세요"}
             type="search"
             inputValue={searchText}
-            setInputValue={(e: ChangeEvent<HTMLInputElement>) =>
-              setSearchText(e.target.value)
-            }
+            setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
+              setSelectedSearchText("");
+              setSearchText(e.target.value);
+            }}
             handleClick={handlerGetSearchResult}
           />
         </InputBoxWrapper>
 
         <StyledSearchResultWrapper>
-          {searchResultText.map((item: ISchoolInfo, index: number) => {
-            return (
-              <StyledSearchResult
-                radius={
-                  index === 0
-                    ? "first"
-                    : index === searchResultText.length - 1
-                    ? "last"
-                    : ""
-                }
-              >
-                <Text text={item.name} />
-              </StyledSearchResult>
-            );
-          })}
+          {!selectedSearchText &&
+            searchResultText.map((item: ISchoolInfo, index: number) => {
+              return (
+                <StyledSearchResult
+                  key={index}
+                  radius_top={index === 0 ? "first" : ""}
+                  radius_bottom={
+                    searchResultText.length > 1 &&
+                    index === searchResultText.length - 1
+                      ? "last"
+                      : searchResultText.length === 1
+                      ? "last"
+                      : ""
+                  }
+                  onClick={() => {
+                    setSelectedSearchText(item.name);
+                    setSearchText(item.name);
+                  }}
+                >
+                  <Text text={item.name} />
+                </StyledSearchResult>
+              );
+            })}
         </StyledSearchResultWrapper>
 
         <StyledBottomWrapper>
@@ -94,7 +107,7 @@ const Step1 = ({
             weight="bold"
             size="1.1rem"
             handleClick={() => {
-              //setCurrentMainStep(currentMainStep + 1);
+              setCurrentStep(currentStep + 1);
             }}
             backcolor={selectedSearchText === "" ? "#F6F6F6" : "#525252"}
             textcolor={selectedSearchText === "" ? "#B5B5B5" : "#FFFFFF"}

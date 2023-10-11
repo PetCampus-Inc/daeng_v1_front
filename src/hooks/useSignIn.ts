@@ -4,6 +4,7 @@ import { ISchoolInfo } from "types/School.type";
 
 const useSignIn = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
+  const [currentStep, setCurrentStep] = useState<number>(1);
   const [inputId, setInputId] = useState<string>("");
   const [inputPw, setInputPw] = useState<string>("");
   const [selectedRole, setSelectedRole] = useState<number>(-1);
@@ -21,6 +22,8 @@ const useSignIn = () => {
   return {
     currentMainStep,
     setCurrentMainStep,
+    currentStep,
+    setCurrentStep,
     inputId,
     setInputId,
     inputPw,

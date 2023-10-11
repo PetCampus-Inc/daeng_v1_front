@@ -48,20 +48,24 @@ export const StyledSearchResultWrapper = styled.div`
   margin-top: 5%;
 `;
 
-export const StyledSearchResult = styled.div<{ radius: string }>`
+export const StyledSearchResult = styled.div<{
+  radius_top: string;
+  radius_bottom: string;
+}>`
   width: 100%;
   height: 15%;
+  padding-left: 5%;
   border: 1px solid #b5b5b5;
-  border-top: ${(props) => (props.radius !== "first" ? "0px" : undefined)};
+  border-top: ${(props) => (props.radius_top !== "first" ? "0px" : undefined)};
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top-right-radius: ${(props) =>
-    props.radius === "first" ? "8px" : undefined};
+    props.radius_top === "first" ? "8px" : undefined};
   border-top-left-radius: ${(props) =>
-    props.radius === "first" ? "8px" : undefined};
+    props.radius_top === "first" ? "8px" : undefined};
   border-bottom-left-radius: ${(props) =>
-    props.radius === "last" ? "8px" : undefined};
+    props.radius_bottom === "last" ? "8px" : undefined};
   border-bottom-right-radius: ${(props) =>
-    props.radius === "last" ? "8px" : undefined};
+    props.radius_bottom === "last" ? "8px" : undefined};
 `;
