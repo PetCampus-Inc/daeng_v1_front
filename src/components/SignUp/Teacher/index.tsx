@@ -1,7 +1,7 @@
 import { memo, Dispatch, SetStateAction } from "react";
-import useSignIn from "hooks/useSignIn";
 import Step1 from "../Step/step1";
 import Step2 from "../Step/step2";
+import useSignUp from "hooks/useSignUp";
 
 interface Props {
   currentMainStep: number;
@@ -19,7 +19,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     selectedSearchText,
     setSelectedSearchText,
     handlerGetSearchResult,
-  } = useSignIn();
+  } = useSignUp();
   return (
     <>
       {currentStep === 1 && (

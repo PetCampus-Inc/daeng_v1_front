@@ -1,10 +1,8 @@
 import { Dispatch, SetStateAction, memo } from "react";
-import { Container, InputBoxWrapper } from "./styles";
+import { Container } from "./styles";
 import Header from "components/common/Header";
 import Text from "components/common/Text";
 import { TextWrapper } from "./styles";
-import InputBox from "components/common/InputBox";
-import InputBoxAndText from "../../SignIn/InputBoxAndText";
 
 interface Props {
   currentStep: number;
