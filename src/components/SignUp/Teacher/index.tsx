@@ -3,6 +3,7 @@ import Step1 from "../Step/step1";
 import Step2 from "../Step/step2";
 import useSignUp from "hooks/useSignUp";
 import Step3 from "../Step/step3";
+import Step4 from "../Step/step4";
 
 interface Props {
   currentMainStep: number;
@@ -67,6 +68,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserPw={setUserPw}
         />
       )}
+      {currentStep === 4 && <Step4 setCurrentMainStep={setCurrentMainStep} />}
     </>
   );
 };
