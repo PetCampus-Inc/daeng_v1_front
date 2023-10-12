@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import {
   ButtonWrapper,
   Container,
@@ -17,6 +17,7 @@ import Header from "components/common/Header";
 import RoleBox from "./RoleBox";
 import { RoleConstants } from "constants/index";
 import SignUp from "components/SignUp";
+import useShowPw from "hooks/useShowPw";
 
 const SignIn = () => {
   const {
@@ -30,19 +31,7 @@ const SignIn = () => {
     setSelectedRole,
   } = useSignIn();
 
-  const [showPw, setShowPw] = useState({
-    type: "password",
-    className: "password",
-  });
-
-  const handleToggle = () => {
-    setShowPw(() => {
-      if (showPw.type === "password") {
-        return { type: "text", className: "text" };
-      }
-      return { type: "password", className: "password" };
-    });
-  };
+  const { showPw, setShowPw, handleToggle } = useShowPw();
 
   return (
     <>

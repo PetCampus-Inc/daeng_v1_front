@@ -24,6 +24,10 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setUserName,
     userPhone,
     setUserPhone,
+    userId,
+    setUserId,
+    userPw,
+    setUserPw,
   } = useSignUp();
   return (
     <>
@@ -53,7 +57,16 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserPhone={setUserPhone}
         />
       )}
-      {currentStep === 3 && <Step3 />}
+      {currentStep === 3 && (
+        <Step3
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+          userId={userId}
+          setUserId={setUserId}
+          userPw={userPw}
+          setUserPw={setUserPw}
+        />
+      )}
     </>
   );
 };
