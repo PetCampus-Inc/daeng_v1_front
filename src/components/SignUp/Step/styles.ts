@@ -9,21 +9,27 @@ export const Container = styled.div`
   position: relative;
 `;
 
-export const TextWrapper = styled.div`
+export const TextWrapper = styled.div<{
+  margin_bottom?: string;
+}>`
   display: flex;
   flex-direction: column;
   height: 10%;
-  margin-bottom: 20%;
+  margin-bottom: ${(props) =>
+    props.margin_bottom ? props.margin_bottom : "20%"};
   padding-left: 5%;
   padding-right: 5%;
 `;
 
-export const InputBoxWrapper = styled.div`
+export const InputBoxWrapper = styled.div<{
+  height?: string;
+}>`
   width: 100%;
-  height: 7%;
+  height: ${(props) => (props.height ? props.height : "7%")};
   padding-left: 5%;
   padding-right: 5%;
   display: flex;
+  flex-direction: column;
 `;
 
 export const StyledBottomWrapper = styled.div`

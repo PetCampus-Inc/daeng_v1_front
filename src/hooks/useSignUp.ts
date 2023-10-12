@@ -8,6 +8,8 @@ const useSignUp = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [searchResultText, setSearchResultText] = useState<ISchoolInfo[]>([]);
   const [selectedSearchText, setSelectedSearchText] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const [userPhone, setUserPhone] = useState<string>("");
 
   const handlerGetSearchResult = useCallback(async () => {
     try {
@@ -28,6 +30,10 @@ const useSignUp = () => {
     selectedSearchText,
     setSelectedSearchText,
     handlerGetSearchResult,
+    userName,
+    setUserName,
+    userPhone,
+    setUserPhone,
   };
 };
 

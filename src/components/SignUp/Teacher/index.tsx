@@ -2,6 +2,7 @@ import { memo, Dispatch, SetStateAction } from "react";
 import Step1 from "../Step/step1";
 import Step2 from "../Step/step2";
 import useSignUp from "hooks/useSignUp";
+import Step3 from "../Step/step3";
 
 interface Props {
   currentMainStep: number;
@@ -19,6 +20,10 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     selectedSearchText,
     setSelectedSearchText,
     handlerGetSearchResult,
+    userName,
+    setUserName,
+    userPhone,
+    setUserPhone,
   } = useSignUp();
   return (
     <>
@@ -39,8 +44,16 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
       )}
 
       {currentStep === 2 && (
-        <Step2 currentStep={currentStep} setCurrentStep={setCurrentStep} />
+        <Step2
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+          userName={userName}
+          setUserName={setUserName}
+          userPhone={userPhone}
+          setUserPhone={setUserPhone}
+        />
       )}
+      {currentStep === 3 && <Step3 />}
     </>
   );
 };
