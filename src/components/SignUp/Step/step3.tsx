@@ -18,6 +18,7 @@ interface Props {
   setUserId: Dispatch<SetStateAction<string>>;
   userPw: string;
   setUserPw: Dispatch<SetStateAction<string>>;
+  className: string;
 }
 
 const Step3 = ({
@@ -27,6 +28,7 @@ const Step3 = ({
   setUserId,
   userPw,
   setUserPw,
+  className,
 }: Props) => {
   const [checkUserPw, setCheckUserPw] = useState("");
   const { showPw, setShowPw, handleToggle } = useShowPw();
@@ -41,7 +43,11 @@ const Step3 = ({
       />
       <TextWrapper margin_bottom="5%">
         <Text
-          text={"회원가입을 완료해주세요"}
+          text={
+            className === "teacher"
+              ? "회원가입을 완료해 주세요"
+              : "아이디와 비밀번호를 입력해 주세요"
+          }
           size="1.4rem"
           weight="bold"
           height="2rem"
@@ -75,7 +81,7 @@ const Step3 = ({
         <Button
           width="90%"
           height="70%"
-          text="가입하기"
+          text={className === "teacher" ? "가입하기" : "다음"}
           weight="bold"
           size="1.1rem"
           handleClick={() => {

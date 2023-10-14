@@ -42,7 +42,7 @@ const Step2 = ({
       />
       <TextWrapper margin_bottom="5%">
         <Text
-          text={"정보를 입력해주세요"}
+          text={"정보를 입력해 주세요"}
           size="1.4rem"
           weight="bold"
           height="2rem"

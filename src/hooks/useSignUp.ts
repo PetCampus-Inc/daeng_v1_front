@@ -12,7 +12,6 @@ const useSignUp = () => {
   const [userPhone, setUserPhone] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [userPw, setUserPw] = useState<string>("");
-  const [className, setClassName] = useState<string>("");
 
   const handlerGetSearchResult = useCallback(async () => {
     try {
@@ -41,8 +40,6 @@ const useSignUp = () => {
     setUserId,
     userPw,
     setUserPw,
-    className,
-    setClassName,
   };
 };
 

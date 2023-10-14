@@ -1,7 +1,8 @@
 import useSignUp from "hooks/useSignUp";
 import { Dispatch, SetStateAction } from "react";
-import Step1 from "../Step/step1";
 import Step2 from "../Step/step2";
+import Step3 from "../Step/step3";
+import Step4 from "../Step/step4";
 
 interface Props {
   currentMainStep: number;
@@ -42,6 +43,20 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setCurrentMainStep={setCurrentMainStep}
           className="principal"
         />
+      )}
+      {currentStep === 2 && (
+        <Step3
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+          userId={userId}
+          setUserId={setUserId}
+          userPw={userPw}
+          setUserPw={setUserPw}
+          className="principal"
+        />
+      )}
+      {currentStep === 3 && (
+        <Step4 currentStep={currentStep} setCurrentStep={setCurrentStep} />
       )}
     </>
   );
