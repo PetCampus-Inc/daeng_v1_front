@@ -8,28 +8,36 @@ import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
 
 interface Props {
+  currentMainStep: number;
+  setCurrentMainStep: Dispatch<SetStateAction<number>>;
   currentStep: number;
   setCurrentStep: Dispatch<SetStateAction<number>>;
   userName: string;
   setUserName: Dispatch<SetStateAction<string>>;
   userPhone: string;
   setUserPhone: Dispatch<SetStateAction<string>>;
+  className: string;
 }
 
 const Step2 = ({
+  currentMainStep,
+  setCurrentMainStep,
   currentStep,
   setCurrentStep,
   userName,
   setUserName,
   userPhone,
   setUserPhone,
+  className,
 }: Props) => {
   return (
     <Container>
       <Header
         type="back"
         handleClick={() => {
-          setCurrentStep(currentStep - 1);
+          className === "teacher"
+            ? setCurrentStep(currentStep - 1)
+            : setCurrentMainStep(currentMainStep - 1);
         }}
       />
       <TextWrapper margin_bottom="5%">

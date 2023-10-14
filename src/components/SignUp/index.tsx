@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, memo } from "react";
 import Teacher from "./Teacher";
+import Principal from "./Principal";
 
 interface Props {
   currentMainStep: number;
@@ -20,7 +21,12 @@ const SingUp = ({
           setCurrentMainStep={setCurrentMainStep}
         />
       )}
-      {/* {selectedRole === 1 && <Master/>} */}
+      {selectedRole === 1 && (
+        <Principal
+          currentMainStep={currentMainStep}
+          setCurrentMainStep={setCurrentMainStep}
+        />
+      )}
     </>
   );
 };

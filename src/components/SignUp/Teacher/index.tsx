@@ -29,7 +29,9 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setUserId,
     userPw,
     setUserPw,
+    className,
   } = useSignUp();
+
   return (
     <>
       {currentStep === 1 && (
@@ -50,12 +52,15 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
 
       {currentStep === 2 && (
         <Step2
+          currentMainStep={currentMainStep}
+          setCurrentMainStep={setCurrentMainStep}
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
           userName={userName}
           setUserName={setUserName}
           userPhone={userPhone}
           setUserPhone={setUserPhone}
+          className="teacher"
         />
       )}
       {currentStep === 3 && (
