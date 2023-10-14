@@ -1,22 +1,24 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ step: number }>`
   width: 100%;
   height: 100%;
-  padding-top: 40%;
+  padding-top: ${(props) => (props.step === 2 ? "20%" : "40%")};
   padding-left: 5%;
   padding-right: 5%;
   background-color: white;
+  justify-content: space-evenly;
 `;
 
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 10%;
 `;
 
-export const Text = styled.text`
+export const StyledTitleText = styled.div`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-bottom: 5px;
 `;
 
@@ -27,50 +29,44 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-export const KakaoButton = styled.button`
-  width: 100%;
-  height: 10%;
-  margin-bottom: 10px;
-  border-radius: 7px;
-  border-style: none;
-  background-color: #fee500;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+export const StyledImage = styled.img<{
+  src: string;
+  alt: string;
+}>`
+  position: absolute;
+  left: 0;
+  padding-left: 5%;
 `;
 
-export const GoogleButton = styled.button`
+export const StyledBottomWrapper = styled.div`
   width: 100%;
-  height: 10%;
-  margin-bottom: 10px;
-  border: solid 1px #cccccc;
-  border-radius: 7px;
-  background-color: white;
+  height: 20%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  flex-direction: column;
 `;
 
-export const AppleButton = styled.button`
-  width: 100%;
-  height: 10%;
-  margin-bottom: 10px;
-  border-radius: 7px;
-  border-style: none;
-  background-color: black;
-  color: white;
+export const StyledInputBoxWrapper = styled.div`
+  height: 65%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
-export const TryButton = styled.button`
-  width: 100%;
+export const StyledSignInButton = styled.div`
   height: 10%;
-  border-style: none;
-  background-color: white;
-  color: #525252;
+  font-size: 0.9rem;
+  color: #858585;
+  border-bottom: 1px solid #b5b5b5;
+  display: flex;
+  margin-bottom: 5%;
+  padding-bottom: 6%;
+  cursor: pointer;
+`;
+
+export const StyledSelectRoleWrapper = styled.div`
+  width: 100%;
+  height: 75%;
+  display: flex;
 `;

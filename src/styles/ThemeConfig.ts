@@ -1,7 +1,7 @@
 import { IThemeConfig } from "styled-components";
 
 export const ThemeConfig: IThemeConfig = {
-  mainColor: "#B689B0",
+  mainColor: "#525252",
   secondColor: "#D5A4CF",
   thirdColor: "#F9BCDD",
   fourthColor: "#74445A",
