@@ -74,7 +74,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
         />
       )}
       {currentStep === 4 && (
-        <Complete setCurrentMainStep={setCurrentMainStep} />
+        <Complete setCurrentMainStep={setCurrentMainStep} className="teacher" />
       )}
     </>
   );
