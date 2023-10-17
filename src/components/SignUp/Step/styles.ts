@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ padding_top?: string }>`
   width: 100%;
   height: 100%;
-  padding-top: 40%;
+  padding-top: ${(props) => (props.padding_top ? props.padding_top : "40%")};
   background-color: white;
   justify-content: space-evenly;
   position: relative;

@@ -62,7 +62,7 @@ const Step1 = ({
           <InputBox
             height="100%"
             width="100%"
-            placeholdText={"유치원을 입력해 주세요"}
+            placeholdText="검색어를 입력해 주세요"
             type="search"
             inputValue={searchText}
             setInputValue={(e: ChangeEvent<HTMLInputElement>) => {

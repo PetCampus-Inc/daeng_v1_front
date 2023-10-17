@@ -115,12 +115,14 @@ const SignIn = () => {
               <InputBoxAndText
                 text="아이디"
                 type="text"
+                placeholder="아이디를 입력해 주세요"
                 inputValue={inputId}
                 setInputValue={setInputId}
               />
               <InputBoxAndText
                 className={showPw.className}
                 text="비밀번호"
+                placeholder="비밀번호를 입력해 주세요"
                 type={showPw.type}
                 inputValue={inputPw}
                 setInputValue={setInputPw}

@@ -56,6 +56,7 @@ const Step3 = ({
       <InputBoxWrapper height="70%">
         <InputBoxAndText
           text="아이디"
+          placeholder="아이디를 입력해 주세요"
           className="id"
           type="check"
           inputValue={userId}
@@ -63,6 +64,7 @@ const Step3 = ({
         />
         <InputBoxAndText
           text="비밀번호"
+          placeholder="비밀번호를 입력해 주세요"
           className={showPw.className}
           type={showPw.type}
           inputValue={userPw}
@@ -71,6 +73,7 @@ const Step3 = ({
         />
         <InputBoxAndText
           text="비밀번호 확인"
+          placeholder="비밀번호를 입력해 주세요"
           className={showPw.className}
           type={showPw.type}
           inputValue={checkUserPw}

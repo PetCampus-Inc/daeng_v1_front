@@ -36,7 +36,7 @@ const Step4 = ({
   setSchoolAddress,
 }: Props) => {
   return (
-    <Container>
+    <Container padding_top="35%">
       <Header
         type="back"
         handleClick={() => {
@@ -61,23 +61,27 @@ const Step4 = ({
         <InputBoxAndText
           text="유치원명"
           type="text"
+          placeholder="유치원 이름을 입력해 주세요"
           inputValue={schoolName}
           setInputValue={setSchoolName}
         />
         <InputBoxAndText
           text="유치원 연락처"
+          placeholder="유치원 연락처를 입력해 주세요"
           type="text"
           inputValue={schoolPhone}
           setInputValue={setSchoolPhone}
         />
         <InputBoxAndText
           text="유치원 주소"
+          placeholder="주소를 검색해 주세요"
           type="search"
           inputValue={schoolAddress}
           setInputValue={setSchoolAddress}
         />
         <InputBoxAndText
           text="사업자 등록번호"
+          placeholder="사업자 등록번호를 입력해 주세요"
           type="check"
           inputValue={schoolNum}
           setInputValue={setSchoolNum}

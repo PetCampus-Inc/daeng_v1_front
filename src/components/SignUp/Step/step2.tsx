@@ -52,12 +52,14 @@ const Step2 = ({
         <InputBoxAndText
           text="이름"
           type="text"
+          placeholder="홍길동"
           inputValue={userName}
           setInputValue={setUserName}
         />
         <InputBoxAndText
           text="연락처"
           type="text"
+          placeholder="연락처를 입력해 주세요"
           inputValue={userPhone}
           setInputValue={setUserPhone}
         />
