@@ -78,7 +78,7 @@ const Step4 = ({
         />
         <InputBoxAndText
           text="사업자 등록번호"
-          type="text"
+          type="check"
           inputValue={schoolNum}
           setInputValue={setSchoolNum}
         />

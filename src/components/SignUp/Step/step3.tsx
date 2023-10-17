@@ -56,7 +56,8 @@ const Step3 = ({
       <InputBoxWrapper height="70%">
         <InputBoxAndText
           text="아이디"
-          type="text"
+          className="id"
+          type="check"
           inputValue={userId}
           setInputValue={setUserId}
         />
