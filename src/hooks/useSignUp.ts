@@ -25,6 +25,11 @@ const useSignUp = () => {
     } catch (error) {}
   }, [searchText, setSearchText, searchResultText, setSearchResultText]);
 
+  const handlerDeleteSearchResult = () => {
+    setSelectedSearchText("");
+    setSearchText("");
+  };
+
   return {
     currentMainStep,
     setCurrentMainStep,
@@ -39,6 +44,7 @@ const useSignUp = () => {
     selectedSearchText,
     setSelectedSearchText,
     handlerGetSearchResult,
+    handlerDeleteSearchResult,
     userName,
     setUserName,
     userPhone,

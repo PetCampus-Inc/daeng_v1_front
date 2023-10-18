@@ -1,13 +1,14 @@
 import {
   Container,
   StyledBottomWrapper,
+  StyledCancleButton,
   StyledLink,
   TextWrapper,
 } from "./styles";
 import { Dispatch, SetStateAction } from "react";
 import Text from "components/common/Text";
 import Button from "components/common/Button";
-import { Link } from "react-router-dom";
+import { DOGOWNER, TEACHER } from "constants/className";
 
 interface Props {
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
@@ -26,30 +27,40 @@ const Complete = ({ setCurrentMainStep, className }: Props) => {
         />
         <Text
           text={
-            className === " teacher"
+            className === TEACHER
               ? "승인이 완료되었습니다"
+              : className === DOGOWNER
+              ? "승인 신청이 완료되었습니다"
               : "등록이 완료 되었습니다"
           }
           size="1.4rem"
           weight="bold"
           height="2rem"
         />
+        {className === DOGOWNER && (
+          <Text text={"승인 완료시 알림으로 알려드릴게요"} size="1rem" />
+        )}
       </TextWrapper>
-      <StyledBottomWrapper>
-        <StyledLink to="/SignIn">
-          <Button
-            width="100%"
-            height="100%"
-            text={className === "teacher" ? "시작하기" : "확인"}
-            weight="bold"
-            size="1.1rem"
-            handleClick={() => {
-              setCurrentMainStep(1);
-            }}
-            backcolor={"#525252"}
-            textcolor={"#FFFFFF"}
-          ></Button>
-        </StyledLink>
+      <StyledBottomWrapper height={className === DOGOWNER ? "9%" : "7%"}>
+        <>
+          {className === DOGOWNER && (
+            <StyledCancleButton>승인 신청 취소하기</StyledCancleButton>
+          )}
+          <StyledLink to="/SignIn">
+            <Button
+              width="100%"
+              height="100%"
+              text={className === TEACHER ? "시작하기" : "확인"}
+              weight="bold"
+              size="1.1rem"
+              handleClick={() => {
+                setCurrentMainStep(0);
+              }}
+              backcolor={"#525252"}
+              textcolor={"#FFFFFF"}
+            />
+          </StyledLink>
+        </>
       </StyledBottomWrapper>
     </Container>
   );

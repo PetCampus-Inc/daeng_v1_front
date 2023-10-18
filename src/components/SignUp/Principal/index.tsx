@@ -4,6 +4,7 @@ import Step2 from "../Step/step2";
 import Step3 from "../Step/step3";
 import Step4 from "../Step/step4";
 import Complete from "../Step/complete";
+import { PRINCIPAL } from "constants/className";
 
 interface Props {
   currentMainStep: number;
@@ -14,13 +15,6 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
   const {
     currentStep,
     setCurrentStep,
-    searchText,
-    setSearchText,
-    searchResultText,
-    setSearchResultText,
-    selectedSearchText,
-    setSelectedSearchText,
-    handlerGetSearchResult,
     userName,
     setUserName,
     userPhone,
@@ -50,7 +44,7 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserPhone={setUserPhone}
           currentMainStep={currentMainStep}
           setCurrentMainStep={setCurrentMainStep}
-          className="principal"
+          className={PRINCIPAL}
         />
       )}
       {currentStep === 2 && (
@@ -61,7 +55,7 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserId={setUserId}
           userPw={userPw}
           setUserPw={setUserPw}
-          className="principal"
+          className={PRINCIPAL}
         />
       )}
       {currentStep === 3 && (
@@ -81,7 +75,7 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
       {currentStep === 4 && (
         <Complete
           setCurrentMainStep={setCurrentMainStep}
-          className="principal"
+          className={PRINCIPAL}
         />
       )}
     </>
