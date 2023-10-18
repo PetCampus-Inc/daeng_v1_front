@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import {
   ButtonWrapper,
   Container,
@@ -16,6 +16,7 @@ import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
 import useShowPw from "hooks/useShowPw";
 import DogOwner from "./DogOwner";
+import { ID_REGEX, PW_REGEX } from "constants/regex";
 
 const SignIn = () => {
   const {
@@ -28,6 +29,13 @@ const SignIn = () => {
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
+  const [isIdValid, setIsIdValid] = useState<boolean>(true);
+  const [isPwValid, setIsPwValid] = useState<boolean>(true);
+
+  const handleValidCheck = () => {
+    ID_REGEX.test(inputId) ? setIsIdValid(true) : setIsIdValid(false);
+    PW_REGEX.test(inputPw) ? setIsPwValid(true) : setIsPwValid(false);
+  };
 
   return (
     <>
@@ -119,6 +127,7 @@ const SignIn = () => {
                 placeholder="아이디를 입력해 주세요"
                 inputValue={inputId}
                 setInputValue={setInputId}
+                errorText={!isIdValid ? "잘못된 아이디입니다." : ""}
               />
               <InputBoxAndText
                 className={showPw.className}
@@ -128,6 +137,7 @@ const SignIn = () => {
                 inputValue={inputPw}
                 setInputValue={setInputPw}
                 handleClick={handleToggle}
+                errorText={!isPwValid ? "잘못된 비밀번호입니다." : ""}
               />
             </StyledInputBoxWrapper>
           )}
@@ -158,6 +168,7 @@ const SignIn = () => {
                   weight="bold"
                   size="1.1rem"
                   handleClick={() => {
+                    handleValidCheck();
                     //todo login
                     //setCurrentMainStep(currentMainStep + 1);
                   }}
