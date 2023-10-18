@@ -21,6 +21,7 @@ interface Props {
   selectedSearchText: string;
   setSelectedSearchText: Dispatch<SetStateAction<string>>;
   handlerGetSearchResult: () => void | Promise<void>;
+  handlerDeleteSearchResult: () => void | Promise<void>;
   currentMainStep: number;
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
   currentStep: number;
@@ -36,6 +37,7 @@ const Step1 = ({
   selectedSearchText,
   setSelectedSearchText,
   handlerGetSearchResult,
+  handlerDeleteSearchResult,
   currentStep,
   setCurrentStep,
   currentMainStep,
@@ -73,11 +75,16 @@ const Step1 = ({
             placeholdText="검색어를 입력해 주세요"
             type="search"
             inputValue={searchText}
+            selectedSearchText={selectedSearchText}
             setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
               setSelectedSearchText("");
               setSearchText(e.target.value);
             }}
-            handleClick={handlerGetSearchResult}
+            handleClick={
+              !selectedSearchText
+                ? handlerGetSearchResult
+                : handlerDeleteSearchResult
+            }
           />
         </InputBoxWrapper>
 

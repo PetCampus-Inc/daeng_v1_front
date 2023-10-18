@@ -15,7 +15,6 @@ import useSignIn from "hooks/useSignIn";
 import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
 import useShowPw from "hooks/useShowPw";
-import Step1 from "components/SignUp/Step/step1";
 import DogOwner from "./DogOwner";
 
 const SignIn = () => {

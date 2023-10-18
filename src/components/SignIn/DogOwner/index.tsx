@@ -1,6 +1,7 @@
 import Complete from "components/SignUp/Step/complete";
 import Step1 from "components/SignUp/Step/step1";
 import Step2 from "components/SignUp/Step/step2";
+import { DOGOWNER } from "constants/className";
 import useSignUp from "hooks/useSignUp";
 import { Dispatch, SetStateAction, memo } from "react";
 
@@ -25,12 +26,12 @@ const DogOwner = ({
     selectedSearchText,
     setSelectedSearchText,
     handlerGetSearchResult,
+    handlerDeleteSearchResult,
     userName,
     setUserName,
     userPhone,
     setUserPhone,
   } = useSignUp();
-  const DOGOWNER = "dogOwner";
   return (
     <>
       {currentStep === 1 && (
@@ -42,6 +43,7 @@ const DogOwner = ({
           selectedSearchText={selectedSearchText}
           setSelectedSearchText={setSelectedSearchText}
           handlerGetSearchResult={handlerGetSearchResult}
+          handlerDeleteSearchResult={handlerDeleteSearchResult}
           currentMainStep={currentMainStep}
           setCurrentMainStep={setCurrentMainStep}
           currentStep={currentStep}

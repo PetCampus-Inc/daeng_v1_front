@@ -22,6 +22,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     selectedSearchText,
     setSelectedSearchText,
     handlerGetSearchResult,
+    handlerDeleteSearchResult,
     userName,
     setUserName,
     userPhone,
@@ -43,6 +44,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           selectedSearchText={selectedSearchText}
           setSelectedSearchText={setSelectedSearchText}
           handlerGetSearchResult={handlerGetSearchResult}
+          handlerDeleteSearchResult={handlerDeleteSearchResult}
           currentMainStep={currentMainStep}
           setCurrentMainStep={setCurrentMainStep}
           currentStep={currentStep}
