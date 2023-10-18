@@ -84,6 +84,9 @@ const SignIn = () => {
                 textcolor="#000000"
                 border="solid 1px #cccccc"
                 marginbottom="3%"
+                handleClick={() => {
+                  setCurrentMainStep(currentMainStep + 2);
+                }}
               >
                 <StyledImage src="images/google-logo.png" alt="google-logo" />
               </Button>
@@ -93,6 +96,9 @@ const SignIn = () => {
                 text="Apple로 시작하기"
                 backcolor="#000000"
                 marginbottom="3%"
+                handleClick={() => {
+                  setCurrentMainStep(currentMainStep + 2);
+                }}
               >
                 <StyledImage src="images/apple-logo.png" alt="apple-logo" />
               </Button>
