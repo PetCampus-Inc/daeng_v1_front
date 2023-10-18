@@ -1,11 +1,11 @@
-import { ChangeEvent, Dispatch, SetStateAction, memo } from "react";
+import { Dispatch, SetStateAction, memo } from "react";
 import { Container, InputBoxWrapper, StyledBottomWrapper } from "./styles";
 import Header from "components/common/Header";
 import Text from "components/common/Text";
 import { TextWrapper } from "./styles";
-import InputBox from "components/common/InputBox";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
+import { DOGOWNER, TEACHER } from "constants/className";
 
 interface Props {
   currentMainStep: number;
@@ -35,14 +35,18 @@ const Step2 = ({
       <Header
         type="back"
         handleClick={() => {
-          className === "teacher"
+          className === TEACHER || className === DOGOWNER
             ? setCurrentStep(currentStep - 1)
             : setCurrentMainStep(currentMainStep - 1);
         }}
       />
       <TextWrapper margin_bottom="5%">
         <Text
-          text={"정보를 입력해 주세요"}
+          text={
+            className === DOGOWNER
+              ? "견주님 이름을\n입력하고 승인 신청을 해주세요"
+              : "정보를 입력해 주세요"
+          }
           size="1.4rem"
           weight="bold"
           height="2rem"
@@ -56,31 +60,48 @@ const Step2 = ({
           inputValue={userName}
           setInputValue={setUserName}
         />
-        <InputBoxAndText
-          text="연락처"
-          type="text"
-          placeholder="연락처를 입력해 주세요"
-          inputValue={userPhone}
-          setInputValue={setUserPhone}
-        />
+        {className !== DOGOWNER ? (
+          <InputBoxAndText
+            text="연락처"
+            type="text"
+            placeholder="연락처를 입력해 주세요"
+            inputValue={userPhone}
+            setInputValue={setUserPhone}
+          />
+        ) : null}
       </InputBoxWrapper>
       <StyledBottomWrapper>
-        <Button
-          width="90%"
-          height="70%"
-          text="다음"
-          weight="bold"
-          size="1.1rem"
-          handleClick={() => {
-            setCurrentStep(currentStep + 1);
-          }}
-          backcolor={
-            userPhone === "" || userName === "" ? "#F6F6F6" : "#525252"
-          }
-          textcolor={
-            userPhone === "" || userName === "" ? "#B5B5B5" : "#FFFFFF"
-          }
-        />
+        {className === TEACHER ? (
+          <Button
+            width="90%"
+            height="70%"
+            text="다음"
+            weight="bold"
+            size="1.1rem"
+            handleClick={() => {
+              setCurrentStep(currentStep + 1);
+            }}
+            backcolor={
+              userPhone === "" || userName === "" ? "#F6F6F6" : "#525252"
+            }
+            textcolor={
+              userPhone === "" || userName === "" ? "#B5B5B5" : "#FFFFFF"
+            }
+          />
+        ) : (
+          <Button
+            width="90%"
+            height="70%"
+            text="승인 신청하기"
+            weight="bold"
+            size="1.1rem"
+            handleClick={() => {
+              setCurrentStep(currentStep + 1);
+            }}
+            backcolor={userName === "" ? "#F6F6F6" : "#525252"}
+            textcolor={userName === "" ? "#B5B5B5" : "#FFFFFF"}
+          />
+        )}
       </StyledBottomWrapper>
     </Container>
   );

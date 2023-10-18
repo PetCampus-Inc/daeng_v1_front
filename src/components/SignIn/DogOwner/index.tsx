@@ -1,17 +1,20 @@
-import { memo, Dispatch, SetStateAction } from "react";
-import Step1 from "../Step/step1";
-import Step2 from "../Step/step2";
+import Complete from "components/SignUp/Step/complete";
+import Step1 from "components/SignUp/Step/step1";
+import Step2 from "components/SignUp/Step/step2";
 import useSignUp from "hooks/useSignUp";
-import Step3 from "../Step/step3";
-import Complete from "../Step/complete";
-import { TEACHER } from "constants/className";
+import { Dispatch, SetStateAction, memo } from "react";
 
 interface Props {
   currentMainStep: number;
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
+  className?: string;
 }
 
-const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
+const DogOwner = ({
+  currentMainStep,
+  setCurrentMainStep,
+  className,
+}: Props) => {
   const {
     currentStep,
     setCurrentStep,
@@ -26,12 +29,8 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setUserName,
     userPhone,
     setUserPhone,
-    userId,
-    setUserId,
-    userPw,
-    setUserPw,
   } = useSignUp();
-
+  const DOGOWNER = "dogOwner";
   return (
     <>
       {currentStep === 1 && (
@@ -47,9 +46,9 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setCurrentMainStep={setCurrentMainStep}
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
+          className={DOGOWNER}
         />
       )}
-
       {currentStep === 2 && (
         <Step2
           currentMainStep={currentMainStep}
@@ -60,25 +59,17 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserName={setUserName}
           userPhone={userPhone}
           setUserPhone={setUserPhone}
-          className={TEACHER}
+          className={DOGOWNER}
         />
       )}
       {currentStep === 3 && (
-        <Step3
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-          userId={userId}
-          setUserId={setUserId}
-          userPw={userPw}
-          setUserPw={setUserPw}
-          className={TEACHER}
+        <Complete
+          setCurrentMainStep={setCurrentMainStep}
+          className={DOGOWNER}
         />
-      )}
-      {currentStep === 4 && (
-        <Complete setCurrentMainStep={setCurrentMainStep} className={TEACHER} />
       )}
     </>
   );
 };
 
-export default memo(Teacher);
+export default memo(DogOwner);

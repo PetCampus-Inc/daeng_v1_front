@@ -10,6 +10,7 @@ import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import useShowPw from "hooks/useShowPw";
 import Button from "components/common/Button";
+import { TEACHER } from "constants/className";
 
 interface Props {
   currentStep: number;
@@ -44,7 +45,7 @@ const Step3 = ({
       <TextWrapper margin_bottom="5%">
         <Text
           text={
-            className === "teacher"
+            className === TEACHER
               ? "회원가입을 완료해 주세요"
               : "아이디와 비밀번호를 입력해 주세요"
           }
@@ -85,7 +86,7 @@ const Step3 = ({
         <Button
           width="90%"
           height="70%"
-          text={className === "teacher" ? "가입하기" : "다음"}
+          text={className === TEACHER ? "가입하기" : "다음"}
           weight="bold"
           size="1.1rem"
           handleClick={() => {

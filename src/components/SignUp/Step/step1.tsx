@@ -25,6 +25,7 @@ interface Props {
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
   currentStep: number;
   setCurrentStep: Dispatch<SetStateAction<number>>;
+  className?: string;
 }
 
 const Step1 = ({
@@ -39,6 +40,7 @@ const Step1 = ({
   setCurrentStep,
   currentMainStep,
   setCurrentMainStep,
+  className,
 }: Props) => {
   return (
     <>
@@ -46,12 +48,18 @@ const Step1 = ({
         <Header
           type="back"
           handleClick={() => {
-            setCurrentMainStep(currentMainStep - 1);
+            className === "dogOwner"
+              ? setCurrentMainStep(0)
+              : setCurrentMainStep(currentMainStep - 1);
           }}
         />
         <TextWrapper>
           <Text
-            text={"안녕하세요 선생님\n어떤 유치원을 찾고계신가요?"}
+            text={
+              className === "dogOwner"
+                ? "안녕하세요 견주님\n어떤 유치원을 찾고 계시나요?"
+                : "안녕하세요 선생님\n어떤 유치원을 찾고 계시나요?"
+            }
             size="1.4rem"
             weight="bold"
             height="2rem"
