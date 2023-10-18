@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const Container = styled.div<{ step: number }>`
+export const Container = styled.div<{ padding_top?: string }>`
   width: 100%;
   height: 100%;
-  padding-top: ${(props) => (props.step === 2 ? "20%" : "40%")};
+  padding-top: ${(props) => (props.padding_top ? props.padding_top : "40%")};
   padding-left: 5%;
   padding-right: 5%;
   background-color: white;
@@ -57,7 +58,6 @@ export const StyledInputBoxWrapper = styled.div`
 export const StyledSignInButton = styled.div`
   height: 10%;
   font-size: 0.9rem;
-  color: #858585;
   border-bottom: 1px solid #b5b5b5;
   display: flex;
   margin-bottom: 5%;
@@ -69,4 +69,8 @@ export const StyledSelectRoleWrapper = styled.div`
   width: 100%;
   height: 75%;
   display: flex;
+`;
+
+export const StyledLink = styled(Link)`
+  color: #858585;
 `;

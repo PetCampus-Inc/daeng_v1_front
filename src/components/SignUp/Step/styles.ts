@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const Container = styled.div`
+export const Container = styled.div<{ padding_top?: string }>`
   width: 100%;
   height: 100%;
-  padding-top: 40%;
+  padding-top: ${(props) => (props.padding_top ? props.padding_top : "40%")};
   background-color: white;
   justify-content: space-evenly;
   position: relative;
@@ -74,4 +75,9 @@ export const StyledSearchResult = styled.div<{
     props.radius_bottom === "last" ? "8px" : undefined};
   border-bottom-right-radius: ${(props) =>
     props.radius_bottom === "last" ? "8px" : undefined};
+`;
+
+export const StyledLink = styled(Link)`
+  width: 90%;
+  height: 70%;
 `;

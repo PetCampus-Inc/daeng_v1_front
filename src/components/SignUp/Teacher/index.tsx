@@ -3,7 +3,7 @@ import Step1 from "../Step/step1";
 import Step2 from "../Step/step2";
 import useSignUp from "hooks/useSignUp";
 import Step3 from "../Step/step3";
-import Step4 from "../Step/step4";
+import Complete from "../Step/complete";
 
 interface Props {
   currentMainStep: number;
@@ -29,7 +29,6 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setUserId,
     userPw,
     setUserPw,
-    className,
   } = useSignUp();
 
   return (
@@ -71,9 +70,12 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserId={setUserId}
           userPw={userPw}
           setUserPw={setUserPw}
+          className="teacher"
         />
       )}
-      {currentStep === 4 && <Step4 setCurrentMainStep={setCurrentMainStep} />}
+      {currentStep === 4 && (
+        <Complete setCurrentMainStep={setCurrentMainStep} className="teacher" />
+      )}
     </>
   );
 };
