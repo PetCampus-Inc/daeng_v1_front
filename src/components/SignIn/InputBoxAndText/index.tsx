@@ -7,6 +7,7 @@ interface Props {
   type: string;
   className?: string;
   inputValue: any;
+  placeholder?: string;
   setInputValue: (e: any) => void | SetStateAction<any>;
   handleClick?: () => void | Promise<void>;
 }
@@ -16,6 +17,7 @@ const InputBoxAndText = ({
   type,
   className,
   inputValue,
+  placeholder,
   setInputValue,
   handleClick,
 }: Props) => {
@@ -26,7 +28,7 @@ const InputBoxAndText = ({
         className={className}
         height="100%"
         width="100%"
-        placeholdText={text + "를 입력해주세요"}
+        placeholdText={placeholder}
         type={type}
         inputValue={inputValue}
         setInputValue={(e: ChangeEvent<HTMLInputElement>) =>

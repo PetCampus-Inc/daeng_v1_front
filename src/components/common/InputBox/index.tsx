@@ -1,4 +1,5 @@
 import { memo, SetStateAction } from "react";
+import Button from "../Button";
 import {
   StyledWrapper,
   StyledButtonWrapper,
@@ -38,6 +39,20 @@ const InputBox = ({
       {type === "search" && (
         <StyledButtonWrapper onClick={handleClick}>
           <StyledImage src="images/search.png" alt="search-icon" />
+        </StyledButtonWrapper>
+      )}
+      {type === "check" && (
+        <StyledButtonWrapper onClick={handleClick}>
+          <Button
+            width="100%"
+            height="40%"
+            size="80%"
+            weight="500"
+            textcolor={inputValue ? "#ffffff" : "#B5B5B5"}
+            backcolor={inputValue ? "#525252" : "#f6f6f6"}
+          >
+            {className === "id" ? "중복확인" : "인증하기"}
+          </Button>
         </StyledButtonWrapper>
       )}
       {className === "password" && (

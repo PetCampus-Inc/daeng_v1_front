@@ -18,12 +18,14 @@ export const StyledWrapper = styled.input`
 
 export const StyledButtonWrapper = styled.div`
   height: 100%;
+  width: 17%;
+  margin-right: 5%;
   aspect-ratio: 1/1;
   cursor: pointer;
   position: absolute;
   right: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 `;
 

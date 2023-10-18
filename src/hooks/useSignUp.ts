@@ -3,6 +3,7 @@ import { handleGetSearchResult } from "apis/school.api";
 import { ISchoolInfo } from "types/School.type";
 
 const useSignUp = () => {
+  const [currentMainStep, setCurrentMainStep] = useState<number>(0);
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedRole, setSelectedRole] = useState<number>(-1);
   const [searchText, setSearchText] = useState<string>("");
@@ -12,7 +13,10 @@ const useSignUp = () => {
   const [userPhone, setUserPhone] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [userPw, setUserPw] = useState<string>("");
-  const [className, setClassName] = useState<string>("");
+  const [schoolName, setSchoolName] = useState<string>("");
+  const [schoolPhone, setSchoolPhone] = useState<string>("");
+  const [schoolNum, setSchoolNum] = useState<string>("");
+  const [schoolAddress, setSchoolAddress] = useState<string>("");
 
   const handlerGetSearchResult = useCallback(async () => {
     try {
@@ -22,6 +26,8 @@ const useSignUp = () => {
   }, [searchText, setSearchText, searchResultText, setSearchResultText]);
 
   return {
+    currentMainStep,
+    setCurrentMainStep,
     currentStep,
     setCurrentStep,
     selectedRole,
@@ -41,8 +47,14 @@ const useSignUp = () => {
     setUserId,
     userPw,
     setUserPw,
-    className,
-    setClassName,
+    schoolName,
+    setSchoolName,
+    schoolPhone,
+    setSchoolPhone,
+    schoolNum,
+    setSchoolNum,
+    schoolAddress,
+    setSchoolAddress,
   };
 };
 

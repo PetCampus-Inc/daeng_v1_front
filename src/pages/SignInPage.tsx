@@ -1,9 +1,7 @@
 import SignIn from "components/SignIn";
 import React from "react";
 
-type Props = {};
-
-const SignInPage = (props: Props) => {
+const SignInPage = () => {
   return <SignIn />;
 };
 
