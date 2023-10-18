@@ -8,12 +8,12 @@ import {
   StyledInputBoxWrapper,
   StyledSignInButton,
   StyledImage,
+  StyledLink,
 } from "./styles";
 import Button from "components/common/Button";
 import useSignIn from "hooks/useSignIn";
 import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
-import { Link } from "react-router-dom";
 import useShowPw from "hooks/useShowPw";
 
 const SignIn = () => {
@@ -127,7 +127,7 @@ const SignIn = () => {
           {currentMainStep === 1 && (
             <>
               <StyledSignInButton>
-                <Link to="/SignUp">{"처음이신가요? 회원가입하기"}</Link>
+                <StyledLink to="/SignUp">처음이신가요? 회원가입하기</StyledLink>
               </StyledSignInButton>
               <Button
                 width="100%"
