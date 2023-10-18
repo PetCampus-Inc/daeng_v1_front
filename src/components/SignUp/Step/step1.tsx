@@ -21,10 +21,12 @@ interface Props {
   selectedSearchText: string;
   setSelectedSearchText: Dispatch<SetStateAction<string>>;
   handlerGetSearchResult: () => void | Promise<void>;
+  handlerDeleteSearchResult: () => void | Promise<void>;
   currentMainStep: number;
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
   currentStep: number;
   setCurrentStep: Dispatch<SetStateAction<number>>;
+  className?: string;
 }
 
 const Step1 = ({
@@ -35,10 +37,12 @@ const Step1 = ({
   selectedSearchText,
   setSelectedSearchText,
   handlerGetSearchResult,
+  handlerDeleteSearchResult,
   currentStep,
   setCurrentStep,
   currentMainStep,
   setCurrentMainStep,
+  className,
 }: Props) => {
   return (
     <>
@@ -46,12 +50,18 @@ const Step1 = ({
         <Header
           type="back"
           handleClick={() => {
-            setCurrentMainStep(currentMainStep - 1);
+            className === "dogOwner"
+              ? setCurrentMainStep(0)
+              : setCurrentMainStep(currentMainStep - 1);
           }}
         />
         <TextWrapper>
           <Text
-            text={"안녕하세요 선생님\n어떤 유치원을 찾고계신가요?"}
+            text={
+              className === "dogOwner"
+                ? "안녕하세요 견주님\n어떤 유치원을 찾고 계시나요?"
+                : "안녕하세요 선생님\n어떤 유치원을 찾고 계시나요?"
+            }
             size="1.4rem"
             weight="bold"
             height="2rem"
@@ -65,11 +75,16 @@ const Step1 = ({
             placeholdText="검색어를 입력해 주세요"
             type="search"
             inputValue={searchText}
+            selectedSearchText={selectedSearchText}
             setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
               setSelectedSearchText("");
               setSearchText(e.target.value);
             }}
-            handleClick={handlerGetSearchResult}
+            handleClick={
+              !selectedSearchText
+                ? handlerGetSearchResult
+                : handlerDeleteSearchResult
+            }
           />
         </InputBoxWrapper>
 

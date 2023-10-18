@@ -33,10 +33,13 @@ export const InputBoxWrapper = styled.div<{
   flex-direction: column;
 `;
 
-export const StyledBottomWrapper = styled.div`
+export const StyledBottomWrapper = styled.div<{
+  height?: string;
+}>`
   width: 100%;
-  height: 7%;
+  height: ${(props) => (props.height ? props.height : "7%")};
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -80,4 +83,13 @@ export const StyledSearchResult = styled.div<{
 export const StyledLink = styled(Link)`
   width: 90%;
   height: 70%;
+`;
+
+export const StyledCancleButton = styled.div`
+  height: 10%;
+  font-size: 0.9rem;
+  display: flex;
+  margin-bottom: 4%;
+  padding-bottom: 4%;
+  cursor: pointer;
 `;

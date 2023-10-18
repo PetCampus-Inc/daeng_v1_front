@@ -14,6 +14,7 @@ interface Props {
   placeholdText?: string;
   inputValue: any;
   setInputValue: (e: any) => void | SetStateAction<any>;
+  selectedSearchText?: string;
   type?: string;
   handleClick?: () => void | Promise<void>;
 }
@@ -25,6 +26,7 @@ const InputBox = ({
   placeholdText,
   inputValue,
   setInputValue,
+  selectedSearchText,
   type,
   handleClick,
 }: Props) => {
@@ -38,7 +40,11 @@ const InputBox = ({
       />
       {type === "search" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="images/search.png" alt="search-icon" />
+          {selectedSearchText === "" ? (
+            <StyledImage src="images/search.png" alt="search-icon" />
+          ) : (
+            <StyledImage src="images/x-box.png" alt="x-box" />
+          )}
         </StyledButtonWrapper>
       )}
       {type === "check" && (
