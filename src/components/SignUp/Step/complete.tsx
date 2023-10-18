@@ -1,7 +1,13 @@
-import { Container, StyledBottomWrapper, TextWrapper } from "./styles";
+import {
+  Container,
+  StyledBottomWrapper,
+  StyledLink,
+  TextWrapper,
+} from "./styles";
 import { Dispatch, SetStateAction } from "react";
 import Text from "components/common/Text";
 import Button from "components/common/Button";
+import { Link } from "react-router-dom";
 
 interface Props {
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
@@ -30,18 +36,20 @@ const Complete = ({ setCurrentMainStep, className }: Props) => {
         />
       </TextWrapper>
       <StyledBottomWrapper>
-        <Button
-          width="90%"
-          height="70%"
-          text={className === "teacher" ? "시작하기" : "확인"}
-          weight="bold"
-          size="1.1rem"
-          handleClick={() => {
-            setCurrentMainStep(1);
-          }}
-          backcolor={"#525252"}
-          textcolor={"#FFFFFF"}
-        />
+        <StyledLink to="/SignIn">
+          <Button
+            width="100%"
+            height="100%"
+            text={className === "teacher" ? "시작하기" : "확인"}
+            weight="bold"
+            size="1.1rem"
+            handleClick={() => {
+              setCurrentMainStep(1);
+            }}
+            backcolor={"#525252"}
+            textcolor={"#FFFFFF"}
+          ></Button>
+        </StyledLink>
       </StyledBottomWrapper>
     </Container>
   );

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div<{ padding_top?: string }>`
   width: 100%;
@@ -74,4 +75,9 @@ export const StyledSearchResult = styled.div<{
     props.radius_bottom === "last" ? "8px" : undefined};
   border-bottom-right-radius: ${(props) =>
     props.radius_bottom === "last" ? "8px" : undefined};
+`;
+
+export const StyledLink = styled(Link)`
+  width: 90%;
+  height: 70%;
 `;
