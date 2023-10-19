@@ -29,10 +29,13 @@ const SignIn = () => {
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
-  const [isIdValid, setIsIdValid] = useState<boolean>(true);
-  const [isPwValid, setIsPwValid] = useState<boolean>(true);
+
+  const [isClicked, setIsClicked] = useState(false);
+  const [isIdValid, setIsIdValid] = useState(false);
+  const [isPwValid, setIsPwValid] = useState(false);
 
   const handleValidCheck = () => {
+    setIsClicked(true);
     ID_REGEX.test(inputId) ? setIsIdValid(true) : setIsIdValid(false);
     PW_REGEX.test(inputPw) ? setIsPwValid(true) : setIsPwValid(false);
   };
@@ -127,7 +130,9 @@ const SignIn = () => {
                 placeholder="아이디를 입력해 주세요"
                 inputValue={inputId}
                 setInputValue={setInputId}
-                errorText={!isIdValid ? "잘못된 아이디입니다." : ""}
+                errorText={
+                  isClicked ? (!isIdValid ? "잘못된 아이디입니다." : "") : ""
+                }
               />
               <InputBoxAndText
                 className={showPw.className}
@@ -137,7 +142,9 @@ const SignIn = () => {
                 inputValue={inputPw}
                 setInputValue={setInputPw}
                 handleClick={handleToggle}
-                errorText={!isPwValid ? "잘못된 비밀번호입니다." : ""}
+                errorText={
+                  isClicked ? (!isPwValid ? "잘못된 비밀번호입니다." : "") : ""
+                }
               />
             </StyledInputBoxWrapper>
           )}
@@ -172,16 +179,8 @@ const SignIn = () => {
                     //todo login
                     //setCurrentMainStep(currentMainStep + 1);
                   }}
-                  backcolor={
-                    inputId.length > 4 && inputPw.length > 4
-                      ? undefined
-                      : "#E9E9E9"
-                  }
-                  textcolor={
-                    inputId.length > 4 && inputPw.length > 4
-                      ? undefined
-                      : "#B5B5B5"
-                  }
+                  backcolor={isIdValid && isPwValid ? undefined : "#E9E9E9"}
+                  textcolor={isIdValid && isPwValid ? undefined : "#B5B5B5"}
                 />
               </>
             )}

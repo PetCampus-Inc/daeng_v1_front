@@ -10,6 +10,7 @@ import {
 interface Props {
   width: string;
   height: string;
+  color?: string;
   className?: string;
   placeholdText?: string;
   inputValue: any;
@@ -22,6 +23,7 @@ interface Props {
 const InputBox = ({
   width,
   height,
+  color,
   className,
   placeholdText,
   inputValue,
@@ -37,6 +39,7 @@ const InputBox = ({
         type={type}
         value={inputValue}
         onChange={setInputValue}
+        color={color}
       />
       {type === "search" && (
         <StyledButtonWrapper onClick={handleClick}>

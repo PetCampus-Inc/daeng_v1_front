@@ -35,6 +35,7 @@ const InputBoxAndText = ({
         <StyledErrorText>{errorText}</StyledErrorText>
       </StyledTextWrapper>
       <InputBox
+        color={errorText ? "#ea5635" : "black"}
         className={className}
         height="100%"
         width="100%"
