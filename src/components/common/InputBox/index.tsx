@@ -6,7 +6,7 @@ import {
   StyledMainWrapper,
   StyledImage,
 } from "./styles";
-import { ID_REGEX } from "constants/regex";
+import { ID_REGEX, REGISTRATION_REGEX } from "constants/regex";
 
 interface Props {
   width: string;
@@ -36,8 +36,15 @@ const InputBox = ({
   handleClick,
 }: Props) => {
   const [isValid, setIsValid] = useState(false);
+
   useEffect(() => {
-    ID_REGEX.test(inputValue) ? setIsValid(true) : setIsValid(false);
+    className === "id"
+      ? ID_REGEX.test(inputValue)
+        ? setIsValid(true)
+        : setIsValid(false)
+      : REGISTRATION_REGEX.test(inputValue)
+      ? setIsValid(true)
+      : setIsValid(false);
   }, [inputValue]);
 
   return (
