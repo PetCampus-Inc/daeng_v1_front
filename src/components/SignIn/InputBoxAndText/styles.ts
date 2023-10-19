@@ -8,10 +8,23 @@ export const StyledMainWrapper = styled.div`
   margin-bottom: 5%;
 `;
 
+export const StyledTextWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const StyledMainText = styled.div`
   font-size: 1rem;
   font-weight: 400;
   display: flex;
   margin-top: 3%;
   margin-bottom: 3%;
+`;
+
+export const StyledErrorText = styled.div`
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  color: #ea5635;
 `;

@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import {
   ButtonWrapper,
   Container,
@@ -16,6 +16,7 @@ import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
 import useShowPw from "hooks/useShowPw";
 import DogOwner from "./DogOwner";
+import { ID_REGEX, PW_REGEX } from "constants/regex";
 
 const SignIn = () => {
   const {
@@ -28,6 +29,16 @@ const SignIn = () => {
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
+
+  const [isClicked, setIsClicked] = useState(false);
+  const [isIdValid, setIsIdValid] = useState(false);
+  const [isPwValid, setIsPwValid] = useState(false);
+
+  const handleValidCheck = () => {
+    setIsClicked(true);
+    ID_REGEX.test(inputId) ? setIsIdValid(true) : setIsIdValid(false);
+    PW_REGEX.test(inputPw) ? setIsPwValid(true) : setIsPwValid(false);
+  };
 
   return (
     <>
@@ -119,6 +130,9 @@ const SignIn = () => {
                 placeholder="아이디를 입력해 주세요"
                 inputValue={inputId}
                 setInputValue={setInputId}
+                errorText={
+                  isClicked ? (!isIdValid ? "잘못된 아이디입니다." : "") : ""
+                }
               />
               <InputBoxAndText
                 className={showPw.className}
@@ -128,6 +142,9 @@ const SignIn = () => {
                 inputValue={inputPw}
                 setInputValue={setInputPw}
                 handleClick={handleToggle}
+                errorText={
+                  isClicked ? (!isPwValid ? "잘못된 비밀번호입니다." : "") : ""
+                }
               />
             </StyledInputBoxWrapper>
           )}
@@ -158,19 +175,12 @@ const SignIn = () => {
                   weight="bold"
                   size="1.1rem"
                   handleClick={() => {
+                    handleValidCheck();
                     //todo login
                     //setCurrentMainStep(currentMainStep + 1);
                   }}
-                  backcolor={
-                    inputId.length > 4 && inputPw.length > 4
-                      ? undefined
-                      : "#E9E9E9"
-                  }
-                  textcolor={
-                    inputId.length > 4 && inputPw.length > 4
-                      ? undefined
-                      : "#B5B5B5"
-                  }
+                  backcolor={isIdValid && isPwValid ? undefined : "#E9E9E9"}
+                  textcolor={isIdValid && isPwValid ? undefined : "#B5B5B5"}
                 />
               </>
             )}

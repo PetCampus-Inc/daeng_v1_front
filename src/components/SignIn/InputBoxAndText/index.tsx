@@ -1,9 +1,15 @@
 import { memo, SetStateAction, ChangeEvent } from "react";
-import { StyledMainWrapper, StyledMainText } from "./styles";
+import {
+  StyledMainWrapper,
+  StyledMainText,
+  StyledErrorText,
+  StyledTextWrapper,
+} from "./styles";
 import InputBox from "components/common/InputBox";
 
 interface Props {
   text: string;
+  errorText?: string;
   type: string;
   className?: string;
   inputValue: any;
@@ -14,6 +20,7 @@ interface Props {
 
 const InputBoxAndText = ({
   text,
+  errorText,
   type,
   className,
   inputValue,
@@ -23,8 +30,12 @@ const InputBoxAndText = ({
 }: Props) => {
   return (
     <StyledMainWrapper>
-      <StyledMainText>{text}</StyledMainText>
+      <StyledTextWrapper>
+        <StyledMainText>{text}</StyledMainText>
+        <StyledErrorText>{errorText}</StyledErrorText>
+      </StyledTextWrapper>
       <InputBox
+        color={errorText ? "#ea5635" : "black"}
         className={className}
         height="100%"
         width="100%"

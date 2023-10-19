@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo } from "react";
+import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
 import {
   Container,
   InputBoxWrapper,
@@ -9,6 +9,7 @@ import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
+import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/regex";
 
 interface Props {
   currentStep: number;
@@ -35,6 +36,23 @@ const Step4 = ({
   schoolAddress,
   setSchoolAddress,
 }: Props) => {
+  const [isSchoolPhoneValid, setIsSchoolPhoneValid] = useState(false);
+  const [isRegistrationValid, setIsRegistrationValid] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleValidCheck = () => {
+    setIsClicked(true);
+    REGISTRATION_REGEX.test(schoolNum)
+      ? setIsRegistrationValid(true)
+      : setIsRegistrationValid(false);
+  };
+
+  useEffect(() => {
+    SCHOOL_PHONE_REGEX.test(schoolPhone)
+      ? setIsSchoolPhoneValid(true)
+      : setIsSchoolPhoneValid(false);
+  }, [schoolPhone]);
+
   return (
     <Container padding_top="35%">
       <Header
@@ -85,6 +103,14 @@ const Step4 = ({
           type="check"
           inputValue={schoolNum}
           setInputValue={setSchoolNum}
+          handleClick={handleValidCheck}
+          errorText={
+            isClicked
+              ? isRegistrationValid
+                ? ""
+                : "올바르지 않은 사업자 등록 번호입니다."
+              : ""
+          }
         />
       </InputBoxWrapper>
       <StyledBottomWrapper>
@@ -95,20 +121,24 @@ const Step4 = ({
           weight="bold"
           size="1.1rem"
           handleClick={() => {
-            setCurrentStep(currentStep + 1);
+            schoolName !== "" &&
+              schoolAddress !== "" &&
+              isSchoolPhoneValid &&
+              isRegistrationValid &&
+              setCurrentStep(currentStep + 1);
           }}
           backcolor={
             schoolName === "" ||
-            schoolPhone === "" ||
-            schoolNum === "" ||
+            !isSchoolPhoneValid ||
+            !isRegistrationValid ||
             schoolAddress === ""
               ? "#F6F6F6"
               : "#525252"
           }
           textcolor={
             schoolName === "" ||
-            schoolPhone === "" ||
-            schoolNum === "" ||
+            !isSchoolPhoneValid ||
+            !isRegistrationValid ||
             schoolAddress === ""
               ? "#B5B5B5"
               : "#FFFFFF"

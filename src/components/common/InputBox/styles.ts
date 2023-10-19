@@ -7,13 +7,14 @@ export const StyledMainWrapper = styled.div<{ width: string; height: string }>`
   position: relative;
 `;
 
-export const StyledWrapper = styled.input`
+export const StyledWrapper = styled.input<{ color?: string }>`
   width: 100%;
   height: 100%;
   border: 1px solid #b5b5b5;
   border-radius: 8px;
   padding-left: 5%;
   font-size: 1rem;
+  color: ${(props) => (props.color ? props.color : "black")};
 `;
 
 export const StyledButtonWrapper = styled.div`
