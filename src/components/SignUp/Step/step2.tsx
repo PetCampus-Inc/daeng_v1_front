@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo } from "react";
+import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
 import { Container, InputBoxWrapper, StyledBottomWrapper } from "./styles";
 import Header from "components/common/Header";
 import Text from "components/common/Text";
@@ -6,6 +6,7 @@ import { TextWrapper } from "./styles";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
 import { DOGOWNER, TEACHER } from "constants/className";
+import { NAME_REGEX, PHONE_REGEX } from "constants/regex";
 
 interface Props {
   currentMainStep: number;
@@ -30,6 +31,16 @@ const Step2 = ({
   setUserPhone,
   className,
 }: Props) => {
+  const [isNameValid, setisNameValid] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
+
+  useEffect(() => {
+    NAME_REGEX.test(userName) ? setisNameValid(true) : setisNameValid(false);
+    PHONE_REGEX.test(userPhone)
+      ? setIsPhoneValid(true)
+      : setIsPhoneValid(false);
+  }, [userName, userPhone]);
+
   return (
     <Container>
       <Header
@@ -81,12 +92,8 @@ const Step2 = ({
             handleClick={() => {
               setCurrentStep(currentStep + 1);
             }}
-            backcolor={
-              userPhone === "" || userName === "" ? "#F6F6F6" : "#525252"
-            }
-            textcolor={
-              userPhone === "" || userName === "" ? "#B5B5B5" : "#FFFFFF"
-            }
+            backcolor={isNameValid && isPhoneValid ? "#525252" : "#F6F6F6"}
+            textcolor={isNameValid && isPhoneValid ? "#FFFFFF" : "#B5B5B5"}
           />
         ) : (
           <Button
@@ -98,8 +105,8 @@ const Step2 = ({
             handleClick={() => {
               setCurrentStep(currentStep + 1);
             }}
-            backcolor={userName === "" ? "#F6F6F6" : "#525252"}
-            textcolor={userName === "" ? "#B5B5B5" : "#FFFFFF"}
+            backcolor={isNameValid && userName !== "" ? "#525252" : "#F6F6F6"}
+            textcolor={isNameValid && userName !== "" ? "#FFFFFF" : "#B5B5B5"}
           />
         )}
       </StyledBottomWrapper>

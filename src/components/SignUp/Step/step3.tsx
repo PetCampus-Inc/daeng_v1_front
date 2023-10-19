@@ -11,6 +11,7 @@ import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import useShowPw from "hooks/useShowPw";
 import Button from "components/common/Button";
 import { TEACHER } from "constants/className";
+import { ID_REGEX, PW_REGEX } from "constants/regex";
 
 interface Props {
   currentStep: number;
@@ -33,6 +34,15 @@ const Step3 = ({
 }: Props) => {
   const [checkUserPw, setCheckUserPw] = useState("");
   const { showPw, setShowPw, handleToggle } = useShowPw();
+  const [isIdValid, setIsIdValid] = useState(false);
+  const [isPwValid, setIsPwValid] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleValidCheck = () => {
+    setIsClicked(true);
+    ID_REGEX.test(userId) ? setIsIdValid(true) : setIsIdValid(false);
+    PW_REGEX.test(userPw) ? setIsPwValid(true) : setIsPwValid(false);
+  };
 
   return (
     <Container>
@@ -71,6 +81,9 @@ const Step3 = ({
           inputValue={userPw}
           setInputValue={setUserPw}
           handleClick={handleToggle}
+          errorText={
+            isClicked ? (!isPwValid ? "비밀번호가 일치하지 않습니다." : "") : ""
+          }
         />
         <InputBoxAndText
           text="비밀번호 확인"
@@ -80,6 +93,13 @@ const Step3 = ({
           inputValue={checkUserPw}
           setInputValue={setCheckUserPw}
           handleClick={handleToggle}
+          errorText={
+            isClicked
+              ? !isPwValid || userPw !== checkUserPw
+                ? "비밀번호가 일치하지 않습니다."
+                : ""
+              : ""
+          }
         />
       </InputBoxWrapper>
       <StyledBottomWrapper>
@@ -90,18 +110,11 @@ const Step3 = ({
           weight="bold"
           size="1.1rem"
           handleClick={() => {
-            setCurrentStep(currentStep + 1);
+            handleValidCheck();
+            isIdValid && isPwValid && setCurrentStep(currentStep + 1);
           }}
-          backcolor={
-            userId === "" || userPw === "" || checkUserPw === ""
-              ? "#F6F6F6"
-              : "#525252"
-          }
-          textcolor={
-            userId === "" || userPw === "" || checkUserPw === ""
-              ? "#B5B5B5"
-              : "#FFFFFF"
-          }
+          backcolor={!isIdValid || !isPwValid ? "#F6F6F6" : "#525252"}
+          textcolor={!isIdValid || !isPwValid ? "#B5B5B5" : "#FFFFFF"}
         />
       </StyledBottomWrapper>
     </Container>

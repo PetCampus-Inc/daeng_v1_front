@@ -1,4 +1,4 @@
-import { memo, SetStateAction } from "react";
+import { memo, SetStateAction, useEffect, useState } from "react";
 import Button from "../Button";
 import {
   StyledWrapper,
@@ -6,10 +6,13 @@ import {
   StyledMainWrapper,
   StyledImage,
 } from "./styles";
+import { ID_REGEX, REGISTRATION_REGEX } from "constants/regex";
 
 interface Props {
   width: string;
   height: string;
+  color?: string;
+  valid?: boolean;
   className?: string;
   placeholdText?: string;
   inputValue: any;
@@ -22,6 +25,8 @@ interface Props {
 const InputBox = ({
   width,
   height,
+  color,
+  valid,
   className,
   placeholdText,
   inputValue,
@@ -30,6 +35,18 @@ const InputBox = ({
   type,
   handleClick,
 }: Props) => {
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    className === "id"
+      ? ID_REGEX.test(inputValue)
+        ? setIsValid(true)
+        : setIsValid(false)
+      : REGISTRATION_REGEX.test(inputValue)
+      ? setIsValid(true)
+      : setIsValid(false);
+  }, [inputValue]);
+
   return (
     <StyledMainWrapper width={width} height={height} className={className}>
       <StyledWrapper
@@ -37,6 +54,7 @@ const InputBox = ({
         type={type}
         value={inputValue}
         onChange={setInputValue}
+        color={color}
       />
       {type === "search" && (
         <StyledButtonWrapper onClick={handleClick}>
@@ -54,8 +72,8 @@ const InputBox = ({
             height="40%"
             size="80%"
             weight="500"
-            textcolor={inputValue ? "#ffffff" : "#B5B5B5"}
-            backcolor={inputValue ? "#525252" : "#f6f6f6"}
+            textcolor={isValid ? "#ffffff" : "#B5B5B5"}
+            backcolor={isValid ? "#525252" : "#f6f6f6"}
           >
             {className === "id" ? "중복확인" : "인증하기"}
           </Button>
