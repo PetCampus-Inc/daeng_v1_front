@@ -16,7 +16,7 @@ import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
 import useShowPw from "hooks/useShowPw";
 import DogOwner from "./DogOwner";
-import { ID_REGEX, PW_REGEX } from "constants/regex";
+import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 
 const SignIn = () => {
   const {

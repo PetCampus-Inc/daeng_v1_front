@@ -6,7 +6,7 @@ import { TextWrapper } from "./styles";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
 import { DOGOWNER, TEACHER } from "constants/className";
-import { NAME_REGEX, PHONE_REGEX } from "constants/regex";
+import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
 
 interface Props {
   currentMainStep: number;

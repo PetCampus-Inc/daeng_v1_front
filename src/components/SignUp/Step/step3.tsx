@@ -11,7 +11,7 @@ import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import useShowPw from "hooks/useShowPw";
 import Button from "components/common/Button";
 import { TEACHER } from "constants/className";
-import { ID_REGEX, PW_REGEX } from "constants/regex";
+import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 
 interface Props {
   currentStep: number;

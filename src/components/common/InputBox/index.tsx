@@ -6,7 +6,7 @@ import {
   StyledMainWrapper,
   StyledImage,
 } from "./styles";
-import { ID_REGEX, REGISTRATION_REGEX } from "constants/regex";
+import { ID_REGEX, REGISTRATION_REGEX } from "constants/validCheck";
 
 interface Props {
   width: string;

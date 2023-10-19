@@ -9,7 +9,7 @@ import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
-import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/regex";
+import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
 
 interface Props {
   currentStep: number;
