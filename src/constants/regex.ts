@@ -15,4 +15,4 @@ export const SCHOOL_PHONE_REGEX = /^\d{2,3}-\d{3,4}-\d{4}$/;
 export const REGISTRATION_REGEX = /^\d{3}-\d{2}-\d{5}$/;
 
 // 한글 입력
-export const CEO_REGEX = /^[가-힣]*$/;
+export const NAME_REGEX = /^[가-힣]{1,10}$/;
