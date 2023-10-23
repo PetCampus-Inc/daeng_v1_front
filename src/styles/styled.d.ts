@@ -2,19 +2,28 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface IThemeConfig {
-    mainColor: string;
+    primaryColor: string;
+    primary_2: string;
+    primary_3: string;
+    primary_4: string;
+    white: string;
+    darkBlack: string;
+    red_1: string;
+    yellow_1: string;
+    yellow_2: string;
+    yellow_3: string;
+    gray_1: string;
+    gray_2: string;
+    gray_3: string;
+    gray_4: string;
+    gray_5: string;
+
     secondColor: string;
     thirdColor: string;
     fourthColor: string;
     backGroundColor: string;
-    white: string;
-    black: string;
-    gray: string;
     navBg: string;
     lightMainColor: string;
-    darkGray: string;
-    fontGray: string;
     interfaceBg: string;
-    red: string;
   }
 }

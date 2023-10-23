@@ -21,7 +21,7 @@ export const StyledMainWrapper = styled.div<{
   cursor: pointer;
   color: ${(props) => (props.textcolor ? props.textcolor : "white")};
   background-color: ${(props) =>
-    props.backcolor ? props.backcolor : props.theme.mainColor};
+    props.backcolor ? props.backcolor : props.theme.primaryColor};
   border: ${(props) => (props.border ? props.border : "none")};
   border-radius: ${(props) => (props.radius ? props.radius : "8px")};
   font-weight: ${(props) => (props.weight ? props.weight : "400")};

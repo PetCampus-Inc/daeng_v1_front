@@ -9,6 +9,7 @@ import {
   StyledSignInButton,
   StyledImage,
   StyledLink,
+  Keyword,
 } from "./styles";
 import Button from "components/common/Button";
 import useSignIn from "hooks/useSignIn";
@@ -60,12 +61,16 @@ const SignIn = () => {
 
       {currentMainStep < 2 && (
         <Container>
-          <TextWrapper>
-            <StyledTitleText>
-              {currentMainStep === 0
-                ? "반려견의 유치원"
-                : "똑독 관리자 시작하기"}
-            </StyledTitleText>
+          <TextWrapper height="10%">
+            {currentMainStep === 0 ? (
+              <TextWrapper direction="row">
+                <Keyword>반려견</Keyword>
+                <StyledTitleText>의 유치원</StyledTitleText>
+              </TextWrapper>
+            ) : (
+              <StyledTitleText>똑독 관리자 시작하기</StyledTitleText>
+            )}
+
             <StyledTitleText>
               {currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}
             </StyledTitleText>
