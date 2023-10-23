@@ -6,6 +6,7 @@ export const ThemeConfig: IThemeConfig = {
   primary_3: "#FFA463",
   primary_4: "#FFE680",
   white: "#FFFFFF",
+  black: "#000000",
   darkBlack: "#292929",
   red_1: "#EA5635",
   yellow_1: "#FFD12D",

@@ -7,6 +7,7 @@ import {
   StyledImage,
 } from "./styles";
 import { ID_REGEX, REGISTRATION_REGEX } from "constants/validCheck";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   width: string;
@@ -72,8 +73,8 @@ const InputBox = ({
             height="40%"
             size="80%"
             weight="500"
-            textcolor={isValid ? "#ffffff" : "#B5B5B5"}
-            backcolor={isValid ? "#525252" : "#f6f6f6"}
+            textcolor={isValid ? ThemeConfig.white : ThemeConfig.gray_3}
+            backcolor={isValid ? ThemeConfig.gray_1 : ThemeConfig.gray_5}
           >
             {className === "id" ? "중복확인" : "인증하기"}
           </Button>
