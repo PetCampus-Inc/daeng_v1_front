@@ -6,7 +6,7 @@ export const Container = styled.div`
   bottom: 0;
   height: 10vh;
   width: 100%;
-  background-color: white;
+  background-color: ${(props) => props.theme.white};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,5 +20,6 @@ export const StyledNavBtn = styled(Link)<{ selected?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => (props.selected ? "red" : "white")};
+  background-color: ${(props) =>
+    props.selected ? props.theme.red_1 : props.theme.white};
 `;

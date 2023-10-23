@@ -9,7 +9,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: ${(props) => props.theme.white};
 `;
 
 export const HeaderWrapper = styled.div<{ type: string }>`
