@@ -10,6 +10,7 @@ import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
 import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   currentStep: number;
@@ -132,16 +133,16 @@ const Step4 = ({
             !isSchoolPhoneValid ||
             !isRegistrationValid ||
             schoolAddress === ""
-              ? "#F6F6F6"
-              : "#525252"
+              ? ThemeConfig.gray_5
+              : ThemeConfig.gray_1
           }
           textcolor={
             schoolName === "" ||
             !isSchoolPhoneValid ||
             !isRegistrationValid ||
             schoolAddress === ""
-              ? "#B5B5B5"
-              : "#FFFFFF"
+              ? ThemeConfig.gray_3
+              : ThemeConfig.white
           }
         />
       </StyledBottomWrapper>

@@ -12,6 +12,7 @@ import useShowPw from "hooks/useShowPw";
 import Button from "components/common/Button";
 import { TEACHER } from "constants/className";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   currentStep: number;
@@ -113,8 +114,12 @@ const Step3 = ({
             handleValidCheck();
             isIdValid && isPwValid && setCurrentStep(currentStep + 1);
           }}
-          backcolor={!isIdValid || !isPwValid ? "#F6F6F6" : "#525252"}
-          textcolor={!isIdValid || !isPwValid ? "#B5B5B5" : "#FFFFFF"}
+          backcolor={
+            !isIdValid || !isPwValid ? ThemeConfig.gray_5 : ThemeConfig.gray_1
+          }
+          textcolor={
+            !isIdValid || !isPwValid ? ThemeConfig.gray_3 : ThemeConfig.white
+          }
         />
       </StyledBottomWrapper>
     </Container>

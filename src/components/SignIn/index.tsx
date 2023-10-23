@@ -97,7 +97,7 @@ const SignIn = () => {
                 height="10%"
                 text="구글로 시작하기"
                 backcolor={ThemeConfig.white}
-                textcolor={ThemeConfig.black}
+                textcolor={ThemeConfig.gray_1}
                 border="solid 1px #cccccc"
                 marginbottom="3%"
                 handleClick={() => {
