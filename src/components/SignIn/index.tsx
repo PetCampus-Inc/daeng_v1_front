@@ -26,6 +26,7 @@ const SignIn = () => {
     setInputId,
     inputPw,
     setInputPw,
+    handlerLogin,
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
@@ -81,7 +82,8 @@ const SignIn = () => {
                 textcolor="#000000"
                 marginbottom="3%"
                 handleClick={() => {
-                  setCurrentMainStep(currentMainStep + 2);
+                  //setCurrentMainStep(currentMainStep + 2);
+                  handlerLogin();
                 }}
               >
                 <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
@@ -95,7 +97,8 @@ const SignIn = () => {
                 border="solid 1px #cccccc"
                 marginbottom="3%"
                 handleClick={() => {
-                  setCurrentMainStep(currentMainStep + 2);
+                  // setCurrentMainStep(currentMainStep + 2);
+                  handlerLogin();
                 }}
               >
                 <StyledImage src="images/google-logo.png" alt="google-logo" />
@@ -107,7 +110,8 @@ const SignIn = () => {
                 backcolor="#000000"
                 marginbottom="3%"
                 handleClick={() => {
-                  setCurrentMainStep(currentMainStep + 2);
+                  // setCurrentMainStep(currentMainStep + 2);
+                  handlerLogin();
                 }}
               >
                 <StyledImage src="images/apple-logo.png" alt="apple-logo" />
