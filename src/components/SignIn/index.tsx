@@ -9,6 +9,7 @@ import {
   StyledSignInButton,
   StyledImage,
   StyledLink,
+  Keyword,
 } from "./styles";
 import Button from "components/common/Button";
 import useSignIn from "hooks/useSignIn";
@@ -17,6 +18,7 @@ import Header from "components/common/Header";
 import useShowPw from "hooks/useShowPw";
 import DogOwner from "./DogOwner";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 const SignIn = () => {
   const {
@@ -61,12 +63,16 @@ const SignIn = () => {
 
       {currentMainStep < 2 && (
         <Container>
-          <TextWrapper>
-            <StyledTitleText>
-              {currentMainStep === 0
-                ? "반려견의 유치원"
-                : "똑독 관리자 시작하기"}
-            </StyledTitleText>
+          <TextWrapper height="10%">
+            {currentMainStep === 0 ? (
+              <TextWrapper direction="row">
+                <Keyword>반려견</Keyword>
+                <StyledTitleText>의 유치원</StyledTitleText>
+              </TextWrapper>
+            ) : (
+              <StyledTitleText>똑독 관리자 시작하기</StyledTitleText>
+            )}
+
             <StyledTitleText>
               {currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}
             </StyledTitleText>
@@ -79,7 +85,7 @@ const SignIn = () => {
                 height="10%"
                 text="카카오로 시작하기"
                 backcolor="#fee500"
-                textcolor="#000000"
+                textcolor={ThemeConfig.black}
                 marginbottom="3%"
                 handleClick={() => {
                   //setCurrentMainStep(currentMainStep + 2);
@@ -92,8 +98,8 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="구글로 시작하기"
-                backcolor="#ffffff"
-                textcolor="#000000"
+                backcolor={ThemeConfig.white}
+                textcolor={ThemeConfig.gray_1}
                 border="solid 1px #cccccc"
                 marginbottom="3%"
                 handleClick={() => {
@@ -107,7 +113,7 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="Apple로 시작하기"
-                backcolor="#000000"
+                backcolor={ThemeConfig.black}
                 marginbottom="3%"
                 handleClick={() => {
                   // setCurrentMainStep(currentMainStep + 2);
@@ -120,8 +126,8 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="서비스 체험하기"
-                backcolor="#fffff"
-                textcolor="#525252"
+                backcolor={ThemeConfig.white}
+                textcolor={ThemeConfig.gray_1}
               />
             </ButtonWrapper>
           )}
@@ -183,8 +189,12 @@ const SignIn = () => {
                     //todo login
                     //setCurrentMainStep(currentMainStep + 1);
                   }}
-                  backcolor={isIdValid && isPwValid ? undefined : "#E9E9E9"}
-                  textcolor={isIdValid && isPwValid ? undefined : "#B5B5B5"}
+                  backcolor={
+                    inputId && inputPw ? undefined : ThemeConfig.gray_5
+                  }
+                  textcolor={
+                    inputId && inputPw ? undefined : ThemeConfig.gray_3
+                  }
                 />
               </>
             )}

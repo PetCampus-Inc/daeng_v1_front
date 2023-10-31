@@ -12,6 +12,8 @@ import Header from "components/common/Header";
 import InputBox from "components/common/InputBox";
 import Button from "components/common/Button";
 import { ISchoolInfo } from "types/School.type";
+import { DOGOWNER } from "constants/className";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   searchText: string;
@@ -50,7 +52,7 @@ const Step1 = ({
         <Header
           type="back"
           handleClick={() => {
-            className === "dogOwner"
+            className === DOGOWNER
               ? setCurrentMainStep(0)
               : setCurrentMainStep(currentMainStep - 1);
           }}
@@ -58,7 +60,7 @@ const Step1 = ({
         <TextWrapper>
           <Text
             text={
-              className === "dogOwner"
+              className === DOGOWNER
                 ? "안녕하세요 견주님\n어떤 유치원을 찾고 계시나요?"
                 : "안녕하세요 선생님\n어떤 유치원을 찾고 계시나요?"
             }
@@ -124,8 +126,14 @@ const Step1 = ({
             handleClick={() => {
               setCurrentStep(currentStep + 1);
             }}
-            backcolor={selectedSearchText === "" ? "#F6F6F6" : "#525252"}
-            textcolor={selectedSearchText === "" ? "#B5B5B5" : "#FFFFFF"}
+            backcolor={
+              selectedSearchText === ""
+                ? ThemeConfig.gray_5
+                : ThemeConfig.primaryColor
+            }
+            textcolor={
+              selectedSearchText === "" ? ThemeConfig.gray_3 : ThemeConfig.white
+            }
           />
         </StyledBottomWrapper>
       </Container>

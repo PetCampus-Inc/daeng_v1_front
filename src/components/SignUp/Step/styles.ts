@@ -5,7 +5,7 @@ export const Container = styled.div<{ padding_top?: string }>`
   width: 100%;
   height: 100%;
   padding-top: ${(props) => (props.padding_top ? props.padding_top : "40%")};
-  background-color: white;
+  background-color: ${(props) => props.theme.white};
   justify-content: space-evenly;
   position: relative;
 `;
@@ -65,7 +65,7 @@ export const StyledSearchResult = styled.div<{
   width: 100%;
   height: 15%;
   padding-left: 5%;
-  border: 1px solid #b5b5b5;
+  border: 1px solid ${(props) => props.theme.gray_3};
   border-top: ${(props) => (props.radius_top !== "first" ? "0px" : undefined)};
   display: flex;
   align-items: center;

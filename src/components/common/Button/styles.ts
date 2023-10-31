@@ -19,9 +19,9 @@ export const StyledMainWrapper = styled.div<{
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: ${(props) => (props.textcolor ? props.textcolor : "white")};
+  color: ${(props) => (props.textcolor ? props.textcolor : props.theme.white)};
   background-color: ${(props) =>
-    props.backcolor ? props.backcolor : props.theme.mainColor};
+    props.backcolor ? props.backcolor : props.theme.primaryColor};
   border: ${(props) => (props.border ? props.border : "none")};
   border-radius: ${(props) => (props.radius ? props.radius : "8px")};
   font-weight: ${(props) => (props.weight ? props.weight : "400")};

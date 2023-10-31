@@ -5,8 +5,9 @@ import Text from "components/common/Text";
 import { TextWrapper } from "./styles";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
-import { DOGOWNER, TEACHER } from "constants/className";
+import { DOGOWNER, PRINCIPAL, TEACHER } from "constants/className";
 import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   currentMainStep: number;
@@ -82,7 +83,7 @@ const Step2 = ({
         ) : null}
       </InputBoxWrapper>
       <StyledBottomWrapper>
-        {className === TEACHER ? (
+        {className === TEACHER || className === PRINCIPAL ? (
           <Button
             width="90%"
             height="70%"
@@ -92,8 +93,16 @@ const Step2 = ({
             handleClick={() => {
               setCurrentStep(currentStep + 1);
             }}
-            backcolor={isNameValid && isPhoneValid ? "#525252" : "#F6F6F6"}
-            textcolor={isNameValid && isPhoneValid ? "#FFFFFF" : "#B5B5B5"}
+            backcolor={
+              isNameValid && isPhoneValid
+                ? ThemeConfig.primaryColor
+                : ThemeConfig.gray_5
+            }
+            textcolor={
+              isNameValid && isPhoneValid
+                ? ThemeConfig.white
+                : ThemeConfig.gray_3
+            }
           />
         ) : (
           <Button
@@ -105,8 +114,16 @@ const Step2 = ({
             handleClick={() => {
               setCurrentStep(currentStep + 1);
             }}
-            backcolor={isNameValid && userName !== "" ? "#525252" : "#F6F6F6"}
-            textcolor={isNameValid && userName !== "" ? "#FFFFFF" : "#B5B5B5"}
+            backcolor={
+              isNameValid && userName !== ""
+                ? ThemeConfig.primaryColor
+                : ThemeConfig.gray_5
+            }
+            textcolor={
+              isNameValid && userName !== ""
+                ? ThemeConfig.white
+                : ThemeConfig.gray_3
+            }
           />
         )}
       </StyledBottomWrapper>

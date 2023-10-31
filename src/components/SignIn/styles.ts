@@ -7,20 +7,27 @@ export const Container = styled.div<{ padding_top?: string }>`
   padding-top: ${(props) => (props.padding_top ? props.padding_top : "40%")};
   padding-left: 5%;
   padding-right: 5%;
-  background-color: white;
+  background-color: ${(props) => props.theme.white};
   justify-content: space-evenly;
 `;
 
-export const TextWrapper = styled.div`
+export const TextWrapper = styled.div<{ direction?: string; height?: string }>`
   display: flex;
-  flex-direction: column;
-  height: 10%;
+  flex-direction: ${(props) => (props.direction ? props.direction : "column")};
+  height: ${(props) => props.height};
 `;
 
-export const StyledTitleText = styled.div`
+export const StyledTitleText = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
   margin-bottom: 5px;
+`;
+
+export const Keyword = styled.span`
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: ${(props) => props.theme.primaryColor};
 `;
 
 export const ButtonWrapper = styled.div`
@@ -58,7 +65,6 @@ export const StyledInputBoxWrapper = styled.div`
 export const StyledSignInButton = styled.div`
   height: 10%;
   font-size: 0.9rem;
-  border-bottom: 1px solid #b5b5b5;
   display: flex;
   margin-bottom: 5%;
   padding-bottom: 6%;
@@ -72,5 +78,5 @@ export const StyledSelectRoleWrapper = styled.div`
 `;
 
 export const StyledLink = styled(Link)`
-  color: #858585;
+  color: ${(props) => props.theme.gray_2};
 `;

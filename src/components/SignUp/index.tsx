@@ -12,6 +12,7 @@ import Header from "components/common/Header";
 import Button from "components/common/Button";
 import { Link } from "react-router-dom";
 import useSignUp from "hooks/useSignUp";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 const SingUp = () => {
   const { currentMainStep, setCurrentMainStep, selectedRole, setSelectedRole } =
@@ -54,8 +55,8 @@ const SingUp = () => {
                 handleClick={() => {
                   setCurrentMainStep(currentMainStep + 1);
                 }}
-                backcolor={selectedRole !== -1 ? undefined : "#E9E9E9"}
-                textcolor={selectedRole !== -1 ? undefined : "#B5B5B5"}
+                backcolor={selectedRole !== -1 ? undefined : ThemeConfig.gray_4}
+                textcolor={selectedRole !== -1 ? undefined : ThemeConfig.gray_3}
               />
             )}
           </StyledBottomWrapper>
