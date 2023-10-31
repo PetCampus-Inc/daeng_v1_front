@@ -129,7 +129,7 @@ const Step1 = ({
             backcolor={
               selectedSearchText === ""
                 ? ThemeConfig.gray_5
-                : ThemeConfig.gray_1
+                : ThemeConfig.primaryColor
             }
             textcolor={
               selectedSearchText === "" ? ThemeConfig.gray_3 : ThemeConfig.white

@@ -115,7 +115,9 @@ const Step3 = ({
             isIdValid && isPwValid && setCurrentStep(currentStep + 1);
           }}
           backcolor={
-            !isIdValid || !isPwValid ? ThemeConfig.gray_5 : ThemeConfig.gray_1
+            !isIdValid || !isPwValid
+              ? ThemeConfig.gray_5
+              : ThemeConfig.primaryColor
           }
           textcolor={
             !isIdValid || !isPwValid ? ThemeConfig.gray_3 : ThemeConfig.white

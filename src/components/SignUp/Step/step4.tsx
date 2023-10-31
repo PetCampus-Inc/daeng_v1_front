@@ -134,7 +134,7 @@ const Step4 = ({
             !isRegistrationValid ||
             schoolAddress === ""
               ? ThemeConfig.gray_5
-              : ThemeConfig.gray_1
+              : ThemeConfig.primaryColor
           }
           textcolor={
             schoolName === "" ||

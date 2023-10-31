@@ -57,7 +57,7 @@ const Complete = ({ setCurrentMainStep, className }: Props) => {
               handleClick={() => {
                 setCurrentMainStep(0);
               }}
-              backcolor={ThemeConfig.gray_1}
+              backcolor={ThemeConfig.primaryColor}
               textcolor={ThemeConfig.white}
             />
           </StyledLink>

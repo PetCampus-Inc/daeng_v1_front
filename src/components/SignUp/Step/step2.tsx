@@ -5,7 +5,7 @@ import Text from "components/common/Text";
 import { TextWrapper } from "./styles";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
-import { DOGOWNER, TEACHER } from "constants/className";
+import { DOGOWNER, PRINCIPAL, TEACHER } from "constants/className";
 import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 
@@ -83,7 +83,7 @@ const Step2 = ({
         ) : null}
       </InputBoxWrapper>
       <StyledBottomWrapper>
-        {className === TEACHER ? (
+        {className === TEACHER || className === PRINCIPAL ? (
           <Button
             width="90%"
             height="70%"
@@ -95,7 +95,7 @@ const Step2 = ({
             }}
             backcolor={
               isNameValid && isPhoneValid
-                ? ThemeConfig.gray_1
+                ? ThemeConfig.primaryColor
                 : ThemeConfig.gray_5
             }
             textcolor={
@@ -116,7 +116,7 @@ const Step2 = ({
             }}
             backcolor={
               isNameValid && userName !== ""
-                ? ThemeConfig.gray_1
+                ? ThemeConfig.primaryColor
                 : ThemeConfig.gray_5
             }
             textcolor={

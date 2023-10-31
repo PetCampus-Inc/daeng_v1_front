@@ -74,7 +74,7 @@ const InputBox = ({
             size="80%"
             weight="500"
             textcolor={isValid ? ThemeConfig.white : ThemeConfig.gray_3}
-            backcolor={isValid ? ThemeConfig.gray_1 : ThemeConfig.gray_5}
+            backcolor={isValid ? ThemeConfig.primaryColor : ThemeConfig.gray_5}
           >
             {className === "id" ? "중복확인" : "인증하기"}
           </Button>
