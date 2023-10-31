@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { StyledMainWrapper, StyledIcon } from "./styles";
 import Text from "components/common/Text";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   selected: boolean;
@@ -17,9 +18,9 @@ const RoleBox = ({ selected, mainText, subText, handleClick }: Props) => {
         size="1.3rem"
         weight="bold"
         text={mainText}
-        color={selected ? "#E9E9E9" : undefined}
+        color={selected ? ThemeConfig.gray_4 : undefined}
       />
-      <Text text={subText} color={selected ? "#E9E9E9" : undefined} />
+      <Text text={subText} color={selected ? ThemeConfig.gray_4 : undefined} />
     </StyledMainWrapper>
   );
 };

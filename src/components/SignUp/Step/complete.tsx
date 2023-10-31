@@ -9,6 +9,7 @@ import { Dispatch, SetStateAction } from "react";
 import Text from "components/common/Text";
 import Button from "components/common/Button";
 import { DOGOWNER, TEACHER } from "constants/className";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
@@ -56,8 +57,8 @@ const Complete = ({ setCurrentMainStep, className }: Props) => {
               handleClick={() => {
                 setCurrentMainStep(0);
               }}
-              backcolor={"#525252"}
-              textcolor={"#FFFFFF"}
+              backcolor={ThemeConfig.primaryColor}
+              textcolor={ThemeConfig.white}
             />
           </StyledLink>
         </>

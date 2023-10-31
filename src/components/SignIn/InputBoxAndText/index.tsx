@@ -6,6 +6,7 @@ import {
   StyledTextWrapper,
 } from "./styles";
 import InputBox from "components/common/InputBox";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   text: string;
@@ -35,7 +36,7 @@ const InputBoxAndText = ({
         <StyledErrorText>{errorText}</StyledErrorText>
       </StyledTextWrapper>
       <InputBox
-        color={errorText ? "#ea5635" : "black"}
+        color={errorText ? ThemeConfig.red_1 : ThemeConfig.black}
         className={className}
         height="100%"
         width="100%"

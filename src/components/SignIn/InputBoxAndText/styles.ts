@@ -26,5 +26,5 @@ export const StyledErrorText = styled.div`
   font-weight: 400;
   margin-top: 3%;
   margin-bottom: 3%;
-  color: #ea5635;
+  color: ${(props) => props.theme.red_1};
 `;
