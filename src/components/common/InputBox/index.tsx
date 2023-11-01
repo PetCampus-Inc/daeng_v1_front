@@ -21,6 +21,7 @@ interface Props {
   selectedSearchText?: string;
   type?: string;
   handleClick?: () => void | Promise<void>;
+  onChange?: (e: any) => void | React.ChangeEvent<HTMLInputElement>;
 }
 
 const InputBox = ({
@@ -35,6 +36,7 @@ const InputBox = ({
   selectedSearchText,
   type,
   handleClick,
+  onChange,
 }: Props) => {
   const [isValid, setIsValid] = useState(false);
 
@@ -54,7 +56,7 @@ const InputBox = ({
         placeholder={placeholdText}
         type={type}
         value={inputValue}
-        onChange={setInputValue}
+        onChange={onChange ? onChange : setInputValue}
         color={color}
       />
       {type === "search" && (

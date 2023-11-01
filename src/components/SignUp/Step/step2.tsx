@@ -42,6 +42,21 @@ const Step2 = ({
       : setIsPhoneValid(false);
   }, [userName, userPhone]);
 
+  // 번호 하이픈 자동생성
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    if (value.length > 13) {
+      value = value.substring(0, 13);
+    }
+    if (value.length === 4 && !value.includes("-")) {
+      setUserPhone(value.substring(0, 3) + "-");
+    } else if (value.length === 9 && value.charAt(8) !== "-") {
+      setUserPhone(value.substring(0, 8) + "-" + value.charAt(8));
+    } else {
+      setUserPhone(value);
+    }
+  };
+
   return (
     <Container>
       <Header
@@ -79,6 +94,7 @@ const Step2 = ({
             placeholder="연락처를 입력해 주세요"
             inputValue={userPhone}
             setInputValue={setUserPhone}
+            onChange={handleInputChange}
           />
         ) : null}
       </InputBoxWrapper>
