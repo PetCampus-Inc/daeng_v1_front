@@ -17,6 +17,7 @@ interface Props {
   placeholder?: string;
   setInputValue: (e: any) => void | SetStateAction<any>;
   handleClick?: () => void | Promise<void>;
+  onChange?: (e: any) => void | ChangeEvent<HTMLInputElement>;
 }
 
 const InputBoxAndText = ({
@@ -28,6 +29,7 @@ const InputBoxAndText = ({
   placeholder,
   setInputValue,
   handleClick,
+  onChange,
 }: Props) => {
   return (
     <StyledMainWrapper>
@@ -47,6 +49,7 @@ const InputBoxAndText = ({
           setInputValue(e.target.value)
         }
         handleClick={handleClick}
+        onChange={onChange}
       />
     </StyledMainWrapper>
   );
