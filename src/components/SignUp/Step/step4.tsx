@@ -48,6 +48,46 @@ const Step4 = ({
       : setIsRegistrationValid(false);
   };
 
+  // 전화번호 하이픈 자동생성
+  const handleSchoolPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    if (value.startsWith("02")) {
+      if (value.length > 12) {
+        value = value.substring(0, 12);
+      }
+      setSchoolPhone(
+        value
+          .replace(/[^0-9]/g, "")
+          .replace(/^(\d{2})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
+      );
+    } else {
+      if (value.length > 13) {
+        value = value.substring(0, 13);
+      }
+      setSchoolPhone(
+        value
+          .replace(/[^0-9]/g, "")
+          .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
+      );
+    }
+  };
+
+  // 사업자번호 하이픈 자동생성
+  const handleSchoolNumChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    if (value.length > 12) {
+      value = value.substring(0, 12);
+    }
+
+    setSchoolNum(
+      value
+        .replace(/[^0-9]/g, "")
+        .replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1-$2-$3")
+        .replace(/(\-{1,2})$/g, "")
+    );
+  };
+
   useEffect(() => {
     SCHOOL_PHONE_REGEX.test(schoolPhone)
       ? setIsSchoolPhoneValid(true)
@@ -90,6 +130,7 @@ const Step4 = ({
           type="text"
           inputValue={schoolPhone}
           setInputValue={setSchoolPhone}
+          onChange={handleSchoolPhoneChange}
         />
         <InputBoxAndText
           text="유치원 주소"
@@ -105,6 +146,7 @@ const Step4 = ({
           inputValue={schoolNum}
           setInputValue={setSchoolNum}
           handleClick={handleValidCheck}
+          onChange={handleSchoolNumChange}
           errorText={
             isClicked
               ? isRegistrationValid

@@ -48,13 +48,12 @@ const Step2 = ({
     if (value.length > 13) {
       value = value.substring(0, 13);
     }
-    if (value.length === 4 && !value.includes("-")) {
-      setUserPhone(value.substring(0, 3) + "-");
-    } else if (value.length === 9 && value.charAt(8) !== "-") {
-      setUserPhone(value.substring(0, 8) + "-" + value.charAt(8));
-    } else {
-      setUserPhone(value);
-    }
+    setUserPhone(
+      value
+        .replace(/[^0-9]/g, "")
+        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
+        .replace(/(\-{1,2})$/g, "")
+    );
   };
 
   return (
