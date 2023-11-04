@@ -11,7 +11,7 @@ import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
 import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
-import Postcode from "components/common/Postcode";
+import Postcode from "components/SignUp/Postcode";
 
 interface Props {
   currentStep: number;

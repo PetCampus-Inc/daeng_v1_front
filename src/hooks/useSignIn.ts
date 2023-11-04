@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { ILoginInfo } from "types/User.type";
-import { handleLoginResult } from "apis/user.api";
+import { ILoginInfo } from "types/Member.type";
+import { handleLoginResult } from "apis/member.api";
 
 const useSignIn = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
