@@ -61,7 +61,7 @@ const InputBox = ({
       />
       {type === "search" && (
         <StyledButtonWrapper onClick={handleClick}>
-          {selectedSearchText === "" ? (
+          {selectedSearchText === "" || inputValue === "" ? (
             <StyledImage src="images/search.png" alt="search-icon" />
           ) : (
             <StyledImage src="images/x-box.png" alt="x-box" />
