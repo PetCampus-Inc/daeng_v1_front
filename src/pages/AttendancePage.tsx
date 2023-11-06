@@ -7,7 +7,7 @@ const AttendancePage = () => {
     <>
       <Header type="main" />
       <Attendance />
-      <Navbar />
+      <Navbar type="admin" />
     </>
   );
 };
