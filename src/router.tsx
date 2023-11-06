@@ -27,6 +27,12 @@ const router = createBrowserRouter([
     path: "/signUp",
     element: <SignUpPage />,
   },
+  //admin 관련 페이지
+  {
+    path: "/admin/main",
+    element: <SignUpPage />,
+  },
+  //user 관련 페이지
   {
     path: "*",
     element: <NotFoundPage />,
