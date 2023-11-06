@@ -22,6 +22,9 @@ interface Props {
   userPw: string;
   setUserPw: Dispatch<SetStateAction<string>>;
   className: string;
+  handlerGetCheckId: () => void | Promise<void>;
+  setConfirmedId: Dispatch<SetStateAction<boolean>>;
+  confirmedId: boolean;
 }
 
 const Step3 = ({
@@ -32,6 +35,9 @@ const Step3 = ({
   userPw,
   setUserPw,
   className,
+  handlerGetCheckId,
+  setConfirmedId,
+  confirmedId,
 }: Props) => {
   const [checkUserPw, setCheckUserPw] = useState("");
   const { showPw, setShowPw, handleToggle } = useShowPw();
@@ -73,6 +79,7 @@ const Step3 = ({
           type="check"
           inputValue={userId}
           setInputValue={setUserId}
+          handleClick={handlerGetCheckId}
         />
         <InputBoxAndText
           text="비밀번호"

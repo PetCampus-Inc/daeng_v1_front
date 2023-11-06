@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { handleGetSearchResult } from "apis/school.api";
 import { ISchoolInfo } from "types/School.type";
+import { handleCheckId } from "apis/admin.api";
 
 const useSignUp = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
@@ -17,18 +18,33 @@ const useSignUp = () => {
   const [schoolPhone, setSchoolPhone] = useState<string>("");
   const [schoolNum, setSchoolNum] = useState<string>("");
   const [schoolAddress, setSchoolAddress] = useState<string>("");
+  const [confirmedId, setConfirmedId] = useState<boolean>(false);
 
   const handlerGetSearchResult = useCallback(async () => {
     try {
       const data = await handleGetSearchResult(searchText);
       setSearchResultText(data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, [searchText, setSearchText, searchResultText, setSearchResultText]);
 
   const handlerDeleteSearchResult = () => {
     setSelectedSearchText("");
     setSearchText("");
   };
+
+  const handlerGetCheckId = useCallback(async () => {
+    try {
+      const data = await handleCheckId(userId);
+      if (data === 200) {
+        setConfirmedId(true);
+      }
+    } catch (error) {
+      setConfirmedId(false);
+      console.log(error);
+    }
+  }, [userId, setUserId, setConfirmedId, confirmedId]);
 
   return {
     currentMainStep,
@@ -61,6 +77,9 @@ const useSignUp = () => {
     setSchoolNum,
     schoolAddress,
     setSchoolAddress,
+    handlerGetCheckId,
+    confirmedId,
+    setConfirmedId,
   };
 };
 

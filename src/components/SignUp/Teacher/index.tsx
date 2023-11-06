@@ -31,6 +31,9 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setUserId,
     userPw,
     setUserPw,
+    handlerGetCheckId,
+    setConfirmedId,
+    confirmedId,
   } = useSignUp();
 
   return (
@@ -73,6 +76,9 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserId={setUserId}
           userPw={userPw}
           setUserPw={setUserPw}
+          handlerGetCheckId={handlerGetCheckId}
+          setConfirmedId={setConfirmedId}
+          confirmedId={confirmedId}
           className={TEACHER}
         />
       )}
