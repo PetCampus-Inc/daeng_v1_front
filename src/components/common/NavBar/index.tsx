@@ -1,4 +1,4 @@
-import { Container, StyledNavBtn } from "./styles";
+import { Container, StyledNavBtn, StyledImage } from "./styles";
 import { memo } from "react";
 import usePathParams from "hooks/usePathParams";
 import Text from "../Text";
@@ -16,11 +16,11 @@ const Navbar = ({ type }: Props) => {
     <Container>
       {type === "admin" ? (
         <>
-          <StyledNavBtn
-            to={"/attendance"}
-            type={type}
-            path={path === "/attendance" ? true : false}
-          >
+          <StyledNavBtn to={"/attendance"} type={type}>
+            <StyledImage
+              src="images/admin-attendance.png"
+              alt="admin-attendance"
+            />
             <Text
               text="출석부"
               color={path === "/attendance" ? ThemeConfig.red_1 : "black"}
@@ -28,10 +28,20 @@ const Navbar = ({ type }: Props) => {
             />
           </StyledNavBtn>
           <StyledNavBtn to={"/"} type={type}>
-            내가 맡은 강아지
+            <StyledImage src="images/admin-mydog.png" alt="admin-mydog" />
+            <Text
+              text="내가 맡은 강아지"
+              color={path === "/" ? ThemeConfig.red_1 : "black"}
+              weight="bold"
+            />
           </StyledNavBtn>
           <StyledNavBtn to={"/"} type={type}>
-            마이페이지
+            <StyledImage src="images/admin-mypage.png" alt="admin-mypage" />
+            <Text
+              text="마이페이지"
+              color={path === "/" ? ThemeConfig.red_1 : "black"}
+              weight="bold"
+            />
           </StyledNavBtn>
         </>
       ) : (

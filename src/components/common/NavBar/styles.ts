@@ -15,17 +15,20 @@ export const Container = styled.div`
 export const StyledNavBtn = styled(Link)<{
   selected?: boolean;
   type?: string;
-  path?: boolean;
 }>`
   width: ${(props) => (props.type === "admin" ? "33%" : "25%")};
   height: 100%;
   font-size: medium;
   font-weight: bold;
-  //color: white;
-  //${(props) => (props.path ? props.theme.red_1 : props.theme.black)};
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
   background-color: ${(props) =>
     props.selected ? props.theme.red_1 : props.theme.white};
 `;
+
+export const StyledImage = styled.img<{
+  src: string;
+  alt: string;
+}>``;
