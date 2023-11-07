@@ -39,6 +39,7 @@ const useSignUp = () => {
       const data = await handleCheckId(userId);
       if (data === 200) {
         setConfirmedId(true);
+        console.log("available ID");
       }
     } catch (error) {
       setConfirmedId(false);

@@ -53,7 +53,9 @@ const SingUp = () => {
                 weight="bold"
                 size="1.1rem"
                 handleClick={() => {
-                  setCurrentMainStep(currentMainStep + 1);
+                  if (selectedRole !== -1) {
+                    setCurrentMainStep(currentMainStep + 1);
+                  }
                 }}
                 backcolor={selectedRole !== -1 ? undefined : ThemeConfig.gray_4}
                 textcolor={selectedRole !== -1 ? undefined : ThemeConfig.gray_3}
