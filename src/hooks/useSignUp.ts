@@ -76,14 +76,14 @@ const useSignUp = () => {
   const handlerOwnerSignup = useCallback(async () => {
     try {
       const data = await handleOwnerSignUpResult({
-        id: userId,
-        pwd: userPw,
-        name: userName,
-        phoneNumber: userPhone,
-        schoolName: schoolName,
-        schoolPhoneNumber: schoolPhone,
-        schoolAddress: schoolAddress,
-        registrationNumber: schoolNum,
+        userId,
+        userPw,
+        userName,
+        userPhone,
+        schoolName,
+        schoolPhone,
+        schoolAddress,
+        schoolNum,
       });
       if (data.status === 200) {
         setCurrentStep(currentStep + 1);

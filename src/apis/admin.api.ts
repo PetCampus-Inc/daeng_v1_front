@@ -28,7 +28,16 @@ export const handleOwnerSignUpResult = async (
   req: IOwnerSignUpInfo
 ): Promise<IResponse> => {
   const url: string = `admin/join/owner`;
-  const { data } = await customAxios.post(url, req);
+  const { data } = await customAxios.post(url, {
+    id: req.userId,
+    pwd: req.userPw,
+    name: req.userName,
+    phoneNumber: req.userPhone,
+    schoolName: req.schoolName,
+    schoolPhoneNumber: req.schoolPhone,
+    schoolAddress: req.schoolAddress,
+    registrationNumber: req.schoolNum,
+  });
   return data;
 };
 
