@@ -27,6 +27,7 @@ interface Props {
   handlerCheckSchoolNum: () => void | Promise<void>;
   confirmedSchoolNum: boolean;
   setConfirmedSchoolNum: Dispatch<SetStateAction<boolean>>;
+  handlerOwnerSignup: () => void | Promise<void>;
 }
 
 const Step4 = ({
@@ -43,6 +44,7 @@ const Step4 = ({
   handlerCheckSchoolNum,
   confirmedSchoolNum,
   setConfirmedSchoolNum,
+  handlerOwnerSignup,
 }: Props) => {
   const [isSchoolPhoneValid, setIsSchoolPhoneValid] = useState(false);
   const [isRegistrationValid, setIsRegistrationValid] = useState(false);
@@ -179,7 +181,7 @@ const Step4 = ({
               onChange={handleSchoolNumChange}
               errorText={
                 isClicked
-                  ? isRegistrationValid
+                  ? confirmedSchoolNum
                     ? ""
                     : "올바르지 않은 사업자 등록 번호입니다."
                   : ""
@@ -197,13 +199,13 @@ const Step4 = ({
                 schoolName !== "" &&
                   schoolAddress !== "" &&
                   isSchoolPhoneValid &&
-                  isRegistrationValid &&
-                  setCurrentStep(currentStep + 1);
+                  confirmedSchoolNum &&
+                  handlerOwnerSignup();
               }}
               backcolor={
                 schoolName === "" ||
                 !isSchoolPhoneValid ||
-                !isRegistrationValid ||
+                !confirmedSchoolNum ||
                 schoolAddress === ""
                   ? ThemeConfig.gray_5
                   : ThemeConfig.primaryColor
@@ -211,7 +213,7 @@ const Step4 = ({
               textcolor={
                 schoolName === "" ||
                 !isSchoolPhoneValid ||
-                !isRegistrationValid ||
+                !confirmedSchoolNum ||
                 schoolAddress === ""
                   ? ThemeConfig.gray_3
                   : ThemeConfig.white

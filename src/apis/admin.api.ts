@@ -29,7 +29,7 @@ export const handleOwnerSignUpResult = async (
 ): Promise<IResponse> => {
   const url: string = `admin/join/owner`;
   const { data } = await customAxios.post(url, req);
-  return data.data;
+  return data;
 };
 
 // 선생님 회원가입 요청

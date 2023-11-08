@@ -1,7 +1,11 @@
 import { useState, useCallback } from "react";
 import { handleGetSearchResult } from "apis/school.api";
 import { ISchoolInfo } from "types/School.type";
-import { handleCheckId, handleCheckRegistrationNumber } from "apis/admin.api";
+import {
+  handleCheckId,
+  handleCheckRegistrationNumber,
+  handleOwnerSignUpResult,
+} from "apis/admin.api";
 
 const useSignUp = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
@@ -68,6 +72,27 @@ const useSignUp = () => {
     }
   }, [schoolNum, setSchoolNum, confirmedSchoolNum, setConfirmedSchoolNum]);
 
+  // 원장 회원가입
+  const handlerOwnerSignup = useCallback(async () => {
+    try {
+      const data = await handleOwnerSignUpResult({
+        id: userId,
+        pwd: userPw,
+        name: userName,
+        phoneNumber: userPhone,
+        schoolName: schoolName,
+        schoolPhoneNumber: schoolPhone,
+        schoolAddress: schoolAddress,
+        registrationNumber: schoolNum,
+      });
+      if (data.status === 200) {
+        setCurrentStep(currentStep + 1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return {
     currentMainStep,
     setCurrentMainStep,
@@ -105,6 +130,7 @@ const useSignUp = () => {
     handlerCheckSchoolNum,
     confirmedSchoolNum,
     setConfirmedSchoolNum,
+    handlerOwnerSignup,
   };
 };
 
