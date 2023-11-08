@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { handleGetSearchResult } from "apis/school.api";
 import { ISchoolInfo } from "types/School.type";
-import { handleCheckId } from "apis/admin.api";
+import { handleCheckId, handleCheckRegistrationNumber } from "apis/admin.api";
 
 const useSignUp = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
@@ -19,6 +19,7 @@ const useSignUp = () => {
   const [schoolNum, setSchoolNum] = useState<string>("");
   const [schoolAddress, setSchoolAddress] = useState<string>("");
   const [confirmedId, setConfirmedId] = useState<boolean>(false);
+  const [confirmedSchoolNum, setConfirmedSchoolNum] = useState<boolean>(false);
 
   const handlerGetSearchResult = useCallback(async () => {
     try {
@@ -34,18 +35,38 @@ const useSignUp = () => {
     setSearchText("");
   };
 
+  // 아이디 중복 확인
   const handlerGetCheckId = useCallback(async () => {
     try {
       const data = await handleCheckId(userId);
       if (data === 200) {
         setConfirmedId(true);
         console.log("available ID");
+      } else {
+        setConfirmedId(false);
       }
     } catch (error) {
-      setConfirmedId(false);
       console.log(error);
     }
   }, [userId, setUserId, setConfirmedId, confirmedId]);
+
+  // 사업자 등록번호 확인
+  const handlerCheckSchoolNum = useCallback(async () => {
+    try {
+      const data = await handleCheckRegistrationNumber(
+        schoolNum.replace(/-/g, "")
+      );
+      if (data === "01") {
+        setConfirmedSchoolNum(true);
+        console.log("available School Number", data);
+      } else {
+        setConfirmedSchoolNum(false);
+        console.log("not available School Number", data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [schoolNum, setSchoolNum, confirmedSchoolNum, setConfirmedSchoolNum]);
 
   return {
     currentMainStep,
@@ -81,6 +102,9 @@ const useSignUp = () => {
     handlerGetCheckId,
     confirmedId,
     setConfirmedId,
+    handlerCheckSchoolNum,
+    confirmedSchoolNum,
+    setConfirmedSchoolNum,
   };
 };
 

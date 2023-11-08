@@ -133,7 +133,12 @@ const Step3 = ({
           weight="bold"
           size="1.1rem"
           handleClick={() => {
-            if (confirmedId && isPwValid && userPw === checkUserPw) {
+            if (
+              confirmedId &&
+              isPwValid &&
+              userPw === checkUserPw &&
+              checkUserId
+            ) {
               setCurrentStep(currentStep + 1);
             } else if (!confirmedId || !isPwValid) {
             } else {
@@ -141,12 +146,14 @@ const Step3 = ({
             }
           }}
           backcolor={
-            !isIdValid || !isPwValid
+            !isIdValid || !isPwValid || !checkUserId
               ? ThemeConfig.gray_5
               : ThemeConfig.primaryColor
           }
           textcolor={
-            !isIdValid || !isPwValid ? ThemeConfig.gray_3 : ThemeConfig.white
+            !isIdValid || !isPwValid || !checkUserId
+              ? ThemeConfig.gray_3
+              : ThemeConfig.white
           }
         />
       </StyledBottomWrapper>

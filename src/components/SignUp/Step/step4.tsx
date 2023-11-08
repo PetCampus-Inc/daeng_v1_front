@@ -24,6 +24,9 @@ interface Props {
   setSchoolNum: Dispatch<SetStateAction<string>>;
   schoolAddress: string;
   setSchoolAddress: Dispatch<SetStateAction<string>>;
+  handlerCheckSchoolNum: () => void | Promise<void>;
+  confirmedSchoolNum: boolean;
+  setConfirmedSchoolNum: Dispatch<SetStateAction<boolean>>;
 }
 
 const Step4 = ({
@@ -37,6 +40,9 @@ const Step4 = ({
   setSchoolNum,
   schoolAddress,
   setSchoolAddress,
+  handlerCheckSchoolNum,
+  confirmedSchoolNum,
+  setConfirmedSchoolNum,
 }: Props) => {
   const [isSchoolPhoneValid, setIsSchoolPhoneValid] = useState(false);
   const [isRegistrationValid, setIsRegistrationValid] = useState(false);
@@ -45,9 +51,7 @@ const Step4 = ({
 
   const handleValidCheck = () => {
     setIsClicked(true);
-    REGISTRATION_REGEX.test(schoolNum)
-      ? setIsRegistrationValid(true)
-      : setIsRegistrationValid(false);
+    handlerCheckSchoolNum();
   };
 
   // 전화번호 하이픈 자동생성
@@ -94,7 +98,10 @@ const Step4 = ({
     SCHOOL_PHONE_REGEX.test(schoolPhone)
       ? setIsSchoolPhoneValid(true)
       : setIsSchoolPhoneValid(false);
-  }, [schoolPhone, schoolAddress]);
+    REGISTRATION_REGEX.test(schoolNum)
+      ? setIsRegistrationValid(true)
+      : setIsRegistrationValid(false);
+  }, [schoolPhone, schoolAddress, schoolNum]);
 
   return (
     <>

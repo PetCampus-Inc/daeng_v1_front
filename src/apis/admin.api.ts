@@ -5,6 +5,7 @@ import {
   IOwnerSignUpInfo,
   ITeacherSignUpInfo,
 } from "types/Admin.type";
+import axios from "axios";
 
 // 아이디 중복확인
 export const handleCheckId = async (id: string): Promise<number> => {
@@ -38,4 +39,15 @@ export const handleTeacherSignUpResult = async (
   const url: string = `admin/submit/teacher/approval`;
   const { data } = await customAxios.post(url, req);
   return data.data;
+};
+
+// 사업자번호 확인 api
+export const handleCheckRegistrationNumber = async (
+  req: string
+): Promise<string> => {
+  const url: string = `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${process.env.REACT_APP_BUSINESS_API_KEY}`;
+  const { data } = await axios.post(url, {
+    b_no: [req],
+  });
+  return data.data[0].b_stt_cd;
 };
