@@ -124,7 +124,9 @@ const Step1 = ({
             weight="bold"
             size="1.1rem"
             handleClick={() => {
-              setCurrentStep(currentStep + 1);
+              if (selectedSearchText !== "") {
+                setCurrentStep(currentStep + 1);
+              }
             }}
             backcolor={
               selectedSearchText === ""

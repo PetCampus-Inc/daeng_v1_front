@@ -12,14 +12,23 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const StyledNavBtn = styled(Link)<{ selected?: boolean }>`
-  width: 25%;
+export const StyledNavBtn = styled(Link)<{
+  selected?: boolean;
+  type?: string;
+}>`
+  width: ${(props) => (props.type === "admin" ? "33%" : "25%")};
   height: 100%;
   font-size: medium;
   font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
   background-color: ${(props) =>
     props.selected ? props.theme.red_1 : props.theme.white};
 `;
+
+export const StyledImage = styled.img<{
+  src: string;
+  alt: string;
+}>``;

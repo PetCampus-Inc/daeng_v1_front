@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import {
   ButtonWrapper,
   Container,
@@ -29,19 +29,19 @@ const SignIn = () => {
     inputPw,
     setInputPw,
     handlerLogin,
+    handlerAdminLogin,
+    isFail,
+    setIsFail,
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
-
-  const [isClicked, setIsClicked] = useState(false);
   const [isIdValid, setIsIdValid] = useState(false);
   const [isPwValid, setIsPwValid] = useState(false);
 
-  const handleValidCheck = () => {
-    setIsClicked(true);
+  useEffect(() => {
     ID_REGEX.test(inputId) ? setIsIdValid(true) : setIsIdValid(false);
     PW_REGEX.test(inputPw) ? setIsPwValid(true) : setIsPwValid(false);
-  };
+  }, [inputId, inputId]);
 
   return (
     <>
@@ -141,7 +141,7 @@ const SignIn = () => {
                 inputValue={inputId}
                 setInputValue={setInputId}
                 errorText={
-                  isClicked ? (!isIdValid ? "잘못된 아이디입니다." : "") : ""
+                  isFail ? (!isIdValid ? "잘못된 아이디입니다." : "") : ""
                 }
               />
               <InputBoxAndText
@@ -153,7 +153,7 @@ const SignIn = () => {
                 setInputValue={setInputPw}
                 handleClick={handleToggle}
                 errorText={
-                  isClicked ? (!isPwValid ? "잘못된 비밀번호입니다." : "") : ""
+                  isFail ? (!isPwValid ? "잘못된 비밀번호입니다." : "") : ""
                 }
               />
             </StyledInputBoxWrapper>
@@ -185,9 +185,7 @@ const SignIn = () => {
                   weight="bold"
                   size="1.1rem"
                   handleClick={() => {
-                    handleValidCheck();
-                    //todo login
-                    //setCurrentMainStep(currentMainStep + 1);
+                    handlerAdminLogin();
                   }}
                   backcolor={
                     inputId && inputPw ? undefined : ThemeConfig.gray_5

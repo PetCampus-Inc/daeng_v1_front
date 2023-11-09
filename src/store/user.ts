@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { IUserInfo } from "types/User.type";
+import { IUserInfo } from "types/Member.type";
 
 export const userInfoAtom = atom<IUserInfo>({
   key: "userInfoAtom",
