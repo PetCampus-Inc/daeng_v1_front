@@ -1,6 +1,6 @@
 export interface IAdminLoginInfo {
-  id: string;
-  pwd: string;
+  inputId: string;
+  inputPw: string;
 }
 
 export interface IOwnerSignUpInfo {

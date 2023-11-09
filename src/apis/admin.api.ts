@@ -19,8 +19,11 @@ export const handleAdminLoginResult = async (
   req: IAdminLoginInfo
 ): Promise<IResponse> => {
   const url: string = `admin/login`;
-  const { data } = await customAxios.post(url, req);
-  return data.data;
+  const { data } = await customAxios.post(url, {
+    id: req.inputId,
+    pwd: req.inputPw,
+  });
+  return data;
 };
 
 // 원장 회원가입
