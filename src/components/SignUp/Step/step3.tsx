@@ -75,7 +75,7 @@ const Step3 = ({
       <InputBoxWrapper height="70%">
         <InputBoxAndText
           text="아이디"
-          placeholder="아이디를 입력해 주세요"
+          placeholder="영문 소문자, 숫자포함 6~12자"
           className="id"
           type="check"
           inputValue={userId}
@@ -83,18 +83,18 @@ const Step3 = ({
           handleClick={
             isIdValid
               ? () => {
-                  handlerGetCheckId();
                   setCheckUserId(true);
+                  handlerGetCheckId();
                 }
               : () => {}
           }
           errorText={
-            checkUserId ? (confirmedId ? "" : "사용 불가능한 ID 입니다.") : ""
+            checkUserId ? (!confirmedId ? "사용 불가능한 ID 입니다." : "") : ""
           }
         />
         <InputBoxAndText
           text="비밀번호"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder="영문 대소문자, 숫자포함 8~20자"
           className={showPw.className}
           type={showPw.type}
           inputValue={userPw}
@@ -110,7 +110,7 @@ const Step3 = ({
         />
         <InputBoxAndText
           text="비밀번호 확인"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder="영문 대소문자, 숫자포함 8~20자"
           className={showPw.className}
           type={showPw.type}
           inputValue={checkUserPw}

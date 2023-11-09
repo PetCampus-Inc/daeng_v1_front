@@ -70,6 +70,7 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
       )}
       {currentStep === 3 && (
         <Step4
+          userName={userName}
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
           schoolName={schoolName}

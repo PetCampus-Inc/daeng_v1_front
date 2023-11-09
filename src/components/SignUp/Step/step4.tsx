@@ -28,9 +28,11 @@ interface Props {
   confirmedSchoolNum: boolean;
   setConfirmedSchoolNum: Dispatch<SetStateAction<boolean>>;
   handlerOwnerSignup: () => void | Promise<void>;
+  userName: string;
 }
 
 const Step4 = ({
+  userName,
   currentStep,
   setCurrentStep,
   schoolName,
@@ -131,7 +133,7 @@ const Step4 = ({
 
           <TextWrapper margin_bottom="8%">
             <Text
-              text={"박유빈 원장님"}
+              text={`${userName} 원장님`}
               size="1.4rem"
               weight="bold"
               height="2rem"

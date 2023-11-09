@@ -30,8 +30,8 @@ const SignIn = () => {
     setInputPw,
     handlerLogin,
     handlerAdminLogin,
-    isFail,
-    setIsFail,
+    isIdConfirmed,
+    isPwConfirmed,
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
@@ -141,7 +141,11 @@ const SignIn = () => {
                 inputValue={inputId}
                 setInputValue={setInputId}
                 errorText={
-                  isFail ? (!isIdValid ? "잘못된 아이디입니다." : "") : ""
+                  !isIdConfirmed
+                    ? !isIdValid
+                      ? "잘못된 아이디입니다."
+                      : "잘못된 아이디입니다."
+                    : ""
                 }
               />
               <InputBoxAndText
@@ -153,7 +157,11 @@ const SignIn = () => {
                 setInputValue={setInputPw}
                 handleClick={handleToggle}
                 errorText={
-                  isFail ? (!isPwValid ? "잘못된 비밀번호입니다." : "") : ""
+                  !isPwConfirmed
+                    ? !isPwValid
+                      ? "잘못된 비밀번호입니다."
+                      : "잘못된 비밀번호입니다."
+                    : ""
                 }
               />
             </StyledInputBoxWrapper>
@@ -175,7 +183,7 @@ const SignIn = () => {
               <>
                 <StyledSignInButton>
                   <StyledLink to="/SignUp">
-                    처음이신가요? 회원가입하기
+                    처음이신가요? 회원가입하기 {">"}
                   </StyledLink>
                 </StyledSignInButton>
                 <Button

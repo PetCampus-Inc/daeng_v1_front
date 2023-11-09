@@ -8,7 +8,8 @@ const useSignIn = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
   const [inputId, setInputId] = useState<string>("");
   const [inputPw, setInputPw] = useState<string>("");
-  const [isFail, setIsFail] = useState<boolean>(false);
+  const [isIdConfirmed, setIsIdConfirmed] = useState<boolean>(true);
+  const [isPwConfirmed, setIsPwConfirmed] = useState<boolean>(true);
   const [infoForLogin, setInfoForLogin] = useState<ILoginInfo>({
     id: "",
     password: "",
@@ -24,22 +25,24 @@ const useSignIn = () => {
     } catch (error) {}
   }, []);
 
-  const handlerAdminLogin = useCallback(async () => {
+  const handlerAdminLogin = async () => {
     try {
       const data = await handleAdminLoginResult({
         inputId,
         inputPw,
       });
       if (data.status === 200) {
-        navigate("/");
-      } else {
-        setIsFail(true);
+        navigate("/attendance");
       }
-    } catch (error) {
-      setIsFail(true);
-      console.log(error);
+    } catch (error: any) {
+      error.response.data.message === "해당 ID를 찾을 수 없습니다"
+        ? setIsIdConfirmed(false)
+        : setIsIdConfirmed(true);
+      error.response.data.message === "비밀번호가 일치하지 않습니다"
+        ? setIsPwConfirmed(false)
+        : setIsPwConfirmed(true);
     }
-  }, []);
+  };
 
   return {
     currentMainStep,
@@ -50,8 +53,8 @@ const useSignIn = () => {
     setInputPw,
     handlerLogin,
     handlerAdminLogin,
-    isFail,
-    setIsFail,
+    isIdConfirmed,
+    isPwConfirmed,
   };
 };
 

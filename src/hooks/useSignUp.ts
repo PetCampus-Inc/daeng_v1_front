@@ -73,7 +73,7 @@ const useSignUp = () => {
   }, [schoolNum, setSchoolNum, confirmedSchoolNum, setConfirmedSchoolNum]);
 
   // 원장 회원가입
-  const handlerOwnerSignup = useCallback(async () => {
+  const handlerOwnerSignup = async () => {
     try {
       const data = await handleOwnerSignUpResult({
         userId,
@@ -91,7 +91,7 @@ const useSignUp = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  };
 
   return {
     currentMainStep,
