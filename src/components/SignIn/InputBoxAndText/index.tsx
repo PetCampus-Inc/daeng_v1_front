@@ -11,6 +11,7 @@ import { ThemeConfig } from "styles/ThemeConfig";
 interface Props {
   text: string;
   errorText?: string;
+  confimedText?: string;
   type: string;
   className?: string;
   inputValue: any;
@@ -18,6 +19,7 @@ interface Props {
   setInputValue: (e: any) => void | SetStateAction<any>;
   handleClick?: () => void | Promise<void>;
   onChange?: (e: any) => void | ChangeEvent<HTMLInputElement>;
+  confirmedId?: boolean;
 }
 
 const InputBoxAndText = ({
@@ -30,15 +32,18 @@ const InputBoxAndText = ({
   setInputValue,
   handleClick,
   onChange,
+  confirmedId,
 }: Props) => {
   return (
     <StyledMainWrapper>
       <StyledTextWrapper>
         <StyledMainText>{text}</StyledMainText>
-        <StyledErrorText>{errorText}</StyledErrorText>
+        <StyledErrorText confirmedId={confirmedId}>{errorText}</StyledErrorText>
       </StyledTextWrapper>
       <InputBox
-        color={errorText ? ThemeConfig.red_1 : ThemeConfig.black}
+        color={
+          !confirmedId && errorText ? ThemeConfig.red_1 : ThemeConfig.black
+        }
         className={className}
         height="100%"
         width="100%"

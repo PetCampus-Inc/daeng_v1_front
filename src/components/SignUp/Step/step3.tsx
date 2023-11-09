@@ -80,6 +80,7 @@ const Step3 = ({
           type="check"
           inputValue={userId}
           setInputValue={setUserId}
+          confirmedId={confirmedId}
           handleClick={
             isIdValid
               ? () => {
@@ -89,7 +90,11 @@ const Step3 = ({
               : () => {}
           }
           errorText={
-            checkUserId ? (!confirmedId ? "사용 불가능한 ID 입니다." : "") : ""
+            checkUserId
+              ? confirmedId
+                ? "사용 가능한 ID 입니다."
+                : "사용 불가능한 ID 입니다."
+              : ""
           }
         />
         <InputBoxAndText

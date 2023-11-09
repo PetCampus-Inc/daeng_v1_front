@@ -50,6 +50,7 @@ const useSignUp = () => {
         setConfirmedId(false);
       }
     } catch (error) {
+      setConfirmedId(false);
       console.log(error);
     }
   }, [userId, setUserId, setConfirmedId, confirmedId]);
