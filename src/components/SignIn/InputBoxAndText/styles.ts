@@ -21,11 +21,11 @@ export const StyledMainText = styled.div`
   margin-bottom: 3%;
 `;
 
-export const StyledErrorText = styled.div<{ confirmedId?: boolean }>`
+export const StyledErrorText = styled.div<{ confirmedid?: string }>`
   font-size: 0.8rem;
   font-weight: 400;
   margin-top: 3%;
   margin-bottom: 3%;
   color: ${(props) =>
-    props.confirmedId ? props.theme.black : props.theme.red_1};
+    props.confirmedid === "true" ? props.theme.green : props.theme.red_1};
 `;

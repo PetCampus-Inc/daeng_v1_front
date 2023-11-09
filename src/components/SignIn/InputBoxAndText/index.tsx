@@ -38,7 +38,9 @@ const InputBoxAndText = ({
     <StyledMainWrapper>
       <StyledTextWrapper>
         <StyledMainText>{text}</StyledMainText>
-        <StyledErrorText confirmedId={confirmedId}>{errorText}</StyledErrorText>
+        <StyledErrorText confirmedid={confirmedId?.toString()}>
+          {errorText}
+        </StyledErrorText>
       </StyledTextWrapper>
       <InputBox
         color={
