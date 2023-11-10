@@ -13,15 +13,26 @@ import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
-  schoolName: string;
+  selectedSearchText?: string;
+  schoolName?: string;
   className: string;
 }
 
-const Complete = ({ setCurrentMainStep, schoolName, className }: Props) => {
+const Complete = ({
+  setCurrentMainStep,
+  selectedSearchText,
+  schoolName,
+  className,
+}: Props) => {
   return (
     <Container>
       <TextWrapper margin_bottom="5%">
-        <Text text={schoolName} size="1.4rem" weight="bold" height="2rem" />
+        <Text
+          text={schoolName ? schoolName : selectedSearchText}
+          size="1.4rem"
+          weight="bold"
+          height="2rem"
+        />
         <Text
           text={
             className === TEACHER

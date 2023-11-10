@@ -2,7 +2,7 @@ import { memo } from "react";
 import { StyledText } from "./styles";
 
 interface Props {
-  text: string;
+  text?: string;
   size?: string;
   weight?: string;
   color?: string;

@@ -26,7 +26,6 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     handlerTeacherSignup,
     schoolId,
     setSchoolId,
-    schoolName,
     userName,
     setUserName,
     userPhone,
@@ -92,7 +91,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
       {currentStep === 4 && (
         <Complete
           setCurrentMainStep={setCurrentMainStep}
-          schoolName={schoolName}
+          selectedSearchText={selectedSearchText}
           className={TEACHER}
         />
       )}

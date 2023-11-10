@@ -71,6 +71,7 @@ const DogOwner = ({
       {currentStep === 3 && (
         <Complete
           setCurrentMainStep={setCurrentMainStep}
+          selectedSearchText={selectedSearchText}
           className={DOGOWNER}
         />
       )}
