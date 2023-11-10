@@ -27,6 +27,8 @@ const DogOwner = ({
     setSelectedSearchText,
     handlerGetSearchResult,
     handlerDeleteSearchResult,
+    schoolId,
+    setSchoolId,
     userName,
     setUserName,
     userPhone,
@@ -44,6 +46,8 @@ const DogOwner = ({
           setSelectedSearchText={setSelectedSearchText}
           handlerGetSearchResult={handlerGetSearchResult}
           handlerDeleteSearchResult={handlerDeleteSearchResult}
+          schoolId={schoolId}
+          setSchoolId={setSchoolId}
           currentMainStep={currentMainStep}
           setCurrentMainStep={setCurrentMainStep}
           currentStep={currentStep}
