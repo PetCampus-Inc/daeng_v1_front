@@ -23,6 +23,6 @@ export interface ITeacherSignUpInfo {
 }
 
 export interface ITeacherApprove {
-  adminId: number;
-  schoolId: number;
+  submittedAdminId: number;
+  submittedSchoolId: number;
 }

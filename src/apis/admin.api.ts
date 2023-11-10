@@ -86,8 +86,8 @@ export const handleTeacherApprove = async (
 ): Promise<IResponse> => {
   const url: string = `admin/approve/teacher/approval`;
   const { data } = await customAxios.post(url, {
-    adminId: req.adminId,
-    schoolId: req.schoolId,
+    adminId: req.submittedAdminId,
+    schoolId: req.submittedSchoolId,
   });
   return data;
 };

@@ -23,6 +23,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setSelectedSearchText,
     handlerGetSearchResult,
     handlerDeleteSearchResult,
+    handlerTeacherSignup,
     schoolId,
     setSchoolId,
     userName,
@@ -83,6 +84,7 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           handlerGetCheckId={handlerGetCheckId}
           setConfirmedId={setConfirmedId}
           confirmedId={confirmedId}
+          handlerTeacherSignup={handlerTeacherSignup}
           className={TEACHER}
         />
       )}

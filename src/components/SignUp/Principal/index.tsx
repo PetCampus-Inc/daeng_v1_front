@@ -38,6 +38,7 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
     confirmedSchoolNum,
     setConfirmedSchoolNum,
     handlerOwnerSignup,
+    handlerTeacherSignup,
   } = useSignUp();
   return (
     <>
@@ -66,6 +67,7 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
           handlerGetCheckId={handlerGetCheckId}
           setConfirmedId={setConfirmedId}
           confirmedId={confirmedId}
+          handlerTeacherSignup={handlerTeacherSignup}
         />
       )}
       {currentStep === 3 && (

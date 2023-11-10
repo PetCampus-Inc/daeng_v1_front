@@ -25,6 +25,7 @@ interface Props {
   handlerGetCheckId: () => void | Promise<void>;
   setConfirmedId: Dispatch<SetStateAction<boolean>>;
   confirmedId: boolean;
+  handlerTeacherSignup: () => void | Promise<void>;
 }
 
 const Step3 = ({
@@ -38,6 +39,7 @@ const Step3 = ({
   handlerGetCheckId,
   setConfirmedId,
   confirmedId,
+  handlerTeacherSignup,
 }: Props) => {
   const [checkUserId, setCheckUserId] = useState(false);
   const [checkUserPw, setCheckUserPw] = useState("");
@@ -138,17 +140,13 @@ const Step3 = ({
           weight="bold"
           size="1.1rem"
           handleClick={() => {
-            if (
-              confirmedId &&
-              isPwValid &&
-              userPw === checkUserPw &&
-              checkUserId
-            ) {
-              setCurrentStep(currentStep + 1);
-            } else if (!confirmedId || !isPwValid) {
-            } else {
-              setIsClicked(true);
-            }
+            confirmedId &&
+            isPwValid &&
+            userPw === checkUserPw &&
+            checkUserId &&
+            className !== TEACHER
+              ? setCurrentStep(currentStep + 1)
+              : handlerTeacherSignup();
           }}
           backcolor={
             !isIdValid || !isPwValid || !checkUserId
