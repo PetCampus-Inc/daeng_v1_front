@@ -92,6 +92,7 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
       {currentStep === 4 && (
         <Complete
           setCurrentMainStep={setCurrentMainStep}
+          schoolName={schoolName}
           className={PRINCIPAL}
         />
       )}
