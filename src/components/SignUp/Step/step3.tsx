@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo, useState } from "react";
+import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
 import {
   Container,
   InputBoxWrapper,
@@ -22,6 +22,10 @@ interface Props {
   userPw: string;
   setUserPw: Dispatch<SetStateAction<string>>;
   className: string;
+  handlerGetCheckId: () => void | Promise<void>;
+  setConfirmedId: Dispatch<SetStateAction<boolean>>;
+  confirmedId: boolean;
+  handlerTeacherSignup: () => void | Promise<void>;
 }
 
 const Step3 = ({
@@ -32,18 +36,23 @@ const Step3 = ({
   userPw,
   setUserPw,
   className,
+  handlerGetCheckId,
+  setConfirmedId,
+  confirmedId,
+  handlerTeacherSignup,
 }: Props) => {
+  const [checkUserId, setCheckUserId] = useState(false);
   const [checkUserPw, setCheckUserPw] = useState("");
   const { showPw, setShowPw, handleToggle } = useShowPw();
   const [isIdValid, setIsIdValid] = useState(false);
   const [isPwValid, setIsPwValid] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  const handleValidCheck = () => {
-    setIsClicked(true);
+  useEffect(() => {
     ID_REGEX.test(userId) ? setIsIdValid(true) : setIsIdValid(false);
     PW_REGEX.test(userPw) ? setIsPwValid(true) : setIsPwValid(false);
-  };
+    PW_REGEX.test(checkUserPw) ? setIsPwValid(true) : setIsPwValid(false);
+  }, [userId, userPw, checkUserPw]);
 
   return (
     <Container>
@@ -68,27 +77,47 @@ const Step3 = ({
       <InputBoxWrapper height="70%">
         <InputBoxAndText
           text="아이디"
-          placeholder="아이디를 입력해 주세요"
+          placeholder="영문 소문자, 숫자포함 6~12자"
           className="id"
           type="check"
           inputValue={userId}
           setInputValue={setUserId}
+          confirmedId={confirmedId}
+          handleClick={
+            isIdValid
+              ? () => {
+                  setCheckUserId(true);
+                  handlerGetCheckId();
+                }
+              : () => {}
+          }
+          errorText={
+            checkUserId
+              ? confirmedId
+                ? "사용 가능한 ID 입니다."
+                : "사용 불가능한 ID 입니다."
+              : ""
+          }
         />
         <InputBoxAndText
           text="비밀번호"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder="영문 대소문자, 숫자포함 8~20자"
           className={showPw.className}
           type={showPw.type}
           inputValue={userPw}
           setInputValue={setUserPw}
           handleClick={handleToggle}
           errorText={
-            isClicked ? (!isPwValid ? "비밀번호가 일치하지 않습니다." : "") : ""
+            isClicked
+              ? !isPwValid || userPw !== checkUserPw
+                ? "비밀번호가 일치하지 않습니다."
+                : ""
+              : ""
           }
         />
         <InputBoxAndText
           text="비밀번호 확인"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder="영문 대소문자, 숫자포함 8~20자"
           className={showPw.className}
           type={showPw.type}
           inputValue={checkUserPw}
@@ -111,16 +140,23 @@ const Step3 = ({
           weight="bold"
           size="1.1rem"
           handleClick={() => {
-            handleValidCheck();
-            isIdValid && isPwValid && setCurrentStep(currentStep + 1);
+            confirmedId &&
+            isPwValid &&
+            userPw === checkUserPw &&
+            checkUserId &&
+            className !== TEACHER
+              ? setCurrentStep(currentStep + 1)
+              : handlerTeacherSignup();
           }}
           backcolor={
-            !isIdValid || !isPwValid
+            !isIdValid || !isPwValid || !checkUserId
               ? ThemeConfig.gray_5
               : ThemeConfig.primaryColor
           }
           textcolor={
-            !isIdValid || !isPwValid ? ThemeConfig.gray_3 : ThemeConfig.white
+            !isIdValid || !isPwValid || !checkUserId
+              ? ThemeConfig.gray_3
+              : ThemeConfig.white
           }
         />
       </StyledBottomWrapper>

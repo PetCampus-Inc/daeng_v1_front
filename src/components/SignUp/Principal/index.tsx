@@ -31,6 +31,14 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setSchoolNum,
     schoolAddress,
     setSchoolAddress,
+    handlerGetCheckId,
+    setConfirmedId,
+    confirmedId,
+    handlerCheckSchoolNum,
+    confirmedSchoolNum,
+    setConfirmedSchoolNum,
+    handlerOwnerSignup,
+    handlerTeacherSignup,
   } = useSignUp();
   return (
     <>
@@ -56,10 +64,15 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
           userPw={userPw}
           setUserPw={setUserPw}
           className={PRINCIPAL}
+          handlerGetCheckId={handlerGetCheckId}
+          setConfirmedId={setConfirmedId}
+          confirmedId={confirmedId}
+          handlerTeacherSignup={handlerTeacherSignup}
         />
       )}
       {currentStep === 3 && (
         <Step4
+          userName={userName}
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
           schoolName={schoolName}
@@ -70,6 +83,10 @@ const Principal = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setSchoolNum={setSchoolNum}
           schoolAddress={schoolAddress}
           setSchoolAddress={setSchoolAddress}
+          handlerCheckSchoolNum={handlerCheckSchoolNum}
+          confirmedSchoolNum={confirmedSchoolNum}
+          setConfirmedSchoolNum={setConfirmedSchoolNum}
+          handlerOwnerSignup={handlerOwnerSignup}
         />
       )}
       {currentStep === 4 && (

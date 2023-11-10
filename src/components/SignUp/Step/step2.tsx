@@ -106,7 +106,9 @@ const Step2 = ({
             weight="bold"
             size="1.1rem"
             handleClick={() => {
-              setCurrentStep(currentStep + 1);
+              if (isNameValid && isPhoneValid) {
+                setCurrentStep(currentStep + 1);
+              }
             }}
             backcolor={
               isNameValid && isPhoneValid
@@ -127,7 +129,9 @@ const Step2 = ({
             weight="bold"
             size="1.1rem"
             handleClick={() => {
-              setCurrentStep(currentStep + 1);
+              if (isNameValid && isPhoneValid) {
+                setCurrentStep(currentStep + 1);
+              }
             }}
             backcolor={
               isNameValid && userName !== ""

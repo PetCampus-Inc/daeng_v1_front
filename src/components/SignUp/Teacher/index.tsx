@@ -23,6 +23,9 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setSelectedSearchText,
     handlerGetSearchResult,
     handlerDeleteSearchResult,
+    handlerTeacherSignup,
+    schoolId,
+    setSchoolId,
     userName,
     setUserName,
     userPhone,
@@ -31,6 +34,9 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
     setUserId,
     userPw,
     setUserPw,
+    handlerGetCheckId,
+    setConfirmedId,
+    confirmedId,
   } = useSignUp();
 
   return (
@@ -43,6 +49,8 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setSearchResultText={setSearchResultText}
           selectedSearchText={selectedSearchText}
           setSelectedSearchText={setSelectedSearchText}
+          schoolId={schoolId}
+          setSchoolId={setSchoolId}
           handlerGetSearchResult={handlerGetSearchResult}
           handlerDeleteSearchResult={handlerDeleteSearchResult}
           currentMainStep={currentMainStep}
@@ -73,6 +81,10 @@ const Teacher = ({ currentMainStep, setCurrentMainStep }: Props) => {
           setUserId={setUserId}
           userPw={userPw}
           setUserPw={setUserPw}
+          handlerGetCheckId={handlerGetCheckId}
+          setConfirmedId={setConfirmedId}
+          confirmedId={confirmedId}
+          handlerTeacherSignup={handlerTeacherSignup}
           className={TEACHER}
         />
       )}

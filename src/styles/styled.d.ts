@@ -2,6 +2,7 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface IThemeConfig {
+    BGray: string;
     primaryColor: string;
     primary_2: string;
     primary_3: string;
@@ -18,6 +19,7 @@ declare module "styled-components" {
     gray_3: string;
     gray_4: string;
     gray_5: string;
+    green: string;
 
     secondColor: string;
     thirdColor: string;

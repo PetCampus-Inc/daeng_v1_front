@@ -24,6 +24,8 @@ interface Props {
   setSelectedSearchText: Dispatch<SetStateAction<string>>;
   handlerGetSearchResult: () => void | Promise<void>;
   handlerDeleteSearchResult: () => void | Promise<void>;
+  schoolId: number;
+  setSchoolId: Dispatch<SetStateAction<number>>;
   currentMainStep: number;
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
   currentStep: number;
@@ -40,6 +42,8 @@ const Step1 = ({
   setSelectedSearchText,
   handlerGetSearchResult,
   handlerDeleteSearchResult,
+  schoolId,
+  setSchoolId,
   currentStep,
   setCurrentStep,
   currentMainStep,
@@ -108,6 +112,7 @@ const Step1 = ({
                   onClick={() => {
                     setSelectedSearchText(item.name);
                     setSearchText(item.name);
+                    setSchoolId(item.schoolId);
                   }}
                 >
                   <Text text={item.name} />
@@ -124,7 +129,9 @@ const Step1 = ({
             weight="bold"
             size="1.1rem"
             handleClick={() => {
-              setCurrentStep(currentStep + 1);
+              if (selectedSearchText !== "") {
+                setCurrentStep(currentStep + 1);
+              }
             }}
             backcolor={
               selectedSearchText === ""

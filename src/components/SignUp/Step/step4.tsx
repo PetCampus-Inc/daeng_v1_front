@@ -11,7 +11,7 @@ import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
 import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
-import Postcode from "components/common/Postcode";
+import Postcode from "components/SignUp/Postcode";
 
 interface Props {
   currentStep: number;
@@ -24,9 +24,15 @@ interface Props {
   setSchoolNum: Dispatch<SetStateAction<string>>;
   schoolAddress: string;
   setSchoolAddress: Dispatch<SetStateAction<string>>;
+  handlerCheckSchoolNum: () => void | Promise<void>;
+  confirmedSchoolNum: boolean;
+  setConfirmedSchoolNum: Dispatch<SetStateAction<boolean>>;
+  handlerOwnerSignup: () => void | Promise<void>;
+  userName: string;
 }
 
 const Step4 = ({
+  userName,
   currentStep,
   setCurrentStep,
   schoolName,
@@ -37,6 +43,10 @@ const Step4 = ({
   setSchoolNum,
   schoolAddress,
   setSchoolAddress,
+  handlerCheckSchoolNum,
+  confirmedSchoolNum,
+  setConfirmedSchoolNum,
+  handlerOwnerSignup,
 }: Props) => {
   const [isSchoolPhoneValid, setIsSchoolPhoneValid] = useState(false);
   const [isRegistrationValid, setIsRegistrationValid] = useState(false);
@@ -45,9 +55,7 @@ const Step4 = ({
 
   const handleValidCheck = () => {
     setIsClicked(true);
-    REGISTRATION_REGEX.test(schoolNum)
-      ? setIsRegistrationValid(true)
-      : setIsRegistrationValid(false);
+    handlerCheckSchoolNum();
   };
 
   // 전화번호 하이픈 자동생성
@@ -94,7 +102,10 @@ const Step4 = ({
     SCHOOL_PHONE_REGEX.test(schoolPhone)
       ? setIsSchoolPhoneValid(true)
       : setIsSchoolPhoneValid(false);
-  }, [schoolPhone, schoolAddress]);
+    REGISTRATION_REGEX.test(schoolNum)
+      ? setIsRegistrationValid(true)
+      : setIsRegistrationValid(false);
+  }, [schoolPhone, schoolAddress, schoolNum]);
 
   return (
     <>
@@ -122,7 +133,7 @@ const Step4 = ({
 
           <TextWrapper margin_bottom="8%">
             <Text
-              text={"박유빈 원장님"}
+              text={`${userName} 원장님`}
               size="1.4rem"
               weight="bold"
               height="2rem"
@@ -172,7 +183,7 @@ const Step4 = ({
               onChange={handleSchoolNumChange}
               errorText={
                 isClicked
-                  ? isRegistrationValid
+                  ? confirmedSchoolNum
                     ? ""
                     : "올바르지 않은 사업자 등록 번호입니다."
                   : ""
@@ -190,13 +201,13 @@ const Step4 = ({
                 schoolName !== "" &&
                   schoolAddress !== "" &&
                   isSchoolPhoneValid &&
-                  isRegistrationValid &&
-                  setCurrentStep(currentStep + 1);
+                  confirmedSchoolNum &&
+                  handlerOwnerSignup();
               }}
               backcolor={
                 schoolName === "" ||
                 !isSchoolPhoneValid ||
-                !isRegistrationValid ||
+                !confirmedSchoolNum ||
                 schoolAddress === ""
                   ? ThemeConfig.gray_5
                   : ThemeConfig.primaryColor
@@ -204,7 +215,7 @@ const Step4 = ({
               textcolor={
                 schoolName === "" ||
                 !isSchoolPhoneValid ||
-                !isRegistrationValid ||
+                !confirmedSchoolNum ||
                 schoolAddress === ""
                   ? ThemeConfig.gray_3
                   : ThemeConfig.white

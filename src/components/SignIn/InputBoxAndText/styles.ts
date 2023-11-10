@@ -21,10 +21,11 @@ export const StyledMainText = styled.div`
   margin-bottom: 3%;
 `;
 
-export const StyledErrorText = styled.div`
+export const StyledErrorText = styled.div<{ confirmedid?: string }>`
   font-size: 0.8rem;
   font-weight: 400;
   margin-top: 3%;
   margin-bottom: 3%;
-  color: ${(props) => props.theme.red_1};
+  color: ${(props) =>
+    props.confirmedid === "true" ? props.theme.green : props.theme.red_1};
 `;
