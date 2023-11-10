@@ -18,6 +18,7 @@ const useSignUp = () => {
   const [userPhone, setUserPhone] = useState<string>("");
   const [userId, setUserId] = useState<string>("");
   const [userPw, setUserPw] = useState<string>("");
+  const [schoolId, setSchoolId] = useState<number>(-1);
   const [schoolName, setSchoolName] = useState<string>("");
   const [schoolPhone, setSchoolPhone] = useState<string>("");
   const [schoolNum, setSchoolNum] = useState<string>("");
@@ -121,6 +122,8 @@ const useSignUp = () => {
     setSchoolName,
     schoolPhone,
     setSchoolPhone,
+    schoolId,
+    setSchoolId,
     schoolNum,
     setSchoolNum,
     schoolAddress,

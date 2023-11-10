@@ -1,8 +1,9 @@
 import customAxios from "libs/CustomAxios";
-import { IResponse } from "types/Response.type";
+import { IResponse, ITeacherSubmitResponse } from "types/Response.type";
 import {
   IAdminLoginInfo,
   IOwnerSignUpInfo,
+  ITeacherApprove,
   ITeacherSignUpInfo,
 } from "types/Admin.type";
 import axios from "axios";
@@ -26,6 +27,17 @@ export const handleAdminLoginResult = async (
   return data;
 };
 
+// 사업자번호 확인 api
+export const handleCheckRegistrationNumber = async (
+  req: string
+): Promise<string> => {
+  const url: string = `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${process.env.REACT_APP_BUSINESS_API_KEY}`;
+  const { data } = await axios.post(url, {
+    b_no: [req],
+  });
+  return data.data[0].b_stt_cd;
+};
+
 // 원장 회원가입
 export const handleOwnerSignUpResult = async (
   req: IOwnerSignUpInfo
@@ -45,21 +57,64 @@ export const handleOwnerSignUpResult = async (
 };
 
 // 선생님 회원가입 요청
-export const handleTeacherSignUpResult = async (
+export const handleTeacherSignUpSubmit = async (
   req: ITeacherSignUpInfo
-): Promise<IResponse> => {
+): Promise<ITeacherSubmitResponse> => {
   const url: string = `admin/submit/teacher/approval`;
-  const { data } = await customAxios.post(url, req);
-  return data.data;
+  const { data } = await customAxios.post(url, {
+    id: req.userId,
+    pwd: req.userPw,
+    schoolId: req.schoolId,
+    name: req.userName,
+    phoneNumber: req.userPhone,
+  });
+  return data;
 };
 
-// 사업자번호 확인 api
-export const handleCheckRegistrationNumber = async (
-  req: string
-): Promise<string> => {
-  const url: string = `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${process.env.REACT_APP_BUSINESS_API_KEY}`;
-  const { data } = await axios.post(url, {
-    b_no: [req],
+// 선생님 회원가입 요청 취소
+export const handleTeacherSignUpCancel = async (
+  adminId: number
+): Promise<IResponse> => {
+  const url: string = `admin/cancel/teacher/approval`;
+  const { data } = await customAxios.post(url, adminId);
+  return data;
+};
+
+// 선생님 가입 승인
+export const handleTeacherApprove = async (
+  req: ITeacherApprove
+): Promise<IResponse> => {
+  const url: string = `admin/approve/teacher/approval`;
+  const { data } = await customAxios.post(url, {
+    adminId: req.adminId,
+    schoolId: req.schoolId,
   });
-  return data.data[0].b_stt_cd;
+  return data;
+};
+
+// 선생님 가입 거절
+export const handleTeacherDeny = async (
+  adminId: number
+): Promise<IResponse> => {
+  const url: string = `admin/deny/teacher/approval`;
+  const { data } = await customAxios.post(url, adminId);
+  return data;
+};
+
+// 견주 가입 승인
+export const handleMemberApprove = async (
+  memberId: number
+): Promise<IResponse> => {
+  const url: string = `admin/approve/member/approval`;
+  const { data } = await customAxios.post(url, memberId);
+  return data;
+};
+
+// 견주 가입 거절
+export const handleMemberDeny = async (
+  memberId: number
+): Promise<IResponse> => {
+  const url: string = `admin/deny/member/approval`;
+  const { data } = await customAxios.post(url, memberId);
+  return data;
 };

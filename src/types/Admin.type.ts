@@ -15,9 +15,14 @@ export interface IOwnerSignUpInfo {
 }
 
 export interface ITeacherSignUpInfo {
-  id: string;
-  pwd: string;
+  userId: string;
+  userPw: string;
   schoolId: number;
-  name: string;
-  phoneNumber: string;
+  userName: string;
+  userPhone: string;
+}
+
+export interface ITeacherApprove {
+  adminId: number;
+  schoolId: number;
 }

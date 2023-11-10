@@ -12,3 +12,14 @@ export interface IError {
     };
   };
 }
+
+export interface ITeacherSubmitResponse {
+  data: {
+    adminId: number;
+    schoolId: number;
+    name: string;
+    phoneNumber: string;
+  };
+  status: number;
+  message: string;
+}
