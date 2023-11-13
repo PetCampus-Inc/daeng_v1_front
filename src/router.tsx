@@ -29,8 +29,13 @@ const router = createBrowserRouter([
     element: <Pages.NotFoundPage />,
   },
   {
-    path: "/attendance",
-    element: <Pages.AttendancePage />,
+    path: "/admin",
+    children: [
+      {
+        path: "attendance",
+        element: <Pages.AttendancePage />,
+      },
+    ],
   },
 ]);
 

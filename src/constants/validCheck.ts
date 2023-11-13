@@ -2,7 +2,7 @@
 export const ID_REGEX = /^(?=.*[a-z])(?=.*\d)[a-z\d]{6,20}$/;
 
 // 비밀번호
-export const PW_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/;
+export const PW_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d|[^a-zA-Z\d]).{8,20}$/;
 
 // 휴대폰 번호
 export const PHONE_REGEX = /^\d{3}-\d{3,4}-\d{4}$/;

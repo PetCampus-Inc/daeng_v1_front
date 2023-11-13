@@ -32,9 +32,10 @@ const useSignIn = () => {
         inputPw,
       });
       if (data.status === 200) {
-        navigate("/attendance");
+        navigate("/admin/attendance");
       }
     } catch (error: any) {
+      console.log(error);
       error.response.data.message === "해당 ID를 찾을 수 없습니다"
         ? setIsIdConfirmed(false)
         : setIsIdConfirmed(true);
