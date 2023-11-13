@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { ChangeEvent, memo, useState } from "react";
 import {
   Container,
   StyledHeadWrapper,
@@ -9,9 +9,12 @@ import {
 import Button from "components/common/Button";
 import Text from "components/common/Text";
 import { ThemeConfig } from "styles/ThemeConfig";
+import InputBox from "components/common/InputBox";
+import { ATTENDANCE } from "constants/className";
 
 const Attendance = () => {
   const [isChecking, setIsChecking] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   return (
     <Container>
@@ -55,6 +58,21 @@ const Attendance = () => {
           ></Button>
         </StyledButtonWrapper>
       </StyledHeadWrapper>
+      <InputBox
+        type="search"
+        width="100%"
+        height="7%"
+        shadow="shadow"
+        radius="15px"
+        color={ThemeConfig.gray_1}
+        className={ATTENDANCE}
+        inputValue={searchText}
+        border="none"
+        placeholdText="검색"
+        setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
+          setSearchText(e.target.value);
+        }}
+      />
     </Container>
   );
 };

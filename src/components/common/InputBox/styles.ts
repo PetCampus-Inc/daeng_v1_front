@@ -1,17 +1,31 @@
 import styled from "styled-components";
+import { ThemeConfig } from "styles/ThemeConfig";
 
-export const StyledMainWrapper = styled.div<{ width: string; height: string }>`
+export const StyledMainWrapper = styled.div<{
+  width: string;
+  height: string;
+  shadow?: string;
+  radius?: string;
+}>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   display: flex;
   position: relative;
+  border-radius: ${(props) => (props.radius ? props.radius : "")};
+  box-shadow: ${(props) =>
+    props.shadow ? "0px 5px 15px 0px rgba(0, 0, 0, 0.07)" : ""};
 `;
 
-export const StyledWrapper = styled.input<{ color?: string }>`
+export const StyledWrapper = styled.input<{
+  color?: string;
+  border?: string;
+  radius?: string;
+}>`
   width: 100%;
   height: 100%;
-  border: 1px solid ${(props) => props.theme.gray_3};
-  border-radius: 8px;
+  border: ${(props) =>
+    props.border ? props.border : `1px solid ${ThemeConfig.gray_3}`};
+  border-radius: ${(props) => (props.radius ? props.radius : "8px")};
   padding-left: 5%;
   font-size: 1rem;
   color: ${(props) => (props.color ? props.color : props.theme.black)};

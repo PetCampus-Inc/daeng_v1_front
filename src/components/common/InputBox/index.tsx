@@ -8,12 +8,16 @@ import {
 } from "./styles";
 import { ID_REGEX, REGISTRATION_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { ATTENDANCE } from "constants/className";
 
 interface Props {
   width: string;
   height: string;
+  shadow?: string;
+  radius?: string;
   color?: string;
   valid?: boolean;
+  border?: string;
   className?: string;
   placeholdText?: string;
   inputValue: any;
@@ -27,8 +31,11 @@ interface Props {
 const InputBox = ({
   width,
   height,
+  shadow,
   color,
+  radius,
   valid,
+  border,
   className,
   placeholdText,
   inputValue,
@@ -51,23 +58,40 @@ const InputBox = ({
   }, [inputValue]);
 
   return (
-    <StyledMainWrapper width={width} height={height} className={className}>
+    <StyledMainWrapper
+      width={width}
+      height={height}
+      shadow={shadow}
+      className={className}
+      radius={radius}
+    >
       <StyledWrapper
         placeholder={placeholdText}
         type={type}
         value={inputValue}
         onChange={onChange ? onChange : setInputValue}
         color={color}
+        border={border}
+        radius={radius}
       />
-      {type === "search" && (
-        <StyledButtonWrapper onClick={handleClick}>
-          {selectedSearchText === "" || inputValue === "" ? (
-            <StyledImage src="images/search.png" alt="search-icon" />
-          ) : (
-            <StyledImage src="images/x-box.png" alt="x-box" />
-          )}
-        </StyledButtonWrapper>
-      )}
+      {type === "search" &&
+        (className === ATTENDANCE ? (
+          <StyledButtonWrapper onClick={handleClick}>
+            {selectedSearchText === "" || inputValue === "" ? (
+              <StyledImage src="/images/brown-search.png" alt="search-icon" />
+            ) : (
+              <StyledImage src="/images/x-box.png" alt="x-box" />
+            )}
+          </StyledButtonWrapper>
+        ) : (
+          <StyledButtonWrapper onClick={handleClick}>
+            {selectedSearchText === "" || inputValue === "" ? (
+              <StyledImage src="/images/search.png" alt="search-icon" />
+            ) : (
+              <StyledImage src="/images/x-box.png" alt="x-box" />
+            )}
+          </StyledButtonWrapper>
+        ))}
       {type === "check" && (
         <StyledButtonWrapper onClick={handleClick}>
           <Button
@@ -84,12 +108,12 @@ const InputBox = ({
       )}
       {className === "password" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="images/opened-eye.png" alt="opened-eye" />
+          <StyledImage src="/images/opened-eye.png" alt="opened-eye" />
         </StyledButtonWrapper>
       )}
       {className === "text" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="images/closed-eye.png" alt="closed-eye" />
+          <StyledImage src="/images/closed-eye.png" alt="closed-eye" />
         </StyledButtonWrapper>
       )}
     </StyledMainWrapper>
