@@ -75,7 +75,7 @@ input::-webkit-search-results-decoration{
 }
 
 body {
-  scrollbar-width: none; 
+  scrollbar-width: none;
   margin: 0;
   padding: 0;
   font-family: "Pretendard";
@@ -83,10 +83,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background-color: #EEE5E8;
+  overflow-y: hidden;
+  background-color: ${(props) => props.theme.BGray};
   &::-webkit-scrollbar{
     display: none;
   }
+}
+
+&::-webkit-scrollbar {
+  background-color: ${(props) => props.theme.gray_3};
+  width: 0.4rem;
+  border-radius: 10px;
+}
+
+&::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
 }
 
   #root {
