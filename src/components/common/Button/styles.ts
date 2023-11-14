@@ -10,12 +10,14 @@ export const StyledMainWrapper = styled.div<{
   weight?: string;
   size?: string;
   marginbottom?: string;
+  margintop?: string;
 }>`
   height: ${(props) => props.height};
   width: ${(props) => props.width};
   margin-bottom: ${(props) => props.marginbottom};
+  margin-top: ${(props) => props.margintop};
   display: flex;
-  position: relative;
+  /* position: relative; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
