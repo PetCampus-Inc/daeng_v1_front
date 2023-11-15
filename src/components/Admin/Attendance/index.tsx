@@ -15,12 +15,12 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import InputBox from "components/common/InputBox";
 import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
-import useCheckAttendance from "hooks/useCheckAttendance";
+import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue } from "recoil";
 import { adminInfoAtom } from "store/admin";
 
 const Attendance = () => {
-  const { handleGetAdminInfo } = useCheckAttendance();
+  const { handleGetAdminInfo } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
   const adminName = useRecoilValue(adminInfoAtom).data.adminName;

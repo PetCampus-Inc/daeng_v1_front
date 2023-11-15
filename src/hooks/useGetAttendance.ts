@@ -1,10 +1,8 @@
 import { handleGetDogs } from "apis/attendance";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { adminInfoAtom } from "store/admin";
-import { IAdminInfo } from "types/Attendance.type";
 
-const useCheckAttendance = () => {
+const useGetAttendance = () => {
   const [adminInfo, setAdminInfo] = useRecoilState(adminInfoAtom);
 
   const handleGetAdminInfo = async (adminId: number) => {
@@ -28,4 +26,4 @@ const useCheckAttendance = () => {
   return { handleGetAdminInfo };
 };
 
-export default useCheckAttendance;
+export default useGetAttendance;
