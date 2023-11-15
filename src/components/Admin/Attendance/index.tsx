@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useState } from "react";
+import { ChangeEvent, memo, useEffect, useState } from "react";
 import {
   Container,
   StyledHeadWrapper,
@@ -15,10 +15,22 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import InputBox from "components/common/InputBox";
 import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
+import useCheckAttendance from "hooks/useCheckAttendance";
+import { useRecoilValue } from "recoil";
+import { adminInfoAtom } from "store/admin";
 
 const Attendance = () => {
+  const { handleGetAdminInfo } = useCheckAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const adminName = useRecoilValue(adminInfoAtom).data.adminName;
+  const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
+
+  useEffect(() => {
+    ///// todo 어드민 아이디 값으로 수정하기
+    handleGetAdminInfo(8);
+    console.log(adminName);
+  }, []);
 
   return (
     <Container>
@@ -26,7 +38,7 @@ const Attendance = () => {
         <StyledMainWrapper>
           <StyledTitleWrapper>
             <Text
-              text={"박유빈 선생님 안녕하세요"}
+              text={`${adminName} 선생님 안녕하세요`}
               size="1.3rem"
               weight="bold"
               height="2rem"
@@ -94,8 +106,17 @@ const Attendance = () => {
       </StyledHeadWrapper>
       <StyledListWrapper>
         <StyledCardWrapper>
-          {/* todo 데이터 없을때 처리 */}
-          <DogCard name="뽀뽀야호" rounds="잔여 1/10 회"></DogCard>
+          {dogLists.length > 0 ? (
+            dogLists.map((data) => {
+              return <DogCard key={data.dogId} name={data.dogName} />;
+            })
+          ) : (
+            <Text
+              text="아직 등원한 강아지가 없어요"
+              color={ThemeConfig.gray_3}
+              margintop="30%"
+            />
+          )}
         </StyledCardWrapper>
       </StyledListWrapper>
     </Container>
