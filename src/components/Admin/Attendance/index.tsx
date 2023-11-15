@@ -20,17 +20,33 @@ import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue } from "recoil";
 import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
+import { handleGetSearchDogs } from "apis/attendance";
+import { ISearchDogs } from "types/Attendance.type";
+import Mode from "./Mode";
 
 const Attendance = () => {
   const { handleGetAdminInfo } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [selectedSearchText, setSelectedSearchText] = useState("");
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
   const adminName = useRecoilValue(adminInfoAtom).data.adminName;
   const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const adminRole = useRecoilValue(adminInfoAtom).data.role;
   const { isFocusing, handleFocus, handleBlur } = useFocus();
+
+  const handlerGetSearchResult = async () => {
+    try {
+      const data = await handleGetSearchDogs(1, searchText);
+      if (data.status === 200) {
+        setSearchDogResults(data);
+        setIsSearchClicked(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     handleGetAdminInfo(1);
@@ -92,43 +108,51 @@ const Attendance = () => {
           color={ThemeConfig.gray_1}
           className={ATTENDANCE}
           inputValue={searchText}
-          selectedSearchText={selectedSearchText}
           border="none"
           placeholdText="검색"
+          isclicked={isSearchClicked}
           onFocus={handleFocus}
           onBlur={handleBlur}
           setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
-            setSelectedSearchText("");
             setSearchText(e.target.value);
           }}
-          // handleClick={selectedSearchText === "" ?  : setSearchText("")}
-        />
-        <Button
-          width="38%"
-          height="17%"
-          text="회차 만료 임박 순"
-          radius="15px"
-          border={`solid 1px ${ThemeConfig.gray_4}`}
-          weight="500"
-          margintop="3%"
-          textcolor={ThemeConfig.gray_2}
-          backcolor={ThemeConfig.white}
+          handleClick={
+            !isSearchClicked
+              ? handlerGetSearchResult
+              : () => {
+                  setSearchText("");
+                  setIsSearchClicked(false);
+                }
+          }
         />
       </StyledHeadWrapper>
       <StyledListWrapper>
         <StyledBlur display={isFocusing ? "block" : "none"} />
+        <Button
+          width="38%"
+          height="5%"
+          text="회차 만료 임박 순"
+          radius="15px"
+          border={`solid 1px ${ThemeConfig.gray_4}`}
+          weight="500"
+          marginbottom="3%"
+          textcolor={ThemeConfig.gray_2}
+          backcolor={ThemeConfig.white}
+        />
         <StyledCardWrapper>
-          {dogLists.length > 0 ? (
+          {dogLists.length > 0 &&
+            !isChecking &&
             dogLists.map((data) => {
               return <DogCard key={data.dogId} name={data.dogName} />;
-            })
-          ) : (
+            })}
+          {dogLists.length < 1 && !isChecking && (
             <Text
               text="아직 등원한 강아지가 없어요"
               color={ThemeConfig.gray_3}
               margintop="30%"
             />
           )}
+          {dogLists.length > 0 && isChecking && <Mode />}
         </StyledCardWrapper>
       </StyledListWrapper>
     </Container>

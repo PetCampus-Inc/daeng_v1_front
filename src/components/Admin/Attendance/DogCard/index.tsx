@@ -11,9 +11,10 @@ import { ThemeConfig } from "styles/ThemeConfig";
 interface Props {
   name?: string;
   rounds?: string;
+  className?: string;
 }
 
-const DogCard = ({ name, rounds }: Props) => {
+const DogCard = ({ name, rounds, className }: Props) => {
   return (
     <Container>
       <StyledImage

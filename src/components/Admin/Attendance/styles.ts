@@ -7,14 +7,14 @@ export const Container = styled.div`
 `;
 
 export const StyledHeadWrapper = styled.div`
-  height: 25%;
+  height: 24%;
   padding-left: 4%;
   padding-right: 4%;
 `;
 
 export const StyledMainWrapper = styled.div`
   display: flex;
-  height: 50%;
+  height: 65%;
   width: 100%;
   margin-top: 15%;
   justify-content: space-between;
@@ -41,7 +41,6 @@ export const StyledImage = styled.img<{
 export const StyledListWrapper = styled.div`
   width: 100%;
   height: 75%;
-  margin-top: 3%;
   padding-bottom: 5%;
   padding-left: 4%;
   padding-right: 2%;
@@ -53,7 +52,7 @@ export const StyledBlur = styled.div<{ display: string }>`
   top: 0;
   left: 0;
   right: 0;
-  bottom: 4.2%;
+  bottom: 0;
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 1;
   pointer-events: none;
