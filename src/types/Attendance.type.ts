@@ -13,3 +13,24 @@ export interface IAdminInfo {
   };
   status: number;
 }
+
+export interface IAdminLoginResponse {
+  data: {
+    adminId: number;
+    adminName: string;
+    role: string;
+  };
+  status: number;
+}
+
+export interface ISearchDogs {
+  data: [
+    {
+      dogId: number;
+      dogName: string;
+      allRounds: number;
+      currentRounds: number;
+    },
+  ];
+  status: number;
+}

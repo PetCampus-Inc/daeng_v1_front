@@ -17,19 +17,20 @@ import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
 import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue } from "recoil";
-import { adminInfoAtom } from "store/admin";
+import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
 
 const Attendance = () => {
   const { handleGetAdminInfo } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [selectedSearchText, setSelectedSearchText] = useState("");
   const adminName = useRecoilValue(adminInfoAtom).data.adminName;
   const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
+  const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
+  const adminRole = useRecoilValue(adminInfoAtom).data.role;
 
   useEffect(() => {
-    ///// todo 어드민 아이디 값으로 수정하기
-    handleGetAdminInfo(8);
-    console.log(adminName);
+    handleGetAdminInfo(adminId);
   }, []);
 
   return (
@@ -38,7 +39,9 @@ const Attendance = () => {
         <StyledMainWrapper>
           <StyledTitleWrapper>
             <Text
-              text={`${adminName} 선생님 안녕하세요`}
+              text={`${adminName} ${
+                adminRole === "ROLE_OWNER" ? "원장님" : "선생님"
+              } 안녕하세요`}
               size="1.3rem"
               weight="bold"
               height="2rem"
@@ -86,11 +89,14 @@ const Attendance = () => {
           color={ThemeConfig.gray_1}
           className={ATTENDANCE}
           inputValue={searchText}
+          selectedSearchText={selectedSearchText}
           border="none"
           placeholdText="검색"
           setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
+            setSelectedSearchText("");
             setSearchText(e.target.value);
           }}
+          // handleClick={selectedSearchText === "" ?  : setSearchText("")}
         />
         <Button
           width="38%"

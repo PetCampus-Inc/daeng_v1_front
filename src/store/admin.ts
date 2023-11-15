@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { IAdminInfo } from "types/Attendance.type";
+import { IAdminInfo, IAdminLoginResponse } from "types/Attendance.type";
 
 export const adminInfoAtom = atom<IAdminInfo>({
   key: "adminInfoAtom",
@@ -9,12 +9,24 @@ export const adminInfoAtom = atom<IAdminInfo>({
       role: "",
       dogs: [
         {
-          dogId: 0,
+          dogId: -1,
           dogName: "",
-          allRounds: 0,
-          currentRounds: 0,
+          allRounds: -1,
+          currentRounds: -1,
         },
       ],
+    },
+    status: 0,
+  },
+});
+
+export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
+  key: "adminLoginInfoAtom",
+  default: {
+    data: {
+      adminId: -1,
+      adminName: "",
+      role: "",
     },
     status: 0,
   },

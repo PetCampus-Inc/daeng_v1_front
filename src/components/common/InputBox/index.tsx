@@ -80,7 +80,7 @@ const InputBox = ({
             {selectedSearchText === "" || inputValue === "" ? (
               <StyledImage src="/images/brown-search.png" alt="search-icon" />
             ) : (
-              <StyledImage src="/images/x-box.png" alt="x-box" />
+              <StyledImage src="/images/brown-x-button.png" alt="x-box" />
             )}
           </StyledButtonWrapper>
         ) : (
