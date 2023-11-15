@@ -8,6 +8,7 @@ import {
   StyledListWrapper,
   StyledCardWrapper,
   StyledImage,
+  StyledBlur,
 } from "./styles";
 import Button from "components/common/Button";
 import Text from "components/common/Text";
@@ -18,6 +19,7 @@ import DogCard from "./DogCard";
 import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue } from "recoil";
 import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
+import useFocus from "hooks/useFocus";
 
 const Attendance = () => {
   const { handleGetAdminInfo } = useGetAttendance();
@@ -28,9 +30,10 @@ const Attendance = () => {
   const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const adminRole = useRecoilValue(adminInfoAtom).data.role;
+  const { isFocusing, handleFocus, handleBlur } = useFocus();
 
   useEffect(() => {
-    handleGetAdminInfo(adminId);
+    handleGetAdminInfo(1);
   }, []);
 
   return (
@@ -92,6 +95,8 @@ const Attendance = () => {
           selectedSearchText={selectedSearchText}
           border="none"
           placeholdText="검색"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
             setSelectedSearchText("");
             setSearchText(e.target.value);
@@ -111,6 +116,7 @@ const Attendance = () => {
         />
       </StyledHeadWrapper>
       <StyledListWrapper>
+        <StyledBlur display={isFocusing ? "block" : "none"} />
         <StyledCardWrapper>
           {dogLists.length > 0 ? (
             dogLists.map((data) => {

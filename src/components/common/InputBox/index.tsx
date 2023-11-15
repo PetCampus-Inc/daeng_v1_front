@@ -26,6 +26,8 @@ interface Props {
   type?: string;
   handleClick?: () => void | Promise<void>;
   onChange?: (e: any) => void | React.ChangeEvent<HTMLInputElement>;
+  onFocus?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
+  onBlur?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
 }
 
 const InputBox = ({
@@ -44,6 +46,8 @@ const InputBox = ({
   type,
   handleClick,
   onChange,
+  onFocus,
+  onBlur,
 }: Props) => {
   const [isValid, setIsValid] = useState(false);
 
@@ -70,6 +74,8 @@ const InputBox = ({
         type={type}
         value={inputValue}
         onChange={onChange ? onChange : setInputValue}
+        onFocus={onFocus}
+        onBlur={onBlur}
         color={color}
         border={border}
         radius={radius}

@@ -45,6 +45,19 @@ export const StyledListWrapper = styled.div`
   padding-bottom: 5%;
   padding-left: 4%;
   padding-right: 2%;
+  position: relative;
+`;
+
+export const StyledBlur = styled.div<{ display: string }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 4.2%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  pointer-events: none;
+  display: ${(props) => props.display};
 `;
 
 export const StyledCardWrapper = styled.div`
