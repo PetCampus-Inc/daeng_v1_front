@@ -1,5 +1,5 @@
 import customAxios from "libs/CustomAxios";
-import { IAdminInfo, ISearchDogs, ISortResponse } from "types/Attendance.type";
+import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
 
 export const handleGetDogs = async (adminId: number): Promise<IAdminInfo> => {
   const url: string = `admin/attendance?adminId=${adminId}`;
@@ -18,7 +18,7 @@ export const handleGetSearchDogs = async (
 
 export const handleSortRegistered = async (
   adminId: number
-): Promise<ISortResponse> => {
+): Promise<ISearchDogs> => {
   const url: string = `admin/attendance/dog/sort/registered?adminId=${adminId}`;
   const { data } = await customAxios.get(url);
   return data;
@@ -26,7 +26,7 @@ export const handleSortRegistered = async (
 
 export const handleSortPayment = async (
   schoolId: number
-): Promise<ISortResponse> => {
+): Promise<ISearchDogs> => {
   const url: string = `admin/attendance/dog/sort/payment?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
@@ -35,7 +35,7 @@ export const handleSortPayment = async (
 export const handleSortCharge = async (
   schoolId: number,
   adminId: number
-): Promise<ISortResponse> => {
+): Promise<ISearchDogs> => {
   const url: string = `admin/attendance/dog/sort/charge?schoolId=${schoolId}&adminId=${adminId}`;
   const { data } = await customAxios.get(url);
   return data;
@@ -43,7 +43,7 @@ export const handleSortCharge = async (
 
 export const handleSortDate = async (
   schoolId: number
-): Promise<ISortResponse> => {
+): Promise<ISearchDogs> => {
   const url: string = `admin/attendance/dog/sort/date?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;

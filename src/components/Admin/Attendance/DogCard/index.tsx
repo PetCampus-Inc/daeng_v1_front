@@ -35,7 +35,7 @@ const DogCard = ({ name, allRounds, currentRounds, className }: Props) => {
           <StyledBlur display={currentRounds === 0 ? "block" : "none"} />
           <StyledImage
             src={
-              currentRounds === 1
+              currentRounds === 1 || currentRounds === 2
                 ? "/images/alert-brown.png"
                 : currentRounds === 0
                 ? "/images/gray-calendar.png"

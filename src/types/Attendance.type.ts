@@ -35,14 +35,9 @@ export interface ISearchDogs {
   status: number;
 }
 
-export interface ISortResponse {
-  dogs: [
-    {
-      dogId: number;
-      dogName: string;
-      allRounds: number;
-      currentRounds: number;
-    },
-  ];
-  status: number;
+export interface IDogsList {
+  dogId: number;
+  dogName: string;
+  allRounds: number;
+  currentRounds: number;
 }

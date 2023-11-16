@@ -18,7 +18,6 @@ const useGetAttendance = () => {
           },
         }));
       }
-      console.log(adminInfo);
     } catch (error) {
       console.log(error);
     }

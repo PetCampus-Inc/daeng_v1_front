@@ -60,6 +60,7 @@ export const StyledBlur = styled.div<{ display: string }>`
   z-index: 1;
   pointer-events: none;
   display: ${(props) => props.display};
+  overflow: hidden;
 `;
 
 export const StyledCardWrapper = styled.div`
@@ -69,5 +70,4 @@ export const StyledCardWrapper = styled.div`
   overflow-y: auto;
   padding-right: 2%;
   gap: 4%;
-  justify-content: center;
 `;
