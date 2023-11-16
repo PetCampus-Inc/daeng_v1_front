@@ -1,6 +1,7 @@
 import { memo } from "react";
 import {
   Container,
+  StyledBlur,
   StyledImage,
   StyledTextWrapper,
   TextWrapper,
@@ -23,12 +24,21 @@ const DogCard = ({ name, allRounds, currentRounds, className }: Props) => {
         alt="dog-image"
       />
       <StyledTextWrapper>
-        <Text text={name} color={ThemeConfig.darkBlack} weight="800" />
+        <Text
+          text={name}
+          color={
+            currentRounds === 0 ? ThemeConfig.gray_2 : ThemeConfig.darkBlack
+          }
+          weight="800"
+        />
         <TextWrapper>
+          <StyledBlur display={currentRounds === 0 ? "block" : "none"} />
           <StyledImage
             src={
-              currentRounds <= 1
+              currentRounds === 1
                 ? "/images/alert-brown.png"
+                : currentRounds === 0
+                ? "/images/gray-calendar.png"
                 : "/images/calendar.png"
             }
             alt="more-button"
@@ -38,7 +48,11 @@ const DogCard = ({ name, allRounds, currentRounds, className }: Props) => {
           />
           <Text
             text={`잔여 ${currentRounds}/${allRounds} 회`}
-            color={ThemeConfig.primaryColor}
+            color={
+              currentRounds === 0
+                ? ThemeConfig.gray_2
+                : ThemeConfig.primaryColor
+            }
             size="0.8rem"
             margintop="0.1rem"
           />

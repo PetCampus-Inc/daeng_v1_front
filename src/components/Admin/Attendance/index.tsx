@@ -30,6 +30,7 @@ const Attendance = () => {
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [isSortClicked, setIsSortClicked] = useState(false);
   const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
   const adminName = useRecoilValue(adminInfoAtom).data.adminName;
   const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
@@ -137,6 +138,7 @@ const Attendance = () => {
           border={`solid 1px ${ThemeConfig.gray_4}`}
           weight="500"
           marginbottom="3%"
+          handleClick={() => setIsSortClicked(true)}
           textcolor={ThemeConfig.gray_2}
           backcolor={ThemeConfig.white}
         >
