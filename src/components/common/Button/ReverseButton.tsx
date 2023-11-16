@@ -18,7 +18,7 @@ interface Props {
   classname?: string;
 }
 
-const Button = ({
+const ReverseButton = ({
   height,
   width,
   text,
@@ -48,10 +48,10 @@ const Button = ({
       margintop={margintop}
       marginbottom={marginbottom}
     >
-      {children}
       {text}
+      {children}
     </StyledMainWrapper>
   );
 };
 
-export default memo(Button);
+export default memo(ReverseButton);

@@ -10,11 +10,12 @@ import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   name?: string;
-  rounds?: string;
+  allRounds?: number;
+  currentRounds: number;
   className?: string;
 }
 
-const DogCard = ({ name, rounds, className }: Props) => {
+const DogCard = ({ name, allRounds, currentRounds, className }: Props) => {
   return (
     <Container>
       <StyledImage
@@ -25,13 +26,22 @@ const DogCard = ({ name, rounds, className }: Props) => {
         <Text text={name} color={ThemeConfig.darkBlack} weight="800" />
         <TextWrapper>
           <StyledImage
-            src="/images/alert-circle.png"
+            src={
+              currentRounds <= 1
+                ? "/images/alert-brown.png"
+                : "/images/calendar.png"
+            }
             alt="more-button"
-            width="1rem"
-            height="1rem"
-            marginright="0"
+            width="1.1rem"
+            height="1.1rem"
+            marginright="0.1rem"
           />
-          <Text text={rounds} color={ThemeConfig.primaryColor} size="0.8rem" />
+          <Text
+            text={`잔여 ${currentRounds}/${allRounds} 회`}
+            color={ThemeConfig.primaryColor}
+            size="0.8rem"
+            margintop="0.1rem"
+          />
         </TextWrapper>
       </StyledTextWrapper>
       <StyledImage

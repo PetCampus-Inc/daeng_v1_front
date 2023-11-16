@@ -23,6 +23,7 @@ import useFocus from "hooks/useFocus";
 import { handleGetSearchDogs } from "apis/attendance";
 import { ISearchDogs } from "types/Attendance.type";
 import Mode from "./Mode";
+import ReverseButton from "components/common/Button/ReverseButton";
 
 const Attendance = () => {
   const { handleGetAdminInfo } = useGetAttendance();
@@ -128,8 +129,8 @@ const Attendance = () => {
       </StyledHeadWrapper>
       <StyledListWrapper>
         <StyledBlur display={isFocusing ? "block" : "none"} />
-        <Button
-          width="38%"
+        <ReverseButton
+          width="41%"
           height="5%"
           text="회차 만료 임박 순"
           radius="15px"
@@ -138,12 +139,26 @@ const Attendance = () => {
           marginbottom="3%"
           textcolor={ThemeConfig.gray_2}
           backcolor={ThemeConfig.white}
-        />
+        >
+          <StyledImage
+            src="/images/chevron-down.png"
+            alt="chevron-down"
+            marginright="0"
+            marginleft="2%"
+          />
+        </ReverseButton>
         <StyledCardWrapper>
           {dogLists.length > 0 &&
             !isChecking &&
             dogLists.map((data) => {
-              return <DogCard key={data.dogId} name={data.dogName} />;
+              return (
+                <DogCard
+                  key={data.dogId}
+                  name={data.dogName}
+                  allRounds={data.allRounds}
+                  currentRounds={data.currentRounds}
+                />
+              );
             })}
           {dogLists.length < 1 && !isChecking && (
             <Text

@@ -43,5 +43,7 @@ export const StyledTextWrapper = styled.div`
 
 export const TextWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 0.1rem;
 `;

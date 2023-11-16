@@ -34,8 +34,11 @@ export const StyledButtonWrapper = styled.div`
 export const StyledImage = styled.img<{
   src: string;
   alt: string;
+  marginright?: string;
+  marginleft?: string;
 }>`
-  margin-right: 3%;
+  margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
+  margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
 `;
 
 export const StyledListWrapper = styled.div`

@@ -17,7 +17,6 @@ export const StyledMainWrapper = styled.div<{
   margin-bottom: ${(props) => props.marginbottom};
   margin-top: ${(props) => props.margintop};
   display: flex;
-  /* position: relative; */
   justify-content: center;
   align-items: center;
   cursor: pointer;
