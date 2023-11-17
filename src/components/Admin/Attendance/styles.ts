@@ -4,6 +4,7 @@ export const Container = styled.div`
   height: 85vh;
   width: 100%;
   margin-top: 5vh;
+  position: relative;
 `;
 
 export const StyledHeadWrapper = styled.div`
@@ -70,4 +71,8 @@ export const StyledCardWrapper = styled.div`
   overflow-y: auto;
   padding-right: 2%;
   gap: 4%;
+`;
+
+export const StyledTextWrapper = styled.div`
+  margin: 40% auto 0;
 `;

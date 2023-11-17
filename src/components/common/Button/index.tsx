@@ -16,6 +16,7 @@ interface Props {
   margintop?: string;
   children?: React.ReactNode;
   classname?: string;
+  justify?: string;
 }
 
 const Button = ({
@@ -32,6 +33,7 @@ const Button = ({
   marginbottom,
   margintop,
   children,
+  justify,
   classname,
 }: Props) => {
   return (
@@ -45,6 +47,7 @@ const Button = ({
       radius={radius}
       weight={weight}
       size={size}
+      justify={justify}
       margintop={margintop}
       marginbottom={marginbottom}
     >

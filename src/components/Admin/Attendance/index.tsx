@@ -9,6 +9,7 @@ import {
   StyledCardWrapper,
   StyledImage,
   StyledBlur,
+  StyledTextWrapper,
 } from "./styles";
 import Button from "components/common/Button";
 import Text from "components/common/Text";
@@ -17,13 +18,14 @@ import InputBox from "components/common/InputBox";
 import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
 import useGetAttendance from "hooks/useGetAttendance";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
 import { handleGetSearchDogs } from "apis/attendance";
-import { ISearchDogs } from "types/Attendance.type";
+import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
+import SortModal from "./SortModal";
 
 const Attendance = () => {
   const { handleGetAdminInfo } = useGetAttendance();
@@ -32,6 +34,7 @@ const Attendance = () => {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
+  const setDogLists = useSetRecoilState<IAdminInfo>(adminInfoAtom);
   const adminName = useRecoilValue(adminInfoAtom).data.adminName;
   const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
@@ -163,15 +166,22 @@ const Attendance = () => {
               );
             })}
           {dogLists.length < 1 && !isChecking && (
-            <Text
-              text="아직 등원한 강아지가 없어요"
-              color={ThemeConfig.gray_3}
-              margintop="30%"
-            />
+            <StyledTextWrapper>
+              <Text
+                text="아직 등원한 강아지가 없어요"
+                color={ThemeConfig.gray_3}
+              />
+            </StyledTextWrapper>
           )}
-          {dogLists.length > 0 && isChecking && <Mode />}
+          {isChecking && <Mode />}
         </StyledCardWrapper>
       </StyledListWrapper>
+      {isSortClicked && (
+        <SortModal
+          setIsSortClicked={setIsSortClicked}
+          setDogLists={setDogLists}
+        />
+      )}
     </Container>
   );
 };
