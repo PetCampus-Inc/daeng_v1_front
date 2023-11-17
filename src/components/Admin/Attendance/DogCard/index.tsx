@@ -1,6 +1,7 @@
 import { memo } from "react";
 import {
   Container,
+  StyledBlur,
   StyledImage,
   StyledTextWrapper,
   TextWrapper,
@@ -10,10 +11,12 @@ import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   name?: string;
-  rounds?: string;
+  allRounds?: number;
+  currentRounds: number;
+  className?: string;
 }
 
-const DogCard = ({ name, rounds }: Props) => {
+const DogCard = ({ name, allRounds, currentRounds, className }: Props) => {
   return (
     <Container>
       <StyledImage
@@ -21,16 +24,38 @@ const DogCard = ({ name, rounds }: Props) => {
         alt="dog-image"
       />
       <StyledTextWrapper>
-        <Text text={name} color={ThemeConfig.darkBlack} weight="800" />
+        <Text
+          text={name}
+          color={
+            currentRounds === 0 ? ThemeConfig.gray_2 : ThemeConfig.darkBlack
+          }
+          weight="800"
+        />
         <TextWrapper>
+          <StyledBlur display={currentRounds === 0 ? "block" : "none"} />
           <StyledImage
-            src="/images/alert-circle.png"
+            src={
+              currentRounds === 1 || currentRounds === 2
+                ? "/images/alert-brown.png"
+                : currentRounds === 0
+                ? "/images/gray-calendar.png"
+                : "/images/calendar.png"
+            }
             alt="more-button"
-            width="1rem"
-            height="1rem"
-            marginright="0"
+            width="1.1rem"
+            height="1.1rem"
+            marginright="0.1rem"
           />
-          <Text text={rounds} color={ThemeConfig.primaryColor} size="0.8rem" />
+          <Text
+            text={`잔여 ${currentRounds}/${allRounds} 회`}
+            color={
+              currentRounds === 0
+                ? ThemeConfig.gray_2
+                : ThemeConfig.primaryColor
+            }
+            size="0.8rem"
+            margintop="0.1rem"
+          />
         </TextWrapper>
       </StyledTextWrapper>
       <StyledImage

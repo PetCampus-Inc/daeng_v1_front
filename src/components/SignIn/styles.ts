@@ -43,7 +43,7 @@ export const StyledImage = styled.img<{
 }>`
   position: absolute;
   left: 0;
-  padding-left: 5%;
+  padding-left: 10%;
 `;
 
 export const StyledBottomWrapper = styled.div`

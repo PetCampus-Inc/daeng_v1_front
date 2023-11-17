@@ -32,11 +32,12 @@ const Complete = ({
           size="1.4rem"
           weight="bold"
           height="2rem"
+          color={ThemeConfig.primaryColor}
         />
         <Text
           text={
             className === TEACHER
-              ? "승인이 완료되었습니다"
+              ? "승인 신청이 완료되었습니다"
               : className === DOGOWNER
               ? "승인 신청이 완료되었습니다"
               : "등록이 완료 되었습니다"
@@ -45,20 +46,24 @@ const Complete = ({
           weight="bold"
           height="2rem"
         />
-        {className === DOGOWNER && (
-          <Text text={"승인 완료시 알림으로 알려드릴게요"} size="1rem" />
+        {className === TEACHER && (
+          <Text
+            text={"승인 완료시 알림으로 알려드릴게요"}
+            size="1rem"
+            color={ThemeConfig.gray_3}
+          />
         )}
       </TextWrapper>
-      <StyledBottomWrapper height={className === DOGOWNER ? "9%" : "7%"}>
+      <StyledBottomWrapper height={className === DOGOWNER ? "7%" : "9%"}>
         <>
-          {className === DOGOWNER && (
-            <StyledCancleButton>승인 신청 취소하기</StyledCancleButton>
+          {className === TEACHER && (
+            <StyledCancleButton>승인 신청 취소하기 {`>`}</StyledCancleButton>
           )}
           <StyledLink to="/SignIn">
             <Button
               width="100%"
               height="100%"
-              text={className === TEACHER ? "시작하기" : "확인"}
+              text={className === DOGOWNER ? "시작하기" : "확인"}
               weight="bold"
               size="1.1rem"
               handleClick={() => {

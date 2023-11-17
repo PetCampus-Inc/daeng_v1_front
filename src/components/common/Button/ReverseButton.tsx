@@ -16,10 +16,9 @@ interface Props {
   margintop?: string;
   children?: React.ReactNode;
   classname?: string;
-  justify?: string;
 }
 
-const Button = ({
+const ReverseButton = ({
   height,
   width,
   text,
@@ -33,7 +32,6 @@ const Button = ({
   marginbottom,
   margintop,
   children,
-  justify,
   classname,
 }: Props) => {
   return (
@@ -47,14 +45,13 @@ const Button = ({
       radius={radius}
       weight={weight}
       size={size}
-      justify={justify}
       margintop={margintop}
       marginbottom={marginbottom}
     >
-      {children}
       {text}
+      {children}
     </StyledMainWrapper>
   );
 };
 
-export default memo(Button);
+export default memo(ReverseButton);

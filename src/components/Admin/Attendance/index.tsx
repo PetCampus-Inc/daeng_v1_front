@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useState } from "react";
+import { ChangeEvent, memo, useEffect, useState } from "react";
 import {
   Container,
   StyledHeadWrapper,
@@ -8,6 +8,8 @@ import {
   StyledListWrapper,
   StyledCardWrapper,
   StyledImage,
+  StyledBlur,
+  StyledTextWrapper,
 } from "./styles";
 import Button from "components/common/Button";
 import Text from "components/common/Text";
@@ -15,10 +17,45 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import InputBox from "components/common/InputBox";
 import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
+import useGetAttendance from "hooks/useGetAttendance";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
+import useFocus from "hooks/useFocus";
+import { handleGetSearchDogs } from "apis/attendance";
+import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
+import Mode from "./Mode";
+import ReverseButton from "components/common/Button/ReverseButton";
+import SortModal from "./SortModal";
 
 const Attendance = () => {
+  const { handleGetAdminInfo } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [isSortClicked, setIsSortClicked] = useState(false);
+  const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
+  const setDogLists = useSetRecoilState<IAdminInfo>(adminInfoAtom);
+  const adminName = useRecoilValue(adminInfoAtom).data.adminName;
+  const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
+  const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
+  const adminRole = useRecoilValue(adminInfoAtom).data.role;
+  const { isFocusing, handleFocus, handleBlur } = useFocus();
+
+  const handlerGetSearchResult = async () => {
+    try {
+      const data = await handleGetSearchDogs(1, searchText);
+      if (data.status === 200) {
+        setSearchDogResults(data);
+        setIsSearchClicked(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetAdminInfo(1);
+  }, []);
 
   return (
     <Container>
@@ -26,7 +63,9 @@ const Attendance = () => {
         <StyledMainWrapper>
           <StyledTitleWrapper>
             <Text
-              text={"박유빈 선생님 안녕하세요"}
+              text={`${adminName} ${
+                adminRole === "ROLE_OWNER" ? "원장님" : "선생님"
+              } 안녕하세요`}
               size="1.3rem"
               weight="bold"
               height="2rem"
@@ -76,28 +115,73 @@ const Attendance = () => {
           inputValue={searchText}
           border="none"
           placeholdText="검색"
+          isclicked={isSearchClicked}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
             setSearchText(e.target.value);
           }}
+          handleClick={
+            !isSearchClicked
+              ? handlerGetSearchResult
+              : () => {
+                  setSearchText("");
+                  setIsSearchClicked(false);
+                }
+          }
         />
-        <Button
-          width="38%"
-          height="17%"
+      </StyledHeadWrapper>
+      <StyledListWrapper>
+        <StyledBlur display={isFocusing ? "block" : "none"} />
+        <ReverseButton
+          width="41%"
+          height="5%"
           text="회차 만료 임박 순"
           radius="15px"
           border={`solid 1px ${ThemeConfig.gray_4}`}
           weight="500"
-          margintop="3%"
+          marginbottom="3%"
+          handleClick={() => setIsSortClicked(true)}
           textcolor={ThemeConfig.gray_2}
           backcolor={ThemeConfig.white}
-        />
-      </StyledHeadWrapper>
-      <StyledListWrapper>
+        >
+          <StyledImage
+            src="/images/chevron-down.png"
+            alt="chevron-down"
+            marginright="0"
+            marginleft="2%"
+          />
+        </ReverseButton>
         <StyledCardWrapper>
-          {/* todo 데이터 없을때 처리 */}
-          <DogCard name="뽀뽀야호" rounds="잔여 1/10 회"></DogCard>
+          {dogLists.length > 0 &&
+            !isChecking &&
+            dogLists.map((data) => {
+              return (
+                <DogCard
+                  key={data.dogId}
+                  name={data.dogName}
+                  allRounds={data.allRounds}
+                  currentRounds={data.currentRounds}
+                />
+              );
+            })}
+          {dogLists.length < 1 && !isChecking && (
+            <StyledTextWrapper>
+              <Text
+                text="아직 등원한 강아지가 없어요"
+                color={ThemeConfig.gray_3}
+              />
+            </StyledTextWrapper>
+          )}
+          {isChecking && <Mode />}
         </StyledCardWrapper>
       </StyledListWrapper>
+      {isSortClicked && (
+        <SortModal
+          setIsSortClicked={setIsSortClicked}
+          setDogLists={setDogLists}
+        />
+      )}
     </Container>
   );
 };
