@@ -1,22 +1,33 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import {
   Container,
   StyledBlur,
   StyledImage,
+  StyledOptionList,
   StyledTextWrapper,
   TextWrapper,
+  StyledButtonWrapper,
 } from "./styles";
 import Text from "components/common/Text";
 import { ThemeConfig } from "styles/ThemeConfig";
+import Button from "components/common/Button";
 
 interface Props {
   name?: string;
   allRounds?: number;
   currentRounds: number;
   className?: string;
+  adminRole?: string;
 }
 
-const DogCard = ({ name, allRounds, currentRounds, className }: Props) => {
+const DogCard = ({
+  name,
+  allRounds,
+  currentRounds,
+  className,
+  adminRole,
+}: Props) => {
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   return (
     <Container>
       <StyledImage
@@ -67,9 +78,41 @@ const DogCard = ({ name, allRounds, currentRounds, className }: Props) => {
         position="absolute"
         right="6px"
         top="3px"
+        onClick={() => setIsOptionsOpen(!isOptionsOpen)}
       />
+      {isOptionsOpen && adminRole === "ROLE_OWNER" && (
+        <StyledOptionList isopen={isOptionsOpen.toString()}>
+          {OPTIONS.owner.map((option, index) => (
+            <StyledButtonWrapper>
+              <Button
+                key={index}
+                width="100%"
+                height="100%"
+                text={option}
+                size="0.9rem"
+                justify="flex-start"
+                backcolor={ThemeConfig.white}
+                textcolor={ThemeConfig.gray_2}
+              >
+                <StyledImage
+                  src="/images/yellow-box.png"
+                  alt="yellow-box"
+                  radius="20%"
+                  width="1.5rem"
+                  height="1.5rem"
+                />
+              </Button>
+            </StyledButtonWrapper>
+          ))}
+        </StyledOptionList>
+      )}
     </Container>
   );
 };
 
 export default memo(DogCard);
+
+const OPTIONS = {
+  owner: ["견주에게 연락하기", "회원권 알림 전송", "회원 삭제"],
+  teacher: ["견주에게 연락하기", "회원권 알림 전송"],
+};

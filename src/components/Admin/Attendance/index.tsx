@@ -33,17 +33,18 @@ const Attendance = () => {
   const [searchText, setSearchText] = useState("");
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
+  const [sortName, setSortName] = useState("결제 임박순");
   const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
+  const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const setDogLists = useSetRecoilState<IAdminInfo>(adminInfoAtom);
   const adminName = useRecoilValue(adminInfoAtom).data.adminName;
   const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
-  const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const adminRole = useRecoilValue(adminInfoAtom).data.role;
   const { isFocusing, handleFocus, handleBlur } = useFocus();
 
   const handlerGetSearchResult = async () => {
     try {
-      const data = await handleGetSearchDogs(1, searchText);
+      const data = await handleGetSearchDogs(1, searchText); //schoolId 로 변경해야함
       if (data.status === 200) {
         setSearchDogResults(data);
         setIsSearchClicked(true);
@@ -54,7 +55,7 @@ const Attendance = () => {
   };
 
   useEffect(() => {
-    handleGetAdminInfo(1);
+    handleGetAdminInfo(1); //adminId 로 변경해야함
   }, []);
 
   return (
@@ -136,7 +137,7 @@ const Attendance = () => {
         <ReverseButton
           width="41%"
           height="5%"
-          text="회차 만료 임박 순"
+          text={sortName}
           radius="15px"
           border={`solid 1px ${ThemeConfig.gray_4}`}
           weight="500"
@@ -162,6 +163,7 @@ const Attendance = () => {
                   name={data.dogName}
                   allRounds={data.allRounds}
                   currentRounds={data.currentRounds}
+                  adminRole={adminRole}
                 />
               );
             })}
@@ -180,6 +182,8 @@ const Attendance = () => {
         <SortModal
           setIsSortClicked={setIsSortClicked}
           setDogLists={setDogLists}
+          setSortName={setSortName}
+          sortName={sortName}
         />
       )}
     </Container>

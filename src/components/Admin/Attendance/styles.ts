@@ -48,6 +48,7 @@ export const StyledListWrapper = styled.div`
   padding-bottom: 5%;
   padding-left: 4%;
   padding-right: 2%;
+  overflow-y: auto;
   position: relative;
 `;
 
@@ -68,7 +69,7 @@ export const StyledCardWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  overflow-y: auto;
+
   padding-right: 2%;
   gap: 4%;
 `;

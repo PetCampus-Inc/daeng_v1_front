@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
@@ -11,9 +11,15 @@ export const Container = styled.div`
   display: flex;
   overflow: hidden;
   align-items: flex-end;
-  transition:
-    background-color 0.3s,
-    opacity 0.3s;
+`;
+
+const slideIn = keyframes`
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 `;
 
 export const StyledMainWrapper = styled.div`
@@ -27,6 +33,7 @@ export const StyledMainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: ${slideIn} 0.4s ease-in-out;
 `;
 
 export const StyledButtonWrapper = styled.div`
