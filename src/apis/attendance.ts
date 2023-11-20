@@ -60,3 +60,9 @@ export const handleCallMember = async (
   const { data } = await customAxios.get(url);
   return data;
 };
+
+export const handleSendAlarm = async (dogId: number) => {
+  const url: string = `admin/attendance/send/alarm/${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data;
+};

@@ -18,7 +18,7 @@ import {
 import Text from "components/common/Text";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Button from "components/common/Button";
-import { handleCallMember } from "apis/attendance";
+import { handleCallMember, handleSendAlarm } from "apis/attendance";
 
 interface Props {
   name?: string;
@@ -56,6 +56,18 @@ const DogCard = ({
       }
     } catch (error) {
       return alert("해당 정보가 존재하지 않습니다.");
+    }
+  };
+
+  ////////// 실제 어플 알림 전송 기능 추가필요함!!!
+  const handlerSendAlarm = async (dogId: number) => {
+    try {
+      const data = await handleSendAlarm(dogId);
+      if (data.status === 200) {
+        return alert(`${name}의 회원권 알림이 전송되었습니다.`);
+      }
+    } catch (error) {
+      return alert("회원권 알림 전송에 실패하였습니다.");
     }
   };
 
@@ -140,6 +152,7 @@ const DogCard = ({
                 textcolor={ThemeConfig.gray_2}
                 handleClick={() => {
                   option === "견주에게 연락하기" && handleGetCallInfo(dogId);
+                  option === "회원권 알림 전송" && handlerSendAlarm(dogId);
                 }}
               >
                 <StyledImage
@@ -166,6 +179,10 @@ const DogCard = ({
                 justify="flex-start"
                 backcolor={ThemeConfig.white}
                 textcolor={ThemeConfig.gray_2}
+                handleClick={() => {
+                  option === "견주에게 연락하기" && handleGetCallInfo(dogId);
+                  option === "회원권 알림 전송" && handlerSendAlarm(dogId);
+                }}
               >
                 <StyledImage
                   src="/images/yellow-box.png"

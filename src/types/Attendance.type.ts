@@ -42,3 +42,19 @@ export interface IMemberCallInfo {
   };
   status: number;
 }
+
+export interface IAlarmResponse {
+  data: {
+    dogId: number;
+    dogName: string;
+    allRounds: number;
+    currentRounds: number;
+    memberId: number;
+    memberName: string;
+    memberPhoneNumber: string;
+    schoolId: number;
+    schoolName: string;
+    schoolPhoneNumber: string;
+  };
+  status: number;
+}
