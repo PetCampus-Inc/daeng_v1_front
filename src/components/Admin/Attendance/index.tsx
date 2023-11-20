@@ -21,7 +21,7 @@ import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
-import { handleGetSearchDogs } from "apis/attendance";
+import { handleDeleteDog, handleGetSearchDogs } from "apis/attendance";
 import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
@@ -40,6 +40,7 @@ const Attendance = () => {
   const [memberPhone, setMemberPhone] = useState("");
   const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
+  const [targetDogId, setTargetDogId] = useState(-1);
   const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const setDogLists = useSetRecoilState<IAdminInfo>(adminInfoAtom);
@@ -60,7 +61,16 @@ const Attendance = () => {
     }
   };
 
-  const handlerDeleteMember = async () => {};
+  const handlerDeleteDog = async () => {
+    try {
+      const data = await handleDeleteDog(adminId, targetDogId);
+      if (data.status === 200) {
+        return alert(data.message);
+      }
+    } catch (error) {
+      return alert("회원 삭제에 실패하였습니다.");
+    }
+  };
 
   useEffect(() => {
     handleGetAdminInfo(1); //adminId 로 변경해야함
@@ -177,6 +187,7 @@ const Attendance = () => {
                   setMemberPhone={setMemberPhone}
                   setDogName={setDogName}
                   setIsDeleteModalOpen={setIsDeleteModalOpen}
+                  setTargetDogId={setTargetDogId}
                 />
               );
             })}
@@ -213,7 +224,7 @@ const Attendance = () => {
           firstbutton="취소"
           secondbutton="삭제"
           firstfunc={() => setIsDeleteModalOpen(false)}
-          secondfunc={handlerDeleteMember}
+          secondfunc={handlerDeleteDog}
         />
       )}
     </Container>

@@ -4,6 +4,7 @@ import {
   IMemberCallInfo,
   ISearchDogs,
 } from "types/Attendance.type";
+import { IResponse } from "types/Response.type";
 
 export const handleGetDogs = async (adminId: number): Promise<IAdminInfo> => {
   const url: string = `admin/attendance?adminId=${adminId}`;
@@ -64,5 +65,17 @@ export const handleCallMember = async (
 export const handleSendAlarm = async (dogId: number) => {
   const url: string = `admin/attendance/send/alarm/${dogId}`;
   const { data } = await customAxios.get(url);
+  return data;
+};
+
+export const handleDeleteDog = async (
+  adminId: number,
+  dogId: number
+): Promise<IResponse> => {
+  const url: string = `admin/attendance/delete/dog`;
+  const { data } = await customAxios.post(url, {
+    adminId: adminId,
+    dogId: dogId,
+  });
   return data;
 };
