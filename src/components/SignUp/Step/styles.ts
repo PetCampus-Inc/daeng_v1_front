@@ -92,4 +92,5 @@ export const StyledCancleButton = styled.div`
   margin-bottom: 4%;
   padding-bottom: 4%;
   cursor: pointer;
+  color: ${(props) => props.theme.gray_2};
 `;

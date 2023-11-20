@@ -7,6 +7,7 @@ import {
   ITeacherSignUpInfo,
 } from "types/Admin.type";
 import axios from "axios";
+import { IAdminLoginResponse } from "types/Attendance.type";
 
 // 아이디 중복확인
 export const handleCheckId = async (id: string): Promise<number> => {
@@ -18,7 +19,7 @@ export const handleCheckId = async (id: string): Promise<number> => {
 // 관리자 로그인
 export const handleAdminLoginResult = async (
   req: IAdminLoginInfo
-): Promise<IResponse> => {
+): Promise<IAdminLoginResponse> => {
   const url: string = `admin/login`;
   const { data } = await customAxios.post(url, {
     id: req.inputId,

@@ -16,7 +16,6 @@ interface Props {
   shadow?: string;
   radius?: string;
   color?: string;
-  valid?: boolean;
   border?: string;
   className?: string;
   placeholdText?: string;
@@ -24,8 +23,11 @@ interface Props {
   setInputValue: (e: any) => void | SetStateAction<any>;
   selectedSearchText?: string;
   type?: string;
+  isclicked?: boolean;
   handleClick?: () => void | Promise<void>;
   onChange?: (e: any) => void | React.ChangeEvent<HTMLInputElement>;
+  onFocus?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
+  onBlur?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
 }
 
 const InputBox = ({
@@ -34,7 +36,6 @@ const InputBox = ({
   shadow,
   color,
   radius,
-  valid,
   border,
   className,
   placeholdText,
@@ -42,8 +43,11 @@ const InputBox = ({
   setInputValue,
   selectedSearchText,
   type,
+  isclicked,
   handleClick,
   onChange,
+  onFocus,
+  onBlur,
 }: Props) => {
   const [isValid, setIsValid] = useState(false);
 
@@ -70,6 +74,8 @@ const InputBox = ({
         type={type}
         value={inputValue}
         onChange={onChange ? onChange : setInputValue}
+        onFocus={onFocus}
+        onBlur={onBlur}
         color={color}
         border={border}
         radius={radius}
@@ -77,10 +83,10 @@ const InputBox = ({
       {type === "search" &&
         (className === ATTENDANCE ? (
           <StyledButtonWrapper onClick={handleClick}>
-            {selectedSearchText === "" || inputValue === "" ? (
+            {inputValue === "" || !isclicked ? (
               <StyledImage src="/images/brown-search.png" alt="search-icon" />
             ) : (
-              <StyledImage src="/images/x-box.png" alt="x-box" />
+              <StyledImage src="/images/brown-x-button.png" alt="x-box" />
             )}
           </StyledButtonWrapper>
         ) : (
