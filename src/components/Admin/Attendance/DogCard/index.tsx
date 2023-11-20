@@ -1,4 +1,11 @@
-import { memo, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  memo,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Container,
   StyledBlur,
@@ -18,6 +25,7 @@ interface Props {
   currentRounds: number;
   className?: string;
   adminRole?: string;
+  setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const DogCard = ({
@@ -26,8 +34,26 @@ const DogCard = ({
   currentRounds,
   className,
   adminRole,
+  setIsCallModalOpen,
 }: Props) => {
+  const modalRef = useRef<HTMLDivElement | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        setIsOptionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   return (
     <Container>
       <StyledImage
@@ -81,11 +107,38 @@ const DogCard = ({
         onClick={() => setIsOptionsOpen(!isOptionsOpen)}
       />
       {isOptionsOpen && adminRole === "ROLE_OWNER" && (
-        <StyledOptionList isopen={isOptionsOpen.toString()}>
+        <StyledOptionList isopen={isOptionsOpen.toString()} ref={modalRef}>
           {OPTIONS.owner.map((option, index) => (
-            <StyledButtonWrapper>
+            <StyledButtonWrapper key={index}>
               <Button
-                key={index}
+                width="100%"
+                height="100%"
+                text={option}
+                size="0.9rem"
+                justify="flex-start"
+                backcolor={ThemeConfig.white}
+                textcolor={ThemeConfig.gray_2}
+                handleClick={() => {
+                  option === "견주에게 연락하기" && setIsCallModalOpen(true);
+                }}
+              >
+                <StyledImage
+                  src="/images/yellow-box.png"
+                  alt="yellow-box"
+                  radius="20%"
+                  width="1.5rem"
+                  height="1.5rem"
+                />
+              </Button>
+            </StyledButtonWrapper>
+          ))}
+        </StyledOptionList>
+      )}
+      {isOptionsOpen && adminRole === "ROLE_TEACHER" && (
+        <StyledOptionList isopen={isOptionsOpen.toString()} ref={modalRef}>
+          {OPTIONS.teacher.map((option, index) => (
+            <StyledButtonWrapper key={index}>
+              <Button
                 width="100%"
                 height="100%"
                 text={option}

@@ -4,8 +4,13 @@ import { adminInfoAtom } from "store/admin";
 import DogCard from "../DogCard";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { StyledTextWrapper } from "../styles";
+import { Dispatch, SetStateAction } from "react";
 
-const Mode = () => {
+interface Props {
+  setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const Mode = ({ setIsCallModalOpen }: Props) => {
   const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
 
   return (
@@ -18,6 +23,7 @@ const Mode = () => {
               name={data.dogName}
               currentRounds={data.currentRounds}
               className="mode"
+              setIsCallModalOpen={setIsCallModalOpen}
             />
           );
         })

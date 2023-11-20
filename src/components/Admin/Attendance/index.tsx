@@ -26,6 +26,7 @@ import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
+import CallModal from "./CallModal";
 
 const Attendance = () => {
   const { handleGetAdminInfo } = useGetAttendance();
@@ -33,6 +34,7 @@ const Attendance = () => {
   const [searchText, setSearchText] = useState("");
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
+  const [isCallModalOpen, setIsCallModalOpen] = useState(false);
   const [sortName, setSortName] = useState("결제 임박순");
   const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
@@ -164,6 +166,7 @@ const Attendance = () => {
                   allRounds={data.allRounds}
                   currentRounds={data.currentRounds}
                   adminRole={adminRole}
+                  setIsCallModalOpen={setIsCallModalOpen}
                 />
               );
             })}
@@ -175,7 +178,7 @@ const Attendance = () => {
               />
             </StyledTextWrapper>
           )}
-          {isChecking && <Mode />}
+          {isChecking && <Mode setIsCallModalOpen={setIsCallModalOpen} />}
         </StyledCardWrapper>
       </StyledListWrapper>
       {isSortClicked && (
@@ -186,6 +189,7 @@ const Attendance = () => {
           sortName={sortName}
         />
       )}
+      {isCallModalOpen && <CallModal setIsCallModalOpen={setIsCallModalOpen} />}
     </Container>
   );
 };

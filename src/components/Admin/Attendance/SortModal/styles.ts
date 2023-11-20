@@ -22,14 +22,17 @@ const slideIn = keyframes`
   }
 `;
 
-export const StyledMainWrapper = styled.div`
+export const StyledMainWrapper = styled.div<{
+  height?: string;
+  paddingtop?: string;
+}>`
   width: 100%;
-  height: 40%;
+  height: ${(props) => (props.height ? props.height : "40%")};
   background-color: white;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
   padding: 5%;
-  padding-top: 9%;
+  padding-top: ${(props) => (props.paddingtop ? props.paddingtop : "9%")};
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -2,7 +2,7 @@ import Text from "components/common/Text";
 import { Container, StyledButtonWrapper, StyledMainWrapper } from "./styles";
 import Button from "components/common/Button";
 import { ThemeConfig } from "styles/ThemeConfig";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import useSortDogs from "hooks/useSortDogs";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
