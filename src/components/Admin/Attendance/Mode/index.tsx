@@ -18,13 +18,14 @@ const Mode = ({ setIsCallModalOpen }: Props) => {
       {dogLists.length > 0 ? (
         dogLists.map((data) => {
           return (
-            <DogCard
-              key={data.dogId}
-              name={data.dogName}
-              currentRounds={data.currentRounds}
-              className="mode"
-              setIsCallModalOpen={setIsCallModalOpen}
-            />
+            // <DogCard
+            //   key={data.dogId}
+            //   name={data.dogName}
+            //   currentRounds={data.currentRounds}
+            //   className="mode"
+            //   setIsCallModalOpen={setIsCallModalOpen}
+            // />
+            <div></div>
           );
         })
       ) : (

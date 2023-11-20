@@ -35,6 +35,8 @@ const Attendance = () => {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
+  const [memberPhone, setMemberPhone] = useState("");
+  const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
   const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
@@ -166,7 +168,10 @@ const Attendance = () => {
                   allRounds={data.allRounds}
                   currentRounds={data.currentRounds}
                   adminRole={adminRole}
+                  dogId={data.dogId}
                   setIsCallModalOpen={setIsCallModalOpen}
+                  setMemberPhone={setMemberPhone}
+                  setDogName={setDogName}
                 />
               );
             })}
@@ -178,7 +183,7 @@ const Attendance = () => {
               />
             </StyledTextWrapper>
           )}
-          {isChecking && <Mode setIsCallModalOpen={setIsCallModalOpen} />}
+          {/* {isChecking && <Mode setIsCallModalOpen={setIsCallModalOpen} />} */}
         </StyledCardWrapper>
       </StyledListWrapper>
       {isSortClicked && (
@@ -189,7 +194,13 @@ const Attendance = () => {
           sortName={sortName}
         />
       )}
-      {isCallModalOpen && <CallModal setIsCallModalOpen={setIsCallModalOpen} />}
+      {isCallModalOpen && (
+        <CallModal
+          setIsCallModalOpen={setIsCallModalOpen}
+          dogName={dogName}
+          memberPhone={memberPhone}
+        />
+      )}
     </Container>
   );
 };

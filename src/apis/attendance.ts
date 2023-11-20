@@ -1,5 +1,9 @@
 import customAxios from "libs/CustomAxios";
-import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
+import {
+  IAdminInfo,
+  IMemberCallInfo,
+  ISearchDogs,
+} from "types/Attendance.type";
 
 export const handleGetDogs = async (adminId: number): Promise<IAdminInfo> => {
   const url: string = `admin/attendance?adminId=${adminId}`;
@@ -45,6 +49,14 @@ export const handleSortDate = async (
   schoolId: number
 ): Promise<ISearchDogs> => {
   const url: string = `admin/attendance/dog/sort/date?schoolId=${schoolId}`;
+  const { data } = await customAxios.get(url);
+  return data;
+};
+
+export const handleCallMember = async (
+  dogId: number
+): Promise<IMemberCallInfo> => {
+  const url: string = `admin/attendance/callowner/${dogId}`;
   const { data } = await customAxios.get(url);
   return data;
 };

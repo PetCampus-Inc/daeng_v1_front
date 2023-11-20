@@ -36,7 +36,7 @@ export const StyledMainWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: ${slideIn} 0.4s ease-in-out;
+  animation: ${slideIn} 0.3s ease-in-out;
 `;
 
 export const StyledButtonWrapper = styled.div`

@@ -34,3 +34,11 @@ export interface IDogsList {
   allRounds: number;
   currentRounds: number;
 }
+
+export interface IMemberCallInfo {
+  data: {
+    dogName: string;
+    memberPhoneNumber: string;
+  };
+  status: number;
+}

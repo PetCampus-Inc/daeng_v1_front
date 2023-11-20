@@ -18,26 +18,46 @@ import {
 import Text from "components/common/Text";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Button from "components/common/Button";
+import { handleCallMember } from "apis/attendance";
 
 interface Props {
   name?: string;
+  dogId: number;
   allRounds?: number;
   currentRounds: number;
   className?: string;
   adminRole?: string;
   setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
+  setMemberPhone: Dispatch<SetStateAction<string>>;
+  setDogName: Dispatch<SetStateAction<string>>;
 }
 
 const DogCard = ({
   name,
+  dogId,
   allRounds,
   currentRounds,
   className,
   adminRole,
   setIsCallModalOpen,
+  setMemberPhone,
+  setDogName,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
+  const handleGetCallInfo = async (dogId: number) => {
+    try {
+      const data = await handleCallMember(dogId);
+      if (data.status === 200) {
+        setMemberPhone(data.data.memberPhoneNumber);
+        setDogName(data.data.dogName);
+        setIsCallModalOpen(true);
+      }
+    } catch (error) {
+      return alert("해당 정보가 존재하지 않습니다.");
+    }
+  };
 
   useEffect(() => {
     const handler = (event: MouseEvent) => {
@@ -119,7 +139,7 @@ const DogCard = ({
                 backcolor={ThemeConfig.white}
                 textcolor={ThemeConfig.gray_2}
                 handleClick={() => {
-                  option === "견주에게 연락하기" && setIsCallModalOpen(true);
+                  option === "견주에게 연락하기" && handleGetCallInfo(dogId);
                 }}
               >
                 <StyledImage

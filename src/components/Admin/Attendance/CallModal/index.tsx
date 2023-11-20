@@ -7,15 +7,17 @@ import Button from "components/common/Button";
 
 interface Props {
   setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
+  memberPhone: string;
+  dogName: string;
 }
 
-const CallModal = ({ setIsCallModalOpen }: Props) => {
+const CallModal = ({ setIsCallModalOpen, memberPhone, dogName }: Props) => {
   return (
     <Container>
       <StyledMainWrapper height="30%" paddingtop="20%">
-        <Text text={`견주`} size="1.2rem" weight="700" />
+        <Text text={`${dogName} 견주`} size="1.2rem" weight="700" />
         <Text
-          text={`010-0000-0000`}
+          text={memberPhone}
           weight="600"
           color={ThemeConfig.gray_2}
           margintop="3%"
@@ -31,6 +33,7 @@ const CallModal = ({ setIsCallModalOpen }: Props) => {
               setIsCallModalOpen(false);
             }}
           />
+          {/* *****통화하기 기능 수정 필요***** */}
           <Button text="통화하기" width="49%" height="70%" weight="700" />
         </StyledButtonWrapper>
       </StyledMainWrapper>
