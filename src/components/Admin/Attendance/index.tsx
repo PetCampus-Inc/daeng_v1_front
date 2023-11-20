@@ -27,6 +27,7 @@ import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
 import CallModal from "./CallModal";
+import ButtonModal from "components/common/ButtonModal";
 
 const Attendance = () => {
   const { handleGetAdminInfo } = useGetAttendance();
@@ -35,6 +36,7 @@ const Attendance = () => {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [memberPhone, setMemberPhone] = useState("");
   const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
@@ -57,6 +59,8 @@ const Attendance = () => {
       console.log(error);
     }
   };
+
+  const handlerDeleteMember = async () => {};
 
   useEffect(() => {
     handleGetAdminInfo(1); //adminId 로 변경해야함
@@ -172,6 +176,7 @@ const Attendance = () => {
                   setIsCallModalOpen={setIsCallModalOpen}
                   setMemberPhone={setMemberPhone}
                   setDogName={setDogName}
+                  setIsDeleteModalOpen={setIsDeleteModalOpen}
                 />
               );
             })}
@@ -199,6 +204,16 @@ const Attendance = () => {
           setIsCallModalOpen={setIsCallModalOpen}
           dogName={dogName}
           memberPhone={memberPhone}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <ButtonModal
+          maintext="정말 삭제하시겠습니까?"
+          subtext="모든 데이터가 초기화되고 가입 탈퇴됩니다"
+          firstbutton="취소"
+          secondbutton="삭제"
+          firstfunc={() => setIsDeleteModalOpen(false)}
+          secondfunc={handlerDeleteMember}
         />
       )}
     </Container>

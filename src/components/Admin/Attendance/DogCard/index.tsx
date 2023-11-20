@@ -30,6 +30,7 @@ interface Props {
   setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
   setMemberPhone: Dispatch<SetStateAction<string>>;
   setDogName: Dispatch<SetStateAction<string>>;
+  setIsDeleteModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const DogCard = ({
@@ -42,6 +43,7 @@ const DogCard = ({
   setIsCallModalOpen,
   setMemberPhone,
   setDogName,
+  setIsDeleteModalOpen,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
@@ -153,6 +155,7 @@ const DogCard = ({
                 handleClick={() => {
                   option === "견주에게 연락하기" && handleGetCallInfo(dogId);
                   option === "회원권 알림 전송" && handlerSendAlarm(dogId);
+                  option === "회원 삭제" && setIsDeleteModalOpen(true);
                 }}
               >
                 <StyledImage
