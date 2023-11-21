@@ -55,7 +55,7 @@ export const StyledBlur = styled.div<{ display: string }>`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   z-index: 1;
   pointer-events: none;
   display: ${(props) => props.display};

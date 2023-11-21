@@ -25,6 +25,7 @@ export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
       adminName: "",
       schoolId: -1,
       role: "",
+      schoolName: "",
     },
     status: 0,
   },

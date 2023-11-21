@@ -42,6 +42,7 @@ const useSignIn = () => {
             adminName: data.data.adminName,
             schoolId: data.data.schoolId,
             role: data.data.role,
+            schoolName: data.data.schoolName,
           },
         }));
         navigate("/admin/attendance");

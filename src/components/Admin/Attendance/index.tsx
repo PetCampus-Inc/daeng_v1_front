@@ -44,6 +44,7 @@ const Attendance = () => {
   const [searchDogResults, setSearchDogResults] = useState<IAttendanceInfo>();
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
+  const schoolName = useRecoilValue(adminLoginInfoAtom).data.schoolName;
   const adminName = useRecoilValue(adminLoginInfoAtom).data.adminName;
   const adminRole = useRecoilValue(adminLoginInfoAtom).data.role;
   const dogLists = useRecoilValue(dogListInfoAtom).data;
@@ -66,7 +67,7 @@ const Attendance = () => {
     try {
       const data = await handleDeleteDog({ adminId, targetDogId });
       if (data.status === 200) {
-        alert(data.message);
+        setIsDeleteModalOpen(false);
       }
     } catch (error) {
       return alert("회원 삭제에 실패하였습니다.");
@@ -92,7 +93,9 @@ const Attendance = () => {
             />
             <Text
               text={
-                isChecking ? "출석 진행중이에요" : "똑독 유치원 친구들이에요"
+                isChecking
+                  ? "출석 진행중이에요"
+                  : `${schoolName} 유치원 친구들이에요`
               }
               size="1rem"
               color={ThemeConfig.gray_2}
@@ -182,6 +185,7 @@ const Attendance = () => {
                   name={data.dogName}
                   allRounds={data.allRounds}
                   currentRounds={data.currentRounds}
+                  monthlyTicket={data.monthlyTicket}
                   adminRole={adminRole}
                   dogId={data.dogId}
                   setIsCallModalOpen={setIsCallModalOpen}

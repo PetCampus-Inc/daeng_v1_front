@@ -19,12 +19,15 @@ import Text from "components/common/Text";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Button from "components/common/Button";
 import { handleCallMember, handleSendAlarm } from "apis/attendance";
+import GetExpirationDate from "hooks/useGetExpirationDate";
+import useFormatDate from "hooks/useFormatDate";
 
 interface Props {
   name?: string;
   dogId: number;
   allRounds?: number;
   currentRounds: number;
+  monthlyTicket: Array<number>;
   className?: string;
   adminRole?: string;
   setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -39,6 +42,7 @@ const DogCard = ({
   dogId,
   allRounds,
   currentRounds,
+  monthlyTicket,
   className,
   adminRole,
   setIsCallModalOpen,
@@ -49,6 +53,8 @@ const DogCard = ({
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket);
+  const monthlyTicketDate = useFormatDate(monthlyTicket);
 
   const handleGetCallInfo = async (dogId: number) => {
     try {
@@ -105,17 +111,28 @@ const DogCard = ({
         <Text
           text={name}
           color={
-            currentRounds === 0 ? ThemeConfig.gray_2 : ThemeConfig.darkBlack
+            (currentRounds === 0 && monthlyTicket === null) ||
+            (currentRounds === 0 && isExpired)
+              ? ThemeConfig.gray_2
+              : ThemeConfig.darkBlack
           }
           weight="800"
         />
         <TextWrapper>
-          <StyledBlur display={currentRounds === 0 ? "block" : "none"} />
+          <StyledBlur
+            display={
+              (currentRounds === 0 && monthlyTicket === null) ||
+              (currentRounds === 0 && isExpired)
+                ? "block"
+                : "none"
+            }
+          />
           <StyledImage
             src={
-              currentRounds === 1 || currentRounds === 2
+              currentRounds === 1 || currentRounds === 2 || isBeforeExpiry
                 ? "/images/alert-brown.png"
-                : currentRounds === 0
+                : (currentRounds === 0 && monthlyTicket === null) ||
+                  (currentRounds === 0 && isExpired)
                 ? "/images/gray-calendar.png"
                 : "/images/calendar.png"
             }
@@ -125,9 +142,14 @@ const DogCard = ({
             marginright="0.1rem"
           />
           <Text
-            text={`잔여 ${currentRounds}/${allRounds} 회`}
+            text={
+              monthlyTicket !== null && !isExpired
+                ? `${monthlyTicketDate} 만료`
+                : `잔여 ${currentRounds}/${allRounds} 회`
+            }
             color={
-              currentRounds === 0
+              (currentRounds === 0 && monthlyTicket === null) ||
+              (currentRounds === 0 && isExpired)
                 ? ThemeConfig.gray_2
                 : ThemeConfig.primaryColor
             }

@@ -9,6 +9,7 @@ export interface IAdminLoginResponse {
     adminName: string;
     schoolId: number;
     role: string;
+    schoolName: string;
   };
   status: number;
 }
