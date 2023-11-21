@@ -30,10 +30,10 @@ interface Props {
   monthlyTicket: Array<number>;
   className?: string;
   adminRole?: string;
-  setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
-  setMemberPhone: Dispatch<SetStateAction<string>>;
-  setDogName: Dispatch<SetStateAction<string>>;
-  setIsDeleteModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsCallModalOpen?: Dispatch<SetStateAction<boolean>>;
+  setMemberPhone?: Dispatch<SetStateAction<string>>;
+  setDogName?: Dispatch<SetStateAction<string>>;
+  setIsDeleteModalOpen?: Dispatch<SetStateAction<boolean>>;
   setTargetDogId: Dispatch<SetStateAction<number>>;
 }
 
@@ -60,9 +60,9 @@ const DogCard = ({
     try {
       const data = await handleCallMember(dogId);
       if (data.status === 200) {
-        setMemberPhone(data.data.memberPhoneNumber);
-        setDogName(data.data.dogName);
-        setIsCallModalOpen(true);
+        setMemberPhone?.(data.data.memberPhoneNumber);
+        setDogName?.(data.data.dogName);
+        setIsCallModalOpen?.(true);
       }
     } catch (error) {
       return alert("해당 정보가 존재하지 않습니다.");
@@ -83,7 +83,7 @@ const DogCard = ({
 
   const handleDeleteDog = (dogId: number) => {
     setTargetDogId(dogId);
-    setIsDeleteModalOpen(true);
+    setIsDeleteModalOpen?.(true);
   };
 
   useEffect(() => {

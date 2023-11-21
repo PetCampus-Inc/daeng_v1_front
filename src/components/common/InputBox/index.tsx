@@ -83,7 +83,7 @@ const InputBox = ({
       {type === "search" &&
         (className === ATTENDANCE ? (
           <StyledButtonWrapper onClick={handleClick}>
-            {inputValue === "" || !isclicked ? (
+            {!isclicked ? (
               <StyledImage src="/images/brown-search.png" alt="search-icon" />
             ) : (
               <StyledImage src="/images/brown-x-button.png" alt="x-box" />

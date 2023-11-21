@@ -22,7 +22,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { dogListInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
 import { handleDeleteDog, handleGetSearchDogs } from "apis/attendance";
-import { IAttendanceInfo } from "types/Attendance.type";
+import { IAttendanceInfo, IDogsList } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
@@ -41,7 +41,7 @@ const Attendance = () => {
   const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
   const [targetDogId, setTargetDogId] = useState(-1);
-  const [searchDogResults, setSearchDogResults] = useState<IAttendanceInfo>();
+  const [searchDogResults, setSearchDogResults] = useState<IDogsList[]>([]);
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
   const schoolName = useRecoilValue(adminLoginInfoAtom).data.schoolName;
@@ -52,10 +52,13 @@ const Attendance = () => {
   const { isFocusing, handleFocus, handleBlur } = useFocus();
 
   const handlerGetSearchResult = async () => {
+    if (searchText === "") {
+      return;
+    }
     try {
       const data = await handleGetSearchDogs(schoolId, searchText);
       if (data.status === 200) {
-        setSearchDogResults(data);
+        setSearchDogResults(data.data);
         setIsSearchClicked(true);
       }
     } catch (error) {
@@ -157,6 +160,7 @@ const Attendance = () => {
       <StyledListWrapper>
         <StyledBlur display={isFocusing ? "block" : "none"} />
         <ReverseButton
+          display={isSearchClicked || isChecking ? "none" : "flex"}
           width="41%"
           height="5%"
           text={sortName}
@@ -176,27 +180,58 @@ const Attendance = () => {
           />
         </ReverseButton>
         <StyledCardWrapper>
-          {dogLists.length > 0 &&
-            !isChecking &&
-            dogLists.map((data) => {
-              return (
-                <DogCard
-                  key={data.dogId}
-                  name={data.dogName}
-                  allRounds={data.allRounds}
-                  currentRounds={data.currentRounds}
-                  monthlyTicket={data.monthlyTicket}
-                  adminRole={adminRole}
-                  dogId={data.dogId}
-                  setIsCallModalOpen={setIsCallModalOpen}
-                  setMemberPhone={setMemberPhone}
-                  setDogName={setDogName}
-                  setIsDeleteModalOpen={setIsDeleteModalOpen}
-                  setTargetDogId={setTargetDogId}
+          {isSearchClicked ? (
+            searchDogResults?.length > 0 ? (
+              searchDogResults?.map((data) => {
+                return (
+                  <DogCard
+                    key={data.dogId}
+                    name={data.dogName}
+                    allRounds={data.allRounds}
+                    currentRounds={data.currentRounds}
+                    monthlyTicket={data.monthlyTicket}
+                    adminRole={adminRole}
+                    dogId={data.dogId}
+                    setIsCallModalOpen={setIsCallModalOpen}
+                    setMemberPhone={setMemberPhone}
+                    setDogName={setDogName}
+                    setIsDeleteModalOpen={setIsDeleteModalOpen}
+                    setTargetDogId={setTargetDogId}
+                  />
+                );
+              })
+            ) : (
+              <StyledTextWrapper>
+                <Text
+                  text="검색 결과와 일치하는 강아지가 없어요"
+                  color={ThemeConfig.gray_3}
                 />
-              );
-            })}
-          {dogLists.length < 1 && !isChecking && (
+              </StyledTextWrapper>
+            )
+          ) : null}
+          {!isSearchClicked
+            ? dogLists.length > 0 &&
+              !isChecking &&
+              dogLists.map((data) => {
+                return (
+                  <DogCard
+                    key={data.dogId}
+                    name={data.dogName}
+                    allRounds={data.allRounds}
+                    currentRounds={data.currentRounds}
+                    monthlyTicket={data.monthlyTicket}
+                    adminRole={adminRole}
+                    dogId={data.dogId}
+                    setIsCallModalOpen={setIsCallModalOpen}
+                    setMemberPhone={setMemberPhone}
+                    setDogName={setDogName}
+                    setIsDeleteModalOpen={setIsDeleteModalOpen}
+                    setTargetDogId={setTargetDogId}
+                  />
+                );
+              })
+            : null}
+          {dogLists.length < 1 && !isChecking && !isSearchClicked && (
             <StyledTextWrapper>
               <Text
                 text="아직 등원한 강아지가 없어요"
@@ -204,7 +239,12 @@ const Attendance = () => {
               />
             </StyledTextWrapper>
           )}
-          {/* {isChecking && <Mode setIsCallModalOpen={setIsCallModalOpen} />} */}
+          {isChecking && (
+            <Mode
+              setIsCallModalOpen={setIsCallModalOpen}
+              setTargetDogId={setTargetDogId}
+            />
+          )}
         </StyledCardWrapper>
       </StyledListWrapper>
       {isSortClicked && (

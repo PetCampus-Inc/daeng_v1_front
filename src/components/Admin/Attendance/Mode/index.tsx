@@ -4,28 +4,32 @@ import { dogListInfoAtom } from "store/admin";
 import DogCard from "../DogCard";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { StyledTextWrapper } from "../styles";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface Props {
   setIsCallModalOpen: Dispatch<SetStateAction<boolean>>;
+  setTargetDogId: Dispatch<SetStateAction<number>>;
 }
 
-const Mode = ({ setIsCallModalOpen }: Props) => {
+const Mode = ({ setIsCallModalOpen, setTargetDogId }: Props) => {
   const dogLists = useRecoilValue(dogListInfoAtom).data;
+  const [selectedDogs, setSeletedDogs] = useState([]);
 
   return (
     <>
       {dogLists.length > 0 ? (
         dogLists.map((data) => {
           return (
-            // <DogCard
-            //   key={data.dogId}
-            //   name={data.dogName}
-            //   currentRounds={data.currentRounds}
-            //   className="mode"
-            //   setIsCallModalOpen={setIsCallModalOpen}
-            // />
-            <div></div>
+            <DogCard
+              key={data.dogId}
+              name={data.dogName}
+              allRounds={data.allRounds}
+              currentRounds={data.currentRounds}
+              monthlyTicket={data.monthlyTicket}
+              dogId={data.dogId}
+              setIsCallModalOpen={setIsCallModalOpen}
+              setTargetDogId={setTargetDogId}
+            />
           );
         })
       ) : (
