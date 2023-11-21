@@ -22,7 +22,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
 import { handleDeleteDog, handleGetSearchDogs } from "apis/attendance";
-import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
+import { IAdminInfo } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
@@ -41,17 +41,18 @@ const Attendance = () => {
   const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
   const [targetDogId, setTargetDogId] = useState(-1);
-  const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
+  const [searchDogResults, setSearchDogResults] = useState<IAdminInfo>();
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
+  const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
+  const adminName = useRecoilValue(adminLoginInfoAtom).data.adminName;
+  const adminRole = useRecoilValue(adminLoginInfoAtom).data.role;
+  const dogLists = useRecoilValue(adminInfoAtom).data;
   const setDogLists = useSetRecoilState<IAdminInfo>(adminInfoAtom);
-  const adminName = useRecoilValue(adminInfoAtom).data.adminName;
-  const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
-  const adminRole = useRecoilValue(adminInfoAtom).data.role;
   const { isFocusing, handleFocus, handleBlur } = useFocus();
 
   const handlerGetSearchResult = async () => {
     try {
-      const data = await handleGetSearchDogs(1, searchText); //schoolId 로 변경해야함
+      const data = await handleGetSearchDogs(schoolId, searchText);
       if (data.status === 200) {
         setSearchDogResults(data);
         setIsSearchClicked(true);
@@ -73,9 +74,9 @@ const Attendance = () => {
   };
 
   useEffect(() => {
-    handleGetAdminInfo(1); //adminId 로 변경해야함
+    handleGetAdminInfo(schoolId);
   }, []);
-
+  console.log(dogLists);
   return (
     <Container>
       <StyledHeadWrapper>

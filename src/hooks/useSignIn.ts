@@ -40,6 +40,7 @@ const useSignIn = () => {
           data: {
             adminId: data.data.adminId,
             adminName: data.data.adminName,
+            schoolId: data.data.schoolId,
             role: data.data.role,
           },
         }));

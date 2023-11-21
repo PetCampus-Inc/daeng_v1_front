@@ -5,17 +5,19 @@ import { adminInfoAtom } from "store/admin";
 const useGetAttendance = () => {
   const [adminInfo, setAdminInfo] = useRecoilState(adminInfoAtom);
 
-  const handleGetAdminInfo = async (adminId: number) => {
+  const handleGetAdminInfo = async (schoolId: number) => {
     try {
-      const data = await handleGetDogs(adminId);
+      const data = await handleGetDogs(schoolId);
       if (data.status === 200) {
         setAdminInfo((prevAdminInfo) => ({
           ...prevAdminInfo,
-          data: {
-            adminName: data.data.adminName,
-            role: data.data.role,
-            dogs: data.data.dogs,
-          },
+          data: data.data.map((dogInfo) => ({
+            dogId: dogInfo.dogId,
+            dogName: dogInfo.dogName,
+            allRounds: dogInfo.allRounds,
+            currentRounds: dogInfo.currentRounds,
+            monthlyTicket: dogInfo.monthlyTicket,
+          })),
         }));
       }
     } catch (error) {

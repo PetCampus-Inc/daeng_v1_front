@@ -10,12 +10,12 @@ import { adminInfoAtom } from "store/admin";
 import { IDogsList } from "types/Attendance.type";
 
 const useSortDogs = () => {
-  const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
+  const dogLists = useRecoilValue(adminInfoAtom).data;
   const [newDogsList, setNewDogsList] = useState<IDogsList[]>(dogLists);
 
-  const handleGetSortRegistered = async (adminId: number) => {
+  const handleGetSortRegistered = async (schoolId: number) => {
     try {
-      const data = await handleSortRegistered(adminId);
+      const data = await handleSortRegistered(schoolId);
       if (data.status === 200) {
         setNewDogsList(data.data);
       }

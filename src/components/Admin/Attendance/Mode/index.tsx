@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Mode = ({ setIsCallModalOpen }: Props) => {
-  const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
+  const dogLists = useRecoilValue(adminInfoAtom).data;
 
   return (
     <>

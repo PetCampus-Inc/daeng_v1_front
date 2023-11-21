@@ -22,7 +22,7 @@ const SortModal = ({
   sortName,
 }: Props) => {
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
-  const schoolId = 1; // 수정해야함 !!!
+  const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
   const {
     handleGetSortRegistered,
     handleGetSortPayment,
@@ -48,7 +48,7 @@ const SortModal = ({
             backcolor={ThemeConfig.white}
             handleClick={() => {
               setSortName(LIST.REGISTERD);
-              handleGetSortRegistered(adminId);
+              handleGetSortRegistered(schoolId);
             }}
             textcolor={
               sortName === LIST.REGISTERD
@@ -116,12 +116,15 @@ const SortModal = ({
           weight="700"
           text="닫기"
           handleClick={() => {
-            setDogLists((prevInfo) => ({
-              ...prevInfo,
-              data: {
-                ...prevInfo.data,
-                dogs: newDogsList,
-              },
+            setDogLists((prevAdminInfo) => ({
+              ...prevAdminInfo,
+              data: newDogsList.map((dogInfo) => ({
+                dogId: dogInfo.dogId,
+                dogName: dogInfo.dogName,
+                allRounds: dogInfo.allRounds,
+                currentRounds: dogInfo.currentRounds,
+                monthlyTicket: dogInfo.monthlyTicket,
+              })),
             }));
             setIsSortClicked(false);
           }}
