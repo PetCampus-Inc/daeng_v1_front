@@ -13,7 +13,7 @@ interface Props {
 
 const Mode = ({ setIsCallModalOpen, setTargetDogId }: Props) => {
   const dogLists = useRecoilValue(dogListInfoAtom).data;
-  const [selectedDogs, setSeletedDogs] = useState([]);
+  const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
 
   return (
     <>
@@ -29,6 +29,9 @@ const Mode = ({ setIsCallModalOpen, setTargetDogId }: Props) => {
               dogId={data.dogId}
               setIsCallModalOpen={setIsCallModalOpen}
               setTargetDogId={setTargetDogId}
+              className="MODE"
+              setSeletedDogIds={setSeletedDogIds}
+              selectedDogIds={selectedDogIds}
             />
           );
         })

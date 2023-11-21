@@ -30,11 +30,13 @@ interface Props {
   monthlyTicket: Array<number>;
   className?: string;
   adminRole?: string;
+  selectedDogIds?: number[];
   setIsCallModalOpen?: Dispatch<SetStateAction<boolean>>;
   setMemberPhone?: Dispatch<SetStateAction<string>>;
   setDogName?: Dispatch<SetStateAction<string>>;
   setIsDeleteModalOpen?: Dispatch<SetStateAction<boolean>>;
   setTargetDogId: Dispatch<SetStateAction<number>>;
+  setSeletedDogIds?: Dispatch<SetStateAction<number[]>>;
 }
 
 const DogCard = ({
@@ -50,11 +52,22 @@ const DogCard = ({
   setDogName,
   setIsDeleteModalOpen,
   setTargetDogId,
+  selectedDogIds,
+  setSeletedDogIds,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket);
   const monthlyTicketDate = useFormatDate(monthlyTicket);
+
+  const handleCheckAttend = (dogId: number) => {
+    if (selectedDogIds?.includes(dogId)) {
+      setSeletedDogIds?.(selectedDogIds.filter((id) => id !== dogId));
+    } else {
+      setSeletedDogIds?.([...(selectedDogIds || []), dogId]);
+    }
+  };
 
   const handleGetCallInfo = async (dogId: number) => {
     try {
@@ -108,67 +121,89 @@ const DogCard = ({
         alt="dog-image"
       />
       <StyledTextWrapper>
-        <Text
-          text={name}
-          color={
-            (currentRounds === 0 && monthlyTicket === null) ||
-            (currentRounds === 0 && isExpired)
-              ? ThemeConfig.gray_2
-              : ThemeConfig.darkBlack
-          }
-          weight="800"
-        />
-        <TextWrapper>
-          <StyledBlur
-            display={
-              (currentRounds === 0 && monthlyTicket === null) ||
-              (currentRounds === 0 && isExpired)
-                ? "block"
-                : "none"
-            }
-          />
-          <StyledImage
-            src={
-              currentRounds === 1 || currentRounds === 2 || isBeforeExpiry
-                ? "/images/alert-brown.png"
-                : (currentRounds === 0 && monthlyTicket === null) ||
+        {className === "MODE" ? (
+          <Text text={name} weight="800" />
+        ) : (
+          <>
+            <Text
+              text={name}
+              color={
+                (currentRounds === 0 && monthlyTicket === null) ||
+                (currentRounds === 0 && isExpired)
+                  ? ThemeConfig.gray_2
+                  : ThemeConfig.darkBlack
+              }
+              weight="800"
+            />
+            <TextWrapper>
+              <StyledBlur
+                display={
+                  (currentRounds === 0 && monthlyTicket === null) ||
                   (currentRounds === 0 && isExpired)
-                ? "/images/gray-calendar.png"
-                : "/images/calendar.png"
-            }
-            alt="more-button"
-            width="1.1rem"
-            height="1.1rem"
-            marginright="0.1rem"
-          />
-          <Text
-            text={
-              monthlyTicket !== null && !isExpired
-                ? `${monthlyTicketDate} 만료`
-                : `잔여 ${currentRounds}/${allRounds} 회`
-            }
-            color={
-              (currentRounds === 0 && monthlyTicket === null) ||
-              (currentRounds === 0 && isExpired)
-                ? ThemeConfig.gray_2
-                : ThemeConfig.primaryColor
-            }
-            size="0.8rem"
-            margintop="0.1rem"
-          />
-        </TextWrapper>
+                    ? "block"
+                    : "none"
+                }
+              />
+              <StyledImage
+                src={
+                  currentRounds === 1 || currentRounds === 2 || isBeforeExpiry
+                    ? "/images/alert-brown.png"
+                    : (currentRounds === 0 && monthlyTicket === null) ||
+                      (currentRounds === 0 && isExpired)
+                    ? "/images/gray-calendar.png"
+                    : "/images/calendar.png"
+                }
+                alt="more-button"
+                width="1.1rem"
+                height="1.1rem"
+                marginright="0.1rem"
+              />
+              <Text
+                text={
+                  monthlyTicket !== null && !isExpired
+                    ? `${monthlyTicketDate} 만료`
+                    : `잔여 ${currentRounds}/${allRounds} 회`
+                }
+                color={
+                  (currentRounds === 0 && monthlyTicket === null) ||
+                  (currentRounds === 0 && isExpired)
+                    ? ThemeConfig.gray_2
+                    : ThemeConfig.primaryColor
+                }
+                size="0.8rem"
+                margintop="0.1rem"
+              />
+            </TextWrapper>
+          </>
+        )}
       </StyledTextWrapper>
-      <StyledImage
-        src="/images/more-button.png"
-        alt="more-button"
-        width="1.5rem"
-        height="1.5rem"
-        marginright="0"
-        position="absolute"
-        right="6px"
-        top="3px"
-        onClick={() => setIsOptionsOpen(!isOptionsOpen)}
-      />
+      {className === "MODE" ? (
+        <StyledImage
+          src={
+            selectedDogIds?.includes(dogId)
+              ? "/images/default-foot-button.png"
+              : "/images/active-foot-button.png"
+          }
+          alt="foot-icon"
+          position="absolute"
+          right="5px"
+          onClick={() => {
+            handleCheckAttend(dogId);
+          }}
+        />
+      ) : (
+        <StyledImage
+          src="/images/more-button.png"
+          alt="more-button"
+          width="1.5rem"
+          height="1.5rem"
+          marginright="0"
+          position="absolute"
+          right="6px"
+          top="3px"
+          onClick={() => setIsOptionsOpen(!isOptionsOpen)}
+        />
+      )}
       {isOptionsOpen && adminRole === "ROLE_OWNER" && (
         <StyledOptionList isopen={isOptionsOpen.toString()} ref={modalRef}>
           {OPTIONS.owner.map((option, index) => (

@@ -26,8 +26,8 @@ export const StyledImage = styled.img<{
   top?: string;
   radius?: string;
 }>`
-  width: ${(props) => (props.width ? props.width : "3rem")};
-  height: ${(props) => (props.height ? props.height : "3rem")};
+  width: ${(props) => (props.width ? props.width : "2.8rem")};
+  height: ${(props) => (props.height ? props.height : "2.8rem")};
   border-radius: ${(props) => (props.radius ? props.radius : "50%")};
   position: ${(props) => (props.position ? props.position : "static")};
   right: ${(props) => (props.right ? props.right : "")};
