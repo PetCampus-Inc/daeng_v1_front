@@ -1,4 +1,4 @@
-export interface IAdminInfo {
+export interface IAttendanceInfo {
   data: IDogsList[];
   status: number;
 }
@@ -56,4 +56,9 @@ export interface IAlarmResponse {
     schoolPhoneNumber: string;
   };
   status: number;
+}
+
+export interface IDeleteInfo {
+  adminId: number;
+  targetDogId: number;
 }

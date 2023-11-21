@@ -1,15 +1,15 @@
 import { handleGetDogs } from "apis/attendance";
 import { useRecoilState } from "recoil";
-import { adminInfoAtom } from "store/admin";
+import { dogListInfoAtom } from "store/admin";
 
 const useGetAttendance = () => {
-  const [adminInfo, setAdminInfo] = useRecoilState(adminInfoAtom);
+  const [dogListInfo, setDogListInfo] = useRecoilState(dogListInfoAtom);
 
   const handleGetAdminInfo = async (schoolId: number) => {
     try {
       const data = await handleGetDogs(schoolId);
       if (data.status === 200) {
-        setAdminInfo((prevAdminInfo) => ({
+        setDogListInfo((prevAdminInfo) => ({
           ...prevAdminInfo,
           data: data.data.map((dogInfo) => ({
             dogId: dogInfo.dogId,

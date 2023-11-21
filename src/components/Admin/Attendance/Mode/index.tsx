@@ -1,6 +1,6 @@
 import Text from "components/common/Text";
 import { useRecoilValue } from "recoil";
-import { adminInfoAtom } from "store/admin";
+import { dogListInfoAtom } from "store/admin";
 import DogCard from "../DogCard";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { StyledTextWrapper } from "../styles";
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Mode = ({ setIsCallModalOpen }: Props) => {
-  const dogLists = useRecoilValue(adminInfoAtom).data;
+  const dogLists = useRecoilValue(dogListInfoAtom).data;
 
   return (
     <>

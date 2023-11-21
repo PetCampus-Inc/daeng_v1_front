@@ -19,10 +19,10 @@ import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
 import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
+import { dogListInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
 import { handleDeleteDog, handleGetSearchDogs } from "apis/attendance";
-import { IAdminInfo } from "types/Attendance.type";
+import { IAttendanceInfo } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
@@ -41,13 +41,13 @@ const Attendance = () => {
   const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
   const [targetDogId, setTargetDogId] = useState(-1);
-  const [searchDogResults, setSearchDogResults] = useState<IAdminInfo>();
+  const [searchDogResults, setSearchDogResults] = useState<IAttendanceInfo>();
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
   const adminName = useRecoilValue(adminLoginInfoAtom).data.adminName;
   const adminRole = useRecoilValue(adminLoginInfoAtom).data.role;
-  const dogLists = useRecoilValue(adminInfoAtom).data;
-  const setDogLists = useSetRecoilState<IAdminInfo>(adminInfoAtom);
+  const dogLists = useRecoilValue(dogListInfoAtom).data;
+  const setDogLists = useSetRecoilState<IAttendanceInfo>(dogListInfoAtom);
   const { isFocusing, handleFocus, handleBlur } = useFocus();
 
   const handlerGetSearchResult = async () => {
@@ -64,9 +64,9 @@ const Attendance = () => {
 
   const handlerDeleteDog = async () => {
     try {
-      const data = await handleDeleteDog(adminId, targetDogId);
+      const data = await handleDeleteDog({ adminId, targetDogId });
       if (data.status === 200) {
-        return alert(data.message);
+        alert(data.message);
       }
     } catch (error) {
       return alert("회원 삭제에 실패하였습니다.");
@@ -76,7 +76,7 @@ const Attendance = () => {
   useEffect(() => {
     handleGetAdminInfo(schoolId);
   }, []);
-  console.log(dogLists);
+
   return (
     <Container>
       <StyledHeadWrapper>

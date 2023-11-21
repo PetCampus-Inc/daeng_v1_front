@@ -6,11 +6,11 @@ import { Dispatch, SetStateAction } from "react";
 import useSortDogs from "hooks/useSortDogs";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
-import { IAdminInfo } from "types/Attendance.type";
+import { IAttendanceInfo } from "types/Attendance.type";
 
 interface Props {
   setIsSortClicked: Dispatch<SetStateAction<boolean>>;
-  setDogLists: React.Dispatch<React.SetStateAction<IAdminInfo>>;
+  setDogLists: React.Dispatch<React.SetStateAction<IAttendanceInfo>>;
   setSortName: Dispatch<SetStateAction<string>>;
   sortName: string;
 }

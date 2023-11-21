@@ -1,8 +1,8 @@
 import { atom } from "recoil";
-import { IAdminInfo, IAdminLoginResponse } from "types/Attendance.type";
+import { IAttendanceInfo, IAdminLoginResponse } from "types/Attendance.type";
 
-export const adminInfoAtom = atom<IAdminInfo>({
-  key: "adminInfoAtom",
+export const dogListInfoAtom = atom<IAttendanceInfo>({
+  key: "dogListInfoAtom",
   default: {
     data: [
       {

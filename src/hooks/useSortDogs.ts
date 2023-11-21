@@ -6,11 +6,11 @@ import {
 } from "apis/attendance";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { adminInfoAtom } from "store/admin";
+import { dogListInfoAtom } from "store/admin";
 import { IDogsList } from "types/Attendance.type";
 
 const useSortDogs = () => {
-  const dogLists = useRecoilValue(adminInfoAtom).data;
+  const dogLists = useRecoilValue(dogListInfoAtom).data;
   const [newDogsList, setNewDogsList] = useState<IDogsList[]>(dogLists);
 
   const handleGetSortRegistered = async (schoolId: number) => {
