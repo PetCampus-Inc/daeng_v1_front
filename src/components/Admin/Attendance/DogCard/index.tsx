@@ -124,7 +124,7 @@ const DogCard = ({
       />
       <StyledTextWrapper>
         {className === "MODE" ? (
-          <Text text={name} weight="700" />
+          <Text text={name} weight="700" color={ThemeConfig.darkBlack} />
         ) : (
           <>
             <Text
