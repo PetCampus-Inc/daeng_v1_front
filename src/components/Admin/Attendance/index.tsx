@@ -48,11 +48,13 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [memberPhone, setMemberPhone] = useState("");
   const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
   const [targetDogId, setTargetDogId] = useState(-1);
   const [searchDogResults, setSearchDogResults] = useState<IDogsList[]>([]);
+  const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
   const schoolName = useRecoilValue(adminLoginInfoAtom).data.schoolName;
@@ -85,6 +87,14 @@ const Attendance = ({ setIsNavHidden }: Props) => {
       }
     } catch (error) {
       return alert("회원 삭제에 실패하였습니다.");
+    }
+  };
+
+  const handlerModeChange = () => {
+    if (selectedDogIds.length > 0) {
+      setIsCancelModalOpen(true);
+    } else {
+      setIsChecking(!isChecking);
     }
   };
 
@@ -137,7 +147,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
               text={isChecking ? "출석중단" : "출 석"}
               radius="15px"
               weight="600"
-              handleClick={() => setIsChecking(!isChecking)}
+              handleClick={handlerModeChange}
               border={
                 isChecking ? "none" : `solid 1px ${ThemeConfig.primaryColor}`
               }
@@ -258,7 +268,13 @@ const Attendance = ({ setIsNavHidden }: Props) => {
             </StyledTextWrapper>
           )}
         </StyledCardWrapper>
-        {isChecking && <Mode setTargetDogId={setTargetDogId} />}
+        {isChecking && (
+          <Mode
+            setTargetDogId={setTargetDogId}
+            selectedDogIds={selectedDogIds}
+            setSeletedDogIds={setSeletedDogIds}
+          />
+        )}
       </StyledListWrapper>
       {isSortClicked && (
         <SortModal
@@ -283,6 +299,20 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           secondbutton="삭제"
           firstfunc={() => setIsDeleteModalOpen(false)}
           secondfunc={handlerDeleteDog}
+        />
+      )}
+      {isCancelModalOpen && (
+        <ButtonModal
+          maintext="출석을 중단하시겠습니까?"
+          subtext="진행중이던 출석 내용이 모두 초기화됩니다"
+          firstbutton="취소"
+          secondbutton="중단"
+          firstfunc={() => setIsCancelModalOpen(false)}
+          secondfunc={() => {
+            setSeletedDogIds([]);
+            setIsCancelModalOpen(false);
+            setIsChecking(false);
+          }}
         />
       )}
     </Container>

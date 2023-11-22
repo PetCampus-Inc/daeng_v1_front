@@ -4,7 +4,7 @@ import { attendDogListInfoAtom } from "store/admin";
 import DogCard from "../DogCard";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { StyledCardWrapper, StyledTextWrapper } from "../styles";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Button from "components/common/Button";
 import {
   StyledBottomWrapper,
@@ -16,11 +16,12 @@ import { StyledImage } from "../DogCard/styles";
 
 interface Props {
   setTargetDogId: Dispatch<SetStateAction<number>>;
+  setSeletedDogIds: Dispatch<SetStateAction<number[]>>;
+  selectedDogIds: number[];
 }
 
-const Mode = ({ setTargetDogId }: Props) => {
+const Mode = ({ setTargetDogId, setSeletedDogIds, selectedDogIds }: Props) => {
   const dogLists = useRecoilValue(attendDogListInfoAtom).data;
-  const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
 
   return (
     <>
@@ -42,6 +43,7 @@ const Mode = ({ setTargetDogId }: Props) => {
                         .map((filteredData) => filteredData.dogName)
                         .join("")}`}
                       color={ThemeConfig.darkBlack}
+                      margintop="0.2rem"
                     />
                   </StyledImageCard>
                   <StyledImage
