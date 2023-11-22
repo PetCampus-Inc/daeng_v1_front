@@ -1,4 +1,11 @@
-import { ChangeEvent, memo, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  memo,
+  useEffect,
+  useState,
+} from "react";
 import {
   Container,
   StyledHeadWrapper,
@@ -29,7 +36,11 @@ import SortModal from "./SortModal";
 import CallModal from "./CallModal";
 import ButtonModal from "components/common/ButtonModal";
 
-const Attendance = () => {
+interface Props {
+  setIsNavHidden: Dispatch<SetStateAction<boolean>>;
+}
+
+const Attendance = ({ setIsNavHidden }: Props) => {
   const { handleGetAdminInfo } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -76,6 +87,12 @@ const Attendance = () => {
       return alert("회원 삭제에 실패하였습니다.");
     }
   };
+
+  if (isFocusing || isChecking || isSearchClicked) {
+    setIsNavHidden(true);
+  } else {
+    setIsNavHidden(false);
+  }
 
   useEffect(() => {
     handleGetAdminInfo(schoolId);
@@ -239,13 +256,8 @@ const Attendance = () => {
               />
             </StyledTextWrapper>
           )}
-          {isChecking && (
-            <Mode
-              setIsCallModalOpen={setIsCallModalOpen}
-              setTargetDogId={setTargetDogId}
-            />
-          )}
         </StyledCardWrapper>
+        {isChecking && <Mode setTargetDogId={setTargetDogId} />}
       </StyledListWrapper>
       {isSortClicked && (
         <SortModal

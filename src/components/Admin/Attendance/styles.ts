@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 85vh;
+  height: 100vh;
   width: 100%;
   margin-top: 5vh;
   position: relative;
 `;
 
 export const StyledHeadWrapper = styled.div`
-  height: 24%;
+  height: 20%;
   padding-left: 4%;
   padding-right: 4%;
 `;
