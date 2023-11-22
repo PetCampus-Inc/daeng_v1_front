@@ -1,19 +1,20 @@
 import Text from "components/common/Text";
 import { useRecoilValue } from "recoil";
-import { dogListInfoAtom } from "store/admin";
+import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 import DogCard from "../DogCard";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { StyledCardWrapper, StyledTextWrapper } from "../styles";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Button from "components/common/Button";
 import { StyledBottomWrapper } from "./styles";
+import useGetAttendance from "hooks/useGetAttendance";
 
 interface Props {
   setTargetDogId: Dispatch<SetStateAction<number>>;
 }
 
 const Mode = ({ setTargetDogId }: Props) => {
-  const dogLists = useRecoilValue(dogListInfoAtom).data;
+  const dogLists = useRecoilValue(attendDogListInfoAtom).data;
   const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
 
   return (

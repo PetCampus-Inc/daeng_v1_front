@@ -1,5 +1,6 @@
 import customAxios from "libs/CustomAxios";
 import {
+  IAttendDogsInfo,
   IAttendanceInfo,
   IDeleteInfo,
   IMemberCallInfo,
@@ -76,5 +77,13 @@ export const handleDeleteDog = async (req: IDeleteInfo): Promise<IResponse> => {
     adminId: req.adminId,
     dogId: req.targetDogId,
   });
+  return data;
+};
+
+export const handleGetAttendDogs = async (
+  schoolId: number
+): Promise<IAttendDogsInfo> => {
+  const url: string = `admin/attendance/attend?schoolId=${schoolId}`;
+  const { data } = await customAxios.get(url);
   return data;
 };

@@ -3,6 +3,11 @@ export interface IAttendanceInfo {
   status: number;
 }
 
+export interface IAttendDogsInfo {
+  data: IAttendDogLists[];
+  status: number;
+}
+
 export interface IAdminLoginResponse {
   data: {
     adminId: number;
@@ -14,20 +19,16 @@ export interface IAdminLoginResponse {
   status: number;
 }
 
-// export interface ISearchDogs {
-//   data: [
-//     {
-//       dogId: number;
-//       dogName: string;
-//       allRounds: number;
-//       currentRounds: number;
-
-//     },
-//   ];
-//   status: number;
-// }
-
 export interface IDogsList {
+  dogId: number;
+  dogName: string;
+  allRounds: number;
+  currentRounds: number;
+  monthlyTicket: [];
+}
+
+export interface IAttendDogLists {
+  attendanceId: number;
   dogId: number;
   dogName: string;
   allRounds: number;

@@ -41,7 +41,7 @@ interface Props {
 }
 
 const Attendance = ({ setIsNavHidden }: Props) => {
-  const { handleGetAdminInfo } = useGetAttendance();
+  const { handleGetAdminInfo, handleGetAttendDogLists } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isSearchClicked, setIsSearchClicked] = useState(false);
@@ -96,6 +96,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
 
   useEffect(() => {
     handleGetAdminInfo(schoolId);
+    handleGetAttendDogLists(schoolId);
   }, []);
 
   return (

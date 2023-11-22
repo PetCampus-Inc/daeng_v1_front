@@ -122,7 +122,7 @@ const DogCard = ({
       />
       <StyledTextWrapper>
         {className === "MODE" ? (
-          <Text text={name} weight="800" />
+          <Text text={name} weight="700" />
         ) : (
           <>
             <Text
@@ -133,7 +133,7 @@ const DogCard = ({
                   ? ThemeConfig.gray_2
                   : ThemeConfig.darkBlack
               }
-              weight="800"
+              weight="700"
             />
             <TextWrapper>
               <StyledBlur

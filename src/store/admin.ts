@@ -1,5 +1,9 @@
 import { atom } from "recoil";
-import { IAttendanceInfo, IAdminLoginResponse } from "types/Attendance.type";
+import {
+  IAttendanceInfo,
+  IAdminLoginResponse,
+  IAttendDogsInfo,
+} from "types/Attendance.type";
 
 export const dogListInfoAtom = atom<IAttendanceInfo>({
   key: "dogListInfoAtom",
@@ -27,6 +31,23 @@ export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
       role: "",
       schoolName: "",
     },
+    status: 0,
+  },
+});
+
+export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
+  key: "attendDogListInfoAtom",
+  default: {
+    data: [
+      {
+        attendanceId: -1,
+        dogId: -1,
+        dogName: "",
+        allRounds: -1,
+        currentRounds: -1,
+        monthlyTicket: [],
+      },
+    ],
     status: 0,
   },
 });
