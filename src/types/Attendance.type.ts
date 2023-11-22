@@ -64,3 +64,8 @@ export interface IDeleteInfo {
   adminId: number;
   targetDogId: number;
 }
+
+export interface IAttendInfo {
+  schoolId: number;
+  selectedDogIds: number[];
+}
