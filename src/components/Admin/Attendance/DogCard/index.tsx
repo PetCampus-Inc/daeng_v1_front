@@ -30,6 +30,7 @@ interface Props {
   monthlyTicket: Array<number>;
   className?: string;
   adminRole?: string;
+  attendanceId?: number;
   selectedDogIds?: number[];
   setIsCallModalOpen?: Dispatch<SetStateAction<boolean>>;
   setMemberPhone?: Dispatch<SetStateAction<string>>;
@@ -47,6 +48,7 @@ const DogCard = ({
   monthlyTicket,
   className,
   adminRole,
+  attendanceId,
   setIsCallModalOpen,
   setMemberPhone,
   setDogName,
@@ -61,11 +63,11 @@ const DogCard = ({
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket);
   const monthlyTicketDate = useFormatDate(monthlyTicket);
 
-  const handleCheckAttend = (dogId: number) => {
-    if (selectedDogIds?.includes(dogId)) {
-      setSeletedDogIds?.(selectedDogIds.filter((id) => id !== dogId));
+  const handleCheckAttend = (attendanceId: number) => {
+    if (selectedDogIds?.includes(attendanceId)) {
+      setSeletedDogIds?.(selectedDogIds.filter((id) => id !== attendanceId));
     } else {
-      setSeletedDogIds?.([...(selectedDogIds || []), dogId]);
+      setSeletedDogIds?.([...(selectedDogIds || []), attendanceId]);
     }
   };
 
@@ -180,7 +182,7 @@ const DogCard = ({
       {className === "MODE" ? (
         <StyledImage
           src={
-            selectedDogIds?.includes(dogId)
+            selectedDogIds?.includes(attendanceId || -1)
               ? "/images/default-foot-button.png"
               : "/images/active-foot-button.png"
           }
@@ -188,7 +190,7 @@ const DogCard = ({
           position="absolute"
           right="5px"
           onClick={() => {
-            handleCheckAttend(dogId);
+            handleCheckAttend(attendanceId || -1);
           }}
         />
       ) : (

@@ -34,6 +34,7 @@ const Mode = ({ setTargetDogId }: Props) => {
                 className="MODE"
                 setSeletedDogIds={setSeletedDogIds}
                 selectedDogIds={selectedDogIds}
+                attendanceId={data.attendanceId}
               />
             );
           })
