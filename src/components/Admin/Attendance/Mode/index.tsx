@@ -1,6 +1,6 @@
 import Text from "components/common/Text";
 import { useRecoilValue } from "recoil";
-import { attendDogListInfoAtom } from "store/admin";
+import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 import DogCard from "../DogCard";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { StyledCardWrapper, StyledTextWrapper } from "../styles";
@@ -13,15 +13,34 @@ import {
   StyledListWrapper,
 } from "./styles";
 import { StyledImage } from "../DogCard/styles";
+import { handlePostAttend } from "apis/attendance";
 
 interface Props {
   setTargetDogId: Dispatch<SetStateAction<number>>;
   setSeletedDogIds: Dispatch<SetStateAction<number[]>>;
+  setIsChecking: Dispatch<SetStateAction<boolean>>;
   selectedDogIds: number[];
 }
 
-const Mode = ({ setTargetDogId, setSeletedDogIds, selectedDogIds }: Props) => {
+const Mode = ({
+  setTargetDogId,
+  setSeletedDogIds,
+  selectedDogIds,
+  setIsChecking,
+}: Props) => {
   const dogLists = useRecoilValue(attendDogListInfoAtom).data;
+  const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
+
+  const handlerPostAttend = async () => {
+    try {
+      const data = await handlePostAttend({ schoolId, selectedDogIds });
+      if (data.status === 200) {
+        setIsChecking(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -110,6 +129,7 @@ const Mode = ({ setTargetDogId, setSeletedDogIds, selectedDogIds }: Props) => {
             selectedDogIds.length > 0 ? ThemeConfig.white : ThemeConfig.gray_2
           }
           weight="700"
+          handleClick={handlerPostAttend}
         />
       </StyledBottomWrapper>
     </>

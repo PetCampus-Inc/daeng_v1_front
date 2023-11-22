@@ -273,6 +273,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
             setTargetDogId={setTargetDogId}
             selectedDogIds={selectedDogIds}
             setSeletedDogIds={setSeletedDogIds}
+            setIsChecking={setIsChecking}
           />
         )}
       </StyledListWrapper>
