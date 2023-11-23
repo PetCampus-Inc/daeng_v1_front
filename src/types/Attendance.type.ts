@@ -3,6 +3,11 @@ export interface IAttendanceInfo {
   status: number;
 }
 
+export interface IAttendSearchInfo {
+  data: IAttendDogLists[];
+  status: number;
+}
+
 export interface IAttendDogsInfo {
   data: IAttendDogLists[];
   status: number;

@@ -28,13 +28,18 @@ import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { dogListInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
-import { handleDeleteDog, handleGetSearchDogs } from "apis/attendance";
+import {
+  handleDeleteDog,
+  handleGetAttendSearchDogs,
+  handleGetSearchDogs,
+} from "apis/attendance";
 import { IAttendanceInfo, IDogsList } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
 import CallModal from "./CallModal";
 import ButtonModal from "components/common/ButtonModal";
+import useGetSearchList from "hooks/useGetSearchList";
 
 interface Props {
   setIsNavHidden: Dispatch<SetStateAction<boolean>>;
@@ -44,7 +49,6 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   const { handleGetAdminInfo, handleGetAttendDogLists } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -53,7 +57,6 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   const [dogName, setDogName] = useState("");
   const [sortName, setSortName] = useState("결제 임박순");
   const [targetDogId, setTargetDogId] = useState(-1);
-  const [searchDogResults, setSearchDogResults] = useState<IDogsList[]>([]);
   const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
@@ -63,21 +66,14 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   const dogLists = useRecoilValue(dogListInfoAtom).data;
   const setDogLists = useSetRecoilState<IAttendanceInfo>(dogListInfoAtom);
   const { isFocusing, handleFocus, handleBlur } = useFocus();
-
-  const handlerGetSearchResult = async () => {
-    if (searchText === "") {
-      return;
-    }
-    try {
-      const data = await handleGetSearchDogs(schoolId, searchText);
-      if (data.status === 200) {
-        setSearchDogResults(data.data);
-        setIsSearchClicked(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    handlerGetSearchResult,
+    handlerGetAttendSearchDog,
+    searchDogResults,
+    isSearchClicked,
+    setIsSearchClicked,
+    searchAttendDogResults,
+  } = useGetSearchList();
 
   const handlerDeleteDog = async () => {
     try {
@@ -177,7 +173,13 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           }}
           handleClick={
             !isSearchClicked
-              ? handlerGetSearchResult
+              ? !isChecking
+                ? () => {
+                    handlerGetSearchResult(schoolId, searchText);
+                  }
+                : () => {
+                    handlerGetAttendSearchDog(schoolId, searchText);
+                  }
               : () => {
                   setSearchText("");
                   setIsSearchClicked(false);
@@ -208,7 +210,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           />
         </ReverseButton>
         <StyledCardWrapper>
-          {isSearchClicked ? (
+          {isSearchClicked && !isChecking ? (
             searchDogResults?.length > 0 ? (
               searchDogResults?.map((data) => {
                 return (
@@ -274,6 +276,8 @@ const Attendance = ({ setIsNavHidden }: Props) => {
             selectedDogIds={selectedDogIds}
             setSeletedDogIds={setSeletedDogIds}
             setIsChecking={setIsChecking}
+            isSearchClicked={isSearchClicked}
+            searchAttendDogResults={searchAttendDogResults}
           />
         )}
       </StyledListWrapper>

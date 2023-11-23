@@ -14,12 +14,15 @@ import {
 } from "./styles";
 import { StyledImage } from "../DogCard/styles";
 import { handlePostAttend } from "apis/attendance";
+import { IAttendDogLists } from "types/Attendance.type";
 
 interface Props {
   setTargetDogId: Dispatch<SetStateAction<number>>;
   setSeletedDogIds: Dispatch<SetStateAction<number[]>>;
   setIsChecking: Dispatch<SetStateAction<boolean>>;
   selectedDogIds: number[];
+  isSearchClicked: boolean;
+  searchAttendDogResults: IAttendDogLists[];
 }
 
 const Mode = ({
@@ -27,6 +30,8 @@ const Mode = ({
   setSeletedDogIds,
   selectedDogIds,
   setIsChecking,
+  isSearchClicked,
+  searchAttendDogResults,
 }: Props) => {
   const dogLists = useRecoilValue(attendDogListInfoAtom).data;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
@@ -86,34 +91,63 @@ const Mode = ({
           </StyledListWrapper>
         </>
       )}
-
       <StyledCardWrapper>
-        {dogLists.length > 0 ? (
-          dogLists.map((data) => {
-            return (
-              <DogCard
-                key={data.dogId}
-                name={data.dogName}
-                allRounds={data.allRounds}
-                currentRounds={data.currentRounds}
-                monthlyTicket={data.monthlyTicket}
-                dogId={data.dogId}
-                setTargetDogId={setTargetDogId}
-                className="MODE"
-                setSeletedDogIds={setSeletedDogIds}
-                selectedDogIds={selectedDogIds}
-                attendanceId={data.attendanceId}
+        {isSearchClicked ? (
+          searchAttendDogResults.length > 0 ? (
+            searchAttendDogResults.map((data) => {
+              return (
+                <DogCard
+                  key={data.dogId}
+                  name={data.dogName}
+                  allRounds={data.allRounds}
+                  currentRounds={data.currentRounds}
+                  monthlyTicket={data.monthlyTicket}
+                  dogId={data.dogId}
+                  setTargetDogId={setTargetDogId}
+                  className="MODE"
+                  setSeletedDogIds={setSeletedDogIds}
+                  selectedDogIds={selectedDogIds}
+                  attendanceId={data.attendanceId}
+                />
+              );
+            })
+          ) : (
+            <StyledTextWrapper>
+              <Text
+                text="검색 결과와 일치하는 강아지가 없어요"
+                color={ThemeConfig.gray_3}
               />
-            );
-          })
-        ) : (
-          <StyledTextWrapper>
-            <Text
-              text="아직 등원한 강아지가 없어요"
-              color={ThemeConfig.gray_3}
-            />
-          </StyledTextWrapper>
-        )}
+            </StyledTextWrapper>
+          )
+        ) : null}
+        {!isSearchClicked ? (
+          dogLists.length > 0 ? (
+            dogLists.map((data) => {
+              return (
+                <DogCard
+                  key={data.dogId}
+                  name={data.dogName}
+                  allRounds={data.allRounds}
+                  currentRounds={data.currentRounds}
+                  monthlyTicket={data.monthlyTicket}
+                  dogId={data.dogId}
+                  setTargetDogId={setTargetDogId}
+                  className="MODE"
+                  setSeletedDogIds={setSeletedDogIds}
+                  selectedDogIds={selectedDogIds}
+                  attendanceId={data.attendanceId}
+                />
+              );
+            })
+          ) : (
+            <StyledTextWrapper>
+              <Text
+                text="아직 등원한 강아지가 없어요"
+                color={ThemeConfig.gray_3}
+              />
+            </StyledTextWrapper>
+          )
+        ) : null}
       </StyledCardWrapper>
       <StyledBottomWrapper>
         <Button
