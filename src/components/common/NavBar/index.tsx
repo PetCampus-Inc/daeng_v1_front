@@ -6,14 +6,15 @@ import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   type?: string;
+  show?: string;
 }
 
 // **경로 수정 필요** //
-const Navbar = ({ type }: Props) => {
+const Navbar = ({ type, show }: Props) => {
   const path: string = usePathParams();
 
   return (
-    <Container>
+    <Container display={show}>
       {type === "admin" ? (
         <>
           <StyledNavBtn to={"/admin/attendance"} type={type}>

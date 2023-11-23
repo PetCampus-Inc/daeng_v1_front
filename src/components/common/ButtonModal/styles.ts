@@ -1,49 +1,39 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
   top: -4rem;
   left: 0;
   right: -0.1rem;
-  bottom: 2.5rem;
+  bottom: 3rem;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 99999;
   display: flex;
   overflow: hidden;
-  align-items: flex-end;
-`;
-
-const slideIn = keyframes`
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledMainWrapper = styled.div<{
   height?: string;
   paddingtop?: string;
 }>`
-  width: 100%;
-  height: ${(props) => (props.height ? props.height : "40%")};
+  width: 90%;
+  height: ${(props) => (props.height ? props.height : "22%")};
   background-color: white;
-  border-top-right-radius: 1rem;
-  border-top-left-radius: 1rem;
+  border-radius: 0.8rem;
   padding: 5%;
   padding-top: ${(props) => (props.paddingtop ? props.paddingtop : "9%")};
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: ${slideIn} 0.3s ease-in-out;
 `;
 
 export const StyledButtonWrapper = styled.div`
-  width: 100%;
-  height: 70%;
-  padding-left: 3%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+
+  padding-top: 10%;
 `;

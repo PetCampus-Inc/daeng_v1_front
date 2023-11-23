@@ -21,9 +21,10 @@ interface Props {
   type: string;
   handleClick?: () => void | Promise<void>;
   text?: string;
+  size?: string;
 }
 
-const Header = ({ type, handleClick, text }: Props) => {
+const Header = ({ type, handleClick, text, size }: Props) => {
   return (
     <Container>
       <HeaderWrapper type={type}>
@@ -45,7 +46,7 @@ const Header = ({ type, handleClick, text }: Props) => {
             <BackIconWrapper onClick={handleClick}>
               <StyledImage src="/images/chevron-left.png" alt="chevron-left" />
             </BackIconWrapper>
-            <TitleText>{text}</TitleText>
+            <TitleText size={size}>{text}</TitleText>
             <div style={{ width: "5%" }} />
           </TextWrapper>
         )}

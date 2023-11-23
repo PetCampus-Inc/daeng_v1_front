@@ -1,20 +1,22 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 85vh;
+  height: 100vh;
   width: 100%;
   margin-top: 5vh;
+  position: relative;
   position: relative;
 `;
 
 export const StyledHeadWrapper = styled.div`
-  height: 24%;
+  height: 20%;
   padding-left: 4%;
   padding-right: 4%;
 `;
 
 export const StyledMainWrapper = styled.div`
   display: flex;
+  height: 65%;
   height: 65%;
   width: 100%;
   margin-top: 15%;
@@ -37,7 +39,11 @@ export const StyledImage = styled.img<{
   alt: string;
   marginright?: string;
   marginleft?: string;
+  marginright?: string;
+  marginleft?: string;
 }>`
+  margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
+  margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
   margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
   margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
 `;
@@ -48,6 +54,7 @@ export const StyledListWrapper = styled.div`
   padding-bottom: 5%;
   padding-left: 4%;
   padding-right: 2%;
+  overflow-y: auto;
   position: relative;
 `;
 
@@ -68,7 +75,6 @@ export const StyledCardWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  overflow-y: auto;
   padding-right: 2%;
   gap: 4%;
 `;

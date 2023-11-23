@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Container = styled.div`
+export const Container = styled.div<{ display?: string }>`
   position: fixed;
   bottom: 0;
   height: 10vh;
   width: 100%;
   background-color: ${(props) => props.theme.white};
-  display: flex;
+  display: ${(props) => (props.display ? props.display : "flex")};
   justify-content: center;
   align-items: center;
 `;

@@ -12,12 +12,13 @@ export const StyledMainWrapper = styled.div<{
   marginbottom?: string;
   margintop?: string;
   justify?: string;
+  display?: string;
 }>`
+  display: ${(props) => (props.display ? props.display : "flex")};
   height: ${(props) => props.height};
   width: ${(props) => props.width};
   margin-bottom: ${(props) => props.marginbottom};
   margin-top: ${(props) => props.margintop};
-  display: flex;
   justify-content: ${(props) => (props.justify ? props.justify : "center")};
   align-items: center;
   cursor: pointer;
