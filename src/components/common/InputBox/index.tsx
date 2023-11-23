@@ -24,6 +24,7 @@ interface Props {
   selectedSearchText?: string;
   type?: string;
   isclicked?: boolean;
+  isclicked?: boolean;
   handleClick?: () => void | Promise<void>;
   onChange?: (e: any) => void | React.ChangeEvent<HTMLInputElement>;
   onFocus?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
