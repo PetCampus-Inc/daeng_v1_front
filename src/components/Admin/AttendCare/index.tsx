@@ -15,15 +15,15 @@ import { adminLoginInfoAtom, attendCareDogListAtom } from "store/admin";
 import DogCard from "../Attendance/DogCard";
 
 const AttendCare = () => {
-  const [selectedDogId, setSelectedDogId] = useState<number[]>([]);
+  const [selectedCareDogId, setSelectedCareDogId] = useState<number[]>([]);
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
-  const { handlerGetAttendCareDogs } = useGetAttendance();
+  const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const dogLists = useRecoilValue(attendCareDogListAtom).data;
+  const { handlerGetAttendCareDogs } = useGetAttendance();
 
   useEffect(() => {
-    handlerGetAttendCareDogs(1);
+    handlerGetAttendCareDogs(1); // schoolId 수정필요!!
   }, []);
-
   console.log(dogLists);
   return (
     <Container>
@@ -37,7 +37,7 @@ const AttendCare = () => {
             color={ThemeConfig.darkBlack}
           />
           <Text
-            text={`총 ${selectedDogId.length}마리`}
+            text={`총 ${selectedCareDogId.length}마리`}
             color={ThemeConfig.gray_1}
           />
         </StyledTextWrapper>
@@ -55,7 +55,10 @@ const AttendCare = () => {
                 key={data.dogId}
                 name={data.dogName}
                 dogId={data.dogId}
+                attendanceId={data.attendanceId}
                 className="CARE"
+                selectedCareDogId={selectedCareDogId}
+                setSelectedCareDogId={setSelectedCareDogId}
               />
             );
           })}
@@ -66,12 +69,14 @@ const AttendCare = () => {
           height="100%"
           text="관리 목록에 추가"
           backcolor={
-            selectedDogId.length > 0
+            selectedCareDogId.length > 0
               ? ThemeConfig.primaryColor
               : ThemeConfig.gray_4
           }
           textcolor={
-            selectedDogId.length > 0 ? ThemeConfig.white : ThemeConfig.gray_2
+            selectedCareDogId.length > 0
+              ? ThemeConfig.white
+              : ThemeConfig.gray_2
           }
           weight="700"
           handleClick={() => {}}

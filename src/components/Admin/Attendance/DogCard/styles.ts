@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ThemeConfig } from "styles/ThemeConfig";
 
-export const Container = styled.div`
+export const Container = styled.div<{ backcolor?: string }>`
   width: 47.5%;
   height: 5rem;
   box-sizing: border-box;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   align-items: center;
   padding-left: 0.8rem;
   position: relative;
-  background-color: ${ThemeConfig.white};
+  background-color: ${(props) => props.backcolor};
 `;
 
 export const StyledImage = styled.img<{

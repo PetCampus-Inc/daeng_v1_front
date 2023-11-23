@@ -32,12 +32,14 @@ interface Props {
   adminRole?: string;
   attendanceId?: number;
   selectedDogIds?: number[];
+  selectedCareDogId?: number[];
   setIsCallModalOpen?: Dispatch<SetStateAction<boolean>>;
   setMemberPhone?: Dispatch<SetStateAction<string>>;
   setDogName?: Dispatch<SetStateAction<string>>;
   setIsDeleteModalOpen?: Dispatch<SetStateAction<boolean>>;
   setTargetDogId?: Dispatch<SetStateAction<number>>;
   setSeletedDogIds?: Dispatch<SetStateAction<number[]>>;
+  setSelectedCareDogId?: Dispatch<SetStateAction<number[]>>;
 }
 
 const DogCard = ({
@@ -56,6 +58,8 @@ const DogCard = ({
   setTargetDogId,
   selectedDogIds,
   setSeletedDogIds,
+  selectedCareDogId,
+  setSelectedCareDogId,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
@@ -69,6 +73,17 @@ const DogCard = ({
       setSeletedDogIds?.([...(selectedDogIds || []), attendanceId]);
     }
   };
+
+  const handleAddAttend = (attendanceId: number) => {
+    if (selectedCareDogId?.includes(attendanceId)) {
+      setSelectedCareDogId?.(
+        selectedCareDogId.filter((id) => id !== attendanceId)
+      );
+    } else {
+      setSelectedCareDogId?.([...(selectedCareDogId || []), attendanceId]);
+    }
+  };
+  console.log(selectedCareDogId);
 
   const handleGetCallInfo = async (dogId: number) => {
     try {
@@ -116,7 +131,20 @@ const DogCard = ({
   });
 
   return (
-    <Container>
+    <Container
+      onClick={
+        className === "CARE"
+          ? () => {
+              handleAddAttend(attendanceId || -1);
+            }
+          : undefined
+      }
+      backcolor={
+        selectedCareDogId?.includes(attendanceId || -1)
+          ? `${ThemeConfig.br_4}`
+          : `${ThemeConfig.white}`
+      }
+    >
       <StyledImage
         src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="dog-image"
