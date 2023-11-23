@@ -1,4 +1,11 @@
-import { ChangeEvent, memo, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  memo,
+  useEffect,
+  useState,
+} from "react";
 import {
   Container,
   StyledHeadWrapper,
@@ -10,6 +17,8 @@ import {
   StyledImage,
   StyledBlur,
   StyledTextWrapper,
+  StyledBlur,
+  StyledTextWrapper,
 } from "./styles";
 import Button from "components/common/Button";
 import Text from "components/common/Text";
@@ -19,42 +28,79 @@ import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
 import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { adminInfoAtom, adminLoginInfoAtom } from "store/admin";
+import { dogListInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
-import { handleGetSearchDogs } from "apis/attendance";
-import { IAdminInfo, ISearchDogs } from "types/Attendance.type";
+import { handleDeleteDog } from "apis/attendance";
+import { IAttendanceInfo } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
+import CallModal from "./CallModal";
+import ButtonModal from "components/common/ButtonModal";
+import useGetSearchList from "hooks/useGetSearchList";
 
-const Attendance = () => {
-  const { handleGetAdminInfo } = useGetAttendance();
+interface Props {
+  setIsNavHidden: Dispatch<SetStateAction<boolean>>;
+}
+
+const Attendance = ({ setIsNavHidden }: Props) => {
+  const { handleGetAdminInfo, handleGetAttendDogLists } = useGetAttendance();
   const [isChecking, setIsChecking] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isSortClicked, setIsSortClicked] = useState(false);
-  const [searchDogResults, setSearchDogResults] = useState<ISearchDogs>();
-  const setDogLists = useSetRecoilState<IAdminInfo>(adminInfoAtom);
-  const adminName = useRecoilValue(adminInfoAtom).data.adminName;
-  const dogLists = useRecoilValue(adminInfoAtom).data.dogs;
+  const [isCallModalOpen, setIsCallModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [memberPhone, setMemberPhone] = useState("");
+  const [dogName, setDogName] = useState("");
+  const [sortName, setSortName] = useState("결제 임박순");
+  const [targetDogId, setTargetDogId] = useState(-1);
+  const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
-  const adminRole = useRecoilValue(adminInfoAtom).data.role;
+  const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
+  const schoolName = useRecoilValue(adminLoginInfoAtom).data.schoolName;
+  const adminName = useRecoilValue(adminLoginInfoAtom).data.adminName;
+  const adminRole = useRecoilValue(adminLoginInfoAtom).data.role;
+  const dogLists = useRecoilValue(dogListInfoAtom).data;
+  const setDogLists = useSetRecoilState<IAttendanceInfo>(dogListInfoAtom);
   const { isFocusing, handleFocus, handleBlur } = useFocus();
+  const {
+    handlerGetSearchResult,
+    handlerGetAttendSearchDog,
+    searchDogResults,
+    isSearchClicked,
+    setIsSearchClicked,
+    searchAttendDogResults,
+  } = useGetSearchList();
 
-  const handlerGetSearchResult = async () => {
+  const handlerDeleteDog = async () => {
     try {
-      const data = await handleGetSearchDogs(1, searchText);
+      const data = await handleDeleteDog({ adminId, targetDogId });
       if (data.status === 200) {
-        setSearchDogResults(data);
-        setIsSearchClicked(true);
+        setIsDeleteModalOpen(false);
       }
     } catch (error) {
-      console.log(error);
+      return alert("회원 삭제에 실패하였습니다.");
     }
   };
 
+  const handlerModeChange = () => {
+    if (selectedDogIds.length > 0) {
+      setIsCancelModalOpen(true);
+    } else {
+      setIsChecking(!isChecking);
+    }
+  };
+
+  if (isFocusing || isChecking || isSearchClicked) {
+    setIsNavHidden(true);
+  } else {
+    setIsNavHidden(false);
+  }
+
   useEffect(() => {
-    handleGetAdminInfo(1);
+    handleGetAdminInfo(schoolId);
+    handleGetAttendDogLists(schoolId);
   }, []);
 
   return (
@@ -66,13 +112,18 @@ const Attendance = () => {
               text={`${adminName} ${
                 adminRole === "ROLE_OWNER" ? "원장님" : "선생님"
               } 안녕하세요`}
+              text={`${adminName} ${
+                adminRole === "ROLE_OWNER" ? "원장님" : "선생님"
+              } 안녕하세요`}
               size="1.3rem"
               weight="bold"
               height="2rem"
             />
             <Text
               text={
-                isChecking ? "출석 진행중이에요" : "똑독 유치원 친구들이에요"
+                isChecking
+                  ? "출석 진행중이에요"
+                  : `${schoolName} 유치원 친구들이에요`
               }
               size="1rem"
               color={ThemeConfig.gray_2}
@@ -93,7 +144,7 @@ const Attendance = () => {
               text={isChecking ? "출석중단" : "출 석"}
               radius="15px"
               weight="600"
-              handleClick={() => setIsChecking(!isChecking)}
+              handleClick={handlerModeChange}
               border={
                 isChecking ? "none" : `solid 1px ${ThemeConfig.primaryColor}`
               }
@@ -118,12 +169,21 @@ const Attendance = () => {
           isclicked={isSearchClicked}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          isclicked={isSearchClicked}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
             setSearchText(e.target.value);
           }}
           handleClick={
             !isSearchClicked
-              ? handlerGetSearchResult
+              ? !isChecking
+                ? () => {
+                    handlerGetSearchResult(schoolId, searchText);
+                  }
+                : () => {
+                    handlerGetAttendSearchDog(schoolId, searchText);
+                  }
               : () => {
                   setSearchText("");
                   setIsSearchClicked(false);
@@ -134,12 +194,15 @@ const Attendance = () => {
       <StyledListWrapper>
         <StyledBlur display={isFocusing ? "block" : "none"} />
         <ReverseButton
+          display={isSearchClicked || isChecking ? "none" : "flex"}
           width="41%"
           height="5%"
-          text="회차 만료 임박 순"
+          text={sortName}
           radius="15px"
           border={`solid 1px ${ThemeConfig.gray_4}`}
           weight="500"
+          marginbottom="3%"
+          handleClick={() => setIsSortClicked(true)}
           marginbottom="3%"
           handleClick={() => setIsSortClicked(true)}
           textcolor={ThemeConfig.gray_2}
@@ -152,20 +215,67 @@ const Attendance = () => {
             marginleft="2%"
           />
         </ReverseButton>
+        >
+          <StyledImage
+            src="/images/chevron-down.png"
+            alt="chevron-down"
+            marginright="0"
+            marginleft="2%"
+          />
+        </ReverseButton>
         <StyledCardWrapper>
-          {dogLists.length > 0 &&
-            !isChecking &&
-            dogLists.map((data) => {
-              return (
-                <DogCard
-                  key={data.dogId}
-                  name={data.dogName}
-                  allRounds={data.allRounds}
-                  currentRounds={data.currentRounds}
+          {isSearchClicked && !isChecking ? (
+            searchDogResults?.length > 0 ? (
+              searchDogResults?.map((data) => {
+                return (
+                  <DogCard
+                    key={data.dogId}
+                    name={data.dogName}
+                    allRounds={data.allRounds}
+                    currentRounds={data.currentRounds}
+                    monthlyTicket={data.monthlyTicket}
+                    adminRole={adminRole}
+                    dogId={data.dogId}
+                    setIsCallModalOpen={setIsCallModalOpen}
+                    setMemberPhone={setMemberPhone}
+                    setDogName={setDogName}
+                    setIsDeleteModalOpen={setIsDeleteModalOpen}
+                    setTargetDogId={setTargetDogId}
+                  />
+                );
+              })
+            ) : (
+              <StyledTextWrapper>
+                <Text
+                  text="검색 결과와 일치하는 강아지가 없어요"
+                  color={ThemeConfig.gray_3}
                 />
-              );
-            })}
-          {dogLists.length < 1 && !isChecking && (
+              </StyledTextWrapper>
+            )
+          ) : null}
+          {!isSearchClicked
+            ? dogLists.length > 0 &&
+              !isChecking &&
+              dogLists.map((data) => {
+                return (
+                  <DogCard
+                    key={data.dogId}
+                    name={data.dogName}
+                    allRounds={data.allRounds}
+                    currentRounds={data.currentRounds}
+                    monthlyTicket={data.monthlyTicket}
+                    adminRole={adminRole}
+                    dogId={data.dogId}
+                    setIsCallModalOpen={setIsCallModalOpen}
+                    setMemberPhone={setMemberPhone}
+                    setDogName={setDogName}
+                    setIsDeleteModalOpen={setIsDeleteModalOpen}
+                    setTargetDogId={setTargetDogId}
+                  />
+                );
+              })
+            : null}
+          {dogLists.length < 1 && !isChecking && !isSearchClicked && (
             <StyledTextWrapper>
               <Text
                 text="아직 등원한 강아지가 없어요"
@@ -173,13 +283,55 @@ const Attendance = () => {
               />
             </StyledTextWrapper>
           )}
-          {isChecking && <Mode />}
         </StyledCardWrapper>
+        {isChecking && (
+          <Mode
+            setTargetDogId={setTargetDogId}
+            selectedDogIds={selectedDogIds}
+            setSeletedDogIds={setSeletedDogIds}
+            setIsChecking={setIsChecking}
+            isSearchClicked={isSearchClicked}
+            searchAttendDogResults={searchAttendDogResults}
+          />
+        )}
       </StyledListWrapper>
       {isSortClicked && (
         <SortModal
           setIsSortClicked={setIsSortClicked}
           setDogLists={setDogLists}
+          setSortName={setSortName}
+          sortName={sortName}
+        />
+      )}
+      {isCallModalOpen && (
+        <CallModal
+          setIsCallModalOpen={setIsCallModalOpen}
+          dogName={dogName}
+          memberPhone={memberPhone}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <ButtonModal
+          maintext="정말 삭제하시겠습니까?"
+          subtext="모든 데이터가 초기화되고 가입 탈퇴됩니다"
+          firstbutton="취소"
+          secondbutton="삭제"
+          firstfunc={() => setIsDeleteModalOpen(false)}
+          secondfunc={handlerDeleteDog}
+        />
+      )}
+      {isCancelModalOpen && (
+        <ButtonModal
+          maintext="출석을 중단하시겠습니까?"
+          subtext="진행중이던 출석 내용이 모두 초기화됩니다"
+          firstbutton="취소"
+          secondbutton="중단"
+          firstfunc={() => setIsCancelModalOpen(false)}
+          secondfunc={() => {
+            setSeletedDogIds([]);
+            setIsCancelModalOpen(false);
+            setIsChecking(false);
+          }}
         />
       )}
     </Container>

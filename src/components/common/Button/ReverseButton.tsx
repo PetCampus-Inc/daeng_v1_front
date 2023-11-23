@@ -16,6 +16,7 @@ interface Props {
   margintop?: string;
   children?: React.ReactNode;
   classname?: string;
+  display?: string;
 }
 
 const ReverseButton = ({
@@ -33,6 +34,7 @@ const ReverseButton = ({
   margintop,
   children,
   classname,
+  display,
 }: Props) => {
   return (
     <StyledMainWrapper
@@ -47,6 +49,7 @@ const ReverseButton = ({
       size={size}
       margintop={margintop}
       marginbottom={marginbottom}
+      display={display}
     >
       {text}
       {children}

@@ -2,21 +2,27 @@ import Text from "components/common/Text";
 import { Container, StyledButtonWrapper, StyledMainWrapper } from "./styles";
 import Button from "components/common/Button";
 import { ThemeConfig } from "styles/ThemeConfig";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import useSortDogs from "hooks/useSortDogs";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
-import { IAdminInfo } from "types/Attendance.type";
+import { IAttendanceInfo } from "types/Attendance.type";
 
 interface Props {
   setIsSortClicked: Dispatch<SetStateAction<boolean>>;
-  setDogLists: React.Dispatch<React.SetStateAction<IAdminInfo>>;
+  setDogLists: React.Dispatch<React.SetStateAction<IAttendanceInfo>>;
+  setSortName: Dispatch<SetStateAction<string>>;
+  sortName: string;
 }
 
-const SortModal = ({ setIsSortClicked, setDogLists }: Props) => {
-  const [selected, setSelected] = useState(LIST.REGISTERD);
+const SortModal = ({
+  setIsSortClicked,
+  setDogLists,
+  setSortName,
+  sortName,
+}: Props) => {
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
-  const schoolId = 1; // 수정해야함 !!!
+  const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
   const {
     handleGetSortRegistered,
     handleGetSortPayment,
@@ -41,15 +47,15 @@ const SortModal = ({ setIsSortClicked, setDogLists }: Props) => {
             justify="flex-start"
             backcolor={ThemeConfig.white}
             handleClick={() => {
-              setSelected(LIST.REGISTERD);
-              handleGetSortRegistered(adminId);
+              setSortName(LIST.REGISTERD);
+              handleGetSortRegistered(schoolId);
             }}
             textcolor={
-              selected === LIST.REGISTERD
+              sortName === LIST.REGISTERD
                 ? ThemeConfig.primaryColor
                 : ThemeConfig.gray_1
             }
-            weight={selected === LIST.REGISTERD ? "800" : ""}
+            weight={sortName === LIST.REGISTERD ? "800" : ""}
             text={LIST.REGISTERD}
           />
           <Button
@@ -57,16 +63,16 @@ const SortModal = ({ setIsSortClicked, setDogLists }: Props) => {
             width="100%"
             justify="flex-start"
             handleClick={() => {
-              setSelected(LIST.PAYMENT);
+              setSortName(LIST.PAYMENT);
               handleGetSortPayment(schoolId);
             }}
             backcolor={ThemeConfig.white}
             textcolor={
-              selected === LIST.PAYMENT
+              sortName === LIST.PAYMENT
                 ? ThemeConfig.primaryColor
                 : ThemeConfig.gray_1
             }
-            weight={selected === LIST.PAYMENT ? "800" : ""}
+            weight={sortName === LIST.PAYMENT ? "800" : ""}
             text={LIST.PAYMENT}
           />
           <Button
@@ -74,16 +80,16 @@ const SortModal = ({ setIsSortClicked, setDogLists }: Props) => {
             width="100%"
             justify="flex-start"
             handleClick={() => {
-              setSelected(LIST.DATE);
+              setSortName(LIST.DATE);
               handleGetSortDate(schoolId);
             }}
             backcolor={ThemeConfig.white}
             textcolor={
-              selected === LIST.DATE
+              sortName === LIST.DATE
                 ? ThemeConfig.primaryColor
                 : ThemeConfig.gray_1
             }
-            weight={selected === LIST.DATE ? "800" : ""}
+            weight={sortName === LIST.DATE ? "800" : ""}
             text={LIST.DATE}
           />
           <Button
@@ -91,16 +97,16 @@ const SortModal = ({ setIsSortClicked, setDogLists }: Props) => {
             width="100%"
             justify="flex-start"
             handleClick={() => {
-              setSelected(LIST.CHARGE);
+              setSortName(LIST.CHARGE);
               handleGetSortCharge(schoolId, adminId);
             }}
             backcolor={ThemeConfig.white}
             textcolor={
-              selected === LIST.CHARGE
+              sortName === LIST.CHARGE
                 ? ThemeConfig.primaryColor
                 : ThemeConfig.gray_1
             }
-            weight={selected === LIST.CHARGE ? "800" : ""}
+            weight={sortName === LIST.CHARGE ? "800" : ""}
             text={LIST.CHARGE}
           />
         </StyledButtonWrapper>
@@ -110,12 +116,15 @@ const SortModal = ({ setIsSortClicked, setDogLists }: Props) => {
           weight="700"
           text="닫기"
           handleClick={() => {
-            setDogLists((prevInfo) => ({
-              ...prevInfo,
-              data: {
-                ...prevInfo.data,
-                dogs: newDogsList,
-              },
+            setDogLists((prevAdminInfo) => ({
+              ...prevAdminInfo,
+              data: newDogsList.map((dogInfo) => ({
+                dogId: dogInfo.dogId,
+                dogName: dogInfo.dogName,
+                allRounds: dogInfo.allRounds,
+                currentRounds: dogInfo.currentRounds,
+                monthlyTicket: dogInfo.monthlyTicket,
+              })),
             }));
             setIsSortClicked(false);
           }}
