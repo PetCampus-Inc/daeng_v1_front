@@ -15,6 +15,15 @@ export const StyledTextWrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const StyledCardWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 2%;
+  padding-left: 3%;
+  gap: 4%;
+`;
+
 export const StyledBottomWrapper = styled.div`
   width: 100%;
   height: 10%;

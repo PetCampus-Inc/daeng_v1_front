@@ -1,11 +1,22 @@
-import { handleGetAttendDogs, handleGetDogs } from "apis/attendance";
+import {
+  handleGetAttendCareDogs,
+  handleGetAttendDogs,
+  handleGetDogs,
+} from "apis/attendance";
 import { useRecoilState } from "recoil";
-import { attendDogListInfoAtom, dogListInfoAtom } from "store/admin";
+import {
+  attendCareDogListAtom,
+  attendDogListInfoAtom,
+  dogListInfoAtom,
+} from "store/admin";
 
 const useGetAttendance = () => {
   const [dogListInfo, setDogListInfo] = useRecoilState(dogListInfoAtom);
   const [attendDogListInfo, setAttendDogListInfo] = useRecoilState(
     attendDogListInfoAtom
+  );
+  const [attendCareDogs, setAttendCareDogs] = useRecoilState(
+    attendCareDogListAtom
   );
 
   const handleGetAdminInfo = async (schoolId: number) => {
@@ -49,7 +60,31 @@ const useGetAttendance = () => {
     }
   };
 
-  return { handleGetAdminInfo, handleGetAttendDogLists };
+  const handlerGetAttendCareDogs = async (schoolId: number) => {
+    try {
+      const data = await handleGetAttendCareDogs(schoolId);
+      if (data.status === 200) {
+        setAttendCareDogs((prevInfo) => ({
+          ...prevInfo,
+          data: data.data.map((data) => ({
+            attendanceId: data.attendanceId,
+            dogId: data.dogId,
+            dogName: data.dogName,
+            status: data.status,
+            adminName: data.adminName,
+          })),
+        }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    handleGetAdminInfo,
+    handleGetAttendDogLists,
+    handlerGetAttendCareDogs,
+  };
 };
 
 export default useGetAttendance;

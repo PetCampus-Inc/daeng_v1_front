@@ -13,6 +13,11 @@ export interface IAttendDogsInfo {
   status: number;
 }
 
+export interface IAttendCareDogInfo {
+  data: IAttendCareDog[];
+  status: number;
+}
+
 export interface IAdminLoginResponse {
   data: {
     adminId: number;
@@ -39,6 +44,14 @@ export interface IAttendDogLists {
   allRounds: number;
   currentRounds: number;
   monthlyTicket: [];
+}
+
+export interface IAttendCareDog {
+  attendanceId: number;
+  dogId: number;
+  dogName: string;
+  status: string;
+  adminName: string;
 }
 
 export interface IMemberCallInfo {
@@ -73,4 +86,9 @@ export interface IDeleteInfo {
 export interface IAttendInfo {
   schoolId: number;
   selectedDogIds: number[];
+}
+
+export interface IAttendCareInfo {
+  adminId: number;
+  selectedDogId: number[];
 }

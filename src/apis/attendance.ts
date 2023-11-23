@@ -1,5 +1,7 @@
 import customAxios from "libs/CustomAxios";
 import {
+  IAttendCareDogInfo,
+  IAttendCareInfo,
   IAttendDogsInfo,
   IAttendInfo,
   IAttendSearchInfo,
@@ -107,5 +109,24 @@ export const handleGetAttendSearchDogs = async (
 ): Promise<IAttendSearchInfo> => {
   const url: string = `admin/attendance/attend/dog/search?schoolId=${schoolId}&searchText=${searchText}`;
   const { data } = await customAxios.get(url);
+  return data;
+};
+
+export const handleGetAttendCareDogs = async (
+  schoolId: number
+): Promise<IAttendCareDogInfo> => {
+  const url: string = `admin/attendance/attend/dog/care?schoolId=${schoolId}`;
+  const { data } = await customAxios.get(url);
+  return data;
+};
+
+export const handlePostAttendCareDogs = async (
+  req: IAttendCareInfo
+): Promise<IResponse> => {
+  const url: string = `admin/attendance/attend/dog/care`;
+  const { data } = await customAxios.post(url, {
+    adminId: req.adminId,
+    attendanceIdList: req.selectedDogId,
+  });
   return data;
 };

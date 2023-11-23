@@ -3,6 +3,7 @@ import {
   IAttendanceInfo,
   IAdminLoginResponse,
   IAttendDogsInfo,
+  IAttendCareDogInfo,
 } from "types/Attendance.type";
 
 export const dogListInfoAtom = atom<IAttendanceInfo>({
@@ -46,6 +47,22 @@ export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
         allRounds: -1,
         currentRounds: -1,
         monthlyTicket: [],
+      },
+    ],
+    status: 0,
+  },
+});
+
+export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
+  key: "attendCareDogListAtom",
+  default: {
+    data: [
+      {
+        attendanceId: -1,
+        dogId: -1,
+        dogName: "",
+        status: "",
+        adminName: "",
       },
     ],
     status: 0,

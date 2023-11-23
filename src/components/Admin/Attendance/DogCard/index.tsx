@@ -26,8 +26,8 @@ interface Props {
   name?: string;
   dogId: number;
   allRounds?: number;
-  currentRounds: number;
-  monthlyTicket: Array<number>;
+  currentRounds?: number;
+  monthlyTicket?: Array<number>;
   className?: string;
   adminRole?: string;
   attendanceId?: number;
@@ -36,7 +36,7 @@ interface Props {
   setMemberPhone?: Dispatch<SetStateAction<string>>;
   setDogName?: Dispatch<SetStateAction<string>>;
   setIsDeleteModalOpen?: Dispatch<SetStateAction<boolean>>;
-  setTargetDogId: Dispatch<SetStateAction<number>>;
+  setTargetDogId?: Dispatch<SetStateAction<number>>;
   setSeletedDogIds?: Dispatch<SetStateAction<number[]>>;
 }
 
@@ -59,9 +59,8 @@ const DogCard = ({
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket);
-  const monthlyTicketDate = useFormatDate(monthlyTicket);
+  const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket || []);
+  const monthlyTicketDate = useFormatDate(monthlyTicket || []);
 
   const handleCheckAttend = (attendanceId: number) => {
     if (selectedDogIds?.includes(attendanceId)) {
@@ -97,7 +96,7 @@ const DogCard = ({
   };
 
   const handleDeleteDog = (dogId: number) => {
-    setTargetDogId(dogId);
+    setTargetDogId?.(dogId);
     setIsDeleteModalOpen?.(true);
   };
 
@@ -123,7 +122,7 @@ const DogCard = ({
         alt="dog-image"
       />
       <StyledTextWrapper>
-        {className === "MODE" ? (
+        {className === "MODE" || className === "CARE" ? (
           <Text text={name} weight="700" color={ThemeConfig.darkBlack} />
         ) : (
           <>
@@ -193,7 +192,7 @@ const DogCard = ({
             handleCheckAttend(attendanceId || -1);
           }}
         />
-      ) : (
+      ) : className !== "CARE" ? (
         <StyledImage
           src="/images/more-button.png"
           alt="more-button"
@@ -205,7 +204,7 @@ const DogCard = ({
           top="3px"
           onClick={() => setIsOptionsOpen(!isOptionsOpen)}
         />
-      )}
+      ) : null}
       {isOptionsOpen && adminRole === "ROLE_OWNER" && (
         <StyledOptionList isopen={isOptionsOpen.toString()} ref={modalRef}>
           {OPTIONS.owner.map((option, index) => (
