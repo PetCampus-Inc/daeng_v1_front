@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 100%;
   margin-top: 5vh;
   position: relative;
+  position: relative;
 `;
 
 export const StyledHeadWrapper = styled.div`
@@ -15,6 +16,7 @@ export const StyledHeadWrapper = styled.div`
 
 export const StyledMainWrapper = styled.div`
   display: flex;
+  height: 65%;
   height: 65%;
   width: 100%;
   margin-top: 15%;
@@ -37,7 +39,11 @@ export const StyledImage = styled.img<{
   alt: string;
   marginright?: string;
   marginleft?: string;
+  marginright?: string;
+  marginleft?: string;
 }>`
+  margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
+  margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
   margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
   margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
 `;

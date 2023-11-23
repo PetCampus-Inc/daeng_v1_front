@@ -17,6 +17,8 @@ import {
   StyledImage,
   StyledBlur,
   StyledTextWrapper,
+  StyledBlur,
+  StyledTextWrapper,
 } from "./styles";
 import Button from "components/common/Button";
 import Text from "components/common/Text";
@@ -110,6 +112,9 @@ const Attendance = ({ setIsNavHidden }: Props) => {
               text={`${adminName} ${
                 adminRole === "ROLE_OWNER" ? "원장님" : "선생님"
               } 안녕하세요`}
+              text={`${adminName} ${
+                adminRole === "ROLE_OWNER" ? "원장님" : "선생님"
+              } 안녕하세요`}
               size="1.3rem"
               weight="bold"
               height="2rem"
@@ -164,6 +169,9 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           isclicked={isSearchClicked}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          isclicked={isSearchClicked}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           setInputValue={(e: ChangeEvent<HTMLInputElement>) => {
             setSearchText(e.target.value);
           }}
@@ -195,8 +203,18 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           weight="500"
           marginbottom="3%"
           handleClick={() => setIsSortClicked(true)}
+          marginbottom="3%"
+          handleClick={() => setIsSortClicked(true)}
           textcolor={ThemeConfig.gray_2}
           backcolor={ThemeConfig.white}
+        >
+          <StyledImage
+            src="/images/chevron-down.png"
+            alt="chevron-down"
+            marginright="0"
+            marginleft="2%"
+          />
+        </ReverseButton>
         >
           <StyledImage
             src="/images/chevron-down.png"

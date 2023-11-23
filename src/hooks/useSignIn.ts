@@ -5,8 +5,11 @@ import { handleAdminLoginResult } from "apis/admin.api";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { useRecoilState } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
 
 const useSignIn = () => {
+  const [loginInfo, setLoginInfo] = useRecoilState(adminLoginInfoAtom);
   const [loginInfo, setLoginInfo] = useRecoilState(adminLoginInfoAtom);
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
   const [inputId, setInputId] = useState<string>("");

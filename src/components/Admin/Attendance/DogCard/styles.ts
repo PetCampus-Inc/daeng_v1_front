@@ -6,6 +6,7 @@ export const Container = styled.div<{ backcolor?: string }>`
   height: 5rem;
   box-sizing: border-box;
   margin-bottom: 1rem;
+  margin-bottom: 1rem;
   border-radius: 0.7rem;
   box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);
   display: flex;
@@ -44,6 +45,8 @@ export const StyledTextWrapper = styled.div`
 
 export const TextWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   align-items: center;
   justify-content: center;
   margin-top: 0.1rem;
