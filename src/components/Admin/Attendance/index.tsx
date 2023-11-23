@@ -28,12 +28,8 @@ import useGetAttendance from "hooks/useGetAttendance";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { dogListInfoAtom, adminLoginInfoAtom } from "store/admin";
 import useFocus from "hooks/useFocus";
-import {
-  handleDeleteDog,
-  handleGetAttendSearchDogs,
-  handleGetSearchDogs,
-} from "apis/attendance";
-import { IAttendanceInfo, IDogsList } from "types/Attendance.type";
+import { handleDeleteDog } from "apis/attendance";
+import { IAttendanceInfo } from "types/Attendance.type";
 import Mode from "./Mode";
 import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";

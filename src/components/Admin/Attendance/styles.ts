@@ -69,7 +69,6 @@ export const StyledCardWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-
   padding-right: 2%;
   gap: 4%;
 `;

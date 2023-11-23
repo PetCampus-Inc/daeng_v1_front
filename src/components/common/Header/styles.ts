@@ -50,8 +50,8 @@ export const TextWrapper = styled.div`
   height: 100%;
 `;
 
-export const TitleText = styled.div`
-  font-size: 1.3rem;
+export const TitleText = styled.div<{ size?: string }>`
+  font-size: ${(props) => (props.size ? props.size : "1.3rem")};
   padding-top: 1.5%;
   font-weight: bold;
   display: flex;
