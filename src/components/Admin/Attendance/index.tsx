@@ -90,11 +90,13 @@ const Attendance = ({ setIsNavHidden }: Props) => {
     }
   };
 
-  if (isFocusing || isChecking || isSearchClicked) {
-    setIsNavHidden(true);
-  } else {
-    setIsNavHidden(false);
-  }
+  useEffect(() => {
+    if (isFocusing || isChecking || isSearchClicked) {
+      setIsNavHidden(true);
+    } else {
+      setIsNavHidden(false);
+    }
+  }, [isFocusing, isChecking, isSearchClicked]);
 
   useEffect(() => {
     handleGetAdminInfo(schoolId);
