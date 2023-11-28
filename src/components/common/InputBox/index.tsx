@@ -24,11 +24,8 @@ interface Props {
   selectedSearchText?: string;
   type?: string;
   isclicked?: boolean;
-  isclicked?: boolean;
   handleClick?: () => void | Promise<void>;
   onChange?: (e: any) => void | React.ChangeEvent<HTMLInputElement>;
-  onFocus?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
-  onBlur?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
   onFocus?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
   onBlur?: (e: any) => void | React.FocusEvent<HTMLInputElement>;
 }
@@ -47,11 +44,8 @@ const InputBox = ({
   selectedSearchText,
   type,
   isclicked,
-  isclicked,
   handleClick,
   onChange,
-  onFocus,
-  onBlur,
   onFocus,
   onBlur,
 }: Props) => {
@@ -82,8 +76,6 @@ const InputBox = ({
         onChange={onChange ? onChange : setInputValue}
         onFocus={onFocus}
         onBlur={onBlur}
-        onFocus={onFocus}
-        onBlur={onBlur}
         color={color}
         border={border}
         radius={radius}
@@ -94,7 +86,6 @@ const InputBox = ({
             {!isclicked ? (
               <StyledImage src="/images/brown-search.png" alt="search-icon" />
             ) : (
-              <StyledImage src="/images/brown-x-button.png" alt="x-box" />
               <StyledImage src="/images/brown-x-button.png" alt="x-box" />
             )}
           </StyledButtonWrapper>

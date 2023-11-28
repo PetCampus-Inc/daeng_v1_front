@@ -39,8 +39,6 @@ export const StyledImage = styled.img<{
   alt: string;
   marginright?: string;
   marginleft?: string;
-  marginright?: string;
-  marginleft?: string;
 }>`
   margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
   margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};

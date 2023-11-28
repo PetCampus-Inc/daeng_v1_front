@@ -9,7 +9,6 @@ import {
 import {
   Container,
   StyledBlur,
-  StyledBlur,
   StyledImage,
   StyledOptionList,
   StyledTextWrapper,
