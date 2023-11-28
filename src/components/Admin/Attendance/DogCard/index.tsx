@@ -83,7 +83,6 @@ const DogCard = ({
       setSelectedCareDogId?.([...(selectedCareDogId || []), attendanceId]);
     }
   };
-  console.log(selectedCareDogId);
 
   const handleGetCallInfo = async (dogId: number) => {
     try {

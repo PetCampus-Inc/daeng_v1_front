@@ -24,7 +24,7 @@ const AttendCare = () => {
   useEffect(() => {
     handlerGetAttendCareDogs(1); // schoolId 수정필요!!
   }, []);
-  console.log(dogLists);
+
   return (
     <Container>
       <StyledHeadWrapper>
