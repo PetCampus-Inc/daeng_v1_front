@@ -118,9 +118,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
             />
             <Text
               text={
-                isChecking
-                  ? "출석 진행중이에요"
-                  : `${schoolName} 유치원 친구들이에요`
+                isChecking ? "출석 진행중이에요" : `${schoolName} 친구들이에요`
               }
               size="1rem"
               color={ThemeConfig.gray_2}

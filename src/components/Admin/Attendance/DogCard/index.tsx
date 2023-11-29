@@ -263,9 +263,14 @@ const DogCard = ({
         </StyledOptionList>
       )}
       {isOptionsOpen && adminRole === "ROLE_TEACHER" && (
-        <StyledOptionList isopen={isOptionsOpen.toString()} ref={modalRef}>
+        <StyledOptionList
+          isopen={isOptionsOpen.toString()}
+          ref={modalRef}
+          height="6rem"
+          bottom="-3.5rem"
+        >
           {OPTIONS.teacher.map((option, index) => (
-            <StyledButtonWrapper key={index}>
+            <StyledButtonWrapper key={index} height="50%">
               <Button
                 width="100%"
                 height="100%"
