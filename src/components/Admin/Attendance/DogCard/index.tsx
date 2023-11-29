@@ -21,6 +21,7 @@ import Button from "components/common/Button";
 import { handleCallMember, handleSendAlarm } from "apis/attendance";
 import GetExpirationDate from "hooks/useGetExpirationDate";
 import useFormatDate from "hooks/useFormatDate";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   name?: string;
@@ -65,6 +66,7 @@ const DogCard = ({
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket || []);
   const monthlyTicketDate = useFormatDate(monthlyTicket || []);
+  const navigate = useNavigate();
 
   const handleCheckAttend = (attendanceId: number) => {
     if (selectedDogIds?.includes(attendanceId)) {
@@ -136,7 +138,9 @@ const DogCard = ({
           ? () => {
               handleAddAttend(attendanceId || -1);
             }
-          : undefined
+          : () => {
+              navigate("/admin/dogInfo");
+            }
       }
       backcolor={
         selectedCareDogId?.includes(attendanceId || -1)
