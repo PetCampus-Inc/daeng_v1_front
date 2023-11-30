@@ -7,6 +7,8 @@ import {
   InfoWrapper,
   InfoTop,
   InfoIcons,
+  IconWrapper,
+  PayTextWrapper,
 } from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
@@ -42,14 +44,30 @@ const DogInfo = () => {
               <Text text="더보기 >" color={ThemeConfig.gray_1} size="0.9rem" />
             </InfoTop>
             <InfoIcons>
-              <BoyIcon />
-              <Text text="수컷" />
-              <Calendar />
-              <Text text="15개월" />
-              <Scale />
-              <Text text="소형견" />
+              <IconWrapper>
+                <BoyIcon />
+                <Text text="수컷" color={ThemeConfig.gray_1} />
+              </IconWrapper>
+              <IconWrapper>
+                <Calendar />
+                <Text text="15개월" color={ThemeConfig.gray_1} />
+              </IconWrapper>
+              <IconWrapper>
+                <Scale />
+                <Text text="소형견" color={ThemeConfig.gray_1} />
+              </IconWrapper>
             </InfoIcons>
-            <Text text={"8회차 앞으로 2회 남아있어요"} />
+            <PayTextWrapper>
+              <Text
+                text={"8회차"}
+                weight="bold"
+                color={ThemeConfig.primaryColor}
+              />
+              <Text
+                text={" 앞으로 2회 남아있어요"}
+                color={ThemeConfig.primaryColor}
+              />
+            </PayTextWrapper>
           </InfoWrapper>
         </CardWrapper>
       </MainTopWrapper>

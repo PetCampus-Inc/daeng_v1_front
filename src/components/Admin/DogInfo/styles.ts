@@ -57,6 +57,22 @@ export const InfoTop = styled.div`
 
 export const InfoIcons = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-top: 3%;
-  margin-bottom: 3%;
+  margin-bottom: 5%;
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+`;
+
+export const PayTextWrapper = styled.div`
+  width: 95%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.yellow_2};
+  border-radius: 1rem;
 `;
