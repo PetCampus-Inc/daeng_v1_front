@@ -4,6 +4,7 @@ import usePathParams from "hooks/usePathParams";
 import Text from "../Text";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Attendance from "assets/svg/attendance";
+import GrayCheckBoard from "assets/svg/gray-check-board";
 
 interface Props {
   type?: string;
@@ -35,7 +36,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
             />
           </StyledNavBtn>
           <StyledNavBtn to={"/"} type={type}>
-            <StyledImage src="/images/admin-mydog.png" alt="admin-mydog" />
+            {path === "/" ? <GrayCheckBoard /> : <GrayCheckBoard />}
             <Text
               text="내가 맡은 강아지"
               color={

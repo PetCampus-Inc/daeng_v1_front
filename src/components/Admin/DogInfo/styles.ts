@@ -55,4 +55,8 @@ export const InfoTop = styled.div`
   justify-content: space-between;
 `;
 
-export const InfoIcons = styled.div``;
+export const InfoIcons = styled.div`
+  display: flex;
+  margin-top: 3%;
+  margin-bottom: 3%;
+`;

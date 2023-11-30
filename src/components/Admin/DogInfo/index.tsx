@@ -10,6 +10,8 @@ import {
 } from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
+import Calendar from "assets/svg/calendar";
+import Scale from "assets/svg/scale";
 
 const DogInfo = () => {
   return (
@@ -41,6 +43,11 @@ const DogInfo = () => {
             </InfoTop>
             <InfoIcons>
               <BoyIcon />
+              <Text text="수컷" />
+              <Calendar />
+              <Text text="15개월" />
+              <Scale />
+              <Text text="소형견" />
             </InfoIcons>
             <Text text={"8회차 앞으로 2회 남아있어요"} />
           </InfoWrapper>
