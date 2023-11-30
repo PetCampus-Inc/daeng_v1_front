@@ -7,7 +7,7 @@ const DogInfoPage = () => {
     <>
       <Header type="main" />
       <DogInfo />
-      <NavBar type="admin" />
+      <NavBar type="admin" attendance={"/admin/dogInfo"} />
     </>
   );
 };

@@ -22,7 +22,7 @@ export const StyledNavBtn = styled(Link)<{
   font-weight: bold;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
   background-color: ${(props) =>
     props.selected ? props.theme.red_1 : props.theme.white};
