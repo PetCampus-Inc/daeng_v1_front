@@ -1,4 +1,6 @@
+import Calendar from "react-calendar";
 import styled from "styled-components";
+import "react-calendar/dist/Calendar.css";
 
 export const Container = styled.div`
   height: 100vh;
@@ -76,3 +78,17 @@ export const PayTextWrapper = styled.div`
   background-color: ${(props) => props.theme.yellow_2};
   border-radius: 1rem;
 `;
+
+export const StyledCalendarWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .react-calendar {
+    width: 100%;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 5%;
+  }
+`;
+
+export const StyledCalendar = styled(Calendar)``;

@@ -1,4 +1,4 @@
-const Calendar = () => {
+const CalendarIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
       <rect width="20" height="20" fill="#FFF0C8" rx="10" />
@@ -26,4 +26,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default CalendarIcon;

@@ -9,13 +9,21 @@ import {
   InfoIcons,
   IconWrapper,
   PayTextWrapper,
+  StyledCalendarWrapper,
+  StyledCalendar,
 } from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
-import Calendar from "assets/svg/calendar";
+import CalendarIcon from "assets/svg/calendar";
 import Scale from "assets/svg/scale";
+import { useState } from "react";
+
+type ValuePiece = Date | null;
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const DogInfo = () => {
+  const [value, onChange] = useState<Value>(new Date());
+
   return (
     <Container>
       <MainTopWrapper>
@@ -46,15 +54,15 @@ const DogInfo = () => {
             <InfoIcons>
               <IconWrapper>
                 <BoyIcon />
-                <Text text="수컷" color={ThemeConfig.gray_1} />
+                <Text text="수컷" color={ThemeConfig.gray_1} size="0.9rem" />
               </IconWrapper>
               <IconWrapper>
-                <Calendar />
-                <Text text="15개월" color={ThemeConfig.gray_1} />
+                <CalendarIcon />
+                <Text text="15개월" color={ThemeConfig.gray_1} size="0.9rem" />
               </IconWrapper>
               <IconWrapper>
                 <Scale />
-                <Text text="소형견" color={ThemeConfig.gray_1} />
+                <Text text="소형견" color={ThemeConfig.gray_1} size="0.9rem" />
               </IconWrapper>
             </InfoIcons>
             <PayTextWrapper>
@@ -71,6 +79,9 @@ const DogInfo = () => {
           </InfoWrapper>
         </CardWrapper>
       </MainTopWrapper>
+      <StyledCalendarWrapper>
+        <StyledCalendar onChange={onChange} value={value} />
+      </StyledCalendarWrapper>
     </Container>
   );
 };
