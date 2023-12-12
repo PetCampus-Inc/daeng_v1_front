@@ -20,7 +20,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
     <Container display={show}>
       {type === "admin" ? (
         <>
-          <StyledNavBtn to={attendance || "/admin/attendance"} type={type}>
+          <StyledNavBtn to={"/admin/attendance"} type={type}>
             <Attendance />
             <Text
               text="출석부"

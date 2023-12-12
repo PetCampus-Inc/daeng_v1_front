@@ -11,18 +11,22 @@ import {
   PayTextWrapper,
   StyledCalendarWrapper,
   StyledCalendar,
+  StyledDate,
+  StyledToday,
 } from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
 import CalendarIcon from "assets/svg/calendar";
 import Scale from "assets/svg/scale";
 import { useState } from "react";
+import moment from "moment";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const DogInfo = () => {
-  const [value, onChange] = useState<Value>(new Date());
+  const today = new Date();
+  const [value, onChange] = useState<Value>(today);
 
   return (
     <Container>
@@ -80,7 +84,30 @@ const DogInfo = () => {
         </CardWrapper>
       </MainTopWrapper>
       <StyledCalendarWrapper>
-        <StyledCalendar onChange={onChange} value={value} />
+        <StyledCalendar
+          onChange={onChange}
+          value={value}
+          formatDay={(locale, date) => moment(date).format("D")} // 일 제거 숫자만 보이게
+          formatYear={(locale, date) => moment(date).format("YYYY")} // 네비게이션 눌렀을때 숫자 연도만 보이게
+          formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")} // 네비게이션에서 2023. 12 이렇게 보이도록 설정
+          calendarType="gregory" // 일요일 부터 시작
+          showNeighboringMonth={false} // 전달, 다음달 날짜 숨기기
+          next2Label={null} // +1년 & +10년 이동 버튼 숨기기
+          prev2Label={null} // -1년 & -10년 이동 버튼 숨기기
+          minDetail="year" // 10년단위 년도 숨기기
+          tileContent={({ date, view }) => {
+            let html = [];
+            if (
+              view === "month" &&
+              date.getMonth() === today.getMonth() &&
+              date.getDate() === today.getDate()
+            ) {
+              html.push(<StyledToday>오늘</StyledToday>);
+            }
+            return <>{html}</>;
+          }}
+        />
+        <StyledDate>{moment(value as Date).format("MM월 DD일")} </StyledDate>
       </StyledCalendarWrapper>
     </Container>
   );
