@@ -3,11 +3,12 @@ import styled from "styled-components";
 import "react-calendar/dist/Calendar.css";
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 85vh;
   width: 100%;
   margin-top: 5vh;
   padding-left: 4%;
   padding-right: 4%;
+  overflow-y: auto;
 `;
 
 export const MainTopWrapper = styled.div`
@@ -214,4 +215,16 @@ export const StyledToday = styled.div`
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
+`;
+
+export const StyledAlbumWrapper = styled.div`
+  padding-top: 10%;
+`;
+
+export const StyledAlbums = styled.div`
+  padding: 5% 0;
+  height: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

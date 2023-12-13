@@ -13,6 +13,8 @@ import {
   StyledCalendar,
   StyledDate,
   StyledToday,
+  StyledAlbumWrapper,
+  StyledAlbums,
 } from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
@@ -20,6 +22,7 @@ import CalendarIcon from "assets/svg/calendar";
 import Scale from "assets/svg/scale";
 import { useState } from "react";
 import moment from "moment";
+import useGetDogDetail from "hooks/useGetDogDetail";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -27,12 +30,13 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const DogInfo = () => {
   const today = new Date();
   const [value, onChange] = useState<Value>(today);
+  const { dogDetail } = useGetDogDetail();
 
   return (
     <Container>
       <MainTopWrapper>
         <Text
-          text={"뽀뽀의 상세정보"}
+          text={`${`뽀뽀`}의 상세정보`}
           color={ThemeConfig.darkBlack}
           size="1.1rem"
           weight="bold"
@@ -109,6 +113,22 @@ const DogInfo = () => {
         />
         <StyledDate>{moment(value as Date).format("MM월 DD일")} </StyledDate>
       </StyledCalendarWrapper>
+      <StyledAlbumWrapper>
+        <Text
+          text="사진 앨범"
+          color={ThemeConfig.darkBlack}
+          size="1.1rem"
+          weight="bold"
+        />
+        <StyledAlbums>
+          {/* 사진이 있는경우 앨범 없을 경우 텍스트 */}
+          <Text
+            text="앨범에 등록된 사진이 없습니다"
+            color={ThemeConfig.gray_3}
+            size="0.9rem"
+          />
+        </StyledAlbums>
+      </StyledAlbumWrapper>
     </Container>
   );
 };

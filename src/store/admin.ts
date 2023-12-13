@@ -75,6 +75,7 @@ export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
   },
 });
 
-export const attendDogDetail = atom<IDogDetails>({
+export const attendDogDetail = atom<IDogDetails | null>({
   key: "attendDogDetails",
+  default: null,
 });

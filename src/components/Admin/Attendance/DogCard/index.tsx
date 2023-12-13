@@ -22,6 +22,8 @@ import { handleCallMember, handleSendAlarm } from "apis/attendance";
 import GetExpirationDate from "hooks/useGetExpirationDate";
 import useFormatDate from "hooks/useFormatDate";
 import { useNavigate } from "react-router-dom";
+import useGetDogDetail from "hooks/useGetDogDetail";
+import moment from "moment";
 
 interface Props {
   name?: string;
@@ -67,6 +69,8 @@ const DogCard = ({
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket || []);
   const monthlyTicketDate = useFormatDate(monthlyTicket || []);
   const navigate = useNavigate();
+  const { handlerGetDogDetail } = useGetDogDetail();
+  const date = moment(new Date()).format("YYYY-MM-DD");
 
   const handleCheckAttend = (attendanceId: number) => {
     if (selectedDogIds?.includes(attendanceId)) {
@@ -121,6 +125,7 @@ const DogCard = ({
       handleAddAttend(attendanceId || -1);
     }
     if ((e.target as HTMLElement).tagName !== "StyledImage") {
+      handlerGetDogDetail(dogId, date);
       navigate("/admin/dogInfo");
     }
   };

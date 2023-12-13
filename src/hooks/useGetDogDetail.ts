@@ -5,6 +5,7 @@ import { IDogDetails } from "types/Attendance.type";
 
 const useGetDogDetail = () => {
   const [dogDetail, setDogDetail] = useRecoilState(attendDogDetail);
+
   const handlerGetDogDetail = async (dogId: number, date: string) => {
     try {
       const data = await handleGetDogDetails(dogId, date);
@@ -26,7 +27,7 @@ const useGetDogDetail = () => {
       console.log(error);
     }
   };
-  return handlerGetDogDetail;
+  return { handlerGetDogDetail, dogDetail };
 };
 
 export default useGetDogDetail;
