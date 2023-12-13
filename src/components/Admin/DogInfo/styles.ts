@@ -26,6 +26,7 @@ export const CardWrapper = styled.div`
   padding-right: 6%;
   display: flex;
   align-items: center;
+  box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);
 `;
 
 export const StyledImage = styled.img<{
@@ -89,6 +90,7 @@ export const StyledCalendarWrapper = styled.div`
     width: 100%;
     border: none;
     border-radius: 0.5rem;
+    box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);
     padding: 3% 5%;
     background-color: white;
   }
@@ -213,6 +215,17 @@ export const StyledToday = styled.div`
   font-weight: 600;
   position: absolute;
   top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+export const StyledDot = styled.div`
+  background-color: ${(props) => props.theme.br_2};
+  border-radius: 50%;
+  width: 0.3rem;
+  height: 0.3rem;
+  position: absolute;
+  top: 60%;
   left: 50%;
   transform: translateX(-50%);
 `;

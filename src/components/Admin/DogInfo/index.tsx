@@ -15,6 +15,7 @@ import {
   StyledToday,
   StyledAlbumWrapper,
   StyledAlbums,
+  StyledDot,
 } from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
@@ -31,6 +32,7 @@ const DogInfo = () => {
   const today = new Date();
   const [value, onChange] = useState<Value>(today);
   const { dogDetail } = useGetDogDetail();
+  const attendDay = ["2023-12-03"]; // 삭제 예정 코드
 
   return (
     <Container>
@@ -107,6 +109,11 @@ const DogInfo = () => {
               date.getDate() === today.getDate()
             ) {
               html.push(<StyledToday>오늘</StyledToday>);
+            }
+            if (
+              attendDay.find((x) => x === moment(date).format("YYYY-MM-DD"))
+            ) {
+              html.push(<StyledDot />);
             }
             return <>{html}</>;
           }}
