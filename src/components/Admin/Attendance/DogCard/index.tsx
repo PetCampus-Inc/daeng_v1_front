@@ -21,6 +21,9 @@ import Button from "components/common/Button";
 import { handleCallMember, handleSendAlarm } from "apis/attendance";
 import GetExpirationDate from "hooks/useGetExpirationDate";
 import useFormatDate from "hooks/useFormatDate";
+import { useNavigate } from "react-router-dom";
+import useGetDogDetail from "hooks/useGetDogDetail";
+import moment from "moment";
 
 interface Props {
   name?: string;
@@ -65,6 +68,9 @@ const DogCard = ({
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthlyTicket || []);
   const monthlyTicketDate = useFormatDate(monthlyTicket || []);
+  const navigate = useNavigate();
+  const { handlerGetDogDetail } = useGetDogDetail();
+  const date = moment(new Date()).format("YYYY-MM-DD");
 
   const handleCheckAttend = (attendanceId: number) => {
     if (selectedDogIds?.includes(attendanceId)) {
@@ -114,6 +120,26 @@ const DogCard = ({
     setIsDeleteModalOpen?.(true);
   };
 
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (className === "CARE") {
+      handleAddAttend(attendanceId || -1);
+    }
+    if ((e.target as HTMLElement).tagName !== "StyledImage") {
+      handlerGetDogDetail(dogId, date);
+      navigate("/admin/dogInfo");
+    }
+  };
+
+  const handleOptionClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    option: string
+  ) => {
+    e.stopPropagation();
+    option === "견주에게 연락하기" && handleGetCallInfo(dogId);
+    option === "회원권 알림 전송" && handlerSendAlarm(dogId);
+    option === "회원 삭제" && handleDeleteDog(dogId);
+  };
+
   useEffect(() => {
     const handler = (event: MouseEvent) => {
       if (
@@ -131,13 +157,7 @@ const DogCard = ({
 
   return (
     <Container
-      onClick={
-        className === "CARE"
-          ? () => {
-              handleAddAttend(attendanceId || -1);
-            }
-          : undefined
-      }
+      onClick={handleCardClick}
       backcolor={
         selectedCareDogId?.includes(attendanceId || -1)
           ? `${ThemeConfig.br_4}`
@@ -181,7 +201,7 @@ const DogCard = ({
                     ? "/images/gray-calendar.png"
                     : "/images/calendar.png"
                 }
-                alt="more-button"
+                alt="calendar-icon"
                 width="1.1rem"
                 height="1.1rem"
                 marginright="0.1rem"
@@ -229,7 +249,10 @@ const DogCard = ({
           position="absolute"
           right="6px"
           top="3px"
-          onClick={() => setIsOptionsOpen(!isOptionsOpen)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOptionsOpen(!isOptionsOpen);
+          }}
         />
       ) : null}
       {isOptionsOpen && adminRole === "ROLE_OWNER" && (
@@ -244,10 +267,8 @@ const DogCard = ({
                 justify="flex-start"
                 backcolor={ThemeConfig.white}
                 textcolor={ThemeConfig.gray_2}
-                handleClick={() => {
-                  option === "견주에게 연락하기" && handleGetCallInfo(dogId);
-                  option === "회원권 알림 전송" && handlerSendAlarm(dogId);
-                  option === "회원 삭제" && handleDeleteDog(dogId);
+                handleClick={(e) => {
+                  handleOptionClick(e, option);
                 }}
               >
                 <StyledImage
@@ -263,9 +284,14 @@ const DogCard = ({
         </StyledOptionList>
       )}
       {isOptionsOpen && adminRole === "ROLE_TEACHER" && (
-        <StyledOptionList isopen={isOptionsOpen.toString()} ref={modalRef}>
+        <StyledOptionList
+          isopen={isOptionsOpen.toString()}
+          ref={modalRef}
+          height="6rem"
+          bottom="-3.5rem"
+        >
           {OPTIONS.teacher.map((option, index) => (
-            <StyledButtonWrapper key={index}>
+            <StyledButtonWrapper key={index} height="50%">
               <Button
                 width="100%"
                 height="100%"
@@ -274,9 +300,8 @@ const DogCard = ({
                 justify="flex-start"
                 backcolor={ThemeConfig.white}
                 textcolor={ThemeConfig.gray_2}
-                handleClick={() => {
-                  option === "견주에게 연락하기" && handleGetCallInfo(dogId);
-                  option === "회원권 알림 전송" && handlerSendAlarm(dogId);
+                handleClick={(e) => {
+                  handleOptionClick(e, option);
                 }}
               >
                 <StyledImage

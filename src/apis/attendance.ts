@@ -7,6 +7,7 @@ import {
   IAttendSearchInfo,
   IAttendanceInfo,
   IDeleteInfo,
+  IDogDetails,
   IMemberCallInfo,
 } from "types/Attendance.type";
 import { IResponse } from "types/Response.type";
@@ -128,5 +129,14 @@ export const handlePostAttendCareDogs = async (
     adminId: req.adminId,
     attendanceIdList: req.selectedDogId,
   });
+  return data;
+};
+
+export const handleGetDogDetails = async (
+  dogId: number,
+  date: string
+): Promise<IDogDetails> => {
+  const url: string = `admin/attendance/detail?dogId=${dogId}&date=${date}`;
+  const { data } = await customAxios.get(url);
   return data;
 };

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ThemeConfig } from "styles/ThemeConfig";
 
 export const Container = styled.div<{ backcolor?: string }>`
   width: 47.5%;
@@ -64,7 +63,11 @@ export const StyledBlur = styled.div<{ display: string }>`
   display: ${(props) => props.display};
 `;
 
-export const StyledOptionList = styled.div<{ isopen: string }>`
+export const StyledOptionList = styled.div<{
+  isopen: string;
+  height?: string;
+  bottom?: string;
+}>`
   display: ${({ isopen }) => (isopen ? "block" : "none")};
   position: absolute;
   background-color: white;
@@ -72,16 +75,16 @@ export const StyledOptionList = styled.div<{ isopen: string }>`
   box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.13);
   border-radius: 0.4rem;
   width: 105%;
-  height: 8rem;
+  height: ${(props) => (props.height ? props.height : "8rem")};
   overflow: hidden;
   left: 0;
-  bottom: -5.5rem;
+  bottom: ${(props) => (props.bottom ? props.bottom : "-5.5rem")};
   z-index: 9999;
 `;
 
-export const StyledButtonWrapper = styled.div`
+export const StyledButtonWrapper = styled.div<{ height?: string }>`
   padding-left: 0.8rem;
   border-bottom: 1px solid ${(props) => props.theme.gray_4};
   width: 100%;
-  height: 34%;
+  height: ${(props) => (props.height ? props.height : "34%")};
 `;

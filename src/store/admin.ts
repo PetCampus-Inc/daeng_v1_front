@@ -4,7 +4,11 @@ import {
   IAdminLoginResponse,
   IAttendDogsInfo,
   IAttendCareDogInfo,
+  IDogDetails,
 } from "types/Attendance.type";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const dogListInfoAtom = atom<IAttendanceInfo>({
   key: "dogListInfoAtom",
@@ -34,6 +38,7 @@ export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
     },
     status: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
@@ -51,6 +56,7 @@ export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
     ],
     status: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
@@ -67,4 +73,9 @@ export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
     ],
     status: 0,
   },
+});
+
+export const attendDogDetail = atom<IDogDetails | null>({
+  key: "attendDogDetails",
+  default: null,
 });
