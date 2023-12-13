@@ -92,3 +92,15 @@ export interface IAttendCareInfo {
   adminId: number;
   selectedDogId: number[];
 }
+
+export interface IDogDetails {
+  dogId: number;
+  dogName: string;
+  size: string;
+  gender: string;
+  allRounds: number;
+  currentRounds: number;
+  monthlyTicket: [];
+  dogAttendances: [];
+  status: number;
+}

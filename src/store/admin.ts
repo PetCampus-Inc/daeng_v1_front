@@ -4,6 +4,7 @@ import {
   IAdminLoginResponse,
   IAttendDogsInfo,
   IAttendCareDogInfo,
+  IDogDetails,
 } from "types/Attendance.type";
 import { recoilPersist } from "recoil-persist";
 
@@ -72,4 +73,8 @@ export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
     ],
     status: 0,
   },
+});
+
+export const attendDogDetail = atom<IDogDetails>({
+  key: "attendDogDetails",
 });

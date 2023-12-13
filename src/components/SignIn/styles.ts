@@ -55,7 +55,7 @@ export const StyledBottomWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const StyledInputBoxWrapper = styled.div`
+export const StyledInputBoxWrapper = styled.form`
   height: 65%;
   display: flex;
   flex-direction: column;

@@ -13,7 +13,7 @@ export const StyledTextWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const StyledMainText = styled.div`
+export const StyledMainText = styled.label`
   font-size: 1rem;
   font-weight: 400;
   display: flex;
