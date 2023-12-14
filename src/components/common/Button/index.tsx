@@ -7,7 +7,9 @@ interface Props {
   text?: string;
   textcolor?: string;
   backcolor?: string;
-  handleClick?: () => void | Promise<void>;
+  handleClick?: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void | Promise<void>;
   border?: string;
   radius?: string;
   weight?: string;

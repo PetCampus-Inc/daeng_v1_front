@@ -39,6 +39,10 @@ const router = createBrowserRouter([
         path: "attendCare",
         element: <Pages.AttendCarePage />,
       },
+      {
+        path: "dogInfo",
+        element: <Pages.DogInfoPage />,
+      },
     ],
   },
 ]);

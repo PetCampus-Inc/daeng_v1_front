@@ -5,7 +5,6 @@ export const Container = styled.div`
   width: 100%;
   margin-top: 5vh;
   position: relative;
-  position: relative;
 `;
 
 export const StyledHeadWrapper = styled.div`
