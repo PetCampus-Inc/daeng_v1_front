@@ -184,7 +184,7 @@ export const StyledDate = styled.div`
   top: 6%;
   background-color: ${(props) => props.theme.primary_3};
   color: ${(props) => props.theme.yellow_2};
-  width: 18%;
+  width: 15%;
   min-width: fit-content;
   height: 1.5rem;
   text-align: center;

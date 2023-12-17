@@ -30,9 +30,22 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const DogInfo = () => {
   const today = new Date();
-  const [value, onChange] = useState<Value>(today);
+  const [date, setDate] = useState<Value>(today);
+  const [activeStartDate, setActiveStartDate] = useState<Date | null>(
+    new Date()
+  );
   const { dogDetail } = useGetDogDetail();
-  const attendDay = ["2023-12-03"]; // 삭제 예정 코드
+  const attendDay = ["2023-12-03", "2023-12-13"]; // 삭제 예정 코드
+
+  const handleDateChange = (newDate: Value) => {
+    setDate(newDate);
+  };
+
+  const handleTodayClick = () => {
+    const today = new Date();
+    setActiveStartDate(today);
+    setDate(today);
+  };
 
   return (
     <Container>
@@ -91,8 +104,14 @@ const DogInfo = () => {
       </MainTopWrapper>
       <StyledCalendarWrapper>
         <StyledCalendar
-          onChange={onChange}
-          value={value}
+          value={date}
+          onChange={handleDateChange}
+          activeStartDate={
+            activeStartDate === null ? undefined : activeStartDate
+          }
+          onActiveStartDateChange={({ activeStartDate }) =>
+            setActiveStartDate(activeStartDate)
+          }
           formatDay={(locale, date) => moment(date).format("D")}
           formatYear={(locale, date) => moment(date).format("YYYY")}
           formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")}
@@ -108,17 +127,17 @@ const DogInfo = () => {
               date.getMonth() === today.getMonth() &&
               date.getDate() === today.getDate()
             ) {
-              html.push(<StyledToday>오늘</StyledToday>);
+              html.push(<StyledToday key={"today"}>오늘</StyledToday>);
             }
             if (
               attendDay.find((x) => x === moment(date).format("YYYY-MM-DD"))
             ) {
-              html.push(<StyledDot />);
+              html.push(<StyledDot key={moment(date).format("YYYY-MM-DD")} />);
             }
             return <>{html}</>;
           }}
         />
-        <StyledDate>{moment(value as Date).format("MM월 DD일")} </StyledDate>
+        <StyledDate onClick={handleTodayClick}>오늘</StyledDate>
       </StyledCalendarWrapper>
       <StyledAlbumWrapper>
         <Text
