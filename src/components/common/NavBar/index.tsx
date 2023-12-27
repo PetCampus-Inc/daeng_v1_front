@@ -5,6 +5,8 @@ import Text from "../Text";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Attendance from "assets/svg/attendance";
 import GrayCheckBoard from "assets/svg/gray-check-board";
+import School from "assets/svg/school";
+import MyPageDog from "assets/svg/my-page";
 
 interface Props {
   type?: string;
@@ -38,7 +40,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
           <StyledNavBtn to={"/"} type={type}>
             {path === "/" ? <GrayCheckBoard /> : <GrayCheckBoard />}
             <Text
-              text="내가 맡은 강아지"
+              text="강아지 관리"
               color={
                 path === "/" ? ThemeConfig.primaryColor : ThemeConfig.gray_3
               }
@@ -46,7 +48,17 @@ const Navbar = ({ type, show, attendance }: Props) => {
             />
           </StyledNavBtn>
           <StyledNavBtn to={"/"} type={type}>
-            <StyledImage src="/images/admin-mypage.png" alt="admin-mypage" />
+            <School />
+            <Text
+              text="유치원 운영"
+              color={
+                path === "/" ? ThemeConfig.primaryColor : ThemeConfig.gray_3
+              }
+              size="0.9rem"
+            />
+          </StyledNavBtn>
+          <StyledNavBtn to={"/"} type={type}>
+            <MyPageDog />
             <Text
               text="마이페이지"
               color={
