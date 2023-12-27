@@ -7,6 +7,7 @@ import Attendance from "assets/svg/attendance";
 import GrayCheckBoard from "assets/svg/gray-check-board";
 import School from "assets/svg/school";
 import MyPageDog from "assets/svg/my-page";
+import GrayAttendance from "assets/svg/gray-attendance";
 
 interface Props {
   type?: string;
@@ -23,7 +24,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
       {type === "admin" ? (
         <>
           <StyledNavBtn to={"/admin/attendance"} type={type}>
-            <Attendance />
+            {path === "/admin/attendance" ? <Attendance /> : <GrayAttendance />}
             <Text
               text="출석부"
               color={
