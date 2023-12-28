@@ -43,6 +43,10 @@ const router = createBrowserRouter([
         path: "dogInfo",
         element: <Pages.DogInfoPage />,
       },
+      {
+        path: "schoolManage",
+        element: <Pages.SchoolManagePage />,
+      },
     ],
   },
 ]);

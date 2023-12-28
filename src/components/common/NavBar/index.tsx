@@ -24,7 +24,11 @@ const Navbar = ({ type, show, attendance }: Props) => {
       {type === "admin" ? (
         <>
           <StyledNavBtn to={"/admin/attendance"} type={type}>
-            {path === "/admin/attendance" ? <Attendance /> : <GrayAttendance />}
+            {path === "/admin/attendance" || "admin/dogInfo" ? (
+              <Attendance />
+            ) : (
+              <GrayAttendance />
+            )}
             <Text
               text="출석부"
               color={

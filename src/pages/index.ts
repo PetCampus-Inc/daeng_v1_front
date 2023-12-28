@@ -5,3 +5,4 @@ export { default as SignUpPage } from "./SignUpPage";
 export { default as AttendancePage } from "./AttendancePage";
 export { default as AttendCarePage } from "./AttendCarePage";
 export { default as DogInfoPage } from "./DogInfoPage";
+export { default as SchoolManagePage } from "./SchoolManagePage";
