@@ -79,4 +79,8 @@ export const StyledSelectRoleWrapper = styled.div`
 
 export const StyledLink = styled(Link)`
   color: ${(props) => props.theme.gray_2};
+  font-weight: 600;
+  &:visited {
+    color: ${(props) => props.theme.gray_2};
+  }
 `;

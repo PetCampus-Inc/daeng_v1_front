@@ -52,7 +52,6 @@ const useSignUp = () => {
       const data = await handleCheckId(userId);
       if (data === 200) {
         setConfirmedId(true);
-        console.log("available ID");
       } else {
         setConfirmedId(false);
       }
@@ -70,10 +69,8 @@ const useSignUp = () => {
       );
       if (data === "01") {
         setConfirmedSchoolNum(true);
-        console.log("available School Number", data);
       } else {
         setConfirmedSchoolNum(false);
-        console.log("not available School Number", data);
       }
     } catch (error) {
       console.log(error);
@@ -127,7 +124,7 @@ const useSignUp = () => {
     try {
       const data = await handleTeacherSignUpCancel(submittedAdminId);
       if (data.status === 200) {
-        // 요청 이미 보낸걸 어케 지우지..
+        // 요청 받은 내용 취소처리 수정필요
       }
     } catch (error) {
       console.log(error);
@@ -142,7 +139,7 @@ const useSignUp = () => {
         submittedSchoolId,
       });
       if (data.status === 200) {
-        // 승인되면 선생님 로그인 가능..
+        // 승인되면 선생님 로그인 가능 처리
       }
     } catch (error) {
       console.log(error);
@@ -154,7 +151,7 @@ const useSignUp = () => {
     try {
       const data = await handleTeacherDeny(submittedAdminId);
       if (data.status === 200) {
-        // 승인 거절 선생님 로그인 불가..
+        // 승인 거절 선생님 로그인 불가 처리
       }
     } catch (error) {
       console.log(error);

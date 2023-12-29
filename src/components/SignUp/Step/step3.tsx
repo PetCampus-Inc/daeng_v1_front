@@ -155,7 +155,7 @@ const Step3 = ({
           }
           textcolor={
             !isIdValid || !isPwValid || !checkUserId
-              ? ThemeConfig.gray_3
+              ? ThemeConfig.gray_2
               : ThemeConfig.white
           }
         />

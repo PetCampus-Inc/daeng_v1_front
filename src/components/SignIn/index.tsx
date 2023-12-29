@@ -20,6 +20,7 @@ import DogOwner from "./DogOwner";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 
+// **소셜 로그인 구현 필요**
 const SignIn = () => {
   const {
     currentMainStep,
@@ -88,8 +89,8 @@ const SignIn = () => {
                 textcolor={ThemeConfig.black}
                 marginbottom="3%"
                 handleClick={() => {
-                  //setCurrentMainStep(currentMainStep + 2);
-                  handlerLogin();
+                  setCurrentMainStep(currentMainStep + 2);
+                  // handlerLogin();
                 }}
               >
                 <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
@@ -122,13 +123,6 @@ const SignIn = () => {
               >
                 <StyledImage src="images/apple-logo.png" alt="apple-logo" />
               </Button>
-              <Button
-                width="100%"
-                height="10%"
-                text="서비스 체험하기"
-                backcolor={ThemeConfig.white}
-                textcolor={ThemeConfig.gray_1}
-              />
             </ButtonWrapper>
           )}
 
@@ -199,7 +193,7 @@ const SignIn = () => {
                     inputId && inputPw ? undefined : ThemeConfig.gray_5
                   }
                   textcolor={
-                    inputId && inputPw ? undefined : ThemeConfig.gray_3
+                    inputId && inputPw ? undefined : ThemeConfig.gray_2
                   }
                 />
               </>

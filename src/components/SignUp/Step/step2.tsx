@@ -21,6 +21,7 @@ interface Props {
   className: string;
 }
 
+// ** 견주 회원가입 승인신청 승인요청 취소, 선생님 승인요청 api 추가수정 필요**
 const Step2 = ({
   currentMainStep,
   setCurrentMainStep,
@@ -118,7 +119,7 @@ const Step2 = ({
             textcolor={
               isNameValid && isPhoneValid
                 ? ThemeConfig.white
-                : ThemeConfig.gray_3
+                : ThemeConfig.gray_2
             }
           />
         ) : (
@@ -129,7 +130,10 @@ const Step2 = ({
             weight="bold"
             size="1.1rem"
             handleClick={() => {
-              if (isNameValid && isPhoneValid) {
+              if (className !== DOGOWNER && isNameValid && isPhoneValid) {
+                setCurrentStep(currentStep + 1);
+              }
+              if (className === DOGOWNER && isNameValid) {
                 setCurrentStep(currentStep + 1);
               }
             }}
@@ -141,7 +145,7 @@ const Step2 = ({
             textcolor={
               isNameValid && userName !== ""
                 ? ThemeConfig.white
-                : ThemeConfig.gray_3
+                : ThemeConfig.gray_2
             }
           />
         )}
