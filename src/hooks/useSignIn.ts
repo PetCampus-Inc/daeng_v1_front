@@ -48,13 +48,10 @@ const useSignIn = () => {
         navigate("/admin/attendance");
       }
     } catch (error: any) {
-      console.log(error);
-      error.response.data.message === "해당 ID를 찾을 수 없습니다"
-        ? setIsIdConfirmed(false)
-        : setIsIdConfirmed(true);
-      error.response.data.message === "비밀번호가 일치하지 않습니다"
-        ? setIsPwConfirmed(false)
-        : setIsPwConfirmed(true);
+      if (error.status === 400) {
+        setIsIdConfirmed(false);
+        setIsPwConfirmed(false);
+      }
     }
   };
 

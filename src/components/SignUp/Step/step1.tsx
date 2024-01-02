@@ -78,6 +78,7 @@ const Step1 = ({
           <InputBox
             height="100%"
             width="100%"
+            color={ThemeConfig.gray_1}
             placeholdText="검색어를 입력해 주세요"
             type="search"
             inputValue={searchText}
@@ -115,7 +116,12 @@ const Step1 = ({
                     setSchoolId(item.schoolId);
                   }}
                 >
-                  <Text text={item.name} />
+                  <Text text={item.name} color={ThemeConfig.gray_1} />
+                  <Text
+                    text={item.address}
+                    size="0.9rem"
+                    color={ThemeConfig.gray_3}
+                  />
                 </StyledSearchResult>
               );
             })}
@@ -139,7 +145,7 @@ const Step1 = ({
                 : ThemeConfig.primaryColor
             }
             textcolor={
-              selectedSearchText === "" ? ThemeConfig.gray_3 : ThemeConfig.white
+              selectedSearchText === "" ? ThemeConfig.gray_2 : ThemeConfig.white
             }
           />
         </StyledBottomWrapper>

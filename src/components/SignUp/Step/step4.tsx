@@ -217,7 +217,7 @@ const Step4 = ({
                 !isSchoolPhoneValid ||
                 !confirmedSchoolNum ||
                 schoolAddress === ""
-                  ? ThemeConfig.gray_3
+                  ? ThemeConfig.gray_2
                   : ThemeConfig.white
               }
             />

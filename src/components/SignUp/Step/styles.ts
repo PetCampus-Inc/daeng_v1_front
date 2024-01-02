@@ -63,13 +63,13 @@ export const StyledSearchResult = styled.div<{
   radius_bottom: string;
 }>`
   width: 100%;
-  height: 15%;
+  height: 19%;
   padding-left: 5%;
   border: 1px solid ${(props) => props.theme.gray_3};
   border-top: ${(props) => (props.radius_top !== "first" ? "0px" : undefined)};
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   border-top-right-radius: ${(props) =>
     props.radius_top === "first" ? "8px" : undefined};
   border-top-left-radius: ${(props) =>

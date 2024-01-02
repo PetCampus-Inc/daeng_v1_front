@@ -41,6 +41,7 @@ const Mode = ({
       const data = await handlePostAttend({ schoolId, selectedDogIds });
       if (data.status === 200) {
         setIsChecking(false);
+        setSeletedDogIds([]);
       }
     } catch (error) {
       console.log(error);
