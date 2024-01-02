@@ -45,6 +45,7 @@ interface Props {
   setSelectedCareDogId?: Dispatch<SetStateAction<number[]>>;
 }
 
+// **출석 완료된 강아지들 표시 수정 필요**
 const DogCard = ({
   name,
   dogId,
@@ -90,6 +91,7 @@ const DogCard = ({
     }
   };
 
+  //////// 전화 걸 수 있는 기능 추가 필요함!
   const handleGetCallInfo = async (dogId: number) => {
     try {
       const data = await handleCallMember(dogId);
@@ -157,7 +159,7 @@ const DogCard = ({
 
   return (
     <Container
-      onClick={handleCardClick}
+      onClick={className === "MODE" ? undefined : handleCardClick}
       backcolor={
         selectedCareDogId?.includes(attendanceId || -1)
           ? `${ThemeConfig.br_4}`
