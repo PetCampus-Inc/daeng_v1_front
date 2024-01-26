@@ -1,5 +1,5 @@
 //아이디
-export const ID_REGEX = /^(?=.*[a-z])(?=.*\d)[a-z\d]{6,20}$/;
+export const ID_REGEX = /^(?=.*[a-z])(?=.*\d)[a-z\d]{6,12}$/;
 
 // 비밀번호
 export const PW_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d|[^a-zA-Z\d]).{8,20}$/;

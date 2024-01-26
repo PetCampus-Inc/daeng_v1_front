@@ -67,11 +67,11 @@ const SignIn = () => {
           <TextWrapper height="10%">
             {currentMainStep === 0 ? (
               <TextWrapper direction="row">
-                <Keyword>반려견</Keyword>
+                <Keyword>우리 강아지</Keyword>
                 <StyledTitleText>의 유치원</StyledTitleText>
               </TextWrapper>
             ) : (
-              <StyledTitleText>똑독 관리자 시작하기</StyledTitleText>
+              <StyledTitleText>똑독 관리자로 시작하기</StyledTitleText>
             )}
 
             <StyledTitleText>

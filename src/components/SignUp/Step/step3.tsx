@@ -94,8 +94,8 @@ const Step3 = ({
           errorText={
             checkUserId
               ? confirmedId
-                ? "사용 가능한 ID 입니다."
-                : "사용 불가능한 ID 입니다."
+                ? "사용 가능한 ID입니다."
+                : "이미 사용중인 ID입니다."
               : ""
           }
         />
@@ -132,11 +132,24 @@ const Step3 = ({
           }
         />
       </InputBoxWrapper>
-      <StyledBottomWrapper>
+      <StyledBottomWrapper height={className === TEACHER ? "13%" : "7%"}>
+        {className === TEACHER && (
+          <>
+            <Text
+              text="가입 신청 시 승인 완료 전 까지 수정이 어려워요"
+              color={ThemeConfig.gray_3}
+            />
+            <Text
+              text="잘못 입력한 내용이 없는지 확인해주세요"
+              color={ThemeConfig.gray_3}
+            />
+          </>
+        )}
         <Button
           width="90%"
           height="70%"
-          text={className === TEACHER ? "가입하기" : "다음"}
+          margintop="5%"
+          text={className === TEACHER ? "가입" : "다음"}
           weight="bold"
           size="1.1rem"
           handleClick={() => {

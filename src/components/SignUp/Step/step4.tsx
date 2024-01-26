@@ -194,7 +194,7 @@ const Step4 = ({
             <Button
               width="90%"
               height="70%"
-              text={"등록하기"}
+              text={"등록"}
               weight="bold"
               size="1.1rem"
               handleClick={() => {
