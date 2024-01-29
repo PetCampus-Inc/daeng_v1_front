@@ -15,7 +15,8 @@ export const ThemeConfig: IThemeConfig = {
   red_1: "#DD5435",
   yellow_1: "#FFD12D",
   yellow_2: "#FFF0C8",
-  yellow_3: "#FFF0B9",
+  yellow_3: "#FFF7E1",
+
   gray_1: "#525252",
   gray_2: "#858585",
   gray_3: "#B5B5B5",

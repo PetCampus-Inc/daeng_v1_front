@@ -28,6 +28,7 @@ const SingUp = () => {
         <Container padding_top="20%">
           <StyledSelectRoleWrapper>
             <RoleBox
+              Role={0}
               selected={selectedRole === 0 ? true : false}
               mainText={RoleConstants[0].role}
               subText={RoleConstants[0].description}
@@ -36,6 +37,7 @@ const SingUp = () => {
               }}
             />
             <RoleBox
+              Role={1}
               selected={selectedRole === 1 ? true : false}
               mainText={RoleConstants[1].role}
               subText={RoleConstants[1].description}
