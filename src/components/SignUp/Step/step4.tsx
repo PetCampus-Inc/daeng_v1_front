@@ -1,10 +1,5 @@
 import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
-import {
-  Container,
-  InputBoxWrapper,
-  StyledBottomWrapper,
-  TextWrapper,
-} from "./styles";
+import { Container, InputBoxWrapper, StyledBottomWrapper, TextWrapper } from "./styles";
 import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
@@ -12,6 +7,8 @@ import Button from "components/common/Button";
 import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Postcode from "components/SignUp/Postcode";
+import useSignUp from "hooks/useSignUp";
+import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 
 interface Props {
   currentStep: number;
@@ -27,7 +24,7 @@ interface Props {
   handlerCheckSchoolNum: () => void | Promise<void>;
   confirmedSchoolNum: boolean;
   setConfirmedSchoolNum: Dispatch<SetStateAction<boolean>>;
-  handlerOwnerSignup: () => void | Promise<void>;
+  // handlerOwnerSignup: () => void | Promise<void>;
   userName: string;
 }
 
@@ -45,13 +42,16 @@ const Step4 = ({
   setSchoolAddress,
   handlerCheckSchoolNum,
   confirmedSchoolNum,
-  setConfirmedSchoolNum,
-  handlerOwnerSignup,
+  setConfirmedSchoolNum
+  // handlerOwnerSignup
 }: Props) => {
   const [isSchoolPhoneValid, setIsSchoolPhoneValid] = useState(false);
-  const [isRegistrationValid, setIsRegistrationValid] = useState(false);
+  const [, setIsRegistrationValid] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isRegisteredPopupOpen, setIsRegisteredPopupOpen] = useState(false);
+
+  const { handlerOwnerSignup } = useSignUp();
 
   const handleValidCheck = () => {
     setIsClicked(true);
@@ -66,19 +66,13 @@ const Step4 = ({
       if (value.length > 12) {
         value = value.substring(0, 12);
       }
-      setSchoolPhone(
-        value
-          .replace(/[^0-9]/g, "")
-          .replace(/^(\d{2})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
-      );
+      setSchoolPhone(value.replace(/[^0-9]/g, "").replace(/^(\d{2})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
     } else {
       if (value.length > 13) {
         value = value.substring(0, 13);
       }
       setSchoolPhone(
-        value
-          .replace(/[^0-9]/g, "")
-          .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
+        value.replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
       );
     }
   };
@@ -93,7 +87,7 @@ const Step4 = ({
       value
         .replace(/[^0-9]/g, "")
         .replace(/^(\d{0,3})(\d{0,2})(\d{0,5})$/g, "$1-$2-$3")
-        .replace(/(\-{1,2})$/g, "")
+        .replace(/(-{1,2})$/g, "")
     );
   };
 
@@ -111,15 +105,8 @@ const Step4 = ({
     <>
       {isPopupOpen && (
         <Container padding_top="25%">
-          <Header
-            type="text"
-            text="주소 검색"
-            handleClick={() => setIsPopupOpen(false)}
-          />
-          <Postcode
-            schoolAddress={schoolAddress}
-            setSchoolAddress={setSchoolAddress}
-          />
+          <Header type="text" text="주소 검색" handleClick={() => setIsPopupOpen(false)} />
+          <Postcode schoolAddress={schoolAddress} setSchoolAddress={setSchoolAddress} />
         </Container>
       )}
       {!isPopupOpen && (
@@ -132,18 +119,8 @@ const Step4 = ({
           />
 
           <TextWrapper margin_bottom="8%">
-            <Text
-              text={`${userName} 원장님`}
-              size="1.4rem"
-              weight="bold"
-              height="2rem"
-            />
-            <Text
-              text={"유치원 정보를 입력해 주세요"}
-              size="1.4rem"
-              weight="bold"
-              height="2rem"
-            />
+            <Text text={`${userName} 원장님`} size="1.4rem" weight="bold" height="2rem" />
+            <Text text={"유치원 정보를 입력해 주세요"} size="1.4rem" weight="bold" height="2rem" />
           </TextWrapper>
           <InputBoxWrapper height="70%">
             <InputBoxAndText
@@ -182,11 +159,7 @@ const Step4 = ({
               handleClick={handleValidCheck}
               onChange={handleSchoolNumChange}
               errorText={
-                isClicked
-                  ? confirmedSchoolNum
-                    ? ""
-                    : "올바르지 않은 사업자 등록 번호입니다."
-                  : ""
+                isClicked ? (confirmedSchoolNum ? "" : "올바르지 않은 사업자 등록 번호입니다.") : ""
               }
             />
           </InputBoxWrapper>
@@ -202,7 +175,7 @@ const Step4 = ({
                   schoolAddress !== "" &&
                   isSchoolPhoneValid &&
                   confirmedSchoolNum &&
-                  handlerOwnerSignup();
+                  handlerOwnerSignup(setIsRegisteredPopupOpen);
               }}
               backcolor={
                 schoolName === "" ||
@@ -222,6 +195,18 @@ const Step4 = ({
               }
             />
           </StyledBottomWrapper>
+          {isRegisteredPopupOpen && (
+            <AlertBottomSheet
+              onClose={() => {
+                setIsRegisteredPopupOpen(false);
+              }}
+              title="이미 등록된 유치원입니다"
+              content="자세한 내용은 서비스 팀으로 문의해 주세요"
+              grayButton="닫기"
+              brownButton="문의"
+              brownFuc={() => console.log("문의")}
+            />
+          )}
         </Container>
       )}
     </>
