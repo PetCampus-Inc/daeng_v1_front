@@ -29,8 +29,8 @@ const AlertBottomSheet = ({
       <InnerContainer>
         <AlertIcon />
         <TextContainer>
-          <Text text={title} size="18px" weight="700" />
-          <Text text={content} color={ThemeConfig.gray_3} margintop="3%" />
+          <Text text={title} size="1.125rem" weight="700" />
+          <Text text={content} color={ThemeConfig.gray_3} margintop="4px" />
         </TextContainer>
       </InnerContainer>
       <ButtonContainer>
