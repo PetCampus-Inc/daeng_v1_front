@@ -19,12 +19,14 @@ export const TitleContainer = styled.div`
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  user-select: none;
 `;
 
 export const Caption = styled.p`
   color: ${({ theme }) => theme.colors.gray_3};
   font-weight: 400;
   font-size: 0.75rem;
+  user-select: none;
 `;
 
 export const RadioContainer = styled.div`
@@ -62,6 +64,7 @@ export const StyledLabel = styled.label`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  user-select: none;
 
   background-color: ${({ theme }) => theme.colors.gray_5};
   border: 1px solid ${({ theme }) => theme.colors.gray_5};
