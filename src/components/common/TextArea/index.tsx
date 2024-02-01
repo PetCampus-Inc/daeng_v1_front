@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import * as S from "./styles";
 
-interface TextAreaProps extends React.HTMLProps<HTMLTextAreaElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   autoResize?: boolean;
   resizable?: boolean;
   readOnly?: boolean;
@@ -10,7 +10,7 @@ interface TextAreaProps extends React.HTMLProps<HTMLTextAreaElement> {
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
-    { autoResize = true, label, resizable = false, readOnly = false, rows = 1, ...props },
+    { autoResize = true, resizable = false, readOnly = false, rows = 1, ...props },
     forwardedRef
   ) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null);

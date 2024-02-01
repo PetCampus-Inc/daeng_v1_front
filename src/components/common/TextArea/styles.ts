@@ -22,12 +22,22 @@ export const TextArea = styled.textarea<{
   resize: ${(prop) => (prop.resizable ? "vertical" : "none")};
   box-sizing: border-box;
 
+  outline: transparent solid 2px;
+  outline-offset: 2px;
   overflow-y: hidden;
 
-  &:focus {
-    border-color: ${({ theme }) => theme.primary};
-    outline: none;
-  }
+  transition:
+    border-color,
+    box-shadow 0.2s ease-out;
+
+  ${({ readOnly, theme }) =>
+    !readOnly &&
+    `
+    &:focus-visible {
+      border-color: ${theme.br_3};
+      box-shadow: ${theme.br_3} 0px 0px 0px 1px;
+    }
+  `}
 
   &::placeholder {
     color: ${({ theme }) => theme.gray_3};
