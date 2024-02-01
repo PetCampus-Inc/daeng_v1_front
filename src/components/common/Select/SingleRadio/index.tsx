@@ -1,22 +1,19 @@
-import Text from "../Text";
-import * as S from "./styles";
+import Text from "../../Text";
+import { ISelect } from "../select.type";
 import { useFormContext } from "react-hook-form";
+import * as S from "../styles";
 
-interface IRadio {
-  title: string;
-  caption?: string;
-  badgeText?: string;
-  badgeType?: string;
+interface ISingleRadio extends ISelect {
   radiosText: string[];
 }
 
-const Radio = ({
+const SingleRadio = ({
   title,
   caption,
   badgeText = "선택 입력",
   badgeType = "optional",
   radiosText
-}: IRadio) => {
+}: ISingleRadio) => {
   const { register } = useFormContext();
 
   return (
@@ -37,4 +34,4 @@ const Radio = ({
     </S.Container>
   );
 };
-export default Radio;
+export default SingleRadio;
