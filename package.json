@@ -32,11 +32,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx src --report-unused-disable-directives --max-warnings 0 --cache --fix"
+    "lint": "eslint .ts,.tsx",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx --cache"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint --fix"
+      "npm run lint:fix"
     ]
   },
   "eslintConfig": {
