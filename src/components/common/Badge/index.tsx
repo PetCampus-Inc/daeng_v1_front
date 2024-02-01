@@ -1,12 +1,13 @@
-import { StyledMainWrapper } from "./styles";
-import type { BadgeStylesProps } from "./styles";
+import * as S from "./styles";
 
-export interface Props extends BadgeStylesProps {
-  text: string;
+export interface BadgeProps {
+  type: "required" | "optional";
 }
 
-const Badge = ({ text, type }: Props) => {
-  return <StyledMainWrapper type={type}>{text}</StyledMainWrapper>;
+const Badge = ({ type }: BadgeProps) => {
+  const text = type === "required" ? "필수 입력" : "선택 입력";
+
+  return <S.Badge type={type}>{text}</S.Badge>;
 };
 
 export default Badge;

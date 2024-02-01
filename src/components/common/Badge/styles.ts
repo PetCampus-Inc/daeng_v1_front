@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import type { DefaultTheme } from "styled-components";
-
-export interface BadgeStylesProps {
-  type: "required" | "optional";
-}
+import type { BadgeProps } from "./index";
 
 const badgeStyles = {
   required: (theme: DefaultTheme) => `
@@ -16,8 +13,8 @@ const badgeStyles = {
     `
 };
 
-export const StyledMainWrapper = styled.span<{
-  type: BadgeStylesProps["type"];
+export const Badge = styled.span<{
+  type: BadgeProps["type"];
 }>`
   display: inline-flex;
   -webkit-box-align: center;
@@ -28,11 +25,10 @@ export const StyledMainWrapper = styled.span<{
   min-width: 50px;
   border-radius: 50px;
 
-  font-size: 0.75rem;
-  letter-spacing: -0.03rem;
+  ${({ theme }) => theme.typo.caption1}
 
   ${({ type, theme }) => badgeStyles[type](theme)};
 
   user-select: none;
-  padding: 4px 8px;
+  padding: 2px 8px;
 `;
