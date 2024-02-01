@@ -1,24 +1,35 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 8.1px;
   width: 100%;
 `;
 
 export const TitleContainer = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 `;
 
 export const Caption = styled.p`
-  color: ${({ theme }) => theme.gray_3};
+  color: ${({ theme }) => theme.colors.gray_3};
   font-weight: 400;
   font-size: 0.75rem;
 `;
 
 export const RadioContainer = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 8px;
 `;
@@ -28,25 +39,31 @@ export const StyledInput = styled.input`
   &:checked + label {
     background-color: ${({ theme }) => theme.br_4};
     border: 1px solid ${({ theme }) => theme.br_3};
-    color: ${({ theme }) => theme.primaryColor};
+    color: ${({ theme }) => theme.colors.primaryColor};
   }
   &:disabled + label {
-    background-color: ${({ theme }) => theme.white};
+    background-color: ${({ theme }) => theme.colors.white};
     ${({ theme }) => theme.typo.body2_16_R};
-    color: ${({ theme }) => theme.gray_4};
+    color: ${({ theme }) => theme.colors.gray_4};
     border: transparent;
   }
 `;
 
 export const StyledLabel = styled.label`
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 49px;
   width: 100%;
   border-radius: 8px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 
-  background-color: ${({ theme }) => theme.gray_5};
-  border: 1px solid ${({ theme }) => theme.gray_5};
-  color: ${({ theme }) => theme.gray_2};
+  background-color: ${({ theme }) => theme.colors.gray_5};
+  border: 1px solid ${({ theme }) => theme.colors.gray_5};
+  color: ${({ theme }) => theme.colors.gray_2};
 `;
