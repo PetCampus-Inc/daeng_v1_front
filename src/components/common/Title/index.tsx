@@ -10,7 +10,7 @@ const Title = ({ children, isRequired, ...props }: FormLabelProps) => {
   return (
     <S.Label {...props}>
       {children}
-      {<Badge type={isRequired ? "required" : "optional"} />}
+      {isRequired && <Badge type={isRequired ? "required" : "optional"} />}
     </S.Label>
   );
 };
