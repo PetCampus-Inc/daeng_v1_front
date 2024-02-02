@@ -6,7 +6,7 @@ export interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelEleme
   isRequired?: boolean;
 }
 
-const FormLabel = ({ children, isRequired, ...props }: FormLabelProps) => {
+const Title = ({ children, isRequired, ...props }: FormLabelProps) => {
   return (
     <S.Label {...props}>
       {children}
@@ -15,4 +15,4 @@ const FormLabel = ({ children, isRequired, ...props }: FormLabelProps) => {
   );
 };
 
-export default FormLabel;
+export default Title;
