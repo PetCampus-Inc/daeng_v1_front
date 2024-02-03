@@ -6,6 +6,7 @@ ${reset}
 
 *{
   box-sizing: border-box;
+  font-family: "Pretendard";
 }
 
 .swiper-button-next::after,
