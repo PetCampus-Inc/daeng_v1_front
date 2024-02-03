@@ -4,7 +4,7 @@ import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Button from "components/common/Button";
-import { REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
+import { PHONE_REGEX, REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Postcode from "components/SignUp/Postcode";
 import useSignUp from "hooks/useSignUp";
@@ -24,7 +24,6 @@ interface Props {
   handlerCheckSchoolNum: () => void | Promise<void>;
   confirmedSchoolNum: boolean;
   setConfirmedSchoolNum: Dispatch<SetStateAction<boolean>>;
-  // handlerOwnerSignup: () => void | Promise<void>;
   userName: string;
 }
 
@@ -41,9 +40,7 @@ const Step4 = ({
   schoolAddress,
   setSchoolAddress,
   handlerCheckSchoolNum,
-  confirmedSchoolNum,
-  setConfirmedSchoolNum
-  // handlerOwnerSignup
+  confirmedSchoolNum
 }: Props) => {
   const [isSchoolPhoneValid, setIsSchoolPhoneValid] = useState(false);
   const [, setIsRegistrationValid] = useState(false);
@@ -66,14 +63,12 @@ const Step4 = ({
       if (value.length > 12) {
         value = value.substring(0, 12);
       }
-      setSchoolPhone(value.replace(/[^0-9]/g, "").replace(/^(\d{2})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
+      setSchoolPhone(value.replace(/[^0-9]/g, "").replace(PHONE_REGEX, `$1-$2-$3`));
     } else {
       if (value.length > 13) {
         value = value.substring(0, 13);
       }
-      setSchoolPhone(
-        value.replace(/[^0-9]/g, "").replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
-      );
+      setSchoolPhone(value.replace(/[^0-9]/g, "").replace(SCHOOL_PHONE_REGEX, `$1-$2-$3`));
     }
   };
 
