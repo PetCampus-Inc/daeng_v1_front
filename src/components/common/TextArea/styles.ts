@@ -7,14 +7,15 @@ export const TextArea = styled.textarea<{
   all: unset;
   display: block;
   width: 100%;
-  background-color: ${(props) => (props.readOnly ? props.theme.gray_5 : props.theme.white)};
+  background-color: ${(props) =>
+    props.readOnly ? props.theme.colors.gray_5 : props.theme.colors.white};
 
   padding: 12.14px 18.22px;
   border-radius: 8px;
-  border: ${(props) => (props.readOnly ? "none" : `1px solid ${props.theme.gray_4}`)};
+  border: ${(props) => (props.readOnly ? "none" : `1px solid ${props.theme.colors.gray_4}`)};
 
   ${({ theme }) => theme.typo.label1_16_R};
-  color: ${({ theme }) => theme.gray_1};
+  color: ${({ theme }) => theme.colors.gray_1};
   overflow-wrap: break-word;
   word-break: break-all;
   white-space: pre-wrap;
@@ -34,12 +35,12 @@ export const TextArea = styled.textarea<{
     !readOnly &&
     `
     &:focus-visible {
-      border-color: ${theme.br_3};
-      box-shadow: ${theme.br_3} 0px 0px 0px 1px;
+      border-color: ${theme.colors.br_3};
+      box-shadow: ${theme.colors.br_3} 0px 0px 0px 1px;
     }
   `}
 
   &::placeholder {
-    color: ${({ theme }) => theme.gray_3};
+    color: ${({ theme }) => theme.colors.gray_3};
   }
 `;
