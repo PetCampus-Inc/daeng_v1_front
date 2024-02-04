@@ -1,4 +1,4 @@
-import { IThemeConfig, css } from "styled-components";
+import { css } from "styled-components";
 
 const typoCreator = (
   fontSize: string,
@@ -89,21 +89,21 @@ export const ThemeConfig = {
   },
 
   typo: {
-    title1_24_B: typoCreator("1.5rem", 700, "-1.2%", "32px"),
-    title1_24_R: typoCreator("1.5rem", 400, "-1.2%", "26px"),
-    title2_20_B: typoCreator("20px", 700, "-1.2%", "28px"),
-    title2_20_R: typoCreator("20px", 400, "-1.2%", "26px"),
-    title3_28_B: typoCreator("28px", 700, "0%", "40px"),
-    body1_18_B: typoCreator("18px", 700, "-1.2%", "27px"),
-    body1_18_R: typoCreator("18px", 400, "-1.2%", "26px"),
-    body2_16_B: typoCreator("16px", 700, "-1.2%%", "23px"),
-    body2_16_R: typoCreator("16px", 400, "-1.2%", "23px"),
-    label1_16_B: typoCreator("16px", 700, "-1.2%", "24px"),
-    label1_16_M: typoCreator("16px", 500, "-1.2%", "24px"),
-    label1_16_R: typoCreator("16px", 400, "-1.2%", "24px"),
-    label2_14_B: typoCreator("14px", 700, "2%", "20px"),
-    label2_14_M: typoCreator("14px", 500, "2%", "25px"),
-    label2_14_R: typoCreator("14px", 400, "2%", "20px"),
-    caption1: typoCreator("12px", 400, "-1%", "17.5px")
+    title1_24_B: typoCreator("1.5rem", 700, "-1.2px", "32px"),
+    title1_24_R: typoCreator("1.5rem", 400, "-1.2px", "26px"),
+    title2_20_B: typoCreator("20px", 700, "-1.2px", "28px"),
+    title2_20_R: typoCreator("20px", 400, "-1.2px", "26px"),
+    title3_28_B: typoCreator("28px", 700, "0px", "40px"),
+    body1_18_B: typoCreator("18px", 700, "-1.2px", "27px"),
+    body1_18_R: typoCreator("18px", 400, "-1.2px", "26px"),
+    body2_16_B: typoCreator("16px", 700, "-1.2px", "23px"),
+    body2_16_R: typoCreator("16px", 400, "-1.2px", "23px"),
+    label1_16_B: typoCreator("16px", 700, "-1.2px", "24px"),
+    label1_16_M: typoCreator("16px", 500, "-1.2px", "24px"),
+    label1_16_R: typoCreator("16px", 400, "-1.2px", "24px"),
+    label2_14_B: typoCreator("14px", 700, "2px", "20px"),
+    label2_14_M: typoCreator("14px", 500, "2px", "25px"),
+    label2_14_R: typoCreator("14px", 400, "2px", "20px"),
+    caption1_12_R: typoCreator("12px", 400, "-1px", "17.5px")
   }
 };
