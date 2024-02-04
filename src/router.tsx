@@ -2,53 +2,62 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as Pages from "pages";
+import { PATH } from "constants/path";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: PATH.ROOT,
     element: <App />,
     errorElement: <Pages.NotFoundPage />,
     children: [
       {
         index: true,
-        path: "/home",
-        element: <Pages.HomePage />,
-      },
-    ],
+        path: PATH.HOME,
+        element: <Pages.HomePage />
+      }
+    ]
   },
   {
-    path: "/signIn",
-    element: <Pages.SignInPage />,
+    path: PATH.LOGIN,
+    element: <Pages.SignInPage />
   },
   {
-    path: "/signUp",
-    element: <Pages.SignUpPage />,
+    path: PATH.SIGNUP,
+    element: <Pages.SignUpPage />
   },
   {
     path: "*",
-    element: <Pages.NotFoundPage />,
+    element: <Pages.NotFoundPage />
   },
   {
-    path: "/admin",
+    path: PATH.ADMIN,
     children: [
       {
-        path: "attendance",
-        element: <Pages.AttendancePage />,
+        path: PATH.ADMIN_ATTENDANCE,
+        element: <Pages.AttendancePage />
       },
       {
-        path: "attendCare",
-        element: <Pages.AttendCarePage />,
+        path: PATH.ADMIN_ATTEND_CARE,
+        element: <Pages.AttendCarePage />
       },
       {
-        path: "dogInfo",
-        element: <Pages.DogInfoPage />,
+        path: PATH.ADMIN_DOG_INFO,
+        element: <Pages.DogInfoPage />
       },
       {
-        path: "schoolManage",
-        element: <Pages.SchoolManagePage />,
-      },
-    ],
+        path: PATH.ADMIN_SCHOOL_MANAGE,
+        element: <Pages.SchoolManagePage />
+      }
+    ]
   },
+  {
+    children: [
+      {
+        path: PATH.OWNER_MA,
+        element: <Pages.MembershipApplicationPage />
+      }
+    ]
+  }
 ]);
 
 export default router;
