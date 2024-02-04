@@ -9,7 +9,7 @@ export const List = styled.ul<{ width: string }>`
   max-height: 192px;
 
   overflow: scroll;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: y mandatory;
   scroll-snap-stop: always;
   scrollbar-width: thin;
 
