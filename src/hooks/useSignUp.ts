@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, Dispatch, SetStateAction } from "react";
 import { handleGetSearchResult } from "apis/school.api";
 import { ISchoolInfo } from "types/School.type";
 import {
@@ -8,7 +8,7 @@ import {
   handleTeacherApprove,
   handleTeacherDeny,
   handleTeacherSignUpCancel,
-  handleTeacherSignUpSubmit,
+  handleTeacherSignUpSubmit
 } from "apis/admin.api";
 
 const useSignUp = () => {
@@ -64,9 +64,7 @@ const useSignUp = () => {
   // 사업자 등록번호 확인
   const handlerCheckSchoolNum = useCallback(async () => {
     try {
-      const data = await handleCheckRegistrationNumber(
-        schoolNum.replace(/-/g, "")
-      );
+      const data = await handleCheckRegistrationNumber(schoolNum.replace(/-/g, ""));
       if (data === "01") {
         setConfirmedSchoolNum(true);
       } else {
@@ -78,7 +76,9 @@ const useSignUp = () => {
   }, [schoolNum, setSchoolNum, confirmedSchoolNum, setConfirmedSchoolNum]);
 
   // 원장 회원가입
-  const handlerOwnerSignup = async () => {
+  const handlerOwnerSignup = async (
+    setIsRegisteredPopupOpen: Dispatch<SetStateAction<boolean>>
+  ) => {
     try {
       const data = await handleOwnerSignUpResult({
         userId,
@@ -88,13 +88,24 @@ const useSignUp = () => {
         schoolName,
         schoolPhone,
         schoolAddress,
-        schoolNum,
+        schoolNum
       });
       if (data.status === 200) {
         setCurrentStep(currentStep + 1);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      const errorCode = error.response?.code;
+      // 유치원 이름과 주소가 이미 등록되어 있을 때
+      if (errorCode === "COMMON-409-1") {
+        setIsRegisteredPopupOpen(true);
+      } else if (errorCode === "ADMIN-409-1") {
+        // TODO : 프론트에서 분기 필요없으면 삭제하기
+        console.log("사업자 등록 번호가 이미 등록되어있습니다.");
+      } else {
+        // TODO : 기획에게 처리 방법 질문하기
+        console.log("회원 가입에 실패했습니다.");
+      }
     }
   };
 
@@ -106,7 +117,7 @@ const useSignUp = () => {
         userPw,
         schoolId,
         userName,
-        userPhone,
+        userPhone
       });
       if (data.status === 200) {
         setSubmittedAdminId(data.data.adminId);
@@ -136,7 +147,7 @@ const useSignUp = () => {
     try {
       const data = await handleTeacherApprove({
         submittedAdminId,
-        submittedSchoolId,
+        submittedSchoolId
       });
       if (data.status === 200) {
         // 승인되면 선생님 로그인 가능 처리
@@ -198,7 +209,7 @@ const useSignUp = () => {
     confirmedSchoolNum,
     setConfirmedSchoolNum,
     handlerOwnerSignup,
-    handlerTeacherSignup,
+    handlerTeacherSignup
   };
 };
 
