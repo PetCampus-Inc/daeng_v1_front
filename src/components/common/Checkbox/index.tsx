@@ -7,10 +7,10 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   ariaLabelledby?: string;
   ariaDescribedby?: string;
   isChecked?: boolean;
-  isDisabled?: boolean;
   name?: string;
   children?: React.ReactNode;
   id?: string;
+  disabled?: boolean;
 }
 
 const Checkbox = ({
@@ -18,27 +18,35 @@ const Checkbox = ({
   ariaLabelledby,
   ariaDescribedby,
   isChecked = false,
-  isDisabled = false,
   name,
   value,
   children,
   id,
+  disabled = false,
   ...props
 }: CheckboxProps) => (
   <S.CheckboxContainer htmlFor={id}>
     <S.HiddenCheckbox
+      type="checkbox"
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledby}
       aria-describedby={ariaDescribedby}
       id={id}
       checked={isChecked}
       name={name}
+      disabled={disabled}
       {...props}
     />
-    <S.Checkbox data-checked={isChecked ? "" : null} data-disabled={isDisabled ? "" : null}>
+    <S.Checkbox
+      className={isChecked ? "checked" : ""}
+      aria-disabled={disabled ? "true" : undefined}
+    >
       <BsCheck className="checkbox-icon" />
     </S.Checkbox>
-    <S.LabelText data-checked={isChecked ? "" : null} data-disabled={isDisabled ? "" : null}>
+    <S.LabelText
+      className={isChecked ? "checked" : ""}
+      aria-disabled={disabled ? "true" : undefined}
+    >
       {children}
     </S.LabelText>
   </S.CheckboxContainer>

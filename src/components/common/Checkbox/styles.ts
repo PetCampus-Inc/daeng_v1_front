@@ -8,9 +8,7 @@ export const CheckboxContainer = styled.label`
   position: relative;
 `;
 
-export const HiddenCheckbox = styled.input.attrs({
-  type: "checkbox"
-})`
+export const HiddenCheckbox = styled.input`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -36,35 +34,31 @@ export const Checkbox = styled.span`
   user-select: none;
   width: 20px;
   height: 20px;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 50%;
   position: relative;
-  border-color: ${({ theme }) => theme.gray_4};
   margin-right: 0.5em;
+
+  border: 2px solid ${({ theme }) => theme.gray_4};
+  border-radius: 50%;
 
   background: ${({ theme }) => theme.gray_4};
 
-  &[data-checked] {
+  &.checked {
     background: ${({ theme }) => theme.primaryColor};
     border-color: ${({ theme }) => theme.primaryColor};
     color: ${({ theme }) => theme.white};
   }
 
-  &[data-disabled] {
+  &[aria-disabled="true"] {
     background: ${({ theme }) => theme.gray_4};
     border: none;
     cursor: not-allowed;
     opacity: 0.6;
+    tabindex: -1;
   }
 
-  &[data-checked][data-disabled] {
+  &[aria-disabled="true"].checked {
     background: ${({ theme }) => theme.gray_3};
     border-color: ${({ theme }) => theme.gray_3};
-  }
-
-  &[data-checked][data-disabled] .checkbox-icon {
-    color: ${({ theme }) => theme.white};
   }
 
   .checkbox-icon {
@@ -80,9 +74,14 @@ export const Checkbox = styled.span`
     animation: none;
   }
 
-  &[data-checked] .checkbox-icon {
+  &.checked .checkbox-icon {
     color: ${({ theme }) => theme.white};
     animation: checking 200ms linear;
+  }
+
+  &[aria-disabled="disabled"] .checkbox-icon,
+  &[aria-disabled="disabled"].checked .checkbox-icon {
+    color: ${({ theme }) => theme.white};
   }
 
   @keyframes checking {
@@ -100,8 +99,9 @@ export const Checkbox = styled.span`
 `;
 
 export const LabelText = styled.span`
-  &[data-disabled] {
+  &[aria-disabled="true"] {
     color: ${({ theme }) => theme.gray_2};
+    tabindex: -1;
   }
 
   ${({ theme }) => theme.typo.label1_16_R};
