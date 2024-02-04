@@ -6,11 +6,12 @@ interface IDropDown {
   dropDownList: { breedId: number; breedName: string }[];
   isOpen: boolean | Dispatch<SetStateAction<boolean>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setInputValue: Dispatch<SetStateAction<string | number>>;
+  setInputValue: Dispatch<SetStateAction<string>>;
   width: string;
   setChosenBreedId: Dispatch<SetStateAction<number | null>>;
 }
 
+// 온보딩 - 생일 선택, 견종 선택에서 쓰이는 드롭다운
 const DropDown = ({
   dropDownList,
   isOpen,
