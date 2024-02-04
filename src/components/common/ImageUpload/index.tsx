@@ -5,7 +5,6 @@ import CloseIcon from "assets/svg/close-icon";
 import * as S from "./styles";
 
 interface ImageUploadProps {
-  id?: string;
   disabled?: boolean;
 }
 
@@ -14,7 +13,7 @@ interface ImageFile {
   preview: string;
 }
 
-const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
+const ImageUpload = ({ disabled }: ImageUploadProps) => {
   const [images, setImages] = useState<ImageFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -74,7 +73,6 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
       )}
       <S.HiddenUpload
         type="file"
-        id={id}
         ref={fileInputRef}
         multiple
         accept="image/*"
