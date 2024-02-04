@@ -1,11 +1,6 @@
 import { memo, SetStateAction, useEffect, useState } from "react";
 import Button from "../Button";
-import {
-  StyledWrapper,
-  StyledButtonWrapper,
-  StyledMainWrapper,
-  StyledImage,
-} from "./styles";
+import { StyledWrapper, StyledButtonWrapper, StyledMainWrapper, StyledImage } from "./styles";
 import { ID_REGEX, REGISTRATION_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { ATTENDANCE } from "constants/className";
@@ -47,7 +42,7 @@ const InputBox = ({
   handleClick,
   onChange,
   onFocus,
-  onBlur,
+  onBlur
 }: Props) => {
   const [isValid, setIsValid] = useState(false);
 
@@ -57,8 +52,8 @@ const InputBox = ({
         ? setIsValid(true)
         : setIsValid(false)
       : REGISTRATION_REGEX.test(inputValue)
-      ? setIsValid(true)
-      : setIsValid(false);
+        ? setIsValid(true)
+        : setIsValid(false);
   }, [inputValue]);
 
   return (
@@ -84,17 +79,27 @@ const InputBox = ({
         (className === ATTENDANCE ? (
           <StyledButtonWrapper onClick={handleClick}>
             {!isclicked ? (
-              <StyledImage src="/images/brown-search.png" alt="search-icon" />
+              <StyledImage
+                src="/images/brown-search.png"
+                alt="search-icon"
+                width="16px"
+                height="16px"
+              />
             ) : (
-              <StyledImage src="/images/brown-x-button.png" alt="x-box" />
+              <StyledImage
+                src="/images/brown-x-button.png"
+                alt="x-box"
+                width="16px"
+                height="16px"
+              />
             )}
           </StyledButtonWrapper>
         ) : (
           <StyledButtonWrapper onClick={handleClick}>
             {selectedSearchText === "" || inputValue === "" ? (
-              <StyledImage src="/images/search.png" alt="search-icon" />
+              <StyledImage src="/images/search.png" alt="search-icon" width="16px" height="16px" />
             ) : (
-              <StyledImage src="/images/x-box.png" alt="x-box" />
+              <StyledImage src="/images/x-box.png" alt="x-box" width="16px" height="16px" />
             )}
           </StyledButtonWrapper>
         ))}
