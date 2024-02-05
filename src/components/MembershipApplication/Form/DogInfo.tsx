@@ -8,7 +8,11 @@ import InputBox from "components/common/InputBox";
 import TextArea from "components/common/TextArea";
 import { Card } from "./styles";
 
-const DogInfo = () => {
+interface DogInfoProps {
+  requiredItems: Map<number, boolean>;
+}
+
+const DogInfo = ({ requiredItems }: DogInfoProps) => {
   const [name, setName] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [chosenBreedId, setChosenBreedId] = useState<number | null>(null);

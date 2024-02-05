@@ -5,8 +5,14 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import { Caption } from "components/common/Select/styles";
 import { useFormContext } from "react-hook-form";
+import type { ITicketInfo } from "types/School.type";
 
-const TicketInfo = () => {
+interface TicketInfoProps {
+  info: ITicketInfo;
+  requiredItems: Map<number, boolean>;
+}
+
+const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
   const methods = useFormContext();
 
   // TODO: API 연동 시 13~15줄 제거
