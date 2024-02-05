@@ -1,14 +1,15 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import * as S from "./styles";
 import Button from "../Button";
 
 interface IDropDown {
-  dropDownList: { breedId: number; breedName: string }[];
+  dropDownList: { breedId: number; breedName: string }[] | string[];
   isOpen: boolean | Dispatch<SetStateAction<boolean>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  inputValue?: string;
   setInputValue: Dispatch<SetStateAction<string>>;
   width: string;
-  setChosenBreedId: Dispatch<SetStateAction<number | null>>;
+  setChosenBreedId?: Dispatch<SetStateAction<number | null>>;
 }
 
 // 온보딩 - 생일 선택, 견종 선택에서 쓰이는 드롭다운
@@ -16,16 +17,32 @@ const DropDown = ({
   dropDownList,
   isOpen,
   setIsOpen,
+  inputValue,
   setInputValue,
   width,
   setChosenBreedId
 }: IDropDown) => {
-  const handleClick = (value: { breedName: string; breedId: number }) => {
-    setInputValue(value.breedName);
+  // 생일 드롭다운 : 선택된 값이 가장 상단에 위치
+  const chosenItemRef = useRef<any>(null);
+  useEffect(() => {
+    if (chosenItemRef.current) {
+      chosenItemRef.current.scrollIntoView({ block: "start" });
+    }
+  }, [inputValue]);
+
+  const handleClick = (value: { breedName: string; breedId: number } | string) => {
+    if (typeof value === "object") {
+      // 견종 드롭다운
+      setInputValue(value.breedName);
+      setChosenBreedId!(value.breedId);
+    } else {
+      // 생일 드롭다운
+      setInputValue(value);
+    }
     setIsOpen(!isOpen);
-    setChosenBreedId(value.breedId);
   };
 
+  // 견종 드롭다운 (검색 결과X)
   if (!dropDownList || dropDownList.length === 0) {
     return (
       <S.List width={width} className="no-list">
@@ -41,11 +58,17 @@ const DropDown = ({
       </S.List>
     );
   }
+  // 견종 드롭다운 (검색 결과 O) & 생일 드롭다운
   return (
     <S.List width={width}>
       {dropDownList.map((value, index) => (
-        <S.ListItem key={index} onClick={() => handleClick(value)}>
-          {value.breedName}
+        <S.ListItem
+          key={index}
+          className={inputValue === value ? "chosen" : ""}
+          onClick={() => handleClick(value)}
+          ref={inputValue === value ? chosenItemRef : null}
+        >
+          {typeof value === "object" && "breedName" in value ? value.breedName : value}
         </S.ListItem>
       ))}
     </S.List>
