@@ -2,18 +2,21 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  padding: 28px 12px 42px;
+  padding: 0 12px 42px;
   flex-direction: column;
-  gap: 28px;
-
   background-color: ${({ theme }) => theme.colors.BGray};
 `;
 
 export const TopWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
-
+  position: sticky;
+  top: 0;
+  padding: 28px 0;
   gap: 12px;
+
+  background-color: ${({ theme }) => theme.colors.BGray};
+  z-index: 1;
 `;
 
 export const TitleWrapper = styled.div`
