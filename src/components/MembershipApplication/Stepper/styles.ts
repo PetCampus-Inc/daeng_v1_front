@@ -4,6 +4,8 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+
+  margin-top: 28px;
 `;
 
 export const Caption = styled.div`
