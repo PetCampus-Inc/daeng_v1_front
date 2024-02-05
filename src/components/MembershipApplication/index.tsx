@@ -1,9 +1,9 @@
 import { FormProvider, useForm } from "react-hook-form";
 import useStep from "hooks/useStep";
 
-import DogOwnerInfo from "./Form/DogOwnerInfo";
+import MemberInfo from "./Form/MemberInfo";
 import DogInfo from "./Form/DogInfo";
-import NoticeInfo from "./Form/NoticeInfo";
+import PolicyInfo from "./Form/PolicyInfo";
 import PickDropInfo from "./Form/PickDropInfo";
 import TicketInfo from "./Form/TicketInfo";
 import Navigation from "./Stepper/Navigation";
@@ -16,32 +16,27 @@ const step = [
   {
     title: "견주 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
-    indicator: "견주 정보",
-    component: DogOwnerInfo
+    indicator: "견주 정보"
   },
   {
     title: "강아지 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
-    indicator: "강아지 정보",
-    component: DogInfo
+    indicator: "강아지 정보"
   },
   {
     title: "이용권 종류를 선택해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
-    indicator: "이용권 정보",
-    component: TicketInfo
+    indicator: "이용권 정보"
   },
   {
     title: "유의사항을 확인해주세요",
     subtitle: "필수입력에 동의하지 않으면 가입이 어려울 수 있어요",
-    indicator: "유의사항",
-    component: NoticeInfo
+    indicator: "유의사항"
   },
   {
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
-    indicator: "픽드랍",
-    component: PickDropInfo
+    indicator: "픽드랍"
   }
 ];
 
@@ -52,7 +47,6 @@ const MembershipApplication = () => {
   });
   const { currentStep, nextStep, prevStep, setStep } = useStep(0, step.length - 1);
 
-  const CurrentComponent = step[currentStep].component;
   const currentTitle = step[currentStep].title;
   const currentSubtitle = step[currentStep].subtitle;
   const indicators: string[] = step.map((s) => s.indicator);
@@ -68,7 +62,11 @@ const MembershipApplication = () => {
       </S.TopWrapper>
       <FormProvider {...methods}>
         <S.ContentWrapper>
-          <CurrentComponent />
+          {currentStep === 0 && <MemberInfo />}
+          {currentStep === 1 && <DogInfo />}
+          {currentStep === 2 && <TicketInfo />}
+          {currentStep === 3 && <PolicyInfo />}
+          {currentStep === 4 && <PickDropInfo />}
         </S.ContentWrapper>
         <Navigation
           currentStep={currentStep}
