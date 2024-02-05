@@ -28,7 +28,7 @@ const SelectNumber = ({
   const [inputValue, setInputValue] = useState<string>(initialValue);
 
   return (
-    <div ref={dropDownRef}>
+    <div ref={dropDownRef} style={{ position: "relative" }}>
       <StyledMainWrapper width={width} height="49px">
         <StyledWrapper
           readOnly
@@ -48,8 +48,7 @@ const SelectNumber = ({
           setIsOpen={setIsOpen}
           inputValue={inputValue}
           dropDownList={numberList}
-          //TODO : 단위 수정하기
-          width={"30%"}
+          width={width}
           setInputValue={setInputValue}
         />
       )}
