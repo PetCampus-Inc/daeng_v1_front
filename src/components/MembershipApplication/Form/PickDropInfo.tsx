@@ -6,7 +6,13 @@ import { useFormContext } from "react-hook-form";
 import { Caption } from "components/common/Select/styles";
 import { textMapping } from "./constant";
 
-const PickDropInfo = () => {
+import type { IPickDropInfo } from "types/School.type";
+interface PickDropInfoProps {
+  info: IPickDropInfo;
+  requiredItems: Map<number, boolean>;
+}
+
+const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
   const methods = useFormContext();
   console.log(textMapping.get(methods.watch("pickDropRequest")));
 
