@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
+import { UseFormRegister, FieldValues } from "react-hook-form";
+
 import * as S from "./styles";
 import { useForm } from "react-hook-form";
 
@@ -8,11 +10,12 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
   readOnly?: boolean;
   rows?: number;
   name?: string;
+  register?: UseFormRegister<FieldValues>;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
-    { autoResize = true, resizable = false, readOnly = false, rows = 1, name, ...props },
+    { autoResize = true, resizable = false, readOnly = false, rows = 1, register, name, ...props },
     forwardedRef
   ) => {
     const { register } = useForm();
@@ -41,13 +44,14 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     };
 
     return (
-      <S.TextArea
-        {...register(`${name}`)}
+      <S.TextAreaInput
         ref={textAreaRef}
         resizable={resizable}
         readOnly={readOnly}
         onChange={handleChange}
         rows={rows}
+        value={props.value ? props.value : ""}
+        {...(name && register && register(name))}
         {...props}
       />
     );
