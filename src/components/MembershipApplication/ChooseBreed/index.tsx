@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import DropDown from "components/common/Dropdown";
 import InputBox from "components/common/InputBox";
 import useDetectClose from "hooks/useDetectClose";
@@ -21,7 +21,6 @@ const BreedInput = ({
 }: IBreedInput) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
-  // const [breedList, setBreedList] = useState<any>([]);
   const { data, refetch, isSuccess } = useGetBreed(inputValue);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,16 +34,11 @@ const BreedInput = ({
       setIsOpen(false);
       return;
     }
-
     // 견종 검색 API 호출
     const timer = setTimeout(async () => {
-      refetch();
-      console.log(isSuccess, "isSuccess");
-      console.log("data", data?.data);
-      console.log("API 호출 with:", inputValue);
-
-      isSuccess && setIsOpen(true);
-    }, 600);
+      await refetch();
+    }, 300);
+    setIsOpen(true);
     return () => clearTimeout(timer);
   }, [inputValue]);
 
@@ -68,7 +62,7 @@ const BreedInput = ({
       />
       {isOpen && isSuccess && (
         <DropDown
-          dropDownList={data.data}
+          dropDownList={data!.data}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           setInputValue={setInputValue}
