@@ -94,7 +94,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
   background-color: ${(props) => props.theme.BGray};
   &::-webkit-scrollbar{
     display: none;
