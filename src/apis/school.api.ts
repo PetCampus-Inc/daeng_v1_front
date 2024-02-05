@@ -1,5 +1,5 @@
 import customAxios from "libs/CustomAxios";
-import type { IEnrollment, IRequestEnrollment, ISchoolInfo } from "types/School.type";
+import type { IEnrollment, IRequestEnrollment, IBreedInfo, ISchoolInfo } from "types/School.type";
 
 export interface IEnrollmentProps {
   memberId: string;
@@ -11,6 +11,17 @@ export const handleGetSearchResult = async (searchText: string): Promise<ISchool
   const url: string = `school/search?searchText=${searchText}`;
   const { data } = await customAxios.get(url);
   return data.data;
+};
+
+export const handleGetBreed = async (searchText: string | number): Promise<IBreedInfo> => {
+  const url: string = `school/search/breed`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      searchText
+    }
+  });
+  console.log(data);
+  return data;
 };
 
 export const handleGetIEnrollment = async ({
