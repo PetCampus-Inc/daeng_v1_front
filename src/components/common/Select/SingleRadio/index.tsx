@@ -6,7 +6,7 @@ interface ISingleRadio extends ISelect {
   radiosText: string[];
 }
 
-const SingleRadio = ({ id, caption, radiosText }: ISingleRadio) => {
+const SingleRadio = ({ name, caption, radiosText }: ISingleRadio) => {
   const { register } = useFormContext();
 
   return (
@@ -15,7 +15,7 @@ const SingleRadio = ({ id, caption, radiosText }: ISingleRadio) => {
       <S.RadioContainer>
         {radiosText.map((text) => (
           <div style={{ width: "100%" }} key={text}>
-            <S.StyledInput id={text} type="radio" {...register(`${id}`)} value={text} />
+            <S.StyledInput id={text} type="radio" {...register(`${name}`)} value={text} />
             <S.StyledLabel htmlFor={text}>{text}</S.StyledLabel>
           </div>
         ))}
