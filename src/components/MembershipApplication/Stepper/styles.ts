@@ -50,7 +50,7 @@ export const IndicatorContainer = styled.div`
   gap: 4px;
 `;
 
-const activeStyle = ({ active, theme }: { active: boolean; theme: DefaultTheme }) =>
+const activeStyle = (active: boolean, theme: DefaultTheme) =>
   active &&
   css`
     ${theme.typo.caption1_12_B};
@@ -60,7 +60,9 @@ const activeStyle = ({ active, theme }: { active: boolean; theme: DefaultTheme }
     box-shadow: 0px 5px 10px 0px rgba(118, 93, 68, 0.3);
   `;
 
-export const IndicatorButton = styled.button<{ active: boolean }>`
+export const IndicatorButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "active"
+})<{ active: boolean }>`
   display: flex;
   width: 100%;
   padding: 4px;
@@ -74,5 +76,5 @@ export const IndicatorButton = styled.button<{ active: boolean }>`
 
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.gray_2};
-  ${({ theme, active }) => activeStyle({ active, theme })}
+  ${({ theme, active }) => activeStyle(active, theme)}
 `;
