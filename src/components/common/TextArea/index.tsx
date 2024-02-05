@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useImperativeHandle, forwardRef } from "react
 import { UseFormRegister, FieldValues } from "react-hook-form";
 
 import * as S from "./styles";
+import { useForm } from "react-hook-form";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   autoResize?: boolean;
@@ -17,6 +18,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     { autoResize = true, resizable = false, readOnly = false, rows = 1, register, name, ...props },
     forwardedRef
   ) => {
+    const { register } = useForm();
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
     useImperativeHandle(forwardedRef, () => textAreaRef.current!);
