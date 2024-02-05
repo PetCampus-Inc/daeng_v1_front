@@ -30,7 +30,8 @@ const DropDown = ({
     }
   }, [inputValue]);
 
-  const handleClick = (value: { breedName: string; breedId: number } | string) => {
+  const handleClick = (e: any, value: { breedName: string; breedId: number } | string) => {
+    e.stopPropagation();
     if (typeof value === "object") {
       // 견종 드롭다운
       setInputValue(value.breedName);
@@ -39,7 +40,7 @@ const DropDown = ({
       // 생일 드롭다운
       setInputValue(value);
     }
-    setIsOpen(!isOpen);
+    setIsOpen(false);
   };
 
   // 견종 드롭다운 (검색 결과X)
@@ -65,7 +66,7 @@ const DropDown = ({
         <S.ListItem
           key={index}
           className={inputValue === value ? "chosen" : ""}
-          onClick={() => handleClick(value)}
+          onClick={(e) => handleClick(e, value)}
           ref={inputValue === value ? chosenItemRef : null}
         >
           {typeof value === "object" && "breedName" in value ? value.breedName : value}
