@@ -8,7 +8,7 @@ interface IDayMultiCheck extends ISelect {
 }
 
 // 요일 복수 선택
-const DayMultiCheck = ({ id, caption, openDays }: IDayMultiCheck) => {
+const DayMultiCheck = ({ name, caption, openDays }: IDayMultiCheck) => {
   const { register } = useFormContext();
 
   return (
@@ -20,7 +20,7 @@ const DayMultiCheck = ({ id, caption, openDays }: IDayMultiCheck) => {
             <S.StyledInput
               id={day}
               type="checkbox"
-              {...register(`${id}`)}
+              {...register(`${name}`)}
               value={day}
               disabled={!openDays.includes(day)}
             />

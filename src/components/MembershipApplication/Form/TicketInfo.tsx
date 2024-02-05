@@ -4,10 +4,10 @@ import { Card } from "./styles";
 import SingleRadio from "components/common/Select/SingleRadio";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import { Caption } from "components/common/Select/styles";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 const TicketInfo = () => {
-  const methods = useForm();
+  const methods = useFormContext();
 
   // TODO: API 연동 시 13~15줄 제거
   const openDays = ["월", "화", "금", "토", "일"];
@@ -21,9 +21,8 @@ const TicketInfo = () => {
     <>
       <Card>
         <Title>가격 안내</Title>
-        <TextArea name="priceInfo" readOnly>
-          TODO: 16.priceInfo (가격 안내) 데이터 가져오기
-        </TextArea>
+        {/* TODO: 16.priceInfo (가격 안내) 데이터 가져오기 */}
+        <TextArea name="priceInfo" readOnly value={"16번 데이터 넣어주세요"} resizable={false} />
       </Card>
       <Card>
         <Title>이용권 종류</Title>
@@ -50,7 +49,8 @@ const TicketInfo = () => {
       <Card>
         <Title>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea readOnly>TODO: 21. ticketInfo (회차권 유의사항 )</TextArea>
+        {/* TODO: 21. ticketInfo (회차권 유의사항 ) */}
+        <TextArea readOnly value={"21번 데이터 넣어주세요"} resizable={false} />
         {/* TODO: 동의합니다 BasicCheckBox 넣어주기*/}
       </Card>
     </>
