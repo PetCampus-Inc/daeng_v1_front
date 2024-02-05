@@ -1,6 +1,4 @@
 export interface ISelect {
-  title: string;
+  id: string;
   caption?: string;
-  badgeText?: string;
-  badgeType?: string;
 }
