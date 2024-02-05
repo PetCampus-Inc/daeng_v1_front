@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import { useEnrollMutation } from "hooks/api/useEnrollMutation";
 
 import * as S from "./styles";
 
@@ -10,10 +11,16 @@ interface NavigationProps {
 }
 
 const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: NavigationProps) => {
-  const { handleSubmit } = useFormContext();
+  const {
+    handleSubmit,
+    formState: { isValid }
+  } = useFormContext();
+
+  const enrollMutation = useEnrollMutation();
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    // enrollMutation(data);
   });
 
   const isLastStep = currentStep === stepsLength - 1;
@@ -38,7 +45,12 @@ const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: Navigation
         )}
         {showNextButton(currentStep, stepsLength) && <S.Button onClick={nextStep}>다음</S.Button>}
         {isLastStep && (
-          <S.Button onClick={onSubmit} type="submit">
+          <S.Button
+            type="submit"
+            onClick={onSubmit}
+            aria-disabled={isValid ? "true" : undefined}
+            aria-label="제출하기"
+          >
             제출하기
           </S.Button>
         )}
