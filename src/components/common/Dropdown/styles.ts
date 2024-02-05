@@ -7,6 +7,7 @@ export const List = styled.ul<{ width: string }>`
   border-radius: 8px;
   width: ${({ width }) => width};
   max-height: 192px;
+  z-index: 2;
 
   overflow: scroll;
   scroll-snap-type: y mandatory;
@@ -42,4 +43,7 @@ export const ListItem = styled.li`
   scroll-snap-align: start;
   scroll-snap-stop: always;
   ${({ theme }) => theme.typo.body1_16_R}
+  &.chosen {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+  }
 `;
