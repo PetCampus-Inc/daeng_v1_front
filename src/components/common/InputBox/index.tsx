@@ -68,7 +68,7 @@ const InputBox = ({
         placeholder={placeholdText}
         type={type}
         value={inputValue}
-        onChange={onChange ? onChange : setInputValue}
+        onChange={onChange ? onChange : (e) => setInputValue(e.target.value)}
         onFocus={onFocus}
         onBlur={onBlur}
         color={color}
