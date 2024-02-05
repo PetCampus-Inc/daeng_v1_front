@@ -1,3 +1,6 @@
+import { useFormContext } from "react-hook-form";
+import { getCaptions } from "libs/common/captions";
+
 import * as S from "./styles";
 
 interface NavigationProps {
@@ -8,15 +11,21 @@ interface NavigationProps {
 }
 
 const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: NavigationProps) => {
-  let captions;
-  if (currentStep === stepsLength - 1) {
-    captions = [
-      "정보를 모두 입력해야 가입신청이 가능합니다.",
-      "제출하신 후에는 수정이 불가하니, 꼼꼼히 확인해 주세요."
-    ];
-  } else {
-    captions = ["정보를 모두 입력해야 가입신청이 가능합니다."];
-  }
+  const { handleSubmit } = useFormContext();
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
+
+  const captions = getCaptions(currentStep, stepsLength);
+
+  const showPrevButton = (currentStep: number, stepsLength: number) => {
+    return currentStep > 0 && currentStep < stepsLength - 1;
+  };
+
+  const showNextButton = (currentStep: number, stepsLength: number) => {
+    return currentStep < stepsLength - 1;
+  };
 
   return (
     <S.ButtonContainer>
@@ -26,11 +35,15 @@ const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: Navigation
         ))}
       </S.Caption>
       <S.ButtonWrapper>
-        {currentStep > 0 && currentStep < stepsLength - 1 && (
+        {showPrevButton(currentStep, stepsLength) && (
           <S.PrevButton onClick={prevStep}>이전</S.PrevButton>
         )}
-        {currentStep < stepsLength - 1 && <S.Button onClick={nextStep}>다음</S.Button>}
-        {currentStep === stepsLength - 1 && <S.Button type="submit">제출하기</S.Button>}
+        {showNextButton(currentStep, stepsLength) && <S.Button onClick={nextStep}>다음</S.Button>}
+        {currentStep === stepsLength - 1 && (
+          <S.Button onClick={onSubmit} type="submit">
+            제출하기
+          </S.Button>
+        )}
       </S.ButtonWrapper>
     </S.ButtonContainer>
   );
