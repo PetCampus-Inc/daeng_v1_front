@@ -38,6 +38,12 @@ export const Button = styled.button`
 
   ${({ theme }) => theme.typo.label1_16_B};
   color: ${({ theme }) => theme.colors.white};
+
+  &[aria-disabled="true"] {
+    background-color: ${({ theme }) => theme.colors.gray_4};
+    color: ${({ theme }) => theme.colors.gray_2};
+    tabindex: -1;
+  }
 `;
 
 export const PrevButton = styled(Button)`
