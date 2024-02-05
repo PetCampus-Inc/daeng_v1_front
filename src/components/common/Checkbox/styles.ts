@@ -1,11 +1,29 @@
-import styled from "styled-components";
+import styled, { DefaultTheme, css } from "styled-components";
+import type { CheckboxProps } from "./index";
 
-export const CheckboxContainer = styled.label`
+const variantStyles = (theme: DefaultTheme) => ({
+  square: css`
+    padding: 14px;
+    border-radius: 12px;
+    background: ${theme.colors.gray_5};
+    &.checked {
+      background: ${theme.colors.br_4};
+    }
+  `
+});
+
+export const CheckboxContainer = styled.label.withConfig({
+  shouldForwardProp: (prop) => prop !== "variant"
+})<{ variant: CheckboxProps["variant"] }>`
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   vertical-align: top;
   position: relative;
+  gap: 11px;
+
+  transition: background-color 0.2s ease;
+  ${({ theme, variant }) => variant === "square" && variantStyles(theme)[variant]};
 `;
 
 export const HiddenCheckbox = styled.input`
@@ -22,7 +40,7 @@ export const HiddenCheckbox = styled.input`
   border-radius: 50%;
 
   &:focus-visible + span {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.br_3};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.br_3};
   }
 `;
 
@@ -35,21 +53,20 @@ export const Checkbox = styled.span`
   width: 20px;
   height: 20px;
   position: relative;
-  margin-right: 0.5em;
 
-  border: 2px solid ${({ theme }) => theme.gray_4};
+  border: 2px solid ${({ theme }) => theme.colors.gray_4};
   border-radius: 50%;
 
-  background: ${({ theme }) => theme.gray_4};
+  background: ${({ theme }) => theme.colors.gray_4};
 
   &.checked {
-    background: ${({ theme }) => theme.primaryColor};
-    border-color: ${({ theme }) => theme.primaryColor};
-    color: ${({ theme }) => theme.white};
+    background: ${({ theme }) => theme.colors.primaryColor};
+    border-color: ${({ theme }) => theme.colors.primaryColor};
+    color: ${({ theme }) => theme.colors.white};
   }
 
   &[aria-disabled="true"] {
-    background: ${({ theme }) => theme.gray_4};
+    background: ${({ theme }) => theme.colors.gray_4};
     border: none;
     cursor: not-allowed;
     opacity: 0.6;
@@ -57,8 +74,8 @@ export const Checkbox = styled.span`
   }
 
   &[aria-disabled="true"].checked {
-    background: ${({ theme }) => theme.gray_3};
-    border-color: ${({ theme }) => theme.gray_3};
+    background: ${({ theme }) => theme.colors.gray_3};
+    border-color: ${({ theme }) => theme.colors.gray_3};
   }
 
   .checkbox-icon {
@@ -67,7 +84,7 @@ export const Checkbox = styled.span`
     display: inline-block;
     line-height: 1em;
     flex-shrink: 0;
-    color: ${({ theme }) => theme.gray_3};
+    color: ${({ theme }) => theme.colors.gray_3};
     vertical-align: middle;
     font-size: 1rem;
     transition-property: transform;
@@ -75,13 +92,13 @@ export const Checkbox = styled.span`
   }
 
   &.checked .checkbox-icon {
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.colors.white};
     animation: checking 200ms linear;
   }
 
   &[aria-disabled="disabled"] .checkbox-icon,
   &[aria-disabled="disabled"].checked .checkbox-icon {
-    color: ${({ theme }) => theme.white};
+    color: ${({ theme }) => theme.colors.white};
   }
 
   @keyframes checking {
@@ -99,14 +116,17 @@ export const Checkbox = styled.span`
 `;
 
 export const LabelText = styled.span`
+  &.checked {
+    color: ${({ theme }) => theme.colors.gray_1};
+  }
+
   &[aria-disabled="true"] {
-    color: ${({ theme }) => theme.gray_2};
+    color: ${({ theme }) => theme.colors.gray_2};
     tabindex: -1;
   }
 
   ${({ theme }) => theme.typo.label1_16_R};
-  color: ${({ theme }) => theme.gray_1};
+  color: ${({ theme }) => theme.colors.gray_2};
 
-  margin-inline-start: 0.5rem;
   user-select: none;
 `;
