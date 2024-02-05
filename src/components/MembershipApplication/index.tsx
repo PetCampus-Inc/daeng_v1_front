@@ -1,4 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
+import { useEnrollQuery } from "hooks/api/useEnrollQuery";
 import useStep from "hooks/useStep";
 
 import MemberInfo from "./Form/MemberInfo";
@@ -7,9 +8,9 @@ import PolicyInfo from "./Form/PolicyInfo";
 import PickDropInfo from "./Form/PickDropInfo";
 import TicketInfo from "./Form/TicketInfo";
 import Navigation from "./Stepper/Navigation";
+import Indicator from "./Stepper/Indicator";
 
 import * as S from "./styles";
-import Indicator from "./Stepper/Indicator";
 
 // FIXME: 이 부분 위치 수정 필요합니다.
 const step = [
@@ -41,6 +42,10 @@ const step = [
 ];
 
 const MembershipApplication = () => {
+  const { enlistmentQuery } = useEnrollQuery({ memberId: "1", schoolId: "1" });
+  const { requiredItemsMap, memberInfo, pickDropInfo, policyInfo, ticketInfo } =
+    enlistmentQuery.data;
+
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false
@@ -62,11 +67,13 @@ const MembershipApplication = () => {
       </S.TopWrapper>
       <FormProvider {...methods}>
         <S.ContentWrapper>
-          {currentStep === 0 && <MemberInfo />}
-          {currentStep === 1 && <DogInfo />}
-          {currentStep === 2 && <TicketInfo />}
-          {currentStep === 3 && <PolicyInfo />}
-          {currentStep === 4 && <PickDropInfo />}
+          {currentStep === 0 && <MemberInfo info={memberInfo} requiredItems={requiredItemsMap} />}
+          {currentStep === 1 && <DogInfo requiredItems={requiredItemsMap} />}
+          {currentStep === 2 && <TicketInfo info={ticketInfo} requiredItems={requiredItemsMap} />}
+          {currentStep === 3 && <PolicyInfo info={policyInfo} requiredItems={requiredItemsMap} />}
+          {currentStep === 4 && (
+            <PickDropInfo info={pickDropInfo} requiredItems={requiredItemsMap} />
+          )}
         </S.ContentWrapper>
         <Navigation
           currentStep={currentStep}
