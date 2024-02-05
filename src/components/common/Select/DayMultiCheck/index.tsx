@@ -1,30 +1,26 @@
 import * as S from "../styles";
-import Text from "components/common/Text";
 import { useFormContext } from "react-hook-form";
 import { ISelect } from "../select.type";
+import { WEEKDAYS } from "constants/date";
 
-interface IMultiCheckbox extends ISelect {
+interface IDayMultiCheck extends ISelect {
   openDays: string[];
 }
 
-const MultiCheckbox = ({ title, caption, badgeText, badgeType, openDays }: IMultiCheckbox) => {
+// 요일 복수 선택
+const DayMultiCheck = ({ id, caption, openDays }: IDayMultiCheck) => {
   const { register } = useFormContext();
-  const weekdays = ["월", "화", "수", "목", "금", "토", "일"];
 
   return (
     <S.Container>
-      <S.TitleContainer>
-        <Text text={title} />
-        {/* <Badge text={badgeText} type={badgeType}/>  */}
-      </S.TitleContainer>
       {caption && <S.Caption>{caption}</S.Caption>}
       <S.RadioContainer>
-        {weekdays.map((day) => (
+        {WEEKDAYS.map((day) => (
           <div style={{ width: "100%" }} key={day}>
             <S.StyledInput
               id={day}
               type="checkbox"
-              {...register(`${title}`)}
+              {...register(`${id}`)}
               value={day}
               disabled={!openDays.includes(day)}
             />
@@ -36,4 +32,4 @@ const MultiCheckbox = ({ title, caption, badgeText, badgeType, openDays }: IMult
   );
 };
 
-export default MultiCheckbox;
+export default DayMultiCheck;
