@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import DropDown from "components/common/Dropdown";
-import InputBox from "components/common/InputBox";
 import useDetectClose from "hooks/useDetectClose";
 import useGetBreed from "hooks/useGetBreed";
+import SearchInputField from "components/common/InputField/SearchInputField";
+import { useFormContext } from "react-hook-form";
 
 interface IBreedInput {
+  name: string;
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   chosenBreedId: number | null;
@@ -13,20 +15,22 @@ interface IBreedInput {
 }
 
 const BreedInput = ({
+  name,
   inputValue,
   setInputValue,
   chosenBreedId,
   setChosenBreedId,
   width = "100%"
 }: IBreedInput) => {
+  const { control } = useFormContext();
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
   const { data, refetch, isSuccess, error } = useGetBreed(inputValue);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    setChosenBreedId(null);
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setInputValue(e.target.value);
+  //   setChosenBreedId(null);
+  // };
 
   useEffect(() => {
     // 아무것도 입력되지 않았거나 정상적으로 선택되었을 때
@@ -44,7 +48,15 @@ const BreedInput = ({
 
   return (
     <div ref={dropDownRef} style={{ position: "relative" }}>
-      <InputBox
+      <SearchInputField
+        name={name}
+        control={control}
+        placeholder="견종을 입력해주세요"
+        onChange={() => {
+          setChosenBreedId(null);
+        }}
+      />
+      {/* <InputBox
         type="search"
         width={width}
         height="48px"
@@ -59,7 +71,7 @@ const BreedInput = ({
           setInputValue("");
           setChosenBreedId(null);
         }}
-      />
+      /> */}
       {isOpen && isSuccess && data && (
         <DropDown
           dropDownList={data.data}
