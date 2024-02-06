@@ -21,7 +21,7 @@ const BreedInput = ({
 }: IBreedInput) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
-  const { data, refetch, isSuccess } = useGetBreed(inputValue);
+  const { data, refetch, isSuccess, error } = useGetBreed(inputValue);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -40,7 +40,7 @@ const BreedInput = ({
     }, 270);
     setIsOpen(true);
     return () => clearTimeout(timer);
-  }, [inputValue]);
+  }, [inputValue, chosenBreedId]);
 
   return (
     <div ref={dropDownRef} style={{ position: "relative" }}>
@@ -60,9 +60,9 @@ const BreedInput = ({
           setChosenBreedId(null);
         }}
       />
-      {isOpen && isSuccess && (
+      {isOpen && isSuccess && data && (
         <DropDown
-          dropDownList={data!.data}
+          dropDownList={data.data}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           setInputValue={setInputValue}
@@ -70,6 +70,8 @@ const BreedInput = ({
           setChosenBreedId={setChosenBreedId}
         />
       )}
+      {/* TODO: 기획에 질문 에러 발생 시 재시도 해달라는 모달 or 바텀시트 생기게 수정  */}
+      {error && <div>추후 토스트 처리</div>}
     </div>
   );
 };
