@@ -29,7 +29,11 @@ const SearchInputField = <TFieldValues extends FieldValues>({
   };
 
   const handleSearch = () => {
+<<<<<<< HEAD
     onSearch && onSearch(value);
+=======
+    onSearch && onSearch(inputValue);
+>>>>>>> a7fe806 (Feat: Change inputbox to inputfield component in BreedInput)
   };
 
   return (
@@ -47,8 +51,13 @@ const SearchInputField = <TFieldValues extends FieldValues>({
           }
         }}
       />
+<<<<<<< HEAD
       {!value ? (
         <S.SearchInputButton onClick={() => onSearch && onSearch(value)}>
+=======
+      {!inputValue ? (
+        <S.SearchInputButton onClick={handleSearch}>
+>>>>>>> a7fe806 (Feat: Change inputbox to inputfield component in BreedInput)
           <img src="/images/search.png" alt="search-icon" />
         </S.SearchInputButton>
       ) : (

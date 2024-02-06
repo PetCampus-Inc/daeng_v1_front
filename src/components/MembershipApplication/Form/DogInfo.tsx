@@ -42,6 +42,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
         <BreedInput
+          name="dogBreed"
           inputValue={inputValue}
           setInputValue={setInputValue}
           chosenBreedId={chosenBreedId}
