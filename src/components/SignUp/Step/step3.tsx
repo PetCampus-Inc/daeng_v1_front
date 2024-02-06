@@ -8,7 +8,7 @@ import {
 import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
-import useShowPw from "hooks/useShowPw";
+import useShowPw from "hooks/common/useShowPw";
 import Button from "components/common/Button";
 import { TEACHER } from "constants/className";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";

@@ -1,6 +1,6 @@
 import { Container, StyledNavBtn, StyledImage } from "./styles";
 import { memo } from "react";
-import usePathParams from "hooks/usePathParams";
+import usePathParams from "hooks/common/usePathParams";
 import Text from "../Text";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Attendance from "assets/svg/attendance";

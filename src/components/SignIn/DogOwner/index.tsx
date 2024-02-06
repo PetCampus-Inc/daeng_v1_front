@@ -2,7 +2,7 @@ import Complete from "components/SignUp/Step/complete";
 import Step1 from "components/SignUp/Step/step1";
 import Step2 from "components/SignUp/Step/step2";
 import { DOGOWNER } from "constants/className";
-import useSignUp from "hooks/useSignUp";
+import useSignUp from "hooks/api/useSignUp";
 import { Dispatch, SetStateAction, memo } from "react";
 
 interface Props {

@@ -1,7 +1,7 @@
 import { memo, Dispatch, SetStateAction } from "react";
 import Step1 from "../Step/step1";
 import Step2 from "../Step/step2";
-import useSignUp from "hooks/useSignUp";
+import useSignUp from "hooks/api/useSignUp";
 import Step3 from "../Step/step3";
 import Complete from "../Step/complete";
 import { TEACHER } from "constants/className";

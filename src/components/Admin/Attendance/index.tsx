@@ -24,10 +24,10 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import InputBox from "components/common/InputBox";
 import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
-import useGetAttendance from "hooks/useGetAttendance";
+import useGetAttendance from "hooks/api/useGetAttendance";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { dogListInfoAtom, adminLoginInfoAtom } from "store/admin";
-import useFocus from "hooks/useFocus";
+import useFocus from "hooks/common/useFocus";
 import { handleDeleteDog } from "apis/attendance";
 import { IAttendanceInfo } from "types/Attendance.type";
 import Mode from "./Mode";
@@ -35,7 +35,7 @@ import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
 import CallModal from "./CallModal";
 import ButtonModal from "components/common/ButtonModal";
-import useGetSearchList from "hooks/useGetSearchList";
+import useGetSearchList from "hooks/api/useGetSearchList";
 
 interface Props {
   setIsNavHidden: Dispatch<SetStateAction<boolean>>;

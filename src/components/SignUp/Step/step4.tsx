@@ -7,7 +7,7 @@ import Button from "components/common/Button";
 import { PHONE_REGEX, REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Postcode from "components/SignUp/Postcode";
-import useSignUp from "hooks/useSignUp";
+import useSignUp from "hooks/api/useSignUp";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 
 interface Props {
