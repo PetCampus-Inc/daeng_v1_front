@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SingleRadio from "components/common/Select/SingleRadio";
-import BreedInput from "../ChooseBreed";
+import BreedInput from "../BreedInput";
 import SelectNumber from "components/common/Select/SelectNumber";
 import { daysArray, monthsArray, yearsArray } from "constants/date";
 import Title from "components/common/Title";
@@ -52,9 +52,19 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber numberList={yearsArray} initialValue={"2000"} />
-          <SelectNumber numberList={monthsArray} initialValue={"01"} />
-          <SelectNumber numberList={daysArray} initialValue={"01"} />
+          <SelectNumber
+            name="year"
+            numberList={yearsArray}
+            initialValue={"2000"}
+            register={register}
+          />
+          <SelectNumber
+            name="month"
+            numberList={monthsArray}
+            initialValue={"01"}
+            register={register}
+          />
+          <SelectNumber name="day" numberList={daysArray} initialValue={"01"} register={register} />
         </div>
       </Card>
       <Card>
