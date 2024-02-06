@@ -48,7 +48,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         readOnly={readOnly}
         onChange={handleChange}
         rows={rows}
-        value={props.value ? props.value : ""}
         {...(name && register && register(name))}
         {...props}
       />
