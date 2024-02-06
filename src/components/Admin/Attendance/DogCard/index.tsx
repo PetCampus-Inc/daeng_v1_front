@@ -148,8 +148,8 @@ const DogCard = ({
       onClick={className === "MODE" ? undefined : handleCardClick}
       backcolor={
         selectedCareDogId?.includes(attendanceId || -1)
-          ? `${ThemeConfig.br_4}`
-          : `${ThemeConfig.white}`
+          ? `${ThemeConfig.colors.br_4}`
+          : `${ThemeConfig.colors.white}`
       }
     >
       <StyledImage
@@ -158,7 +158,7 @@ const DogCard = ({
       />
       <StyledTextWrapper>
         {className === "MODE" || className === "CARE" ? (
-          <Text text={name} weight="700" color={ThemeConfig.darkBlack} />
+          <Text text={name} weight="700" color={ThemeConfig.colors.darkBlack} />
         ) : (
           <>
             <Text
@@ -166,8 +166,8 @@ const DogCard = ({
               color={
                 (currentRounds === 0 && monthlyTicket === null) ||
                 (currentRounds === 0 && isExpired)
-                  ? ThemeConfig.gray_2
-                  : ThemeConfig.darkBlack
+                  ? ThemeConfig.colors.gray_2
+                  : ThemeConfig.colors.darkBlack
               }
               weight="700"
             />
@@ -203,8 +203,8 @@ const DogCard = ({
                 color={
                   (currentRounds === 0 && monthlyTicket === null) ||
                   (currentRounds === 0 && isExpired)
-                    ? ThemeConfig.gray_2
-                    : ThemeConfig.primaryColor
+                    ? ThemeConfig.colors.gray_2
+                    : ThemeConfig.colors.primaryColor
                 }
                 size="0.8rem"
                 margintop="0.1rem"
@@ -253,8 +253,8 @@ const DogCard = ({
                 text={option}
                 size="0.9rem"
                 justify="flex-start"
-                backcolor={ThemeConfig.white}
-                textcolor={ThemeConfig.gray_2}
+                backcolor={ThemeConfig.colors.white}
+                textcolor={ThemeConfig.colors.gray_2}
                 handleClick={(e) => {
                   handleOptionClick(e, option);
                 }}
@@ -286,8 +286,8 @@ const DogCard = ({
                 text={option}
                 size="0.9rem"
                 justify="flex-start"
-                backcolor={ThemeConfig.white}
-                textcolor={ThemeConfig.gray_2}
+                backcolor={ThemeConfig.colors.white}
+                textcolor={ThemeConfig.colors.gray_2}
                 handleClick={(e) => {
                   handleOptionClick(e, option);
                 }}

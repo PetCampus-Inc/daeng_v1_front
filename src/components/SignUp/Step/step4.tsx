@@ -177,16 +177,16 @@ const Step4 = ({
                 !isSchoolPhoneValid ||
                 !confirmedSchoolNum ||
                 schoolAddress === ""
-                  ? ThemeConfig.gray_5
-                  : ThemeConfig.primaryColor
+                  ? ThemeConfig.colors.gray_5
+                  : ThemeConfig.colors.primaryColor
               }
               textcolor={
                 schoolName === "" ||
                 !isSchoolPhoneValid ||
                 !confirmedSchoolNum ||
                 schoolAddress === ""
-                  ? ThemeConfig.gray_2
-                  : ThemeConfig.white
+                  ? ThemeConfig.colors.gray_2
+                  : ThemeConfig.colors.white
               }
             />
           </StyledBottomWrapper>

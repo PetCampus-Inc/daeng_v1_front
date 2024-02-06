@@ -77,7 +77,7 @@ export const PayTextWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.yellow_2};
+  background-color: ${(props) => props.theme.colors.yellow_2};
   border-radius: 1rem;
 `;
 
@@ -97,7 +97,7 @@ export const StyledCalendarWrapper = styled.div`
 
   .react-calendar__month-view {
     abbr {
-      color: ${(props) => props.theme.gray_1};
+      color: ${(props) => props.theme.colors.gray_1};
     }
   }
 
@@ -116,7 +116,7 @@ export const StyledCalendarWrapper = styled.div`
 
   .react-calendar__navigation button:disabled {
     background-color: white;
-    color: ${(props) => props.theme.darkBlack};
+    color: ${(props) => props.theme.colors.darkBlack};
   }
 
   .react-calendar__navigation__label {
@@ -129,24 +129,24 @@ export const StyledCalendarWrapper = styled.div`
   }
 
   .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
-    color: ${(props) => props.theme.red_1};
+    color: ${(props) => props.theme.colors.red_1};
   }
 
   .react-calendar__tile--now {
     background: none;
     abbr {
-      color: ${(props) => props.theme.primary_2};
+      color: ${(props) => props.theme.colors.primary_2};
     }
   }
 
   .react-calendar__year-view__months__month {
     border-radius: 0.8rem;
-    background-color: ${(props) => props.theme.gray_5};
+    background-color: ${(props) => props.theme.colors.gray_5};
     padding: 0;
   }
 
   .react-calendar__tile--hasActive {
-    background-color: ${(props) => props.theme.primary_2};
+    background-color: ${(props) => props.theme.colors.primary_2};
     abbr {
       color: white;
     }
@@ -165,13 +165,13 @@ export const StyledCalendarWrapper = styled.div`
     padding: 20px 6.6667px;
     font-size: 0.9rem;
     font-weight: 600;
-    color: ${(props) => props.theme.gray_1};
+    color: ${(props) => props.theme.colors.gray_1};
   }
 
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus,
   .react-calendar__tile--active {
-    background-color: ${(props) => props.theme.yellow_2};
+    background-color: ${(props) => props.theme.colors.yellow_2};
     border-radius: 0.3rem;
   }
 `;
@@ -182,8 +182,8 @@ export const StyledDate = styled.div`
   position: absolute;
   right: 7%;
   top: 6%;
-  background-color: ${(props) => props.theme.primary_3};
-  color: ${(props) => props.theme.yellow_2};
+  background-color: ${(props) => props.theme.colors.primary_3};
+  color: ${(props) => props.theme.colors.yellow_2};
   width: 15%;
   min-width: fit-content;
   height: 1.5rem;
@@ -197,7 +197,7 @@ export const StyledDate = styled.div`
 
 export const StyledToday = styled.div`
   font-size: x-small;
-  color: ${(props) => props.theme.br_2};
+  color: ${(props) => props.theme.colors.br_2};
   font-weight: 600;
   position: absolute;
   top: 50%;
@@ -206,7 +206,7 @@ export const StyledToday = styled.div`
 `;
 
 export const StyledDot = styled.div`
-  background-color: ${(props) => props.theme.br_2};
+  background-color: ${(props) => props.theme.colors.br_2};
   border-radius: 50%;
   width: 0.3rem;
   height: 0.3rem;

@@ -44,7 +44,7 @@ const InputBoxAndText = ({
       </StyledTextWrapper>
       <InputBox
         color={
-          !confirmedId && errorText ? ThemeConfig.red_1 : ThemeConfig.black
+          !confirmedId && errorText ? ThemeConfig.colors.red_1 : ThemeConfig.colors.black
         }
         className={className}
         height="100%"

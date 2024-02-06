@@ -7,7 +7,7 @@ export const Container = styled.div<{ padding_top?: string }>`
   padding-top: ${(props) => (props.padding_top ? props.padding_top : "40%")};
   padding-left: 5%;
   padding-right: 5%;
-  background-color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.colors.white};
   justify-content: space-evenly;
 `;
 
@@ -27,7 +27,7 @@ export const Keyword = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
   margin-bottom: 5px;
-  color: ${(props) => props.theme.primaryColor};
+  color: ${(props) => props.theme.colors.primaryColor};
 `;
 
 export const ButtonWrapper = styled.div`
@@ -78,9 +78,9 @@ export const StyledSelectRoleWrapper = styled.div`
 `;
 
 export const StyledLink = styled(Link)`
-  color: ${(props) => props.theme.gray_2};
+  color: ${(props) => props.theme.colors.gray_2};
   font-weight: 600;
   &:visited {
-    color: ${(props) => props.theme.gray_2};
+    color: ${(props) => props.theme.colors.gray_2};
   }
 `;

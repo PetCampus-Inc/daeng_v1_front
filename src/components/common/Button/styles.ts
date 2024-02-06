@@ -22,9 +22,9 @@ export const StyledMainWrapper = styled.div<{
   justify-content: ${(props) => (props.justify ? props.justify : "center")};
   align-items: center;
   cursor: pointer;
-  color: ${(props) => (props.textcolor ? props.textcolor : props.theme.white)};
+  color: ${(props) => (props.textcolor ? props.textcolor : props.theme.colors.white)};
   background-color: ${(props) =>
-    props.backcolor ? props.backcolor : props.theme.primaryColor};
+    props.backcolor ? props.backcolor : props.theme.colors.primaryColor};
   border: ${(props) => (props.border ? props.border : "none")};
   border-radius: ${(props) => (props.radius ? props.radius : "8px")};
   font-weight: ${(props) => (props.weight ? props.weight : "400")};

@@ -28,7 +28,7 @@ const Complete = ({ setCurrentMainStep, selectedSearchText, schoolName, classNam
           size="1.4rem"
           weight="bold"
           height="2rem"
-          color={ThemeConfig.primaryColor}
+          color={ThemeConfig.colors.primaryColor}
         />
         <Text
           text={
@@ -43,7 +43,7 @@ const Complete = ({ setCurrentMainStep, selectedSearchText, schoolName, classNam
           height="2rem"
         />
         {className === TEACHER && (
-          <Text text={"승인 완료시 알림으로 알려드릴게요"} size="1rem" color={ThemeConfig.gray_3} />
+          <Text text={"승인 완료시 알림으로 알려드릴게요"} size="1rem" color={ThemeConfig.colors.gray_3} />
         )}
       </TextWrapper>
       <StyledBottomWrapper height={className === DOGOWNER ? "7%" : "9%"}>
@@ -61,8 +61,8 @@ const Complete = ({ setCurrentMainStep, selectedSearchText, schoolName, classNam
               handleClick={() => {
                 setCurrentMainStep(0);
               }}
-              backcolor={ThemeConfig.primaryColor}
-              textcolor={ThemeConfig.white}
+              backcolor={ThemeConfig.colors.primaryColor}
+              textcolor={ThemeConfig.colors.white}
             />
           </StyledLink>
         </>

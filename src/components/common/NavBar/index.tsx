@@ -34,8 +34,8 @@ const Navbar = ({ type, show, attendance }: Props) => {
               text="출석부"
               color={
                 path === PATH.ADMIN_ATTENDANCE || PATH.ADMIN_DOG_INFO
-                  ? ThemeConfig.primaryColor
-                  : ThemeConfig.gray_3
+                  ? ThemeConfig.colors.primaryColor
+                  : ThemeConfig.colors.gray_3
               }
               weight={(path === PATH.ADMIN_ATTENDANCE || PATH.ADMIN_DOG_INFO) && "bold"}
               size="0.9rem"
@@ -45,7 +45,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
             {path === "/" ? <GrayCheckBoard /> : <GrayCheckBoard />}
             <Text
               text="강아지 관리"
-              color={path === "/" ? ThemeConfig.primaryColor : ThemeConfig.gray_3}
+              color={path === "/" ? ThemeConfig.colors.primaryColor : ThemeConfig.colors.gray_3}
               size="0.9rem"
             />
           </StyledNavBtn>
@@ -53,7 +53,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
             <School />
             <Text
               text="유치원 운영"
-              color={path === "/" ? ThemeConfig.primaryColor : ThemeConfig.gray_3}
+              color={path === "/" ? ThemeConfig.colors.primaryColor : ThemeConfig.colors.gray_3}
               size="0.9rem"
             />
           </StyledNavBtn>
@@ -61,7 +61,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
             <MyPageDog />
             <Text
               text="마이페이지"
-              color={path === "/" ? ThemeConfig.primaryColor : ThemeConfig.gray_3}
+              color={path === "/" ? ThemeConfig.colors.primaryColor : ThemeConfig.colors.gray_3}
               size="0.9rem"
             />
           </StyledNavBtn>
