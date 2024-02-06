@@ -12,16 +12,6 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const TitleContainer = styled.div`
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  user-select: none;
-`;
-
 export const Caption = styled.p`
   color: ${({ theme }) => theme.colors.gray_3};
   font-weight: 400;
