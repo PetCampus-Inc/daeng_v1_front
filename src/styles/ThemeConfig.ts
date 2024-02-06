@@ -30,14 +30,14 @@ export const ThemeConfig = {
   yellow_1: "#FFD12D",
   yellow_2: "#FFF0C8",
   yellow_3: "#FFF7E1",
-  
+
   gray_1: "#525252",
   gray_2: "#858585",
   gray_3: "#B5B5B5",
   gray_4: "#E9E9E9",
   gray_5: "#F6F6F6",
   green: "#5BBA70",
-  
+
   secondColor: "#D5A4CF",
   thirdColor: "#F9BCDD",
   fourthColor: "#74445A",
@@ -45,7 +45,7 @@ export const ThemeConfig = {
   navBg: "#ffc078",
   lightMainColor: "#fdf1e8",
   interfaceBg: "#f7f9fc",
-  
+
   colors: {
     gray_1: "#525252",
     gray_2: "#858585",
@@ -65,7 +65,7 @@ export const ThemeConfig = {
     br_3: "#E4CAB1",
     br_4: "#EEE3D9",
     green: "#5BBA70",
-    
+
     yellow_1: "#FFD12D",
     yellow_2: "#FFF0C8",
     yellow_3: "#FFF7E1",
@@ -77,7 +77,7 @@ export const ThemeConfig = {
     lightMainColor: "#fdf1e8",
     interfaceBg: "#f7f9fc"
   },
-  
+
   shadows: {
     upper: "0px 5px 10px rgba(0, 0, 0, 0.04)",
     card: "0px 8px 15px rgba(0, 0, 0, 0.04)",
@@ -87,7 +87,7 @@ export const ThemeConfig = {
     input: "0px -5px 10px rgba(0,0,0,0.04)",
     bottomTab: "0px -17px 39px -15px rgba(167,167,167,0.15)"
   },
-  
+
   typo: {
     title1_24_B: typoCreator("1.5rem", 700, "-1.2px", "32px"),
     title1_24_R: typoCreator("1.5rem", 400, "-1.2px", "26px"),
@@ -97,7 +97,7 @@ export const ThemeConfig = {
     body1_18_B: typoCreator("18px", 700, "-1.2px", "27px"),
     body1_18_R: typoCreator("18px", 400, "-1.2px", "26px"),
     body2_16_B: typoCreator("16px", 700, "-1.2px", "23px"),
-    body2_16_R: typoCreator("16px", 400, "-1.2px", "23px"),
+    body2_16_R: typoCreator("16px", 400, "-0.192px", "23px"),
     label1_16_B: typoCreator("16px", 700, "-0.192px", "24px"),
     label1_16_M: typoCreator("16px", 500, "-1.2px", "24px"),
     label1_16_R: typoCreator("16px", 400, "-0.192px", "24px"),
