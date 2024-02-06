@@ -34,10 +34,12 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint": "eslint .ts,.tsx",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx --cache"
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx --cache",
+    "prettier:fix": "prettier --write '*.{js,jsx,ts,tsx}'"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "*/*.{js, jsx, ts, tsx}": [
+      "npm run prettier:fix",
       "npm run lint:fix"
     ]
   },
