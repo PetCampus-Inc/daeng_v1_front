@@ -1,13 +1,12 @@
 import React from "react";
-import { Control, FieldValues, Path, PathValue, useController } from "react-hook-form";
+import { Control, FieldValues, UseControllerProps, useController } from "react-hook-form";
 
 import * as S from "./styles";
 
 export interface InputFieldProps<TFieldValues extends FieldValues>
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "name"> {
-  name: Path<TFieldValues>;
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "name">,
+    UseControllerProps<TFieldValues> {
   control: Control<TFieldValues>;
-  defaultValue?: PathValue<TFieldValues, Path<TFieldValues>>;
 }
 
 const InputField = <TFieldValues extends FieldValues>({
@@ -15,7 +14,7 @@ const InputField = <TFieldValues extends FieldValues>({
 }: InputFieldProps<TFieldValues>) => {
   const { field } = useController({ ...props, name: props.name });
 
-  return <S.Input {...field} id={field.name} {...props} />;
+  return <S.Input {...field} id={field.name} value={field.value ? field.value : ""} {...props} />;
 };
 
 export default InputField;
