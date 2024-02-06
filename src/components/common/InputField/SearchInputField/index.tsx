@@ -7,7 +7,7 @@ import * as S from "./styles";
 
 interface SearchInputFieldProps<TFieldValues extends FieldValues>
   extends Omit<InputFieldProps<TFieldValues>, "type"> {
-  onSearch: (value: string) => void;
+  onSearch?: (value: string) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -28,7 +28,7 @@ const SearchInputField = <TFieldValues extends FieldValues>({
   };
 
   const handleSearch = () => {
-    onSearch(inputValue);
+    onSearch && onSearch(inputValue);
   };
 
   return (
@@ -47,7 +47,7 @@ const SearchInputField = <TFieldValues extends FieldValues>({
         }}
       />
       {!inputValue ? (
-        <S.SearchInputButton onClick={() => onSearch(inputValue)}>
+        <S.SearchInputButton onClick={handleSearch}>
           <img src="/images/search.png" alt="search-icon" />
         </S.SearchInputButton>
       ) : (
