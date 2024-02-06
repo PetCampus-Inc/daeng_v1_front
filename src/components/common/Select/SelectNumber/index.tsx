@@ -8,12 +8,15 @@ import {
 } from "components/common/InputBox/styles";
 import useDetectClose from "hooks/useDetectClose";
 import { IoIosArrowDown } from "react-icons/io";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface ISelectNumber {
   numberList: string[];
   initialValue: string;
   placeHolder?: string;
   width?: string;
+  name?: string;
+  register?: UseFormRegister<FieldValues>;
 }
 
 const SelectNumber = ({
@@ -21,6 +24,8 @@ const SelectNumber = ({
   initialValue,
   placeHolder,
   width = "100%",
+  name,
+  register,
   ...props
 }: ISelectNumber) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
@@ -36,6 +41,7 @@ const SelectNumber = ({
           color={ThemeConfig.colors.gray_2}
           placeholder={placeHolder}
           border={`1px solid ${ThemeConfig.colors.gray_4}`}
+          {...(name && register && register(name))}
           {...props}
         />
         <StyledButtonWrapper onClick={() => setIsOpen(!isOpen)}>
