@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import SingleRadio from "components/common/Select/SingleRadio";
 import BreedInput from "../ChooseBreed";
 import SelectNumber from "components/common/Select/SelectNumber";
