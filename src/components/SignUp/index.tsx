@@ -7,7 +7,7 @@ import { RoleConstants } from "constants/index";
 import Header from "components/common/Header";
 import Button from "components/common/Button";
 import { Link } from "react-router-dom";
-import useSignUp from "hooks/useSignUp";
+import useSignUp from "hooks/api/useSignUp";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { PATH } from "constants/path";
 

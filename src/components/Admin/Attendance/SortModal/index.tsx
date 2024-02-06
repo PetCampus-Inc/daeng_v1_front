@@ -3,7 +3,7 @@ import { Container, StyledButtonWrapper, StyledMainWrapper } from "./styles";
 import Button from "components/common/Button";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { Dispatch, SetStateAction } from "react";
-import useSortDogs from "hooks/useSortDogs";
+import useSortDogs from "hooks/api/useSortDogs";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 import { IAttendanceInfo } from "types/Attendance.type";

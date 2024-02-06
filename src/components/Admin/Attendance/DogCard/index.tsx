@@ -12,10 +12,10 @@ import Text from "components/common/Text";
 import { ThemeConfig } from "styles/ThemeConfig";
 import Button from "components/common/Button";
 import { handleCallMember, handleSendAlarm } from "apis/attendance";
-import GetExpirationDate from "hooks/useGetExpirationDate";
-import useFormatDate from "hooks/useFormatDate";
+import GetExpirationDate from "hooks/common/useGetExpirationDate";
+import useFormatDate from "hooks/common/useFormatDate";
 import { useNavigate } from "react-router-dom";
-import useGetDogDetail from "hooks/useGetDogDetail";
+import useGetDogDetail from "hooks/api/useGetDogDetail";
 import moment from "moment";
 import { PATH } from "constants/path";
 

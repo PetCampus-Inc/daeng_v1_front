@@ -9,7 +9,7 @@ import {
 } from "./styles";
 import Button from "components/common/Button";
 import { useEffect, useState } from "react";
-import useGetAttendance from "hooks/useGetAttendance";
+import useGetAttendance from "hooks/api/useGetAttendance";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom, attendCareDogListAtom } from "store/admin";
 import DogCard from "../Attendance/DogCard";

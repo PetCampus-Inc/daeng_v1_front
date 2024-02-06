@@ -15,7 +15,7 @@ import {
   StyledToday,
   StyledAlbumWrapper,
   StyledAlbums,
-  StyledDot,
+  StyledDot
 } from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
@@ -23,7 +23,7 @@ import CalendarIcon from "assets/svg/calendar";
 import Scale from "assets/svg/scale";
 import { useState } from "react";
 import moment from "moment";
-import useGetDogDetail from "hooks/useGetDogDetail";
+import useGetDogDetail from "hooks/api/useGetDogDetail";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -31,9 +31,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const DogInfo = () => {
   const today = new Date();
   const [date, setDate] = useState<Value>(today);
-  const [activeStartDate, setActiveStartDate] = useState<Date | null>(
-    new Date()
-  );
+  const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
   const { dogDetail } = useGetDogDetail();
   const attendDay = ["2023-12-03", "2023-12-13"]; // 삭제 예정 코드
 
@@ -66,12 +64,7 @@ const DogInfo = () => {
           />
           <InfoWrapper>
             <InfoTop>
-              <Text
-                text={"뽀뽀"}
-                color={ThemeConfig.darkBlack}
-                size="1.1rem"
-                weight="bold"
-              />
+              <Text text={"뽀뽀"} color={ThemeConfig.darkBlack} size="1.1rem" weight="bold" />
               <Text text="더보기 >" color={ThemeConfig.gray_1} size="0.9rem" />
             </InfoTop>
             <InfoIcons>
@@ -89,15 +82,8 @@ const DogInfo = () => {
               </IconWrapper>
             </InfoIcons>
             <PayTextWrapper>
-              <Text
-                text={"8회차"}
-                weight="bold"
-                color={ThemeConfig.primaryColor}
-              />
-              <Text
-                text={" 앞으로 2회 남아있어요"}
-                color={ThemeConfig.primaryColor}
-              />
+              <Text text={"8회차"} weight="bold" color={ThemeConfig.primaryColor} />
+              <Text text={" 앞으로 2회 남아있어요"} color={ThemeConfig.primaryColor} />
             </PayTextWrapper>
           </InfoWrapper>
         </CardWrapper>
@@ -106,12 +92,8 @@ const DogInfo = () => {
         <StyledCalendar
           value={date}
           onChange={handleDateChange}
-          activeStartDate={
-            activeStartDate === null ? undefined : activeStartDate
-          }
-          onActiveStartDateChange={({ activeStartDate }) =>
-            setActiveStartDate(activeStartDate)
-          }
+          activeStartDate={activeStartDate === null ? undefined : activeStartDate}
+          onActiveStartDateChange={({ activeStartDate }) => setActiveStartDate(activeStartDate)}
           formatDay={(locale, date) => moment(date).format("D")}
           formatYear={(locale, date) => moment(date).format("YYYY")}
           formatMonthYear={(locale, date) => moment(date).format("YYYY. MM")}
@@ -129,9 +111,7 @@ const DogInfo = () => {
             ) {
               html.push(<StyledToday key={"today"}>오늘</StyledToday>);
             }
-            if (
-              attendDay.find((x) => x === moment(date).format("YYYY-MM-DD"))
-            ) {
+            if (attendDay.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
               html.push(<StyledDot key={moment(date).format("YYYY-MM-DD")} />);
             }
             return <>{html}</>;
@@ -140,19 +120,10 @@ const DogInfo = () => {
         <StyledDate onClick={handleTodayClick}>오늘</StyledDate>
       </StyledCalendarWrapper>
       <StyledAlbumWrapper>
-        <Text
-          text="사진 앨범"
-          color={ThemeConfig.darkBlack}
-          size="1.1rem"
-          weight="bold"
-        />
+        <Text text="사진 앨범" color={ThemeConfig.darkBlack} size="1.1rem" weight="bold" />
         <StyledAlbums>
           {/* 사진이 있는경우 앨범 없을 경우 텍스트 */}
-          <Text
-            text="앨범에 등록된 사진이 없습니다"
-            color={ThemeConfig.gray_3}
-            size="0.9rem"
-          />
+          <Text text="앨범에 등록된 사진이 없습니다" color={ThemeConfig.gray_3} size="0.9rem" />
         </StyledAlbums>
       </StyledAlbumWrapper>
     </Container>

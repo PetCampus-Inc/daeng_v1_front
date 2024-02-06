@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import DropDown from "components/common/Dropdown";
 import InputBox from "components/common/InputBox";
-import useDetectClose from "hooks/useDetectClose";
-import useGetBreed from "hooks/useGetBreed";
+import useDetectClose from "hooks/common/useDetectClose";
+import useGetBreed from "hooks/api/useGetBreed";
 
 interface IBreedInput {
   inputValue: string;
