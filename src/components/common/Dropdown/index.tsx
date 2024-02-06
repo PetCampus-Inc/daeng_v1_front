@@ -23,14 +23,18 @@ const DropDown = ({
   setChosenBreedId
 }: IDropDown) => {
   // 생일 드롭다운 : 선택된 값이 가장 상단에 위치
-  const chosenItemRef = useRef<any>(null);
+  const chosenItemRef = useRef<HTMLLIElement | null>(null);
   useEffect(() => {
     if (chosenItemRef.current) {
-      chosenItemRef.current.scrollIntoView({ block: "start" });
+      const topOffset = chosenItemRef.current.offsetTop;
+      chosenItemRef.current.parentElement!.scrollTop = topOffset;
     }
   }, [inputValue]);
 
-  const handleClick = (e: any, value: { breedName: string; breedId: number } | string) => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLLIElement>,
+    value: { breedName: string; breedId: number } | string
+  ) => {
     e.stopPropagation();
     if (typeof value === "object") {
       // 견종 드롭다운
