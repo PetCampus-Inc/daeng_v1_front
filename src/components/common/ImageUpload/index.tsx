@@ -55,21 +55,23 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
       <S.Upload onClick={handleClick} disabled={disabled}>
         <UploadIcon /> {text}
       </S.Upload>
-      <S.PreviewContainer>
-        {images.map((image, index) => (
-          <S.PreviewItem key={index}>
-            <S.PreviewInner>
-              <S.PreviewButton disabled={disabled}>
-                <S.InnerShadow />
-                <S.PreviewImg src={image.preview} alt={image.file.name} />
-              </S.PreviewButton>
-            </S.PreviewInner>
-            <S.DeleteButton onClick={() => handleDeleteImage(index)} aria-label="이미지 삭제">
-              <CloseIcon />
-            </S.DeleteButton>
-          </S.PreviewItem>
-        ))}
-      </S.PreviewContainer>
+      {images.length > 0 && (
+        <S.PreviewContainer>
+          {images.map((image, index) => (
+            <S.PreviewItem key={index}>
+              <S.PreviewInner>
+                <S.PreviewButton disabled={disabled}>
+                  <S.InnerShadow />
+                  <S.PreviewImg src={image.preview} alt={image.file.name} />
+                </S.PreviewButton>
+              </S.PreviewInner>
+              <S.DeleteButton onClick={() => handleDeleteImage(index)} aria-label="이미지 삭제">
+                <CloseIcon />
+              </S.DeleteButton>
+            </S.PreviewItem>
+          ))}
+        </S.PreviewContainer>
+      )}
       <S.HiddenUpload
         type="file"
         id={id}
