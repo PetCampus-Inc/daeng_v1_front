@@ -29,8 +29,8 @@ export const RadioContainer = styled.div`
 export const StyledInput = styled.input`
   display: none;
   &:checked + label {
-    background-color: ${({ theme }) => theme.br_4};
-    border: 1px solid ${({ theme }) => theme.br_3};
+    background-color: ${({ theme }) => theme.colors.br_4};
+    border: 1px solid ${({ theme }) => theme.colors.br_3};
     color: ${({ theme }) => theme.colors.primaryColor};
   }
   &:disabled + label {

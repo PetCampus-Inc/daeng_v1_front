@@ -24,11 +24,11 @@ export const StyledWrapper = styled.input<{
   width: 100%;
   height: 100%;
   border: ${(props) =>
-    props.border ? props.border : `1px solid ${ThemeConfig.gray_3}`};
+    props.border ? props.border : `1px solid ${ThemeConfig.colors.gray_3}`};
   border-radius: ${(props) => (props.radius ? props.radius : "8px")};
   padding-left: 5%;
   font-size: 1rem;
-  color: ${(props) => (props.color ? props.color : props.theme.black)};
+  color: ${(props) => (props.color ? props.color : props.theme.colors.black)};
 `;
 
 export const StyledButtonWrapper = styled.div`

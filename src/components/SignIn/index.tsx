@@ -82,7 +82,7 @@ const SignIn = () => {
                 height="10%"
                 text="카카오로 시작하기"
                 backcolor="#fee500"
-                textcolor={ThemeConfig.black}
+                textcolor={ThemeConfig.colors.black}
                 marginbottom="3%"
                 handleClick={() => {
                   setCurrentMainStep(currentMainStep + 2);
@@ -95,8 +95,8 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="구글로 시작하기"
-                backcolor={ThemeConfig.white}
-                textcolor={ThemeConfig.gray_1}
+                backcolor={ThemeConfig.colors.white}
+                textcolor={ThemeConfig.colors.gray_1}
                 border="solid 1px #cccccc"
                 marginbottom="3%"
                 handleClick={() => {
@@ -110,7 +110,7 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="Apple로 시작하기"
-                backcolor={ThemeConfig.black}
+                backcolor={ThemeConfig.colors.black}
                 marginbottom="3%"
                 handleClick={() => {
                   // setCurrentMainStep(currentMainStep + 2);
@@ -183,8 +183,8 @@ const SignIn = () => {
                   handleClick={() => {
                     handlerAdminLogin();
                   }}
-                  backcolor={inputId && inputPw ? undefined : ThemeConfig.gray_5}
-                  textcolor={inputId && inputPw ? undefined : ThemeConfig.gray_2}
+                  backcolor={inputId && inputPw ? undefined : ThemeConfig.colors.gray_5}
+                  textcolor={inputId && inputPw ? undefined : ThemeConfig.colors.gray_2}
                 />
               </>
             )}

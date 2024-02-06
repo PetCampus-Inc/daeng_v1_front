@@ -50,7 +50,7 @@ const DogInfo = () => {
       <MainTopWrapper>
         <Text
           text={`${`뽀뽀`}의 상세정보`}
-          color={ThemeConfig.darkBlack}
+          color={ThemeConfig.colors.darkBlack}
           size="1.1rem"
           weight="bold"
         />
@@ -64,26 +64,26 @@ const DogInfo = () => {
           />
           <InfoWrapper>
             <InfoTop>
-              <Text text={"뽀뽀"} color={ThemeConfig.darkBlack} size="1.1rem" weight="bold" />
-              <Text text="더보기 >" color={ThemeConfig.gray_1} size="0.9rem" />
+              <Text text={"뽀뽀"} color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
+              <Text text="더보기 >" color={ThemeConfig.colors.gray_1} size="0.9rem" />
             </InfoTop>
             <InfoIcons>
               <IconWrapper>
                 <BoyIcon />
-                <Text text="수컷" color={ThemeConfig.gray_1} size="0.9rem" />
+                <Text text="수컷" color={ThemeConfig.colors.gray_1} size="0.9rem" />
               </IconWrapper>
               <IconWrapper>
                 <CalendarIcon />
-                <Text text="15개월" color={ThemeConfig.gray_1} size="0.9rem" />
+                <Text text="15개월" color={ThemeConfig.colors.gray_1} size="0.9rem" />
               </IconWrapper>
               <IconWrapper>
                 <Scale />
-                <Text text="소형견" color={ThemeConfig.gray_1} size="0.9rem" />
+                <Text text="소형견" color={ThemeConfig.colors.gray_1} size="0.9rem" />
               </IconWrapper>
             </InfoIcons>
             <PayTextWrapper>
-              <Text text={"8회차"} weight="bold" color={ThemeConfig.primaryColor} />
-              <Text text={" 앞으로 2회 남아있어요"} color={ThemeConfig.primaryColor} />
+              <Text text={"8회차"} weight="bold" color={ThemeConfig.colors.primaryColor} />
+              <Text text={" 앞으로 2회 남아있어요"} color={ThemeConfig.colors.primaryColor} />
             </PayTextWrapper>
           </InfoWrapper>
         </CardWrapper>
@@ -120,10 +120,10 @@ const DogInfo = () => {
         <StyledDate onClick={handleTodayClick}>오늘</StyledDate>
       </StyledCalendarWrapper>
       <StyledAlbumWrapper>
-        <Text text="사진 앨범" color={ThemeConfig.darkBlack} size="1.1rem" weight="bold" />
+        <Text text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
         <StyledAlbums>
           {/* 사진이 있는경우 앨범 없을 경우 텍스트 */}
-          <Text text="앨범에 등록된 사진이 없습니다" color={ThemeConfig.gray_3} size="0.9rem" />
+          <Text text="앨범에 등록된 사진이 없습니다" color={ThemeConfig.colors.gray_3} size="0.9rem" />
         </StyledAlbums>
       </StyledAlbumWrapper>
     </Container>

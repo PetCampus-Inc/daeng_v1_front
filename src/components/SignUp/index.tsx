@@ -55,8 +55,8 @@ const SingUp = () => {
                     setCurrentMainStep(currentMainStep + 1);
                   }
                 }}
-                backcolor={selectedRole !== -1 ? undefined : ThemeConfig.gray_5}
-                textcolor={selectedRole !== -1 ? undefined : ThemeConfig.gray_2}
+                backcolor={selectedRole !== -1 ? undefined : ThemeConfig.colors.gray_5}
+                textcolor={selectedRole !== -1 ? undefined : ThemeConfig.colors.gray_2}
               />
             )}
           </StyledBottomWrapper>

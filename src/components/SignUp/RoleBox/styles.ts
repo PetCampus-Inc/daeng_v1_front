@@ -7,7 +7,7 @@ export const StyledMainWrapper = styled.div<{ selected: boolean }>`
   justify-content: space-evenly;
   align-items: center;
   background-color: ${(props) =>
-    props.selected ? props.theme.yellow_3 : props.theme.white};
+    props.selected ? props.theme.colors.yellow_3 : props.theme.colors.white};
   margin-left: 3%;
   margin-right: 3%;
   border-radius: 8px;
