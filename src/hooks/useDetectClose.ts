@@ -7,18 +7,18 @@ const useDetectClose = (
   const [isOpen, setIsOpen] = useState<boolean>(initialState);
 
   useEffect(() => {
-    const pageTouchEvent = (e: MouseEvent) => {
+    const pageTouchEvent = (e: TouchEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setIsOpen(!isOpen);
       }
     };
 
     if (isOpen) {
-      window.addEventListener("mousedown", pageTouchEvent);
+      window.addEventListener("touchstart", pageTouchEvent);
     }
 
     return () => {
-      window.removeEventListener("mousedown", pageTouchEvent);
+      window.removeEventListener("touchstart", pageTouchEvent);
     };
   }, [isOpen, ref]);
   return [isOpen, setIsOpen];

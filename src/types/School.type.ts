@@ -5,10 +5,9 @@ export interface ISchoolInfo {
   address: string;
 }
 
-interface Breed {
-  breedId: number;
-  breedName: string;
-}
 export interface IBreedInfo {
-  data: Breed[];
+  data: {
+    breedId: number;
+    breedName: string;
+  }[];
 }
