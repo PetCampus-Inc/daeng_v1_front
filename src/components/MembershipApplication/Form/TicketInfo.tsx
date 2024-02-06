@@ -22,7 +22,7 @@ const TicketInfo = () => {
       <Card>
         <Title>가격 안내</Title>
         {/* TODO: 16.priceInfo (가격 안내) 데이터 가져오기 */}
-        <TextArea name="priceInfo" readOnly value={"16번 데이터 넣어주세요"} resizable={false} />
+        <TextArea name="priceInfo" readOnly value={"16번 데이터 넣어주세요"} />
       </Card>
       <Card>
         <Title>이용권 종류</Title>
