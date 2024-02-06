@@ -5,6 +5,7 @@ import { handleAdminLoginResult } from "apis/admin.api";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { PATH } from "constants/path";
 
 const useSignIn = () => {
   const [loginInfo, setLoginInfo] = useRecoilState(adminLoginInfoAtom);
@@ -15,7 +16,7 @@ const useSignIn = () => {
   const [isPwConfirmed, setIsPwConfirmed] = useState<boolean>(true);
   const [infoForLogin, setInfoForLogin] = useState<ILoginInfo>({
     id: "",
-    password: "",
+    password: ""
   });
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ const useSignIn = () => {
     try {
       const data = await handleAdminLoginResult({
         inputId,
-        inputPw,
+        inputPw
       });
       if (data.status === 200) {
         setLoginInfo((prevLoginInfo) => ({
@@ -42,10 +43,10 @@ const useSignIn = () => {
             adminName: data.data.adminName,
             schoolId: data.data.schoolId,
             role: data.data.role,
-            schoolName: data.data.schoolName,
-          },
+            schoolName: data.data.schoolName
+          }
         }));
-        navigate("/admin/attendance");
+        navigate(PATH.ADMIN_ATTENDANCE);
       }
     } catch (error: any) {
       if (error.status === 400) {
@@ -65,7 +66,7 @@ const useSignIn = () => {
     handlerLogin,
     handlerAdminLogin,
     isIdConfirmed,
-    isPwConfirmed,
+    isPwConfirmed
   };
 };
 

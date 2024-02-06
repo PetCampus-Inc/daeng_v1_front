@@ -9,7 +9,7 @@ import {
   StyledSignInButton,
   StyledImage,
   StyledLink,
-  Keyword,
+  Keyword
 } from "./styles";
 import Button from "components/common/Button";
 import useSignIn from "hooks/useSignIn";
@@ -19,6 +19,7 @@ import useShowPw from "hooks/useShowPw";
 import DogOwner from "./DogOwner";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { PATH } from "constants/path";
 
 // **소셜 로그인 구현 필요**
 const SignIn = () => {
@@ -32,7 +33,7 @@ const SignIn = () => {
     handlerLogin,
     handlerAdminLogin,
     isIdConfirmed,
-    isPwConfirmed,
+    isPwConfirmed
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
@@ -56,10 +57,7 @@ const SignIn = () => {
       )}
 
       {currentMainStep === 2 && (
-        <DogOwner
-          currentMainStep={currentMainStep}
-          setCurrentMainStep={setCurrentMainStep}
-        />
+        <DogOwner currentMainStep={currentMainStep} setCurrentMainStep={setCurrentMainStep} />
       )}
 
       {currentMainStep < 2 && (
@@ -74,9 +72,7 @@ const SignIn = () => {
               <StyledTitleText>똑독 관리자로 시작하기</StyledTitleText>
             )}
 
-            <StyledTitleText>
-              {currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}
-            </StyledTitleText>
+            <StyledTitleText>{currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}</StyledTitleText>
           </TextWrapper>
 
           {currentMainStep === 0 && (
@@ -176,9 +172,7 @@ const SignIn = () => {
             {currentMainStep === 1 && (
               <>
                 <StyledSignInButton>
-                  <StyledLink to="/SignUp">
-                    처음이신가요? 회원가입하기 {">"}
-                  </StyledLink>
+                  <StyledLink to={PATH.SIGNUP}>처음이신가요? 회원가입하기 {">"}</StyledLink>
                 </StyledSignInButton>
                 <Button
                   width="100%"
@@ -189,12 +183,8 @@ const SignIn = () => {
                   handleClick={() => {
                     handlerAdminLogin();
                   }}
-                  backcolor={
-                    inputId && inputPw ? undefined : ThemeConfig.gray_5
-                  }
-                  textcolor={
-                    inputId && inputPw ? undefined : ThemeConfig.gray_2
-                  }
+                  backcolor={inputId && inputPw ? undefined : ThemeConfig.gray_5}
+                  textcolor={inputId && inputPw ? undefined : ThemeConfig.gray_2}
                 />
               </>
             )}

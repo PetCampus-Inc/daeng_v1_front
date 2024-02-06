@@ -3,13 +3,14 @@ import {
   StyledBottomWrapper,
   StyledCancleButton,
   StyledLink,
-  TextWrapper,
+  TextWrapper
 } from "./styles";
 import { Dispatch, SetStateAction } from "react";
 import Text from "components/common/Text";
 import Button from "components/common/Button";
 import { DOGOWNER, TEACHER } from "constants/className";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { PATH } from "constants/path";
 
 interface Props {
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
@@ -18,12 +19,7 @@ interface Props {
   className: string;
 }
 
-const Complete = ({
-  setCurrentMainStep,
-  selectedSearchText,
-  schoolName,
-  className,
-}: Props) => {
+const Complete = ({ setCurrentMainStep, selectedSearchText, schoolName, className }: Props) => {
   return (
     <Container>
       <TextWrapper margin_bottom="5%">
@@ -39,19 +35,15 @@ const Complete = ({
             className === TEACHER
               ? "승인 신청이 완료되었습니다"
               : className === DOGOWNER
-              ? "승인 신청이 완료되었습니다"
-              : "등록이 완료 되었습니다"
+                ? "승인 신청이 완료되었습니다"
+                : "등록이 완료 되었습니다"
           }
           size="1.4rem"
           weight="bold"
           height="2rem"
         />
         {className === TEACHER && (
-          <Text
-            text={"승인 완료시 알림으로 알려드릴게요"}
-            size="1rem"
-            color={ThemeConfig.gray_3}
-          />
+          <Text text={"승인 완료시 알림으로 알려드릴게요"} size="1rem" color={ThemeConfig.gray_3} />
         )}
       </TextWrapper>
       <StyledBottomWrapper height={className === DOGOWNER ? "7%" : "9%"}>
@@ -59,7 +51,7 @@ const Complete = ({
           {className === TEACHER && (
             <StyledCancleButton>승인 신청 취소하기 {`>`}</StyledCancleButton>
           )}
-          <StyledLink to="/SignIn">
+          <StyledLink to={PATH.LOGIN}>
             <Button
               width="100%"
               height="100%"
