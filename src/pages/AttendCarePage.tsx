@@ -1,6 +1,7 @@
 import Header from "components/common/Header";
 import { useNavigate } from "react-router-dom";
 import AttendCare from "components/Admin/AttendCare";
+import { PATH } from "constants/path";
 
 const AttendCarePage = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const AttendCarePage = () => {
         type="text"
         text="오늘 관리할 강아지"
         size="1rem"
-        handleClick={() => navigate("/admin/attendance")}
+        handleClick={() => navigate(PATH.ADMIN_ATTENDANCE)}
       />
       <AttendCare />
     </>

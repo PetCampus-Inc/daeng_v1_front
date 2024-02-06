@@ -1,11 +1,7 @@
 import { memo } from "react";
 import Teacher from "./Teacher";
 import Principal from "./Principal";
-import {
-  Container,
-  StyledBottomWrapper,
-  StyledSelectRoleWrapper,
-} from "../SignIn/styles";
+import { Container, StyledBottomWrapper, StyledSelectRoleWrapper } from "../SignIn/styles";
 import RoleBox from "./RoleBox";
 import { RoleConstants } from "constants/index";
 import Header from "components/common/Header";
@@ -13,14 +9,14 @@ import Button from "components/common/Button";
 import { Link } from "react-router-dom";
 import useSignUp from "hooks/useSignUp";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { PATH } from "constants/path";
 
 const SingUp = () => {
-  const { currentMainStep, setCurrentMainStep, selectedRole, setSelectedRole } =
-    useSignUp();
+  const { currentMainStep, setCurrentMainStep, selectedRole, setSelectedRole } = useSignUp();
   return (
     <>
       {currentMainStep === 0 && (
-        <Link to="/SignIn">
+        <Link to={PATH.LOGIN}>
           <Header type="text" text="역할 선택" />
         </Link>
       )}
@@ -68,16 +64,10 @@ const SingUp = () => {
       )}
 
       {selectedRole === 0 && currentMainStep === 1 && (
-        <Teacher
-          currentMainStep={currentMainStep}
-          setCurrentMainStep={setCurrentMainStep}
-        />
+        <Teacher currentMainStep={currentMainStep} setCurrentMainStep={setCurrentMainStep} />
       )}
       {selectedRole === 1 && currentMainStep === 1 && (
-        <Principal
-          currentMainStep={currentMainStep}
-          setCurrentMainStep={setCurrentMainStep}
-        />
+        <Principal currentMainStep={currentMainStep} setCurrentMainStep={setCurrentMainStep} />
       )}
     </>
   );
