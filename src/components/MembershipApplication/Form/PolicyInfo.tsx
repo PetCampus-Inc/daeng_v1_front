@@ -54,7 +54,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
           이용 제한 유의 사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea id="limitsInfo" value={info.limitsInfo} readOnly />
+        <TextArea id="limitsInfo" defaultValue={info.limitsInfo} readOnly />
         <S.Stack>
           <Checkbox
             name="limitsInfo"
@@ -72,7 +72,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
           상해 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea id="accidentInfo" value={info.accidentInfo} readOnly />
+        <TextArea id="accidentInfo" defaultValue={info.accidentInfo} readOnly />
         <S.Stack>
           <Checkbox
             name="accidentInfo"
@@ -90,7 +90,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
           유기 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea id="abandonmentInfo" value={info.abandonmentInfo} readOnly />
+        <TextArea id="abandonmentInfo" defaultValue={info.abandonmentInfo} readOnly />
         <S.Stack>
           <Checkbox
             name="abandonmentInfo"
