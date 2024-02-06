@@ -37,7 +37,7 @@ const BreedInput = ({
     // 견종 검색 API 호출
     const timer = setTimeout(async () => {
       await refetch();
-    }, 300);
+    }, 270);
     setIsOpen(true);
     return () => clearTimeout(timer);
   }, [inputValue]);
