@@ -12,11 +12,9 @@ export const Upload = styled.button`
   display: flex;
   width: 100%;
   height: 49px;
-  padding: 12px 116px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray_4};
   background: ${({ theme }) => theme.colors.gray_5};
