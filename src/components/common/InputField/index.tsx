@@ -1,20 +1,20 @@
 import React from "react";
-import { Control, FieldValues, UseControllerProps, useController } from "react-hook-form";
+import { Control, UseControllerProps, useController } from "react-hook-form";
 
 import * as S from "./styles";
 
-export interface InputFieldProps<TFieldValues extends FieldValues>
+export interface InputFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "name">,
-    UseControllerProps<TFieldValues> {
-  control: Control<TFieldValues>;
+    UseControllerProps {
+  control: Control;
 }
 
-const InputField = <TFieldValues extends FieldValues>({
-  ...props
-}: InputFieldProps<TFieldValues>) => {
-  const { field } = useController({ ...props, name: props.name });
+const InputField = ({ control, name, rules, defaultValue, ...inputProps }: InputFieldProps) => {
+  const { field } = useController({ control, name, rules, defaultValue });
 
-  return <S.Input {...field} id={field.name} value={field.value ? field.value : ""} {...props} />;
+  return (
+    <S.Input {...field} id={field.name} value={field.value ? field.value : ""} {...inputProps} />
+  );
 };
 
 export default InputField;
