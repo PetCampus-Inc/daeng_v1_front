@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SingleRadio from "components/common/Select/SingleRadio";
-import BreedInput from "../BreedInput";
+import BreedInput from "../ChooseBreed";
 import SelectNumber from "components/common/Select/SelectNumber";
 import { daysArray, monthsArray, yearsArray } from "constants/date";
 import Title from "components/common/Title";
