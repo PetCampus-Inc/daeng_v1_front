@@ -18,8 +18,12 @@ export const handleGetIEnrollment = async ({
   memberId
 }: IEnrollmentProps): Promise<IEnrollment> => {
   const url: string = `school/member/enroll?schoolId=${schoolId}&memberId=${memberId}`;
-  const { data } = await customAxios.get(url);
-  return data.data;
+  try {
+    const { data } = await customAxios.get(url);
+    return data.data;
+  } catch (error) {
+    throw new Error("handleGetEnrollment 통신 실패");
+  }
 };
 
 export const handleGetIEnrollmentUrl = async ({

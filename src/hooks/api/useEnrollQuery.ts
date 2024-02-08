@@ -20,7 +20,7 @@ interface EnrollmentProps {
 export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
   const enlistmentQuery = useSuspenseQuery<IEnrollment, Error, EnrollmentProps>({
     queryKey: ["enrollment", memberId, schoolId],
-    queryFn: async () => await handleGetIEnrollment({ schoolId, memberId }),
+    queryFn: () => handleGetIEnrollment({ schoolId, memberId }),
     select: (data) => {
       // 이용권 정보
       const selectTicketInfo = () => ({
