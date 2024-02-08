@@ -1,4 +1,3 @@
-import { useState } from "react";
 import SingleRadio from "components/common/Select/SingleRadio";
 import BreedInput from "../BreedInput";
 import SelectNumber from "components/common/Select/SelectNumber";
@@ -16,9 +15,7 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
-  const [chosenBreedId, setChosenBreedId] = useState<number | null>(null);
-  //post할 때 chosenBreedId가 있으면 이걸로 보내고(꼭 얘를 먼저 검증), 없으면 inputValue를 보내면 된다.
-  const { register, control, watch } = useFormContext();
+  const { register, control, watch, setValue } = useFormContext();
 
   return (
     <>
@@ -40,12 +37,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
-        <BreedInput
-          control={control}
-          name="dogBreed"
-          chosenBreedId={chosenBreedId}
-          setChosenBreedId={setChosenBreedId}
-        />
+        <BreedInput control={control} name="dogBreed" setValue={setValue} watch={watch} />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BIRTHDAY)}>생일</Title>

@@ -1,33 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import DropDown from "components/common/Dropdown";
 import useDetectClose from "hooks/common/useDetectClose";
 import useGetBreed from "hooks/api/useGetBreed";
 import SearchInputField from "components/common/InputField/SearchInputField";
-import { Control, FieldValues } from "react-hook-form";
+import { Control, FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
 interface IBreedInput {
   name: string;
-  chosenBreedId: number | null;
-  setChosenBreedId: React.Dispatch<React.SetStateAction<number | null>>;
   width?: string;
   control: Control<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  watch: UseFormWatch<FieldValues>;
 }
 
-const BreedInput = ({
-  name,
-  chosenBreedId,
-  setChosenBreedId,
-  control,
-  width = "100%"
-}: IBreedInput) => {
+const BreedInput = ({ name, control, width = "100%", setValue, watch }: IBreedInput) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
-  const [breedValue, setBreedValue] = useState<string>("");
-  const { data, refetch, isSuccess, error } = useGetBreed(breedValue);
+  const value = watch(`${name}`) ? watch(`${name}`) : "";
+  const { data, refetch, isSuccess, error } = useGetBreed(value);
+  const breedId = watch("breedId");
 
   useEffect(() => {
     // 아무것도 입력되지 않았거나 정상적으로 선택되었을 때
-    if (!breedValue || chosenBreedId) {
+    if (!value || breedId) {
       setIsOpen(false);
       return;
     }
@@ -37,7 +32,7 @@ const BreedInput = ({
     }, 270);
     setIsOpen(true);
     return () => clearTimeout(timer);
-  }, [breedValue, chosenBreedId]);
+  }, [value, breedId]);
 
   return (
     <div ref={dropDownRef} style={{ position: "relative" }}>
@@ -46,19 +41,18 @@ const BreedInput = ({
         control={control}
         placeholder="견종을 입력해주세요"
         onChange={() => {
-          setChosenBreedId(null);
+          setValue("breedId", 0);
         }}
-        value={breedValue}
-        setValue={setBreedValue}
+        value={value}
+        setValue={setValue}
       />
       {isOpen && isSuccess && data && (
         <DropDown
           dropDownList={data.data}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          setInputValue={setBreedValue}
+          setValue={setValue}
           width={width}
-          setChosenBreedId={setChosenBreedId}
         />
       )}
       {/* TODO: 기획에 질문 에러 발생 시 재시도 해달라는 모달 or 바텀시트 생기게 수정  */}
