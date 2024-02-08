@@ -13,14 +13,13 @@ export const handleGetSearchResult = async (searchText: string): Promise<ISchool
   return data.data;
 };
 
-export const handleGetBreed = async (searchText: string | number): Promise<IBreedInfo> => {
+export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> => {
   const url: string = `school/search/breed`;
   const { data } = await customAxios.get(url, {
     params: {
       searchText
     }
   });
-  console.log(data);
   return data;
 };
 
