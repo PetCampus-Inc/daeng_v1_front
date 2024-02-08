@@ -62,7 +62,7 @@ const DogInfo = () => {
               </S.IconWrapper>
               <S.IconWrapper>
                 <CalendarIcon />
-                <Text text="15개월" color={ThemeConfig.colors.colors.gray_1} size="0.9rem" />
+                <Text text="15개월" color={ThemeConfig.colors.gray_1} size="0.9rem" />
               </S.IconWrapper>
               <S.IconWrapper>
                 <Scale />

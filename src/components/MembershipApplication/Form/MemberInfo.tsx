@@ -10,6 +10,7 @@ import { formatPhoneNumber } from "utils/formatter";
 
 import { Card } from "./styles";
 import type { IMemberDto } from "types/School.type";
+import { useState } from "react";
 
 interface MemberInfoProps {
   info: IMemberDto;
@@ -18,6 +19,7 @@ interface MemberInfoProps {
 
 const MemberInfo = ({ info, requiredItems }: MemberInfoProps) => {
   const { control, setValue } = useFormContext();
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -55,6 +57,8 @@ const MemberInfo = ({ info, requiredItems }: MemberInfoProps) => {
           onSearch={() => {
             console.log("클릭");
           }}
+          value={inputValue}
+          setValue={setInputValue}
         />
       </Card>
       <Card>

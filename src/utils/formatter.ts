@@ -1,5 +1,5 @@
 export const formatDate = (year: string, month: string, day: string) => {
-  if (!year || !month || !day) return;
+  if (!year || !month || !day) return "";
   const formattedMonth = month.padStart(2, "0");
   const formattedDay = day.padStart(2, "0");
 

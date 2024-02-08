@@ -3,7 +3,7 @@ import DropDown from "components/common/Dropdown";
 import useDetectClose from "hooks/common/useDetectClose";
 import useGetBreed from "hooks/api/useGetBreed";
 import SearchInputField from "components/common/InputField/SearchInputField";
-import { Control, FieldValues, useFormContext } from "react-hook-form";
+import { Control, FieldValues } from "react-hook-form";
 
 interface IBreedInput {
   name: string;
