@@ -1,4 +1,4 @@
-import useSignUp from "hooks/useSignUp";
+import useSignUp from "hooks/api/useSignUp";
 import { Dispatch, SetStateAction } from "react";
 import Step2 from "../Step/step2";
 import Step3 from "../Step/step3";

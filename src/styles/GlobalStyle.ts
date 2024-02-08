@@ -95,14 +95,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: ${(props) => props.theme.BGray};
+  background-color: ${(props) => props.theme.colors.BGray};
   &::-webkit-scrollbar{
     display: none;
   }
 }
 
 &::-webkit-scrollbar {
-  background-color: ${(props) => props.theme.gray_3};
+  background-color: ${(props) => props.theme.colors.gray_3};
   width: 0.4rem;
   border-radius: 10px;
 }

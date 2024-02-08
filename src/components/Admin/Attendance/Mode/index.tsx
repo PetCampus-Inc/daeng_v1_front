@@ -52,7 +52,7 @@ const Mode = ({
     <>
       {selectedDogIds.length > 0 && (
         <>
-          <Text text="출석이 완료된 친구들이에요" color={ThemeConfig.gray_2} />
+          <Text text="출석이 완료된 친구들이에요" color={ThemeConfig.colors.gray_2} />
           <StyledListWrapper>
             {selectedDogIds.map((dogId) => {
               return (
@@ -67,7 +67,7 @@ const Mode = ({
                         .filter((data) => data.attendanceId === dogId)
                         .map((filteredData) => filteredData.dogName)
                         .join("")}`}
-                      color={ThemeConfig.darkBlack}
+                      color={ThemeConfig.colors.darkBlack}
                       margintop="0.2rem"
                     />
                   </StyledImageCard>
@@ -116,7 +116,7 @@ const Mode = ({
             <StyledTextWrapper>
               <Text
                 text="검색 결과와 일치하는 강아지가 없어요"
-                color={ThemeConfig.gray_3}
+                color={ThemeConfig.colors.gray_3}
               />
             </StyledTextWrapper>
           )
@@ -144,7 +144,7 @@ const Mode = ({
             <StyledTextWrapper>
               <Text
                 text="아직 등원한 강아지가 없어요"
-                color={ThemeConfig.gray_3}
+                color={ThemeConfig.colors.gray_3}
               />
             </StyledTextWrapper>
           )
@@ -157,11 +157,11 @@ const Mode = ({
           text="출석완료"
           backcolor={
             selectedDogIds.length > 0
-              ? ThemeConfig.primaryColor
-              : ThemeConfig.gray_4
+              ? ThemeConfig.colors.primaryColor
+              : ThemeConfig.colors.gray_4
           }
           textcolor={
-            selectedDogIds.length > 0 ? ThemeConfig.white : ThemeConfig.gray_2
+            selectedDogIds.length > 0 ? ThemeConfig.colors.white : ThemeConfig.colors.gray_2
           }
           weight="700"
           handleClick={handlerPostAttend}

@@ -9,7 +9,7 @@ import {
 } from "./styles";
 import Button from "components/common/Button";
 import { useEffect, useState } from "react";
-import useGetAttendance from "hooks/useGetAttendance";
+import useGetAttendance from "hooks/api/useGetAttendance";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom, attendCareDogListAtom } from "store/admin";
 import DogCard from "../Attendance/DogCard";
@@ -34,17 +34,17 @@ const AttendCare = () => {
             size="1.2rem"
             weight="bold"
             height="2rem"
-            color={ThemeConfig.darkBlack}
+            color={ThemeConfig.colors.darkBlack}
           />
           <Text
             text={`총 ${selectedCareDogId.length}마리`}
-            color={ThemeConfig.gray_1}
+            color={ThemeConfig.colors.gray_1}
           />
         </StyledTextWrapper>
         <Text
           text="출석한 강아지 중 오늘 관리할 강아지를 추가해주세요"
           size="1rem"
-          color={ThemeConfig.gray_2}
+          color={ThemeConfig.colors.gray_2}
         />
       </StyledHeadWrapper>
       <StyledCardWrapper>
@@ -70,13 +70,13 @@ const AttendCare = () => {
           text="관리 목록에 추가"
           backcolor={
             selectedCareDogId.length > 0
-              ? ThemeConfig.primaryColor
-              : ThemeConfig.gray_4
+              ? ThemeConfig.colors.primaryColor
+              : ThemeConfig.colors.gray_4
           }
           textcolor={
             selectedCareDogId.length > 0
-              ? ThemeConfig.white
-              : ThemeConfig.gray_2
+              ? ThemeConfig.colors.white
+              : ThemeConfig.colors.gray_2
           }
           weight="700"
           handleClick={() => {}}

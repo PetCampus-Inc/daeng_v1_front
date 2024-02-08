@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { useEnrollQuery } from "hooks/api/useEnrollQuery";
-import useStep from "hooks/useStep";
+import useStep from "hooks/common/useStep";
 
 import MemberInfo from "./Form/MemberInfo";
 import DogInfo from "./Form/DogInfo";

@@ -8,7 +8,7 @@ import {
 import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
-import useShowPw from "hooks/useShowPw";
+import useShowPw from "hooks/common/useShowPw";
 import Button from "components/common/Button";
 import { TEACHER } from "constants/className";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
@@ -137,11 +137,11 @@ const Step3 = ({
           <>
             <Text
               text="가입 신청 시 승인 완료 전 까지 수정이 어려워요"
-              color={ThemeConfig.gray_3}
+              color={ThemeConfig.colors.gray_3}
             />
             <Text
               text="잘못 입력한 내용이 없는지 확인해주세요"
-              color={ThemeConfig.gray_3}
+              color={ThemeConfig.colors.gray_3}
             />
           </>
         )}
@@ -163,13 +163,13 @@ const Step3 = ({
           }}
           backcolor={
             !isIdValid || !isPwValid || !checkUserId
-              ? ThemeConfig.gray_5
-              : ThemeConfig.primaryColor
+              ? ThemeConfig.colors.gray_5
+              : ThemeConfig.colors.primaryColor
           }
           textcolor={
             !isIdValid || !isPwValid || !checkUserId
-              ? ThemeConfig.gray_2
-              : ThemeConfig.white
+              ? ThemeConfig.colors.gray_2
+              : ThemeConfig.colors.white
           }
         />
       </StyledBottomWrapper>

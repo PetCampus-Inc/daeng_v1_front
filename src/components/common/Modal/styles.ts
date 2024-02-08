@@ -10,7 +10,7 @@ export const StyledModalBackground = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: ${({ theme }) => theme.black}95;
+  background-color: ${({ theme }) => theme.colors.black};
   z-index: 99999;
 `;
 

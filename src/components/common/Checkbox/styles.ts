@@ -126,7 +126,7 @@ export const LabelText = styled.span`
   }
 
   ${({ theme }) => theme.typo.label1_16_R};
-  color: ${({ theme }) => theme.colors.gray_2};
+  color: ${({ theme }) => theme.colors.gray_1};
 
   user-select: none;
 `;

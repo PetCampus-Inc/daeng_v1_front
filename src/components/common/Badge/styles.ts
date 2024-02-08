@@ -3,8 +3,8 @@ import type { DefaultTheme } from "styled-components";
 import type { BadgeProps } from "./index";
 
 const badgeStyles = (theme: DefaultTheme) => ({
-  required: `background-color: ${theme.br_4}; color: ${theme.primaryColor};`,
-  optional: `background-color: ${theme.gray_5}; color: ${theme.gray_2};`
+  required: `background-color: ${theme.colors.br_4}; color: ${theme.colors.primaryColor};`,
+  optional: `background-color: ${theme.colors.gray_5}; color: ${theme.colors.gray_2};`
 });
 
 export const Badge = styled.span<{

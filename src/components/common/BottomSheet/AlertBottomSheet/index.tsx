@@ -30,7 +30,7 @@ const AlertBottomSheet = ({
         <AlertIcon />
         <TextContainer>
           <Text text={title} size="1.125rem" weight="700" />
-          <Text text={content} color={ThemeConfig.gray_3} margintop="4px" />
+          <Text text={content} color={ThemeConfig.colors.gray_3} margintop="4px" />
         </TextContainer>
       </InnerContainer>
       <ButtonContainer>
@@ -38,8 +38,8 @@ const AlertBottomSheet = ({
           <Button
             height="48px"
             width="100%"
-            backcolor={ThemeConfig.gray_4}
-            textcolor={ThemeConfig.gray_2}
+            backcolor={ThemeConfig.colors.gray_4}
+            textcolor={ThemeConfig.colors.gray_2}
             weight="400"
             handleClick={onClose}
           >

@@ -19,7 +19,7 @@ const CallModal = ({ setIsCallModalOpen, memberPhone, dogName }: Props) => {
         <Text
           text={memberPhone}
           weight="600"
-          color={ThemeConfig.gray_2}
+          color={ThemeConfig.colors.gray_2}
           margintop="3%"
         />
         <StyledButtonWrapper>
@@ -27,8 +27,8 @@ const CallModal = ({ setIsCallModalOpen, memberPhone, dogName }: Props) => {
             text="닫기"
             width="49%"
             height="70%"
-            backcolor={ThemeConfig.gray_4}
-            textcolor={ThemeConfig.gray_2}
+            backcolor={ThemeConfig.colors.gray_4}
+            textcolor={ThemeConfig.colors.gray_2}
             handleClick={() => {
               setIsCallModalOpen(false);
             }}

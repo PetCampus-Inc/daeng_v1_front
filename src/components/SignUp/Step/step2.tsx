@@ -113,13 +113,13 @@ const Step2 = ({
             }}
             backcolor={
               isNameValid && isPhoneValid
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_5
+                ? ThemeConfig.colors.primaryColor
+                : ThemeConfig.colors.gray_5
             }
             textcolor={
               isNameValid && isPhoneValid
-                ? ThemeConfig.white
-                : ThemeConfig.gray_2
+                ? ThemeConfig.colors.white
+                : ThemeConfig.colors.gray_2
             }
           />
         ) : (
@@ -139,13 +139,13 @@ const Step2 = ({
             }}
             backcolor={
               isNameValid && userName !== ""
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_5
+                ? ThemeConfig.colors.primaryColor
+                : ThemeConfig.colors.gray_5
             }
             textcolor={
               isNameValid && userName !== ""
-                ? ThemeConfig.white
-                : ThemeConfig.gray_2
+                ? ThemeConfig.colors.white
+                : ThemeConfig.colors.gray_2
             }
           />
         )}

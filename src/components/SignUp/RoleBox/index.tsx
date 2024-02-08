@@ -31,9 +31,9 @@ const RoleBox = ({ selected, Role, mainText, subText, handleClick }: Props) => {
         size="1.3rem"
         weight="bold"
         text={mainText}
-        color={ThemeConfig.darkBlack}
+        color={ThemeConfig.colors.darkBlack}
       />
-      <Text text={subText} color={ThemeConfig.darkBlack} />
+      <Text text={subText} color={ThemeConfig.colors.darkBlack} />
     </StyledMainWrapper>
   );
 };

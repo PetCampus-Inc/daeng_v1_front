@@ -6,7 +6,7 @@ import {
   StyledMainWrapper,
   StyledWrapper
 } from "components/common/InputBox/styles";
-import useDetectClose from "hooks/useDetectClose";
+import useDetectClose from "hooks/common/useDetectClose";
 import { IoIosArrowDown } from "react-icons/io";
 
 interface ISelectNumber {

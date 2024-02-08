@@ -24,10 +24,10 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import InputBox from "components/common/InputBox";
 import { ATTENDANCE } from "constants/className";
 import DogCard from "./DogCard";
-import useGetAttendance from "hooks/useGetAttendance";
+import useGetAttendance from "hooks/api/useGetAttendance";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { dogListInfoAtom, adminLoginInfoAtom } from "store/admin";
-import useFocus from "hooks/useFocus";
+import useFocus from "hooks/common/useFocus";
 import { handleDeleteDog } from "apis/attendance";
 import { IAttendanceInfo } from "types/Attendance.type";
 import Mode from "./Mode";
@@ -35,7 +35,7 @@ import ReverseButton from "components/common/Button/ReverseButton";
 import SortModal from "./SortModal";
 import CallModal from "./CallModal";
 import ButtonModal from "components/common/ButtonModal";
-import useGetSearchList from "hooks/useGetSearchList";
+import useGetSearchList from "hooks/api/useGetSearchList";
 
 interface Props {
   setIsNavHidden: Dispatch<SetStateAction<boolean>>;
@@ -121,7 +121,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
                 isChecking ? "출석 진행중이에요" : `${schoolName} 친구들이에요`
               }
               size="1rem"
-              color={ThemeConfig.gray_2}
+              color={ThemeConfig.colors.gray_2}
             />
           </StyledTitleWrapper>
           <StyledButtonWrapper>
@@ -141,11 +141,11 @@ const Attendance = ({ setIsNavHidden }: Props) => {
               weight="600"
               handleClick={handlerModeChange}
               border={
-                isChecking ? "none" : `solid 1px ${ThemeConfig.primaryColor}`
+                isChecking ? "none" : `solid 1px ${ThemeConfig.colors.primaryColor}`
               }
-              backcolor={isChecking ? ThemeConfig.br_2 : ThemeConfig.white}
+              backcolor={isChecking ? ThemeConfig.colors.br_2 : ThemeConfig.colors.white}
               textcolor={
-                isChecking ? ThemeConfig.white : ThemeConfig.primaryColor
+                isChecking ? ThemeConfig.colors.white : ThemeConfig.colors.primaryColor
               }
             />
           </StyledButtonWrapper>
@@ -156,7 +156,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           height="27%"
           shadow="shadow"
           radius="15px"
-          color={ThemeConfig.gray_1}
+          color={ThemeConfig.colors.gray_1}
           className={ATTENDANCE}
           inputValue={searchText}
           border="none"
@@ -191,12 +191,12 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           height="5%"
           text={sortName}
           radius="15px"
-          border={`solid 1px ${ThemeConfig.gray_4}`}
+          border={`solid 1px ${ThemeConfig.colors.gray_4}`}
           weight="500"
           marginbottom="3%"
           handleClick={() => setIsSortClicked(true)}
-          textcolor={ThemeConfig.gray_2}
-          backcolor={ThemeConfig.white}
+          textcolor={ThemeConfig.colors.gray_2}
+          backcolor={ThemeConfig.colors.white}
         >
           <StyledImage
             src="/images/chevron-down.png"
@@ -230,7 +230,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
               <StyledTextWrapper>
                 <Text
                   text="검색 결과와 일치하는 강아지가 없어요"
-                  color={ThemeConfig.gray_3}
+                  color={ThemeConfig.colors.gray_3}
                 />
               </StyledTextWrapper>
             )
@@ -261,7 +261,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
             <StyledTextWrapper>
               <Text
                 text="아직 등원한 강아지가 없어요"
-                color={ThemeConfig.gray_3}
+                color={ThemeConfig.colors.gray_3}
               />
             </StyledTextWrapper>
           )}

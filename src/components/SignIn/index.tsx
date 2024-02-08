@@ -9,16 +9,17 @@ import {
   StyledSignInButton,
   StyledImage,
   StyledLink,
-  Keyword,
+  Keyword
 } from "./styles";
 import Button from "components/common/Button";
-import useSignIn from "hooks/useSignIn";
+import useSignIn from "hooks/api/useSignIn";
 import InputBoxAndText from "./InputBoxAndText";
 import Header from "components/common/Header";
-import useShowPw from "hooks/useShowPw";
+import useShowPw from "hooks/common/useShowPw";
 import DogOwner from "./DogOwner";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { PATH } from "constants/path";
 
 // **소셜 로그인 구현 필요**
 const SignIn = () => {
@@ -32,7 +33,7 @@ const SignIn = () => {
     handlerLogin,
     handlerAdminLogin,
     isIdConfirmed,
-    isPwConfirmed,
+    isPwConfirmed
   } = useSignIn();
 
   const { showPw, setShowPw, handleToggle } = useShowPw();
@@ -56,10 +57,7 @@ const SignIn = () => {
       )}
 
       {currentMainStep === 2 && (
-        <DogOwner
-          currentMainStep={currentMainStep}
-          setCurrentMainStep={setCurrentMainStep}
-        />
+        <DogOwner currentMainStep={currentMainStep} setCurrentMainStep={setCurrentMainStep} />
       )}
 
       {currentMainStep < 2 && (
@@ -74,9 +72,7 @@ const SignIn = () => {
               <StyledTitleText>똑독 관리자로 시작하기</StyledTitleText>
             )}
 
-            <StyledTitleText>
-              {currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}
-            </StyledTitleText>
+            <StyledTitleText>{currentMainStep === 0 ? "생활을 보러 갈까요?" : ""}</StyledTitleText>
           </TextWrapper>
 
           {currentMainStep === 0 && (
@@ -86,7 +82,7 @@ const SignIn = () => {
                 height="10%"
                 text="카카오로 시작하기"
                 backcolor="#fee500"
-                textcolor={ThemeConfig.black}
+                textcolor={ThemeConfig.colors.black}
                 marginbottom="3%"
                 handleClick={() => {
                   setCurrentMainStep(currentMainStep + 2);
@@ -99,8 +95,8 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="구글로 시작하기"
-                backcolor={ThemeConfig.white}
-                textcolor={ThemeConfig.gray_1}
+                backcolor={ThemeConfig.colors.white}
+                textcolor={ThemeConfig.colors.gray_1}
                 border="solid 1px #cccccc"
                 marginbottom="3%"
                 handleClick={() => {
@@ -114,7 +110,7 @@ const SignIn = () => {
                 width="100%"
                 height="10%"
                 text="Apple로 시작하기"
-                backcolor={ThemeConfig.black}
+                backcolor={ThemeConfig.colors.black}
                 marginbottom="3%"
                 handleClick={() => {
                   // setCurrentMainStep(currentMainStep + 2);
@@ -176,9 +172,7 @@ const SignIn = () => {
             {currentMainStep === 1 && (
               <>
                 <StyledSignInButton>
-                  <StyledLink to="/SignUp">
-                    처음이신가요? 회원가입하기 {">"}
-                  </StyledLink>
+                  <StyledLink to={PATH.SIGNUP}>처음이신가요? 회원가입하기 {">"}</StyledLink>
                 </StyledSignInButton>
                 <Button
                   width="100%"
@@ -189,12 +183,8 @@ const SignIn = () => {
                   handleClick={() => {
                     handlerAdminLogin();
                   }}
-                  backcolor={
-                    inputId && inputPw ? undefined : ThemeConfig.gray_5
-                  }
-                  textcolor={
-                    inputId && inputPw ? undefined : ThemeConfig.gray_2
-                  }
+                  backcolor={inputId && inputPw ? undefined : ThemeConfig.colors.gray_5}
+                  textcolor={inputId && inputPw ? undefined : ThemeConfig.colors.gray_2}
                 />
               </>
             )}

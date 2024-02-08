@@ -26,14 +26,14 @@ const ButtonModal = ({
     <Container>
       <StyledMainWrapper>
         <Text text={maintext} size="1.2rem" weight="700" />
-        <Text text={subtext} color={ThemeConfig.gray_2} margintop="3%" />
+        <Text text={subtext} color={ThemeConfig.colors.gray_2} margintop="3%" />
         <StyledButtonWrapper>
           <Button
             text={firstbutton}
             width="49%"
             height="100%"
-            backcolor={ThemeConfig.gray_4}
-            textcolor={ThemeConfig.gray_2}
+            backcolor={ThemeConfig.colors.gray_4}
+            textcolor={ThemeConfig.colors.gray_2}
             handleClick={firstfunc}
           />
           <Button

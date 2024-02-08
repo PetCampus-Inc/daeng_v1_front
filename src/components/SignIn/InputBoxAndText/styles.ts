@@ -28,6 +28,6 @@ export const StyledErrorText = styled.div<{ confirmedid?: string }>`
   margin-bottom: 3%;
   color: ${(props) =>
     props.confirmedid === "true"
-      ? props.theme.primaryColor
-      : props.theme.red_1};
+      ? props.theme.colors.primaryColor
+      : props.theme.colors.red_1};
 `;

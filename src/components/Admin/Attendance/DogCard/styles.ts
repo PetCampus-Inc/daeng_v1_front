@@ -71,7 +71,7 @@ export const StyledOptionList = styled.div<{
   display: ${({ isopen }) => (isopen ? "block" : "none")};
   position: absolute;
   background-color: white;
-  border: solid 1px ${(props) => props.theme.gray_4};
+  border: solid 1px ${(props) => props.theme.colors.gray_4};
   box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.13);
   border-radius: 0.4rem;
   width: 105%;
@@ -84,7 +84,7 @@ export const StyledOptionList = styled.div<{
 
 export const StyledButtonWrapper = styled.div<{ height?: string }>`
   padding-left: 0.8rem;
-  border-bottom: 1px solid ${(props) => props.theme.gray_4};
+  border-bottom: 1px solid ${(props) => props.theme.colors.gray_4};
   width: 100%;
   height: ${(props) => (props.height ? props.height : "34%")};
 `;

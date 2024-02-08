@@ -3,7 +3,7 @@ import { Container, StyledButtonWrapper, StyledMainWrapper } from "./styles";
 import Button from "components/common/Button";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { Dispatch, SetStateAction } from "react";
-import useSortDogs from "hooks/useSortDogs";
+import useSortDogs from "hooks/api/useSortDogs";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 import { IAttendanceInfo } from "types/Attendance.type";
@@ -36,7 +36,7 @@ const SortModal = ({
       <StyledMainWrapper>
         <Text
           text="정렬"
-          color={ThemeConfig.black}
+          color={ThemeConfig.colors.black}
           weight="700"
           size="1.1rem"
         />
@@ -45,15 +45,15 @@ const SortModal = ({
             height="22%"
             width="100%"
             justify="flex-start"
-            backcolor={ThemeConfig.white}
+            backcolor={ThemeConfig.colors.white}
             handleClick={() => {
               setSortName(LIST.REGISTERD);
               handleGetSortRegistered(schoolId);
             }}
             textcolor={
               sortName === LIST.REGISTERD
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_1
+                ? ThemeConfig.colors.primaryColor
+                : ThemeConfig.colors.gray_1
             }
             weight={sortName === LIST.REGISTERD ? "800" : ""}
             text={LIST.REGISTERD}
@@ -66,11 +66,11 @@ const SortModal = ({
               setSortName(LIST.PAYMENT);
               handleGetSortPayment(schoolId);
             }}
-            backcolor={ThemeConfig.white}
+            backcolor={ThemeConfig.colors.white}
             textcolor={
               sortName === LIST.PAYMENT
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_1
+                ? ThemeConfig.colors.primaryColor
+                : ThemeConfig.colors.gray_1
             }
             weight={sortName === LIST.PAYMENT ? "800" : ""}
             text={LIST.PAYMENT}
@@ -83,11 +83,11 @@ const SortModal = ({
               setSortName(LIST.DATE);
               handleGetSortDate(schoolId);
             }}
-            backcolor={ThemeConfig.white}
+            backcolor={ThemeConfig.colors.white}
             textcolor={
               sortName === LIST.DATE
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_1
+                ? ThemeConfig.colors.primaryColor
+                : ThemeConfig.colors.gray_1
             }
             weight={sortName === LIST.DATE ? "800" : ""}
             text={LIST.DATE}
@@ -100,11 +100,11 @@ const SortModal = ({
               setSortName(LIST.CHARGE);
               handleGetSortCharge(schoolId, adminId);
             }}
-            backcolor={ThemeConfig.white}
+            backcolor={ThemeConfig.colors.white}
             textcolor={
               sortName === LIST.CHARGE
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_1
+                ? ThemeConfig.colors.primaryColor
+                : ThemeConfig.colors.gray_1
             }
             weight={sortName === LIST.CHARGE ? "800" : ""}
             text={LIST.CHARGE}

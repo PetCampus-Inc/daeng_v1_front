@@ -6,7 +6,7 @@ export const Container = styled.div<{ display?: string }>`
   bottom: 0;
   height: 10vh;
   width: 100%;
-  background-color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.colors.white};
   display: ${(props) => (props.display ? props.display : "flex")};
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@ export const StyledNavBtn = styled(Link)<{
   justify-content: center;
   flex-direction: column;
   background-color: ${(props) =>
-    props.selected ? props.theme.red_1 : props.theme.white};
+    props.selected ? props.theme.colors.red_1 : props.theme.colors.white};
 `;
 
 export const StyledImage = styled.img<{
