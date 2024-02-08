@@ -20,8 +20,7 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
     <>
       <Card>
         <Label>픽드랍 안내</Label>
-        {/* TODO: 픽드랍 안내 & 픽드랍 유의사항 백엔드에 맞춰 수정해주기 */}
-        <TextArea name="pickDropAnnouncement" readOnly defaultValue={info.pickDropState} />
+        <TextArea name="pickDropAnnouncement" readOnly defaultValue={info.pickDropNotice} />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_REQUEST)}>픽드랍 신청</Title>
