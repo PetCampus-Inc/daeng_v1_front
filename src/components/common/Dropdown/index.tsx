@@ -1,15 +1,16 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import * as S from "./styles";
 import Button from "../Button";
+import { FieldValues, UseFormSetValue } from "react-hook-form";
 
 interface IDropDown {
   dropDownList: { breedId: number; breedName: string }[] | string[];
   isOpen: boolean | Dispatch<SetStateAction<boolean>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   inputValue?: string;
-  setInputValue: Dispatch<SetStateAction<string>>;
+  setInputValue?: Dispatch<SetStateAction<string>>;
   width: string;
-  setChosenBreedId?: Dispatch<SetStateAction<number | null>>;
+  setValue?: UseFormSetValue<FieldValues>;
 }
 
 // 온보딩 - 생일 선택, 견종 선택에서 쓰이는 드롭다운
@@ -20,7 +21,7 @@ const DropDown = ({
   inputValue,
   setInputValue,
   width,
-  setChosenBreedId
+  setValue
 }: IDropDown) => {
   // 생일 드롭다운 : 선택된 값이 가장 상단에 위치
   const chosenItemRef = useRef<HTMLLIElement | null>(null);
@@ -38,11 +39,11 @@ const DropDown = ({
     e.stopPropagation();
     if (typeof value === "object") {
       // 견종 드롭다운
-      setInputValue(value.breedName);
-      setChosenBreedId!(value.breedId);
+      setValue && setValue("dogBreed", value.breedName);
+      setValue!("breedId", value.breedId);
     } else {
       // 생일 드롭다운
-      setInputValue(value);
+      setInputValue && setInputValue(value);
     }
     setIsOpen(false);
   };

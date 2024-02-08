@@ -28,8 +28,8 @@ const SubmitButton = () => {
       // TODO: requestData 인터페이스 정의하기
       schoolFormId: 1,
       memberId: 1,
-      breedId: 1,
-      newBreed: "",
+      breedId: data.breedId,
+      newBreed: data.breedId ? "" : data.dogBreed,
       fileUrl: "",
       memberName: data.memberName,
       address: data.address || "",
