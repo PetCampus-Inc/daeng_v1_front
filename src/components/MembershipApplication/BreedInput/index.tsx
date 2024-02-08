@@ -1,40 +1,33 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DropDown from "components/common/Dropdown";
 import useDetectClose from "hooks/useDetectClose";
 import useGetBreed from "hooks/useGetBreed";
 import SearchInputField from "components/common/InputField/SearchInputField";
-import { useFormContext } from "react-hook-form";
+import { Control, FieldValues, useFormContext } from "react-hook-form";
 
 interface IBreedInput {
   name: string;
-  inputValue: string;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
   chosenBreedId: number | null;
   setChosenBreedId: React.Dispatch<React.SetStateAction<number | null>>;
   width?: string;
+  control: Control<FieldValues>;
 }
 
 const BreedInput = ({
   name,
-  inputValue,
-  setInputValue,
   chosenBreedId,
   setChosenBreedId,
+  control,
   width = "100%"
 }: IBreedInput) => {
-  const { control } = useFormContext();
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
-  const { data, refetch, isSuccess, error } = useGetBreed(inputValue);
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setInputValue(e.target.value);
-  //   setChosenBreedId(null);
-  // };
+  const [breedValue, setBreedValue] = useState<string>("");
+  const { data, refetch, isSuccess, error } = useGetBreed(breedValue);
 
   useEffect(() => {
     // 아무것도 입력되지 않았거나 정상적으로 선택되었을 때
-    if (!inputValue || chosenBreedId) {
+    if (!breedValue || chosenBreedId) {
       setIsOpen(false);
       return;
     }
@@ -44,7 +37,7 @@ const BreedInput = ({
     }, 270);
     setIsOpen(true);
     return () => clearTimeout(timer);
-  }, [inputValue, chosenBreedId]);
+  }, [breedValue, chosenBreedId]);
 
   return (
     <div ref={dropDownRef} style={{ position: "relative" }}>
@@ -55,29 +48,15 @@ const BreedInput = ({
         onChange={() => {
           setChosenBreedId(null);
         }}
+        value={breedValue}
+        setValue={setBreedValue}
       />
-      {/* <InputBox
-        type="search"
-        width={width}
-        height="48px"
-        radius="5px"
-        color="black"
-        border="1px solid #e0e0e0"
-        placeholdText="견종을 입력해주세요"
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-        onChange={handleChange}
-        handleClick={() => {
-          setInputValue("");
-          setChosenBreedId(null);
-        }}
-      /> */}
       {isOpen && isSuccess && data && (
         <DropDown
           dropDownList={data.data}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          setInputValue={setInputValue}
+          setInputValue={setBreedValue}
           width={width}
           setChosenBreedId={setChosenBreedId}
         />
