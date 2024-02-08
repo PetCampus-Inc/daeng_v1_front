@@ -1,3 +1,4 @@
+import { FieldValues, UseFormSetValue } from "react-hook-form";
 import InputField from "../index";
 import type { InputFieldProps } from "../index";
 
@@ -7,17 +8,17 @@ interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   onSearch?: (value: string) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  setValue: (value: string) => void;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
 const SearchInputField = ({ name, onSearch, value, setValue, ...props }: SearchInputFieldProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setValue(name, e.target.value);
     props.onChange && props.onChange(e);
   };
 
   const handleClear = () => {
-    setValue("");
+    setValue(name, "");
   };
 
   const handleSearch = () => {
