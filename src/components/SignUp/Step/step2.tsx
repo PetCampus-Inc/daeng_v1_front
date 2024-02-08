@@ -8,6 +8,7 @@ import Button from "components/common/Button";
 import { DOGOWNER, PRINCIPAL, TEACHER } from "constants/className";
 import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { formatPhoneNumber } from "utils/formatter";
 
 interface Props {
   currentMainStep: number;
@@ -31,30 +32,21 @@ const Step2 = ({
   setUserName,
   userPhone,
   setUserPhone,
-  className,
+  className
 }: Props) => {
   const [isNameValid, setisNameValid] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
 
   useEffect(() => {
     NAME_REGEX.test(userName) ? setisNameValid(true) : setisNameValid(false);
-    PHONE_REGEX.test(userPhone)
-      ? setIsPhoneValid(true)
-      : setIsPhoneValid(false);
+    PHONE_REGEX.test(userPhone) ? setIsPhoneValid(true) : setIsPhoneValid(false);
   }, [userName, userPhone]);
 
   // 번호 하이픈 자동생성
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    if (value.length > 13) {
-      value = value.substring(0, 13);
-    }
-    setUserPhone(
-      value
-        .replace(/[^0-9]/g, "")
-        .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-        .replace(/(\-{1,2})$/g, "")
-    );
+    const value = e.target.value;
+    const formattedValue = formatPhoneNumber(value);
+    setUserPhone(formattedValue);
   };
 
   return (
@@ -111,16 +103,8 @@ const Step2 = ({
                 setCurrentStep(currentStep + 1);
               }
             }}
-            backcolor={
-              isNameValid && isPhoneValid
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_5
-            }
-            textcolor={
-              isNameValid && isPhoneValid
-                ? ThemeConfig.white
-                : ThemeConfig.gray_2
-            }
+            backcolor={isNameValid && isPhoneValid ? ThemeConfig.primaryColor : ThemeConfig.gray_5}
+            textcolor={isNameValid && isPhoneValid ? ThemeConfig.white : ThemeConfig.gray_2}
           />
         ) : (
           <Button
@@ -138,15 +122,9 @@ const Step2 = ({
               }
             }}
             backcolor={
-              isNameValid && userName !== ""
-                ? ThemeConfig.primaryColor
-                : ThemeConfig.gray_5
+              isNameValid && userName !== "" ? ThemeConfig.primaryColor : ThemeConfig.gray_5
             }
-            textcolor={
-              isNameValid && userName !== ""
-                ? ThemeConfig.white
-                : ThemeConfig.gray_2
-            }
+            textcolor={isNameValid && userName !== "" ? ThemeConfig.white : ThemeConfig.gray_2}
           />
         )}
       </StyledBottomWrapper>
