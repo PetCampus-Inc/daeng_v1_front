@@ -16,7 +16,6 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
-  const [inputValue, setInputValue] = useState<string>("");
   const [chosenBreedId, setChosenBreedId] = useState<number | null>(null);
   //post할 때 chosenBreedId가 있으면 이걸로 보내고(꼭 얘를 먼저 검증), 없으면 inputValue를 보내면 된다.
   const { register, control, watch } = useFormContext();
@@ -42,9 +41,8 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
         <BreedInput
+          control={control}
           name="dogBreed"
-          inputValue={inputValue}
-          setInputValue={setInputValue}
           chosenBreedId={chosenBreedId}
           setChosenBreedId={setChosenBreedId}
         />
