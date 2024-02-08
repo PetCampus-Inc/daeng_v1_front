@@ -8,27 +8,36 @@ import { ITEM_KEYS } from "constants/item";
 import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
 import { formatPhoneNumber } from "utils/formatter";
 
-import { Card } from "./styles";
-import type { IMemberDto } from "types/School.type";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Postcode from "components/common/Postcode";
 
+import { Card } from "./styles";
 interface MemberInfoProps {
-  info: IMemberDto;
   requiredItems: Map<number, boolean>;
 }
 
-const MemberInfo = ({ info, requiredItems }: MemberInfoProps) => {
-  const { control, setValue } = useFormContext();
-  const [inputValue, setInputValue] = useState("");
+const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
+  const { control, setValue, watch } = useFormContext();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const addressStreet = "address.street";
+  const watchAddress = watch(addressStreet, "");
+
+  const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const formattedValue = formatPhoneNumber(value);
     setValue(field, formattedValue);
   };
 
+  useEffect(() => {
+    watchAddress !== "" && setIsPopupOpen(false);
+  }, [watchAddress]);
+
   return (
     <>
+      {isPopupOpen && (
+        <Postcode field={addressStreet} setValue={setValue} closePopup={setIsPopupOpen} />
+      )}
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
         <InputField
@@ -52,13 +61,23 @@ const MemberInfo = ({ info, requiredItems }: MemberInfoProps) => {
         <Title isRequired={requiredItems.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
         <SearchInputField
           control={control}
-          name="address"
+          name={addressStreet}
           placeholder="주소를 입력해주세요"
           onSearch={() => {
-            console.log("클릭");
+            setIsPopupOpen(!isPopupOpen);
           }}
-          value={inputValue}
-          setValue={setInputValue}
+          onClick={() => {
+            setIsPopupOpen(!isPopupOpen);
+          }}
+          value={watchAddress}
+          setValue={setValue}
+          readOnly
+        />
+
+        <InputField
+          control={control}
+          name="address.detail"
+          placeholder="상세 주소를 입력해주세요"
         />
       </Card>
       <Card>
@@ -73,7 +92,7 @@ const MemberInfo = ({ info, requiredItems }: MemberInfoProps) => {
               message: "휴대폰 번호를 입력해주세요 (ex. 010-1234-5678)"
             }
           }}
-          onChange={handleChange("phoneNumber")}
+          onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
         />
       </Card>
@@ -89,7 +108,7 @@ const MemberInfo = ({ info, requiredItems }: MemberInfoProps) => {
               message: "휴대폰 번호를 입력해주세요 (ex. 010-1234-5678)"
             }
           }}
-          onChange={handleChange("emergencyNumber")}
+          onChange={handleChangeNumber("emergencyNumber")}
           placeholder="비상 연락처를 입력해주세요"
         />
       </Card>
