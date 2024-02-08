@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const TextArea = styled.textarea<{
+export const TextAreaInput = styled.textarea.withConfig({
+  shouldForwardProp: (prop) => !["resizable"].includes(prop)
+})<{
   resizable: boolean;
   readOnly: boolean;
 }>`
@@ -10,7 +12,7 @@ export const TextArea = styled.textarea<{
   background-color: ${(props) =>
     props.readOnly ? props.theme.colors.gray_5 : props.theme.colors.white};
 
-  padding: 12.14px 18.22px;
+  padding: 12px 18px;
   border-radius: 8px;
   border: ${(props) => (props.readOnly ? "none" : `1px solid ${props.theme.colors.gray_4}`)};
 
