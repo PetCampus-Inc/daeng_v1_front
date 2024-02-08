@@ -1,45 +1,46 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
-import DropDown from "components/common/Dropdown";
 import {
   StyledButtonWrapper,
   StyledMainWrapper,
   StyledWrapper
 } from "components/common/InputBox/styles";
 import useDetectClose from "hooks/common/useDetectClose";
+import { FieldValues, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import StringDropdown from "components/common/Dropdown/StringDropdown";
 import { IoIosArrowDown } from "react-icons/io";
-import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface ISelectNumber {
   numberList: string[];
   initialValue: string;
-  placeHolder?: string;
   width?: string;
-  name?: string;
+  name: string;
   register?: UseFormRegister<FieldValues>;
+  watch: UseFormWatch<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
 const SelectNumber = ({
+  name,
   numberList,
   initialValue,
-  placeHolder,
-  width = "100%",
-  name,
   register,
+  watch,
+  setValue,
+  width = "100%",
   ...props
 }: ISelectNumber) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
-  const [inputValue, setInputValue] = useState<string>(initialValue);
+  const value = watch(`${name}`) ? watch(`${name}`) : initialValue;
 
   return (
     <div ref={dropDownRef} style={{ position: "relative" }}>
       <StyledMainWrapper width={width} height="49px">
         <StyledWrapper
           readOnly
-          value={inputValue}
+          value={value}
           color={ThemeConfig.colors.gray_2}
-          placeholder={placeHolder}
           border={`1px solid ${ThemeConfig.colors.gray_4}`}
           {...(name && register && register(name))}
           {...props}
@@ -49,13 +50,13 @@ const SelectNumber = ({
         </StyledButtonWrapper>
       </StyledMainWrapper>
       {isOpen && (
-        <DropDown
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          inputValue={inputValue}
+        <StringDropdown
           dropDownList={numberList}
+          setIsOpen={setIsOpen}
+          name={name}
+          value={value}
+          setValue={setValue}
           width={width}
-          setInputValue={setInputValue}
         />
       )}
     </div>
