@@ -4,7 +4,6 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import { useFormContext } from "react-hook-form";
 import { Caption } from "components/common/Select/styles";
-import { textMapping } from "./constant";
 import type { IPickDropInfo } from "types/School.type";
 import { ITEM_KEYS } from "constants/item";
 import Checkbox from "components/common/Checkbox";
@@ -16,7 +15,6 @@ interface PickDropInfoProps {
 
 const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
   const { control, watch, register } = useFormContext();
-  console.log(textMapping.get(watch("pickDropRequest")));
 
   return (
     <>
