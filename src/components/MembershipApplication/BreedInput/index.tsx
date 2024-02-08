@@ -62,4 +62,4 @@ const BreedInput = ({ name, control, width = "100%", setValue, watch }: IBreedIn
   );
 };
 
-export default BreedInput;
+export default BreedDropDown;
