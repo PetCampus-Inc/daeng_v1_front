@@ -4,7 +4,6 @@ import { StyledWrapper, StyledButtonWrapper, StyledMainWrapper, StyledImage } fr
 import { ID_REGEX, REGISTRATION_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { ATTENDANCE } from "constants/className";
-import { useForm } from "react-hook-form";
 
 interface Props {
   name?: string;
@@ -47,7 +46,6 @@ const InputBox = ({
   onFocus,
   onBlur
 }: Props) => {
-  const { register } = useForm({ mode: "onChange" });
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -69,11 +67,10 @@ const InputBox = ({
       radius={radius}
     >
       <StyledWrapper
-        {...register(`${name}`)}
         placeholder={placeholdText}
         type={type}
         value={inputValue}
-        onChange={onChange ? onChange : (e) => setInputValue(e.target.value)}
+        onChange={onChange ? onChange : setInputValue}
         onFocus={onFocus}
         onBlur={onBlur}
         color={color}
