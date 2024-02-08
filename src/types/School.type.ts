@@ -5,6 +5,13 @@ export interface ISchoolInfo {
   address: string;
 }
 
+export interface IBreedInfo {
+  data: {
+    breedId: number;
+    breedName: string;
+  }[];
+}
+
 export interface IEnrollment {
   schoolFormId: number;
   requiredItemList: string;

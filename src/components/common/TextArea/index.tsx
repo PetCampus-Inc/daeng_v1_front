@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
 import { UseFormRegister, FieldValues } from "react-hook-form";
-
 import * as S from "./styles";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

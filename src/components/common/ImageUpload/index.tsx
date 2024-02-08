@@ -5,6 +5,7 @@ import CloseIcon from "assets/svg/close-icon";
 import * as S from "./styles";
 
 interface ImageUploadProps {
+  id?: string;
   disabled?: boolean;
 }
 
@@ -13,7 +14,7 @@ interface ImageFile {
   preview: string;
 }
 
-const ImageUpload = ({ disabled }: ImageUploadProps) => {
+const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
   const [images, setImages] = useState<ImageFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -54,23 +55,26 @@ const ImageUpload = ({ disabled }: ImageUploadProps) => {
       <S.Upload onClick={handleClick} disabled={disabled}>
         <UploadIcon /> {text}
       </S.Upload>
-      <S.PreviewContainer>
-        {images.map((image, index) => (
-          <S.PreviewItem key={index}>
-            <S.PreviewInner>
-              <S.PreviewButton disabled={disabled}>
-                <S.InnerShadow />
-                <S.PreviewImg src={image.preview} alt={image.file.name} />
-              </S.PreviewButton>
-            </S.PreviewInner>
-            <S.DeleteButton onClick={() => handleDeleteImage(index)} aria-label="이미지 삭제">
-              <CloseIcon />
-            </S.DeleteButton>
-          </S.PreviewItem>
-        ))}
-      </S.PreviewContainer>
+      {images.length > 0 && (
+        <S.PreviewContainer>
+          {images.map((image, index) => (
+            <S.PreviewItem key={index}>
+              <S.PreviewInner>
+                <S.PreviewButton disabled={disabled}>
+                  <S.InnerShadow />
+                  <S.PreviewImg src={image.preview} alt={image.file.name} />
+                </S.PreviewButton>
+              </S.PreviewInner>
+              <S.DeleteButton onClick={() => handleDeleteImage(index)} aria-label="이미지 삭제">
+                <CloseIcon />
+              </S.DeleteButton>
+            </S.PreviewItem>
+          ))}
+        </S.PreviewContainer>
+      )}
       <S.HiddenUpload
         type="file"
+        id={id}
         ref={fileInputRef}
         multiple
         accept="image/*"
