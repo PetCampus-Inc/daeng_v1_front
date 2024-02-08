@@ -29,7 +29,7 @@ export const CardWrapper = styled.div`
   box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);
 `;
 
-export const StyledImage = styled.img<{
+export const Image = styled.img<{
   src: string;
   alt: string;
   width?: string;
@@ -46,8 +46,7 @@ export const StyledImage = styled.img<{
   position: ${(props) => (props.position ? props.position : "static")};
   right: ${(props) => (props.right ? props.right : "")};
   top: ${(props) => (props.top ? props.top : "")};
-  margin-right: ${(props) =>
-    props.marginright ? props.marginright : "0.3rem"};
+  margin-right: ${(props) => (props.marginright ? props.marginright : "0.3rem")};
 `;
 
 export const InfoWrapper = styled.div`
@@ -81,7 +80,7 @@ export const PayTextWrapper = styled.div`
   border-radius: 1rem;
 `;
 
-export const StyledCalendarWrapper = styled.div`
+export const CalendarWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -178,7 +177,7 @@ export const StyledCalendarWrapper = styled.div`
 
 export const StyledCalendar = styled(Calendar)``;
 
-export const StyledDate = styled.div`
+export const Date = styled.div`
   position: absolute;
   right: 7%;
   top: 6%;
@@ -195,7 +194,7 @@ export const StyledDate = styled.div`
   font-weight: 800;
 `;
 
-export const StyledToday = styled.div`
+export const Today = styled.div`
   font-size: x-small;
   color: ${(props) => props.theme.colors.br_2};
   font-weight: 600;
@@ -205,7 +204,7 @@ export const StyledToday = styled.div`
   transform: translateX(-50%);
 `;
 
-export const StyledDot = styled.div`
+export const Dot = styled.div`
   background-color: ${(props) => props.theme.colors.br_2};
   border-radius: 50%;
   width: 0.3rem;
@@ -216,11 +215,11 @@ export const StyledDot = styled.div`
   transform: translateX(-50%);
 `;
 
-export const StyledAlbumWrapper = styled.div`
+export const AlbumWrapper = styled.div`
   padding-top: 10%;
 `;
 
-export const StyledAlbums = styled.div`
+export const Albums = styled.div`
   padding: 5% 0;
   height: 15rem;
   display: flex;
