@@ -77,6 +77,7 @@ export const PayTextWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.yellow_2};
+  background-color: ${(props) => props.theme.colors.yellow_2};
   border-radius: 1rem;
 `;
 
@@ -97,6 +98,7 @@ export const CalendarWrapper = styled.div`
   .react-calendar__month-view {
     abbr {
       color: ${(props) => props.theme.colors.gray_1};
+      color: ${(props) => props.theme.colors.gray_1};
     }
   }
 
@@ -116,6 +118,7 @@ export const CalendarWrapper = styled.div`
   .react-calendar__navigation button:disabled {
     background-color: white;
     color: ${(props) => props.theme.colors.darkBlack};
+    color: ${(props) => props.theme.colors.darkBlack};
   }
 
   .react-calendar__navigation__label {
@@ -129,11 +132,13 @@ export const CalendarWrapper = styled.div`
 
   .react-calendar__month-view__weekdays__weekday--weekend abbr[title="일요일"] {
     color: ${(props) => props.theme.colors.red_1};
+    color: ${(props) => props.theme.colors.red_1};
   }
 
   .react-calendar__tile--now {
     background: none;
     abbr {
+      color: ${(props) => props.theme.colors.primary_2};
       color: ${(props) => props.theme.colors.primary_2};
     }
   }
@@ -141,10 +146,12 @@ export const CalendarWrapper = styled.div`
   .react-calendar__year-view__months__month {
     border-radius: 0.8rem;
     background-color: ${(props) => props.theme.colors.gray_5};
+    background-color: ${(props) => props.theme.colors.gray_5};
     padding: 0;
   }
 
   .react-calendar__tile--hasActive {
+    background-color: ${(props) => props.theme.colors.primary_2};
     background-color: ${(props) => props.theme.colors.primary_2};
     abbr {
       color: white;
@@ -165,11 +172,13 @@ export const CalendarWrapper = styled.div`
     font-size: 0.9rem;
     font-weight: 600;
     color: ${(props) => props.theme.colors.gray_1};
+    color: ${(props) => props.theme.colors.gray_1};
   }
 
   .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus,
   .react-calendar__tile--active {
+    background-color: ${(props) => props.theme.colors.yellow_2};
     background-color: ${(props) => props.theme.colors.yellow_2};
     border-radius: 0.3rem;
   }
@@ -181,6 +190,8 @@ export const Date = styled.div`
   position: absolute;
   right: 7%;
   top: 6%;
+  background-color: ${(props) => props.theme.colors.primary_3};
+  color: ${(props) => props.theme.colors.yellow_2};
   background-color: ${(props) => props.theme.colors.primary_3};
   color: ${(props) => props.theme.colors.yellow_2};
   width: 15%;
@@ -196,6 +207,7 @@ export const Date = styled.div`
 
 export const Today = styled.div`
   font-size: x-small;
+  color: ${(props) => props.theme.colors.br_2};
   color: ${(props) => props.theme.colors.br_2};
   font-weight: 600;
   position: absolute;
