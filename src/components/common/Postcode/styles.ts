@@ -8,6 +8,7 @@ export const Container = styled.div`
   bottom: 0;
   z-index: 99;
 
+  position: fixed;
   padding-top: 20%;
   background-color: ${(props) => props.theme.colors.white};
   justify-content: space-evenly;
