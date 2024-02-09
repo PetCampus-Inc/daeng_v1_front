@@ -1,34 +1,33 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Container = styled.div<{ display?: string }>`
+export const Container = styled.div`
   position: fixed;
   bottom: 0;
-  height: 10vh;
   width: 100%;
   background-color: ${(props) => props.theme.colors.white};
-  display: ${(props) => (props.display ? props.display : "flex")};
+  display: flex;
   justify-content: center;
   align-items: center;
+  padding: 8px 0 15px;
 `;
 
-export const StyledNavBtn = styled(Link)<{
-  selected?: boolean;
-  type?: string;
-}>`
-  width: ${(props) => (props.type === "admin" ? "33%" : "25%")};
+export const NavButton = styled(Link)`
+  width: 100%;
   height: 100%;
-  font-size: medium;
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: ${(props) =>
-    props.selected ? props.theme.colors.red_1 : props.theme.colors.white};
+  gap: 2px;
 `;
 
-export const StyledImage = styled.img<{
-  src: string;
-  alt: string;
-}>``;
+export const Text = styled.span`
+  color: ${(props) => props.theme.colors.gray_3};
+  ${({ theme }) => theme.typo.caption1_12_R}
+
+  &.active {
+    color: ${(props) => props.theme.colors.primaryColor};
+    ${({ theme }) => theme.typo.caption1_12_B}
+  }
+`;
