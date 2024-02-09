@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  position: absolute;
-  top: -4rem;
-  left: 0;
-  right: -0.1rem;
-  bottom: 3rem;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 99999;
+export const BackDrop = styled.div`
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  overflow: hidden;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 5;
 `;
 
 export const MainWrapper = styled.div<{
@@ -57,9 +58,9 @@ export const ButtonWrapper = styled.div`
 
 const Button = styled.button`
   width: 100%;
-  border-radius: 8px;
-
   padding: 3%;
+
+  border-radius: 8px;
 `;
 
 export const CloseButton = styled(Button)`

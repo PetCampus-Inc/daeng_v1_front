@@ -20,7 +20,7 @@ const ButtonModal = ({
   actionfunc
 }: Props) => {
   return (
-    <S.Container>
+    <S.BackDrop>
       <S.MainWrapper>
         {children}
         <S.TextWrapper>
@@ -32,7 +32,7 @@ const ButtonModal = ({
           {actionbutton && <S.ActButton onClick={actionfunc}>{actionbutton}</S.ActButton>}
         </S.ButtonWrapper>
       </S.MainWrapper>
-    </S.Container>
+    </S.BackDrop>
   );
 };
 
