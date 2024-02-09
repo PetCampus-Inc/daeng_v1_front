@@ -1,6 +1,7 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const StyledBottomSheet = styled.div<{
+export const StyledBottomSheet = styled(motion.div)<{
   height: string;
 }>`
   position: absolute;
@@ -9,6 +10,6 @@ export const StyledBottomSheet = styled.div<{
   height: ${(props) => props.height};
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 20px 20px 0px 0px;
-  z-index: 100000;
+  z-index: 10;
   padding: 0 16px 24px;
 `;
