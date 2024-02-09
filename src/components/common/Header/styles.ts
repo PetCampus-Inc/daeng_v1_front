@@ -11,6 +11,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.white};
+  z-index: 10;
 `;
 
 export const HeaderWrapper = styled.div`
@@ -20,6 +21,7 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
+  box-shadow: ${({ theme }) => theme.shadows.card};
 `;
 
 export const LogoWrapper = styled(Link)`
