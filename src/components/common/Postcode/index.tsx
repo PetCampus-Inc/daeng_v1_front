@@ -12,9 +12,10 @@ interface PostcodeProps {
   field: string;
   setValue: UseFormSetValue<FieldValues>;
   closePopup: Dispatch<SetStateAction<boolean>>;
+  setIsAddressActive: Dispatch<SetStateAction<boolean>>;
 }
 
-const Postcode = ({ field, setValue, closePopup }: PostcodeProps) => {
+const Postcode = ({ field, setValue, closePopup, setIsAddressActive }: PostcodeProps) => {
   const popupRootRef = useRef(document.createElement("div"));
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const Postcode = ({ field, setValue, closePopup }: PostcodeProps) => {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setValue(field, fullAddress);
+    setIsAddressActive(true);
   };
 
   return ReactDOM.createPortal(

@@ -19,6 +19,7 @@ interface MemberInfoProps {
 const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   const { control, setValue, watch } = useFormContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isAddressActive, setIsAddressActive] = useState(false);
 
   const addressStreet = "address.street";
   const watchAddress = watch(addressStreet, "");
@@ -36,7 +37,12 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   return (
     <>
       {isPopupOpen && (
-        <Postcode field={addressStreet} setValue={setValue} closePopup={setIsPopupOpen} />
+        <Postcode
+          field={addressStreet}
+          setValue={setValue}
+          closePopup={setIsPopupOpen}
+          setIsAddressActive={setIsAddressActive}
+        />
       )}
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
@@ -73,12 +79,13 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           setValue={setValue}
           readOnly
         />
-
-        <InputField
-          control={control}
-          name="address.detail"
-          placeholder="상세 주소를 입력해주세요"
-        />
+        {isAddressActive && (
+          <InputField
+            control={control}
+            name="address.detail"
+            placeholder="상세 주소를 입력해주세요"
+          />
+        )}
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.MEMBER_PHONE)}>연락처</Title>
