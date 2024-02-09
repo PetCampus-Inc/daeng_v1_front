@@ -25,7 +25,7 @@ export const menuItems = [
   },
   {
     text: "채팅",
-    path: PATH.CHAT,
+    path: PATH.ADMIN_CHAT,
     blackImage: <ChatBlack />,
     colorImage: <Chat />
   },
