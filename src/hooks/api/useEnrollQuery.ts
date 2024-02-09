@@ -43,7 +43,8 @@ export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
       const selectPickDrop = () => ({
         pickDropState: data.pickDropState,
         pickDropMemo: data.pickDropMemo,
-        pickDropInfo: data.pickDropInfo
+        pickDropInfo: data.pickDropInfo,
+        pickDropNotice: data.pickDropNotice
       });
 
       // 필수 항목 리스트

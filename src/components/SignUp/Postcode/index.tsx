@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import DaumPostcode from "react-daum-postcode";
+import DaumPostcode, { Address } from "react-daum-postcode";
 
 interface Props {
   schoolAddress: string;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Postcode = ({ schoolAddress, setSchoolAddress }: Props) => {
-  const complete = (data: any) => {
+  const complete = (data: Address) => {
     let fullAddress = data.address;
     let extraAddress = "";
 
@@ -16,22 +16,16 @@ const Postcode = ({ schoolAddress, setSchoolAddress }: Props) => {
         extraAddress += data.bname;
       }
       if (data.buildingName !== "") {
-        extraAddress +=
-          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+        extraAddress += extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-
     setSchoolAddress(fullAddress);
   };
 
   return (
     <>
-      <DaumPostcode
-        autoClose
-        onComplete={complete}
-        style={{ width: "100%", height: "100%" }}
-      />
+      <DaumPostcode autoClose onComplete={complete} style={{ width: "100%", height: "100%" }} />
     </>
   );
 };
