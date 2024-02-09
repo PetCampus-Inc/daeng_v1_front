@@ -5,6 +5,8 @@ export const Container = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+  min-height: 78px;
+  height: 7vh;
   background-color: ${(props) => props.theme.colors.white};
   display: flex;
   justify-content: center;
