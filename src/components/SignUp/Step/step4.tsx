@@ -99,6 +99,7 @@ const Step4 = ({
   return (
     <>
       {isPopupOpen && (
+        // FIXME: RHF 사용 시에 common/Postcode로 교체할 것!
         <Container padding_top="25%">
           <Header type="text" text="주소 검색" handleClick={() => setIsPopupOpen(false)} />
           <Postcode schoolAddress={schoolAddress} setSchoolAddress={setSchoolAddress} />

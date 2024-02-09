@@ -51,12 +51,12 @@ export const TextWrapper = styled.div`
 `;
 
 export const TitleText = styled.div<{ size?: string }>`
-  font-size: ${(props) => (props.size ? props.size : "1.3rem")};
   padding-top: 1.5%;
-  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${({ theme }) => theme.typo.title2_20_B};
 `;
 
 export const StyledImage = styled.img<{

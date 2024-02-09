@@ -2,8 +2,8 @@ import { useFormContext } from "react-hook-form";
 import { useEnrollMutation } from "hooks/api/useEnrollMutation";
 import { formatDate, extractNumber } from "utils/formatter";
 import { IRequestEnrollment } from "../../../types/School.type";
-import { ITEM_MAP } from "./constant";
-import type { ItemMapValue } from "./constant";
+import { ITEM_MAP } from "constants/item";
+import type { ItemMapValue } from "constants/item";
 
 import * as S from "../Stepper/styles";
 
@@ -22,17 +22,18 @@ const SubmitButton = () => {
     return "";
   };
 
+  // FIXME: schoolFormId, memberId, fileUrl 추가 필요
   const onSubmit = handleSubmit((data) => {
+    const address = [data.address.street, data.address.detail].filter(Boolean).join(" ");
+
     const requestData: IRequestEnrollment = {
-      // FIXME: schoolFormId, memberId, fileUrl 추가 필요
-      // TODO: requestData 인터페이스 정의하기
       schoolFormId: 1,
       memberId: 1,
-      breedId: 1,
-      newBreed: "",
+      breedId: data.breedId,
+      newBreed: data.breedId ? "" : data.dogBreed,
       fileUrl: "",
       memberName: data.memberName,
-      address: data.address || "",
+      address,
       phoneNumber: data.phoneNumber,
       emergencyNumber: data.emergencyNumber || "",
       dogName: data.dogName,

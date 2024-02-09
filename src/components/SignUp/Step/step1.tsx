@@ -5,7 +5,7 @@ import {
   StyledBottomWrapper,
   InputBoxWrapper,
   StyledSearchResultWrapper,
-  StyledSearchResult,
+  StyledSearchResult
 } from "./styles";
 import Text from "components/common/Text";
 import Header from "components/common/Header";
@@ -48,7 +48,7 @@ const Step1 = ({
   setCurrentStep,
   currentMainStep,
   setCurrentMainStep,
-  className,
+  className
 }: Props) => {
   return (
     <>
@@ -87,11 +87,7 @@ const Step1 = ({
               setSelectedSearchText("");
               setSearchText(e.target.value);
             }}
-            handleClick={
-              !selectedSearchText
-                ? handlerGetSearchResult
-                : handlerDeleteSearchResult
-            }
+            handleClick={!selectedSearchText ? handlerGetSearchResult : handlerDeleteSearchResult}
           />
         </InputBoxWrapper>
 
@@ -103,12 +99,11 @@ const Step1 = ({
                   key={index}
                   radius_top={index === 0 ? "first" : ""}
                   radius_bottom={
-                    searchResultText.length > 1 &&
-                    index === searchResultText.length - 1
+                    searchResultText.length > 1 && index === searchResultText.length - 1
                       ? "last"
                       : searchResultText.length === 1
-                      ? "last"
-                      : ""
+                        ? "last"
+                        : ""
                   }
                   onClick={() => {
                     setSelectedSearchText(item.name);
@@ -117,11 +112,7 @@ const Step1 = ({
                   }}
                 >
                   <Text text={item.name} color={ThemeConfig.colors.gray_1} />
-                  <Text
-                    text={item.address}
-                    size="0.9rem"
-                    color={ThemeConfig.colors.gray_3}
-                  />
+                  <Text text={item.address} size="0.9rem" color={ThemeConfig.colors.gray_3} />
                 </StyledSearchResult>
               );
             })}
