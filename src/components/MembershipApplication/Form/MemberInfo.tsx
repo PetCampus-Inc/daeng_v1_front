@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import Postcode from "components/common/Postcode";
 
 import { Card } from "./styles";
+import FloatingButton from "./FloatingButton";
 interface MemberInfoProps {
   requiredItems: Map<number, boolean>;
 }
@@ -20,6 +21,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   const { control, setValue, watch } = useFormContext();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isAddressActive, setIsAddressActive] = useState(false);
+  const [showFloatingButton, setShowFloatingButton] = useState(false);
 
   const addressStreet = "address.street";
   const watchAddress = watch(addressStreet, "");
@@ -33,6 +35,14 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   useEffect(() => {
     watchAddress !== "" && setIsPopupOpen(false);
   }, [watchAddress]);
+
+  const handleFocus = () => {
+    setShowFloatingButton(true);
+  };
+
+  const handleBlur = () => {
+    setShowFloatingButton(false);
+  };
 
   return (
     <>
@@ -84,6 +94,8 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
             control={control}
             name="address.detail"
             placeholder="상세 주소를 입력해주세요"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
         )}
       </Card>
@@ -119,6 +131,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           placeholder="비상 연락처를 입력해주세요"
         />
       </Card>
+      <FloatingButton isVisible={showFloatingButton} />
     </>
   );
 };
