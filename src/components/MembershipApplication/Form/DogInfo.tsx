@@ -47,14 +47,25 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
             numberList={yearsArray}
             initialValue={"2000"}
             register={register}
+            watch={watch}
+            setValue={setValue}
           />
           <SelectNumber
             name="month"
             numberList={monthsArray}
             initialValue={"01"}
             register={register}
+            watch={watch}
+            setValue={setValue}
           />
-          <SelectNumber name="day" numberList={daysArray} initialValue={"01"} register={register} />
+          <SelectNumber
+            name="day"
+            numberList={daysArray}
+            initialValue={"01"}
+            register={register}
+            watch={watch}
+            setValue={setValue}
+          />
         </div>
       </Card>
       <Card>

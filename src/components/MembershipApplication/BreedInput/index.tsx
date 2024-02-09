@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import DropDown from "components/common/Dropdown";
+import { useEffect, useRef } from "react";
+import { Control, FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import useDetectClose from "hooks/common/useDetectClose";
 import useGetBreed from "hooks/api/useGetBreed";
 import SearchInputField from "components/common/InputField/SearchInputField";
-import { Control, FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import BreedDropDown from "components/common/Dropdown/BreedDropdown";
 
 interface IBreedInput {
   name: string;
@@ -47,10 +47,11 @@ const BreedInput = ({ name, control, width = "100%", setValue, watch }: IBreedIn
         setValue={setValue}
       />
       {isOpen && isSuccess && data && (
-        <DropDown
+        <BreedDropDown
           dropDownList={data.data}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
+          value={value}
           setValue={setValue}
           width={width}
         />
