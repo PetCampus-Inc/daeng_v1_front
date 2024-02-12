@@ -10,28 +10,28 @@ export interface ToggleBadgeProps
 }
 
 const ToggleBadge = ({ control, name, readOnly = false, ...props }: ToggleBadgeProps) => {
-  const required = "필수";
-  const optional = "선택";
+  const REQUIRED = "필수";
+  const OPTIONAL = "선택";
 
   const { field } = useController({
     control,
     name,
-    defaultValue: optional
+    defaultValue: OPTIONAL
   });
   const handleToggle = () => {
-    field.onChange(field.value === optional ? required : optional);
+    field.onChange(field.value === OPTIONAL ? REQUIRED : OPTIONAL);
   };
 
   return (
     <S.ToggleButton
       id={field.name}
       onClick={handleToggle}
-      aria-pressed={field.value === required}
+      aria-pressed={field.value === REQUIRED}
       readOnly={readOnly}
       {...props}
     >
-      <S.LeftItem className={field.value === optional ? "active" : ""}>{optional}</S.LeftItem>
-      <S.RightItem className={field.value === required ? "active" : ""}>{required}</S.RightItem>
+      <S.LeftItem className={field.value === OPTIONAL ? "active" : ""}>{OPTIONAL}</S.LeftItem>
+      <S.RightItem className={field.value === REQUIRED ? "active" : ""}>{REQUIRED}</S.RightItem>
       <input type="hidden" {...field} value={field.value} />
     </S.ToggleButton>
   );
