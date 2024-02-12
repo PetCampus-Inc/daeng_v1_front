@@ -56,7 +56,13 @@ export const StyledLabel = styled.label`
   align-items: center;
   user-select: none;
 
-  background-color: ${({ theme }) => theme.colors.gray_5};
-  border: 1px solid ${({ theme }) => theme.colors.gray_5};
-  color: ${({ theme }) => theme.colors.gray_2};
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.gray_4};
+  color: ${({ theme }) => theme.colors.gray_3};
+
+  &.policyPage {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    border: transparent;
+    color: ${({ theme }) => theme.colors.gray_2};
+  }
 `;

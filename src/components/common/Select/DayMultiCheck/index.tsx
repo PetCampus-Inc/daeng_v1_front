@@ -24,7 +24,7 @@ const DayMultiCheck = ({ name, caption, openDays }: IDayMultiCheck) => {
               value={day}
               disabled={!openDays.includes(day)}
             />
-            <S.StyledLabel htmlFor={day}>{day}</S.StyledLabel>
+            <S.StyledLabel htmlFor={day} className="policyPage">{day}</S.StyledLabel>
           </div>
         ))}
       </S.RadioContainer>
