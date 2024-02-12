@@ -2,6 +2,7 @@ import customAxios from "libs/CustomAxios";
 import { IResponse, ITeacherSubmitResponse } from "types/Response.type";
 import {
   IAdminLoginInfo,
+  INewEnrollmentList,
   IOwnerSignUpInfo,
   ITeacherApprove,
   ITeacherSignUpInfo
@@ -107,11 +108,15 @@ export const handleMemberDeny = async (memberId: number): Promise<IResponse> => 
 };
 
 // 원장 신규관리 메인페이지
-export const handleGetEnrollment = async (adminId: number): Promise<any> => {
+export const handleGetNewEnrollment = async (
+  adminId: number,
+  schoolId: number
+): Promise<INewEnrollmentList> => {
   const url: string = `admin/enrollment/main`;
   const { data } = await customAxios.get(url, {
     params: {
-      adminId
+      adminId,
+      schoolId
     }
   });
   return data.data;

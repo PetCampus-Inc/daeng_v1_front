@@ -26,3 +26,16 @@ export interface ITeacherApprove {
   submittedAdminId: number;
   submittedSchoolId: number;
 }
+
+export interface INewEnrollmentList {
+  simpleEnrollmentFormList: {
+    enrollmentFormId: number;
+    memberName: string;
+    dogName: string;
+  }[];
+  simpleSchoolFormList: {
+    schoolFormId: number;
+    schoolFormName: string;
+    createDate: number[];
+  }[];
+}
