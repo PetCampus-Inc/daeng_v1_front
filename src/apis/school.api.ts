@@ -7,6 +7,10 @@ export interface IEnrollmentProps {
   requestUrl?: string;
 }
 
+export interface IAdminEnrollmentProps {
+  formId: string;
+}
+
 export const handleGetSearchResult = async (searchText: string): Promise<ISchoolInfo[]> => {
   const url: string = `school/search?searchText=${searchText}`;
   const { data } = await customAxios.get(url);
@@ -23,7 +27,7 @@ export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> =>
   return data;
 };
 
-export const handleGetIEnrollment = async ({
+export const handleGetEnrollment = async ({
   schoolId,
   memberId
 }: IEnrollmentProps): Promise<IEnrollment> => {
@@ -36,7 +40,7 @@ export const handleGetIEnrollment = async ({
   }
 };
 
-export const handleGetIEnrollmentUrl = async ({
+export const handleGetEnrollmentUrl = async ({
   requestUrl,
   memberId
 }: IEnrollmentProps): Promise<IEnrollment> => {
@@ -45,7 +49,15 @@ export const handleGetIEnrollmentUrl = async ({
   return data.data;
 };
 
-export const handlePostIEnrollment = async (
+export const handleGetAdminEnrollment = async ({
+  formId
+}: IAdminEnrollmentProps): Promise<IEnrollment> => {
+  const url: string = `school/form/list/${formId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
+export const handlePostEnrollment = async (
   requestProps: IRequestEnrollment
 ): Promise<IEnrollment> => {
   const url: string = `school/member/enroll`;
