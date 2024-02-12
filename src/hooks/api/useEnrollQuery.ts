@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetIEnrollment } from "apis/school.api";
+import { handleGetEnrollment } from "apis/school.api";
 import type { IEnrollmentProps } from "apis/school.api";
 import type {
   IEnrollment,
@@ -11,7 +11,7 @@ import type {
 
 interface EnrollmentProps {
   requiredItemsMap: Map<number, boolean>;
-  memberInfo: IMemberDto;
+  memberInfo: IMemberDto | null;
   ticketInfo: ITicketInfo;
   policyInfo: IPolicyInfo;
   pickDropInfo: IPickDropInfo;
@@ -20,7 +20,7 @@ interface EnrollmentProps {
 export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
   const enlistmentQuery = useSuspenseQuery<IEnrollment, Error, EnrollmentProps>({
     queryKey: ["enrollment", memberId, schoolId],
-    queryFn: () => handleGetIEnrollment({ schoolId, memberId }),
+    queryFn: () => handleGetEnrollment({ schoolId, memberId }),
     refetchOnWindowFocus: false,
     select: (data) => {
       // 이용권 정보

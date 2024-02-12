@@ -31,7 +31,7 @@ export interface IEnrollment {
   pickDropMemo: string;
   pickDropInfo: string;
   pickDropNotice: string;
-  memberDto: IMemberDto;
+  memberDto: IMemberDto | null;
 }
 export interface IMemberDto {
   memberId: number;
