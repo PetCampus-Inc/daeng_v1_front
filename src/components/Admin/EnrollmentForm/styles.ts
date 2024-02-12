@@ -43,3 +43,21 @@ export const ContentWrapper = styled.div`
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin-top: 28px;
+`;
+
+export const Caption = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  ${({ theme }) => theme.typo.caption1_12_R};
+  color: ${({ theme }) => theme.colors.gray_3};
+`;

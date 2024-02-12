@@ -2,26 +2,6 @@
 
 import styled, { DefaultTheme, css } from "styled-components";
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-
-  margin-top: 28px;
-`;
-
-export const Caption = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  & > p {
-    ${({ theme }) => theme.typo.caption1_12_R};
-    color: ${({ theme }) => theme.colors.gray_3};
-  }
-`;
-
 export const ButtonWrapper = styled.div`
   display: flex;
   gap: 4px;
