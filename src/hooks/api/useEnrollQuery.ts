@@ -21,6 +21,7 @@ export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
   const enlistmentQuery = useSuspenseQuery<IEnrollment, Error, EnrollmentProps>({
     queryKey: ["enrollment", memberId, schoolId],
     queryFn: () => handleGetIEnrollment({ schoolId, memberId }),
+    refetchOnWindowFocus: false,
     select: (data) => {
       // 이용권 정보
       const selectTicketInfo = () => ({
