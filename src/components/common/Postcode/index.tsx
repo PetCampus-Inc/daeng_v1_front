@@ -1,12 +1,11 @@
-import React, { useEffect, useRef } from "react";
 import DaumPostcode, { Address } from "react-daum-postcode";
-import ReactDOM from "react-dom";
+import Portal from "components/common/Modal/portal";
+import Header from "../Header";
 
 import type { FieldValues, UseFormSetValue } from "react-hook-form";
 import type { Dispatch, SetStateAction } from "react";
 
 import { Container } from "./styles";
-import Header from "../Header";
 
 interface PostcodeProps {
   field: string;
@@ -16,22 +15,6 @@ interface PostcodeProps {
 }
 
 const Postcode = ({ field, setValue, closePopup, setIsAddressActive }: PostcodeProps) => {
-  const popupRootRef = useRef(document.createElement("div"));
-
-  useEffect(() => {
-    const popupRoot = popupRootRef.current;
-
-    if (!popupRoot.parentElement) {
-      document.body.appendChild(popupRoot);
-    }
-
-    return () => {
-      if (popupRoot.parentElement) {
-        document.body.removeChild(popupRoot);
-      }
-    };
-  }, [popupRootRef]);
-
   const complete = (data: Address) => {
     let fullAddress = data.address;
     let extraAddress = "";
@@ -49,12 +32,13 @@ const Postcode = ({ field, setValue, closePopup, setIsAddressActive }: PostcodeP
     setIsAddressActive(true);
   };
 
-  return ReactDOM.createPortal(
-    <Container>
-      <Header type="text" text="주소 검색" handleClick={() => closePopup(false)} />
-      <DaumPostcode autoClose onComplete={complete} style={{ width: "100%", height: "100%" }} />
-    </Container>,
-    popupRootRef.current
+  return (
+    <Portal>
+      <Container>
+        <Header type="text" text="주소 검색" handleClick={() => closePopup(false)} />
+        <DaumPostcode autoClose onComplete={complete} style={{ width: "100%", height: "100%" }} />
+      </Container>
+    </Portal>
   );
 };
 
