@@ -21,13 +21,15 @@ const MembershipApplication = () => {
     mode: "onBlur",
     shouldUnregister: false
   });
-  const { currentStep, nextStep, prevStep, setStep } = useStep(0, MEMBER_MA_STEP.length - 1);
+
+  const visibleSteps = MEMBER_MA_STEP.filter((step) => step.isVisible(pickDropInfo));
+  const maxSteps = visibleSteps.length;
+
+  const { currentStep, nextStep, prevStep, setStep } = useStep(0, maxSteps - 1);
 
   const currentTitle = MEMBER_MA_STEP[currentStep].title;
   const currentSubtitle = MEMBER_MA_STEP[currentStep].subtitle;
-  const filteredSteps = MEMBER_MA_STEP.filter((step) => step.isVisible(pickDropInfo));
-  const indicators = filteredSteps.map((step) => step.indicator);
-
+  const indicators = visibleSteps.map((step) => step.indicator);
   return (
     <S.Container>
       <S.TopWrapper>
@@ -49,7 +51,7 @@ const MembershipApplication = () => {
         </S.ContentWrapper>
         <Navigation
           currentStep={currentStep}
-          stepsLength={MEMBER_MA_STEP.length}
+          stepsLength={maxSteps}
           nextStep={nextStep}
           prevStep={prevStep}
         />
