@@ -75,4 +75,12 @@ export const DeleteButton = styled.button`
   top: -10px;
   right: -10px;
   z-index: 3;
+
+  & > svg > .icon-circle {
+    color: ${({ theme }) => theme.colors.gray_3};
+  }
+
+  & > svg > .icon-path {
+    color: ${({ theme }) => theme.colors.gray_4};
+  }
 `;

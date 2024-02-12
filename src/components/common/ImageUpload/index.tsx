@@ -3,20 +3,22 @@ import UploadIcon from "assets/svg/upload-icon";
 import CloseIcon from "assets/svg/close-icon";
 
 import * as S from "./styles";
+import ImageModal from "./ImageModal";
 
 interface ImageUploadProps {
   id?: string;
   disabled?: boolean;
 }
-
-interface ImageFile {
+export interface ImageFile {
   file: File;
   preview: string;
 }
 
 const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
-  const [images, setImages] = useState<ImageFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [images, setImages] = useState<ImageFile[]>([]);
+  const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -40,6 +42,11 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
     }
   };
 
+  const handleImageClick = (image: ImageFile) => {
+    setSelectedImage(image);
+    setShowModal(true);
+  };
+
   useEffect(() => {
     return () => {
       images.forEach((image) => {
@@ -60,7 +67,7 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
           {images.map((image, index) => (
             <S.PreviewItem key={index}>
               <S.PreviewInner>
-                <S.PreviewButton disabled={disabled}>
+                <S.PreviewButton disabled={disabled} onClick={() => handleImageClick(image)}>
                   <S.InnerShadow />
                   <S.PreviewImg src={image.preview} alt={image.file.name} />
                 </S.PreviewButton>
@@ -71,6 +78,9 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
             </S.PreviewItem>
           ))}
         </S.PreviewContainer>
+      )}
+      {showModal && selectedImage && (
+        <ImageModal image={selectedImage} onClose={() => setShowModal(false)} />
       )}
       <S.HiddenUpload
         type="file"
