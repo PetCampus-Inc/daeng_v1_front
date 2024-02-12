@@ -22,11 +22,11 @@ const EditableRadioGroup = ({
   ...props
 }: EditableRadioGroupProps) => {
   return (
-    <S.RadioGroupContainer $fieldsLength={fields.length}>
+    <S.RadioGroupContainer>
       {fields.map((item, index) => (
         <S.RadioWrapper key={item.id}>
           <Controller
-            name={`myRadioGroup.${index}.value`}
+            name={`${name}.${index}.value`}
             control={control}
             render={({ field }) => (
               <S.StyledInput
