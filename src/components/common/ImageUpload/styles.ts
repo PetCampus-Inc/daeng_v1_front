@@ -16,11 +16,24 @@ export const Upload = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid ${({ theme }) => theme.colors.gray_4};
-  background: ${({ theme }) => theme.colors.gray_5};
+  border: 1.012px solid ${({ theme }) => theme.colors.gray_4};
+  background: ${({ theme }) => theme.colors.white};
 
   ${({ theme }) => theme.typo.body2_16_R};
-  color: ${({ theme }) => theme.colors.gray_2};
+  color: ${({ theme }) => theme.colors.gray_3};
+  > svg {
+    fill: ${({ theme }) => theme.colors.gray_3};
+    stroke: ${({ theme }) => theme.colors.gray_3};
+  }
+
+  &.add {
+    color: ${({ theme }) => theme.colors.gray_1};
+    border: 1.012px solid ${({ theme }) => theme.colors.gray_3};
+    > svg {
+      fill: ${({ theme }) => theme.colors.gray_1};
+      stroke: ${({ theme }) => theme.colors.gray_1};
+    }
+  }
 `;
 
 export const PreviewContainer = styled.ul`
