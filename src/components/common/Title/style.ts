@@ -8,3 +8,8 @@ export const Label = styled.label`
 
   ${({ theme }) => theme.typo.label1_16_R}
 `;
+
+export const Container = styled.div`
+  display: flex;
+  gap: 4px;
+`;

@@ -3,7 +3,8 @@ import type { DefaultTheme } from "styled-components";
 import type { BadgeProps } from "./index";
 
 const badgeStyles = (theme: DefaultTheme) => ({
-  required: `background-color: ${theme.colors.br_4}; color: ${theme.colors.primaryColor};`,
+  required: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
+  adminRequired: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
   optional: `background-color: ${theme.colors.gray_5}; color: ${theme.colors.gray_2};`
 });
 
