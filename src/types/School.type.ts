@@ -12,6 +12,9 @@ export interface IBreedInfo {
   }[];
 }
 
+type TPickDropState = "RUNNING" | "NOT_RUNNING";
+export type TPickDropRequest = "REQUEST" | "NOT_REQUEST";
+
 export interface IEnrollment {
   schoolFormId: number;
   requiredItemList: string;
@@ -24,7 +27,7 @@ export interface IEnrollment {
   limitsInfo: string;
   accidentInfo: string;
   abandonmentInfo: string;
-  pickDropState: string;
+  pickDropState: TPickDropState;
   pickDropMemo: string;
   pickDropInfo: string;
   pickDropNotice: string;
@@ -55,7 +58,7 @@ export interface IPolicyInfo {
 }
 
 export interface IPickDropInfo {
-  pickDropState: string;
+  pickDropState: TPickDropState;
   pickDropNotice: string;
   pickDropMemo: string;
   pickDropInfo: string;
@@ -83,7 +86,7 @@ export interface IRequestEnrollment {
   roundTicketNumber: number;
   monthlyTicketNumber: number;
   attendanceDays: string[];
-  pickDropRequest: string;
+  pickDropRequest: TPickDropRequest;
   pickDropType: string;
   pickDropMemo: string;
 }
