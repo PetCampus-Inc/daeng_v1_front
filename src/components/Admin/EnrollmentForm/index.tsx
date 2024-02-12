@@ -12,6 +12,7 @@ import Indicator from "./Stepper/Indicator";
 import * as S from "./styles";
 import { ADMIN_CREATE_FORM_STEP, ADMIN_READ_FORM_STEP } from "constants/step";
 import SubmitButton from "./Stepper/SubmitButton";
+import { FORM_DESC } from "constants/desc";
 
 interface EnrollmentFormProps {
   type: "READ" | "CREATE" | "EDIT";
@@ -30,6 +31,7 @@ const EnrollmentForm = ({ type }: EnrollmentFormProps) => {
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
+  const helperText = FORM_DESC[type as "CREATE" | "EDIT"]!;
 
   return (
     <S.Container>
@@ -48,15 +50,20 @@ const EnrollmentForm = ({ type }: EnrollmentFormProps) => {
           {currentStep === 3 && <PolicyInfo />}
           {currentStep === 4 && <PickDropInfo />}
         </S.ContentWrapper>
-        {type === "CREATE" && (
-          <Navigation
-            currentStep={currentStep}
-            stepsLength={currentSteps.length}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
+        {type !== "READ" && (
+          <S.ButtonContainer>
+            <S.Caption>{helperText}</S.Caption>
+            {type === "CREATE" && (
+              <Navigation
+                currentStep={currentStep}
+                stepsLength={currentSteps.length}
+                nextStep={nextStep}
+                prevStep={prevStep}
+              />
+            )}
+            {type === "EDIT" && <SubmitButton type="EDIT" />}
+          </S.ButtonContainer>
         )}
-        {type === "EDIT" && <SubmitButton />}
       </FormProvider>
     </S.Container>
   );
