@@ -25,7 +25,8 @@ const MembershipApplication = () => {
 
   const currentTitle = MEMBER_MA_STEP[currentStep].title;
   const currentSubtitle = MEMBER_MA_STEP[currentStep].subtitle;
-  const indicators: string[] = MEMBER_MA_STEP.map((s) => s.indicator);
+  const filteredSteps = MEMBER_MA_STEP.filter((step) => step.isVisible(pickDropInfo));
+  const indicators = filteredSteps.map((step) => step.indicator);
 
   return (
     <S.Container>
