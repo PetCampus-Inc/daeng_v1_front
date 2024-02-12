@@ -63,18 +63,14 @@ export const StyledLabel = styled.label`
   ${({ theme }) => theme.typo.body2_16_R};
 `;
 
-export const RadioGroupContainer = styled.div<{ $fieldsLength: number }>`
-  display: grid;
-  grid-template-columns: repeat(
-    ${({ $fieldsLength }) => ($fieldsLength > 4 ? $fieldsLength : 4)},
-    minmax(0, 1fr)
-  );
+export const RadioGroupContainer = styled.div`
+  display: flex;
   gap: 12px;
 `;
 
 export const RadioWrapper = styled.div`
   position: relative;
-  width: auto;
+  flex: 1;
 `;
 
 export const DeleteButton = styled.button`
