@@ -1,6 +1,11 @@
-import React from "react";
+import type { ITicketInfo } from "types/School.type";
 
-const TicketInfo = () => {
+interface TicketInfoProps {
+  info?: ITicketInfo;
+  requiredItems?: Map<number, boolean>;
+}
+
+const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
   return <div>TicketInfo</div>;
 };
 

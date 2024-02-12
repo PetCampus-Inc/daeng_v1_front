@@ -70,7 +70,7 @@ export const ADMIN_CREATE_FORM_STEP = [
 export const ADMIN_READ_FORM_STEP = [
   {
     title: "견주에게 받을 정보들이에요",
-    subtitle: "견주에게 받을 정보들이에요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
     indicator: "견주 정보",
     isVisible: () => true
   },

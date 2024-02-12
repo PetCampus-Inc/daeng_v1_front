@@ -1,6 +1,11 @@
-import React from "react";
+import type { IPolicyInfo } from "types/School.type";
 
-const PolicyInfo = () => {
+interface PolicyInfoProps {
+  info?: IPolicyInfo;
+  requiredItems?: Map<number, boolean>;
+}
+
+const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
   return <div>PolicyInfo</div>;
 };
 

@@ -1,6 +1,10 @@
-import React from "react";
+import type { IPickDropInfo } from "types/School.type";
 
-const PickDropInfo = () => {
+interface PickDropInfoProps {
+  info?: IPickDropInfo;
+  requiredItems?: Map<number, boolean>;
+}
+const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
   return <div>PickDropInfo</div>;
 };
 

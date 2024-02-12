@@ -1,6 +1,8 @@
-import React from "react";
+interface MemberInfoProps {
+  requiredItems?: Map<number, boolean>;
+}
 
-const MemberInfo = () => {
+const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   return <div>MemberInfo</div>;
 };
 
