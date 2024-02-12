@@ -65,4 +65,10 @@ export const StyledLabel = styled.label`
     border: transparent;
     color: ${({ theme }) => theme.colors.gray_2};
   }
+
+  &.disabled {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    border: 1px solid ${({ theme }) => theme.colors.gray_4};
+    color: ${({ theme }) => theme.colors.gray_4};
+  }
 `;
