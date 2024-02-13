@@ -15,12 +15,11 @@ interface PickDropInfoProps {
 
 const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
   const { control, watch, register } = useFormContext();
-
   return (
     <>
       <Card>
         <Label>픽드랍 안내</Label>
-        <TextArea name="pickDropAnnouncement" readOnly defaultValue={info.pickDropNotice} />
+        <TextArea name="pickDropAnnouncement" disabled defaultValue={info.pickDropNotice} />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_REQUEST)}>픽드랍 신청</Title>
@@ -44,7 +43,13 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
           <Card>
             <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_INFO)}>픽드랍 유의사항</Title>
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-            <TextArea name="pickDropInfo" readOnly autoResize value={info.pickDropInfo} />
+            <TextArea
+              name="pickDropInfo"
+              disabled
+              autoResize
+              value={info.pickDropInfo}
+              isChecked={watch("pickDropInfo")}
+            />
             <Stack>
               <Checkbox
                 name="pickDropInfo"
