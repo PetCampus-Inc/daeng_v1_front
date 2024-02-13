@@ -17,22 +17,26 @@ export const BackDrop = styled.div`
 
 export const MainWrapper = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
   height: 65%;
   margin: 1rem;
+
+  background-color: ${({ theme }) => theme.colors.black};
+  border-radius: 12px;
 `;
 
 export const PreviewItem = styled.div`
   width: 100%;
-  height: 100%;
-
-  overflow: hidden;
-  border-radius: 12px;
 `;
 
 export const PreviewImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 export const DeleteButton = styled.button`
