@@ -10,5 +10,5 @@ export const PATH = {
   ADMIN_SCHOOL_MANAGE: "/admin/schoolManage",
   OWNER: "/owner",
   OWNER_MA: "/owner/membershipApplication",
-  REDIRECT: "/auth/:provider"
+  REDIRECT: "/auth/:provider/callback"
 } as const;

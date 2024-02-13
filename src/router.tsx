@@ -56,6 +56,10 @@ const router = createBrowserRouter([
         element: <Pages.MembershipApplicationPage />
       }
     ]
+  },
+  {
+    path: PATH.REDIRECT,
+    element: <Pages.RedirectPage />
   }
 ]);
 
