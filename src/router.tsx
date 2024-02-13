@@ -86,8 +86,8 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: PATH.ADMIN_SCHOOL_MANAGE_NEW_ENROLLMENT,
-        element: <Pages.SchoolManageNewEnrollmentPage />
+        path: PATH.ADMIN_SCHOOL_MANAGE_ENROLLMENT,
+        element: <Pages.SchoolManageEnrollmentPage />
       },
       {
         path: PATH.ADMIN_MY_PAGE,
