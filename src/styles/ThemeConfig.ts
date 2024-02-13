@@ -33,6 +33,7 @@ export const ThemeConfig = {
     br_2: "#C8A584",
     br_3: "#E4CAB1",
     br_4: "#EEE3D9",
+    br_5: "#F6F1ED",
     green: "#5BBA70",
 
     yellow_1: "#FFD12D",
