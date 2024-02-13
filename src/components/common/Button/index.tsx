@@ -7,9 +7,7 @@ interface Props {
   text?: string;
   textcolor?: string;
   backcolor?: string;
-  handleClick?: (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void | Promise<void>;
+  handleClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void | Promise<void>;
   border?: string;
   radius?: string;
   weight?: string;
@@ -36,7 +34,7 @@ const Button = ({
   margintop,
   children,
   justify,
-  classname,
+  classname
 }: Props) => {
   return (
     <StyledMainWrapper

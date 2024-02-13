@@ -20,6 +20,7 @@ import DogOwner from "./DogOwner";
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { PATH } from "constants/path";
+import { KAKAO_API_URL } from "constants/api";
 
 // **소셜 로그인 구현 필요**
 const SignIn = () => {
@@ -85,8 +86,7 @@ const SignIn = () => {
                 textcolor={ThemeConfig.colors.black}
                 marginbottom="3%"
                 handleClick={() => {
-                  setCurrentMainStep(currentMainStep + 2);
-                  // handlerLogin();
+                  window.location.href = KAKAO_API_URL;
                 }}
               >
                 <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
