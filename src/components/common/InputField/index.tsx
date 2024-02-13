@@ -9,11 +9,24 @@ export interface InputFieldProps
   control: Control;
 }
 
-const InputField = ({ control, name, rules, defaultValue, disabled=false, ...inputProps }: InputFieldProps) => {
+const InputField = ({
+  control,
+  name,
+  rules,
+  defaultValue,
+  disabled = false,
+  ...inputProps
+}: InputFieldProps) => {
   const { field } = useController({ control, name, rules, defaultValue });
 
   return (
-    <S.Input {...field} id={field.name} value={field.value ? field.value : ""} disabled={disabled} {...inputProps} />
+    <S.Input
+      {...field}
+      id={field.name}
+      value={field.value ? field.value : ""}
+      disabled={disabled}
+      {...inputProps}
+    />
   );
 };
 
