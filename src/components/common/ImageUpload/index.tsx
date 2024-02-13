@@ -1,22 +1,21 @@
-import { useRef, ChangeEvent, useState, useEffect } from "react";
+import { useRef, ChangeEvent, useState } from "react";
 import UploadIcon from "assets/svg/upload-icon";
 import CloseIcon from "assets/svg/close-icon";
 
 import * as S from "./styles";
 import ImageModal from "./ImageModal";
+import { useRecoilState } from "recoil";
+import { imagePreviewAtom } from "store/form";
+import type { ImageFile } from "store/form";
 
 interface ImageUploadProps {
   id?: string;
   disabled?: boolean;
 }
-export interface ImageFile {
-  file: File;
-  preview: string;
-}
 
 const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [images, setImages] = useState<ImageFile[]>([]);
+  const [images, setImages] = useRecoilState<ImageFile[]>(imagePreviewAtom);
   const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -46,14 +45,6 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
     setSelectedImage(image);
     setShowModal(true);
   };
-
-  useEffect(() => {
-    return () => {
-      images.forEach((image) => {
-        URL.revokeObjectURL(image.preview);
-      });
-    };
-  }, [images]);
 
   const text = images.length > 0 ? "추가 업로드" : "사진 업로드";
 
