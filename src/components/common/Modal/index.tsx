@@ -5,14 +5,9 @@ import React, {
   RefObject,
   useCallback,
   useEffect,
-  useRef,
+  useRef
 } from "react";
-import {
-  StyledCloseImage,
-  StyledModal,
-  StyledModalBackground,
-  StyledModalContent,
-} from "./styles";
+import * as S from "./styles";
 import Portal from "./portal";
 
 interface IModal {
@@ -44,7 +39,7 @@ const Modal = ({
   yesComment = "예",
   noComment = "아니요",
   isClose = false,
-  type,
+  type
 }: IModal) => {
   const modalRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   const onClickOutSide = useCallback(
@@ -65,17 +60,12 @@ const Modal = ({
 
   return (
     <Portal>
-      <StyledModalBackground>
-        <StyledModal
-          width={width}
-          height={height}
-          style={customStyle}
-          ref={modalRef}
-        >
-          <StyledModalContent>{children}</StyledModalContent>
-          {isClose && <StyledCloseImage onClick={onClose} />}
-        </StyledModal>
-      </StyledModalBackground>
+      <S.BackDrop>
+        <S.StyledModal width={width} height={height} style={customStyle} ref={modalRef}>
+          <S.StyledModalContent>{children}</S.StyledModalContent>
+          {isClose && <S.StyledCloseImage onClick={onClose} />}
+        </S.StyledModal>
+      </S.BackDrop>
     </Portal>
   );
 };
