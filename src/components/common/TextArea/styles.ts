@@ -14,10 +14,7 @@ export const TextAreaInput = styled.textarea.withConfig({
 
   padding: 12px 18px;
   border-radius: 8px;
-  border: ${(props) =>
-    props.$isChecked
-      ? `1px solid ${props.theme.colors.br_2}`
-      : `1px solid ${props.theme.colors.gray_4}`};
+  border: 1px solid ${(props) => (props.$isChecked ? props.theme.colors.br_2 : props.theme.colors.gray_4)};
 
   ${({ theme }) => theme.typo.label1_16_R};
   color: ${(props) =>
