@@ -60,7 +60,7 @@ export const ThemeConfig = {
   typo: {
     title1_24_B: typoCreator("1.5rem", 700, "-1.2px", "32px"),
     title1_24_R: typoCreator("1.5rem", 400, "-1.2px", "26px"),
-    title2_20_B: typoCreator("20px", 700, "-1.2px", "28px"),
+    title2_20_B: typoCreator("20px", 700, "-0.24px", "28px"),
     title2_20_R: typoCreator("20px", 400, "-1.2px", "26px"),
     title3_28_B: typoCreator("28px", 700, "0px", "40px"),
     body1_18_B: typoCreator("18px", 700, "-1.2px", "27px"),

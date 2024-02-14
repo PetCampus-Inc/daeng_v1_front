@@ -1,5 +1,5 @@
 import Badge from "components/common/Badge";
-import * as S from "./style";
+import { Label } from "./style";
 
 export interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   children: React.ReactNode;
@@ -8,10 +8,10 @@ export interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelEleme
 
 const Title = ({ children, isRequired, ...props }: FormLabelProps) => {
   return (
-    <S.Label {...props}>
+    <Label {...props}>
       {children}
       <Badge type={isRequired ? "required" : "optional"} />
-    </S.Label>
+    </Label>
   );
 };
 

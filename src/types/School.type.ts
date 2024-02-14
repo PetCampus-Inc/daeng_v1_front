@@ -27,6 +27,7 @@ export interface IEnrollment {
   pickDropState: string;
   pickDropMemo: string;
   pickDropInfo: string;
+  pickDropNotice: string;
   memberDto: IMemberDto;
 }
 export interface IMemberDto {
@@ -55,6 +56,7 @@ export interface IPolicyInfo {
 
 export interface IPickDropInfo {
   pickDropState: string;
+  pickDropNotice: string;
   pickDropMemo: string;
   pickDropInfo: string;
 }

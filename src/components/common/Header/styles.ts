@@ -50,6 +50,8 @@ export const TitleText = styled.div<{ size?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${({ theme }) => theme.typo.title2_20_B};
 `;
 
 export const StyledImage = styled.img<{
