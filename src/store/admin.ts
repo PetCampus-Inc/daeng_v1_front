@@ -4,9 +4,10 @@ import {
   IAdminLoginResponse,
   IAttendDogsInfo,
   IAttendCareDogInfo,
-  IDogDetails,
+  IDogDetails
 } from "types/Attendance.type";
 import { recoilPersist } from "recoil-persist";
+import { INewEnrollmentList } from "types/Admin.type";
 
 const { persistAtom } = recoilPersist();
 
@@ -19,11 +20,11 @@ export const dogListInfoAtom = atom<IAttendanceInfo>({
         dogName: "",
         allRounds: -1,
         currentRounds: -1,
-        monthlyTicket: [],
-      },
+        monthlyTicket: []
+      }
     ],
-    status: 0,
-  },
+    status: 0
+  }
 });
 
 export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
@@ -34,11 +35,11 @@ export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
       adminName: "",
       schoolId: -1,
       role: "",
-      schoolName: "",
+      schoolName: ""
     },
-    status: 0,
+    status: 0
   },
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom]
 });
 
 export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
@@ -51,12 +52,12 @@ export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
         dogName: "",
         allRounds: -1,
         currentRounds: -1,
-        monthlyTicket: [],
-      },
+        monthlyTicket: []
+      }
     ],
-    status: 0,
+    status: 0
   },
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom]
 });
 
 export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
@@ -68,14 +69,19 @@ export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
         dogId: -1,
         dogName: "",
         status: "",
-        adminName: "",
-      },
+        adminName: ""
+      }
     ],
-    status: 0,
-  },
+    status: 0
+  }
 });
 
 export const attendDogDetail = atom<IDogDetails | null>({
   key: "attendDogDetails",
-  default: null,
+  default: null
+});
+
+export const newEnrollmentListAtom = atom<INewEnrollmentList | null>({
+  key: "newEnrollmentList",
+  default: null
 });

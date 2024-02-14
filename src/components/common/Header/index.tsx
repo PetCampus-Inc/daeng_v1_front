@@ -1,20 +1,21 @@
 import {
   Container,
   HeaderWrapper,
-  IconsWrapper,
   LogoWrapper,
-  BackIconWrapper,
   TitleText,
   TextWrapper,
   StyledImage,
+  IconWrapper
 } from "./styles";
-import { Link } from "react-router-dom";
 import { memo } from "react";
+import NoticeActiveIcon from "assets/svg/notice-active-icon";
 
 /*
 header type
 - main : 로고
 - back : 뒤로기기
+- text : 뒤로가기 + 텍스트
+- notice : 텍스트 + 알림
 */
 
 interface Props {
@@ -27,7 +28,7 @@ interface Props {
 const Header = ({ type, handleClick, text, size }: Props) => {
   return (
     <Container>
-      <HeaderWrapper type={type}>
+      <HeaderWrapper>
         {type === "main" && (
           <>
             <LogoWrapper to={"/home"}>
@@ -37,17 +38,28 @@ const Header = ({ type, handleClick, text, size }: Props) => {
           </>
         )}
         {type === "back" && (
-          <BackIconWrapper onClick={handleClick}>
+          <IconWrapper onClick={handleClick}>
             <StyledImage src="/images/chevron-left.png" alt="chevron-left" />
-          </BackIconWrapper>
+          </IconWrapper>
         )}
         {type === "text" && (
           <TextWrapper>
-            <BackIconWrapper onClick={handleClick}>
+            <IconWrapper onClick={handleClick}>
               <StyledImage src="/images/chevron-left.png" alt="chevron-left" />
-            </BackIconWrapper>
+            </IconWrapper>
             <TitleText size={size}>{text}</TitleText>
-            <div style={{ width: "5%" }} />
+          </TextWrapper>
+        )}
+        {type === "notice" && (
+          <TextWrapper>
+            <TitleText size={size}>{text}</TitleText>
+            <IconWrapper
+              onClick={() => {
+                // TODO: 알림 페이지로 이동
+              }}
+            >
+              <NoticeActiveIcon />
+            </IconWrapper>
           </TextWrapper>
         )}
       </HeaderWrapper>

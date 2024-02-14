@@ -1,51 +1,38 @@
-import { ThemeConfig } from "styles/ThemeConfig";
-import Text from "../Text";
-import { Container, StyledMainWrapper, StyledButtonWrapper } from "./styles";
-import Button from "../Button";
+import * as S from "./styles";
 
 interface Props {
   children?: React.ReactNode;
   maintext: string;
   subtext: string;
-  firstbutton: string;
-  secondbutton: string;
-  firstfunc: () => void | Promise<void>;
-  secondfunc: () => void | Promise<void>;
+  closebutton?: string;
+  actionbutton?: string;
+  closefunc?: () => void | Promise<void>;
+  actionfunc?: () => void | Promise<void>;
 }
 
 const ButtonModal = ({
   children,
   maintext,
   subtext,
-  firstbutton,
-  secondbutton,
-  firstfunc,
-  secondfunc,
+  closebutton,
+  actionbutton,
+  closefunc,
+  actionfunc
 }: Props) => {
   return (
-    <Container>
-      <StyledMainWrapper>
-        <Text text={maintext} size="1.2rem" weight="700" />
-        <Text text={subtext} color={ThemeConfig.colors.gray_2} margintop="3%" />
-        <StyledButtonWrapper>
-          <Button
-            text={firstbutton}
-            width="49%"
-            height="100%"
-            backcolor={ThemeConfig.colors.gray_4}
-            textcolor={ThemeConfig.colors.gray_2}
-            handleClick={firstfunc}
-          />
-          <Button
-            text={secondbutton}
-            width="49%"
-            height="100%"
-            weight="700"
-            handleClick={secondfunc}
-          />
-        </StyledButtonWrapper>
-      </StyledMainWrapper>
-    </Container>
+    <S.BackDrop>
+      <S.MainWrapper>
+        {children}
+        <S.TextWrapper>
+          <S.MainText>{maintext}</S.MainText>
+          <S.SubText>{subtext}</S.SubText>
+        </S.TextWrapper>
+        <S.ButtonWrapper>
+          {closebutton && <S.CloseButton onClick={closefunc}>{closebutton}</S.CloseButton>}
+          {actionbutton && <S.ActButton onClick={actionfunc}>{actionbutton}</S.ActButton>}
+        </S.ButtonWrapper>
+      </S.MainWrapper>
+    </S.BackDrop>
   );
 };
 
