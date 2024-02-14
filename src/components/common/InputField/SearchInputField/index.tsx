@@ -11,7 +11,7 @@ interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   setValue: UseFormSetValue<FieldValues>;
 }
 
-const SearchInputField = ({ name, onSearch, value, setValue, ...props }: SearchInputFieldProps) => {
+const SearchInputField = ({ name, onSearch, value, setValue, disabled=false, ...props }: SearchInputFieldProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(name, e.target.value);
     props.onChange && props.onChange(e);
@@ -30,6 +30,7 @@ const SearchInputField = ({ name, onSearch, value, setValue, ...props }: SearchI
       <InputField
         {...props}
         type="search"
+        disabled={disabled}
         name={name}
         value={value}
         onChange={handleChange}

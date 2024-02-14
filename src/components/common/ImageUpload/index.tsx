@@ -50,7 +50,11 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
 
   return (
     <S.Container>
-      <S.Upload onClick={handleClick} disabled={disabled}>
+      <S.Upload
+        onClick={handleClick}
+        disabled={disabled}
+        className={images.length > 0 ? "add" : ""}
+      >
         <UploadIcon /> {text}
       </S.Upload>
       {images.length > 0 && (

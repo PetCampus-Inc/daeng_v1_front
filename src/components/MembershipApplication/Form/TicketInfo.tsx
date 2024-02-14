@@ -39,7 +39,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea name="priceInfo" readOnly value={info.priceInfo} />
+        <TextArea name="priceInfo" disabled value={info.priceInfo} />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
@@ -67,7 +67,13 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea id="ticketInfo" readOnly value={info.ticketInfo} resizable={false} />
+        <TextArea
+          id="ticketInfo"
+          disabled
+          value={info.ticketInfo}
+          resizable={false}
+          isChecked={watch("ticketInfo")}
+        />
         <Stack>
           <Checkbox
             name="ticketInfo"

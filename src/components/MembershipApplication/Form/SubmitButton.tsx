@@ -25,7 +25,6 @@ const SubmitButton = () => {
   // FIXME: schoolFormId, memberId, fileUrl 추가 필요
   const onSubmit = handleSubmit((data) => {
     const address = [data.address.street, data.address.detail].filter(Boolean).join(" ");
-
     const requestData: IRequestEnrollment = {
       schoolFormId: 1,
       memberId: 1,

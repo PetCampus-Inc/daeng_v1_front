@@ -56,26 +56,19 @@ export const StyledLabel = styled.label`
   align-items: center;
   user-select: none;
 
-  background-color: ${({ theme }) => theme.colors.gray_5};
-  border: 1px solid ${({ theme }) => theme.colors.gray_5};
-  color: ${({ theme }) => theme.colors.gray_2};
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.gray_4};
+  color: ${({ theme }) => theme.colors.gray_3};
 
-  ${({ theme }) => theme.typo.body2_16_R};
-`;
+  &.policyPage {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    border: transparent;
+    color: ${({ theme }) => theme.colors.gray_2};
+  }
 
-export const RadioGroupContainer = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
-export const RadioWrapper = styled.div`
-  position: relative;
-  flex: 1;
-`;
-
-export const DeleteButton = styled.button`
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  z-index: 2;
+  &.disabled {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    border: 1px solid ${({ theme }) => theme.colors.gray_4};
+    color: ${({ theme }) => theme.colors.gray_4};
+  }
 `;

@@ -4,9 +4,10 @@ import * as S from "../styles";
 
 interface ISingleRadio extends ISelect {
   radiosText: string[];
+  disabled?: boolean;
 }
 
-const SingleRadio = ({ name, caption, radiosText }: ISingleRadio) => {
+const SingleRadio = ({ name, caption, radiosText, disabled = false }: ISingleRadio) => {
   const { register } = useFormContext();
 
   return (
@@ -16,7 +17,9 @@ const SingleRadio = ({ name, caption, radiosText }: ISingleRadio) => {
         {radiosText.map((text) => (
           <div style={{ width: "100%" }} key={text}>
             <S.StyledInput id={text + name} type="radio" {...register(name)} value={text} />
-            <S.StyledLabel htmlFor={text + name}>{text}</S.StyledLabel>
+            <S.StyledLabel htmlFor={text + name} className={disabled ? "disabled" : ""}>
+              {text}
+            </S.StyledLabel>
           </div>
         ))}
       </S.RadioContainer>

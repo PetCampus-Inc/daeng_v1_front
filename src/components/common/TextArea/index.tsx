@@ -5,15 +5,24 @@ import * as S from "./styles";
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   autoResize?: boolean;
   resizable?: boolean;
-  readOnly?: boolean;
   rows?: number;
   name?: string;
   register?: UseFormRegister<FieldValues>;
+  isChecked?: boolean;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
-    { autoResize = true, resizable = false, readOnly = false, rows = 1, register, name, ...props },
+    {
+      autoResize = true,
+      resizable = false,
+      rows = 1,
+      register,
+      name,
+      disabled = false,
+      isChecked = false,
+      ...props
+    },
     forwardedRef
   ) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -44,9 +53,10 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       <S.TextAreaInput
         ref={textAreaRef}
         resizable={resizable}
-        readOnly={readOnly}
+        disabled={disabled}
         onChange={handleChange}
         rows={rows}
+        $isChecked={isChecked}
         {...(name && register && register(name))}
         {...props}
       />

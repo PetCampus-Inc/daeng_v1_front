@@ -19,7 +19,9 @@ export const Input = styled.input`
   &:focus {
     outline: none;
     border: 1px solid ${({ theme }) => theme.colors.br_3};
-    box-shadow: ${({ theme }) => theme.colors.br_3} 0px 0px 0px 1px;
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.primaryColor};
+    }
   }
 
   outline: transparent solid 2px;
@@ -28,15 +30,27 @@ export const Input = styled.input`
 
   transition:
     border,
-    border-color,
-    box-shadow 0.2s ease-out;
+    border-color 0.2s ease-out;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
 
+  &:not(:placeholder-shown) {
+    border: 1px solid ${({ theme }) => theme.colors.gray_3};
+  }
+
   &[type="number"] {
     -moz-appearance: textfield;
+  }
+
+  &:disabled {
+    border: 1.012px solid ${({ theme }) => theme.colors.gray_4};
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    color: ${({ theme }) => theme.colors.gray_2};
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.gray_4};
+    }
   }
 `;
