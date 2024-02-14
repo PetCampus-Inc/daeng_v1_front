@@ -27,15 +27,19 @@ export interface ITeacherApprove {
   submittedSchoolId: number;
 }
 
+export interface ISimpleEnrollmentFormList {
+  enrollmentFormId: number;
+  memberName: string;
+  dogName: string;
+}
+
+export interface ISimpleSchoolFormList {
+  schoolFormId: number;
+  schoolFormName: string;
+  createdDate: number[];
+}
+
 export interface INewEnrollmentList {
-  simpleEnrollmentFormList: {
-    enrollmentFormId: number;
-    memberName: string;
-    dogName: string;
-  }[];
-  simpleSchoolFormList: {
-    schoolFormId: number;
-    schoolFormName: string;
-    createDate: number[];
-  }[];
+  simpleEnrollmentFormList: ISimpleEnrollmentFormList[];
+  simpleSchoolFormList: ISimpleSchoolFormList[];
 }

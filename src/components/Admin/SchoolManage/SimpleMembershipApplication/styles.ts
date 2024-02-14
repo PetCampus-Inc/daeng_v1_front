@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled(Link)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,6 +11,9 @@ export const Container = styled.div`
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray_4};
   box-shadow: ${({ theme }) => theme.shadows.card};
+  .skeleton {
+    background-color: ${({ theme }) => theme.colors.gray_4};
+  }
 `;
 
 export const LeftBox = styled.div`
@@ -24,6 +28,7 @@ export const Image = styled.div`
 `;
 
 export const TextWrapper = styled.div`
+  text-align: left;
   margin-left: 16px;
   gap: 2px;
 `;

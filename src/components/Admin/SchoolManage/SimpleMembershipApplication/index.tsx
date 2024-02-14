@@ -1,22 +1,30 @@
-import React from "react";
 import * as S from "./styles";
 import RightArrow from "assets/svg/right-arrow";
 import YellowApplication from "assets/svg/yellow-application";
 import BrownApplication from "assets/svg/brown-application";
+import { ISimpleSchoolFormList } from "types/Admin.type";
 
 interface ISimpleMembershipApplicationProps {
   isUsed?: boolean;
+  data: ISimpleSchoolFormList;
 }
 
-const SimpleMembershipApplication = ({ isUsed = false }: ISimpleMembershipApplicationProps) => {
+const SimpleMembershipApplication = ({
+  isUsed = false,
+  data
+}: ISimpleMembershipApplicationProps) => {
+  const dateString = data.createdDate.map((num: number) => (num < 10 ? "0" + num : num)).join("-");
+
   return (
-    <S.Container>
+    <S.Container to={`${data.schoolFormId}`}>
       <S.LeftBox>
         <S.Image>{isUsed ? <YellowApplication /> : <BrownApplication />}</S.Image>
         <S.TextWrapper>
-          <S.Title>소현경용 신청서 ver1</S.Title>
-          <S.MiddleText>신청일: 2021.08.30</S.MiddleText>
-          <S.Date>2023.12.21 작성됨</S.Date>
+          <S.Title>{data.schoolFormName}</S.Title>
+          <S.MiddleText>
+            {isUsed ? "현재 사용중인 신청서에요" : "이전에 작성된 신청서에요"}
+          </S.MiddleText>
+          <S.Date>{dateString} 작성됨</S.Date>
         </S.TextWrapper>
       </S.LeftBox>
       <RightArrow />
