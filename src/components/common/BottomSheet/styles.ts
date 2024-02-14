@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+export { BackDrop } from "../Modal/styles";
 
 export const StyledBottomSheet = styled(motion.div)<{
   height: string;

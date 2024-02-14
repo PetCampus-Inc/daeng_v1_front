@@ -8,8 +8,7 @@ import React, {
   useRef
 } from "react";
 import { AnimatePresence } from "framer-motion";
-import { StyledModalBackground } from "../Modal/styles";
-import { StyledBottomSheet } from "./styles";
+import { StyledBottomSheet, BackDrop } from "./styles";
 import BottomSheetPortal from "./bottomSheetPortal";
 
 interface IBottomSheet {
@@ -51,7 +50,7 @@ const BottomSheet = ({ children, onClose, customStyle, height = "auto" }: IBotto
   return (
     <AnimatePresence mode="wait">
       <BottomSheetPortal>
-        <StyledModalBackground
+        <BackDrop
           initial="hidden"
           animate="visible"
           exit="hidden"

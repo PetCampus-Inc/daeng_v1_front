@@ -1,18 +1,26 @@
-import reactDom from "react-dom";
-import { memo, ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 
 const Portal = ({ children }: { children: ReactNode }) => {
-  // React Portal을 사용한 Modal
+  const modalRootRef = useRef(document.createElement("div"));
+
   useEffect(() => {
-    // 스크롤 막기
+    const modalRoot = modalRootRef.current;
     document.body.style.overflow = "hidden";
+
+    if (!modalRoot.parentElement) {
+      document.body.appendChild(modalRoot);
+    }
+
     return () => {
+      if (modalRoot.parentElement) {
+        document.body.removeChild(modalRoot);
+      }
       document.body.style.overflow = "unset";
     };
-  }, []);
+  }, [modalRootRef]);
 
-  const el = document.getElementById("modal");
-  return el && reactDom.createPortal(children, el);
+  return ReactDOM.createPortal(children, modalRootRef.current);
 };
 
-export default memo(Portal);
+export default Portal;

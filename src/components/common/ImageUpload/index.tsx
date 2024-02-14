@@ -1,22 +1,23 @@
-import { useRef, ChangeEvent, useState, useEffect } from "react";
+import { useRef, ChangeEvent, useState } from "react";
 import UploadIcon from "assets/svg/upload-icon";
 import CloseIcon from "assets/svg/close-icon";
 
 import * as S from "./styles";
+import ImageModal from "./ImageModal";
+import { useRecoilState } from "recoil";
+import { imagePreviewAtom } from "store/form";
+import type { ImageFile } from "store/form";
 
 interface ImageUploadProps {
   id?: string;
   disabled?: boolean;
 }
 
-interface ImageFile {
-  file: File;
-  preview: string;
-}
-
 const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
-  const [images, setImages] = useState<ImageFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [images, setImages] = useRecoilState<ImageFile[]>(imagePreviewAtom);
+  const [selectedImage, setSelectedImage] = useState<ImageFile | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -40,13 +41,10 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      images.forEach((image) => {
-        URL.revokeObjectURL(image.preview);
-      });
-    };
-  }, [images]);
+  const handleImageClick = (image: ImageFile) => {
+    setSelectedImage(image);
+    setShowModal(true);
+  };
 
   const text = images.length > 0 ? "추가 업로드" : "사진 업로드";
 
@@ -60,7 +58,7 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
           {images.map((image, index) => (
             <S.PreviewItem key={index}>
               <S.PreviewInner>
-                <S.PreviewButton disabled={disabled}>
+                <S.PreviewButton disabled={disabled} onClick={() => handleImageClick(image)}>
                   <S.InnerShadow />
                   <S.PreviewImg src={image.preview} alt={image.file.name} />
                 </S.PreviewButton>
@@ -71,6 +69,9 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
             </S.PreviewItem>
           ))}
         </S.PreviewContainer>
+      )}
+      {showModal && selectedImage && (
+        <ImageModal image={selectedImage} onClose={() => setShowModal(false)} />
       )}
       <S.HiddenUpload
         type="file"
