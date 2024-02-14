@@ -1,4 +1,4 @@
-import React, { useEffect, FormEventHandler, useImperativeHandle, useRef, forwardRef } from "react";
+import React, { useEffect, useImperativeHandle, useRef, forwardRef } from "react";
 import { UseFormRegister, FieldValues } from "react-hook-form";
 import * as S from "./styles";
 
