@@ -19,7 +19,12 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
     <>
       <Card>
         <Label>픽드랍 안내</Label>
-        <TextArea name="pickDropAnnouncement" disabled defaultValue={info.pickDropNotice} />
+        <TextArea
+          name="pickDropAnnouncement"
+          register={register}
+          defaultValue={info.pickDropNotice}
+          disabled
+        />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_REQUEST)}>픽드랍 신청</Title>
@@ -34,9 +39,8 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
           <Card>
             <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_MEMO)}>픽드랍 메모</Title>
             <TextArea
+              name="pickDropMemoField"
               register={register}
-              name="pickDropMemo"
-              autoResize
               placeholder="픽드랍 장소, 시간에 대해 자세히 적어주세요."
             />
           </Card>
@@ -45,10 +49,10 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
             <TextArea
               name="pickDropInfo"
-              disabled
-              autoResize
-              value={info.pickDropInfo}
+              register={register}
+              defaultValue={info.pickDropInfo}
               isChecked={watch("pickDropInfo")}
+              disabled
             />
             <Stack>
               <Checkbox
