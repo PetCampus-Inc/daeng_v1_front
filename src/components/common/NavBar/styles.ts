@@ -5,11 +5,14 @@ export const Container = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+  min-height: 78px;
+  height: 7vh;
   background-color: ${(props) => props.theme.colors.white};
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8px 0 15px;
+  box-shadow: ${({ theme }) => theme.shadows.bottomTab};
 `;
 
 export const NavButton = styled(Link)`
