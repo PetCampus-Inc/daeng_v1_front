@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  memo,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, Dispatch, SetStateAction, memo, useEffect, useState } from "react";
 import {
   Container,
   StyledHeadWrapper,
@@ -16,7 +9,7 @@ import {
   StyledCardWrapper,
   StyledImage,
   StyledBlur,
-  StyledTextWrapper,
+  StyledTextWrapper
 } from "./styles";
 import Button from "components/common/Button";
 import Text from "components/common/Text";
@@ -68,7 +61,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
     searchDogResults,
     isSearchClicked,
     setIsSearchClicked,
-    searchAttendDogResults,
+    searchAttendDogResults
   } = useGetSearchList();
 
   const handlerDeleteDog = async () => {
@@ -109,17 +102,13 @@ const Attendance = ({ setIsNavHidden }: Props) => {
         <StyledMainWrapper>
           <StyledTitleWrapper>
             <Text
-              text={`${adminName} ${
-                adminRole === "ROLE_OWNER" ? "원장님" : "선생님"
-              } 안녕하세요`}
+              text={`${adminName} ${adminRole === "ROLE_OWNER" ? "원장님" : "선생님"} 안녕하세요`}
               size="1.3rem"
               weight="bold"
               height="2rem"
             />
             <Text
-              text={
-                isChecking ? "출석 진행중이에요" : `${schoolName} 강아지들이에요`
-              }
+              text={isChecking ? "출석 진행중이에요" : `${schoolName} 친구들이에요`}
               size="1rem"
               color={ThemeConfig.colors.gray_2}
             />
@@ -127,9 +116,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           <StyledButtonWrapper>
             <StyledImage
               src={
-                isChecking
-                  ? "/images/active-foot-button.png"
-                  : "/images/default-foot-button.png"
+                isChecking ? "/images/active-foot-button.png" : "/images/default-foot-button.png"
               }
               alt="default-foot-button"
             />
@@ -140,13 +127,9 @@ const Attendance = ({ setIsNavHidden }: Props) => {
               radius="15px"
               weight="600"
               handleClick={handlerModeChange}
-              border={
-                isChecking ? "none" : `solid 1px ${ThemeConfig.colors.primaryColor}`
-              }
+              border={isChecking ? "none" : `solid 1px ${ThemeConfig.colors.primaryColor}`}
               backcolor={isChecking ? ThemeConfig.colors.br_2 : ThemeConfig.colors.white}
-              textcolor={
-                isChecking ? ThemeConfig.colors.white : ThemeConfig.colors.primaryColor
-              }
+              textcolor={isChecking ? ThemeConfig.colors.white : ThemeConfig.colors.primaryColor}
             />
           </StyledButtonWrapper>
         </StyledMainWrapper>
@@ -259,10 +242,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
             : null}
           {dogLists.length < 1 && !isChecking && !isSearchClicked && (
             <StyledTextWrapper>
-              <Text
-                text="아직 등원한 강아지가 없어요"
-                color={ThemeConfig.colors.gray_3}
-              />
+              <Text text="아직 등원한 강아지가 없어요" color={ThemeConfig.colors.gray_3} />
             </StyledTextWrapper>
           )}
         </StyledCardWrapper>
@@ -296,20 +276,20 @@ const Attendance = ({ setIsNavHidden }: Props) => {
         <ButtonModal
           maintext="정말 삭제하시겠습니까?"
           subtext="모든 데이터가 초기화되고 가입 탈퇴됩니다"
-          firstbutton="취소"
-          secondbutton="삭제"
-          firstfunc={() => setIsDeleteModalOpen(false)}
-          secondfunc={handlerDeleteDog}
+          closebutton="취소"
+          actionbutton="삭제"
+          closefunc={() => setIsDeleteModalOpen(false)}
+          actionfunc={handlerDeleteDog}
         />
       )}
       {isCancelModalOpen && (
         <ButtonModal
           maintext="출석을 중단하시겠습니까?"
           subtext="진행중이던 출석 내용이 모두 초기화됩니다"
-          firstbutton="취소"
-          secondbutton="중단"
-          firstfunc={() => setIsCancelModalOpen(false)}
-          secondfunc={() => {
+          closebutton="취소"
+          actionbutton="중단"
+          closefunc={() => setIsCancelModalOpen(false)}
+          actionfunc={() => {
             setSeletedDogIds([]);
             setIsCancelModalOpen(false);
             setIsChecking(false);

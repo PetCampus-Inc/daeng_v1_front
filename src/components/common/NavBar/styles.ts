@@ -12,7 +12,9 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px 0 15px;
+
   box-shadow: ${({ theme }) => theme.shadows.bottomTab};
+  z-index: 9;
 `;
 
 export const NavButton = styled(Link)`

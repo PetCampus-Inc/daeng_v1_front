@@ -45,7 +45,7 @@ export const StyledLabel = styled.label`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 49px;
+  padding: 12px 8px;
   width: 100%;
   border-radius: 8px;
   -webkit-box-pack: center;
@@ -59,4 +59,23 @@ export const StyledLabel = styled.label`
   background-color: ${({ theme }) => theme.colors.gray_5};
   border: 1px solid ${({ theme }) => theme.colors.gray_5};
   color: ${({ theme }) => theme.colors.gray_2};
+
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
+
+export const RadioGroupContainer = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+export const RadioWrapper = styled.div`
+  position: relative;
+  flex: 1;
+`;
+
+export const DeleteButton = styled.button`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 2;
 `;
