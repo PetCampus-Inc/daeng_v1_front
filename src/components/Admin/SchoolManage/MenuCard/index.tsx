@@ -29,12 +29,12 @@ const MenuCard = () => {
   }, [activeIndex]);
 
   // 신규 가입 버튼 동작
-  const handleNewEnrollment = async () => {
+  const handleNewEnrollment = () => {
     refetch()
       .then((data) => {
         if (!data) return;
         setNewEnrollmentList(data.data || null);
-        if ((data.data!.simpleSchoolFormList).length === 0) {
+        if (data.data!.simpleSchoolFormList.length === 0) {
           setIsOpened(true);
           return;
         }
