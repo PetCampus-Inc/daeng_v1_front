@@ -44,8 +44,16 @@ const router = createBrowserRouter([
         element: <Pages.DogInfoPage />
       },
       {
+        path: PATH.ADMIN_CHAT,
+        element: <Pages.Chat />
+      },
+      {
         path: PATH.ADMIN_SCHOOL_MANAGE,
         element: <Pages.SchoolManagePage />
+      },
+      {
+        path: PATH.ADMIN_MY_PAGE,
+        element: <Pages.MyPage />
       }
     ]
   },

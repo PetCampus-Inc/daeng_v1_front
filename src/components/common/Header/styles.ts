@@ -4,22 +4,24 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: fixed;
   top: 0;
+  min-height: 48px;
   height: 5vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.white};
+  z-index: 10;
 `;
 
-export const HeaderWrapper = styled.div<{ type: string }>`
+export const HeaderWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
   justify-content: space-between;
   align-items: center;
-  margin-left: ${(props) => (props.type === "main" ? "5%" : undefined)};
-  margin-right: 6%;
+  padding: 0 5%;
+  box-shadow: ${({ theme }) => theme.shadows.card};
 `;
 
 export const LogoWrapper = styled(Link)`
@@ -28,18 +30,11 @@ export const LogoWrapper = styled(Link)`
   gap: 10%;
 `;
 
-export const IconsWrapper = styled.div`
+export const IconWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 20%;
-`;
-
-export const BackIconWrapper = styled.div`
-  display: flex;
-  height: 70%;
+  height: 100%;
+  align-items: center;
   cursor: pointer;
-  width: 10%;
-  padding-left: 2%;
 `;
 
 export const TextWrapper = styled.div`
@@ -51,7 +46,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const TitleText = styled.div<{ size?: string }>`
-  padding-top: 1.5%;
+  ${({ theme }) => theme.typo.body1_18_B}
   display: flex;
   justify-content: center;
   align-items: center;

@@ -7,6 +7,7 @@ import React, {
   useEffect,
   useRef
 } from "react";
+import { AnimatePresence } from "framer-motion";
 import { StyledModalBackground } from "../Modal/styles";
 import { StyledBottomSheet } from "./styles";
 import BottomSheetPortal from "./bottomSheetPortal";
@@ -35,13 +36,42 @@ const BottomSheet = ({ children, onClose, customStyle, height = "auto" }: IBotto
     };
   }, [onClickOutSide]);
 
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 }
+  };
+
+  const BottomSheetVariants = {
+    hidden: { y: "100vh", x: "50", opacity: 0 },
+    visible: { y: 0, x: "50", opacity: 1 },
+    exit: { y: "-100", x: "50", opacity: 0 }
+  };
+
   return (
-    <BottomSheetPortal>
-      <StyledModalBackground />
-      <StyledBottomSheet height={height} style={customStyle} ref={bottomSheetRef}>
-        {children}
-      </StyledBottomSheet>
-    </BottomSheetPortal>
+    <AnimatePresence mode="wait">
+      <BottomSheetPortal>
+        <StyledModalBackground
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={backdropVariants}
+          transition={{ duration: 0.3 }}
+        />
+        <StyledBottomSheet
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={BottomSheetVariants}
+          transition={{ duration: 0.3 }}
+          height={height}
+          style={customStyle}
+          ref={bottomSheetRef}
+        >
+          {children}
+        </StyledBottomSheet>
+      </BottomSheetPortal>
+    </AnimatePresence>
   );
 };
 
