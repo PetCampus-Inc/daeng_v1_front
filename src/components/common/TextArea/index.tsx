@@ -1,4 +1,4 @@
-import React, { useEffect, FormEventHandler, useImperativeHandle, useRef, forwardRef } from "react";
+import React, { useEffect, useImperativeHandle, useRef, forwardRef } from "react";
 import { UseFormRegister, FieldValues } from "react-hook-form";
 import * as S from "./styles";
 
@@ -12,10 +12,15 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  (
-    { autoResize = true, resizable = false, readOnly = false, rows = 1, register, name, ...props },
-    forwardedRef
-  ) => {
+  ({
+    autoResize = true,
+    resizable = false,
+    readOnly = false,
+    rows = 1,
+    register,
+    name,
+    ...props
+  }) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
     const { ref, ...rest } = register(name);
