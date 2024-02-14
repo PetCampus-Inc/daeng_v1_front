@@ -1,11 +1,11 @@
 import { useFormContext } from "react-hook-form";
 import { useEnrollMutation } from "hooks/api/useEnrollMutation";
 import { formatDate, extractNumber } from "utils/formatter";
-import { IRequestEnrollment } from "../../../types/School.type";
-import { ITEM_MAP } from "constants/item";
+import type { IRequestEnrollment, TPickDropRequest } from "types/School.type";
 import type { ItemMapValue } from "constants/item";
+import { ITEM_MAP } from "constants/item";
 
-import * as S from "../Stepper/styles";
+import * as S from "./styles";
 
 const SubmitButton = () => {
   const {
@@ -45,7 +45,7 @@ const SubmitButton = () => {
       dogSize: mapValue(data.dogSize) as string,
       neutralization: (mapValue(data.neutralization) as ItemMapValue).neutralization,
       vaccination: (mapValue(data.vaccination) as ItemMapValue).vaccination,
-      pickDropRequest: mapValue(data.pickDropRequest) as string,
+      pickDropRequest: mapValue(data.pickDropRequest) as TPickDropRequest,
       pickDropType: mapValue(data.pickDropType) as string,
       ticketType: mapValue(data.ticketType) as string,
       monthlyTicketNumber: extractNumber(data.monthlyTicketNumber),

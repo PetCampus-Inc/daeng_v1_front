@@ -1,6 +1,6 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetEnrollment } from "apis/school.api";
-import type { IEnrollmentProps } from "apis/school.api";
+import { useQuery } from "@tanstack/react-query";
+import { handleGetAdminEnrollment } from "apis/school.api";
+import type { IAdminEnrollmentProps } from "apis/school.api";
 import type {
   IEnrollment,
   IMemberDto,
@@ -8,6 +8,10 @@ import type {
   IPolicyInfo,
   ITicketInfo
 } from "types/School.type";
+
+interface AdminEnrollQueryProps extends IAdminEnrollmentProps {
+  type: "READ" | "CREATE" | "EDIT";
+}
 
 interface EnrollmentProps {
   requiredItemsMap: Map<number, boolean>;
@@ -17,11 +21,11 @@ interface EnrollmentProps {
   pickDropInfo: IPickDropInfo;
 }
 
-export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
-  const enlistmentQuery = useSuspenseQuery<IEnrollment, Error, EnrollmentProps>({
-    queryKey: ["enrollment", memberId, schoolId],
-    queryFn: () => handleGetEnrollment({ schoolId, memberId }),
-    refetchOnWindowFocus: false,
+export const useAdminEnrollQuery = ({ type, formId }: AdminEnrollQueryProps) => {
+  const enlistmentQuery = useQuery<IEnrollment, Error, EnrollmentProps>({
+    queryKey: ["enrollment", formId],
+    queryFn: () => handleGetAdminEnrollment({ formId }),
+    enabled: type !== "CREATE",
     select: (data) => {
       // 이용권 정보
       const selectTicketInfo = () => ({
@@ -64,5 +68,5 @@ export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
     }
   });
 
-  return { enlistmentQuery };
+  return enlistmentQuery;
 };
