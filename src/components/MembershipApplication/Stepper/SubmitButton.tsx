@@ -2,10 +2,10 @@ import { useFormContext } from "react-hook-form";
 import { useEnrollMutation } from "hooks/api/useEnrollMutation";
 import { formatDate, extractNumber } from "utils/formatter";
 import type { IRequestEnrollment, TPickDropRequest } from "types/School.type";
-import { ITEM_MAP } from "constants/item";
 import type { ItemMapValue } from "constants/item";
+import { ITEM_MAP } from "constants/item";
 
-import * as S from "../Stepper/styles";
+import * as S from "./styles";
 
 const SubmitButton = () => {
   const {
