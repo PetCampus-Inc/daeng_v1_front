@@ -6,7 +6,6 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import { ATTENDANCE } from "constants/className";
 
 interface Props {
-  name?: string;
   width: string;
   height: string;
   shadow?: string;
@@ -27,7 +26,6 @@ interface Props {
 }
 
 const InputBox = ({
-  name,
   width,
   height,
   shadow,

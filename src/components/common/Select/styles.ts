@@ -45,7 +45,7 @@ export const StyledLabel = styled.label`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 49px;
+  padding: 12px 8px;
   width: 100%;
   border-radius: 8px;
   -webkit-box-pack: center;
