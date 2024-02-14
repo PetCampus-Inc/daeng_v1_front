@@ -8,8 +8,7 @@ import React, {
   useRef
 } from "react";
 import { AnimatePresence } from "framer-motion";
-import { BackDrop } from "../Modal/styles";
-import { StyledBottomSheet } from "./styles";
+import { StyledBottomSheet, BackDrop } from "./styles";
 import BottomSheetPortal from "./bottomSheetPortal";
 
 interface IBottomSheet {
@@ -49,15 +48,9 @@ const BottomSheet = ({ children, onClose, customStyle, height = "auto" }: IBotto
   };
 
   return (
-    <BottomSheetPortal>
-      <BackDrop />
-      <StyledBottomSheet height={height} style={customStyle} ref={bottomSheetRef}>
-        {children}
-      </StyledBottomSheet>
-    </BottomSheetPortal>
     <AnimatePresence mode="wait">
       <BottomSheetPortal>
-        <StyledModalBackground
+        <BackDrop
           initial="hidden"
           animate="visible"
           exit="hidden"
