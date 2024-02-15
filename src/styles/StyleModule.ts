@@ -1,4 +1,4 @@
-import { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 // CSS 속성중 자주쓰이는 조합들 모아놓은것
 
@@ -37,4 +37,8 @@ export const fadeIn = keyframes`
   to {
     opacity: 1;
   }
+`;
+
+export const PageContainer = styled.div`
+  margin: calc(5vh + 32px) 16px 0;
 `;
