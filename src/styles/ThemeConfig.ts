@@ -72,7 +72,7 @@ export const ThemeConfig = {
     label1_16_M: typoCreator("16px", 500, "-1.2px", "24px"),
     label1_16_R: typoCreator("16px", 400, "-0.192px", "24px"),
     label2_14_B: typoCreator("14px", 700, "2px", "20px"),
-    label2_14_M: typoCreator("14px", 500, "2px", "25px"),
+    label2_14_M: typoCreator("14px", 500, "0.28px", "25px"),
     label2_14_R: typoCreator("14px", 400, "0.28px", "20px"),
     caption1_12_R: typoCreator("12px", 400, "-0.12px", "17.5px"),
     caption1_12_B: typoCreator("12px", 700, "0.24px", "20px")
