@@ -1,15 +1,7 @@
-import React, {
-  CSSProperties,
-  memo,
-  ReactNode,
-  RefObject,
-  useCallback,
-  useEffect,
-  useRef
-} from "react";
+import { CSSProperties, memo, ReactNode, RefObject, useCallback, useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
+import Portal from "../Modal/portal";
 import { StyledBottomSheet, BackDrop } from "./styles";
-import BottomSheetPortal from "./bottomSheetPortal";
 
 interface IBottomSheet {
   children: ReactNode;
@@ -49,27 +41,29 @@ const BottomSheet = ({ children, onClose, customStyle, height = "auto" }: IBotto
 
   return (
     <AnimatePresence mode="wait">
-      <BottomSheetPortal>
-        <BackDrop
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={backdropVariants}
-          transition={{ duration: 0.3 }}
-        />
-        <StyledBottomSheet
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={BottomSheetVariants}
-          transition={{ duration: 0.3 }}
-          height={height}
-          style={customStyle}
-          ref={bottomSheetRef}
-        >
-          {children}
-        </StyledBottomSheet>
-      </BottomSheetPortal>
+      <Portal>
+        <div style={{ position: "relative" }}>
+          <BackDrop
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={backdropVariants}
+            transition={{ duration: 0.3 }}
+          />
+          <StyledBottomSheet
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={BottomSheetVariants}
+            transition={{ duration: 0.3 }}
+            height={height}
+            style={customStyle}
+            ref={bottomSheetRef}
+          >
+            {children}
+          </StyledBottomSheet>
+        </div>
+      </Portal>
     </AnimatePresence>
   );
 };
