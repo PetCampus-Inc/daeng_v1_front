@@ -7,7 +7,7 @@ import TextArea from "components/common/TextArea";
 import { ITEM_KEYS } from "constants/item";
 
 const PickDropInfo = () => {
-  const { control, watch } = useFormContext();
+  const { control, register, watch } = useFormContext();
 
   return (
     <>
@@ -33,7 +33,11 @@ const PickDropInfo = () => {
               픽드랍 안내
             </AdminTitle>
             <Caption>견주에게 안내할 픽드랍 내용을 입력해 주세요</Caption>
-            <TextArea name="pickDropNotice" placeholder="ex) 픽드랍 왕복 50000 추가금 10000" />
+            <TextArea
+              name="pickDropNotice"
+              register={register}
+              placeholder="ex) 픽드랍 왕복 50000 추가금 10000"
+            />
           </Card>
           <Card>
             <AdminTitle
@@ -78,7 +82,11 @@ const PickDropInfo = () => {
             >
               픽드랍 유의사항
             </AdminTitle>
-            <TextArea name="pickDropInfo" placeholder="픽드랍 유의사항을 입력해 주세요" />
+            <TextArea
+              name="pickDropInfo"
+              register={register}
+              placeholder="픽드랍 유의사항을 입력해 주세요"
+            />
           </Card>
         </>
       )}

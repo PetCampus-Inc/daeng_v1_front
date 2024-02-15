@@ -87,7 +87,7 @@ const TicketInfo = () => {
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
-        <DayMultiCheck name="attendanceDays" defaultChecked={true} />
+        <DayMultiCheck name="openDays" defaultChecked={true} />
       </Card>
       <Card>
         <AdminTitle
@@ -98,7 +98,7 @@ const TicketInfo = () => {
         >
           유의사항
         </AdminTitle>
-        <TextArea name="ticketInfo" placeholder="유의사항을 입력해 주세요" />
+        <TextArea name="ticketInfo" register={register} placeholder="유의사항을 입력해 주세요" />
       </Card>
     </>
   );
