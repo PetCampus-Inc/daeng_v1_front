@@ -12,6 +12,7 @@ import BottomSheet from "components/common/BottomSheet";
 
 import * as S from "./styles";
 import AddIcon from "assets/svg/addIcon";
+import ButtonModal from "components/common/ButtonModal";
 
 type TicketTypeProps = {
   control: Control;
@@ -22,6 +23,7 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
   const INIT_COUNTER = 2;
   const FIELD_NAME = name;
   const bottomSheet = useBottomSheet();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [counter, setCounter] = useState<number>(INIT_COUNTER);
   const defaultValues = [1, 3, 5, 10];
 
@@ -48,7 +50,7 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
     if (fields.length > MIN_ITEMS) {
       remove(index);
     } else {
-      alert("최소 1개 이상의 항목이 필요합니다.");
+      setIsDeleteModalOpen(true);
     }
   };
 
@@ -57,8 +59,18 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
     return extendedField.value === counter.toString();
   });
 
+  console.log(isDeleteModalOpen);
+
   return (
     <>
+      {isDeleteModalOpen && (
+        <ButtonModal
+          maintext="모두 삭제할 수 없어요"
+          subtext="최소 1개 이상의 정기권 옵션을 추가해 주세요"
+          actionbutton="닫기"
+          actionfunc={() => setIsDeleteModalOpen(false)}
+        />
+      )}
       {bottomSheet.isVisible && (
         <BottomSheet onClose={() => bottomSheet.close()}>
           <S.CloseButton type="button" onClick={() => bottomSheet.close()}>
