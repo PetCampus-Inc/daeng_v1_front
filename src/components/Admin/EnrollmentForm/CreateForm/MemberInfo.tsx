@@ -6,6 +6,7 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import SearchInputField from "components/common/InputField/SearchInputField";
 
 import { Card } from "../styles";
+import { ITEM_KEYS } from "constants/item";
 
 const MemberInfo = () => {
   const { control } = useFormContext();
@@ -13,50 +14,58 @@ const MemberInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name="name" control={control}>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_NAME}`} control={control}>
           이름
         </AdminTitle>
         <InputField
-          name="nameField"
+          name="null"
           control={control}
           placeholder="견주 이름을 입력하는 칸이에요"
           disabled
         />
       </Card>
       <Card>
-        <AdminTitle name="memberGender" control={control}>
+        <AdminTitle
+          name={`requiredItemList.${ITEM_KEYS.MEMBER_GENDER}`}
+          control={control}
+          hasToggle
+        >
           성별
         </AdminTitle>
-        <SingleRadio name="memberGenderField" radiosText={["남", "여"]} disabled />
+        <SingleRadio name="null" radiosText={["남", "여"]} disabled />
       </Card>
       <Card>
-        <AdminTitle name="address" control={control}>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_ADDRESS}`} control={control}>
           주소
         </AdminTitle>
         <SearchInputField
-          name="addressField"
+          name="null"
           control={control}
           placeholder="주소를 입력하는 칸이에요"
           disabled
         />
       </Card>
       <Card>
-        <AdminTitle name="phoneNumber" control={control}>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_PHONE}`} control={control}>
           연락처
         </AdminTitle>
         <InputField
-          name="phoneNumberField"
+          name="null"
           control={control}
           placeholder="견주가 연락처를 입력하는 칸이에요"
           disabled
         />
       </Card>
       <Card>
-        <AdminTitle name="emergencyNumber" control={control}>
+        <AdminTitle
+          name={`requiredItemList.${ITEM_KEYS.EMERGENCY_NUMBER}`}
+          control={control}
+          hasToggle
+        >
           비상 연락처
         </AdminTitle>
         <InputField
-          name="emergencyNumberField"
+          name="null"
           control={control}
           placeholder="견주가 비상연락처를 입력하는 칸이에요"
           disabled
