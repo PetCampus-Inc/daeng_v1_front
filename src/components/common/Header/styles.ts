@@ -35,6 +35,7 @@ export const IconWrapper = styled.div`
   height: 100%;
   align-items: center;
   cursor: pointer;
+  z-index: 3;
 `;
 
 export const TextWrapper = styled.div`

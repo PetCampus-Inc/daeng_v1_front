@@ -24,6 +24,7 @@ const MenuCard = () => {
         handleNewEnrollment();
         break;
       case 1:
+        handleTeacherManage();
         break;
     }
   }, [activeIndex]);
@@ -43,6 +44,11 @@ const MenuCard = () => {
       .catch((error) => {
         // TODO: 에러 토스트띄우기
       });
+  };
+
+  // 선생님 관리 버튼 동작
+  const handleTeacherManage = () => {
+    navigate("teacher");
   };
 
   const menuCardItems = [
