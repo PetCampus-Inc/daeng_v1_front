@@ -1,5 +1,5 @@
-import { BsCheck } from "react-icons/bs";
 import { useController, UseControllerProps } from "react-hook-form";
+import CheckIcon from "assets/svg/checkIcon";
 
 import * as S from "./styles";
 import { ChangeEvent } from "react";
@@ -67,7 +67,7 @@ const Checkbox = ({
         className={isChecked ? "checked" : ""}
         aria-disabled={disabled ? "true" : undefined}
       >
-        <BsCheck className="checkbox-icon" />
+        <CheckIcon />
       </S.Checkbox>
       <S.LabelText
         className={isChecked ? "checked" : ""}
