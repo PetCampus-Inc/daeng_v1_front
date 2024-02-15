@@ -25,7 +25,7 @@ import {
   ButtonContainer
 } from "components/Admin/EnrollmentForm/styles";
 
-const EnrollmentFormPage = () => {
+const EnrollmentFormDetailPage = () => {
   const { formId } = useParams();
   if (!formId) throw new Error("잘못된 formId 입니다");
 
@@ -74,4 +74,4 @@ const EnrollmentFormPage = () => {
   );
 };
 
-export default EnrollmentFormPage;
+export default EnrollmentFormDetailPage;
