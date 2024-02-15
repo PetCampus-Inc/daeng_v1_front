@@ -65,7 +65,7 @@ export const InfoIcons = styled.div`
   margin-bottom: 5%;
 `;
 
-export const IconWrapper = styled.div`
+export const IconWrapper = styled.button`
   display: flex;
 `;
 
