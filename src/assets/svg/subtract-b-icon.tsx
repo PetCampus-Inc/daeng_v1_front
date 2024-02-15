@@ -1,4 +1,4 @@
-const SubtractIcon = () => {
+const SubtractBIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
       <rect x="0.203125" y="0.693359" width="16.1925" height="16.1925" rx="4" fill="currentColor" />
@@ -14,4 +14,4 @@ const SubtractIcon = () => {
   );
 };
 
-export default SubtractIcon;
+export default SubtractBIcon;
