@@ -27,6 +27,7 @@ export const ThemeConfig = {
     darkBlack: "#292929",
     primaryColor: "#956F4C",
     red_1: "#DD5435",
+    red_2: "#FAE7E3",
     primary_2: "#FF8E3B",
     primary_3: "#EE7821",
     primary_4: "#FFD66C",
