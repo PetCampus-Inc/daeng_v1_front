@@ -9,10 +9,6 @@ import type {
   ITicketInfo
 } from "types/School.type";
 
-interface AdminEnrollQueryProps extends IAdminEnrollmentProps {
-  type: "READ" | "CREATE" | "EDIT";
-}
-
 interface EnrollmentProps {
   requiredItemsMap: Map<number, boolean>;
   memberInfo: IMemberDto | null;
@@ -21,11 +17,10 @@ interface EnrollmentProps {
   pickDropInfo: IPickDropInfo;
 }
 
-export const useAdminEnrollQuery = ({ type, formId }: AdminEnrollQueryProps) => {
+export const useAdminEnrollQuery = (formId: string) => {
   const enlistmentQuery = useQuery<IEnrollment, Error, EnrollmentProps>({
     queryKey: ["enrollment", formId],
     queryFn: () => handleGetAdminEnrollment({ formId }),
-    enabled: type !== "CREATE",
     select: (data) => {
       // 이용권 정보
       const selectTicketInfo = () => ({
