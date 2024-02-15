@@ -8,7 +8,7 @@ import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
 import TicketCounter from "../TicketCounter";
 import BottomSheet from "components/common/BottomSheet";
 
-import * as S from "../Form/styles";
+import * as S from "./styles";
 
 type TicketTypeProps = {
   control: Control;

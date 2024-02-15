@@ -8,7 +8,7 @@ import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
 import TicketCounter from "../TicketCounter";
 import BottomSheet from "components/common/BottomSheet";
 
-import * as S from "../Form/styles";
+import * as S from "./styles";
 
 type TicketTypeProps = {
   control: Control;
@@ -19,8 +19,7 @@ const MonthlyTicketType = ({ control }: TicketTypeProps) => {
   const FIELD_NAME = "MonthlyTicketType";
   const bottomSheet = useBottomSheet();
   const [counter, setCounter] = useState<number>(INIT_COUNTER);
-  // FIXME: 임의 값으로 수정 필요
-  const defaultValues = [1, 2, 3, 4];
+  const defaultValues = [1, 2, 4, 8];
 
   const { fields, append, remove } = useTicketFieldArray({
     control,
