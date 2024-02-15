@@ -12,7 +12,7 @@ const BackgroundButton = ({
 }: IBackgroundButton) => {
   return (
     <S.Background $backgroundColor={backgroundColor}>
-      <S.BackgroundButton $isActivated={isActivated} onClick={handleTouch}>
+      <S.BackgroundButton $isActivated={isActivated} onClick={handleTouch} disabled={!isActivated}>
         삭제
       </S.BackgroundButton>
     </S.Background>

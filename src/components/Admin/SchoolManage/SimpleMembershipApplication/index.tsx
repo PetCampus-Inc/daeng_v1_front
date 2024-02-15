@@ -4,26 +4,37 @@ import YellowApplication from "assets/svg/yellow-application";
 import BrownApplication from "assets/svg/brown-application";
 import { ISimpleSchoolFormList } from "types/Admin.type";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ISimpleMembershipApplicationProps {
   isUsed?: boolean;
   data: ISimpleSchoolFormList;
   isEditable?: boolean;
+  setSelectedList?: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 const SimpleMembershipApplication = ({
   isUsed = false,
   data,
-  isEditable = false
+  isEditable = false,
+  setSelectedList
 }: ISimpleMembershipApplicationProps) => {
   const navigate = useNavigate();
   const dateString = data.createdDate.map((num: number) => (num < 10 ? "0" + num : num)).join("-");
   const [isSelected, setIsSelected] = useState(false);
 
+  useEffect(() => {
+    setIsSelected(false);
+  }, [isEditable]);
+
   const handleTouch = () => {
-    if (isEditable) {
+    if (isEditable && setSelectedList) {
       setIsSelected(!isSelected);
+      if (!isSelected) {
+        setSelectedList((prev) => [...prev, data.schoolFormId]);
+      } else {
+        setSelectedList((prev) => prev.filter((id) => id !== data.schoolFormId));
+      }
       return;
     }
     navigate(`/admin/schoolManage/enrollment/list/${data.schoolFormId}`);

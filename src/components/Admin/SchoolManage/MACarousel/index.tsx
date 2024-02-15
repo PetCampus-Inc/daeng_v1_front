@@ -8,7 +8,6 @@ import * as S from "./styles";
 
 const MACarousel = () => {
   const list = useRecoilValue(newEnrollmentListAtom)?.simpleSchoolFormList;
-  console.log(list);
 
   const settings = {
     dots: true,

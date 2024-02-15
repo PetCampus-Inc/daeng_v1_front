@@ -2,21 +2,25 @@ import SimpleMembershipApplication from "components/Admin/SchoolManage/SimpleMem
 import { ListContainer } from "components/Admin/SchoolManage/SimpleMembershipApplication/styles";
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import ButtonBadge from "components/common/Badge/ButtonBadge";
+import BackgroundButton from "components/common/Button/BackgroundButton";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
+import { INewEnrollmentList, ISimpleSchoolFormList } from "types/Admin.type";
 
 const EnrollmentFormListPage = () => {
   const navigate = useNavigate();
   const [isEditable, setIsEditable] = useState(false);
-  const data = useRecoilValue(newEnrollmentListAtom)?.simpleSchoolFormList;
+  const [selectedList, setSelectedList] = useState<number[]>([]);
+  const [data, setData] = useRecoilState(newEnrollmentListAtom);
 
   if (!data) {
     return <>로딩중..</>;
   }
+
   return (
     <>
       <Header
@@ -31,7 +35,8 @@ const EnrollmentFormListPage = () => {
             <ButtonBadge
               type={isEditable ? "cancel" : "delete"}
               handleTouch={() => {
-                if (data.length <= 0) {
+                if (data.simpleSchoolFormList.length <= 0) {
+                  // TODO: 한 개일 땐 삭제할 수 없다는 토스트 띄우기
                   return;
                 }
                 setIsEditable(!isEditable);
@@ -40,15 +45,49 @@ const EnrollmentFormListPage = () => {
           }
         />
         <ListContainer>
-          {data.map((item, index) => (
+          {data.simpleSchoolFormList.map((item, index) => (
             <SimpleMembershipApplication
               key={item.schoolFormId}
               data={item}
               isUsed={index === 0 ? true : false}
               isEditable={isEditable}
+              setSelectedList={setSelectedList}
             />
           ))}
         </ListContainer>
+        {isEditable && (
+          <BackgroundButton
+            isActivated={
+              selectedList.length > 0 &&
+              !(selectedList.length === data?.simpleSchoolFormList.length)
+            }
+            handleTouch={() => {
+              //TODO: 삭제 API 연동하기
+              const filteredData: ISimpleSchoolFormList[] = data.simpleSchoolFormList.filter(
+                (item) => !selectedList.includes(item.schoolFormId)
+              );
+
+              setData((prev: INewEnrollmentList | null) => {
+                if (!prev) {
+                  return prev;
+                } else {
+                  return {
+                    ...prev,
+                    simpleSchoolFormList: [
+                      ...filteredData.map((item) => ({
+                        schoolFormId: item.schoolFormId,
+                        schoolFormName: item.schoolFormName,
+                        createdDate: item.createdDate
+                      }))
+                    ]
+                  };
+                }
+              });
+              setIsEditable(false);
+              setSelectedList([]);
+            }}
+          />
+        )}
       </PageContainer>
     </>
   );
