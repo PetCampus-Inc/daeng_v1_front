@@ -5,5 +5,4 @@ export interface CommonDropdownProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   value: string;
   setValue: UseFormSetValue<FieldValues>;
-  width: string;
 }
