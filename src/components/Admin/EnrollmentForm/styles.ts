@@ -16,7 +16,7 @@ export const TopWrapper = styled.div`
   gap: 12px;
 
   background-color: ${({ theme }) => theme.colors.BGray};
-  z-index: 1;
+  z-index: 3;
 `;
 
 export const TitleWrapper = styled.div`
