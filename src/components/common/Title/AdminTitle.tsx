@@ -20,7 +20,7 @@ const AdminTitle = ({
   ...props
 }: AdminTitleProps) => {
   return (
-    <Label htmlFor={name}>
+    <Label htmlFor={name + ".label"}>
       <Container>
         {children}
         {hasBadge && <Badge type="adminRequired" />}
