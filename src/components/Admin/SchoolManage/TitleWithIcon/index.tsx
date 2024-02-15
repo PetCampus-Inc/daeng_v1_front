@@ -6,13 +6,14 @@ import { StyledTextWrapper } from "components/SignIn/InputBoxAndText/styles";
 interface ITitleWithIcon {
   title: string;
   icon: ReactNode;
+  handleClick?: () => void;
 }
 
-const TitleWithIcon = ({ title, icon }: ITitleWithIcon) => {
+const TitleWithIcon = ({ title, icon, handleClick }: ITitleWithIcon) => {
   return (
-    <StyledTextWrapper>
+    <StyledTextWrapper style={{ margin: "0 0 12px" }}>
       <Title>{title}</Title>
-      <IconWrapper>{icon}</IconWrapper>
+      <IconWrapper onClick={handleClick}>{icon}</IconWrapper>
     </StyledTextWrapper>
   );
 };

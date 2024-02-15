@@ -16,7 +16,7 @@ const SimpleMembershipApplication = ({
   const dateString = data.createdDate.map((num: number) => (num < 10 ? "0" + num : num)).join("-");
 
   return (
-    <S.Container to={`/list/${data.schoolFormId}`}>
+    <S.Container to={`list/${data.schoolFormId}`}>
       <S.LeftBox>
         <S.Image>{isUsed ? <YellowApplication /> : <BrownApplication />}</S.Image>
         <S.TextWrapper>
