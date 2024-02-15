@@ -3,20 +3,34 @@ import RightArrow from "assets/svg/right-arrow";
 import YellowApplication from "assets/svg/yellow-application";
 import BrownApplication from "assets/svg/brown-application";
 import { ISimpleSchoolFormList } from "types/Admin.type";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface ISimpleMembershipApplicationProps {
   isUsed?: boolean;
   data: ISimpleSchoolFormList;
+  isEditable?: boolean;
 }
 
 const SimpleMembershipApplication = ({
   isUsed = false,
-  data
+  data,
+  isEditable = false
 }: ISimpleMembershipApplicationProps) => {
+  const navigate = useNavigate();
   const dateString = data.createdDate.map((num: number) => (num < 10 ? "0" + num : num)).join("-");
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handleTouch = () => {
+    if (isEditable) {
+      setIsSelected(!isSelected);
+      return;
+    }
+    navigate(`/admin/schoolManage/enrollment/list/${data.schoolFormId}`);
+  };
 
   return (
-    <S.Container to={`list/${data.schoolFormId}`}>
+    <S.Container onClick={() => handleTouch()} $isUsed={isUsed} $isSelected={isSelected}>
       <S.LeftBox>
         <S.Image>{isUsed ? <YellowApplication /> : <BrownApplication />}</S.Image>
         <S.TextWrapper>

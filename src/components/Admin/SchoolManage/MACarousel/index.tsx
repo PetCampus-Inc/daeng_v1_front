@@ -24,11 +24,11 @@ const MACarousel = () => {
   return (
     <S.Container>
       {list.length <= 1 ? (
-        <SimpleMembershipApplication data={list[0]} />
+        <SimpleMembershipApplication data={list[0]} isUsed />
       ) : (
         <Slider {...settings}>
           {list.map((form, index) => (
-            <div key={index}>
+            <div key={form.schoolFormId}>
               <SimpleMembershipApplication data={form} isUsed={index === 0 ? true : false} />
             </div>
           ))}
