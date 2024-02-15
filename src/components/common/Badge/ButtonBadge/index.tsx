@@ -1,14 +1,16 @@
 import * as S from "./styles";
 
 export interface ButtonBadgeProps {
-  type: "delete" | "cancel";
+  type: "delete" | "cancel" | "edit" | "redDelete";
   handleTouch: () => void;
 }
 
 const ButtonBadge = ({ type, handleTouch }: ButtonBadgeProps) => {
   const text = new Map([
     ["delete", "삭제"],
-    ["cancel", "취소"]
+    ["cancel", "취소"],
+    ["edit", "편집"],
+    ["redDelete", "삭제"]
   ]);
 
   return (
