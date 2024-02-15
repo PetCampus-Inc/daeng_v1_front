@@ -43,10 +43,14 @@ export const TextWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  text-align: center;
 `;
 
 export const TitleText = styled.div<{ size?: string }>`
   ${({ theme }) => theme.typo.body1_18_B}
+  position: absolute;
+  right: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
