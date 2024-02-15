@@ -72,3 +72,30 @@ export const StyledLabel = styled.label`
     color: ${({ theme }) => theme.colors.gray_4};
   }
 `;
+
+export const RadioGroupContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  gap: 12px;
+`;
+
+export const RadioWrapper = styled.div`
+  position: relative;
+  flex: 1;
+`;
+
+export const DeleteButton = styled.button`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 2;
+
+  & > svg > .icon-circle {
+    color: ${({ theme }) => theme.colors.gray_3};
+  }
+
+  & > svg > .icon-path {
+    color: ${({ theme }) => theme.colors.gray_4};
+  }
+`;
