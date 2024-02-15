@@ -37,7 +37,7 @@ export const StyledInput = styled.input`
     background-color: ${({ theme }) => theme.colors.white};
     ${({ theme }) => theme.typo.body2_16_R};
     color: ${({ theme }) => theme.colors.gray_4};
-    border: transparent;
+    border: 1px solid ${({ theme }) => theme.colors.gray_5};
   }
 `;
 

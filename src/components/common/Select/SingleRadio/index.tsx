@@ -16,7 +16,13 @@ const SingleRadio = ({ name, caption, radiosText, disabled = false }: ISingleRad
       <S.RadioContainer>
         {radiosText.map((text) => (
           <div style={{ width: "100%" }} key={text}>
-            <S.StyledInput id={text + name} type="radio" {...register(name)} value={text} />
+            <S.StyledInput
+              id={text + name}
+              type="radio"
+              {...register(name)}
+              value={text}
+              disabled={disabled}
+            />
             <S.StyledLabel htmlFor={text + name} className={disabled ? "disabled" : ""}>
               {text}
             </S.StyledLabel>
