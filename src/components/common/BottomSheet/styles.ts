@@ -5,7 +5,7 @@ export { BackDrop } from "../Modal/styles";
 export const StyledBottomSheet = styled(motion.div)<{
   height: string;
 }>`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: ${(props) => props.height};

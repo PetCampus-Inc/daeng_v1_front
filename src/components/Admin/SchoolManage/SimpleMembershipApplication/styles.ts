@@ -7,7 +7,7 @@ export const Container = styled.button<{ $isUsed: boolean; $isSelected: boolean 
   width: 100%;
   padding: 19px 20px;
   background-color: ${(props) =>
-    props.$isSelected ? props.theme.colors.yellow_2 : props.theme.colors.white};
+    props.$isSelected ? props.theme.colors.yellow_3 : props.theme.colors.white};
   border-radius: 8px;
   border: 1px solid
     ${(props) => (props.$isUsed ? props.theme.colors.br_4 : props.theme.colors.gray_4)};
