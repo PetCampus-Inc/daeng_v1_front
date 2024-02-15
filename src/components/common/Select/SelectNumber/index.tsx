@@ -14,7 +14,8 @@ interface ISelectNumber extends InputFieldProps {
   watch?: UseFormWatch<FieldValues>;
   setValue?: UseFormSetValue<FieldValues>;
   disabled?: boolean;
-  defaultValue: string;
+  defaultValue?: string;
+  placeholder?: string;
 }
 
 const SelectNumber = ({
@@ -24,6 +25,7 @@ const SelectNumber = ({
   watch,
   setValue,
   disabled = false,
+  placeholder,
   ...props
 }: ISelectNumber) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
@@ -38,6 +40,7 @@ const SelectNumber = ({
           name={name}
           disabled={disabled}
           defaultValue={defaultValue}
+          placeholder={placeholder}
           readOnly
         />
         <Button disabled={disabled}>

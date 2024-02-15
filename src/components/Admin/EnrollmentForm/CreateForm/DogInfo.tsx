@@ -60,9 +60,9 @@ const DogInfo = () => {
           생일
         </AdminTitle>
         <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber name="null" control={control} defaultValue="2000" disabled />
-          <SelectNumber name="null" control={control} defaultValue="01" disabled />
-          <SelectNumber name="null" control={control} defaultValue="01" disabled />
+          <SelectNumber name="year" control={control} placeholder="2000" disabled />
+          <SelectNumber name="month" control={control} placeholder="01" disabled />
+          <SelectNumber name="day" control={control} placeholder="01" disabled />
         </div>
       </Card>
       <Card>
