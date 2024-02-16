@@ -44,7 +44,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [memberPhone, setMemberPhone] = useState("");
   const [dogName, setDogName] = useState("");
-  const [sortName, setSortName] = useState("결제 임박순");
+  const [sortName, setSortName] = useState("이용권 만료 임박순");
   const [targetDogId, setTargetDogId] = useState(-1);
   const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
