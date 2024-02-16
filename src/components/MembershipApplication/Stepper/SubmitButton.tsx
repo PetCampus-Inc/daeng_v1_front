@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { useEnrollMutation } from "hooks/api/useEnrollMutation";
 import { formatDate, extractNumber } from "utils/formatter";
-import type { IRequestEnrollment, TPickDropRequest } from "types/School.type";
+import type { IRequestEnrollment, TPickDropRequest, TTicketType } from "types/School.type";
 import type { ItemMapValue } from "constants/item";
 import { ITEM_MAP } from "constants/item";
 
@@ -47,7 +47,7 @@ const SubmitButton = () => {
       vaccination: (mapValue(data.vaccination) as ItemMapValue).vaccination,
       pickDropRequest: mapValue(data.pickDropRequest) as TPickDropRequest,
       pickDropType: mapValue(data.pickDropType) as string,
-      ticketType: mapValue(data.ticketType) as string,
+      ticketType: mapValue(data.ticketType) as TTicketType,
       monthlyTicketNumber: extractNumber(data.monthlyTicketNumber),
       roundTicketNumber: extractNumber(data.roundTicketNumber)
     };

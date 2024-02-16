@@ -9,6 +9,7 @@ export const PATH = {
   ADMIN_DOG_INFO: "/admin/dogInfo", // 강아지 상세정보 (TODO: 어디 사용되는건지 파악하기)
   ADMIN_CHAT: "admin/chat", // 채팅
   ADMIN_SCHOOL_MANAGE: "/admin/schoolManage", // 유치원 운영
+  ADMIN_ENROLLMENT: "/admin/schoolManage/enrollment", // 원장 신규가입 관리
   ADMIN_FORMS: "/admin/schoolManage/enrollment/list", // 원장 가입신청서 목록
   ADMIN_FORM: (formId: string) => `/admin/schoolManage/enrollment/list/${formId}`, // 원장 가입신청서 상세 조회
   ADMIN_EDIT_FORM: (formId: string) => `/admin/schoolManage/enrollment/list/${formId}/edit`, // 원장 가입신청서 수정

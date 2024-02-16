@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 export const ContentWrapper = styled.div`
   display: flex;
@@ -26,19 +26,6 @@ export const ErrorMessage = styled.p`
 
   ${({ theme }) => theme.typo.body2_16_R};
   color: ${({ theme }) => theme.colors.red_1};
-`;
-
-export const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.gray_5};
-    border-radius: 50%;
-  }
-
-  transition: background-color 0.2s ease-in-out;
 `;
 
 export const Counter = styled.div`
@@ -73,18 +60,4 @@ export const Button = styled.button`
   &:active {
     color: ${({ theme }) => theme.colors.gray_4};
   }
-`;
-
-export const ConfirmButton = styled.button`
-  display: flex;
-  width: 100%;
-  padding: 11px;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primaryColor};
-  color: ${({ theme }) => theme.colors.white};
-
-  ${({ theme }) => theme.typo.label1_16_B};
 `;
