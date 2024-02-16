@@ -8,6 +8,7 @@ import { Card, Stack } from "../styles";
 
 const PolicyInfo = () => {
   const { control, register } = useFormContext();
+
   return (
     <>
       <Card>
@@ -22,6 +23,9 @@ const PolicyInfo = () => {
         <TextArea
           name="limitsInfo"
           register={register}
+          rules={{
+            required: true
+          }}
           placeholder="이용 제한 관련 유의사항을 입력해 주세요"
         />
         <Stack>
@@ -42,6 +46,9 @@ const PolicyInfo = () => {
         <TextArea
           name="accidentInfo"
           register={register}
+          rules={{
+            required: true
+          }}
           placeholder="상해 관련 유의사항을 입력해 주세요"
         />
         <Stack>
@@ -62,6 +69,9 @@ const PolicyInfo = () => {
         <TextArea
           name="abandonmentInfo"
           register={register}
+          rules={{
+            required: true
+          }}
           placeholder="유기 관련 유의사항을 입력해 주세요"
         />
         <Stack>

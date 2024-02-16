@@ -37,6 +37,9 @@ const PickDropInfo = () => {
             <TextArea
               name="pickDropNotice"
               register={register}
+              rules={{
+                required: true
+              }}
               placeholder="ex) 픽드랍 왕복 50000 추가금 10000"
             />
           </Card>
@@ -88,7 +91,9 @@ const PickDropInfo = () => {
               name="pickDropInfo"
               register={register}
               placeholder="픽드랍 유의사항을 입력해 주세요"
-              rules={}
+              rules={{
+                required: true
+              }}
             />
             <Stack>
               <Checkbox name="null" control={control} disabled>

@@ -105,7 +105,14 @@ const TicketInfo = () => {
         >
           유의사항
         </AdminTitle>
-        <TextArea name="ticketInfo" register={register} placeholder="유의사항을 입력해 주세요" />
+        <TextArea
+          name="ticketInfo"
+          rules={{
+            required: true
+          }}
+          register={register}
+          placeholder="유의사항을 입력해 주세요"
+        />
         <Stack>
           <Checkbox name="null" control={control} disabled>
             동의합니다
