@@ -69,6 +69,7 @@ const PickDropInfo = () => {
             </AdminTitle>
             <TextArea
               name="null"
+              register={register}
               placeholder="견주가 원하는 픽드랍 장소나 시간에 대해 입력하는 칸이에요"
               disabled
             />

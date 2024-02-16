@@ -76,32 +76,10 @@ export const StyledLabel = styled.label`
 `;
 
 export const RadioGroupContainer = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
-export const RadioWrapper = styled.div`
-  position: relative;
-  flex: 1;
-`;
-
-export const DeleteButton = styled.button`
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  z-index: 2;
-`;
-
-export const RadioGroupContainer = styled.div`
   width: 100%;
 
   display: flex;
   gap: 12px;
-`;
-
-export const RadioWrapper = styled.div`
-  position: relative;
-  flex: 1;
 `;
 
 export const DeleteButton = styled.button`
@@ -119,53 +97,7 @@ export const DeleteButton = styled.button`
   }
 `;
 
-export const RadioGroupContainer = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
 export const RadioWrapper = styled.div`
   position: relative;
   flex: 1;
-`;
-
-export const DeleteButton = styled.button`
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  z-index: 2;
-`;
-
-export const RadioGroupContainer = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
-export const RadioWrapper = styled.div`
-  position: relative;
-  flex: 1;
-`;
-
-export const DeleteButton = styled.button`
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  z-index: 2;
-`;
-
-export const RadioGroupContainer = styled.div`
-  display: flex;
-  gap: 12px;
-`;
-
-export const RadioWrapper = styled.div`
-  position: relative;
-  flex: 1;
-`;
-
-export const DeleteButton = styled.button`
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  z-index: 2;
 `;
