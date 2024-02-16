@@ -1,10 +1,11 @@
 import { useFormContext } from "react-hook-form";
 
-import { Card, Caption } from "../styles";
 import AdminTitle from "components/common/Title/AdminTitle";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import { ITEM_KEYS } from "constants/item";
+import { Card, Caption, Stack } from "../styles";
+import Checkbox from "components/common/Checkbox";
 
 const PickDropInfo = () => {
   const { control, register, watch } = useFormContext();
@@ -87,7 +88,13 @@ const PickDropInfo = () => {
               name="pickDropInfo"
               register={register}
               placeholder="픽드랍 유의사항을 입력해 주세요"
+              rules={}
             />
+            <Stack>
+              <Checkbox name="null" control={control} disabled>
+                동의합니다
+              </Checkbox>
+            </Stack>
           </Card>
         </>
       )}

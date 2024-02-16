@@ -7,7 +7,7 @@ import { ChangeEvent } from "react";
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue">,
     UseControllerProps {
-  isChecked: boolean;
+  isChecked?: boolean;
   isRequired?: boolean;
   ariaLabel?: string;
   ariaLabelledby?: string;
@@ -67,7 +67,7 @@ const Checkbox = ({
         className={isChecked ? "checked" : ""}
         aria-disabled={disabled ? "true" : undefined}
       >
-        <CheckIcon />
+        <CheckIcon className="checkbox-icon" />
       </S.Checkbox>
       <S.LabelText
         className={isChecked ? "checked" : ""}

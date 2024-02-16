@@ -78,9 +78,7 @@ export const Checkbox = styled.span`
     border-color: ${({ theme }) => theme.colors.gray_3};
   }
 
-  & > svg {
-    width: 1em;
-    height: 1em;
+  & > .checkbox-icon {
     display: inline-block;
     line-height: 1em;
     flex-shrink: 0;
@@ -91,7 +89,7 @@ export const Checkbox = styled.span`
     animation: none;
   }
 
-  &.checked > svg {
+  &.checked > .checkbox-icon {
     color: ${({ theme }) => theme.colors.white};
     animation: checking 200ms linear;
   }
@@ -121,7 +119,7 @@ export const LabelText = styled.span`
   }
 
   &[aria-disabled="true"] {
-    color: ${({ theme }) => theme.colors.gray_2};
+    color: ${({ theme }) => theme.colors.gray_4};
     tabindex: -1;
   }
 

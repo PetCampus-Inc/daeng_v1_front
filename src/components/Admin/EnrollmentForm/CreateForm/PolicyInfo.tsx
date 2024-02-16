@@ -1,9 +1,10 @@
 import { useFormContext } from "react-hook-form";
 
-import { Card } from "../styles";
+import Checkbox from "components/common/Checkbox";
 import AdminTitle from "components/common/Title/AdminTitle";
 import TextArea from "components/common/TextArea";
 import { ITEM_KEYS } from "constants/item";
+import { Card, Stack } from "../styles";
 
 const PolicyInfo = () => {
   const { control, register } = useFormContext();
@@ -23,6 +24,11 @@ const PolicyInfo = () => {
           register={register}
           placeholder="이용 제한 관련 유의사항을 입력해 주세요"
         />
+        <Stack>
+          <Checkbox name="null" control={control} disabled>
+            동의합니다
+          </Checkbox>
+        </Stack>
       </Card>
       <Card>
         <AdminTitle
@@ -38,6 +44,11 @@ const PolicyInfo = () => {
           register={register}
           placeholder="상해 관련 유의사항을 입력해 주세요"
         />
+        <Stack>
+          <Checkbox name="null" control={control} disabled>
+            동의합니다
+          </Checkbox>
+        </Stack>
       </Card>
       <Card>
         <AdminTitle
@@ -53,6 +64,11 @@ const PolicyInfo = () => {
           register={register}
           placeholder="유기 관련 유의사항을 입력해 주세요"
         />
+        <Stack>
+          <Checkbox name="null" control={control} disabled>
+            동의합니다
+          </Checkbox>
+        </Stack>
       </Card>
     </>
   );
