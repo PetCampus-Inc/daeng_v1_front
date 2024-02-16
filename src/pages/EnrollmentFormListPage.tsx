@@ -10,6 +10,18 @@ import { useRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
 import { INewEnrollmentList, ISimpleSchoolFormList } from "types/Admin.type";
+import SimpleMembershipApplication from "components/Admin/SchoolManage/SimpleMembershipApplication";
+import { ListContainer } from "components/Admin/SchoolManage/SimpleMembershipApplication/styles";
+import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
+import ButtonBadge from "components/common/Badge/ButtonBadge";
+import BackgroundButton from "components/common/Button/BackgroundButton";
+import Header from "components/common/Header";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { newEnrollmentListAtom } from "store/admin";
+import { PageContainer } from "styles/StyleModule";
+import { INewEnrollmentList, ISimpleSchoolFormList } from "types/Admin.type";
 
 const EnrollmentFormListPage = () => {
   const navigate = useNavigate();
