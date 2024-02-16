@@ -1,5 +1,12 @@
 import customAxios from "libs/CustomAxios";
-import type { IEnrollment, IRequestEnrollment, IBreedInfo, ISchoolInfo } from "types/School.type";
+import type { IResponse } from "types/Response.type";
+import type {
+  IEnrollment,
+  IRequestEnrollment,
+  IBreedInfo,
+  ISchoolInfo,
+  IRequestForm
+} from "types/School.type";
 
 export interface IEnrollmentProps {
   memberId: string;
@@ -59,10 +66,18 @@ export const handleGetAdminEnrollment = async ({
 
 export const handlePostEnrollment = async (
   requestProps: IRequestEnrollment
-): Promise<IEnrollment> => {
+): Promise<IResponse> => {
   const url: string = `school/member/enroll`;
   const { data } = await customAxios.post(url, {
-    requestProps
+    ...requestProps
+  });
+  return data.data;
+};
+
+export const handlePostForm = async (requestProps: IRequestForm): Promise<IResponse> => {
+  const url: string = `school/form`;
+  const { data } = await customAxios.post(url, {
+    ...requestProps
   });
   return data.data;
 };

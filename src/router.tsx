@@ -55,25 +55,29 @@ const router = createBrowserRouter([
             element: <Pages.SchoolManagePage />
           },
           {
-            path: PATH.ADMIN_ENROLLMENT,
+            path: PATH.ADMIN_FORMS,
+            element: <Pages.EnrollmentFormListPage />
+          },
+          {
+            path: PATH.ADMIN_CREATE_FORM,
             children: [
               {
-                path: PATH.ADMIN_FORMS,
-                element: <Pages.EnrollmentFormListPage />
-              },
-              {
-                path: PATH.ADMIN_CREATE_FORM,
+                index: true,
                 element: <Pages.EnrollmentFormCreatePage />
               },
               {
-                path: PATH.ADMIN_FORM(":formId"),
-                element: <Pages.EnrollmentFormPage />
-              },
-              {
-                path: PATH.ADMIN_EDIT_FORM(":formId"),
-                element: <Pages.EnrollmentFormEditPage />
+                path: "submit",
+                element: <Pages.EnrollmentFormSubmitPage />
               }
             ]
+          },
+          {
+            path: PATH.ADMIN_FORM(":formId"),
+            element: <Pages.EnrollmentFormDetailPage />
+          },
+          {
+            path: PATH.ADMIN_EDIT_FORM(":formId"),
+            element: <Pages.EnrollmentFormEditPage />
           }
         ]
       }

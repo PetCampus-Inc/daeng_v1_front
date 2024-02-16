@@ -2,27 +2,35 @@ import { FieldValues, UseFormSetValue } from "react-hook-form";
 import InputField from "../index";
 import type { InputFieldProps } from "../index";
 
+import SearchIcon from "assets/svg/search-icon";
 import * as S from "./styles";
 
 interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   onSearch?: (value: string) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
-  setValue: UseFormSetValue<FieldValues>;
+  value?: string;
+  setValue?: UseFormSetValue<FieldValues>;
 }
 
-const SearchInputField = ({ name, onSearch, value, setValue, disabled=false, ...props }: SearchInputFieldProps) => {
+const SearchInputField = ({
+  name,
+  onSearch,
+  value,
+  setValue,
+  disabled = false,
+  ...props
+}: SearchInputFieldProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(name, e.target.value);
+    setValue && setValue(name, e.target.value);
     props.onChange && props.onChange(e);
   };
 
   const handleClear = () => {
-    setValue(name, "");
+    setValue && setValue(name, "");
   };
 
   const handleSearch = () => {
-    onSearch && onSearch(value);
+    value && onSearch && onSearch(value);
   };
 
   return (
@@ -42,8 +50,8 @@ const SearchInputField = ({ name, onSearch, value, setValue, disabled=false, ...
         }}
       />
       {!value ? (
-        <S.SearchInputButton onClick={handleSearch}>
-          <img src="/images/search.png" alt="search-icon" />
+        <S.SearchInputButton onClick={handleSearch} disabled={disabled}>
+          <SearchIcon />
         </S.SearchInputButton>
       ) : (
         <S.SearchInputButton onClick={handleClear}>

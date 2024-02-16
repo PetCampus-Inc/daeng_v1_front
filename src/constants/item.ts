@@ -50,5 +50,7 @@ export const ITEM_MAP = new Map<string, string | ItemMapValue>([
   ["편도", "ONE_WAY"],
   ["왕복", "ROUND"],
   ["회차권", "ROUND"],
-  ["정기권", "MONTHLY"]
+  ["정기권", "MONTHLY"],
+  ["운영", "RUNNING"],
+  ["미운영", "NOT_RUNNING"]
 ]);

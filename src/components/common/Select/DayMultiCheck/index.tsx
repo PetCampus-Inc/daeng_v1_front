@@ -3,12 +3,14 @@ import { useFormContext } from "react-hook-form";
 import { ISelect } from "../select.type";
 import { WEEKDAYS } from "constants/date";
 
-interface IDayMultiCheck extends ISelect {
-  openDays: string[];
+interface IDayMultiCheck
+  extends ISelect,
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
+  openDays?: string[];
 }
 
 // 요일 복수 선택
-const DayMultiCheck = ({ name, caption, openDays }: IDayMultiCheck) => {
+const DayMultiCheck = ({ name, caption, openDays, disabled = false, ...props }: IDayMultiCheck) => {
   const { register } = useFormContext();
 
   return (
@@ -22,9 +24,12 @@ const DayMultiCheck = ({ name, caption, openDays }: IDayMultiCheck) => {
               type="checkbox"
               {...register(`${name}`)}
               value={day}
-              disabled={!openDays.includes(day)}
+              disabled={disabled && !openDays?.includes(day)}
+              {...props}
             />
-            <S.StyledLabel htmlFor={day} className="policyPage">{day}</S.StyledLabel>
+            <S.StyledLabel htmlFor={day} className="policyPage">
+              {day}
+            </S.StyledLabel>
           </div>
         ))}
       </S.RadioContainer>

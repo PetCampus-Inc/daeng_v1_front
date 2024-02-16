@@ -14,6 +14,7 @@ const InputField = ({
   name,
   rules,
   defaultValue,
+  placeholder,
   disabled = false,
   ...inputProps
 }: InputFieldProps) => {
@@ -25,6 +26,7 @@ const InputField = ({
       id={field.name}
       value={field.value ? field.value : ""}
       disabled={disabled}
+      placeholder={placeholder}
       {...inputProps}
     />
   );

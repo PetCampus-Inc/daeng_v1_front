@@ -1,3 +1,4 @@
+import Portal from "../Modal/portal";
 import * as S from "./styles";
 
 interface Props {
@@ -20,19 +21,21 @@ const ButtonModal = ({
   actionfunc
 }: Props) => {
   return (
-    <S.BackDrop>
-      <S.MainWrapper>
-        {children}
-        <S.TextWrapper>
-          <S.MainText>{maintext}</S.MainText>
-          <S.SubText>{subtext}</S.SubText>
-        </S.TextWrapper>
-        <S.ButtonWrapper>
-          {closebutton && <S.CloseButton onClick={closefunc}>{closebutton}</S.CloseButton>}
-          {actionbutton && <S.ActButton onClick={actionfunc}>{actionbutton}</S.ActButton>}
-        </S.ButtonWrapper>
-      </S.MainWrapper>
-    </S.BackDrop>
+    <Portal>
+      <S.BackDrop>
+        <S.MainWrapper>
+          {children}
+          <S.TextWrapper>
+            <S.MainText>{maintext}</S.MainText>
+            <S.SubText>{subtext}</S.SubText>
+          </S.TextWrapper>
+          <S.ButtonWrapper>
+            {closebutton && <S.CloseButton onClick={closefunc}>{closebutton}</S.CloseButton>}
+            {actionbutton && <S.ActButton onClick={actionfunc}>{actionbutton}</S.ActButton>}
+          </S.ButtonWrapper>
+        </S.MainWrapper>
+      </S.BackDrop>
+    </Portal>
   );
 };
 

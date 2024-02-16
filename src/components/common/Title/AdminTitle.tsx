@@ -5,7 +5,6 @@ import type { ToggleBadgeProps } from "../Badge/ToggleBadge";
 import { Label, Container } from "./style";
 
 interface AdminTitleProps extends Omit<ToggleBadgeProps, "control" | "name"> {
-  htmlFor: string;
   control: ToggleBadgeProps["control"];
   name: ToggleBadgeProps["name"];
   hasBadge?: boolean;
@@ -13,20 +12,26 @@ interface AdminTitleProps extends Omit<ToggleBadgeProps, "control" | "name"> {
 
 const AdminTitle = ({
   children,
-  htmlFor,
   control,
   name,
   readOnly,
   hasBadge = false,
+  hasToggle = false,
   ...props
 }: AdminTitleProps) => {
   return (
-    <Label htmlFor={htmlFor}>
+    <Label htmlFor={name + ".label"}>
       <Container>
         {children}
         {hasBadge && <Badge type="adminRequired" />}
       </Container>
-      <ToggleBadge name={name} control={control} {...props} readOnly={readOnly} />
+      <ToggleBadge
+        name={name}
+        control={control}
+        hasToggle={hasToggle}
+        {...props}
+        readOnly={readOnly}
+      />
     </Label>
   );
 };

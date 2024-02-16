@@ -1,65 +1,62 @@
 import { useRef } from "react";
-import { ThemeConfig } from "styles/ThemeConfig";
-import {
-  StyledButtonWrapper,
-  StyledMainWrapper,
-  StyledWrapper
-} from "components/common/InputBox/styles";
+import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import useDetectClose from "hooks/common/useDetectClose";
-import { FieldValues, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
-import StringDropdown from "components/common/Dropdown/StringDropdown";
-import { IoIosArrowDown } from "react-icons/io";
 
-interface ISelectNumber {
-  numberList: string[];
-  initialValue: string;
-  width?: string;
+import StringDropdown from "components/common/Dropdown/StringDropdown";
+import InputField, { InputFieldProps } from "components/common/InputField";
+
+import ArrowDownIcon from "assets/svg/arrow-down-icon";
+import { Container, InputWrapper, Button } from "./styles";
+
+interface ISelectNumber extends InputFieldProps {
+  numberList?: string[];
   name: string;
-  register?: UseFormRegister<FieldValues>;
-  watch: UseFormWatch<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
+  watch?: UseFormWatch<FieldValues>;
+  setValue?: UseFormSetValue<FieldValues>;
+  disabled?: boolean;
+  defaultValue?: string;
+  placeholder?: string;
 }
 
 const SelectNumber = ({
   name,
   numberList,
-  initialValue,
-  register,
+  defaultValue,
   watch,
   setValue,
-  width = "100%",
+  disabled = false,
+  placeholder,
   ...props
 }: ISelectNumber) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
-  const value = watch(`${name}`) ? watch(`${name}`) : initialValue;
+  const value = watch?.(name) ?? defaultValue;
 
   return (
-    <div ref={dropDownRef} style={{ position: "relative" }}>
-      <StyledMainWrapper width={width} height="49px">
-        <StyledWrapper
-          readOnly
-          value={value}
-          color={ThemeConfig.colors.gray_2}
-          border={`1px solid ${ThemeConfig.colors.gray_4}`}
-          {...(name && register && register(name))}
+    <Container ref={dropDownRef}>
+      <InputWrapper onClick={() => setIsOpen(!isOpen)}>
+        <InputField
           {...props}
+          name={name}
+          disabled={disabled}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          readOnly
         />
-        <StyledButtonWrapper onClick={() => setIsOpen(!isOpen)}>
-          <IoIosArrowDown />
-        </StyledButtonWrapper>
-      </StyledMainWrapper>
-      {isOpen && (
+        <Button disabled={disabled}>
+          <ArrowDownIcon />
+        </Button>
+      </InputWrapper>
+      {isOpen && numberList && setValue && (
         <StringDropdown
           dropDownList={numberList}
           setIsOpen={setIsOpen}
           name={name}
-          value={value}
           setValue={setValue}
-          width={width}
+          value={value}
         />
       )}
-    </div>
+    </Container>
   );
 };
 

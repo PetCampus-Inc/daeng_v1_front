@@ -7,14 +7,7 @@ interface IStringDropdown extends CommonDropdownProps {
   dropDownList: string[];
 }
 
-const StringDropdown = ({
-  dropDownList,
-  setIsOpen,
-  value,
-  setValue,
-  width,
-  name
-}: IStringDropdown) => {
+const StringDropdown = ({ dropDownList, setIsOpen, value, setValue, name }: IStringDropdown) => {
   // 선택된 값이 가장 상단에 위치
   const chosenItemRef = useRef<HTMLLIElement | null>(null);
   useEffect(() => {
@@ -26,12 +19,12 @@ const StringDropdown = ({
 
   const handleClick = (e: React.MouseEvent<HTMLLIElement>, item: string) => {
     e.stopPropagation();
-    setValue(name, item);
+    setValue && setValue(name, item);
     setIsOpen(false);
   };
 
   return (
-    <S.List width={width}>
+    <S.List>
       {dropDownList.map((item, index) => (
         <S.ListItem
           key={index}

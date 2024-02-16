@@ -19,7 +19,7 @@ const useTicketFieldArray = ({ control, fieldName, defaultValues }: TicketFieldA
       append(
         defaultValues.map((value) => ({
           value: value.toString(),
-          label: `${value}${fieldName.includes("Round") ? "회" : "주"}`
+          label: `${value}${fieldName.includes("round") ? "회" : "주"}`
         }))
       );
     }

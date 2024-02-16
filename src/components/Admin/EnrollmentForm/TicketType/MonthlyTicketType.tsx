@@ -4,20 +4,26 @@ import useTicketFieldArray from "hooks/common/useTicketFieldArray";
 import useBottomSheet from "hooks/common/useBottomSheet";
 
 import XIcon from "assets/svg/x-icon";
-import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
+import EditableRadioGroup, {
+  ExtendedFieldArrayWithId
+} from "components/common/Select/EditableRadioGroup";
 import TicketCounter from "../TicketCounter";
 import BottomSheet from "components/common/BottomSheet";
 
 import * as S from "./styles";
+import AddIcon from "assets/svg/addIcon";
+import ButtonModal from "components/common/ButtonModal";
 
 type TicketTypeProps = {
   control: Control;
+  name: string;
 };
 
-const MonthlyTicketType = ({ control }: TicketTypeProps) => {
+const MonthlyTicketType = ({ control, name }: TicketTypeProps) => {
   const INIT_COUNTER = 2;
-  const FIELD_NAME = "MonthlyTicketType";
+  const FIELD_NAME = name;
   const bottomSheet = useBottomSheet();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [counter, setCounter] = useState<number>(INIT_COUNTER);
   const defaultValues = [1, 2, 4, 8];
 
@@ -27,14 +33,42 @@ const MonthlyTicketType = ({ control }: TicketTypeProps) => {
     defaultValues
   });
 
+  const MAX_ITEMS = 6;
+  const MIN_ITEMS = 1;
+
   const handleAddRadio = () => {
-    append({ value: counter.toString(), label: `${counter}주` });
-    bottomSheet.close();
-    setCounter(INIT_COUNTER);
+    if (fields.length < MAX_ITEMS) {
+      append({ value: counter.toString(), label: `${counter}주` });
+      bottomSheet.close();
+      setCounter(INIT_COUNTER);
+    } else {
+      alert("더 이상 추가할 수 없습니다.");
+    }
   };
+
+  const handleRemove = (index: number) => {
+    if (fields.length > MIN_ITEMS) {
+      remove(index);
+    } else {
+      setIsDeleteModalOpen(true);
+    }
+  };
+
+  const isDuplication = fields.some((field) => {
+    const extendedField = field as ExtendedFieldArrayWithId;
+    return extendedField.value === counter.toString();
+  });
 
   return (
     <>
+      {isDeleteModalOpen && (
+        <ButtonModal
+          maintext="모두 삭제할 수 없어요"
+          subtext="최소 1개 이상의 정기권 옵션을 추가해 주세요"
+          actionbutton="닫기"
+          actionfunc={() => setIsDeleteModalOpen(false)}
+        />
+      )}
       {bottomSheet.isVisible && (
         <BottomSheet onClose={() => bottomSheet.close()}>
           <S.CloseButton type="button" onClick={() => bottomSheet.close()}>
@@ -42,6 +76,7 @@ const MonthlyTicketType = ({ control }: TicketTypeProps) => {
           </S.CloseButton>
           <TicketCounter
             type="MONTHLY"
+            isDuplication={isDuplication}
             initial={INIT_COUNTER}
             counter={counter}
             setCounter={setCounter}
@@ -49,8 +84,20 @@ const MonthlyTicketType = ({ control }: TicketTypeProps) => {
           <S.ConfirmButton onClick={handleAddRadio}>추가</S.ConfirmButton>
         </BottomSheet>
       )}
-      <button onClick={() => bottomSheet.open()}>직접 추가하기</button>
-      <EditableRadioGroup control={control} name={FIELD_NAME} fields={fields} remove={remove} />
+      <EditableRadioGroup
+        control={control}
+        name={FIELD_NAME}
+        fields={fields}
+        remove={handleRemove}
+      />
+      <S.AddButton
+        type="button"
+        onClick={() => bottomSheet.open()}
+        disabled={fields.length >= MAX_ITEMS}
+      >
+        <AddIcon />
+        정기권 직접 추가
+      </S.AddButton>
     </>
   );
 };

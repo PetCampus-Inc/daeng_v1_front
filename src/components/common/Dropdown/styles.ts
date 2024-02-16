@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
-export const List = styled.ul<{ width: string }>`
+export const List = styled.ul`
   position: absolute;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.gray_4};
   border-radius: 8px;
-  width: ${({ width }) => width};
+  width: 100%;
   max-height: 192px;
+  margin-top: 8px;
   z-index: 2;
 
-  overflow: scroll;
+  overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-snap-stop: always;
   scrollbar-width: thin;

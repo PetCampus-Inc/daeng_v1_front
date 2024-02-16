@@ -1,22 +1,23 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
-export const SearchInputWrapper = styled.div`
-  width: 100%;
+export const Container = styled.div`
   position: relative;
 `;
 
-export const SearchInputButton = styled.button`
-  all: unset;
+export const InputWrapper = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
 
+export const Button = styled.button`
   height: 100%;
   width: 17%;
   margin-right: 5%;
   aspect-ratio: 1/1;
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  right: 0%;
-  transform: translateY(-50%);
+  right: 0;
+  top: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
