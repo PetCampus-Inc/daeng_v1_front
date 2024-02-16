@@ -21,6 +21,32 @@ const EnrollmentFormListPage = () => {
     return <>로딩중..</>;
   }
 
+  const handleTouch = () => {
+    //TODO: 삭제 API 연동하기
+    const filteredData: ISimpleSchoolFormList[] = data.simpleSchoolFormList.filter(
+      (item) => !selectedList.includes(item.schoolFormId)
+    );
+
+    setData((prev: INewEnrollmentList | null) => {
+      if (!prev) {
+        return prev;
+      } else {
+        return {
+          ...prev,
+          simpleSchoolFormList: [
+            ...filteredData.map((item) => ({
+              schoolFormId: item.schoolFormId,
+              schoolFormName: item.schoolFormName,
+              createdDate: item.createdDate
+            }))
+          ]
+        };
+      }
+    });
+    setIsEditable(false);
+    setSelectedList([]);
+  };
+
   return (
     <>
       <Header
@@ -61,31 +87,7 @@ const EnrollmentFormListPage = () => {
               selectedList.length > 0 &&
               !(selectedList.length === data?.simpleSchoolFormList.length)
             }
-            handleTouch={() => {
-              //TODO: 삭제 API 연동하기
-              const filteredData: ISimpleSchoolFormList[] = data.simpleSchoolFormList.filter(
-                (item) => !selectedList.includes(item.schoolFormId)
-              );
-
-              setData((prev: INewEnrollmentList | null) => {
-                if (!prev) {
-                  return prev;
-                } else {
-                  return {
-                    ...prev,
-                    simpleSchoolFormList: [
-                      ...filteredData.map((item) => ({
-                        schoolFormId: item.schoolFormId,
-                        schoolFormName: item.schoolFormName,
-                        createdDate: item.createdDate
-                      }))
-                    ]
-                  };
-                }
-              });
-              setIsEditable(false);
-              setSelectedList([]);
-            }}
+            handleTouch={handleTouch}
           />
         )}
       </PageContainer>

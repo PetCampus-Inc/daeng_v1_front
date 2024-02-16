@@ -30,14 +30,12 @@ const SimpleMembershipApplication = ({
   const handleTouch = () => {
     if (isEditable && setSelectedList) {
       setIsSelected(!isSelected);
-      if (!isSelected) {
-        setSelectedList((prev) => [...prev, data.schoolFormId]);
-      } else {
-        setSelectedList((prev) => prev.filter((id) => id !== data.schoolFormId));
-      }
-      return;
+      setSelectedList((prev) =>
+        isSelected ? prev.filter((id) => id !== data.schoolFormId) : [...prev, data.schoolFormId]
+      );
+    } else {
+      navigate(`/admin/schoolManage/enrollment/list/${data.schoolFormId}`);
     }
-    navigate(`/admin/schoolManage/enrollment/list/${data.schoolFormId}`);
   };
 
   return (
