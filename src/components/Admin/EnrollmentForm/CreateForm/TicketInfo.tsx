@@ -5,11 +5,11 @@ import TextArea from "components/common/TextArea";
 import SingleRadio from "components/common/Select/SingleRadio";
 import AdminTitle from "components/common/Title/AdminTitle";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
+import Checkbox from "components/common/Checkbox";
 
-import { Card, Caption } from "../styles";
 import { ITEM_KEYS } from "constants/item";
-import MonthlyTicketType from "../TicketType/MonthlyTicketType";
-import RoundTicketType from "../TicketType/RoundTicketType";
+import { Card, Caption, Stack } from "../styles";
+import TicketType from "../TicketType";
 
 const TicketInfo = () => {
   const { register, control, watch, setValue } = useFormContext();
@@ -17,12 +17,9 @@ const TicketInfo = () => {
   const selectedTicketType = watch("ticketType");
 
   useEffect(() => {
-    if (selectedTicketType === "정기권") {
-      setValue("roundTicketNumber", undefined);
-    } else {
-      setValue("monthlyTicketNumber", undefined);
-    }
-  }, [selectedTicketType]);
+    const fieldName = selectedTicketType === "정기권" ? "roundTicketNumber" : "monthlyTicketNumber";
+    setValue(fieldName, undefined);
+  }, [selectedTicketType, setValue]);
 
   return (
     <>
@@ -61,7 +58,12 @@ const TicketInfo = () => {
               정기권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <MonthlyTicketType name="monthlyTicketNumber" control={control} />
+            <TicketType
+              control={control}
+              name="monthlyTicketNumber"
+              ticketType="MONTHLY"
+              defaultValues={[1, 2, 4, 8]}
+            />
           </Card>
         ) : (
           <Card>
@@ -74,7 +76,12 @@ const TicketInfo = () => {
               회차권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <RoundTicketType name="roundTicketNumber" control={control} />
+            <TicketType
+              control={control}
+              name="roundTicketNumber"
+              ticketType="ROUND"
+              defaultValues={[1, 3, 5, 10]}
+            />
           </Card>
         ))}
       <Card>
@@ -99,6 +106,11 @@ const TicketInfo = () => {
           유의사항
         </AdminTitle>
         <TextArea name="ticketInfo" register={register} placeholder="유의사항을 입력해 주세요" />
+        <Stack>
+          <Checkbox name="null" control={control} disabled>
+            동의합니다
+          </Checkbox>
+        </Stack>
       </Card>
     </>
   );

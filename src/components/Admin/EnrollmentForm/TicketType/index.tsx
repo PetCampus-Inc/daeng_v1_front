@@ -17,15 +17,16 @@ import ButtonModal from "components/common/ButtonModal";
 type TicketTypeProps = {
   control: Control;
   name: string;
+  ticketType: "ROUND" | "MONTHLY";
+  defaultValues: number[];
 };
 
-const RoundTicketType = ({ control, name }: TicketTypeProps) => {
+const TicketType = ({ control, name, ticketType, defaultValues }: TicketTypeProps) => {
   const INIT_COUNTER = 2;
   const FIELD_NAME = name;
   const bottomSheet = useBottomSheet();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [counter, setCounter] = useState<number>(INIT_COUNTER);
-  const defaultValues = [1, 3, 5, 10];
 
   const { fields, append, remove } = useTicketFieldArray({
     control,
@@ -35,10 +36,12 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
 
   const MAX_ITEMS = 6;
   const MIN_ITEMS = 1;
+  const TICKET_TYPE = ticketType === "ROUND" ? "회차권" : "정기권";
+  const TIMES = ticketType === "ROUND" ? "회" : "주";
 
-  const handleAddRoundRadio = () => {
+  const handleAddRadio = () => {
     if (fields.length < MAX_ITEMS) {
-      append({ value: counter.toString(), label: `${counter}회` });
+      append({ value: counter.toString(), label: `${counter}${TIMES}` });
       bottomSheet.close();
       setCounter(INIT_COUNTER);
     } else {
@@ -59,14 +62,12 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
     return extendedField.value === counter.toString();
   });
 
-  console.log(isDeleteModalOpen);
-
   return (
     <>
       {isDeleteModalOpen && (
         <ButtonModal
           maintext="모두 삭제할 수 없어요"
-          subtext="최소 1개 이상의 정기권 옵션을 추가해 주세요"
+          subtext={`최소 1개 이상의 ${TICKET_TYPE} 옵션을 추가해 주세요`}
           actionbutton="닫기"
           actionfunc={() => setIsDeleteModalOpen(false)}
         />
@@ -77,13 +78,13 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
             <XIcon />
           </S.CloseButton>
           <TicketCounter
-            type="ROUND"
+            type={ticketType}
             isDuplication={isDuplication}
             initial={INIT_COUNTER}
             counter={counter}
             setCounter={setCounter}
           />
-          <S.ConfirmButton onClick={handleAddRoundRadio} disabled={isDuplication}>
+          <S.ConfirmButton onClick={handleAddRadio} disabled={isDuplication}>
             추가
           </S.ConfirmButton>
         </BottomSheet>
@@ -100,10 +101,10 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
         disabled={fields.length >= MAX_ITEMS}
       >
         <AddIcon />
-        회차권 직접 추가
+        {TICKET_TYPE} 직접 추가
       </S.AddButton>
     </>
   );
 };
 
-export default RoundTicketType;
+export default TicketType;
