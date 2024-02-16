@@ -17,7 +17,7 @@ interface TicketInfoProps {
 }
 
 const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
-  const { watch, control, setValue } = useFormContext();
+  const { watch, control, setValue, register } = useFormContext();
 
   const selectedTicketType = watch("ticketType");
   const roundTicketText =
@@ -39,7 +39,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea name="priceInfo" disabled value={info.priceInfo} />
+        <TextArea name="priceInfo" register={register} defaultValue={info.priceInfo} disabled />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
@@ -68,11 +68,11 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
         <Title isRequired={requiredItems.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
         <TextArea
-          id="ticketInfo"
-          disabled
-          value={info.ticketInfo}
-          resizable={false}
+          name="ticketInfoField"
+          register={register}
+          defaultValue={info.ticketInfo}
           isChecked={watch("ticketInfo")}
+          disabled
         />
         <Stack>
           <Checkbox
