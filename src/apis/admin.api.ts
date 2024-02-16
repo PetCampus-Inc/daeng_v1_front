@@ -5,6 +5,7 @@ import {
   INewEnrollmentList,
   IOwnerSignUpInfo,
   ITeacherApprove,
+  ITeacherList,
   ITeacherSignUpInfo
 } from "types/Admin.type";
 import axios from "axios";
@@ -105,6 +106,21 @@ export const handleMemberDeny = async (memberId: number): Promise<IResponse> => 
   const url: string = `admin/deny/member/approval`;
   const { data } = await customAxios.post(url, memberId);
   return data;
+};
+
+// 원장 선생님 목록 조회
+export const handleGetTeacherList = async (
+  adminId: number,
+  schoolId: number
+): Promise<ITeacherList> => {
+  const url: string = `admin/teachers/main`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      adminId,
+      schoolId
+    }
+  });
+  return data.data;
 };
 
 // 원장 신규관리 메인페이지

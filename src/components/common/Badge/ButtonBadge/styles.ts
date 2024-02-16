@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 
 const badgeStyles = (theme: DefaultTheme) => ({
   delete: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
-  cancel: `background-color: ${theme.colors.gray_4}; color: ${theme.colors.gray_2};`
+  edit: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
+  cancel: `background-color: ${theme.colors.gray_4}; color: ${theme.colors.gray_2};`,
+  redDelete: `background-color: ${theme.colors.red_2}; color: ${theme.colors.red_1}; border-radius: 90px; font-weight:700; font-size: 12px;`
 });
 
 export const Badge = styled(motion.button)<{

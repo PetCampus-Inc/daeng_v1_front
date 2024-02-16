@@ -43,3 +43,13 @@ export interface INewEnrollmentList {
   simpleEnrollmentFormList: ISimpleEnrollmentFormList[];
   simpleSchoolFormList: ISimpleSchoolFormList[];
 }
+
+export interface ITeacherInfo {
+  adminId: number;
+  phoneNumber: string;
+  teacherName: string;
+}
+export interface ITeacherList {
+  teacherList: ITeacherInfo[];
+  pendingList: ITeacherInfo[];
+}

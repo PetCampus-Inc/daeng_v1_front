@@ -20,7 +20,7 @@ export const MainWrapper = styled.div<{
   paddingtop?: string;
 }>`
   width: 90%;
-  height: ${(props) => (props.height ? props.height : "22%")};
+  min-height: 22%;
   background-color: white;
   border-radius: 0.8rem;
   padding: 5%;
