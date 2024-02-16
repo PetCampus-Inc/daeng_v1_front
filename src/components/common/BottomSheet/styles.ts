@@ -13,4 +13,5 @@ export const StyledBottomSheet = styled(motion.div)<{
   border-radius: 20px 20px 0px 0px;
   z-index: 10;
   padding: 0 16px 24px;
+  bottom: 0;
 `;

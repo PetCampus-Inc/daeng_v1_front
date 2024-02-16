@@ -78,7 +78,7 @@ export const Checkbox = styled.span`
     border-color: ${({ theme }) => theme.colors.gray_3};
   }
 
-  .checkbox-icon {
+  & > svg {
     width: 1em;
     height: 1em;
     display: inline-block;
@@ -91,7 +91,7 @@ export const Checkbox = styled.span`
     animation: none;
   }
 
-  &.checked .checkbox-icon {
+  &.checked > svg {
     color: ${({ theme }) => theme.colors.white};
     animation: checking 200ms linear;
   }

@@ -44,25 +44,25 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         <div style={{ display: "flex", gap: "5px" }}>
           <SelectNumber
             name="year"
+            control={control}
             numberList={yearsArray}
-            initialValue={"2000"}
-            register={register}
+            defaultValue="2000"
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="month"
+            control={control}
             numberList={monthsArray}
-            initialValue={"01"}
-            register={register}
+            defaultValue="01"
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="day"
+            control={control}
             numberList={daysArray}
-            initialValue={"01"}
-            register={register}
+            defaultValue="01"
             watch={watch}
             setValue={setValue}
           />

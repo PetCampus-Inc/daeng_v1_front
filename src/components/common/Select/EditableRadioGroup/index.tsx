@@ -2,7 +2,7 @@ import { Control, Controller, FieldArrayWithId } from "react-hook-form";
 import CloseIcon from "assets/svg/close-icon";
 import * as S from "../styles";
 
-interface ExtendedFieldArrayWithId extends FieldArrayWithId {
+export interface ExtendedFieldArrayWithId extends FieldArrayWithId {
   value?: string;
   label?: string;
 }

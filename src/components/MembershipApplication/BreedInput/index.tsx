@@ -7,13 +7,12 @@ import BreedDropDown from "components/common/Dropdown/BreedDropdown";
 
 interface IBreedInput {
   name: string;
-  width?: string;
   control: Control<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   watch: UseFormWatch<FieldValues>;
 }
 
-const BreedInput = ({ name, control, width = "100%", setValue, watch }: IBreedInput) => {
+const BreedInput = ({ name, control, setValue, watch }: IBreedInput) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
   const value = watch(`${name}`) ? watch(`${name}`) : "";
@@ -53,7 +52,6 @@ const BreedInput = ({ name, control, width = "100%", setValue, watch }: IBreedIn
           setIsOpen={setIsOpen}
           value={value}
           setValue={setValue}
-          width={width}
         />
       )}
       {/* TODO: 기획에 질문 에러 발생 시 재시도 해달라는 모달 or 바텀시트 생기게 수정  */}

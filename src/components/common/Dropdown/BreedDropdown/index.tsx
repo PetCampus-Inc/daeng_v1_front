@@ -8,14 +8,7 @@ interface IBreedDropdown extends CommonDropdownProps {
   dropDownList: { breedId: number; breedName: string }[];
 }
 
-const BreedDropDown = ({
-  dropDownList,
-  isOpen,
-  setIsOpen,
-  value,
-  setValue,
-  width
-}: IBreedDropdown) => {
+const BreedDropDown = ({ dropDownList, isOpen, setIsOpen, value, setValue }: IBreedDropdown) => {
   const chosenItemRef = useRef<HTMLLIElement | null>(null);
 
   const handleClick = (
@@ -31,7 +24,7 @@ const BreedDropDown = ({
   // 견종 드롭다운 (검색 결과 X)
   if (!dropDownList || dropDownList.length === 0) {
     return (
-      <S.List width={width} className="no-list">
+      <S.List className="no-list">
         <S.BoldText>
           검색 결과가 없어요
           <br />
@@ -46,7 +39,7 @@ const BreedDropDown = ({
   }
   // 견종 드롭다운 (검색 결과 O)
   return (
-    <S.List width={width}>
+    <S.List>
       {dropDownList.map((item, index) => (
         <S.ListItem
           key={index}

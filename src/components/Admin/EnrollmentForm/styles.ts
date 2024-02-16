@@ -16,7 +16,7 @@ export const TopWrapper = styled.div`
   gap: 12px;
 
   background-color: ${({ theme }) => theme.colors.BGray};
-  z-index: 1;
+  z-index: 3;
 `;
 
 export const TitleWrapper = styled.div`
@@ -52,7 +52,7 @@ export const ButtonContainer = styled.div`
   margin-top: 28px;
 `;
 
-export const Caption = styled.div`
+export const HelperText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -61,3 +61,6 @@ export const Caption = styled.div`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.gray_3};
 `;
+
+export { Card, Stack, Caption } from "components/MembershipApplication/Form/styles";
+export { Label } from "components/common/Title/style";

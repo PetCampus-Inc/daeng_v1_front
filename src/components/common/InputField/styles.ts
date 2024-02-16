@@ -18,9 +18,12 @@ export const Input = styled.input`
 
   &:focus {
     outline: none;
-    border: 1px solid ${({ theme }) => theme.colors.br_3};
-    &::placeholder {
-      color: ${({ theme }) => theme.colors.primaryColor};
+    border: 1px solid ${({ theme }) => theme.colors.br_2};
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+  &:not(:focus) {
+    &:not(:placeholder-shown) {
+      border: 1px solid ${({ theme }) => theme.colors.gray_3};
     }
   }
 
@@ -37,18 +40,15 @@ export const Input = styled.input`
     -webkit-appearance: none;
   }
 
-  &:not(:placeholder-shown) {
-    border: 1px solid ${({ theme }) => theme.colors.gray_3};
-  }
-
   &[type="number"] {
     -moz-appearance: textfield;
   }
 
   &:disabled {
-    border: 1.012px solid ${({ theme }) => theme.colors.gray_4};
+    border: 1px solid ${({ theme }) => theme.colors.gray_4};
     background-color: ${({ theme }) => theme.colors.gray_5};
     color: ${({ theme }) => theme.colors.gray_2};
+
     &::placeholder {
       color: ${({ theme }) => theme.colors.gray_4};
     }

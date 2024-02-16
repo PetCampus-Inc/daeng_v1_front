@@ -21,3 +21,8 @@ export const formatPhoneNumber = (value: string): string => {
     .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
     .replace(/(\-{1,2})$/g, "");
 };
+
+type TItem = Record<string, string>[];
+export const extractTicketValues = (items: TItem) => {
+  return items.map((item) => parseInt(item.value, 10));
+};

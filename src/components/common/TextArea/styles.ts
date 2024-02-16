@@ -30,21 +30,21 @@ export const TextAreaInput = styled.textarea.withConfig({
   outline-offset: 2px;
   overflow-y: hidden;
 
-  transition: border-color 0.2s ease-out;
+  transition: color, border-color 0.2s ease-out;
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.gray_3};
   }
 
-  &:not(:placeholder-shown) {
-    border: 1px solid ${({ theme }) => theme.colors.gray_3};
-  }
 
   &:focus {
     outline: none;
-    border: 1px solid ${({ theme }) => theme.colors.br_3};
-    &::placeholder {
-      color: ${({ theme }) => theme.colors.primaryColor};
+    border: 1px solid ${({ theme }) => theme.colors.br_2};
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+  &:not(:focus) {
+    &:not(:placeholder-shown) {
+      border: 1px solid ${({ theme }) => theme.colors.gray_3};
     }
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from "react";
+import React, { useEffect, useImperativeHandle, useRef, forwardRef } from "react";
 import { UseFormRegister, FieldValues } from "react-hook-form";
 import * as S from "./styles";
 
@@ -6,8 +6,8 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
   autoResize?: boolean;
   resizable?: boolean;
   rows?: number;
-  name?: string;
-  register?: UseFormRegister<FieldValues>;
+  name: string;
+  register: UseFormRegister<FieldValues>;
   isChecked?: boolean;
 }
 
@@ -27,7 +27,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-    useImperativeHandle(forwardedRef, () => textAreaRef.current!);
+    const { ref, ...rest } = register(name);
+
+    useImperativeHandle(ref, () => textAreaRef.current!);
 
     useEffect(() => {
       autoResize && adjustHeight();
@@ -42,22 +44,19 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      if (props.onChange) {
-        props.onChange(e);
-      }
+    const handleChange = () => {
       autoResize && adjustHeight();
     };
 
     return (
       <S.TextAreaInput
-        ref={textAreaRef}
         resizable={resizable}
         disabled={disabled}
+        {...rest}
         onChange={handleChange}
         rows={rows}
         $isChecked={isChecked}
-        {...(name && register && register(name))}
+        ref={textAreaRef}
         {...props}
       />
     );
