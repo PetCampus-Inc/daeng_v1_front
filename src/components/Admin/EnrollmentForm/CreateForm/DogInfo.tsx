@@ -12,7 +12,7 @@ import { ITEM_KEYS } from "constants/item";
 import { Card, Caption } from "../styles";
 
 const DogInfo = () => {
-  const { control } = useFormContext();
+  const { control, register } = useFormContext();
 
   return (
     <>
@@ -91,7 +91,12 @@ const DogInfo = () => {
         >
           알러지 및 질병 유무
         </AdminTitle>
-        <TextArea name="null" placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
+        <TextArea
+          name="null"
+          register={register}
+          placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
+          disabled
+        />
       </Card>
     </>
   );
