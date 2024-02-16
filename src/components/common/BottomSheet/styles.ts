@@ -6,6 +6,7 @@ export const StyledBottomSheet = styled(motion.div)<{
   height: string;
 }>`
   position: fixed;
+  bottom: 0;
   width: 100%;
   height: ${(props) => props.height};
   background-color: ${({ theme }) => theme.colors.white};

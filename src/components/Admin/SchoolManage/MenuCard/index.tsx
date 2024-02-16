@@ -38,7 +38,7 @@ const MenuCard = () => {
           setIsOpened(true);
           return;
         }
-        navigate("/admin/schoolManage/newEnrollment");
+        navigate("/admin/schoolManage/enrollment");
       })
       .catch((error) => {
         // TODO: 에러 토스트띄우기

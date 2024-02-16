@@ -83,5 +83,6 @@ export const attendDogDetail = atom<IDogDetails | null>({
 
 export const newEnrollmentListAtom = atom<INewEnrollmentList | null>({
   key: "newEnrollmentList",
-  default: null
+  default: null,
+  effects_UNSTABLE: [persistAtom]
 });

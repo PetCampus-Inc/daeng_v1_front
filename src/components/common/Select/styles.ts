@@ -37,7 +37,7 @@ export const StyledInput = styled.input`
     background-color: ${({ theme }) => theme.colors.white};
     ${({ theme }) => theme.typo.body2_16_R};
     color: ${({ theme }) => theme.colors.gray_4};
-    border: transparent;
+    border: 1px solid ${({ theme }) => theme.colors.gray_5};
   }
 `;
 
@@ -117,4 +117,21 @@ export const DeleteButton = styled.button`
   & > svg > .icon-path {
     color: ${({ theme }) => theme.colors.gray_4};
   }
+`;
+
+export const RadioGroupContainer = styled.div`
+  display: flex;
+  gap: 12px;
+`;
+
+export const RadioWrapper = styled.div`
+  position: relative;
+  flex: 1;
+`;
+
+export const DeleteButton = styled.button`
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 2;
 `;

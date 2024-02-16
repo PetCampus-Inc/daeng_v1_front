@@ -9,6 +9,7 @@ export { default as Chat } from "./Chat";
 export { default as SchoolManagePage } from "./SchoolManagePage";
 export { default as MyPage } from "./MyPage";
 export { default as MembershipApplicationPage } from "./MembershipApplicationPage";
+export { default as SchoolManageEnrollmentPage } from "./SchoolManageEnrollmentPage";
 export { default as EnrollmentFormDetailPage } from "./EnrollmentFormDetailPage";
 export { default as EnrollmentFormEditPage } from "./EnrollmentFormEditPage";
 export { default as EnrollmentFormCreatePage } from "./EnrollmentFormCreatePage";
