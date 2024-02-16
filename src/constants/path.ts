@@ -15,7 +15,6 @@ export const PATH = {
   ADMIN_EDIT_FORM: (formId: string) => `/admin/schoolManage/enrollment/list/${formId}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: "/admin/schoolManage/enrollment/enrollment-new", // 원장 가입신청서 등록
   ADMIN_TEACHER_MANAGE: "/admin/schoolManage/teacher", // 선생님 관리
-  ADMIN_TEACHER_MANAGE: "/admin/schoolManage/teacher", // 선생님 관리
   ADMIN_MY_PAGE: "/admin/myPage", // 마이페이지
   OWNER: "/owner",
   OWNER_MA: "/owner/membershipApplication", // 견주 가입신청서
