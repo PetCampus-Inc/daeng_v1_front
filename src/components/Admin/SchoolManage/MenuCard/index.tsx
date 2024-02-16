@@ -6,6 +6,7 @@ import useGetNewEnrollment from "hooks/api/useNewGetEnrollment";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
+import showToast from "utils/showToast";
 
 const MenuCard = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const MenuCard = () => {
         navigate("/admin/schoolManage/enrollment");
       })
       .catch((error) => {
-        // TODO: 에러 토스트띄우기
+        showToast("정보를 불러오는 데 실패했습니다. 다시 시도해주세요", "bottom");
       });
   };
 
