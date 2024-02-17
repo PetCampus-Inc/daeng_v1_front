@@ -1,15 +1,15 @@
 import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
 
-import { ITEM_KEYS } from "constants/item";
-import { Caption, Card, Label, Stack } from "../styles";
-
-import type { ITicketInfo } from "types/School.type";
 import Title from "components/common/Title";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
-import { useEffect } from "react";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import Checkbox from "components/common/Checkbox";
+import type { ITicketInfo } from "types/School.type";
+
+import { ITEM_KEYS } from "constants/item";
+import { Caption, Card, Label, Stack } from "../styles";
 interface TicketInfoProps {
   info?: ITicketInfo;
   requiredItems?: Map<number, boolean>;
@@ -32,7 +32,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea name="priceInfo" register={register} defaultValue={info?.priceInfo} readOnly />
+        <TextArea name="priceInfo" register={register} defaultValue={info?.priceInfo} disabled />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
@@ -55,6 +55,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
             <SingleRadio name="roundTicketNumber" radiosText={roundTicketText} disabled />
           </Card>
         ))}
+      {/* FIXME: defaultCheck 되도록 수정 필요! */}
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
         <DayMultiCheck name="attendanceDays" openDays={info?.openDays} />
@@ -69,12 +70,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
           disabled
         />
         <Stack>
-          <Checkbox
-            name="ticketInfo"
-            control={control}
-            isChecked={watch("ticketInfo")}
-            ariaLabel="동의"
-          >
+          <Checkbox name="null" control={control} readOnly>
             동의합니다
           </Checkbox>
         </Stack>

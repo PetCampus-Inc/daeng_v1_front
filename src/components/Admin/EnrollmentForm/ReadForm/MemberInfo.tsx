@@ -22,12 +22,13 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           control={control}
           name="memberName"
           placeholder="견주 이름을 입력해주세요"
-          disabled
+          readOnly
         />
       </Card>
       <Card>
         <Title>성별</Title>
-        <SingleRadio name="memberGender" radiosText={["남", "여"]} />
+        {/* FIXME: disabled 상태와 readonly 상태 구분이 필요해 보임..!*/}
+        <SingleRadio name="memberGender" radiosText={["남", "여"]} disabled />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
@@ -35,7 +36,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           control={control}
           name="addressStreet"
           placeholder="주소를 입력해주세요"
-          disabled
+          readOnly
         />
       </Card>
       <Card>
@@ -44,7 +45,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           control={control}
           name="phoneNumber"
           placeholder="연락처를 입력해주세요"
-          disabled
+          readOnly
         />
       </Card>
       <Card>
@@ -53,7 +54,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           control={control}
           name="emergencyNumber"
           placeholder="비상 연락처를 입력해주세요"
-          disabled
+          readOnly
         />
       </Card>
     </>

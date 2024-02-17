@@ -25,7 +25,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           control={control}
           name="dogName"
           placeholder="강아지 이름을 입력해주세요"
-          disabled
+          readOnly
         />
       </Card>
       <Card>
@@ -43,7 +43,12 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
-        <SearchInputField control={control} name="dogBreed" disabled />
+        <SearchInputField
+          control={control}
+          name="dogBreed"
+          placeholder="견종을 선택해 주세요"
+          readOnly
+        />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_BIRTHDAY)}>생일</Title>
@@ -70,7 +75,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           register={register}
           name="allergyDisease"
           placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
-          disabled
+          readOnly
         />
       </Card>
     </>
