@@ -5,9 +5,18 @@ import * as S from "../styles";
 interface ISingleRadio extends ISelect {
   radiosText: string[];
   disabled?: boolean;
+  defaultSelect?: string;
+  isPreviewMode?: boolean;
 }
 
-const SingleRadio = ({ name, caption, radiosText, disabled = false }: ISingleRadio) => {
+const SingleRadio = ({
+  name,
+  caption,
+  radiosText,
+  disabled = false,
+  defaultSelect,
+  isPreviewMode
+}: ISingleRadio) => {
   const { register } = useFormContext();
 
   return (
@@ -22,10 +31,10 @@ const SingleRadio = ({ name, caption, radiosText, disabled = false }: ISingleRad
               {...register(name)}
               value={text}
               disabled={disabled}
+              defaultChecked={defaultSelect === text}
+              className={isPreviewMode ? "preview" : ""}
             />
-            <S.StyledLabel htmlFor={text + name} className={disabled ? "disabled" : ""}>
-              {text}
-            </S.StyledLabel>
+            <S.StyledLabel htmlFor={text + name}>{text}</S.StyledLabel>
           </div>
         ))}
       </S.RadioContainer>
