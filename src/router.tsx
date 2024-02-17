@@ -82,6 +82,10 @@ const router = createBrowserRouter([
           {
             path: PATH.ADMIN_EDIT_FORM(":formId"),
             element: <Pages.EnrollmentFormEditPage />
+          },
+          {
+            path: PATH.ADMIN_TEACHER_MANAGE,
+            element: <Pages.TeacherManagePage />
           }
         ]
       },
