@@ -49,9 +49,8 @@ export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
       });
 
       // 필수 항목 리스트
-      const requiredItemsList = JSON.parse(data.requiredItemList);
       const requiredItemsMap: Map<number, boolean> = new Map(
-        requiredItemsList.map((itemNumber: number) => [itemNumber, true])
+        data.requiredItemList.map((itemNumber: number) => [itemNumber, true])
       );
 
       return {

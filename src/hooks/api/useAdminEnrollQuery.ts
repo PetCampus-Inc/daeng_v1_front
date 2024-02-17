@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { handleGetAdminEnrollment } from "apis/school.api";
-import type { IAdminEnrollmentProps } from "apis/school.api";
+import { handleGetAdminForm } from "apis/school.api";
+
 import type {
   IEnrollment,
   IMemberDto,
@@ -20,7 +20,7 @@ interface EnrollmentProps {
 export const useAdminEnrollQuery = (formId: string) => {
   const enlistmentQuery = useQuery<IEnrollment, Error, EnrollmentProps>({
     queryKey: ["enrollment", formId],
-    queryFn: () => handleGetAdminEnrollment({ formId }),
+    queryFn: () => handleGetAdminForm({ formId }),
     select: (data) => {
       // 이용권 정보
       const selectTicketInfo = () => ({
@@ -48,9 +48,8 @@ export const useAdminEnrollQuery = (formId: string) => {
       });
 
       // 필수 항목 리스트
-      const requiredItemsList = JSON.parse(data.requiredItemList);
       const requiredItemsMap: Map<number, boolean> = new Map(
-        requiredItemsList.map((itemNumber: number) => [itemNumber, true])
+        data.requiredItemList.map((itemNumber: number) => [itemNumber, true])
       );
 
       return {
