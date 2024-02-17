@@ -33,7 +33,8 @@ export const StyledInput = styled.input`
     border: 1px solid ${({ theme }) => theme.colors.br_3};
     color: ${({ theme }) => theme.colors.primaryColor};
   }
-  &:disabled + label {
+
+  &:disabled:not(.preview) + label {
     background-color: ${({ theme }) => theme.colors.white};
     ${({ theme }) => theme.typo.body2_16_R};
     color: ${({ theme }) => theme.colors.gray_4};
