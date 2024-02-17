@@ -30,6 +30,7 @@ const EnrollmentFormDetailPage = () => {
   if (!formId) throw new Error("잘못된 formId 입니다");
 
   const { data } = useAdminEnrollQuery(formId);
+
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false
