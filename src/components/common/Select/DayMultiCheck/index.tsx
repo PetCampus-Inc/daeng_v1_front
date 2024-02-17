@@ -7,10 +7,20 @@ interface IDayMultiCheck
   extends ISelect,
     Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
   openDays?: string[];
+  defaultSelect?: string[];
+  isPreviewMode?: boolean;
 }
 
 // 요일 복수 선택
-const DayMultiCheck = ({ name, caption, openDays, disabled = false, ...props }: IDayMultiCheck) => {
+const DayMultiCheck = ({
+  name,
+  caption,
+  openDays,
+  disabled = false,
+  defaultSelect,
+  isPreviewMode = false,
+  ...props
+}: IDayMultiCheck) => {
   const { register } = useFormContext();
 
   return (
@@ -19,17 +29,19 @@ const DayMultiCheck = ({ name, caption, openDays, disabled = false, ...props }: 
       <S.RadioContainer>
         {WEEKDAYS.map((day) => (
           <div style={{ width: "100%" }} key={day}>
-            <S.StyledInput
+            <S.DayCheckInput
               id={day}
               type="checkbox"
-              {...register(`${name}`)}
+              {...register(`${name}`, { required: true })}
               value={day}
-              disabled={disabled && !openDays?.includes(day)}
+              defaultChecked={defaultSelect?.includes(day)}
+              disabled={disabled ? disabled : openDays && !openDays?.includes(day)}
+              className={openDays && openDays?.includes(day) ? "open-day" : ""}
               {...props}
             />
-            <S.StyledLabel htmlFor={day} className="policyPage">
+            <S.DayCheckLabel htmlFor={day} className={isPreviewMode ? " preview" : ""}>
               {day}
-            </S.StyledLabel>
+            </S.DayCheckLabel>
           </div>
         ))}
       </S.RadioContainer>
