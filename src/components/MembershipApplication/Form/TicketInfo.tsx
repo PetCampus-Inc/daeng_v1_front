@@ -20,20 +20,13 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
   const { watch, control, setValue, register } = useFormContext();
 
   const selectedTicketType = watch("ticketType");
-  const roundTicketText =
-    info.roundTicketNumber &&
-    JSON.parse(info.roundTicketNumber).map((number: number) => `${number}회`);
-  const monthlyTicketText =
-    info.monthlyTicketNumber &&
-    JSON.parse(info.monthlyTicketNumber).map((number: number) => `${number}주`);
+  const roundTicketText = info.roundTicketNumber?.map((number) => `${number}회`) || [];
+  const monthlyTicketText = info.monthlyTicketNumber?.map((number) => `${number}주`) || [];
 
   useEffect(() => {
-    if (selectedTicketType === "정기권") {
-      setValue("roundTicketNumber", undefined);
-    } else {
-      setValue("monthlyTicketNumber", undefined);
-    }
-  }, [selectedTicketType]);
+    const fieldName = selectedTicketType === "정기권" ? "roundTicketNumber" : "monthlyTicketNumber";
+    setValue(fieldName, undefined);
+  }, [selectedTicketType, setValue]);
 
   return (
     <>
