@@ -20,7 +20,7 @@ const ToggleBadge = ({
   const { field } = useController({
     control,
     name,
-    defaultValue: true
+    defaultValue: false
   });
 
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {

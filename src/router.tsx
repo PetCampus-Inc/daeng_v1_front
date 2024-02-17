@@ -64,16 +64,11 @@ const router = createBrowserRouter([
           },
           {
             path: PATH.ADMIN_CREATE_FORM,
-            children: [
-              {
-                index: true,
-                element: <Pages.EnrollmentFormCreatePage />
-              },
-              {
-                path: "submit",
-                element: <Pages.EnrollmentFormSubmitPage />
-              }
-            ]
+            element: <Pages.EnrollmentFormCreatePage />
+          },
+          {
+            path: PATH.ADMIN_SUBMIT_FORM,
+            element: <Pages.EnrollmentFormSubmitPage />
           },
           {
             path: PATH.ADMIN_FORM(":formId"),
