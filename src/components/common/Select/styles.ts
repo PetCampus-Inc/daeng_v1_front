@@ -62,7 +62,7 @@ export const StyledLabel = styled.label`
 
   &.policyPage {
     background-color: ${({ theme }) => theme.colors.gray_5};
-    border: transparent;
+    border: 1px solid ${({ theme }) => theme.colors.gray_5};
     color: ${({ theme }) => theme.colors.gray_2};
   }
 
