@@ -57,7 +57,7 @@ const SubmitButton = ({ type }: SubmitButtonProps) => {
     };
 
     setEnrollmentForm(requestData);
-    navigate(PATH.ADMIN_CREATE_FORM + "/submit");
+    navigate(PATH.ADMIN_SUBMIT_FORM);
   });
 
   return (
