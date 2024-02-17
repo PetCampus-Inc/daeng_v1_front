@@ -23,20 +23,22 @@ export const MainWrapper = styled.div<{
   min-height: 22%;
   background-color: white;
   border-radius: 0.8rem;
-  padding: 5%;
-  padding-top: ${(props) => (props.paddingtop ? props.paddingtop : "9%")};
+  padding: 9% 5% 5%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 4px;
   align-items: center;
   height: 80%;
-
-  gap: 4px;
+  margin: 0 0 6%;
+  text-wrap: balance;
+  word-break: keep-all;
 `;
 
 export const MainText = styled.p`
