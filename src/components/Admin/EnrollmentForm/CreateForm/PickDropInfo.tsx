@@ -30,7 +30,6 @@ const PickDropInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.PICKDROP_NOTICE}`}
               control={control}
               hasBadge
-              hasToggle
             >
               픽드랍 안내
             </AdminTitle>
@@ -45,31 +44,19 @@ const PickDropInfo = () => {
             />
           </Card>
           <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_REQUEST}`}
-              control={control}
-              hasToggle
-            >
+            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_REQUEST}`} control={control}>
               픽드랍 신청
             </AdminTitle>
             <SingleRadio name="null" radiosText={["신청", "미신청"]} disabled />
           </Card>
           <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_TYPE}`}
-              control={control}
-              hasToggle
-            >
+            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_TYPE}`} control={control}>
               픽드랍 유형
             </AdminTitle>
             <SingleRadio name="null" radiosText={["편도", "왕복"]} disabled />
           </Card>
           <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_MEMO}`}
-              control={control}
-              hasToggle
-            >
+            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_MEMO}`} control={control}>
               픽드랍 메모
             </AdminTitle>
             <TextArea
@@ -84,7 +71,6 @@ const PickDropInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.PICKDROP_INFO}`}
               control={control}
               hasBadge
-              hasToggle
             >
               픽드랍 유의사항
             </AdminTitle>

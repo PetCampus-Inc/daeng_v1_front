@@ -36,12 +36,7 @@ const TicketInfo = () => {
         />
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.TICKET_TYPE}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_TYPE}`} control={control} hasBadge>
           이용권 종류
         </AdminTitle>
         <Caption>복수 선택이 가능해요</Caption>
@@ -54,7 +49,6 @@ const TicketInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.MONTHLY_TICKET_NUMBER}`}
               control={control}
               hasBadge
-              hasToggle
             >
               정기권 유형
             </AdminTitle>
@@ -71,7 +65,6 @@ const TicketInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.ROUND_TICKET_NUMBER}`}
               control={control}
               hasBadge
-              hasToggle
             >
               회차권 유형
             </AdminTitle>
@@ -84,24 +77,14 @@ const TicketInfo = () => {
           </Card>
         ))}
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.OPEN_DAYS}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.OPEN_DAYS}`} control={control} hasBadge>
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
         <DayMultiCheck name="openDays" defaultChecked={true} />
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`} control={control} hasBadge>
           유의사항
         </AdminTitle>
         <TextArea
