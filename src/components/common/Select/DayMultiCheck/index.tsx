@@ -2,7 +2,7 @@ import * as S from "../styles";
 import { useFormContext } from "react-hook-form";
 import { ISelect } from "../select.type";
 import { WEEKDAYS } from "constants/date";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 interface IDayMultiCheck
   extends ISelect,
@@ -10,6 +10,7 @@ interface IDayMultiCheck
   openDays?: string[];
   defaultSelect?: string[];
   isPreviewMode?: boolean;
+  isRequired?: boolean;
 }
 
 // 요일 복수 선택
@@ -20,6 +21,7 @@ const DayMultiCheck = ({
   disabled = false,
   defaultSelect,
   isPreviewMode = false,
+  isRequired = false,
   ...props
 }: IDayMultiCheck) => {
   const { register, watch, setValue } = useFormContext();
@@ -31,7 +33,7 @@ const DayMultiCheck = ({
     }
   }, [watch(name)]);
 
-  const handleTouch = (e: any) => {
+  const handleTouch = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.checked && !isAvailable) {
       e.preventDefault();
       e.stopPropagation();
@@ -50,7 +52,7 @@ const DayMultiCheck = ({
             <S.DayCheckInput
               id={day}
               type="checkbox"
-              {...register(`${name}`, { required: true, onChange: handleTouch })}
+              {...register(`${name}`, { required: isRequired, onChange: handleTouch })}
               value={day}
               defaultChecked={defaultSelect?.includes(day)}
               disabled={disabled ? disabled : openDays && !openDays?.includes(day)}
