@@ -70,17 +70,13 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         </div>
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.NEUTRALIZATION}`}
-          control={control}
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.NEUTRALIZATION}`} control={control}>
           중성화 여부
         </AdminTitle>
         <SingleRadio name="null" radiosText={["했어요", "안했어요"]} disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.VACCINATION}`} control={control} hasToggle>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.VACCINATION}`} control={control}>
           예방접종 여부
         </AdminTitle>
         <SingleRadio name="null" radiosText={["했어요", "안했어요"]} disabled />
@@ -88,11 +84,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         <ImageUpload disabled />
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.ALLERGY_DISEASE}`}
-          control={control}
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.ALLERGY_DISEASE}`} control={control}>
           알러지 및 질병 유무
         </AdminTitle>
         <TextArea

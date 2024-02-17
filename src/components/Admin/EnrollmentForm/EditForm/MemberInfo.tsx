@@ -29,11 +29,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         />
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.MEMBER_GENDER}`}
-          control={control}
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_GENDER}`} control={control}>
           성별
         </AdminTitle>
         <SingleRadio name="null" radiosText={["남", "여"]} disabled />
@@ -61,11 +57,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         />
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.EMERGENCY_NUMBER}`}
-          control={control}
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.EMERGENCY_NUMBER}`} control={control}>
           비상 연락처
         </AdminTitle>
         <InputField

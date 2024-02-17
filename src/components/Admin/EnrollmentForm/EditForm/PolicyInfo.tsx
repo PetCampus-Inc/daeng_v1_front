@@ -19,12 +19,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
   return (
     <>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.LIMITS_INFO}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.LIMITS_INFO}`} control={control} hasBadge>
           이용 제한 유의 사항
         </AdminTitle>
         <TextArea
@@ -43,12 +38,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         </Stack>
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.ACCIDENT_INFO}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.ACCIDENT_INFO}`} control={control} hasBadge>
           상해 유의사항
         </AdminTitle>
         <TextArea
@@ -71,7 +61,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
           name={`requiredItemList.${ITEM_KEYS.ABANDONMENT_INFO}`}
           control={control}
           hasBadge
-          hasToggle
         >
           유기 유의사항
         </AdminTitle>
