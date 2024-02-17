@@ -18,10 +18,10 @@ type TicketTypeProps = {
   control: Control;
   name: string;
   ticketType: "ROUND" | "MONTHLY";
-  defaultValues: number[];
+  defaultValues?: number[];
 };
 
-const TicketType = ({ control, name, ticketType, defaultValues }: TicketTypeProps) => {
+const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTypeProps) => {
   const INIT_COUNTER = 2;
   const FIELD_NAME = name;
   const bottomSheet = useBottomSheet();

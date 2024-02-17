@@ -6,10 +6,11 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import AdminTitle from "components/common/Title/AdminTitle";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import Checkbox from "components/common/Checkbox";
+import RoundTicketType from "../TicketType/RoundTicketType";
+import MonthlyTicketType from "../TicketType/MonthlyTicketType";
 
 import { ITEM_KEYS } from "constants/item";
 import { Card, Caption, Stack } from "../styles";
-import TicketType from "../TicketType";
 
 const TicketInfo = () => {
   const { register, control, watch, setValue } = useFormContext();
@@ -58,10 +59,9 @@ const TicketInfo = () => {
               정기권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <TicketType
+            <MonthlyTicketType
               control={control}
               name="monthlyTicketNumber"
-              ticketType="MONTHLY"
               defaultValues={[1, 2, 4, 8]}
             />
           </Card>
@@ -76,10 +76,9 @@ const TicketInfo = () => {
               회차권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <TicketType
+            <RoundTicketType
               control={control}
               name="roundTicketNumber"
-              ticketType="ROUND"
               defaultValues={[1, 3, 5, 10]}
             />
           </Card>

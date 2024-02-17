@@ -3,9 +3,10 @@ import { useFormContext } from "react-hook-form";
 import AdminTitle from "components/common/Title/AdminTitle";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
+import Checkbox from "components/common/Checkbox";
+
 import { ITEM_KEYS } from "constants/item";
 import { Card, Caption, Stack } from "../styles";
-import Checkbox from "components/common/Checkbox";
 
 const PickDropInfo = () => {
   const { control, register, watch } = useFormContext();
