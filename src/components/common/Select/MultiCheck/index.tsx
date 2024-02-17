@@ -35,9 +35,7 @@ const MultiCheck = ({
               className={isPreviewMode ? "preview" : ""}
               {...props}
             />
-            <S.StyledLabel htmlFor={text} className={isPreviewMode ? "preview" : ""}>
-              {text}
-            </S.StyledLabel>
+            <S.StyledLabel htmlFor={text}>{text}</S.StyledLabel>
           </div>
         ))}
       </S.RadioContainer>

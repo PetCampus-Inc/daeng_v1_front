@@ -35,10 +35,14 @@ export const StyledInput = styled.input`
   }
 
   &:disabled:not(.preview) + label {
-    background-color: ${({ theme }) => theme.colors.white};
-    ${({ theme }) => theme.typo.body2_16_R};
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    border: 1px solid ${({ theme }) => theme.colors.gray_4};
     color: ${({ theme }) => theme.colors.gray_4};
-    border: 1px solid ${({ theme }) => theme.colors.gray_5};
+
+    // background-color: ${({ theme }) => theme.colors.white};
+    // ${({ theme }) => theme.typo.body2_16_R};
+    // color: ${({ theme }) => theme.colors.gray_4};
+    // border: 1px solid ${({ theme }) => theme.colors.gray_5};
   }
 `;
 
@@ -65,12 +69,6 @@ export const StyledLabel = styled.label`
     background-color: ${({ theme }) => theme.colors.gray_5};
     border: 1px solid ${({ theme }) => theme.colors.gray_5};
     color: ${({ theme }) => theme.colors.gray_2};
-  }
-
-  &.disabled {
-    background-color: ${({ theme }) => theme.colors.gray_5};
-    border: 1px solid ${({ theme }) => theme.colors.gray_4};
-    color: ${({ theme }) => theme.colors.gray_4};
   }
 
   ${({ theme }) => theme.typo.body2_16_R};
