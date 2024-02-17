@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { ISelect } from "../select.type";
 import * as S from "../styles";
+import { useEffect, useState } from "react";
 
 interface IMulticheck extends ISelect, Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
   radiosText: string[];
@@ -18,7 +19,24 @@ const MultiCheck = ({
   isPreviewMode = false,
   ...props
 }: IMulticheck) => {
-  const { register } = useFormContext();
+  const { register, watch, setValue } = useFormContext();
+  const [isAvailable, setIsAvailable] = useState(true);
+
+  useEffect(() => {
+    if (watch(name) && watch(name).length <= 1) {
+      setIsAvailable(false);
+    }
+  }, [watch(name)]);
+
+  const handleTouch = (e: any) => {
+    if (!e.target.checked && !isAvailable) {
+      e.preventDefault();
+      e.stopPropagation();
+      setValue(name, [e.target.value]);
+    } else {
+      setIsAvailable(true);
+    }
+  };
 
   return (
     <S.Container>
@@ -28,7 +46,7 @@ const MultiCheck = ({
             <S.StyledInput
               id={text}
               type="checkbox"
-              {...register(`${name}`, { required: isRequired })}
+              {...register(`${name}`, { required: isRequired, onChange: handleTouch })}
               value={text}
               disabled={disabled}
               defaultChecked={defaultSelect === text}
