@@ -8,7 +8,7 @@ const toastHeight: { [key: string]: string } = {
   gallery: `margin: 0 0 72px;`
 };
 
-export const Toast = styled.div<{ position: string }>`
+export const Toast = styled.div<{ $position: string }>`
   width: 100%;
   padding: 12px 15px;
   margin: 0 0 50px;
@@ -19,7 +19,7 @@ export const Toast = styled.div<{ position: string }>`
   ${({ theme }) => theme.typo.label2_14_R}
   box-shadow: ${({ theme }) => theme.shadows.card};
 
-  ${({ position }) => toastHeight[position]};
+  ${({ $position }) => toastHeight[$position]};
 `;
 
 export const StyledContainer = styled(ToastContainer)`

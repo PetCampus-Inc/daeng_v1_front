@@ -179,3 +179,11 @@ export const handlePostDenyTeacher = async (adminId: number): Promise<IResponse>
   const { data } = await customAxios.post(url);
   return data;
 };
+
+// 선생님 삭제 (유치원 admin에서 삭제)
+export const handleDeleteTeacher = async (adminId: number): Promise<IResponse> => {
+  const url: string = `admin/delete/teacher?adminId=${adminId}`;
+  const { data } = await customAxios.post(url);
+  console.log(data);
+  return data;
+};

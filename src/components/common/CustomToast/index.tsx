@@ -7,7 +7,7 @@ export interface CustomToastProps {
 }
 
 const CustomToast = ({ position, children }: CustomToastProps) => {
-  return <S.Toast position={position}>{children}</S.Toast>;
+  return <S.Toast $position={position}>{children}</S.Toast>;
 };
 
 export default CustomToast;
