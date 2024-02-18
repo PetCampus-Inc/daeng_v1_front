@@ -17,15 +17,15 @@ import ButtonModal from "components/common/ButtonModal";
 type TicketTypeProps = {
   control: Control;
   name: string;
+  defaultValues?: number[];
 };
 
-const RoundTicketType = ({ control, name }: TicketTypeProps) => {
+const RoundTicketType = ({ control, name, defaultValues = [] }: TicketTypeProps) => {
   const INIT_COUNTER = 2;
   const FIELD_NAME = name;
   const bottomSheet = useBottomSheet();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [counter, setCounter] = useState<number>(INIT_COUNTER);
-  const defaultValues = [1, 3, 5, 10];
 
   const { fields, append, remove } = useTicketFieldArray({
     control,
@@ -58,8 +58,6 @@ const RoundTicketType = ({ control, name }: TicketTypeProps) => {
     const extendedField = field as ExtendedFieldArrayWithId;
     return extendedField.value === counter.toString();
   });
-
-  console.log(isDeleteModalOpen);
 
   return (
     <>

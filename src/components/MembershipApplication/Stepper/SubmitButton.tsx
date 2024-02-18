@@ -1,9 +1,8 @@
 import { useFormContext } from "react-hook-form";
 import { useEnrollMutation } from "hooks/api/useEnrollMutation";
-import { formatDate, extractNumber } from "utils/formatter";
+import { formatDate, extractNumber, getMapValue } from "utils/formatter";
 import type { IRequestEnrollment, TPickDropRequest, TTicketType } from "types/School.type";
 import type { ItemMapValue } from "constants/item";
-import { ITEM_MAP } from "constants/item";
 
 import * as S from "./styles";
 
@@ -14,13 +13,6 @@ const SubmitButton = () => {
   } = useFormContext();
 
   const enrollMutation = useEnrollMutation();
-
-  const mapValue = (key: string): string | ItemMapValue => {
-    if (ITEM_MAP.has(key)) {
-      return ITEM_MAP.get(key) as string | ItemMapValue;
-    }
-    return "";
-  };
 
   // FIXME: schoolFormId, memberId, fileUrl 추가 필요
   const onSubmit = handleSubmit((data) => {
@@ -40,14 +32,14 @@ const SubmitButton = () => {
       attendanceDays: data.attendanceDays,
       pickDropMemo: data.pickDropMemo,
       birthDate: formatDate(data.year, data.month, data.day),
-      memberGender: mapValue(data.memberGender) as string,
-      dogGender: mapValue(data.dogGender) as string,
-      dogSize: mapValue(data.dogSize) as string,
-      neutralization: (mapValue(data.neutralization) as ItemMapValue).neutralization,
-      vaccination: (mapValue(data.vaccination) as ItemMapValue).vaccination,
-      pickDropRequest: mapValue(data.pickDropRequest) as TPickDropRequest,
-      pickDropType: mapValue(data.pickDropType) as string,
-      ticketType: mapValue(data.ticketType) as TTicketType,
+      memberGender: getMapValue(data.memberGender) as string,
+      dogGender: getMapValue(data.dogGender) as string,
+      dogSize: getMapValue(data.dogSize) as string,
+      neutralization: (getMapValue(data.neutralization) as ItemMapValue).neutralization,
+      vaccination: (getMapValue(data.vaccination) as ItemMapValue).vaccination,
+      pickDropRequest: getMapValue(data.pickDropRequest) as TPickDropRequest,
+      pickDropType: getMapValue(data.pickDropType) as string,
+      ticketType: getMapValue(data.ticketType) as TTicketType,
       monthlyTicketNumber: extractNumber(data.monthlyTicketNumber),
       roundTicketNumber: extractNumber(data.roundTicketNumber)
     };

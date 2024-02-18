@@ -15,15 +15,17 @@ export interface IBreedInfo {
 export type TPickDropState = "RUNNING" | "NOT_RUNNING";
 export type TPickDropRequest = "REQUEST" | "NOT_REQUEST";
 export type TTicketType = "ROUND" | "MONTHLY";
+type TRoundTicketNumber = number[];
+type TMonthlyTicketNumber = number[];
 
 export interface IEnrollment {
   schoolFormId: number;
-  requiredItemList: string;
+  requiredItemList: number[];
   priceInfo: string;
   ticketType: TTicketType[];
-  roundTicketNumber: string;
+  roundTicketNumber: TRoundTicketNumber;
   openDays: string[];
-  monthlyTicketNumber: string;
+  monthlyTicketNumber: TMonthlyTicketNumber;
   ticketInfo: string;
   limitsInfo: string;
   accidentInfo: string;
@@ -46,9 +48,9 @@ export interface IMemberDto {
 export interface ITicketInfo {
   priceInfo: string;
   ticketType: TTicketType[];
-  roundTicketNumber: string;
+  roundTicketNumber: TRoundTicketNumber;
   openDays: string[];
-  monthlyTicketNumber: string;
+  monthlyTicketNumber: TMonthlyTicketNumber;
   ticketInfo: string;
 }
 
@@ -99,9 +101,9 @@ export interface IRequestForm {
   requiredItemList: number[];
   priceInfo: string;
   ticketType: string[];
-  roundTicketNumber: number[];
+  roundTicketNumber: TRoundTicketNumber;
   openDays: string[];
-  monthlyTicketNumber: number[];
+  monthlyTicketNumber: TMonthlyTicketNumber;
   ticketInfo: string;
   limitsInfo: string;
   accidentInfo: string;

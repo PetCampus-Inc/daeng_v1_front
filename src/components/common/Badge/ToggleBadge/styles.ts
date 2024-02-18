@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const ToggleBox = styled.label<{
-  readOnly: boolean;
-}>`
+export const ToggleBox = styled.label`
   min-width: 50px;
   position: relative;
   display: inline-flex;
@@ -10,7 +8,6 @@ export const ToggleBox = styled.label<{
   justify-content: space-between;
 
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.br_4};
   border-radius: 8px;
 
   cursor: pointer;
@@ -34,7 +31,9 @@ export const HiddenCheckbox = styled.input`
   border-radius: 50%;
 `;
 
-const Item = styled.span`
+const Item = styled.span<{
+  readOnly: boolean;
+}>`
   align-self: center;
   z-index: 1;
   pointer-events: none;
@@ -42,11 +41,14 @@ const Item = styled.span`
   padding: 1px 12px;
 
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ theme }) => theme.colors.br_4};
+  color: ${({ theme, readOnly }) => (readOnly ? theme.colors.gray_4 : theme.colors.br_4)};
+  background-color: ${({ theme, readOnly }) => readOnly && theme.colors.gray_5};
+  border: 1px solid ${({ theme, readOnly }) => (readOnly ? theme.colors.gray_4 : theme.colors.br_4)};
 
   &.active {
     color: ${({ theme }) => theme.colors.primaryColor};
     background-color: ${({ theme }) => theme.colors.br_4};
+    border: 1px solid ${({ theme }) => theme.colors.br_4};
   }
 
   transition:

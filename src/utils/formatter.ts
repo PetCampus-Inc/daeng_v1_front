@@ -1,3 +1,5 @@
+import { ITEM_MAP, ItemMapValue } from "constants/item";
+
 export const formatDate = (year: string, month: string, day: string) => {
   if (!year || !month || !day) return "";
   const formattedMonth = month.padStart(2, "0");
@@ -25,4 +27,11 @@ export const formatPhoneNumber = (value: string): string => {
 type TItem = Record<string, string>[];
 export const extractTicketValues = (items: TItem) => {
   return items.map((item) => parseInt(item.value, 10));
+};
+
+export const getMapValue = (key: string): string | ItemMapValue => {
+  if (ITEM_MAP.has(key)) {
+    return ITEM_MAP.get(key) as string | ItemMapValue;
+  }
+  return "";
 };

@@ -16,7 +16,6 @@ const AdminTitle = ({
   name,
   readOnly,
   hasBadge = false,
-  hasToggle = false,
   ...props
 }: AdminTitleProps) => {
   return (
@@ -25,13 +24,7 @@ const AdminTitle = ({
         {children}
         {hasBadge && <Badge type="adminRequired" />}
       </Container>
-      <ToggleBadge
-        name={name}
-        control={control}
-        hasToggle={hasToggle}
-        {...props}
-        readOnly={readOnly}
-      />
+      <ToggleBadge name={name} control={control} {...props} readOnly={readOnly} />
     </Label>
   );
 };

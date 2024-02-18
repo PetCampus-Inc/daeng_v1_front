@@ -1,10 +1,12 @@
 import { useFormContext } from "react-hook-form";
 
-import { Card, Caption } from "../styles";
 import AdminTitle from "components/common/Title/AdminTitle";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
+import Checkbox from "components/common/Checkbox";
+
 import { ITEM_KEYS } from "constants/item";
+import { Card, Caption, Stack } from "../styles";
 
 const PickDropInfo = () => {
   const { control, register, watch } = useFormContext();
@@ -28,7 +30,6 @@ const PickDropInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.PICKDROP_NOTICE}`}
               control={control}
               hasBadge
-              hasToggle
             >
               픽드랍 안내
             </AdminTitle>
@@ -36,35 +37,26 @@ const PickDropInfo = () => {
             <TextArea
               name="pickDropNotice"
               register={register}
+              rules={{
+                required: true
+              }}
               placeholder="ex) 픽드랍 왕복 50000 추가금 10000"
             />
           </Card>
           <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_REQUEST}`}
-              control={control}
-              hasToggle
-            >
+            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_REQUEST}`} control={control}>
               픽드랍 신청
             </AdminTitle>
             <SingleRadio name="null" radiosText={["신청", "미신청"]} disabled />
           </Card>
           <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_TYPE}`}
-              control={control}
-              hasToggle
-            >
+            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_TYPE}`} control={control}>
               픽드랍 유형
             </AdminTitle>
             <SingleRadio name="null" radiosText={["편도", "왕복"]} disabled />
           </Card>
           <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_MEMO}`}
-              control={control}
-              hasToggle
-            >
+            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_MEMO}`} control={control}>
               픽드랍 메모
             </AdminTitle>
             <TextArea
@@ -79,7 +71,6 @@ const PickDropInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.PICKDROP_INFO}`}
               control={control}
               hasBadge
-              hasToggle
             >
               픽드랍 유의사항
             </AdminTitle>
@@ -87,7 +78,15 @@ const PickDropInfo = () => {
               name="pickDropInfo"
               register={register}
               placeholder="픽드랍 유의사항을 입력해 주세요"
+              rules={{
+                required: true
+              }}
             />
+            <Stack>
+              <Checkbox name="null" control={control} disabled>
+                동의합니다
+              </Checkbox>
+            </Stack>
           </Card>
         </>
       )}

@@ -5,11 +5,12 @@ import TextArea from "components/common/TextArea";
 import SingleRadio from "components/common/Select/SingleRadio";
 import AdminTitle from "components/common/Title/AdminTitle";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
-
-import { Card, Caption } from "../styles";
-import { ITEM_KEYS } from "constants/item";
-import MonthlyTicketType from "../TicketType/MonthlyTicketType";
+import Checkbox from "components/common/Checkbox";
 import RoundTicketType from "../TicketType/RoundTicketType";
+import MonthlyTicketType from "../TicketType/MonthlyTicketType";
+
+import { ITEM_KEYS } from "constants/item";
+import { Card, Caption, Stack } from "../styles";
 
 const TicketInfo = () => {
   const { register, control, watch, setValue } = useFormContext();
@@ -17,12 +18,9 @@ const TicketInfo = () => {
   const selectedTicketType = watch("ticketType");
 
   useEffect(() => {
-    if (selectedTicketType === "정기권") {
-      setValue("roundTicketNumber", undefined);
-    } else {
-      setValue("monthlyTicketNumber", undefined);
-    }
-  }, [selectedTicketType]);
+    const fieldName = selectedTicketType === "정기권" ? "roundTicketNumber" : "monthlyTicketNumber";
+    setValue(fieldName, undefined);
+  }, [selectedTicketType, setValue]);
 
   return (
     <>
@@ -38,12 +36,7 @@ const TicketInfo = () => {
         />
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.TICKET_TYPE}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_TYPE}`} control={control} hasBadge>
           이용권 종류
         </AdminTitle>
         <Caption>복수 선택이 가능해요</Caption>
@@ -56,12 +49,15 @@ const TicketInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.MONTHLY_TICKET_NUMBER}`}
               control={control}
               hasBadge
-              hasToggle
             >
               정기권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <MonthlyTicketType name="monthlyTicketNumber" control={control} />
+            <MonthlyTicketType
+              control={control}
+              name="monthlyTicketNumber"
+              defaultValues={[1, 2, 4, 8]}
+            />
           </Card>
         ) : (
           <Card>
@@ -69,36 +65,41 @@ const TicketInfo = () => {
               name={`requiredItemList.${ITEM_KEYS.ROUND_TICKET_NUMBER}`}
               control={control}
               hasBadge
-              hasToggle
             >
               회차권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <RoundTicketType name="roundTicketNumber" control={control} />
+            <RoundTicketType
+              control={control}
+              name="roundTicketNumber"
+              defaultValues={[1, 3, 5, 10]}
+            />
           </Card>
         ))}
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.OPEN_DAYS}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.OPEN_DAYS}`} control={control} hasBadge>
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
         <DayMultiCheck name="openDays" defaultChecked={true} />
       </Card>
       <Card>
-        <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`}
-          control={control}
-          hasBadge
-          hasToggle
-        >
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`} control={control} hasBadge>
           유의사항
         </AdminTitle>
-        <TextArea name="ticketInfo" register={register} placeholder="유의사항을 입력해 주세요" />
+        <TextArea
+          name="ticketInfo"
+          rules={{
+            required: true
+          }}
+          register={register}
+          placeholder="유의사항을 입력해 주세요"
+        />
+        <Stack>
+          <Checkbox name="null" control={control} disabled>
+            동의합니다
+          </Checkbox>
+        </Stack>
       </Card>
     </>
   );

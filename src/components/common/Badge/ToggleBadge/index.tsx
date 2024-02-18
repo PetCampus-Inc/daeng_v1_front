@@ -7,28 +7,25 @@ export interface ToggleBadgeProps
     UseControllerProps {
   control: Control;
   readOnly?: boolean;
-  hasToggle?: boolean;
 }
 
-const ToggleBadge = ({
-  control,
-  name,
-  readOnly = false,
-  hasToggle,
-  ...props
-}: ToggleBadgeProps) => {
+const ToggleBadge = ({ control, name, readOnly = false, ...props }: ToggleBadgeProps) => {
   const { field } = useController({
     control,
     name,
-    defaultValue: true
+    defaultValue: false
   });
 
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (readOnly) {
+      event.preventDefault();
+      return;
+    }
     field.onChange(event.target.checked);
   };
 
-  return hasToggle ? (
-    <S.ToggleBox readOnly={readOnly}>
+  return (
+    <S.ToggleBox>
       <S.HiddenCheckbox
         type="checkbox"
         {...field}
@@ -37,18 +34,13 @@ const ToggleBadge = ({
         checked={field.value}
         onChange={handleToggle}
       />
-      <S.LeftItem className={field.value ? "" : "active"}>선택</S.LeftItem>
-      <S.RightItem className={field.value ? "active" : ""}>필수</S.RightItem>
+      <S.LeftItem className={field.value ? "" : "active"} readOnly={readOnly}>
+        선택
+      </S.LeftItem>
+      <S.RightItem className={field.value ? "active" : ""} readOnly={readOnly}>
+        필수
+      </S.RightItem>
     </S.ToggleBox>
-  ) : (
-    <S.HiddenCheckbox
-      type="checkbox"
-      {...field}
-      {...props}
-      id={field.name}
-      checked={field.value}
-      onChange={handleToggle}
-    />
   );
 };
 

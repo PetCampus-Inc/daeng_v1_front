@@ -26,12 +26,15 @@ import {
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
+import { useEffect } from "react";
 
 const EnrollmentFormEditPage = () => {
   const { formId } = useParams();
   if (!formId) throw new Error("잘못된 formId 입니다");
 
   const { data } = useAdminEnrollQuery(formId);
+  const REQUIRED_ITEMS = data?.requiredItemsMap;
+
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false
@@ -43,9 +46,19 @@ const EnrollmentFormEditPage = () => {
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
+  // FIXME: 최초 한번만 실행되면 되지만 이 페이지는 자주 언마운트 되기 때문에 메모리 낭비되고 있는 상황입니다. 수정이 필요합니다.
+  useEffect(() => {
+    if (REQUIRED_ITEMS) {
+      REQUIRED_ITEMS.forEach((isRequired, key) => {
+        const fieldName = `requiredItemList.${key}`;
+        methods.setValue(fieldName, isRequired);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [REQUIRED_ITEMS]);
+
   return (
     <>
-      <Header type="main" />
       <Container>
         <TopWrapper>
           <TitleWrapper>

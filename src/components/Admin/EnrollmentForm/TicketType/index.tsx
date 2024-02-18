@@ -17,10 +17,11 @@ import ButtonModal from "components/common/ButtonModal";
 type TicketTypeProps = {
   control: Control;
   name: string;
+  ticketType: "ROUND" | "MONTHLY";
   defaultValues?: number[];
 };
 
-const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProps) => {
+const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTypeProps) => {
   const INIT_COUNTER = 2;
   const FIELD_NAME = name;
   const bottomSheet = useBottomSheet();
@@ -35,10 +36,12 @@ const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProp
 
   const MAX_ITEMS = 6;
   const MIN_ITEMS = 1;
+  const TICKET_TYPE = ticketType === "ROUND" ? "회차권" : "정기권";
+  const TIMES = ticketType === "ROUND" ? "회" : "주";
 
   const handleAddRadio = () => {
     if (fields.length < MAX_ITEMS) {
-      append({ value: counter.toString(), label: `${counter}주` });
+      append({ value: counter.toString(), label: `${counter}${TIMES}` });
       bottomSheet.close();
       setCounter(INIT_COUNTER);
     } else {
@@ -64,7 +67,7 @@ const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProp
       {isDeleteModalOpen && (
         <ButtonModal
           maintext="모두 삭제할 수 없어요"
-          subtext="최소 1개 이상의 정기권 옵션을 추가해 주세요"
+          subtext={`최소 1개 이상의 ${TICKET_TYPE} 옵션을 추가해 주세요`}
           actionbutton="닫기"
           actionfunc={() => setIsDeleteModalOpen(false)}
         />
@@ -75,7 +78,7 @@ const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProp
             <XIcon />
           </S.CloseButton>
           <TicketCounter
-            type="MONTHLY"
+            type={ticketType}
             isDuplication={isDuplication}
             initial={INIT_COUNTER}
             counter={counter}
@@ -98,10 +101,10 @@ const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProp
         disabled={fields.length >= MAX_ITEMS}
       >
         <AddIcon />
-        정기권 직접 추가
+        {TICKET_TYPE} 직접 추가
       </S.AddButton>
     </>
   );
 };
 
-export default MonthlyTicketType;
+export default TicketType;
