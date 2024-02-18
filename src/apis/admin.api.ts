@@ -151,3 +151,31 @@ export const handleGetWaitingOwnersList = async (
   });
   return data.data;
 };
+
+// 가입신청서 승인
+export const handlePostApproveForm = async (enrollmentFormId: number): Promise<IResponse> => {
+  const url: string = `admin/enrollment/approve?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+// 가입신청서 거절
+export const handlePostDenyForm = async (enrollmentFormId: number): Promise<IResponse> => {
+  const url: string = `admin/enrollment/deny?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+// 선생님 승인
+export const handlePostApproveTeacher = async (adminId: number): Promise<IResponse> => {
+  const url: string = `admin/approve/teacher/approval?adminId=${adminId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+// 선생님 거절
+export const handlePostDenyTeacher = async (adminId: number): Promise<IResponse> => {
+  const url: string = `admin/deny/teacher/approval?adminId=${adminId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};

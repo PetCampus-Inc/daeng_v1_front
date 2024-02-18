@@ -4,17 +4,21 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 interface IApproveDenyButton {
   setIsShow: Dispatch<SetStateAction<boolean>>;
+  approveFunc: () => void;
+  denyFunc: () => void;
 }
 
-const ApproveDenyButton = ({ setIsShow }: IApproveDenyButton) => {
+const ApproveDenyButton = ({ setIsShow, approveFunc, denyFunc }: IApproveDenyButton) => {
   const [firstButtonVisible, setFirstButtonVisible] = useState(true);
   const [secondButtonVisible, setSecondButtonVisible] = useState(true);
 
   const handleButton1Click = () => {
+    approveFunc();
     setSecondButtonVisible(false);
   };
 
   const handleButton2Click = () => {
+    denyFunc();
     setFirstButtonVisible(false);
   };
 

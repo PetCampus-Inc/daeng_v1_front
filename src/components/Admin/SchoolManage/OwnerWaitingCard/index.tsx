@@ -6,6 +6,8 @@ import { TextWrapper, Name, Contour, PhoneNum } from "../TeacherInfo/styles";
 import ApproveDenyButton from "../ApproveDenyButton";
 import ListIconSmallRound from "assets/svg/list-icon-small-round";
 import RightArrow from "assets/svg/right-arrow";
+import { useApproveFormMutation, useDenyFormMutation } from "hooks/api/useApproveDenyMutation";
+import showToast from "utils/showToast";
 
 interface IOwnerWaitingCard {
   data: IWaitingOwnerInfo;
@@ -14,6 +16,26 @@ interface IOwnerWaitingCard {
 const OwnerWaitingCard = ({ data }: IOwnerWaitingCard) => {
   const { dogName, memberName, enrollmentFormId } = data;
   const [isShow, setIsShow] = useState(true);
+  const mutateApproveForm = useApproveFormMutation();
+  const mutateDenyForm = useDenyFormMutation();
+
+  const approveFunc = () => {
+    mutateApproveForm(enrollmentFormId, {
+      onError: () => {
+        showToast("승인에 실패했습니다. 다시 시도해주세요.", "bottom");
+        return;
+      }
+    });
+  };
+
+  const denyFunc = () => {
+    mutateDenyForm(enrollmentFormId, {
+      onError: () => {
+        showToast("거절에 실패했습니다. 다시 시도해주세요.", "bottom");
+        return;
+      }
+    });
+  };
 
   return (
     <AnimatePresence>
@@ -35,7 +57,11 @@ const OwnerWaitingCard = ({ data }: IOwnerWaitingCard) => {
               <Contour>|</Contour>
               <PhoneNum>{dogName}</PhoneNum>
             </TextWrapper>
-            <ApproveDenyButton setIsShow={setIsShow} />
+            <ApproveDenyButton
+              setIsShow={setIsShow}
+              approveFunc={approveFunc}
+              denyFunc={denyFunc}
+            />
           </S.UpperWrapper>
           <S.LowerWrapper>
             <S.TextWrapper>
