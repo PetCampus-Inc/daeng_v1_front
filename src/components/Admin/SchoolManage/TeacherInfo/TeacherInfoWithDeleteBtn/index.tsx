@@ -1,45 +1,16 @@
 import ButtonBadge from "components/common/Badge/ButtonBadge";
-import * as S from "./styles";
+import * as S from "../styles";
 import { ITeacherInfo } from "types/Admin.type";
 import { useState } from "react";
 import ButtonModal from "components/common/ButtonModal";
-import ApproveDenyButton from "../ApproveDenyButton";
-import { AnimatePresence } from "framer-motion";
 
-interface TeacherInfoProps {
+interface TeacherInfoWithDeleteBtnProps {
   isEditable?: boolean;
   data: ITeacherInfo;
 }
 
-const TeacherInfo = ({ isEditable = false, data }: TeacherInfoProps) => {
+const TeacherInfoWithDeleteBtn = ({ isEditable = false, data }: TeacherInfoWithDeleteBtnProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isShow, setIsShow] = useState(true);
-
-  return (
-    <AnimatePresence>
-      {isShow && (
-        <S.Container
-          initial={{ opacity: 1, scale: 1 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{
-            x: -150,
-            opacity: 0,
-            transition: { delay: 0.5, duration: 0.3 }
-          }}
-          transition={{ duration: 0.5, type: "spring", delay: 0.3 }}
-          layout
-          key={data.adminId}
-        >
-          <S.TextWrapper>
-            <S.Name>{data.teacherName}</S.Name>
-            <S.Contour>|</S.Contour>
-            <S.PhoneNum>{data.phoneNumber}</S.PhoneNum>
-          </S.TextWrapper>
-          <ApproveDenyButton setIsShow={setIsShow} />
-        </S.Container>
-      )}
-    </AnimatePresence>
-  );
 
   return (
     <S.Container>
@@ -71,4 +42,4 @@ const TeacherInfo = ({ isEditable = false, data }: TeacherInfoProps) => {
   );
 };
 
-export default TeacherInfo;
+export default TeacherInfoWithDeleteBtn;

@@ -12,7 +12,7 @@ interface IOwnerWaitingCard {
 }
 
 const OwnerWaitingCard = ({ data }: IOwnerWaitingCard) => {
-  const { dogName, memberName } = data;
+  const { dogName, memberName, enrollmentFormId } = data;
   const [isShow, setIsShow] = useState(true);
 
   return (
@@ -20,8 +20,14 @@ const OwnerWaitingCard = ({ data }: IOwnerWaitingCard) => {
       {isShow && (
         <S.CardContainer
           initial={{ opacity: 1, scale: 1 }}
-          exit={{ x: -500, opacity: 0 }}
-          transition={{ ease: "easeInOut", duration: 1 }}
+          exit={{
+            x: -150,
+            opacity: 0,
+            transition: { delay: 0.5, duration: 0.3 }
+          }}
+          transition={{ duration: 0.8, type: "spring", delay: 0.3 }}
+          layout
+          key={enrollmentFormId}
         >
           <S.UpperWrapper>
             <TextWrapper>
