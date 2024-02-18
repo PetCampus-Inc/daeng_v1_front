@@ -4,6 +4,7 @@ import { ITeacherInfo } from "types/Admin.type";
 import { useState } from "react";
 import ButtonModal from "components/common/ButtonModal";
 import ApproveDenyButton from "../ApproveDenyButton";
+import { AnimatePresence } from "framer-motion";
 
 interface TeacherInfoProps {
   isEditable?: boolean;
@@ -12,6 +13,26 @@ interface TeacherInfoProps {
 
 const TeacherInfo = ({ isEditable = false, data }: TeacherInfoProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isShow, setIsShow] = useState(true);
+
+  return (
+    <AnimatePresence>
+      {isShow && (
+        <S.Container
+          initial={{ opacity: 1, scale: 1 }}
+          exit={{ x: -500, opacity: 0 }}
+          transition={{ ease: "easeInOut", duration: 1 }}
+        >
+          <S.TextWrapper>
+            <S.Name>{data.teacherName}</S.Name>
+            <S.Contour>|</S.Contour>
+            <S.PhoneNum>{data.phoneNumber}</S.PhoneNum>
+          </S.TextWrapper>
+          <ApproveDenyButton setIsShow={setIsShow} />
+        </S.Container>
+      )}
+    </AnimatePresence>
+  );
 
   return (
     <S.Container>
@@ -39,7 +60,6 @@ const TeacherInfo = ({ isEditable = false, data }: TeacherInfoProps) => {
           closefunc={() => setIsOpen(false)}
         />
       )}
-      <ApproveDenyButton />
     </S.Container>
   );
 };

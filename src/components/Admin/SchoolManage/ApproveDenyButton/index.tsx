@@ -1,53 +1,61 @@
 import { ThemeConfig } from "styles/ThemeConfig";
 import * as S from "./styles";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-const ApproveDenyButton = () => {
-  const [button1Visible, setButton1Visible] = useState(true);
-  const [button2Visible, setButton2Visible] = useState(true);
+interface IApproveDenyButton {
+  setIsShow: Dispatch<SetStateAction<boolean>>;
+}
+
+const ApproveDenyButton = ({ setIsShow }: IApproveDenyButton) => {
+  const [firstButtonVisible, setFirstButtonVisible] = useState(true);
+  const [secondButtonVisible, setSecondButtonVisible] = useState(true);
 
   const handleButton1Click = () => {
-    setButton2Visible(false);
+    setSecondButtonVisible(false);
   };
 
   const handleButton2Click = () => {
-    setButton1Visible(false);
+    setFirstButtonVisible(false);
   };
 
   const customVariants = {
     greenScaleUp: { backgroundColor: ThemeConfig.colors.green, width: "120px" },
-    redScaleUp: { backgroundColor: ThemeConfig.colors.red_1, width: "120px", color: "white" },
+    redScaleUp: {
+      backgroundColor: ThemeConfig.colors.red_1,
+      width: "120px",
+      color: ThemeConfig.colors.white
+    },
     disappear: { opacity: 0, display: "none" }
   };
 
   return (
     <S.ButtonWrapper>
-      {button1Visible && (
+      {firstButtonVisible && (
         <S.ButtonWrapper>
           <S.Button
             variants={customVariants}
             initial={{ opacity: 1, scale: 1 }}
-            animate={!button2Visible && "greenScaleUp"}
-            exit={{ opacity: 0, y: -20 }}
+            animate={!secondButtonVisible && "greenScaleUp"}
             transition={{ ease: "easeInOut", duration: 0.4 }}
             onClick={handleButton1Click}
+            onAnimationComplete={() => setIsShow(false)}
           >
             승인
           </S.Button>
         </S.ButtonWrapper>
       )}
 
-      {button2Visible && (
+      {secondButtonVisible && (
         <S.ButtonWrapper style={{ justifyContent: "flex-end" }}>
           <S.Button
             key="button2"
             className="second"
             variants={customVariants}
             initial={{ opacity: 1, scale: 1 }}
-            animate={!button1Visible && "redScaleUp"}
-            exit={{ opacity: 0, y: -20, backgroundColor: "blue" }}
+            animate={!firstButtonVisible && "redScaleUp"}
             transition={{ ease: "easeInOut", duration: 0.4 }}
             onClick={handleButton2Click}
+            onAnimationComplete={() => setIsShow(false)}
           >
             거절
           </S.Button>

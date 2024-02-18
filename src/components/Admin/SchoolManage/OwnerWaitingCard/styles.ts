@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const CardContainer = styled.div`
+export const CardContainer = styled(motion.div)`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
