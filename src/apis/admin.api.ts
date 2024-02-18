@@ -6,7 +6,8 @@ import {
   IOwnerSignUpInfo,
   ITeacherApprove,
   ITeacherList,
-  ITeacherSignUpInfo
+  ITeacherSignUpInfo,
+  IWaitingOwnerInfo
 } from "types/Admin.type";
 import axios from "axios";
 import { IAdminLoginResponse } from "types/Attendance.type";
@@ -132,6 +133,19 @@ export const handleGetNewEnrollment = async (
   const { data } = await customAxios.get(url, {
     params: {
       adminId,
+      schoolId
+    }
+  });
+  return data.data;
+};
+
+// 원장 신규관리 - 가입 신청 승인 대기중인 견주 목록
+export const handleGetWaitingOwnersList = async (
+  schoolId: number
+): Promise<IWaitingOwnerInfo[]> => {
+  const url: string = `admin/enrollment/list`;
+  const { data } = await customAxios.get(url, {
+    params: {
       schoolId
     }
   });

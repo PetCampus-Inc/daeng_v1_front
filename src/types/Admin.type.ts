@@ -53,3 +53,9 @@ export interface ITeacherList {
   teacherList: ITeacherInfo[];
   pendingList: ITeacherInfo[];
 }
+
+export interface IWaitingOwnerInfo {
+  enrollmentFormId: number;
+  memberName: string;
+  dogName: string;
+}
