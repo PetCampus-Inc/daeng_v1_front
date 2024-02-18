@@ -12,3 +12,9 @@ export const Text = styled.p`
   color: ${({ theme }) => theme.colors.gray_2};
   ${({ theme }) => theme.typo.body2_16_R};
 `;
+
+export const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
