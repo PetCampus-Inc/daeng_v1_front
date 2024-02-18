@@ -1,7 +1,7 @@
-import { useFormContext } from "react-hook-form";
-import { ISelect } from "../select.type";
-import * as S from "../styles";
 import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import type { ISelect } from "../select.type";
+import * as S from "../styles";
 
 interface IMulticheck extends ISelect, Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
   radiosText: string[];
@@ -26,6 +26,7 @@ const MultiCheck = ({
     if (watch(name) && watch(name).length <= 1) {
       setIsAvailable(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch(name)]);
 
   const handleTouch = (e: any) => {
@@ -46,7 +47,7 @@ const MultiCheck = ({
             <S.StyledInput
               id={text}
               type="checkbox"
-              {...register(`${name}`, { required: isRequired, onChange: handleTouch })}
+              {...register(name, { required: isRequired, onChange: handleTouch })}
               value={text}
               disabled={disabled}
               defaultChecked={defaultSelect === text}

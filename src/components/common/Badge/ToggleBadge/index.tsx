@@ -12,8 +12,7 @@ export interface ToggleBadgeProps
 const ToggleBadge = ({ control, name, readOnly = false, ...props }: ToggleBadgeProps) => {
   const { field } = useController({
     control,
-    name,
-    defaultValue: false
+    name
   });
 
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {

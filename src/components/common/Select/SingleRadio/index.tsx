@@ -1,5 +1,5 @@
-import { ISelect } from "../select.type";
 import { useFormContext } from "react-hook-form";
+import type { ISelect } from "../select.type";
 import * as S from "../styles";
 
 interface ISingleRadio extends ISelect {
