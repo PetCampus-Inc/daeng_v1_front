@@ -4,6 +4,7 @@ import useDetectClose from "hooks/common/useDetectClose";
 import useGetBreed from "hooks/api/useGetBreed";
 import SearchInputField from "components/common/InputField/SearchInputField";
 import BreedDropDown from "components/common/Dropdown/BreedDropdown";
+import showToast from "utils/showToast";
 
 interface IBreedInput {
   name: string;
@@ -33,6 +34,10 @@ const BreedInput = ({ name, control, setValue, watch }: IBreedInput) => {
     return () => clearTimeout(timer);
   }, [value, breedId]);
 
+  if (error) {
+    showToast("견종을 불러오는 데 실패했습니다. 다시 시도해주세요", "bottom");
+  }
+
   return (
     <div ref={dropDownRef} style={{ position: "relative" }}>
       <SearchInputField
@@ -54,8 +59,6 @@ const BreedInput = ({ name, control, setValue, watch }: IBreedInput) => {
           setValue={setValue}
         />
       )}
-      {/* TODO: 기획에 질문 에러 발생 시 재시도 해달라는 모달 or 바텀시트 생기게 수정  */}
-      {error && <div>추후 토스트 처리</div>}
     </div>
   );
 };

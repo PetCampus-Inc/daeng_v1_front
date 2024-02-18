@@ -10,6 +10,7 @@ import {
   handleTeacherSignUpCancel,
   handleTeacherSignUpSubmit
 } from "apis/admin.api";
+import showToast from "utils/showToast";
 
 const useSignUp = () => {
   const [currentMainStep, setCurrentMainStep] = useState<number>(0);
@@ -103,8 +104,7 @@ const useSignUp = () => {
         // TODO : 프론트에서 분기 필요없으면 삭제하기
         console.log("사업자 등록 번호가 이미 등록되어있습니다.");
       } else {
-        // TODO : 기획에게 처리 방법 질문하기
-        console.log("회원 가입에 실패했습니다.");
+        showToast("회원가입에 실패했습니다. 다시 시도해주세요", "bottom");
       }
     }
   };

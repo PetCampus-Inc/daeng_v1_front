@@ -33,11 +33,11 @@ export const StyledInput = styled.input`
     border: 1px solid ${({ theme }) => theme.colors.br_3};
     color: ${({ theme }) => theme.colors.primaryColor};
   }
-  &:disabled + label {
-    background-color: ${({ theme }) => theme.colors.white};
-    ${({ theme }) => theme.typo.body2_16_R};
+
+  &:disabled:not(.preview) + label {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    border: 1px solid ${({ theme }) => theme.colors.gray_4};
     color: ${({ theme }) => theme.colors.gray_4};
-    border: 1px solid ${({ theme }) => theme.colors.gray_5};
   }
 `;
 
@@ -60,17 +60,48 @@ export const StyledLabel = styled.label`
   border: 1px solid ${({ theme }) => theme.colors.gray_4};
   color: ${({ theme }) => theme.colors.gray_3};
 
-  &.policyPage {
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
+
+export const DayCheckInput = styled.input`
+  display: none;
+  &:checked + label {
+    background-color: ${({ theme }) => theme.colors.br_4};
+    border: 1px solid ${({ theme }) => theme.colors.br_3};
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+
+  &:disabled + label {
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.gray_4};
+  }
+
+  &.open-day:disabled + label {
     background-color: ${({ theme }) => theme.colors.gray_5};
-    border: transparent;
+    border: 1px solid ${({ theme }) => theme.colors.gray_5};
     color: ${({ theme }) => theme.colors.gray_2};
   }
 
-  &.disabled {
-    background-color: ${({ theme }) => theme.colors.gray_5};
-    border: 1px solid ${({ theme }) => theme.colors.gray_4};
-    color: ${({ theme }) => theme.colors.gray_4};
+  &:disabled:checked + label {
+    background-color: ${({ theme }) => theme.colors.br_4};
+    border: 1px solid ${({ theme }) => theme.colors.br_3};
+    color: ${({ theme }) => theme.colors.primaryColor};
   }
+`;
+
+export const DayCheckLabel = styled.label`
+  display: flex;
+  padding: 12px 8px;
+  width: 100%;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+
+  background-color: ${({ theme }) => theme.colors.gray_5};
+  border: 1px solid ${({ theme }) => theme.colors.gray_5};
+  color: ${({ theme }) => theme.colors.gray_2};
 
   ${({ theme }) => theme.typo.body2_16_R};
 `;

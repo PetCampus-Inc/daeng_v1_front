@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
 import { INewEnrollmentList, ISimpleSchoolFormList } from "types/Admin.type";
+import showToast from "utils/showToast";
 
 const EnrollmentFormListPage = () => {
   const navigate = useNavigate();
@@ -61,8 +62,9 @@ const EnrollmentFormListPage = () => {
             <ButtonBadge
               type={isEditable ? "cancel" : "delete"}
               handleTouch={() => {
-                if (data.simpleSchoolFormList.length <= 0) {
+                if (data.simpleSchoolFormList.length <= 1) {
                   // TODO: 한 개일 땐 삭제할 수 없다는 토스트 띄우기
+                  showToast("최소 1개는 갖고 있어야합니다.", "bottom");
                   return;
                 }
                 setIsEditable(!isEditable);
