@@ -1,6 +1,7 @@
 import { ITeacherInfo } from "types/Admin.type";
 import * as S from "../styles";
 import TeacherInfo from "../../TeacherInfo";
+import { LayoutGroup } from "framer-motion";
 
 interface WaitingTeacherListProps {
   teacherList: ITeacherInfo[];
@@ -13,9 +14,11 @@ const WaitingTeacherList = ({ teacherList }: WaitingTeacherListProps) => {
 
   return (
     <S.ListBox>
-      {teacherList.map((info) => (
-        <TeacherInfo key={info.adminId} data={info} />
-      ))}
+      <LayoutGroup>
+        {teacherList.map((info) => (
+          <TeacherInfo key={info.adminId} data={info} />
+        ))}
+      </LayoutGroup>
     </S.ListBox>
   );
 };

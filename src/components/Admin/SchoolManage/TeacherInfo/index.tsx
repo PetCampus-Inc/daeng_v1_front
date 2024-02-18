@@ -20,8 +20,15 @@ const TeacherInfo = ({ isEditable = false, data }: TeacherInfoProps) => {
       {isShow && (
         <S.Container
           initial={{ opacity: 1, scale: 1 }}
-          exit={{ x: -500, opacity: 0 }}
-          transition={{ ease: "easeInOut", duration: 1 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{
+            x: -150,
+            opacity: 0,
+            transition: { delay: 0.5, duration: 0.3 }
+          }}
+          transition={{ duration: 0.5, type: "spring", delay: 0.3 }}
+          layout
+          key={data.adminId}
         >
           <S.TextWrapper>
             <S.Name>{data.teacherName}</S.Name>

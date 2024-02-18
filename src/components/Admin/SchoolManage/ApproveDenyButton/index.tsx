@@ -33,10 +33,11 @@ const ApproveDenyButton = ({ setIsShow }: IApproveDenyButton) => {
       {firstButtonVisible && (
         <S.ButtonWrapper>
           <S.Button
+            key="button1"
             variants={customVariants}
             initial={{ opacity: 1, scale: 1 }}
             animate={!secondButtonVisible && "greenScaleUp"}
-            transition={{ ease: "easeInOut", duration: 0.4 }}
+            transition={{ ease: "easeInOut", duration: 0.5 }}
             onClick={handleButton1Click}
             onAnimationComplete={() => setIsShow(false)}
           >
@@ -53,7 +54,7 @@ const ApproveDenyButton = ({ setIsShow }: IApproveDenyButton) => {
             variants={customVariants}
             initial={{ opacity: 1, scale: 1 }}
             animate={!firstButtonVisible && "redScaleUp"}
-            transition={{ ease: "easeInOut", duration: 0.4 }}
+            transition={{ ease: "easeInOut", duration: 0.5 }}
             onClick={handleButton2Click}
             onAnimationComplete={() => setIsShow(false)}
           >
