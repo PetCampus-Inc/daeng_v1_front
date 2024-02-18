@@ -17,6 +17,8 @@ export const Badge = styled(motion.button)<{
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
+  user-select: none;
+  min-width: 49px;
 
   border-radius: 8px;
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import ButtonModal from "components/common/ButtonModal";
 import useTeacherDeleteMutation from "hooks/api/useTeacherDeleteMutation";
 import showToast from "utils/showToast";
+import { AnimatePresence } from "framer-motion";
 
 interface TeacherInfoWithDeleteBtnProps {
   isEditable?: boolean;
@@ -23,14 +24,16 @@ const TeacherInfoWithDeleteBtn = ({ isEditable = false, data }: TeacherInfoWithD
         <S.Contour>|</S.Contour>
         <S.PhoneNum>{phoneNumber}</S.PhoneNum>
       </S.TextWrapper>
-      {isEditable && (
-        <ButtonBadge
-          type="redDelete"
-          handleTouch={() => {
-            setIsOpen(!isOpen);
-          }}
-        />
-      )}
+      <AnimatePresence>
+        {isEditable && (
+          <ButtonBadge
+            type="redDelete"
+            handleTouch={() => {
+              setIsOpen(!isOpen);
+            }}
+          />
+        )}
+      </AnimatePresence>
       {isOpen && (
         <ButtonModal
           maintext={`${teacherName} 교사를 삭제하시겠습니까?`}
