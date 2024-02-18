@@ -40,7 +40,8 @@ export const fadeIn = keyframes`
 `;
 
 export const PageContainer = styled.div`
-  margin: calc(5vh + 32px) 16px 0;
+  padding: calc(5vh + 32px) 16px 0;
+  height: 100%;
 `;
 
 export const WhiteBackground = styled.div`
