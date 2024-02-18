@@ -12,7 +12,7 @@ export const Card = styled.div`
   gap: 19px;
   width: 100%;
   padding: 16px 12px;
-  background-color: ${({ theme }) => theme.colors.gray_5};
+  background-color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.label1_16_B};
   color: ${({ theme }) => theme.colors.gray_1};
   border: 2px solid ${({ theme }) => theme.colors.gray_5};

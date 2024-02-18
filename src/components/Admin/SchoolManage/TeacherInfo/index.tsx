@@ -3,14 +3,16 @@ import * as S from "./styles";
 import { ITeacherInfo } from "types/Admin.type";
 import { useState } from "react";
 import ButtonModal from "components/common/ButtonModal";
+import ApproveDenyButton from "../ApproveDenyButton";
 
 interface TeacherInfoProps {
   isEditable?: boolean;
   data: ITeacherInfo;
 }
 
-const TeacherInfo = ({ isEditable = true, data }: TeacherInfoProps) => {
+const TeacherInfo = ({ isEditable = false, data }: TeacherInfoProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <S.Container>
       <S.TextWrapper>
@@ -37,6 +39,7 @@ const TeacherInfo = ({ isEditable = true, data }: TeacherInfoProps) => {
           closefunc={() => setIsOpen(false)}
         />
       )}
+      <ApproveDenyButton />
     </S.Container>
   );
 };

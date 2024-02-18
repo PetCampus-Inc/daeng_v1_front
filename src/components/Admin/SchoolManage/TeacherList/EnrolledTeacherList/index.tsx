@@ -1,6 +1,6 @@
-import TeacherInfo from "../TeacherInfo";
+import TeacherInfo from "../../TeacherInfo";
 import { ITeacherInfo } from "types/Admin.type";
-import * as S from "./styles";
+import * as S from "../styles";
 
 interface EnrolledTeacherListProps {
   teacherList: ITeacherInfo[];
