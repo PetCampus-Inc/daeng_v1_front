@@ -5,7 +5,7 @@ import { StyledTextWrapper } from "components/SignIn/InputBoxAndText/styles";
 
 interface ITitleWithIcon {
   title: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   handleClick?: () => void;
   children?: ReactNode;
 }

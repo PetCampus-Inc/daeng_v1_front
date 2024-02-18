@@ -4,6 +4,7 @@ import ListIcon from "assets/svg/list-icon";
 import MACarousel from "components/Admin/SchoolManage/MACarousel";
 import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
+import OwnerWaitingList from "components/Admin/SchoolManage/OwnerWaitingList";
 
 const SchoolManageEnrollmentPage = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const SchoolManageEnrollmentPage = () => {
           handleClick={() => navigate("list")}
         />
         <MACarousel />
+        <OwnerWaitingList />
       </PageContainer>
     </>
   );
