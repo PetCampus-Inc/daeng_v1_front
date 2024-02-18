@@ -38,7 +38,7 @@ const RoundTicketType = ({ control, name, defaultValues = [] }: TicketTypeProps)
 
   const handleAddRoundRadio = () => {
     if (fields.length < MAX_ITEMS) {
-      append({ value: counter.toString(), label: `${counter}회` });
+      append(counter);
       bottomSheet.close();
       setCounter(INIT_COUNTER);
     } else {
@@ -56,7 +56,7 @@ const RoundTicketType = ({ control, name, defaultValues = [] }: TicketTypeProps)
 
   const isDuplication = fields.some((field) => {
     const extendedField = field as ExtendedFieldArrayWithId;
-    return extendedField.value === counter.toString();
+    return extendedField.value === counter;
   });
 
   return (
@@ -89,6 +89,7 @@ const RoundTicketType = ({ control, name, defaultValues = [] }: TicketTypeProps)
       <EditableRadioGroup
         control={control}
         name={FIELD_NAME}
+        suffix="회"
         fields={fields}
         remove={handleRemove}
       />

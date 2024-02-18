@@ -41,7 +41,7 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
 
   const handleAddRadio = () => {
     if (fields.length < MAX_ITEMS) {
-      append({ value: counter.toString(), label: `${counter}${TIMES}` });
+      append({ value: counter });
       bottomSheet.close();
       setCounter(INIT_COUNTER);
     } else {
@@ -59,7 +59,7 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
 
   const isDuplication = fields.some((field) => {
     const extendedField = field as ExtendedFieldArrayWithId;
-    return extendedField.value === counter.toString();
+    return extendedField.value === counter;
   });
 
   return (
@@ -91,6 +91,7 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
       )}
       <EditableRadioGroup
         control={control}
+        suffix={TIMES}
         name={FIELD_NAME}
         fields={fields}
         remove={handleRemove}

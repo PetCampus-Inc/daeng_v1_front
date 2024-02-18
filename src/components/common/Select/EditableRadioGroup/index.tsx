@@ -3,8 +3,7 @@ import CloseIcon from "assets/svg/close-icon";
 import * as S from "../styles";
 
 export interface ExtendedFieldArrayWithId extends FieldArrayWithId {
-  value?: string;
-  label?: string;
+  value?: number;
 }
 
 interface EditableRadioGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -12,6 +11,7 @@ interface EditableRadioGroupProps extends React.InputHTMLAttributes<HTMLInputEle
   name: string;
   fields: ExtendedFieldArrayWithId[];
   remove: (index: number) => void;
+  suffix: string;
 }
 
 const EditableRadioGroup = ({
@@ -19,6 +19,7 @@ const EditableRadioGroup = ({
   name,
   fields,
   remove,
+  suffix,
   ...props
 }: EditableRadioGroupProps) => {
   return (
@@ -33,12 +34,12 @@ const EditableRadioGroup = ({
                 {...field}
                 {...props}
                 id={`${name}-${index}`}
-                checked={true}
+                checked={field.value === item.value}
                 type="radio"
               />
             )}
           />
-          <S.StyledLabel htmlFor={`${name}-${index}`}>{item.label}</S.StyledLabel>
+          <S.StyledLabel htmlFor={`${name}-${index}`}>{item.value + suffix}</S.StyledLabel>
           <S.DeleteButton type="button" onClick={() => remove(index)} aria-label="삭제">
             <CloseIcon />
           </S.DeleteButton>
