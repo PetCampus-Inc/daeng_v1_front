@@ -88,7 +88,7 @@ export interface IRequestEnrollment {
   ticketType: TTicketType;
   roundTicketNumber: number;
   monthlyTicketNumber: number;
-  attendanceDays: string[];
+  openDays: number[];
   pickDropRequest: TPickDropRequest;
   pickDropType: string;
   pickDropMemo: string;
