@@ -15,13 +15,18 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
-  const { watch, setValue } = useFormContext();
+  const { register, watch, setValue } = useFormContext();
 
   return (
     <>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_NAME)}>이름</Title>
-        <InputField name="dogName" placeholder="강아지 이름을 입력해주세요" isRequired />
+        <InputField
+          name="dogName"
+          placeholder="강아지 이름을 입력해주세요"
+          register={register}
+          isRequired
+        />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_GENDER)}>성별</Title>
@@ -38,7 +43,13 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
-        <BreedInput name="newBreed" setValue={setValue} watch={watch} isRequired />
+        <BreedInput
+          name="newBreed"
+          setValue={setValue}
+          watch={watch}
+          register={register}
+          isRequired
+        />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BIRTHDAY)}>생일</Title>

@@ -1,11 +1,11 @@
 import { useFormContext } from "react-hook-form";
 
-import { ITEM_KEYS } from "constants/item";
-import { Card, Caption, Stack } from "../styles";
 import AdminTitle from "components/common/Title/AdminTitle";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Checkbox from "components/common/Checkbox";
+import { ITEM_KEYS } from "constants/item";
+import { Card, Caption, Stack } from "../styles";
 
 const PickDropInfo = () => {
   const { control, watch } = useFormContext();
@@ -20,7 +20,7 @@ const PickDropInfo = () => {
         >
           픽드랍 운영
         </AdminTitle>
-        <SingleRadio name="pickDropState" radiosText={["운영", "미운영"]} />
+        <SingleRadio name="pickDropState" radiosText={["운영", "미운영"]} isRequired />
       </Card>
       {watch("pickDropState") === "운영" && (
         <>
@@ -33,7 +33,11 @@ const PickDropInfo = () => {
               픽드랍 안내
             </AdminTitle>
             <Caption>견주에게 안내할 픽드랍 내용을 입력해 주세요</Caption>
-            <TextArea name="pickDropNotice" placeholder="ex) 픽드랍 왕복 50000 추가금 10000" />
+            <TextArea
+              name="pickDropNotice"
+              placeholder="ex) 픽드랍 왕복 50000 추가금 10000"
+              isRequired
+            />
           </Card>
           <Card>
             <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_REQUEST}`} control={control}>
@@ -65,7 +69,11 @@ const PickDropInfo = () => {
             >
               픽드랍 유의사항
             </AdminTitle>
-            <TextArea name="pickDropInfo" placeholder="픽드랍 유의사항을 입력해 주세요" />
+            <TextArea
+              name="pickDropInfo"
+              placeholder="픽드랍 유의사항을 입력해 주세요"
+              isRequired
+            />
             <Stack>
               <Checkbox name="null" disabled>
                 동의합니다
