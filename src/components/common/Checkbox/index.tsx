@@ -34,7 +34,12 @@ const Checkbox = ({
   onChange,
   ...useControllerProps
 }: CheckboxProps) => {
-  const { field } = useController(useControllerProps);
+  const { field } = useController({
+    ...useControllerProps,
+    rules: {
+      required: isRequired
+    }
+  });
   const { onChange: fieldOnChange, ...restFieldProps } = field;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

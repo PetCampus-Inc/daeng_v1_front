@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Control, FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
+import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import useDetectClose from "hooks/common/useDetectClose";
 import useGetBreed from "hooks/api/useGetBreed";
 import SearchInputField from "components/common/InputField/SearchInputField";
@@ -8,12 +8,12 @@ import showToast from "utils/showToast";
 
 interface IBreedInput {
   name: string;
-  control: Control<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   watch: UseFormWatch<FieldValues>;
+  isRequired?: boolean;
 }
 
-const BreedInput = ({ name, control, setValue, watch }: IBreedInput) => {
+const BreedInput = ({ name, setValue, watch, isRequired = false }: IBreedInput) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
   const value = watch(`${name}`) ? watch(`${name}`) : "";
@@ -42,13 +42,13 @@ const BreedInput = ({ name, control, setValue, watch }: IBreedInput) => {
     <div ref={dropDownRef} style={{ position: "relative" }}>
       <SearchInputField
         name={name}
-        control={control}
         placeholder="견종을 입력해주세요"
         onChange={() => {
           setValue("breedId", 0);
         }}
         value={value}
         setValue={setValue}
+        isRequired={isRequired}
       />
       {isOpen && isSuccess && data && (
         <BreedDropDown

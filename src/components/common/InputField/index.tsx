@@ -1,30 +1,29 @@
 import React from "react";
-import { Control, UseControllerProps, useController } from "react-hook-form";
+import { ValidationRule, useFormContext } from "react-hook-form";
 
 import * as S from "./styles";
 
 export interface InputFieldProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "name" | "disabled">,
-    UseControllerProps {
-  control: Control;
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "pattern"> {
+  name: string;
+  isRequired?: boolean;
+  pattern?: ValidationRule<RegExp>;
 }
 
 const InputField = ({
-  control,
   name,
-  rules,
-  defaultValue,
+  isRequired,
+  pattern,
   placeholder,
   disabled = false,
   ...inputProps
 }: InputFieldProps) => {
-  const { field } = useController({ control, name, rules, defaultValue });
+  const { register } = useFormContext();
 
   return (
     <S.Input
-      {...field}
-      id={field.name}
-      value={field.value ? field.value : ""}
+      {...register(name || "", { required: isRequired, pattern })}
+      id={name}
       disabled={disabled}
       placeholder={placeholder}
       {...inputProps}
