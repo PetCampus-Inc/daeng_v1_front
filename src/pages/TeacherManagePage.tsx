@@ -12,8 +12,10 @@ import WaitingTeacherList from "components/Admin/SchoolManage/TeacherList/Waitin
 const TeacherManagePage = () => {
   const navigate = useNavigate();
   const [isEditable, setIsEditable] = useState(false);
-  const { data } = useGetTeacherList(2, 1);
-
+  const [changed, setChanged] = useState(false);
+  const { data } = useGetTeacherList(1, 1, changed);
+  console.log(data?.teacherList);
+  console.log(data?.pendingList);
   if (!data) return <div>로딩중..</div>;
 
   return (
@@ -23,7 +25,7 @@ const TeacherManagePage = () => {
         <TeacherInfoTitle isEditable={isEditable} setIsEditable={setIsEditable} />
         <EnrolledTeacherList teacherList={data.teacherList} isEditable={isEditable} />
         <TitleWithIcon title="승인 대기중인 교사" />
-        <WaitingTeacherList teacherList={data.pendingList} />
+        <WaitingTeacherList teacherList={data.pendingList} setChanged={setChanged} />
       </PageContainer>
     </Background>
   );

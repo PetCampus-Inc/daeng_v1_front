@@ -11,9 +11,10 @@ import showToast from "utils/showToast";
 
 interface TeacherInfoWithTwoBtnProps {
   data: ITeacherInfo;
+  setChanged?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TeacherInfoWithTwoBtn = ({ data }: TeacherInfoWithTwoBtnProps) => {
+const TeacherInfoWithTwoBtn = ({ data, setChanged }: TeacherInfoWithTwoBtnProps) => {
   const [isShow, setIsShow] = useState(true);
   const { adminId, teacherName, phoneNumber } = data;
   const mutateApproveAdmin = useApproveTeacherMutation();
@@ -21,6 +22,9 @@ const TeacherInfoWithTwoBtn = ({ data }: TeacherInfoWithTwoBtnProps) => {
 
   const approveFunc = () => {
     mutateApproveAdmin(adminId, {
+      onSuccess: () => {
+        setChanged && setChanged((prev) => !prev);
+      },
       onError: () => {
         showToast("승인에 실패했습니다. 다시 시도해주세요.", "bottom");
         return;

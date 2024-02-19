@@ -5,9 +5,10 @@ import { LayoutGroup } from "framer-motion";
 
 interface WaitingTeacherListProps {
   teacherList: ITeacherInfo[];
+  setChanged?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const WaitingTeacherList = ({ teacherList }: WaitingTeacherListProps) => {
+const WaitingTeacherList = ({ teacherList, setChanged }: WaitingTeacherListProps) => {
   if (!teacherList || teacherList.length === 0) {
     return <S.TextContainer>승인 대기중인 교사가 없어요.</S.TextContainer>;
   }
@@ -16,7 +17,7 @@ const WaitingTeacherList = ({ teacherList }: WaitingTeacherListProps) => {
     <S.ListBox>
       <LayoutGroup>
         {teacherList.map((info) => (
-          <TeacherInfoWithTwoBtn key={info.adminId} data={info} />
+          <TeacherInfoWithTwoBtn key={info.adminId} data={info} setChanged={setChanged} />
         ))}
       </LayoutGroup>
     </S.ListBox>
