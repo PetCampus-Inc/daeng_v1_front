@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { PATH } from "constants/path";
 
 const SubmitForm = () => {
-  const { handleSubmit } = useForm();
+  const { handleSubmit, register } = useForm();
 
   const formData = useRecoilValue(enrollmentFormAtom);
   const mutateForm = useFormMutation();
@@ -40,7 +40,7 @@ const SubmitForm = () => {
     <form>
       <S.TopWrapper>
         <S.Title>가입신청서의 이름을 작성해주세요</S.Title>
-        <InputField name="formName" placeholder={defaultFormName} />
+        <InputField name="formName" register={register} placeholder={defaultFormName} />
       </S.TopWrapper>
       <S.Button type="submit" onClick={onSubmit} aria-label="제출하기">
         완료

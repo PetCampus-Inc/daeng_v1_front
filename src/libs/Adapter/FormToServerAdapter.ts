@@ -33,7 +33,7 @@ export class FormToServerAdapter {
 
   adapt(): IRequestAdminEnrollment {
     return {
-      schoolId: 1,
+      schoolId: 3,
       adminId: 2,
       formName: null,
       openDays: this.value.openDays || [],

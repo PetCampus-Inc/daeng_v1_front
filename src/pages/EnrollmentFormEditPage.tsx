@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
@@ -45,6 +46,7 @@ const EnrollmentFormEditPage = () => {
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -80,7 +82,7 @@ const EnrollmentFormEditPage = () => {
           </ContentWrapper>
           <ButtonContainer>
             <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
-            <SubmitButton type="EDIT" />
+            <SubmitButton type="EDIT" setModal={setIsModalOpen} />
           </ButtonContainer>
         </FormProvider>
       </Container>
