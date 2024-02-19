@@ -1,5 +1,5 @@
 import React from "react";
-import { ValidationRule, useFormContext } from "react-hook-form";
+import { FieldValues, UseFormRegister, ValidationRule } from "react-hook-form";
 
 import * as S from "./styles";
 
@@ -8,6 +8,7 @@ export interface InputFieldProps
   name: string;
   isRequired?: boolean;
   pattern?: ValidationRule<RegExp>;
+  register?: UseFormRegister<FieldValues>;
 }
 
 const InputField = ({
@@ -16,17 +17,16 @@ const InputField = ({
   pattern,
   placeholder,
   disabled = false,
-  ...inputProps
+  register,
+  ...props
 }: InputFieldProps) => {
-  const { register } = useFormContext();
-
   return (
     <S.Input
-      {...register(name || "", { required: isRequired, pattern })}
+      {...(register && register(name || "", { required: isRequired, pattern }))}
       id={name}
       disabled={disabled}
       placeholder={placeholder}
-      {...inputProps}
+      {...props}
     />
   );
 };
