@@ -15,7 +15,7 @@ interface PolicyInfoProps {
 }
 
 const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
-  const { control, setValue, watch, register } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
   const allChecked = watch("all");
   const watchTerms = watch(["limitsInfo", "accidentInfo", "abandonmentInfo"]);
 
@@ -56,7 +56,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea
           name="limitsInfoField"
-          register={register}
           defaultValue={info.limitsInfo}
           isChecked={watchTerms[0]}
           disabled
@@ -80,7 +79,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea
           name="accidentInfoField"
-          register={register}
           defaultValue={info.accidentInfo}
           isChecked={watchTerms[1]}
           disabled
@@ -104,7 +102,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea
           name="abandonmentInfoField"
-          register={register}
           defaultValue={info.abandonmentInfo}
           isChecked={watchTerms[2]}
           disabled
