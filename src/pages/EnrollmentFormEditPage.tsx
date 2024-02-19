@@ -22,40 +22,33 @@ import {
   TitleWrapper,
   Title,
   SubTitle,
+  Content,
   ContentWrapper,
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
-import { useEffect } from "react";
 
 const EnrollmentFormEditPage = () => {
   const { formId } = useParams();
   if (!formId) throw new Error("잘못된 formId 입니다");
 
-  const { data } = useAdminEnrollQuery(formId);
-  const REQUIRED_ITEMS = data?.requiredItemsMap;
+  const { data, isLoading } = useAdminEnrollQuery(formId);
 
   const methods = useForm({
     mode: "onBlur",
-    shouldUnregister: false
+    shouldUnregister: false,
+    defaultValues: data
   });
 
   const currentSteps = ADMIN_CREATE_FORM_STEP;
-  const { currentStep, setStep } = useStep(0, currentSteps.length - 1);
+  const { currentStep, setStep } = useStep(currentSteps.length - 1);
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
-  // FIXME: 최초 한번만 실행되면 되지만 이 페이지는 자주 언마운트 되기 때문에 메모리 낭비되고 있는 상황입니다. 수정이 필요합니다.
-  useEffect(() => {
-    if (REQUIRED_ITEMS) {
-      REQUIRED_ITEMS.forEach((isRequired, key) => {
-        const fieldName = `requiredItemList.${key}`;
-        methods.setValue(fieldName, isRequired);
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [REQUIRED_ITEMS]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -69,17 +62,21 @@ const EnrollmentFormEditPage = () => {
         </TopWrapper>
         <FormProvider {...methods}>
           <ContentWrapper>
-            {currentStep === 0 && <MemberInfo requiredItems={data?.requiredItemsMap} />}
-            {currentStep === 1 && <DogInfo requiredItems={data?.requiredItemsMap} />}
-            {currentStep === 2 && (
-              <TicketInfo info={data?.ticketInfo} requiredItems={data?.requiredItemsMap} />
-            )}
-            {currentStep === 3 && (
-              <PolicyInfo info={data?.policyInfo} requiredItems={data?.requiredItemsMap} />
-            )}
-            {currentStep === 4 && (
-              <PickDropInfo info={data?.pickDropInfo} requiredItems={data?.requiredItemsMap} />
-            )}
+            <Content $isVisible={currentStep === 0}>
+              <MemberInfo />
+            </Content>
+            <Content $isVisible={currentStep === 1}>
+              <DogInfo />
+            </Content>
+            <Content $isVisible={currentStep === 2}>
+              <TicketInfo />
+            </Content>
+            <Content $isVisible={currentStep === 3}>
+              <PolicyInfo />
+            </Content>
+            <Content $isVisible={currentStep === 3}>
+              <PickDropInfo />
+            </Content>
           </ContentWrapper>
           <ButtonContainer>
             <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>

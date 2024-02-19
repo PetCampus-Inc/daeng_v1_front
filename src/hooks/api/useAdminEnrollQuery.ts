@@ -1,65 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetAdminForm } from "apis/school.api";
+import { Adapter } from "libs/Adapter";
+import { ServerToFormAdapter } from "libs/Adapter/ServerToFormAdapter";
 
-import type {
-  IEnrollment,
-  IMemberDto,
-  IPickDropInfo,
-  IPolicyInfo,
-  ITicketInfo
-} from "types/School.type";
+import type { IAdminEnrollment } from "types/School.type";
 
-interface EnrollmentProps {
-  requiredItemsMap: Map<number, boolean>;
-  memberInfo: IMemberDto | null;
-  ticketInfo: ITicketInfo;
-  policyInfo: IPolicyInfo;
-  pickDropInfo: IPickDropInfo;
-}
+type AdaptedData = Omit<
+  IAdminEnrollment,
+  "requiredItemList" | "roundTicketNumber" | "monthlyTicketNumber" | "ticketType" | "pickDropState"
+>;
 
 export const useAdminEnrollQuery = (formId: string) => {
-  const enlistmentQuery = useQuery<IEnrollment, Error, EnrollmentProps>({
+  const enlistmentQuery = useSuspenseQuery<IAdminEnrollment, Error, AdaptedData>({
     queryKey: ["enrollment", formId],
     queryFn: () => handleGetAdminForm({ formId }),
-    select: (data) => {
-      // 이용권 정보
-      const selectTicketInfo = () => ({
-        priceInfo: data.priceInfo,
-        ticketType: data.ticketType,
-        roundTicketNumber: data.roundTicketNumber,
-        openDays: data.openDays,
-        monthlyTicketNumber: data.monthlyTicketNumber,
-        ticketInfo: data.ticketInfo
-      });
-
-      // 정책 정보
-      const selectPolicyInfo = () => ({
-        limitsInfo: data.limitsInfo,
-        accidentInfo: data.accidentInfo,
-        abandonmentInfo: data.abandonmentInfo
-      });
-
-      // 픽드랍 정보
-      const selectPickDrop = () => ({
-        pickDropState: data.pickDropState,
-        pickDropMemo: data.pickDropMemo,
-        pickDropInfo: data.pickDropInfo,
-        pickDropNotice: data.pickDropNotice
-      });
-
-      // 필수 항목 리스트
-      const requiredItemsMap: Map<number, boolean> = new Map(
-        data.requiredItemList.map((itemNumber: number) => [itemNumber, true])
-      );
-
-      return {
-        requiredItemsMap,
-        memberInfo: data.memberDto,
-        ticketInfo: selectTicketInfo(),
-        policyInfo: selectPolicyInfo(),
-        pickDropInfo: selectPickDrop()
-      };
-    }
+    select: (data) =>
+      Adapter.from(data).to<IAdminEnrollment, AdaptedData>((item) =>
+        new ServerToFormAdapter(item).adapt()
+      )
   });
 
   return enlistmentQuery;

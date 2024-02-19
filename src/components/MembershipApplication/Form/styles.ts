@@ -17,3 +17,4 @@ export const Caption = styled.p`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.gray_3};
 `;
+export { Label } from "components/common/Title/style";
