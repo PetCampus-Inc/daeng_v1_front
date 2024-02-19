@@ -74,7 +74,7 @@ const EnrollmentFormEditPage = () => {
             <Content $isVisible={currentStep === 3}>
               <PolicyInfo />
             </Content>
-            <Content $isVisible={currentStep === 3}>
+            <Content $isVisible={currentStep === 4}>
               <PickDropInfo />
             </Content>
           </ContentWrapper>

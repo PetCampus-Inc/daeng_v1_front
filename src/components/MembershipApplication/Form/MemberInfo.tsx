@@ -5,7 +5,7 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import InputField from "components/common/InputField";
 import SearchInputField from "components/common/InputField/SearchInputField";
 import { ITEM_KEYS } from "constants/item";
-import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
+import { PHONE_REGEX } from "constants/validCheck";
 import { formatPhoneNumber } from "utils/formatter";
 
 import { useEffect, useState } from "react";
@@ -46,12 +46,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
       )}
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
-        <InputField
-          name="memberName"
-          isRequired
-          pattern={NAME_REGEX}
-          placeholder="견주 이름을 입력해주세요"
-        />
+        <InputField name="memberName" isRequired placeholder="견주 이름을 입력해주세요" />
       </Card>
       <Card>
         <Title>성별</Title>
@@ -70,6 +65,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           }}
           value={watchAddress}
           setValue={setValue}
+          isRequired={requiredItems.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
         />
         {isAddressActive && (
