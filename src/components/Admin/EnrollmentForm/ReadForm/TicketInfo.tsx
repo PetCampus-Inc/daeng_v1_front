@@ -12,6 +12,7 @@ interface TicketInfoProps {
   ticket?: {
     roundTicketNumber: number[];
     monthlyTicketNumber: number[];
+    openDays: string[];
   };
   item?: Map<number, boolean>;
 }
@@ -48,7 +49,7 @@ const TicketInfo = ({ ticket, item }: TicketInfoProps) => {
         ))}
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
-        <DayMultiCheck name="openDays" readOnly isPreviewMode />
+        <DayMultiCheck name="openDays" openDays={ticket?.openDays} disabled isPreviewMode />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>

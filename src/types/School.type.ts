@@ -49,7 +49,7 @@ export interface IAdminEnrollment {
   limitsInfo: string;
   accidentInfo: string;
   abandonmentInfo: string;
-  pickDropState: string;
+  pickDropState: TPickDropState;
   pickDropMemo: string;
   pickDropInfo: string;
   pickDropNotice: string;
@@ -66,7 +66,7 @@ export interface IMemberDto {
 
 export interface ITicketInfo {
   priceInfo: string;
-  ticketType: TTicketType[];
+  ticketType: string[];
   roundTicketNumber: TRoundTicketNumber;
   openDays: string[];
   monthlyTicketNumber: TMonthlyTicketNumber;

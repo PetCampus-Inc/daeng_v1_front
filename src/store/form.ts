@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import type { IRequestForm } from "types/School.type";
+import type { IRequestAdminEnrollment } from "types/School.type";
 
 export const currentStepState = atom({
   key: "currentStepState",
@@ -16,7 +16,7 @@ export const imagePreviewAtom = atom<ImageFile[]>({
   default: []
 });
 
-export const enrollmentFormAtom = atom<IRequestForm>({
+export const enrollmentFormAtom = atom<IRequestAdminEnrollment>({
   key: "enrollmentFormAtom",
   default: {
     schoolId: -1,

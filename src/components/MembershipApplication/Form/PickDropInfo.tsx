@@ -33,7 +33,6 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
         <>
           <Card>
             <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_TYPE)}>픽드랍 유형</Title>
-
             <SingleRadio
               name="pickDropType"
               radiosText={["편도", "왕복"]}

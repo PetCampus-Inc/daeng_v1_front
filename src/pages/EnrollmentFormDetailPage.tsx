@@ -29,8 +29,14 @@ const EnrollmentFormDetailPage = () => {
   if (!formId) throw new Error("잘못된 formId 입니다");
 
   const { data, isLoading } = useAdminEnrollQuery(formId, "READ");
-  const { requiredItemList, roundTicketNumber, monthlyTicketNumber, ticketType, ...rest } =
-    data as AdaptedData<"READ">;
+  const {
+    requiredItemList,
+    roundTicketNumber,
+    monthlyTicketNumber,
+    ticketType,
+    openDays,
+    ...rest
+  } = data as AdaptedData<"READ">;
 
   const methods = useForm({
     mode: "onBlur",
@@ -51,7 +57,8 @@ const EnrollmentFormDetailPage = () => {
 
   const ticket = {
     roundTicketNumber,
-    monthlyTicketNumber
+    monthlyTicketNumber,
+    openDays
   };
 
   return (
