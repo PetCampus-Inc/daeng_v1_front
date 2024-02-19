@@ -55,7 +55,7 @@ const EnrollmentFormListPage = () => {
         text="등록된 가입신청서"
         handleClick={() => navigate("/admin/schoolManage/enrollment")}
       />
-      <PageContainer>
+      <PageContainer paddingTop="32px">
         <TitleWithIcon
           title="가입신청서 목록"
           icon={

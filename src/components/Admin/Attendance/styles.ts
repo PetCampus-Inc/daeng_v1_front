@@ -9,8 +9,6 @@ export const Container = styled.div`
 
 export const StyledHeadWrapper = styled.div`
   height: 20%;
-  padding-left: 4%;
-  padding-right: 4%;
 `;
 
 export const StyledMainWrapper = styled.div`
@@ -18,7 +16,6 @@ export const StyledMainWrapper = styled.div`
   height: 65%;
   height: 65%;
   width: 100%;
-  margin-top: 15%;
   justify-content: space-between;
   align-items: center;
 `;

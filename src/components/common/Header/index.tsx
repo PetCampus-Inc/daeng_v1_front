@@ -19,7 +19,7 @@ header type
 */
 
 interface Props {
-  type: string;
+  type: "main" | "back" | "text" | "notice";
   handleClick?: () => void | Promise<void>;
   text?: string;
   size?: string;

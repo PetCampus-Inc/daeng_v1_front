@@ -7,7 +7,7 @@ const AttendancePage = () => {
   const [isNavHidden, setIsNavHidden] = useState(false);
   return (
     <>
-      <Header type="main" />
+      <Header type="notice" text="출석부" />
       <Attendance setIsNavHidden={setIsNavHidden} />
       <Navbar type="admin" show={isNavHidden ? "none" : "flex"} />
     </>
