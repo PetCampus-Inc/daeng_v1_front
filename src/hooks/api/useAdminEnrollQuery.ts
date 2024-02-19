@@ -1,23 +1,40 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetAdminForm } from "apis/school.api";
 import { Adapter } from "libs/Adapter";
-import { ServerToFormAdapter } from "libs/Adapter/ServerToFormAdapter";
+import { ReadModeAdapter, EditModeAdapter } from "libs/Adapter/ServerToFormAdapter";
 
 import type { IAdminEnrollment } from "types/School.type";
 
-type AdaptedData = Omit<
+export type AdaptedData<Mode extends "READ" | "EDIT"> = Omit<
   IAdminEnrollment,
-  "requiredItemList" | "roundTicketNumber" | "monthlyTicketNumber" | "ticketType" | "pickDropState"
->;
+  "requiredItemList" | "pickDropState" | "roundTicketNumber" | "monthlyTicketNumber"
+> & {
+  requiredItemList: Mode extends "READ" ? Map<number, boolean> : boolean[];
+  pickDropState: string;
+  roundTicketNumber: Mode extends "READ"
+    ? number[]
+    : {
+        value: number;
+      }[];
+  monthlyTicketNumber: Mode extends "READ"
+    ? number[]
+    : {
+        value: number;
+      }[];
+};
 
-export const useAdminEnrollQuery = (formId: string) => {
-  const enlistmentQuery = useSuspenseQuery<IAdminEnrollment, Error, AdaptedData>({
+type Mode = "READ" | "EDIT";
+
+export const useAdminEnrollQuery = (formId: string, mode: Mode) => {
+  const enlistmentQuery = useSuspenseQuery<IAdminEnrollment, Error, AdaptedData<typeof mode>>({
     queryKey: ["enrollment", formId],
     queryFn: () => handleGetAdminForm({ formId }),
     select: (data) =>
-      Adapter.from(data).to<IAdminEnrollment, AdaptedData>((item) =>
-        new ServerToFormAdapter(item).adapt()
-      )
+      Adapter.from(data).to<IAdminEnrollment, AdaptedData<typeof mode>>((item) => {
+        const adapterInstance =
+          mode === "READ" ? new ReadModeAdapter(item) : new EditModeAdapter(item);
+        return adapterInstance.adapt();
+      })
   });
 
   return enlistmentQuery;

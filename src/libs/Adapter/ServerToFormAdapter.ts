@@ -1,14 +1,41 @@
 import { getMapValue } from "utils/formatter";
 import type { IAdminEnrollment } from "types/School.type";
 
-export class ServerToFormAdapter {
-  private value: IAdminEnrollment;
+class ServerToFormAdapter {
+  protected value: IAdminEnrollment;
 
   constructor(obj: IAdminEnrollment) {
     this.value = obj;
   }
 
-  get requiredItemList(): boolean[] {
+  get ticketType(): string[] {
+    return this.value.ticketType.map((type) => getMapValue("ticketType", type));
+  }
+
+  get pickDropState(): string {
+    return getMapValue("pickDropState", this.value.pickDropState);
+  }
+}
+
+export class ReadModeAdapter extends ServerToFormAdapter {
+  getRequiredItemList(): Map<number, boolean> {
+    return new Map(this.value.requiredItemList.map((itemNumber: number) => [itemNumber, true]));
+  }
+
+  adapt() {
+    return {
+      ...this.value,
+      requiredItemList: this.getRequiredItemList(),
+      ticketType: this.ticketType,
+      roundTicketNumber: this.value.roundTicketNumber,
+      monthlyTicketNumber: this.value.monthlyTicketNumber,
+      pickDropState: this.pickDropState
+    };
+  }
+}
+
+export class EditModeAdapter extends ServerToFormAdapter {
+  getRequiredItemList(): boolean[] {
     const maxNumber = Math.max(...this.value.requiredItemList);
     const itemList = new Array(maxNumber + 1).fill(false);
 
@@ -19,14 +46,6 @@ export class ServerToFormAdapter {
     });
 
     return itemList;
-  }
-
-  get ticketType(): string[] {
-    return this.value.ticketType.map((type) => getMapValue("ticketType", type));
-  }
-
-  get pickDropState(): string {
-    return getMapValue("pickDropState", this.value.pickDropState);
   }
 
   get roundTicketNumber() {
@@ -40,7 +59,7 @@ export class ServerToFormAdapter {
   adapt() {
     return {
       ...this.value,
-      requiredItemList: this.requiredItemList,
+      requiredItemList: this.getRequiredItemList(),
       ticketType: this.ticketType,
       roundTicketNumber: this.roundTicketNumber,
       monthlyTicketNumber: this.monthlyTicketNumber,
