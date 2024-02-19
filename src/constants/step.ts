@@ -62,8 +62,7 @@ export const ADMIN_CREATE_FORM_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "픽드랍 운영시 픽드랍 안내사항을 입력해 주세요",
     indicator: "픽드랍",
-    isVisible: (pickDropInfo: IPickDropInfo | undefined) =>
-      !pickDropInfo || pickDropInfo.pickDropState === "RUNNING"
+    isVisible: () => true
   }
 ] as const;
 
@@ -96,7 +95,7 @@ export const ADMIN_READ_FORM_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "견주가 볼 가입신청서 화면이에요",
     indicator: "픽드랍",
-    isVisible: (pickDropInfo: IPickDropInfo) => pickDropInfo?.pickDropState === "RUNNING"
+    isVisible: (pickDropState: string) => pickDropState === "운영"
   }
 ] as const;
 
