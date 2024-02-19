@@ -184,6 +184,5 @@ export const handlePostDenyTeacher = async (adminId: number): Promise<IResponse>
 export const handleDeleteTeacher = async (adminId: number): Promise<IResponse> => {
   const url: string = `admin/delete/teacher?adminId=${adminId}`;
   const { data } = await customAxios.post(url);
-  console.log(data);
   return data;
 };
