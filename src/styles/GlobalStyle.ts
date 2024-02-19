@@ -6,7 +6,6 @@ ${reset}
 
 *{
   box-sizing: border-box;
-  font-family: "Pretendard";
 }
 
 .swiper-button-next::after,
@@ -89,7 +88,7 @@ body {
   scrollbar-width: none;
   margin: 0;
   padding: 0;
-  font-family: "Pretendard";
+  font-family: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   -ms-overflow-style: none; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
