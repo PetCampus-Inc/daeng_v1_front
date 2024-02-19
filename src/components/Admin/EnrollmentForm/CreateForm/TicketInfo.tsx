@@ -36,14 +36,18 @@ const TicketInfo = () => {
           가격 안내
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
-        <TextArea name="priceInfo" placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다." />
+        <TextArea
+          name="priceInfo"
+          placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다."
+          isRequired
+        />
       </Card>
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_TYPE}`} control={control} hasBadge>
           이용권 종류
         </AdminTitle>
         <Caption>복수 선택이 가능해요</Caption>
-        <MultiCheck name="ticketType" radiosText={["정기권", "회차권"]} />
+        <MultiCheck name="ticketType" radiosText={["정기권", "회차권"]} isRequired />
       </Card>
       {isMonthlySelected && (
         <Card>
@@ -86,13 +90,13 @@ const TicketInfo = () => {
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
-        <DayMultiCheck name="openDays" defaultChecked />
+        <DayMultiCheck name="openDays" defaultChecked isRequired />
       </Card>
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`} control={control} hasBadge>
           유의사항
         </AdminTitle>
-        <TextArea name="ticketInfo" placeholder="유의사항을 입력해 주세요" />
+        <TextArea name="ticketInfo" placeholder="유의사항을 입력해 주세요" isRequired />
         <Stack>
           <Checkbox name="null" disabled>
             동의합니다
