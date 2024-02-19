@@ -1,59 +1,51 @@
-import { useState } from "react";
-import { FieldValues, useFormContext } from "react-hook-form";
+import type { Dispatch, SetStateAction } from "react";
+import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { enrollmentFormAtom } from "store/form";
+import { currentStepState, enrollmentFormAtom } from "store/form";
 import { Adapter } from "libs/Adapter";
 import { FormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
-import ButtonModal from "components/common/ButtonModal";
 import { PATH } from "constants/path";
 
 import type { IRequestAdminEnrollment } from "types/School.type";
 import * as S from "./styles";
+import { FIELD_TO_STEP } from "constants/step";
 interface SubmitButtonProps {
   type?: "READ" | "CREATE" | "EDIT";
+  setModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const SubmitButton = ({ type }: SubmitButtonProps) => {
-  const {
-    handleSubmit,
-    formState: { isValid }
-  } = useFormContext();
+const SubmitButton = ({ type, setModal }: SubmitButtonProps) => {
+  const { handleSubmit } = useFormContext();
   const setEnrollmentForm = useSetRecoilState(enrollmentFormAtom);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const setStep = useSetRecoilState(currentStepState);
+
   const navigate = useNavigate();
 
   const text = type === "EDIT" ? "수정 완료" : "가입 신청서 등록";
 
-  const onSubmit = handleSubmit((data) => {
-    if (!isValid) setIsModalOpen(true);
-
+  const onSubmit = (data: FieldValues) => {
     const requestData = Adapter.from(data).to<FieldValues, IRequestAdminEnrollment>((item) =>
       new FormToServerAdapter(item).adapt()
     );
 
-    console.log(requestData);
-
     setEnrollmentForm(requestData);
     navigate(PATH.ADMIN_SUBMIT_FORM);
-  });
+  };
+
+  const onInvalid = (errors: FieldErrors) => {
+    const firstErrorField = Object.keys(errors)[0];
+    const step = FIELD_TO_STEP.get(firstErrorField);
+    if (step !== undefined) {
+      setStep(step);
+      setModal(true);
+    }
+  };
 
   return (
-    <>
-      {isModalOpen && (
-        <ButtonModal
-          maintext="가입신청서를 완성해 주세요"
-          subtext="선택 입력으로 변경하거나 내용을 입력해 주세요"
-          closebutton="닫기"
-          actionbutton="돌아가기"
-          closefunc={() => setIsModalOpen(false)}
-          actionfunc={() => setIsModalOpen(false)}
-        />
-      )}
-      <S.Button type="submit" onClick={onSubmit} aria-label="제출하기" disabled={!isValid}>
-        {text}
-      </S.Button>
-    </>
+    <S.Button type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
+      {text}
+    </S.Button>
   );
 };
 

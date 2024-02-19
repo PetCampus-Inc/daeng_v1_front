@@ -35,7 +35,7 @@ const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: Navigation
         <S.ButtonWrapper>
           {!isFirstStep && !isLastStep && <S.PrevButton onClick={prevStep}>이전</S.PrevButton>}
           {!isLastStep && <S.Button onClick={nextStep}>다음</S.Button>}
-          {isLastStep && <SubmitButton setIsVisible={setIsVisible} />}
+          {isLastStep && <SubmitButton setModal={setIsVisible} />}
         </S.ButtonWrapper>
       </S.ButtonContainer>
     </>

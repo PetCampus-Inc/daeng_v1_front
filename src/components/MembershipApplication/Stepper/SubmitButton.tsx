@@ -9,10 +9,10 @@ import { EnrollmentFormTransformer } from "utils/formTransformer";
 import { FIELD_TO_STEP } from "constants/step";
 
 interface Props {
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
+  setModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const SubmitButton = ({ setIsVisible }: Props) => {
+const SubmitButton = ({ setModal }: Props) => {
   const { handleSubmit } = useFormContext();
   const setStep = useSetRecoilState(currentStepState);
   const enrollMutation = useEnrollMutation();
@@ -30,16 +30,14 @@ const SubmitButton = ({ setIsVisible }: Props) => {
     const step = FIELD_TO_STEP.get(firstErrorField);
     if (step !== undefined) {
       setStep(step);
-      setIsVisible(true);
+      setModal(true);
     }
   };
 
   return (
-    <>
-      <S.Button type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
-        제출하기
-      </S.Button>
-    </>
+    <S.Button type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
+      제출하기
+    </S.Button>
   );
 };
 
