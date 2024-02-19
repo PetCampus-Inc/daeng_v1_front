@@ -1,6 +1,11 @@
 import { atom } from "recoil";
 import type { IRequestForm } from "types/School.type";
 
+export const currentStepState = atom({
+  key: "currentStepState",
+  default: 0
+});
+
 export interface ImageFile {
   file: File;
   preview: string;
