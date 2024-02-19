@@ -1,11 +1,12 @@
 import Text from "components/common/Text";
-import * as S from "./styles";
+import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
 import { ThemeConfig } from "styles/ThemeConfig";
+
 import AboutDog from "./AboutDog";
 import AboutOwner from "./AboutOwner";
 import Memo from "./Memo";
+import * as S from "./styles";
 import { InnerContainer } from "../styles";
-import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
 
 const DogInfo = () => {
   const { data } = useGetDogAndMemberDetail(2); //FIXME: 나영이꺼 머지되면 queryString에서 가져오기

@@ -1,6 +1,6 @@
-import Calendar from "../DogInfo/Calendar";
 import DailyNotice from "./DailyNotice";
 import * as S from "./styles";
+import Calendar from "../DogInfo/Calendar";
 
 const AttendanceRecord = () => {
   return (

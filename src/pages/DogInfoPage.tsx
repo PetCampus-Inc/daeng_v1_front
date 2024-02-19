@@ -1,20 +1,21 @@
-import Header from "components/common/Header";
-import DogInfo from "components/Admin/DogDetailInfo/DogInfo";
 import { ADMIN_DOG_DETAIL_INFO_STEP } from "constants/step";
-import useStep from "hooks/common/useStep";
+
+import GalleryIcon from "assets/svg/gallery-icon";
 import AttendanceRecord from "components/Admin/DogDetailInfo/AttendanceRecord";
-import Ticket from "components/Admin/DogDetailInfo/Ticket";
+import DogInfo from "components/Admin/DogDetailInfo/DogInfo";
 import Notice from "components/Admin/DogDetailInfo/Notice";
-import { PageContainer } from "styles/StyleModule";
 import {
   ContentWrapper,
   NavItem,
   NavWrapper,
   Underline
 } from "components/Admin/DogDetailInfo/styles";
-import { ThemeConfig } from "styles/ThemeConfig";
+import Ticket from "components/Admin/DogDetailInfo/Ticket";
+import Header from "components/common/Header";
+import useStep from "hooks/common/useStep";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import GalleryIcon from "assets/svg/gallery-icon";
+import { PageContainer } from "styles/StyleModule";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 const DogInfoPage = () => {
   const navigate = useNavigate();
