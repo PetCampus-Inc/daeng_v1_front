@@ -15,12 +15,7 @@ interface Props {
   sortName: string;
 }
 
-const SortModal = ({
-  setIsSortClicked,
-  setDogLists,
-  setSortName,
-  sortName,
-}: Props) => {
+const SortModal = ({ setIsSortClicked, setDogLists, setSortName, sortName }: Props) => {
   const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
   const {
@@ -28,18 +23,13 @@ const SortModal = ({
     handleGetSortPayment,
     handleGetSortCharge,
     handleGetSortDate,
-    newDogsList,
+    newDogsList
   } = useSortDogs();
 
   return (
     <Container>
       <StyledMainWrapper>
-        <Text
-          text="정렬"
-          color={ThemeConfig.colors.black}
-          weight="700"
-          size="1.1rem"
-        />
+        <Text text="정렬" color={ThemeConfig.colors.black} weight="700" size="1.1rem" />
         <StyledButtonWrapper>
           <Button
             height="22%"
@@ -85,9 +75,7 @@ const SortModal = ({
             }}
             backcolor={ThemeConfig.colors.white}
             textcolor={
-              sortName === LIST.DATE
-                ? ThemeConfig.colors.primaryColor
-                : ThemeConfig.colors.gray_1
+              sortName === LIST.DATE ? ThemeConfig.colors.primaryColor : ThemeConfig.colors.gray_1
             }
             weight={sortName === LIST.DATE ? "800" : ""}
             text={LIST.DATE}
@@ -102,9 +90,7 @@ const SortModal = ({
             }}
             backcolor={ThemeConfig.colors.white}
             textcolor={
-              sortName === LIST.CHARGE
-                ? ThemeConfig.colors.primaryColor
-                : ThemeConfig.colors.gray_1
+              sortName === LIST.CHARGE ? ThemeConfig.colors.primaryColor : ThemeConfig.colors.gray_1
             }
             weight={sortName === LIST.CHARGE ? "800" : ""}
             text={LIST.CHARGE}
@@ -123,8 +109,8 @@ const SortModal = ({
                 dogName: dogInfo.dogName,
                 allRounds: dogInfo.allRounds,
                 currentRounds: dogInfo.currentRounds,
-                monthlyTicket: dogInfo.monthlyTicket,
-              })),
+                monthlyTicket: dogInfo.monthlyTicket
+              }))
             }));
             setIsSortClicked(false);
           }}
@@ -138,7 +124,7 @@ export default SortModal;
 
 const LIST = {
   REGISTERD: "유치원 등록순",
-  PAYMENT: "결제 임박순",
+  PAYMENT: "이용권 만료 임박순",
   DATE: "최근 등원순",
-  CHARGE: "자주 맡은 강아지순",
+  CHARGE: "자주 맡은 강아지순"
 };

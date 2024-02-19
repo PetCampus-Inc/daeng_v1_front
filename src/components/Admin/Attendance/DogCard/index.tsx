@@ -1,16 +1,7 @@
 import { Dispatch, SetStateAction, memo, useEffect, useRef, useState } from "react";
-import {
-  Container,
-  StyledBlur,
-  StyledImage,
-  StyledOptionList,
-  StyledTextWrapper,
-  TextWrapper,
-  StyledButtonWrapper
-} from "./styles";
+import { Container, StyledBlur, StyledImage, StyledTextWrapper, TextWrapper } from "./styles";
 import Text from "components/common/Text";
 import { ThemeConfig } from "styles/ThemeConfig";
-import Button from "components/common/Button";
 import { handleCallMember, handleSendAlarm } from "apis/attendance";
 import GetExpirationDate from "hooks/common/useGetExpirationDate";
 import useFormatDate from "hooks/common/useFormatDate";
@@ -18,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 import useGetDogDetail from "hooks/api/useGetDogDetail";
 import moment from "moment";
 import { PATH } from "constants/path";
+import BrownAlertIcon from "assets/svg/alert-brown";
+import GrayAlertIcon from "assets/svg/alert.gray";
+import CalendarIcon from "assets/svg/calendar";
+import OptionList from "./OptionList";
 
 interface Props {
   name?: string;
@@ -126,9 +121,9 @@ const DogCard = ({
 
   const handleOptionClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, option: string) => {
     e.stopPropagation();
-    option === "견주에게 연락하기" && handleGetCallInfo(dogId);
-    option === "회원권 알림 전송" && handlerSendAlarm(dogId);
-    option === "회원 삭제" && handleDeleteDog(dogId);
+    option === "견주에게 전화 걸기" && handleGetCallInfo(dogId);
+    option === "이용권 알림 전송하기" && handlerSendAlarm(dogId);
+    option === "강아지 삭제" && handleDeleteDog(dogId);
   };
 
   useEffect(() => {
@@ -180,20 +175,13 @@ const DogCard = ({
                     : "none"
                 }
               />
-              <StyledImage
-                src={
-                  currentRounds === 1 || currentRounds === 2 || isBeforeExpiry
-                    ? "/images/alert-brown.png"
-                    : (currentRounds === 0 && monthlyTicket === null) ||
-                        (currentRounds === 0 && isExpired)
-                      ? "/images/gray-calendar.png"
-                      : "/images/calendar.png"
-                }
-                alt="calendar-icon"
-                width="1.1rem"
-                height="1.1rem"
-                marginright="0.1rem"
-              />
+              {currentRounds === 1 || currentRounds === 2 || (isBeforeExpiry && <BrownAlertIcon />)}
+              {(currentRounds === 0 && monthlyTicket === null) ||
+              (currentRounds === 0 && isExpired) ? (
+                <GrayAlertIcon />
+              ) : (
+                <CalendarIcon />
+              )}
               <Text
                 text={
                   monthlyTicket !== null && !isExpired
@@ -244,65 +232,20 @@ const DogCard = ({
         />
       ) : null}
       {isOptionsOpen && adminRole === "ROLE_OWNER" && (
-        <StyledOptionList isopen={isOptionsOpen.toString()} ref={modalRef}>
-          {OPTIONS.owner.map((option, index) => (
-            <StyledButtonWrapper key={index}>
-              <Button
-                width="100%"
-                height="100%"
-                text={option}
-                size="0.9rem"
-                justify="flex-start"
-                backcolor={ThemeConfig.colors.white}
-                textcolor={ThemeConfig.colors.gray_2}
-                handleClick={(e) => {
-                  handleOptionClick(e, option);
-                }}
-              >
-                <StyledImage
-                  src="/images/yellow-box.png"
-                  alt="yellow-box"
-                  radius="20%"
-                  width="1.5rem"
-                  height="1.5rem"
-                />
-              </Button>
-            </StyledButtonWrapper>
-          ))}
-        </StyledOptionList>
+        <OptionList
+          isOptionsOpen={isOptionsOpen}
+          options={OPTIONS.owner}
+          handleOptionClick={handleOptionClick}
+          modalRef={modalRef}
+        />
       )}
       {isOptionsOpen && adminRole === "ROLE_TEACHER" && (
-        <StyledOptionList
-          isopen={isOptionsOpen.toString()}
-          ref={modalRef}
-          height="6rem"
-          bottom="-3.5rem"
-        >
-          {OPTIONS.teacher.map((option, index) => (
-            <StyledButtonWrapper key={index} height="50%">
-              <Button
-                width="100%"
-                height="100%"
-                text={option}
-                size="0.9rem"
-                justify="flex-start"
-                backcolor={ThemeConfig.colors.white}
-                textcolor={ThemeConfig.colors.gray_2}
-                handleClick={(e) => {
-                  handleOptionClick(e, option);
-                }}
-              >
-                <StyledImage
-                  src="/images/yellow-box.png"
-                  alt="yellow-box"
-                  radius="20%"
-                  width="1.5rem"
-                  height="1.5rem"
-                />
-              </Button>
-            </StyledButtonWrapper>
-          ))}
-        </StyledOptionList>
+        <OptionList
+          isOptionsOpen={isOptionsOpen}
+          options={OPTIONS.owner}
+          handleOptionClick={handleOptionClick}
+          modalRef={modalRef}
+        />
       )}
     </Container>
   );
@@ -311,6 +254,6 @@ const DogCard = ({
 export default memo(DogCard);
 
 const OPTIONS = {
-  owner: ["견주에게 연락하기", "회원권 알림 전송", "회원 삭제"],
-  teacher: ["견주에게 연락하기", "회원권 알림 전송"]
+  owner: ["견주에게 전화 걸기", "이용권 알림 전송하기", "강아지 삭제"],
+  teacher: ["견주에게 전화 걸기", "이용권 알림 전송하기"]
 };
