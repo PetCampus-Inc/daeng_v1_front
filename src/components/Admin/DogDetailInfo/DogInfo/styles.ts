@@ -9,6 +9,7 @@ export const Container = styled.div`
   padding-left: 4%;
   padding-right: 4%;
   overflow-y: auto;
+  background-color: ${(props) => props.theme.colors.white};
 `;
 
 export const MainTopWrapper = styled.div`

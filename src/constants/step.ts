@@ -99,3 +99,10 @@ export const ADMIN_READ_FORM_STEP = [
     isVisible: (pickDropInfo: IPickDropInfo) => pickDropInfo?.pickDropState === "RUNNING"
   }
 ] as const;
+
+export const ADMIN_DOG_DETAIL_INFO_STEP = [
+  "강아지 정보",
+  "등원 기록",
+  "이용권",
+  "유의사항"
+] as const;
