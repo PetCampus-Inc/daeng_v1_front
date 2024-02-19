@@ -14,8 +14,6 @@ const TeacherManagePage = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [changed, setChanged] = useState(false);
   const { data } = useGetTeacherList(1, 1, changed);
-  console.log(data?.teacherList);
-  console.log(data?.pendingList);
   if (!data) return <div>로딩중..</div>;
 
   return (
