@@ -6,7 +6,8 @@ import {
   IOwnerSignUpInfo,
   ITeacherApprove,
   ITeacherList,
-  ITeacherSignUpInfo
+  ITeacherSignUpInfo,
+  IWaitingOwnerInfo
 } from "types/Admin.type";
 import axios from "axios";
 import { IAdminLoginResponse } from "types/Attendance.type";
@@ -136,4 +137,52 @@ export const handleGetNewEnrollment = async (
     }
   });
   return data.data;
+};
+
+// 원장 신규관리 - 가입 신청 승인 대기중인 견주 목록
+export const handleGetWaitingOwnersList = async (
+  schoolId: number
+): Promise<IWaitingOwnerInfo[]> => {
+  const url: string = `admin/enrollment/list`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      schoolId
+    }
+  });
+  return data.data;
+};
+
+// 가입신청서 승인
+export const handlePostApproveForm = async (enrollmentFormId: number): Promise<IResponse> => {
+  const url: string = `admin/enrollment/approve?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+// 가입신청서 거절
+export const handlePostDenyForm = async (enrollmentFormId: number): Promise<IResponse> => {
+  const url: string = `admin/enrollment/deny?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+// 선생님 승인
+export const handlePostApproveTeacher = async (adminId: number): Promise<IResponse> => {
+  const url: string = `admin/approve/teacher/approval?adminId=${adminId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+// 선생님 거절
+export const handlePostDenyTeacher = async (adminId: number): Promise<IResponse> => {
+  const url: string = `admin/deny/teacher/approval?adminId=${adminId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+// 선생님 삭제 (유치원 admin에서 삭제)
+export const handleDeleteTeacher = async (adminId: number): Promise<IResponse> => {
+  const url: string = `admin/delete/teacher?adminId=${adminId}`;
+  const { data } = await customAxios.post(url);
+  return data;
 };

@@ -2,7 +2,7 @@ import NewSignUpIcon from "assets/svg/new-sign-up-icon";
 import * as S from "./styles";
 import TeacherManagementIcon from "assets/svg/teacher-management-icon";
 import { useEffect, useState } from "react";
-import useGetNewEnrollment from "hooks/api/useNewGetEnrollment";
+import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";

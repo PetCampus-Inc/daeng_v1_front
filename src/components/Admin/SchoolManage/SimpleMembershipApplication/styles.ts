@@ -17,6 +17,10 @@ export const Container = styled.button<{ $isUsed: boolean; $isSelected: boolean 
   }
 
   transition: background-color 0.3s;
+
+  > svg {
+    color: ${({ theme }) => theme.colors.darkBlack};
+  }
 `;
 
 export const LeftBox = styled.div`

@@ -29,6 +29,7 @@ import SortModal from "./SortModal";
 import CallModal from "./CallModal";
 import ButtonModal from "components/common/ButtonModal";
 import useGetSearchList from "hooks/api/useGetSearchList";
+import { PageContainer } from "styles/StyleModule";
 
 interface Props {
   setIsNavHidden: Dispatch<SetStateAction<boolean>>;
@@ -47,11 +48,13 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   const [sortName, setSortName] = useState("이용권 만료 임박순");
   const [targetDogId, setTargetDogId] = useState(-1);
   const [selectedDogIds, setSeletedDogIds] = useState<number[]>([]);
-  const adminId = useRecoilValue(adminLoginInfoAtom).data.adminId;
-  const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
-  const schoolName = useRecoilValue(adminLoginInfoAtom).data.schoolName;
-  const adminName = useRecoilValue(adminLoginInfoAtom).data.adminName;
-  const adminRole = useRecoilValue(adminLoginInfoAtom).data.role;
+  const {
+    adminId,
+    schoolId,
+    schoolName,
+    adminName,
+    role: adminRole
+  } = useRecoilValue(adminLoginInfoAtom).data;
   const dogLists = useRecoilValue(dogListInfoAtom).data;
   const setDogLists = useSetRecoilState<IAttendanceInfo>(dogListInfoAtom);
   const { isFocusing, handleFocus, handleBlur } = useFocus();
@@ -97,7 +100,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   }, []);
 
   return (
-    <Container>
+    <PageContainer $paddingTop="32px">
       <StyledHeadWrapper>
         <StyledMainWrapper>
           <StyledTitleWrapper>
@@ -296,7 +299,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           }}
         />
       )}
-    </Container>
+    </PageContainer>
   );
 };
 

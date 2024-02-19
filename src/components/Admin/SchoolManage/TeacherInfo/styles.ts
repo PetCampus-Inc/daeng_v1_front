@@ -1,6 +1,7 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,7 +10,7 @@ export const Container = styled.div`
   height: 2vh;
   padding: 0 12px 0 18px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.gray_5};
+  background-color: ${({ theme }) => theme.colors.white};
 
   scroll-snap-align: start;
   scroll-snap-stop: always;

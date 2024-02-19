@@ -1,6 +1,6 @@
-import TeacherInfo from "../TeacherInfo";
 import { ITeacherInfo } from "types/Admin.type";
-import * as S from "./styles";
+import * as S from "../styles";
+import TeacherInfoWithDeleteBtn from "../../TeacherInfo/TeacherInfoWithDeleteBtn";
 
 interface EnrolledTeacherListProps {
   teacherList: ITeacherInfo[];
@@ -11,7 +11,7 @@ const EnrolledTeacherList = ({ teacherList, isEditable }: EnrolledTeacherListPro
   return (
     <S.ListBox>
       {teacherList.map((info) => (
-        <TeacherInfo key={info.adminId} isEditable={isEditable} data={info} />
+        <TeacherInfoWithDeleteBtn key={info.adminId} isEditable={isEditable} data={info} />
       ))}
     </S.ListBox>
   );

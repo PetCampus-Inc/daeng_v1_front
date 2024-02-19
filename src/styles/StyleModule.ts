@@ -39,15 +39,16 @@ export const fadeIn = keyframes`
   }
 `;
 
-export const PageContainer = styled.div`
-  margin: calc(5vh + 32px) 16px 0;
+export const PageContainer = styled.div<{ $paddingTop?: string }>`
+  padding: ${({ $paddingTop }) => `calc(5vh + ${$paddingTop})`} 16px 0;
+  height: 100%;
 `;
 
-export const WhiteBackground = styled.div`
+export const Background = styled.div<{ color?: string }>`
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ color, theme }) => (color ? color : theme.colors.white)};
 `;

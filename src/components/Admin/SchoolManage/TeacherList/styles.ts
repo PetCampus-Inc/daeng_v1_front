@@ -11,3 +11,11 @@ export const ListBox = styled.div`
   scroll-snap-align: start;
   scroll-snap-stop: always;
 `;
+
+export const TextContainer = styled.p`
+  width: 100%;
+  padding: 20% 0 0;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
