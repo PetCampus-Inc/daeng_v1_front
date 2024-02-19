@@ -32,7 +32,7 @@ const EnrollmentFormEditPage = () => {
   const { formId } = useParams();
   if (!formId) throw new Error("잘못된 formId 입니다");
 
-  const { data, isLoading } = useAdminEnrollQuery(formId);
+  const { data, isLoading } = useAdminEnrollQuery(formId, "EDIT");
 
   const methods = useForm({
     mode: "onBlur",
