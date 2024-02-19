@@ -57,6 +57,10 @@ export const TitleText = styled.div<{ size?: string }>`
   align-items: center;
 
   ${({ theme }) => theme.typo.title2_20_B};
+
+  &.start {
+    position: relative;
+  }
 `;
 
 export const StyledImage = styled.img<{

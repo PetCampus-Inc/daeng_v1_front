@@ -52,7 +52,9 @@ const Header = ({ type, handleClick, text, size }: Props) => {
         )}
         {type === "notice" && (
           <TextWrapper>
-            <TitleText size={size}>{text}</TitleText>
+            <TitleText size={size} className="start">
+              {text}
+            </TitleText>
             <IconWrapper
               onClick={() => {
                 // TODO: 알림 페이지로 이동
