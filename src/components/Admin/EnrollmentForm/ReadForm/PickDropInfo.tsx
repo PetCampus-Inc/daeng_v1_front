@@ -13,18 +13,13 @@ interface PickDropInfoProps {
   requiredItems?: Map<number, boolean>;
 }
 const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
-  const { control, watch, register } = useFormContext();
+  const { watch } = useFormContext();
 
   return (
     <>
       <Card>
         <Label>픽드랍 안내</Label>
-        <TextArea
-          name="pickDropNoticeField"
-          register={register}
-          defaultValue={info?.pickDropNotice}
-          disabled
-        />
+        <TextArea name="pickDropNoticeField" defaultValue={info?.pickDropNotice} disabled />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_REQUEST)}>픽드랍 신청</Title>
@@ -40,7 +35,6 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
             <Title isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_MEMO)}>픽드랍 메모</Title>
             <TextArea
               name="pickDropMemoField"
-              register={register}
               placeholder="픽드랍 장소, 시간에 대해 자세히 적어주세요."
               readOnly
             />
@@ -48,14 +42,9 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
           <Card>
             <Title isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_INFO)}>픽드랍 유의사항</Title>
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-            <TextArea
-              name="pickDropInfoField"
-              register={register}
-              defaultValue={info?.pickDropInfo}
-              disabled
-            />
+            <TextArea name="pickDropInfoField" defaultValue={info?.pickDropInfo} disabled />
             <Stack>
-              <Checkbox name="pickDropInfo" control={control} ariaLabel="동의" readOnly>
+              <Checkbox name="pickDropInfo" ariaLabel="동의" readOnly>
                 동의합니다
               </Checkbox>
             </Stack>

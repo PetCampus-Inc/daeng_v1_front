@@ -17,7 +17,7 @@ interface TicketInfoProps {
 }
 
 const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
-  const { watch, control } = useFormContext();
+  const { watch } = useFormContext();
 
   const selectedTicketType = watch("ticketType");
   const roundTicketText = info.roundTicketNumber?.map((number) => `${number}회`) || [];
@@ -80,7 +80,6 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
         <Stack>
           <Checkbox
             name="ticketInfo"
-            control={control}
             isChecked={watch("ticketInfo")}
             ariaLabel="동의"
             isRequired={requiredItems.get(ITEM_KEYS.TICKET_INFO)}

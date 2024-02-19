@@ -6,14 +6,13 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import AdminTitle from "components/common/Title/AdminTitle";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import Checkbox from "components/common/Checkbox";
-import RoundTicketType from "../TicketType/RoundTicketType";
-import MonthlyTicketType from "../TicketType/MonthlyTicketType";
 
 import { ITEM_KEYS } from "constants/item";
 import { Card, Caption, Stack } from "../styles";
+import TicketType from "../TicketType";
 
 const TicketInfo = () => {
-  const { register, control, watch, setValue } = useFormContext();
+  const { control, watch, setValue } = useFormContext();
 
   const selectedTicketType = watch("ticketType");
 
@@ -29,11 +28,7 @@ const TicketInfo = () => {
           가격 안내
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
-        <TextArea
-          name="priceInfo"
-          register={register}
-          placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다."
-        />
+        <TextArea name="priceInfo" placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다." />
       </Card>
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_TYPE}`} control={control} hasBadge>
@@ -53,8 +48,9 @@ const TicketInfo = () => {
               정기권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <MonthlyTicketType
+            <TicketType
               control={control}
+              ticketType="MONTHLY"
               name="monthlyTicketNumber"
               defaultValues={[1, 2, 4, 8]}
             />
@@ -69,8 +65,9 @@ const TicketInfo = () => {
               회차권 유형
             </AdminTitle>
             <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <RoundTicketType
+            <TicketType
               control={control}
+              ticketType="ROUND"
               name="roundTicketNumber"
               defaultValues={[1, 3, 5, 10]}
             />
@@ -81,22 +78,15 @@ const TicketInfo = () => {
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
-        <DayMultiCheck name="openDays" defaultChecked={true} />
+        <DayMultiCheck name="openDays" defaultChecked />
       </Card>
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`} control={control} hasBadge>
           유의사항
         </AdminTitle>
-        <TextArea
-          name="ticketInfo"
-          rules={{
-            required: true
-          }}
-          register={register}
-          placeholder="유의사항을 입력해 주세요"
-        />
+        <TextArea name="ticketInfo" placeholder="유의사항을 입력해 주세요" />
         <Stack>
-          <Checkbox name="null" control={control} disabled>
+          <Checkbox name="null" disabled>
             동의합니다
           </Checkbox>
         </Stack>

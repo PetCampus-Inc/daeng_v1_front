@@ -1,5 +1,3 @@
-import { useFormContext } from "react-hook-form";
-
 import Title from "components/common/Title";
 import InputField from "components/common/InputField";
 import SingleRadio from "components/common/Select/SingleRadio";
@@ -15,18 +13,11 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
-  const { register, control } = useFormContext();
-
   return (
     <>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_NAME)}>이름</Title>
-        <InputField
-          control={control}
-          name="dogName"
-          placeholder="강아지 이름을 입력해주세요"
-          readOnly
-        />
+        <InputField name="dogName" placeholder="강아지 이름을 입력해주세요" readOnly />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_GENDER)}>성별</Title>
@@ -43,19 +34,14 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
-        <SearchInputField
-          control={control}
-          name="dogBreed"
-          placeholder="견종을 선택해 주세요"
-          readOnly
-        />
+        <SearchInputField name="newBreed" placeholder="견종을 선택해 주세요" readOnly />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber name="year" control={control} defaultValue="2000" disabled />
-          <SelectNumber name="month" control={control} defaultValue="01" disabled />
-          <SelectNumber name="day" control={control} defaultValue="01" disabled />
+          <SelectNumber name="year" defaultValue="2000" disabled />
+          <SelectNumber name="month" defaultValue="01" disabled />
+          <SelectNumber name="day" defaultValue="01" disabled />
         </div>
       </Card>
       <Card>
@@ -72,7 +58,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           알러지 및 질병 유무
         </Title>
         <TextArea
-          register={register}
           name="allergyDisease"
           placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
           readOnly

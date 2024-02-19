@@ -16,7 +16,7 @@ interface TicketInfoProps {
 }
 
 const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
-  const { control, watch, setValue, register } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const roundTicketText = info?.roundTicketNumber?.map((number) => `${number}회`) || [];
   const monthlyTicketText = info?.monthlyTicketNumber?.map((number) => `${number}주`) || [];
@@ -32,7 +32,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea name="priceInfo" register={register} defaultValue={info?.priceInfo} disabled />
+        <TextArea name="priceInfo" defaultValue={info?.priceInfo} disabled />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
@@ -55,22 +55,16 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
             <SingleRadio name="roundTicketNumber" radiosText={roundTicketText} disabled />
           </Card>
         ))}
-      {/* FIXME: defaultCheck 되도록 수정 필요! */}
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
-        <DayMultiCheck name="attendanceDays" openDays={info?.openDays} />
+        <DayMultiCheck name="openDays" openDays={info?.openDays} readOnly isPreviewMode />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea
-          name="ticketInfoField"
-          register={register}
-          defaultValue={info?.ticketInfo}
-          disabled
-        />
+        <TextArea name="ticketInfoField" defaultValue={info?.ticketInfo} disabled />
         <Stack>
-          <Checkbox name="null" control={control} readOnly>
+          <Checkbox name="null" readOnly>
             동의합니다
           </Checkbox>
         </Stack>

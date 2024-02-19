@@ -1,5 +1,3 @@
-import { useFormContext } from "react-hook-form";
-
 import Title from "components/common/Title";
 import InputField from "components/common/InputField";
 import SingleRadio from "components/common/Select/SingleRadio";
@@ -12,18 +10,11 @@ interface MemberInfoProps {
 }
 
 const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
-  const { control } = useFormContext();
-
   return (
     <>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
-        <InputField
-          control={control}
-          name="memberName"
-          placeholder="견주 이름을 입력해주세요"
-          readOnly
-        />
+        <InputField name="memberName" placeholder="견주 이름을 입력해주세요" readOnly />
       </Card>
       <Card>
         <Title>성별</Title>
@@ -32,30 +23,15 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
-        <SearchInputField
-          control={control}
-          name="addressStreet"
-          placeholder="주소를 입력해주세요"
-          readOnly
-        />
+        <SearchInputField name="addressStreet" placeholder="주소를 입력해주세요" readOnly />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_PHONE)}>연락처</Title>
-        <InputField
-          control={control}
-          name="phoneNumber"
-          placeholder="연락처를 입력해주세요"
-          readOnly
-        />
+        <InputField name="phoneNumber" placeholder="연락처를 입력해주세요" readOnly />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
-        <InputField
-          control={control}
-          name="emergencyNumber"
-          placeholder="비상 연락처를 입력해주세요"
-          readOnly
-        />
+        <InputField name="emergencyNumber" placeholder="비상 연락처를 입력해주세요" readOnly />
       </Card>
     </>
   );
