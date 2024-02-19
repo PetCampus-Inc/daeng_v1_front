@@ -14,7 +14,7 @@ import { MEMBER_MA_STEP } from "constants/step";
 import * as S from "./styles";
 
 const MembershipApplication = () => {
-  const { enlistmentQuery } = useEnrollQuery({ memberId: "1", schoolId: "1" });
+  const { enlistmentQuery } = useEnrollQuery({ memberId: "1", schoolId: "2" });
   const { requiredItemsMap, pickDropInfo, policyInfo, ticketInfo } = enlistmentQuery.data;
 
   const methods = useForm({
@@ -25,7 +25,7 @@ const MembershipApplication = () => {
   const visibleSteps = MEMBER_MA_STEP.filter((step) => step.isVisible(pickDropInfo));
   const maxSteps = visibleSteps.length;
 
-  const { currentStep, nextStep, prevStep, setStep } = useStep(0, maxSteps - 1);
+  const { currentStep, nextStep, prevStep, setStep } = useStep(maxSteps - 1);
 
   const currentTitle = MEMBER_MA_STEP[currentStep].title;
   const currentSubtitle = MEMBER_MA_STEP[currentStep].subtitle;
@@ -41,13 +41,21 @@ const MembershipApplication = () => {
       </S.TopWrapper>
       <FormProvider {...methods}>
         <S.ContentWrapper>
-          {currentStep === 0 && <MemberInfo requiredItems={requiredItemsMap} />}
-          {currentStep === 1 && <DogInfo requiredItems={requiredItemsMap} />}
-          {currentStep === 2 && <TicketInfo info={ticketInfo} requiredItems={requiredItemsMap} />}
-          {currentStep === 3 && <PolicyInfo info={policyInfo} requiredItems={requiredItemsMap} />}
-          {currentStep === 4 && (
+          <S.Content $isVisible={currentStep === 0}>
+            <MemberInfo requiredItems={requiredItemsMap} />
+          </S.Content>
+          <S.Content $isVisible={currentStep === 1}>
+            <DogInfo requiredItems={requiredItemsMap} />
+          </S.Content>
+          <S.Content $isVisible={currentStep === 2}>
+            <TicketInfo info={ticketInfo} requiredItems={requiredItemsMap} />
+          </S.Content>
+          <S.Content $isVisible={currentStep === 3}>
+            <PolicyInfo info={policyInfo} requiredItems={requiredItemsMap} />
+          </S.Content>
+          <S.Content $isVisible={currentStep === 4}>
             <PickDropInfo info={pickDropInfo} requiredItems={requiredItemsMap} />
-          )}
+          </S.Content>
         </S.ContentWrapper>
         <Navigation
           currentStep={currentStep}
