@@ -131,3 +131,10 @@ export const FIELD_TO_STEP = new Map<string, number>([
   ["pickDropMemo", 4],
   ["pickDropInfo", 4]
 ]);
+
+export const ADMIN_DOG_DETAIL_INFO_STEP = [
+  "강아지 정보",
+  "등원 기록",
+  "이용권",
+  "유의사항"
+] as const;
