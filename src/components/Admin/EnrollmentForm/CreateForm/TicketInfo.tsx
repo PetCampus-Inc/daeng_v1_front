@@ -2,24 +2,32 @@ import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import TextArea from "components/common/TextArea";
-import SingleRadio from "components/common/Select/SingleRadio";
+import MultiCheck from "components/common/Select/MultiCheck";
 import AdminTitle from "components/common/Title/AdminTitle";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import Checkbox from "components/common/Checkbox";
+import TicketType from "../TicketType";
 
 import { ITEM_KEYS } from "constants/item";
 import { Card, Caption, Stack } from "../styles";
-import TicketType from "../TicketType";
 
 const TicketInfo = () => {
   const { control, watch, setValue } = useFormContext();
 
-  const selectedTicketType = watch("ticketType");
+  const selectedTicketTypes = watch("ticketType");
+
+  const isMonthlySelected = selectedTicketTypes?.includes("정기권");
+  const isRoundSelected = selectedTicketTypes?.includes("회차권");
 
   useEffect(() => {
-    const fieldName = selectedTicketType === "정기권" ? "roundTicketNumber" : "monthlyTicketNumber";
-    setValue(fieldName, undefined);
-  }, [selectedTicketType, setValue]);
+    if (!isMonthlySelected) {
+      setValue("monthlyTicketNumber", []);
+    }
+    if (!isRoundSelected) {
+      setValue("roundTicketNumber", []);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMonthlySelected, isRoundSelected]);
 
   return (
     <>
@@ -35,44 +43,44 @@ const TicketInfo = () => {
           이용권 종류
         </AdminTitle>
         <Caption>복수 선택이 가능해요</Caption>
-        <SingleRadio name="ticketType" radiosText={["정기권", "회차권"]} />
+        <MultiCheck name="ticketType" radiosText={["정기권", "회차권"]} />
       </Card>
-      {selectedTicketType &&
-        (selectedTicketType === "정기권" ? (
-          <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.MONTHLY_TICKET_NUMBER}`}
-              control={control}
-              hasBadge
-            >
-              정기권 유형
-            </AdminTitle>
-            <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <TicketType
-              control={control}
-              ticketType="MONTHLY"
-              name="monthlyTicketNumber"
-              defaultValues={[1, 2, 4, 8]}
-            />
-          </Card>
-        ) : (
-          <Card>
-            <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.ROUND_TICKET_NUMBER}`}
-              control={control}
-              hasBadge
-            >
-              회차권 유형
-            </AdminTitle>
-            <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-            <TicketType
-              control={control}
-              ticketType="ROUND"
-              name="roundTicketNumber"
-              defaultValues={[1, 3, 5, 10]}
-            />
-          </Card>
-        ))}
+      {isMonthlySelected && (
+        <Card>
+          <AdminTitle
+            name={`requiredItemList.${ITEM_KEYS.MONTHLY_TICKET_NUMBER}`}
+            control={control}
+            hasBadge
+          >
+            정기권 유형
+          </AdminTitle>
+          <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
+          <TicketType
+            ticketType="MONTHLY"
+            control={control}
+            name="monthlyTicketNumber"
+            defaultValues={[1, 2, 4, 8]}
+          />
+        </Card>
+      )}
+      {isRoundSelected && (
+        <Card>
+          <AdminTitle
+            name={`requiredItemList.${ITEM_KEYS.ROUND_TICKET_NUMBER}`}
+            control={control}
+            hasBadge
+          >
+            회차권 유형
+          </AdminTitle>
+          <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
+          <TicketType
+            ticketType="ROUND"
+            control={control}
+            name="roundTicketNumber"
+            defaultValues={[1, 3, 5, 10]}
+          />
+        </Card>
+      )}
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.OPEN_DAYS}`} control={control} hasBadge>
           등원 요일 선택
