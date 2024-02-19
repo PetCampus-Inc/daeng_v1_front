@@ -6,9 +6,9 @@ import { IDogDetails } from "types/Attendance.type";
 const useGetDogDetail = () => {
   const [dogDetail, setDogDetail] = useRecoilState(attendDogDetail);
 
-  const handlerGetDogDetail = async (dogId: number, date: string) => {
+  const handlerGetDogDetail = async (dogId: number) => {
     try {
-      const data = await handleGetDogDetails(dogId, date);
+      const data = await handleGetDogDetails(dogId);
       if (data.status === 200) {
         const dogDetails: IDogDetails = {
           dogId: data.dogId,
@@ -19,7 +19,7 @@ const useGetDogDetail = () => {
           currentRounds: data.currentRounds,
           monthlyTicket: data.monthlyTicket,
           dogAttendances: data.dogAttendances,
-          status: data.status,
+          status: data.status
         };
         setDogDetail(dogDetails);
       }

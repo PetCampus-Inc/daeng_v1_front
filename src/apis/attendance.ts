@@ -8,13 +8,11 @@ import {
   IAttendanceInfo,
   IDeleteInfo,
   IDogDetails,
-  IMemberCallInfo,
+  IMemberCallInfo
 } from "types/Attendance.type";
 import { IResponse } from "types/Response.type";
 
-export const handleGetDogs = async (
-  schoolId: number
-): Promise<IAttendanceInfo> => {
+export const handleGetDogs = async (schoolId: number): Promise<IAttendanceInfo> => {
   const url: string = `admin/attendance?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
@@ -29,17 +27,13 @@ export const handleGetSearchDogs = async (
   return data;
 };
 
-export const handleSortRegistered = async (
-  schoolId: number
-): Promise<IAttendanceInfo> => {
+export const handleSortRegistered = async (schoolId: number): Promise<IAttendanceInfo> => {
   const url: string = `admin/attendance/dog/sort/registered?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
 };
 
-export const handleSortPayment = async (
-  schoolId: number
-): Promise<IAttendanceInfo> => {
+export const handleSortPayment = async (schoolId: number): Promise<IAttendanceInfo> => {
   const url: string = `admin/attendance/dog/sort/payment?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
@@ -54,17 +48,13 @@ export const handleSortCharge = async (
   return data;
 };
 
-export const handleSortDate = async (
-  schoolId: number
-): Promise<IAttendanceInfo> => {
+export const handleSortDate = async (schoolId: number): Promise<IAttendanceInfo> => {
   const url: string = `admin/attendance/dog/sort/date?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
 };
 
-export const handleCallMember = async (
-  dogId: number
-): Promise<IMemberCallInfo> => {
+export const handleCallMember = async (dogId: number): Promise<IMemberCallInfo> => {
   const url: string = `admin/attendance/callowner/${dogId}`;
   const { data } = await customAxios.get(url);
   return data;
@@ -80,26 +70,22 @@ export const handleDeleteDog = async (req: IDeleteInfo): Promise<IResponse> => {
   const url: string = `admin/attendance/delete/dog`;
   const { data } = await customAxios.post(url, {
     adminId: req.adminId,
-    dogId: req.targetDogId,
+    dogId: req.targetDogId
   });
   return data;
 };
 
-export const handleGetAttendDogs = async (
-  schoolId: number
-): Promise<IAttendDogsInfo> => {
+export const handleGetAttendDogs = async (schoolId: number): Promise<IAttendDogsInfo> => {
   const url: string = `admin/attendance/attend?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
 };
 
-export const handlePostAttend = async (
-  req: IAttendInfo
-): Promise<IResponse> => {
+export const handlePostAttend = async (req: IAttendInfo): Promise<IResponse> => {
   const url: string = `admin/attendance/attend`;
   const { data } = await customAxios.post(url, {
     schoolId: req.schoolId,
-    attendanceIdList: req.selectedDogIds,
+    attendanceIdList: req.selectedDogIds
   });
   return data;
 };
@@ -113,30 +99,23 @@ export const handleGetAttendSearchDogs = async (
   return data;
 };
 
-export const handleGetAttendCareDogs = async (
-  schoolId: number
-): Promise<IAttendCareDogInfo> => {
+export const handleGetAttendCareDogs = async (schoolId: number): Promise<IAttendCareDogInfo> => {
   const url: string = `admin/attendance/attend/dog/care?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
 };
 
-export const handlePostAttendCareDogs = async (
-  req: IAttendCareInfo
-): Promise<IResponse> => {
+export const handlePostAttendCareDogs = async (req: IAttendCareInfo): Promise<IResponse> => {
   const url: string = `admin/attendance/attend/dog/care`;
   const { data } = await customAxios.post(url, {
     adminId: req.adminId,
-    attendanceIdList: req.selectedDogId,
+    attendanceIdList: req.selectedDogId
   });
   return data;
 };
 
-export const handleGetDogDetails = async (
-  dogId: number,
-  date: string
-): Promise<IDogDetails> => {
-  const url: string = `admin/attendance/detail?dogId=${dogId}&date=${date}`;
+export const handleGetDogDetails = async (dogId: number): Promise<IDogDetails> => {
+  const url: string = `admin/attendance/dogInfo?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data;
 };
