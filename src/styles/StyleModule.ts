@@ -39,8 +39,8 @@ export const fadeIn = keyframes`
   }
 `;
 
-export const PageContainer = styled.div<{ paddingTop?: string }>`
-  padding: ${({ paddingTop }) => `calc(5vh + ${paddingTop})`} 16px 0;
+export const PageContainer = styled.div<{ $paddingTop?: string }>`
+  padding: ${({ $paddingTop }) => `calc(5vh + ${$paddingTop})`} 16px 0;
   height: 100%;
 `;
 

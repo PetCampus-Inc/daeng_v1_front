@@ -19,7 +19,7 @@ const TeacherManagePage = () => {
   return (
     <Background color={ThemeConfig.colors.gray_5}>
       <Header type="text" text="교사 관리" handleClick={() => navigate("/admin/schoolManage")} />
-      <PageContainer paddingTop="32px">
+      <PageContainer $paddingTop="32px">
         <TeacherInfoTitle isEditable={isEditable} setIsEditable={setIsEditable} />
         <EnrolledTeacherList teacherList={data.teacherList} isEditable={isEditable} />
         <TitleWithIcon title="승인 대기중인 교사" />

@@ -12,7 +12,7 @@ const SchoolManageEnrollmentPage = () => {
   return (
     <Background color={ThemeConfig.colors.gray_5}>
       <Header type="text" text="신규가입" handleClick={() => navigate("/admin/schoolManage")} />
-      <PageContainer paddingTop="32px">
+      <PageContainer $paddingTop="32px">
         <TitleWithIcon
           title="등록된 가입신청서"
           icon={<ListIcon />}

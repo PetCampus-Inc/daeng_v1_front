@@ -100,7 +100,7 @@ const Attendance = ({ setIsNavHidden }: Props) => {
   }, []);
 
   return (
-    <PageContainer paddingTop="32px">
+    <PageContainer $paddingTop="32px">
       <StyledHeadWrapper>
         <StyledMainWrapper>
           <StyledTitleWrapper>
