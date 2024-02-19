@@ -114,7 +114,7 @@ const DogCard = ({
       handleAddAttend(attendanceId || -1);
     }
     if ((e.target as HTMLElement).tagName !== "StyledImage") {
-      handlerGetDogDetail(dogId, date);
+      handlerGetDogDetail(dogId);
       navigate(PATH.ADMIN_DOG_INFO);
     }
   };
