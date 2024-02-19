@@ -54,3 +54,27 @@ export const ITEM_MAP = new Map<string, string | ItemMapValue>([
   ["운영", "RUNNING"],
   ["미운영", "NOT_RUNNING"]
 ]);
+
+export type ItemMaps = {
+  memberGender: { MALE: string; FEMALE: string };
+  dogGender: { MALE: string; FEMALE: string };
+  dogSize: { BIG: string; MEDIUM: string; SMALL: string };
+  neutralization: { NEUTERED: string; NOT_NEUTERED: string };
+  vaccination: { VACCINATED: string; NOT_VACCINATED: string };
+  pickDropRequest: { REQUEST: string; NOT_REQUEST: string };
+  pickDropType: { ONE_WAY: string; ROUND: string };
+  pickDropState: { RUNNING: string; NOT_RUNNING: string };
+  ticketType: { ROUND: string; MONTHLY: string };
+};
+
+export const ITEM_MAPS: ItemMaps = {
+  memberGender: { MALE: "남", FEMALE: "여" },
+  dogGender: { MALE: "수컷", FEMALE: "암컷" },
+  dogSize: { BIG: "대형견", MEDIUM: "중형견", SMALL: "소형견" },
+  neutralization: { NEUTERED: "했어요", NOT_NEUTERED: "안했어요" },
+  vaccination: { VACCINATED: "했어요", NOT_VACCINATED: "안했어요" },
+  pickDropRequest: { REQUEST: "신청", NOT_REQUEST: "미신청" },
+  pickDropType: { ONE_WAY: "편도", ROUND: "왕복" },
+  pickDropState: { RUNNING: "운영", NOT_RUNNING: "미운영" },
+  ticketType: { ROUND: "회차권", MONTHLY: "정기권" }
+};

@@ -1,4 +1,4 @@
-import { ITEM_MAP, ItemMapValue } from "constants/item";
+import { ITEM_MAP, ITEM_MAPS, type ItemMapValue, type ItemMaps } from "constants/item";
 
 export const formatDate = (year: string, month: string, day: string) => {
   if (!year || !month || !day) return "";
@@ -25,13 +25,17 @@ export const formatPhoneNumber = (value: string): string => {
 };
 
 type TItem = Record<string, string>[];
-export const extractTicketValues = (items: TItem) => {
+export const extractTicketValues = (items: TItem = []) => {
   return items.map((item) => parseInt(item.value, 10));
 };
 
-export const getMapValue = (key: string): string | ItemMapValue => {
-  if (ITEM_MAP.has(key)) {
-    return ITEM_MAP.get(key) as string | ItemMapValue;
-  }
-  return "";
+export const getMapValue = (category: keyof ItemMaps, value: string) => {
+  const categoryMap = ITEM_MAPS[category];
+  return (categoryMap as any)[value] || value;
+};
+
+export const reverseMapValue = <T extends keyof ItemMaps>(category: T, value: string) => {
+  const categoryMap = ITEM_MAPS[category] as Record<string, string>;
+  const reversedKey = Object.keys(categoryMap).find((key) => categoryMap[key] === value);
+  return reversedKey || value;
 };
