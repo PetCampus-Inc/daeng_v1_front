@@ -121,6 +121,7 @@ export const FIELD_TO_STEP = new Map<string, number>([
   ["roundTicketNumber", 2],
   ["monthlyTicketNumber", 2],
   ["openDays", 2],
+  ["ticketInfo", 2],
   ["limitsInfo", 3],
   ["accidentInfo", 3],
   ["abandonmentInfo", 3],
