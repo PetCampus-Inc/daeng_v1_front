@@ -44,7 +44,6 @@ const DogInfoPage = () => {
           {currentStep === 2 && <Ticket />}
           {currentStep === 3 && <Notice />}
         </ContentWrapper>
-        <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />
       </PageContainer>
     </>
   );
