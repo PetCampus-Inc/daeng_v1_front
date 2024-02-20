@@ -40,7 +40,7 @@ export const Text = styled.div`
   color: ${({ theme }) => theme.colors.darkBlack};
   ${({ theme }) => theme.typo.label1_16_B};
 
-  &.dogName {
+  &.big {
     ${({ theme }) => theme.typo.body1_18_B};
   }
 
@@ -101,7 +101,7 @@ export const DogDetailList = styled.div`
   padding-top: 24px;
 `;
 
-export const DogDetailItem = styled.div`
+export const DetailItem = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -114,10 +114,9 @@ export const DogDetailItem = styled.div`
 
 export const YellowThickButton = styled.button`
   display: flex;
-  padding: 4px 16px;
+  padding: 2px 12px;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
   background-color: ${({ theme }) => theme.colors.yellow_3};
   border-radius: 90px;
   color: ${({ theme }) => theme.colors.primaryColor};
