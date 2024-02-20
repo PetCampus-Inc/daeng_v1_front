@@ -31,9 +31,9 @@ export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
   key: "adminLoginInfoAtom",
   default: {
     data: {
-      adminId: -1,
+      adminId: 1,
       adminName: "",
-      schoolId: -1,
+      schoolId: 1,
       role: "",
       schoolName: ""
     },
