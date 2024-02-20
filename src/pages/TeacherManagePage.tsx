@@ -5,7 +5,7 @@ import Header from "components/common/Header";
 import useGetTeacherList from "hooks/api/useGetTeacherList";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Background, PageContainer } from "styles/StyleModule";
+import { PageContainer } from "styles/StyleModule";
 import { ThemeConfig } from "styles/ThemeConfig";
 import WaitingTeacherList from "components/Admin/SchoolManage/TeacherList/WaitingTeacherList";
 
@@ -17,15 +17,15 @@ const TeacherManagePage = () => {
   if (!data) return <div>로딩중..</div>;
 
   return (
-    <Background color={ThemeConfig.colors.gray_5}>
+    <>
       <Header type="text" text="교사 관리" handleClick={() => navigate("/admin/schoolManage")} />
-      <PageContainer $paddingTop="32px">
+      <PageContainer $padding="calc(5vh + 2rem) 1rem 0" color={ThemeConfig.colors.gray_5}>
         <TeacherInfoTitle isEditable={isEditable} setIsEditable={setIsEditable} />
         <EnrolledTeacherList teacherList={data.teacherList} isEditable={isEditable} />
         <TitleWithIcon title="승인 대기중인 교사" />
         <WaitingTeacherList teacherList={data.pendingList} setChanged={setChanged} />
       </PageContainer>
-    </Background>
+    </>
   );
 };
 
