@@ -1,10 +1,11 @@
-import PhoneIcon from "assets/svg/phone";
-import { DetailItem, TextWrapper, YellowThickButton } from "../AboutDog/styles";
-import * as S from "./styles";
-import BasicPhoneIcon from "assets/svg/phone-basic";
 import MapPinIcon from "assets/svg/map-pin-icon";
-import { DogDetailInfoText } from "../styles";
+import PhoneIcon from "assets/svg/phone";
+import BasicPhoneIcon from "assets/svg/phone-basic";
+
+import * as S from "./styles";
 import { FlexWrapper } from "../../styles";
+import { DetailItem, TextWrapper, YellowThickButton } from "../AboutDog/styles";
+import { DogDetailInfoText } from "../styles";
 
 const AboutOwner = ({ data }: any) => {
   const { memberName, memberPhone, memberAddress } = data;
