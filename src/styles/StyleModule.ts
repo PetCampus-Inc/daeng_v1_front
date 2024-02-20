@@ -39,22 +39,18 @@ export const fadeIn = keyframes`
   }
 `;
 
-export const PageContainer = styled.div<{ $paddingTop?: string }>`
-  padding: ${({ $paddingTop }) => `calc(5vh + ${$paddingTop})`} 16px 0;
+export const PageContainer = styled.div<{ $padding?: string; color?: string }>`
+  padding: ${({ $padding }) => ($padding ? `${$padding}` : "5vh 1rem 0")};
+  background-color: ${({ color, theme }) => (color ? color : theme.colors.white)};
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  width: 100vw;
   height: 100%;
 `;
 
 export const ContentContainer = styled.div`
   padding: calc(5vh) 0 7vh;
-`;
-
-export const Background = styled.div<{ color?: string }>`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: ${({ color, theme }) => (color ? color : theme.colors.white)};
 `;
 
 export const CloseButton = styled.button`

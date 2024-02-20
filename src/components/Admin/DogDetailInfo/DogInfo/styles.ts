@@ -9,6 +9,9 @@ export const Container = styled.div`
   width: 100%;
   padding: 24px 16px 0;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const IconWrapper = styled.div`
