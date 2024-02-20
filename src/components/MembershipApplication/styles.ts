@@ -43,3 +43,9 @@ export const ContentWrapper = styled.div`
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 `;
+
+export const Content = styled.div<{ $isVisible: boolean }>`
+  width: 100%;
+  visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
+  position: ${({ $isVisible }) => ($isVisible ? "static" : "absolute")};
+`;

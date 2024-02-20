@@ -10,8 +10,8 @@ import { getCurrentDate } from "utils/date";
 import { useNavigate } from "react-router-dom";
 import { PATH } from "constants/path";
 
-const EnrollmentInfo = () => {
-  const { control, handleSubmit } = useForm();
+const SubmitForm = () => {
+  const { handleSubmit, register } = useForm();
 
   const formData = useRecoilValue(enrollmentFormAtom);
   const mutateForm = useFormMutation();
@@ -27,8 +27,6 @@ const EnrollmentInfo = () => {
       formName
     };
 
-    console.log(requestData);
-
     // FIXME: 에러 핸들링 필요
     mutateForm(requestData, {
       onSuccess: (res) => {
@@ -42,7 +40,7 @@ const EnrollmentInfo = () => {
     <form>
       <S.TopWrapper>
         <S.Title>가입신청서의 이름을 작성해주세요</S.Title>
-        <InputField name="formName" control={control} placeholder={defaultFormName} />
+        <InputField name="formName" register={register} placeholder={defaultFormName} />
       </S.TopWrapper>
       <S.Button type="submit" onClick={onSubmit} aria-label="제출하기">
         완료
@@ -51,4 +49,4 @@ const EnrollmentInfo = () => {
   );
 };
 
-export default EnrollmentInfo;
+export default SubmitForm;

@@ -5,7 +5,7 @@ import type { InputFieldProps } from "../index";
 import SearchIcon from "assets/svg/search-icon";
 import * as S from "./styles";
 
-interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
+export interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   onSearch?: (value: string) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;

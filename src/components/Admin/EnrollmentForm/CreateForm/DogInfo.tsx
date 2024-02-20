@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import AdminTitle from "components/common/Title/AdminTitle";
@@ -13,44 +12,24 @@ import { ITEM_KEYS } from "constants/item";
 import { Card, Caption } from "../styles";
 
 const DogInfo = () => {
-  const { control, register, setValue } = useFormContext();
-
-  const REQUIRED_ITEMS = [
-    `requiredItemList.${ITEM_KEYS.DOG_NAME}`,
-    `requiredItemList.${ITEM_KEYS.DOG_GENDER}`,
-    `requiredItemList.${ITEM_KEYS.DOG_SIZE}`,
-    `requiredItemList.${ITEM_KEYS.DOG_BREED}`,
-    `requiredItemList.${ITEM_KEYS.DOG_BIRTHDAY}`
-  ];
-
-  useEffect(() => {
-    REQUIRED_ITEMS.forEach((fieldName) => {
-      setValue(fieldName, true);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { control } = useFormContext();
 
   return (
     <>
       <Card>
-        <AdminTitle name={REQUIRED_ITEMS[0]} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_NAME}`} control={control} readOnly>
           이름
         </AdminTitle>
-        <InputField
-          name="null"
-          control={control}
-          placeholder="강아지 이름을 입력해주세요"
-          disabled
-        />
+        <InputField name="null" placeholder="강아지 이름을 입력해주세요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={REQUIRED_ITEMS[1]} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_GENDER}`} control={control} readOnly>
           성별
         </AdminTitle>
         <SingleRadio name="null" radiosText={["수컷", "암컷"]} disabled />
       </Card>
       <Card>
-        <AdminTitle name={REQUIRED_ITEMS[2]} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_SIZE}`} control={control} readOnly>
           크기
         </AdminTitle>
         <SingleRadio
@@ -61,24 +40,19 @@ const DogInfo = () => {
         />
       </Card>
       <Card>
-        <AdminTitle name={REQUIRED_ITEMS[3]} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_BREED}`} control={control} readOnly>
           견종
         </AdminTitle>
-        <SearchInputField
-          name="null"
-          control={control}
-          placeholder="견종을 선택하는 칸이에요"
-          disabled
-        />
+        <SearchInputField name="null" placeholder="견종을 선택하는 칸이에요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={REQUIRED_ITEMS[4]} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_BIRTHDAY}`} control={control} readOnly>
           생일
         </AdminTitle>
         <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber name="year" control={control} placeholder="2000" disabled />
-          <SelectNumber name="month" control={control} placeholder="01" disabled />
-          <SelectNumber name="day" control={control} placeholder="01" disabled />
+          <SelectNumber name="year" placeholder="2000" disabled />
+          <SelectNumber name="month" placeholder="01" disabled />
+          <SelectNumber name="day" placeholder="01" disabled />
         </div>
       </Card>
       <Card>
@@ -99,12 +73,7 @@ const DogInfo = () => {
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.ALLERGY_DISEASE}`} control={control}>
           알러지 및 질병 유무
         </AdminTitle>
-        <TextArea
-          name="null"
-          register={register}
-          placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
-          disabled
-        />
+        <TextArea name="null" placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
       </Card>
     </>
   );

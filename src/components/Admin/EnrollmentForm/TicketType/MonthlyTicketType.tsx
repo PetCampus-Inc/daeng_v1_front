@@ -38,7 +38,7 @@ const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProp
 
   const handleAddRadio = () => {
     if (fields.length < MAX_ITEMS) {
-      append({ value: counter.toString(), label: `${counter}주` });
+      append({ value: counter });
       bottomSheet.close();
       setCounter(INIT_COUNTER);
     } else {
@@ -56,7 +56,7 @@ const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProp
 
   const isDuplication = fields.some((field) => {
     const extendedField = field as ExtendedFieldArrayWithId;
-    return extendedField.value === counter.toString();
+    return extendedField.value === counter;
   });
 
   return (
@@ -88,6 +88,7 @@ const MonthlyTicketType = ({ control, name, defaultValues = [] }: TicketTypeProp
       )}
       <EditableRadioGroup
         control={control}
+        suffix="주"
         name={FIELD_NAME}
         fields={fields}
         remove={handleRemove}

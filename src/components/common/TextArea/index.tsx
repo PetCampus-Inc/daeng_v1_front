@@ -1,5 +1,5 @@
 import React, { useEffect, useImperativeHandle, useRef, forwardRef } from "react";
-import { UseFormRegister, FieldValues, RegisterOptions } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import * as S from "./styles";
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -7,9 +7,8 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
   resizable?: boolean;
   rows?: number;
   name: string;
-  register: UseFormRegister<FieldValues>;
   isChecked?: boolean;
-  rules?: Pick<RegisterOptions<FieldValues>, "maxLength" | "minLength" | "validate" | "required">;
+  isRequired?: boolean;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -18,18 +17,18 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       autoResize = true,
       resizable = false,
       rows = 1,
-      register,
       name,
       disabled = false,
       isChecked = false,
-      rules,
+      isRequired = false,
       ...props
     },
     forwardedRef
   ) => {
+    const { register } = useFormContext();
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
-    const { ref, ...rest } = register(name, rules);
+    const { ref, ...rest } = register(name, { required: isRequired });
 
     useImperativeHandle(ref, () => textAreaRef.current!);
 

@@ -9,7 +9,7 @@ import { ITEM_KEYS } from "constants/item";
 import { Card, Caption, Stack } from "../styles";
 
 const PickDropInfo = () => {
-  const { control, register, watch } = useFormContext();
+  const { control, watch } = useFormContext();
 
   return (
     <>
@@ -21,7 +21,7 @@ const PickDropInfo = () => {
         >
           픽드랍 운영
         </AdminTitle>
-        <SingleRadio name="pickDropState" radiosText={["운영", "미운영"]} />
+        <SingleRadio name="pickDropState" radiosText={["운영", "미운영"]} isRequired />
       </Card>
       {watch("pickDropState") === "운영" && (
         <>
@@ -36,11 +36,8 @@ const PickDropInfo = () => {
             <Caption>견주에게 안내할 픽드랍 내용을 입력해 주세요</Caption>
             <TextArea
               name="pickDropNotice"
-              register={register}
-              rules={{
-                required: true
-              }}
               placeholder="ex) 픽드랍 왕복 50000 추가금 10000"
+              isRequired
             />
           </Card>
           <Card>
@@ -61,7 +58,6 @@ const PickDropInfo = () => {
             </AdminTitle>
             <TextArea
               name="null"
-              register={register}
               placeholder="견주가 원하는 픽드랍 장소나 시간에 대해 입력하는 칸이에요"
               disabled
             />
@@ -76,14 +72,11 @@ const PickDropInfo = () => {
             </AdminTitle>
             <TextArea
               name="pickDropInfo"
-              register={register}
               placeholder="픽드랍 유의사항을 입력해 주세요"
-              rules={{
-                required: true
-              }}
+              isRequired
             />
             <Stack>
-              <Checkbox name="null" control={control} disabled>
+              <Checkbox name="null" disabled>
                 동의합니다
               </Checkbox>
             </Stack>

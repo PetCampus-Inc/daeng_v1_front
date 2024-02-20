@@ -64,3 +64,4 @@ export const HelperText = styled.div`
 
 export { Card, Stack, Caption } from "components/MembershipApplication/Form/styles";
 export { Label } from "components/common/Title/style";
+export { Content } from "components/MembershipApplication/styles";

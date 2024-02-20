@@ -1,12 +1,11 @@
-import { useController, UseControllerProps } from "react-hook-form";
+import React from "react";
+import { useFormContext } from "react-hook-form";
 import CheckIcon from "assets/svg/checkIcon";
 
 import * as S from "./styles";
-import { ChangeEvent } from "react";
 
 export interface CheckboxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue">,
-    UseControllerProps {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue"> {
   isChecked?: boolean;
   isRequired?: boolean;
   ariaLabel?: string;
@@ -17,7 +16,7 @@ export interface CheckboxProps
   variant?: "square" | "default";
   id?: string;
   name: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Checkbox = ({
@@ -25,21 +24,19 @@ const Checkbox = ({
   ariaLabelledby,
   ariaDescribedby,
   isChecked = false,
-  value,
   children,
   disabled = false,
   variant = "default",
   isRequired = false,
   id,
+  name,
   onChange,
-  ...useControllerProps
+  ...props
 }: CheckboxProps) => {
-  const { field } = useController(useControllerProps);
-  const { onChange: fieldOnChange, ...restFieldProps } = field;
+  const { register, setValue } = useFormContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    fieldOnChange(e);
-
+    setValue(name, e.target.checked, { shouldValidate: true });
     if (onChange) {
       onChange(e);
     }
@@ -58,10 +55,10 @@ const Checkbox = ({
         aria-labelledby={ariaLabelledby}
         aria-describedby={ariaDescribedby}
         id={id}
-        checked={field.value ?? false}
+        defaultChecked={isChecked}
         disabled={disabled}
-        onChange={handleChange}
-        {...restFieldProps}
+        {...register(name, { required: isRequired, onChange: handleChange })}
+        {...props}
       />
       <S.Checkbox
         className={isChecked ? "checked" : ""}

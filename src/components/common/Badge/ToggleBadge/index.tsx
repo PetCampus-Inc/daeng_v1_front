@@ -13,7 +13,7 @@ const ToggleBadge = ({ control, name, readOnly = false, ...props }: ToggleBadgeP
   const { field } = useController({
     control,
     name,
-    defaultValue: false
+    defaultValue: true
   });
 
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {

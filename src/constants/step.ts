@@ -62,8 +62,7 @@ export const ADMIN_CREATE_FORM_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "픽드랍 운영시 픽드랍 안내사항을 입력해 주세요",
     indicator: "픽드랍",
-    isVisible: (pickDropInfo: IPickDropInfo | undefined) =>
-      !pickDropInfo || pickDropInfo.pickDropState === "RUNNING"
+    isVisible: () => true
   }
 ] as const;
 
@@ -96,6 +95,39 @@ export const ADMIN_READ_FORM_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "견주가 볼 가입신청서 화면이에요",
     indicator: "픽드랍",
-    isVisible: (pickDropInfo: IPickDropInfo) => pickDropInfo?.pickDropState === "RUNNING"
+    isVisible: (pickDropState: string) => pickDropState === "운영"
   }
 ] as const;
+
+export const FIELD_TO_STEP = new Map<string, number>([
+  ["memberName", 0],
+  ["memberGender", 0],
+  ["address", 0],
+  ["phoneNumber", 0],
+  ["emergencyNumber", 0],
+  ["dogName", 1],
+  ["dogGender", 1],
+  ["dogSize", 1],
+  ["breedId", 1],
+  ["newBreed", 1],
+  ["birthdate", 1],
+  ["neutralization", 1],
+  ["vaccination", 1],
+  ["fileUrl", 1],
+  ["allergyDisease", 1],
+  ["priceInfo", 2],
+  ["ticketType", 2],
+  ["roundTicketNumber", 2],
+  ["monthlyTicketNumber", 2],
+  ["openDays", 2],
+  ["ticketInfo", 2],
+  ["limitsInfo", 3],
+  ["accidentInfo", 3],
+  ["abandonmentInfo", 3],
+  ["pickDropState", 4],
+  ["pickDropNotice", 4],
+  ["pickDropRequest", 4],
+  ["pickDropType", 4],
+  ["pickDropMemo", 4],
+  ["pickDropInfo", 4]
+]);

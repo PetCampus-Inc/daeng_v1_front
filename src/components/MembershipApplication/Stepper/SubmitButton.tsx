@@ -1,60 +1,41 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, type FieldErrors } from "react-hook-form";
 import { useEnrollMutation } from "hooks/api/useEnrollMutation";
-import { formatDate, extractNumber, getMapValue } from "utils/formatter";
-import type { IRequestEnrollment, TPickDropRequest, TTicketType } from "types/School.type";
-import type { ItemMapValue } from "constants/item";
+import { useSetRecoilState } from "recoil";
 
+import type { Dispatch, SetStateAction } from "react";
 import * as S from "./styles";
+import { currentStepState } from "store/form";
+import { EnrollmentFormTransformer } from "utils/formTransformer";
+import { FIELD_TO_STEP } from "constants/step";
 
-const SubmitButton = () => {
-  const {
-    handleSubmit,
-    formState: { isValid }
-  } = useFormContext();
+interface Props {
+  setModal: Dispatch<SetStateAction<boolean>>;
+}
 
+const SubmitButton = ({ setModal }: Props) => {
+  const { handleSubmit } = useFormContext();
+  const setStep = useSetRecoilState(currentStepState);
   const enrollMutation = useEnrollMutation();
 
-  // FIXME: schoolFormId, memberId, fileUrl 추가 필요
-  const onSubmit = handleSubmit((data) => {
-    const address = [data.address.street, data.address.detail].filter(Boolean).join(" ");
-    const requestData: IRequestEnrollment = {
-      schoolFormId: 1,
-      memberId: 1,
-      breedId: data.breedId,
-      newBreed: data.breedId ? "" : data.dogBreed,
-      fileUrl: "",
-      memberName: data.memberName,
-      address,
-      phoneNumber: data.phoneNumber,
-      emergencyNumber: data.emergencyNumber || "",
-      dogName: data.dogName,
-      allergyDisease: data.allergyDisease,
-      attendanceDays: data.attendanceDays,
-      pickDropMemo: data.pickDropMemo,
-      birthDate: formatDate(data.year, data.month, data.day),
-      memberGender: getMapValue(data.memberGender) as string,
-      dogGender: getMapValue(data.dogGender) as string,
-      dogSize: getMapValue(data.dogSize) as string,
-      neutralization: (getMapValue(data.neutralization) as ItemMapValue).neutralization,
-      vaccination: (getMapValue(data.vaccination) as ItemMapValue).vaccination,
-      pickDropRequest: getMapValue(data.pickDropRequest) as TPickDropRequest,
-      pickDropType: getMapValue(data.pickDropType) as string,
-      ticketType: getMapValue(data.ticketType) as TTicketType,
-      monthlyTicketNumber: extractNumber(data.monthlyTicketNumber),
-      roundTicketNumber: extractNumber(data.roundTicketNumber)
-    };
+  const onSubmit = (data: object) => {
+    // FIXME: schoolFormId, memberId, fileUrl 추가 필요
+    const transformer = new EnrollmentFormTransformer(data);
+    const requestData = transformer.transform();
 
-    console.log(requestData);
-    // enrollMutation(requestData);
-  });
+    enrollMutation(requestData);
+  };
+
+  const onInvalid = (errors: FieldErrors) => {
+    const firstErrorField = Object.keys(errors)[0];
+    const step = FIELD_TO_STEP.get(firstErrorField);
+    if (step !== undefined) {
+      setStep(step);
+      setModal(true);
+    }
+  };
 
   return (
-    <S.Button
-      type="submit"
-      onClick={onSubmit}
-      aria-disabled={isValid ? "true" : undefined}
-      aria-label="제출하기"
-    >
+    <S.Button type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
       제출하기
     </S.Button>
   );

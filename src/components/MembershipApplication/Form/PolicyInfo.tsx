@@ -15,7 +15,7 @@ interface PolicyInfoProps {
 }
 
 const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
-  const { control, setValue, watch, register } = useFormContext();
+  const { setValue, watch } = useFormContext();
   const allChecked = watch("all");
   const watchTerms = watch(["limitsInfo", "accidentInfo", "abandonmentInfo"]);
 
@@ -40,7 +40,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
       <S.Card>
         <Checkbox
           name="all"
-          control={control}
           ariaLabel="동의"
           onChange={handleParentCheckboxChange}
           isChecked={allChecked}
@@ -56,7 +55,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea
           name="limitsInfoField"
-          register={register}
           defaultValue={info.limitsInfo}
           isChecked={watchTerms[0]}
           disabled
@@ -64,7 +62,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Stack>
           <Checkbox
             name="limitsInfo"
-            control={control}
             ariaLabel="동의"
             isChecked={watchTerms[0]}
             isRequired={requiredItems.get(ITEM_KEYS.LIMITS_INFO)}
@@ -80,7 +77,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea
           name="accidentInfoField"
-          register={register}
           defaultValue={info.accidentInfo}
           isChecked={watchTerms[1]}
           disabled
@@ -88,7 +84,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Stack>
           <Checkbox
             name="accidentInfo"
-            control={control}
             ariaLabel="동의"
             isChecked={watchTerms[1]}
             isRequired={requiredItems.get(ITEM_KEYS.ACCIDENT_INFO)}
@@ -104,7 +99,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea
           name="abandonmentInfoField"
-          register={register}
           defaultValue={info.abandonmentInfo}
           isChecked={watchTerms[2]}
           disabled
@@ -112,7 +106,6 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Stack>
           <Checkbox
             name="abandonmentInfo"
-            control={control}
             ariaLabel="동의"
             isChecked={watchTerms[2]}
             isRequired={requiredItems.get(ITEM_KEYS.ABANDONMENT_INFO)}

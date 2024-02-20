@@ -1,5 +1,5 @@
-import { ISelect } from "../select.type";
 import { useFormContext } from "react-hook-form";
+import type { ISelect } from "../select.type";
 import * as S from "../styles";
 
 interface ISingleRadio extends ISelect {
@@ -7,6 +7,7 @@ interface ISingleRadio extends ISelect {
   disabled?: boolean;
   defaultSelect?: string;
   isPreviewMode?: boolean;
+  isRequired?: boolean;
 }
 
 const SingleRadio = ({
@@ -14,6 +15,7 @@ const SingleRadio = ({
   caption,
   radiosText,
   disabled = false,
+  isRequired = false,
   defaultSelect,
   isPreviewMode
 }: ISingleRadio) => {
@@ -28,7 +30,7 @@ const SingleRadio = ({
             <S.StyledInput
               id={text + name}
               type="radio"
-              {...register(name)}
+              {...register(name, { required: isRequired })}
               value={text}
               disabled={disabled}
               defaultChecked={defaultSelect === text}

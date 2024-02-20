@@ -40,7 +40,7 @@ export const HiddenCheckbox = styled.input`
   border-radius: 50%;
 
   &:focus-visible + span {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.br_3};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.br_2};
   }
 `;
 

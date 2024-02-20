@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
+import { type AdaptedData, useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
 import useStep from "hooks/common/useStep";
 
 import Header from "components/common/Header";
@@ -21,26 +21,45 @@ import {
   TitleWrapper,
   Title,
   SubTitle,
-  ContentWrapper,
-  ButtonContainer
+  ContentWrapper
 } from "components/Admin/EnrollmentForm/styles";
 
 const EnrollmentFormDetailPage = () => {
   const { formId } = useParams();
   if (!formId) throw new Error("잘못된 formId 입니다");
 
-  const { data } = useAdminEnrollQuery(formId);
+  const { data, isLoading } = useAdminEnrollQuery(formId, "READ");
+  const {
+    requiredItemList,
+    roundTicketNumber,
+    monthlyTicketNumber,
+    ticketType,
+    openDays,
+    ...rest
+  } = data as AdaptedData<"READ">;
 
   const methods = useForm({
     mode: "onBlur",
-    shouldUnregister: false
+    shouldUnregister: false,
+    defaultValues: { ticketType: ticketType.slice(-1)[0], pickDropRequest: "신청", ...rest }
   });
 
-  const currentSteps = ADMIN_READ_FORM_STEP;
-  const { currentStep, setStep } = useStep(0, currentSteps.length - 1);
-  const currentTitle = currentSteps[currentStep].title;
-  const currentSubtitle = currentSteps[currentStep].subtitle;
-  const indicators: string[] = currentSteps.map((s) => s.indicator);
+  const visibleSteps = ADMIN_READ_FORM_STEP.filter((step) => step.isVisible(data.pickDropState));
+  const maxSteps = visibleSteps.length;
+  const { currentStep, setStep } = useStep(maxSteps - 1);
+  const currentTitle = ADMIN_READ_FORM_STEP[currentStep].title;
+  const currentSubtitle = ADMIN_READ_FORM_STEP[currentStep].subtitle;
+  const indicators: string[] = visibleSteps.map((step) => step.indicator);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const ticket = {
+    roundTicketNumber,
+    monthlyTicketNumber,
+    openDays
+  };
 
   return (
     <>
@@ -55,19 +74,12 @@ const EnrollmentFormDetailPage = () => {
         </TopWrapper>
         <FormProvider {...methods}>
           <ContentWrapper>
-            {currentStep === 0 && <MemberInfo requiredItems={data?.requiredItemsMap} />}
-            {currentStep === 1 && <DogInfo requiredItems={data?.requiredItemsMap} />}
-            {currentStep === 2 && (
-              <TicketInfo info={data?.ticketInfo} requiredItems={data?.requiredItemsMap} />
-            )}
-            {currentStep === 3 && (
-              <PolicyInfo info={data?.policyInfo} requiredItems={data?.requiredItemsMap} />
-            )}
-            {currentStep === 4 && (
-              <PickDropInfo info={data?.pickDropInfo} requiredItems={data?.requiredItemsMap} />
-            )}
+            {currentStep === 0 && <MemberInfo item={requiredItemList} />}
+            {currentStep === 1 && <DogInfo item={requiredItemList} />}
+            {currentStep === 2 && <TicketInfo item={requiredItemList} ticket={ticket} />}
+            {currentStep === 3 && <PolicyInfo item={requiredItemList} />}
+            {currentStep === 4 && <PickDropInfo item={requiredItemList} />}
           </ContentWrapper>
-          <ButtonContainer></ButtonContainer>
         </FormProvider>
       </Container>
       <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />

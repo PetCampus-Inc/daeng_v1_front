@@ -1,65 +1,40 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetAdminForm } from "apis/school.api";
+import { Adapter } from "libs/Adapter";
+import { ReadModeAdapter, EditModeAdapter } from "libs/Adapter/ServerToFormAdapter";
 
-import type {
-  IEnrollment,
-  IMemberDto,
-  IPickDropInfo,
-  IPolicyInfo,
-  ITicketInfo
-} from "types/School.type";
+import type { IAdminEnrollment } from "types/School.type";
 
-interface EnrollmentProps {
-  requiredItemsMap: Map<number, boolean>;
-  memberInfo: IMemberDto | null;
-  ticketInfo: ITicketInfo;
-  policyInfo: IPolicyInfo;
-  pickDropInfo: IPickDropInfo;
-}
+export type AdaptedData<Mode extends "READ" | "EDIT"> = Omit<
+  IAdminEnrollment,
+  "requiredItemList" | "pickDropState" | "roundTicketNumber" | "monthlyTicketNumber"
+> & {
+  requiredItemList: Mode extends "READ" ? Map<number, boolean> : boolean[];
+  pickDropState: string;
+  roundTicketNumber: Mode extends "READ"
+    ? number[]
+    : {
+        value: number;
+      }[];
+  monthlyTicketNumber: Mode extends "READ"
+    ? number[]
+    : {
+        value: number;
+      }[];
+};
 
-export const useAdminEnrollQuery = (formId: string) => {
-  const enlistmentQuery = useQuery<IEnrollment, Error, EnrollmentProps>({
+type Mode = "READ" | "EDIT";
+
+export const useAdminEnrollQuery = (formId: string, mode: Mode) => {
+  const enlistmentQuery = useSuspenseQuery<IAdminEnrollment, Error, AdaptedData<typeof mode>>({
     queryKey: ["enrollment", formId],
     queryFn: () => handleGetAdminForm({ formId }),
-    select: (data) => {
-      // 이용권 정보
-      const selectTicketInfo = () => ({
-        priceInfo: data.priceInfo,
-        ticketType: data.ticketType,
-        roundTicketNumber: data.roundTicketNumber,
-        openDays: data.openDays,
-        monthlyTicketNumber: data.monthlyTicketNumber,
-        ticketInfo: data.ticketInfo
-      });
-
-      // 정책 정보
-      const selectPolicyInfo = () => ({
-        limitsInfo: data.limitsInfo,
-        accidentInfo: data.accidentInfo,
-        abandonmentInfo: data.abandonmentInfo
-      });
-
-      // 픽드랍 정보
-      const selectPickDrop = () => ({
-        pickDropState: data.pickDropState,
-        pickDropMemo: data.pickDropMemo,
-        pickDropInfo: data.pickDropInfo,
-        pickDropNotice: data.pickDropNotice
-      });
-
-      // 필수 항목 리스트
-      const requiredItemsMap: Map<number, boolean> = new Map(
-        data.requiredItemList.map((itemNumber: number) => [itemNumber, true])
-      );
-
-      return {
-        requiredItemsMap,
-        memberInfo: data.memberDto,
-        ticketInfo: selectTicketInfo(),
-        policyInfo: selectPolicyInfo(),
-        pickDropInfo: selectPickDrop()
-      };
-    }
+    select: (data) =>
+      Adapter.from(data).to<IAdminEnrollment, AdaptedData<typeof mode>>((item) => {
+        const adapterInstance =
+          mode === "READ" ? new ReadModeAdapter(item) : new EditModeAdapter(item);
+        return adapterInstance.adapt();
+      })
   });
 
   return enlistmentQuery;

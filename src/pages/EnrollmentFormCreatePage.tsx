@@ -10,6 +10,7 @@ import PickDropInfo from "components/Admin/EnrollmentForm/CreateForm/PickDropInf
 import Navigation from "components/Admin/EnrollmentForm/Stepper/Navigation";
 
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
+import { ITEM_KEYS } from "constants/item";
 
 import {
   Container,
@@ -18,6 +19,7 @@ import {
   Title,
   SubTitle,
   ContentWrapper,
+  Content,
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
@@ -25,11 +27,14 @@ import {
 const EnrollmentFormCreatePage = () => {
   const methods = useForm({
     mode: "onBlur",
-    shouldUnregister: false
+    shouldUnregister: false,
+    defaultValues: {
+      ticketType: []
+    }
   });
 
   const currentSteps = ADMIN_CREATE_FORM_STEP;
-  const { currentStep, nextStep, prevStep, setStep } = useStep(0, currentSteps.length - 1);
+  const { currentStep, nextStep, prevStep, setStep } = useStep(currentSteps.length - 1);
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
@@ -45,11 +50,21 @@ const EnrollmentFormCreatePage = () => {
       </TopWrapper>
       <FormProvider {...methods}>
         <ContentWrapper>
-          {currentStep === 0 && <MemberInfo />}
-          {currentStep === 1 && <DogInfo />}
-          {currentStep === 2 && <TicketInfo />}
-          {currentStep === 3 && <PolicyInfo />}
-          {currentStep === 4 && <PickDropInfo />}
+          <Content $isVisible={currentStep === 0}>
+            <MemberInfo />
+          </Content>
+          <Content $isVisible={currentStep === 1}>
+            <DogInfo />
+          </Content>
+          <Content $isVisible={currentStep === 2}>
+            <TicketInfo />
+          </Content>
+          <Content $isVisible={currentStep === 3}>
+            <PolicyInfo />
+          </Content>
+          <Content $isVisible={currentStep === 4}>
+            <PickDropInfo />
+          </Content>
         </ContentWrapper>
         <ButtonContainer>
           <HelperText>작성된 신청서로 견주가 가입 신청을 해요</HelperText>

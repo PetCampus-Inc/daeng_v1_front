@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { currentStepState } from "store/form";
 
-const useStep = (initialStep = 0, maxStep: number) => {
-  const [currentStep, setCurrentStep] = useState(initialStep);
+const useStep = (maxStep: number) => {
+  const [currentStep, setCurrentStep] = useRecoilState(currentStepState);
 
   const nextStep = () => setCurrentStep((prevStep) => Math.min(prevStep + 1, maxStep));
   const prevStep = () => setCurrentStep((prevStep) => Math.max(prevStep - 1, 0));

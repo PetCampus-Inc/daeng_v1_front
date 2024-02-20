@@ -16,7 +16,7 @@ const BreedDropDown = ({ dropDownList, isOpen, setIsOpen, value, setValue }: IBr
     item: { breedName: string; breedId: number }
   ) => {
     e.stopPropagation();
-    setValue("dogBreed", item.breedName);
+    setValue("newBreed", item.breedName);
     setValue("breedId", item.breedId);
     setIsOpen(false);
   };

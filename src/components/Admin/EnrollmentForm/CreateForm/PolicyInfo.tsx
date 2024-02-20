@@ -17,14 +17,11 @@ const PolicyInfo = () => {
         </AdminTitle>
         <TextArea
           name="limitsInfo"
-          register={register}
-          rules={{
-            required: true
-          }}
           placeholder="이용 제한 관련 유의사항을 입력해 주세요"
+          isRequired
         />
         <Stack>
-          <Checkbox name="null" control={control} disabled>
+          <Checkbox name="null" disabled>
             동의합니다
           </Checkbox>
         </Stack>
@@ -33,16 +30,9 @@ const PolicyInfo = () => {
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.ACCIDENT_INFO}`} control={control} hasBadge>
           상해 유의사항
         </AdminTitle>
-        <TextArea
-          name="accidentInfo"
-          register={register}
-          rules={{
-            required: true
-          }}
-          placeholder="상해 관련 유의사항을 입력해 주세요"
-        />
+        <TextArea name="accidentInfo" placeholder="상해 관련 유의사항을 입력해 주세요" isRequired />
         <Stack>
-          <Checkbox name="null" control={control} disabled>
+          <Checkbox name="null" disabled>
             동의합니다
           </Checkbox>
         </Stack>
@@ -57,14 +47,11 @@ const PolicyInfo = () => {
         </AdminTitle>
         <TextArea
           name="abandonmentInfo"
-          register={register}
-          rules={{
-            required: true
-          }}
           placeholder="유기 관련 유의사항을 입력해 주세요"
+          isRequired
         />
         <Stack>
-          <Checkbox name="null" control={control} disabled>
+          <Checkbox name="null" disabled>
             동의합니다
           </Checkbox>
         </Stack>

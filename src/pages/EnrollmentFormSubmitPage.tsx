@@ -1,10 +1,10 @@
-import EnrollmentInfo from "components/Admin/EnrollmentForm/CreateForm/EnrollmentInfo";
-import { Container } from "components/Admin/EnrollmentForm/CreateForm/styles";
+import SubmitForm from "components/Admin/EnrollmentForm/SubmitForm";
+import { Container } from "components/Admin/EnrollmentForm/SubmitForm/styles";
 
 const EnrollmentFormSubmitPage = () => {
   return (
     <Container>
-      <EnrollmentInfo />
+      <SubmitForm />
     </Container>
   );
 };

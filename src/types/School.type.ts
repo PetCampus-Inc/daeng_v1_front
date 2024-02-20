@@ -22,7 +22,26 @@ export interface IEnrollment {
   schoolFormId: number;
   requiredItemList: number[];
   priceInfo: string;
-  ticketType: TTicketType[];
+  ticketType: TTicketType;
+  roundTicketNumber: TRoundTicketNumber;
+  openDays: string[];
+  monthlyTicketNumber: TMonthlyTicketNumber;
+  ticketInfo: string;
+  limitsInfo: string;
+  accidentInfo: string;
+  abandonmentInfo: string;
+  pickDropState: TPickDropState;
+  pickDropMemo: string;
+  pickDropInfo: string;
+  pickDropNotice: string;
+  memberDto: IMemberDto | null;
+}
+
+export interface IAdminEnrollment {
+  schoolFormId: number;
+  requiredItemList: number[];
+  priceInfo: string;
+  ticketType: string[];
   roundTicketNumber: TRoundTicketNumber;
   openDays: string[];
   monthlyTicketNumber: TMonthlyTicketNumber;
@@ -47,7 +66,7 @@ export interface IMemberDto {
 
 export interface ITicketInfo {
   priceInfo: string;
-  ticketType: TTicketType[];
+  ticketType: string[];
   roundTicketNumber: TRoundTicketNumber;
   openDays: string[];
   monthlyTicketNumber: TMonthlyTicketNumber;
@@ -88,13 +107,13 @@ export interface IRequestEnrollment {
   ticketType: TTicketType;
   roundTicketNumber: number;
   monthlyTicketNumber: number;
-  attendanceDays: string[];
+  openDays: number[];
   pickDropRequest: TPickDropRequest;
   pickDropType: string;
   pickDropMemo: string;
 }
 
-export interface IRequestForm {
+export interface IRequestAdminEnrollment {
   schoolId: number;
   adminId: number;
   formName: string | null;

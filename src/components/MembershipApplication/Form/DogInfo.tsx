@@ -15,17 +15,22 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
-  const { register, control, watch, setValue } = useFormContext();
+  const { register, watch, setValue } = useFormContext();
 
   return (
     <>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_NAME)}>이름</Title>
-        <InputField control={control} name="dogName" placeholder="강아지 이름을 입력해주세요" />
+        <InputField
+          name="dogName"
+          placeholder="강아지 이름을 입력해주세요"
+          register={register}
+          isRequired
+        />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_GENDER)}>성별</Title>
-        <SingleRadio name="dogGender" radiosText={["수컷", "암컷"]} />
+        <SingleRadio name="dogGender" radiosText={["수컷", "암컷"]} isRequired />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_SIZE)}>크기</Title>
@@ -33,18 +38,24 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           name="dogSize"
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
+          isRequired
         />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
-        <BreedInput control={control} name="dogBreed" setValue={setValue} watch={watch} />
+        <BreedInput
+          name="newBreed"
+          setValue={setValue}
+          watch={watch}
+          register={register}
+          isRequired
+        />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.DOG_BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
           <SelectNumber
             name="year"
-            control={control}
             numberList={yearsArray}
             defaultValue="2000"
             watch={watch}
@@ -52,7 +63,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           />
           <SelectNumber
             name="month"
-            control={control}
             numberList={monthsArray}
             defaultValue="01"
             watch={watch}
@@ -60,7 +70,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           />
           <SelectNumber
             name="day"
-            control={control}
             numberList={daysArray}
             defaultValue="01"
             watch={watch}
@@ -70,11 +79,19 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.NEUTRALIZATION)}>중성화 여부</Title>
-        <SingleRadio name="neutralization" radiosText={["했어요", "안했어요"]} />
+        <SingleRadio
+          name="neutralization"
+          radiosText={["했어요", "안했어요"]}
+          isRequired={requiredItems.get(ITEM_KEYS.NEUTRALIZATION)}
+        />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.VACCINATION)}>예방접종 여부</Title>
-        <SingleRadio name="vaccination" radiosText={["했어요", "안했어요"]} />
+        <SingleRadio
+          name="vaccination"
+          radiosText={["했어요", "안했어요"]}
+          isRequired={requiredItems.get(ITEM_KEYS.VACCINATION)}
+        />
       </Card>
       {watch("vaccination") === "했어요" && (
         <Card>
@@ -88,9 +105,9 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.ALLERGY_DISEASE)}>알러지 및 질병 유무</Title>
         <TextArea
-          register={register}
           name="allergyDisease"
           placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
+          isRequired={requiredItems.get(ITEM_KEYS.ALLERGY_DISEASE)}
         />
       </Card>
     </>
