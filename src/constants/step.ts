@@ -124,10 +124,10 @@ export const FIELD_TO_STEP = new Map<string, number>([
   ["limitsInfo", 3],
   ["accidentInfo", 3],
   ["abandonmentInfo", 3],
-  ["pickDropState", 5],
-  ["pickDropNotice", 5],
-  ["pickDropRequest", 5],
-  ["pickDropType", 5],
-  ["pickDropMemo", 5],
-  ["pickDropInfo", 5]
+  ["pickDropState", 4],
+  ["pickDropNotice", 4],
+  ["pickDropRequest", 4],
+  ["pickDropType", 4],
+  ["pickDropMemo", 4],
+  ["pickDropInfo", 4]
 ]);
