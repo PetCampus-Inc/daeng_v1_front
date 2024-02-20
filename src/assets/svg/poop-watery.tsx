@@ -1,0 +1,10 @@
+const PoopWatery = () => {
+  return (
+    <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="62" height="62" rx="8" fill="#E9E9E9" />
+      <circle cx="31" cy="31" r="15" fill="#B5B5B5" />
+    </svg>
+  );
+};
+
+export default PoopWatery;

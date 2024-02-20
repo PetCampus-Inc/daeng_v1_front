@@ -52,7 +52,7 @@ const AboutDog = () => {
           <S.DetailItem>
             <S.Text>알러지 및 질병</S.Text>
             <S.Text className="explanation">
-              뽀뽀의 알러지는요 눈을 긁으면 ㅈ빨간 점이 생기고요그리고요
+              뽀뽀의 알러지는요 눈을 긁으면 빨간 점이 생기고요그리고요
             </S.Text>
           </S.DetailItem>
           <S.DetailItem>
