@@ -8,7 +8,12 @@ import TextAreaModal from "components/common/TextAreaModal";
 
 const Memo = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { getValues, register } = useForm({ mode: "onSubmit" });
+  const { getValues, register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit((data) => {
+    // TODO: post API 연동
+    setIsOpen(false);
+  });
 
   return (
     <>
@@ -23,7 +28,7 @@ const Memo = () => {
       {/* FIXME: 나영이 작업 머지되면 수정하기 */}
       <TextAreaInput
         $isChecked={false}
-        resizable={true}
+        resizable={false}
         placeholder="메모를 입력해주세요"
         onClick={() => {
           setIsOpen(true);
@@ -39,6 +44,7 @@ const Memo = () => {
             closefunc={() => setIsOpen(false)}
             name="memoModal"
             register={register}
+            actionfunc={onSubmit}
           />
         )}
       </AnimatePresence>
