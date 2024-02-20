@@ -3,6 +3,8 @@ import * as S from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
 import useGetDogDetail from "hooks/api/useGetDogDetail";
 import AboutDog from "./AboutDog";
+import AboutOwner from "./AboutOwner";
+import Memo from "./Memo";
 
 const DogInfo = () => {
   const { dogDetail } = useGetDogDetail();
@@ -10,6 +12,10 @@ const DogInfo = () => {
   return (
     <S.Container>
       <AboutDog />
+
+      <AboutOwner />
+
+      <Memo />
 
       <S.AlbumWrapper>
         <Text text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
