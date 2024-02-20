@@ -16,7 +16,7 @@ const AboutDog = () => {
         <S.InfoWrapper>
           <S.InfoTop>
             <S.TextWrapper>
-              <S.Text className="dogName">{"모카"}</S.Text>
+              <S.Text className="big">{"모카"}</S.Text>
               <S.DogSizeBadge>{"소형견"}</S.DogSizeBadge>
             </S.TextWrapper>
             <PencilIcon handleTouch={() => console.log("수정")} />
@@ -45,22 +45,22 @@ const AboutDog = () => {
           <Badge type="pickdrop" />
         </S.TagsWrapper>
         <S.DogDetailList>
-          <S.DogDetailItem className="row">
+          <S.DetailItem className="row">
             <S.Text>예방접종 파일</S.Text>
             <S.YellowThickButton>파일 열람</S.YellowThickButton>
-          </S.DogDetailItem>
-          <S.DogDetailItem>
+          </S.DetailItem>
+          <S.DetailItem>
             <S.Text>알러지 및 질병</S.Text>
             <S.Text className="explanation">
               뽀뽀의 알러지는요 눈을 긁으면 ㅈ빨간 점이 생기고요그리고요
             </S.Text>
-          </S.DogDetailItem>
-          <S.DogDetailItem>
+          </S.DetailItem>
+          <S.DetailItem>
             <S.Text>픽드랍 정보</S.Text>
             <S.Text className="explanation">
               롯데 아파트 8단지 820동 앞에서 2시에 어머니가 나와서 어쩌고 저쩌고 입니다.
             </S.Text>
-          </S.DogDetailItem>
+          </S.DetailItem>
         </S.DogDetailList>
       </S.MainBottomWrapper>
     </div>
