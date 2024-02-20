@@ -80,14 +80,14 @@ const InputBox = ({
           <StyledButtonWrapper onClick={handleClick}>
             {!isclicked ? (
               <StyledImage
-                src="/images/brown-search.png"
+                src="/images/temp/brown-search.png"
                 alt="search-icon"
                 width="16px"
                 height="16px"
               />
             ) : (
               <StyledImage
-                src="/images/brown-x-button.png"
+                src="/images/temp/brown-x-button.png"
                 alt="x-box"
                 width="16px"
                 height="16px"
@@ -97,7 +97,12 @@ const InputBox = ({
         ) : (
           <StyledButtonWrapper onClick={handleClick}>
             {selectedSearchText === "" || inputValue === "" ? (
-              <StyledImage src="/images/search.png" alt="search-icon" width="16px" height="16px" />
+              <StyledImage
+                src="/images/temp/search.png"
+                alt="search-icon"
+                width="16px"
+                height="16px"
+              />
             ) : (
               <StyledImage src="/images/x-box.png" alt="x-box" width="16px" height="16px" />
             )}
@@ -119,12 +124,12 @@ const InputBox = ({
       )}
       {className === "password" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="/images/opened-eye.png" alt="opened-eye" />
+          <StyledImage src="/images/temp/opened-eye.png" alt="opened-eye" />
         </StyledButtonWrapper>
       )}
       {className === "text" && (
         <StyledButtonWrapper onClick={handleClick}>
-          <StyledImage src="/images/closed-eye.png" alt="closed-eye" />
+          <StyledImage src="/images/temp/closed-eye.png" alt="closed-eye" />
         </StyledButtonWrapper>
       )}
     </StyledMainWrapper>

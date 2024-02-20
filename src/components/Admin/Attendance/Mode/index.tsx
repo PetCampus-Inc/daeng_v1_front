@@ -10,7 +10,7 @@ import {
   StyledBottomWrapper,
   StyledImageCard,
   StyledCardsWrapper,
-  StyledListWrapper,
+  StyledListWrapper
 } from "./styles";
 import { StyledImage } from "../DogCard/styles";
 import { handlePostAttend } from "apis/attendance";
@@ -31,7 +31,7 @@ const Mode = ({
   selectedDogIds,
   setIsChecking,
   isSearchClicked,
-  searchAttendDogResults,
+  searchAttendDogResults
 }: Props) => {
   const dogLists = useRecoilValue(attendDogListInfoAtom).data;
   const schoolId = useRecoilValue(adminLoginInfoAtom).data.schoolId;
@@ -72,7 +72,7 @@ const Mode = ({
                     />
                   </StyledImageCard>
                   <StyledImage
-                    src="/images/x-button.png"
+                    src="/images/temp/x-button.png"
                     alt="x-button"
                     width="1.5rem"
                     height="1.5rem"
@@ -81,9 +81,7 @@ const Mode = ({
                     right="0.8rem"
                     top="-0.4rem"
                     onClick={() => {
-                      setSeletedDogIds(
-                        selectedDogIds.filter((id) => id !== dogId)
-                      );
+                      setSeletedDogIds(selectedDogIds.filter((id) => id !== dogId));
                     }}
                   />
                 </StyledCardsWrapper>
@@ -114,10 +112,7 @@ const Mode = ({
             })
           ) : (
             <StyledTextWrapper>
-              <Text
-                text="검색 결과와 일치하는 강아지가 없어요"
-                color={ThemeConfig.colors.gray_3}
-              />
+              <Text text="검색 결과와 일치하는 강아지가 없어요" color={ThemeConfig.colors.gray_3} />
             </StyledTextWrapper>
           )
         ) : null}
@@ -142,10 +137,7 @@ const Mode = ({
             })
           ) : (
             <StyledTextWrapper>
-              <Text
-                text="아직 등원한 강아지가 없어요"
-                color={ThemeConfig.colors.gray_3}
-              />
+              <Text text="아직 등원한 강아지가 없어요" color={ThemeConfig.colors.gray_3} />
             </StyledTextWrapper>
           )
         ) : null}
@@ -156,9 +148,7 @@ const Mode = ({
           height="100%"
           text="출석완료"
           backcolor={
-            selectedDogIds.length > 0
-              ? ThemeConfig.colors.primaryColor
-              : ThemeConfig.colors.gray_4
+            selectedDogIds.length > 0 ? ThemeConfig.colors.primaryColor : ThemeConfig.colors.gray_4
           }
           textcolor={
             selectedDogIds.length > 0 ? ThemeConfig.colors.white : ThemeConfig.colors.gray_2
