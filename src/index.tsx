@@ -7,13 +7,14 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 import { ThemeConfig } from "./styles/ThemeConfig";
 import { ThemeProvider } from "styled-components";
 import { StyledContainer } from "components/common/CustomToast/styles";
+import mediaQueries from "styles/MediaQuery";
 
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={ThemeConfig}>
+    <ThemeProvider theme={{ ...ThemeConfig, mediaQueries }}>
       <RecoilRoot>
         <GlobalStyle />
         <Router />
