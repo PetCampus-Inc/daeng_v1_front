@@ -1,15 +1,16 @@
 import PhoneIcon from "assets/svg/phone";
-import { DetailItem, Text, TextWrapper, YellowThickButton } from "../AboutDog/styles";
+import { DetailItem, TextWrapper, YellowThickButton } from "../AboutDog/styles";
 import * as S from "./styles";
 import BasicPhoneIcon from "assets/svg/phone-basic";
 import MapPinIcon from "assets/svg/map-pin-icon";
+import { DogDetailInfoText } from "../styles";
 
 const AboutOwner = () => {
   return (
     <S.Wrapper>
-      <Text className="big">보호자 상세 정보</Text>
+      <DogDetailInfoText className="big">보호자 상세 정보</DogDetailInfoText>
       <S.UpperContainer>
-        <Text className="big">고솔미</Text>
+        <DogDetailInfoText className="big">고솔미</DogDetailInfoText>
       </S.UpperContainer>
       <S.BottomContainer>
         <DetailItem className="row">

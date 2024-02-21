@@ -1,16 +1,16 @@
 import * as S from "./styles";
-import { Text } from "../../DogInfo/AboutDog/styles";
 import PoopHard from "assets/svg/poop-hard";
 import PoopHealthy from "assets/svg/poop-healty";
 import PoopWatery from "assets/svg/poop-watery";
 import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopNeedAttention from "assets/svg/poop-need-attention";
+import { DogDetailInfoText } from "../../DogInfo/styles";
 
 const DailyNotice = () => {
   return (
     <>
       <S.NoticeContainer>
-        <Text className="big">11월 10일 알림장</Text>
+        <DogDetailInfoText className="big">11월 10일 알림장</DogDetailInfoText>
         <S.NoticeItemWrapper>
           알림장
           <S.NoticeContent>

@@ -1,9 +1,9 @@
 import * as S from "./styles";
 import BoyIcon from "assets/svg/boy-icon";
 import CalendarIcon from "assets/svg/calendar";
-import PencilIcon from "assets/svg/pencil-icon";
 import BreedIcon from "assets/svg/breed-icon";
 import Badge from "components/common/Badge";
+import { DogDetailInfoText } from "../styles";
 
 const AboutDog = () => {
   return (
@@ -16,10 +16,9 @@ const AboutDog = () => {
         <S.InfoWrapper>
           <S.InfoTop>
             <S.TextWrapper>
-              <S.Text className="big">{"모카"}</S.Text>
+              <DogDetailInfoText className="big">{"모카"}</DogDetailInfoText>
               <S.DogSizeBadge>{"소형견"}</S.DogSizeBadge>
             </S.TextWrapper>
-            <PencilIcon handleTouch={() => console.log("수정")} />
           </S.InfoTop>
           <S.InfoIcons>
             <S.IconWrapper>
@@ -46,20 +45,20 @@ const AboutDog = () => {
         </S.TagsWrapper>
         <S.DogDetailList>
           <S.DetailItem className="row">
-            <S.Text>예방접종 파일</S.Text>
+            <DogDetailInfoText>예방접종 파일</DogDetailInfoText>
             <S.YellowThickButton>파일 열람</S.YellowThickButton>
           </S.DetailItem>
           <S.DetailItem>
-            <S.Text>알러지 및 질병</S.Text>
-            <S.Text className="explanation">
+            <DogDetailInfoText>알러지 및 질병</DogDetailInfoText>
+            <DogDetailInfoText className="explanation">
               뽀뽀의 알러지는요 눈을 긁으면 빨간 점이 생기고요그리고요
-            </S.Text>
+            </DogDetailInfoText>
           </S.DetailItem>
           <S.DetailItem>
-            <S.Text>픽드랍 정보</S.Text>
-            <S.Text className="explanation">
+            <DogDetailInfoText>픽드랍 정보</DogDetailInfoText>
+            <DogDetailInfoText className="explanation">
               롯데 아파트 8단지 820동 앞에서 2시에 어머니가 나와서 어쩌고 저쩌고 입니다.
-            </S.Text>
+            </DogDetailInfoText>
           </S.DetailItem>
         </S.DogDetailList>
       </S.MainBottomWrapper>

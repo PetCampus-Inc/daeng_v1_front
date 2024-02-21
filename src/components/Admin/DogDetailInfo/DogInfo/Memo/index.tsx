@@ -1,10 +1,11 @@
 import PencilIcon from "assets/svg/pencil-icon";
-import { InfoTop, Text } from "../AboutDog/styles";
+import { InfoTop } from "../AboutDog/styles";
 import { TextAreaInput } from "components/common/TextArea/styles";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import TextAreaModal from "components/common/TextAreaModal";
+import { DogDetailInfoText } from "../styles";
 
 const Memo = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const Memo = () => {
   return (
     <>
       <InfoTop>
-        <Text className="big">메모</Text>
+        <DogDetailInfoText className="big">메모</DogDetailInfoText>
         <PencilIcon
           handleTouch={() => {
             setIsOpen(true);
