@@ -33,3 +33,17 @@ export const Albums = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const DogDetailInfoText = styled.div`
+  color: ${({ theme }) => theme.colors.darkBlack};
+  ${({ theme }) => theme.typo.label1_16_B};
+
+  &.big {
+    ${({ theme }) => theme.typo.body1_18_B};
+  }
+
+  &.explanation {
+    ${({ theme }) => theme.typo.label2_14_R};
+    color: ${({ theme }) => theme.colors.gray_2};
+  }
+`;

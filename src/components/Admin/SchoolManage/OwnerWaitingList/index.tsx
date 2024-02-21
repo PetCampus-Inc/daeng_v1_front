@@ -5,7 +5,7 @@ import useGetWatingOwnersList from "hooks/api/useGetWaitingOwnersList";
 import { LayoutGroup } from "framer-motion";
 
 const OwnerWaitingList = () => {
-  const { data } = useGetWatingOwnersList(1);
+  const { data } = useGetWatingOwnersList(2);
 
   return (
     <S.OwnerWaitingListContainer>

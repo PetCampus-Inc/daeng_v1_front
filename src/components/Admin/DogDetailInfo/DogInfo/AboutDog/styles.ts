@@ -36,20 +36,6 @@ export const TextWrapper = styled.div`
   align-items: center;
 `;
 
-export const Text = styled.div`
-  color: ${({ theme }) => theme.colors.darkBlack};
-  ${({ theme }) => theme.typo.label1_16_B};
-
-  &.big {
-    ${({ theme }) => theme.typo.body1_18_B};
-  }
-
-  &.explanation {
-    ${({ theme }) => theme.typo.label2_14_R};
-    color: ${({ theme }) => theme.colors.gray_2};
-  }
-`;
-
 export const DogSizeBadge = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.primaryColor};
