@@ -1,7 +1,7 @@
 import CalendarIcon from "assets/svg/calendar";
 import * as S from "./styles";
 import RemainCountIcon from "assets/svg/remain-count-icon";
-import SendAlarmIcon from "assets/svg/send-alarm";
+import SendAlermButton from "../SendAlermButton";
 
 const TicketCard = () => {
   return (
@@ -17,14 +17,7 @@ const TicketCard = () => {
             <S.Text className="detail">잔여횟수 : 3회</S.Text>
           </S.IconWrapper>
 
-          <S.SendButton
-            onClick={() => {
-              /* 알림 전송 post api 연동 */
-            }}
-          >
-            <SendAlarmIcon />
-            알림 전송
-          </S.SendButton>
+          <SendAlermButton />
         </S.IconWrapper>
 
         <S.IconWrapper>
