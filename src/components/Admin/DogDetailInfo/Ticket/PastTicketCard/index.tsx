@@ -1,4 +1,4 @@
-import PastTicket from "../\bPastTicket";
+import PastTicket from "../PastTicket";
 import * as S from "./styles";
 
 const PastTicketCard = () => {
