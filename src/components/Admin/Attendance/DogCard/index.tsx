@@ -9,8 +9,7 @@ import { useNavigate } from "react-router-dom";
 import useGetDogDetail from "hooks/api/useGetDogDetail";
 import moment from "moment";
 import { PATH } from "constants/path";
-import BrownAlertIcon from "assets/svg/alert-brown";
-import GrayAlertIcon from "assets/svg/alert.gray";
+import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
 import OptionList from "./OptionList";
 
@@ -175,10 +174,12 @@ const DogCard = ({
                     : "none"
                 }
               />
-              {currentRounds === 1 || currentRounds === 2 || (isBeforeExpiry && <BrownAlertIcon />)}
+              {currentRounds === 1 ||
+                currentRounds === 2 ||
+                (isBeforeExpiry && <AlertSmallIcon color="brown" />)}
               {(currentRounds === 0 && monthlyTicket === null) ||
               (currentRounds === 0 && isExpired) ? (
-                <GrayAlertIcon />
+                <AlertSmallIcon color="gray" />
               ) : (
                 <CalendarIcon />
               )}
