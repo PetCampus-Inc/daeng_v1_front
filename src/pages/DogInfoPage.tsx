@@ -1,7 +1,5 @@
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
 import DogInfo from "components/Admin/DogDetailInfo/DogInfo";
-import { PATH } from "constants/path";
 import { ADMIN_DOG_DETAIL_INFO_STEP } from "constants/step";
 import useStep from "hooks/common/useStep";
 import AttendanceRecord from "components/Admin/DogDetailInfo/AttendanceRecord";
