@@ -5,12 +5,13 @@ import useGetDogDetail from "hooks/api/useGetDogDetail";
 import AboutDog from "./AboutDog";
 import AboutOwner from "./AboutOwner";
 import Memo from "./Memo";
+import { InnerContainer } from "../styles";
 
 const DogInfo = () => {
   const { dogDetail } = useGetDogDetail();
 
   return (
-    <S.Container>
+    <InnerContainer>
       <AboutDog />
 
       <AboutOwner />
@@ -28,7 +29,7 @@ const DogInfo = () => {
           />
         </S.Albums>
       </S.AlbumWrapper>
-    </S.Container>
+    </InnerContainer>
   );
 };
 

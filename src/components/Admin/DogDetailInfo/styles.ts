@@ -5,7 +5,8 @@ export const NavWrapper = styled.ul`
   display: flex;
   gap: 24px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  margin: 0 20px;
   text-align: center;
   white-space: nowrap;
   position: relative;
@@ -26,7 +27,7 @@ export const Underline = styled(motion.div)`
   bottom: 0px;
   left: 0;
   right: 0;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   height: 2px;
 `;
 
@@ -34,4 +35,23 @@ export const ContentWrapper = styled.div`
   height: 100%;
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.colors.white};
+`;
+
+export const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  height: 100%;
+  width: 100%;
+  padding: 24px 16px 0;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const FlexWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `;
