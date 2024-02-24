@@ -9,7 +9,7 @@ const MedicineIcon = () => {
         fill="#956F4C"
       />
       <rect x="4.13281" y="8.51367" width="16.3378" height="9.48649" rx="1.58108" fill="white" />
-      <path d="M4.13281 13.2568H8.61254" stroke="#E4CAB1" stroke-width="0.790541" />
+      <path d="M4.13281 13.2568H8.61254" stroke="#E4CAB1" strokeWidth="0.790541" />
       <rect x="11.25" y="10.0947" width="2.10811" height="6.32432" rx="0.527027" fill="#956F4C" />
       <rect
         x="15.4648"
@@ -20,7 +20,7 @@ const MedicineIcon = () => {
         transform="rotate(90 15.4648 12.2031)"
         fill="#956F4C"
       />
-      <path d="M15.9922 13.2568H20.4719" stroke="#E4CAB1" stroke-width="0.790541" />
+      <path d="M15.9922 13.2568H20.4719" stroke="#E4CAB1" strokeWidth="0.790541" />
     </svg>
   );
 };

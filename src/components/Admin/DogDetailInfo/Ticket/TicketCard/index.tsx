@@ -1,5 +1,5 @@
-import CalendarIcon from "assets/svg/calendar";
 import * as S from "./styles";
+import CalendarIcon from "assets/svg/calendar";
 import RemainCountIcon from "assets/svg/remain-count-icon";
 import SendAlermButton from "../SendAlermButton";
 

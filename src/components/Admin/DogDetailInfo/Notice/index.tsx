@@ -7,7 +7,7 @@ import AgreeList from "./AgreeList";
 
 const Notice = () => {
   return (
-    <InnerContainer>
+    <InnerContainer style={{ gap: "12px" }}>
       <S.FlexWrapper>
         <DogDetailInfoText className="big">유의사항 동의</DogDetailInfoText>
         <SendAlermButton />

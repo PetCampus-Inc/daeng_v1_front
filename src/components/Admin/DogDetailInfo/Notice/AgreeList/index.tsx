@@ -1,12 +1,12 @@
+import { DOG_NOTICE_LIST } from "constants/notice";
 import * as S from "./styles";
 import AlertSmallIcon from "assets/svg/alert-small-icon";
-import { DOG_NOTICE_LIST } from "constants/notice";
 
 const AgreeList = () => {
   return (
     <S.ListContainer>
       {DOG_NOTICE_LIST.map((item) => (
-        <S.List>
+        <S.List key={item.id}>
           <S.FlexText className="title">
             {item.icon}
             {item.title}
