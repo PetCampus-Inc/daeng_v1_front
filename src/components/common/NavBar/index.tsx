@@ -1,6 +1,6 @@
 import { memo } from "react";
 import usePathParams from "hooks/common/usePathParams";
-import { menuItems } from "constants/navBar";
+import { MENU_ITEMS } from "constants/navBar";
 import * as S from "./styles";
 
 interface Props {
@@ -15,7 +15,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
 
   return (
     <S.Container>
-      {menuItems.map((menuItem) => (
+      {MENU_ITEMS.map((menuItem) => (
         <S.NavButton key={menuItem.text} to={menuItem.path}>
           {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
           <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
