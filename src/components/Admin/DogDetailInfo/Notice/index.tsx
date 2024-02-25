@@ -1,4 +1,3 @@
-import React from "react";
 import { InnerContainer } from "../styles";
 import { DogDetailInfoText } from "../DogInfo/styles";
 import SendAlermButton from "../Ticket/SendAlermButton";

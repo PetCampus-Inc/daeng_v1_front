@@ -1,22 +1,24 @@
 import Text from "components/common/Text";
 import * as S from "./styles";
 import { ThemeConfig } from "styles/ThemeConfig";
-import useGetDogDetail from "hooks/api/useGetDogDetail";
 import AboutDog from "./AboutDog";
 import AboutOwner from "./AboutOwner";
 import Memo from "./Memo";
 import { InnerContainer } from "../styles";
+import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
 
 const DogInfo = () => {
-  const { dogDetail } = useGetDogDetail();
+  const { data, isLoading } = useGetDogAndMemberDetail(1);
+
+  if (isLoading) return <div>로딩중</div>;
 
   return (
     <InnerContainer>
-      <AboutDog />
+      <AboutDog data={data!.dogInfo} />
 
-      <AboutOwner />
+      <AboutOwner data={data!.memberInfo} />
 
-      <Memo />
+      <Memo memo={data!.dogInfo.dogMemo} />
 
       <S.AlbumWrapper>
         <Text text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />

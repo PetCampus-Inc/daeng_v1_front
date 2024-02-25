@@ -5,18 +5,20 @@ import BasicPhoneIcon from "assets/svg/phone-basic";
 import MapPinIcon from "assets/svg/map-pin-icon";
 import { DogDetailInfoText } from "../styles";
 
-const AboutOwner = () => {
+const AboutOwner = ({ data }: any) => {
+  const { memberName, memberPhone, memberAddress } = data;
+
   return (
     <S.Wrapper>
       <DogDetailInfoText className="big">보호자 상세 정보</DogDetailInfoText>
       <S.UpperContainer>
-        <DogDetailInfoText className="big">고솔미</DogDetailInfoText>
+        <DogDetailInfoText className="big">{memberName}</DogDetailInfoText>
       </S.UpperContainer>
       <S.BottomContainer>
         <DetailItem className="row">
           <TextWrapper>
             <BasicPhoneIcon />
-            010-1234-5678
+            {memberPhone || "연락처 없음"}
           </TextWrapper>
           <YellowThickButton>
             <PhoneIcon />
@@ -26,7 +28,7 @@ const AboutOwner = () => {
         <DetailItem>
           <TextWrapper>
             <MapPinIcon />
-            서울시 광진구 이라동 780-3
+            {memberAddress || "주소 없음"}
           </TextWrapper>
         </DetailItem>
       </S.BottomContainer>

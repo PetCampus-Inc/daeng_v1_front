@@ -1,3 +1,5 @@
+import { IMemberInfo } from "./School.type";
+
 export interface IAttendanceInfo {
   data: IDogsList[];
   status: number;
@@ -93,6 +95,7 @@ export interface IAttendCareInfo {
   selectedDogId: number[];
 }
 
+// TODO: 이 부분+ 이 타입을 사용한 기존 API들 삭제해도 되는지 검토 (API변동 이슈)
 export interface IDogDetails {
   dogId: number;
   dogName: string;
@@ -103,4 +106,23 @@ export interface IDogDetails {
   monthlyTicket: [];
   dogAttendances: [];
   status: number;
+}
+
+export interface IDogAndMemberInfo {
+  dogId: number;
+  dogName: string;
+  dogGender: string;
+  dogSize: string;
+  breedId: number;
+  breedName: string;
+  dogBirthDate: number[];
+  neutralization: string;
+  allergyDisease: string;
+  vaccination: string;
+  fileUrl: string[];
+  pickDropRequest: string;
+  pickDropType: string;
+  pickDropMemo: string;
+  dogMemo: string;
+  member: IMemberInfo;
 }

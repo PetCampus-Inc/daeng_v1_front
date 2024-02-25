@@ -4,8 +4,33 @@ import CalendarIcon from "assets/svg/calendar";
 import BreedIcon from "assets/svg/breed-icon";
 import Badge from "components/common/Badge";
 import { DogDetailInfoText } from "../styles";
+import { IDogAndMemberInfo } from "types/Attendance.type";
+import { differenceInMonths, format } from "date-fns";
 
-const AboutDog = () => {
+interface AboutDogProps {
+  data: Omit<IDogAndMemberInfo, "member">;
+}
+
+const AboutDog = ({ data }: AboutDogProps) => {
+  const {
+    dogName,
+    dogGender,
+    dogSize,
+    breedName,
+    dogBirthDate,
+    vaccination,
+    neutralization,
+    pickDropRequest,
+    allergyDisease,
+
+    pickDropMemo
+  } = data;
+  const birthDate = format(
+    new Date(dogBirthDate[0], dogBirthDate[1] - 1, dogBirthDate[2]),
+    "yyyy.MM.dd"
+  );
+  const monthsDifference = differenceInMonths(new Date(), birthDate);
+
   return (
     <div>
       <S.CardWrapper>
@@ -16,32 +41,33 @@ const AboutDog = () => {
         <S.InfoWrapper>
           <S.InfoTop>
             <S.TextWrapper>
-              <DogDetailInfoText className="big">{"모카"}</DogDetailInfoText>
-              <S.DogSizeBadge>{"소형견"}</S.DogSizeBadge>
+              <DogDetailInfoText className="big">{dogName}</DogDetailInfoText>
+              <S.DogSizeBadge>{dogSize}</S.DogSizeBadge>
             </S.TextWrapper>
           </S.InfoTop>
           <S.InfoIcons>
             <S.IconWrapper>
               <BoyIcon />
-              {"수컷"}
+              {dogGender}
             </S.IconWrapper>
             <S.IconWrapper>
               <BreedIcon />
-              {"푸들"}
+              {breedName}
             </S.IconWrapper>
           </S.InfoIcons>
           <S.IconWrapper>
             <CalendarIcon />
-            {"2008.09.10 [15개월]"}
+            {birthDate}
+            {` [${monthsDifference}개월]`}
           </S.IconWrapper>
         </S.InfoWrapper>
       </S.CardWrapper>
 
       <S.MainBottomWrapper>
         <S.TagsWrapper>
-          <Badge type="vaccinated" />
-          <Badge type="neutralized" />
-          <Badge type="pickdrop" />
+          {vaccination === "VACCINATED" && <Badge type="vaccinated" />}
+          {neutralization === "NEUTERED" && <Badge type="neutralized" />}
+          {pickDropRequest === "REQUEST" && <Badge type="pickdrop" />}
         </S.TagsWrapper>
         <S.DogDetailList>
           <S.DetailItem className="row">
@@ -51,14 +77,12 @@ const AboutDog = () => {
           <S.DetailItem>
             <DogDetailInfoText>알러지 및 질병</DogDetailInfoText>
             <DogDetailInfoText className="explanation">
-              뽀뽀의 알러지는요 눈을 긁으면 빨간 점이 생기고요그리고요
+              {allergyDisease || "없음"}
             </DogDetailInfoText>
           </S.DetailItem>
           <S.DetailItem>
             <DogDetailInfoText>픽드랍 정보</DogDetailInfoText>
-            <DogDetailInfoText className="explanation">
-              롯데 아파트 8단지 820동 앞에서 2시에 어머니가 나와서 어쩌고 저쩌고 입니다.
-            </DogDetailInfoText>
+            <DogDetailInfoText className="explanation">{pickDropMemo || "없음"}</DogDetailInfoText>
           </S.DetailItem>
         </S.DogDetailList>
       </S.MainBottomWrapper>
