@@ -7,7 +7,11 @@ import { useForm } from "react-hook-form";
 import TextAreaModal from "components/common/TextAreaModal";
 import { DogDetailInfoText } from "../styles";
 
-const Memo = () => {
+interface MemoProps {
+  memo: string;
+}
+
+const Memo = ({ memo }: MemoProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { getValues, register, handleSubmit } = useForm();
 
@@ -35,6 +39,7 @@ const Memo = () => {
           setIsOpen(true);
         }}
         readOnly
+        defaultValue={memo}
         value={getValues("memoModal")}
       />
       <AnimatePresence>
@@ -46,6 +51,7 @@ const Memo = () => {
             name="memoModal"
             register={register}
             actionfunc={onSubmit}
+            defaultValue={memo}
           />
         )}
       </AnimatePresence>

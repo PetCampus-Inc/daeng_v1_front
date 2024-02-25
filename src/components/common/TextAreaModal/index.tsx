@@ -11,6 +11,7 @@ interface Props {
   actionfunc?: () => void | Promise<void>;
   name: string;
   register: UseFormRegister<FieldValues>;
+  defaultValue?: string;
 }
 
 const TextAreaModal = ({
@@ -20,7 +21,8 @@ const TextAreaModal = ({
   closefunc,
   actionfunc,
   name,
-  register
+  register,
+  defaultValue
 }: Props) => {
   return (
     <Portal>
@@ -31,6 +33,7 @@ const TextAreaModal = ({
             name={name}
             register={register}
             autoResize={false}
+            defaultValue={defaultValue}
             style={{ height: "18vh", marginBottom: "20px", textAlign: "start" }}
           />
 

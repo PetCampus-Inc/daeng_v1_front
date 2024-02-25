@@ -105,8 +105,54 @@ export const handlePostAttendCareDogs = async (req: IAttendCareInfo): Promise<IR
   return data;
 };
 
-export const handleGetDogDetails = async (dogId: number): Promise<IDogDetails> => {
-  const url = `admin/attendance/dogInfo?dogId=${dogId}`;
+// 연결 전
+export const handleGetDogAndMemberDetails = async (dogId: number): Promise<any> => {
+  const url = `admin/attendance/dog/info?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data;
+};
+
+// 연결 전
+export const handlePostDogMemo = async (dogId: number, memo: string): Promise<any> => {
+  const url = `admin/attendance/dog/info/memo`;
+  const { data } = await customAxios.post(url, {
+    dogId,
+    memo
+  });
+  return data;
+};
+
+// 연결 전
+export const handleGetAttendanceHistory = async (dogId: number, calendar: string): Promise<any> => {
+  const url = `admin/attendance/dog/info/attendance?dogId=${dogId}&calendar=${calendar}`;
+  const { data } = await customAxios.get(url);
+  return data;
+};
+
+// 연결 전
+export const handleGetTicketDetail = async (dogId: number): Promise<any> => {
+  const url = `admin/attendance/dog/ticket?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data;
+};
+
+// 연결 전
+export const handlePostTicket = async (req: any): Promise<any> => {
+  const url = `admin/attendance/dog/ticket`;
+  const { data } = await customAxios.post(url, {
+    dogId: req.dogId,
+    startDate: req.startDate,
+    ticketType: req.ticketType,
+    roundTicketNumber: req.roundTicketNumber,
+    monthlyTicketNumber: req.monthlyTicketNumber,
+    attendanceDays: req.attendanceDays
+  });
+  return data;
+};
+
+// 연결 전
+export const handleGetPrecautions = async (dogId: number): Promise<any> => {
+  const url = `admin/attendance/dog/precautions?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data;
 };
