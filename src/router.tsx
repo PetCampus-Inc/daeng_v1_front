@@ -4,6 +4,7 @@ import * as Pages from "pages";
 import { PATH } from "constants/path";
 import { useRecoilState } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { Suspense } from "react";
 
 export default function Router() {
   const [{ data }] = useRecoilState(adminLoginInfoAtom);
@@ -69,19 +70,35 @@ export default function Router() {
             },
             {
               path: PATH.ADMIN_CREATE_FORM,
-              element: <Pages.EnrollmentFormCreatePage />
+              element: (
+                <Suspense>
+                  <Pages.EnrollmentFormCreatePage />
+                </Suspense>
+              )
             },
             {
               path: PATH.ADMIN_SUBMIT_FORM,
-              element: <Pages.EnrollmentFormSubmitPage />
+              element: (
+                <Suspense>
+                  <Pages.EnrollmentFormSubmitPage />
+                </Suspense>
+              )
             },
             {
               path: PATH.ADMIN_FORM(":formId"),
-              element: <Pages.EnrollmentFormDetailPage />
+              element: (
+                <Suspense>
+                  <Pages.EnrollmentFormDetailPage />
+                </Suspense>
+              )
             },
             {
               path: PATH.ADMIN_EDIT_FORM(":formId"),
-              element: <Pages.EnrollmentFormEditPage />
+              element: (
+                <Suspense>
+                  <Pages.EnrollmentFormEditPage />
+                </Suspense>
+              )
             },
             {
               path: PATH.ADMIN_TEACHER_MANAGE,
@@ -99,7 +116,11 @@ export default function Router() {
       children: [
         {
           path: PATH.OWNER_MA,
-          element: <Pages.MembershipApplicationPage />
+          element: (
+            <Suspense>
+              <Pages.MembershipApplicationPage />
+            </Suspense>
+          )
         }
       ]
     }
