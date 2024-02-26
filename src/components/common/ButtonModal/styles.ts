@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-export const BackDrop = styled.div`
+export const BackDrop = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["isOpen"].includes(prop)
+})<{
+  isOpen: boolean;
+}>`
+  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+
   width: 100vw;
   height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -15,16 +20,13 @@ export const BackDrop = styled.div`
   z-index: 5;
 `;
 
-export const MainWrapper = styled.div<{
-  height?: string;
-  paddingtop?: string;
-}>`
+export const MainWrapper = styled.div`
   width: 90%;
   min-height: 22%;
+  display: flex;
   background-color: white;
   border-radius: 0.8rem;
   padding: 9% 5% 5%;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

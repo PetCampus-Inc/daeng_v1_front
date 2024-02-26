@@ -9,6 +9,7 @@ interface Props {
   actionbutton?: string;
   closefunc?: () => void | Promise<void>;
   actionfunc?: () => void | Promise<void>;
+  isOpen?: boolean;
 }
 
 const ButtonModal = ({
@@ -18,11 +19,12 @@ const ButtonModal = ({
   closebutton,
   actionbutton,
   closefunc,
-  actionfunc
+  actionfunc,
+  isOpen = false
 }: Props) => {
   return (
     <Portal>
-      <S.BackDrop>
+      <S.BackDrop isOpen={isOpen}>
         <S.MainWrapper>
           {children}
           <S.TextWrapper>
