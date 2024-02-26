@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 
@@ -7,6 +8,10 @@ const useStep = (maxStep: number) => {
   const nextStep = () => setCurrentStep((prevStep) => Math.min(prevStep + 1, maxStep));
   const prevStep = () => setCurrentStep((prevStep) => Math.max(prevStep - 1, 0));
   const setStep = (step: number) => setCurrentStep(step);
+
+  useEffect(() => {
+    setCurrentStep(0);
+  }, []);
 
   return { currentStep, nextStep, prevStep, setStep };
 };
