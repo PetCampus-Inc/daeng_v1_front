@@ -11,43 +11,94 @@ export const StyledHeadWrapper = styled.div`
   height: 20%;
 `;
 
-export const StyledMainWrapper = styled.div`
+export const MainWrapper = styled.div`
   display: flex;
-  height: 65%;
-  height: 65%;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const StyledTitleWrapper = styled.div``;
+export const TitleWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+`;
 
-export const StyledButtonWrapper = styled.div`
+export const Title = styled.h2`
+  color: ${({ theme }) => theme.colors.black};
+  ${({ theme }) => theme.typo.title2_20_B};
+`;
+export const SubTitle = styled.h4`
+  color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
+
+export const ButtonWrapper = styled.div`
   display: flex;
-  width: 35%;
   height: 100%;
   justify-content: center;
   align-items: center;
+  gap: 4px;
 `;
 
-export const StyledImage = styled.img<{
-  src: string;
-  alt: string;
-  marginright?: string;
-  marginleft?: string;
-}>`
-  margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
-  margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
-  margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
-  margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
+export const FootButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+  background-color: ${({ theme }) => theme.colors.primaryColor};
+
+  & > svg {
+    color: ${({ theme }) => theme.colors.white};
+  }
+
+  &.active {
+    border: 1px solid ${({ theme }) => theme.colors.br_2};
+    background-color: ${({ theme }) => theme.colors.white};
+  }
+
+  &.active > svg {
+    color: ${({ theme }) => theme.colors.br_2};
+  }
+`;
+
+export const ControlButton = styled.button`
+  min-width: 70px;
+  display: flex;
+  padding: 4px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 50px;
+  border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+  background-color: ${({ theme }) => theme.colors.white};
+
+  ${({ theme }) => theme.typo.label2_14_B};
+  color: ${({ theme }) => theme.colors.primaryColor};
+`;
+
+export const ListWrapper = styled.div`
+  width: 100%;
+  height: 75%;
+  padding-bottom: 5%;
+  overflow-y: auto;
+  position: relative;
+`;
+
+export const CardListWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
 `;
 
 export const StyledListWrapper = styled.div`
   width: 100%;
   height: 75%;
   padding-bottom: 5%;
-  padding-left: 4%;
-  padding-right: 2%;
   overflow-y: auto;
   position: relative;
 `;
