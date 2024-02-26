@@ -48,4 +48,6 @@ export const Content = styled.div<{ $isVisible: boolean }>`
   width: 100%;
   visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
   position: ${({ $isVisible }) => ($isVisible ? "static" : "absolute")};
+  max-height: ${({ $isVisible }) => ($isVisible ? "none" : "0")};
+  overflow: hidden;
 `;
