@@ -20,7 +20,7 @@ export const HeaderWrapper = styled.div`
   height: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
+  padding: 0 16px;
   box-shadow: ${({ theme }) => theme.shadows.card};
 `;
 
@@ -32,10 +32,14 @@ export const LogoWrapper = styled(Link)`
 
 export const IconWrapper = styled.div`
   display: flex;
-  height: 100%;
   align-items: center;
   cursor: pointer;
   z-index: 3;
+  height: 100%;
+
+  & > .arrow-left {
+    color: ${({ theme }) => theme.colors.darkBlack};
+  }
 `;
 
 export const TextWrapper = styled.div`
@@ -48,18 +52,21 @@ export const TextWrapper = styled.div`
 `;
 
 export const TitleText = styled.div<{ size?: string }>`
-  ${({ theme }) => theme.typo.body1_18_B}
   position: absolute;
   right: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${({ theme }) => theme.typo.title2_20_B};
+  color: ${({ theme }) => theme.colors.darkBlack};
+  ${({ theme }) => theme.typo.title2_20_B}
 
   &.start {
     position: relative;
+  }
+
+  &.text {
+    ${({ theme }) => theme.typo.body2_16_B};
   }
 `;
 
