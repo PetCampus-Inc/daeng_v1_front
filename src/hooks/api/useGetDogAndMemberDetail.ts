@@ -4,7 +4,7 @@ import { IDogAndMemberInfo } from "types/Attendance.type";
 
 const useGetDogAndMemberDetail = (dogId: number) => {
   return useSuspenseQuery({
-    queryKey: ["getDogAndMemberDetail"],
+    queryKey: ["getDogAndMemberDetail", dogId],
     queryFn: () => handleGetDogAndMemberDetails(dogId),
     staleTime: 1000 * 60 * 60,
     select: ({ data }) => {

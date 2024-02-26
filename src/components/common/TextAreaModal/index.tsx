@@ -22,7 +22,6 @@ const TextAreaModal = ({
   closefunc,
   actionfunc,
   name,
-  register,
   defaultValue,
   placeholder
 }: Props) => {
@@ -33,7 +32,6 @@ const TextAreaModal = ({
           {children}
           <TextArea
             name={name}
-            register={register}
             autoResize={false}
             defaultValue={defaultValue}
             placeholder={placeholder}

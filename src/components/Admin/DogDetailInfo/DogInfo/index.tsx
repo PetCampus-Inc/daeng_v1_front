@@ -9,7 +9,7 @@ import * as S from "./styles";
 import { InnerContainer } from "../styles";
 
 const DogInfo = () => {
-  const { data } = useGetDogAndMemberDetail(2); //FIXME: 나영이꺼 머지되면 queryString에서 가져오기
+  const { data, refetch } = useGetDogAndMemberDetail(2); //FIXME: 나영이꺼 머지되면 queryString에서 가져오기
 
   return (
     <InnerContainer>
@@ -17,7 +17,7 @@ const DogInfo = () => {
 
       <AboutOwner data={data.memberInfo} />
 
-      <Memo memo={data.dogInfo.dogMemo} id={data.dogInfo.dogId} />
+      <Memo memo={data.dogInfo.dogMemo} id={data.dogInfo.dogId} refetch={refetch} />
 
       <S.AlbumWrapper>
         <Text text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
