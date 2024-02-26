@@ -10,7 +10,7 @@ import { useCallMember } from "hooks/api/useCallMemberQuery";
 import { useDeleteDog } from "hooks/api/useDeleteDogMutation";
 import { getOptions } from "utils/options";
 
-import OptionList from "./OptionList";
+import AttendanceOptionList from "../AttendanceOptionList";
 import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
 import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
 import AlertSmallIcon from "assets/svg/alert-small-icon";
@@ -109,7 +109,7 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
           }}
         >
           {dropdown.isOpen && adminRole === "ROLE_OWNER" && (
-            <OptionList
+            <AttendanceOptionList
               isOptionsOpen={dropdown.isOpen}
               options={OPTIONS}
               handleOptionClick={handleOptionClick}
@@ -117,7 +117,7 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
             />
           )}
           {dropdown.isOpen && adminRole === "ROLE_TEACHER" && (
-            <OptionList
+            <AttendanceOptionList
               isOptionsOpen={dropdown.isOpen}
               options={OPTIONS}
               handleOptionClick={handleOptionClick}
