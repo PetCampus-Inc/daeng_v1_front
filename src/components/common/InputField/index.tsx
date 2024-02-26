@@ -26,6 +26,7 @@ const InputField = ({
       id={name}
       disabled={disabled}
       placeholder={placeholder}
+      className={props.defaultValue !== props.value ? "default" : ""}
       {...props}
     />
   );
