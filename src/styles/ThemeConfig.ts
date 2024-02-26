@@ -56,7 +56,8 @@ export const ThemeConfig = {
     alertCard: "0px 8px 15px 10px rgba(156, 155, 155, 0.07)",
     overlap: "-4px 0px 12px rgba(0,0,0,0.35)",
     input: "0px -5px 10px rgba(0,0,0,0.04)",
-    bottomTab: "0px -17px 39px -15px rgba(167,167,167,0.15)"
+    bottomTab: "0px -17px 39px -15px rgba(167,167,167,0.15)",
+    dogCard: "0px 2px 7px 0px rgba(0, 0, 0, 0.04);"
   },
 
   typo: {
@@ -72,7 +73,7 @@ export const ThemeConfig = {
     label1_16_B: typoCreator("16px", 700, "-0.192px", "24px"),
     label1_16_M: typoCreator("16px", 500, "-1.2px", "24px"),
     label1_16_R: typoCreator("16px", 400, "-0.192px", "24px"),
-    label2_14_B: typoCreator("14px", 700, "2px", "20px"),
+    label2_14_B: typoCreator("14px", 700, "0.28px", "20px"),
     label2_14_M: typoCreator("14px", 500, "0.28px", "25px"),
     label2_14_R: typoCreator("14px", 400, "0.28px", "20px"),
     caption1_12_R: typoCreator("12px", 400, "-0.12px", "17.5px"),
