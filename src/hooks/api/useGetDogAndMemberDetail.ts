@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogAndMemberDetails } from "apis/attendance";
 import { IDogAndMemberInfo } from "types/Attendance.type";
 
 const useGetDogAndMemberDetail = (dogId: number) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ["getDogAndMemberDetail"],
     queryFn: () => handleGetDogAndMemberDetails(dogId),
     staleTime: 1000 * 60 * 60,

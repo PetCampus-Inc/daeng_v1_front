@@ -30,6 +30,8 @@ const AboutDog = ({ data }: AboutDogProps) => {
     "yyyy.MM.dd"
   );
   const monthsDifference = differenceInMonths(new Date(), birthDate);
+  const noTag =
+    vaccination !== "VACCINATED" && neutralization !== "NEUTERED" && pickDropRequest !== "REQUEST";
 
   return (
     <div>
@@ -57,18 +59,19 @@ const AboutDog = ({ data }: AboutDogProps) => {
           </S.InfoIcons>
           <S.IconWrapper>
             <CalendarIcon />
-            {birthDate}
-            {` [${monthsDifference}개월]`}
+            {`${birthDate} [${monthsDifference}개월]`}
           </S.IconWrapper>
         </S.InfoWrapper>
       </S.CardWrapper>
 
       <S.MainBottomWrapper>
-        <S.TagsWrapper>
-          {vaccination === "VACCINATED" && <Badge type="vaccinated" />}
-          {neutralization === "NEUTERED" && <Badge type="neutralized" />}
-          {pickDropRequest === "REQUEST" && <Badge type="pickdrop" />}
-        </S.TagsWrapper>
+        {noTag ? null : (
+          <S.TagsWrapper>
+            {vaccination === "VACCINATED" && <Badge type="vaccinated" />}
+            {neutralization === "NEUTERED" && <Badge type="neutralized" />}
+            {pickDropRequest === "REQUEST" && <Badge type="pickdrop" />}
+          </S.TagsWrapper>
+        )}
         <S.DogDetailList>
           <S.DetailItem className="row">
             <DogDetailInfoText>예방접종 파일</DogDetailInfoText>

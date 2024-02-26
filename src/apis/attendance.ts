@@ -6,7 +6,6 @@ import {
   IAttendDogsInfo,
   IAttendInfo,
   IAttendanceInfo,
-  IDogDetails,
   IMemberCallInfo
 } from "types/Attendance.type";
 import { IResponse } from "types/Response.type";

@@ -13,14 +13,22 @@ import {
   Underline
 } from "components/Admin/DogDetailInfo/styles";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { useNavigate } from "react-router-dom";
+import GalleryIcon from "assets/svg/gallery-icon";
 
 const DogInfoPage = () => {
+  const navigate = useNavigate();
   const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
   const { currentStep, setStep } = useStep(0, currentSteps.length - 1);
 
   return (
     <>
-      <Header type="text" text="뽀뽕의 상세 정보" />
+      <Header
+        type="text"
+        text="뽀뽕의 상세 정보"
+        handleClick={() => navigate("/admin/attendance")}
+        rightElement={<GalleryIcon handleTouch={() => navigate("/gallery")} />}
+      />
       <PageContainer color={ThemeConfig.colors.primaryColor} $padding="calc(5vh + 2rem) 0 0">
         <nav>
           <NavWrapper>
