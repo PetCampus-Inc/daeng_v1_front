@@ -1,10 +1,12 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import App from "./App";
-import * as Pages from "pages";
 import { PATH } from "constants/path";
+
+import * as Pages from "pages";
+import { Suspense } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
-import { Suspense } from "react";
+
+import App from "./App";
 
 export default function Router() {
   const [{ data }] = useRecoilState(adminLoginInfoAtom);
@@ -64,7 +66,7 @@ export default function Router() {
         {
           path: PATH.ADMIN_DOG_INFO,
           element: (
-            <Suspense>
+            <Suspense fallback={<div>로딩중</div>}>
               <Pages.DogInfoPage />
             </Suspense>
           )
