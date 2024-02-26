@@ -1,54 +1,73 @@
 import styled from "styled-components";
 
-export const Container = styled.div<{ backcolor?: string }>`
-  width: 47.5%;
-  height: 5rem;
+export const CardContainer = styled.div`
   box-sizing: border-box;
-  margin-bottom: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.7rem;
-  box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);
+  border-radius: 12px;
+  box-shadow: ${({ theme }) => theme.shadows.dogCard};
   display: flex;
   align-items: center;
-  padding-left: 0.8rem;
+  padding: 16px;
   position: relative;
-  background-color: ${(props) => props.backcolor};
+  background-color: ${({ theme }) => theme.colors.white};
+  gap: 4px;
 `;
 
-export const StyledImage = styled.img<{
-  src: string;
-  alt: string;
-  width?: string;
-  height?: string;
-  marginright?: string;
-  position?: string;
-  right?: string;
-  top?: string;
-  radius?: string;
-}>`
-  width: ${(props) => (props.width ? props.width : "2.8rem")};
-  height: ${(props) => (props.height ? props.height : "2.8rem")};
-  border-radius: ${(props) => (props.radius ? props.radius : "50%")};
-  position: ${(props) => (props.position ? props.position : "static")};
-  right: ${(props) => (props.right ? props.right : "")};
-  top: ${(props) => (props.top ? props.top : "")};
-  margin-right: ${(props) =>
-    props.marginright ? props.marginright : "0.3rem"};
+export const ImageWrapper = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
 `;
 
-export const StyledTextWrapper = styled.div`
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-export const TextWrapper = styled.div`
+export const Icon = styled.div<{ $isExpired: boolean }>`
+  width: 16px;
+  height: 16px;
   display: flex;
-  align-items: center;
   justify-content: center;
   align-items: center;
-  justify-content: center;
-  margin-top: 0.1rem;
+  background-color: ${({ theme, $isExpired }) =>
+    $isExpired ? theme.colors.gray_5 : theme.colors.yellow_3};
+  border-radius: 4px;
+
+  & > svg {
+    width: 0.9em;
+    height: 0.9em;
+  }
+`;
+
+export const Text = styled.span`
+  ${({ theme }) => theme.typo.body2_16_B};
+  color: ${({ theme }) => theme.colors.black};
+`;
+
+export const Info = styled.span`
+  display: flex;
+  gap: 2px;
+  align-items: center;
+
+  ${({ theme }) => theme.typo.caption1_12_R};
+  color: ${({ theme }) => theme.colors.primaryColor};
+`;
+
+export const MoreButton = styled.button`
+  position: absolute;
+  right: 6px;
+  top: 3px;
+  border-radius: 50%;
+
+  color: ${({ theme }) => theme.colors.gray_2};
 `;
 
 export const StyledBlur = styled.div<{ display: string }>`
@@ -63,28 +82,35 @@ export const StyledBlur = styled.div<{ display: string }>`
   display: ${(props) => props.display};
 `;
 
-export const StyledOptionList = styled.div<{
-  isopen: string;
-  height?: string;
-  bottom?: string;
+export const StyledOptionList = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isOpen"
+})<{
+  isOpen: boolean;
 }>`
-  display: ${({ isopen }) => (isopen ? "block" : "none")};
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  min-width: 163px;
   position: absolute;
   background-color: white;
   border: solid 1px ${(props) => props.theme.colors.gray_4};
   box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.13);
   border-radius: 0.4rem;
-  width: 105%;
-  height: ${(props) => (props.height ? props.height : "8rem")};
-  overflow: hidden;
-  left: 0;
-  bottom: ${(props) => (props.bottom ? props.bottom : "-5.5rem")};
-  z-index: 9999;
+  right: -8px;
+  top: 20px;
+  z-index: 10;
 `;
 
 export const StyledButtonWrapper = styled.div<{ height?: string }>`
-  padding-left: 0.8rem;
+  padding: 8px 12px;
   border-bottom: 1px solid ${(props) => props.theme.colors.gray_4};
-  width: 100%;
-  height: ${(props) => (props.height ? props.height : "34%")};
+  &:last-child {
+    border: none;
+  }
+`;
+
+export const Item = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  ${({ theme }) => theme.typo.label2_14_R};
+  color: ${({ theme }) => theme.colors.gray_2};
 `;
