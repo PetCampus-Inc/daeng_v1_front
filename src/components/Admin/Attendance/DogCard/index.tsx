@@ -205,8 +205,8 @@ const DogCard = ({
         <StyledImage
           src={
             selectedDogIds?.includes(attendanceId || -1)
-              ? "/images/default-foot-button.png"
-              : "/images/active-foot-button.png"
+              ? "/images/temp/default-foot-button.png"
+              : "/images/temp/active-foot-button.png"
           }
           alt="foot-icon"
           position="absolute"

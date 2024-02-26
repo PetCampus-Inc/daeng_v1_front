@@ -119,7 +119,9 @@ const Attendance = ({ setIsNavHidden }: Props) => {
           <StyledButtonWrapper>
             <StyledImage
               src={
-                isChecking ? "/images/active-foot-button.png" : "/images/default-foot-button.png"
+                isChecking
+                  ? "/images/temp/active-foot-button.png"
+                  : "/images/temp/default-foot-button.png"
               }
               alt="default-foot-button"
             />
