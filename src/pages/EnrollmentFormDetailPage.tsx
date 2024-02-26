@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { type AdaptedData, useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
 import useStep from "hooks/common/useStep";
 
@@ -21,12 +21,15 @@ import {
   TitleWrapper,
   Title,
   SubTitle,
-  ContentWrapper
+  ContentWrapper,
+  EditButton
 } from "components/Admin/EnrollmentForm/styles";
+import { ContentContainer } from "styles/StyleModule";
 
 const EnrollmentFormDetailPage = () => {
   const { formId } = useParams();
   if (!formId) throw new Error("잘못된 formId 입니다");
+  const navigate = useNavigate();
 
   const { data, isLoading } = useAdminEnrollQuery(formId, "READ");
   const {
@@ -63,25 +66,35 @@ const EnrollmentFormDetailPage = () => {
 
   return (
     <>
-      <Header type="main" />
-      <Container>
-        <TopWrapper>
-          <TitleWrapper>
-            <Title>{currentTitle}</Title>
-            <SubTitle>{currentSubtitle}</SubTitle>
-          </TitleWrapper>
-          <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
-        </TopWrapper>
-        <FormProvider {...methods}>
-          <ContentWrapper>
-            {currentStep === 0 && <MemberInfo item={requiredItemList} />}
-            {currentStep === 1 && <DogInfo item={requiredItemList} />}
-            {currentStep === 2 && <TicketInfo item={requiredItemList} ticket={ticket} />}
-            {currentStep === 3 && <PolicyInfo item={requiredItemList} />}
-            {currentStep === 4 && <PickDropInfo item={requiredItemList} />}
-          </ContentWrapper>
-        </FormProvider>
-      </Container>
+      <Header
+        type="text"
+        text="미리보기"
+        rightElement={
+          <EditButton type="button" onClick={() => navigate(PATH.ADMIN_EDIT_FORM(formId))}>
+            수정
+          </EditButton>
+        }
+      />
+      <ContentContainer>
+        <Container>
+          <TopWrapper>
+            <TitleWrapper>
+              <Title>{currentTitle}</Title>
+              <SubTitle>{currentSubtitle}</SubTitle>
+            </TitleWrapper>
+            <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
+          </TopWrapper>
+          <FormProvider {...methods}>
+            <ContentWrapper>
+              {currentStep === 0 && <MemberInfo item={requiredItemList} />}
+              {currentStep === 1 && <DogInfo item={requiredItemList} />}
+              {currentStep === 2 && <TicketInfo item={requiredItemList} ticket={ticket} />}
+              {currentStep === 3 && <PolicyInfo item={requiredItemList} />}
+              {currentStep === 4 && <PickDropInfo item={requiredItemList} />}
+            </ContentWrapper>
+          </FormProvider>
+        </Container>
+      </ContentContainer>
       <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />
     </>
   );
