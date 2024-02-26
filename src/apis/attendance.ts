@@ -121,7 +121,7 @@ export const handleGetDogAndMemberDetails = async (dogId: number): Promise<any> 
 };
 
 // 연결 전
-export const handlePostDogMemo = async (dogId: number, memo: string): Promise<any> => {
+export const handlePostDogMemo = async (dogId: number, memo: string): Promise<IResponse> => {
   const url: string = `admin/attendance/dog/info/memo`;
   const { data } = await customAxios.post(url, {
     dogId,

@@ -8,17 +8,15 @@ import { InnerContainer } from "../styles";
 import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
 
 const DogInfo = () => {
-  const { data, isLoading } = useGetDogAndMemberDetail(1);
-
-  if (isLoading) return <div>로딩중</div>;
+  const { data } = useGetDogAndMemberDetail(2);
 
   return (
     <InnerContainer>
-      <AboutDog data={data!.dogInfo} />
+      <AboutDog data={data.dogInfo} />
 
-      <AboutOwner data={data!.memberInfo} />
+      <AboutOwner data={data.memberInfo} />
 
-      <Memo memo={data!.dogInfo.dogMemo} />
+      <Memo memo={data.dogInfo.dogMemo} id={data.dogInfo.dogId} />
 
       <S.AlbumWrapper>
         <Text text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
