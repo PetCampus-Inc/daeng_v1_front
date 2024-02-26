@@ -5,12 +5,20 @@ import PoopWatery from "assets/svg/poop-watery";
 import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopNeedAttention from "assets/svg/poop-need-attention";
 import { DogDetailInfoText } from "../../DogInfo/styles";
+import { useSearchParams } from "react-router-dom";
+import { format, parseISO } from "date-fns";
+import useGetAttendanceHistory from "hooks/api/useGetAttendanceHistory";
 
 const DailyNotice = () => {
+  const [searchParams] = useSearchParams();
+  const date = searchParams.get("date") || format(new Date(), "yyyy-MM-dd");
+  const formattedDate = format(parseISO(date), "M월 d일");
+  const data = useGetAttendanceHistory(2, date); //FIXME: 나영이꺼 머지되면 queryString에서 가져오기
+
   return (
     <>
       <S.NoticeContainer>
-        <DogDetailInfoText className="big">11월 10일 알림장</DogDetailInfoText>
+        <DogDetailInfoText className="big">{formattedDate} 알림장</DogDetailInfoText>
         <S.NoticeItemWrapper>
           알림장
           <S.NoticeContent>

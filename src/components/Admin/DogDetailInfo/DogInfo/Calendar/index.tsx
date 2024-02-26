@@ -1,6 +1,8 @@
 import * as S from "./styles";
 import { useState } from "react";
 import moment from "moment";
+import { useSearchParams } from "react-router-dom";
+import { format } from "date-fns";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -10,9 +12,13 @@ const Calendar = () => {
   const [date, setDate] = useState<Value>(today);
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
   const attendDay = ["2023-12-03", "2023-12-13"]; // 삭제 예정 코드
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleDateChange = (newDate: Value) => {
     setDate(newDate);
+    const formattedDate = format(`${newDate}`, "yyyy-MM-dd");
+    searchParams.set("date", formattedDate);
+    setSearchParams(searchParams);
   };
 
   const handleTodayClick = () => {

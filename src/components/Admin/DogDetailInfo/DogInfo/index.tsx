@@ -8,7 +8,7 @@ import { InnerContainer } from "../styles";
 import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
 
 const DogInfo = () => {
-  const { data } = useGetDogAndMemberDetail(2);
+  const { data } = useGetDogAndMemberDetail(2); //FIXME: 나영이꺼 머지되면 queryString에서 가져오기
 
   return (
     <InnerContainer>

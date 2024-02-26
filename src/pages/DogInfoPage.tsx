@@ -13,11 +13,12 @@ import {
   Underline
 } from "components/Admin/DogDetailInfo/styles";
 import { ThemeConfig } from "styles/ThemeConfig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import GalleryIcon from "assets/svg/gallery-icon";
 
 const DogInfoPage = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
   const { currentStep, setStep } = useStep(0, currentSteps.length - 1);
 
@@ -36,7 +37,13 @@ const DogInfoPage = () => {
               <NavItem
                 key={item}
                 className={index === currentStep ? "selected" : ""}
-                onClick={() => setStep(index)}
+                onClick={() => {
+                  setStep(index);
+                  if (searchParams.has("date")) {
+                    searchParams.delete("date");
+                    setSearchParams(searchParams);
+                  }
+                }}
               >
                 {item}
                 {index === currentStep ? <Underline layoutId="underline" /> : null}
