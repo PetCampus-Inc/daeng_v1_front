@@ -11,7 +11,7 @@ export const TopWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  top: 0;
+  top: 5vh;
   padding: 28px 0;
   gap: 12px;
 
@@ -60,6 +60,11 @@ export const HelperText = styled.div`
 
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.gray_3};
+`;
+
+export const EditButton = styled.button`
+  ${({ theme }) => theme.typo.label2_14_B};
+  color: ${({ theme }) => theme.colors.gray_1};
 `;
 
 export { Card, Stack, Caption } from "components/MembershipApplication/Form/styles";

@@ -21,7 +21,7 @@ const DogInfo = ({ item }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.DOG_GENDER)}>성별</Title>
-        <SingleRadio name="dogGender" radiosText={["수컷", "암컷"]} disabled />
+        <SingleRadio name="dogGender" radiosText={["수컷", "암컷"]} isPreviewMode disabled />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.DOG_SIZE)}>크기</Title>
@@ -29,6 +29,7 @@ const DogInfo = ({ item }: DogInfoProps) => {
           name="dogSize"
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
+          isPreviewMode
           disabled
         />
       </Card>
@@ -39,18 +40,28 @@ const DogInfo = ({ item }: DogInfoProps) => {
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.DOG_BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber name="year" defaultValue="2000" disabled />
-          <SelectNumber name="month" defaultValue="01" disabled />
-          <SelectNumber name="day" defaultValue="01" disabled />
+          <SelectNumber name="year" defaultValue="2000" readOnly />
+          <SelectNumber name="month" defaultValue="01" readOnly />
+          <SelectNumber name="day" defaultValue="01" readOnly />
         </div>
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.NEUTRALIZATION)}>중성화 여부</Title>
-        <SingleRadio name="neutralization" radiosText={["했어요", "안했어요"]} disabled />
+        <SingleRadio
+          name="neutralization"
+          radiosText={["했어요", "안했어요"]}
+          isPreviewMode
+          disabled
+        />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.VACCINATION)}>예방접종 여부</Title>
-        <SingleRadio name="vaccination" radiosText={["했어요", "안했어요"]} disabled />
+        <SingleRadio
+          name="vaccination"
+          radiosText={["했어요", "안했어요"]}
+          isPreviewMode
+          disabled
+        />
         <ImageUpload disabled />
       </Card>
       <Card>

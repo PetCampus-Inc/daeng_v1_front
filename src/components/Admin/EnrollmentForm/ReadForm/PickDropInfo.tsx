@@ -29,7 +29,7 @@ const PickDropInfo = ({ item }: PickDropInfoProps) => {
         <>
           <Card>
             <Title isRequired={item?.get(ITEM_KEYS.PICKDROP_TYPE)}>픽드랍 유형</Title>
-            <SingleRadio name="pickDropType" radiosText={["편도", "왕복"]} />
+            <SingleRadio name="pickDropType" radiosText={["편도", "왕복"]} isPreviewMode disabled />
           </Card>
           <Card>
             <Title isRequired={item?.get(ITEM_KEYS.PICKDROP_MEMO)}>픽드랍 메모</Title>
