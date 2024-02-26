@@ -3,7 +3,7 @@ import { InfoTop } from "../AboutDog/styles";
 import { TextAreaInput } from "components/common/TextArea/styles";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import TextAreaModal from "components/common/TextAreaModal";
 import { DogDetailInfoText } from "../styles";
 import { FlexWrapper } from "../../styles";
@@ -13,19 +13,21 @@ import showToast from "utils/showToast";
 interface MemoProps {
   memo: string;
   id: number;
+  refetch: () => void;
 }
 
-const Memo = ({ memo, id }: MemoProps) => {
-  const { getValues, register, handleSubmit } = useForm();
+const Memo = ({ memo, id, refetch }: MemoProps) => {
+  const methods = useForm({ mode: "onSubmit" });
   const mutatePostMemo = useSubmitMemoMutation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = methods.handleSubmit((data) => {
     mutatePostMemo(
-      { dogId: id, memo: getValues("memoModal") },
+      { dogId: id, memo: methods.getValues("memoModal") },
       {
         onSuccess: () => {
           showToast("메모를 등록했습니다.", "bottom");
+          refetch();
         },
         onError: () => {
           showToast("메모 등록을 실패했습니다. 다시 시도해주세요", "bottom");
@@ -36,6 +38,8 @@ const Memo = ({ memo, id }: MemoProps) => {
     setIsOpen(false);
   });
 
+  console.log("default", methods.getValues("memoModal"));
+  console.log("memo", memo);
   return (
     <FlexWrapper>
       <InfoTop>
@@ -55,21 +59,22 @@ const Memo = ({ memo, id }: MemoProps) => {
           setIsOpen(true);
         }}
         readOnly
-        defaultValue={memo}
-        value={getValues("memoModal")}
+        value={methods.getValues("memoModal") ? methods.getValues("memoModal") : memo}
       />
       <AnimatePresence>
         {isOpen && (
-          <TextAreaModal
-            actionbutton="저장"
-            closebutton="취소"
-            closefunc={() => setIsOpen(false)}
-            name="memoModal"
-            register={register}
-            actionfunc={onSubmit}
-            defaultValue={memo}
-            placeholder="메모를 입력해주세요"
-          />
+          <FormProvider {...methods}>
+            <TextAreaModal
+              actionbutton="저장"
+              closebutton="취소"
+              closefunc={() => setIsOpen(false)}
+              name="memoModal"
+              register={methods.register}
+              actionfunc={onSubmit}
+              defaultValue={memo}
+              placeholder="메모를 입력해주세요"
+            />
+          </FormProvider>
         )}
       </AnimatePresence>
     </FlexWrapper>

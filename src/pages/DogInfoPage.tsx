@@ -15,12 +15,13 @@ import {
 import { ThemeConfig } from "styles/ThemeConfig";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import GalleryIcon from "assets/svg/gallery-icon";
+import { useState } from "react";
 
 const DogInfoPage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
-  const { currentStep, setStep } = useStep(0, currentSteps.length - 1);
+  const [currentStep, setCurrentStep] = useState(0);
 
   return (
     <>
@@ -28,7 +29,13 @@ const DogInfoPage = () => {
         type="text"
         text="뽀뽕의 상세 정보"
         handleClick={() => navigate("/admin/attendance")}
-        rightElement={<GalleryIcon handleTouch={() => navigate("/gallery")} />}
+        rightElement={
+          <GalleryIcon
+            handleTouch={() => {
+              navigate("/gallery");
+            }}
+          />
+        }
       />
       <PageContainer color={ThemeConfig.colors.primaryColor} $padding="calc(5vh + 2rem) 0 0">
         <nav>
@@ -38,7 +45,7 @@ const DogInfoPage = () => {
                 key={item}
                 className={index === currentStep ? "selected" : ""}
                 onClick={() => {
-                  setStep(index);
+                  setCurrentStep(index);
                   if (searchParams.has("date")) {
                     searchParams.delete("date");
                     setSearchParams(searchParams);
