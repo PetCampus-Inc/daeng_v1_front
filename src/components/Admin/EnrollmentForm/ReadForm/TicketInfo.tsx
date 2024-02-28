@@ -39,12 +39,22 @@ const TicketInfo = ({ ticket, item }: TicketInfoProps) => {
         (selectedTicketType === "정기권" ? (
           <Card>
             <Title isRequired={item?.get(ITEM_KEYS.MONTHLY_TICKET_NUMBER)}>정기권 유형</Title>
-            <SingleRadio name="monthlyTicketNumber" radiosText={monthlyTicketText} disabled />
+            <SingleRadio
+              name="monthlyTicketNumber"
+              radiosText={monthlyTicketText}
+              isPreviewMode
+              disabled
+            />
           </Card>
         ) : (
           <Card>
             <Title isRequired={item?.get(ITEM_KEYS.ROUND_TICKET_NUMBER)}>회차권 유형</Title>
-            <SingleRadio name="roundTicketNumber" radiosText={roundTicketText} disabled />
+            <SingleRadio
+              name="roundTicketNumber"
+              radiosText={roundTicketText}
+              isPreviewMode
+              disabled
+            />
           </Card>
         ))}
       <Card>

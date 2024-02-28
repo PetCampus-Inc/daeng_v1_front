@@ -9,6 +9,8 @@ import {
 } from "./styles";
 import { memo } from "react";
 import NoticeActiveIcon from "assets/svg/notice-active-icon";
+import { useNavigate } from "react-router-dom";
+import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 
 /*
 header type
@@ -27,6 +29,9 @@ interface Props {
 }
 
 const Header = ({ type, handleClick, text, size, rightElement }: Props) => {
+  const navigate = useNavigate();
+
+  const click = handleClick ? handleClick : () => navigate(-1);
   return (
     <Container>
       <HeaderWrapper>
@@ -39,24 +44,22 @@ const Header = ({ type, handleClick, text, size, rightElement }: Props) => {
           </>
         )}
         {type === "back" && (
-          <IconWrapper onClick={handleClick}>
-            <StyledImage src="/images/chevron-left.png" alt="chevron-left" />
+          <IconWrapper onClick={click}>
+            <ArrowLeftIcon className="arrow-left" />
           </IconWrapper>
         )}
         {type === "text" && (
           <TextWrapper>
-            <IconWrapper onClick={handleClick}>
-              <StyledImage src="/images/chevron-left.png" alt="chevron-left" />
+            <IconWrapper onClick={click}>
+              <ArrowLeftIcon className="arrow-left" />
             </IconWrapper>
-            <TitleText size={size}>{text}</TitleText>
+            <TitleText className="text">{text}</TitleText>
             <IconWrapper>{rightElement}</IconWrapper>
           </TextWrapper>
         )}
         {type === "notice" && (
           <TextWrapper>
-            <TitleText size={size} className="start">
-              {text}
-            </TitleText>
+            <TitleText className="start">{text}</TitleText>
             <IconWrapper
               onClick={() => {
                 // TODO: 알림 페이지로 이동

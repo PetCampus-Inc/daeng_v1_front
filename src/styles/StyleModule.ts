@@ -44,6 +44,10 @@ export const PageContainer = styled.div<{ $paddingTop?: string }>`
   height: 100%;
 `;
 
+export const ContentContainer = styled.div`
+  padding: calc(5vh) 0 7vh;
+`;
+
 export const Background = styled.div<{ color?: string }>`
   position: absolute;
   top: 0;

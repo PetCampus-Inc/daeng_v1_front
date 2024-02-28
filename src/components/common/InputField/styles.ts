@@ -15,16 +15,14 @@ export const Input = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.colors.gray_3};
   }
+  &.default {
+    color: ${({ theme }) => theme.colors.gray_3};
+  }
 
   &:focus {
     outline: none;
     border: 1px solid ${({ theme }) => theme.colors.br_2};
     color: ${({ theme }) => theme.colors.primaryColor};
-  }
-  &:not(:focus) {
-    &:not(:placeholder-shown) {
-      border: 1px solid ${({ theme }) => theme.colors.gray_3};
-    }
   }
 
   outline: transparent solid 2px;

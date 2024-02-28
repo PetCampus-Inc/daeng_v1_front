@@ -18,8 +18,7 @@ const MemberInfo = ({ item }: MemberInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.MEMBER_GENDER)}>성별</Title>
-        {/* FIXME: disabled 상태와 readonly 상태 구분이 필요해 보임..!*/}
-        <SingleRadio name="memberGender" radiosText={["남", "여"]} disabled />
+        <SingleRadio name="memberGender" radiosText={["남", "여"]} isPreviewMode disabled />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
