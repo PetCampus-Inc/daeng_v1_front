@@ -126,3 +126,14 @@ export interface IDogAndMemberInfo {
   dogMemo: string;
   member: IMemberInfo;
 }
+
+export interface ITicketDetail {
+  ticketType: string;
+  allRoundTicket: number;
+  currentRoundTicket: number;
+  monthlyTicketNumber: number;
+  ticketStartDate: string;
+  ticketExpirationDate: string;
+  attendanceDays: string[];
+  ticketHistory: ITicketDetail[];
+}

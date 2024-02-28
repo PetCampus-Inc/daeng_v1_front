@@ -8,7 +8,8 @@ import {
   IAttendSearchInfo,
   IAttendanceInfo,
   IDeleteInfo,
-  IMemberCallInfo
+  IMemberCallInfo,
+  ITicketDetail
 } from "types/Attendance.type";
 import { IResponse } from "types/Response.type";
 
@@ -147,11 +148,11 @@ export const handleGetAttendanceHistory = async (
   return data.data;
 };
 
-// 연결 전
-export const handleGetTicketDetail = async (dogId: number): Promise<any> => {
+// 강아지 상세 - 이용권 상세정보
+export const handleGetTicketDetail = async (dogId: number): Promise<ITicketDetail> => {
   const url: string = `admin/attendance/dog/ticket?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
-  return data;
+  return data.data;
 };
 
 // 연결 전
