@@ -4,6 +4,8 @@ import RemainCountIcon from "assets/svg/remain-count-icon";
 import SendAlermButton from "../SendAlermButton";
 import { ITicketDetail } from "types/Attendance.type";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
+import { differenceInDays, isAfter, parseISO } from "date-fns";
+import AlertSmallIcon from "assets/svg/alert-small-icon";
 
 interface TicketCardProps {
   data: Omit<ITicketDetail, "ticketHistory">;
@@ -12,8 +14,49 @@ interface TicketCardProps {
 const TicketCard = ({ data }: TicketCardProps) => {
   const isRoundTicket = data?.ticketType === "ROUND";
 
+  if (!data) {
+    return <div>로딩중</div>;
+  }
+  // 임시 데이터
+  const currentDate = new Date();
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate());
+
+  const isSoonDeadline =
+    (data.currentRoundTicket <= 3 && data.currentRoundTicket > 0) ||
+    (differenceInDays(endDate, currentDate) > 0 && differenceInDays(endDate, currentDate) <= 3);
+  const isNeededRenewal =
+    data.currentRoundTicket === 0 ||
+    // TODO: 백엔드 수정시 이 코드로 교체하기 -> isAfter(data.ticketStartDate, data.ticketExpirationDate);
+    isAfter(currentDate, endDate);
+
+  let statusIcon = <></>;
+  let statusText = <></>;
+  if (isRoundTicket) {
+    statusIcon = isSoonDeadline ? <AlertSmallIcon color="red" /> : <RemainCountIcon />;
+    statusText = (
+      <S.Text className={`detail ${isSoonDeadline ? "red" : ""}`}>
+        잔여횟수 : {data.currentRoundTicket || "- "}회
+      </S.Text>
+    );
+  } else {
+    statusIcon = isSoonDeadline ? <AlertSmallIcon color="red" /> : <CalendarExpireIcon />;
+    statusText = (
+      <S.Text className={`detail ${isSoonDeadline ? "red" : ""}`}>
+        만료일 : {data.ticketExpirationDate || "없음"}
+      </S.Text>
+    );
+  }
+
   return (
     <S.Container>
+      {isNeededRenewal ? (
+        <S.BlackCover>
+          <S.RenewButton>이용권 갱신</S.RenewButton>
+        </S.BlackCover>
+      ) : (
+        <></>
+      )}
       <S.InnerBox className="upper">
         <S.Text className="ticket">{isRoundTicket ? "회차권" : "정기권"}</S.Text>
         <S.Text className="count">
@@ -22,19 +65,11 @@ const TicketCard = ({ data }: TicketCardProps) => {
       </S.InnerBox>
       <S.InnerBox className="lower">
         <S.IconWrapper className="upper">
-          {isRoundTicket ? (
-            <S.IconWrapper>
-              <RemainCountIcon />
-              <S.Text className="detail">잔여횟수 : {data.currentRoundTicket}회</S.Text>
-            </S.IconWrapper>
-          ) : (
-            <S.IconWrapper>
-              <CalendarExpireIcon />
-              <S.Text className="detail">만료일 : {data.ticketExpirationDate || "없음"}</S.Text>
-            </S.IconWrapper>
-          )}
-
-          <SendAlermButton />
+          <S.IconWrapper>
+            {statusIcon}
+            {statusText}
+          </S.IconWrapper>
+          {isSoonDeadline ? <SendAlermButton /> : <></>}
         </S.IconWrapper>
 
         <S.IconWrapper>
