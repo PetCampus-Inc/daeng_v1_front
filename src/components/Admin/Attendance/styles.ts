@@ -41,7 +41,9 @@ export const ButtonWrapper = styled.div`
   gap: 4px;
 `;
 
-export const FootButton = styled.button`
+export const FootButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "isFocus"
+})<{ isFocus: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,9 +66,22 @@ export const FootButton = styled.button`
   &.active > svg {
     color: ${({ theme }) => theme.colors.br_2};
   }
+
+  ${({ isFocus, theme }) =>
+    isFocus &&
+    `
+    opacity: 0.5;
+    border: 1px solid ${theme.colors.gray_3};
+    background-color: ${theme.colors.white};
+    & > svg {
+    color: ${theme.colors.gray_3};
+  }
+    `}
 `;
 
-export const ControlButton = styled.button`
+export const ControlButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "isFocus"
+})<{ isFocus: boolean }>`
   min-width: 70px;
   display: flex;
   padding: 4px 10px;
@@ -79,6 +94,15 @@ export const ControlButton = styled.button`
 
   ${({ theme }) => theme.typo.label2_14_B};
   color: ${({ theme }) => theme.colors.primaryColor};
+
+  ${({ isFocus, theme }) =>
+    isFocus &&
+    `
+    opacity: 0.5;
+    border: 1px solid ${theme.colors.gray_3};
+    background-color: ${theme.colors.gray_5}; 
+    color: ${theme.colors.gray_3};
+    `}
 `;
 
 export const ListWrapper = styled.div`
@@ -103,17 +127,17 @@ export const StyledListWrapper = styled.div`
   position: relative;
 `;
 
-export const StyledBlur = styled.div<{ display: string }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.6);
-  z-index: 1;
-  pointer-events: none;
-  display: ${(props) => props.display};
-  overflow: hidden;
+export const EmptyText = styled.div`
+  padding-top: 30%;
+  text-align: center;
+  ${({ theme }) => theme.typo.label2_14_R};
+  color: ${({ theme }) => theme.colors.gray_3};
+`;
+
+export const Blur = styled.div<{ isFocus: boolean }>`
+  & > * {
+    opacity: ${({ isFocus }) => (isFocus ? 0.5 : 1)};
+  }
 `;
 
 export const StyledCardWrapper = styled.div`
@@ -126,4 +150,8 @@ export const StyledCardWrapper = styled.div`
 
 export const StyledTextWrapper = styled.div`
   margin: 40% auto 0;
+`;
+
+export const Spacing = styled.div`
+  height: 52px;
 `;
