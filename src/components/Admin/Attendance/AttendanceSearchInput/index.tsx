@@ -21,7 +21,6 @@ const AttendanceSearchInput = ({ name, onSearch, ...props }: AttendanceSearchInp
 
   const handleSearch = () => {
     onSearch && onSearch(inputValue);
-    console.log(inputValue);
   };
 
   const disabled = !inputValue.trim();

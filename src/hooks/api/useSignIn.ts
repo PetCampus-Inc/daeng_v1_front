@@ -49,6 +49,7 @@ const useSignIn = () => {
         navigate(PATH.ADMIN_ATTENDANCE);
       }
     } catch (error: any) {
+      // TODO: 에러처리 필요~!!~!
       if (error.status === 400) {
         setIsIdConfirmed(false);
         setIsPwConfirmed(false);
