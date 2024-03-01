@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
   width: 100%;
   box-shadow: ${({ theme }) => theme.shadows.card};
   border-radius: 8px;
@@ -46,5 +47,24 @@ export const Text = styled.p`
   &.detail {
     color: ${({ theme }) => theme.colors.gray_1};
     ${({ theme }) => theme.typo.label2_14_R};
+    &.red {
+      color: ${({ theme }) => theme.colors.red_1};
+    }
   }
+`;
+
+export const BlackCover = styled.button`
+  position: absolute;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+`;
+
+export const RenewButton = styled.span`
+  background-color: ${({ theme }) => theme.colors.red_2};
+  color: ${({ theme }) => theme.colors.red_1};
+  ${({ theme }) => theme.typo.label2_14_B};
+  padding: 6px 21px;
+  border-radius: 28px;
 `;
