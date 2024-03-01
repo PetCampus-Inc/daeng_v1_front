@@ -88,7 +88,8 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
           <S.Text>{name}</S.Text>
           <S.Info>
             <S.Icon $isExpired={isExpired}>
-              {rounds === 1 || rounds === 2 || (isBeforeExpiry && <AlertSmallIcon color="brown" />)}
+              {(rounds !== null && rounds <= 2) ||
+                (isBeforeExpiry && <AlertSmallIcon color="brown" />)}
               {(rounds === 0 && rounds === null) || (rounds === 0 && isExpired) ? (
                 <AlertSmallIcon color="gray" />
               ) : (
