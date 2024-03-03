@@ -5,6 +5,7 @@ import { adminLoginInfoAtom } from "store/admin";
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
 import FootIcon from "assets/svg/foot-icon";
 import * as S from "./styles";
+import { useSearchParams } from "react-router-dom";
 
 interface IAttendanceTop {
   mode: "DEFAULT" | "ATTENDANCE";
@@ -15,6 +16,7 @@ interface IAttendanceTop {
 const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
   const { schoolName, adminName, role: adminRole } = useRecoilValue(adminLoginInfoAtom).data;
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const isAttendMode = mode === "ATTENDANCE";
 
@@ -22,6 +24,7 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
     if (isAttendMode) {
       setIsCancelModalOpen(true);
     } else {
+      setSearchParams({});
       setMode("ATTENDANCE");
     }
   };
@@ -55,6 +58,7 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
         action={() => {
           setMode("DEFAULT");
           setIsCancelModalOpen(false);
+          setSearchParams({});
         }}
       />
     </S.MainWrapper>
