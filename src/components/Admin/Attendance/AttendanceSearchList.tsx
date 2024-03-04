@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import { attendDogListInfoAtom } from "store/admin";
-import AttendanceDogCard from "./AttendanceDogCard";
+import AttendanceDogCard from "./AttendanceCard/AttendanceDogCard";
 import type { IAttendDogsInfo, IAttendDogLists } from "types/Attendance.type";
 import { CardListWrapper, EmptyText, ListWrapper } from "./styles";
 

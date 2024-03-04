@@ -1,4 +1,4 @@
-import { StyledOptionList, StyledButtonWrapper, Item } from "../DogCard/styles";
+import { StyledOptionList, StyledButtonWrapper, Item } from "../AttendanceCard/styles";
 import PhoneIcon from "assets/svg/phone";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 

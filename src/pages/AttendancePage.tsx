@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
 import Navbar from "components/common/NavBar";
 import Header from "components/common/Header";
 import AttendanceTop from "components/Admin/Attendance/AttendanceTop";
-import AttendanceSearch from "components/Admin/Attendance/AttendanceSearch";
-import { PageContainer } from "styles/StyleModule";
-import { adminLoginInfoAtom } from "store/admin";
-import { useRecoilValue } from "recoil";
 import AttendanceMain from "components/Admin/Attendance/AttendanceMain";
+import Attendance from "components/Admin/Attendance/Attendance";
+import { PageContainer } from "styles/StyleModule";
 
 const AttendancePage = () => {
   const { schoolId, adminId } = useRecoilValue(adminLoginInfoAtom).data;
@@ -30,7 +30,7 @@ const AttendancePage = () => {
           />
         )}
         {isAttendMode && (
-          <AttendanceSearch
+          <Attendance
             schoolId={schoolId}
             isFocus={isFocus}
             setIsFocus={setIsFocus}

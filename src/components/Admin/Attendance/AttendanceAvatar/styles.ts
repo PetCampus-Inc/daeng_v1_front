@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ImageWrapper } from "../DogCard/styles";
-export { Image } from "../DogCard/styles";
+import { ImageWrapper } from "../AttendanceCard/styles";
+export { Image } from "../AttendanceCard/styles";
 
 export const Container = styled.div``;
 
