@@ -16,7 +16,7 @@ const DogList = ({ schoolId, adminId, isFocus }: DogListProps) => {
   const { data } = useDogListAndSortedList({ sortName, schoolId, adminId });
 
   return (
-    <Blur isFocus={isFocus}>
+    <Blur $isFocus={isFocus}>
       <SortSelectBox sortName={sortName} setSortName={setSortName} />
       <DogSearchList data={data} />
     </Blur>
