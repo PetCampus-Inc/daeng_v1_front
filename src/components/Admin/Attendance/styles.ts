@@ -105,6 +105,10 @@ export const ControlButton = styled.button.withConfig({
     `}
 `;
 
+export const ListContainer = styled.div`
+  height: 100%;
+`;
+
 export const ListWrapper = styled.div`
   width: 100%;
   height: 75%;
@@ -135,6 +139,8 @@ export const EmptyText = styled.div`
 `;
 
 export const Blur = styled.div<{ $isFocus: boolean }>`
+  height: 100%;
+
   & > * {
     opacity: ${({ $isFocus }) => ($isFocus ? 0.5 : 1)};
   }

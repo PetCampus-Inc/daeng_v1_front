@@ -1,9 +1,9 @@
 import { type SetStateAction, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import useDogSearchQuery from "hooks/api/useDogSearchQuery";
-import DogList from "./DogList";
 import AttendanceSearchInput from "./AttendanceSearchInput";
-import DogSearchList from "./DogSearchList";
+import List from "./List";
+import SearchList from "./SearchList";
 import { Spacing } from "./styles";
 
 interface AttendanceMainProps {
@@ -46,10 +46,10 @@ const AttendanceMain = ({ schoolId, adminId, isFocus, setIsFocus }: AttendanceMa
       {showSearchResults ? (
         <>
           <Spacing />
-          <DogSearchList data={data} />
+          <SearchList data={data} />
         </>
       ) : (
-        <DogList schoolId={schoolId} adminId={adminId} isFocus={isFocus} />
+        <List schoolId={schoolId} adminId={adminId} isFocus={isFocus} />
       )}
     </>
   );
