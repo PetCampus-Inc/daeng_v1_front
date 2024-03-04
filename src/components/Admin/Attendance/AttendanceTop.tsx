@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
+import { useEffect, useState } from "react";
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
 import FootIcon from "assets/svg/foot-icon";
@@ -17,6 +17,7 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
   const { schoolName, adminName, role: adminRole } = useRecoilValue(adminLoginInfoAtom).data;
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const resetState = useResetRecoilState(attendDogListInfoAtom);
 
   const isAttendMode = mode === "ATTENDANCE";
 
@@ -25,6 +26,7 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
       setIsCancelModalOpen(true);
     } else {
       setSearchParams({});
+      resetState();
       setMode("ATTENDANCE");
     }
   };
@@ -58,6 +60,7 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
         action={() => {
           setMode("DEFAULT");
           setIsCancelModalOpen(false);
+          resetState();
           setSearchParams({});
         }}
       />
