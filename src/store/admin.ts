@@ -13,27 +13,16 @@ const { persistAtom } = recoilPersist();
 
 export const dogListInfoAtom = atom<IAttendanceInfo>({
   key: "dogListInfoAtom",
-  default: {
-    data: [
-      {
-        dogId: -1,
-        dogName: "",
-        allRounds: -1,
-        currentRounds: -1,
-        monthlyTicket: []
-      }
-    ],
-    status: 0
-  }
+  default: []
 });
 
 export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
   key: "adminLoginInfoAtom",
   default: {
     data: {
-      adminId: -1,
+      adminId: 1,
       adminName: "",
-      schoolId: -1,
+      schoolId: 1,
       role: "",
       schoolName: ""
     },
@@ -44,20 +33,7 @@ export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
 
 export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
   key: "attendDogListInfoAtom",
-  default: {
-    data: [
-      {
-        attendanceId: -1,
-        dogId: -1,
-        dogName: "",
-        allRounds: -1,
-        currentRounds: -1,
-        monthlyTicket: []
-      }
-    ],
-    status: 0
-  },
-  effects_UNSTABLE: [persistAtom]
+  default: []
 });
 
 export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
