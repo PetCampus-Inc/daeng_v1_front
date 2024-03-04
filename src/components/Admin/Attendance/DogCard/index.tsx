@@ -86,19 +86,17 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
         </S.ImageWrapper>
         <S.InfoWrapper>
           <S.Text>{name}</S.Text>
-          <S.Info>
-            <S.Icon $isExpired={isExpired}>
-              {(rounds !== null && rounds <= 2) ||
-                (isBeforeExpiry && <AlertSmallIcon color="brown" />)}
-              {(rounds === 0 && rounds === null) || (rounds === 0 && isExpired) ? (
-                <AlertSmallIcon color="gray" />
-              ) : (
-                <CalendarIcon className="calendar-icon" />
-              )}
+          <S.Info $isExpired={isExpired || isBeforeExpiry}>
+            <S.Icon>
+              {isBeforeExpiry && !isExpired && <AlertSmallIcon color="brown" />}
+              {isExpired && <AlertSmallIcon color="gray" />}
+              {!isBeforeExpiry && !isExpired && <CalendarIcon className="calendar-icon" />}
             </S.Icon>
-            {monthly !== null && !isExpired
-              ? `${monthlyTicketDate} 만료`
-              : `잔여 ${rounds}/${allRounds} 회`}
+            <span className="ticketNumber">
+              {monthly !== null && !isExpired
+                ? `${monthlyTicketDate} 만료`
+                : `잔여 ${rounds}/${allRounds} 회`}
+            </span>
           </S.Info>
         </S.InfoWrapper>
         <S.MoreButton
