@@ -11,14 +11,14 @@ import AttendanceAvatar from "./AttendanceAvatar";
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { Blur, Spacing } from "./styles";
 
-interface AttendanceSearchProps {
+interface AttendanceProps {
   schoolId: number;
   isFocus: boolean;
   setIsFocus: React.Dispatch<SetStateAction<boolean>>;
   setMode: React.Dispatch<React.SetStateAction<"DEFAULT" | "ATTENDANCE">>;
 }
 
-const AttendanceSearch = ({ schoolId, isFocus, setIsFocus, setMode }: AttendanceSearchProps) => {
+const Attendance = ({ schoolId, isFocus, setIsFocus, setMode }: AttendanceProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = useState(searchParams.get("dogName") || "");
   const { data, isLoading, isFetching } = useAttendDogSearchQuery(schoolId, searchText);
@@ -84,4 +84,4 @@ const AttendanceSearch = ({ schoolId, isFocus, setIsFocus, setMode }: Attendance
   );
 };
 
-export default AttendanceSearch;
+export default Attendance;

@@ -1,11 +1,11 @@
 import { ListWrapper, CardListWrapper, EmptyText } from "./styles";
-import DogCard from "./DogCard";
+import DogCard from "./AttendanceCard/DogCard";
 
-type DogSearchListProps = {
+type SearchListProps = {
   data?: any[];
 };
 
-const DogSearchList = ({ data }: DogSearchListProps) => {
+const SearchList = ({ data }: SearchListProps) => {
   // TODO: 데이터패칭이 실패한 경우, 또는 패칭이 안된 경우 에러 핸들링 필요!
   if (!data) return null;
 
@@ -33,4 +33,4 @@ const DogSearchList = ({ data }: DogSearchListProps) => {
   );
 };
 
-export default DogSearchList;
+export default SearchList;
