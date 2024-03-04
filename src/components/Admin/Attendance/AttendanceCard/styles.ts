@@ -19,6 +19,10 @@ export const ImageWrapper = styled.div`
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
+
+  &.expired > img {
+    filter: opacity(0.5);
+  }
 `;
 
 export const Image = styled.img`
@@ -31,6 +35,14 @@ export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &.expired .dogName {
+    color: ${({ theme }) => theme.colors.gray_3};
+  }
+
+  &.expired .ticketNumber {
+    color: ${({ theme }) => theme.colors.gray_3};
+  }
 `;
 
 export const Icon = styled.div`
@@ -47,14 +59,14 @@ export const Text = styled.span`
   color: ${({ theme }) => theme.colors.black};
 `;
 
-export const Info = styled.span<{ $isExpired: boolean }>`
+export const Info = styled.span<{ $isBeforeExpiry: boolean }>`
   display: flex;
   gap: 2px;
   align-items: center;
 
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ theme, $isExpired }) =>
-    $isExpired ? theme.colors.gray_2 : theme.colors.primaryColor};
+  color: ${({ theme, $isBeforeExpiry }) =>
+    $isBeforeExpiry ? theme.colors.gray_2 : theme.colors.primaryColor};
 `;
 
 export const MoreButton = styled.button`

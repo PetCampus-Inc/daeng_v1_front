@@ -80,15 +80,15 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
         <DeleteDogModal isOpen={isModalOpen} close={modalClose} action={handleDeleteDog} />
       )}
       <S.CardContainer>
-        <S.ImageWrapper>
+        <S.ImageWrapper className={isExpired ? "expired" : ""}>
           <S.Image
             src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt={name + " 이미지"}
           />
         </S.ImageWrapper>
-        <S.InfoWrapper>
-          <S.Text>{name}</S.Text>
-          <S.Info $isExpired={isExpired || isBeforeExpiry}>
+        <S.InfoWrapper className={isExpired ? "expired" : ""}>
+          <S.Text className="dogName">{name}</S.Text>
+          <S.Info $isBeforeExpiry={isBeforeExpiry}>
             <S.Icon>
               {isBeforeExpiry && !isExpired && <AlertSmallIcon color="brown" />}
               {isExpired && <AlertSmallIcon color="gray" />}
