@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
@@ -49,4 +49,5 @@ export const Content = styled.div<{ $isVisible: boolean }>`
   visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
   position: ${({ $isVisible }) => ($isVisible ? "static" : "absolute")};
   max-height: ${({ $isVisible }) => ($isVisible ? "none" : "0")};
+  overflow: hidden;
 `;
