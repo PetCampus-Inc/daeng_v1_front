@@ -1,6 +1,7 @@
 import styled from "styled-components";
+export { FootButton } from "../styles";
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<{ $isAvatar?: boolean }>`
   box-sizing: border-box;
   border-radius: 12px;
   box-shadow: ${({ theme }) => theme.shadows.dogCard};
@@ -10,6 +11,7 @@ export const CardContainer = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.colors.white};
   gap: 4px;
+  justify-content: ${({ $isAvatar }) => ($isAvatar ? "space-between" : "flex-start")};
 `;
 
 export const ImageWrapper = styled.div`
@@ -31,20 +33,13 @@ export const InfoWrapper = styled.div`
   justify-content: center;
 `;
 
-export const Icon = styled.div<{ $isExpired: boolean }>`
+export const Icon = styled.div`
   width: 16px;
   height: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme, $isExpired }) =>
-    $isExpired ? theme.colors.gray_5 : theme.colors.yellow_3};
   border-radius: 4px;
-
-  & > svg {
-    width: 0.9em;
-    height: 0.9em;
-  }
 `;
 
 export const Text = styled.span`
@@ -52,13 +47,14 @@ export const Text = styled.span`
   color: ${({ theme }) => theme.colors.black};
 `;
 
-export const Info = styled.span`
+export const Info = styled.span<{ $isExpired: boolean }>`
   display: flex;
   gap: 2px;
   align-items: center;
 
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ theme }) => theme.colors.primaryColor};
+  color: ${({ theme, $isExpired }) =>
+    $isExpired ? theme.colors.gray_2 : theme.colors.primaryColor};
 `;
 
 export const MoreButton = styled.button`
@@ -113,4 +109,10 @@ export const Item = styled.div`
   gap: 2px;
   ${({ theme }) => theme.typo.label2_14_R};
   color: ${({ theme }) => theme.colors.gray_2};
+`;
+
+export const Stack = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;
