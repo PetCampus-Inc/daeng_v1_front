@@ -2,9 +2,9 @@ import customAxios from "libs/CustomAxios";
 import {
   IAttendCareDogInfo,
   IAttendCareInfo,
+  IAttendDogLists,
   IAttendDogsInfo,
   IAttendInfo,
-  IAttendSearchInfo,
   IAttendanceInfo,
   IDogDetails,
   IMemberCallInfo
@@ -71,12 +71,6 @@ export const handleDeleteDog = async (dogId: number): Promise<IResponse> => {
   return data.data;
 };
 
-export const handleGetAttendDogs = async (schoolId: number): Promise<IAttendDogsInfo> => {
-  const url: string = `admin/attendance/attend?schoolId=${schoolId}`;
-  const { data } = await customAxios.get(url);
-  return data;
-};
-
 export const handlePostAttend = async (req: IAttendInfo): Promise<IResponse> => {
   const url: string = `admin/attendance/attend`;
   const { data } = await customAxios.post(url, {
@@ -86,13 +80,19 @@ export const handlePostAttend = async (req: IAttendInfo): Promise<IResponse> => 
   return data;
 };
 
+export const handleGetAttendDogs = async (schoolId: number): Promise<IAttendDogsInfo> => {
+  const url: string = `admin/attendance/attend?schoolId=${schoolId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
 export const handleGetAttendSearchDogs = async (
   schoolId: number,
   searchText: string
-): Promise<IAttendSearchInfo> => {
-  const url: string = `admin/attendance/attend/dog/search?schoolId=${schoolId}&searchText=${searchText}`;
+): Promise<IAttendDogLists[]> => {
+  const url: string = `admin/attendance/attend/search?schoolId=${schoolId}&searchText=${searchText}`;
   const { data } = await customAxios.get(url);
-  return data;
+  return data.data;
 };
 
 export const handleGetAttendCareDogs = async (schoolId: number): Promise<IAttendCareDogInfo> => {
