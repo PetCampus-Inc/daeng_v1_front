@@ -10,7 +10,7 @@ const AlertSmallIcon = ({ color }: AlertIconProps) => {
   ]);
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
       <rect width="16" height="16" fill={colorMap.get(color)?.[0]} rx="4" />
       <circle cx="8.001" cy="7.999" r="5.333" fill={colorMap.get(color)?.[1]} />
       <path
