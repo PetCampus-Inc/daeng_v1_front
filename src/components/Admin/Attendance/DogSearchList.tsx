@@ -7,7 +7,7 @@ type DogSearchListProps = {
 
 const DogSearchList = ({ data }: DogSearchListProps) => {
   // TODO: 데이터패칭이 실패한 경우, 또는 패칭이 안된 경우 에러 핸들링 필요!
-  if (!data) return;
+  if (!data) return null;
 
   return (
     <>

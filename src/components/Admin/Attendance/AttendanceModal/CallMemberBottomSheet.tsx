@@ -11,7 +11,7 @@ interface CallMemberBottomSheetProps {
 }
 
 const CallMemberBottomSheet = ({ info, close }: CallMemberBottomSheetProps) => {
-  if (!info) return;
+  if (!info) return null;
 
   const handleCallMember = (info: IMemberCallInfo) => {
     console.log(info.phoneNumber);

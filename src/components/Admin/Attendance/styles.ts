@@ -43,7 +43,7 @@ export const ButtonWrapper = styled.div`
 
 export const FootButton = styled.button.withConfig({
   shouldForwardProp: (prop) => prop !== "isFocus"
-})<{ isFocus: boolean }>`
+})<{ isFocus?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,9 +134,9 @@ export const EmptyText = styled.div`
   color: ${({ theme }) => theme.colors.gray_3};
 `;
 
-export const Blur = styled.div<{ isFocus: boolean }>`
+export const Blur = styled.div<{ $isFocus: boolean }>`
   & > * {
-    opacity: ${({ isFocus }) => (isFocus ? 0.5 : 1)};
+    opacity: ${({ $isFocus }) => ($isFocus ? 0.5 : 1)};
   }
 `;
 
