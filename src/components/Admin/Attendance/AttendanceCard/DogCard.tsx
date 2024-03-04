@@ -38,6 +38,7 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
   const { mutate } = useDeleteDog();
   const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
 
+  // FIXME: 실제 전화번호 앱 열리는 로직 추가 필요
   const handleGetCallInfo = async () => {
     const { data } = await getPhoneNumber();
     if (!data) return;
@@ -45,6 +46,7 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
     bsOpen();
   };
 
+  // FIXME: 실제 알림 전송 로직 추가 필요
   const handlerSendAlarm = async () => {
     console.log(dogId);
   };

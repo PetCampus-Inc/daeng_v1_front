@@ -1,14 +1,14 @@
 import FootIcon from "assets/svg/foot-icon";
-import * as S from "components/Admin/Attendance/DogCard/styles";
+import * as S from "./styles";
 
-interface AttendanceDogCardProps {
+interface AttendanceCardProps {
   attendanceId: number;
   dogName: string;
   onClick: () => void;
   isSelected: boolean;
 }
 
-const AttendanceDogCard = ({ dogName, onClick, isSelected }: AttendanceDogCardProps) => {
+const AttendanceDogCard = ({ dogName, onClick, isSelected }: AttendanceCardProps) => {
   return (
     <S.CardContainer $isAvatar>
       <S.Stack>
