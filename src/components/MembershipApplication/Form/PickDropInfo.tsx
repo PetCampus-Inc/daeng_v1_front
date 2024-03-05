@@ -6,7 +6,7 @@ import { Caption } from "components/common/Select/styles";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { Label } from "components/common/Title/style";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Card, Stack } from "./styles";
 
@@ -18,7 +18,7 @@ interface PickDropInfoProps {
 }
 
 const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
-  const { register, watch } = useFormContext();
+  const { control, watch } = useFormContext();
   return (
     <>
       <Card>
@@ -57,14 +57,19 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
             <TextArea defaultValue={info.pickDropInfo} isChecked={watch("pickDropInfo")} disabled />
             <Stack>
-              <Checkbox
+              <Controller
                 name="pickDropInfo"
-                ariaLabel="동의"
-                isChecked={watch("pickDropInfo")}
-                isRequired={requiredItems.get(ITEM_KEYS.ABANDONMENT_INFO)}
-              >
-                동의합니다
-              </Checkbox>
+                control={control}
+                rules={{ required: requiredItems.get(ITEM_KEYS.ABANDONMENT_INFO) }}
+                render={({ field: { ref, ...field } }) => (
+                  <Checkbox
+                    label="동의합니다"
+                    ref={ref}
+                    isChecked={field.value}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
             </Stack>
           </Card>
         </>

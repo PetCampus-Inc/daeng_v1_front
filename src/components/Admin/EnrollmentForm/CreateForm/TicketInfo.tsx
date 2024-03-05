@@ -100,9 +100,7 @@ const TicketInfo = () => {
           placeholder="유의사항을 입력해 주세요"
         />
         <Stack>
-          <Checkbox name="null" disabled>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
     </>

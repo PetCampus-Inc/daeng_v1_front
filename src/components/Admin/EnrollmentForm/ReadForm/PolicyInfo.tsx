@@ -3,7 +3,6 @@ import { ITEM_KEYS } from "constants/item";
 import Checkbox from "components/common/Checkbox";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
-import { useFormContext } from "react-hook-form";
 
 import { Caption, Card, Stack } from "../styles";
 
@@ -16,9 +15,7 @@ const PolicyInfo = ({ item }: PolicyInfoProps) => {
   return (
     <>
       <Card>
-        <Checkbox name="all" variant="square" readOnly>
-          유의사항 전체 동의하기
-        </Checkbox>
+        <Checkbox label="유의사항 전체 동의하기" variant="fill" readOnly />
       </Card>
       <Card>
         <Title htmlFor="limitsInfo" isRequired={item?.get(ITEM_KEYS.LIMITS_INFO)}>
@@ -27,9 +24,7 @@ const PolicyInfo = ({ item }: PolicyInfoProps) => {
         <Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</Caption>
         <TextArea {...register("limitsInfo")} disabled />
         <Stack>
-          <Checkbox name="null" readOnly>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" readOnly />
         </Stack>
       </Card>
       <Card>
@@ -39,9 +34,7 @@ const PolicyInfo = ({ item }: PolicyInfoProps) => {
         <Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</Caption>
         <TextArea {...register("accidentInfo")} disabled />
         <Stack>
-          <Checkbox name="null" ariaLabel="동의" readOnly>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" readOnly />
         </Stack>
       </Card>
       <Card>
@@ -51,9 +44,7 @@ const PolicyInfo = ({ item }: PolicyInfoProps) => {
         <Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</Caption>
         <TextArea {...register("abandonmentInfo")} disabled />
         <Stack>
-          <Checkbox name="null" ariaLabel="동의" readOnly>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" readOnly />
         </Stack>
       </Card>
     </>
