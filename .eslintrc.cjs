@@ -14,7 +14,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "import/extensions": ["off", "error", "ignorePackages"],
     "import/order": [
-      "error",
+      "warn",
       {
         groups: [
           "builtin",
