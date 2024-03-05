@@ -37,14 +37,14 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "lint": "eslint .ts,.tsx",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx --cache",
-    "prettier:fix": "prettier --write '*.{js,jsx,ts,tsx}'"
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix '**/*.{js,jsx,ts,tsx}' --cache",
+    "prettier:fix": "prettier --write '**/*.{js,jsx,ts,tsx}'"
   },
   "lint-staged": {
-    "*/*.{js, jsx, ts, tsx}": [
-      "npm run prettier:fix",
-      "npm run lint:fix"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "eslintConfig": {
