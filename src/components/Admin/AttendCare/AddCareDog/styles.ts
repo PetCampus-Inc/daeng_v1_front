@@ -20,4 +20,6 @@ export const ListWrapper = styled.div`
 export const AvatarList = styled.div`
   display: flex;
   gap: 16px;
+
+  margin-top: 16px;
 `;
