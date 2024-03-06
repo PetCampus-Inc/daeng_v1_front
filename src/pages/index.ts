@@ -16,3 +16,5 @@ export { default as EnrollmentFormCreatePage } from "./EnrollmentFormCreatePage"
 export { default as EnrollmentFormListPage } from "./EnrollmentFormListPage";
 export { default as EnrollmentFormSubmitPage } from "./EnrollmentFormSubmitPage";
 export { default as TeacherManagePage } from "./TeacherManagePage";
+export { default as AttendCareDeletePage } from "./AttendCareDeletePage";
+export { default as RedirectAttendCarePage } from "./AttendCareRedirectPage";
