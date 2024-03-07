@@ -1,14 +1,16 @@
-import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
-import { Container, InputBoxWrapper, StyledBottomWrapper, TextWrapper } from "./styles";
+import { PHONE_REGEX, REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
+
+import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import Button from "components/common/Button";
 import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
-import Button from "components/common/Button";
-import { PHONE_REGEX, REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/validCheck";
-import { ThemeConfig } from "styles/ThemeConfig";
 import Postcode from "components/SignUp/Postcode";
 import useSignUp from "hooks/api/useSignUp";
-import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
+import { ThemeConfig } from "styles/ThemeConfig";
+
+import { Container, InputBoxWrapper, StyledBottomWrapper, TextWrapper } from "./styles";
 
 interface Props {
   currentStep: number;
@@ -191,18 +193,17 @@ const Step4 = ({
               }
             />
           </StyledBottomWrapper>
-          {isRegisteredPopupOpen && (
-            <AlertBottomSheet
-              onClose={() => {
-                setIsRegisteredPopupOpen(false);
-              }}
-              title="이미 등록된 유치원입니다"
-              content="자세한 내용은 서비스 팀으로 문의해 주세요"
-              grayButton="닫기"
-              brownButton="문의"
-              brownFuc={() => console.log("문의")}
-            />
-          )}
+          <AlertBottomSheet
+            isOpen={isRegisteredPopupOpen}
+            onClose={() => {
+              setIsRegisteredPopupOpen(false);
+            }}
+            title="이미 등록된 유치원입니다"
+            subtitle="자세한 내용은 서비스 팀으로 문의해 주세요"
+            closeText="닫기"
+            actionText="문의"
+            actionFn={() => console.log("문의")}
+          />
         </Container>
       )}
     </>
