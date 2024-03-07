@@ -8,7 +8,7 @@ import useDropdown from "hooks/common/useDropdown";
 import useFormatDate from "hooks/common/useFormatDate";
 import GetExpirationDate from "hooks/common/useGetExpirationDate";
 import useModal from "hooks/common/useModal";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 import { getOptions } from "utils/options";
@@ -28,7 +28,7 @@ interface DogCardProps {
   monthly: number[] | null;
 }
 
-const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
+const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
   const dropdown = useDropdown(dogId);
   const monthlyTicketDate = useFormatDate(monthly || []);
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthly || []);
@@ -76,7 +76,7 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
 
   return (
     <>
-      {isBsOpen && <CallMemberBottomSheet info={memberInfo} close={bsClose} />}
+      <CallMemberBottomSheet info={memberInfo} isOpen={isBsOpen} close={bsClose} />
       {isModalOpen && (
         <DeleteDogModal isOpen={isModalOpen} close={modalClose} action={handleDeleteDog} />
       )}
@@ -123,6 +123,6 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
       </S.CardContainer>
     </>
   );
-};
+});
 
 export default DogCard;
