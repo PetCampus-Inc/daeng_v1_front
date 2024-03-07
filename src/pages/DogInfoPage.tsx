@@ -5,6 +5,7 @@ import AttendanceRecord from "components/Admin/DogDetailInfo/AttendanceRecord";
 import DogInfo from "components/Admin/DogDetailInfo/DogInfo";
 import Notice from "components/Admin/DogDetailInfo/Notice";
 import {
+  Circle,
   ContentWrapper,
   NavItem,
   NavWrapper,
@@ -12,6 +13,7 @@ import {
 } from "components/Admin/DogDetailInfo/styles";
 import Ticket from "components/Admin/DogDetailInfo/Ticket";
 import Header from "components/common/Header";
+import useGetPrecautions from "hooks/api/useGetPrecautions";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
@@ -22,6 +24,8 @@ const DogInfoPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
+  const { data } = useGetPrecautions(2);
+  const showNotice = data.modifiedList.length > 0;
 
   return (
     <>
@@ -53,6 +57,7 @@ const DogInfoPage = () => {
                 }}
               >
                 {item}
+                {showNotice && index === 3 ? <Circle /> : null}
                 {index === currentStep ? <Underline layoutId="underline" /> : null}
               </NavItem>
             ))}
@@ -62,7 +67,7 @@ const DogInfoPage = () => {
           {currentStep === 0 && <DogInfo />}
           {currentStep === 1 && <AttendanceRecord />}
           {currentStep === 2 && <Ticket />}
-          {currentStep === 3 && <Notice />}
+          {currentStep === 3 && <Notice data={data} />}
         </ContentWrapper>
       </PageContainer>
     </>

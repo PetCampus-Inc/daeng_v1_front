@@ -123,3 +123,14 @@ export interface ITicketDetail {
   attendanceDays: string[];
   ticketHistory: ITicketDetail[];
 }
+
+export interface IPrecautionInfo {
+  modifiedList: number[];
+  agreements: {
+    21?: number[];
+    22?: number[];
+    23?: number[];
+    24?: number[];
+    30?: number[];
+  };
+}

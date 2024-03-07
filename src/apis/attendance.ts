@@ -8,6 +8,7 @@ import {
   IAttendInfo,
   IAttendanceInfo,
   IMemberCallInfo,
+  IPrecautionInfo,
   ITicketDetail
 } from "types/Attendance.type";
 import { IResponse } from "types/Response.type";
@@ -160,9 +161,9 @@ export const handlePostTicket = async (req: any): Promise<any> => {
   return data;
 };
 
-// 연결 전
-export const handleGetPrecautions = async (dogId: number): Promise<any> => {
+// 강아지 상세 - 유의사항
+export const handleGetPrecautions = async (dogId: number): Promise<IPrecautionInfo> => {
   const url = `admin/attendance/dog/precautions?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
-  return data;
+  return data.data;
 };

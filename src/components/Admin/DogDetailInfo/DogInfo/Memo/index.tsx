@@ -38,8 +38,6 @@ const Memo = ({ memo, id, refetch }: MemoProps) => {
     setIsOpen(false);
   });
 
-  console.log("default", methods.getValues("memoModal"));
-  console.log("memo", memo);
   return (
     <FlexWrapper>
       <InfoTop>
