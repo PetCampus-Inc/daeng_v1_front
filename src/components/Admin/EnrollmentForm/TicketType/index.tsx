@@ -1,18 +1,17 @@
-import { useState } from "react";
-import type { Control } from "react-hook-form";
-import useTicketFieldArray from "hooks/common/useTicketFieldArray";
-import useBottomSheet from "hooks/common/useBottomSheet";
-
-import XIcon from "assets/svg/x-icon";
+import AddIcon from "assets/svg/addIcon";
+import BottomSheet from "components/common/BottomSheet";
+import ButtonModal from "components/common/ButtonModal";
 import EditableRadioGroup, {
   ExtendedFieldArrayWithId
 } from "components/common/Select/EditableRadioGroup";
-import TicketCounter from "../TicketCounter";
-import BottomSheet from "components/common/BottomSheet";
+import useBottomSheet from "hooks/common/useBottomSheet";
+import useTicketFieldArray from "hooks/common/useTicketFieldArray";
+import { useState } from "react";
 
 import * as S from "./styles";
-import AddIcon from "assets/svg/addIcon";
-import ButtonModal from "components/common/ButtonModal";
+import TicketCounter from "../TicketCounter";
+
+import type { Control } from "react-hook-form";
 
 type TicketTypeProps = {
   control: Control;
@@ -73,20 +72,22 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
         />
       )}
       {bottomSheet.isVisible && (
-        <BottomSheet onClose={() => bottomSheet.close()}>
-          <S.CloseButton type="button" onClick={() => bottomSheet.close()}>
-            <XIcon />
-          </S.CloseButton>
-          <TicketCounter
-            type={ticketType}
-            isDuplication={isDuplication}
-            initial={INIT_COUNTER}
-            counter={counter}
-            setCounter={setCounter}
-          />
-          <S.ConfirmButton onClick={handleAddRadio} disabled={isDuplication}>
-            추가
-          </S.ConfirmButton>
+        <BottomSheet isOpen={bottomSheet.isVisible} onClose={() => bottomSheet.close()}>
+          <BottomSheet.Content>
+            <BottomSheet.Control />
+            <TicketCounter
+              type={ticketType}
+              isDuplication={isDuplication}
+              initial={INIT_COUNTER}
+              counter={counter}
+              setCounter={setCounter}
+            />
+            <BottomSheet.Button
+              actionText="추가"
+              actionFn={handleAddRadio}
+              disabled={isDuplication}
+            />
+          </BottomSheet.Content>
         </BottomSheet>
       )}
       <EditableRadioGroup
