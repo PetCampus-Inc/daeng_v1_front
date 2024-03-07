@@ -11,7 +11,7 @@ const sizes: ISizes = {
 };
 
 interface MediaQueries {
-  [key: string]: (...args: any[]) => RuleSet<Object>;
+  [key: string]: (...args: any[]) => RuleSet<object>;
 }
 
 const mediaQueries: MediaQueries = Object.keys(sizes).reduce((acc: MediaQueries, label: string) => {

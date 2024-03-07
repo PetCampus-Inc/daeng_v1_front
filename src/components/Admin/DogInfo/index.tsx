@@ -1,12 +1,13 @@
-import Text from "components/common/Text";
-import * as S from "./styles";
-import { ThemeConfig } from "styles/ThemeConfig";
 import BoyIcon from "assets/svg/boy-icon";
 import CalendarIcon from "assets/svg/calendar";
 import Scale from "assets/svg/scale";
-import { useState } from "react";
-import moment from "moment";
+import Text from "components/common/Text";
 import useGetDogDetail from "hooks/api/useGetDogDetail";
+import moment from "moment";
+import { useState } from "react";
+import { ThemeConfig } from "styles/ThemeConfig";
+
+import * as S from "./styles";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -95,7 +96,7 @@ const DogInfo = () => {
           prev2Label={null}
           minDetail="year"
           tileContent={({ date, view }: { date: Date; view: string }) => {
-            let html = [];
+            const html = [];
             if (
               view === "month" &&
               date.getMonth() === today.getMonth() &&
