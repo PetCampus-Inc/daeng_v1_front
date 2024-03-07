@@ -1,23 +1,24 @@
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
-import useModal from "hooks/common/useModal";
-import useBottomSheet from "hooks/common/useBottomSheet";
-import useFormatDate from "hooks/common/useFormatDate";
-import GetExpirationDate from "hooks/common/useGetExpirationDate";
-import useDropdown from "hooks/common/useDropdown";
-import { useCallMember } from "hooks/api/useCallMemberQuery";
-import { useDeleteDog } from "hooks/api/useDeleteDogMutation";
-import { getOptions } from "utils/options";
-
-import AttendanceOptionList from "../AttendanceOptionList";
-import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
-import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
 import MoreIcon from "assets/svg/more-icon";
-import type { IMemberCallInfo } from "types/Attendance.type";
+import { useCallMember } from "hooks/api/useCallMemberQuery";
+import { useDeleteDog } from "hooks/api/useDeleteDogMutation";
+import useBottomSheet from "hooks/common/useBottomSheet";
+import useDropdown from "hooks/common/useDropdown";
+import useFormatDate from "hooks/common/useFormatDate";
+import GetExpirationDate from "hooks/common/useGetExpirationDate";
+import useModal from "hooks/common/useModal";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
+import { getOptions } from "utils/options";
+
 import * as S from "./styles";
+import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
+import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
+import AttendanceOptionList from "../AttendanceOptionList";
+
+import type { IMemberCallInfo } from "types/Attendance.type";
 
 interface DogCardProps {
   dogId: number;
@@ -109,15 +110,7 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
             dropdown.toggle();
           }}
         >
-          {dropdown.isOpen && adminRole === "ROLE_OWNER" && (
-            <AttendanceOptionList
-              isOptionsOpen={dropdown.isOpen}
-              options={OPTIONS}
-              handleOptionClick={handleOptionClick}
-              modalRef={dropdown.ref}
-            />
-          )}
-          {dropdown.isOpen && adminRole === "ROLE_TEACHER" && (
+          {dropdown.isOpen && adminRole && (
             <AttendanceOptionList
               isOptionsOpen={dropdown.isOpen}
               options={OPTIONS}

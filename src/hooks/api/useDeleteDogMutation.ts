@@ -9,7 +9,7 @@ export const useDeleteDog = () => {
     mutationFn: (dogId: number) => handleDeleteDog(dogId),
     onSuccess: () => {
       showToast("강아지가 삭제되었습니다", "bottom");
-      queryClient.invalidateQueries({ queryKey: ["getAdminInfo"] });
+      queryClient.invalidateQueries({ queryKey: ["getDogList"] });
     },
 
     throwOnError: true

@@ -1,11 +1,11 @@
+import FootIcon from "assets/svg/foot-icon";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
-import FootIcon from "assets/svg/foot-icon";
 import * as S from "./styles";
-import { useSearchParams } from "react-router-dom";
 
 interface IAttendanceTop {
   mode: "DEFAULT" | "ATTENDANCE";

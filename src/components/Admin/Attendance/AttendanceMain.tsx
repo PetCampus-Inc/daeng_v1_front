@@ -1,6 +1,7 @@
+import useDogSearchQuery from "hooks/api/useDogSearchQuery";
 import { type SetStateAction, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import useDogSearchQuery from "hooks/api/useDogSearchQuery";
+
 import AttendanceSearchInput from "./AttendanceSearchInput";
 import List from "./List";
 import SearchList from "./SearchList";

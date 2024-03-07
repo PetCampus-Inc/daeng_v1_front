@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { LIST } from "constants/option";
+
 import { useDogListAndSortedList } from "hooks/api/useSortDogsQuery";
+import { useState } from "react";
+
 import SearchList from "./SearchList";
 import SortSelectBox from "./SortSelectBox";
-import { LIST } from "constants/option";
 import { Blur } from "./styles";
 
 interface ListProps {

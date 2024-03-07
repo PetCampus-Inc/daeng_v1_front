@@ -1,5 +1,6 @@
-import AttendanceSearchList from "./AttendanceSearchList";
 import { useGetAttendDogList } from "hooks/api/useGetAttendanceQuery";
+
+import AttendanceSearchList from "./AttendanceSearchList";
 
 interface DogListProps {
   schoolId: number;

@@ -1,11 +1,13 @@
-import * as S from "./styles";
-import TitleWithIcon from "../TitleWithIcon";
-import OwnerWaitingCard from "../OwnerWaitingCard";
-import useGetWatingOwnersList from "hooks/api/useGetWaitingOwnersList";
 import { LayoutGroup } from "framer-motion";
+import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
+
+import * as S from "./styles";
+import OwnerWaitingCard from "../OwnerWaitingCard";
+import TitleWithIcon from "../TitleWithIcon";
 
 const OwnerWaitingList = () => {
-  const { data } = useGetWatingOwnersList(1);
+  // FIXME: school ID 관리 필요!!!
+  const { data } = useGetWaitingOwnersList(2);
 
   return (
     <S.OwnerWaitingListContainer>

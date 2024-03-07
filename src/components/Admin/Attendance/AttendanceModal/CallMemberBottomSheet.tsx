@@ -1,9 +1,11 @@
-import BottomSheet from "components/common/BottomSheet";
-import type { IMemberCallInfo } from "types/Attendance.type";
-import XIcon from "assets/svg/x-icon";
 import BasicPhoneIcon from "assets/svg/phone-basic";
-import { Container, SubTitle, Title, TitleWrapper } from "./styles";
+import XIcon from "assets/svg/x-icon";
+import BottomSheet from "components/common/BottomSheet";
 import { CloseButton, ConfirmButton } from "styles/StyleModule";
+
+import { Container, SubTitle, Title, TitleWrapper } from "./styles";
+
+import type { IMemberCallInfo } from "types/Attendance.type";
 
 interface CallMemberBottomSheetProps {
   info: IMemberCallInfo | null;

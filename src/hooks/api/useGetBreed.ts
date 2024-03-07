@@ -1,9 +1,11 @@
+import { QUERY_KEY } from "constants/queryKey";
+
 import { useQuery } from "@tanstack/react-query";
 import { handleGetBreed } from "apis/school.api";
 
 const useGetBreed = (inputValue: string) => {
   return useQuery({
-    queryKey: ["getBreed"],
+    queryKey: QUERY_KEY.BREED,
     queryFn: () => handleGetBreed(inputValue),
     enabled: false
   });

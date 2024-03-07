@@ -1,4 +1,5 @@
 import FootIcon from "assets/svg/foot-icon";
+
 import * as S from "./styles";
 
 interface AttendanceCardProps {

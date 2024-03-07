@@ -1,7 +1,8 @@
-import { StyledOptionList, StyledButtonWrapper, Item } from "../AttendanceCard/styles";
 import PhoneIcon from "assets/svg/phone";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";
+
+import { StyledOptionList, StyledButtonWrapper, Item } from "../AttendanceCard/styles";
 
 interface Props {
   isOptionsOpen: boolean;
@@ -10,6 +11,7 @@ interface Props {
   modalRef: React.RefObject<HTMLDivElement>;
 }
 
+// FIXME: 드롭다운 공통 컴포넌트로 분리
 const AttendanceOptionList = ({ isOptionsOpen, options, handleOptionClick, modalRef }: Props) => {
   return (
     <>

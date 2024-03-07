@@ -1,14 +1,15 @@
+import BackgroundButton from "components/common/Button/BackgroundButton";
+import useAttendDog from "hooks/api/useAttendDogMutation";
+import useAttendDogSearchQuery from "hooks/api/useAttendDogSearchQuery";
 import { type SetStateAction, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { attendDogListInfoAtom } from "store/admin";
-import useAttendDogSearchQuery from "hooks/api/useAttendDogSearchQuery";
-import useAttendDog from "hooks/api/useAttendDogMutation";
+
+import AttendanceAvatar from "./AttendanceAvatar";
+import AttendanceList from "./AttendanceList";
 import AttendanceSearchInput from "./AttendanceSearchInput";
 import AttendanceSearchList from "./AttendanceSearchList";
-import AttendanceList from "./AttendanceList";
-import AttendanceAvatar from "./AttendanceAvatar";
-import BackgroundButton from "components/common/Button/BackgroundButton";
 import { Blur, Spacing } from "./styles";
 
 interface AttendanceProps {

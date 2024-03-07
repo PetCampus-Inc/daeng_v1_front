@@ -1,12 +1,12 @@
+import { LIST } from "constants/option";
+
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   handleGetDogs,
   handleSortCharge,
   handleSortDate,
-  handleSortPayment,
-  handleSortRegistered
+  handleSortPayment
 } from "apis/attendance";
-import { LIST } from "constants/option";
 
 interface Props {
   sortName: string;
@@ -17,7 +17,7 @@ interface Props {
 const fetchSortedDogs = async ({ sortName, schoolId, adminId }: Props) => {
   switch (sortName) {
     case LIST.REGISTERED:
-      return await handleSortRegistered(schoolId);
+      return await handleGetDogs(schoolId);
     case LIST.PAYMENT:
       return await handleSortPayment(schoolId);
     case LIST.DATE:
@@ -31,7 +31,7 @@ const fetchSortedDogs = async ({ sortName, schoolId, adminId }: Props) => {
 
 export const useDogListAndSortedList = ({ sortName, schoolId, adminId }: Props) => {
   return useSuspenseQuery({
-    queryKey: ["dogList", sortName],
+    queryKey: ["getDogList", sortName],
     queryFn: () => fetchSortedDogs({ sortName, schoolId, adminId })
   });
 };

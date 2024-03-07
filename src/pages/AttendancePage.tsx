@@ -1,11 +1,11 @@
+import Attendance from "components/Admin/Attendance/Attendance";
+import AttendanceMain from "components/Admin/Attendance/AttendanceMain";
+import AttendanceTop from "components/Admin/Attendance/AttendanceTop";
+import Header from "components/common/Header";
+import Navbar from "components/common/NavBar";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
-import Navbar from "components/common/NavBar";
-import Header from "components/common/Header";
-import AttendanceTop from "components/Admin/Attendance/AttendanceTop";
-import AttendanceMain from "components/Admin/Attendance/AttendanceMain";
-import Attendance from "components/Admin/Attendance/Attendance";
 import { PageContainer } from "styles/StyleModule";
 
 const AttendancePage = () => {

@@ -1,5 +1,5 @@
-import { ListWrapper, CardListWrapper, EmptyText } from "./styles";
 import DogCard from "./AttendanceCard/DogCard";
+import { ListWrapper, CardListWrapper, EmptyText } from "./styles";
 
 type SearchListProps = {
   data?: any[];

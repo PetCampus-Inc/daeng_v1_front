@@ -1,6 +1,7 @@
-import { useState } from "react";
-import SearchIcon from "assets/svg/search-icon";
 import CloseIcon from "assets/svg/close-icon";
+import SearchIcon from "assets/svg/search-icon";
+import { useState } from "react";
+
 import * as S from "./styles";
 
 type AttendanceSearchInputProps = {

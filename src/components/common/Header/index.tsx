@@ -1,3 +1,8 @@
+import ArrowLeftIcon from "assets/svg/arrow-left-icon";
+import NoticeActiveIcon from "assets/svg/notice-active-icon";
+import { memo } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Container,
   HeaderWrapper,
@@ -7,10 +12,6 @@ import {
   StyledImage,
   IconWrapper
 } from "./styles";
-import { memo } from "react";
-import NoticeActiveIcon from "assets/svg/notice-active-icon";
-import { useNavigate } from "react-router-dom";
-import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 
 /*
 header type
@@ -24,11 +25,10 @@ interface Props {
   type: "main" | "back" | "text" | "notice";
   handleClick?: () => void | Promise<void>;
   text?: string;
-  size?: string;
   rightElement?: React.ReactNode;
 }
 
-const Header = ({ type, handleClick, text, size, rightElement }: Props) => {
+const Header = ({ type, handleClick, text, rightElement }: Props) => {
   const navigate = useNavigate();
 
   const click = handleClick ? handleClick : () => navigate(-1);

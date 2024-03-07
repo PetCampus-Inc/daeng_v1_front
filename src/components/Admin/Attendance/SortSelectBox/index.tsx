@@ -1,9 +1,11 @@
-import { type SetStateAction } from "react";
-import useBottomSheet from "hooks/common/useBottomSheet";
-import BottomSheet from "components/common/BottomSheet";
 import { LIST } from "constants/option";
+
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
+import BottomSheet from "components/common/BottomSheet";
+import useBottomSheet from "hooks/common/useBottomSheet";
+import { type SetStateAction } from "react";
 import { ConfirmButton } from "styles/StyleModule";
+
 import * as S from "./styles";
 
 type SortSelectBoxProps = {

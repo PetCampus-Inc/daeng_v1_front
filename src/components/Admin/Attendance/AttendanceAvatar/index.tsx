@@ -1,10 +1,12 @@
+import ArrowLeftSquare from "assets/svg/arrow-left-square-icon";
+import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
+import CloseIcon from "assets/svg/close-icon";
 import { useRef, useState } from "react";
 import Slider from "react-slick";
-import CloseIcon from "assets/svg/close-icon";
-import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
-import ArrowLeftSquare from "assets/svg/arrow-left-square-icon";
-import type { IAttendDogLists } from "types/Attendance.type";
+
 import * as S from "./styles";
+
+import type { IAttendDogLists } from "types/Attendance.type";
 
 interface AttendanceAvatarProps {
   selectedDogs: IAttendDogLists[];
@@ -13,7 +15,7 @@ interface AttendanceAvatarProps {
 
 const AttendanceAvatar = ({ selectedDogs, onRemoveDog }: AttendanceAvatarProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  let sliderRef = useRef<Slider>(null);
+  const sliderRef = useRef<Slider>(null);
 
   const next = () => {
     sliderRef.current?.slickNext();
