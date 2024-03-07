@@ -7,10 +7,8 @@ export const SearchInputWrapper = styled.div`
 
 export const SearchInputButton = styled.button`
   all: unset;
-
   height: 100%;
-  width: 17%;
-  margin-right: 5%;
+  padding-right: 1rem;
   aspect-ratio: 1/1;
   cursor: pointer;
   position: absolute;

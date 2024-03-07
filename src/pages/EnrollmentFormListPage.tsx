@@ -90,7 +90,9 @@ const EnrollmentFormListPage = () => {
               !(selectedList.length === data?.simpleSchoolFormList.length)
             }
             handleTouch={handleTouch}
-          />
+          >
+            삭제
+          </BackgroundButton>
         )}
       </PageContainer>
     </>

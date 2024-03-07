@@ -1,5 +1,8 @@
+import { QUERY_KEY } from "constants/queryKey";
+
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetEnrollment } from "apis/school.api";
+
 import type { IEnrollmentProps } from "apis/school.api";
 import type {
   IAdminEnrollment,
@@ -17,9 +20,10 @@ interface EnrollmentProps {
   pickDropInfo: IPickDropInfo;
 }
 
+// FIXME: 어뎁터 패턴 사용하기
 export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
   const enlistmentQuery = useSuspenseQuery<IAdminEnrollment, Error, EnrollmentProps>({
-    queryKey: ["enrollment", memberId, schoolId],
+    queryKey: QUERY_KEY.ENROLLMENT(schoolId, memberId),
     queryFn: () => handleGetEnrollment({ schoolId, memberId }),
     refetchOnWindowFocus: false,
     select: (data) => {

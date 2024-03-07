@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Background = styled.div<{ $backgroundColor: string }>`
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;

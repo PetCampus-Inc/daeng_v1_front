@@ -1,17 +1,11 @@
-export interface IAttendanceInfo {
-  data: IDogsList[];
-  status: number;
-}
+export type IAttendanceInfo = IDogsList[];
 
 export interface IAttendSearchInfo {
   data: IAttendDogLists[];
   status: number;
 }
 
-export interface IAttendDogsInfo {
-  data: IAttendDogLists[];
-  status: number;
-}
+export type IAttendDogsInfo = IAttendDogLists[];
 
 export interface IAttendCareDogInfo {
   data: IAttendCareDog[];
@@ -43,7 +37,7 @@ export interface IAttendDogLists {
   dogName: string;
   allRounds: number;
   currentRounds: number;
-  monthlyTicket: [];
+  monthlyTicket: string;
 }
 
 export interface IAttendCareDog {
@@ -55,11 +49,8 @@ export interface IAttendCareDog {
 }
 
 export interface IMemberCallInfo {
-  data: {
-    dogName: string;
-    memberPhoneNumber: string;
-  };
-  status: number;
+  dogName: string;
+  phoneNumber: string;
 }
 
 export interface IAlarmResponse {
@@ -76,11 +67,6 @@ export interface IAlarmResponse {
     schoolPhoneNumber: string;
   };
   status: number;
-}
-
-export interface IDeleteInfo {
-  adminId: number;
-  targetDogId: number;
 }
 
 export interface IAttendInfo {

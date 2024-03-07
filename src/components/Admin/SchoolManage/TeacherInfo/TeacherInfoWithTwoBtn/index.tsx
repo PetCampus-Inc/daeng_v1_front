@@ -1,44 +1,30 @@
-import * as S from "../styles";
-import { ITeacherInfo } from "types/Admin.type";
-import { useState } from "react";
-import ApproveDenyButton from "../../ApproveDenyButton";
 import { AnimatePresence } from "framer-motion";
 import {
   useApproveTeacherMutation,
   useDenyTeacherMutation
 } from "hooks/api/useApproveDenyMutation";
-import showToast from "utils/showToast";
+import { useState } from "react";
+import { ITeacherInfo } from "types/Admin.type";
+
+import ApproveDenyButton from "../../ApproveDenyButton";
+import * as S from "../styles";
 
 interface TeacherInfoWithTwoBtnProps {
   data: ITeacherInfo;
-  setChanged?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TeacherInfoWithTwoBtn = ({ data, setChanged }: TeacherInfoWithTwoBtnProps) => {
+const TeacherInfoWithTwoBtn = ({ data }: TeacherInfoWithTwoBtnProps) => {
   const [isShow, setIsShow] = useState(true);
   const { adminId, teacherName, phoneNumber } = data;
   const mutateApproveAdmin = useApproveTeacherMutation();
   const mutateDenyAdmin = useDenyTeacherMutation();
 
   const approveFunc = () => {
-    mutateApproveAdmin(adminId, {
-      onSuccess: () => {
-        setChanged && setChanged((prev) => !prev);
-      },
-      onError: () => {
-        showToast("승인에 실패했습니다. 다시 시도해주세요.", "bottom");
-        return;
-      }
-    });
+    mutateApproveAdmin(adminId);
   };
 
   const denyFunc = () => {
-    mutateDenyAdmin(adminId, {
-      onError: () => {
-        showToast("거절에 실패했습니다. 다시 시도해주세요.", "bottom");
-        return;
-      }
-    });
+    mutateDenyAdmin(adminId);
   };
 
   return (

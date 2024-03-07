@@ -1,5 +1,5 @@
-import { handlePostEnrollment } from "apis/school.api";
 import { useMutation } from "@tanstack/react-query";
+import { handlePostEnrollment } from "apis/school.api";
 
 import type { IRequestEnrollment } from "types/School.type";
 

@@ -1,3 +1,5 @@
+import { QUERY_KEY } from "constants/queryKey";
+
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetAdminForm } from "apis/school.api";
 import { Adapter } from "libs/Adapter";
@@ -27,7 +29,7 @@ type Mode = "READ" | "EDIT";
 
 export const useAdminEnrollQuery = (formId: string, mode: Mode) => {
   const enlistmentQuery = useSuspenseQuery<IAdminEnrollment, Error, AdaptedData<typeof mode>>({
-    queryKey: ["enrollment", formId],
+    queryKey: QUERY_KEY.ADMIN_ENROLLMENT(formId),
     queryFn: () => handleGetAdminForm({ formId }),
     select: (data) =>
       Adapter.from(data).to<IAdminEnrollment, AdaptedData<typeof mode>>((item) => {

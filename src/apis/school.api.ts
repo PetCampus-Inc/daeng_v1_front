@@ -1,4 +1,5 @@
 import customAxios from "libs/CustomAxios";
+
 import type { IResponse } from "types/Response.type";
 import type {
   IAdminEnrollment,
@@ -10,7 +11,7 @@ import type {
 
 export interface IEnrollmentProps {
   memberId: string;
-  schoolId?: string;
+  schoolId: string;
   requestUrl?: string;
 }
 
@@ -19,13 +20,13 @@ export interface IAdminEnrollmentProps {
 }
 
 export const handleGetSearchResult = async (searchText: string): Promise<ISchoolInfo[]> => {
-  const url: string = `school/search?searchText=${searchText}`;
+  const url = `school/search?searchText=${searchText}`;
   const { data } = await customAxios.get(url);
   return data.data;
 };
 
 export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> => {
-  const url: string = `school/search/breed`;
+  const url = `school/search/breed`;
   const { data } = await customAxios.get(url, {
     params: {
       searchText
@@ -38,7 +39,7 @@ export const handleGetEnrollment = async ({
   schoolId,
   memberId
 }: IEnrollmentProps): Promise<IAdminEnrollment> => {
-  const url: string = `school/member/enroll?schoolId=${schoolId}&memberId=${memberId}`;
+  const url = `school/member/enroll?schoolId=${schoolId}&memberId=${memberId}`;
   try {
     const { data } = await customAxios.get(url);
     return data.data;
@@ -51,7 +52,7 @@ export const handleGetEnrollmentUrl = async ({
   requestUrl,
   memberId
 }: IEnrollmentProps): Promise<IAdminEnrollment> => {
-  const url: string = `school/member/enroll/${requestUrl}?memberId=${memberId}`;
+  const url = `school/member/enroll/${requestUrl}?memberId=${memberId}`;
   const { data } = await customAxios.get(url);
   return data.data;
 };
@@ -59,7 +60,7 @@ export const handleGetEnrollmentUrl = async ({
 export const handleGetAdminForm = async ({
   formId
 }: IAdminEnrollmentProps): Promise<IAdminEnrollment> => {
-  const url: string = `school/form/list/${formId}`;
+  const url = `school/form/list/${formId}`;
   const { data } = await customAxios.get(url);
   return data.data;
 };
@@ -67,7 +68,7 @@ export const handleGetAdminForm = async ({
 export const handlePostEnrollment = async (
   requestProps: IRequestEnrollment
 ): Promise<IResponse> => {
-  const url: string = `school/member/enroll`;
+  const url = `school/member/enroll`;
   const { data } = await customAxios.post(url, {
     ...requestProps
   });
@@ -77,7 +78,7 @@ export const handlePostEnrollment = async (
 export const handlePostAdminForm = async (
   requestProps: IRequestAdminEnrollment
 ): Promise<IResponse> => {
-  const url: string = `school/form`;
+  const url = `school/form`;
   const { data } = await customAxios.post(url, {
     ...requestProps
   });

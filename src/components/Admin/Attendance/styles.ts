@@ -11,58 +11,139 @@ export const StyledHeadWrapper = styled.div`
   height: 20%;
 `;
 
-export const StyledMainWrapper = styled.div`
+export const MainWrapper = styled.div`
   display: flex;
-  height: 65%;
-  height: 65%;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const StyledTitleWrapper = styled.div``;
+export const TitleWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+`;
 
-export const StyledButtonWrapper = styled.div`
+export const Title = styled.h2`
+  color: ${({ theme }) => theme.colors.black};
+  ${({ theme }) => theme.typo.title2_20_B};
+`;
+export const SubTitle = styled.h4`
+  color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
+
+export const ButtonWrapper = styled.div`
   display: flex;
-  width: 35%;
   height: 100%;
   justify-content: center;
   align-items: center;
+  gap: 4px;
 `;
 
-export const StyledImage = styled.img<{
-  src: string;
-  alt: string;
-  marginright?: string;
-  marginleft?: string;
-}>`
-  margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
-  margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
-  margin-right: ${(props) => (props.marginright ? props.marginright : "3%")};
-  margin-left: ${(props) => (props.marginleft ? props.marginleft : "")};
+export const FootButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "isFocus"
+})<{ isFocus?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+  background-color: ${({ theme }) => theme.colors.primaryColor};
+
+  & > svg {
+    color: ${({ theme }) => theme.colors.white};
+  }
+
+  &.active {
+    border: 1px solid ${({ theme }) => theme.colors.br_2};
+    background-color: ${({ theme }) => theme.colors.white};
+  }
+
+  &.active > svg {
+    color: ${({ theme }) => theme.colors.br_2};
+  }
+
+  ${({ isFocus, theme }) =>
+    isFocus &&
+    `
+    opacity: 0.5;
+    border: 1px solid ${theme.colors.gray_3};
+    background-color: ${theme.colors.white};
+    & > svg {
+    color: ${theme.colors.gray_3};
+  }
+    `}
+`;
+
+export const ControlButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => prop !== "isFocus"
+})<{ isFocus: boolean }>`
+  min-width: 70px;
+  display: flex;
+  padding: 4px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 50px;
+  border: 1px solid ${({ theme }) => theme.colors.primaryColor};
+  background-color: ${({ theme }) => theme.colors.white};
+
+  ${({ theme }) => theme.typo.label2_14_B};
+  color: ${({ theme }) => theme.colors.primaryColor};
+
+  ${({ isFocus, theme }) =>
+    isFocus &&
+    `
+    opacity: 0.5;
+    border: 1px solid ${theme.colors.gray_3};
+    background-color: ${theme.colors.gray_5}; 
+    color: ${theme.colors.gray_3};
+    `}
+`;
+
+export const ListContainer = styled.div`
+  height: 100%;
+`;
+
+export const ListWrapper = styled.div`
+  width: 100%;
+  height: 75%;
+  padding-bottom: 5%;
+  overflow-y: auto;
+  position: relative;
+`;
+
+export const CardListWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
 `;
 
 export const StyledListWrapper = styled.div`
   width: 100%;
   height: 75%;
   padding-bottom: 5%;
-  padding-left: 4%;
-  padding-right: 2%;
   overflow-y: auto;
   position: relative;
 `;
 
-export const StyledBlur = styled.div<{ display: string }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.6);
-  z-index: 1;
-  pointer-events: none;
-  display: ${(props) => props.display};
-  overflow: hidden;
+export const EmptyText = styled.div`
+  padding-top: 30%;
+  text-align: center;
+  ${({ theme }) => theme.typo.label2_14_R};
+  color: ${({ theme }) => theme.colors.gray_3};
+`;
+
+export const Blur = styled.div<{ $isFocus: boolean }>`
+  height: 100%;
+
+  & > * {
+    opacity: ${({ $isFocus }) => ($isFocus ? 0.5 : 1)};
+  }
 `;
 
 export const StyledCardWrapper = styled.div`
@@ -75,4 +156,8 @@ export const StyledCardWrapper = styled.div`
 
 export const StyledTextWrapper = styled.div`
   margin: 40% auto 0;
+`;
+
+export const Spacing = styled.div`
+  height: 52px;
 `;

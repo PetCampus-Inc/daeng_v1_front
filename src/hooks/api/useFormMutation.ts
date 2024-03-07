@@ -1,5 +1,5 @@
-import { handlePostAdminForm } from "apis/school.api";
 import { useMutation } from "@tanstack/react-query";
+import { handlePostAdminForm } from "apis/school.api";
 
 import type { IRequestAdminEnrollment } from "types/School.type";
 

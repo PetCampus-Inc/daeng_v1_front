@@ -4,16 +4,18 @@ interface IBackgroundButton {
   isActivated?: boolean;
   backgroundColor?: "white" | "gray_5";
   handleTouch: () => void;
+  children: React.ReactNode;
 }
 const BackgroundButton = ({
   isActivated,
   backgroundColor = "gray_5",
-  handleTouch
+  handleTouch,
+  children
 }: IBackgroundButton) => {
   return (
     <S.Background $backgroundColor={backgroundColor}>
       <S.BackgroundButton $isActivated={isActivated} onClick={handleTouch} disabled={!isActivated}>
-        삭제
+        {children}
       </S.BackgroundButton>
     </S.Background>
   );

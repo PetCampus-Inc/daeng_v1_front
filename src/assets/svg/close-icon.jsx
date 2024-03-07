@@ -1,6 +1,13 @@
-const CloseIcon = () => {
+const CloseIcon = ({ className = "" }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="none" viewBox="0 0 25 25">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="25"
+      height="25"
+      fill="none"
+      viewBox="0 0 25 25"
+      className={className}
+    >
       <circle className="icon-circle" cx="12.311" cy="12.365" r="8.096" fill="currentColor" />
       <path
         className="icon-path"
