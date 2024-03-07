@@ -5,6 +5,7 @@ export const QUERY_KEY = {
   TEACHER_LIST: ["teacherList"], // 선생님 리스트 조회
   BREED: ["breed"], // 견종 검색
   ATTEND_LIST: ["attendDogList"], // 출석안한 강아지 리스트
+  ATTEND_LIST_ID: (schoolId: number) => ["attendDogList", schoolId], // 출석안한 강아지 리스트 with 유치원아이디
   ATTEND_LIST_SEARCH: (schoolId: number, searchText: string) => [
     "attendDogList",
     schoolId,
