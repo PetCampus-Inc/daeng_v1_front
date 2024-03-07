@@ -1,4 +1,4 @@
-import { ITEM_MAP, ITEM_MAPS, type ItemMapValue, type ItemMaps } from "constants/item";
+import { ITEM_MAPS, type ItemMaps } from "constants/item";
 
 export const formatDate = (year: string, month: string, day: string) => {
   if (!year || !month || !day) return "";
@@ -21,7 +21,7 @@ export const formatPhoneNumber = (value: string): string => {
   return value
     .replace(/\D/g, "")
     .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-    .replace(/(\-{1,2})$/g, "");
+    .replace(/(-{1,2})$/g, "");
 };
 
 type TItem = Record<string, string>[];

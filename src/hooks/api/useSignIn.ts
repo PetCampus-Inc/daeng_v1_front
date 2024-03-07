@@ -1,11 +1,12 @@
-import { useCallback, useState } from "react";
-import { ILoginInfo } from "types/Member.type";
-import { handleLoginResult } from "apis/member.api";
+import { PATH } from "constants/path";
+
 import { handleAdminLoginResult } from "apis/admin.api";
+import { handleLoginResult } from "apis/member.api";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
-import { PATH } from "constants/path";
+import { ILoginInfo } from "types/Member.type";
 
 const useSignIn = () => {
   const [loginInfo, setLoginInfo] = useRecoilState(adminLoginInfoAtom);
@@ -26,7 +27,9 @@ const useSignIn = () => {
       if (data.status === 200) {
         setCurrentMainStep(currentMainStep + 2);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const handlerAdminLogin = async () => {
