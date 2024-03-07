@@ -4,12 +4,16 @@ import styled from "styled-components";
 import type { TitleProps } from "./BottomSheetTitle";
 export { BackDrop } from "../Modal/styles";
 
+export const Container = styled.div`
+  position: relative;
+`;
+
 export const StyledBottomSheet = styled(motion.div)`
   position: fixed;
   bottom: 0;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 16px 16px 0px 0px;
   z-index: 10;
 `;
 
@@ -20,6 +24,7 @@ export const Content = styled.div`
 export const Control = styled.div`
   display: flex;
   justify-content: flex-end;
+  padding-right: 3px;
 `;
 
 export const ControlButton = styled.button`

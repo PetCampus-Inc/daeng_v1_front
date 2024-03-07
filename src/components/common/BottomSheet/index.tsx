@@ -6,7 +6,7 @@ import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetControl from "./BottomSheetControl";
 import { BottomSheetSubTitle, BottomSheetTitle } from "./BottomSheetTitle";
 import { BottomSheetProvider } from "./provider";
-import { StyledBottomSheet, BackDrop } from "./styles";
+import { StyledBottomSheet, BackDrop, Container } from "./styles";
 import Portal from "../Modal/portal";
 
 interface IBottomSheetProps {
@@ -49,8 +49,7 @@ const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBotto
 
   const BottomSheetVariants = {
     hidden: { y: "100%", opacity: 0 },
-    visible: { y: 0, opacity: 1 },
-    exit: { y: "100%", opacity: 0 }
+    visible: { y: 0, opacity: 1 }
   };
 
   return (
@@ -58,25 +57,25 @@ const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBotto
       <AnimatePresence mode="wait">
         {isOpen && (
           <BottomSheetProvider onClose={onClose}>
-            <div style={{ position: "relative" }}>
+            <Container>
               <BackDrop
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
                 variants={backdropVariants}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
               />
               <StyledBottomSheet
                 initial="hidden"
                 animate="visible"
-                exit="exit"
+                exit="hidden"
                 variants={BottomSheetVariants}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
                 ref={bottomSheetRef}
               >
                 {children}
               </StyledBottomSheet>
-            </div>
+            </Container>
           </BottomSheetProvider>
         )}
       </AnimatePresence>
