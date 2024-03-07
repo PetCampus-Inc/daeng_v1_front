@@ -1,12 +1,13 @@
-import Title from "components/common/Title";
+import { ITEM_KEYS } from "constants/item";
+
+import ImageUpload from "components/common/ImageUpload";
 import InputField from "components/common/InputField";
-import SingleRadio from "components/common/Select/SingleRadio";
 import SearchInputField from "components/common/InputField/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
-import ImageUpload from "components/common/ImageUpload";
+import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
+import Title from "components/common/Title";
 
-import { ITEM_KEYS } from "constants/item";
 import { Card } from "../styles";
 interface DogInfoProps {
   item?: Map<number, boolean>;
@@ -66,11 +67,7 @@ const DogInfo = ({ item }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.ALLERGY_DISEASE)}>알러지 및 질병 유무</Title>
-        <TextArea
-          name="allergyDisease"
-          placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
-          readOnly
-        />
+        <TextArea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." readOnly />
       </Card>
     </>
   );

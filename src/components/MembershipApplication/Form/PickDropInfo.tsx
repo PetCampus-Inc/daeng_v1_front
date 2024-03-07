@@ -1,25 +1,29 @@
-import Title from "components/common/Title";
-import { Card, Stack } from "./styles";
-import SingleRadio from "components/common/Select/SingleRadio";
-import TextArea from "components/common/TextArea";
-import { useFormContext } from "react-hook-form";
-import { Caption } from "components/common/Select/styles";
-import type { IPickDropInfo } from "types/School.type";
 import { ITEM_KEYS } from "constants/item";
+
 import Checkbox from "components/common/Checkbox";
+import SingleRadio from "components/common/Select/SingleRadio";
+import { Caption } from "components/common/Select/styles";
+import TextArea from "components/common/TextArea";
+import Title from "components/common/Title";
 import { Label } from "components/common/Title/style";
+import { useFormContext } from "react-hook-form";
+
+import { Card, Stack } from "./styles";
+
+import type { IPickDropInfo } from "types/School.type";
+
 interface PickDropInfoProps {
   info: IPickDropInfo;
   requiredItems: Map<number, boolean>;
 }
 
 const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
-  const { watch } = useFormContext();
+  const { register, watch } = useFormContext();
   return (
     <>
       <Card>
         <Label>픽드랍 안내</Label>
-        <TextArea name="pickDropNoticeField" defaultValue={info.pickDropNotice} disabled />
+        <TextArea defaultValue={info.pickDropNotice} disabled />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_REQUEST)}>픽드랍 신청</Title>
@@ -42,20 +46,16 @@ const PickDropInfo = ({ info, requiredItems }: PickDropInfoProps) => {
           <Card>
             <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_MEMO)}>픽드랍 메모</Title>
             <TextArea
-              name="pickDropMemoField"
+              {...register("pickDropMemoField", {
+                required: requiredItems.get(ITEM_KEYS.PICKDROP_MEMO)
+              })}
               placeholder="픽드랍 장소, 시간에 대해 자세히 적어주세요."
-              isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_MEMO)}
             />
           </Card>
           <Card>
             <Title isRequired={requiredItems.get(ITEM_KEYS.PICKDROP_INFO)}>픽드랍 유의사항</Title>
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-            <TextArea
-              name="pickDropInfoField"
-              defaultValue={info.pickDropInfo}
-              isChecked={watch("pickDropInfo")}
-              disabled
-            />
+            <TextArea defaultValue={info.pickDropInfo} isChecked={watch("pickDropInfo")} disabled />
             <Stack>
               <Checkbox
                 name="pickDropInfo"
