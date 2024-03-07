@@ -1,55 +1,45 @@
-import BottomSheet from "..";
-import { ThemeConfig } from "styles/ThemeConfig";
-import { ButtonContainer, InnerContainer, TextContainer } from "./styles";
-import Text from "components/common/Text";
 import AlertIcon from "assets/svg/alert-icon";
-import Button from "components/common/Button";
 
-interface IAlertBottomSheet {
+import { TextContainer } from "./styles";
+import BottomSheet from "../index";
+
+import type { BottomSheetButtonProps } from "../BottomSheetButton";
+
+interface IAlertBottomSheet extends BottomSheetButtonProps {
   title: string;
-  content: string;
-  onClose: () => void; // 바텀시트 배경 클릭 시 닫기
-  grayButton?: string;
-  brownButton: string;
-  grayFuc?: () => void | Promise<void>;
-  brownFuc?: () => void | Promise<void>;
+  subtitle: string;
+  isOpen: boolean;
+  onClose: () => void;
+  hasControl?: boolean;
 }
 
 const AlertBottomSheet = ({
   title,
-  content,
+  subtitle,
   onClose,
-  grayButton,
-  brownButton,
-  grayFuc,
-  brownFuc
+  isOpen,
+  hasControl = false, // 바텀시트 상단 x 버튼
+  closeText,
+  actionText,
+  closeFn,
+  actionFn
 }: IAlertBottomSheet) => {
   return (
-    <BottomSheet onClose={onClose}>
-      <InnerContainer>
+    <BottomSheet isOpen={isOpen} onClose={onClose}>
+      <BottomSheet.Content>
+        {hasControl && <BottomSheet.Control />}
         <AlertIcon />
         <TextContainer>
-          <Text text={title} size="1.125rem" weight="700" />
-          <Text text={content} color={ThemeConfig.colors.gray_3} margintop="4px" />
+          <BottomSheet.Title>{title}</BottomSheet.Title>
+          <BottomSheet.Subtitle>{subtitle}</BottomSheet.Subtitle>
         </TextContainer>
-      </InnerContainer>
-      <ButtonContainer>
-        {grayButton && (
-          <Button
-            height="48px"
-            width="100%"
-            backcolor={ThemeConfig.colors.gray_4}
-            textcolor={ThemeConfig.colors.gray_2}
-            weight="400"
-            handleClick={onClose}
-          >
-            {grayButton}
-          </Button>
-        )}
-        <Button height="48px" width="100%" handleClick={brownFuc}>
-          {brownButton}
-        </Button>
-      </ButtonContainer>
+        <BottomSheet.Button
+          closeText={closeText}
+          closeFn={closeFn}
+          actionText={actionText}
+          actionFn={actionFn}
+        />
+      </BottomSheet.Content>
     </BottomSheet>
   );
 };
