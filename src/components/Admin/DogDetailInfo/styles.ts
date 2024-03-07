@@ -55,3 +55,13 @@ export const FlexWrapper = styled.div`
   flex-direction: column;
   gap: 12px;
 `;
+
+export const Circle = styled.div`
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.yellow_1};
+`;
