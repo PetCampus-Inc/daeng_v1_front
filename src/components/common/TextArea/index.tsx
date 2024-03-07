@@ -46,6 +46,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     return (
       <S.TextAreaInput
+        {...props}
         name={name}
         resizable={resizable}
         disabled={disabled}
@@ -53,7 +54,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         rows={rows}
         $isChecked={isChecked}
         ref={textAreaRef}
-        {...props}
       />
     );
   }
