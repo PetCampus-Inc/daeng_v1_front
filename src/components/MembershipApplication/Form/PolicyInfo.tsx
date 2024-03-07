@@ -1,13 +1,14 @@
+import { ITEM_KEYS } from "constants/item";
+
+import Checkbox from "components/common/Checkbox";
+import TextArea from "components/common/TextArea";
+import Title from "components/common/Title";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
-import Title from "components/common/Title";
-import TextArea from "components/common/TextArea";
-import Checkbox from "components/common/Checkbox";
-import { ITEM_KEYS } from "constants/item";
-import type { IPolicyInfo } from "types/School.type";
-
 import * as S from "./styles";
+
+import type { IPolicyInfo } from "types/School.type";
 
 interface PolicyInfoProps {
   info: IPolicyInfo;
@@ -53,12 +54,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
           이용 제한 유의 사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea
-          name="limitsInfoField"
-          defaultValue={info.limitsInfo}
-          isChecked={watchTerms[0]}
-          disabled
-        />
+        <TextArea defaultValue={info.limitsInfo} isChecked={watchTerms[0]} disabled />
         <S.Stack>
           <Checkbox
             name="limitsInfo"
@@ -75,12 +71,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
           상해 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea
-          name="accidentInfoField"
-          defaultValue={info.accidentInfo}
-          isChecked={watchTerms[1]}
-          disabled
-        />
+        <TextArea defaultValue={info.accidentInfo} isChecked={watchTerms[1]} disabled />
         <S.Stack>
           <Checkbox
             name="accidentInfo"
@@ -97,12 +88,7 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
           유기 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea
-          name="abandonmentInfoField"
-          defaultValue={info.abandonmentInfo}
-          isChecked={watchTerms[2]}
-          disabled
-        />
+        <TextArea defaultValue={info.abandonmentInfo} isChecked={watchTerms[2]} disabled />
         <S.Stack>
           <Checkbox
             name="abandonmentInfo"

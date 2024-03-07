@@ -1,15 +1,14 @@
-import { useFormContext } from "react-hook-form";
-
-import Title from "components/common/Title";
-import SingleRadio from "components/common/Select/SingleRadio";
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
 import { ITEM_KEYS } from "constants/item";
 import { PHONE_REGEX } from "constants/validCheck";
-import { formatPhoneNumber } from "utils/formatter";
 
-import { useEffect, useState } from "react";
+import InputField from "components/common/InputField";
+import SearchInputField from "components/common/InputField/SearchInputField";
 import Postcode from "components/common/Postcode";
+import SingleRadio from "components/common/Select/SingleRadio";
+import Title from "components/common/Title";
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { formatPhoneNumber } from "utils/formatter";
 
 import { Card } from "./styles";
 interface MemberInfoProps {
