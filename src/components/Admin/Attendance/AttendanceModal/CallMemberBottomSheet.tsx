@@ -1,18 +1,17 @@
 import BasicPhoneIcon from "assets/svg/phone-basic";
-import XIcon from "assets/svg/x-icon";
 import BottomSheet from "components/common/BottomSheet";
-import { CloseButton, ConfirmButton } from "styles/StyleModule";
-
-import { Container, SubTitle, Title, TitleWrapper } from "./styles";
+import { memo } from "react";
 
 import type { IMemberCallInfo } from "types/Attendance.type";
 
 interface CallMemberBottomSheetProps {
   info: IMemberCallInfo | null;
+  isOpen: boolean;
   close: () => void;
 }
 
-const CallMemberBottomSheet = ({ info, close }: CallMemberBottomSheetProps) => {
+const CallMemberBottomSheet = memo(({ info, isOpen, close }: CallMemberBottomSheetProps) => {
+  if (!isOpen) return null;
   if (!info) return null;
 
   const handleCallMember = (info: IMemberCallInfo) => {
@@ -21,20 +20,18 @@ const CallMemberBottomSheet = ({ info, close }: CallMemberBottomSheetProps) => {
     close();
   };
   return (
-    <BottomSheet onClose={() => close()}>
-      <CloseButton type="button" onClick={() => close()}>
-        <XIcon />
-      </CloseButton>
-      <Container>
-        <TitleWrapper>
+    <BottomSheet isOpen={isOpen} onClose={() => close()}>
+      <BottomSheet.Content>
+        <BottomSheet.Control />
+        <BottomSheet.Title>
           <BasicPhoneIcon />
-          <Title>{info.dogName} 견주</Title>
-        </TitleWrapper>
-        <SubTitle>{info.phoneNumber}</SubTitle>
-      </Container>
-      <ConfirmButton onClick={() => handleCallMember(info)}>전화 걸기</ConfirmButton>
+          <span>{info?.dogName} 견주</span>
+        </BottomSheet.Title>
+        <BottomSheet.Subtitle>{info?.phoneNumber}</BottomSheet.Subtitle>
+        <BottomSheet.Button actionText="전화 걸기" actionFn={() => handleCallMember(info)} />
+      </BottomSheet.Content>
     </BottomSheet>
   );
-};
+});
 
 export default CallMemberBottomSheet;
