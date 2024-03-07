@@ -1,12 +1,13 @@
-import { useFormContext, type FieldErrors } from "react-hook-form";
-import { useEnrollMutation } from "hooks/api/useEnrollMutation";
-import { useSetRecoilState } from "recoil";
-
+import { FIELD_TO_STEP } from "constants/step";
 import type { Dispatch, SetStateAction } from "react";
-import * as S from "./styles";
+
+import { useEnrollMutation } from "hooks/api/useEnrollMutation";
+import { useFormContext, type FieldErrors } from "react-hook-form";
+import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 import { EnrollmentFormTransformer } from "utils/formTransformer";
-import { FIELD_TO_STEP } from "constants/step";
+
+import * as S from "./styles";
 
 interface Props {
   setModal: Dispatch<SetStateAction<boolean>>;
