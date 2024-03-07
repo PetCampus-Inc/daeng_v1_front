@@ -2,20 +2,28 @@ import { PropsWithChildren } from "react";
 
 import { SubTitle, Title } from "./styles";
 
-interface TitleProps {
-  position?: "left" | "right" | "center";
+export interface TitleProps {
+  align?: "left" | "right" | "center";
+  variant?: "title" | "body";
 }
 
+type SubTitleProps = Pick<TitleProps, "align">;
+
 export const BottomSheetTitle = ({
-  position = "center",
+  align = "center",
+  variant = "title",
   children
 }: PropsWithChildren<TitleProps>) => {
-  return <Title className={`bottom-sheet-title ${position}`}>{children}</Title>;
+  return (
+    <Title className={`bottom-sheet-title ${align}`} variant={variant}>
+      {children}
+    </Title>
+  );
 };
 
 export const BottomSheetSubTitle = ({
-  position = "center",
+  align = "center",
   children
-}: PropsWithChildren<TitleProps>) => {
-  return <SubTitle className={`bottom-sheet-subtitle ${position}`}>{children}</SubTitle>;
+}: PropsWithChildren<SubTitleProps>) => {
+  return <SubTitle className={`bottom-sheet-subtitle ${align}`}>{children}</SubTitle>;
 };

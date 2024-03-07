@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+
+import type { TitleProps } from "./BottomSheetTitle";
 export { BackDrop } from "../Modal/styles";
 
 export const StyledBottomSheet = styled(motion.div)`
@@ -63,13 +65,17 @@ export const ButtonGroup = styled.div`
   margin-top: 32px;
 `;
 
-export const Title = styled.p`
+type TitleStyleProps = Pick<TitleProps, "variant">;
+
+export const Title = styled.p.withConfig({
+  shouldForwardProp: (prop) => !["variant"].includes(prop)
+})<TitleStyleProps>`
   display: flex;
   align-items: center;
   gap: 8px;
   margin-top: 8px;
 
-  ${({ theme }) => theme.typo.title2_20_B};
+  ${({ variant, theme }) => (variant === "title" ? theme.typo.title2_20_B : theme.typo.body1_18_B)};
   color: ${({ theme }) => theme.colors.darkBlack};
 
   &.bottom-sheet-title.left {
