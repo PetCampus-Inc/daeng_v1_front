@@ -16,13 +16,6 @@ const AttendancePage = () => {
   const isAttendMode = mode === "ATTENDANCE";
   const isDefaultMode = mode === "DEFAULT";
 
-  const { schoolId, adminId } = useRecoilValue(adminLoginInfoAtom).data;
-  const [mode, setMode] = useState<"DEFAULT" | "ATTENDANCE">("DEFAULT");
-  const [isFocus, setIsFocus] = useState<boolean>(false);
-
-  const isAttendMode = mode === "ATTENDANCE";
-  const isDefaultMode = mode === "DEFAULT";
-
   return (
     <>
       <Header type="notice" text="출석부" />
