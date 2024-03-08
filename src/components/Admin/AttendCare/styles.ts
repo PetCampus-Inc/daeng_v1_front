@@ -13,3 +13,8 @@ export const SubTitle = styled.h3`
 export const ListWrapper = styled.div`
   margin: 24px 0;
 `;
+
+export const DescTitle = styled.h2`
+  ${({ theme }) => theme.typo.body2_16_B};
+  color: ${({ theme }) => theme.colors.darkBlack};
+`;
