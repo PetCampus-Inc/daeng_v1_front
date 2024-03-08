@@ -1,15 +1,30 @@
-import styled from "styled-components";
+import styled, { type DefaultTheme, css } from "styled-components";
 
-export const StyledButton = styled.button`
+import type { TColorScheme } from ".";
+
+const colorSchemeStyles = (theme: DefaultTheme) => ({
+  primary: css`
+    background-color: ${theme.colors.br_4};
+    color: ${theme.colors.primaryColor};
+  `,
+  gray: css`
+    background-color: ${theme.colors.gray_4};
+    color: ${theme.colors.gray_2};
+  `
+});
+
+export const StyledButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !["colorScheme"].includes(prop)
+})<{ colorScheme: TColorScheme }>`
   display: flex;
   padding: 1px 12px;
   align-items: center;
   gap: 10px;
 
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.br_4};
-  color: ${({ theme }) => theme.colors.primaryColor};
   ${({ theme }) => theme.typo.label2_14_M};
+
+  ${({ theme, colorScheme }) => colorSchemeStyles(theme)[colorScheme]};
 `;
 
 export const StyledButtonAddon = styled.span`
