@@ -3,7 +3,7 @@ import { LIST } from "constants/option";
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import BottomSheet from "components/common/BottomSheet";
 import useBottomSheet from "hooks/common/useBottomSheet";
-import { type SetStateAction } from "react";
+import { memo, type SetStateAction } from "react";
 import { ConfirmButton } from "styles/StyleModule";
 
 import * as S from "./styles";
@@ -13,7 +13,7 @@ type SortSelectBoxProps = {
   setSortName: React.Dispatch<SetStateAction<string>>;
 };
 
-const SortSelectBox = ({ sortName, setSortName }: SortSelectBoxProps) => {
+const SortSelectBox = memo(({ sortName, setSortName }: SortSelectBoxProps) => {
   const { isVisible, open, close } = useBottomSheet(false);
 
   return (
@@ -58,7 +58,12 @@ const SortSelectBox = ({ sortName, setSortName }: SortSelectBoxProps) => {
           <ConfirmButton onClick={() => close()}>닫기</ConfirmButton>
         </BottomSheet.Content>
       </BottomSheet>
-      <S.SelectBox onClick={() => open()}>
+      <S.SelectBox
+        onClick={(event) => {
+          event.stopPropagation();
+          open();
+        }}
+      >
         <S.Text>{sortName}</S.Text>
         <S.ArrowDownButton type="button">
           <ArrowDownIcon />
@@ -66,6 +71,6 @@ const SortSelectBox = ({ sortName, setSortName }: SortSelectBoxProps) => {
       </S.SelectBox>
     </>
   );
-};
+});
 
 export default SortSelectBox;

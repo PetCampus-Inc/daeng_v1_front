@@ -6,7 +6,7 @@ import useBottomSheet from "hooks/common/useBottomSheet";
 import useFormatDate from "hooks/common/useFormatDate";
 import GetExpirationDate from "hooks/common/useGetExpirationDate";
 import useModal from "hooks/common/useModal";
-import { memo, useCallback, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 import { getOptions } from "utils/options";
@@ -32,17 +32,17 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
   const { role: adminRole } = useRecoilValue(adminLoginInfoAtom).data;
   const { isVisible: isBsOpen, open: bsOpen, close: bsClose } = useBottomSheet();
   const { isVisible: isModalOpen, open: modalOpen, close: modalClose } = useModal();
+  const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
   const { refetch: getPhoneNumber } = useCallMember(dogId);
   const { mutate } = useDeleteDog();
-  const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
 
   // FIXME: 실제 전화번호 앱 열리는 로직 추가 필요
-  const handleGetCallInfo = useCallback(async () => {
+  const handleGetCallInfo = async () => {
     const { data } = await getPhoneNumber();
     if (!data) return;
     setMemberInfo(data);
     bsOpen();
-  }, []);
+  };
 
   // FIXME: 실제 알림 전송 로직 추가 필요
   const handlerSendAlarm = async () => {
@@ -66,16 +66,16 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
     if (action) action();
   };
 
-  const OPTIONS = getOptions(rounds, isBeforeExpiry, adminRole)
-    .filter((option) => option.condition())
-    .map((option) => option.label);
+  const OPTIONS = useMemo(() => {
+    return getOptions(rounds, isBeforeExpiry, adminRole)
+      .filter((option) => option.condition())
+      .map((option) => option.label);
+  }, [rounds, isBeforeExpiry, adminRole]);
 
   return (
     <>
       <CallMemberBottomSheet info={memberInfo} isOpen={isBsOpen} close={bsClose} />
-      {isModalOpen && (
-        <DeleteDogModal isOpen={isModalOpen} close={modalClose} action={handleDeleteDog} />
-      )}
+      <DeleteDogModal isOpen={isModalOpen} close={modalClose} action={handleDeleteDog} />
       <S.CardContainer>
         <S.ImageWrapper className={isExpired ? "expired" : ""}>
           <S.Image
