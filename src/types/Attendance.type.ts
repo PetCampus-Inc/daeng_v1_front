@@ -9,11 +9,6 @@ export interface IAttendSearchInfo {
 
 export type IAttendDogsInfo = IAttendDogLists[];
 
-export interface IAttendCareDogInfo {
-  data: IAttendCareDog[];
-  status: number;
-}
-
 export interface IAdminLoginResponse {
   data: {
     adminId: number;
@@ -46,8 +41,9 @@ export interface IAttendCareDog {
   attendanceId: number;
   dogId: number;
   dogName: string;
-  status: string;
-  adminName: string;
+  adminName: string | null;
+  lastPhotoTime: string | null;
+  agendaWriting: "COMPLETE" | "NOT_YET" | "WRITING";
 }
 
 export interface IMemberCallInfo {
