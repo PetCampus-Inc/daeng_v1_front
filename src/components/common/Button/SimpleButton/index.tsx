@@ -3,25 +3,30 @@ import type { ButtonHTMLAttributes, PropsWithChildren, ReactElement } from "reac
 import ButtonAddon from "./ButtonAddon";
 import { StyledButton } from "./styles";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftAddon?: ReactElement;
   rightAddon?: ReactElement;
+  colorScheme?: TColorScheme;
 }
+
+export type TColorScheme = "primary" | "gray";
 
 const SimpleButton = ({
   children,
   leftAddon,
   rightAddon,
+  colorScheme = "primary",
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   const contentProps = {
     leftAddon,
     rightAddon,
+    colorScheme,
     children
   };
 
   return (
-    <StyledButton {...props}>
+    <StyledButton colorScheme={colorScheme} {...props}>
       <ButtonContent {...contentProps} />
     </StyledButton>
   );
