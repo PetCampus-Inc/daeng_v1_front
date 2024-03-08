@@ -1,6 +1,6 @@
 import AddIcon from "assets/svg/addIcon";
 import BottomSheet from "components/common/BottomSheet";
-import ButtonModal from "components/common/ButtonModal";
+import Modal from "components/common/ButtonModal";
 import EditableRadioGroup, {
   ExtendedFieldArrayWithId
 } from "components/common/Select/EditableRadioGroup";
@@ -63,33 +63,32 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
 
   return (
     <>
-      {isDeleteModalOpen && (
-        <ButtonModal
-          maintext="모두 삭제할 수 없어요"
-          subtext={`최소 1개 이상의 ${TICKET_TYPE} 옵션을 추가해 주세요`}
-          actionbutton="닫기"
-          actionfunc={() => setIsDeleteModalOpen(false)}
-        />
-      )}
-      {bottomSheet.isVisible && (
-        <BottomSheet isOpen={bottomSheet.isVisible} onClose={() => bottomSheet.close()}>
-          <BottomSheet.Content>
-            <BottomSheet.Control />
-            <TicketCounter
-              type={ticketType}
-              isDuplication={isDuplication}
-              initial={INIT_COUNTER}
-              counter={counter}
-              setCounter={setCounter}
-            />
-            <BottomSheet.Button
-              actionText="추가"
-              actionFn={handleAddRadio}
-              disabled={isDuplication}
-            />
-          </BottomSheet.Content>
-        </BottomSheet>
-      )}
+      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
+        <Modal.Content>
+          <Modal.Title
+            title="모두 삭제할 수 없어요"
+            subtitle={`최소 1개 이상의 ${TICKET_TYPE} 옵션을 추가해 주세요`}
+          />
+          <Modal.Button actionText="닫기" actionFn={() => setIsDeleteModalOpen(false)} />
+        </Modal.Content>
+      </Modal>
+      <BottomSheet isOpen={bottomSheet.isVisible} onClose={() => bottomSheet.close()}>
+        <BottomSheet.Content>
+          <BottomSheet.Control />
+          <TicketCounter
+            type={ticketType}
+            isDuplication={isDuplication}
+            initial={INIT_COUNTER}
+            counter={counter}
+            setCounter={setCounter}
+          />
+          <BottomSheet.Button
+            actionText="추가"
+            actionFn={handleAddRadio}
+            disabled={isDuplication}
+          />
+        </BottomSheet.Content>
+      </BottomSheet>
       <EditableRadioGroup
         control={control}
         suffix={TIMES}
