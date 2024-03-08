@@ -1,5 +1,6 @@
 import { AnimatePresence } from "framer-motion";
-import { PropsWithChildren, RefObject, memo, useCallback, useEffect, useRef } from "react";
+import { useClickOutSide } from "hooks/common/useClickOutSide";
+import { PropsWithChildren, RefObject, memo, useRef } from "react";
 
 import BottomSheetButton from "./BottomSheetButton";
 import BottomSheetContent from "./BottomSheetContent";
@@ -26,21 +27,11 @@ interface IBottomSheet
 const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBottomSheetProps>) => {
   const bottomSheetRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
-  const onClickOutSide = useCallback(
-    (e: MouseEvent): void => {
-      if (bottomSheetRef.current && !bottomSheetRef.current.contains(e.target as Node)) {
-        onClose();
-      }
-    },
-    [onClose]
-  );
-
-  useEffect(() => {
-    document.addEventListener("mouseup", onClickOutSide);
-    return () => {
-      document.removeEventListener("mouseup", onClickOutSide);
-    };
-  }, [onClickOutSide]);
+  useClickOutSide({
+    enabled: isOpen,
+    targetRef: bottomSheetRef,
+    onClickOutside: onClose
+  });
 
   const backdropVariants = {
     hidden: { opacity: 0 },
