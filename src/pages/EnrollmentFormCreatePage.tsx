@@ -1,17 +1,12 @@
-import { FormProvider, useForm } from "react-hook-form";
-import useStep from "hooks/common/useStep";
-
-import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
-import MemberInfo from "components/Admin/EnrollmentForm/CreateForm/MemberInfo";
-import DogInfo from "components/Admin/EnrollmentForm/CreateForm/DogInfo";
-import TicketInfo from "components/Admin/EnrollmentForm/CreateForm/TicketInfo";
-import PolicyInfo from "components/Admin/EnrollmentForm/CreateForm/PolicyInfo";
-import PickDropInfo from "components/Admin/EnrollmentForm/CreateForm/PickDropInfo";
-import Navigation from "components/Admin/EnrollmentForm/Stepper/Navigation";
-import Header from "components/common/Header";
-
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
 
+import DogInfo from "components/Admin/EnrollmentForm/CreateForm/DogInfo";
+import MemberInfo from "components/Admin/EnrollmentForm/CreateForm/MemberInfo";
+import PickDropInfo from "components/Admin/EnrollmentForm/CreateForm/PickDropInfo";
+import PolicyInfo from "components/Admin/EnrollmentForm/CreateForm/PolicyInfo";
+import TicketInfo from "components/Admin/EnrollmentForm/CreateForm/TicketInfo";
+import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
+import Navigation from "components/Admin/EnrollmentForm/Stepper/Navigation";
 import {
   Container,
   TopWrapper,
@@ -23,6 +18,9 @@ import {
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
+import Header from "components/common/Header";
+import useStep from "hooks/common/useStep";
+import { FormProvider, useForm } from "react-hook-form";
 import { ContentContainer } from "styles/StyleModule";
 
 const EnrollmentFormCreatePage = () => {
@@ -42,7 +40,7 @@ const EnrollmentFormCreatePage = () => {
 
   return (
     <>
-      <Header type="text" text="가입신청서 수정" />
+      <Header type="text" text="가입신청서" />
       <ContentContainer>
         <Container>
           <TopWrapper>

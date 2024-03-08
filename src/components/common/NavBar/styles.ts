@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Container = styled.div`
   position: fixed;
@@ -14,7 +14,7 @@ export const Container = styled.div`
   padding: 8px 0 15px;
 
   box-shadow: ${({ theme }) => theme.shadows.bottomTab};
-  z-index: 9;
+  z-index: 5;
 `;
 
 export const NavButton = styled(Link)`
