@@ -47,12 +47,10 @@ const BaseButton = styled.button`
 export const ActionButton = styled(BaseButton)`
   background-color: ${({ theme }) => theme.colors.primaryColor};
   color: ${({ theme }) => theme.colors.white};
-
   ${({ theme }) => theme.typo.label1_16_B};
 `;
 
 export const CloseButton = styled(BaseButton)`
-  border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.gray_4};
   color: ${({ theme }) => theme.colors.gray_2};
 

@@ -1,17 +1,25 @@
 import { useContext, type ButtonHTMLAttributes } from "react";
 
 import { ModalContext } from "./provider";
-import { ButtonGroup, CloseButton } from "./styles";
-import { ActionButton } from "../BottomSheet/styles";
+import { ActionButton, ButtonGroup, CloseButton } from "./styles";
 
+export type TColorScheme = "primary" | "red";
 export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   actionText: string;
   closeText?: string;
   actionFn: () => void | Promise<void>;
   closeFn?: () => void | Promise<void>;
+  colorScheme?: TColorScheme;
 }
 
-const ModalButton = ({ closeText, actionText, closeFn, actionFn, ...props }: ModalButtonProps) => {
+const ModalButton = ({
+  closeText,
+  actionText,
+  closeFn,
+  actionFn,
+  colorScheme = "primary",
+  ...props
+}: ModalButtonProps) => {
   const modalContext = useContext(ModalContext);
   if (!modalContext) throw new Error("ModalButton must be rendered within a Modal");
 
@@ -24,7 +32,7 @@ const ModalButton = ({ closeText, actionText, closeFn, actionFn, ...props }: Mod
           {closeText}
         </CloseButton>
       )}
-      <ActionButton onClick={actionFn} {...props}>
+      <ActionButton colorScheme={colorScheme} onClick={actionFn} {...props}>
         {actionText}
       </ActionButton>
     </ButtonGroup>
