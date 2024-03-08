@@ -117,3 +117,8 @@ export const SubTitle = styled.p`
     justify-content: center;
   }
 `;
+
+export const CallSubtitle = styled(SubTitle)`
+  margin-top: 8px;
+  justify-content: center;
+`;
