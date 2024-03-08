@@ -14,10 +14,10 @@ export const useClickOutSide = ({ targetRef, onClickOutside, enabled }: UseClick
       }
     };
 
-    document.addEventListener("mouseup", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener("mouseup", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [targetRef, enabled]);
 };
