@@ -69,15 +69,6 @@ export const Info = styled.span<{ $isBeforeExpiry: boolean }>`
     $isBeforeExpiry ? theme.colors.gray_2 : theme.colors.primaryColor};
 `;
 
-export const MoreButton = styled.button`
-  position: absolute;
-  right: 6px;
-  top: 3px;
-  border-radius: 50%;
-
-  color: ${({ theme }) => theme.colors.gray_2};
-`;
-
 export const StyledBlur = styled.div<{ display: string }>`
   position: absolute;
   top: 0;
@@ -88,39 +79,6 @@ export const StyledBlur = styled.div<{ display: string }>`
   z-index: 1;
   pointer-events: none;
   display: ${(props) => props.display};
-`;
-
-export const StyledOptionList = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "isOpen"
-})<{
-  isOpen: boolean;
-}>`
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-  min-width: 163px;
-  position: absolute;
-  background-color: white;
-  border: solid 1px ${(props) => props.theme.colors.gray_4};
-  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.13);
-  border-radius: 0.4rem;
-  right: -8px;
-  top: 20px;
-  z-index: 10;
-`;
-
-export const StyledButtonWrapper = styled.div<{ height?: string }>`
-  padding: 8px 12px;
-  border-bottom: 1px solid ${(props) => props.theme.colors.gray_4};
-  &:last-child {
-    border: none;
-  }
-`;
-
-export const Item = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  ${({ theme }) => theme.typo.label2_14_R};
-  color: ${({ theme }) => theme.colors.gray_2};
 `;
 
 export const Stack = styled.div`
