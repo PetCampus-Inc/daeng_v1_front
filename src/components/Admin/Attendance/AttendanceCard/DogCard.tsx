@@ -1,14 +1,12 @@
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
-import MoreIcon from "assets/svg/more-icon";
 import { useCallMember } from "hooks/api/useCallMemberQuery";
 import { useDeleteDog } from "hooks/api/useDeleteDogMutation";
 import useBottomSheet from "hooks/common/useBottomSheet";
-import useDropdown from "hooks/common/useDropdown";
 import useFormatDate from "hooks/common/useFormatDate";
 import GetExpirationDate from "hooks/common/useGetExpirationDate";
 import useModal from "hooks/common/useModal";
-import { memo, useState } from "react";
+import { memo, useCallback, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 import { getOptions } from "utils/options";
@@ -29,7 +27,6 @@ interface DogCardProps {
 }
 
 const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
-  const dropdown = useDropdown(dogId);
   const monthlyTicketDate = useFormatDate(monthly || []);
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthly || []);
   const { role: adminRole } = useRecoilValue(adminLoginInfoAtom).data;
@@ -40,12 +37,12 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
   const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
 
   // FIXME: 실제 전화번호 앱 열리는 로직 추가 필요
-  const handleGetCallInfo = async () => {
+  const handleGetCallInfo = useCallback(async () => {
     const { data } = await getPhoneNumber();
     if (!data) return;
     setMemberInfo(data);
     bsOpen();
-  };
+  }, []);
 
   // FIXME: 실제 알림 전송 로직 추가 필요
   const handlerSendAlarm = async () => {
@@ -67,7 +64,6 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
   const handleOptionClick = (option: string) => {
     const action = actionHandlers[option];
     if (action) action();
-    dropdown.toggle();
   };
 
   const OPTIONS = getOptions(rounds, isBeforeExpiry, adminRole)
@@ -102,24 +98,9 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
             </span>
           </S.Info>
         </S.InfoWrapper>
-        <S.MoreButton
-          type="button"
-          className="more-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            dropdown.toggle();
-          }}
-        >
-          {dropdown.isOpen && adminRole && (
-            <AttendanceOptionList
-              isOptionsOpen={dropdown.isOpen}
-              options={OPTIONS}
-              handleOptionClick={handleOptionClick}
-              modalRef={dropdown.ref}
-            />
-          )}
-          <MoreIcon />
-        </S.MoreButton>
+        {adminRole && (
+          <AttendanceOptionList options={OPTIONS} handleOptionClick={handleOptionClick} />
+        )}
       </S.CardContainer>
     </>
   );
