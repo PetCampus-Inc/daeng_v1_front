@@ -1,44 +1,68 @@
-import Portal from "../Modal/portal";
-import * as S from "./styles";
+import { AnimatePresence } from "framer-motion";
+import { PropsWithChildren, memo } from "react";
 
-interface Props {
-  children?: React.ReactNode;
-  maintext: string;
-  subtext: string;
-  closebutton?: string;
-  actionbutton?: string;
-  closefunc?: () => void | Promise<void>;
-  actionfunc?: () => void | Promise<void>;
+import ModalButton from "./ModalButton";
+import ModalContent from "./ModalContent";
+import ModalTitle from "./ModalTitle";
+import { ModalProvider } from "./provider";
+import { BackDrop, StyledModal } from "./styles";
+import Portal from "../Portal";
+
+interface ModalProps {
   isOpen?: boolean;
+  onClose: () => void;
 }
 
-const ButtonModal = ({
-  children,
-  maintext,
-  subtext,
-  closebutton,
-  actionbutton,
-  closefunc,
-  actionfunc,
-  isOpen = false
-}: Props) => {
+interface IModal extends React.MemoExoticComponent<React.FC<PropsWithChildren<ModalProps>>> {
+  Content: typeof ModalContent;
+  Button: typeof ModalButton;
+  Title: typeof ModalTitle;
+}
+
+const BaseButtonModal = ({ children, isOpen = false, onClose }: PropsWithChildren<ModalProps>) => {
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
+  };
+
+  const modalVariants = {
+    initial: { y: "-50%", x: "-50%", opacity: 0.5 },
+    hidden: { y: "-50%", x: "-50%", opacity: 0 },
+    visible: { y: "-60%", x: "-50%", opacity: 1 }
+  };
+
   return (
     <Portal>
-      <S.BackDrop isOpen={isOpen}>
-        <S.MainWrapper>
-          {children}
-          <S.TextWrapper>
-            <S.MainText>{maintext}</S.MainText>
-            <S.SubText>{subtext}</S.SubText>
-          </S.TextWrapper>
-          <S.ButtonWrapper>
-            {closebutton && <S.CloseButton onClick={closefunc}>{closebutton}</S.CloseButton>}
-            {actionbutton && <S.ActButton onClick={actionfunc}>{actionbutton}</S.ActButton>}
-          </S.ButtonWrapper>
-        </S.MainWrapper>
-      </S.BackDrop>
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <ModalProvider onClose={onClose}>
+            <BackDrop
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={backdropVariants}
+              transition={{ duration: 0.2 }}
+            />
+            <StyledModal
+              initial="initial"
+              animate="visible"
+              exit="hidden"
+              variants={modalVariants}
+              transition={{ duration: 0.2 }}
+            >
+              {children}
+            </StyledModal>
+          </ModalProvider>
+        )}
+      </AnimatePresence>
     </Portal>
   );
 };
 
-export default ButtonModal;
+const Modal = memo(BaseButtonModal) as IModal;
+
+Modal.Content = ModalContent;
+Modal.Title = ModalTitle;
+Modal.Button = ModalButton;
+
+export default Modal;
