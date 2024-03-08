@@ -1,8 +1,8 @@
 import { useRecoilState } from "recoil";
 import { attendCareDogListAtom } from "store/admin";
 
-import AddDogAvatar from "./AddCareDog/AddDogAvatar";
-import AddDogList from "./AddCareDog/AddDogList";
+import AddDogAvatar from "./CareList/AddDogAvatar";
+import AddDogList from "./CareList/AddDogList";
 import { ListWrapper, SubTitle, Title } from "./styles";
 
 const data = [

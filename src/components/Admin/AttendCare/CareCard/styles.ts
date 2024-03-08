@@ -57,8 +57,9 @@ export const CheckboxWrapper = styled.div`
 `;
 
 export const CardContainer = styled.div`
+  position: relative;
   display: flex;
-  padding: 23px 5px 16px 5px;
+  padding: 23px 5px 16px;
   flex-direction: column;
   align-items: center;
   gap: 5px;
@@ -68,4 +69,11 @@ export const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 
   box-shadow: ${({ theme }) => theme.shadows.card};
+`;
+
+export const CardCheckboxWrapper = styled.div`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 4px;
 `;
