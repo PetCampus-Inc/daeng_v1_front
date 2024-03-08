@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import styled, { DefaultTheme, css } from "styled-components";
 
+import type { TColorScheme } from "./ModalButton";
 import type { ModalButtonVariant } from "./type";
+
 export { Container, BackDrop } from "styles/StyleModule";
 
 export const StyledModal = styled(motion.div)`
@@ -24,8 +26,8 @@ export const StyledContent = styled.div.withConfig({
 `;
 
 const Text = styled.p`
-  align-items: center;
-  text-wrap: balance;
+  text-align: center;
+  text-wrap: pretty;
   word-break: keep-all;
 `;
 
@@ -37,7 +39,7 @@ export const MainText = styled(Text)`
 export const SubText = styled(Text)`
   ${({ theme }) => theme.typo.body2_16_R};
   color: ${({ theme }) => theme.colors.gray_2};
-  padding: 0 10px;
+  padding: 0 7px;
 `;
 
 export const TextWrapper = styled.div`
@@ -55,7 +57,7 @@ export const ButtonGroup = styled.div`
   gap: 8px;
 `;
 
-const Button = styled.button`
+const BaseButton = styled.button`
   display: flex;
   width: 100%;
   padding: 11px;
@@ -67,12 +69,26 @@ const Button = styled.button`
   ${({ theme }) => theme.typo.label1_16_B};
 `;
 
-export const CloseButton = styled(Button)`
+export const CloseButton = styled(BaseButton)`
   background-color: ${({ theme }) => theme.colors.gray_4};
   color: ${({ theme }) => theme.colors.gray_2};
 `;
 
-export const ActButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.primaryColor};
-  color: ${({ theme }) => theme.colors.white};
+const colorSchemeStyles = (theme: DefaultTheme) => ({
+  primary: css`
+    background-color: ${theme.colors.primaryColor};
+    color: ${theme.colors.white};
+  `,
+  red: css`
+    background-color: ${theme.colors.red_1};
+    color: ${theme.colors.white};
+  `
+});
+
+export const ActionButton = styled(BaseButton).withConfig({
+  shouldForwardProp: (prop) => !["colorScheme"].includes(prop)
+})<{ colorScheme: TColorScheme }>`
+  ${({ theme }) => theme.typo.label1_16_B};
+
+  ${({ theme, colorScheme }) => colorSchemeStyles(theme)[colorScheme]};
 `;
