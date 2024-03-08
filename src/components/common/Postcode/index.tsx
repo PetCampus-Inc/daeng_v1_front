@@ -1,11 +1,12 @@
+import type { Dispatch, SetStateAction } from "react";
+
+import Portal from "components/common/Portal";
 import DaumPostcode, { Address } from "react-daum-postcode";
-import Portal from "components/common/Modal/portal";
+
+import { Container } from "./styles";
 import Header from "../Header";
 
 import type { FieldValues, UseFormSetValue } from "react-hook-form";
-import type { Dispatch, SetStateAction } from "react";
-
-import { Container } from "./styles";
 
 interface PostcodeProps {
   field: string;

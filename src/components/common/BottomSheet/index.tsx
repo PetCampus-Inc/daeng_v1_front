@@ -8,7 +8,7 @@ import BottomSheetControl from "./BottomSheetControl";
 import { BottomSheetSubTitle, BottomSheetTitle } from "./BottomSheetTitle";
 import { BottomSheetProvider } from "./provider";
 import { StyledBottomSheet, BackDrop, Container } from "./styles";
-import Portal from "../Modal/portal";
+import Portal from "../Portal";
 
 interface IBottomSheetProps {
   isOpen: boolean;

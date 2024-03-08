@@ -1,12 +1,8 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+export { Container, BackDrop } from "styles/StyleModule";
 
 import type { TitleProps } from "./BottomSheetTitle";
-export { BackDrop } from "../Modal/styles";
-
-export const Container = styled.div`
-  position: relative;
-`;
 
 export const StyledBottomSheet = styled(motion.div)`
   position: fixed;
