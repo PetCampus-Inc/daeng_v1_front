@@ -1,17 +1,21 @@
-import { PATH } from "constants/path";
-
+import AttendCare from "components/Admin/AttendCare";
+import AttendCareInit from "components/Admin/AttendCare/AttendCareInit";
 import Header from "components/common/Header";
-import { useNavigate } from "react-router-dom";
+import NavBar from "components/common/NavBar";
+import { PageContainer } from "styles/StyleModule";
 
-const AttendCarePage = () => {
-  const navigate = useNavigate();
+type AttendCarePageProps = { type: "main" | "init" };
+
+const AttendCarePage = ({ type }: AttendCarePageProps) => {
+  const isFirstEntry = type === "init";
+
   return (
     <>
-      <Header
-        type="text"
-        text="오늘 관리할 강아지"
-        handleClick={() => navigate(PATH.ADMIN_ATTENDANCE)}
-      />
+      <Header type="notice" text="강아지 관리" />
+      <PageContainer $paddingTop="32px" style={{ paddingBottom: "78px" }}>
+        {isFirstEntry ? <AttendCareInit /> : <AttendCare />}
+      </PageContainer>
+      <NavBar />
     </>
   );
 };
