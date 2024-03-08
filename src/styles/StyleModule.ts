@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled, { css, keyframes } from "styled-components";
 
 // CSS 속성중 자주쓰이는 조합들 모아놓은것
@@ -78,4 +79,23 @@ export const ConfirmButton = styled.button`
   color: ${({ theme }) => theme.colors.white};
 
   ${({ theme }) => theme.typo.label1_16_B};
+`;
+
+export const Container = styled.div`
+  position: relative;
+`;
+
+export const BackDrop = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9;
 `;
