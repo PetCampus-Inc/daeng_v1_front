@@ -1,20 +1,21 @@
+import { format } from "date-fns";
 import customAxios from "libs/CustomAxios";
 import {
-  IAttendCareDogInfo,
+  IAttendCareDog,
   IAttendCareInfo,
   IAttendDogLists,
   IAttendDogsInfo,
   IAttendInfo,
   IAttendanceInfo,
-  IDogDetails,
-  IMemberCallInfo
+  IMemberCallInfo,
+  IPrecautionInfo,
+  ITicketDetail
 } from "types/Attendance.type";
 import { IResponse } from "types/Response.type";
 
 export const handleGetDogs = async (schoolId: number): Promise<IAttendanceInfo> => {
   const url = `admin/attendance?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
-  return data.data;
   return data.data;
 };
 
@@ -24,7 +25,6 @@ export const handleGetSearchDogs = async (
 ): Promise<IAttendanceInfo> => {
   const url = `admin/attendance/dog/search?schoolId=${schoolId}&searchText=${searchText}`;
   const { data } = await customAxios.get(url);
-  return data.data;
   return data.data;
 };
 
@@ -48,20 +48,17 @@ export const handleSortDate = async (schoolId: number): Promise<IAttendanceInfo>
   const url = `admin/attendance/dog/sort/date?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data.data;
-  return data.data;
 };
 
 export const handleCallMember = async (dogId: number): Promise<IMemberCallInfo> => {
   const url = `admin/attendance/callowner/${dogId}`;
   const { data } = await customAxios.get(url);
   return data.data;
-  return data.data;
 };
 
 export const handleSendAlarm = async (dogId: number) => {
   const url = `admin/attendance/send/alarm/${dogId}`;
   const { data } = await customAxios.get(url);
-  return data.data;
   return data.data;
 };
 
@@ -93,10 +90,9 @@ export const handleGetAttendSearchDogs = async (
   const url = `admin/attendance/attend/search?schoolId=${schoolId}&searchText=${searchText}`;
   const { data } = await customAxios.get(url);
   return data.data;
-  return data.data;
 };
 
-export const handleGetAttendCareDogs = async (schoolId: number): Promise<IAttendCareDogInfo> => {
+export const handleGetAttendCareDogs = async (schoolId: number): Promise<IAttendCareDog[]> => {
   const url = `admin/attendance/attend/dog/care?schoolId=${schoolId}`;
   const { data } = await customAxios.get(url);
   return data;
@@ -111,8 +107,63 @@ export const handlePostAttendCareDogs = async (req: IAttendCareInfo): Promise<IR
   return data;
 };
 
-export const handleGetDogDetails = async (dogId: number, date: string): Promise<IDogDetails> => {
-  const url = `admin/attendance/dog/info?dogId=${dogId}&date=${date}`;
+// 강아지 상세 - 강아지 상세 정보
+export const handleGetDogAndMemberDetails = async (dogId: number): Promise<any> => {
+  const url = `admin/attendance/dog/info?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data;
+};
+
+// 강아지 상세 - 메모 수정
+export const handlePostDogMemo = async (dogId: number, memo: string): Promise<IResponse> => {
+  const url = `admin/attendance/dog/info/memo`;
+  const { data } = await customAxios.post(url, {
+    dogId,
+    memo
+  });
+  return data;
+};
+
+// 강아지 상세 - 등원 기록
+// FIXME: 백엔드 api 수정 완료 시 response any 타입 수정 필요
+export const handleGetAttendanceHistory = async (
+  dogId: number,
+  calendar?: string
+): Promise<any> => {
+  const url = `admin/attendance/dog/info/attendance`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      dogId,
+      calendar: calendar || format(new Date(), "yyyy-MM-dd")
+    }
+  });
+  return data.data;
+};
+
+// 강아지 상세 - 이용권 상세정보
+export const handleGetTicketDetail = async (dogId: number): Promise<ITicketDetail> => {
+  const url = `admin/attendance/dog/ticket?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
+// 연결 전
+export const handlePostTicket = async (req: any): Promise<any> => {
+  const url = `admin/attendance/dog/ticket`;
+  const { data } = await customAxios.post(url, {
+    dogId: req.dogId,
+    startDate: req.startDate,
+    ticketType: req.ticketType,
+    roundTicketNumber: req.roundTicketNumber,
+    monthlyTicketNumber: req.monthlyTicketNumber,
+    attendanceDays: req.attendanceDays
+  });
+  return data;
+};
+
+// 강아지 상세 - 유의사항
+export const handleGetPrecautions = async (dogId: number): Promise<IPrecautionInfo> => {
+  const url = `admin/attendance/dog/precautions?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
 };

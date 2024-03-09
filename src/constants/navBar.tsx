@@ -10,7 +10,7 @@ import School from "assets/svg/school";
 import MyPageDogBlack from "assets/svg/myPageDogBlack";
 import MyPageDog from "assets/svg/myPageDog";
 
-export const menuItems = [
+export const MENU_ITEMS = [
   {
     text: "출석부",
     path: PATH.ADMIN_ATTENDANCE,

@@ -86,14 +86,17 @@ export interface IPickDropInfo {
   pickDropInfo: string;
 }
 
-export interface IRequestEnrollment {
-  schoolFormId: number;
+export interface IMemberInfo {
   memberId: number;
   memberName: string;
   memberGender: string;
   address: string;
   phoneNumber: string;
   emergencyNumber: string;
+}
+
+export interface IRequestEnrollment extends IMemberInfo {
+  schoolFormId: number;
   dogName: string;
   dogGender: string;
   dogSize: string;

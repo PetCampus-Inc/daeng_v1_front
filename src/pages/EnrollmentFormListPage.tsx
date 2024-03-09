@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
+import { ThemeConfig } from "styles/ThemeConfig";
 import { INewEnrollmentList, ISimpleSchoolFormList } from "types/Admin.type";
 import showToast from "utils/showToast";
 
@@ -55,7 +56,7 @@ const EnrollmentFormListPage = () => {
         text="등록된 가입신청서"
         handleClick={() => navigate("/admin/schoolManage/enrollment")}
       />
-      <PageContainer $paddingTop="32px">
+      <PageContainer $padding="calc(5vh + 2rem) 1rem 0" color={ThemeConfig.colors.gray_5}>
         <TitleWithIcon
           title="가입신청서 목록"
           icon={
