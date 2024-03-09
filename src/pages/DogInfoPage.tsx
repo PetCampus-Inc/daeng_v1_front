@@ -70,6 +70,47 @@ const DogInfoPage = () => {
           {currentStep === 3 && <Notice data={data} />}
         </ContentWrapper>
       </PageContainer>
+      <Header
+        type="text"
+        text="뽀뽕의 상세 정보"
+        handleClick={() => navigate("/admin/attendance")}
+        rightElement={
+          <GalleryIcon
+            handleTouch={() => {
+              navigate("/gallery");
+            }}
+          />
+        }
+      />
+      <PageContainer color={ThemeConfig.colors.primaryColor} $padding="calc(5vh + 2rem) 0 0">
+        <nav>
+          <NavWrapper>
+            {currentSteps.map((item, index) => (
+              <NavItem
+                key={item}
+                className={index === currentStep ? "selected" : ""}
+                onClick={() => {
+                  setCurrentStep(index);
+                  if (searchParams.has("date")) {
+                    searchParams.delete("date");
+                    setSearchParams(searchParams);
+                  }
+                }}
+              >
+                {item}
+                {showNotice && index === 3 ? <Circle /> : null}
+                {index === currentStep ? <Underline layoutId="underline" /> : null}
+              </NavItem>
+            ))}
+          </NavWrapper>
+        </nav>
+        <ContentWrapper>
+          {currentStep === 0 && <DogInfo />}
+          {currentStep === 1 && <AttendanceRecord />}
+          {currentStep === 2 && <Ticket />}
+          {currentStep === 3 && <Notice data={data} />}
+        </ContentWrapper>
+      </PageContainer>
     </>
   );
 };
