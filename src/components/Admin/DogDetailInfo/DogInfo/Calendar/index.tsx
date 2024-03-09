@@ -1,8 +1,9 @@
-import * as S from "./styles";
-import { useState } from "react";
-import moment from "moment";
-import { useSearchParams } from "react-router-dom";
 import { format } from "date-fns";
+import moment from "moment";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
+import * as S from "./styles";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -45,7 +46,7 @@ const Calendar = () => {
         prev2Label={null}
         minDetail="year"
         tileContent={({ date, view }: { date: Date; view: string }) => {
-          let html = [];
+          const html = [];
           if (
             view === "month" &&
             date.getMonth() === today.getMonth() &&

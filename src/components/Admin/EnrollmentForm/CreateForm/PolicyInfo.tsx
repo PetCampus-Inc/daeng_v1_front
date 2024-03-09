@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 import { Card, Stack } from "../styles";
 
 const PolicyInfo = () => {
-  const { control } = useFormContext();
+  const { register, control } = useFormContext();
 
   return (
     <>

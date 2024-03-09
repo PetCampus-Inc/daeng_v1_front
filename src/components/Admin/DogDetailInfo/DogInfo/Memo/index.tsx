@@ -1,14 +1,14 @@
 import PencilIcon from "assets/svg/pencil-icon";
-import { InfoTop } from "../AboutDog/styles";
 import { TextAreaInput } from "components/common/TextArea/styles";
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { FormProvider, useForm } from "react-hook-form";
 import TextAreaModal from "components/common/TextAreaModal";
-import { DogDetailInfoText } from "../styles";
-import { FlexWrapper } from "../../styles";
 import { useSubmitMemoMutation } from "hooks/api/useSubmitMemoMutation";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import showToast from "utils/showToast";
+
+import { FlexWrapper } from "../../styles";
+import { InfoTop } from "../AboutDog/styles";
+import { DogDetailInfoText } from "../styles";
 
 interface MemoProps {
   memo: string;
@@ -59,22 +59,19 @@ const Memo = ({ memo, id, refetch }: MemoProps) => {
         readOnly
         value={methods.getValues("memoModal") ? methods.getValues("memoModal") : memo}
       />
-      <AnimatePresence>
-        {isOpen && (
-          <FormProvider {...methods}>
-            <TextAreaModal
-              actionbutton="저장"
-              closebutton="취소"
-              closefunc={() => setIsOpen(false)}
-              name="memoModal"
-              register={methods.register}
-              actionfunc={onSubmit}
-              defaultValue={memo}
-              placeholder="메모를 입력해주세요"
-            />
-          </FormProvider>
-        )}
-      </AnimatePresence>
+      <FormProvider {...methods}>
+        <TextAreaModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          actionText="저장"
+          closeText="취소"
+          name="memoModal"
+          register={methods.register}
+          actionFn={onSubmit}
+          defaultValue={memo}
+          placeholder="메모를 입력해주세요"
+        />
+      </FormProvider>
     </FlexWrapper>
   );
 };

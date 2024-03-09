@@ -1,14 +1,19 @@
-import Portal from "../Modal/portal";
-import TextArea from "../TextArea";
-import * as S from "../ButtonModal/styles";
 import { FieldValues, UseFormRegister } from "react-hook-form";
+
+import Modal from "../ButtonModal";
+import ModalContent from "../ButtonModal/ModalContent";
+import { ModalWithTextAreaContent } from "../ButtonModal/styles";
+import Portal from "../Portal";
+import TextArea from "../TextArea";
 
 interface Props {
   children?: React.ReactNode;
-  closebutton?: string;
-  actionbutton?: string;
-  closefunc?: () => void | Promise<void>;
-  actionfunc?: () => void | Promise<void>;
+  isOpen: boolean;
+  onClose: () => void;
+  closeText?: string;
+  actionText: string;
+  closeFn?: () => void | Promise<void>;
+  actionFn: () => void | Promise<void>;
   name: string;
   register: UseFormRegister<FieldValues>;
   defaultValue?: string;
@@ -16,35 +21,35 @@ interface Props {
 }
 
 const TextAreaModal = ({
-  children,
-  closebutton,
-  actionbutton,
-  closefunc,
-  actionfunc,
+  isOpen,
+  onClose,
+  closeText,
+  actionText,
+  closeFn,
+  actionFn,
   name,
   defaultValue,
-  placeholder
+  placeholder,
+  register
 }: Props) => {
   return (
-    <Portal>
-      <S.BackDrop>
-        <S.MainWrapper>
-          {children}
-          <TextArea
-            name={name}
-            autoResize={false}
-            defaultValue={defaultValue}
-            placeholder={placeholder}
-            style={{ height: "18vh", marginBottom: "20px", textAlign: "start" }}
-          />
-
-          <S.ButtonWrapper>
-            {closebutton && <S.CloseButton onClick={closefunc}>{closebutton}</S.CloseButton>}
-            {actionbutton && <S.ActButton onClick={actionfunc}>{actionbutton}</S.ActButton>}
-          </S.ButtonWrapper>
-        </S.MainWrapper>
-      </S.BackDrop>
-    </Portal>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalWithTextAreaContent>
+        <TextArea
+          {...register(name)}
+          rows={4}
+          autoResize={false}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+        />
+        <Modal.Button
+          closeText={closeText}
+          actionText={actionText}
+          closeFn={closeFn}
+          actionFn={actionFn}
+        />
+      </ModalWithTextAreaContent>
+    </Modal>
   );
 };
 

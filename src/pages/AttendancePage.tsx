@@ -16,7 +16,7 @@ const AttendancePage = () => {
   return (
     <>
       <Header type="notice" text="출석부" />
-      <PageContainer $paddingTop="32px" style={{ paddingBottom: "78px" }}>
+      <PageContainer $padding="32px 0 78px">
         <AttendanceTop mode={mode} setMode={setMode} isFocus={isFocus} />
         {isDefaultMode && <AttendanceMain isFocus={isFocus} setIsFocus={setIsFocus} />}
         {isAttendMode && <Attendance isFocus={isFocus} setIsFocus={setIsFocus} setMode={setMode} />}

@@ -12,7 +12,7 @@ const AttendCarePage = ({ type }: AttendCarePageProps) => {
   return (
     <>
       <Header type="notice" text="강아지 관리" />
-      <PageContainer $paddingTop="32px" style={{ paddingBottom: "78px" }}>
+      <PageContainer $padding="32px 0 78px">
         {isFirstEntry ? <AttendCareInit /> : <AttendCare />}
       </PageContainer>
       <NavBar />
