@@ -1,8 +1,9 @@
 import useGetTicketDetail from "hooks/api/useGetTicketDetail";
-import { DogDetailInfoText } from "../DogInfo/styles";
-import { FlexWrapper, InnerContainer } from "../styles";
+
 import PastTicketCard from "./PastTicketCard";
 import TicketCard from "./TicketCard";
+import { DogDetailInfoText } from "../DogInfo/styles";
+import { FlexWrapper, InnerContainer } from "../styles";
 
 const Ticket = () => {
   const { data } = useGetTicketDetail(2); //FIXME: 나영이꺼 머지되면 dogId queryString으로 받아오기

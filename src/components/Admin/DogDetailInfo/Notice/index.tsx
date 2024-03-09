@@ -1,10 +1,12 @@
-import { InnerContainer } from "../styles";
-import { DogDetailInfoText } from "../DogInfo/styles";
-import SendAlermButton from "../Ticket/SendAlermButton";
-import * as S from "./styles";
-import { IPrecautionInfo } from "types/Attendance.type";
-import AlertSmallIcon from "assets/svg/alert-small-icon";
 import { DOG_NOTICE_LIST } from "constants/notice";
+
+import AlertSmallIcon from "assets/svg/alert-small-icon";
+import { IPrecautionInfo } from "types/Attendance.type";
+
+import * as S from "./styles";
+import { DogDetailInfoText } from "../DogInfo/styles";
+import { InnerContainer } from "../styles";
+import SendAlermButton from "../Ticket/SendAlermButton";
 
 interface NoticeProps {
   data: IPrecautionInfo;

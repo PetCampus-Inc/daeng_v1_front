@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+
 import type { IRequestAdminEnrollment } from "types/School.type";
 
 export const currentStepState = atom({

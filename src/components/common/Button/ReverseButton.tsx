@@ -1,4 +1,5 @@
 import { memo } from "react";
+
 import { StyledMainWrapper } from "./styles";
 
 interface Props {
@@ -34,7 +35,7 @@ const ReverseButton = ({
   margintop,
   children,
   classname,
-  display,
+  display
 }: Props) => {
   return (
     <StyledMainWrapper

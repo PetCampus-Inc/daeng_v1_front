@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
-import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
-import useDetectClose from "hooks/common/useDetectClose";
-import useGetBreed from "hooks/api/useGetBreed";
+import BreedDropDown from "components/common/Dropdown/BreedDropdown";
 import SearchInputField, {
   type SearchInputFieldProps
 } from "components/common/InputField/SearchInputField";
-import BreedDropDown from "components/common/Dropdown/BreedDropdown";
+import useGetBreed from "hooks/api/useGetBreed";
+import useDetectClose from "hooks/common/useDetectClose";
+import { useEffect, useRef } from "react";
+import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import showToast from "utils/showToast";
 
 interface IBreedInput extends SearchInputFieldProps {

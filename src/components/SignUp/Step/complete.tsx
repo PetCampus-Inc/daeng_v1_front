@@ -1,3 +1,11 @@
+import { DOGOWNER, TEACHER } from "constants/className";
+import { PATH } from "constants/path";
+
+import Button from "components/common/Button";
+import Text from "components/common/Text";
+import { Dispatch, SetStateAction } from "react";
+import { ThemeConfig } from "styles/ThemeConfig";
+
 import {
   Container,
   StyledBottomWrapper,
@@ -5,12 +13,6 @@ import {
   StyledLink,
   TextWrapper
 } from "./styles";
-import { Dispatch, SetStateAction } from "react";
-import Text from "components/common/Text";
-import Button from "components/common/Button";
-import { DOGOWNER, TEACHER } from "constants/className";
-import { ThemeConfig } from "styles/ThemeConfig";
-import { PATH } from "constants/path";
 
 interface Props {
   setCurrentMainStep: Dispatch<SetStateAction<number>>;
@@ -43,7 +45,11 @@ const Complete = ({ setCurrentMainStep, selectedSearchText, schoolName, classNam
           height="2rem"
         />
         {className === TEACHER && (
-          <Text text={"승인 완료시 알림으로 알려드릴게요"} size="1rem" color={ThemeConfig.colors.gray_3} />
+          <Text
+            text={"승인 완료시 알림으로 알려드릴게요"}
+            size="1rem"
+            color={ThemeConfig.colors.gray_3}
+          />
         )}
       </TextWrapper>
       <StyledBottomWrapper height={className === DOGOWNER ? "7%" : "9%"}>

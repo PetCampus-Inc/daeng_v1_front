@@ -1,11 +1,12 @@
-import * as S from "./styles";
 import BoyIcon from "assets/svg/boy-icon";
-import CalendarIcon from "assets/svg/calendar";
 import BreedIcon from "assets/svg/breed-icon";
+import CalendarIcon from "assets/svg/calendar";
 import Badge from "components/common/Badge";
-import { DogDetailInfoText } from "../styles";
-import { IDogAndMemberInfo } from "types/Attendance.type";
 import { differenceInMonths, format } from "date-fns";
+import { IDogAndMemberInfo } from "types/Attendance.type";
+
+import * as S from "./styles";
+import { DogDetailInfoText } from "../styles";
 
 interface AboutDogProps {
   data: Omit<IDogAndMemberInfo, "member">;

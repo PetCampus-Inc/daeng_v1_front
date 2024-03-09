@@ -1,4 +1,13 @@
+import { DOGOWNER } from "constants/className";
+
+import Button from "components/common/Button";
+import Header from "components/common/Header";
+import InputBox from "components/common/InputBox";
+import Text from "components/common/Text";
 import { memo, Dispatch, SetStateAction, ChangeEvent } from "react";
+import { ThemeConfig } from "styles/ThemeConfig";
+import { ISchoolInfo } from "types/School.type";
+
 import {
   Container,
   TextWrapper,
@@ -7,13 +16,6 @@ import {
   StyledSearchResultWrapper,
   StyledSearchResult
 } from "./styles";
-import Text from "components/common/Text";
-import Header from "components/common/Header";
-import InputBox from "components/common/InputBox";
-import Button from "components/common/Button";
-import { ISchoolInfo } from "types/School.type";
-import { DOGOWNER } from "constants/className";
-import { ThemeConfig } from "styles/ThemeConfig";
 
 interface Props {
   searchText: string;

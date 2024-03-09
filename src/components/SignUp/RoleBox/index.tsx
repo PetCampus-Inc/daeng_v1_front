@@ -1,11 +1,12 @@
-import { memo } from "react";
-import { StyledMainWrapper } from "./styles";
-import Text from "components/common/Text";
-import { ThemeConfig } from "styles/ThemeConfig";
-import TeacherIcon from "assets/svg/teacher-icon";
 import PrincipalIcon from "assets/svg/principal-icon";
-import TeacherSelectedIcon from "assets/svg/teacher-selected-icon";
 import PrincipalSelectedIcon from "assets/svg/principal-selected-icon";
+import TeacherIcon from "assets/svg/teacher-icon";
+import TeacherSelectedIcon from "assets/svg/teacher-selected-icon";
+import Text from "components/common/Text";
+import { memo } from "react";
+import { ThemeConfig } from "styles/ThemeConfig";
+
+import { StyledMainWrapper } from "./styles";
 
 interface Props {
   selected: boolean;
@@ -27,12 +28,7 @@ const RoleBox = ({ selected, Role, mainText, subText, handleClick }: Props) => {
       ) : (
         <PrincipalIcon />
       )}
-      <Text
-        size="1.3rem"
-        weight="bold"
-        text={mainText}
-        color={ThemeConfig.colors.darkBlack}
-      />
+      <Text size="1.3rem" weight="bold" text={mainText} color={ThemeConfig.colors.darkBlack} />
       <Text text={subText} color={ThemeConfig.colors.darkBlack} />
     </StyledMainWrapper>
   );

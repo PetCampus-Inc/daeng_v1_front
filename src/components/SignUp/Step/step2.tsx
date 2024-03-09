@@ -1,14 +1,16 @@
-import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
-import { Container, InputBoxWrapper, StyledBottomWrapper } from "./styles";
-import Header from "components/common/Header";
-import Text from "components/common/Text";
-import { TextWrapper } from "./styles";
-import InputBoxAndText from "components/SignIn/InputBoxAndText";
-import Button from "components/common/Button";
 import { DOGOWNER, PRINCIPAL, TEACHER } from "constants/className";
 import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
+
+import Button from "components/common/Button";
+import Header from "components/common/Header";
+import Text from "components/common/Text";
+import InputBoxAndText from "components/SignIn/InputBoxAndText";
+import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { formatPhoneNumber } from "utils/formatter";
+
+import { TextWrapper } from "./styles";
+import { Container, InputBoxWrapper, StyledBottomWrapper } from "./styles";
 
 interface Props {
   currentMainStep: number;

@@ -1,9 +1,10 @@
-import { FieldValues, UseFormSetValue } from "react-hook-form";
-import InputField from "../index";
-import type { InputFieldProps } from "../index";
-
 import SearchIcon from "assets/svg/search-icon";
+import { FieldValues, UseFormSetValue } from "react-hook-form";
+
 import * as S from "./styles";
+import InputField from "../index";
+
+import type { InputFieldProps } from "../index";
 
 export interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   onSearch?: (value: string) => void;

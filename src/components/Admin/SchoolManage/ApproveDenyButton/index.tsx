@@ -1,6 +1,7 @@
-import { ThemeConfig } from "styles/ThemeConfig";
-import * as S from "./styles";
 import { Dispatch, SetStateAction, useState } from "react";
+import { ThemeConfig } from "styles/ThemeConfig";
+
+import * as S from "./styles";
 
 interface IApproveDenyButton {
   setIsShow: Dispatch<SetStateAction<boolean>>;

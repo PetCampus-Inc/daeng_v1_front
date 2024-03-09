@@ -1,9 +1,11 @@
-import { memo, SetStateAction, useEffect, useState } from "react";
-import Button from "../Button";
-import { StyledWrapper, StyledButtonWrapper, StyledMainWrapper, StyledImage } from "./styles";
-import { ID_REGEX, REGISTRATION_REGEX } from "constants/validCheck";
-import { ThemeConfig } from "styles/ThemeConfig";
 import { ATTENDANCE } from "constants/className";
+import { ID_REGEX, REGISTRATION_REGEX } from "constants/validCheck";
+
+import { memo, SetStateAction, useEffect, useState } from "react";
+import { ThemeConfig } from "styles/ThemeConfig";
+
+import { StyledWrapper, StyledButtonWrapper, StyledMainWrapper, StyledImage } from "./styles";
+import Button from "../Button";
 
 interface Props {
   width: string;

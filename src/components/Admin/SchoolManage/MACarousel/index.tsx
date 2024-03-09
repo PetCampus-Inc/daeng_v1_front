@@ -1,9 +1,12 @@
 import Slider from "react-slick";
+
 import SimpleMembershipApplication from "../SimpleMembershipApplication";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRecoilValue } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
+
 import * as S from "./styles";
 
 const MACarousel = () => {

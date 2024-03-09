@@ -1,4 +1,5 @@
 import { getMapValue } from "utils/formatter";
+
 import type { IAdminEnrollment } from "types/School.type";
 
 class ServerToFormAdapter {

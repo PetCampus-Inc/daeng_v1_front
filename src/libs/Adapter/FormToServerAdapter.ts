@@ -1,6 +1,7 @@
 import { extractTicketValues, reverseMapValue } from "utils/formatter";
-import type { IRequestAdminEnrollment } from "types/School.type";
+
 import type { FieldValues } from "react-hook-form";
+import type { IRequestAdminEnrollment } from "types/School.type";
 
 export class FormToServerAdapter {
   private value: FieldValues;

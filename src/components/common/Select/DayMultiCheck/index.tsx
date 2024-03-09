@@ -1,8 +1,10 @@
-import * as S from "../styles";
-import { useFormContext } from "react-hook-form";
-import { ISelect } from "../select.type";
 import { WEEKDAYS } from "constants/date";
+
 import { ChangeEvent, useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+
+import { ISelect } from "../select.type";
+import * as S from "../styles";
 
 interface IDayMultiCheck
   extends ISelect,

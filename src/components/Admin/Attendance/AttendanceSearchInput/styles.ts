@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { SearchInputWrapper } from "components/common/InputField/SearchInputField/styles";
+import styled from "styled-components";
 
 export const SearchInput = styled.input`
   display: flex;

@@ -1,10 +1,10 @@
-import Header from "components/common/Header";
-import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import ListIcon from "assets/svg/list-icon";
 import MACarousel from "components/Admin/SchoolManage/MACarousel";
+import OwnerWaitingList from "components/Admin/SchoolManage/OwnerWaitingList";
+import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
+import Header from "components/common/Header";
 import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
-import OwnerWaitingList from "components/Admin/SchoolManage/OwnerWaitingList";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 const SchoolManageEnrollmentPage = () => {

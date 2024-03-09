@@ -1,5 +1,5 @@
 import PencilIcon from "assets/svg/pencil-icon";
-import { TextAreaInput } from "components/common/TextArea/styles";
+import TextArea from "components/common/TextArea";
 import TextAreaModal from "components/common/TextAreaModal";
 import { useSubmitMemoMutation } from "hooks/api/useSubmitMemoMutation";
 import { useState } from "react";
@@ -21,7 +21,7 @@ const Memo = ({ memo, id, refetch }: MemoProps) => {
   const mutatePostMemo = useSubmitMemoMutation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const onSubmit = methods.handleSubmit((data) => {
+  const onSubmit = methods.handleSubmit(() => {
     mutatePostMemo(
       { dogId: id, memo: methods.getValues("memoModal") },
       {
@@ -48,16 +48,14 @@ const Memo = ({ memo, id, refetch }: MemoProps) => {
           }}
         />
       </InfoTop>
-      {/* FIXME: 나영이 작업 머지되면 수정하기 */}
-      <TextAreaInput
-        $isChecked={false}
+      <TextArea
         resizable={false}
         placeholder="메모를 입력해주세요"
         onClick={() => {
           setIsOpen(true);
         }}
-        readOnly
         value={methods.getValues("memoModal") ? methods.getValues("memoModal") : memo}
+        readOnly
       />
       <FormProvider {...methods}>
         <TextAreaModal

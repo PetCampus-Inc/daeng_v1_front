@@ -1,5 +1,6 @@
 import React from "react";
 import { Control, useController, UseControllerProps } from "react-hook-form";
+
 import * as S from "./styles";
 
 export interface ToggleBadgeProps

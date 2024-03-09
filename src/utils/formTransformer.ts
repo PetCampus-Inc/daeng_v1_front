@@ -1,6 +1,8 @@
-import { formatDate, extractNumber } from "utils/formatter";
-import type { IRequestEnrollment, TPickDropRequest, TTicketType } from "types/School.type";
 import { ITEM_MAP, type ItemMapValue } from "constants/item";
+
+import { formatDate, extractNumber } from "utils/formatter";
+
+import type { IRequestEnrollment, TPickDropRequest, TTicketType } from "types/School.type";
 
 export class EnrollmentFormTransformer {
   private formData: any;

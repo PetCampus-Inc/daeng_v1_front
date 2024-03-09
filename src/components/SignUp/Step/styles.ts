@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Container = styled.div<{ padding_top?: string }>`
   width: 100%;
@@ -16,8 +16,7 @@ export const TextWrapper = styled.div<{
   display: flex;
   flex-direction: column;
   height: 10%;
-  margin-bottom: ${(props) =>
-    props.margin_bottom ? props.margin_bottom : "20%"};
+  margin-bottom: ${(props) => (props.margin_bottom ? props.margin_bottom : "20%")};
   padding-left: 5%;
   padding-right: 5%;
 `;
@@ -70,14 +69,10 @@ export const StyledSearchResult = styled.div<{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-top-right-radius: ${(props) =>
-    props.radius_top === "first" ? "8px" : undefined};
-  border-top-left-radius: ${(props) =>
-    props.radius_top === "first" ? "8px" : undefined};
-  border-bottom-left-radius: ${(props) =>
-    props.radius_bottom === "last" ? "8px" : undefined};
-  border-bottom-right-radius: ${(props) =>
-    props.radius_bottom === "last" ? "8px" : undefined};
+  border-top-right-radius: ${(props) => (props.radius_top === "first" ? "8px" : undefined)};
+  border-top-left-radius: ${(props) => (props.radius_top === "first" ? "8px" : undefined)};
+  border-bottom-left-radius: ${(props) => (props.radius_bottom === "last" ? "8px" : undefined)};
+  border-bottom-right-radius: ${(props) => (props.radius_bottom === "last" ? "8px" : undefined)};
 `;
 
 export const StyledLink = styled(Link)`

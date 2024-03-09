@@ -1,4 +1,5 @@
 import { ITicketDetail } from "types/Attendance.type";
+
 import * as S from "../PastTicketCard/styles";
 
 interface PastTicketProps {

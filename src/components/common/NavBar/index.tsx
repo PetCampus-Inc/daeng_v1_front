@@ -1,6 +1,8 @@
-import { memo } from "react";
-import usePathParams from "hooks/common/usePathParams";
 import { MENU_ITEMS } from "constants/navBar";
+
+import usePathParams from "hooks/common/usePathParams";
+import { memo } from "react";
+
 import * as S from "./styles";
 
 interface Props {

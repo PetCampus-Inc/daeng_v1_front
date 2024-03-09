@@ -1,6 +1,7 @@
 import { ITeacherInfo } from "types/Admin.type";
-import * as S from "../styles";
+
 import TeacherInfoWithDeleteBtn from "../../TeacherInfo/TeacherInfoWithDeleteBtn";
+import * as S from "../styles";
 
 interface EnrolledTeacherListProps {
   teacherList: ITeacherInfo[];

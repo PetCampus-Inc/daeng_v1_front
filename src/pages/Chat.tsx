@@ -1,5 +1,6 @@
-import NavBar from "components/common/NavBar";
 import { PATH } from "constants/path";
+
+import NavBar from "components/common/NavBar";
 
 const Chat = () => {
   return (

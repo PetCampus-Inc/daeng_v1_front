@@ -1,20 +1,12 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
-import { type AdaptedData, useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
-import useStep from "hooks/common/useStep";
-
-import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
-import MemberInfo from "components/Admin/EnrollmentForm/ReadForm/MemberInfo";
-import DogInfo from "components/Admin/EnrollmentForm/ReadForm/DogInfo";
-import TicketInfo from "components/Admin/EnrollmentForm/ReadForm/TicketInfo";
-import PolicyInfo from "components/Admin/EnrollmentForm/ReadForm/PolicyInfo";
-import PickDropInfo from "components/Admin/EnrollmentForm/ReadForm/PickDropInfo";
-import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
-
 import { PATH } from "constants/path";
 import { ADMIN_READ_FORM_STEP } from "constants/step";
 
+import DogInfo from "components/Admin/EnrollmentForm/ReadForm/DogInfo";
+import MemberInfo from "components/Admin/EnrollmentForm/ReadForm/MemberInfo";
+import PickDropInfo from "components/Admin/EnrollmentForm/ReadForm/PickDropInfo";
+import PolicyInfo from "components/Admin/EnrollmentForm/ReadForm/PolicyInfo";
+import TicketInfo from "components/Admin/EnrollmentForm/ReadForm/TicketInfo";
+import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
 import {
   Container,
   TopWrapper,
@@ -24,6 +16,12 @@ import {
   ContentWrapper,
   EditButton
 } from "components/Admin/EnrollmentForm/styles";
+import Header from "components/common/Header";
+import NavBar from "components/common/NavBar";
+import { type AdaptedData, useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
+import useStep from "hooks/common/useStep";
+import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import { ContentContainer } from "styles/StyleModule";
 
 const EnrollmentFormDetailPage = () => {

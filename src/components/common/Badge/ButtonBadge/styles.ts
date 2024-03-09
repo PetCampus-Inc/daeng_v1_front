@@ -1,6 +1,7 @@
-import styled, { DefaultTheme } from "styled-components";
-import { ButtonBadgeProps } from ".";
 import { motion } from "framer-motion";
+import styled, { DefaultTheme } from "styled-components";
+
+import { ButtonBadgeProps } from ".";
 
 const badgeStyles = (theme: DefaultTheme) => ({
   delete: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,

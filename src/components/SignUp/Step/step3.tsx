@@ -1,18 +1,15 @@
-import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
-import {
-  Container,
-  InputBoxWrapper,
-  StyledBottomWrapper,
-  TextWrapper,
-} from "./styles";
+import { TEACHER } from "constants/className";
+import { ID_REGEX, PW_REGEX } from "constants/validCheck";
+
+import Button from "components/common/Button";
 import Header from "components/common/Header";
 import Text from "components/common/Text";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import useShowPw from "hooks/common/useShowPw";
-import Button from "components/common/Button";
-import { TEACHER } from "constants/className";
-import { ID_REGEX, PW_REGEX } from "constants/validCheck";
+import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
+
+import { Container, InputBoxWrapper, StyledBottomWrapper, TextWrapper } from "./styles";
 
 interface Props {
   currentStep: number;
@@ -39,7 +36,7 @@ const Step3 = ({
   handlerGetCheckId,
   setConfirmedId,
   confirmedId,
-  handlerTeacherSignup,
+  handlerTeacherSignup
 }: Props) => {
   const [checkUserId, setCheckUserId] = useState(false);
   const [checkUserPw, setCheckUserPw] = useState("");
@@ -65,9 +62,7 @@ const Step3 = ({
       <TextWrapper margin_bottom="5%">
         <Text
           text={
-            className === TEACHER
-              ? "회원가입을 완료해 주세요"
-              : "아이디와 비밀번호를 입력해 주세요"
+            className === TEACHER ? "회원가입을 완료해 주세요" : "아이디와 비밀번호를 입력해 주세요"
           }
           size="1.4rem"
           weight="bold"
@@ -89,14 +84,13 @@ const Step3 = ({
                   setCheckUserId(true);
                   handlerGetCheckId();
                 }
-              : () => {}
+              : () => {
+                  // FIXME: 수정해!
+                  console.log("수정해!!");
+                }
           }
           errorText={
-            checkUserId
-              ? confirmedId
-                ? "사용 가능한 ID입니다."
-                : "이미 사용중인 ID입니다."
-              : ""
+            checkUserId ? (confirmedId ? "사용 가능한 ID입니다." : "이미 사용중인 ID입니다.") : ""
           }
         />
         <InputBoxAndText
@@ -139,10 +133,7 @@ const Step3 = ({
               text="가입 신청 시 승인 완료 전 까지 수정이 어려워요"
               color={ThemeConfig.colors.gray_3}
             />
-            <Text
-              text="잘못 입력한 내용이 없는지 확인해주세요"
-              color={ThemeConfig.colors.gray_3}
-            />
+            <Text text="잘못 입력한 내용이 없는지 확인해주세요" color={ThemeConfig.colors.gray_3} />
           </>
         )}
         <Button

@@ -1,19 +1,19 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { useEnrollQuery } from "hooks/api/useEnrollQuery";
-import useStep from "hooks/common/useStep";
-
-import Header from "components/common/Header";
-import MemberInfo from "./Form/MemberInfo";
-import DogInfo from "./Form/DogInfo";
-import PolicyInfo from "./Form/PolicyInfo";
-import PickDropInfo from "./Form/PickDropInfo";
-import TicketInfo from "./Form/TicketInfo";
-import Navigation from "./Stepper/Navigation";
-import Indicator from "./Stepper/Indicator";
 import { MEMBER_MA_STEP } from "constants/step";
 
-import * as S from "./styles";
+import Header from "components/common/Header";
+import { useEnrollQuery } from "hooks/api/useEnrollQuery";
+import useStep from "hooks/common/useStep";
+import { FormProvider, useForm } from "react-hook-form";
 import { ContentContainer } from "styles/StyleModule";
+
+import DogInfo from "./Form/DogInfo";
+import MemberInfo from "./Form/MemberInfo";
+import PickDropInfo from "./Form/PickDropInfo";
+import PolicyInfo from "./Form/PolicyInfo";
+import TicketInfo from "./Form/TicketInfo";
+import Indicator from "./Stepper/Indicator";
+import Navigation from "./Stepper/Navigation";
+import * as S from "./styles";
 
 const MembershipApplication = () => {
   const { enlistmentQuery } = useEnrollQuery({ memberId: "1", schoolId: "2" });

@@ -1,5 +1,6 @@
-import { Control, Controller, FieldArrayWithId } from "react-hook-form";
 import CloseIcon from "assets/svg/close-icon";
+import { Control, Controller, FieldArrayWithId } from "react-hook-form";
+
 import * as S from "../styles";
 
 export interface ExtendedFieldArrayWithId extends FieldArrayWithId {

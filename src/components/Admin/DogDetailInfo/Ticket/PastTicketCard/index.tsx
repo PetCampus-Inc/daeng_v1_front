@@ -1,6 +1,7 @@
 import { ITicketDetail } from "types/Attendance.type";
-import PastTicket from "../PastTicket";
+
 import * as S from "./styles";
+import PastTicket from "../PastTicket";
 
 interface PastTicketCardProps {
   data: ITicketDetail[];

@@ -1,10 +1,12 @@
+import { PRINCIPAL } from "constants/className";
+
 import useSignUp from "hooks/api/useSignUp";
 import { Dispatch, SetStateAction } from "react";
+
+import Complete from "../Step/complete";
 import Step2 from "../Step/step2";
 import Step3 from "../Step/step3";
 import Step4 from "../Step/step4";
-import Complete from "../Step/complete";
-import { PRINCIPAL } from "constants/className";
 
 interface Props {
   currentMainStep: number;

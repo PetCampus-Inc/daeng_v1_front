@@ -1,14 +1,14 @@
-import { useForm } from "react-hook-form";
-import { useFormMutation } from "hooks/api/useFormMutation";
+import { PATH } from "constants/path";
 
-import * as S from "./styles";
 import InputField from "components/common/InputField";
-
+import { useFormMutation } from "hooks/api/useFormMutation";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { enrollmentFormAtom } from "store/form";
 import { getCurrentDate } from "utils/date";
-import { useNavigate } from "react-router-dom";
-import { PATH } from "constants/path";
+
+import * as S from "./styles";
 
 const SubmitForm = () => {
   const { handleSubmit, register } = useForm();

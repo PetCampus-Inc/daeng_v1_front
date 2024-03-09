@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Outlet } from "react-router-dom";
-import Navbar from "components/common/NavBar";
 import Header from "components/common/Header";
+import Navbar from "components/common/NavBar";
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
 
 const App = () => {
   return (

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { ImageWrapper } from "../AttendanceCard/styles";
 export { Image } from "../AttendanceCard/styles";
 

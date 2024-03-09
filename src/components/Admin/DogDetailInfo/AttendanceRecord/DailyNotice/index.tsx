@@ -1,13 +1,14 @@
-import * as S from "./styles";
 import PoopHard from "assets/svg/poop-hard";
 import PoopHealthy from "assets/svg/poop-healty";
-import PoopWatery from "assets/svg/poop-watery";
-import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopNeedAttention from "assets/svg/poop-need-attention";
-import { DogDetailInfoText } from "../../DogInfo/styles";
-import { useSearchParams } from "react-router-dom";
+import PoopNotBrown from "assets/svg/poop-not-brown";
+import PoopWatery from "assets/svg/poop-watery";
 import { format, parseISO } from "date-fns";
 import useGetAttendanceHistory from "hooks/api/useGetAttendanceHistory";
+import { useSearchParams } from "react-router-dom";
+
+import * as S from "./styles";
+import { DogDetailInfoText } from "../../DogInfo/styles";
 
 const DailyNotice = () => {
   const [searchParams] = useSearchParams();

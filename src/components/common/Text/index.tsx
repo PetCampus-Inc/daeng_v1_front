@@ -1,4 +1,5 @@
 import { memo } from "react";
+
 import { StyledText } from "./styles";
 
 interface Props {
@@ -12,13 +13,7 @@ interface Props {
 
 const Text = ({ text, size, weight, color, height, margintop }: Props) => {
   return (
-    <StyledText
-      size={size}
-      weight={weight}
-      color={color}
-      height={height}
-      margintop={margintop}
-    >
+    <StyledText size={size} weight={weight} color={color} height={height} margintop={margintop}>
       {text}
     </StyledText>
   );

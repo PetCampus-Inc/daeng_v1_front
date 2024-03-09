@@ -1,15 +1,17 @@
-import { memo } from "react";
-import Teacher from "./Teacher";
-import Principal from "./Principal";
-import { Container, StyledBottomWrapper, StyledSelectRoleWrapper } from "../SignIn/styles";
-import RoleBox from "./RoleBox";
 import { RoleConstants } from "constants/index";
-import Header from "components/common/Header";
-import Button from "components/common/Button";
-import { Link } from "react-router-dom";
-import useSignUp from "hooks/api/useSignUp";
-import { ThemeConfig } from "styles/ThemeConfig";
 import { PATH } from "constants/path";
+
+import Button from "components/common/Button";
+import Header from "components/common/Header";
+import useSignUp from "hooks/api/useSignUp";
+import { memo } from "react";
+import { Link } from "react-router-dom";
+import { ThemeConfig } from "styles/ThemeConfig";
+
+import Principal from "./Principal";
+import RoleBox from "./RoleBox";
+import Teacher from "./Teacher";
+import { Container, StyledBottomWrapper, StyledSelectRoleWrapper } from "../SignIn/styles";
 
 const SingUp = () => {
   const { currentMainStep, setCurrentMainStep, selectedRole, setSelectedRole } = useSignUp();

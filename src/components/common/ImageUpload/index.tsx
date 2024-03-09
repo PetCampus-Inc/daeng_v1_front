@@ -1,11 +1,12 @@
-import { useRef, ChangeEvent, useState } from "react";
-import UploadIcon from "assets/svg/upload-icon";
 import CloseIcon from "assets/svg/close-icon";
-
-import * as S from "./styles";
-import ImageModal from "./ImageModal";
+import UploadIcon from "assets/svg/upload-icon";
+import { useRef, ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { imagePreviewAtom } from "store/form";
+
+import ImageModal from "./ImageModal";
+import * as S from "./styles";
+
 import type { ImageFile } from "store/form";
 
 interface ImageUploadProps {

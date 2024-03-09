@@ -1,11 +1,10 @@
-import { useRef } from "react";
-import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
-import useDetectClose from "hooks/common/useDetectClose";
-
+import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import StringDropdown from "components/common/Dropdown/StringDropdown";
 import InputField, { InputFieldProps } from "components/common/InputField";
+import useDetectClose from "hooks/common/useDetectClose";
+import { useRef } from "react";
+import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
-import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import { Container, InputWrapper, Button } from "./styles";
 
 interface ISelectNumber extends InputFieldProps {

@@ -1,7 +1,8 @@
+import { DOGOWNER } from "constants/className";
+
 import Complete from "components/SignUp/Step/complete";
 import Step1 from "components/SignUp/Step/step1";
 import Step2 from "components/SignUp/Step/step2";
-import { DOGOWNER } from "constants/className";
 import useSignUp from "hooks/api/useSignUp";
 import { Dispatch, SetStateAction, memo } from "react";
 
@@ -11,11 +12,7 @@ interface Props {
   className?: string;
 }
 
-const DogOwner = ({
-  currentMainStep,
-  setCurrentMainStep,
-  className,
-}: Props) => {
+const DogOwner = ({ currentMainStep, setCurrentMainStep, className }: Props) => {
   const {
     currentStep,
     setCurrentStep,
@@ -32,7 +29,7 @@ const DogOwner = ({
     userName,
     setUserName,
     userPhone,
-    setUserPhone,
+    setUserPhone
   } = useSignUp();
   return (
     <>

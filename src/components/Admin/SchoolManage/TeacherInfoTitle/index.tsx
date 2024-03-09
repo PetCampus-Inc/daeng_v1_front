@@ -1,7 +1,8 @@
 import ListIcon from "assets/svg/list-icon";
-import TitleWithIcon from "../TitleWithIcon";
 import ButtonBadge from "components/common/Badge/ButtonBadge";
+
 import * as S from "./styles";
+import TitleWithIcon from "../TitleWithIcon";
 
 interface TeacherInfoTitleProps {
   isEditable: boolean;

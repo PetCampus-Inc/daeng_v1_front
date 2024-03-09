@@ -1,12 +1,13 @@
 import NewSignUpIcon from "assets/svg/new-sign-up-icon";
-import * as S from "./styles";
 import TeacherManagementIcon from "assets/svg/teacher-management-icon";
-import { useEffect, useState } from "react";
 import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
 import showToast from "utils/showToast";
+
+import * as S from "./styles";
 
 const MenuCard = () => {
   const navigate = useNavigate();

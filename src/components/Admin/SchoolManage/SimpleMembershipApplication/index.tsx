@@ -1,10 +1,11 @@
-import * as S from "./styles";
+import BrownApplication from "assets/svg/brown-application";
 import RightArrow from "assets/svg/right-arrow";
 import YellowApplication from "assets/svg/yellow-application";
-import BrownApplication from "assets/svg/brown-application";
-import { ISimpleSchoolFormList } from "types/Admin.type";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ISimpleSchoolFormList } from "types/Admin.type";
+
+import * as S from "./styles";
 
 interface ISimpleMembershipApplicationProps {
   isUsed?: boolean;

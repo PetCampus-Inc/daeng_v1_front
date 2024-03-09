@@ -1,11 +1,12 @@
-import * as S from "./styles";
-import CalendarIcon from "assets/svg/calendar";
-import RemainCountIcon from "assets/svg/remain-count-icon";
-import SendAlermButton from "../SendAlermButton";
-import { ITicketDetail } from "types/Attendance.type";
-import CalendarExpireIcon from "assets/svg/calendar-expire";
-import { differenceInDays, isAfter, parseISO } from "date-fns";
 import AlertSmallIcon from "assets/svg/alert-small-icon";
+import CalendarIcon from "assets/svg/calendar";
+import CalendarExpireIcon from "assets/svg/calendar-expire";
+import RemainCountIcon from "assets/svg/remain-count-icon";
+import { differenceInDays, isAfter, parseISO } from "date-fns";
+import { ITicketDetail } from "types/Attendance.type";
+
+import * as S from "./styles";
+import SendAlermButton from "../SendAlermButton";
 
 interface TicketCardProps {
   data: Omit<ITicketDetail, "ticketHistory">;

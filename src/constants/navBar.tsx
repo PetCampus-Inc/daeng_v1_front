@@ -1,14 +1,15 @@
-import { PATH } from "./path";
-import AttendanceBlack from "assets/svg/attendanceBlack";
 import Attendance from "assets/svg/attendance";
-import CheckBoardBlack from "assets/svg/checkBoardBlack";
-import CheckBoard from "assets/svg/checkBoard";
-import ChatBlack from "assets/svg/chatBlack";
+import AttendanceBlack from "assets/svg/attendanceBlack";
 import Chat from "assets/svg/chat";
-import SchoolBlack from "assets/svg/schoolBlack";
-import School from "assets/svg/school";
-import MyPageDogBlack from "assets/svg/myPageDogBlack";
+import ChatBlack from "assets/svg/chatBlack";
+import CheckBoard from "assets/svg/checkBoard";
+import CheckBoardBlack from "assets/svg/checkBoardBlack";
 import MyPageDog from "assets/svg/myPageDog";
+import MyPageDogBlack from "assets/svg/myPageDogBlack";
+import School from "assets/svg/school";
+import SchoolBlack from "assets/svg/schoolBlack";
+
+import { PATH } from "./path";
 
 export const MENU_ITEMS = [
   {

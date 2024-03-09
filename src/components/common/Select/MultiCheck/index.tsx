@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import type { ISelect } from "../select.type";
+
 import * as S from "../styles";
+
+import type { ISelect } from "../select.type";
 
 interface IMulticheck extends ISelect, Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
   radiosText: string[];

@@ -1,4 +1,5 @@
 import { memo } from "react";
+
 import { StyledMainWrapper, StyledSubWrapper } from "./styles";
 
 interface Props {
@@ -13,9 +14,7 @@ const Board = ({ children, direction, cellSize }: Props) => {
       {item}
     </StyledSubWrapper>
   ));
-  return (
-    <StyledMainWrapper direction={direction}>{TableCellList}</StyledMainWrapper>
-  );
+  return <StyledMainWrapper direction={direction}>{TableCellList}</StyledMainWrapper>;
 };
 
 export default memo(Board);

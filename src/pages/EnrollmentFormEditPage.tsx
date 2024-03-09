@@ -1,22 +1,13 @@
-import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
-import useStep from "hooks/common/useStep";
-
-import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
-import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
-import MemberInfo from "components/Admin/EnrollmentForm/EditForm/MemberInfo";
-import DogInfo from "components/Admin/EnrollmentForm/EditForm/DogInfo";
-import TicketInfo from "components/Admin/EnrollmentForm/EditForm/TicketInfo";
-import PolicyInfo from "components/Admin/EnrollmentForm/EditForm/PolicyInfo";
-import PickDropInfo from "components/Admin/EnrollmentForm/EditForm/PickDropInfo";
-import SubmitButton from "components/Admin/EnrollmentForm/Stepper/SubmitButton";
-
 import { PATH } from "constants/path";
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
 
+import DogInfo from "components/Admin/EnrollmentForm/EditForm/DogInfo";
+import MemberInfo from "components/Admin/EnrollmentForm/EditForm/MemberInfo";
+import PickDropInfo from "components/Admin/EnrollmentForm/EditForm/PickDropInfo";
+import PolicyInfo from "components/Admin/EnrollmentForm/EditForm/PolicyInfo";
+import TicketInfo from "components/Admin/EnrollmentForm/EditForm/TicketInfo";
+import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
+import SubmitButton from "components/Admin/EnrollmentForm/Stepper/SubmitButton";
 import {
   Container,
   TopWrapper,
@@ -28,6 +19,13 @@ import {
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
+import Header from "components/common/Header";
+import NavBar from "components/common/NavBar";
+import { useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
+import useStep from "hooks/common/useStep";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { ContentContainer } from "styles/StyleModule";
 
 const EnrollmentFormEditPage = () => {

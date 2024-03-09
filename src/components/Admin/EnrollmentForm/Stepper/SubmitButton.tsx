@@ -1,15 +1,17 @@
+import { PATH } from "constants/path";
+import { FIELD_TO_STEP } from "constants/step";
 import type { Dispatch, SetStateAction } from "react";
+
+import { Adapter } from "libs/Adapter";
+import { FormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { currentStepState, enrollmentFormAtom } from "store/form";
-import { Adapter } from "libs/Adapter";
-import { FormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
-import { PATH } from "constants/path";
+
+import * as S from "./styles";
 
 import type { IRequestAdminEnrollment } from "types/School.type";
-import * as S from "./styles";
-import { FIELD_TO_STEP } from "constants/step";
 interface SubmitButtonProps {
   type?: "READ" | "CREATE" | "EDIT";
   setModal: Dispatch<SetStateAction<boolean>>;

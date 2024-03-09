@@ -1,12 +1,8 @@
-import { memo, SetStateAction, ChangeEvent } from "react";
-import {
-  StyledMainWrapper,
-  StyledMainText,
-  StyledErrorText,
-  StyledTextWrapper,
-} from "./styles";
 import InputBox from "components/common/InputBox";
+import { memo, SetStateAction, ChangeEvent } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
+
+import { StyledMainWrapper, StyledMainText, StyledErrorText, StyledTextWrapper } from "./styles";
 
 interface Props {
   text: string;
@@ -32,29 +28,23 @@ const InputBoxAndText = ({
   setInputValue,
   handleClick,
   onChange,
-  confirmedId,
+  confirmedId
 }: Props) => {
   return (
     <StyledMainWrapper>
       <StyledTextWrapper>
         <StyledMainText>{text}</StyledMainText>
-        <StyledErrorText confirmedid={confirmedId?.toString()}>
-          {errorText}
-        </StyledErrorText>
+        <StyledErrorText confirmedid={confirmedId?.toString()}>{errorText}</StyledErrorText>
       </StyledTextWrapper>
       <InputBox
-        color={
-          !confirmedId && errorText ? ThemeConfig.colors.red_1 : ThemeConfig.colors.black
-        }
+        color={!confirmedId && errorText ? ThemeConfig.colors.red_1 : ThemeConfig.colors.black}
         className={className}
         height="100%"
         width="100%"
         placeholdText={placeholder}
         type={type}
         inputValue={inputValue}
-        setInputValue={(e: ChangeEvent<HTMLInputElement>) =>
-          setInputValue(e.target.value)
-        }
+        setInputValue={(e: ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
         handleClick={handleClick}
         onChange={onChange}
       />
