@@ -1,4 +1,4 @@
-import ButtonModal from "components/common/ButtonModal";
+import Modal from "components/common/ButtonModal";
 
 type DeleteDogModalProps = {
   isOpen: boolean;
@@ -7,16 +7,17 @@ type DeleteDogModalProps = {
 };
 
 const DeleteDogModal = ({ close, action, isOpen }: DeleteDogModalProps) => {
+  if (!isOpen) return null;
   return (
-    <ButtonModal
-      isOpen={isOpen}
-      maintext="정말 삭제하시겠습니까?"
-      subtext="모든 데이터가 초기화되고 가입이 탈퇴됩니다"
-      closebutton="닫기"
-      closefunc={close}
-      actionbutton="중단"
-      actionfunc={action}
-    />
+    <Modal isOpen={isOpen} onClose={close}>
+      <Modal.Content variant="two">
+        <Modal.Title
+          title="정말 삭제하시겠습니까?"
+          subtitle="모든 데이터가 초기화되고 가입이 탈퇴됩니다"
+        />
+        <Modal.Button closeText="닫기" actionText="중단" actionFn={action} />
+      </Modal.Content>
+    </Modal>
   );
 };
 

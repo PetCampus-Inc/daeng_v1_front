@@ -1,7 +1,8 @@
-import { useState } from "react";
-import SubmitButton from "./SubmitButton";
-import * as S from "./styles";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import { useState } from "react";
+
+import * as S from "./styles";
+import SubmitButton from "./SubmitButton";
 
 interface NavigationProps {
   currentStep: number;
@@ -18,15 +19,14 @@ const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: Navigation
 
   return (
     <>
-      {isVisible && (
-        <AlertBottomSheet
-          onClose={close}
-          title="입력을 하지 않은 필수 항목이 있어요"
-          content="유의사항에 동의하지 않으면 가입이 어려워요"
-          brownButton="확인"
-          brownFuc={close}
-        />
-      )}
+      <AlertBottomSheet
+        isOpen={isVisible}
+        onClose={close}
+        title="입력을 하지 않은 필수 항목이 있어요"
+        subtitle="유의사항에 동의하지 않으면 가입이 어려워요"
+        actionText="확인"
+        actionFn={close}
+      />
       <S.ButtonContainer>
         <S.Caption>
           <p>정보를 모두 입력해야 가입신청이 가능합니다.</p>

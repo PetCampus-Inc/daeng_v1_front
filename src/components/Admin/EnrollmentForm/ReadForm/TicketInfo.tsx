@@ -1,12 +1,12 @@
-import { useFormContext } from "react-hook-form";
+import { ITEM_KEYS } from "constants/item";
 
-import Title from "components/common/Title";
+import Checkbox from "components/common/Checkbox";
+import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
-import DayMultiCheck from "components/common/Select/DayMultiCheck";
-import Checkbox from "components/common/Checkbox";
+import Title from "components/common/Title";
+import { useFormContext } from "react-hook-form";
 
-import { ITEM_KEYS } from "constants/item";
 import { Caption, Card, Label, Stack } from "../styles";
 interface TicketInfoProps {
   ticket?: {
@@ -18,7 +18,7 @@ interface TicketInfoProps {
 }
 
 const TicketInfo = ({ ticket, item }: TicketInfoProps) => {
-  const { watch } = useFormContext();
+  const { register, watch } = useFormContext();
 
   const selectedTicketType = watch("ticketType");
   const roundTicketText = ticket?.roundTicketNumber?.map((number) => `${number}회`) || [];
@@ -28,7 +28,7 @@ const TicketInfo = ({ ticket, item }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea name="priceInfo" disabled />
+        <TextArea {...register("priceInfo")} disabled />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
@@ -64,7 +64,7 @@ const TicketInfo = ({ ticket, item }: TicketInfoProps) => {
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea name="ticketInfo" disabled />
+        <TextArea {...register("ticketInfo")} disabled />
         <Stack>
           <Checkbox name="null" readOnly>
             동의합니다

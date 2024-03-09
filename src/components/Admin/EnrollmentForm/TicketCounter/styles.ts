@@ -1,22 +1,24 @@
 import { styled } from "styled-components";
 
-export const ContentWrapper = styled.div`
+export const CounterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  gap: 2rem;
-  margin: 44px 0 20px;
+  margin-top: 2rem;
 `;
 
 export const TextWrapper = styled.div`
   width: 100%;
   position: relative;
   text-align: center;
+
+  margin-top: 8px;
 `;
 
 export const Title = styled.p`
   ${({ theme }) => theme.typo.body1_18_B};
+  color: ${({ theme }) => theme.colors.darkBlack};
 `;
 
 export const ErrorMessage = styled.p`

@@ -1,14 +1,14 @@
-import { useFormContext } from "react-hook-form";
+import { ITEM_KEYS } from "constants/item";
 
-import AdminTitle from "components/common/Title/AdminTitle";
+import ImageUpload from "components/common/ImageUpload";
 import InputField from "components/common/InputField";
-import SingleRadio from "components/common/Select/SingleRadio";
 import SearchInputField from "components/common/InputField/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
-import ImageUpload from "components/common/ImageUpload";
+import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
+import AdminTitle from "components/common/Title/AdminTitle";
+import { useFormContext } from "react-hook-form";
 
-import { ITEM_KEYS } from "constants/item";
 import { Card, Caption } from "../styles";
 
 const DogInfo = () => {
@@ -73,7 +73,7 @@ const DogInfo = () => {
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.ALLERGY_DISEASE}`} control={control}>
           알러지 및 질병 유무
         </AdminTitle>
-        <TextArea name="null" placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
+        <TextArea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
       </Card>
     </>
   );

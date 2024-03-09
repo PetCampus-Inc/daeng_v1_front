@@ -3,8 +3,8 @@ import useAttendDog from "hooks/api/useAttendDogMutation";
 import useAttendDogSearchQuery from "hooks/api/useAttendDogSearchQuery";
 import { type SetStateAction, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { attendDogListInfoAtom } from "store/admin";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 
 import AttendanceAvatar from "./AttendanceAvatar";
 import AttendanceList from "./AttendanceList";
@@ -13,13 +13,13 @@ import AttendanceSearchList from "./AttendanceSearchList";
 import { Blur, Spacing } from "./styles";
 
 interface AttendanceProps {
-  schoolId: number;
   isFocus: boolean;
   setIsFocus: React.Dispatch<SetStateAction<boolean>>;
   setMode: React.Dispatch<React.SetStateAction<"DEFAULT" | "ATTENDANCE">>;
 }
 
-const Attendance = ({ schoolId, isFocus, setIsFocus, setMode }: AttendanceProps) => {
+const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
+  const { schoolId } = useRecoilValue(adminLoginInfoAtom).data;
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = useState(searchParams.get("dogName") || "");
   const { data, isLoading, isFetching } = useAttendDogSearchQuery(schoolId, searchText);

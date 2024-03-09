@@ -1,38 +1,42 @@
+import MoreIcon from "assets/svg/more-icon";
 import PhoneIcon from "assets/svg/phone";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";
+import Dropdown from "components/common/Dropdown/OptionDropdown";
 
-import { StyledOptionList, StyledButtonWrapper, Item } from "../AttendanceCard/styles";
-
+import { IconWrapper } from "./styles";
 interface Props {
-  isOptionsOpen: boolean;
   options: string[];
   handleOptionClick: (option: string) => void;
-  modalRef: React.RefObject<HTMLDivElement>;
 }
+const AttendanceOptionList = ({ options, handleOptionClick }: Props) => {
+  const optionIcon = {
+    "견주에게 전화 걸기": <PhoneIcon />,
+    "이용권 알림 전송하기": <SendAlarmIcon />,
+    "강아지 삭제": <XBoxIcon />
+  };
 
-// FIXME: 드롭다운 공통 컴포넌트로 분리
-const AttendanceOptionList = ({ isOptionsOpen, options, handleOptionClick, modalRef }: Props) => {
   return (
-    <>
-      <StyledOptionList className="dropdown" isOpen={isOptionsOpen} ref={modalRef}>
+    <Dropdown defaultOpen={false}>
+      <Dropdown.Trigger>
+        <IconWrapper>
+          <MoreIcon />
+        </IconWrapper>
+      </Dropdown.Trigger>
+      <Dropdown.List>
         {options.map((option, index) => (
-          <StyledButtonWrapper key={index}>
-            <Item
-              onClick={(e) => {
-                e.preventDefault();
-                handleOptionClick(option);
-              }}
-            >
-              {option === "견주에게 전화 걸기" && <PhoneIcon />}
-              {option === "이용권 알림 전송하기" && <SendAlarmIcon />}
-              {option === "강아지 삭제" && <XBoxIcon />}
-              {option}
-            </Item>
-          </StyledButtonWrapper>
+          <Dropdown.Option
+            key={index}
+            onClick={() => {
+              handleOptionClick(option);
+            }}
+          >
+            {optionIcon[option as keyof typeof optionIcon]}
+            <span>{option}</span>
+          </Dropdown.Option>
         ))}
-      </StyledOptionList>
-    </>
+      </Dropdown.List>
+    </Dropdown>
   );
 };
 

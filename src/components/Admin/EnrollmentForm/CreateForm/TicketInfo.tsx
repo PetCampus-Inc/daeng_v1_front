@@ -1,18 +1,18 @@
+import { ITEM_KEYS } from "constants/item";
+
+import Checkbox from "components/common/Checkbox";
+import DayMultiCheck from "components/common/Select/DayMultiCheck";
+import MultiCheck from "components/common/Select/MultiCheck";
+import TextArea from "components/common/TextArea";
+import AdminTitle from "components/common/Title/AdminTitle";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
-import TextArea from "components/common/TextArea";
-import MultiCheck from "components/common/Select/MultiCheck";
-import AdminTitle from "components/common/Title/AdminTitle";
-import DayMultiCheck from "components/common/Select/DayMultiCheck";
-import Checkbox from "components/common/Checkbox";
+import { Card, Caption, Stack } from "../styles";
 import TicketType from "../TicketType";
 
-import { ITEM_KEYS } from "constants/item";
-import { Card, Caption, Stack } from "../styles";
-
 const TicketInfo = () => {
-  const { control, watch, setValue } = useFormContext();
+  const { register, control, watch, setValue } = useFormContext();
 
   const selectedTicketTypes = watch("ticketType");
 
@@ -37,9 +37,8 @@ const TicketInfo = () => {
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
         <TextArea
-          name="priceInfo"
+          {...register("priceInfo", { required: true })}
           placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다."
-          isRequired
         />
       </Card>
       <Card>
@@ -96,7 +95,10 @@ const TicketInfo = () => {
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`} control={control} hasBadge>
           유의사항
         </AdminTitle>
-        <TextArea name="ticketInfo" placeholder="유의사항을 입력해 주세요" isRequired />
+        <TextArea
+          {...register("ticketInfo", { required: true })}
+          placeholder="유의사항을 입력해 주세요"
+        />
         <Stack>
           <Checkbox name="null" disabled>
             동의합니다

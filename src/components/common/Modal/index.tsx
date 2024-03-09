@@ -7,8 +7,9 @@ import React, {
   useEffect,
   useRef
 } from "react";
+
 import * as S from "./styles";
-import Portal from "./portal";
+import Portal from "../Portal";
 
 interface IModal {
   children: ReactNode;

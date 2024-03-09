@@ -1,18 +1,17 @@
-import { useState } from "react";
-import type { Control } from "react-hook-form";
-import useTicketFieldArray from "hooks/common/useTicketFieldArray";
-import useBottomSheet from "hooks/common/useBottomSheet";
-
-import XIcon from "assets/svg/x-icon";
+import AddIcon from "assets/svg/addIcon";
+import BottomSheet from "components/common/BottomSheet";
+import Modal from "components/common/ButtonModal";
 import EditableRadioGroup, {
   ExtendedFieldArrayWithId
 } from "components/common/Select/EditableRadioGroup";
-import TicketCounter from "../TicketCounter";
-import BottomSheet from "components/common/BottomSheet";
+import useBottomSheet from "hooks/common/useBottomSheet";
+import useTicketFieldArray from "hooks/common/useTicketFieldArray";
+import { useState } from "react";
 
 import * as S from "./styles";
-import AddIcon from "assets/svg/addIcon";
-import ButtonModal from "components/common/ButtonModal";
+import TicketCounter from "../TicketCounter";
+
+import type { Control } from "react-hook-form";
 
 type TicketTypeProps = {
   control: Control;
@@ -64,19 +63,18 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
 
   return (
     <>
-      {isDeleteModalOpen && (
-        <ButtonModal
-          maintext="모두 삭제할 수 없어요"
-          subtext={`최소 1개 이상의 ${TICKET_TYPE} 옵션을 추가해 주세요`}
-          actionbutton="닫기"
-          actionfunc={() => setIsDeleteModalOpen(false)}
-        />
-      )}
-      {bottomSheet.isVisible && (
-        <BottomSheet onClose={() => bottomSheet.close()}>
-          <S.CloseButton type="button" onClick={() => bottomSheet.close()}>
-            <XIcon />
-          </S.CloseButton>
+      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
+        <Modal.Content>
+          <Modal.Title
+            title="모두 삭제할 수 없어요"
+            subtitle={`최소 1개 이상의 ${TICKET_TYPE} 옵션을 추가해 주세요`}
+          />
+          <Modal.Button actionText="닫기" actionFn={() => setIsDeleteModalOpen(false)} />
+        </Modal.Content>
+      </Modal>
+      <BottomSheet isOpen={bottomSheet.isVisible} onClose={() => bottomSheet.close()}>
+        <BottomSheet.Content>
+          <BottomSheet.Control />
           <TicketCounter
             type={ticketType}
             isDuplication={isDuplication}
@@ -84,11 +82,13 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
             counter={counter}
             setCounter={setCounter}
           />
-          <S.ConfirmButton onClick={handleAddRadio} disabled={isDuplication}>
-            추가
-          </S.ConfirmButton>
-        </BottomSheet>
-      )}
+          <BottomSheet.Button
+            actionText="추가"
+            actionFn={handleAddRadio}
+            disabled={isDuplication}
+          />
+        </BottomSheet.Content>
+      </BottomSheet>
       <EditableRadioGroup
         control={control}
         suffix={TIMES}

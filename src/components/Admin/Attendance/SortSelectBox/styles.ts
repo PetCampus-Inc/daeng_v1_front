@@ -40,6 +40,7 @@ export const ListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 10px 8px;
 `;
 
 export const ListItem = styled.li`

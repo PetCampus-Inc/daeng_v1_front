@@ -1,7 +1,7 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { PropsWithChildren, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
-const Portal = ({ children }: { children: ReactNode }) => {
+const Portal = (props: PropsWithChildren) => {
   const modalRootRef = useRef(document.createElement("div"));
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Portal = ({ children }: { children: ReactNode }) => {
     };
   }, [modalRootRef]);
 
-  return ReactDOM.createPortal(children, modalRootRef.current);
+  return ReactDOM.createPortal(props.children, modalRootRef.current);
 };
 
 export default Portal;

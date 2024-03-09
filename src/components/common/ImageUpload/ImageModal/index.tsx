@@ -1,8 +1,9 @@
 import CloseIcon from "assets/svg/close-icon";
-import Portal from "components/common/Modal/portal";
+import Portal from "components/common/Portal";
+
+import { BackDrop, MainWrapper, DeleteButton, PreviewImg, PreviewItem } from "./styles";
 
 import type { ImageFile } from "store/form";
-import { BackDrop, MainWrapper, DeleteButton, PreviewImg, PreviewItem } from "./styles";
 
 interface ImageModalProps {
   image: ImageFile;

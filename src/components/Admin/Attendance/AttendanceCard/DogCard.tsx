@@ -1,14 +1,12 @@
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
-import MoreIcon from "assets/svg/more-icon";
 import { useCallMember } from "hooks/api/useCallMemberQuery";
 import { useDeleteDog } from "hooks/api/useDeleteDogMutation";
 import useBottomSheet from "hooks/common/useBottomSheet";
-import useDropdown from "hooks/common/useDropdown";
 import useFormatDate from "hooks/common/useFormatDate";
 import GetExpirationDate from "hooks/common/useGetExpirationDate";
 import useModal from "hooks/common/useModal";
-import { useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 import { getOptions } from "utils/options";
@@ -28,16 +26,15 @@ interface DogCardProps {
   monthly: number[] | null;
 }
 
-const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
-  const dropdown = useDropdown(dogId);
+const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
   const monthlyTicketDate = useFormatDate(monthly || []);
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthly || []);
   const { role: adminRole } = useRecoilValue(adminLoginInfoAtom).data;
   const { isVisible: isBsOpen, open: bsOpen, close: bsClose } = useBottomSheet();
   const { isVisible: isModalOpen, open: modalOpen, close: modalClose } = useModal();
+  const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
   const { refetch: getPhoneNumber } = useCallMember(dogId);
   const { mutate } = useDeleteDog();
-  const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
 
   // FIXME: 실제 전화번호 앱 열리는 로직 추가 필요
   const handleGetCallInfo = async () => {
@@ -67,19 +64,18 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
   const handleOptionClick = (option: string) => {
     const action = actionHandlers[option];
     if (action) action();
-    dropdown.toggle();
   };
 
-  const OPTIONS = getOptions(rounds, isBeforeExpiry, adminRole)
-    .filter((option) => option.condition())
-    .map((option) => option.label);
+  const OPTIONS = useMemo(() => {
+    return getOptions(rounds, isBeforeExpiry, adminRole)
+      .filter((option) => option.condition())
+      .map((option) => option.label);
+  }, [rounds, isBeforeExpiry, adminRole]);
 
   return (
     <>
-      {isBsOpen && <CallMemberBottomSheet info={memberInfo} close={bsClose} />}
-      {isModalOpen && (
-        <DeleteDogModal isOpen={isModalOpen} close={modalClose} action={handleDeleteDog} />
-      )}
+      <CallMemberBottomSheet info={memberInfo} isOpen={isBsOpen} close={bsClose} />
+      <DeleteDogModal isOpen={isModalOpen} close={modalClose} action={handleDeleteDog} />
       <S.CardContainer>
         <S.ImageWrapper className={isExpired ? "expired" : ""}>
           <S.Image
@@ -102,27 +98,12 @@ const DogCard = ({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
             </span>
           </S.Info>
         </S.InfoWrapper>
-        <S.MoreButton
-          type="button"
-          className="more-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            dropdown.toggle();
-          }}
-        >
-          {dropdown.isOpen && adminRole && (
-            <AttendanceOptionList
-              isOptionsOpen={dropdown.isOpen}
-              options={OPTIONS}
-              handleOptionClick={handleOptionClick}
-              modalRef={dropdown.ref}
-            />
-          )}
-          <MoreIcon />
-        </S.MoreButton>
+        {adminRole && (
+          <AttendanceOptionList options={OPTIONS} handleOptionClick={handleOptionClick} />
+        )}
       </S.CardContainer>
     </>
   );
-};
+});
 
 export default DogCard;

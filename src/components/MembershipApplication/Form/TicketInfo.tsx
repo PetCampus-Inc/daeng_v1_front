@@ -1,15 +1,16 @@
-import { useFormContext } from "react-hook-form";
+import { ITEM_KEYS } from "constants/item";
 
+import Checkbox from "components/common/Checkbox";
+import DayMultiCheck from "components/common/Select/DayMultiCheck";
+import SingleRadio from "components/common/Select/SingleRadio";
+import { Caption } from "components/common/Select/styles";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
-import SingleRadio from "components/common/Select/SingleRadio";
-import DayMultiCheck from "components/common/Select/DayMultiCheck";
-import Checkbox from "components/common/Checkbox";
-import { ITEM_KEYS } from "constants/item";
-import type { ITicketInfo } from "types/School.type";
+import { useFormContext } from "react-hook-form";
 
-import { Caption } from "components/common/Select/styles";
 import { Card, Stack, Label } from "./styles";
+
+import type { ITicketInfo } from "types/School.type";
 
 interface TicketInfoProps {
   info: ITicketInfo;
@@ -27,7 +28,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea name="priceInfo" defaultValue={info.priceInfo} disabled />
+        <TextArea defaultValue={info.priceInfo} disabled />
       </Card>
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
@@ -71,12 +72,7 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
       <Card>
         <Title isRequired={requiredItems.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea
-          name="ticketInfoField"
-          defaultValue={info.ticketInfo}
-          isChecked={watch("ticketInfo")}
-          disabled
-        />
+        <TextArea defaultValue={info.ticketInfo} isChecked={watch("ticketInfo")} disabled />
         <Stack>
           <Checkbox
             name="ticketInfo"

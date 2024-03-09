@@ -1,71 +1,85 @@
-import { CSSProperties, memo, ReactNode, RefObject, useCallback, useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
-import Portal from "../Modal/portal";
-import { StyledBottomSheet, BackDrop } from "./styles";
+import { useClickOutSide } from "hooks/common/useClickOutSide";
+import { PropsWithChildren, RefObject, memo, useRef } from "react";
 
-interface IBottomSheet {
-  children: ReactNode;
+import BottomSheetButton from "./BottomSheetButton";
+import BottomSheetContent from "./BottomSheetContent";
+import BottomSheetControl from "./BottomSheetControl";
+import { BottomSheetSubTitle, BottomSheetTitle } from "./BottomSheetTitle";
+import { BottomSheetProvider } from "./provider";
+import { StyledBottomSheet, BackDrop, Container } from "./styles";
+import Portal from "../Portal";
+
+interface IBottomSheetProps {
+  isOpen: boolean;
   onClose: () => void;
-  height?: string;
-  customStyle?: CSSProperties;
 }
 
-const BottomSheet = ({ children, onClose, customStyle, height = "auto" }: IBottomSheet) => {
+interface IBottomSheet
+  extends React.MemoExoticComponent<React.FC<PropsWithChildren<IBottomSheetProps>>> {
+  Content: typeof BottomSheetContent;
+  Control: typeof BottomSheetControl;
+  Button: typeof BottomSheetButton;
+  Title: typeof BottomSheetTitle;
+  Subtitle: typeof BottomSheetSubTitle;
+}
+
+const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBottomSheetProps>) => {
   const bottomSheetRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  const onClickOutSide = useCallback(
-    (e: MouseEvent): void => {
-      if (bottomSheetRef.current && !bottomSheetRef.current.contains(e.target as Node)) {
-        onClose();
-      }
-    },
-    [onClose]
-  );
-  useEffect(() => {
-    document.addEventListener("mouseup", onClickOutSide);
-    return () => {
-      document.removeEventListener("mouseup", onClickOutSide);
-    };
-  }, [onClickOutSide]);
+
+  useClickOutSide({
+    enabled: isOpen,
+    targetRef: bottomSheetRef,
+    onClickOutside: onClose
+  });
 
   const backdropVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-    exit: { opacity: 0 }
+    visible: { opacity: 1 }
   };
 
   const BottomSheetVariants = {
-    hidden: { y: "100vh", x: "50", opacity: 0 },
-    visible: { y: 0, x: "50", opacity: 1 },
-    exit: { y: "-100", x: "50", opacity: 0 }
+    hidden: { y: "100%", opacity: 0 },
+    visible: { y: 0, opacity: 1 }
   };
 
   return (
-    <AnimatePresence mode="wait">
-      <Portal>
-        <div style={{ position: "relative" }}>
-          <BackDrop
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={backdropVariants}
-            transition={{ duration: 0.3 }}
-          />
-          <StyledBottomSheet
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={BottomSheetVariants}
-            transition={{ duration: 0.3 }}
-            height={height}
-            style={customStyle}
-            ref={bottomSheetRef}
-          >
-            {children}
-          </StyledBottomSheet>
-        </div>
-      </Portal>
-    </AnimatePresence>
+    <Portal>
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <BottomSheetProvider onClose={onClose}>
+            <Container>
+              <BackDrop
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={backdropVariants}
+                transition={{ duration: 0.3 }}
+              />
+              <StyledBottomSheet
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={BottomSheetVariants}
+                transition={{ duration: 0.3 }}
+                ref={bottomSheetRef}
+              >
+                {children}
+              </StyledBottomSheet>
+            </Container>
+          </BottomSheetProvider>
+        )}
+      </AnimatePresence>
+    </Portal>
   );
 };
 
-export default memo(BottomSheet);
+const BottomSheet = memo(BottomSheetBase) as IBottomSheet;
+
+BottomSheet.Content = BottomSheetContent;
+BottomSheet.Control = BottomSheetControl;
+BottomSheet.Button = BottomSheetButton;
+BottomSheet.Title = BottomSheetTitle;
+BottomSheet.Subtitle = BottomSheetSubTitle;
+
+export default BottomSheet;
