@@ -5,7 +5,7 @@ export const PATH = {
   SIGNUP: "/signUp",
   ADMIN: "/admin",
   ADMIN_ATTENDANCE: "/admin/attendance", // 출석부
-  ADMIN_ATTEND_CARE: "/admin/attendCare", // 오늘 관리할 강아지 (TODO: 얼마나 바뀌었는지 파악하기)
+  ADMIN_ATTEND_CARE: "/admin/attendCare", // 오늘 관리할 강아지
   ADMIN_DOG_INFO: "/admin/dogInfo", // 강아지 상세정보 (TODO: 어디 사용되는건지 파악하기)
   ADMIN_CHAT: "/admin/chat", // 채팅
   ADMIN_SCHOOL_MANAGE: "/admin/schoolManage", // 유치원 운영

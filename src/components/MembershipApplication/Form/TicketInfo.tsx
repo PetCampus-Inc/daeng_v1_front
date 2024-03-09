@@ -6,7 +6,7 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import { Caption } from "components/common/Select/styles";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Card, Stack, Label } from "./styles";
 
@@ -18,7 +18,7 @@ interface TicketInfoProps {
 }
 
 const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
-  const { watch } = useFormContext();
+  const { control, watch } = useFormContext();
 
   const selectedTicketType = watch("ticketType");
   const roundTicketText = info.roundTicketNumber?.map((number) => `${number}회`) || [];
@@ -74,14 +74,19 @@ const TicketInfo = ({ info, requiredItems }: TicketInfoProps) => {
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
         <TextArea defaultValue={info.ticketInfo} isChecked={watch("ticketInfo")} disabled />
         <Stack>
-          <Checkbox
+          <Controller
             name="ticketInfo"
-            isChecked={watch("ticketInfo")}
-            ariaLabel="동의"
-            isRequired={requiredItems.get(ITEM_KEYS.TICKET_INFO)}
-          >
-            동의합니다
-          </Checkbox>
+            control={control}
+            rules={{ required: requiredItems.get(ITEM_KEYS.TICKET_INFO) }}
+            render={({ field: { ref, ...field } }) => (
+              <Checkbox
+                label="동의합니다"
+                ref={ref}
+                isChecked={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
         </Stack>
       </Card>
     </>

@@ -1,18 +1,19 @@
 import styled from "styled-components";
-import type { DefaultTheme } from "styled-components";
+
 import type { BadgeProps } from "./index";
+import type { DefaultTheme } from "styled-components";
 
 const badgeStyles = (theme: DefaultTheme) => ({
-  required: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
-  adminRequired: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
-  optional: `background-color: ${theme.colors.gray_5}; color: ${theme.colors.gray_2};`,
-  neutralized: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
-  vaccinated: `background-color: #fff2e8; color: ${theme.colors.primary_3};`,
-  pickdrop: `background-color: ${theme.colors.br_5}; color: ${theme.colors.primaryColor};`
+  brown: `background-color: ${theme.colors.br_4}; color: ${theme.colors.primaryColor};`,
+  yellow: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
+  gray: `background-color: ${theme.colors.gray_5}; color: ${theme.colors.gray_2};`,
+  // neutralized: `background-color: ${theme.colors.yellow_3}; color: ${theme.colors.primaryColor};`,
+  orange: `background-color: #fff2e8; color: ${theme.colors.primary_3};`,
+  lightBrown: `background-color: ${theme.colors.br_5}; color: ${theme.colors.primaryColor};`
 });
 
 export const Badge = styled.span<{
-  type: BadgeProps["type"];
+  variant: BadgeProps["variant"];
 }>`
   display: inline-flex;
   -webkit-box-align: center;
@@ -26,7 +27,7 @@ export const Badge = styled.span<{
 
   ${({ theme }) => theme.typo.caption1_12_R}
 
-  ${({ type, theme }) => badgeStyles(theme)[type]};
+  ${({ variant, theme }) => badgeStyles(theme)[variant]};
 
   user-select: none;
   padding: 2px 8px;

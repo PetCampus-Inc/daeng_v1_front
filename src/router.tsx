@@ -38,125 +38,102 @@ export default function Router() {
     },
     {
       path: PATH.SIGNUP,
+      element: <Pages.SignUpPage />
+    },
+    {
+      path: "*",
+      element: <Pages.NotFoundPage />
+    },
+    {
+      path: PATH.ADMIN_ATTENDANCE,
+      element: <Pages.AttendancePage />
+    },
+    {
+      path: PATH.ADMIN_ATTEND_CARE,
+      element: <Pages.RedirectAttendCarePage />,
+      children: [
+        {
+          index: true,
+          element: <Pages.AttendCarePage type="main" />
+        },
+        {
+          path: "init",
+          element: <Pages.AttendCarePage type="init" />
+        },
+        {
+          path: "delete",
+          element: <Pages.AttendCareDeletePage />
+        }
+      ]
+    },
+    {
+      path: PATH.ADMIN_DOG_INFO,
       element: (
-        <Suspense>
-          <Pages.SignUpPage />
+        <Suspense fallback={<div>로딩중</div>}>
+          <Pages.DogInfoPage />
         </Suspense>
       )
     },
     {
-      path: PATH.ADMIN,
+      path: PATH.ADMIN_CHAT,
+      element: <Pages.Chat />
+    },
+    {
+      path: PATH.ADMIN_SCHOOL_MANAGE,
       children: [
         {
-          path: PATH.ADMIN_ATTENDANCE,
+          index: true,
+          element: <Pages.SchoolManagePage />
+        },
+        {
+          path: PATH.ADMIN_ENROLLMENT,
+          element: <Pages.SchoolManageEnrollmentPage />
+        },
+        {
+          path: PATH.ADMIN_FORMS,
+          element: <Pages.EnrollmentFormListPage />
+        },
+        {
+          path: PATH.ADMIN_CREATE_FORM,
           element: (
             <Suspense>
-              <Pages.AttendancePage />
+              <Pages.EnrollmentFormCreatePage />
             </Suspense>
           )
         },
         {
-          path: PATH.ADMIN_ATTEND_CARE,
+          path: PATH.ADMIN_SUBMIT_FORM,
           element: (
             <Suspense>
-              <Pages.AttendCarePage />
+              <Pages.EnrollmentFormSubmitPage />
             </Suspense>
           )
         },
         {
-          path: PATH.ADMIN_DOG_INFO,
-          element: (
-            <Suspense fallback={<div>로딩중</div>}>
-              <Pages.DogInfoPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.ADMIN_CHAT,
+          path: PATH.ADMIN_EDIT_FORM(":formId"),
           element: (
             <Suspense>
-              <Pages.Chat />
+              <Pages.EnrollmentFormEditPage />
             </Suspense>
           )
         },
         {
-          path: PATH.ADMIN_SCHOOL_MANAGE,
-          children: [
-            {
-              index: true,
-              element: (
-                <Suspense>
-                  <Pages.SchoolManagePage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_ENROLLMENT,
-              element: (
-                <Suspense>
-                  <Pages.SchoolManageEnrollmentPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_FORMS,
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormListPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_CREATE_FORM,
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormCreatePage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_SUBMIT_FORM,
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormSubmitPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_FORM(":formId"),
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormDetailPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_EDIT_FORM(":formId"),
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormEditPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_TEACHER_MANAGE,
-              element: (
-                <Suspense>
-                  <Pages.TeacherManagePage />
-                </Suspense>
-              )
-            }
-          ]
-        },
-        {
-          path: PATH.ADMIN_MY_PAGE,
+          path: PATH.ADMIN_FORM(":formId"),
           element: (
             <Suspense>
-              <Pages.MyPage />
+              <Pages.EnrollmentFormDetailPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.ADMIN_TEACHER_MANAGE,
+          element: <Pages.TeacherManagePage />
         }
       ]
+    },
+    {
+      path: PATH.ADMIN_MY_PAGE,
+      element: <Pages.MyPage />
     },
     {
       children: [

@@ -21,9 +21,7 @@ const PolicyInfo = () => {
           placeholder="이용 제한 관련 유의사항을 입력해 주세요"
         />
         <Stack>
-          <Checkbox name="null" disabled>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
       <Card>
@@ -35,9 +33,7 @@ const PolicyInfo = () => {
           placeholder="상해 관련 유의사항을 입력해 주세요"
         />
         <Stack>
-          <Checkbox name="null" disabled>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
       <Card>
@@ -53,9 +49,7 @@ const PolicyInfo = () => {
           placeholder="유기 관련 유의사항을 입력해 주세요"
         />
         <Stack>
-          <Checkbox name="null" disabled>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
     </>

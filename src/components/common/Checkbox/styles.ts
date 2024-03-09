@@ -1,16 +1,6 @@
 import styled, { DefaultTheme, css } from "styled-components";
-import type { CheckboxProps } from "./index";
 
-const variantStyles = (theme: DefaultTheme) => ({
-  square: css`
-    padding: 14px;
-    border-radius: 12px;
-    background: ${theme.colors.gray_5};
-    &.checked {
-      background: ${theme.colors.br_4};
-    }
-  `
-});
+import type { CheckboxProps } from "./index";
 
 export const CheckboxContainer = styled.label.withConfig({
   shouldForwardProp: (prop) => prop !== "variant"
@@ -23,7 +13,16 @@ export const CheckboxContainer = styled.label.withConfig({
   gap: 11px;
 
   transition: background-color 0.2s ease;
-  ${({ theme, variant }) => variant === "square" && variantStyles(theme)[variant]};
+  ${({ theme, variant }) =>
+    variant === "fill" &&
+    css`
+      padding: 14px;
+      border-radius: 12px;
+      background: ${theme.colors.gray_5};
+      &.checked {
+        background: ${theme.colors.br_4};
+      }
+    `};
 `;
 
 export const HiddenCheckbox = styled.input`
@@ -44,7 +43,31 @@ export const HiddenCheckbox = styled.input`
   }
 `;
 
-export const Checkbox = styled.span`
+const getVariantStyle = (theme: DefaultTheme, variant: CheckboxProps["variant"]) => {
+  switch (variant) {
+    case "fill":
+    case "default":
+      return css`
+        background: ${theme.colors.gray_4};
+        & > .checkbox-icon {
+          display: inline-block;
+        }
+      `;
+    case "outline":
+      return css`
+        background: ${theme.colors.white};
+        & > .checkbox-icon {
+          display: none;
+        }
+      `;
+    default:
+      return css``;
+  }
+};
+
+export const Checkbox = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== "variant"
+})<{ variant: CheckboxProps["variant"] }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -56,8 +79,7 @@ export const Checkbox = styled.span`
 
   border: 2px solid ${({ theme }) => theme.colors.gray_4};
   border-radius: 50%;
-
-  background: ${({ theme }) => theme.colors.gray_4};
+  ${({ theme, variant }) => getVariantStyle(theme, variant)}
 
   &.checked {
     background: ${({ theme }) => theme.colors.primaryColor};
@@ -79,7 +101,6 @@ export const Checkbox = styled.span`
   }
 
   & > .checkbox-icon {
-    display: inline-block;
     line-height: 1em;
     flex-shrink: 0;
     color: ${({ theme }) => theme.colors.gray_3};
@@ -90,6 +111,7 @@ export const Checkbox = styled.span`
   }
 
   &.checked > .checkbox-icon {
+    display: inline-block;
     color: ${({ theme }) => theme.colors.white};
     animation: checking 200ms linear;
   }

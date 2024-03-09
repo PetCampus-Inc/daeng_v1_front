@@ -1,13 +1,13 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+import { INewEnrollmentList } from "types/Admin.type";
 import {
   IAttendanceInfo,
   IAdminLoginResponse,
   IAttendDogsInfo,
-  IAttendCareDogInfo,
-  IDogDetails
+  IDogDetails,
+  IAttendCareDog
 } from "types/Attendance.type";
-import { recoilPersist } from "recoil-persist";
-import { INewEnrollmentList } from "types/Admin.type";
 
 const { persistAtom } = recoilPersist();
 
@@ -36,20 +36,9 @@ export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
   default: []
 });
 
-export const attendCareDogListAtom = atom<IAttendCareDogInfo>({
+export const attendCareDogListAtom = atom<IAttendCareDog[]>({
   key: "attendCareDogListAtom",
-  default: {
-    data: [
-      {
-        attendanceId: -1,
-        dogId: -1,
-        dogName: "",
-        status: "",
-        adminName: ""
-      }
-    ],
-    status: 0
-  }
+  default: []
 });
 
 export const newEnrollmentListAtom = atom<INewEnrollmentList | null>({

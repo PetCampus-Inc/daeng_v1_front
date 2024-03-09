@@ -67,9 +67,9 @@ const AboutDog = ({ data }: AboutDogProps) => {
       <S.MainBottomWrapper>
         {noTag ? null : (
           <S.TagsWrapper>
-            {vaccination === "VACCINATED" && <Badge type="vaccinated" />}
-            {neutralization === "NEUTERED" && <Badge type="neutralized" />}
-            {pickDropRequest === "REQUEST" && <Badge type="pickdrop" />}
+            {vaccination === "VACCINATED" && <Badge variant="yellow" text="예방접종 완료" />}
+            {neutralization === "NEUTERED" && <Badge variant="orange" />}
+            {pickDropRequest === "REQUEST" && <Badge variant="lightBrown" />}
           </S.TagsWrapper>
         )}
         <S.DogDetailList>

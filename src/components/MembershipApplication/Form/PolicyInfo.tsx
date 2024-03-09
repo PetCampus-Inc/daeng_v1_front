@@ -4,7 +4,7 @@ import Checkbox from "components/common/Checkbox";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import * as S from "./styles";
 
@@ -16,7 +16,7 @@ interface PolicyInfoProps {
 }
 
 const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
-  const { setValue, watch } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
   const allChecked = watch("all");
   const watchTerms = watch(["limitsInfo", "accidentInfo", "abandonmentInfo"]);
 
@@ -39,15 +39,19 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
   return (
     <>
       <S.Card>
-        <Checkbox
+        <Controller
           name="all"
-          ariaLabel="동의"
-          onChange={handleParentCheckboxChange}
-          isChecked={allChecked}
-          variant="square"
-        >
-          유의사항 전체 동의하기
-        </Checkbox>
+          control={control}
+          render={({ field: { ref, ...field } }) => (
+            <Checkbox
+              label="유의사항 전체 동의하기"
+              ref={ref}
+              onChange={handleParentCheckboxChange}
+              isChecked={field.value}
+              variant="fill"
+            />
+          )}
+        />
       </S.Card>
       <S.Card>
         <Title htmlFor="limitsInfo" isRequired={requiredItems.get(ITEM_KEYS.LIMITS_INFO)}>
@@ -56,14 +60,19 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea defaultValue={info.limitsInfo} isChecked={watchTerms[0]} disabled />
         <S.Stack>
-          <Checkbox
+          <Controller
             name="limitsInfo"
-            ariaLabel="동의"
-            isChecked={watchTerms[0]}
-            isRequired={requiredItems.get(ITEM_KEYS.LIMITS_INFO)}
-          >
-            동의합니다
-          </Checkbox>
+            control={control}
+            rules={{ required: requiredItems.get(ITEM_KEYS.LIMITS_INFO) }}
+            render={({ field: { ref, ...field } }) => (
+              <Checkbox
+                label="동의합니다"
+                ref={ref}
+                isChecked={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
         </S.Stack>
       </S.Card>
       <S.Card>
@@ -73,14 +82,19 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea defaultValue={info.accidentInfo} isChecked={watchTerms[1]} disabled />
         <S.Stack>
-          <Checkbox
+          <Controller
             name="accidentInfo"
-            ariaLabel="동의"
-            isChecked={watchTerms[1]}
-            isRequired={requiredItems.get(ITEM_KEYS.ACCIDENT_INFO)}
-          >
-            동의합니다
-          </Checkbox>
+            control={control}
+            rules={{ required: requiredItems.get(ITEM_KEYS.ACCIDENT_INFO) }}
+            render={({ field: { ref, ...field } }) => (
+              <Checkbox
+                label="동의합니다"
+                ref={ref}
+                isChecked={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
         </S.Stack>
       </S.Card>
       <S.Card>
@@ -90,14 +104,19 @@ const PolicyInfo = ({ info, requiredItems }: PolicyInfoProps) => {
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
         <TextArea defaultValue={info.abandonmentInfo} isChecked={watchTerms[2]} disabled />
         <S.Stack>
-          <Checkbox
+          <Controller
             name="abandonmentInfo"
-            ariaLabel="동의"
-            isChecked={watchTerms[2]}
-            isRequired={requiredItems.get(ITEM_KEYS.ABANDONMENT_INFO)}
-          >
-            동의합니다
-          </Checkbox>
+            control={control}
+            rules={{ required: requiredItems.get(ITEM_KEYS.ABANDONMENT_INFO) }}
+            render={({ field: { ref, ...field } }) => (
+              <Checkbox
+                label="동의합니다"
+                ref={ref}
+                isChecked={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
         </S.Stack>
       </S.Card>
     </>

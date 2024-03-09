@@ -66,9 +66,7 @@ const TicketInfo = ({ ticket, item }: TicketInfoProps) => {
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
         <TextArea {...register("ticketInfo")} disabled />
         <Stack>
-          <Checkbox name="null" readOnly>
-            동의합니다
-          </Checkbox>
+          <Checkbox label="동의합니다" readOnly />
         </Stack>
       </Card>
     </>
