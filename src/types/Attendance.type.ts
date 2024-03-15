@@ -37,15 +37,6 @@ export interface IAttendDogLists {
   monthlyTicket: string;
 }
 
-export interface IAttendCareDog {
-  attendanceId: number;
-  dogId: number;
-  dogName: string;
-  adminName: string | null;
-  lastPhotoTime: string | null;
-  agendaWriting: "COMPLETE" | "NOT_YET" | "WRITING";
-}
-
 export interface IMemberCallInfo {
   dogName: string;
   phoneNumber: string;
@@ -72,12 +63,6 @@ export interface IAttendInfo {
   selectedDogIds: number[];
 }
 
-export interface IAttendCareInfo {
-  adminId: number;
-  selectedDogId: number[];
-}
-
-// TODO: 이 부분+ 이 타입을 사용한 기존 API들 삭제해도 되는지 검토 (API변동 이슈)
 // TODO: 이 부분+ 이 타입을 사용한 기존 API들 삭제해도 되는지 검토 (API변동 이슈)
 export interface IDogDetails {
   dogId: number;
