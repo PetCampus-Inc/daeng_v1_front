@@ -46,7 +46,11 @@ export default function Router() {
     },
     {
       path: PATH.ADMIN_ATTENDANCE,
-      element: <Pages.AttendancePage />
+      element: (
+        <Suspense>
+          <Pages.AttendancePage />
+        </Suspense>
+      )
     },
     {
       path: PATH.ADMIN_ATTEND_CARE,
