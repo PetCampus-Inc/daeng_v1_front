@@ -1,13 +1,12 @@
 import { useContext } from "react";
+import { ICareDogInfo } from "types/admin.caredog.type";
 
 import { MainDogGrid } from "./styles";
 import DeleteDogCard from "../CareCard/DeleteDogCard";
 import { SelectedIdsContext } from "../provider/SelectedIdsProvider";
 
-import type { IAttendCareDog } from "types/Attendance.type";
-
 interface DeleteDogListProps {
-  data: IAttendCareDog[];
+  data: ICareDogInfo[];
 }
 
 const DeleteDogList = ({ data }: DeleteDogListProps) => {
