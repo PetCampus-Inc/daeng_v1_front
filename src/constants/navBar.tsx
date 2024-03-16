@@ -20,7 +20,7 @@ export const MENU_ITEMS = [
   },
   {
     text: "강아지 관리",
-    path: PATH.ADMIN_ATTEND_CARE,
+    path: PATH.ADMIN_CARE_DOG,
     blackImage: <CheckBoardBlack />,
     colorImage: <CheckBoard />
   },
