@@ -53,8 +53,12 @@ export default function Router() {
       )
     },
     {
-      path: PATH.ADMIN_ATTEND_CARE,
-      element: <Pages.RedirectAttendCarePage />,
+      path: PATH.ADMIN_CARE_DOG,
+      element: (
+        <Suspense>
+          <Pages.RedirectAttendCarePage />
+        </Suspense>
+      ),
       children: [
         {
           index: true,
@@ -87,15 +91,27 @@ export default function Router() {
       children: [
         {
           index: true,
-          element: <Pages.SchoolManagePage />
+          element: (
+            <Suspense>
+              <Pages.SchoolManagePage />
+            </Suspense>
+          )
         },
         {
           path: PATH.ADMIN_ENROLLMENT,
-          element: <Pages.SchoolManageEnrollmentPage />
+          element: (
+            <Suspense>
+              <Pages.SchoolManageEnrollmentPage />
+            </Suspense>
+          )
         },
         {
           path: PATH.ADMIN_FORMS,
-          element: <Pages.EnrollmentFormListPage />
+          element: (
+            <Suspense>
+              <Pages.EnrollmentFormListPage />
+            </Suspense>
+          )
         },
         {
           path: PATH.ADMIN_CREATE_FORM,
@@ -131,7 +147,11 @@ export default function Router() {
         },
         {
           path: PATH.ADMIN_TEACHER_MANAGE,
-          element: <Pages.TeacherManagePage />
+          element: (
+            <Suspense>
+              <Pages.TeacherManagePage />
+            </Suspense>
+          )
         }
       ]
     },
