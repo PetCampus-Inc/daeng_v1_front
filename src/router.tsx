@@ -56,18 +56,10 @@ export default function Router() {
       path: PATH.ADMIN_CARE_DOG,
       element: (
         <Suspense>
-          <Pages.RedirectAttendCarePage />
+          <Pages.AttendCarePage />
         </Suspense>
       ),
       children: [
-        {
-          index: true,
-          element: <Pages.AttendCarePage type="main" />
-        },
-        {
-          path: "init",
-          element: <Pages.AttendCarePage type="init" />
-        },
         {
           path: "delete",
           element: <Pages.AttendCareDeletePage />
