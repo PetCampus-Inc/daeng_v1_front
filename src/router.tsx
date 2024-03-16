@@ -54,12 +54,15 @@ export default function Router() {
     },
     {
       path: PATH.ADMIN_CARE_DOG,
-      element: (
-        <Suspense>
-          <Pages.AttendCarePage />
-        </Suspense>
-      ),
       children: [
+        {
+          index: true,
+          element: (
+            <Suspense>
+              <Pages.AttendCarePage />
+            </Suspense>
+          )
+        },
         {
           path: "delete",
           element: <Pages.AttendCareDeletePage />
