@@ -1,21 +1,30 @@
 import { request } from "libs/CustomAxios/request";
 import { ICareDogInfo, ICareDogProps } from "types/admin.caredog.type";
+import { IResponse } from "types/helper.type";
 
-export const handleGetCareDogs = async (schoolId: number): Promise<ICareDogInfo[]> => {
-  const url = `admin/attendance/care/add?adminId=${schoolId}`;
-  return await request<ICareDogInfo[]>({ url });
+export const handleGetCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
+  const url = `admin/attendance/care?adminId=${adminId}`;
+  const { data } = await request<IResponse<ICareDogInfo[]>>({ url });
+  return data;
 };
 
-export const handleAddCareDogs = async (req: ICareDogProps): Promise<ICareDogInfo[]> => {
+export const handleGetNewCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
+  const url = `admin/attendance/care/add?adminId=${adminId}`;
+  const { data } = await request<IResponse<ICareDogInfo[]>>({ url });
+  return data;
+};
+
+export const handleCreateCareDogs = async (req: ICareDogProps): Promise<ICareDogInfo[]> => {
   const url = `admin/attendance/care/add`;
-  return await request<ICareDogInfo[]>({
+  const { data } = await request<IResponse<ICareDogInfo[]>>({
     url,
     method: "POST",
-    params: {
+    data: {
       adminId: req.adminId,
       attendanceIdList: req.selectedDogId
     }
   });
+  return data;
 };
 
 export const handleDeleteCareDogs = async (req: ICareDogProps): Promise<void> => {
@@ -23,7 +32,7 @@ export const handleDeleteCareDogs = async (req: ICareDogProps): Promise<void> =>
   return await request<void>({
     url,
     method: "DELETE",
-    params: {
+    data: {
       adminId: req.adminId,
       attendanceIdList: req.selectedDogId
     }
