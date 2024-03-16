@@ -1,26 +1,37 @@
-import { useRecoilState } from "recoil";
-import { attendCareDogListAtom } from "store/admin";
+import { useGetNewCareDogs } from "hooks/api/caredogQuery";
+import { useEffect } from "react";
+import { ICareDogInfo } from "types/admin.caredog.type";
 
 import { ListContainer, ListTitle, ListWrapper } from "./styles";
 import AddDogCard from "../CareCard/AddDogCard";
+import { useSelectedDogs } from "../provider/SelectedDogsProvider";
 
-interface AddDogListProps {
-  data: any[];
-}
+type AddDogList = {
+  adminId?: number;
+};
 
-const AddDogList = ({ data }: AddDogListProps) => {
-  const [dogList, setDogList] = useRecoilState(attendCareDogListAtom);
+const AddDogList = ({ adminId }: AddDogList) => {
+  if (!adminId) throw new Error("adminId가 없습니다!");
 
-  const handleCardClick = (dog: any) => {
-    setDogList((prev) => {
-      const isSelected = prev.some((selectedDog) => selectedDog.dogId === dog.dogId);
-      if (isSelected) {
-        return prev.filter((selectedDog) => selectedDog.dogId !== dog.dogId);
-      } else {
-        return [...prev, dog];
-      }
-    });
+  const { data, isFetchedAfterMount } = useGetNewCareDogs(adminId);
+  const [selectedDogs, dispatch] = useSelectedDogs();
+
+  const addDog = (dog: ICareDogInfo) => {
+    dispatch({ type: "ADD_DOG", payload: dog });
   };
+
+  useEffect(() => {
+    if (data && isFetchedAfterMount) {
+      const updatedSelectedDogs = selectedDogs.filter((selectedDog) =>
+        data.some(
+          (serverDog) => serverDog.dogId === selectedDog.dogId && serverDog.adminName === null
+        )
+      );
+
+      dispatch({ type: "SET_DOGS", payload: updatedSelectedDogs });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isFetchedAfterMount]);
 
   return (
     <ListContainer>
@@ -32,8 +43,8 @@ const AddDogList = ({ data }: AddDogListProps) => {
             dogId={item.dogId}
             dogName={item.dogName}
             adminName={item.adminName}
-            isChecked={dogList.some((dog) => dog.dogId === item.dogId)}
-            onClick={() => handleCardClick(item)}
+            isChecked={selectedDogs.some((dog) => dog.dogId === item.dogId)}
+            onClick={() => addDog(item)}
           />
         ))}
       </ListWrapper>
