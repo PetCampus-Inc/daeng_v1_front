@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  padding: 0 12px 42px;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.BGray};
 `;
 
 export const TopWrapper = styled.div`

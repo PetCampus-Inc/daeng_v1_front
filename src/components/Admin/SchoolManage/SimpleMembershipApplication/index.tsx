@@ -21,6 +21,7 @@ const SimpleMembershipApplication = ({
   setSelectedList
 }: ISimpleMembershipApplicationProps) => {
   const navigate = useNavigate();
+
   const dateString = data.createdDate.map((num: number) => (num < 10 ? "0" + num : num)).join("-");
   const [isSelected, setIsSelected] = useState(false);
 

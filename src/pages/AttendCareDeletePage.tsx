@@ -7,7 +7,7 @@ const AttendCareDeletePage = () => {
   return (
     <>
       <Header type="text" text="관리 강아지 삭제" />
-      <PageContainer $padding="32px 0 78px">
+      <PageContainer color="BGray" pt={2}>
         <AttendCareDelete />
       </PageContainer>
       <NavBar />

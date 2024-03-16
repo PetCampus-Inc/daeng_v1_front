@@ -6,7 +6,6 @@ import Header from "components/common/Header";
 import useGetTeacherList from "hooks/api/useGetTeacherList";
 import { useState } from "react";
 import { PageContainer } from "styles/StyleModule";
-import { ThemeConfig } from "styles/ThemeConfig";
 
 const TeacherManagePage = () => {
   const [isEditable, setIsEditable] = useState(false);
@@ -17,7 +16,7 @@ const TeacherManagePage = () => {
   return (
     <>
       <Header type="text" text="교사 관리" />
-      <PageContainer $padding="calc(5vh + 2rem) 1rem 0" color={ThemeConfig.colors.gray_5}>
+      <PageContainer pt={2} color="gray_5">
         <TeacherInfoTitle isEditable={isEditable} setIsEditable={setIsEditable} />
         <EnrolledTeacherList teacherList={data.teacherList} isEditable={isEditable} />
         <TitleWithIcon title="승인 대기중인 교사" />

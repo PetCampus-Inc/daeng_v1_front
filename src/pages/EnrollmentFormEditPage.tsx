@@ -26,7 +26,7 @@ import useStep from "hooks/common/useStep";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { ContentContainer } from "styles/StyleModule";
+import { PageContainer } from "styles/StyleModule";
 
 const EnrollmentFormEditPage = () => {
   const { formId } = useParams();
@@ -54,7 +54,7 @@ const EnrollmentFormEditPage = () => {
   return (
     <>
       <Header type="text" text="가입신청서 수정" />
-      <ContentContainer>
+      <PageContainer color="BGray">
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -87,7 +87,7 @@ const EnrollmentFormEditPage = () => {
             </ButtonContainer>
           </FormProvider>
         </Container>
-      </ContentContainer>
+      </PageContainer>
       <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />
     </>
   );

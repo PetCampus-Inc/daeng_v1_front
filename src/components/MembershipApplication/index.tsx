@@ -4,7 +4,7 @@ import Header from "components/common/Header";
 import { useEnrollQuery } from "hooks/api/useEnrollQuery";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
-import { ContentContainer } from "styles/StyleModule";
+import { PageContainer } from "styles/StyleModule";
 
 import DogInfo from "./Form/DogInfo";
 import MemberInfo from "./Form/MemberInfo";
@@ -35,7 +35,7 @@ const MembershipApplication = () => {
   return (
     <>
       <Header type="text" text="가입신청서" />
-      <ContentContainer>
+      <PageContainer color="BGray" pb={2.5}>
         <S.Container>
           <S.TopWrapper>
             <S.TitleWrapper>
@@ -70,7 +70,7 @@ const MembershipApplication = () => {
             />
           </FormProvider>
         </S.Container>
-      </ContentContainer>
+      </PageContainer>
     </>
   );
 };
