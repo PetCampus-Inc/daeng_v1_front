@@ -1,30 +1,26 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
-import { INewEnrollmentList } from "types/Admin.type";
-import {
-  IAttendanceInfo,
-  IAdminLoginResponse,
-  IAttendDogsInfo,
-  IDogDetails,
-  IAttendCareDog
-} from "types/Attendance.type";
+
+import type { INewEnrollmentList } from "types/Admin.type";
+import type { IAttendanceInfo, IAdminLoginResponse, IAttendDogsInfo } from "types/Attendance.type";
 
 const { persistAtom } = recoilPersist();
 
 export const dogListInfoAtom = atom<IAttendanceInfo>({
-  key: "dogListInfoAtom",
+  key: "dogListInfo",
   default: []
 });
 
+// FIXME: 유저권한에 따른 라우팅 처리가 되어있지않기 때문에, 원장권한의 유저정보를 디폴트로 사용하고 있습니다.
 export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
-  key: "adminLoginInfoAtom",
+  key: "adminLoginInfo",
   default: {
     data: {
-      adminId: 1,
-      adminName: "",
-      schoolId: 1,
-      role: "",
-      schoolName: ""
+      adminId: 2,
+      adminName: "염원장",
+      schoolId: 2,
+      role: "ROLE_OWNER",
+      schoolName: "귀여운강아지월드"
     },
     status: 0
   },
@@ -32,12 +28,7 @@ export const adminLoginInfoAtom = atom<IAdminLoginResponse>({
 });
 
 export const attendDogListInfoAtom = atom<IAttendDogsInfo>({
-  key: "attendDogListInfoAtom",
-  default: []
-});
-
-export const attendCareDogListAtom = atom<IAttendCareDog[]>({
-  key: "attendCareDogListAtom",
+  key: "attendDogListInfo",
   default: []
 });
 
