@@ -80,3 +80,5 @@ export const ThemeConfig = {
     caption1_12_B: typoCreator("0.75rem", 700, "0.24px", "20px")
   }
 };
+
+export type TColor = keyof (typeof ThemeConfig)["colors"];

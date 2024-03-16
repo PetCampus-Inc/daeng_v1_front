@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import styled, { css, keyframes } from "styled-components";
 
+import type { TColor } from "./ThemeConfig";
+
 // CSS 속성중 자주쓰이는 조합들 모아놓은것
 
 export const selectNone = css`
@@ -40,18 +42,24 @@ export const fadeIn = keyframes`
   }
 `;
 
-export const PageContainer = styled.div<{ $padding?: string; color?: string }>`
-  padding: ${({ $padding }) => ($padding ? `${$padding}` : "5vh 1rem 0")};
-  background-color: ${({ color, theme }) => (color ? color : theme.colors.white)};
+export const PageContainer = styled.div<{
+  pt?: number;
+  pb?: number;
+  ph?: number;
+  pr?: number;
+  pl?: number;
+  color?: TColor;
+}>`
+  padding-top: ${({ pt }) => (pt ? `calc(5vh + ${pt}rem)` : "calc(5vh)")};
+  padding-bottom: ${({ pb }) => (pb ? `calc(7vh + ${pb}rem)` : "calc(7vh)")};
+  padding-left: ${({ pl, ph }) => (pl ? `${pl}rem` : ph ? `${ph}rem` : "1rem")};
+  padding-right: ${({ pr, ph }) => (pr ? `${pr}rem` : ph ? `${ph}rem` : "1rem")};
+  background-color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.white)};
+  width: 100vw;
+
   &::-webkit-scrollbar {
     display: none;
   }
-  width: 100vw;
-  height: 100%;
-`;
-
-export const ContentContainer = styled.div`
-  padding: calc(5vh) 0 7vh;
 `;
 
 export const CloseButton = styled.button`
