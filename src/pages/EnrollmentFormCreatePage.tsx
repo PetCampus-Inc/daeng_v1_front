@@ -21,7 +21,7 @@ import {
 import Header from "components/common/Header";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
-import { ContentContainer } from "styles/StyleModule";
+import { PageContainer } from "styles/StyleModule";
 
 const EnrollmentFormCreatePage = () => {
   const methods = useForm({
@@ -41,7 +41,7 @@ const EnrollmentFormCreatePage = () => {
   return (
     <>
       <Header type="text" text="가입신청서" />
-      <ContentContainer>
+      <PageContainer color="BGray">
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -79,7 +79,7 @@ const EnrollmentFormCreatePage = () => {
             </ButtonContainer>
           </FormProvider>
         </Container>
-      </ContentContainer>
+      </PageContainer>
     </>
   );
 };
