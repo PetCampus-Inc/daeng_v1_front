@@ -1,8 +1,10 @@
+import { ICareDogInfo } from "types/admin.caredog.type";
+
 import { MainDogGrid } from "./styles";
 import MainDogCard from "../CareCard/MainDogCard";
 
 interface MainDogListProps {
-  data: any[];
+  data: ICareDogInfo[];
 }
 
 const MainDogList = ({ data }: MainDogListProps) => {

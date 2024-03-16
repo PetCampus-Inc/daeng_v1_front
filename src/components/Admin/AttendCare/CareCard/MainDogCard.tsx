@@ -1,8 +1,7 @@
 import Badge, { type BadgeProps } from "components/common/Badge";
+import { ICareDogInfo } from "types/admin.caredog.type";
 
 import { CardContainer, ListItemImg, ListItemTime, ListItemTitle } from "./styles";
-
-import type { IAttendCareDog } from "types/Attendance.type";
 
 const MainDogCard = ({
   attendanceId,
@@ -11,7 +10,7 @@ const MainDogCard = ({
   adminName,
   lastPhotoTime,
   agendaWriting
-}: IAttendCareDog) => {
+}: ICareDogInfo) => {
   const agendaWritingOptions: {
     [key: string]: { variant: BadgeProps["variant"]; text: string };
   } = {
