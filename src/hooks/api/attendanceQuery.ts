@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tansta
 import {
   handleCallMember,
   handleDeleteDog,
+  handleGetAttendDogs,
   handleGetAttendSearchDogs,
   handleGetSearchDogs,
   handlePostAttend,
@@ -14,10 +15,18 @@ import {
 } from "apis/admin.attendance.api";
 import showToast from "utils/showToast";
 
+export const useGetAttendDogList = (schoolId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.ATTEND_LIST,
+    queryFn: () => handleGetAttendDogs(schoolId)
+  });
+};
+
 export const useAttendDogSearchQuery = (schoolId: number, searchText?: string) => {
   return useQuery({
     queryKey: QUERY_KEY.ATTEND_LIST_SEARCH(schoolId, searchText),
-    queryFn: () => handleGetAttendSearchDogs(schoolId, searchText)
+    queryFn: () => handleGetAttendSearchDogs(schoolId, searchText),
+    enabled: !!searchText
   });
 };
 
