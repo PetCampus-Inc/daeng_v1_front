@@ -6,18 +6,19 @@ export const QUERY_KEY = {
   BREED: ["breed"], // 견종 검색
   ATTEND_LIST: ["attendDogList"], // 출석안한 강아지 리스트
   ATTEND_LIST_ID: (schoolId: number) => ["attendDogList", schoolId], // 출석안한 강아지 리스트 with 유치원아이디
-  ATTEND_LIST_SEARCH: (schoolId: number, searchText: string) => [
+  ATTEND_LIST_SEARCH: (schoolId: number, searchText?: string) => [
     "attendDogList",
     schoolId,
     searchText
   ],
   ATTENDANCE_LIST: ["dogList"], // 출석부 강아지 리스트
   ATTENDANCE_LIST_ID: (schoolId: number) => ["dogList", schoolId], // 출석부 강아지 리스트 with 유치원아이디
-  ATTENDANCE_LIST_SEARCH: (schoolId: number, searchText: string) => [
+  ATTENDANCE_LIST_SEARCH: (schoolId: number, searchText?: string) => [
     "dogList",
     schoolId,
     searchText
   ], // 출석부 강아지 리스트 with 유치원아이디 and 검색어
+  ATTENDANCE_LIST_SORTNAME: (sortName: string) => ["dogList", sortName],
   MEMBER_PHONE_NUMBER: (dogId: number) => ["phoneNumber", dogId], // 견주 전화번호
   MEMBER_WAITING_LIST: ["WaitingMemberList"], // 가입신청 대기 중인 견주 리스트
   CARE_DOG_LIST: ["careDogList"], // 강아지 관리 리스트
