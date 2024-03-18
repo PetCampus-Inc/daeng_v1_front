@@ -43,7 +43,7 @@ export const useCreateCareDogs = (open: () => void) => {
       }
     }
   });
-  return { MutateCreateCareDogs: createCareDogsMutation.mutate };
+  return { mutateCreateCareDogs: createCareDogsMutation.mutate };
 };
 
 export const useDeleteCareDogs = () => {
@@ -58,5 +58,5 @@ export const useDeleteCareDogs = () => {
     }
   });
 
-  return { MutateDeleteCareDogs: deleteCareDogsMutation.mutate };
+  return { mutateDeleteCareDogs: deleteCareDogsMutation.mutate };
 };
