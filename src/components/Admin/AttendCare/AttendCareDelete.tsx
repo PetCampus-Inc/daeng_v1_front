@@ -1,52 +1,31 @@
+import { useRecoilValue } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
+
+import AllSelectButton from "./CareButton/AllSelectButton";
+import DeleteDogButton from "./CareButton/DeleteDogButton";
 import DeleteDogList from "./CareList/DeleteDogList";
-import { SelectedIdsProvider } from "./provider/SelectedIdsProvider";
-import { DescTitle, ListWrapper } from "./styles";
+import { SelectedIdsProvider } from "./context/SelectedIdsProvider";
+import { DescTitle, ListWrapper, VStack } from "./styles";
 
-const data = [
-  {
-    attendanceId: 47,
-    dogId: 1,
-    dogName: "쥐빵이",
-    adminName: null,
-    lastPhotoTime: null,
-    agendaWriting: "NOT_YET" as const
-  },
-  {
-    attendanceId: 57,
-    dogId: 2,
-    dogName: "꽃개",
-    adminName: null,
-    lastPhotoTime: null,
-    agendaWriting: "NOT_YET" as const
-  },
-  {
-    attendanceId: 67,
-    dogId: 3,
-    dogName: "냠냠이",
-    adminName: null,
-    lastPhotoTime: null,
-    agendaWriting: "NOT_YET" as const
-  },
-  {
-    attendanceId: 49,
-    dogId: 4,
-    dogName: "호빵맨",
-    adminName: null,
-    lastPhotoTime: null,
-    agendaWriting: "NOT_YET" as const
-  }
-];
+import type { ICareDogInfo } from "types/admin.caredog.type";
 
-const AttendCareDelete = () => {
+interface AttendCareDeleteProps {
+  data: ICareDogInfo[];
+}
+
+const AttendCareDelete = ({ data }: AttendCareDeleteProps) => {
+  const { adminId } = useRecoilValue(adminLoginInfoAtom);
   return (
-    <div>
-      <DescTitle>삭제할 강아지 선택</DescTitle>
+    <SelectedIdsProvider>
+      <VStack>
+        <DescTitle>삭제할 강아지 선택</DescTitle>
+        <AllSelectButton data={data} />
+      </VStack>
       <ListWrapper>
-        <SelectedIdsProvider>
-          <DeleteDogList data={data} />
-        </SelectedIdsProvider>
+        <DeleteDogList data={data} />
       </ListWrapper>
-    </div>
+      <DeleteDogButton adminId={adminId} />
+    </SelectedIdsProvider>
   );
 };
 
