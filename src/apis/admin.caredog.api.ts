@@ -31,7 +31,7 @@ export const handleDeleteCareDogs = async (req: ICareDogProps): Promise<void> =>
   const url = `admin/attendance/care/delete`;
   return await request<void>({
     url,
-    method: "DELETE",
+    method: "POST",
     data: {
       adminId: req.adminId,
       attendanceIdList: req.selectedDogId
