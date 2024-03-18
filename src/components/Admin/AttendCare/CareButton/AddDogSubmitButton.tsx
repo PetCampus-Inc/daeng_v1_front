@@ -18,10 +18,10 @@ const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
   const selectedDogId = selectedDogs.map((dog) => dog.attendanceId);
 
   // FIXME: 고려해야할 점) mutation 후 onSuccess가 실행되지 않았을 때 adminName으로 본인일 시에 핸들링 필요..!!
-  const { MutateCreateCareDogs } = useCreateCareDogs(open);
+  const { mutateCreateCareDogs } = useCreateCareDogs(open);
 
   const handleSubmit = () => {
-    MutateCreateCareDogs({ adminId, selectedDogId });
+    mutateCreateCareDogs({ adminId, selectedDogId });
   };
 
   return (

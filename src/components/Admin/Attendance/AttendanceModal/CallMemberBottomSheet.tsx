@@ -1,7 +1,7 @@
 import CallBottomSheet from "components/common/BottomSheet/CallBottomSheet";
 import { memo } from "react";
 
-import type { IMemberCallInfo } from "types/Attendance.type";
+import type { IMemberCallInfo } from "types/admin.attendance.type";
 
 interface CallMemberBottomSheetProps {
   info: IMemberCallInfo | null;

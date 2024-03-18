@@ -3,7 +3,7 @@ import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
 import Badge from "components/common/Badge";
 import { differenceInMonths, format } from "date-fns";
-import { IDogAndMemberInfo } from "types/Attendance.type";
+import { IDogAndMemberInfo } from "types/admin.attendance.type";
 
 import * as S from "./styles";
 import { DogDetailInfoText } from "../styles";

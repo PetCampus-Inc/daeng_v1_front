@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { handlePostDogMemo } from "apis/attendance";
+import { handlePostDogMemo } from "apis/admin.attendance.api";
 
 export const useSubmitMemoMutation = () => {
   return useMutation({
