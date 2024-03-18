@@ -42,7 +42,9 @@ export const fadeIn = keyframes`
   }
 `;
 
-export const PageContainer = styled.div<{
+export const PageContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["pt", "pb", "ph", "pr", "pl", "color"].includes(prop)
+})<{
   pt?: number;
   pb?: number;
   ph?: number;
@@ -56,7 +58,7 @@ export const PageContainer = styled.div<{
   padding-right: ${({ pr, ph }) => (pr ? `${pr}rem` : ph ? `${ph}rem` : "1rem")};
   background-color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.white)};
   width: 100vw;
-
+  height: 100%;
   &::-webkit-scrollbar {
     display: none;
   }
