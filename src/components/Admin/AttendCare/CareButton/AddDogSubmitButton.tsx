@@ -3,7 +3,8 @@ import BackgroundButton from "components/common/Button/BackgroundButton";
 import { useCreateCareDogs } from "hooks/api/caredogQuery";
 import useBottomSheet from "hooks/common/useBottomSheet";
 
-import { useSelectedDogs } from "../provider/SelectedDogsProvider";
+import { BackgroundButtonWrapper } from "./styles";
+import { useSelectedDogs } from "../context/SelectedDogsProvider";
 
 type AddDogSubmitButtonProps = {
   adminId?: number;
@@ -19,6 +20,10 @@ const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
   // FIXME: 고려해야할 점) mutation 후 onSuccess가 실행되지 않았을 때 adminName으로 본인일 시에 핸들링 필요..!!
   const { MutateCreateCareDogs } = useCreateCareDogs(open);
 
+  const handleSubmit = () => {
+    MutateCreateCareDogs({ adminId, selectedDogId });
+  };
+
   return (
     <>
       <AlertBottomSheet
@@ -29,12 +34,11 @@ const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
         actionFn={close}
         onClose={close}
       />
-      <BackgroundButton
-        isActivated={selectedDogs.length > 0}
-        handleTouch={() => MutateCreateCareDogs({ adminId, selectedDogId })}
-      >
-        선택완료
-      </BackgroundButton>
+      <BackgroundButtonWrapper>
+        <BackgroundButton disabled={selectedDogs.length === 0} onClick={() => handleSubmit()}>
+          선택완료
+        </BackgroundButton>
+      </BackgroundButtonWrapper>
     </>
   );
 };
