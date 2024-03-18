@@ -3,7 +3,7 @@ import { ICareDogInfo } from "types/admin.caredog.type";
 
 import { MainDogGrid } from "./styles";
 import DeleteDogCard from "../CareCard/DeleteDogCard";
-import { SelectedIdsContext } from "../provider/SelectedIdsProvider";
+import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
 interface DeleteDogListProps {
   data: ICareDogInfo[];
@@ -11,10 +11,6 @@ interface DeleteDogListProps {
 
 const DeleteDogList = ({ data }: DeleteDogListProps) => {
   const selectIdsContext = useContext(SelectedIdsContext);
-
-  const handleSubmit = () => {
-    console.log(Array.from(selectIdsContext?.selectedIds ?? []));
-  };
 
   return (
     <MainDogGrid>
@@ -28,7 +24,6 @@ const DeleteDogList = ({ data }: DeleteDogListProps) => {
           toggleId={selectIdsContext?.toggleId}
         />
       ))}
-      <button onClick={handleSubmit}>Submit</button>
     </MainDogGrid>
   );
 };
