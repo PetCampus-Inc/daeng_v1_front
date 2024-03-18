@@ -3,14 +3,25 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StyledContainer } from "components/common/CustomToast/styles";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
-import Router from "router";
+import AppRouter from "router";
 import { ThemeProvider } from "styled-components";
 import mediaQueries from "styles/MediaQuery";
 
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { ThemeConfig } from "./styles/ThemeConfig";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 1,
+      throwOnError: true
+    },
+    mutations: {
+      retry: 1,
+      throwOnError: true
+    }
+  }
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
@@ -18,7 +29,7 @@ root.render(
     <ThemeProvider theme={{ ...ThemeConfig, mediaQueries }}>
       <RecoilRoot>
         <GlobalStyle />
-        <Router />
+        <AppRouter queryClient={queryClient} />
         <StyledContainer
           position="bottom-center"
           limit={1}
