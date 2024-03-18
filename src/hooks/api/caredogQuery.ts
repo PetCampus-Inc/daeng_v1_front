@@ -9,13 +9,15 @@ import {
   handleGetNewCareDogs
 } from "apis/admin.caredog.api";
 import { useNavigate } from "react-router-dom";
+import showToast from "utils/showToast";
 
-import type { ICareDogInfo, ICareDogProps } from "types/admin.caredog.type";
+import type { ICareDogInfo } from "types/admin.caredog.type";
 
-export const useGetCareDogList = (adminId: number) => {
+export const useGetCareDogList = (adminId: number, initialData: ICareDogInfo[]) => {
   return useSuspenseQuery<ICareDogInfo[]>({
     queryKey: QUERY_KEY.CARE_DOG_LIST,
-    queryFn: () => handleGetCareDogs(adminId)
+    queryFn: () => handleGetCareDogs(adminId),
+    initialData
   });
 };
 
@@ -33,23 +35,27 @@ export const useCreateCareDogs = (open: () => void) => {
     mutationFn: handleCreateCareDogs,
     onSuccess: (data) => {
       if (data.length > 0) {
-        console.log("선택 안됨");
         open();
         queryClient.setQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, data);
       } else {
-        console.log("선택 완료");
-        navigate(PATH.ADMIN_CARE_DOG, { state: { isFirstEntry: false } });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
+        navigate(PATH.ADMIN_CARE_DOG);
       }
     }
   });
   return { MutateCreateCareDogs: createCareDogsMutation.mutate };
 };
 
-export const useDeleteCareDogs = (req: ICareDogProps) => {
+export const useDeleteCareDogs = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const deleteCareDogsMutation = useMutation({
-    mutationFn: () => handleDeleteCareDogs(req),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: QUERY_KEY.NEW_CARE_DOG_LIST })
+    mutationFn: handleDeleteCareDogs,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.NEW_CARE_DOG_LIST });
+      navigate(PATH.ADMIN_CARE_DOG);
+      showToast("관리 강아지 목록에서 삭제되었습니다", "bottom");
+    }
   });
 
   return { MutateDeleteCareDogs: deleteCareDogsMutation.mutate };
