@@ -85,11 +85,11 @@ const EnrollmentFormListPage = () => {
         </ListContainer>
         {isEditable && (
           <BackgroundButton
-            isActivated={
+            disabled={
               selectedList.length > 0 &&
               !(selectedList.length === data?.simpleSchoolFormList.length)
             }
-            handleTouch={handleTouch}
+            onClick={handleTouch}
           >
             삭제
           </BackgroundButton>

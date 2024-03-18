@@ -1,22 +1,18 @@
+import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
+
 import * as S from "./styles";
 
-interface IBackgroundButton {
-  isActivated?: boolean;
+interface IBackgroundButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   backgroundColor?: "white" | "gray_5";
-  handleTouch: () => void;
-  children: React.ReactNode;
 }
 const BackgroundButton = ({
-  isActivated,
   backgroundColor = "gray_5",
-  handleTouch,
-  children
-}: IBackgroundButton) => {
+  children,
+  ...props
+}: PropsWithChildren<IBackgroundButton>) => {
   return (
     <S.Background $backgroundColor={backgroundColor}>
-      <S.BackgroundButton $isActivated={isActivated} onClick={handleTouch} disabled={!isActivated}>
-        {children}
-      </S.BackgroundButton>
+      <S.BackgroundButton {...props}>{children}</S.BackgroundButton>
     </S.Background>
   );
 };
