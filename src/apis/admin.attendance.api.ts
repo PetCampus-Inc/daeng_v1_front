@@ -66,6 +66,12 @@ export const handleDeleteDog = async (dogId: number): Promise<void> => {
   });
 };
 
+export const handleGetAttendDogs = async (schoolId: number): Promise<IAttendDogInfo[]> => {
+  const url = `admin/attendance/attend?schoolId=${schoolId}`;
+  const { data } = await request<IResponse<IAttendDogInfo[]>>({ url });
+  return data;
+};
+
 interface IAttendInfoProps {
   schoolId: number;
   selectedDogIds: number[];
