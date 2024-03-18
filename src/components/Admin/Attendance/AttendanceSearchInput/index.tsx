@@ -1,38 +1,39 @@
 import CloseIcon from "assets/svg/close-icon";
 import SearchIcon from "assets/svg/search-icon";
-import { useState } from "react";
 
 import * as S from "./styles";
 
 type AttendanceSearchInputProps = {
   name?: string;
   onSearch?: (value: string) => void;
+  onClear?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const AttendanceSearchInput = ({ name, onSearch, ...props }: AttendanceSearchInputProps) => {
-  const [inputValue, setInputValue] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
+const AttendanceSearchInput = ({
+  name,
+  value,
+  onSearch,
+  onChange,
+  onClear,
+  ...props
+}: AttendanceSearchInputProps) => {
   const handleClear = () => {
-    setInputValue("");
+    onClear && onClear();
   };
 
   const handleSearch = () => {
-    onSearch && onSearch(inputValue);
+    onSearch && value && onSearch(value?.toString());
   };
 
-  const disabled = !inputValue.trim();
+  const disabled = !value?.toString().trim();
 
   return (
     <S.SearchInputContainer>
       <S.SearchInput
         type="search"
         name={name}
-        value={inputValue}
-        onChange={handleChange}
+        value={value}
+        onChange={onChange}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
@@ -41,7 +42,7 @@ const AttendanceSearchInput = ({ name, onSearch, ...props }: AttendanceSearchInp
         }}
         {...props}
       />
-      {inputValue ? (
+      {value ? (
         <S.SearchInputButton onClick={handleClear}>
           <CloseIcon className="close-icon" />
         </S.SearchInputButton>
