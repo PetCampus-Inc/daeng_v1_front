@@ -41,7 +41,7 @@ const DogInfoPage = () => {
           />
         }
       />
-      <PageContainer color={ThemeConfig.colors.primaryColor} $padding="calc(5vh + 2rem) 0 0">
+      <PageContainer pt={2} pl={0} pb={0} color="primaryColor">
         <nav>
           <NavWrapper>
             {currentSteps.map((item, index) => (

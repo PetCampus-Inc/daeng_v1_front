@@ -22,7 +22,7 @@ import { type AdaptedData, useAdminEnrollQuery } from "hooks/api/useAdminEnrollQ
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { ContentContainer } from "styles/StyleModule";
+import { PageContainer } from "styles/StyleModule";
 
 const EnrollmentFormDetailPage = () => {
   const { formId } = useParams();
@@ -73,7 +73,7 @@ const EnrollmentFormDetailPage = () => {
           </EditButton>
         }
       />
-      <ContentContainer>
+      <PageContainer color="BGray" pb={2.5}>
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -92,7 +92,7 @@ const EnrollmentFormDetailPage = () => {
             </ContentWrapper>
           </FormProvider>
         </Container>
-      </ContentContainer>
+      </PageContainer>
       <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />
     </>
   );

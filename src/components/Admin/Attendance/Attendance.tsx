@@ -10,7 +10,7 @@ import AttendanceAvatar from "./AttendanceAvatar";
 import AttendanceList from "./AttendanceList";
 import AttendanceSearchInput from "./AttendanceSearchInput";
 import AttendanceSearchList from "./AttendanceSearchList";
-import { Blur, Spacing } from "./styles";
+import { BackgroundButtonWrapper, Blur, Spacing } from "./styles";
 
 interface AttendanceProps {
   isFocus: boolean;
@@ -19,7 +19,7 @@ interface AttendanceProps {
 }
 
 const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
-  const { schoolId } = useRecoilValue(adminLoginInfoAtom).data;
+  const { schoolId } = useRecoilValue(adminLoginInfoAtom);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = useState(searchParams.get("dogName") || "");
   const { data, isLoading, isFetching } = useAttendDogSearchQuery(schoolId, searchText);
@@ -77,9 +77,11 @@ const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
         ) : (
           <AttendanceList schoolId={schoolId} />
         )}
-        <BackgroundButton handleTouch={handlePostAttend} isActivated={dogList.length > 0}>
-          출석 완료
-        </BackgroundButton>
+        <BackgroundButtonWrapper>
+          <BackgroundButton onClick={handlePostAttend} disabled={dogList.length > 0}>
+            출석 완료
+          </BackgroundButton>
+        </BackgroundButtonWrapper>
       </Blur>
     </>
   );

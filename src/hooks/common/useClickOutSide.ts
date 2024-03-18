@@ -2,22 +2,29 @@ import { RefObject, useEffect } from "react";
 
 interface UseClickContainsProps {
   targetRef: RefObject<HTMLElement>;
+  parentRef?: RefObject<HTMLElement>;
   onClickOutside: () => void;
   enabled?: boolean;
 }
 
-export const useClickOutSide = ({ targetRef, onClickOutside, enabled }: UseClickContainsProps) => {
+export const useClickOutSide = ({
+  parentRef,
+  targetRef,
+  onClickOutside,
+  enabled
+}: UseClickContainsProps) => {
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: Event) => {
       if (enabled && targetRef.current && !targetRef.current.contains(event.target as Node)) {
         onClickOutside();
       }
     };
 
-    document.addEventListener("click", handleClickOutside);
+    const eventTarget = parentRef?.current ?? document;
+    eventTarget.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      eventTarget.removeEventListener("click", handleClickOutside);
     };
-  }, [targetRef, enabled]);
+  }, [parentRef, targetRef, enabled]);
 };

@@ -33,9 +33,15 @@ const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
     }
 
     return (
-      <button ref={dropdownTriggerRef} onClick={handleClick} {...rest}>
+      <span
+        ref={dropdownTriggerRef}
+        onClick={handleClick}
+        {...rest}
+        aria-label="펼치기"
+        role="button"
+      >
         {children}
-      </button>
+      </span>
     );
   }
 );

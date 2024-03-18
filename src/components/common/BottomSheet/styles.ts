@@ -48,6 +48,15 @@ export const ActionButton = styled(BaseButton)`
   background-color: ${({ theme }) => theme.colors.primaryColor};
   color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.label1_16_B};
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.gray_4};
+    color: ${({ theme }) => theme.colors.gray_2};
+  }
+
+  transition:
+    color,
+    background-color 0.2s ease-in-out;
 `;
 
 export const CloseButton = styled(BaseButton)`

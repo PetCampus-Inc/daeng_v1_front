@@ -19,5 +19,7 @@ export const QUERY_KEY = {
     searchText
   ], // 출석부 강아지 리스트 with 유치원아이디 and 검색어
   MEMBER_PHONE_NUMBER: (dogId: number) => ["phoneNumber", dogId], // 견주 전화번호
-  MEMBER_WAITING_LIST: ["WaitingMemberList"] // 가입신청 대기 중인 견주 리스트
+  MEMBER_WAITING_LIST: ["WaitingMemberList"], // 가입신청 대기 중인 견주 리스트
+  CARE_DOG_LIST: ["careDogList"], // 강아지 관리 리스트
+  NEW_CARE_DOG_LIST: ["newCareDogList"] // 새로운 강아지 관리 리스트
 };

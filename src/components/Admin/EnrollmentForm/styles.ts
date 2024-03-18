@@ -2,16 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  padding: 0 12px 42px;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.BGray};
 `;
 
 export const TopWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  top: 5vh;
+  top: 0;
   padding: 28px 0;
   gap: 12px;
 

@@ -1,11 +1,10 @@
 import Checkbox from "components/common/Checkbox";
 import { memo } from "react";
+import { ICareDogInfo } from "types/admin.caredog.type";
 
 import { CardCheckboxWrapper, CardContainer, ListItemImg, ListItemTitle } from "./styles";
 
-import type { IAttendCareDog } from "types/Attendance.type";
-
-type AttendanceData = Pick<IAttendCareDog, "dogId" | "dogName" | "attendanceId">;
+type AttendanceData = Pick<ICareDogInfo, "dogId" | "dogName" | "attendanceId">;
 
 interface DeleteDogCardProps extends AttendanceData {
   isChecked?: boolean;

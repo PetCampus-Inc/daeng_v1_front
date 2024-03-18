@@ -1,16 +1,17 @@
 import { PATH } from "constants/path";
 
+import { QueryClient } from "@tanstack/react-query";
 import * as Pages from "pages";
 import { Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import caredogLoader from "routes/caredogLoader";
 import { adminLoginInfoAtom } from "store/admin";
 
 import App from "./App";
 
-export default function Router() {
-  const [{ data }] = useRecoilState(adminLoginInfoAtom);
-
+const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
+  const [adminInfo] = useRecoilState(adminLoginInfoAtom);
   const router = createBrowserRouter([
     {
       path: PATH.ROOT,
@@ -46,23 +47,24 @@ export default function Router() {
     },
     {
       path: PATH.ADMIN_ATTENDANCE,
-      element: <Pages.AttendancePage />
+      element: (
+        <Suspense>
+          <Pages.AttendancePage />
+        </Suspense>
+      )
     },
     {
       path: PATH.ADMIN_CARE_DOG,
-      element: (
-        <Suspense>
-          <Pages.RedirectAttendCarePage />
-        </Suspense>
-      ),
+      id: "caredog",
+      loader: () => caredogLoader({ adminId: adminInfo.adminId, queryClient }),
       children: [
         {
           index: true,
-          element: <Pages.AttendCarePage type="main" />
-        },
-        {
-          path: "init",
-          element: <Pages.AttendCarePage type="init" />
+          element: (
+            <Suspense>
+              <Pages.AttendCarePage />
+            </Suspense>
+          )
         },
         {
           path: "delete",
@@ -168,6 +170,7 @@ export default function Router() {
       ]
     }
   ]);
-
   return <RouterProvider router={router} />;
-}
+};
+
+export default AppRouter;

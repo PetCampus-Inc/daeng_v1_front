@@ -7,6 +7,11 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftAddon?: ReactElement;
   rightAddon?: ReactElement;
   colorScheme?: TColorScheme;
+  pt?: number;
+  pb?: number;
+  ph?: number;
+  pr?: number;
+  pl?: number;
 }
 
 export type TColorScheme = "primary" | "gray";
@@ -21,7 +26,6 @@ const SimpleButton = ({
   const contentProps = {
     leftAddon,
     rightAddon,
-    colorScheme,
     children
   };
 

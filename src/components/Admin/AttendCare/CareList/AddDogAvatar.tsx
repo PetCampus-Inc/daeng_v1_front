@@ -1,13 +1,16 @@
 import Avatar from "components/common/Avatar";
 
 import { AvatarList } from "./styles";
+import { useSelectedDogs } from "../context/SelectedDogsProvider";
 
-interface AddDogAvatarProps {
-  selectedDogs: any[];
-  onRemove: (dogId: number) => void;
-}
+const AddDogAvatar = () => {
+  const [selectedDogs, dispatch] = useSelectedDogs();
+  if (selectedDogs.length === 0) return null;
 
-const AddDogAvatar = ({ selectedDogs, onRemove }: AddDogAvatarProps) => {
+  const removeDog = (dogId: number) => {
+    dispatch({ type: "REMOVE_DOG", payload: dogId });
+  };
+
   return (
     <AvatarList>
       {selectedDogs.map((dog) => (
@@ -15,7 +18,7 @@ const AddDogAvatar = ({ selectedDogs, onRemove }: AddDogAvatarProps) => {
           key={dog.dogId}
           id={dog.dogId}
           name={dog.dogName}
-          handleClick={() => onRemove(dog.dogId)}
+          handleClick={() => removeDog(dog.dogId)}
         />
       ))}
     </AvatarList>

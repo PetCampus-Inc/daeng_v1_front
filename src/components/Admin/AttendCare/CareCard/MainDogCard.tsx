@@ -1,8 +1,8 @@
-import Badge, { type BadgeProps } from "components/common/Badge";
+import Badge, { BadgeProps } from "components/common/Badge";
 
 import { CardContainer, ListItemImg, ListItemTime, ListItemTitle } from "./styles";
 
-import type { IAttendCareDog } from "types/Attendance.type";
+import type { ICareDogInfo, TAgendaWriting } from "types/admin.caredog.type";
 
 const MainDogCard = ({
   attendanceId,
@@ -11,15 +11,23 @@ const MainDogCard = ({
   adminName,
   lastPhotoTime,
   agendaWriting
-}: IAttendCareDog) => {
-  const agendaWritingOptions: {
-    [key: string]: { variant: BadgeProps["variant"]; text: string };
-  } = {
-    WRITING: { variant: "yellow", text: "알림장 작성중" },
-    COMPLETE: { variant: "brown", text: "알림장 전송완료" },
-    NOT_YET: { variant: "gray", text: "알림장 작성전" }
+}: ICareDogInfo) => {
+  const agendaWritingOptions = (
+    agendaWriting: TAgendaWriting
+  ): { variant: BadgeProps["variant"]; text: string } => {
+    switch (agendaWriting) {
+      case "WRITING":
+        return { variant: "yellow", text: "알림장 작성중" };
+      case "COMPLETE":
+        return { variant: "brown", text: "알림장 전송완료" };
+      case "NOT_YET":
+        return { variant: "gray", text: "알림장 작성전" };
+      default:
+        return { variant: "gray", text: "알림장 작성전" };
+    }
   };
-  const { variant, text } = agendaWritingOptions[agendaWriting];
+
+  const { variant, text } = agendaWritingOptions(agendaWriting);
 
   return (
     <CardContainer key={dogId}>

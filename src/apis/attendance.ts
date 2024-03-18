@@ -1,8 +1,6 @@
 import { format } from "date-fns";
 import customAxios from "libs/CustomAxios";
 import {
-  IAttendCareDog,
-  IAttendCareInfo,
   IAttendDogLists,
   IAttendDogsInfo,
   IAttendInfo,
@@ -40,7 +38,6 @@ export const handleSortCharge = async (
 ): Promise<IAttendanceInfo> => {
   const url = `admin/attendance/dog/sort/charge?schoolId=${schoolId}&adminId=${adminId}`;
   const { data } = await customAxios.get(url);
-  return data.data;
   return data.data;
 };
 
@@ -90,21 +87,6 @@ export const handleGetAttendSearchDogs = async (
   const url = `admin/attendance/attend/search?schoolId=${schoolId}&searchText=${searchText}`;
   const { data } = await customAxios.get(url);
   return data.data;
-};
-
-export const handleGetAttendCareDogs = async (schoolId: number): Promise<IAttendCareDog[]> => {
-  const url = `admin/attendance/attend/dog/care?schoolId=${schoolId}`;
-  const { data } = await customAxios.get(url);
-  return data;
-};
-
-export const handlePostAttendCareDogs = async (req: IAttendCareInfo): Promise<IResponse> => {
-  const url = `admin/attendance/attend/dog/care`;
-  const { data } = await customAxios.post(url, {
-    adminId: req.adminId,
-    attendanceIdList: req.selectedDogId
-  });
-  return data;
 };
 
 // 강아지 상세 - 강아지 상세 정보

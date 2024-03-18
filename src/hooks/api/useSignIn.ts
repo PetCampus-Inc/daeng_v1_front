@@ -39,15 +39,12 @@ const useSignIn = () => {
         inputPw
       });
       if (data.status === 200) {
-        setLoginInfo((prevLoginInfo) => ({
-          ...prevLoginInfo,
-          data: {
-            adminId: data.data.adminId,
-            adminName: data.data.adminName,
-            schoolId: data.data.schoolId,
-            role: data.data.role,
-            schoolName: data.data.schoolName
-          }
+        setLoginInfo(() => ({
+          adminId: data.data.adminId,
+          adminName: data.data.adminName,
+          schoolId: data.data.schoolId,
+          role: data.data.role,
+          schoolName: data.data.schoolName
         }));
         navigate(PATH.ADMIN_ATTENDANCE);
       }

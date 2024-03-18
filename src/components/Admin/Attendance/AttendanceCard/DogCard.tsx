@@ -29,7 +29,7 @@ interface DogCardProps {
 const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
   const monthlyTicketDate = useFormatDate(monthly || []);
   const { isBeforeExpiry, isExpired } = GetExpirationDate(monthly || []);
-  const { role: adminRole } = useRecoilValue(adminLoginInfoAtom).data;
+  const { role: adminRole } = useRecoilValue(adminLoginInfoAtom);
   const { isVisible: isBsOpen, open: bsOpen, close: bsClose } = useBottomSheet();
   const { isVisible: isModalOpen, open: modalOpen, close: modalClose } = useModal();
   const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
