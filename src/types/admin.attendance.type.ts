@@ -2,7 +2,7 @@ import { Nullable } from "./helper.type";
 import { IMemberInfo } from "./School.type";
 
 export interface IAttendDogInfo {
-  attendanceId: Nullable<number>;
+  attendanceId: number;
   dogId: number;
   dogName: string;
   allRounds: Nullable<number>;
