@@ -1,7 +1,6 @@
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
-import { useCallMember } from "hooks/api/useCallMemberQuery";
-import { useDeleteDog } from "hooks/api/useDeleteDogMutation";
+import { useCallMember, useDeleteAttendDog } from "hooks/api/attendanceQuery";
 import useBottomSheet from "hooks/common/useBottomSheet";
 import useFormatDate from "hooks/common/useFormatDate";
 import GetExpirationDate from "hooks/common/useGetExpirationDate";
@@ -16,25 +15,20 @@ import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
 import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
 import AttendanceOptionList from "../AttendanceOptionList";
 
-import type { IMemberCallInfo } from "types/Attendance.type";
+import type { IAttendDogInfo, IMemberCallInfo } from "types/admin.attendance.type";
+import type { Nullable } from "types/helper.type";
 
-interface DogCardProps {
-  dogId: number;
-  name: string;
-  allRounds: number | null;
-  rounds: number | null;
-  monthly: number[] | null;
-}
+type DogCardProps = { info: IAttendDogInfo };
 
-const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps) => {
-  const monthlyTicketDate = useFormatDate(monthly || []);
-  const { isBeforeExpiry, isExpired } = GetExpirationDate(monthly || []);
+const DogCard = memo(({ info }: DogCardProps) => {
+  const monthlyTicketDate = useFormatDate(info.monthlyTicket || []);
+  const { isBeforeExpiry, isExpired } = GetExpirationDate(info.monthlyTicket || []);
   const { role: adminRole } = useRecoilValue(adminLoginInfoAtom);
   const { isVisible: isBsOpen, open: bsOpen, close: bsClose } = useBottomSheet();
   const { isVisible: isModalOpen, open: modalOpen, close: modalClose } = useModal();
-  const [memberInfo, setMemberInfo] = useState<IMemberCallInfo | null>(null);
-  const { refetch: getPhoneNumber } = useCallMember(dogId);
-  const { mutate } = useDeleteDog();
+  const [memberInfo, setMemberInfo] = useState<Nullable<IMemberCallInfo>>(null);
+  const { refetch: getPhoneNumber } = useCallMember(info.dogId);
+  const { mutateDelete } = useDeleteAttendDog();
 
   // FIXME: 실제 전화번호 앱 열리는 로직 추가 필요
   const handleGetCallInfo = async () => {
@@ -46,11 +40,11 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
 
   // FIXME: 실제 알림 전송 로직 추가 필요
   const handlerSendAlarm = async () => {
-    console.log(dogId);
+    console.log(info.dogId);
   };
 
   const handleDeleteDog = () => {
-    mutate(dogId, {
+    mutateDelete(info.dogId, {
       onSuccess: () => modalClose()
     });
   };
@@ -67,10 +61,10 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
   };
 
   const OPTIONS = useMemo(() => {
-    return getOptions(rounds, isBeforeExpiry, adminRole)
+    return getOptions(info.currentRounds, isBeforeExpiry, adminRole)
       .filter((option) => option.condition())
       .map((option) => option.label);
-  }, [rounds, isBeforeExpiry, adminRole]);
+  }, [info.currentRounds, isBeforeExpiry, adminRole]);
 
   return (
     <>
@@ -80,11 +74,11 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
         <S.ImageWrapper className={isExpired ? "expired" : ""}>
           <S.Image
             src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt={name + " 이미지"}
+            alt={info.dogName + "의 프로필 사진"}
           />
         </S.ImageWrapper>
         <S.InfoWrapper className={isExpired ? "expired" : ""}>
-          <S.Text className="dogName">{name}</S.Text>
+          <S.Text className="dogName">{info.dogName}</S.Text>
           <S.Info $isBeforeExpiry={isBeforeExpiry}>
             <S.Icon>
               {isBeforeExpiry && !isExpired && <AlertSmallIcon color="brown" />}
@@ -92,9 +86,9 @@ const DogCard = memo(({ dogId, name, allRounds, rounds, monthly }: DogCardProps)
               {!isBeforeExpiry && !isExpired && <CalendarIcon className="calendar-icon" />}
             </S.Icon>
             <span className="ticketNumber">
-              {monthly !== null && !isExpired
+              {info.monthlyTicket !== null && !isExpired
                 ? `${monthlyTicketDate} 만료`
-                : `잔여 ${rounds}/${allRounds} 회`}
+                : `잔여 ${info.currentRounds}/${info.allRounds} 회`}
             </span>
           </S.Info>
         </S.InfoWrapper>
