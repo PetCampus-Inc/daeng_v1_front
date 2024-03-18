@@ -10,13 +10,13 @@ import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 const DeleteDogButton = ({ adminId }: { adminId?: number }) => {
   if (!adminId) throw new Error("adminId가 없습니다!");
   const modal = useModal();
-  const { MutateDeleteCareDogs } = useDeleteCareDogs();
+  const { mutateDeleteCareDogs } = useDeleteCareDogs();
   const selectIdsContext = useContext(SelectedIdsContext);
   const selectedDogId = Array.from(selectIdsContext?.selectedIds ?? []);
 
   const handleSubmit = () => {
     console.log({ adminId, selectedDogId });
-    MutateDeleteCareDogs({ adminId, selectedDogId });
+    mutateDeleteCareDogs({ adminId, selectedDogId });
   };
 
   return (
