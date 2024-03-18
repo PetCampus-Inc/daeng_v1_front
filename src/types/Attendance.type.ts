@@ -9,17 +9,6 @@ export interface IAttendSearchInfo {
 
 export type IAttendDogsInfo = IAttendDogLists[];
 
-export interface IAdminLoginResponse {
-  data: {
-    adminId: number;
-    adminName: string;
-    schoolId: number;
-    role: string;
-    schoolName: string;
-  };
-  status: number;
-}
-
 export interface IDogsList {
   dogId: number;
   dogName: string;
