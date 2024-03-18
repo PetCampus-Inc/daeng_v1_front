@@ -15,7 +15,7 @@ interface AttendanceMainProps {
 }
 
 const AttendanceMain = ({ isFocus, setIsFocus }: AttendanceMainProps) => {
-  const { schoolId, adminId } = useRecoilValue(adminLoginInfoAtom).data;
+  const { schoolId, adminId } = useRecoilValue(adminLoginInfoAtom);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = useState(searchParams.get("dogName") || "");
   const { data, isLoading, isFetching } = useDogSearchQuery(schoolId, searchText);

@@ -14,7 +14,7 @@ interface IAttendanceTop {
 }
 
 const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
-  const { schoolName, adminName, role: adminRole } = useRecoilValue(adminLoginInfoAtom).data;
+  const { schoolName, adminName, role: adminRole } = useRecoilValue(adminLoginInfoAtom);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const resetState = useResetRecoilState(attendDogListInfoAtom);
