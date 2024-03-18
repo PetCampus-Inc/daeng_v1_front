@@ -4,11 +4,11 @@ import { adminLoginInfoAtom } from "store/admin";
 import AddDogSubmitButton from "./CareButton/AddDogSubmitButton";
 import AddDogAvatar from "./CareList/AddDogAvatar";
 import AddDogList from "./CareList/AddDogList";
-import { SelectedDogsProvider } from "./provider/SelectedDogsProvider";
+import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
 import { ListWrapper, SubTitle, Title } from "./styles";
 
 const AttendCareInit = () => {
-  const { adminId } = useRecoilValue(adminLoginInfoAtom).data;
+  const { adminId } = useRecoilValue(adminLoginInfoAtom);
 
   return (
     <SelectedDogsProvider>
