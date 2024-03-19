@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetAttendanceHistory } from "apis/attendance";
+import { handleGetAttendanceHistory } from "apis/admin.attendance.api";
 
 const useGetAttendanceHistory = (dogId: number, calendar?: string) => {
   const query = useSuspenseQuery({

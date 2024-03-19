@@ -3,7 +3,7 @@ import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
 import { differenceInDays, isAfter, parseISO } from "date-fns";
-import { ITicketDetail } from "types/Attendance.type";
+import { ITicketDetail } from "types/admin.attendance.type";
 
 import * as S from "./styles";
 import SendAlermButton from "../SendAlermButton";

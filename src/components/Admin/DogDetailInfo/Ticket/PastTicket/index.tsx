@@ -1,4 +1,4 @@
-import { ITicketDetail } from "types/Attendance.type";
+import { ITicketDetail } from "types/admin.attendance.type";
 
 import * as S from "../PastTicketCard/styles";
 

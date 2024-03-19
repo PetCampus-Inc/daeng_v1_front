@@ -17,12 +17,12 @@ const AddCaredogBottomSheet = ({ isVisible, close }: AddCaredogBottomSheetProps)
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
   const [selectedDogs, _] = useSelectedDogs();
   const { isVisible: isModalOpen, open, close: modalClose } = useModal();
-  const { MutateCreateCareDogs } = useCreateCareDogs(open);
+  const { mutateCreateCareDogs } = useCreateCareDogs(open);
   const selectedDogId = selectedDogs.map((dog) => dog.attendanceId);
 
   // TODO: 명확한 네이밍, useCreateCareDogs 내부의 onSuccess 분리하기!
   const handleSubmit = () => {
-    MutateCreateCareDogs(
+    mutateCreateCareDogs(
       { adminId, selectedDogId },
       {
         onSuccess: () => close()

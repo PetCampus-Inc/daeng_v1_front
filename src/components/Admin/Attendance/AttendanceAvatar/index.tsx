@@ -6,10 +6,10 @@ import Slider from "react-slick";
 
 import * as S from "./styles";
 
-import type { IAttendDogLists } from "types/Attendance.type";
+import type { IAttendDogInfo } from "types/admin.attendance.type";
 
 interface AttendanceAvatarProps {
-  selectedDogs: IAttendDogLists[];
+  selectedDogs: IAttendDogInfo[];
   onRemoveDog: (dogId: number) => void;
 }
 

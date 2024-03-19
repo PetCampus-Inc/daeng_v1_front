@@ -1,13 +1,14 @@
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import useAttendDog from "hooks/api/useAttendDogMutation";
-import useAttendDogSearchQuery from "hooks/api/useAttendDogSearchQuery";
-import { type SetStateAction, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import {
+  useAttendDogSearchQuery,
+  useCreateAttendDog,
+  useGetAttendDogList
+} from "hooks/api/attendanceQuery";
+import { type SetStateAction, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 
 import AttendanceAvatar from "./AttendanceAvatar";
-import AttendanceList from "./AttendanceList";
 import AttendanceSearchInput from "./AttendanceSearchInput";
 import AttendanceSearchList from "./AttendanceSearchList";
 import { BackgroundButtonWrapper, Blur, Spacing } from "./styles";
@@ -20,34 +21,32 @@ interface AttendanceProps {
 
 const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
   const { schoolId } = useRecoilValue(adminLoginInfoAtom);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchText, setSearchText] = useState(searchParams.get("dogName") || "");
-  const { data, isLoading, isFetching } = useAttendDogSearchQuery(schoolId, searchText);
-  const [dogList, setDogList] = useRecoilState(attendDogListInfoAtom);
-  const handleSearch = (value: React.SetStateAction<string>) => {
-    setSearchText(value);
+  const { data: dogList } = useGetAttendDogList(schoolId);
+  const [searchText, setSearchText] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const { data: searchList, isLoading } = useAttendDogSearchQuery(schoolId, searchQuery);
+  const [selectedList, setSelectedList] = useRecoilState(attendDogListInfoAtom);
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
   };
-  const { mutateAttend } = useAttendDog();
 
-  useEffect(() => {
-    const cleanedSearchParams = Object.fromEntries(
-      Object.entries({ dogName: searchText }).filter(([, value]) => !!value)
-    );
-    setSearchParams(new URLSearchParams(cleanedSearchParams));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchText]);
+  const handleClear = () => {
+    setSearchText("");
+    setSearchQuery("");
+  };
 
-  const showSearchResults = isLoading || isFetching || data || searchText;
+  const { mutateAttend } = useCreateAttendDog();
 
   const handleItemRemove = (dogId: number) => {
-    setDogList((prev) => prev.filter((dog) => dog.dogId !== dogId));
+    setSelectedList((prev) => prev.filter((dog) => dog.dogId !== dogId));
   };
 
   const handlePostAttend = () => {
     mutateAttend(
       {
         schoolId,
-        selectedDogIds: dogList.map((item) => item.attendanceId)
+        selectedDogIds: selectedList.map((item) => item.attendanceId)
       },
       {
         onSuccess: () => setMode("DEFAULT")
@@ -57,28 +56,30 @@ const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
 
   if (isLoading) return <div>로딩중...</div>;
 
+  const dataToShow = searchQuery ? searchList : dogList;
+  const type = searchQuery ? "search" : "list";
+
   return (
     <>
       <AttendanceSearchInput
         name="dogSearch"
         placeholder="검색"
+        onChange={(e) => setSearchText(e.target.value)}
         onSearch={handleSearch}
+        onClear={handleClear}
+        value={searchText}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
       />
       <Blur $isFocus={isFocus}>
-        {dogList.length > 0 ? (
-          <AttendanceAvatar selectedDogs={dogList} onRemoveDog={handleItemRemove} />
+        {selectedList.length > 0 ? (
+          <AttendanceAvatar selectedDogs={selectedList} onRemoveDog={handleItemRemove} />
         ) : (
           <Spacing />
         )}
-        {showSearchResults ? (
-          <AttendanceSearchList data={data} />
-        ) : (
-          <AttendanceList schoolId={schoolId} />
-        )}
+        <AttendanceSearchList data={dataToShow} type={type} />
         <BackgroundButtonWrapper>
-          <BackgroundButton onClick={handlePostAttend} disabled={dogList.length > 0}>
+          <BackgroundButton onClick={handlePostAttend} disabled={selectedList.length === 0}>
             출석 완료
           </BackgroundButton>
         </BackgroundButtonWrapper>

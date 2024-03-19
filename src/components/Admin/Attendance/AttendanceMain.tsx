@@ -1,13 +1,14 @@
-import useDogSearchQuery from "hooks/api/useDogSearchQuery";
-import { type SetStateAction, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { LIST } from "constants/option";
+
+import { useDogListAndSortedList, useDogSearchQuery } from "hooks/api/attendanceQuery";
+import { type SetStateAction, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 
 import AttendanceSearchInput from "./AttendanceSearchInput";
-import List from "./List";
 import SearchList from "./SearchList";
-import { Spacing } from "./styles";
+import SortSelectBox from "./SortSelectBox";
+import { Blur, Spacing } from "./styles";
 
 interface AttendanceMainProps {
   isFocus: boolean;
@@ -16,44 +17,47 @@ interface AttendanceMainProps {
 
 const AttendanceMain = ({ isFocus, setIsFocus }: AttendanceMainProps) => {
   const { schoolId, adminId } = useRecoilValue(adminLoginInfoAtom);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchText, setSearchText] = useState(searchParams.get("dogName") || "");
-  const { data, isLoading, isFetching } = useDogSearchQuery(schoolId, searchText);
+  const [sortName, setSortName] = useState<string>(LIST.REGISTERED);
+  const { data: dogList } = useDogListAndSortedList({ sortName, schoolId, adminId });
+  const [searchText, setSearchText] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const { data: searchList, isLoading } = useDogSearchQuery(schoolId, searchQuery);
 
-  const handleSearch = (value: React.SetStateAction<string>) => {
-    setSearchText(value);
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
   };
 
-  // FIXME: searchText가 없는데도 사이드이펙트 실행되고 있음.
-  useEffect(() => {
-    const cleanedSearchParams = Object.fromEntries(
-      Object.entries({ dogName: searchText }).filter(([, value]) => !!value)
-    );
-    setSearchParams(new URLSearchParams(cleanedSearchParams));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchText]);
+  const handleClear = () => {
+    setSearchText("");
+    setSearchQuery("");
+  };
 
-  const showSearchResults = isLoading || isFetching || data || searchText;
-
+  // TODO: loading과 error 컴포넌트는 SearchList에 내려줘서 표시하도록 변경 or 따로 하위 Fetcher 컴포넌트 만들 것
   if (isLoading) return <div>로딩중...</div>;
+
+  const dataToShow = searchQuery ? searchList : dogList;
+  const type = searchQuery ? "search" : "list";
 
   return (
     <>
       <AttendanceSearchInput
         name="dogSearch"
         placeholder="검색"
+        onChange={(e) => setSearchText(e.target.value)}
         onSearch={handleSearch}
+        onClear={handleClear}
+        value={searchText}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
       />
-      {showSearchResults ? (
-        <>
+      <Blur $isFocus={isFocus}>
+        {!searchQuery ? (
+          <SortSelectBox sortName={sortName} setSortName={setSortName} />
+        ) : (
           <Spacing />
-          <SearchList data={data} />
-        </>
-      ) : (
-        <List schoolId={schoolId} adminId={adminId} isFocus={isFocus} />
-      )}
+        )}
+        <SearchList data={dataToShow} type={type} />
+      </Blur>
     </>
   );
 };
