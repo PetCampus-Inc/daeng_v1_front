@@ -16,7 +16,7 @@ const TeacherManagePage = () => {
   return (
     <>
       <Header type="text" text="교사 관리" />
-      <PageContainer pt={2} color="gray_5">
+      <PageContainer pt="2" color="gray_5">
         <TeacherInfoTitle isEditable={isEditable} setIsEditable={setIsEditable} />
         <EnrolledTeacherList teacherList={data.teacherList} isEditable={isEditable} />
         <TitleWithIcon title="승인 대기중인 교사" />

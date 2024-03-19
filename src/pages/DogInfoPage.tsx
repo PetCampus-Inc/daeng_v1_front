@@ -41,7 +41,7 @@ const DogInfoPage = () => {
           />
         }
       />
-      <PageContainer pt={2} pl={0} pb={0} color="primaryColor">
+      <PageContainer pt="2" ph="0" color="primaryColor">
         <nav>
           <NavWrapper>
             {currentSteps.map((item, index) => (

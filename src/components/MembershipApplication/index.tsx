@@ -35,7 +35,7 @@ const MembershipApplication = () => {
   return (
     <>
       <Header type="text" text="가입신청서" />
-      <PageContainer color="BGray" pb={2.5}>
+      <PageContainer color="BGray" pb="2.5">
         <S.Container>
           <S.TopWrapper>
             <S.TitleWrapper>
