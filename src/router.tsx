@@ -47,11 +47,24 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
     },
     {
       path: PATH.ADMIN_ATTENDANCE,
-      element: (
-        <Suspense>
-          <Pages.AttendancePage />
-        </Suspense>
-      )
+      children: [
+        {
+          index: true,
+          element: (
+            <Suspense>
+              <Pages.AttendancePage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.ADMIN_ATTENDANCE_INFO(),
+          element: (
+            <Suspense>
+              <Pages.DogInfoPage />
+            </Suspense>
+          )
+        }
+      ]
     },
     {
       path: PATH.ADMIN_CARE_DOG,
@@ -71,14 +84,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: <Pages.AttendCareDeletePage />
         }
       ]
-    },
-    {
-      path: PATH.ADMIN_DOG_INFO,
-      element: (
-        <Suspense fallback={<div>로딩중</div>}>
-          <Pages.DogInfoPage />
-        </Suspense>
-      )
     },
     {
       path: PATH.ADMIN_CHAT,
