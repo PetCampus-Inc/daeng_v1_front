@@ -133,7 +133,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.ADMIN_EDIT_FORM(":formId"),
+          path: PATH.ADMIN_EDIT_FORM(),
           element: (
             <Suspense>
               <Pages.EnrollmentFormEditPage />
@@ -141,7 +141,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.ADMIN_FORM(":formId"),
+          path: PATH.ADMIN_FORM(),
           element: (
             <Suspense>
               <Pages.EnrollmentFormDetailPage />
