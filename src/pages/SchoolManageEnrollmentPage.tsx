@@ -11,7 +11,7 @@ const SchoolManageEnrollmentPage = () => {
   return (
     <>
       <Header type="text" text="신규가입" />
-      <PageContainer pt={2} color="gray_5">
+      <PageContainer pt="2" color="gray_5">
         <TitleWithIcon
           title="등록된 가입신청서"
           icon={<ListIcon />}

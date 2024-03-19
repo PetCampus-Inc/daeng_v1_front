@@ -25,7 +25,7 @@ const DogInfoPage = () => {
   const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
   const { data } = useGetPrecautions(2);
-  const showNotice = data.modifiedList.length > 0;
+  const showNotice = data.modifiedList?.length > 0;
 
   return (
     <>
@@ -41,7 +41,7 @@ const DogInfoPage = () => {
           />
         }
       />
-      <PageContainer pt={2} pl={0} pb={0} color="primaryColor">
+      <PageContainer pt="2" ph="0" color="primaryColor">
         <nav>
           <NavWrapper>
             {currentSteps.map((item, index) => (

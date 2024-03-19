@@ -14,7 +14,7 @@ const AttendCareDeletePage = () => {
   return (
     <>
       <Header type="text" text="관리 강아지 삭제" />
-      <PageContainer color="BGray" pt={2}>
+      <PageContainer color="BGray" pt="2">
         <AttendCareDelete data={data} />
       </PageContainer>
     </>

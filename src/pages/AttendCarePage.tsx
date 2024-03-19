@@ -26,7 +26,7 @@ const AttendCarePage = () => {
   return (
     <>
       <Header type="notice" text="강아지 관리" />
-      <PageContainer color={isFirstEntry ? "white" : "BGray"} pt={2}>
+      <PageContainer color={isFirstEntry ? "white" : "BGray"} pt="2">
         {isFirstEntry ? <AttendCareInit /> : <AttendCareMain data={data} />}
       </PageContainer>
       <NavBar />

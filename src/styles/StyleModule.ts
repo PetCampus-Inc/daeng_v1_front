@@ -45,15 +45,15 @@ export const fadeIn = keyframes`
 export const PageContainer = styled.div.withConfig({
   shouldForwardProp: (prop) => !["pt", "pb", "ph", "pr", "pl", "color"].includes(prop)
 })<{
-  pt?: number;
-  pb?: number;
-  ph?: number;
-  pr?: number;
-  pl?: number;
+  pt?: string;
+  pb?: string;
+  ph?: string;
+  pr?: string;
+  pl?: string;
   color?: TColor;
 }>`
   padding-top: ${({ pt }) => (pt ? `calc(5vh + ${pt}rem)` : "calc(5vh)")};
-  padding-bottom: ${({ pb }) => (pb ? `calc(7vh + ${pb}rem)` : "calc(7vh)")};
+  padding-bottom: ${({ pb }) => (pb ? `calc(7vh + ${pb}rem)` : 0)};
   padding-left: ${({ pl, ph }) => (pl ? `${pl}rem` : ph ? `${ph}rem` : "1rem")};
   padding-right: ${({ pr, ph }) => (pr ? `${pr}rem` : ph ? `${ph}rem` : "1rem")};
   background-color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.white)};

@@ -16,7 +16,7 @@ const AttendancePage = () => {
   return (
     <>
       <Header type="notice" text="출석부" />
-      <PageContainer color="BGray" pt={2}>
+      <PageContainer color="BGray" pt="2">
         <AttendanceTop mode={mode} setMode={setMode} isFocus={isFocus} />
         {isDefaultMode && <AttendanceMain isFocus={isFocus} setIsFocus={setIsFocus} />}
         {isAttendMode && <Attendance isFocus={isFocus} setIsFocus={setIsFocus} setMode={setMode} />}
