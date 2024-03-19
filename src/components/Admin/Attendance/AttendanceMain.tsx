@@ -32,6 +32,7 @@ const AttendanceMain = ({ isFocus, setIsFocus }: AttendanceMainProps) => {
     setSearchQuery("");
   };
 
+  // TODO: loading과 error 컴포넌트는 SearchList에 내려줘서 표시하도록 변경 or 따로 하위 Fetcher 컴포넌트 만들 것
   if (isLoading) return <div>로딩중...</div>;
 
   const dataToShow = searchQuery ? searchList : dogList;
