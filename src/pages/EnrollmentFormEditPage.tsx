@@ -1,4 +1,3 @@
-import { PATH } from "constants/path";
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
 
 import DogInfo from "components/Admin/EnrollmentForm/EditForm/DogInfo";
@@ -88,7 +87,7 @@ const EnrollmentFormEditPage = () => {
           </FormProvider>
         </Container>
       </PageContainer>
-      <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />
+      <NavBar type="admin" />
     </>
   );
 };

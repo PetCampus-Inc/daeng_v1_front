@@ -4,7 +4,7 @@ import { DropdownContext } from "./provider";
 import { Item, ItemWrapper } from "./styles";
 
 interface DropdownOptionProps {
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent) => void;
   handleChange?: () => void;
   isSelected?: boolean;
 }
@@ -23,9 +23,11 @@ const DropdownOption = ({
   return (
     <ItemWrapper
       onClick={(e) => {
+        e.stopPropagation();
         e.preventDefault();
         handleChange?.();
-        onClick?.();
+        onClick?.(e);
+        dropdownContext.changeIsOpen(false);
       }}
     >
       <Item>{children}</Item>

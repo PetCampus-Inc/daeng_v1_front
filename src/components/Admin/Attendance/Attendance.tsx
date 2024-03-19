@@ -1,17 +1,14 @@
-import BackgroundButton from "components/common/Button/BackgroundButton";
-import {
-  useAttendDogSearchQuery,
-  useCreateAttendDog,
-  useGetAttendDogList
-} from "hooks/api/attendanceQuery";
+import { useAttendDogSearchQuery, useGetAttendDogList } from "hooks/api/attendanceQuery";
 import { type SetStateAction, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
+import { useRecoilValue } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
 
-import AttendanceAvatar from "./AttendanceAvatar";
-import AttendanceSearchInput from "./AttendanceSearchInput";
-import AttendanceSearchList from "./AttendanceSearchList";
-import { BackgroundButtonWrapper, Blur, Spacing } from "./styles";
+import AttendDogSubmitButton from "./AttendanceButton/AttendDogSubmitButton";
+import AttendanceSearchInput from "./AttendanceInput/AttendanceSearchInput";
+import AttendanceAvatar from "./AttendanceList/AttendanceAvatar";
+import AttendanceSearchList from "./AttendanceList/AttendanceSearchList";
+import { SelectedDogsProvider } from "./context/SelectedDogProvider";
+import { Blur } from "./styles";
 
 interface AttendanceProps {
   isFocus: boolean;
@@ -25,7 +22,6 @@ const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
   const [searchText, setSearchText] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { data: searchList, isLoading } = useAttendDogSearchQuery(schoolId, searchQuery);
-  const [selectedList, setSelectedList] = useRecoilState(attendDogListInfoAtom);
 
   const handleSearch = (value: string) => {
     setSearchQuery(value);
@@ -34,24 +30,6 @@ const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
   const handleClear = () => {
     setSearchText("");
     setSearchQuery("");
-  };
-
-  const { mutateAttend } = useCreateAttendDog();
-
-  const handleItemRemove = (dogId: number) => {
-    setSelectedList((prev) => prev.filter((dog) => dog.dogId !== dogId));
-  };
-
-  const handlePostAttend = () => {
-    mutateAttend(
-      {
-        schoolId,
-        selectedDogIds: selectedList.map((item) => item.attendanceId)
-      },
-      {
-        onSuccess: () => setMode("DEFAULT")
-      }
-    );
   };
 
   if (isLoading) return <div>로딩중...</div>;
@@ -72,17 +50,11 @@ const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
         onBlur={() => setIsFocus(false)}
       />
       <Blur $isFocus={isFocus}>
-        {selectedList.length > 0 ? (
-          <AttendanceAvatar selectedDogs={selectedList} onRemoveDog={handleItemRemove} />
-        ) : (
-          <Spacing />
-        )}
-        <AttendanceSearchList data={dataToShow} type={type} />
-        <BackgroundButtonWrapper>
-          <BackgroundButton onClick={handlePostAttend} disabled={selectedList.length === 0}>
-            출석 완료
-          </BackgroundButton>
-        </BackgroundButtonWrapper>
+        <SelectedDogsProvider>
+          <AttendanceAvatar />
+          <AttendanceSearchList data={dataToShow} type={type} />
+          <AttendDogSubmitButton schoolId={schoolId} setMode={setMode} />
+        </SelectedDogsProvider>
       </Blur>
     </>
   );

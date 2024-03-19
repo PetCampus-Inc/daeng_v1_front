@@ -27,7 +27,8 @@ const AttendanceOptionList = ({ options, handleOptionClick }: Props) => {
         {options.map((option, index) => (
           <Dropdown.Option
             key={index}
-            onClick={() => {
+            onClick={(e) => {
+              e?.stopPropagation();
               handleOptionClick(option);
             }}
           >

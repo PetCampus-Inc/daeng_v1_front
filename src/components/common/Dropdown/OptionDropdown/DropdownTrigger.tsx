@@ -16,6 +16,7 @@ const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
     const dropdownTriggerRef = (ref || originalRef) as RefObject<HTMLButtonElement>;
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
       onClick?.(event);
       if (dropdownContext) {
         dropdownContext.toggle();

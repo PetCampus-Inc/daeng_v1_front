@@ -1,5 +1,4 @@
 import styled from "styled-components";
-export { BackgroundButtonWrapper } from "components/Admin/AttendCare/CareButton/styles";
 
 export const Container = styled.div`
   height: 100vh;

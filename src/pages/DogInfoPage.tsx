@@ -17,7 +17,6 @@ import useGetPrecautions from "hooks/api/useGetPrecautions";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
-import { ThemeConfig } from "styles/ThemeConfig";
 
 const DogInfoPage = () => {
   const navigate = useNavigate();
@@ -25,7 +24,8 @@ const DogInfoPage = () => {
   const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
   const { data } = useGetPrecautions(2);
-  const showNotice = data.modifiedList.length > 0;
+
+  const showNotice = !!data.modifiedList;
 
   return (
     <>
