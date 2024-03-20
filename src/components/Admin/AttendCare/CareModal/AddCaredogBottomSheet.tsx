@@ -3,6 +3,7 @@ import { useCreateCareDogs } from "hooks/api/caredogQuery";
 import useModal from "hooks/common/useModal";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { styled } from "styled-components";
 
 import AlertAlreadySelectedModal from "./AlertAlreadySelectedModal";
 import AddDogList from "../CareList/AddDogList";
@@ -37,7 +38,13 @@ const AddCaredogBottomSheet = ({ isVisible, close }: AddCaredogBottomSheetProps)
       <BottomSheet isOpen={isVisible} onClose={() => close()}>
         <BottomSheet.Content>
           <BottomSheet.Control />
-          <AddDogList adminId={adminId} />
+          <BottomSheet.Title align="left">오늘 관리할 강아지</BottomSheet.Title>
+          <BottomSheet.Subtitle align="left">
+            관리할 강아지 목록에 추가할 강아지를 선택해 주세요
+          </BottomSheet.Subtitle>
+          <ListWrapper>
+            <AddDogList adminId={adminId} />
+          </ListWrapper>
           <BottomSheet.Button
             actionText="선택 완료"
             actionFn={handleSubmit}
@@ -48,5 +55,9 @@ const AddCaredogBottomSheet = ({ isVisible, close }: AddCaredogBottomSheetProps)
     </>
   );
 };
+
+const ListWrapper = styled.div`
+  padding-top: 0.75rem;
+`;
 
 export default AddCaredogBottomSheet;
