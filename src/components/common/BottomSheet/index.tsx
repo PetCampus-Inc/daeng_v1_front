@@ -10,7 +10,7 @@ import { BottomSheetProvider } from "./provider";
 import { StyledBottomSheet, BackDrop, Container } from "./styles";
 import Portal from "../Portal";
 
-interface IBottomSheetProps {
+export interface IBottomSheetProps {
   isOpen: boolean;
   onClose: () => void;
 }
