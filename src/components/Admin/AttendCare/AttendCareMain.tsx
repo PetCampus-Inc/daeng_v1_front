@@ -11,6 +11,7 @@ import CareOptionDropdown from "./CareButton/CareOptionDropdown";
 import MainSendCard from "./CareButton/MainSendCard";
 import MainDogList from "./CareList/MainDogList";
 import AddCaredogBottomSheet from "./CareModal/AddCaredogBottomSheet";
+import AgendaSchedulerBottomSheet from "./CareModal/AgendaSchedulerBottomSheet";
 import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
 import { ButtonWrapper } from "./styles";
 
@@ -20,11 +21,20 @@ interface AttendCareMainProps {
 
 const AttendCareMain = ({ data }: AttendCareMainProps) => {
   const navigate = useNavigate();
-  const { isVisible, open, close } = useBottomSheet();
+  const {
+    isVisible: isAddCareDogOpen,
+    open: addCareDogOpen,
+    close: addCareDogClose
+  } = useBottomSheet();
+  const {
+    isVisible: isSchedulerOpen,
+    open: schedulerOpen,
+    close: schedulerClose
+  } = useBottomSheet();
 
   const CARE_OPTIONS: { [key: string]: () => void } = {
     "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE_DOG + "/delete"),
-    "알림장 일괄 전송": () => console.log("알림장 전송 바텀시트")
+    "알림장 일괄 전송": schedulerOpen
   };
 
   const handleOptionClick = (option: string) => {
@@ -34,8 +44,9 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
 
   return (
     <>
+      <AgendaSchedulerBottomSheet isOpen={isSchedulerOpen} onClose={schedulerClose} />
       <SelectedDogsProvider>
-        <AddCaredogBottomSheet isVisible={isVisible} close={close} />
+        <AddCaredogBottomSheet isVisible={isAddCareDogOpen} close={addCareDogClose} />
       </SelectedDogsProvider>
       <MainSendCard
         text="견주에게 바로 사진을 보낼 수 있어요"
@@ -43,7 +54,7 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
       />
       <ButtonWrapper>
         <SimpleButton
-          onClick={open}
+          onClick={addCareDogOpen}
           leftAddon={<AddIcon />}
           rightAddon={<RightArrow w={"20"} h={"20"} />}
         >
