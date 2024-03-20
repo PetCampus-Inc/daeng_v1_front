@@ -14,12 +14,11 @@ export const StyledTimeWrapper = styled.div`
   gap: 0.25rem;
 
   & > .text {
-    color: ${({ theme }) => theme.colors.gray_2};
     ${({ theme }) => theme.typo.label2_14_M};
   }
 `;
 
-export const StyledTimeInputWrapper = styled.div`
+export const StyledTimeInputWrapper = styled.div<{ $isActive?: boolean }>`
   position: relative;
   display: flex;
   height: 3rem;
@@ -29,7 +28,15 @@ export const StyledTimeInputWrapper = styled.div`
 
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.gray_5};
-  color: ${({ theme }) => theme.colors.gray_2};
+
+  color: ${({ $isActive, theme }) => ($isActive ? theme.colors.gray_2 : theme.colors.gray_3)};
+  border: 1px solid
+    ${({ $isActive, theme }) => ($isActive ? theme.colors.gray_5 : theme.colors.gray_4)};
+
+  &:disabled {
+    color: ${({ theme }) => theme.colors.gray_3};
+    border: 1px solid ${({ theme }) => theme.colors.gray_4};
+  }
 `;
 
 export const StyledTimeInput = styled.div`

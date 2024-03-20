@@ -29,7 +29,9 @@ export const TimePickerContainer = styled.div<{ $isActive: boolean }>`
     $isActive ? theme.colors.white : theme.colors.gray_5};
   color: ${({ $isActive, theme }) => ($isActive ? theme.colors.gray_1 : theme.colors.gray_3)};
 
-  box-shadow: ${({ theme }) => theme.shadows.card};
+  box-shadow: ${({ $isActive, theme }) => $isActive && theme.shadows.card};
+
+  transition: all 0.2s ease-in-out;
 `;
 
 export const TimePickerTitle = styled.p`

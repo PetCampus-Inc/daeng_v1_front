@@ -89,48 +89,64 @@ export interface TimePickerHandles {
   getTime: () => TimeState;
 }
 
-const TimePicker = forwardRef<TimePickerHandles>((props, ref) => {
-  const [state, dispatch] = useReducer(timeReducer, {
-    period: "오후",
-    hours: "12",
-    minutes: "00"
-  });
+const TimePicker = forwardRef<TimePickerHandles, { disabled?: boolean }>(
+  ({ disabled = false }, ref) => {
+    const [state, dispatch] = useReducer(timeReducer, {
+      period: "오후",
+      hours: "12",
+      minutes: "00"
+    });
 
-  useImperativeHandle(ref, () => ({
-    getTime: () => state
-  }));
+    useImperativeHandle(ref, () => ({
+      getTime: () => state
+    }));
 
-  return (
-    <StyledTimePickerWrapper>
-      <StyledTimeInputWrapper
-        as="button"
-        onClick={() => dispatch({ type: ActionType.TOGGLE_PERIOD })}
-      >
-        {state.period}
-      </StyledTimeInputWrapper>
-      <StyledTimeWrapper>
-        <StyledTimeInputWrapper>
-          <DecrementButton onClick={() => dispatch({ type: ActionType.DECREMENT_HOURS })}>
-            -
-          </DecrementButton>
-          <StyledTimeInput> {state.hours}</StyledTimeInput>
-          <IncrementButton onClick={() => dispatch({ type: ActionType.INCREMENT_HOURS })}>
-            +
-          </IncrementButton>
+    return (
+      <StyledTimePickerWrapper>
+        <StyledTimeInputWrapper
+          as="button"
+          onClick={() => dispatch({ type: ActionType.TOGGLE_PERIOD })}
+          disabled={disabled}
+          $isActive={!disabled}
+        >
+          {state.period}
         </StyledTimeInputWrapper>
-        <span className="text">:</span>
-        <StyledTimeInputWrapper>
-          <DecrementButton onClick={() => dispatch({ type: ActionType.DECREMENT_MINUTES })}>
-            -
-          </DecrementButton>
-          <StyledTimeInput>{state.minutes}</StyledTimeInput>
-          <IncrementButton onClick={() => dispatch({ type: ActionType.INCREMENT_MINUTES })}>
-            +
-          </IncrementButton>
-        </StyledTimeInputWrapper>
-      </StyledTimeWrapper>
-    </StyledTimePickerWrapper>
-  );
-});
+        <StyledTimeWrapper>
+          <StyledTimeInputWrapper $isActive={!disabled}>
+            <DecrementButton
+              onClick={() => dispatch({ type: ActionType.DECREMENT_HOURS })}
+              disabled={disabled}
+            >
+              -
+            </DecrementButton>
+            <StyledTimeInput> {state.hours}</StyledTimeInput>
+            <IncrementButton
+              onClick={() => dispatch({ type: ActionType.INCREMENT_HOURS })}
+              disabled={disabled}
+            >
+              +
+            </IncrementButton>
+          </StyledTimeInputWrapper>
+          <span className="text">:</span>
+          <StyledTimeInputWrapper $isActive={!disabled}>
+            <DecrementButton
+              onClick={() => dispatch({ type: ActionType.DECREMENT_MINUTES })}
+              disabled={disabled}
+            >
+              -
+            </DecrementButton>
+            <StyledTimeInput>{state.minutes}</StyledTimeInput>
+            <IncrementButton
+              onClick={() => dispatch({ type: ActionType.INCREMENT_MINUTES })}
+              disabled={disabled}
+            >
+              +
+            </IncrementButton>
+          </StyledTimeInputWrapper>
+        </StyledTimeWrapper>
+      </StyledTimePickerWrapper>
+    );
+  }
+);
 
 export default TimePicker;
