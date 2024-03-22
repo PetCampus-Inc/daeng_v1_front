@@ -1,18 +1,19 @@
 import { type IBottomSheetProps } from "components/common/BottomSheet";
 import CallBottomSheet from "components/common/BottomSheet/CallBottomSheet";
+import { useCallMember } from "hooks/api/attendanceQuery";
 import { memo } from "react";
 
 import type { IMemberCallInfo } from "types/admin.attendance.type";
 
 interface CallMemberBottomSheetProps extends IBottomSheetProps {
-  info: IMemberCallInfo | null;
+  dogId: number;
 }
 
-const CallMemberBottomSheet = memo(({ info, isOpen, close }: CallMemberBottomSheetProps) => {
-  if (!info) return null;
+const CallMemberBottomSheet = memo(({ dogId, isOpen, close }: CallMemberBottomSheetProps) => {
+  const { data } = useCallMember(dogId);
 
-  const handleCallMember = (info: IMemberCallInfo) => {
-    console.log(info.phoneNumber);
+  const handleCallMember = (data: IMemberCallInfo) => {
+    console.log(data.phoneNumber);
     // TODO: 해당 견주의 전화번호가 입력된 전화앱으로 바로 이동.
     close();
   };
@@ -20,10 +21,10 @@ const CallMemberBottomSheet = memo(({ info, isOpen, close }: CallMemberBottomShe
   return (
     <CallBottomSheet
       isOpen={isOpen}
-      dogName={info.dogName}
-      phoneNumber={info.phoneNumber}
+      dogName={data.dogName}
+      phoneNumber={data.phoneNumber}
       close={close}
-      handleCall={() => handleCallMember(info)}
+      handleCall={() => handleCallMember(data)}
     />
   );
 });
