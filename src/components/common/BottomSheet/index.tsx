@@ -41,38 +41,42 @@ const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBotto
   };
 
   const BottomSheetVariants = {
-    hidden: { y: "100%", opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    hidden: { y: "100%" },
+    visible: { y: 0 }
+  };
+
+  const transition = {
+    type: "spring",
+    damping: 40,
+    stiffness: 400
   };
 
   return (
-    <Portal>
-      <AnimatePresence mode="wait">
-        {isOpen && (
-          <BottomSheetProvider onClose={onClose}>
-            <Container ref={parentRef}>
-              <BackDrop
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={backdropVariants}
-                transition={{ duration: 0.3 }}
-              />
-              <StyledBottomSheet
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={BottomSheetVariants}
-                transition={{ duration: 0.3 }}
-                ref={bottomSheetRef}
-              >
-                {children}
-              </StyledBottomSheet>
-            </Container>
-          </BottomSheetProvider>
-        )}
-      </AnimatePresence>
-    </Portal>
+    <AnimatePresence mode="wait">
+      {isOpen && (
+        <BottomSheetProvider onClose={onClose}>
+          <Container ref={parentRef}>
+            <BackDrop
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={backdropVariants}
+              transition={{ duration: 0.3 }}
+            />
+            <StyledBottomSheet
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={BottomSheetVariants}
+              transition={transition}
+              ref={bottomSheetRef}
+            >
+              {children}
+            </StyledBottomSheet>
+          </Container>
+        </BottomSheetProvider>
+      )}
+    </AnimatePresence>
   );
 };
 
