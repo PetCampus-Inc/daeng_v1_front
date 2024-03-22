@@ -1,10 +1,11 @@
-import { useContext, useEffect, useId, useMemo, useRef } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 
 import { OverlayController, type OverlayControlRef } from "./OverlayController";
 import { OverlayContext } from "./OverlayProvider";
 
 import type { CreateOverlayElement } from "./type";
 
+let elementId = 1;
 interface Options {
   exitOnUnmount?: boolean;
 }
@@ -16,7 +17,7 @@ const useOverlay = ({ exitOnUnmount = true }: Options = {}) => {
     throw new Error("useOverlay is only available within OverlayProvider.");
   }
 
-  const [id] = useId();
+  const [id] = useState(() => String(elementId++));
 
   const { mount, unmount } = context;
 
