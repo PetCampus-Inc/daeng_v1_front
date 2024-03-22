@@ -1,6 +1,6 @@
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { useDeleteCareDogs } from "hooks/api/caredogQuery";
-import useModal from "hooks/common/useModal";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useContext } from "react";
 
 import { BackgroundButtonWrapper } from "./styles";
@@ -8,30 +8,34 @@ import DeleteCareDogModal from "../CareModal/DeleteCareDogModal";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
 const DeleteDogButton = ({ adminId }: { adminId?: number }) => {
-  if (!adminId) throw new Error("adminId가 없습니다!");
-  const modal = useModal();
+  const overlay = useOverlay();
   const { mutateDeleteCareDogs } = useDeleteCareDogs();
+
   const selectIdsContext = useContext(SelectedIdsContext);
   const selectedDogId = Array.from(selectIdsContext?.selectedIds ?? []);
+
+  if (!adminId) throw new Error("adminId가 없습니다!");
 
   const handleSubmit = () => {
     console.log({ adminId, selectedDogId });
     mutateDeleteCareDogs({ adminId, selectedDogId });
   };
 
+  const openPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <DeleteCareDogModal isOpen={isOpen} close={close} action={handleSubmit} />
+    ));
+
   return (
-    <>
-      <DeleteCareDogModal isOpen={modal.isVisible} close={modal.close} action={handleSubmit} />
-      <BackgroundButtonWrapper $isBottom>
-        <BackgroundButton
-          backgroundColor="white"
-          disabled={selectedDogId.length === 0}
-          onClick={modal.open}
-        >
-          삭제
-        </BackgroundButton>
-      </BackgroundButtonWrapper>
-    </>
+    <BackgroundButtonWrapper $isBottom>
+      <BackgroundButton
+        backgroundColor="white"
+        disabled={selectedDogId.length === 0}
+        onClick={openPopup}
+      >
+        삭제
+      </BackgroundButton>
+    </BackgroundButtonWrapper>
   );
 };
 
