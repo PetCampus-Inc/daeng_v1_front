@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { StyledContainer } from "components/common/CustomToast/styles";
+import OverlayProvider from "hooks/common/useOverlay/OverlayProvider";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import AppRouter from "router";
@@ -29,7 +30,9 @@ root.render(
     <ThemeProvider theme={{ ...ThemeConfig, mediaQueries }}>
       <RecoilRoot>
         <GlobalStyle />
-        <AppRouter queryClient={queryClient} />
+        <OverlayProvider>
+          <AppRouter queryClient={queryClient} />
+        </OverlayProvider>
         <StyledContainer
           position="bottom-center"
           limit={1}
