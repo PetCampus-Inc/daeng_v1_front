@@ -1,5 +1,5 @@
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
-import useBottomSheet from "hooks/common/useBottomSheet";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { memo, type SetStateAction } from "react";
 
 import { ArrowDownButton, SelectBox, Text } from "./styles";
@@ -11,23 +11,26 @@ export type TSortSelectBoxProps = {
 };
 
 const SortSelectBox = memo(({ sortName, setSortName }: TSortSelectBoxProps) => {
-  const { isVisible, open, close } = useBottomSheet(false);
+  const overlay = useOverlay();
 
-  return (
-    <>
+  // FIXME: SortSelectBox내부에서 sortName 상태 관리하도록 변경 필요!
+  const openCallPopup = () =>
+    overlay.open(({ isOpen, close }) => (
       <SortOptionListBottomSheet
         sortName={sortName}
         setSortName={setSortName}
-        isVisible={isVisible}
+        isVisible={isOpen}
         close={close}
       />
-      <SelectBox onClick={open}>
-        <Text>{sortName}</Text>
-        <ArrowDownButton type="button">
-          <ArrowDownIcon />
-        </ArrowDownButton>
-      </SelectBox>
-    </>
+    ));
+
+  return (
+    <SelectBox onClick={openCallPopup}>
+      <Text>{sortName}</Text>
+      <ArrowDownButton type="button">
+        <ArrowDownIcon />
+      </ArrowDownButton>
+    </SelectBox>
   );
 });
 
