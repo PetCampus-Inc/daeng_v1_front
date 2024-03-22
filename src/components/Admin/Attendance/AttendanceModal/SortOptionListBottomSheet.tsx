@@ -21,7 +21,7 @@ const SortOptionListBottomSheet = ({
   setSortName
 }: TSortOptionList) => {
   return (
-    <BottomSheet isOpen={isVisible} onClose={close}>
+    <BottomSheet isOpen={isVisible} close={close}>
       <BottomSheet.Content>
         <BottomSheet.Title variant="body">정렬</BottomSheet.Title>
         <ListWrapper>

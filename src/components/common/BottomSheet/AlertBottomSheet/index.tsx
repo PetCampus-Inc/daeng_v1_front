@@ -1,22 +1,20 @@
 import AlertIcon from "assets/svg/alert-icon";
 import styled from "styled-components";
 
-import BottomSheet from "../index";
+import BottomSheet, { type IBottomSheetProps } from "../index";
 
 import type { BottomSheetButtonProps } from "../BottomSheetButton";
 
-interface IAlertBottomSheet extends BottomSheetButtonProps {
+interface IAlertBottomSheet extends BottomSheetButtonProps, IBottomSheetProps {
   title: string;
   subtitle: string;
-  isOpen: boolean;
-  onClose: () => void;
   hasControl?: boolean;
 }
 
 const AlertBottomSheet = ({
   title,
   subtitle,
-  onClose,
+  close,
   isOpen,
   hasControl = false, // 바텀시트 상단 x 버튼
   closeText,
@@ -25,7 +23,7 @@ const AlertBottomSheet = ({
   actionFn
 }: IAlertBottomSheet) => {
   return (
-    <BottomSheet isOpen={isOpen} onClose={onClose}>
+    <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
         {hasControl && <BottomSheet.Control />}
         <IconWrapper>

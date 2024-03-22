@@ -1,12 +1,11 @@
+import { type IBottomSheetProps } from "components/common/BottomSheet";
 import CallBottomSheet from "components/common/BottomSheet/CallBottomSheet";
 import { memo } from "react";
 
 import type { IMemberCallInfo } from "types/admin.attendance.type";
 
-interface CallMemberBottomSheetProps {
+interface CallMemberBottomSheetProps extends IBottomSheetProps {
   info: IMemberCallInfo | null;
-  isOpen: boolean;
-  close: () => void;
 }
 
 const CallMemberBottomSheet = memo(({ info, isOpen, close }: CallMemberBottomSheetProps) => {
@@ -23,7 +22,7 @@ const CallMemberBottomSheet = memo(({ info, isOpen, close }: CallMemberBottomShe
       isOpen={isOpen}
       dogName={info.dogName}
       phoneNumber={info.phoneNumber}
-      onClose={close}
+      close={close}
       handleCall={() => handleCallMember(info)}
     />
   );

@@ -63,7 +63,7 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
 
   return (
     <>
-      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
+      <Modal isOpen={isDeleteModalOpen} close={() => setIsDeleteModalOpen(false)}>
         <Modal.Content>
           <Modal.Title
             title="모두 삭제할 수 없어요"
@@ -72,7 +72,7 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
           <Modal.Button actionText="닫기" actionFn={() => setIsDeleteModalOpen(false)} />
         </Modal.Content>
       </Modal>
-      <BottomSheet isOpen={bottomSheet.isVisible} onClose={() => bottomSheet.close()}>
+      <BottomSheet isOpen={bottomSheet.isVisible} close={() => bottomSheet.close()}>
         <BottomSheet.Content>
           <BottomSheet.Control />
           <TicketCounter
