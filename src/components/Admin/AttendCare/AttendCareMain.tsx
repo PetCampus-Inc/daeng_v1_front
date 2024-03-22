@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import AddIcon from "assets/svg/addIcon";
 import RightArrow from "assets/svg/right-arrow";
 import SimpleButton from "components/common/Button/SimpleButton";
-import useBottomSheet from "hooks/common/useBottomSheet";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { ICareDogInfo } from "types/admin.caredog.type";
 
@@ -21,20 +21,23 @@ interface AttendCareMainProps {
 
 const AttendCareMain = ({ data }: AttendCareMainProps) => {
   const navigate = useNavigate();
-  const {
-    isVisible: isAddCareDogOpen,
-    open: addCareDogOpen,
-    close: addCareDogClose
-  } = useBottomSheet();
-  const {
-    isVisible: isSchedulerOpen,
-    open: schedulerOpen,
-    close: schedulerClose
-  } = useBottomSheet();
+  const overlay = useOverlay();
+
+  const openAddDogPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <SelectedDogsProvider>
+        <AddCaredogBottomSheet isOpen={isOpen} close={close} />
+      </SelectedDogsProvider>
+    ));
+
+  const openSchedulerPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AgendaSchedulerBottomSheet isOpen={isOpen} close={close} />
+    ));
 
   const CARE_OPTIONS: { [key: string]: () => void } = {
     "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE_DOG + "/delete"),
-    "알림장 일괄 전송": schedulerOpen
+    "알림장 일괄 전송": openSchedulerPopup
   };
 
   const handleOptionClick = (option: string) => {
@@ -44,17 +47,13 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
 
   return (
     <>
-      <AgendaSchedulerBottomSheet isOpen={isSchedulerOpen} onClose={schedulerClose} />
-      <SelectedDogsProvider>
-        <AddCaredogBottomSheet isVisible={isAddCareDogOpen} close={addCareDogClose} />
-      </SelectedDogsProvider>
       <MainSendCard
         text="견주에게 바로 사진을 보낼 수 있어요"
         onClick={() => navigate("강아지관리 상세정보")}
       />
       <ButtonWrapper>
         <SimpleButton
-          onClick={addCareDogOpen}
+          onClick={openAddDogPopup}
           leftAddon={<AddIcon />}
           rightAddon={<RightArrow w={"20"} h={"20"} />}
         >
