@@ -87,8 +87,8 @@ const SignIn = () => {
                 textcolor={ThemeConfig.colors.black}
                 marginbottom="3%"
                 handleClick={() => {
-                  setCurrentMainStep(currentMainStep + 2);
-                  // handlerLogin();
+                  window.location.href = "/oauth2/authorization/kakao";
+                  // setCurrentMainStep(currentMainStep + 2);
                 }}
               >
                 <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
