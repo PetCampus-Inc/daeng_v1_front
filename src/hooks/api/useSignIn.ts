@@ -23,7 +23,7 @@ const useSignIn = () => {
 
   const handlerLogin = useCallback(async () => {
     try {
-      const data = await handleLoginResult(infoForLogin);
+      const data = await handleLoginResult();
       if (data.status === 200) {
         setCurrentMainStep(currentMainStep + 2);
       }

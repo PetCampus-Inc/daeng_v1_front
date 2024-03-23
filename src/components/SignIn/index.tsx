@@ -87,7 +87,7 @@ const SignIn = () => {
                 textcolor={ThemeConfig.colors.black}
                 marginbottom="3%"
                 handleClick={() => {
-                  window.location.href = "/oauth2/authorization/kakao";
+                  handlerLogin();
                   // setCurrentMainStep(currentMainStep + 2);
                 }}
               >
