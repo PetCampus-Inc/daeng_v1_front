@@ -11,9 +11,9 @@ export const PATH = {
   ADMIN_SCHOOL_MANAGE: "/admin/schoolManage", // 유치원 운영
   ADMIN_ENROLLMENT: "/admin/schoolManage/enrollment", // 원장 신규가입 관리
   ADMIN_FORMS: "/admin/schoolManage/enrollment/list", // 원장 가입신청서 목록
-  ADMIN_FORM: (formId?: string) => `/admin/schoolManage/enrollment/list/${formId ?? formId}`, // 원장 가입신청서 상세 조회
+  ADMIN_FORM: (formId?: string) => `/admin/schoolManage/enrollment/list/${formId ?? ":formId"}`, // 원장 가입신청서 상세 조회
   ADMIN_EDIT_FORM: (formId?: string) =>
-    `/admin/schoolManage/enrollment/list/${formId ?? formId}/edit`, // 원장 가입신청서 수정
+    `/admin/schoolManage/enrollment/list/${formId ?? ":formId"}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: "/admin/schoolManage/enrollment/enrollment-new", // 원장 가입신청서 등록
   ADMIN_SUBMIT_FORM: "/admin/schoolManage/enrollment/submit", // 원장 가입신청서 제출
   ADMIN_TEACHER_MANAGE: "/admin/schoolManage/teacher", // 선생님 관리

@@ -195,7 +195,7 @@ const Step4 = ({
           </StyledBottomWrapper>
           <AlertBottomSheet
             isOpen={isRegisteredPopupOpen}
-            onClose={() => {
+            close={() => {
               setIsRegisteredPopupOpen(false);
             }}
             title="이미 등록된 유치원입니다"

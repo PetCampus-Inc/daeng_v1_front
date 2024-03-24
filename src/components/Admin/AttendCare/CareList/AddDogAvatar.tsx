@@ -1,7 +1,7 @@
 import Avatar from "components/common/Avatar";
 
 import { AvatarList } from "./styles";
-import { useSelectedDogs } from "../context/SelectedDogsProvider";
+import { useSelectedDogs } from "../hooks/useSelectedDogs";
 
 const AddDogAvatar = () => {
   const [selectedDogs, dispatch] = useSelectedDogs();

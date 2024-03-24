@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode } from "react";
+import React, { createContext, useReducer, useMemo, type PropsWithChildren } from "react";
 
 import type { ICareDogInfo } from "types/admin.caredog.type";
 
@@ -7,10 +7,10 @@ type Action =
   | { type: "REMOVE_DOG"; payload: number }
   | { type: "SET_DOGS"; payload: ICareDogInfo[] };
 
-type SelectedDogsContextProps = [ICareDogInfo[], React.Dispatch<Action>];
+export type SelectedDogsContextProps = [ICareDogInfo[], React.Dispatch<Action>];
 
 const noOpDispatch: React.Dispatch<Action> = () => undefined;
-const SelectedDogsContext = createContext<SelectedDogsContextProps>([[], noOpDispatch]);
+export const SelectedDogsContext = createContext<SelectedDogsContextProps>([[], noOpDispatch]);
 
 const selectedDogsReducer = (state: ICareDogInfo[], action: Action) => {
   switch (action.type) {
@@ -33,24 +33,10 @@ const selectedDogsReducer = (state: ICareDogInfo[], action: Action) => {
   }
 };
 
-interface SelectedDogsProviderProps {
-  children: ReactNode;
-}
-
-export const SelectedDogsProvider = ({ children }: SelectedDogsProviderProps) => {
+export const SelectedDogsProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(selectedDogsReducer, []);
 
-  return (
-    <SelectedDogsContext.Provider value={[state, dispatch]}>
-      {children}
-    </SelectedDogsContext.Provider>
-  );
-};
+  const context: SelectedDogsContextProps = useMemo(() => [state, dispatch], [state, dispatch]);
 
-export const useSelectedDogs = (): SelectedDogsContextProps => {
-  const context = useContext(SelectedDogsContext);
-  if (context === undefined) {
-    throw new Error("useSelectedDogs must be used within a SelectedDogsProvider");
-  }
-  return context;
+  return <SelectedDogsContext.Provider value={context}>{children}</SelectedDogsContext.Provider>;
 };

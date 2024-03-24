@@ -8,11 +8,10 @@ import BottomSheetControl from "./BottomSheetControl";
 import { BottomSheetSubTitle, BottomSheetTitle } from "./BottomSheetTitle";
 import { BottomSheetProvider } from "./provider";
 import { StyledBottomSheet, BackDrop, Container } from "./styles";
-import Portal from "../Portal";
 
 export interface IBottomSheetProps {
   isOpen: boolean;
-  onClose: () => void;
+  close: () => void;
 }
 
 interface IBottomSheet
@@ -24,7 +23,7 @@ interface IBottomSheet
   Subtitle: typeof BottomSheetSubTitle;
 }
 
-const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBottomSheetProps>) => {
+const BottomSheetBase = ({ children, isOpen, close }: PropsWithChildren<IBottomSheetProps>) => {
   const bottomSheetRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +31,7 @@ const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBotto
     enabled: isOpen,
     targetRef: bottomSheetRef,
     parentRef: parentRef,
-    onClickOutside: onClose
+    onClickOutside: close
   });
 
   const backdropVariants = {
@@ -41,38 +40,42 @@ const BottomSheetBase = ({ children, isOpen, onClose }: PropsWithChildren<IBotto
   };
 
   const BottomSheetVariants = {
-    hidden: { y: "100%", opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    hidden: { y: "100%" },
+    visible: { y: 0 }
+  };
+
+  const transition = {
+    type: "spring",
+    damping: 40,
+    stiffness: 400
   };
 
   return (
-    <Portal>
-      <AnimatePresence mode="wait">
-        {isOpen && (
-          <BottomSheetProvider onClose={onClose}>
-            <Container ref={parentRef}>
-              <BackDrop
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={backdropVariants}
-                transition={{ duration: 0.3 }}
-              />
-              <StyledBottomSheet
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={BottomSheetVariants}
-                transition={{ duration: 0.3 }}
-                ref={bottomSheetRef}
-              >
-                {children}
-              </StyledBottomSheet>
-            </Container>
-          </BottomSheetProvider>
-        )}
-      </AnimatePresence>
-    </Portal>
+    <AnimatePresence mode="wait">
+      {isOpen && (
+        <BottomSheetProvider onClose={close}>
+          <Container ref={parentRef}>
+            <BackDrop
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={backdropVariants}
+              transition={{ duration: 0.3 }}
+            />
+            <StyledBottomSheet
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={BottomSheetVariants}
+              transition={transition}
+              ref={bottomSheetRef}
+            >
+              {children}
+            </StyledBottomSheet>
+          </Container>
+        </BottomSheetProvider>
+      )}
+    </AnimatePresence>
   );
 };
 

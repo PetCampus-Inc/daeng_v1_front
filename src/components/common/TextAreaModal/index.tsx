@@ -1,9 +1,7 @@
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 import Modal from "../ButtonModal";
-import ModalContent from "../ButtonModal/ModalContent";
 import { ModalWithTextAreaContent } from "../ButtonModal/styles";
-import Portal from "../Portal";
 import TextArea from "../TextArea";
 
 interface Props {
@@ -33,7 +31,7 @@ const TextAreaModal = ({
   register
 }: Props) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} close={onClose}>
       <ModalWithTextAreaContent>
         <TextArea
           {...register(name)}

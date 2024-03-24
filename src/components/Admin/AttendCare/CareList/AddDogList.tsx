@@ -4,7 +4,7 @@ import { ICareDogInfo } from "types/admin.caredog.type";
 
 import { ListContainer, ListTitle, ListWrapper } from "./styles";
 import AddDogCard from "../CareCard/AddDogCard";
-import { useSelectedDogs } from "../context/SelectedDogsProvider";
+import { useSelectedDogs } from "../hooks/useSelectedDogs";
 
 type AddDogList = {
   adminId?: number;

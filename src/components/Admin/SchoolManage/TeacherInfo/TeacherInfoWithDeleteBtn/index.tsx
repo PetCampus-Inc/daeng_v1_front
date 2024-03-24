@@ -41,7 +41,7 @@ const TeacherInfoWithDeleteBtn = ({ isEditable = false, data }: TeacherInfoWithD
               />
             )}
           </AnimatePresence>
-          <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal isOpen={isOpen} close={() => setIsOpen(false)}>
             <Modal.Content variant="two">
               <Modal.Title
                 title={`${teacherName} 교사를 삭제하시겠습니까?`}

@@ -1,25 +1,23 @@
 import BasicPhoneIcon from "assets/svg/phone-basic";
 
-import BottomSheet from "../index";
+import BottomSheet, { type IBottomSheetProps } from "../index";
 import { CallSubtitle } from "../styles";
 
-interface CallBottomSheetProps {
-  isOpen: boolean;
+interface CallBottomSheetProps extends IBottomSheetProps {
   dogName: string;
   phoneNumber: string;
-  onClose: () => void;
   handleCall: () => void;
 }
 
 const CallBottomSheet = ({
   dogName,
-  onClose,
+  close,
   phoneNumber,
   isOpen,
   handleCall
 }: CallBottomSheetProps) => {
   return (
-    <BottomSheet isOpen={isOpen} onClose={onClose}>
+    <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
         <BottomSheet.Control />
         <BottomSheet.Title>

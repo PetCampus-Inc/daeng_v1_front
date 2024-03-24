@@ -8,18 +8,18 @@ import { ModalProvider } from "./provider";
 import { BackDrop, StyledModal } from "./styles";
 import Portal from "../Portal";
 
-interface ModalProps {
+export interface IModalProps {
   isOpen?: boolean;
-  onClose: () => void;
+  close: () => void;
 }
 
-interface IModal extends React.MemoExoticComponent<React.FC<PropsWithChildren<ModalProps>>> {
+interface IModal extends React.MemoExoticComponent<React.FC<PropsWithChildren<IModalProps>>> {
   Content: typeof ModalContent;
   Button: typeof ModalButton;
   Title: typeof ModalTitle;
 }
 
-const BaseButtonModal = ({ children, isOpen = false, onClose }: PropsWithChildren<ModalProps>) => {
+const BaseButtonModal = ({ children, isOpen = false, close }: PropsWithChildren<IModalProps>) => {
   const backdropVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 }
@@ -35,7 +35,7 @@ const BaseButtonModal = ({ children, isOpen = false, onClose }: PropsWithChildre
     <Portal>
       <AnimatePresence mode="wait">
         {isOpen && (
-          <ModalProvider onClose={onClose}>
+          <ModalProvider onClose={close}>
             <BackDrop
               initial="hidden"
               animate="visible"
