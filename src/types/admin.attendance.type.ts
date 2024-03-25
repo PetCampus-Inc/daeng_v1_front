@@ -47,6 +47,11 @@ export interface IDogAndMemberInfo {
   member: IMemberInfo;
 }
 
+export interface IDogInfoRecord {
+  date: string;
+  status: string; //TODO: ATTENDED 등으로 변경
+}
+
 export interface ITicketDetail {
   ticketType: string;
   allRoundTicket: number;
@@ -60,11 +65,5 @@ export interface ITicketDetail {
 
 export interface IPrecautionInfo {
   modifiedList: Nullable<number[]>;
-  agreements: {
-    21?: number[];
-    22?: number[];
-    23?: number[];
-    24?: number[];
-    30?: number[];
-  };
+  agreements: [{ 21: string }, { 22: string }, { 23: string }, { 24: string }, { 30: string }];
 }
