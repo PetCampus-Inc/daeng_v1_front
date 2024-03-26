@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-import { CommonDropdownProps } from "../dropdown.type";
 import * as S from "../styles";
+import { CommonDropdownProps } from "../type";
 
 interface IStringDropdown extends CommonDropdownProps {
   name: string;

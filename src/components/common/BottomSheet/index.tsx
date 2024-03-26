@@ -25,12 +25,10 @@ interface IBottomSheet
 
 const BottomSheetBase = ({ children, isOpen, close }: PropsWithChildren<IBottomSheetProps>) => {
   const bottomSheetRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  const parentRef = useRef<HTMLDivElement>(null);
 
   useClickOutSide({
     enabled: isOpen,
     targetRef: bottomSheetRef,
-    parentRef: parentRef,
     onClickOutside: close
   });
 
@@ -54,7 +52,7 @@ const BottomSheetBase = ({ children, isOpen, close }: PropsWithChildren<IBottomS
     <AnimatePresence mode="wait">
       {isOpen && (
         <BottomSheetProvider onClose={close}>
-          <Container ref={parentRef}>
+          <Container>
             <BackDrop
               initial="hidden"
               animate="visible"
