@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useContext } from "react";
 
-import { DropdownContext } from "./provider";
+import { DropdownContext } from "./DropdownContext";
 import { Item, ItemWrapper } from "./styles";
 
 interface DropdownOptionProps {

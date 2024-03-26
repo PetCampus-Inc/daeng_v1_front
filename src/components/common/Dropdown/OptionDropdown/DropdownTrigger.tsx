@@ -1,7 +1,7 @@
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { type ButtonHTMLAttributes, type RefObject, forwardRef, useContext, useRef } from "react";
 
-import { DropdownContext } from "./provider";
+import { DropdownContext } from "./DropdownContext";
 
 type DropdownTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>;
 

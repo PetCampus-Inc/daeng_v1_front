@@ -2,7 +2,7 @@ import MoreIcon from "assets/svg/more-icon";
 import PhoneIcon from "assets/svg/phone";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";
-import Dropdown from "components/common/Dropdown/OptionDropdown";
+import Dropdown from "components/common/Dropdown/OptionDropdown/DropdownRoot";
 
 import { IconWrapper } from "./styles";
 interface Props {
@@ -27,8 +27,7 @@ const AttendanceOptionList = ({ options, handleOptionClick }: Props) => {
         {options.map((option, index) => (
           <Dropdown.Option
             key={index}
-            onClick={(e) => {
-              e?.stopPropagation();
+            onClick={() => {
               handleOptionClick(option);
             }}
           >

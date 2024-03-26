@@ -1,9 +1,9 @@
 import { PropsWithChildren, RefObject, memo, useRef } from "react";
 
+import { DropdownProvider } from "./DropdownContext";
 import DropdownList from "./DropdownList";
 import DropdownOption from "./DropdownOption";
 import DropdownTrigger from "./DropdownTrigger";
-import { DropdownProvider } from "./provider";
 import { DropdownRoot } from "./styles";
 
 interface OptionDropdownProps {
