@@ -18,24 +18,26 @@ const AttendanceOptionList = ({ options, handleOptionClick }: Props) => {
 
   return (
     <Dropdown defaultOpen={false}>
-      <Dropdown.Trigger>
-        <IconWrapper>
-          <MoreIcon />
-        </IconWrapper>
-      </Dropdown.Trigger>
-      <Dropdown.List>
-        {options.map((option, index) => (
-          <Dropdown.Option
-            key={index}
-            onClick={() => {
-              handleOptionClick(option);
-            }}
-          >
-            {optionIcon[option as keyof typeof optionIcon]}
-            <span>{option}</span>
-          </Dropdown.Option>
-        ))}
-      </Dropdown.List>
+      <Dropdown.Content>
+        <Dropdown.Trigger>
+          <IconWrapper>
+            <MoreIcon />
+          </IconWrapper>
+        </Dropdown.Trigger>
+        <Dropdown.List>
+          {options.map((option, index) => (
+            <Dropdown.Option
+              key={index}
+              onClick={() => {
+                handleOptionClick(option);
+              }}
+            >
+              {optionIcon[option as keyof typeof optionIcon]}
+              <span>{option}</span>
+            </Dropdown.Option>
+          ))}
+        </Dropdown.List>
+      </Dropdown.Content>
     </Dropdown>
   );
 };
