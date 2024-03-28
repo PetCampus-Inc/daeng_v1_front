@@ -6,7 +6,7 @@ import {
   type ReactElement
 } from "react";
 
-import { DropdownContext } from "./provider";
+import { DropdownContext } from "./DropdownContext";
 import { StyledDropdownList } from "./styles";
 
 const DropdownList = ({ children }: PropsWithChildren) => {

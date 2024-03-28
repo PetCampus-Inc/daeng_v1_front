@@ -2,7 +2,7 @@ import MoreIcon from "assets/svg/more-icon";
 import PhoneIcon from "assets/svg/phone";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";
-import Dropdown from "components/common/Dropdown/OptionDropdown";
+import Dropdown from "components/common/Dropdown/OptionDropdown/DropdownRoot";
 
 import { IconWrapper } from "./styles";
 interface Props {
@@ -18,25 +18,26 @@ const AttendanceOptionList = ({ options, handleOptionClick }: Props) => {
 
   return (
     <Dropdown defaultOpen={false}>
-      <Dropdown.Trigger>
-        <IconWrapper>
-          <MoreIcon />
-        </IconWrapper>
-      </Dropdown.Trigger>
-      <Dropdown.List>
-        {options.map((option, index) => (
-          <Dropdown.Option
-            key={index}
-            onClick={(e) => {
-              e?.stopPropagation();
-              handleOptionClick(option);
-            }}
-          >
-            {optionIcon[option as keyof typeof optionIcon]}
-            <span>{option}</span>
-          </Dropdown.Option>
-        ))}
-      </Dropdown.List>
+      <Dropdown.Content>
+        <Dropdown.Trigger>
+          <IconWrapper>
+            <MoreIcon />
+          </IconWrapper>
+        </Dropdown.Trigger>
+        <Dropdown.List>
+          {options.map((option, index) => (
+            <Dropdown.Option
+              key={index}
+              onClick={() => {
+                handleOptionClick(option);
+              }}
+            >
+              {optionIcon[option as keyof typeof optionIcon]}
+              <span>{option}</span>
+            </Dropdown.Option>
+          ))}
+        </Dropdown.List>
+      </Dropdown.Content>
     </Dropdown>
   );
 };

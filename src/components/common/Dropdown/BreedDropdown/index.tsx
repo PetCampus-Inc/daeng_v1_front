@@ -1,8 +1,8 @@
 import Button from "components/common/Button";
 import { Dispatch, SetStateAction, useRef } from "react";
 
-import { CommonDropdownProps } from "../dropdown.type";
 import * as S from "../styles";
+import { CommonDropdownProps } from "../type";
 
 interface IBreedDropdown extends CommonDropdownProps {
   isOpen: boolean | Dispatch<SetStateAction<boolean>>;

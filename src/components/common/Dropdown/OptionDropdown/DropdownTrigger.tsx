@@ -1,7 +1,7 @@
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { type ButtonHTMLAttributes, type RefObject, forwardRef, useContext, useRef } from "react";
 
-import { DropdownContext } from "./provider";
+import { DropdownContext } from "./DropdownContext";
 
 type DropdownTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
@@ -22,12 +22,6 @@ const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
         dropdownContext.toggle();
       }
     };
-
-    useClickOutSide({
-      enabled: dropdownContext?.isOpen || !!dropdownContext?.defaultOpen,
-      targetRef: dropdownTriggerRef,
-      onClickOutside: () => dropdownContext?.changeIsOpen(false)
-    });
 
     if (!dropdownContext) {
       throw new Error("DropdownTrigger should be used within a Dropdown");
