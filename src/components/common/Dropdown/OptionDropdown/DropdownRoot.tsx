@@ -1,5 +1,6 @@
 import { PropsWithChildren, RefObject, memo, useRef } from "react";
 
+import DropdownContent from "./DropdownContent";
 import { DropdownProvider } from "./DropdownContext";
 import DropdownList from "./DropdownList";
 import DropdownOption from "./DropdownOption";
@@ -16,6 +17,7 @@ interface IDropdown
   Trigger: typeof DropdownTrigger;
   List: typeof DropdownList;
   Option: typeof DropdownOption;
+  Content: typeof DropdownContent;
 }
 
 const OptionDropdownBase = ({
@@ -36,5 +38,6 @@ const Dropdown = memo(OptionDropdownBase) as IDropdown;
 Dropdown.Trigger = DropdownTrigger;
 Dropdown.List = DropdownList;
 Dropdown.Option = DropdownOption;
+Dropdown.Content = DropdownContent;
 
 export default Dropdown;

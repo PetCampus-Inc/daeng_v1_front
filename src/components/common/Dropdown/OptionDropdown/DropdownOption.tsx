@@ -24,7 +24,6 @@ const DropdownOption = ({
     <ItemWrapper
       onClick={(e) => {
         e.stopPropagation();
-        e.preventDefault();
         handleChange?.();
         onClick?.(e);
         dropdownContext.changeIsOpen(false);

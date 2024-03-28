@@ -23,12 +23,6 @@ const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
       }
     };
 
-    useClickOutSide({
-      enabled: dropdownContext?.isOpen || !!dropdownContext?.defaultOpen,
-      targetRef: dropdownTriggerRef,
-      onClickOutside: () => dropdownContext?.changeIsOpen(false)
-    });
-
     if (!dropdownContext) {
       throw new Error("DropdownTrigger should be used within a Dropdown");
     }
