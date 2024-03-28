@@ -9,15 +9,17 @@ interface UseClickContainsProps {
 export const useClickOutSide = ({ targetRef, onClickOutside, enabled }: UseClickContainsProps) => {
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
-      if (enabled && targetRef.current && !targetRef.current.contains(event.target as Node)) {
+      if (targetRef.current && !targetRef?.current?.contains(event.target as Node)) {
         onClickOutside();
       }
     };
 
-    document.addEventListener("click", handleClickOutside, true);
+    if (enabled) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
 
     return () => {
-      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [targetRef, enabled]);
 };
