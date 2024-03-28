@@ -93,7 +93,7 @@ const EnrollmentFormDetailPage = () => {
           </FormProvider>
         </Container>
       </PageContainer>
-      <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />
+      <NavBar type="admin" />
     </>
   );
 };

@@ -12,6 +12,8 @@ export const CardContainer = styled.div<{ $isAvatar?: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
   gap: 4px;
   justify-content: ${({ $isAvatar }) => ($isAvatar ? "space-between" : "flex-start")};
+
+  cursor: pointer;
 `;
 
 export const ImageWrapper = styled.div`

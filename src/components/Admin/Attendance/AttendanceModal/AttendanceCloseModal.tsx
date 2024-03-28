@@ -1,14 +1,12 @@
-import Modal from "components/common/ButtonModal";
+import Modal, { type IModalProps } from "components/common/ButtonModal";
 
 type AttendanceCloseModalProps = {
-  isOpen: boolean;
-  close: () => void;
   action: () => void;
-};
+} & IModalProps;
 
 const AttendanceCloseModal = ({ close, action, isOpen }: AttendanceCloseModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={close}>
+    <Modal isOpen={isOpen} close={close}>
       <Modal.Content variant="two">
         <Modal.Title
           title="출석을 중단하고 싶으신가요?"

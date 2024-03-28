@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
+
+export const IconWrapper = styled.span`
+  position: absolute;
+  right: 6px;
+  top: 3px;
+  border-radius: 50%;
+
+  color: ${({ theme }) => theme.colors.gray_2};
+`;
 
 export const SelectBox = styled.div`
   display: inline-flex;
@@ -36,30 +45,11 @@ export const Title = styled.p`
   color: ${({ theme }) => theme.colors.black};
   text-align: center;
 `;
-export const ListWrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 10px 8px;
-`;
 
-export const ListItem = styled.li`
-  display: flex;
-  padding: 18px 0;
-  align-items: center;
-  gap: 10px;
-
-  ${({ theme }) => theme.typo.body2_16_R};
-  color: ${({ theme }) => theme.colors.gray_1};
-
-  &.active {
-    ${({ theme }) => theme.typo.label1_16_B};
-    color: ${({ theme }) => theme.colors.primaryColor};
-  }
-
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
-
-  &:last-child {
-    border: none;
-  }
+export const BackgroundButtonWrapper = styled.div<{ $isBottom?: boolean }>`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: ${({ $isBottom }) => ($isBottom ? 0 : "calc(7vh)")};
 `;

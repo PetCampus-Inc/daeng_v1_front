@@ -28,14 +28,15 @@ export const useGetNewCareDogs = (adminId: number) => {
   });
 };
 
-export const useCreateCareDogs = (open: () => void) => {
+export const useCreateCareDogs = (openPopup: () => void) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
   const createCareDogsMutation = useMutation({
     mutationFn: handleCreateCareDogs,
     onSuccess: (data) => {
       if (data.length > 0) {
-        open();
+        openPopup();
         queryClient.setQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, data);
       } else {
         queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });

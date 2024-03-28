@@ -61,11 +61,11 @@ export const useDeleteAttendDog = () => {
   return { mutateDelete: deleteDogMutation.mutate };
 };
 
+// FIXME: prefecth를 사용하여 전화번호를 미리 가져오는 방법으로 변경 필요
 export const useCallMember = (dogId: number) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_PHONE_NUMBER(dogId),
-    queryFn: () => handleCallMember(dogId),
-    enabled: false
+    queryFn: () => handleCallMember(dogId)
   });
 };
 

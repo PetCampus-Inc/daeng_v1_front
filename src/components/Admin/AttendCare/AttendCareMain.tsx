@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import AddIcon from "assets/svg/addIcon";
 import RightArrow from "assets/svg/right-arrow";
 import SimpleButton from "components/common/Button/SimpleButton";
-import useBottomSheet from "hooks/common/useBottomSheet";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { ICareDogInfo } from "types/admin.caredog.type";
 
@@ -11,6 +11,7 @@ import CareOptionDropdown from "./CareButton/CareOptionDropdown";
 import MainSendCard from "./CareButton/MainSendCard";
 import MainDogList from "./CareList/MainDogList";
 import AddCaredogBottomSheet from "./CareModal/AddCaredogBottomSheet";
+import AgendaSchedulerBottomSheet from "./CareModal/AgendaSchedulerBottomSheet";
 import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
 import { ButtonWrapper } from "./styles";
 
@@ -20,11 +21,23 @@ interface AttendCareMainProps {
 
 const AttendCareMain = ({ data }: AttendCareMainProps) => {
   const navigate = useNavigate();
-  const { isVisible, open, close } = useBottomSheet();
+  const overlay = useOverlay();
+
+  const openAddDogPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <SelectedDogsProvider>
+        <AddCaredogBottomSheet isOpen={isOpen} close={close} />
+      </SelectedDogsProvider>
+    ));
+
+  const openSchedulerPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AgendaSchedulerBottomSheet isOpen={isOpen} close={close} />
+    ));
 
   const CARE_OPTIONS: { [key: string]: () => void } = {
     "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE_DOG + "/delete"),
-    "알림장 일괄 전송": () => console.log("알림장 전송 바텀시트")
+    "알림장 일괄 전송": openSchedulerPopup
   };
 
   const handleOptionClick = (option: string) => {
@@ -34,16 +47,13 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
 
   return (
     <>
-      <SelectedDogsProvider>
-        <AddCaredogBottomSheet isVisible={isVisible} close={close} />
-      </SelectedDogsProvider>
       <MainSendCard
         text="견주에게 바로 사진을 보낼 수 있어요"
         onClick={() => navigate("강아지관리 상세정보")}
       />
       <ButtonWrapper>
         <SimpleButton
-          onClick={open}
+          onClick={openAddDogPopup}
           leftAddon={<AddIcon />}
           rightAddon={<RightArrow w={"20"} h={"20"} />}
         >

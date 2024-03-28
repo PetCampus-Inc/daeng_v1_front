@@ -5,9 +5,9 @@ import { type SetStateAction, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 
-import AttendanceSearchInput from "./AttendanceSearchInput";
-import SearchList from "./SearchList";
-import SortSelectBox from "./SortSelectBox";
+import SortSelectBox from "./AttendanceButton/SortSelectBox";
+import AttendanceSearchInput from "./AttendanceInput/AttendanceSearchInput";
+import SearchList from "./AttendanceList/SearchList";
 import { Blur, Spacing } from "./styles";
 
 interface AttendanceMainProps {

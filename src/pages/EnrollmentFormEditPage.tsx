@@ -1,4 +1,3 @@
-import { PATH } from "constants/path";
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
 
 import DogInfo from "components/Admin/EnrollmentForm/EditForm/DogInfo";
@@ -45,7 +44,6 @@ const EnrollmentFormEditPage = () => {
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -83,12 +81,12 @@ const EnrollmentFormEditPage = () => {
             </ContentWrapper>
             <ButtonContainer>
               <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
-              <SubmitButton type="EDIT" setModal={setIsModalOpen} />
+              <SubmitButton type="EDIT" />
             </ButtonContainer>
           </FormProvider>
         </Container>
       </PageContainer>
-      <NavBar type="admin" attendance={PATH.ADMIN_DOG_INFO} />
+      <NavBar type="admin" />
     </>
   );
 };

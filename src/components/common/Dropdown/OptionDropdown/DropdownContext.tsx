@@ -1,7 +1,7 @@
 import { useToggle } from "hooks/common/useToggle";
-import { ReactNode, createContext, useMemo, useState } from "react";
+import { type ReactNode, type RefObject, createContext, useMemo, useState, useId } from "react";
 
-interface DropdownContextValue {
+interface IDropdownContext {
   isOpen: boolean;
   toggle: () => void;
   current: number;
@@ -9,9 +9,10 @@ interface DropdownContextValue {
   defaultOpen?: boolean;
   changeIsOpen: (value: boolean) => void;
   onSelect?: (index: number) => void;
+  parentRef?: RefObject<HTMLElement>;
 }
 
-export const DropdownContext = createContext<DropdownContextValue | null>(null);
+export const DropdownContext = createContext<IDropdownContext | null>(null);
 
 interface DropdownProviderProps {
   children: ReactNode;
@@ -24,7 +25,7 @@ export const DropdownProvider = ({ children, defaultOpen, onSelect }: DropdownPr
 
   const [current, changeCurrent] = useState<number>(0);
 
-  const ContextValue = useMemo(
+  const context = useMemo(
     () => ({
       isOpen,
       toggle,
@@ -37,5 +38,5 @@ export const DropdownProvider = ({ children, defaultOpen, onSelect }: DropdownPr
     [isOpen, current, defaultOpen]
   );
 
-  return <DropdownContext.Provider value={ContextValue}>{children}</DropdownContext.Provider>;
+  return <DropdownContext.Provider value={context}>{children}</DropdownContext.Provider>;
 };

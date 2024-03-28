@@ -1,7 +1,7 @@
 import { memo } from "react";
 
-import DogCard from "./AttendanceCard/DogCard";
-import { ListWrapper, CardListWrapper, EmptyText } from "./styles";
+import DogCard from "../AttendanceCard/DogCard";
+import { ListWrapper, CardListWrapper, EmptyText } from "../styles";
 
 import type { IAttendDogInfo } from "types/admin.attendance.type";
 

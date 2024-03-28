@@ -14,13 +14,13 @@ export const StyledBottomSheet = styled(motion.div)`
 `;
 
 export const Content = styled.div`
-  padding: 16px 16px 42px;
+  padding: 1rem 1rem 2.625rem;
 `;
 
 export const Control = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding-right: 3px;
+  padding-right: 0.3rem;
 `;
 
 export const ControlButton = styled.button`
@@ -37,7 +37,7 @@ export const ControlButton = styled.button`
 const BaseButton = styled.button`
   display: flex;
   width: 100%;
-  padding: 11px;
+  padding: 0.688rem;
   justify-content: center;
   align-items: center;
 
@@ -69,8 +69,8 @@ export const CloseButton = styled(BaseButton)`
 export const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 8px;
-  margin-top: 32px;
+  gap: 0.5rem;
+  margin-top: 2rem;
 `;
 
 type TitleStyleProps = Pick<TitleProps, "variant">;
@@ -80,8 +80,8 @@ export const Title = styled.p.withConfig({
 })<TitleStyleProps>`
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 
   ${({ variant, theme }) => (variant === "title" ? theme.typo.title2_20_B : theme.typo.body1_18_B)};
   color: ${({ theme }) => theme.colors.darkBlack};
@@ -101,12 +101,13 @@ export const Title = styled.p.withConfig({
 export const SubTitle = styled.p`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 
-  margin-top: 4px;
-
+  margin-top: 0.25rem;
   ${({ theme }) => theme.typo.body2_16_R};
   color: ${({ theme }) => theme.colors.gray_2};
+
+  text-wrap: pretty;
 
   &.bottom-sheet-subtitle.left {
     justify-content: flex-start;
@@ -122,6 +123,6 @@ export const SubTitle = styled.p`
 `;
 
 export const CallSubtitle = styled(SubTitle)`
-  margin-top: 8px;
+  margin-top: 0.5rem;
   justify-content: center;
 `;

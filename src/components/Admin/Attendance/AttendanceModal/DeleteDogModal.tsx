@@ -1,15 +1,12 @@
-import Modal from "components/common/ButtonModal";
+import Modal, { type IModalProps } from "components/common/ButtonModal";
 
 type DeleteDogModalProps = {
-  isOpen: boolean;
-  close: () => void;
   action: () => void;
-};
+} & IModalProps;
 
 const DeleteDogModal = ({ close, action, isOpen }: DeleteDogModalProps) => {
-  if (!isOpen) return null;
   return (
-    <Modal isOpen={isOpen} onClose={close}>
+    <Modal isOpen={isOpen} close={close}>
       <Modal.Content variant="two">
         <Modal.Title
           title="정말 삭제하시겠습니까?"

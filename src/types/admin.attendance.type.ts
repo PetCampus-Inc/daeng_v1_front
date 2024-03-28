@@ -1,5 +1,5 @@
-import { Nullable } from "./helper.type";
-import { IMemberInfo } from "./School.type";
+import type { Nullable } from "./helper.type";
+import type { IMemberInfo } from "./School.type";
 
 export interface IAttendDogInfo {
   attendanceId: number;
@@ -59,7 +59,7 @@ export interface ITicketDetail {
 }
 
 export interface IPrecautionInfo {
-  modifiedList: number[];
+  modifiedList: Nullable<number[]>;
   agreements: {
     21?: number[];
     22?: number[];

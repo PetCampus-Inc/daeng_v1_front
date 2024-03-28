@@ -1,21 +1,22 @@
 import ArrowLeftSquare from "assets/svg/arrow-left-square-icon";
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
 import CloseIcon from "assets/svg/close-icon";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Slider from "react-slick";
 
 import * as S from "./styles";
+import { useSelectedDogs } from "../context/SelectedDogProvider";
+import { Spacing } from "../styles";
 
-import type { IAttendDogInfo } from "types/admin.attendance.type";
-
-interface AttendanceAvatarProps {
-  selectedDogs: IAttendDogInfo[];
-  onRemoveDog: (dogId: number) => void;
-}
-
-const AttendanceAvatar = ({ selectedDogs, onRemoveDog }: AttendanceAvatarProps) => {
+const AttendanceAvatar = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef<Slider>(null);
+
+  const [selectedDogs, dispatch] = useSelectedDogs();
+
+  const removeDog = useCallback((dogId: number) => {
+    dispatch({ type: "REMOVE_DOG", payload: dogId });
+  }, []);
 
   const next = () => {
     sliderRef.current?.slickNext();
@@ -36,6 +37,8 @@ const AttendanceAvatar = ({ selectedDogs, onRemoveDog }: AttendanceAvatarProps) 
       setCurrentIndex(current);
     }
   };
+
+  if (selectedDogs.length === 0) return <Spacing />;
 
   return (
     <S.Container>
@@ -65,7 +68,7 @@ const AttendanceAvatar = ({ selectedDogs, onRemoveDog }: AttendanceAvatarProps) 
                   />
                 </S.AvatarImgWrapper>
                 <S.Name>{dog.dogName}</S.Name>
-                <S.RemoveButton type="button" onClick={() => onRemoveDog(dog.dogId)}>
+                <S.RemoveButton type="button" onClick={() => removeDog(dog.dogId)}>
                   <CloseIcon />
                 </S.RemoveButton>
               </S.AvatarWrapper>
