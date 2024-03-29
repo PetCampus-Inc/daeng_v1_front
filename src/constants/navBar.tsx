@@ -1,13 +1,13 @@
 import Attendance from "assets/svg/attendance";
 import AttendanceBlack from "assets/svg/attendanceBlack";
 import Chat from "assets/svg/chat";
-import ChatBlack from "assets/svg/chatBlack";
-import CheckBoard from "assets/svg/checkBoard";
-import CheckBoardBlack from "assets/svg/checkBoardBlack";
+import ChatBlack from "assets/svg/chat-black";
+import CheckBoard from "assets/svg/check-board";
+import CheckBoardBlack from "assets/svg/check-board-black";
 import MyPageDog from "assets/svg/myPageDog";
 import MyPageDogBlack from "assets/svg/myPageDogBlack";
 import School from "assets/svg/school";
-import SchoolBlack from "assets/svg/schoolBlack";
+import SchoolBlack from "assets/svg/school-black";
 
 import { PATH } from "./path";
 

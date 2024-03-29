@@ -1,4 +1,4 @@
-import CheckIcon from "assets/svg/checkIcon";
+import CheckIcon from "assets/svg/check-icon";
 import React, { type ChangeEvent } from "react";
 
 import * as S from "./styles";
