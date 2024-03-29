@@ -1,5 +1,6 @@
 import Text from "components/common/Text";
 import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
+import { useLocation } from "react-router-dom";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import AboutDog from "./AboutDog";
@@ -9,7 +10,8 @@ import * as S from "./styles";
 import { InnerContainer } from "../styles";
 
 const DogInfo = () => {
-  const { data, refetch } = useGetDogAndMemberDetail(2); //FIXME: 나영이꺼 머지되면 queryString에서 가져오기
+  const dogId = useLocation().pathname.split("/").pop();
+  const { data, refetch } = useGetDogAndMemberDetail(Number(dogId));
 
   return (
     <InnerContainer>

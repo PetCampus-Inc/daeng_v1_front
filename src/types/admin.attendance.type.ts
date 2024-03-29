@@ -48,17 +48,30 @@ export interface IDogAndMemberInfo {
 }
 
 export interface IDogInfoRecord {
-  date: string;
+  date: number[];
   status: string; //TODO: ATTENDED 등으로 변경
 }
+
+export interface IDogInfoAgenda {
+  agendaId: number;
+  agendaNote: string;
+  snack: string;
+  poop: IPoop;
+  poopMemo: string;
+  dogId: number;
+  status: "NOT_YET" | "COMPLETE" | "WRITING";
+  date: string;
+}
+
+export type IPoop = "HARD" | "HEALTHY" | "NOT_BROWN" | "WATERY" | "WARNING" | null;
 
 export interface ITicketDetail {
   ticketType: string;
   allRoundTicket: number;
   currentRoundTicket: number;
   monthlyTicketNumber: number;
-  ticketStartDate: string;
-  ticketExpirationDate: string;
+  ticketStartDate: number[];
+  ticketExpirationDate: number[];
   attendanceDays: string[];
   ticketHistory: ITicketDetail[];
 }

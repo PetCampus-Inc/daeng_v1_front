@@ -14,8 +14,8 @@ import {
 import Ticket from "components/Admin/DogDetailInfo/Ticket";
 import Header from "components/common/Header";
 import useGetPrecautions from "hooks/api/useGetPrecautions";
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Suspense, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 const DogInfoPage = () => {
@@ -23,15 +23,15 @@ const DogInfoPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
-  const { data } = useGetPrecautions(2);
-
+  const dogId = useLocation().pathname.split("/").pop(); // TODO: 보안 측면에서 더 나은 방법이 있는지에 대한 고민
+  const { data } = useGetPrecautions(Number(dogId));
   const showNotice = !!data.modifiedList;
 
   return (
     <>
       <Header
         type="text"
-        text="뽀뽕의 상세 정보"
+        text={`${searchParams.get("dog_name")}의 상세 정보`}
         handleClick={() => navigate("/admin/attendance")}
         rightElement={
           <GalleryIcon
@@ -57,6 +57,7 @@ const DogInfoPage = () => {
                 }}
               >
                 {item}
+                {searchParams.get("ticket_status") === "true" && index === 2 ? <Circle /> : null}
                 {showNotice && index === 3 ? <Circle /> : null}
                 {index === currentStep ? <Underline layoutId="underline" /> : null}
               </NavItem>
@@ -64,10 +65,12 @@ const DogInfoPage = () => {
           </NavWrapper>
         </nav>
         <ContentWrapper>
-          {currentStep === 0 && <DogInfo />}
-          {currentStep === 1 && <AttendanceRecord />}
-          {currentStep === 2 && <Ticket />}
-          {currentStep === 3 && <Notice data={data} />}
+          <Suspense>
+            {currentStep === 0 && <DogInfo />}
+            {currentStep === 1 && <AttendanceRecord />}
+            {currentStep === 2 && <Ticket />}
+            {currentStep === 3 && <Notice data={data} />}
+          </Suspense>
         </ContentWrapper>
       </PageContainer>
     </>
