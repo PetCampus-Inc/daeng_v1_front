@@ -1,4 +1,4 @@
-const BrownApplication = () => {
+const ApplicationBrownIcon = () => {
   return (
     <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="68" height="68" rx="12" fill="#EEE3D9" />
@@ -41,4 +41,4 @@ const BrownApplication = () => {
   );
 };
 
-export default BrownApplication;
+export default ApplicationBrownIcon;

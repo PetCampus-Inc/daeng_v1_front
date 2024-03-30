@@ -1,4 +1,4 @@
-import AlertRed from "assets/svg/alert-red";
+import AlertRed from "assets/svg/alert-red-icon";
 import Badge from "components/common/Badge";
 import Checkbox from "components/common/Checkbox";
 import React from "react";

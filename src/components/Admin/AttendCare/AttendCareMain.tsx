@@ -1,6 +1,6 @@
 import { PATH } from "constants/path";
 
-import AddIcon from "assets/svg/addIcon";
+import AddIcon from "assets/svg/add-icon";
 import RightArrow from "assets/svg/right-arrow";
 import SimpleButton from "components/common/Button/SimpleButton";
 import useOverlay from "hooks/common/useOverlay/useOverlay";

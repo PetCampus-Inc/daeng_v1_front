@@ -1,5 +1,5 @@
-import Attendance from "assets/svg/attendance";
-import AttendanceBlack from "assets/svg/attendanceBlack";
+import AttendanceBlackIcon from "assets/svg/attendance-black-icon";
+import AttendanceIcon from "assets/svg/attendance-icon";
 import Chat from "assets/svg/chat";
 import ChatBlack from "assets/svg/chat-black";
 import CheckBoard from "assets/svg/check-board";
@@ -15,8 +15,8 @@ export const MENU_ITEMS = [
   {
     text: "출석부",
     path: PATH.ADMIN_ATTENDANCE,
-    blackImage: <AttendanceBlack />,
-    colorImage: <Attendance />
+    blackImage: <AttendanceBlackIcon />,
+    colorImage: <AttendanceIcon />
   },
   {
     text: "강아지 관리",

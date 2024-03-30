@@ -1,4 +1,4 @@
-import BrownApplication from "assets/svg/brown-application";
+import ApplicationBrownIcon from "assets/svg/application-brown-icon";
 import RightArrow from "assets/svg/right-arrow";
 import YellowApplication from "assets/svg/yellow-application";
 import { useEffect, useState } from "react";
@@ -43,7 +43,7 @@ const SimpleMembershipApplication = ({
   return (
     <S.Container onClick={() => handleTouch()} $isUsed={isUsed} $isSelected={isSelected}>
       <S.LeftBox>
-        <S.Image>{isUsed ? <YellowApplication /> : <BrownApplication />}</S.Image>
+        <S.Image>{isUsed ? <YellowApplication /> : <ApplicationBrownIcon />}</S.Image>
         <S.TextWrapper>
           <S.Title>{data.schoolFormName}</S.Title>
           <S.MiddleText>

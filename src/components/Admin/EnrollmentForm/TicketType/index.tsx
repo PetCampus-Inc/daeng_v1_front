@@ -1,4 +1,4 @@
-import AddIcon from "assets/svg/addIcon";
+import AddIcon from "assets/svg/add-icon";
 import Modal from "components/common/ButtonModal";
 import EditableRadioGroup, {
   ExtendedFieldArrayWithId

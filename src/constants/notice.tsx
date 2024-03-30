@@ -1,4 +1,4 @@
-import ApplicationWhiteIcon from "assets/svg/application-white";
+import ApplicationWhiteIcon from "assets/svg/application-white-icon";
 import CarIcon from "assets/svg/car-icon";
 import HomelessDogIcon from "assets/svg/homeless-dog-icon";
 import MedicineIcon from "assets/svg/medicine-icon";
