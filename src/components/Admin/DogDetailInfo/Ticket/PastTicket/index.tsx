@@ -8,10 +8,19 @@ interface PastTicketProps {
 }
 
 const PastTicket = ({ data }: PastTicketProps) => {
-  const ticketType = data.ticketType === "ROUND" ? "회차권" : "정기권";
+  const ticketInfo = (ticketType: string) => {
+    switch (ticketType) {
+      case "ROUND":
+        return `회차권 ${data.allRoundTicket}회`;
+      case "MONTHLY":
+        return `정기권 ${data.monthlyTicketNumber}주`;
+      default:
+        return "-";
+    }
+  };
   return (
     <S.List>
-      <S.ListInnerBox className="left">{ticketType}</S.ListInnerBox>
+      <S.ListInnerBox className="left">{ticketInfo(data.ticketType)}</S.ListInnerBox>
       <S.ListInnerBox>
         {data.ticketStartDate && (addZero(data.ticketStartDate) as number[]).join(".")}
         {" - "}

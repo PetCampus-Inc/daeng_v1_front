@@ -1,6 +1,5 @@
 import useGetTicketDetail from "hooks/api/useGetTicketDetail";
 import { useLocation } from "react-router-dom";
-import showToast from "utils/showToast";
 
 import PastTicketCard from "./PastTicketCard";
 import TicketCard from "./TicketCard";
