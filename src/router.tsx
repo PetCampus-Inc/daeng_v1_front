@@ -154,8 +154,21 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       ]
     },
     {
-      path: PATH.ADMIN_MY_PAGE,
-      element: <Pages.MyPage />
+      path: PATH.MY_PAGE,
+      children: [
+        {
+          index: true,
+          element: <Pages.MyPage />
+        },
+        {
+          path: PATH.PRINCIPAL_MY_PAGE,
+          element: <Pages.PrincipalMyPage />
+        },
+        {
+          path: PATH.TEACHER_MY_PAGE,
+          element: <Pages.TeacherMyPage />
+        }
+      ]
     },
     {
       children: [

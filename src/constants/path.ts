@@ -16,7 +16,10 @@ export const PATH = {
   ADMIN_CREATE_FORM: "/admin/schoolManage/enrollment/enrollment-new", // 원장 가입신청서 등록
   ADMIN_SUBMIT_FORM: "/admin/schoolManage/enrollment/submit", // 원장 가입신청서 제출
   ADMIN_TEACHER_MANAGE: "/admin/schoolManage/teacher", // 선생님 관리
-  ADMIN_MY_PAGE: "/admin/myPage", // 마이페이지
+  MY_PAGE: "/myPage",
+  PRINCIPAL_MY_PAGE: "/myPage/principal", // 원장 마이페이지
+  TEACHER_MY_PAGE: "/myPage/teacher", // 선생님 마이페이지
+  OWNER_MY_PAGE: "/myPage/owner", // 견주 마이페이지
   OWNER: "/owner",
   OWNER_MA: "/owner/membershipApplication", // 견주 가입신청서
   REDIRECT: "/auth/:provider"

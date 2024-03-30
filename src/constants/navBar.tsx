@@ -38,7 +38,7 @@ export const MENU_ITEMS = [
   },
   {
     text: "마이페이지",
-    path: PATH.ADMIN_MY_PAGE,
+    path: PATH.MY_PAGE,
     blackImage: <MyPageDogBlack />,
     colorImage: <MyPageDog />
   }

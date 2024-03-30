@@ -8,6 +8,8 @@ export { default as DogInfoPage } from "./DogInfoPage";
 export { default as Chat } from "./Chat";
 export { default as SchoolManagePage } from "./SchoolManagePage";
 export { default as MyPage } from "./MyPage";
+export { default as PrincipalMyPage } from "./PrincipalMyPage";
+export { default as TeacherMyPage } from "./TeacherMyPage";
 export { default as MembershipApplicationPage } from "./MembershipApplicationPage";
 export { default as SchoolManageEnrollmentPage } from "./SchoolManageEnrollmentPage";
 export { default as EnrollmentFormDetailPage } from "./EnrollmentFormDetailPage";
