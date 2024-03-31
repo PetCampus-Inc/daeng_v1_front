@@ -36,7 +36,7 @@ const DogInfoPage = () => {
         rightElement={
           <GalleryIcon
             handleTouch={() => {
-              navigate("/gallery");
+              navigate("gallery");
             }}
           />
         }
