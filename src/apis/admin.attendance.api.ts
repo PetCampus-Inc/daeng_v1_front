@@ -154,7 +154,7 @@ export const handleGetTicketDetail = async (dogId: number): Promise<ITicketDetai
   return data.data;
 };
 
-// 연결 전
+// 강아지 상세 - 이용권 갱신
 export const handlePostTicket = async (req: any): Promise<any> => {
   const url = `admin/attendance/dog/ticket`;
   const { data } = await customAxios.post(url, {

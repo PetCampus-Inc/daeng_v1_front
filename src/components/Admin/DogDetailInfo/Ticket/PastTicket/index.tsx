@@ -22,9 +22,9 @@ const PastTicket = ({ data }: PastTicketProps) => {
     <S.List>
       <S.ListInnerBox className="left">{ticketInfo(data.ticketType)}</S.ListInnerBox>
       <S.ListInnerBox>
-        {data.ticketStartDate && (addZero(data.ticketStartDate) as number[]).join(".")}
+        {data.ticketStartDate && (addZero(data.ticketStartDate) as string[]).join(".")}
         {" - "}
-        {data.ticketExpirationDate && (addZero(data.ticketExpirationDate) as number[]).join(".")}
+        {data.ticketExpirationDate && (addZero(data.ticketExpirationDate) as string[]).join(".")}
       </S.ListInnerBox>
     </S.List>
   );
