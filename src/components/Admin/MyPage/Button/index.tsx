@@ -9,9 +9,7 @@ const LogOutButton = () => {
   return (
     <>
       <BackgroundButtonWrapper>
-        <BackgroundGrayButton onClick={handleLogOut}>
-          {" "}
-          {/* 버튼 색상 변경 */}
+        <BackgroundGrayButton onClick={handleLogOut} className="logOut">
           로그아웃
         </BackgroundGrayButton>
       </BackgroundButtonWrapper>
