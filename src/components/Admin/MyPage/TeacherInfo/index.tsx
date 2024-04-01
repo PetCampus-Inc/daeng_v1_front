@@ -1,9 +1,12 @@
+import { PATH } from "constants/path";
+
 import Calendar from "assets/svg/calendar";
 import Map from "assets/svg/map-pin-icon";
 import Phone from "assets/svg/phone-basic";
 import RightArrow from "assets/svg/right-arrow";
 import School from "assets/svg/school";
 import TransparentButton from "components/common/Button/TransparentButton/index";
+import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 import * as S from "./styles";
@@ -19,7 +22,9 @@ interface InfoItem {
   icon: JSX.Element;
 }
 
-const SchoolInfo = ({ data }: TeacherInfoProps) => {
+const TeacherInfo = ({ data }: TeacherInfoProps) => {
+  const navigate = useNavigate();
+
   const infoList: InfoItem[] = [
     {
       title: data.schoolName,
@@ -38,6 +43,11 @@ const SchoolInfo = ({ data }: TeacherInfoProps) => {
       icon: <Calendar />
     }
   ];
+
+  const getSchoolInfo = () => {
+    navigate(PATH.TEACHER_SCHOOL_INFO);
+  };
+
   return (
     <>
       <PageContainer color="BGray" pb="2.5">
@@ -45,9 +55,10 @@ const SchoolInfo = ({ data }: TeacherInfoProps) => {
           <S.Title>소속 유치원</S.Title>
 
           <S.ButtonWrapper>
-            <TransparentButton rightAddon={<RightArrow w={"20"} h={"20"} />}>
-              {" "}
-              {/* TODO: onClick 추가 */}
+            <TransparentButton
+              onClick={getSchoolInfo}
+              rightAddon={<RightArrow w={"20"} h={"20"} />}
+            >
               유치원 정보
             </TransparentButton>
           </S.ButtonWrapper>
@@ -66,4 +77,4 @@ const SchoolInfo = ({ data }: TeacherInfoProps) => {
   );
 };
 
-export default SchoolInfo;
+export default TeacherInfo;
