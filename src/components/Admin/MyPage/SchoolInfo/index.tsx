@@ -2,8 +2,10 @@ import Calendar from "assets/svg/calendar";
 import Map from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone";
 import Phone from "assets/svg/phone-basic";
+import DisconnectModal from "components/Admin/MyPage/MypageModal/DisconnectModal";
 import BackgroundGrayButton from "components/common/Button/BackgroundGrayButton";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 
@@ -12,9 +14,10 @@ import * as S from "./styles";
 const SchoolInfo = () => {
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
   const { data } = useGetTeacherInfo(adminId);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
 
   const handleDisconnet = () => {
-    console.log("Disconnected"); // TODO: 유치원 연결 끊기 추가
+    setIsCancelModalOpen(true);
   };
 
   return (
@@ -54,6 +57,14 @@ const SchoolInfo = () => {
           유치원 연결 끊기
         </BackgroundGrayButton>
       </S.CardContainer>
+
+      <DisconnectModal
+        isOpen={isCancelModalOpen}
+        close={() => setIsCancelModalOpen(false)}
+        action={() => {
+          setIsCancelModalOpen(false);
+        }}
+      />
     </>
   );
 };
