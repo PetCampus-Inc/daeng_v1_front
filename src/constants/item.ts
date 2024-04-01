@@ -78,3 +78,11 @@ export const ITEM_MAPS: ItemMaps = {
   pickDropState: { RUNNING: "운영", NOT_RUNNING: "미운영" },
   ticketType: { ROUND: "회차권", MONTHLY: "정기권" }
 };
+
+export const ITEM_ENGLISH_TO_KOREAN = {
+  SMALL: "소형견",
+  MEDIUM: "중형견",
+  BIG: "대형견",
+  MALE: "수컷",
+  FEMALE: "암컷"
+};

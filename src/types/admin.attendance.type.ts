@@ -31,8 +31,8 @@ export interface IDogDetails {
 export interface IDogAndMemberInfo {
   dogId: number;
   dogName: string;
-  dogGender: string;
-  dogSize: string;
+  dogGender: "FEMALE" | "MALE";
+  dogSize: "SMALL" | "MEDIUM" | "BIG";
   breedId: number;
   breedName: string;
   dogBirthDate: number[];

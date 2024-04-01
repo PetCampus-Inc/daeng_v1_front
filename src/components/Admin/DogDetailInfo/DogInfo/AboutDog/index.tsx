@@ -1,3 +1,5 @@
+import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
+
 import BoyIcon from "assets/svg/boy-icon";
 import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
@@ -45,13 +47,13 @@ const AboutDog = ({ data }: AboutDogProps) => {
           <S.InfoTop>
             <S.TextWrapper>
               <DogDetailInfoText className="big">{dogName}</DogDetailInfoText>
-              <S.DogSizeBadge>{dogSize}</S.DogSizeBadge>
+              <S.DogSizeBadge>{ITEM_ENGLISH_TO_KOREAN[dogSize]}</S.DogSizeBadge>
             </S.TextWrapper>
           </S.InfoTop>
           <S.InfoIcons>
             <S.IconWrapper>
               <BoyIcon />
-              {dogGender}
+              {ITEM_ENGLISH_TO_KOREAN[dogGender]}
             </S.IconWrapper>
             <S.IconWrapper>
               <BreedIcon />
