@@ -20,6 +20,7 @@ export const PATH = {
   PRINCIPAL_MY_PAGE: "/myPage/principal", // 원장 마이페이지
   TEACHER_MY_PAGE: "/myPage/teacher", // 선생님 마이페이지
   OWNER_MY_PAGE: "/myPage/owner", // 견주 마이페이지
+  TEACHER_SCHOOL_INFO: "/school/teacher/info", // 선생님의 유치원 상세 정보
   OWNER: "/owner",
   OWNER_MA: "/owner/membershipApplication", // 견주 가입신청서
   REDIRECT: "/auth/:provider"

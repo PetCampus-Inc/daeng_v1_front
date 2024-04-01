@@ -171,6 +171,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       ]
     },
     {
+      path: PATH.TEACHER_SCHOOL_INFO,
+      element: (
+        <Suspense>
+          <Pages.SchoolInfoPage />
+        </Suspense>
+      )
+    },
+    {
       children: [
         {
           path: PATH.OWNER_MA,
