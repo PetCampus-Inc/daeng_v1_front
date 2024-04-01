@@ -2,7 +2,14 @@ import styled from "styled-components";
 
 export const Background = styled.div<{ $backgroundColor: string }>`
   background-color: ${({ theme, $backgroundColor }) => theme.colors[$backgroundColor]};
-  padding: 16px 16px 42px;
+
+  &.logOut {
+    padding: 16px 16px 42px;
+  }
+
+  &.disconnect {
+    padding-top: 0.5rem;
+  }
 `;
 
 export const BackgroundButton = styled.button`
