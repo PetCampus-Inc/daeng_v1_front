@@ -1,6 +1,6 @@
 import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import NoticeActiveIcon from "assets/svg/notice-active-icon";
-import SettingWhiteIcon from "assets/svg/setting-white";
+import SettingWhiteIcon from "assets/svg/setting-white-icon";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
