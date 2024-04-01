@@ -19,7 +19,7 @@ interface InfoItem {
   icon: JSX.Element;
 }
 
-const SchoolInfo = ({ data }: PrincipalInfoProps) => {
+const PrincipalInfo = ({ data }: PrincipalInfoProps) => {
   const infoList: InfoItem[] = [
     {
       title: data.schoolName,
@@ -38,6 +38,7 @@ const SchoolInfo = ({ data }: PrincipalInfoProps) => {
       icon: <Calendar />
     }
   ];
+
   return (
     <>
       <PageContainer color="BGray" pb="2.5">
@@ -66,4 +67,4 @@ const SchoolInfo = ({ data }: PrincipalInfoProps) => {
   );
 };
 
-export default SchoolInfo;
+export default PrincipalInfo;
