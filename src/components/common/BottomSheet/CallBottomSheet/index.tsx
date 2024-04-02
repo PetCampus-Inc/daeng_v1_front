@@ -5,7 +5,8 @@ import { CallSubtitle } from "../styles";
 
 interface CallBottomSheetProps {
   isOpen: boolean;
-  dogName: string;
+  dogName?: string;
+  schoolName?: string;
   phoneNumber: string;
   onClose: () => void;
   handleCall: () => void;
@@ -13,6 +14,7 @@ interface CallBottomSheetProps {
 
 const CallBottomSheet = ({
   dogName,
+  schoolName,
   onClose,
   phoneNumber,
   isOpen,
@@ -24,7 +26,7 @@ const CallBottomSheet = ({
         <BottomSheet.Control />
         <BottomSheet.Title>
           <BasicPhoneIcon />
-          <span>{dogName} 견주</span>
+          {dogName ? <span>{dogName} 견주</span> : <span>{schoolName} 유치원</span>}
         </BottomSheet.Title>
         <CallSubtitle>{phoneNumber}</CallSubtitle>
         <BottomSheet.Button actionText="전화 걸기" actionFn={handleCall} />
