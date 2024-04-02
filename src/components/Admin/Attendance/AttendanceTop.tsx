@@ -1,6 +1,5 @@
 import FootIcon from "assets/svg/foot-icon";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { adminLoginInfoAtom, attendDogListInfoAtom } from "store/admin";
 
