@@ -27,3 +27,8 @@ export interface ITeacherInfo {
     address: string;
   };
 }
+
+export interface ISchoolCallInfo {
+  schoolName: string | undefined;
+  schoolNumber: string | undefined;
+}
