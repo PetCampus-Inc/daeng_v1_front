@@ -45,71 +45,54 @@ export const SlideIndex = styled.span`
   ${({ theme }) => theme.typo.caption1_12_R};
 `;
 
-export const SlideIndicator = styled.ul`
+export const DotContainer = styled.div`
   position: absolute;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
   bottom: 1.25rem;
+  width: 100%;
+`;
+
+export const DotWrapper = styled.div`
+  overflow: hidden;
+  margin: auto;
+  bottom: 0;
 
   list-style: none;
   text-align: center;
 
-  &.dots_custom li {
+  &.custom-dots li {
     position: relative;
-
     display: inline-block;
-
     cursor: pointer;
+    margin: 0;
   }
 
-  &.dots_custom li button {
-    font-size: 0;
-    line-height: 0;
-
-    display: block;
-
-    width: 16px;
-    height: 16px;
-    padding: 0.5rem;
-
-    cursor: pointer;
-
-    color: transparent;
-    border: 0;
-    outline: none;
-    background: transparent;
+  &.custom-dots.slick-dots ul {
+    padding: 0;
+    display: flex;
+    transition: all 0.2s;
+    position: relative;
+    margin: 0px;
   }
-  &.dots_custom li button:hover,
-  &.dots_custom li button:focus {
-    outline: none;
-  }
-  &.dots_custom li button:hover:before,
-  &.dots_custom li button:focus:before {
-    opacity: 1;
-  }
-  &.dots_custom li button:before {
-    font-family: "slick";
-    font-size: 8.5px;
-    line-height: 20px;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 16px;
-    height: 16px;
-
-    content: "•";
-    text-align: center;
-
-    color: ${({ theme }) => theme.colors.white};
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  &.dots_custom li.slick-active button:before {
+  &.custom-dots.slick-dots li.slick-active button::before {
     color: ${({ theme }) => theme.colors.primaryColor};
+  }
+
+  &.custom-dots.slick-dots li button::before {
+    transition: font-size 0.35s;
+    font-size: 10px;
+    content: "•";
+
+    opacity: 1;
+    color: ${({ theme }) => theme.colors.white};
+  }
+
+  &.custom-dots.slick-dots li.small button::before {
+    font-size: 7px;
+    line-height: 20px;
   }
 `;
