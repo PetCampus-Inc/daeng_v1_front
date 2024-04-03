@@ -16,25 +16,27 @@ const CareOptionDropdown = ({ options, handleOptionClick }: CareOptionListProps)
   };
 
   return (
-    <Dropdown defaultOpen={false}>
-      <Dropdown.Trigger>
-        <SimpleButton ph={0.125}>
-          <MoreIcon />
-        </SimpleButton>
-      </Dropdown.Trigger>
-      <Dropdown.List>
-        {options.map((option, index) => (
-          <Dropdown.Option
-            key={index}
-            onClick={() => {
-              handleOptionClick(option);
-            }}
-          >
-            {optionIcon[option as keyof typeof optionIcon]}
-            <span>{option}</span>
-          </Dropdown.Option>
-        ))}
-      </Dropdown.List>
+    <Dropdown>
+      <Dropdown.Content>
+        <Dropdown.Trigger>
+          <SimpleButton ph={0.125}>
+            <MoreIcon />
+          </SimpleButton>
+        </Dropdown.Trigger>
+        <Dropdown.List>
+          {options.map((option, index) => (
+            <Dropdown.Option
+              key={index}
+              onClick={() => {
+                handleOptionClick(option);
+              }}
+            >
+              {optionIcon[option as keyof typeof optionIcon]}
+              <span>{option}</span>
+            </Dropdown.Option>
+          ))}
+        </Dropdown.List>
+      </Dropdown.Content>
     </Dropdown>
   );
 };
