@@ -1,5 +1,14 @@
-import { useClickOutSide } from "hooks/common/useClickOutSide";
-import { type ButtonHTMLAttributes, type RefObject, forwardRef, useContext, useRef } from "react";
+import {
+  type ButtonHTMLAttributes,
+  type RefObject,
+  forwardRef,
+  useContext,
+  useRef,
+  Children,
+  cloneElement,
+  isValidElement,
+  ReactElement
+} from "react";
 
 import { DropdownContext } from "./DropdownContext";
 
@@ -31,11 +40,18 @@ const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
       <span
         ref={dropdownTriggerRef}
         onClick={handleClick}
+        aria-expanded={dropdownContext.isOpen ? "true" : "false"}
         {...rest}
         aria-label="펼치기"
         role="button"
       >
-        {children}
+        {Children.map(children, (child) => {
+          return isValidElement(child)
+            ? cloneElement(child as ReactElement, {
+                isOpen: dropdownContext?.isOpen
+              })
+            : child;
+        })}
       </span>
     );
   }
