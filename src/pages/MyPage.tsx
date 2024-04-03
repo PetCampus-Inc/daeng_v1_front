@@ -10,7 +10,7 @@ const MyPage = () => {
       <div>기획분들을 위해 페이지 이동용으로 임시로 만들어둔 버튼</div>
 
       <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
-        <Link to={PATH.OWNER_MA} style={{ backgroundColor: "lightblue" }}>
+        <Link to={PATH.ENROLLMENT} style={{ backgroundColor: "lightblue" }}>
           견주 가입신청서 작성 페이지
         </Link>
         <Link to={PATH.ADMIN_CREATE_FORM} style={{ backgroundColor: "lightblue" }}>

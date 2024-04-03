@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom"
 import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
 import { adminLoginInfoAtom } from "store/admin";
+import { isTRole } from "utils/typeGuard";
 
 import App from "./App";
 
@@ -14,7 +15,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const [adminInfo] = useRecoilState(adminLoginInfoAtom);
   const router = createBrowserRouter([
     {
-      path: "/admin",
+      path: PATH.ADMIN,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,
       children: [
@@ -135,11 +136,16 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           path: PATH.ADMIN_MY_PAGE,
           element: <Pages.MyPage />
         }
-      ]
+      ],
+      loader: () => {
+        if (!isTRole(adminInfo.role)) return redirect("/");
+        return null;
+      }
     },
     {
       path: PATH.ROOT,
       element: <App />,
+      errorElement: <Pages.NotFoundPage />,
       children: [
         {
           index: true,
@@ -164,14 +170,18 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: <Pages.SignUpPage />
         },
         {
-          path: PATH.OWNER_MA,
+          path: PATH.ENROLLMENT,
           element: (
             <Suspense>
               <Pages.MembershipApplicationPage />
             </Suspense>
           )
         }
-      ]
+      ],
+      loader: () => {
+        // if (auth.role !== "USER") return redirect(PATH.LOGIN);
+        return null;
+      }
     }
   ]);
   return <RouterProvider router={router} />;

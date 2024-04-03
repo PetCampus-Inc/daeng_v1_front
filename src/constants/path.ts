@@ -4,6 +4,8 @@ export const PATH = {
   LOGIN: "/signIn",
   SIGNUP: "/signUp",
   ADMIN: "/admin",
+  ADMIN_LOGIN: "/admin/login",
+  ADMIN_SIGNUP: "/admin/signUp",
   ADMIN_ATTENDANCE: "/admin/attendance", // 출석부
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/admin/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_CARE_DOG: "/admin/attendCare", // 오늘 관리할 강아지
@@ -18,7 +20,6 @@ export const PATH = {
   ADMIN_SUBMIT_FORM: "/admin/schoolManage/enrollment/submit", // 원장 가입신청서 제출
   ADMIN_TEACHER_MANAGE: "/admin/schoolManage/teacher", // 선생님 관리
   ADMIN_MY_PAGE: "/admin/myPage", // 마이페이지
-  OWNER: "/owner",
-  OWNER_MA: "/owner/membershipApplication", // 견주 가입신청서
+  ENROLLMENT: "/enrollment", // 견주 가입신청서
   REDIRECT: "/auth/:provider"
 } as const;
