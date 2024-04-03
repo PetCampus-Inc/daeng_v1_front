@@ -22,7 +22,6 @@ const SingleRadio = ({
   isPreviewMode
 }: ISingleRadio) => {
   const { register } = useFormContext();
-
   return (
     <S.Container>
       {caption && <S.Caption>{caption}</S.Caption>}

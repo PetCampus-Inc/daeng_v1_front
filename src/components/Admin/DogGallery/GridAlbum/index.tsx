@@ -1,8 +1,13 @@
 import * as S from "./styles";
 import SinglePicture from "../SinglePicture";
 
-const GridAlbum = () => {
+interface IGridAlbumProps {
+  mode: "view" | "edit";
+}
+
+const GridAlbum = ({ mode }: IGridAlbumProps) => {
   // FIXME: 데이터가 [{"2024.03.31":[사진 목록]},{"2024.03.31":[사진 목록]},{"2024.03.31":[사진 목록]}...] 형태로 온다고 가정하고 작성함.
+  // TODO: 무한스크롤 / windowing 적용
   const dummy = [
     {
       "2024.03.31": ["https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg"]
@@ -20,8 +25,24 @@ const GridAlbum = () => {
         "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
         "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg"
       ]
+    },
+    {
+      "2024.04.03": [
+        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
+        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
+        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg"
+      ]
+    },
+    {
+      "2024.04.04": [
+        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
+        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
+        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
+        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg"
+      ]
     }
   ];
+
   return (
     <S.GridAlbumContainer>
       {dummy.map((item, index) => {
@@ -35,7 +56,7 @@ const GridAlbum = () => {
             </S.TextContainer>
             <S.GridPictures key={index}>
               {pictures.map((picture: string, index: number) => (
-                <SinglePicture key={index} picture={picture} />
+                <SinglePicture key={index} picture={picture} mode={mode} />
               ))}
             </S.GridPictures>
           </S.GridAlbumContainer>

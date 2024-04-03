@@ -2,8 +2,10 @@ import BottomSheet from "components/common/BottomSheet";
 import Checkbox from "components/common/Checkbox";
 import { addWeeks, format } from "date-fns";
 import { useNewTicketMutation } from "hooks/api/useNewTicketMutation";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { newTicketCardDataAtom } from "store/admin";
 import { ITicketDetail } from "types/admin.attendance.type";
 
 import { NewTicketBottomSheetWrapper } from "./styles";
@@ -18,25 +20,31 @@ interface AddCaredogBottomSheetProps {
 const NewTicketBottomSheet = ({ isVisible, close, currentData }: AddCaredogBottomSheetProps) => {
   const dogId = useLocation().pathname.split("/").pop();
   const [isChecked, setIsChecked] = useState(false);
+  const [, setData] = useRecoilState(newTicketCardDataAtom); //TODO: set만 가져오게
+  const navigate = useNavigate();
   const mutateNewTicket = useNewTicketMutation(close);
   const today = new Date();
-  const futureDate = addWeeks(today, currentData.monthlyTicketNumber || 0);
+  const futureDate = addWeeks(today, currentData.monthlyTicketNumber || 1);
   const todayArray = format(today, "yyyy, M, d").split(",").map(Number);
   const futureDateArray = format(futureDate, "yyyy, M, d").split(",").map(Number);
-  const [newTicketData, setNewTicketData] = useState({
-    dogId: dogId,
-    ticketType: currentData.ticketType,
-    roundTicketNumber: currentData.allRoundTicket,
-    monthlyTicketNumber: currentData.monthlyTicketNumber,
-    startDate: todayArray,
-    attendanceDays: currentData.attendanceDays
-  });
 
   const handleSubmit = () => {
-    mutateNewTicket(newTicketData);
+    if (isChecked) {
+      navigate("newTicket");
+      return;
+    }
+    mutateNewTicket({
+      dogId: dogId,
+      ticketType: currentData.ticketType,
+      roundTicketNumber: currentData.allRoundTicket,
+      monthlyTicketNumber: currentData.monthlyTicketNumber,
+      startDate: todayArray,
+      attendanceDays: currentData.attendanceDays
+    });
   };
 
   const cardData = {
+    dogId: dogId,
     ticketType: currentData.ticketType,
     currentRoundTicket: currentData.allRoundTicket,
     ticketExpirationDate: futureDateArray,
@@ -45,6 +53,10 @@ const NewTicketBottomSheet = ({ isVisible, close, currentData }: AddCaredogBotto
     ticketStartDate: todayArray,
     attendanceDays: currentData.attendanceDays
   };
+
+  useEffect(() => {
+    setData(cardData);
+  }, []);
 
   return (
     <>
