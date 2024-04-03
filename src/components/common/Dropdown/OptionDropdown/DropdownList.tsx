@@ -7,9 +7,9 @@ import {
 } from "react";
 
 import { DropdownContext } from "./DropdownContext";
-import { StyledDropdownList } from "./styles";
+import { type ICustomStyle, StyledDropdownList } from "./styles";
 
-const DropdownList = ({ children }: PropsWithChildren) => {
+const DropdownList = ({ children, customStyle }: PropsWithChildren<ICustomStyle>) => {
   const dropdownContext = useContext(DropdownContext);
   if (!dropdownContext) {
     throw new Error("DropdownList should be used within a Dropdown");
@@ -17,7 +17,7 @@ const DropdownList = ({ children }: PropsWithChildren) => {
   return (
     <>
       {dropdownContext?.isOpen && (
-        <StyledDropdownList role="menu">
+        <StyledDropdownList role="menu" customStyle={customStyle}>
           {Children.map(children, (child, idx) => {
             return cloneElement(child as ReactElement, {
               handleChange: () => {
