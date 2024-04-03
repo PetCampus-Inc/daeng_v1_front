@@ -1,14 +1,9 @@
 import { useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 
-import {
-  Image,
-  ImageShadow,
-  SlideIndex,
-  SlideIndicator,
-  SliderContainer,
-  SlideWrapper
-} from "./style";
+import SliderDots from "./SliderDots";
+import { Image, ImageShadow, SlideIndex, SliderContainer, SlideWrapper } from "./style";
 
 interface ImageSidlerProps {
   images: string[];
@@ -27,8 +22,9 @@ const DogImageSidler = ({ images }: ImageSidlerProps) => {
     beforeChange: (_: never, newIndex: number) => {
       setCurrentIndex(newIndex);
     },
-    appendDots: (dots: React.ReactNode) => <SlideIndicator> {dots} </SlideIndicator>,
-    dotsClass: "dots_custom"
+    appendDots: (dots: React.ReactElement[]) => (
+      <SliderDots dots={dots} numDotsToShow={5} dotWidth={20} />
+    )
   };
 
   return (
