@@ -109,12 +109,12 @@ export const IconButton = styled.button`
   border: 1px solid ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.8)};
   background-color: ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.8)};
 
-  &:active {
+  &.active {
     border: 1px solid ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.6)};
     background-color: rgba(0, 0, 0, 0.5);
-
-    transition: background-color 0.1s ease-out;
   }
+
+  transition: background-color 0.1s ease-out;
 `;
 
 export const ButtonGroup = styled.div`
@@ -135,4 +135,62 @@ export const SliderHeader = styled.div`
 export const TimeText = styled.p`
   color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.body2_16_B};
+`;
+
+export const CommentBoxWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 90%;
+  max-height: 65%;
+  padding: 0.75rem 0.625rem;
+  gap: 0.625rem;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.white};
+  // backdrop-filter: blur(2px);
+  opacity: 0.65;
+  overflow-y: auto;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background: url("/images/double-quotes-icon.svg") no-repeat center center;
+    background-size: contain;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  &::before {
+    top: 0.75rem;
+    left: 0.62rem;
+  }
+
+  &::after {
+    bottom: 0.75rem;
+    right: 0.62rem;
+    transform: rotate(180deg);
+  }
+`;
+
+export const CommentTextWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 0.25rem 1rem;
+
+  max-height: 100%;
+  overflow-y: auto;
+`;
+
+export const CommentText = styled.pre`
+  color: ${({ theme }) => theme.colors.darkBlack};
+  ${({ theme }) => theme.typo.label1_16_R};
+  text-wrap: pretty;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  padding: 0 0.25rem;
+  margin: 0;
+  overflow: visible;
 `;

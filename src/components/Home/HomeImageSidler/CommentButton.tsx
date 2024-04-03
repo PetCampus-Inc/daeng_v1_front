@@ -2,9 +2,14 @@ import Chat from "assets/svg/chat";
 
 import { IconButton } from "./style";
 
-const CommentButton = () => {
+interface CommentButtonProps {
+  isOpen: boolean;
+  onClick: () => void;
+}
+
+const CommentButton = ({ isOpen, onClick }: CommentButtonProps) => {
   return (
-    <IconButton type="button" onClick={() => console.log("코멘트버튼 클릭")}>
+    <IconButton type="button" onClick={onClick} className={isOpen ? "active" : ""}>
       <Chat />
     </IconButton>
   );
