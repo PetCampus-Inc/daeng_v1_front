@@ -6,6 +6,8 @@ export const SliderContainer = styled.div`
   border-radius: 8px;
   overflow: hidden;
   aspect-ratio: 1 / 1;
+
+  overscroll-behavior: contain;
 `;
 
 export const ImageShadow = styled.div`
@@ -151,7 +153,6 @@ export const CommentBoxWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   // backdrop-filter: blur(2px);
   opacity: 0.65;
-  overflow-y: auto;
 
   &::before,
   &::after {
@@ -182,6 +183,7 @@ export const CommentTextWrapper = styled.div`
 
   max-height: 100%;
   overflow-y: auto;
+  overscroll-behavior: contain;
 `;
 
 export const CommentText = styled.pre`
@@ -191,6 +193,4 @@ export const CommentText = styled.pre`
   white-space: pre-wrap;
   overflow-wrap: break-word;
   padding: 0 0.25rem;
-  margin: 0;
-  overflow: visible;
 `;
