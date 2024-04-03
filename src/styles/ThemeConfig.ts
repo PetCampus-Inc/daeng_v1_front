@@ -68,7 +68,7 @@ export const ThemeConfig = {
     title3_28_B: typoCreator("1.75rem", 700, "0px", "40px"),
     body1_18_B: typoCreator("1.125rem", 700, "0px", "27px"),
     body1_18_R: typoCreator("1.125rem", 400, "-1.2px", "26px"),
-    body2_16_B: typoCreator("1rem", 700, "-1.2px", "23px"),
+    body2_16_B: typoCreator("1rem", 700, "-0.012rem", "23px"),
     body2_16_R: typoCreator("1rem", 400, "-0.192px", "23px"),
     label1_16_B: typoCreator("1rem", 700, "-0.192px", "24px"),
     label1_16_M: typoCreator("1rem", 500, "-1.2px", "24px"),
