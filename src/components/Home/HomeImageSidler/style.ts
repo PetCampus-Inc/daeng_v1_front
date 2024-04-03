@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { convertHexToRGBA } from "utils/color";
 
 export const SliderContainer = styled.div`
   position: relative;
@@ -95,4 +96,43 @@ export const DotWrapper = styled.div`
     font-size: 7px;
     line-height: 20px;
   }
+`;
+
+export const IconButton = styled.button`
+  display: flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.8)};
+  background-color: ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.8)};
+
+  &:active {
+    border: 1px solid ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.6)};
+    background-color: rgba(0, 0, 0, 0.5);
+
+    transition: background-color 0.1s ease-out;
+  }
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 0.75rem;
+`;
+
+export const SliderHeader = styled.div`
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+
+  z-index: 3;
+`;
+
+export const TimeText = styled.p`
+  color: ${({ theme }) => theme.colors.white};
+  ${({ theme }) => theme.typo.body2_16_B};
 `;
