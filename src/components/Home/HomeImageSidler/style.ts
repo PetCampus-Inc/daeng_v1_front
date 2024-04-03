@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { convertHexToRGBA } from "utils/color";
 
 export const SliderContainer = styled.div`
@@ -193,4 +193,19 @@ export const CommentText = styled.pre`
   white-space: pre-wrap;
   overflow-wrap: break-word;
   padding: 0 0.25rem;
+`;
+
+export const DropdownListStyle = css`
+  right: 1rem;
+  top: 3.2rem;
+`;
+
+export const IconWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: ${({ theme }) => theme.colors.yellow_3};
+  border-radius: 50%;
 `;

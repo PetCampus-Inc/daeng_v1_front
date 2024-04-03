@@ -2,9 +2,9 @@ import DownloadIcon from "assets/svg/download-icon";
 
 import { IconButton } from "./style";
 
-const SaveButton = () => {
+const SaveButton = ({ isOpen }: { isOpen?: boolean }) => {
   return (
-    <IconButton type="button" onClick={() => console.log("저장버튼 클릭")}>
+    <IconButton type="button" className={isOpen ? "active" : ""}>
       <DownloadIcon />
     </IconButton>
   );
