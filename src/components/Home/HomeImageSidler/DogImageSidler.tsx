@@ -4,7 +4,7 @@ import Slider from "react-slick";
 
 import CommentBox from "./CommentBox";
 import CommentButton from "./CommentButton";
-import SaveButton from "./SaveButton";
+import SaveOptionDropdown from "./SaveOptionDropdown";
 import SliderDots from "./SliderDots";
 import {
   ButtonGroup,
@@ -40,11 +40,19 @@ const DogImageSidler = ({ images }: ImageSidlerProps) => {
     )
   };
 
-  const handleCommentButtonClick = () => {
-    setIsCommentOpen(!isCommentOpen); // Toggle the comment box
+  const handleComment = () => {
+    setIsCommentOpen(!isCommentOpen);
   };
 
-  console.log(isCommentOpen);
+  const SAVE_OPTIONS: { [key: string]: () => void } = {
+    "이 사진만 저장": () => console.log("개별 저장"),
+    "전체 저장": () => console.log("전체 저장")
+  };
+
+  const handleOptionClick = (option: string) => {
+    const action = SAVE_OPTIONS[option];
+    if (action) action();
+  };
 
   return (
     <SliderContainer>
@@ -52,8 +60,11 @@ const DogImageSidler = ({ images }: ImageSidlerProps) => {
       <SliderHeader>
         <TransmissionTime />
         <ButtonGroup>
-          <CommentButton onClick={handleCommentButtonClick} isOpen={isCommentOpen} />
-          <SaveButton />
+          <CommentButton onClick={handleComment} isOpen={isCommentOpen} />
+          <SaveOptionDropdown
+            options={Object.keys(SAVE_OPTIONS)}
+            handleOptionClick={handleOptionClick}
+          />
         </ButtonGroup>
       </SliderHeader>
       <Slider {...settings}>
