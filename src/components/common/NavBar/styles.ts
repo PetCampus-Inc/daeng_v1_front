@@ -42,7 +42,7 @@ export const Circle = styled.div`
   border-radius: 50%;
   width: 20%;
   height: 100%;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.white};
   top: -15px;
   z-index: -1;
 `;
