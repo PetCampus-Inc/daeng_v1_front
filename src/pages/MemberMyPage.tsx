@@ -1,5 +1,7 @@
+import MemberNavbar from "components/common/MemberNavbar";
+
 const MemberMyPage = () => {
-  return <></>;
+  return <MemberNavbar />;
 };
 
 export default MemberMyPage;
