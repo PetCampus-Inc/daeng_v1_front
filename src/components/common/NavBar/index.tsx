@@ -17,12 +17,22 @@ const Navbar = ({ type, show, attendance }: Props) => {
 
   return (
     <S.Container>
-      {MENU_ITEMS.map((menuItem) => (
-        <S.NavButton key={menuItem.text} to={menuItem.path}>
-          {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
-          <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
-        </S.NavButton>
-      ))}
+      {path.includes("/member")
+        ? MENU_ITEMS.member.map((menuItem, index) => (
+            <>
+              <S.NavButton key={menuItem.text} to={menuItem.path}>
+                {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
+                <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
+              </S.NavButton>
+              {index === 0 && <S.Circle />}
+            </>
+          ))
+        : MENU_ITEMS.admin.map((menuItem) => (
+            <S.NavButton key={menuItem.text} to={menuItem.path}>
+              {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
+              <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
+            </S.NavButton>
+          ))}
     </S.Container>
   );
 };

@@ -36,3 +36,13 @@ export const Text = styled.span`
     ${({ theme }) => theme.typo.caption1_12_B}
   }
 `;
+
+export const Circle = styled.div`
+  position: absolute;
+  border-radius: 50%;
+  width: 20%;
+  height: 100%;
+  background-color: white;
+  top: -15px;
+  z-index: -1;
+`;
