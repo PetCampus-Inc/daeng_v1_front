@@ -1,7 +1,7 @@
 import { MENU_ITEMS } from "constants/navBar";
 
 import usePathParams from "hooks/common/usePathParams";
-import { memo } from "react";
+import React, { memo } from "react";
 
 import * as S from "./styles";
 
@@ -17,12 +17,22 @@ const Navbar = ({ type, show, attendance }: Props) => {
 
   return (
     <S.Container>
-      {MENU_ITEMS.map((menuItem) => (
-        <S.NavButton key={menuItem.text} to={menuItem.path}>
-          {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
-          <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
-        </S.NavButton>
-      ))}
+      {path.includes("/member")
+        ? MENU_ITEMS.member.map((menuItem, index) => (
+            <React.Fragment key={menuItem.text}>
+              <S.NavButton to={menuItem.path}>
+                {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
+                <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
+              </S.NavButton>
+              {index === 0 && <S.Circle />}
+            </React.Fragment>
+          ))
+        : MENU_ITEMS.admin.map((menuItem) => (
+            <S.NavButton key={menuItem.text} to={menuItem.path}>
+              {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
+              <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
+            </S.NavButton>
+          ))}
     </S.Container>
   );
 };

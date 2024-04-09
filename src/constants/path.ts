@@ -21,5 +21,6 @@ export const PATH = {
   ADMIN_TEACHER_MANAGE: "/admin/schoolManage/teacher", // 선생님 관리
   ADMIN_MY_PAGE: "/admin/myPage", // 마이페이지
   ENROLLMENT: "/enrollment", // 견주 가입신청서
+  MEMBER_MY_PAGE: "/member/myPage",
   REDIRECT: "/auth/:provider"
 } as const;
