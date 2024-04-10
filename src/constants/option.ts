@@ -8,3 +8,5 @@ export const LIST = {
 } as const;
 
 export type TSortOptionList = PropertyValues<typeof LIST>;
+
+export const INIT_COUNTER = 2;
