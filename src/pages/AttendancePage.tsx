@@ -1,5 +1,5 @@
-import Attendance from "components/Admin/Attendance/Attendance";
 import AttendanceMain from "components/Admin/Attendance/AttendanceMain";
+import Attendance from "components/Admin/Attendance/AttendanceMode";
 import AttendanceTop from "components/Admin/Attendance/AttendanceTop";
 import Header from "components/common/Header";
 import Navbar from "components/common/NavBar";
