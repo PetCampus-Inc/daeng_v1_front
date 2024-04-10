@@ -1,27 +1,18 @@
+import { TSortOptionList } from "constants/option";
+
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
-import { memo, type SetStateAction } from "react";
+import { memo } from "react";
 
 import { ArrowDownButton, SelectBox, Text } from "./styles";
 import SortOptionListBottomSheet from "../AttendanceModal/SortOptionListBottomSheet";
 
-export type TSortSelectBoxProps = {
-  sortName: string;
-  setSortName: React.Dispatch<SetStateAction<string>>;
-};
-
-const SortSelectBox = memo(({ sortName, setSortName }: TSortSelectBoxProps) => {
+const SortSelectBox = memo(({ sortName }: { sortName: TSortOptionList }) => {
   const overlay = useOverlay();
 
-  // FIXME: SortSelectBox내부에서 sortName 상태 관리하도록 변경 필요!
   const openCallPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <SortOptionListBottomSheet
-        sortName={sortName}
-        setSortName={setSortName}
-        isVisible={isOpen}
-        close={close}
-      />
+      <SortOptionListBottomSheet isOpen={isOpen} close={close} />
     ));
 
   return (
