@@ -1,11 +1,13 @@
+import { INIT_COUNTER } from "constants/option";
+
 import AddIcon from "assets/svg/add-icon";
 import Modal from "components/common/ButtonModal";
-import EditableRadioGroup, {
-  ExtendedFieldArrayWithId
-} from "components/common/Select/EditableRadioGroup";
+import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
 import useTicketFieldArray from "hooks/common/useTicketFieldArray";
-import { useState } from "react";
+import { useCallback } from "react";
+import { useRecoilState } from "recoil";
+import { ticketCounterAtom } from "store/overlay";
 
 import * as S from "./styles";
 import TicketCounterBottomSheet from "../FormModal/TicketCounterBottomSheet";
@@ -20,14 +22,13 @@ type TicketTypeProps = {
 };
 
 const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTypeProps) => {
-  const INIT_COUNTER = 2;
   const FIELD_NAME = name;
   const MAX_ITEMS = 6;
   const MIN_ITEMS = 1;
   const TICKET_TYPE = ticketType === "ROUND" ? "회차권" : "정기권";
   const TIMES = ticketType === "ROUND" ? "회" : "주";
 
-  const [counter, setCounter] = useState<number>(INIT_COUNTER);
+  const [counter, setCounter] = useRecoilState(ticketCounterAtom);
 
   const { fields, append, remove } = useTicketFieldArray({
     control,
@@ -55,24 +56,19 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
     }
   };
 
-  const isDuplication = fields.some((field) => {
-    const extendedField = field as ExtendedFieldArrayWithId;
-    return extendedField.value === counter;
-  });
-
-  const openTicketCounter = () =>
-    overlay.open(({ isOpen, close }) => (
-      <TicketCounterBottomSheet
-        isOpen={isOpen}
-        close={close}
-        ticketType={ticketType}
-        isDuplication={isDuplication}
-        INIT_COUNTER={INIT_COUNTER}
-        counter={counter}
-        setCounter={setCounter}
-        action={handleAddRadio}
-      />
-    ));
+  const openTicketCounter = useCallback(
+    () =>
+      overlay.open(({ isOpen, close }) => (
+        <TicketCounterBottomSheet
+          isOpen={isOpen}
+          close={close}
+          ticketType={ticketType}
+          fields={fields}
+          action={handleAddRadio}
+        />
+      )),
+    [counter]
+  );
 
   const openDeleteModal = () =>
     overlay.open(({ isOpen, close }) => (
