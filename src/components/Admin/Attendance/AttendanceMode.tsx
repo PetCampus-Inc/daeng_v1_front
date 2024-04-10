@@ -16,7 +16,7 @@ interface AttendanceProps {
   setMode: React.Dispatch<React.SetStateAction<"DEFAULT" | "ATTENDANCE">>;
 }
 
-const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
+const AttendanceMode = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
   const { schoolId } = useRecoilValue(adminLoginInfoAtom);
   const { data: dogList } = useGetAttendDogList(schoolId);
   const [searchText, setSearchText] = useState<string>("");
@@ -60,4 +60,4 @@ const Attendance = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
   );
 };
 
-export default Attendance;
+export default AttendanceMode;
