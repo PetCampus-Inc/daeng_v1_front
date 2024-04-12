@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import { QueryClient } from "@tanstack/react-query";
 import * as Pages from "pages";
 import { Suspense } from "react";
-import { Navigate, Outlet, RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
 import { adminLoginInfoAtom } from "store/admin";
@@ -133,24 +133,9 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           ]
         },
         {
-          path: PATH.ADMIN_MY_PAGE(),
-          element: <Outlet />,
-          children: [
-            {
-              index: true,
-              element: (
-                <Navigate to={adminInfo.role === "ROLE_OWNER" ? "owner" : "teacher"} replace />
-              )
-            },
-            {
-              path: "owner",
-              element: <Pages.PrincipalMyPage />
-            },
-            {
-              path: "teacher",
-              element: <Pages.TeacherMyPage />
-            }
-          ]
+          path: PATH.ADMIN_MY_PAGE,
+          element:
+            adminInfo.role === "ROLE_OWNER" ? <Pages.PrincipalMyPage /> : <Pages.TeacherMyPage />
         }
       ],
       loader: () => {
