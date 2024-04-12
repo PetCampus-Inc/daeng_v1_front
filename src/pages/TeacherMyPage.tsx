@@ -16,7 +16,6 @@ const TeacherMyPage = () => {
   return (
     <>
       <Header type="setting" text="마이페이지" transparent={true} />
-
       <PageContainer
         pt="7"
         imageUrl={
@@ -29,9 +28,7 @@ const TeacherMyPage = () => {
           {data && <TeacherInfo data={data} />}
         </ContentContainer>
       </PageContainer>
-
       <LogOutButton />
-
       <NavBar type="admin" />
     </>
   );

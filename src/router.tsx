@@ -12,7 +12,7 @@ import { isTRole } from "utils/typeGuard";
 import App from "./App";
 
 const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
-  const [adminInfo] = useRecoilState(adminLoginInfoAtom);
+  const [auth] = useRecoilState(adminLoginInfoAtom);
   const router = createBrowserRouter([
     {
       path: PATH.ADMIN,
@@ -41,9 +41,9 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           ]
         },
         {
-          path: PATH.ADMIN_CARE_DOG,
+          path: PATH.ADMIN_CARE,
           id: "caredog",
-          loader: () => caredogLoader({ adminId: adminInfo.adminId, queryClient }),
+          loader: () => caredogLoader({ adminId: auth.adminId, queryClient }),
           children: [
             {
               index: true,
@@ -134,12 +134,32 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
         },
         {
           path: PATH.ADMIN_MY_PAGE,
-          element:
-            adminInfo.role === "ROLE_OWNER" ? <Pages.PrincipalMyPage /> : <Pages.TeacherMyPage />
+          children: [
+            {
+              index: true,
+              element:
+                auth.role === "ROLE_OWNER" ? <Pages.PrincipalMyPage /> : <Pages.TeacherMyPage />
+            },
+            {
+              // 마페 - 프로필 수정
+              path: PATH.ADMIN_MY_PAGE_EDIT
+              // element: <Pages.EditAdminProfile />
+            },
+            {
+              // 교사 마페 - 유치원 상세 정보
+              path: PATH.ADMIN_MY_SCHOOL_INFO,
+              element: <Pages.SchoolInfoPage />
+            },
+            {
+              // 원장 마페 - 유치원 정보 수정
+              path: PATH.ADMIN_MY_SCHOOL_INFO_EDIT
+              // element: <Pages.SchoolInfoEditPage />
+            }
+          ]
         }
       ],
       loader: () => {
-        if (!isTRole(adminInfo.role)) return redirect("/");
+        if (!isTRole(auth.role)) return redirect("/");
         return null;
       }
     },
@@ -171,7 +191,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: <Pages.SignUpPage />
         },
         {
-          path: PATH.ENROLLMENT,
+          path: PATH.ENROLL,
           element: (
             <Suspense>
               <Pages.MembershipApplicationPage />
