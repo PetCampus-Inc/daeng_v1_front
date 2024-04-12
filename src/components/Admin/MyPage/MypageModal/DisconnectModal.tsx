@@ -9,7 +9,7 @@ type DisconnectModalProps = {
 
 const DisconnectModal = ({ close, action, isOpen }: DisconnectModalProps) => {
   return (
-    <Modal isOpen={isOpen} onClose={close}>
+    <Modal isOpen={isOpen} close={close}>
       <Modal.Content variant="two">
         <Modal.Title
           title="유치원과 연결을 끊으시겠습니까?"

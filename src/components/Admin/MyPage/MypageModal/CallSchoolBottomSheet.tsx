@@ -23,7 +23,7 @@ const CallSchoolBottomSheet = memo(({ info, isOpen, close }: CallSchoolBottomShe
       isOpen={isOpen}
       schoolName={info.schoolName}
       phoneNumber={info.schoolNumber}
-      onClose={close}
+      close={close}
       handleCall={() => handleCallMember(info)}
     />
   );
