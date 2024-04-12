@@ -36,7 +36,7 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
     ));
 
   const CARE_OPTIONS: { [key: string]: () => void } = {
-    "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE_DOG + "/delete"),
+    "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE + "/delete"),
     "알림장 일괄 전송": openSchedulerPopup
   };
 

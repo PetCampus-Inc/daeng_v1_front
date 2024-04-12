@@ -6,7 +6,6 @@ import CallSchoolBottomSheet from "components/Admin/MyPage/MyPageModal/CallSchoo
 import DisconnectModal from "components/Admin/MyPage/MyPageModal/DisconnectModal";
 import BackgroundGrayButton from "components/common/Button/BackgroundGrayButton";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
-import useBottomSheet from "hooks/common/useBottomSheet";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
@@ -18,7 +17,7 @@ const SchoolInfo = () => {
   const { data } = useGetTeacherInfo(adminId);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
 
-  const { isVisible: isBsOpen, open: bsOpen, close: bsClose } = useBottomSheet();
+  // const { isVisible: isBsOpen, open: bsOpen, close: bsClose } = useBottomSheet();
 
   const handleDisconnet = () => {
     console.log("Disconnected"); // TODO: 유치원 연결 끊기 추가
@@ -26,17 +25,17 @@ const SchoolInfo = () => {
   };
 
   // FIXME: 실제 전화번호 앱 열리는 로직 추가 필요
-  const handleGetCallInfo = async () => {
-    bsOpen();
-  };
-  const schoolCallInfo = {
-    schoolName: data?.schoolName,
-    schoolNumber: data?.schoolNumber
-  };
+  // const handleGetCallInfo = async () => {
+  //   bsOpen();
+  // };
+  // const schoolCallInfo = {
+  //   schoolName: data?.schoolName,
+  //   schoolNumber: data?.schoolNumber
+  // };
 
   return (
     <>
-      <CallSchoolBottomSheet info={schoolCallInfo} isOpen={isBsOpen} close={bsClose} />
+      {/* <CallSchoolBottomSheet info={schoolCallInfo} isOpen={isBsOpen} close={bsClose} /> */}
       <S.CardContainer>
         <S.CardTitle>{data && data.schoolName ? `${data.schoolName} 유치원` : ""}</S.CardTitle>
         <S.InfoContainer>
@@ -45,7 +44,7 @@ const SchoolInfo = () => {
               <Phone />
             </S.IconWrapper>
             <S.ListTitle>{data && data.schoolNumber ? data.schoolNumber : ""}</S.ListTitle>
-            <S.YellowThickButton onClick={handleGetCallInfo}>
+            <S.YellowThickButton onClick={() => console.log("클릭!")}>
               <PhoneIcon />
               전화 걸기
             </S.YellowThickButton>
