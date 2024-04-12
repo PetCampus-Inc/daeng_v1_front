@@ -3,8 +3,7 @@ import BasicPhoneIcon from "assets/svg/phone-basic";
 import BottomSheet, { type IBottomSheetProps } from "../index";
 import { CallSubtitle } from "../styles";
 
-interface CallBottomSheetProps {
-  isOpen: boolean;
+interface CallBottomSheetProps extends IBottomSheetProps {
   dogName?: string;
   schoolName?: string;
   phoneNumber: string;
@@ -14,8 +13,8 @@ interface CallBottomSheetProps {
 const CallBottomSheet = ({
   dogName,
   schoolName,
-  close,
   phoneNumber,
+  close,
   isOpen,
   handleCall
 }: CallBottomSheetProps) => {
