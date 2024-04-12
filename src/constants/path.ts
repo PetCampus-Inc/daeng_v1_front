@@ -19,8 +19,8 @@ export const PATH = {
   ADMIN_CREATE_FORM: "/admin/schoolManage/enrollment/enrollment-new", // 원장 가입신청서 등록
   ADMIN_SUBMIT_FORM: "/admin/schoolManage/enrollment/submit", // 원장 가입신청서 제출
   ADMIN_TEACHER_MANAGE: "/admin/schoolManage/teacher", // 선생님 관리
-  ADMIN_MY_PAGE: (role?: "teacher" | "owner") => `/admin/myPage${role ? `/${role}` : ""}`,
-  ADMIN_MY_SCHOOL_INFO: (role?: string) => `/admin/myPage/${role}/school`,
+  ADMIN_MY_PAGE: "/admin/myPage",
+  ADMIN_MY_SCHOOL_INFO: `/admin/myPage/school`,
   ENROLLMENT: "/enrollment", // 견주 가입신청서
   MEMBER_MY_PAGE: "/member/myPage",
   REDIRECT: "/auth/:provider"

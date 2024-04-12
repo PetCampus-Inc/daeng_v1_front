@@ -45,7 +45,7 @@ const TeacherInfo = ({ data }: TeacherInfoProps) => {
   ];
 
   const getSchoolInfo = () => {
-    navigate(PATH.ADMIN_MY_SCHOOL_INFO("teacher"));
+    navigate(PATH.ADMIN_MY_SCHOOL_INFO);
   };
 
   return (
