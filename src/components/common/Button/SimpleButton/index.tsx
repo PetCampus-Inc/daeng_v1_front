@@ -3,24 +3,23 @@ import type { ButtonHTMLAttributes, PropsWithChildren, ReactElement } from "reac
 import ButtonAddon from "./ButtonAddon";
 import { StyledButton } from "./styles";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+import type { ICustomStyle, TColorScheme, TPaddingOptions } from "./types";
+
+export interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    ICustomStyle,
+    TPaddingOptions {
   leftAddon?: ReactElement;
   rightAddon?: ReactElement;
   colorScheme?: TColorScheme;
-  pt?: number;
-  pb?: number;
-  ph?: number;
-  pr?: number;
-  pl?: number;
 }
-
-export type TColorScheme = "primary" | "gray";
 
 const SimpleButton = ({
   children,
   leftAddon,
   rightAddon,
   colorScheme = "primary",
+  customStyle,
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   const contentProps = {
@@ -30,7 +29,7 @@ const SimpleButton = ({
   };
 
   return (
-    <StyledButton colorScheme={colorScheme} {...props}>
+    <StyledButton colorScheme={colorScheme} customStyle={customStyle} {...props}>
       <ButtonContent {...contentProps} />
     </StyledButton>
   );
