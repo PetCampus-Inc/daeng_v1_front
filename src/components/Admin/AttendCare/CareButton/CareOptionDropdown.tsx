@@ -2,7 +2,7 @@ import MoreIcon from "assets/svg/more-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";
 import SimpleButton from "components/common/Button/SimpleButton";
-import Dropdown from "components/common/Dropdown/OptionDropdown/DropdownRoot";
+import Dropdown from "components/common/Dropdown/OptionDropdown/Dropdown";
 
 interface CareOptionListProps {
   options: string[];

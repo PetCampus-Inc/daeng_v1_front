@@ -2,7 +2,7 @@ import MoreIcon from "assets/svg/more-icon";
 import PhoneIcon from "assets/svg/phone";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";
-import Dropdown from "components/common/Dropdown/OptionDropdown/DropdownRoot";
+import Dropdown from "components/common/Dropdown/OptionDropdown/Dropdown";
 
 import { IconWrapper } from "./styles";
 interface Props {
