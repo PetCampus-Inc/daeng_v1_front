@@ -13,3 +13,9 @@ export const BackgroundButtonWrapper = styled.div`
   right: 0;
   padding-bottom: 78px;
 `;
+
+export const CardContainer = styled.div`
+  height: 100%;
+  padding: 1.5rem 1rem;
+  background-color: ${({ theme }) => theme.colors.gray_5};
+`;

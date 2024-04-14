@@ -1,7 +1,7 @@
 import LogOutButton from "components/Admin/MyPage/Button/index";
 import { PageContainer } from "components/Admin/MyPage/Container/styles";
-import { ContentContainer } from "components/Admin/MyPage/styles";
-import TeacherInfo from "components/Admin/MyPage/TeacherInfo/index";
+import InfoCard from "components/Admin/MyPage/MyPageCard/InfoCard";
+import { CardContainer, ContentContainer } from "components/Admin/MyPage/styles";
 import TeacherProfile from "components/Admin/MyPage/TeacherProfile/index";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
@@ -25,7 +25,9 @@ const TeacherMyPage = () => {
         {/* TODO: data.imageURL 없는 경우 기본 이미지 url로 연결 */}
         <ContentContainer>
           {data && <TeacherProfile data={data} />}
-          {data && <TeacherInfo data={data} />}
+          <CardContainer>
+            <InfoCard data={data} role={"ROLE_TEACHER"} />
+          </CardContainer>
         </ContentContainer>
       </PageContainer>
       <LogOutButton />
