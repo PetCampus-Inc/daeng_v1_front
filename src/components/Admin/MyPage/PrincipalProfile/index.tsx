@@ -1,9 +1,9 @@
 import * as S from "./styles";
 
-import type { IPrincipalInfo } from "types/admin.mypage.type";
+import type { IOwnerInfo } from "types/admin.mypage.type";
 
 interface PrincipalInfoProps {
-  data: IPrincipalInfo;
+  data: IOwnerInfo;
 }
 
 const PrincipalProfile = ({ data }: PrincipalInfoProps) => {
