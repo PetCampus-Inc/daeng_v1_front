@@ -1,5 +1,5 @@
 import MoreIcon from "assets/svg/more-icon";
-import PhoneIcon from "assets/svg/phone";
+import PhoneIcon from "assets/svg/phone-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XBoxIcon from "assets/svg/x-box";
 import Dropdown from "components/common/Dropdown/OptionDropdown/Dropdown";
