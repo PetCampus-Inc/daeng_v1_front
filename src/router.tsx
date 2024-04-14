@@ -138,7 +138,15 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               index: true,
               element:
-                auth.role === "ROLE_OWNER" ? <Pages.PrincipalMyPage /> : <Pages.TeacherMyPage />
+                auth.role === "ROLE_OWNER" ? (
+                  <Suspense>
+                    <Pages.PrincipalMyPage />
+                  </Suspense>
+                ) : (
+                  <Suspense>
+                    <Pages.TeacherMyPage />
+                  </Suspense>
+                )
             },
             {
               // 마페 - 프로필 수정
@@ -148,7 +156,11 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               // 교사 마페 - 유치원 상세 정보
               path: PATH.ADMIN_MY_SCHOOL_INFO,
-              element: <Pages.SchoolInfoPage />
+              element: (
+                <Suspense>
+                  <Pages.SchoolInfoPage />
+                </Suspense>
+              )
             },
             {
               // 원장 마페 - 유치원 정보 수정
