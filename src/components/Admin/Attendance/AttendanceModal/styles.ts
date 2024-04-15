@@ -29,6 +29,8 @@ export const ListWrapper = styled.ul`
   flex-direction: column;
   justify-content: center;
   margin: 10px 8px;
+
+  user-select: none;
 `;
 
 export const ListItem = styled.li`

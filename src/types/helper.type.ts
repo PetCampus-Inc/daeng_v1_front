@@ -6,3 +6,5 @@ export interface IResponse<T> {
   message: string;
   responseTime?: number[];
 }
+
+export type PropertyValues<T> = T[keyof T];
