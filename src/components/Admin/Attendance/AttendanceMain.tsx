@@ -1,9 +1,8 @@
-import { LIST } from "constants/option";
-
 import { useDogListAndSortedList, useDogSearchQuery } from "hooks/api/attendanceQuery";
 import { type SetStateAction, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { sortOptionAtom } from "store/overlay";
 
 import SortSelectBox from "./AttendanceButton/SortSelectBox";
 import AttendanceSearchInput from "./AttendanceInput/AttendanceSearchInput";
@@ -17,7 +16,7 @@ interface AttendanceMainProps {
 
 const AttendanceMain = ({ isFocus, setIsFocus }: AttendanceMainProps) => {
   const { schoolId, adminId } = useRecoilValue(adminLoginInfoAtom);
-  const [sortName, setSortName] = useState<string>(LIST.REGISTERED);
+  const sortName = useRecoilValue(sortOptionAtom);
   const { data: dogList } = useDogListAndSortedList({ sortName, schoolId, adminId });
   const [searchText, setSearchText] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -51,11 +50,7 @@ const AttendanceMain = ({ isFocus, setIsFocus }: AttendanceMainProps) => {
         onBlur={() => setIsFocus(false)}
       />
       <Blur $isFocus={isFocus}>
-        {!searchQuery ? (
-          <SortSelectBox sortName={sortName} setSortName={setSortName} />
-        ) : (
-          <Spacing />
-        )}
+        {!searchQuery ? <SortSelectBox sortName={sortName} /> : <Spacing />}
         <SearchList data={dataToShow} type={type} />
       </Blur>
     </>

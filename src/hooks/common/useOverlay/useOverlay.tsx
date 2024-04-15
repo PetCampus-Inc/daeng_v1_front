@@ -3,7 +3,7 @@ import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { OverlayController, type OverlayControlRef } from "./OverlayController";
 import { OverlayContext } from "./OverlayProvider";
 
-import type { CreateOverlayElement } from "./type";
+import type { CreateOverlayElement } from "./types";
 
 let elementId = 1;
 interface Options {
