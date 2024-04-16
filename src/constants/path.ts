@@ -24,5 +24,6 @@ export const PATH = {
   ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`,
   ENROLL: "/enroll", // 견주 가입신청서
   MEMBER_MY_PAGE: "/member/myPage",
-  REDIRECT: "/auth/:provider"
+  REDIRECT: "/auth/:provider",
+  SETTING: "/setting" // 설정 페이지
 } as const;
