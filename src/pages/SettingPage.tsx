@@ -1,8 +1,11 @@
+import Header from "components/common/Header";
+
 const SettingPage = () => {
   return (
-    <div>
+    <>
+      <Header type="text" text="설정" />
       설정페이지
-    </div>
+    </>
   );
 };
 
