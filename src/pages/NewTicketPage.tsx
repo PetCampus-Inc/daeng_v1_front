@@ -1,6 +1,9 @@
 import NewTicket from "components/Admin/DogDetailInfo/NewTicket";
+import CancelModal from "components/Admin/DogDetailInfo/NewTicket/CancelModal";
+import { NewTicketButton } from "components/Admin/DogDetailInfo/NewTicket/styles";
 import Header from "components/common/Header";
 import { useNewTicketMutation } from "hooks/api/useNewTicketMutation";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useForm, FormProvider } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -13,6 +16,7 @@ const NewTicketPage = () => {
   const mutateNewTicket = useNewTicketMutation();
   const navigate = useNavigate();
   const [currentTicket, setCurrentTicket] = useRecoilState(newTicketCardDataAtom);
+  const overlay = useOverlay();
 
   const dogId = Number(useLocation().pathname.split("/").at(-2));
   const methods = useForm({ mode: "onSubmit" });
@@ -33,13 +37,12 @@ const NewTicketPage = () => {
     startDate: `${methods.watch("year") ?? currentTicket!.ticketStartDate[0]}-${methods.watch("month") ?? addZero(currentTicket!.ticketStartDate[1])}-${methods.watch("day") ?? addZero(currentTicket!.ticketStartDate[2])}`,
     attendanceDays: methods.watch("openDays") ?? currentTicket?.attendanceDays
   };
-  console.log(updatedTicket);
 
   const onSubmit = methods.handleSubmit(() => {
     mutateNewTicket(updatedTicket, {
       onSuccess: () => {
         navigate(-1);
-        // setCurrentTicket(null);
+        setCurrentTicket(null);
       },
       onError: () => {
         showToast("갱신에 실패했습니다.", "bottom");
@@ -47,12 +50,15 @@ const NewTicketPage = () => {
     });
   });
 
+  const openModal = () =>
+    overlay.open(({ isOpen, close }) => <CancelModal isOpen={isOpen} close={close} />);
+
   return (
     <FormProvider {...methods}>
-      <Header type="text" text="갱신될 이용권 정보 변경" />
-      <PageContainer pt="2" ph="0">
+      <Header type="text" text="갱신될 이용권 정보 변경" handleClick={openModal} />
+      <PageContainer pt="2" ph="1">
         <NewTicket />
-        <button onClick={onSubmit}>갱신하기</button>
+        <NewTicketButton onClick={onSubmit}>갱신하기</NewTicketButton>
       </PageContainer>
     </FormProvider>
   );

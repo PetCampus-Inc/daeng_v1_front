@@ -3,25 +3,26 @@ import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
 import { differenceInDays, isAfter } from "date-fns";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { memo } from "react";
 import { ITicketDetail } from "types/admin.attendance.type";
 import { addZero } from "utils/date";
 
 import * as S from "./styles";
+import NewTicketBottomSheet from "../NewTicketBotomSheet.tsx";
 import SendAlermButton from "../SendAlermButton";
 
 interface TicketCardProps {
   data: Omit<ITicketDetail, "ticketHistory">;
-  open?: () => void;
 }
 
-const TicketCard = ({ data, open }: TicketCardProps) => {
+const TicketCard = ({ data }: TicketCardProps) => {
   const isRoundTicket = data?.ticketType === "ROUND";
+  const overlay = useOverlay();
 
   if (!data) {
     return <div>로딩중</div>;
   }
-  console.log(data, "TicketCard컴포넌트");
 
   const currentDate = new Date();
   // const ticketStartDate = data.ticketStartDate
@@ -56,11 +57,16 @@ const TicketCard = ({ data, open }: TicketCardProps) => {
     );
   }
 
+  const openPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <NewTicketBottomSheet isOpen={isOpen} close={close} currentData={data} />
+    ));
+
   return (
     <S.Container>
       {isNeededRenewal && (
-        <S.BlackCover onClick={open}>
-          <S.RenewButton>이용권 갱신</S.RenewButton>
+        <S.BlackCover>
+          <S.RenewButton onClick={openPopup}>이용권 갱신</S.RenewButton>
         </S.BlackCover>
       )}
       <S.InnerBox className="upper">

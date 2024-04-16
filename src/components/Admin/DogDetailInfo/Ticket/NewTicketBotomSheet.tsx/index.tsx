@@ -12,12 +12,12 @@ import { NewTicketBottomSheetWrapper } from "./styles";
 import TicketCard from "../TicketCard";
 
 interface AddCaredogBottomSheetProps {
-  isVisible: boolean;
+  isOpen: boolean;
   close: () => void;
   currentData: Omit<ITicketDetail, "ticketHistory">;
 }
 
-const NewTicketBottomSheet = ({ isVisible, close, currentData }: AddCaredogBottomSheetProps) => {
+const NewTicketBottomSheet = ({ isOpen, close, currentData }: AddCaredogBottomSheetProps) => {
   const dogId = useLocation().pathname.split("/").pop();
   const [isChecked, setIsChecked] = useState(false);
   const [, setData] = useRecoilState(newTicketCardDataAtom); //TODO: set만 가져오게
@@ -30,7 +30,7 @@ const NewTicketBottomSheet = ({ isVisible, close, currentData }: AddCaredogBotto
 
   const handleSubmit = () => {
     if (isChecked) {
-      navigate("newTicket");
+      navigate(`attendance/${dogId}/newTicket`);
       return;
     }
     mutateNewTicket({
@@ -60,7 +60,7 @@ const NewTicketBottomSheet = ({ isVisible, close, currentData }: AddCaredogBotto
 
   return (
     <>
-      <BottomSheet isOpen={isVisible} onClose={() => close()}>
+      <BottomSheet isOpen={isOpen} close={() => close()}>
         <BottomSheet.Content>
           <NewTicketBottomSheetWrapper>
             <BottomSheet.Control />

@@ -37,6 +37,22 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
                   <Pages.DogInfoPage />
                 </Suspense>
               )
+            },
+            {
+              path: PATH.ADMIN_ATTENDANCE_INFO_NEW_TICKET(),
+              element: (
+                <Suspense>
+                  <Pages.NewTicketPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_ATTENDANCE_INFO_GALLERY(),
+              element: (
+                <Suspense>
+                  <Pages.DogGalleryPage />
+                </Suspense>
+              )
             }
           ]
         },
