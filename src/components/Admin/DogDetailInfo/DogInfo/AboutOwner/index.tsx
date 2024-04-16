@@ -1,6 +1,6 @@
 import MapPinIcon from "assets/svg/map-pin-icon";
-import PhoneIcon from "assets/svg/phone";
 import BasicPhoneIcon from "assets/svg/phone-basic";
+import PhoneIcon from "assets/svg/phone-icon";
 
 import * as S from "./styles";
 import { FlexWrapper } from "../../styles";
