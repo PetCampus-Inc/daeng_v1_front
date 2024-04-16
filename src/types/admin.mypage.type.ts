@@ -1,4 +1,4 @@
-export interface IPrincipalInfo {
+export interface IOwnerInfo {
   adminName: string;
   phoneNumber: string;
   id: string;

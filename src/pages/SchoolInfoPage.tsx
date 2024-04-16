@@ -1,4 +1,4 @@
-import SchoolInfo from "components/Admin/MyPage/SchoolInfo";
+import SchoolInfo from "components/Admin/SchoolInfo";
 import Header from "components/common/Header";
 import { PageContainer } from "styles/StyleModule";
 

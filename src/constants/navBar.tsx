@@ -8,8 +8,8 @@ import HomeBlack from "assets/svg/home-black";
 import HomeBrown from "assets/svg/home-brown";
 import MyPageDog from "assets/svg/myPageDog";
 import MyPageDogBlack from "assets/svg/myPageDogBlack";
-import School from "assets/svg/school";
 import SchoolBlack from "assets/svg/school-black";
+import School from "assets/svg/school-icon";
 
 import { PATH } from "./path";
 

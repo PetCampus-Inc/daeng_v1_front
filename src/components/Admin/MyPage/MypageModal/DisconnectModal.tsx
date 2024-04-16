@@ -1,7 +1,7 @@
 import Modal from "components/common/ButtonModal";
 
 type DisconnectModalProps = {
-  // 탈퇴 액션 추가
+  // TODO: 탈퇴 액션 추가
   isOpen: boolean;
   close: () => void;
   action: () => void;
