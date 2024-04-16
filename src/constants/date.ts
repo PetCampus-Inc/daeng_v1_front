@@ -6,6 +6,11 @@ export const yearsArray = Array.from({ length: currentYear - 1989 }, (_, index) 
   (1990 + index).toString()
 );
 
+// 1990 ~ currentYear ~ + 2 years
+export const newTicketYear = Array.from({ length: currentYear - 1987 }, (_, index) =>
+  (1990 + index).toString()
+);
+
 // "01" ~ "12"
 export const monthsArray = Array.from({ length: 12 }, (_, index) =>
   (index + 1).toString().padStart(2, "0")

@@ -20,7 +20,7 @@ const MembershipApplication = () => {
   const { requiredItemsMap, pickDropInfo, policyInfo, ticketInfo } = enlistmentQuery.data;
 
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     shouldUnregister: false
   });
 

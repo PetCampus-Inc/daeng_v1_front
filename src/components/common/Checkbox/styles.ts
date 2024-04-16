@@ -11,6 +11,7 @@ export const CheckboxContainer = styled.label.withConfig({
   vertical-align: top;
   position: relative;
   gap: 11px;
+  width: 100%;
 
   transition: background-color 0.2s ease;
   ${({ theme, variant }) =>

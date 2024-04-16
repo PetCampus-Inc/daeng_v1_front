@@ -1,7 +1,8 @@
 import { format } from "date-fns";
+import useGetDogInfoRecord from "hooks/api/useGetDogInfoRecord";
 import moment from "moment";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import * as S from "./styles";
 
@@ -12,8 +13,10 @@ const Calendar = () => {
   const today = new Date();
   const [date, setDate] = useState<Value>(today);
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
-  const attendDay = ["2023-12-03", "2023-12-13"]; // 삭제 예정 코드
   const [searchParams, setSearchParams] = useSearchParams();
+  const dogId = useLocation().pathname.split("/").pop();
+  const data = useGetDogInfoRecord(Number(dogId));
+  const attendDay = data.map((item) => format(item.date.join("-"), "yyyy-MM-dd"));
 
   const handleDateChange = (newDate: Value) => {
     setDate(newDate);

@@ -1,8 +1,8 @@
 import { ThemeConfig } from "styles/ThemeConfig";
 import { IPoop } from "types/admin.attendance.type";
 
-const PoopWatery = ({ poop }: { poop?: IPoop }) => {
-  const isSelected = poop && poop === "WATERY" ? true : false;
+const PoopHealthy = ({ poop }: { poop?: IPoop }) => {
+  const isSelected = poop && poop === "HEALTHY" ? true : false;
 
   return (
     <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,4 +22,4 @@ const PoopWatery = ({ poop }: { poop?: IPoop }) => {
   );
 };
 
-export default PoopWatery;
+export default PoopHealthy;

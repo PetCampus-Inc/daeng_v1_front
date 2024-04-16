@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-import type { IAttendDogInfo } from "types/admin.attendance.type";
+import type { IAttendDogInfo, ITicketDetail } from "types/admin.attendance.type";
 import type { INewEnrollmentList } from "types/Admin.type";
 import type { TAdminLoginInfo } from "types/admin.userInfo.type";
 
@@ -29,6 +29,12 @@ export const attendDogListInfoAtom = atom<IAttendDogInfo[]>({
 
 export const newEnrollmentListAtom = atom<INewEnrollmentList | null>({
   key: "newEnrollmentList",
+  default: null,
+  effects_UNSTABLE: [persistAtom]
+});
+
+export const newTicketCardDataAtom = atom<Omit<ITicketDetail, "ticketHistory"> | null>({
+  key: "newTicketCardData",
   default: null,
   effects_UNSTABLE: [persistAtom]
 });

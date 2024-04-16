@@ -4,10 +4,11 @@ import Chat from "assets/svg/chat";
 import ChatBlack from "assets/svg/chat-black";
 import CheckBoard from "assets/svg/check-board";
 import CheckBoardBlack from "assets/svg/check-board-black";
+
 import HomeBlack from "assets/svg/home-black";
 import HomeBrown from "assets/svg/home-brown";
-import MyPageDog from "assets/svg/myPageDog";
-import MyPageDogBlack from "assets/svg/myPageDogBlack";
+import MyPageDog from "assets/svg/my-page-dog";
+import MyPageDogBlack from "assets/svg/my-page-dog-black";
 import School from "assets/svg/school";
 import SchoolBlack from "assets/svg/school-black";
 

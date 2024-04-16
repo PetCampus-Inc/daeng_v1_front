@@ -1,4 +1,5 @@
 import useGetTicketDetail from "hooks/api/useGetTicketDetail";
+import { useLocation } from "react-router-dom";
 
 import PastTicketCard from "./PastTicketCard";
 import TicketCard from "./TicketCard";
@@ -6,8 +7,10 @@ import { DogDetailInfoText } from "../DogInfo/styles";
 import { FlexWrapper, InnerContainer } from "../styles";
 
 const Ticket = () => {
-  const { data } = useGetTicketDetail(2); //FIXME: 나영이꺼 머지되면 dogId queryString으로 받아오기
+  const dogId = useLocation().pathname.split("/").pop();
+  const { data } = useGetTicketDetail(Number(dogId) || -1);
   const { ticketHistory, ...ticketInfo } = data;
+
   return (
     <>
       <InnerContainer>
@@ -20,6 +23,8 @@ const Ticket = () => {
           <PastTicketCard data={ticketHistory} />
         </FlexWrapper>
       </InnerContainer>
+
+      {/* <NewTicketBottomSheet isVisible={isVisible} close={close} currentData={ticketInfo} /> */}
     </>
   );
 };

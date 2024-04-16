@@ -31,8 +31,8 @@ export interface IDogDetails {
 export interface IDogAndMemberInfo {
   dogId: number;
   dogName: string;
-  dogGender: string;
-  dogSize: string;
+  dogGender: "FEMALE" | "MALE";
+  dogSize: "SMALL" | "MEDIUM" | "BIG";
   breedId: number;
   breedName: string;
   dogBirthDate: number[];
@@ -47,24 +47,36 @@ export interface IDogAndMemberInfo {
   member: IMemberInfo;
 }
 
+export interface IDogInfoRecord {
+  date: number[];
+  status: string; //TODO: ATTENDED 등으로 변경
+}
+
+export interface IDogInfoAgenda {
+  agendaId: number;
+  agendaNote: string;
+  snack: string;
+  poop: IPoop;
+  poopMemo: string;
+  dogId: number;
+  status: "NOT_YET" | "COMPLETE" | "WRITING";
+  date: string;
+}
+
+export type IPoop = "HARD" | "HEALTHY" | "NOT_BROWN" | "WATERY" | "WARNING" | null;
+
 export interface ITicketDetail {
   ticketType: string;
   allRoundTicket: number;
   currentRoundTicket: number;
   monthlyTicketNumber: number;
-  ticketStartDate: string;
-  ticketExpirationDate: string;
+  ticketStartDate: number[];
+  ticketExpirationDate: number[];
   attendanceDays: string[];
   ticketHistory: ITicketDetail[];
 }
 
 export interface IPrecautionInfo {
   modifiedList: Nullable<number[]>;
-  agreements: {
-    21?: number[];
-    22?: number[];
-    23?: number[];
-    24?: number[];
-    30?: number[];
-  };
+  agreements: [{ 21: string }, { 22: string }, { 23: string }, { 24: string }, { 30: string }];
 }

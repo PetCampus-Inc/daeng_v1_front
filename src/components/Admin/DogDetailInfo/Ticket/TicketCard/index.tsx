@@ -2,10 +2,14 @@ import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
-import { differenceInDays, isAfter, parseISO } from "date-fns";
+import { differenceInDays, isAfter } from "date-fns";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { memo } from "react";
 import { ITicketDetail } from "types/admin.attendance.type";
+import { addZero } from "utils/date";
 
 import * as S from "./styles";
+import NewTicketBottomSheet from "../NewTicketBotomSheet.tsx";
 import SendAlermButton from "../SendAlermButton";
 
 interface TicketCardProps {
@@ -14,22 +18,26 @@ interface TicketCardProps {
 
 const TicketCard = ({ data }: TicketCardProps) => {
   const isRoundTicket = data?.ticketType === "ROUND";
+  const overlay = useOverlay();
 
   if (!data) {
     return <div>로딩중</div>;
   }
-  // 임시 데이터
+
   const currentDate = new Date();
-  const endDate = new Date();
-  endDate.setDate(endDate.getDate());
+  // const ticketStartDate = data.ticketStartDate
+  //   ? (addZero(data.ticketStartDate) as string[]).join(".")
+  //   : "";
+  const ticketEndDate = data.ticketExpirationDate
+    ? (addZero(data.ticketExpirationDate) as string[]).join(".")
+    : "";
 
   const isSoonDeadline =
     (data.currentRoundTicket <= 3 && data.currentRoundTicket > 0) ||
-    (differenceInDays(endDate, currentDate) > 0 && differenceInDays(endDate, currentDate) <= 3);
+    (differenceInDays(ticketEndDate, currentDate) > 0 &&
+      differenceInDays(ticketEndDate, currentDate) <= 3);
   const isNeededRenewal =
-    data.currentRoundTicket === 0 ||
-    // TODO: 백엔드 수정시 이 코드로 교체하기 -> isAfter(data.ticketStartDate, data.ticketExpirationDate);
-    isAfter(currentDate, endDate);
+    (isRoundTicket && data.currentRoundTicket === 0) || isAfter(currentDate, ticketEndDate);
 
   let statusIcon = <></>;
   let statusText = <></>;
@@ -37,26 +45,29 @@ const TicketCard = ({ data }: TicketCardProps) => {
     statusIcon = isSoonDeadline ? <AlertSmallIcon color="red" /> : <RemainCountIcon />;
     statusText = (
       <S.Text className={`detail ${isSoonDeadline ? "red" : ""}`}>
-        잔여횟수 : {data.currentRoundTicket || "- "}회
+        잔여횟수 : {data.currentRoundTicket || " 0 "}회
       </S.Text>
     );
   } else {
     statusIcon = isSoonDeadline ? <AlertSmallIcon color="red" /> : <CalendarExpireIcon />;
     statusText = (
       <S.Text className={`detail ${isSoonDeadline ? "red" : ""}`}>
-        만료일 : {data.ticketExpirationDate || "없음"}
+        만료일 : {ticketEndDate || "없음"}
       </S.Text>
     );
   }
 
+  const openPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <NewTicketBottomSheet isOpen={isOpen} close={close} currentData={data} />
+    ));
+
   return (
     <S.Container>
-      {isNeededRenewal ? (
+      {isNeededRenewal && (
         <S.BlackCover>
-          <S.RenewButton>이용권 갱신</S.RenewButton>
+          <S.RenewButton onClick={openPopup}>이용권 갱신</S.RenewButton>
         </S.BlackCover>
-      ) : (
-        <></>
       )}
       <S.InnerBox className="upper">
         <S.Text className="ticket">{isRoundTicket ? "회차권" : "정기권"}</S.Text>
@@ -70,16 +81,18 @@ const TicketCard = ({ data }: TicketCardProps) => {
             {statusIcon}
             {statusText}
           </S.IconWrapper>
-          {isSoonDeadline ? <SendAlermButton /> : <></>}
+          {isSoonDeadline && <SendAlermButton />}
         </S.IconWrapper>
 
         <S.IconWrapper>
           <CalendarIcon />
-          <S.Text className="detail">유치원 등원 요일 : {data!.attendanceDays.join(", ")}</S.Text>
+          <S.Text className="detail">
+            유치원 등원 요일 : {data.attendanceDays?.join(", ") ?? "미지정"}
+          </S.Text>
         </S.IconWrapper>
       </S.InnerBox>
     </S.Container>
   );
 };
 
-export default TicketCard;
+export default memo(TicketCard);
