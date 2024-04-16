@@ -16,7 +16,11 @@ const ButtonAddon = (props: ButtonAddonProps) => {
       })
     : children;
 
-  return <StyledButtonAddon {...rest}>{_children}</StyledButtonAddon>;
+  return (
+    <StyledButtonAddon className="button_addon" {...rest}>
+      {_children}
+    </StyledButtonAddon>
+  );
 };
 
 export default ButtonAddon;

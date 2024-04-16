@@ -1,3 +1,5 @@
+import { PATH } from "constants/path";
+
 import NewSignUpIcon from "assets/svg/new-sign-up-icon";
 import TeacherManagementIcon from "assets/svg/teacher-management-icon";
 import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
@@ -41,7 +43,7 @@ const MenuCard = () => {
           setIsOpened(true);
           return;
         }
-        navigate("/admin/schoolManage/enrollment");
+        navigate(PATH.ADMIN_SCHOOL_MANAGE);
       })
       .catch((error) => {
         showToast("정보를 불러오는 데 실패했습니다. 다시 시도해주세요", "bottom");

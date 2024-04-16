@@ -40,7 +40,7 @@ export const useCreateCareDogs = (openPopup: () => void) => {
         queryClient.setQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, data);
       } else {
         queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
-        navigate(PATH.ADMIN_CARE_DOG);
+        navigate(PATH.ADMIN_CARE);
       }
     }
   });
@@ -54,7 +54,7 @@ export const useDeleteCareDogs = () => {
     mutationFn: handleDeleteCareDogs,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.NEW_CARE_DOG_LIST });
-      navigate(PATH.ADMIN_CARE_DOG);
+      navigate(PATH.ADMIN_CARE);
       showToast("관리 강아지 목록에서 삭제되었습니다", "bottom");
     }
   });
