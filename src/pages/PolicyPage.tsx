@@ -6,7 +6,9 @@ const PolicyPage = () => {
   return (
     <>
       <Header type="text" text="정책" />
-      <PageContainer color="white"><PolicyInfo /></PageContainer>
+      <PageContainer color="white">
+        <PolicyInfo />
+      </PageContainer>
     </>
   );
 };
