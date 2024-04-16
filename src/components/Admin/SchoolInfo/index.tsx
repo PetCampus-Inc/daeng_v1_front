@@ -8,9 +8,9 @@ import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 
+import CallSchoolBottomSheet from "./Modal/CallSchoolBottomSheet";
+import DisconnectModal from "./Modal/DisconnectModal";
 import * as S from "./styles";
-import CallSchoolBottomSheet from "../MyPage/MyPageModal/CallSchoolBottomSheet";
-import DisconnectModal from "../MyPage/MyPageModal/DisconnectModal";
 
 const SchoolInfo = () => {
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
