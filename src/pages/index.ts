@@ -19,3 +19,4 @@ export { default as TeacherManagePage } from "./TeacherManagePage";
 export { default as AttendCareDeletePage } from "./AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogGalleryPage";
 export { default as NewTicketPage } from "./NewTicketPage";
+export { default as MemberMyPage } from "./MemberMyPage";

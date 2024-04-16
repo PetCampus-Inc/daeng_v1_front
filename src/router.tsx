@@ -192,6 +192,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MembershipApplicationPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_MY_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberMyPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
