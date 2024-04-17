@@ -6,7 +6,9 @@ const UnregisterSuccess = () => {
   return (
     <>
       <S.TitleWrapper>
-        <S.Title><S.AccentText>탈퇴</S.AccentText>가 완료되었습니다.</S.Title>
+        <S.Title>
+          <S.AccentText>탈퇴</S.AccentText>가 완료되었습니다.
+        </S.Title>
         <S.SubText>똑독 유치원에서 다시 만날 날을 기다릴게요</S.SubText>
       </S.TitleWrapper>
       <div></div>
