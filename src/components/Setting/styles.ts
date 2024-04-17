@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface ISettingProps {
   type?: string;
+  isVerUpdate?: boolean;
 }
 
 export const SettingList = styled.ul``;
@@ -79,9 +80,12 @@ export const SubTextPL = styled.span`
   padding-left: 1.75rem;
 `;
 
-export const SubText = styled.span`
+export const SubText = styled.span<ISettingProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ theme }) => theme.colors.gray_2};
+  color: ${(props) =>
+    props.isVerUpdate
+      ? ({ theme }) => theme.colors.primaryColor
+      : ({ theme }) => theme.colors.gray_2};
 `;
 
 export const GotoPageButton = styled(Link)`

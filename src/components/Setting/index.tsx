@@ -24,7 +24,7 @@ const SettingInfo = () => {
           <S.GotoUpdateButton>업데이트 하기</S.GotoUpdateButton>
         </S.TopBox>
         <S.ButtomBox>
-          <S.SubText>업데이트가 필요합니다.</S.SubText>
+          <S.SubText isVerUpdate>업데이트가 필요합니다.</S.SubText>
           <S.SubText>똑독 2.0</S.SubText>
         </S.ButtomBox>
       </S.SettingItem>
