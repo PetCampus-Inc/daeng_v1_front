@@ -82,7 +82,6 @@ const NotificationInfo = () => {
           </S.TextWrapper>
           <Toggle />
         </S.SettingItem>
-
       </S.SettingList>
     </>
   );
