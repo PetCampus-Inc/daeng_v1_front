@@ -21,3 +21,7 @@ export { default as TeacherManagePage } from "./TeacherManagePage";
 export { default as AttendCareDeletePage } from "./AttendCareDeletePage";
 export { default as MemberMyPage } from "./MemberMyPage";
 export { default as SettingPage } from "./SettingPage";
+export { default as PolicyPage } from "./PolicyPage";
+export { default as UnregisterPage } from "./UnregisterPage";
+export { default as SettingNotificationPage } from "./SettingNotificationPage";
+export { default as UnregisterSuccessPage } from "./UnregisterSuccessPage";

@@ -225,6 +225,38 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.SettingPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.SETTING_NOTIFICATION,
+          element: (
+            <Suspense>
+              <Pages.SettingNotificationPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.POLICY,
+          element: (
+            <Suspense>
+              <Pages.PolicyPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_UNREGISTER,
+          element: (
+            <Suspense>
+              <Pages.UnregisterPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_UNREGISTER_SUCCESS,
+          element: (
+            <Suspense>
+              <Pages.UnregisterSuccessPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
