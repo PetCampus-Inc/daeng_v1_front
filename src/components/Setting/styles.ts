@@ -24,6 +24,11 @@ export const TopWrapper = styled.div`
   padding-bottom: 0;
 `;
 
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const TopBox = styled.div`
   display: flex;
   align-items: center;
