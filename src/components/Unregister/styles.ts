@@ -4,6 +4,12 @@ interface IUnregisterProps {
   isChecked?: boolean;
 }
 
+export const UnregisterContainer = styled.section`
+  position: relative;
+  z-index: 1;
+  height: 100%;
+`;
+
 export const TopWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,4 +81,19 @@ export const BackgroundButtonWrapper = styled.div`
   left: 0;
   right: 0;
   padding: 1rem 1rem 2rem 1rem;
+  z-index: 1;
+`;
+
+export const ExclamationMark = styled.div`
+  position: absolute;
+  right: -5rem;
+  bottom: 5.8125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  width: 236px;
+  height: 236px;
+  background-color: ${({ theme }) => theme.colors.gray_5};
+  z-index: -1;
 `;
