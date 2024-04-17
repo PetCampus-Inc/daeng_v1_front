@@ -1,8 +1,15 @@
+import Header from "components/common/Header";
+import NotificationInfo from "components/Setting/Notification";
+import { PageContainer } from "styles/StyleModule";
+
 const SettingNotificationPage = () => {
   return (
-    <div>
-      알림 설정 페이지
-    </div>
+    <>
+      <Header type="text" text="설정" />
+      <PageContainer color="white">
+        <NotificationInfo />
+      </PageContainer>
+    </>
   );
 };
 
