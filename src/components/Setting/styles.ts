@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 interface ISettingProps {
@@ -83,7 +84,7 @@ export const SubText = styled.span`
   color: ${({ theme }) => theme.colors.gray_2};
 `;
 
-export const GotoPageButton = styled.button`
+export const GotoPageButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
