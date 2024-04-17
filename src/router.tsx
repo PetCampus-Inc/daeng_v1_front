@@ -242,7 +242,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           path: PATH.ENROLL,
           element: (
             <Suspense>
-              <Pages.MembershipApplicationPage />
+              <Pages.EnrollmentPage />
             </Suspense>
           )
         },
