@@ -1,8 +1,13 @@
+import UnregisterSuccess from "components/Unregister/Success";
+import { PageContainer } from "styles/StyleModule";
+
 const UnregisterSuccessPage = () => {
   return (
-    <div>
-      탈퇴 완료
-    </div>
+    <>
+      <PageContainer color="white">
+        <UnregisterSuccess />
+      </PageContainer>
+    </>
   );
 };
 
