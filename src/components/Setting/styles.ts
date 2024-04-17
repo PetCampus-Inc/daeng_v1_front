@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 interface ISettingProps {
   type?: string;
-  isVerUpdate?: boolean;
 }
 
 export const SettingList = styled.ul``;
@@ -83,7 +82,7 @@ export const SubTextPL = styled.span`
 export const SubText = styled.span<ISettingProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${(props) =>
-    props.isVerUpdate
+    props.type === "verUpdate"
       ? ({ theme }) => theme.colors.primaryColor
       : ({ theme }) => theme.colors.gray_2};
 `;
