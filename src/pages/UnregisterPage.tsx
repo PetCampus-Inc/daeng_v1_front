@@ -1,8 +1,15 @@
+import Header from "components/common/Header";
+import UnregisterInfo from "components/Unregister";
+import { PageContainer } from "styles/StyleModule";
+
 const UnregisterPage = () => {
   return (
-    <div>
-      회원 탈퇴 페이지
-    </div>
+    <>
+      <Header type="back" />
+      <PageContainer color="white">
+        <UnregisterInfo />
+      </PageContainer>
+    </>
   );
 };
 
