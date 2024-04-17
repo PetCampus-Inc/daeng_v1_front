@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetEnrollment } from "apis/school.api";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { handleGetEnrollment, handlePostEnrollment } from "apis/school.api";
 
 import type { IEnrollmentProps } from "apis/school.api";
 import type {
@@ -9,6 +9,7 @@ import type {
   IMemberDto,
   IPickDropInfo,
   IPolicyInfo,
+  IRequestEnrollment,
   ITicketInfo
 } from "types/School.type";
 
@@ -21,8 +22,8 @@ interface EnrollmentProps {
 }
 
 // FIXME: 어뎁터 패턴 사용하기
-export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
-  const enlistmentQuery = useSuspenseQuery<IAdminEnrollment, Error, EnrollmentProps>({
+export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
+  return useSuspenseQuery<IAdminEnrollment, Error, EnrollmentProps>({
     queryKey: QUERY_KEY.ENROLLMENT(schoolId, memberId),
     queryFn: () => handleGetEnrollment({ schoolId, memberId }),
     refetchOnWindowFocus: false,
@@ -66,6 +67,13 @@ export const useEnrollQuery = ({ memberId, schoolId }: IEnrollmentProps) => {
       };
     }
   });
+};
 
-  return { enlistmentQuery };
+export const usePostEnrollment = () => {
+  const enrollMutation = useMutation({
+    mutationFn: (enrollmentData: IRequestEnrollment) => handlePostEnrollment(enrollmentData),
+    throwOnError: true
+  });
+
+  return enrollMutation.mutate;
 };
