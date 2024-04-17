@@ -7,7 +7,7 @@ interface ISettingProps {
 export const SettingList = styled.ul``;
 
 export const SettingItem = styled.li<ISettingProps>`
-  padding: 16px;
+  padding: 1rem;
   display: flex;
   flex-direction: ${(props) => (props.type === "verUpdate" ? "column" : "row")};
   justify-content: ${(props) => (props.type === "notification" ? "space-between" : "normal")};
@@ -20,7 +20,7 @@ export const SettingItem = styled.li<ISettingProps>`
 export const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding: 1rem;
   padding-bottom: 0;
 `;
 
@@ -43,7 +43,7 @@ export const ButtomBox = styled.div`
 export const TextBox = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
 `;
 
 // TODO 추후 공통 컴포넌트 작업 필요합니다.
@@ -75,7 +75,7 @@ export const Text = styled.span`
 export const SubTextPL = styled.span`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.gray_2};
-  padding-left: 28px;
+  padding-left: 1.75rem;
 `;
 
 export const SubText = styled.span`
@@ -87,7 +87,7 @@ export const GotoPageButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
+  gap: 0.3125rem;
   width: 100%;
 `;
 
