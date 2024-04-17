@@ -26,7 +26,7 @@ export const PATH = {
   ADMIN_MY_PAGE_EDIT: "/admin/mypage/profile/edit",
   ADMIN_MY_SCHOOL_INFO: `/admin/mypage/school`,
   ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`,
-  ENROLL: "/enroll", // 견주 가입신청서
+  ENROLL: "/enrollment", // 견주 가입신청서
   MEMBER_MY_PAGE: "/member/myPage",
   REDIRECT: "/auth/:provider"
 } as const;
