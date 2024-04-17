@@ -11,8 +11,8 @@ const UnregisterInfo = () => {
         <S.SubText>탈퇴 전, 아래 내용을 확인해 주세요</S.SubText>
       </S.TopWrapper>
       <S.CheckBoxWrapper>
-        <S.CheckBoxItem>
-          <Checkbox />
+        <S.CheckBoxItem isChecked>
+          <Checkbox isChecked />
           <S.CautionText>
             지금까지 주고받은 채팅내역, 알림장, 사진앨범 등의 모든 기록이 <S.AccentText>영구 삭제</S.AccentText>되며
             복구할 수 없어요
@@ -26,14 +26,13 @@ const UnregisterInfo = () => {
         </S.CheckBoxItem>
       </S.CheckBoxWrapper>
 
-      <S.CheckBoxItem>
-        <Checkbox />
+      <S.AllCheckBoxItem isChecked>
+        <Checkbox isChecked />
         <S.CautionText>위 안내사항에 모두 동의해요</S.CautionText>
-      </S.CheckBoxItem>
+      </S.AllCheckBoxItem>
       <S.BackgroundButtonWrapper>
         <BackgroundGrayButton>탈퇴하기</BackgroundGrayButton>
       </S.BackgroundButtonWrapper>
-
     </>
   );
 };

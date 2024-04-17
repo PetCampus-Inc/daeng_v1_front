@@ -1,4 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+interface IUnregisterProps {
+  isChecked?: boolean;
+}
 
 export const TopWrapper = styled.div`
   display: flex;
@@ -25,14 +29,35 @@ export const CheckBoxWrapper = styled.div`
   margin-bottom: 2.25rem;
 `;
 
-export const CheckBoxItem = styled.div`
+const CheckBoxStyle = css`
   padding: 1rem 0.625rem;
   border-radius: 0.5rem;
-  border: 1px solid ${({ theme }) => theme.colors.gray_5};
-  background-color: ${({ theme }) => theme.colors.white};
   display: flex;
-  gap: 16px;
+  gap: 1rem;
   cursor: pointer;
+`;
+
+export const CheckBoxItem = styled.div<IUnregisterProps>`
+  ${CheckBoxStyle}
+  border: 1px solid ${(props) =>
+    props.isChecked ? ({ theme }) => theme.colors.br_5 : ({ theme }) => theme.colors.gray_5};
+  background-color: ${(props) =>
+    props.isChecked ? ({ theme }) => theme.colors.br_5 : ({ theme }) => theme.colors.white};
+`;
+
+export const AllCheckBoxItem = styled.div<IUnregisterProps>`
+  ${CheckBoxStyle}
+  border: 1px solid ${(props) =>
+    props.isChecked ? ({ theme }) => theme.colors.br_4 : ({ theme }) => theme.colors.gray_5};
+  background-color: ${(props) =>
+    props.isChecked ? ({ theme }) => theme.colors.br_4 : ({ theme }) => theme.colors.white};
+
+  & > p {
+    color: ${(props) =>
+      props.isChecked
+        ? ({ theme }) => theme.colors.primaryColor
+        : ({ theme }) => theme.colors.gray_1};
+  }
 `;
 
 export const CautionText = styled.p`
