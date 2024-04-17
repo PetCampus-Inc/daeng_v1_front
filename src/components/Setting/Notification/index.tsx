@@ -1,5 +1,7 @@
 import AttendanceIcon from "assets/svg/attendance-icon";
 import CheckBoard from "assets/svg/check-board";
+import DogIcon from "assets/svg/dog-icon";
+import FootRoundIcon from "assets/svg/foot-round-icon";
 import SchoolIcon from "assets/svg/school-icon";
 import Toggle from "components/common/Toggle/Toggle";
 
@@ -17,6 +19,7 @@ const NotificationInfo = () => {
         <Toggle />
       </S.TopWrapper>
       <S.SettingList>
+        {/* 어드민 내용 */}
         <S.SettingItem type="notification">
           <S.TextWrapper>
             <S.TextBox>
@@ -53,6 +56,33 @@ const NotificationInfo = () => {
           </S.TextWrapper>
           <Toggle />
         </S.SettingItem>
+
+        {/* 유저 내용 */}
+        <S.SettingItem type="notification">
+          <S.TextWrapper>
+            <S.TextBox>
+              <S.StyledIconBox>
+                <DogIcon />
+              </S.StyledIconBox>
+              <S.Text>등록 알림</S.Text>
+            </S.TextBox>
+            <S.SubTextPL>유치원 가입, 강아지 정보</S.SubTextPL>
+          </S.TextWrapper>
+          <Toggle />
+        </S.SettingItem>
+        <S.SettingItem type="notification">
+          <S.TextWrapper>
+            <S.TextBox>
+              <S.StyledIconBox>
+                <FootRoundIcon />
+              </S.StyledIconBox>
+              <S.Text>활동 알림</S.Text>
+            </S.TextBox>
+            <S.SubTextPL>알림장, 채팅, 사진</S.SubTextPL>
+          </S.TextWrapper>
+          <Toggle />
+        </S.SettingItem>
+
       </S.SettingList>
     </>
   );
