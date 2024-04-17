@@ -3,11 +3,9 @@ import { PageContainer } from "styles/StyleModule";
 
 const UnregisterSuccessPage = () => {
   return (
-    <>
-      <PageContainer color="white">
-        <UnregisterSuccess />
-      </PageContainer>
-    </>
+    <PageContainer color="white" pt="6.9">
+      <UnregisterSuccess />
+    </PageContainer>
   );
 };
 

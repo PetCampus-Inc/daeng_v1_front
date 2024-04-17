@@ -18,6 +18,13 @@ export const TopWrapper = styled.div`
   padding-bottom: 1.875rem;
 `;
 
+export const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 2.375rem;
+`;
+
 export const Title = styled.h3`
   ${({ theme }) => theme.typo.title1_24_B};
   color: ${({ theme }) => theme.colors.darkBlack};
