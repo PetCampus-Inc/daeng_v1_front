@@ -4,9 +4,8 @@ import { usePostEnrollment } from "hooks/api/enroll";
 import { useFormContext, type FieldErrors } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
+import { FormButton } from "styles/StyleModule";
 import { EnrollmentFormTransformer } from "utils/formTransformer";
-
-import * as S from "./styles";
 
 const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => {
   const { handleSubmit } = useFormContext();
@@ -33,9 +32,9 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   };
 
   return (
-    <S.Button type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
+    <FormButton type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
       제출하기
-    </S.Button>
+    </FormButton>
   );
 };
 
