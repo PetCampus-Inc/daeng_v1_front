@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useQuery } from "@tanstack/react-query";
-import { handleGetBreed } from "apis/school.api";
+import { handleGetBreed } from "apis/member/school.api";
 
 const useGetBreed = (inputValue: string) => {
   return useQuery({
