@@ -1,13 +1,16 @@
 import { LayoutGroup } from "framer-motion";
 import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
+import { useRecoilValue } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
 
 import * as S from "./styles";
-import OwnerWaitingCard from "../OwnerWaitingCard";
+import OwnerWaitingCard from "../MemberWaitingCard";
 import TitleWithIcon from "../TitleWithIcon";
 
-const OwnerWaitingList = () => {
+const MemberWaitingList = () => {
   // FIXME: school ID 관리 필요!!!
-  const { data } = useGetWaitingOwnersList(2);
+  const { schoolId } = useRecoilValue(adminLoginInfoAtom);
+  const { data } = useGetWaitingOwnersList(schoolId);
 
   return (
     <S.OwnerWaitingListContainer>
@@ -27,4 +30,4 @@ const OwnerWaitingList = () => {
   );
 };
 
-export default OwnerWaitingList;
+export default MemberWaitingList;
