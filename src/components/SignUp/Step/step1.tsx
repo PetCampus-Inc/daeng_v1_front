@@ -6,7 +6,7 @@ import InputBox from "components/common/InputBox";
 import Text from "components/common/Text";
 import { memo, Dispatch, SetStateAction, ChangeEvent } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
-import { ISchoolInfo } from "types/School.type";
+import { ISchoolInfo } from "types/admin/school.types";
 
 import {
   Container,
