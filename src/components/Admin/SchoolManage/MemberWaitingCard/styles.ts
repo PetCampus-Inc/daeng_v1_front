@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const CardContainer = styled(motion.div)`
@@ -37,7 +38,7 @@ export const Button = styled(motion.button)`
   }
 `;
 
-export const LowerWrapper = styled.button`
+export const LinkToEnrollment = styled(Link)`
   display: flex;
   justify-content: space-between;
   align-items: center;
