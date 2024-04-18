@@ -9,7 +9,7 @@ export const TopWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  top: 0;
+  top: 5vh;
   padding: 28px 0;
   gap: 12px;
 
