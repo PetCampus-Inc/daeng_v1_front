@@ -1,13 +1,9 @@
 import customAxios from "libs/CustomAxios";
 
+import type { IRequestAdminEnrollment, IResponseAdminForm } from "types/admin/enrollment.types";
+import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
+import type { IResponseEnrollment, IRequestEnrollment } from "types/member/enrollment.types";
 import type { IResponse } from "types/Response.type";
-import type {
-  IAdminEnrollment,
-  IRequestEnrollment,
-  IRequestAdminEnrollment,
-  IBreedInfo,
-  ISchoolInfo
-} from "types/School.type";
 
 export interface IEnrollmentProps {
   memberId: string;
@@ -38,28 +34,33 @@ export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> =>
 export const handleGetEnrollment = async ({
   schoolId,
   memberId
-}: IEnrollmentProps): Promise<IAdminEnrollment> => {
-  const url = `school/member/enroll?schoolId=${schoolId}&memberId=${memberId}`;
-  try {
-    const { data } = await customAxios.get(url);
-    return data.data;
-  } catch (error) {
-    throw new Error("handleGetEnrollment 통신 실패");
-  }
+}: IEnrollmentProps): Promise<IResponseEnrollment> => {
+  const url = `school/member/enroll`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      schoolId,
+      memberId
+    }
+  });
+  return data.data;
 };
 
 export const handleGetEnrollmentUrl = async ({
   requestUrl,
   memberId
-}: IEnrollmentProps): Promise<IAdminEnrollment> => {
-  const url = `school/member/enroll/${requestUrl}?memberId=${memberId}`;
-  const { data } = await customAxios.get(url);
+}: IEnrollmentProps): Promise<IResponseAdminForm> => {
+  const url = `school/member/enroll/${requestUrl}`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      memberId
+    }
+  });
   return data.data;
 };
 
 export const handleGetAdminForm = async ({
   formId
-}: IAdminEnrollmentProps): Promise<IAdminEnrollment> => {
+}: IAdminEnrollmentProps): Promise<IResponseAdminForm> => {
   const url = `school/form/list/${formId}`;
   const { data } = await customAxios.get(url);
   return data.data;
