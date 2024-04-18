@@ -1,6 +1,6 @@
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import { useCreateCareDogs } from "hooks/api/caredogQuery";
+import { useCreateCareDogs } from "hooks/api/admin/care";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
 
 import { BackgroundButtonWrapper } from "./styles";

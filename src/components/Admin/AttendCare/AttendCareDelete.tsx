@@ -7,7 +7,7 @@ import DeleteDogList from "./CareList/DeleteDogList";
 import { SelectedIdsProvider } from "./context/SelectedIdsProvider";
 import { DescTitle, ListWrapper, VStack } from "./styles";
 
-import type { ICareDogInfo } from "types/admin.caredog.type";
+import type { ICareDogInfo } from "types/admin/care.types";
 
 interface AttendCareDeleteProps {
   data: ICareDogInfo[];
