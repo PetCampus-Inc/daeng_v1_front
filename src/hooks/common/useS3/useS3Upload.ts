@@ -13,7 +13,7 @@ interface uploadToS3Props {
 const useS3Upload = () => {
   const s3Client = useMemo(() => new S3Client(s3ClientConfig), []);
 
-  const [uploadResults, setUploadResults] = useState<TResult[]>([]);
+  const [data, setData] = useState<TResult[]>([]);
 
   const uploadToS3 = ({ accept = "image/*", files, path }: uploadToS3Props) => {
     if (!files) return;
@@ -31,16 +31,16 @@ const useS3Upload = () => {
           });
           await s3Client.send(command);
           const url = `https://${bucketName}.s3.amazonaws.com/${objectKey}`;
-          setUploadResults((prev) => [...prev, { url, error: null }]);
+          setData((prev) => [...prev, { url, error: null }]);
         } catch (err) {
           console.error("Upload error:", err);
-          setUploadResults((prev) => [...prev, { url: "", error: "Failed to upload file." }]);
+          setData((prev) => [...prev, { url: "", error: "Failed to upload file." }]);
         }
       }
     });
   };
 
-  return { uploadToS3, uploadResults };
+  return { uploadToS3, data };
 };
 
 export default useS3Upload;
