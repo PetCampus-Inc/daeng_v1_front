@@ -1,6 +1,5 @@
 import { PATH } from "constants/path";
 import { FIELD_TO_STEP } from "constants/step";
-import type { Dispatch, SetStateAction } from "react";
 
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
@@ -10,8 +9,7 @@ import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { currentStepState, enrollmentFormAtom } from "store/form";
-
-import * as S from "./styles";
+import { FormButton } from "styles/StyleModule";
 
 import type { IRequestAdminEnrollment } from "types/School.type";
 interface SubmitButtonProps {
@@ -59,9 +57,9 @@ const SubmitButton = ({ type }: SubmitButtonProps) => {
   };
 
   return (
-    <S.Button type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
+    <FormButton type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
       {text}
-    </S.Button>
+    </FormButton>
   );
 };
 

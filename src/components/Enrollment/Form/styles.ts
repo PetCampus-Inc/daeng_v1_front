@@ -10,7 +10,7 @@ export const Card = styled.div`
 
 export const Stack = styled.div`
   display: flex;
-  justify-content: flex-end;
+  margin-left: auto;
 `;
 
 export const Caption = styled.p`

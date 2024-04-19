@@ -1,4 +1,4 @@
-import * as S from "./styles";
+import { IndicatorButton, IndicatorContainer } from "components/Enrollment/Stepper/styles";
 
 interface IndicatorProps {
   currentStep: number;
@@ -8,17 +8,13 @@ interface IndicatorProps {
 
 const Indicator = ({ currentStep, indicators, goToStep }: IndicatorProps) => {
   return (
-    <S.IndicatorContainer>
+    <IndicatorContainer>
       {indicators.map((step, index) => (
-        <S.IndicatorButton
-          key={index}
-          active={index === currentStep}
-          onClick={() => goToStep(index)}
-        >
+        <IndicatorButton key={index} active={index === currentStep} onClick={() => goToStep(index)}>
           {step}
-        </S.IndicatorButton>
+        </IndicatorButton>
       ))}
-    </S.IndicatorContainer>
+    </IndicatorContainer>
   );
 };
 
