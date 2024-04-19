@@ -1,4 +1,4 @@
-import CloseIcon from "assets/svg/close-icon";
+import CloseIcon from "assets/svg/x-circle-icon";
 import { useMemo } from "react";
 import { Control, Controller, FieldArrayWithId } from "react-hook-form";
 

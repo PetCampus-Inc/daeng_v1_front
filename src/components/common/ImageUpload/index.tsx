@@ -1,5 +1,5 @@
-import CloseIcon from "assets/svg/close-icon";
 import UploadIcon from "assets/svg/upload-icon";
+import CloseIcon from "assets/svg/x-circle-icon";
 import { useRef, ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
 import { imagePreviewAtom } from "store/form";
