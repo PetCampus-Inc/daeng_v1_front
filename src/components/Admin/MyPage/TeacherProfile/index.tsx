@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-import type { ITeacherInfo } from "types/admin.mypage.type";
+import type { ITeacherInfo } from "types/admin/mypage.type";
 
 interface TeacherInfoProps {
   data: ITeacherInfo;

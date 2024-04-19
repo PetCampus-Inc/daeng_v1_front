@@ -1,5 +1,5 @@
 import { PATH } from "constants/path";
-import { ADMIN_READ_FORM_STEP } from "constants/step";
+import { MEMBER_ENROLL_STEP } from "constants/step";
 
 import DogInfo from "components/Admin/EnrollmentForm/ReadForm/DogInfo";
 import MemberInfo from "components/Admin/EnrollmentForm/ReadForm/MemberInfo";
@@ -13,66 +13,43 @@ import {
   TitleWrapper,
   Title,
   SubTitle,
-  ContentWrapper,
-  EditButton
+  ContentWrapper
 } from "components/Admin/EnrollmentForm/styles";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
-import { type FormAdaptedData, useAdminEnrollment } from "hooks/api/admin/enroll";
+import { useGetMemberEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
-const EnrollmentFormDetailPage = () => {
+const MemberEnrollmentFormDetailPage = () => {
   const { formId } = useParams();
-  if (!formId) throw new Error("잘못된 formId 입니다");
-  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const memberName = queryParams.get("member_name");
 
-  const { data, isLoading } = useAdminEnrollment(formId, "READ");
-  const {
-    requiredItemList,
-    roundTicketNumber,
-    monthlyTicketNumber,
-    ticketType,
-    openDays,
-    ...rest
-  } = data as FormAdaptedData<"READ">;
+  if (!formId) throw new Error("잘못된 formId 입니다");
+
+  const { data } = useGetMemberEnrollment(formId);
+  const { pickDropState, ...rest } = data;
 
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false,
-    defaultValues: { ticketType: ticketType.slice(-1)[0], pickDropRequest: "신청", ...rest }
+    defaultValues: { ...rest }
   });
 
-  const visibleSteps = ADMIN_READ_FORM_STEP.filter((step) => step.isVisible(data.pickDropState));
+  const visibleSteps = MEMBER_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));
   const maxSteps = visibleSteps.length;
   const { currentStep, setStep } = useStep(maxSteps - 1);
-  const currentTitle = ADMIN_READ_FORM_STEP[currentStep].title;
-  const currentSubtitle = ADMIN_READ_FORM_STEP[currentStep].subtitle;
+  const currentTitle = MEMBER_ENROLL_STEP[currentStep].title;
+  const currentSubtitle = MEMBER_ENROLL_STEP[currentStep].subtitle;
   const indicators: string[] = visibleSteps.map((step) => step.indicator);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const ticket = {
-    roundTicketNumber,
-    monthlyTicketNumber,
-    openDays
-  };
 
   return (
     <>
-      <Header
-        type="text"
-        text="미리보기"
-        rightElement={
-          <EditButton type="button" onClick={() => navigate(PATH.ADMIN_EDIT_FORM(formId))}>
-            수정
-          </EditButton>
-        }
-      />
+      <Header type="text" text={`${memberName}의 가입신청서`} />
       <PageContainer color="BGray" pb="2.5">
         <Container>
           <TopWrapper>
@@ -84,11 +61,11 @@ const EnrollmentFormDetailPage = () => {
           </TopWrapper>
           <FormProvider {...methods}>
             <ContentWrapper>
-              {currentStep === 0 && <MemberInfo item={requiredItemList} />}
+              {/* {currentStep === 0 && <MemberInfo item={requiredItemList} />}
               {currentStep === 1 && <DogInfo item={requiredItemList} />}
-              {currentStep === 2 && <TicketInfo item={requiredItemList} ticket={ticket} />}
+              {currentStep === 2 && <TicketInfo item={requiredItemList}/>}
               {currentStep === 3 && <PolicyInfo item={requiredItemList} />}
-              {currentStep === 4 && <PickDropInfo item={requiredItemList} />}
+              {currentStep === 4 && <PickDropInfo item={requiredItemList} />} */}
             </ContentWrapper>
           </FormProvider>
         </Container>
@@ -98,4 +75,4 @@ const EnrollmentFormDetailPage = () => {
   );
 };
 
-export default EnrollmentFormDetailPage;
+export default MemberEnrollmentFormDetailPage;

@@ -1,4 +1,4 @@
-import type { Nullable } from "./helper.type";
+import type { Nullable } from "../helper.type";
 
 export interface ICareDogProps {
   adminId: number;
