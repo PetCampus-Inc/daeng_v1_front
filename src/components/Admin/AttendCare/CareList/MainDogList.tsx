@@ -1,4 +1,4 @@
-import { ICareDogInfo } from "types/admin.caredog.type";
+import { ICareDogInfo } from "types/admin/care.types";
 
 import { MainDogGrid } from "./styles";
 import MainDogCard from "../CareCard/MainDogCard";

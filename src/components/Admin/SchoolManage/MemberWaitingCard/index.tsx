@@ -1,3 +1,5 @@
+import { PATH } from "constants/path";
+
 import ListIconSmallRound from "assets/svg/list-icon-small-round";
 import RightArrow from "assets/svg/right-arrow";
 import { AnimatePresence } from "framer-motion";
@@ -14,7 +16,7 @@ interface IOwnerWaitingCard {
   data: IWaitingOwnerInfo;
 }
 
-const OwnerWaitingCard = ({ data }: IOwnerWaitingCard) => {
+const MemberWaitingCard = ({ data }: IOwnerWaitingCard) => {
   const { dogName, memberName, enrollmentFormId } = data;
   const [isShow, setIsShow] = useState(true);
   const mutateApproveForm = useApproveFormMutation();
@@ -37,6 +39,9 @@ const OwnerWaitingCard = ({ data }: IOwnerWaitingCard) => {
       }
     });
   };
+
+  const params = new URLSearchParams();
+  params.append("member_name", memberName);
 
   return (
     <AnimatePresence>
@@ -64,17 +69,17 @@ const OwnerWaitingCard = ({ data }: IOwnerWaitingCard) => {
               denyFunc={denyFunc}
             />
           </S.UpperWrapper>
-          <S.LowerWrapper>
+          <S.LinkToEnrollment to={PATH.ADMIN_MEMBER_FORM(`${enrollmentFormId}?${params}`)}>
             <S.TextWrapper>
               <ListIconSmallRound />
               <p>가입신청서 보기</p>
             </S.TextWrapper>
             <RightArrow />
-          </S.LowerWrapper>
+          </S.LinkToEnrollment>
         </S.CardContainer>
       )}
     </AnimatePresence>
   );
 };
 
-export default OwnerWaitingCard;
+export default MemberWaitingCard;

@@ -1,6 +1,6 @@
-import { MEMBER_MA_STEP } from "constants/step";
+import { MEMBER_ENROLL_STEP } from "constants/step";
 
-import { useGetEnrollment } from "hooks/api/enroll";
+import { useGetEnrollment } from "hooks/api/member/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
@@ -17,21 +17,28 @@ import * as S from "./styles";
 // TODO: page 컴포넌트에서 조합해서 사용하기!
 const EnrollmentForm = () => {
   const { data } = useGetEnrollment({ memberId: "1", schoolId: "2" });
-  const { requiredItemsMap, pickDropInfo, policyInfo, ticketInfo } = data;
+  const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
 
   const methods = useForm({
     mode: "onChange",
-    shouldUnregister: false
+    shouldUnregister: false,
+    defaultValues: { ...rest }
   });
 
-  const visibleSteps = MEMBER_MA_STEP.filter((step) => step.isVisible(pickDropInfo));
+  const visibleSteps = MEMBER_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));
   const maxSteps = visibleSteps.length;
 
   const { currentStep, nextStep, prevStep, setStep } = useStep(maxSteps - 1);
 
-  const currentTitle = MEMBER_MA_STEP[currentStep].title;
-  const currentSubtitle = MEMBER_MA_STEP[currentStep].subtitle;
+  const currentTitle = MEMBER_ENROLL_STEP[currentStep].title;
+  const currentSubtitle = MEMBER_ENROLL_STEP[currentStep].subtitle;
   const indicators = visibleSteps.map((step) => step.indicator);
+
+  const ticket = {
+    roundTicketNumber,
+    monthlyTicketNumber
+  };
+
   return (
     <PageContainer color="BGray" pb="2.5">
       <S.Container>
@@ -45,19 +52,19 @@ const EnrollmentForm = () => {
         <FormProvider {...methods}>
           <S.ContentWrapper>
             <S.Content $isVisible={currentStep === 0}>
-              <MemberInfo requiredItems={requiredItemsMap} />
+              <MemberInfo requiredItems={requiredItemList} />
             </S.Content>
             <S.Content $isVisible={currentStep === 1}>
-              <DogInfo requiredItems={requiredItemsMap} />
+              <DogInfo requiredItems={requiredItemList} />
             </S.Content>
             <S.Content $isVisible={currentStep === 2}>
-              <TicketInfo info={ticketInfo} requiredItems={requiredItemsMap} />
+              <TicketInfo requiredItems={requiredItemList} ticket={ticket} />
             </S.Content>
             <S.Content $isVisible={currentStep === 3}>
-              <PolicyInfo info={policyInfo} requiredItems={requiredItemsMap} />
+              <PolicyInfo requiredItems={requiredItemList} />
             </S.Content>
             <S.Content $isVisible={currentStep === 4}>
-              <PickDropInfo info={pickDropInfo} requiredItems={requiredItemsMap} />
+              <PickDropInfo requiredItems={requiredItemList} />
             </S.Content>
           </S.ContentWrapper>
           <Navigation

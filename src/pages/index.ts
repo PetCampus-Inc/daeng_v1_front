@@ -24,3 +24,4 @@ export { default as NewTicketPage } from "./NewTicketPage";
 export { default as MemberMyPage } from "./MemberMyPage";
 export { default as AttendCareGallery } from "./AttendCareGalleryPage";
 export { default as AttendCareInfo } from "./AttendCareInfoPage";
+export { default as MemberEnrollmentFormDetailPage } from "./MemberEnrollmentFormDetailPage";

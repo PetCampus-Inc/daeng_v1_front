@@ -1,6 +1,7 @@
 import { atom } from "recoil";
+import { IRequestAdminEnrollment } from "types/admin/enrollment.types";
 
-import type { IRequestAdminEnrollment } from "types/School.type";
+import type { TMemberDto } from "types/member/enrollment.types";
 
 export const currentStepState = atom({
   key: "currentStepState",
@@ -33,8 +34,30 @@ export const enrollmentFormAtom = atom<IRequestAdminEnrollment>({
     limitsInfo: "",
     accidentInfo: "",
     abandonmentInfo: "",
-    pickDropState: "",
+    pickDropState: "NOT_RUNNING",
     pickDropNotice: "",
     pickDropInfo: ""
+  }
+});
+
+type memberInfoType = {
+  member: Omit<TMemberDto, "title">;
+  schoolFormId: number;
+  schoolFormName: string;
+};
+
+export const memberInfoState = atom<memberInfoType>({
+  key: "memberInfoAtom",
+  default: {
+    member: {
+      memberId: -1,
+      memberName: "",
+      memberGender: "",
+      address: "",
+      phoneNumber: "",
+      emergencyNumber: null
+    },
+    schoolFormId: -1,
+    schoolFormName: ""
   }
 });

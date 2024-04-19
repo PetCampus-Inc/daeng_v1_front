@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
-import type { ICareDogInfo } from "types/admin.caredog.type";
+import type { ICareDogInfo } from "types/admin/care.types";
 
 export const useGetCareDogList = (adminId: number, initialData: ICareDogInfo[]) => {
   return useSuspenseQuery<ICareDogInfo[]>({

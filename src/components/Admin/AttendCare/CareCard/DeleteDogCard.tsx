@@ -1,6 +1,6 @@
 import Checkbox from "components/common/Checkbox";
 import { memo } from "react";
-import { ICareDogInfo } from "types/admin.caredog.type";
+import { ICareDogInfo } from "types/admin/care.types";
 
 import { CardCheckboxWrapper, CardContainer, ListItemImg, ListItemTitle } from "./styles";
 
