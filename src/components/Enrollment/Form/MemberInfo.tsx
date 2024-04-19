@@ -6,7 +6,8 @@ import SearchInputField from "components/common/InputField/SearchInputField";
 import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Title from "components/common/Title";
-import { useEffect, useState } from "react";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { formatPhoneNumber } from "utils/formatter";
 
@@ -17,8 +18,8 @@ interface MemberInfoProps {
 
 const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   const { register, setValue, watch } = useFormContext();
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isAddressActive, setIsAddressActive] = useState(false);
+  const overlay = useOverlay();
 
   const addressStreet = "address.street";
   const watchAddress = watch(addressStreet, "");
@@ -29,20 +30,25 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
     setValue(field, formattedValue);
   };
 
-  useEffect(() => {
-    watchAddress !== "" && setIsPopupOpen(false);
-  }, [watchAddress]);
+  const handleClear = () => {
+    setValue(addressStreet, "");
+    setValue("address.detail", "");
+    setIsAddressActive(false);
+  };
+
+  const openPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <Postcode
+        isOpen={isOpen}
+        close={close}
+        field={addressStreet}
+        setValue={setValue}
+        setIsAddressActive={setIsAddressActive}
+      />
+    ));
 
   return (
     <>
-      {isPopupOpen && (
-        <Postcode
-          field={addressStreet}
-          setValue={setValue}
-          closePopup={setIsPopupOpen}
-          setIsAddressActive={setIsAddressActive}
-        />
-      )}
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
         <InputField
@@ -60,24 +66,20 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
         <SearchInputField
           name={addressStreet}
-          placeholder="주소를 입력해주세요"
           register={register}
-          onSearch={() => {
-            setIsPopupOpen(!isPopupOpen);
-          }}
-          onClick={() => {
-            setIsPopupOpen(!isPopupOpen);
-          }}
+          onSearch={() => openPopup()}
+          onClick={() => openPopup()}
+          onClear={handleClear}
           value={watchAddress}
-          setValue={setValue}
           isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
+          placeholder="주소를 입력해주세요"
         />
         {isAddressActive && (
           <InputField
             name="address.detail"
-            placeholder="상세 주소를 입력해주세요"
             register={register}
+            placeholder="상세 주소를 입력해주세요"
           />
         )}
       </Card>
