@@ -6,7 +6,8 @@ import { MemberFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
-import { FormButton } from "styles/StyleModule";
+
+import * as S from "./styles";
 
 import type { IRequestEnrollment } from "types/member/enrollment.types";
 
