@@ -1,8 +1,10 @@
 import type { ElementType } from "react";
 
-import { CSSProperties, ForwardedRef, forwardRef, HTMLAttributes } from "react";
+import { type CSSProperties, type ForwardedRef, forwardRef, type HTMLAttributes } from "react";
 
 import { StyledBox } from "./styles";
+
+import type { TColor } from "styles/ThemeConfig";
 
 export type BoxOptions = {
   width?: CSSProperties["width"];
@@ -19,14 +21,15 @@ export type BoxOptions = {
   pl?: CSSProperties["paddingLeft"];
   border?: CSSProperties["border"];
   borderRadius?: CSSProperties["borderRadius"];
-  borderColor?: CSSProperties["borderColor"];
+  borderColor?: TColor;
   borderTop?: CSSProperties["borderTop"];
   borderRight?: CSSProperties["borderRight"];
   borderBottom?: CSSProperties["borderBottom"];
   borderLeft?: CSSProperties["borderLeft"];
-  bg?: CSSProperties["backgroundColor"];
-  color?: CSSProperties["color"];
+  bg?: TColor;
+  color?: TColor;
   position?: CSSProperties["position"];
+  overflow?: CSSProperties["overflow"];
 };
 
 export type BoxProps = BoxOptions &
