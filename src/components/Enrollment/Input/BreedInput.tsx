@@ -2,7 +2,7 @@ import SearchInputField, {
   type SearchInputFieldProps
 } from "components/common/InputField/SearchInputField";
 import BreedDropDown from "components/Enrollment/Input/BreedDropDown";
-import useGetBreed from "hooks/api/useGetBreed";
+import { useGetBreed } from "hooks/api/member/enroll";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { FieldValues, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
