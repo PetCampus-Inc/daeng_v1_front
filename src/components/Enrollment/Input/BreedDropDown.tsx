@@ -1,15 +1,14 @@
 import Button from "components/common/Button";
-import { Dispatch, SetStateAction, useRef } from "react";
+import { useRef } from "react";
 
-import * as S from "../styles";
-import { CommonDropdownProps } from "../type";
+import * as S from "../../common/Dropdown/styles";
+import { CommonDropdownProps } from "../../common/Dropdown/type";
 
 interface IBreedDropdown extends CommonDropdownProps {
-  isOpen: boolean | Dispatch<SetStateAction<boolean>>;
   dropDownList: { breedId: number; breedName: string }[];
 }
 
-const BreedDropDown = ({ dropDownList, isOpen, setIsOpen, value, setValue }: IBreedDropdown) => {
+const BreedDropDown = ({ dropDownList, setIsOpen, value, setValue }: IBreedDropdown) => {
   const chosenItemRef = useRef<HTMLLIElement | null>(null);
 
   const handleClick = (
@@ -19,6 +18,7 @@ const BreedDropDown = ({ dropDownList, isOpen, setIsOpen, value, setValue }: IBr
     e.stopPropagation();
     setValue("newBreed", item.breedName);
     setValue("breedId", item.breedId);
+    console.log("닫힘!!");
     setIsOpen(false);
   };
 
@@ -32,7 +32,7 @@ const BreedDropDown = ({ dropDownList, isOpen, setIsOpen, value, setValue }: IBr
           견종을 정확히 입력해주세요
         </S.BoldText>
         <S.ThinText>ex) 밀티즈(x) → 말티즈(O)</S.ThinText>
-        <Button width="100%" height="48px" margintop="20px" handleClick={() => setIsOpen(!isOpen)}>
+        <Button width="100%" height="48px" margintop="20px" handleClick={() => setIsOpen(false)}>
           견종 등록하기
         </Button>
       </S.List>
