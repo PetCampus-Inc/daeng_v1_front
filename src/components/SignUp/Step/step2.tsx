@@ -3,7 +3,7 @@ import { NAME_REGEX, PHONE_REGEX } from "constants/validCheck";
 
 import Button from "components/common/Button";
 import Header from "components/common/Header";
-import Text from "components/common/Text";
+import Typo from "components/common/Typo";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
@@ -62,7 +62,7 @@ const Step2 = ({
         }}
       />
       <TextWrapper margin_bottom="5%">
-        <Text
+        <Typo
           text={
             className === DOGOWNER
               ? "견주님 이름을\n입력하고 승인 신청을 해주세요"

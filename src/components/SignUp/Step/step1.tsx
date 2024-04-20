@@ -3,7 +3,7 @@ import { DOGOWNER } from "constants/className";
 import Button from "components/common/Button";
 import Header from "components/common/Header";
 import InputBox from "components/common/InputBox";
-import Text from "components/common/Text";
+import Typo from "components/common/Typo";
 import { memo, Dispatch, SetStateAction, ChangeEvent } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { ISchoolInfo } from "types/School.type";
@@ -64,7 +64,7 @@ const Step1 = ({
           }}
         />
         <TextWrapper>
-          <Text
+          <Typo
             text={
               className === DOGOWNER
                 ? "안녕하세요 견주님\n어떤 유치원을 찾고 계시나요?"
@@ -113,8 +113,8 @@ const Step1 = ({
                     setSchoolId(item.schoolId);
                   }}
                 >
-                  <Text text={item.name} color={ThemeConfig.colors.gray_1} />
-                  <Text text={item.address} size="0.9rem" color={ThemeConfig.colors.gray_3} />
+                  <Typo text={item.name} color={ThemeConfig.colors.gray_1} />
+                  <Typo text={item.address} size="0.9rem" color={ThemeConfig.colors.gray_3} />
                 </StyledSearchResult>
               );
             })}

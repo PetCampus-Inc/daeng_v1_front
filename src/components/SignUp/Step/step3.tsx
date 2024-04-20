@@ -3,7 +3,7 @@ import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 
 import Button from "components/common/Button";
 import Header from "components/common/Header";
-import Text from "components/common/Text";
+import Typo from "components/common/Typo";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import useShowPw from "hooks/common/useShowPw";
 import { Dispatch, SetStateAction, memo, useEffect, useState } from "react";
@@ -60,7 +60,7 @@ const Step3 = ({
         }}
       />
       <TextWrapper margin_bottom="5%">
-        <Text
+        <Typo
           text={
             className === TEACHER ? "회원가입을 완료해 주세요" : "아이디와 비밀번호를 입력해 주세요"
           }
@@ -129,11 +129,11 @@ const Step3 = ({
       <StyledBottomWrapper height={className === TEACHER ? "13%" : "7%"}>
         {className === TEACHER && (
           <>
-            <Text
+            <Typo
               text="가입 신청 시 승인 완료 전 까지 수정이 어려워요"
               color={ThemeConfig.colors.gray_3}
             />
-            <Text text="잘못 입력한 내용이 없는지 확인해주세요" color={ThemeConfig.colors.gray_3} />
+            <Typo text="잘못 입력한 내용이 없는지 확인해주세요" color={ThemeConfig.colors.gray_3} />
           </>
         )}
         <Button
