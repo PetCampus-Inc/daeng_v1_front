@@ -5,28 +5,17 @@ import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import MultiCheck from "components/common/Select/MultiCheck";
 import TextArea from "components/common/TextArea";
 import AdminTitle from "components/common/Title/AdminTitle";
-import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Card, Caption, Stack } from "../styles";
 import TicketType from "../TicketType";
 
 const TicketInfo = () => {
-  const { register, control, watch, setValue } = useFormContext();
+  const { register, control, watch } = useFormContext();
 
   const selectedTicketTypes = watch("ticketType");
   const isMonthlySelected = selectedTicketTypes?.includes("정기권");
   const isRoundSelected = selectedTicketTypes?.includes("회차권");
-
-  // useEffect(() => {
-  //   if (!isMonthlySelected) {
-  //     setValue("monthlyTicketNumber", []);
-  //   }
-  //   if (!isRoundSelected) {
-  //     setValue("roundTicketNumber", []);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isMonthlySelected, isRoundSelected]);
 
   return (
     <>
