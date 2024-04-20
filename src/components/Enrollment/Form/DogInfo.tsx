@@ -10,7 +10,7 @@ import Title from "components/common/Title";
 import { useFormContext } from "react-hook-form";
 
 import { Caption, Card } from "./styles";
-import BreedInput from "../BreedInput";
+import BreedInput from "../Input/BreedInput";
 
 interface DogInfoProps {
   requiredItems?: Map<number, boolean>;
@@ -47,10 +47,10 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
         <BreedInput
           name="newBreed"
+          register={register}
           setValue={setValue}
           watch={watch}
-          register={register}
-          isRequired
+          isRequired={requiredItems?.get(ITEM_KEYS.DOG_BREED)}
         />
       </Card>
       <Card>
