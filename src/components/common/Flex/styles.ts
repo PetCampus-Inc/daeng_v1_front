@@ -4,7 +4,7 @@ import type { FlexOptions } from ".";
 
 export const StyledFlex = styled.div.attrs<FlexOptions>((props) => ({
   style: {
-    display: "flex",
+    display: props.display || "flex",
     gap: props.gap + "px" || undefined,
     flexDirection: props.direction || undefined,
     alignItems: props.align || undefined,
