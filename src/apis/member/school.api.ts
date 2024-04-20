@@ -22,7 +22,7 @@ export const handleGetSearchResult = async (searchText: string): Promise<ISchool
 };
 
 export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> => {
-  const sanitizedSearchText = searchText.replace(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/g, "");
+  const sanitizedSearchText = searchText.replace(/[^ㄱ-ㅎ가-힣a-zA-Z0-9()]/g, "");
 
   const url = `school/search/breed`;
   const { data } = await customAxios.get(url, {

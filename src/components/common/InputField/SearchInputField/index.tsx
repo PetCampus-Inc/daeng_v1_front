@@ -27,8 +27,6 @@ const SearchInputField = ({
     value && onSearch?.(value.toString());
   };
 
-  const searchDisabled = !value?.toString().trim();
-
   return (
     <S.SearchInputWrapper>
       <InputField
@@ -49,7 +47,7 @@ const SearchInputField = ({
           <XCircleIcon />
         </S.SearchInputButton>
       ) : (
-        <S.SearchInputButton onClick={handleSearch} disabled={searchDisabled}>
+        <S.SearchInputButton onClick={handleSearch} disabled={disabled}>
           <SearchIcon />
         </S.SearchInputButton>
       )}
