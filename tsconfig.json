@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,20 +17,20 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "~": ["*"],
-      "components/*": ["components/*"],
-      "hooks/*": ["hooks/*"],
-      "pages/*": ["pages/*"],
-      "styles/*": ["styles/*"],
-      "utils/*": ["utils/*"],
-      "types/*": ["types/*"],
-      "assets/*": ["assets/*"],
-      "store/*": ["store/*"],
-      "routes/*": ["routes/*"],
-      "apis/*": ["apis/*"],
-      "constants/*": ["constants/*"],
-      "context/*": ["context/*"],
-      "libs/*": ["libs/*"]
+      "~": ["src/*"],
+      "components/*": ["src/components/*"],
+      "hooks/*": ["src/hooks/*"],
+      "pages/*": ["src/pages/*"],
+      "styles/*": ["src/styles/*"],
+      "utils/*": ["src/utils/*"],
+      "types/*": ["src/types/*"],
+      "assets/*": ["src/assets/*"],
+      "store/*": ["src/store/*"],
+      "routes/*": ["src/routes/*"],
+      "apis/*": ["src/apis/*"],
+      "constants/*": ["src/constants/*"],
+      "context/*": ["src/context/*"],
+      "libs/*": ["src/libs/*"]
     }
   },
 
