@@ -28,7 +28,6 @@ const SearchInputField = ({
   };
 
   const searchDisabled = !value?.toString().trim();
-  console.log(value);
 
   return (
     <S.SearchInputWrapper>
