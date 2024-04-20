@@ -15,7 +15,6 @@ const SearchInputField = ({
   name,
   value,
   onSearch,
-  onChange,
   onClear,
   disabled = false,
   ...props
@@ -29,15 +28,14 @@ const SearchInputField = ({
   };
 
   const searchDisabled = !value?.toString().trim();
+  console.log(value);
 
   return (
     <S.SearchInputWrapper>
       <InputField
-        {...props}
         type="search"
         name={name}
         value={value}
-        onChange={onChange}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
@@ -45,6 +43,7 @@ const SearchInputField = ({
           }
         }}
         disabled={disabled}
+        {...props}
       />
       {value ? (
         <S.SearchInputButton onClick={handleClear}>
