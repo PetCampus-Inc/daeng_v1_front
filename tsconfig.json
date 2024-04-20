@@ -15,25 +15,23 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
-  },
-
-  /* Path aliases */
-  "baseUrl": ".",
-  "paths": {
-    "@/*": ["./src/*"],
-    "@components/*": ["./src/components/*"],
-    "@hooks/*": ["./src/hooks/*"],
-    "@pages/*": ["./src/pages/*"],
-    "@styles/*": ["./src/styles/*"],
-    "@constants/*": ["./src/constants/*"],
-    "@assets/*": ["./src/assets/*"],
-    "@apis/*": ["./src/apis/*"],
-    "@router/*": ["./src/router/*"],
-    "@utils/*": ["./src/utils/*"],
-    "@type/*": ["./src/types/*"],
-    "@store/*": ["./src/store/*"],
-    "@libs/*": ["./src/libs/*"]
+    "jsx": "react-jsx",
+    "paths": {
+      "~": ["*"],
+      "components/*": ["components/*"],
+      "hooks/*": ["hooks/*"],
+      "pages/*": ["pages/*"],
+      "styles/*": ["styles/*"],
+      "utils/*": ["utils/*"],
+      "types/*": ["types/*"],
+      "assets/*": ["assets/*"],
+      "store/*": ["store/*"],
+      "routes/*": ["routes/*"],
+      "apis/*": ["apis/*"],
+      "constants/*": ["constants/*"],
+      "context/*": ["context/*"],
+      "libs/*": ["libs/*"]
+    }
   },
 
   "include": ["src", ".eslintrc.cjs"]
