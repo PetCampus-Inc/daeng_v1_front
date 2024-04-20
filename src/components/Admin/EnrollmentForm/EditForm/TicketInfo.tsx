@@ -18,15 +18,15 @@ const TicketInfo = () => {
   const isMonthlySelected = selectedTicketTypes?.includes("정기권");
   const isRoundSelected = selectedTicketTypes?.includes("회차권");
 
-  useEffect(() => {
-    if (!isMonthlySelected) {
-      setValue("monthlyTicketNumber", []);
-    }
-    if (!isRoundSelected) {
-      setValue("roundTicketNumber", []);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMonthlySelected, isRoundSelected]);
+  // useEffect(() => {
+  //   if (!isMonthlySelected) {
+  //     setValue("monthlyTicketNumber", []);
+  //   }
+  //   if (!isRoundSelected) {
+  //     setValue("roundTicketNumber", []);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isMonthlySelected, isRoundSelected]);
 
   return (
     <>
