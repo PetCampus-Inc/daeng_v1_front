@@ -42,7 +42,7 @@ export const StyledBox = styled.div.withConfig({
   padding-right: ${({ pr }) => (pr ? remCalc(pr) + "rem" : undefined)};
   padding-bottom: ${({ pb }) => (pb ? remCalc(pb) + "rem" : undefined)};
   padding-left: ${({ pl }) => (pl ? remCalc(pl) + "rem" : undefined)};
-  border: ${({ border }) => (border ? `${border}px` : undefined)};
+  border: ${({ border }) => (border ? `${border}px solid` : undefined)};
   border-radius: ${({ borderRadius }) => (borderRadius ? `${borderRadius}px` : undefined)};
   border-color: ${({ borderColor, theme }) =>
     borderColor ? theme.colors[borderColor] : undefined};
