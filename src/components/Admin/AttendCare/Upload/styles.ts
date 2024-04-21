@@ -53,16 +53,15 @@ export const StyledText = styled.span`
 `;
 
 export const StyledThumbList = styled.ul`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
   padding: ${remCalc("12px")} 0 ${remCalc("10px")}; // 스크롤 영역 띄우기
   margin: ${remCalc("10px")} 0 ${remCalc("26px")};
 
   overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  touch-action: pan-y;
 
-  scroll-snap-type: y mandatory;
-  scroll-snap-stop: always;
+  -webkit-overflow-scrolling: touch;
+
   scrollbar-width: thin;
 `;

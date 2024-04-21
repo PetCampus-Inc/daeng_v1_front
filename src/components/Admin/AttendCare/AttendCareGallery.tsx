@@ -2,7 +2,7 @@ import { Upload } from "components/Admin/AttendCare/Upload/FileUpload";
 import { StyledThumbList } from "components/Admin/AttendCare/Upload/styles";
 import Thumbnail from "components/Admin/AttendCare/Upload/Thumbnail";
 import { IFile } from "components/Admin/AttendCare/Upload/types";
-import { Text, Flex } from "components/common";
+import { Flex, Text } from "components/common";
 import TextArea from "components/common/TextArea";
 import { ChangeEvent, useState } from "react";
 import { remCalc } from "utils/calculator";
@@ -41,13 +41,16 @@ const AttendCareGallery = () => {
             12장
           </Text>
         </Flex>
+
         <StyledThumbList>
-          <Upload onChange={handleUpload} accept={["image/*", "video/*"]} />
-          {dataSet.map((data, index) => (
-            <Box key={index} position="relative">
-              <Thumbnail file={data} index={index} onRemove={handleDeleteImage} />
-            </Box>
-          ))}
+          <Flex gap={10} align="center">
+            <Upload onChange={handleUpload} accept={["image/*", "video/*"]} />
+            {dataSet.map((data, index) => (
+              <Box key={index} position="relative">
+                <Thumbnail file={data} index={index} onRemove={handleDeleteImage} />
+              </Box>
+            ))}
+          </Flex>
         </StyledThumbList>
       </Box>
       <Flex direction="column" gap={8}>
