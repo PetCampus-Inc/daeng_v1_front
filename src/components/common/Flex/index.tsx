@@ -1,9 +1,17 @@
-import { type CSSProperties, type ForwardedRef, type HTMLAttributes, forwardRef } from "react";
+import { type CSSProperties, type ForwardedRef, forwardRef, type HTMLAttributes } from "react";
 
 import { StyledFlex } from "./styles";
 
 export type FlexOptions = {
   gap?: CSSProperties["gap"];
+  width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
+  maxWidth?: CSSProperties["maxWidth"];
+  maxHeight?: CSSProperties["maxHeight"];
+  overflowX?: CSSProperties["overflowX"];
+  overflowY?: CSSProperties["overflowY"];
+  margin?: CSSProperties["margin"];
+  padding?: CSSProperties["padding"];
   display?: CSSProperties["display"];
   direction?: CSSProperties["flexDirection"];
   align?: CSSProperties["alignItems"];
@@ -17,18 +25,7 @@ export type FlexOptions = {
 export type FlexProps = FlexOptions & HTMLAttributes<HTMLDivElement>;
 
 export const Flex = forwardRef(function Flex(
-  {
-    children,
-    display = "flex",
-    direction = "row",
-    align,
-    justify,
-    wrap,
-    basis,
-    grow,
-    shrink,
-    ...props
-  }: FlexProps,
+  { children, display, direction, align, justify, wrap, basis, grow, shrink, ...props }: FlexProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   return (
