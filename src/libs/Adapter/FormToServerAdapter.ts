@@ -1,4 +1,4 @@
-import { AGREEMENT_ITEM } from "constants/item";
+import { AGREEMENT_ITEM, ITEM_MAPS } from "constants/item";
 
 import { extractNumber, extractTicketValues, formatDate, reverseMapValue } from "utils/formatter";
 import { isNumber } from "utils/typeGuard";
@@ -118,10 +118,12 @@ export class AdminFormToServerAdapter {
   }
 
   get roundTicketNumber() {
+    if (!this.value.ticketType.includes(ITEM_MAPS.ticketType.ROUND)) return 0;
     return extractTicketValues(this.value.roundTicketNumber);
   }
 
   get monthlyTicketNumber() {
+    if (!this.value.ticketType.includes(ITEM_MAPS.ticketType.MONTHLY)) return 0;
     return extractTicketValues(this.value.monthlyTicketNumber);
   }
 
