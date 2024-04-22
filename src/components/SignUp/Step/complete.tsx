@@ -2,7 +2,7 @@ import { DOGOWNER, TEACHER } from "constants/className";
 import { PATH } from "constants/path";
 
 import Button from "components/common/Button";
-import Text from "components/common/Text";
+import Typo from "components/common/Typo";
 import { Dispatch, SetStateAction } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
 
@@ -25,14 +25,14 @@ const Complete = ({ setCurrentMainStep, selectedSearchText, schoolName, classNam
   return (
     <Container>
       <TextWrapper margin_bottom="5%">
-        <Text
+        <Typo
           text={schoolName ? schoolName : selectedSearchText}
           size="1.4rem"
           weight="bold"
           height="2rem"
           color={ThemeConfig.colors.primaryColor}
         />
-        <Text
+        <Typo
           text={
             className === TEACHER
               ? "승인 신청이 완료되었습니다"
@@ -45,7 +45,7 @@ const Complete = ({ setCurrentMainStep, selectedSearchText, schoolName, classNam
           height="2rem"
         />
         {className === TEACHER && (
-          <Text
+          <Typo
             text={"승인 완료시 알림으로 알려드릴게요"}
             size="1rem"
             color={ThemeConfig.colors.gray_3}

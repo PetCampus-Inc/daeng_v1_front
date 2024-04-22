@@ -72,6 +72,26 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               path: "delete",
               element: <Pages.AttendCareDeletePage />
+            },
+            {
+              // 강아지 관리 메인 사진 앨범 전송
+              path: PATH.ADMIN_CARE_GALLERY,
+              element: <Pages.AttendCareGallery type="main" />
+            },
+            {
+              path: PATH.ADMIN_CARE_INFO(),
+              children: [
+                {
+                  // 강아지 관리 상세
+                  index: true,
+                  element: <Pages.AttendCareInfo />
+                },
+                {
+                  // 강아지 관리 상세 사진 앨범 전송
+                  path: PATH.ADMIN_CARE_INFO_GALLERY(),
+                  element: <Pages.AttendCareGallery type="info" />
+                }
+              ]
             }
           ]
         },

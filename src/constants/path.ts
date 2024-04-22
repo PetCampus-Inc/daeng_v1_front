@@ -13,6 +13,9 @@ export const PATH = {
   ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: string) =>
     `/admin/attendance/${dogId ?? ":dogId"}/newTicket`, // 출석부 강아지 상세정보
   ADMIN_CARE: "/admin/care", // 오늘 관리할 강아지
+  ADMIN_CARE_GALLERY: `/admin/care/gallery`, // 오늘 관리할 강아지 사진앨범 전송
+  ADMIN_CARE_INFO: (dogId?: number) => `/admin/care/${dogId ?? ":dogId"}`, // 오늘 관리할 강아지 상세정보
+  ADMIN_CARE_INFO_GALLERY: (dogId?: number) => `/admin/care/${dogId ?? ":dogId"}/gallery`, // 오늘 관리할 강아지 사진앨범 전송
   ADMIN_CHAT: "/admin/chat", // 채팅
   ADMIN_SCHOOL_MANAGE: "/admin/school", // 유치원 운영
   ADMIN_ENROLLMENT: "/admin/school/enrollment", // 원장 신규가입 관리
@@ -28,5 +31,5 @@ export const PATH = {
   ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`,
   ENROLL: "/enroll", // 견주 가입신청서
   MEMBER_MY_PAGE: "/member/myPage",
-  REDIRECT: "/auth/:provider"
+  REDIRECT: "/auth/:context"
 } as const;
