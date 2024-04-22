@@ -21,6 +21,7 @@ const SearchInputField = ({
   onClear,
   onClear,
   disabled = false,
+  readOnly = false,
   ...props
 }: SearchInputFieldProps) => {
   const handleClear = () => {
@@ -32,8 +33,6 @@ const SearchInputField = ({
     value && onSearch?.(value.toString());
     value && onSearch?.(value.toString());
   };
-
-  const searchDisabled = !value?.toString().trim();
 
   return (
     <S.SearchInputWrapper>
@@ -48,6 +47,7 @@ const SearchInputField = ({
           }
         }}
         disabled={disabled}
+        readOnly={readOnly}
         {...props}
         disabled={disabled}
         {...props}
@@ -60,7 +60,7 @@ const SearchInputField = ({
           <XCircleIcon />
         </S.SearchInputButton>
       ) : (
-        <S.SearchInputButton onClick={handleSearch} disabled={searchDisabled}>
+        <S.SearchInputButton onClick={handleSearch} disabled={readOnly || disabled}>
           <SearchIcon />
         <S.SearchInputButton onClick={handleSearch} disabled={searchDisabled}>
           <SearchIcon />

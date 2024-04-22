@@ -42,7 +42,7 @@ const EnrollmentFormDetailPage = () => {
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false,
-    defaultValues: { ticketType: ticketType.slice(-1)[0], pickDropRequest: "신청", ...rest }
+    defaultValues: { ticketType: ticketType[0], pickDropRequest: "신청", ...rest }
   });
 
   const visibleSteps = ADMIN_READ_FORM_STEP.filter((step) => step.isVisible(data.pickDropState));
