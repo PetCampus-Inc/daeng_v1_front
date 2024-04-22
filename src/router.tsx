@@ -176,6 +176,60 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       }
     },
     {
+      path: PATH.MEMBER,
+      element: <App />,
+      errorElement: <Pages.NotFoundPage />,
+      children: [
+        {
+          path: PATH.MEMBER_UNREGISTER,
+          element: (
+            <Suspense>
+              <Pages.UnregisterPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberMyPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_UNREGISTER_SUCCESS,
+          element: (
+            <Suspense>
+              <Pages.UnregisterSuccessPage />
+            </Suspense>
+          )
+        }
+      ]
+    },
+    {
+      path: PATH.SETTING,
+      element: <App />,
+      errorElement: <Pages.NotFoundPage />,
+      children: [
+        {
+          path: PATH.SETTING,
+          element: (
+            <Suspense>
+              <Pages.SettingPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.SETTING_NOTIFICATION,
+          element: (
+            <Suspense>
+              <Pages.SettingNotificationPage />
+            </Suspense>
+          )
+        }
+      ]
+    },
+    {
       path: PATH.ROOT,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,
@@ -211,14 +265,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.MEMBER_MY_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyPage />
-            </Suspense>
-          )
-        },
-        {
           path: PATH.POLICY,
           element: (
             <Suspense>
@@ -226,50 +272,11 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             </Suspense>
           )
         },
-        {
-          path: PATH.MEMBER_UNREGISTER,
-          element: (
-            <Suspense>
-              <Pages.UnregisterPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_UNREGISTER_SUCCESS,
-          element: (
-            <Suspense>
-              <Pages.UnregisterSuccessPage />
-            </Suspense>
-          )
-        }
       ],
       loader: () => {
         // if (auth.role !== "USER") return redirect(PATH.LOGIN);
         return null;
       }
-    },
-    {
-      path: PATH.SETTING,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
-      children: [
-        {
-          path: PATH.SETTING,
-          element: (
-            <Suspense>
-              <Pages.SettingPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.SETTING_NOTIFICATION,
-          element: (
-            <Suspense>
-              <Pages.SettingNotificationPage />
-            </Suspense>
-          )
-        },
-      ],
     }
   ]);
   return <RouterProvider router={router} />;
