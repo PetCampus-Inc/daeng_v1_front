@@ -271,13 +271,13 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.PolicyPage />
             </Suspense>
           )
-        },
+        }
       ],
       loader: () => {
         // if (auth.role !== "USER") return redirect(PATH.LOGIN);
         return null;
       }
-    }
+    },
   ]);
   return <RouterProvider router={router} />;
 };
