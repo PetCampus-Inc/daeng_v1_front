@@ -16,7 +16,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
   const path: string = usePathParams();
 
   return (
-    <S.Container>
+    <S.Container radius={`${path.includes("/member") ? "20px 20px 0 0" : "0"}`}>
       {path.includes("/member")
         ? MENU_ITEMS.member.map((menuItem, index) => (
             <React.Fragment key={menuItem.text}>
