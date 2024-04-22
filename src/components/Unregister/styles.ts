@@ -48,6 +48,14 @@ const CheckBoxStyle = css`
   display: flex;
   gap: 1rem;
   cursor: pointer;
+
+  & > label {
+    flex: 1;
+  }
+
+  & > p {
+    flex: 20;
+  }
 `;
 
 export const CheckBoxItem = styled.div<IUnregisterProps>`
