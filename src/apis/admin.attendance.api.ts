@@ -3,6 +3,8 @@ import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
 import {
   IAttendDogInfo,
+  IDogInfoAgenda,
+  IDogInfoRecord,
   IMemberCallInfo,
   IPrecautionInfo,
   ITicketDetail
@@ -116,16 +118,30 @@ export const handlePostDogMemo = async (dogId: number, memo: string): Promise<vo
 };
 
 // 강아지 상세 - 등원 기록
-// FIXME: 백엔드 api 수정 완료 시 response any 타입 수정 필요
-export const handleGetAttendanceHistory = async (
+export const handleGetDogInfoRecord = async (
   dogId: number,
-  calendar?: string
-): Promise<any> => {
-  const url = `admin/attendance/dog/info/attendance`;
+  date?: string
+): Promise<IDogInfoRecord[]> => {
+  const url = `admin/attendance/dog/info/record`;
   const { data } = await customAxios.get(url, {
     params: {
       dogId,
-      calendar: calendar || format(new Date(), "yyyy-MM-dd")
+      date: date || format(new Date(), "yyyy-MM-dd")
+    }
+  });
+  return data.data;
+};
+
+// 강아지 상세 - 알림장
+export const handleGetDogInfoAgenda = async (
+  dogId: number,
+  date?: string
+): Promise<IDogInfoAgenda> => {
+  const url = `admin/attendance/dog/info/agenda`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      dogId,
+      date: date || format(new Date(), "yyyy-MM-dd")
     }
   });
   return data.data;
@@ -138,7 +154,7 @@ export const handleGetTicketDetail = async (dogId: number): Promise<ITicketDetai
   return data.data;
 };
 
-// 연결 전
+// 강아지 상세 - 이용권 갱신
 export const handlePostTicket = async (req: any): Promise<any> => {
   const url = `admin/attendance/dog/ticket`;
   const { data } = await customAxios.post(url, {

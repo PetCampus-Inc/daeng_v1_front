@@ -77,13 +77,13 @@ export const InnerShadow = styled.div`
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
 `;
 
-export const PreviewImg = styled.img`
+export const StyledThumbImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
 `;
 
-export const DeleteButton = styled.button`
+export const StyledDeleteButton = styled.button`
   position: absolute;
   top: -10px;
   right: -10px;

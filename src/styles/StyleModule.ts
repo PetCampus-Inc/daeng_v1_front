@@ -47,7 +47,7 @@ export const PageContainer = styled.div.withConfig({
 })<{
   pt?: string;
   pb?: string;
-  ph?: string;
+  ph?: string; // 좌우 동일 padding
   pr?: string;
   pl?: string;
   color?: TColor;

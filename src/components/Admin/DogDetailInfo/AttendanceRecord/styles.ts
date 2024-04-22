@@ -17,3 +17,14 @@ export const Image = styled.img`
   transform: translateY(3vh);
   z-index: 2;
 `;
+
+export const NoticeContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 6% 5% 89px;
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: 0px -8px 15px rgba(0, 0, 0, 0.04);
+  z-index: 2;
+`;

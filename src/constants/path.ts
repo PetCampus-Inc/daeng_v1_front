@@ -8,7 +8,14 @@ export const PATH = {
   ADMIN_SIGNUP: "/admin/signup",
   ADMIN_ATTENDANCE: "/admin/attendance", // 출석부
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/admin/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
+  ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>
+    `/admin/attendance/${dogId ?? ":dogId"}/gallery`, // 출석부 강아지 갤러리
+  ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: string) =>
+    `/admin/attendance/${dogId ?? ":dogId"}/newTicket`, // 출석부 강아지 상세정보
   ADMIN_CARE: "/admin/care", // 오늘 관리할 강아지
+  ADMIN_CARE_GALLERY: `/admin/care/gallery`, // 오늘 관리할 강아지 사진앨범 전송
+  ADMIN_CARE_INFO: (dogId?: number) => `/admin/care/${dogId ?? ":dogId"}`, // 오늘 관리할 강아지 상세정보
+  ADMIN_CARE_INFO_GALLERY: (dogId?: number) => `/admin/care/${dogId ?? ":dogId"}/gallery`, // 오늘 관리할 강아지 사진앨범 전송
   ADMIN_CHAT: "/admin/chat", // 채팅
   ADMIN_SCHOOL_MANAGE: "/admin/school", // 유치원 운영
   ADMIN_ENROLLMENT: "/admin/school/enrollment", // 원장 신규가입 관리
@@ -30,5 +37,6 @@ export const PATH = {
   REDIRECT: "/auth/:provider",
   SETTING: "/setting", // 설정 페이지
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
-  POLICY: "/policy" // 정책 페이지
+  POLICY: "/policy", // 정책 페이지
+  REDIRECT: "/auth/:context"
 } as const;

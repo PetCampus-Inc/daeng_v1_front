@@ -12,7 +12,14 @@ interface NoticeProps {
   data: IPrecautionInfo;
 }
 const Notice = ({ data }: NoticeProps) => {
-  console.log(data);
+  const findObject = (id: number) => {
+    const object = data.agreements.find((obj) => Object.prototype.hasOwnProperty.call(obj, id));
+    if (object) {
+      return Object.values(object)[0];
+    }
+    return "";
+  };
+
   return (
     <InnerContainer style={{ gap: "12px" }}>
       <S.FlexWrapper>
@@ -29,11 +36,16 @@ const Notice = ({ data }: NoticeProps) => {
             </S.FlexText>
             <S.InnerFlexWrapper>
               <S.FlexText className="re-agree">
-                <AlertSmallIcon color="orange" />
-                재동의 필요
+                {data.modifiedList?.includes(item.id) ? (
+                  <>
+                    <AlertSmallIcon color="orange" /> "재동의 요청"
+                  </>
+                ) : (
+                  ""
+                )}
               </S.FlexText>
 
-              <S.FlexText className="date">2020.10.10 동의</S.FlexText>
+              <S.FlexText className="date">{findObject(item.id)} 동의</S.FlexText>
             </S.InnerFlexWrapper>
           </S.List>
         ))}
