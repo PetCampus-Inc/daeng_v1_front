@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { imagePreviewAtom } from "store/form";
 
 import ImageModal from "./ImageModal";
+import { StyledDeleteButton, StyledThumbImg } from "./styles";
 import * as S from "./styles";
 
 import type { ImageFile } from "store/form";
@@ -65,12 +66,15 @@ const ImageUpload = ({ id, disabled }: ImageUploadProps) => {
               <S.PreviewInner>
                 <S.PreviewButton disabled={disabled} onClick={() => handleImageClick(image)}>
                   <S.InnerShadow />
-                  <S.PreviewImg src={image.preview} alt={image.file.name} />
+                  <S.StyledThumbImg src={image.preview} alt={image.file.name} />
                 </S.PreviewButton>
               </S.PreviewInner>
-              <S.DeleteButton onClick={() => handleDeleteImage(index)} aria-label="이미지 삭제">
+              <S.StyledDeleteButton
+                onClick={() => handleDeleteImage(index)}
+                aria-label="이미지 삭제"
+              >
                 <CloseIcon />
-              </S.DeleteButton>
+              </S.StyledDeleteButton>
             </S.PreviewItem>
           ))}
         </S.PreviewContainer>

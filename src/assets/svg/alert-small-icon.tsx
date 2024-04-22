@@ -1,5 +1,5 @@
 interface AlertIconProps {
-  color: "red" | "gray" | "brown" | "orange";
+  color: "red" | "gray" | "brown" | "orange" | "darkgray";
 }
 
 const AlertSmallIcon = ({ color }: AlertIconProps) => {
@@ -7,7 +7,8 @@ const AlertSmallIcon = ({ color }: AlertIconProps) => {
     ["red", ["#FAE7E3", "#DD5435", "#FAE7E3"]],
     ["gray", ["#F7F7F7", "#B5B5B5", "#F7F7F7"]],
     ["brown", ["#FFF7E1", "#956F4C", "#EEE3D9"]],
-    ["orange", ["#FFFFFF", "#EE7821", "#F7F7F7"]]
+    ["orange", ["#FFFFFF", "#EE7821", "#F7F7F7"]],
+    ["darkgray", ["#E9E9E9", "#B5B5B5", "#F7F7F7"]]
   ]);
 
   return (

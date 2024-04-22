@@ -1,5 +1,6 @@
-import Text from "components/common/Text";
+import Typo from "components/common/Typo";
 import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
+import { useLocation } from "react-router-dom";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import AboutDog from "./AboutDog";
@@ -9,7 +10,8 @@ import * as S from "./styles";
 import { InnerContainer } from "../styles";
 
 const DogInfo = () => {
-  const { data, refetch } = useGetDogAndMemberDetail(2); //FIXME: 나영이꺼 머지되면 queryString에서 가져오기
+  const dogId = useLocation().pathname.split("/").pop();
+  const { data, refetch } = useGetDogAndMemberDetail(Number(dogId));
 
   return (
     <InnerContainer>
@@ -20,10 +22,10 @@ const DogInfo = () => {
       <Memo memo={data.dogInfo.dogMemo} id={data.dogInfo.dogId} refetch={refetch} />
 
       <S.AlbumWrapper>
-        <Text text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
+        <Typo text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
         <S.Albums>
           {/* 사진이 있는경우 앨범 없을 경우 텍스트 */}
-          <Text
+          <Typo
             text="앨범에 등록된 사진이 없습니다"
             color={ThemeConfig.colors.gray_3}
             size="0.9rem"

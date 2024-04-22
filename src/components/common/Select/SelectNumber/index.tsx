@@ -38,7 +38,7 @@ const SelectNumber = ({
           {...props}
           name={name}
           disabled={disabled}
-          defaultValue={defaultValue}
+          value={value}
           placeholder={placeholder}
           readOnly
         />
