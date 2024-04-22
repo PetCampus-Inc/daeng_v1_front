@@ -219,22 +219,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.SETTING,
-          element: (
-            <Suspense>
-              <Pages.SettingPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.SETTING_NOTIFICATION,
-          element: (
-            <Suspense>
-              <Pages.SettingNotificationPage />
-            </Suspense>
-          )
-        },
-        {
           path: PATH.POLICY,
           element: (
             <Suspense>
@@ -263,6 +247,29 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
         // if (auth.role !== "USER") return redirect(PATH.LOGIN);
         return null;
       }
+    },
+    {
+      path: PATH.SETTING,
+      element: <App />,
+      errorElement: <Pages.NotFoundPage />,
+      children: [
+        {
+          path: PATH.SETTING,
+          element: (
+            <Suspense>
+              <Pages.SettingPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.SETTING_NOTIFICATION,
+          element: (
+            <Suspense>
+              <Pages.SettingNotificationPage />
+            </Suspense>
+          )
+        },
+      ],
     }
   ]);
   return <RouterProvider router={router} />;
