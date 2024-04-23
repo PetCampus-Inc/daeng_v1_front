@@ -46,6 +46,7 @@ export const MyDogImg = styled.img`
   width: 100%;
   inset: 0px;
   color: transparent;
+  object-fit: cover;
 `;
 
 export const DogName = styled.h3`
