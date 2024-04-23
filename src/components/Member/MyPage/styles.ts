@@ -17,5 +17,6 @@ export const BackgroundButtonWrapper = styled.div`
 export const CardContainer = styled.div`
   height: 100%;
   padding: 1.5rem 1rem;
-  background-color: ${({ theme }) => theme.colors.gray_5};
+  border-top: 0.5rem solid ${({ theme }) => theme.colors.gray_5};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
