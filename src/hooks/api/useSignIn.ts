@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
 import { handleAdminLoginResult } from "apis/admin.api";
-import { handleLoginResult } from "apis/member.api";
+import { handleLoginResult } from "apis/member/member.api";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";

@@ -1,6 +1,6 @@
-import type { IPickDropInfo } from "types/School.type";
+import { TPickDropState } from "types/member/enrollment.types";
 
-export const MEMBER_MA_STEP = [
+export const MEMBER_ENROLL_STEP = [
   {
     title: "견주 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
@@ -29,7 +29,7 @@ export const MEMBER_MA_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
     indicator: "픽드랍",
-    isVisible: (pickDropInfo: IPickDropInfo) => pickDropInfo?.pickDropState === "RUNNING"
+    isVisible: (status: TPickDropState) => status === "RUNNING"
   }
 ];
 

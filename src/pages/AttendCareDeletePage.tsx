@@ -1,6 +1,6 @@
 import AttendCareDelete from "components/Admin/AttendCare/AttendCareDelete";
 import Header from "components/common/Header";
-import { useGetCareDogList } from "hooks/api/caredogQuery";
+import { useGetCareDogList } from "hooks/api/admin/care";
 import { useRouteLoaderData } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import caredogLoader from "routes/caredogLoader";

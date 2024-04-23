@@ -1,6 +1,6 @@
 import { createContext, useState, useCallback, type PropsWithChildren } from "react";
 
-import type { ICareDogInfo } from "types/admin.caredog.type";
+import type { ICareDogInfo } from "types/admin/care.types";
 
 interface SelectedIdsContextProps {
   selectedIds: Set<number>;

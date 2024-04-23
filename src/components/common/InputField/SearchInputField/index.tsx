@@ -1,5 +1,6 @@
 import SearchIcon from "assets/svg/search-icon";
-import { FieldValues, UseFormSetValue } from "react-hook-form";
+import XCircleIcon from "assets/svg/x-circle-icon";
+import XCircleIcon from "assets/svg/x-circle-icon";
 
 import * as S from "./styles";
 import InputField from "../index";
@@ -8,55 +9,61 @@ import type { InputFieldProps } from "../index";
 
 export interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   onSearch?: (value: string) => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
-  setValue?: UseFormSetValue<FieldValues>;
+  onClear?: () => void;
+  onClear?: () => void;
 }
 
 const SearchInputField = ({
   name,
-  onSearch,
   value,
-  setValue,
+  value,
+  onSearch,
+  onClear,
+  onClear,
   disabled = false,
+  readOnly = false,
   ...props
 }: SearchInputFieldProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue && setValue(name, e.target.value);
-    props.onChange && props.onChange(e);
-  };
-
   const handleClear = () => {
-    setValue && setValue(name, "");
+    onClear?.();
+    onClear?.();
   };
 
   const handleSearch = () => {
-    value && onSearch && onSearch(value);
+    value && onSearch?.(value.toString());
+    value && onSearch?.(value.toString());
   };
 
   return (
     <S.SearchInputWrapper>
       <InputField
-        {...props}
         type="search"
-        disabled={disabled}
         name={name}
         value={value}
-        onChange={handleChange}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault();
             handleSearch();
           }
         }}
+        disabled={disabled}
+        readOnly={readOnly}
+        {...props}
+        disabled={disabled}
+        {...props}
       />
-      {!value ? (
-        <S.SearchInputButton onClick={handleSearch} disabled={disabled}>
-          <SearchIcon />
+      {value ? (
+        <S.SearchInputButton onClick={handleClear}>
+          <XCircleIcon />
+      {value ? (
+        <S.SearchInputButton onClick={handleClear}>
+          <XCircleIcon />
         </S.SearchInputButton>
       ) : (
-        <S.SearchInputButton onClick={handleClear}>
-          <img src="/images/x-box.png" alt="x-box" />
+        <S.SearchInputButton onClick={handleSearch} disabled={readOnly || disabled}>
+          <SearchIcon />
+        <S.SearchInputButton onClick={handleSearch} disabled={searchDisabled}>
+          <SearchIcon />
         </S.SearchInputButton>
       )}
     </S.SearchInputWrapper>

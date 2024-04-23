@@ -2,7 +2,7 @@ import Badge, { BadgeProps } from "components/common/Badge";
 
 import { CardContainer, ListItemImg, ListItemTime, ListItemTitle } from "./styles";
 
-import type { ICareDogInfo, TAgendaWriting } from "types/admin.caredog.type";
+import type { ICareDogInfo, TAgendaWriting } from "types/admin/care.types";
 
 const MainDogCard = ({
   attendanceId,

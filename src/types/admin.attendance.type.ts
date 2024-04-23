@@ -1,5 +1,6 @@
+import { TMemberDto } from "./admin/enrollment.types";
+
 import type { Nullable } from "./helper.type";
-import type { IMemberInfo } from "./School.type";
 
 export interface IAttendDogInfo {
   attendanceId: number;
@@ -44,7 +45,7 @@ export interface IDogAndMemberInfo {
   pickDropType: string;
   pickDropMemo: string;
   dogMemo: string;
-  member: IMemberInfo;
+  member: TMemberDto;
 }
 
 export interface IDogInfoRecord {

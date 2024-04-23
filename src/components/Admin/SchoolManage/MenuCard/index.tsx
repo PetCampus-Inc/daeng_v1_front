@@ -39,11 +39,11 @@ const MenuCard = () => {
       .then((data) => {
         if (!data) return;
         setNewEnrollmentList(data.data || null);
-        if (data.data!.simpleSchoolFormList.length === 0) {
+        if (data.data?.simpleSchoolFormList.length === 0) {
           setIsOpened(true);
           return;
         }
-        navigate(PATH.ADMIN_SCHOOL_MANAGE);
+        navigate(PATH.ADMIN_ENROLLMENT);
       })
       .catch((error) => {
         showToast("정보를 불러오는 데 실패했습니다. 다시 시도해주세요", "bottom");

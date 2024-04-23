@@ -1,5 +1,5 @@
-import CloseIcon from "assets/svg/close-icon";
 import SearchIcon from "assets/svg/search-icon";
+import XCircleIcon from "assets/svg/x-circle-icon";
 
 import * as S from "./styles";
 
@@ -22,7 +22,7 @@ const AttendanceSearchInput = ({
   };
 
   const handleSearch = () => {
-    onSearch && value && onSearch(value?.toString());
+    value && onSearch && onSearch(value?.toString());
   };
 
   const disabled = !value?.toString().trim();
@@ -44,7 +44,7 @@ const AttendanceSearchInput = ({
       />
       {value ? (
         <S.SearchInputButton onClick={handleClear}>
-          <CloseIcon className="close-icon" />
+          <XCircleIcon className="close-icon" colorScheme="brown" />
         </S.SearchInputButton>
       ) : (
         <S.SearchInputButton onClick={handleSearch} disabled={disabled}>

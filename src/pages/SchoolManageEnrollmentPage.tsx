@@ -1,6 +1,6 @@
 import ListIcon from "assets/svg/list-icon";
 import MACarousel from "components/Admin/SchoolManage/MACarousel";
-import OwnerWaitingList from "components/Admin/SchoolManage/OwnerWaitingList";
+import OwnerWaitingList from "components/Admin/SchoolManage/MemberWaitingList";
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import Header from "components/common/Header";
 import { useNavigate } from "react-router-dom";
