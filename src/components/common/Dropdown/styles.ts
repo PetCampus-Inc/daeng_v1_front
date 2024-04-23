@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { dragNone } from "styles/StyleModule";
 
 export const List = styled.ul`
   position: absolute;
@@ -10,7 +11,9 @@ export const List = styled.ul`
   margin-top: 8px;
   z-index: 2;
 
-  overflow-y: scroll;
+  box-shadow: ${({ theme }) => theme.shadows.card};
+
+  overflow-y: auto;
   scroll-snap-type: y mandatory;
   scroll-snap-stop: always;
   scrollbar-width: thin;
@@ -22,7 +25,10 @@ export const List = styled.ul`
     flex-direction: column;
     text-align: center;
   }
+
+  ${dragNone}
 `;
+
 export const BoldText = styled.span`
   ${({ theme }) => theme.typo.body2_16_B}
   color: ${({ theme }) => theme.colors.gray_1};
@@ -39,11 +45,15 @@ export const ListItem = styled.li`
   align-items: center;
   gap: 25px;
   height: 48px;
-  color: ${({ theme }) => theme.colors.gray_3};
+  color: ${({ theme }) => theme.colors.gray_1};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_4};
   scroll-snap-align: start;
   scroll-snap-stop: always;
   ${({ theme }) => theme.typo.body1_16_R}
+
+  &:hover, &:active {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+  }
   &.chosen {
     background-color: ${({ theme }) => theme.colors.gray_5};
   }

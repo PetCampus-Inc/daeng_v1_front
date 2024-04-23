@@ -1,6 +1,6 @@
-import { useGetNewCareDogs } from "hooks/api/caredogQuery";
+import { useGetNewCareDogs } from "hooks/api/admin/care";
 import { useEffect } from "react";
-import { ICareDogInfo } from "types/admin.caredog.type";
+import { ICareDogInfo } from "types/admin/care.types";
 
 import { ListContainer, ListTitle, ListWrapper } from "./styles";
 import AddDogCard from "../CareCard/AddDogCard";

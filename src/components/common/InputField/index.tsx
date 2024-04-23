@@ -4,7 +4,7 @@ import * as S from "./styles";
 
 export interface InputFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "pattern"> {
-  name: string;
+  name?: string;
   isRequired?: boolean;
   pattern?: ValidationRule<RegExp>;
   register?: UseFormRegister<FieldValues>;

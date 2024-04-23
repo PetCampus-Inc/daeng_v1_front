@@ -1,4 +1,4 @@
-import CloseIcon from "assets/svg/close-icon";
+import CloseIcon from "assets/svg/x-circle-icon";
 import Portal from "components/common/Portal";
 
 import { BackDrop, MainWrapper, DeleteButton, PreviewImg, PreviewItem } from "./styles";

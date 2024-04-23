@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useMemo, type PropsWithChildren } from "react";
 
-import type { ICareDogInfo } from "types/admin.caredog.type";
+import type { ICareDogInfo } from "types/admin/care.types";
 
 type Action =
   | { type: "ADD_DOG"; payload: ICareDogInfo }
