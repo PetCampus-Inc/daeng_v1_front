@@ -2,6 +2,7 @@ import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import { PageContainer } from "components/Member/MyPage/Container/styles";
 import MemberProfile from "components/Member/MyPage/MemberProfile";
+import MyDogInfo from "components/Member/MyPage/MyDogInfo";
 import { CardContainer, ContentContainer } from "components/Member/MyPage/styles";
 
 const MemberMyPage = () => {
@@ -16,7 +17,9 @@ const MemberMyPage = () => {
       >
         <ContentContainer>
           <MemberProfile />
-          <CardContainer></CardContainer>
+          <CardContainer>
+            <MyDogInfo />
+          </CardContainer>
         </ContentContainer>
       </PageContainer>
       <NavBar type="member" />
