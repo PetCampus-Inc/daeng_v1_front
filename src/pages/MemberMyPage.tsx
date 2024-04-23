@@ -1,5 +1,6 @@
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
+import LogOutButton from "components/Member/MyPage/Buttons/LogOutButton";
 import { PageContainer } from "components/Member/MyPage/Container/styles";
 import MemberProfile from "components/Member/MyPage/MemberProfile";
 import MyDogInfo from "components/Member/MyPage/MyDogInfo";
@@ -22,6 +23,7 @@ const MemberMyPage = () => {
           </CardContainer>
         </ContentContainer>
       </PageContainer>
+      <LogOutButton />
       <NavBar type="member" />
     </>
   );
