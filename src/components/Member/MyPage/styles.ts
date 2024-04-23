@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const ContentContainer = styled.div`
-  height: 100%;
+  height: calc(100vh - 32vh);
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.colors.white};
 `;
@@ -11,7 +11,7 @@ export const BackgroundButtonWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  padding-bottom: 78px;
+  padding: 0 1rem 7.625rem 1rem;
 `;
 
 export const CardContainer = styled.div`
