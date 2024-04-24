@@ -1,5 +1,5 @@
 import Header from "components/common/Header";
-import MyInfo from "components/Member/MyPage/MyInfo";
+import MyInfo from "components/Member/MyPage/MyMemberinfo";
 import { PageContainer } from "styles/StyleModule";
 
 const MemberMyInfoPage = () => {
