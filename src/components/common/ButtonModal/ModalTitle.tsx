@@ -1,6 +1,6 @@
 import { MainText, SubText, TextWrapper } from "./styles";
 
-interface ModalTitleProps {
+export interface ModalTitleProps {
   title: string;
   subtitle: string;
 }
