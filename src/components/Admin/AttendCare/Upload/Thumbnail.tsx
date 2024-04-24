@@ -7,23 +7,30 @@ import {
   StyledText
 } from "components/Admin/AttendCare/Upload/styles";
 import { Box } from "components/common";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
+
+import PreviewPopup from "./PreviewPopup";
 
 import type { IFile } from "components/Admin/AttendCare/Upload/types";
 
 interface TumbnailProps {
-  file: IFile;
+  data: IFile;
   index: number;
   onRemove?: (index: number) => void;
 }
 
-const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
+const Thumbnail = ({ data, index, onRemove }: TumbnailProps) => {
+  const overlay = useOverlay();
+  const openPopup = () =>
+    overlay.open(({ isOpen, close }) => <PreviewPopup isOpen={isOpen} close={close} data={data} />);
+
   return (
     <>
       <StyledThumb>
-        <Box tag="button" width="100%" height="100%" onClick={() => console.log("이미지 클릭!")}>
+        <Box tag="button" width="100%" height="100%" onClick={openPopup}>
           <InnerShadow />
-          <StyledThumbImg src={file.thumbnail} alt={`preview-${index}`} />
-          {file.duration && <StyledText>{file.duration}</StyledText>}
+          <StyledThumbImg src={data.thumbnail} alt={`preview-${index}`} />
+          {data.duration && <StyledText>{data.duration}</StyledText>}
         </Box>
       </StyledThumb>
       {onRemove && (
