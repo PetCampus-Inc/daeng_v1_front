@@ -1,7 +1,9 @@
-import { useState, useMemo } from "react";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { useState, useMemo } from "react";
 import { v1 as uuidv1 } from "uuid";
+
 import { s3ClientConfig, bucketName } from "./config";
+
 import type { TResult } from "./types";
 
 interface uploadToS3Props {

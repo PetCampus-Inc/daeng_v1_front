@@ -7,9 +7,9 @@ import {
   handleTeacherSignUpCancel,
   handleTeacherSignUpSubmit
 } from "apis/admin.api";
-import { handleGetSearchResult } from "apis/school.api";
+import { handleGetSearchResult } from "apis/member/school.api";
 import { useState, useCallback, Dispatch, SetStateAction } from "react";
-import { ISchoolInfo } from "types/School.type";
+import { ISchoolInfo } from "types/admin/school.types";
 import showToast from "utils/showToast";
 
 const useSignUp = () => {

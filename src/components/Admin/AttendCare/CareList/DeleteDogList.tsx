@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ICareDogInfo } from "types/admin.caredog.type";
+import { ICareDogInfo } from "types/admin/care.types";
 
 import { MainDogGrid } from "./styles";
 import DeleteDogCard from "../CareCard/DeleteDogCard";

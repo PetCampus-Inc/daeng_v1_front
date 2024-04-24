@@ -18,7 +18,7 @@ import {
 } from "components/Admin/EnrollmentForm/styles";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
-import { type AdaptedData, useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
+import { type FormAdaptedData, useAdminEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ const EnrollmentFormDetailPage = () => {
   if (!formId) throw new Error("잘못된 formId 입니다");
   const navigate = useNavigate();
 
-  const { data, isLoading } = useAdminEnrollQuery(formId, "READ");
+  const { data, isLoading } = useAdminEnrollment(formId, "READ");
   const {
     requiredItemList,
     roundTicketNumber,
@@ -37,12 +37,12 @@ const EnrollmentFormDetailPage = () => {
     ticketType,
     openDays,
     ...rest
-  } = data as AdaptedData<"READ">;
+  } = data as FormAdaptedData<"READ">;
 
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false,
-    defaultValues: { ticketType: ticketType.slice(-1)[0], pickDropRequest: "신청", ...rest }
+    defaultValues: { ticketType: ticketType[0], pickDropRequest: "신청", ...rest }
   });
 
   const visibleSteps = ADMIN_READ_FORM_STEP.filter((step) => step.isVisible(data.pickDropState));

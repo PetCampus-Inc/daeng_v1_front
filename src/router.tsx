@@ -111,60 +111,84 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             },
             {
-              path: PATH.ADMIN_ENROLLMENT,
-              element: (
-                <Suspense>
-                  <Pages.SchoolManageEnrollmentPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_FORMS,
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormListPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_CREATE_FORM,
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormCreatePage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_SUBMIT_FORM,
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormSubmitPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_EDIT_FORM(),
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormEditPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_FORM(),
-              element: (
-                <Suspense>
-                  <Pages.EnrollmentFormDetailPage />
-                </Suspense>
-              )
-            },
-            {
               path: PATH.ADMIN_TEACHER_MANAGE,
               element: (
                 <Suspense>
                   <Pages.TeacherManagePage />
                 </Suspense>
               )
+            },
+            {
+              path: PATH.ADMIN_ENROLLMENT,
+              children: [
+                {
+                  index: true,
+                  element: (
+                    <Suspense>
+                      <Pages.SchoolManageEnrollmentPage />
+                    </Suspense>
+                  )
+                },
+                {
+                  // 견주 가입신청서 상세 조회
+                  path: PATH.ADMIN_MEMBER_FORM(),
+                  element: (
+                    <Suspense>
+                      <Pages.MemberEnrollmentFormDetailPage />
+                    </Suspense>
+                  )
+                },
+                {
+                  // 원장 가입신청서 리스트
+                  path: PATH.ADMIN_FORMS,
+                  children: [
+                    {
+                      index: true,
+                      element: (
+                        <Suspense>
+                          <Pages.EnrollmentFormListPage />
+                        </Suspense>
+                      )
+                    },
+                    {
+                      // 원장 가입신청서 수정
+                      path: PATH.ADMIN_EDIT_FORM(),
+                      element: (
+                        <Suspense>
+                          <Pages.EnrollmentFormEditPage />
+                        </Suspense>
+                      )
+                    },
+                    {
+                      // 원장 가입신청서 조회
+                      path: PATH.ADMIN_FORM(),
+                      element: (
+                        <Suspense>
+                          <Pages.EnrollmentFormDetailPage />
+                        </Suspense>
+                      )
+                    }
+                  ]
+                },
+                {
+                  // 원장 가입신청서 등록
+                  path: PATH.ADMIN_CREATE_FORM,
+                  element: (
+                    <Suspense>
+                      <Pages.EnrollmentFormCreatePage />
+                    </Suspense>
+                  )
+                },
+                {
+                  // FIXME: 라우터로 빼지 말고, 폼안에 페이지 만들기
+                  path: PATH.ADMIN_SUBMIT_FORM,
+                  element: (
+                    <Suspense>
+                      <Pages.EnrollmentFormSubmitPage />
+                    </Suspense>
+                  )
+                }
+              ]
             }
           ]
         },
@@ -296,7 +320,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           path: PATH.ENROLL,
           element: (
             <Suspense>
-              <Pages.MembershipApplicationPage />
+              <Pages.EnrollmentPage />
             </Suspense>
           )
         },

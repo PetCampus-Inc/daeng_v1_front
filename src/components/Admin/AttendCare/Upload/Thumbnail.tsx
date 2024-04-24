@@ -1,4 +1,4 @@
-import CloseIcon from "assets/svg/close-icon";
+import XCircleIcon from "assets/svg/x-circle-icon";
 import {
   StyledThumbImg,
   StyledThumb,
@@ -28,7 +28,7 @@ const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
       </StyledThumb>
       {onRemove && (
         <StyledDeleteButton onClick={() => onRemove(index)} aria-label="이미지 삭제">
-          <CloseIcon />
+          <XCircleIcon />
         </StyledDeleteButton>
       )}
     </>

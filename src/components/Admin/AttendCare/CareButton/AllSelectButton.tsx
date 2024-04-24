@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
-import type { ICareDogInfo } from "types/admin.caredog.type";
+import type { ICareDogInfo } from "types/admin/care.types";
 
 // FIXME: 버튼에서 data를 읽어야하는게 이상하긴하당.. 괜찮나? 재사용성은 떨어지는듯..^^
 
