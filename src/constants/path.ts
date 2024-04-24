@@ -13,6 +13,7 @@ export const PATH = {
   ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: string) =>
     `/admin/attendance/${dogId ?? ":dogId"}/newTicket`, // 출석부 강아지 상세정보
   ADMIN_CARE: "/admin/care", // 오늘 관리할 강아지
+  ADMIN_CARE_NOTICE: (dogId?: string) => `/admin/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
   ADMIN_CHAT: "/admin/chat", // 채팅
   ADMIN_SCHOOL_MANAGE: "/admin/school", // 유치원 운영
   ADMIN_ENROLLMENT: "/admin/school/enrollment", // 원장 신규가입 관리

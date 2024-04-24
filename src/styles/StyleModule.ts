@@ -43,7 +43,7 @@ export const fadeIn = keyframes`
 `;
 
 export const PageContainer = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["pt", "pb", "ph", "pr", "pl", "color"].includes(prop)
+  shouldForwardProp: (prop) => !["pt", "pb", "ph", "pr", "pl", "color", "auto"].includes(prop)
 })<{
   pt?: string;
   pb?: string;
@@ -51,6 +51,7 @@ export const PageContainer = styled.div.withConfig({
   pr?: string;
   pl?: string;
   color?: TColor;
+  auto?: string;
 }>`
   padding-top: ${({ pt }) => (pt ? `calc(5vh + ${pt}rem)` : "calc(5vh)")};
   padding-bottom: ${({ pb }) => (pb ? `calc(7vh + ${pb}rem)` : 0)};
@@ -58,7 +59,8 @@ export const PageContainer = styled.div.withConfig({
   padding-right: ${({ pr, ph }) => (pr ? `${pr}rem` : ph ? `${ph}rem` : "1rem")};
   background-color: ${({ color, theme }) => (color ? theme.colors[color] : theme.colors.white)};
   width: 100vw;
-  height: 100%;
+  // height: 100%;
+  height: ${({ auto }) => (auto ? "auto" : "100%")};
   &::-webkit-scrollbar {
     display: none;
   }

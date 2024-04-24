@@ -72,12 +72,29 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               path: "delete",
               element: <Pages.AttendCareDeletePage />
+            },
+            {
+              path: PATH.ADMIN_CARE_NOTICE(),
+              element: (
+                <Suspense>
+                  <Pages.AttendCareNoticePage />
+                </Suspense>
+              )
             }
           ]
         },
         {
           path: PATH.ADMIN_CHAT,
-          element: <Pages.Chat />
+          children: [
+            {
+              index: true,
+              element: (
+                <Suspense>
+                  <Pages.Chat />
+                </Suspense>
+              )
+            }
+          ]
         },
         {
           path: PATH.ADMIN_SCHOOL_MANAGE,
