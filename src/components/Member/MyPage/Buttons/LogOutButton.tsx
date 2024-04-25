@@ -1,10 +1,10 @@
-import BackgroundGrayButton from "components/common/Button/BackgroundGrayButton";
+import BackgroundButton from "components/common/Button/BackgroundButton";
 import { BackgroundButtonWrapper } from "components/Member/MyPage/styles";
 
 const LogOutButton = () => {
   return (
     <BackgroundButtonWrapper>
-      <BackgroundGrayButton>로그아웃</BackgroundGrayButton>
+      <BackgroundButton>로그아웃</BackgroundButton>
     </BackgroundButtonWrapper>
   );
 };

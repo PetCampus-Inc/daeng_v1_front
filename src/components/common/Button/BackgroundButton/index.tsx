@@ -11,7 +11,7 @@ const BackgroundButton = ({
   ...props
 }: PropsWithChildren<IBackgroundButton>) => {
   return (
-    <S.Background $backgroundColor={backgroundColor}>
+    <S.Background $backgroundColor={backgroundColor} className={props.className}>
       <S.BackgroundButton {...props}>{children}</S.BackgroundButton>
     </S.Background>
   );
