@@ -1,7 +1,10 @@
+import FootIcon from "assets/svg/foot-icon";
 import { Box } from "components/common/Box";
 import { styled } from "styled-components";
 
 export const MyInfoContainer = styled.article`
+  position: relative;
+  z-index: 1;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.colors.alertCard};
   padding: 30px 16px;
@@ -9,6 +12,8 @@ export const MyInfoContainer = styled.article`
   flex-direction: column;
   align-items: center;
   padding-bottom: 80px;
+  box-shadow: ${({ theme }) => theme.shadows.alertCard};
+  overflow: hidden;
 `;
 
 export const TitleBox = styled.div`
@@ -62,6 +67,8 @@ export const UserName = styled.span`
 `;
 
 export const MyInfoList = styled.ul`
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -97,4 +104,43 @@ export const IconCircle = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const FootIconItem = styled(FootIcon)`
+  &.gray5-foot {
+    position: absolute;
+    width: 102px;
+    height: 84px;
+    transform: rotate(-16deg);
+    opacity: 0.45;
+    right: -2.3rem;
+    bottom: 2.25rem;
+    path {
+      fill: ${({ theme }) => theme.colors.gray_5};
+    }
+  }
+
+  &.br4-foot {
+    position: fixed;
+    width: 35px;
+    height: 29px;
+    transform: rotate(30deg);
+    left: -5px;
+    top: 18rem;
+    path {
+      fill: ${({ theme }) => theme.colors.br_4};
+    }
+  }
+
+  &.y2-foot {
+    position: fixed;
+    width: 45px;
+    height: 36px;
+    transform: rotate(-30deg);
+    bottom: 16rem;
+    right: -1rem;
+    path {
+      fill: ${({ theme }) => theme.colors.yellow_2};
+    }
+  }
 `;

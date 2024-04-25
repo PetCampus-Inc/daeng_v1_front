@@ -1,4 +1,3 @@
-import FootIcon from "assets/svg/foot-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import ListNormalIcon from "assets/svg/list-normal-icon";
 import MapPinFootNormalIcon from "assets/svg/map-pin-foot-normal-icon";
@@ -22,7 +21,7 @@ const MyInfo = () => {
             alt="user_profile"
           />
         </S.ImgageBox>
-        <S.UserName>뽀뽀의 언니 / 누나</S.UserName>
+        <S.UserName>뽀뽀의 언니/누나</S.UserName>
       </S.UserProfile>
       <S.MyInfoList>
         <S.MyInfoItem>
@@ -101,7 +100,7 @@ const MyInfo = () => {
           <S.MyInfoText>서울 중구 덕수궁길 150 롯데캐슬 아파트 203동 1403호</S.MyInfoText>
         </S.MyInfoItem>
       </S.MyInfoList>
-      <FootIcon />
+      <S.FootIconItem className="gray5-foot" />
     </S.MyInfoContainer>
   );
 };
