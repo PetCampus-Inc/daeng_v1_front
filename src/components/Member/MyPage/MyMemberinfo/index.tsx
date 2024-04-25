@@ -1,22 +1,12 @@
 import BasicPhoneIcon from "assets/svg/phone-basic";
-import { Box } from "components/common/Box";
-import { Flex } from "components/common/Flex";
 
+import CirclesItems from "./CirclesItmes";
 import * as S from "./styles";
 
 const MyInfo = () => {
   return (
     <S.MyInfoContainer>
-      <Flex gap={"24"} margin={"0 0 38px 0"}>
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
-      </Flex>
+      <CirclesItems />
       <S.TitleBox>
         <S.Title>견주 정보</S.Title>
         <S.SubText>가입신청서 작성시 입력한 내용이에요</S.SubText>
