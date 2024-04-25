@@ -1,6 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
 import { S3Client, GetObjectCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
+import { useState, useEffect, useMemo } from "react";
+
 import { s3ClientConfig, bucketName } from "./config";
+
 import type { TResult } from "./types";
 
 interface S3FolderProps {

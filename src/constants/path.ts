@@ -20,6 +20,7 @@ export const PATH = {
   ADMIN_SCHOOL_MANAGE: "/admin/school", // 유치원 운영
   ADMIN_ENROLLMENT: "/admin/school/enrollment", // 원장 신규가입 관리
   ADMIN_FORMS: "/admin/school/enrollment/list", // 원장 가입신청서 목록
+  ADMIN_MEMBER_FORM: (formId?: string) => `/admin/school/enrollment/${formId ?? ":formId"}`, // 견주 가입신청서 상세 조회
   ADMIN_FORM: (formId?: string) => `/admin/school/enrollment/list/${formId ?? ":formId"}`, // 원장 가입신청서 상세 조회
   ADMIN_EDIT_FORM: (formId?: string) => `/admin/school/enrollment/list/${formId ?? ":formId"}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: "/admin/school/enrollment/new-enrollment", // 원장 가입신청서 등록
@@ -29,7 +30,13 @@ export const PATH = {
   ADMIN_MY_PAGE_EDIT: "/admin/mypage/profile/edit",
   ADMIN_MY_SCHOOL_INFO: `/admin/mypage/school`,
   ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`,
-  ENROLL: "/enroll", // 견주 가입신청서
-  MEMBER_MY_PAGE: "/member/myPage",
-  REDIRECT: "/auth/:context"
+  MEMBER: "/member",
+  UNREGISTER: "/unregister", // 회원탈퇴 페이지
+  UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지
+  SETTING: "/setting", // 설정 페이지
+  SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
+  POLICY: "/policy", // 정책 페이지
+  ENROLL: "/enrollment", // 견주 가입신청서
+  MEMBER_MY_PAGE: "/mypage",
+  REDIRECT: "/auth/:provider"
 } as const;

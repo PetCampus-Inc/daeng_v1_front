@@ -18,9 +18,12 @@ import {
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
+import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 const EnrollmentFormCreatePage = () => {
@@ -31,6 +34,8 @@ const EnrollmentFormCreatePage = () => {
       ticketType: []
     }
   });
+  const navigate = useNavigate();
+  const overlay = useOverlay();
 
   const currentSteps = ADMIN_CREATE_FORM_STEP;
   const { currentStep, nextStep, prevStep, setStep } = useStep(currentSteps.length - 1);
@@ -38,9 +43,14 @@ const EnrollmentFormCreatePage = () => {
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
+  const openPreventLeavePopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
+    ));
+
   return (
     <>
-      <Header type="text" text="가입신청서" />
+      <Header type="text" text="가입신청서" handleClick={openPreventLeavePopup} />
       <PageContainer color="BGray">
         <Container>
           <TopWrapper>

@@ -2,9 +2,10 @@ import BottomSheet, { type IBottomSheetProps } from "components/common/BottomShe
 import { ExtendedFieldArrayWithId } from "components/common/Select/EditableRadioGroup";
 import { useRecoilValue } from "recoil";
 import { ticketCounterAtom } from "store/overlay";
-import { TTicketType } from "types/School.type";
 
 import TicketCounter from "../TicketCounter";
+
+import type { TTicketType } from "types/admin/enrollment.types";
 
 interface TicketCounterProps extends IBottomSheetProps {
   ticketType: TTicketType;
