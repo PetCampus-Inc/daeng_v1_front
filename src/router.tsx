@@ -236,6 +236,29 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       }
     },
     {
+      path: PATH.SETTING,
+      element: <App />,
+      errorElement: <Pages.NotFoundPage />,
+      children: [
+        {
+          path: PATH.SETTING,
+          element: (
+            <Suspense>
+              <Pages.SettingPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.SETTING_NOTIFICATION,
+          element: (
+            <Suspense>
+              <Pages.SettingNotificationPage />
+            </Suspense>
+          )
+        }
+      ]
+    },
+    {
       path: PATH.ROOT,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,
@@ -275,6 +298,30 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: (
             <Suspense>
               <Pages.MemberMyPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.POLICY,
+          element: (
+            <Suspense>
+              <Pages.PolicyPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.UNREGISTER,
+          element: (
+            <Suspense>
+              <Pages.UnregisterPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.UNREGISTER_SUCCESS,
+          element: (
+            <Suspense>
+              <Pages.UnregisterSuccessPage />
             </Suspense>
           )
         }
