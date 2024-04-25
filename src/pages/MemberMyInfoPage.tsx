@@ -6,7 +6,7 @@ const MemberMyInfoPage = () => {
   return (
     <>
       <Header type="text" text="내프로필" transparent={true} />
-      <PageContainer pt="7" color="br_5">
+      <PageContainer pt="1" color="br_5">
         <MyInfo />
       </PageContainer>
     </>
