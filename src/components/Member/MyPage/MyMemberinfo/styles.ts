@@ -7,11 +7,11 @@ export const MyInfoContainer = styled.article`
   z-index: 1;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.colors.alertCard};
-  padding: 30px 1rem;
+  padding: 1.875rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 80px;
+  padding-bottom: 5rem;
   box-shadow: ${({ theme }) => theme.shadows.alertCard};
   overflow: hidden;
 `;
@@ -21,8 +21,8 @@ export const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
-  padding-bottom: 8px;
-  margin-bottom: 20px;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.25rem;
 `;
 
 export const Title = styled.h3`
@@ -39,8 +39,8 @@ export const UserProfile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 `;
 
 export const ImgageBox = styled.div`
@@ -71,7 +71,7 @@ export const MyInfoList = styled.ul`
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 1.75rem;
   width: 100%;
 `;
 
@@ -79,7 +79,7 @@ export const MyInfoItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
 
   &.address {
     align-items: flex-start;
@@ -92,7 +92,7 @@ export const MyInfoTitle = styled.h4`
   color: ${({ theme }) => theme.colors.darkBlack};
   display: flex;
   align-items: center;
-  gap: 3.5px;
+  gap: 0.2188rem;
 `;
 
 export const MyInfoText = styled.span`
@@ -125,7 +125,7 @@ export const FootIconItem = styled(FootIcon)`
     width: 35px;
     height: 29px;
     transform: rotate(30deg);
-    left: -5px;
+    left: -0.3125rem;
     top: 18rem;
     path {
       fill: ${({ theme }) => theme.colors.br_4};
