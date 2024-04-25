@@ -3,7 +3,7 @@ import AttendCareMain from "components/Admin/AttendCare/AttendCareMain";
 import AttendCareNoResult from "components/Admin/AttendCare/AttendCareNoResult";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
-import { useGetCareDogList } from "hooks/api/caredogQuery";
+import { useGetCareDogList } from "hooks/api/admin/care";
 import { useRouteLoaderData } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import caredogLoader from "routes/caredogLoader";
