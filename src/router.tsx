@@ -236,21 +236,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       }
     },
     {
-      path: PATH.MEMBER,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
-      children: [
-        {
-          path: PATH.MEMBER_MY_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyPage />
-            </Suspense>
-          )
-        }
-      ]
-    },
-    {
       path: PATH.SETTING,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,
@@ -305,6 +290,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: (
             <Suspense>
               <Pages.EnrollmentPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberMyPage />
             </Suspense>
           )
         },
