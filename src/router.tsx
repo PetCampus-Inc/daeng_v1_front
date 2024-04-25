@@ -241,26 +241,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       errorElement: <Pages.NotFoundPage />,
       children: [
         {
-          path: PATH.MEMBER_UNREGISTER,
-          element: (
-            <Suspense>
-              <Pages.UnregisterPage />
-            </Suspense>
-          )
-        },
-        {
           path: PATH.MEMBER_MY_PAGE,
           element: (
             <Suspense>
               <Pages.MemberMyPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_UNREGISTER_SUCCESS,
-          element: (
-            <Suspense>
-              <Pages.UnregisterSuccessPage />
             </Suspense>
           )
         }
@@ -331,13 +315,29 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.PolicyPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.UNREGISTER,
+          element: (
+            <Suspense>
+              <Pages.UnregisterPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.UNREGISTER_SUCCESS,
+          element: (
+            <Suspense>
+              <Pages.UnregisterSuccessPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
         // if (auth.role !== "USER") return redirect(PATH.LOGIN);
         return null;
       }
-    },
+    }
   ]);
   return <RouterProvider router={router} />;
 };

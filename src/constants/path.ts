@@ -32,9 +32,9 @@ export const PATH = {
   ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`,
   ENROLL: "/enroll", // 견주 가입신청서
   MEMBER: "/member",
-  MEMBER_MY_PAGE: "/member/myPage",
-  MEMBER_UNREGISTER: "/member/unregister", // 회원탈퇴 페이지
-  MEMBER_UNREGISTER_SUCCESS: "/member/unregister/success", // 회원탈퇴 성공 페이지
+  MEMBER_MY_PAGE: "/myPage",
+  UNREGISTER: "/unregister", // 회원탈퇴 페이지
+  UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지
   REDIRECT: "/auth/:provider",
   SETTING: "/setting", // 설정 페이지
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
