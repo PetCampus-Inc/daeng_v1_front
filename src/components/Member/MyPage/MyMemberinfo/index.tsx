@@ -1,9 +1,10 @@
+import FootIcon from "assets/svg/foot-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import ListNormalIcon from "assets/svg/list-normal-icon";
 import MapPinFootNormalIcon from "assets/svg/map-pin-foot-normal-icon";
 import PhoneNormalIcon from "assets/svg/phone-normal-icon";
 
-import CirclesItems from "./CirclesItmes";
+import CirclesItems from "./CirclesItem";
 import * as S from "./styles";
 
 const MyInfo = () => {
@@ -100,6 +101,7 @@ const MyInfo = () => {
           <S.MyInfoText>서울 중구 덕수궁길 150 롯데캐슬 아파트 203동 1403호</S.MyInfoText>
         </S.MyInfoItem>
       </S.MyInfoList>
+      <FootIcon />
     </S.MyInfoContainer>
   );
 };
