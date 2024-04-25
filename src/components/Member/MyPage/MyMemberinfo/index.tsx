@@ -1,10 +1,22 @@
 import BasicPhoneIcon from "assets/svg/phone-basic";
+import { Box } from "components/common/Box";
+import { Flex } from "components/common/Flex";
 
 import * as S from "./styles";
 
 const MyInfo = () => {
   return (
     <S.MyInfoContainer>
+      <Flex gap={"24"} margin={"0 0 38px 0"}>
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+        <Box width={"12px"} height={"12px"} bg={"br_5"} borderRadius={50} />
+      </Flex>
       <S.TitleBox>
         <S.Title>견주 정보</S.Title>
         <S.SubText>가입신청서 작성시 입력한 내용이에요</S.SubText>
@@ -18,43 +30,43 @@ const MyInfo = () => {
         </S.ImgageBox>
         <S.UserName>뽀뽀의 언니 / 누나</S.UserName>
       </S.UserProfile>
-      <ul>
-        <li>
-          <span>
+      <S.MyInfoList>
+        <S.MyInfoItem>
+          <S.MyInfoTitle>
             <BasicPhoneIcon />
             이름
-          </span>
-          <span>박유빈</span>
-        </li>
-        <li>
-          <span>
+          </S.MyInfoTitle>
+          <S.MyInfoText>박유빈</S.MyInfoText>
+        </S.MyInfoItem>
+        <S.MyInfoItem>
+          <S.MyInfoTitle>
             <BasicPhoneIcon />
             성별
-          </span>
-          <span>여</span>
-        </li>
-        <li>
-          <span>
+          </S.MyInfoTitle>
+          <S.MyInfoText>여</S.MyInfoText>
+        </S.MyInfoItem>
+        <S.MyInfoItem>
+          <S.MyInfoTitle>
             <BasicPhoneIcon />
             연락처
-          </span>
-          <span>010-1414-1414</span>
-        </li>
-        <li>
-          <span>
+          </S.MyInfoTitle>
+          <S.MyInfoText>010-1414-1414</S.MyInfoText>
+        </S.MyInfoItem>
+        <S.MyInfoItem>
+          <S.MyInfoTitle>
             <BasicPhoneIcon />
             비상연락처
-          </span>
-          <span>010-1414-1414</span>
-        </li>
-        <li>
-          <span>
+          </S.MyInfoTitle>
+          <S.MyInfoText>010-1414-1414</S.MyInfoText>
+        </S.MyInfoItem>
+        <S.MyInfoItem>
+          <S.MyInfoTitle>
             <BasicPhoneIcon />
             주소
-          </span>
-          <span>서울 중구 덕수궁길 150 롯데캐슬 아파트 203동 1403호</span>
-        </li>
-      </ul>
+          </S.MyInfoTitle>
+          <S.MyInfoText>서울 중구 덕수궁길 150 롯데캐슬 아파트 203동 1403호</S.MyInfoText>
+        </S.MyInfoItem>
+      </S.MyInfoList>
     </S.MyInfoContainer>
   );
 };
