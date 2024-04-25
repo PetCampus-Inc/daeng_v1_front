@@ -7,6 +7,7 @@ export const MyInfoContainer = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 80px;
 `;
 
 export const TitleBox = styled.div`
@@ -59,17 +60,34 @@ export const UserName = styled.span`
   color: ${({ theme }) => theme.colors.gray_1};
 `;
 
-export const MyInfoList = styled.ul``;
+export const MyInfoList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+`;
 
 export const MyInfoItem = styled.li`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+
+  &.address {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 `;
 
 export const MyInfoTitle = styled.h4`
+  ${({ theme }) => theme.typo.label2_14_R};
+  color: ${({ theme }) => theme.colors.darkBlack};
   display: flex;
   align-items: center;
   gap: 3.5px;
 `;
 
-export const MyInfoText = styled.span``;
+export const MyInfoText = styled.span`
+  ${({ theme }) => theme.typo.label2_14_R};
+  color: ${({ theme }) => theme.colors.gray_2};
+`;

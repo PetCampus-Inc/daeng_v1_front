@@ -49,7 +49,7 @@ const MyInfo = () => {
           </S.MyInfoTitle>
           <S.MyInfoText>010-1414-1414</S.MyInfoText>
         </S.MyInfoItem>
-        <S.MyInfoItem>
+        <S.MyInfoItem className="address">
           <S.MyInfoTitle>
             <BasicPhoneIcon />
             주소
