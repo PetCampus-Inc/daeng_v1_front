@@ -7,7 +7,7 @@ export const MyInfoContainer = styled.article`
   z-index: 1;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.colors.alertCard};
-  padding: 30px 16px;
+  padding: 30px 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +137,7 @@ export const FootIconItem = styled(FootIcon)`
     width: 45px;
     height: 36px;
     transform: rotate(-30deg);
-    bottom: 16rem;
+    top: 40rem;
     right: -1rem;
     path {
       fill: ${({ theme }) => theme.colors.yellow_2};
