@@ -30,15 +30,12 @@ export const PATH = {
   ADMIN_MY_PAGE_EDIT: "/admin/mypage/profile/edit",
   ADMIN_MY_SCHOOL_INFO: `/admin/mypage/school`,
   ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`,
-  ENROLL: "/enroll", // 견주 가입신청서
   MEMBER: "/member",
-  MEMBER_MY_PAGE: "/myPage",
   UNREGISTER: "/unregister", // 회원탈퇴 페이지
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지
   SETTING: "/setting", // 설정 페이지
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
   POLICY: "/policy", // 정책 페이지
-  REDIRECT: "/auth/:context"
   ENROLL: "/enrollment", // 견주 가입신청서
   MEMBER_MY_PAGE: "/mypage",
   REDIRECT: "/auth/:provider"

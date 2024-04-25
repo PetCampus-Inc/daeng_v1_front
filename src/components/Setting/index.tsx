@@ -29,7 +29,7 @@ const SettingInfo = () => {
         </S.ButtomBox>
       </S.SettingItem>
       <S.SettingItem>
-        <S.GotoPageButton to={PATH.MEMBER_UNREGISTER}>
+        <S.GotoPageButton to={PATH.UNREGISTER}>
           <S.Text>탈퇴하기</S.Text>
           <ArrowRightRound />
         </S.GotoPageButton>
