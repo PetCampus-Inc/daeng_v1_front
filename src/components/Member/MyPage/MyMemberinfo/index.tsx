@@ -1,4 +1,7 @@
-import BasicPhoneIcon from "assets/svg/phone-basic";
+import GirlNormalIcon from "assets/svg/girl-normal-icon";
+import ListNormalIcon from "assets/svg/list-normal-icon";
+import MapPinFootNormalIcon from "assets/svg/map-pin-foot-normal-icon";
+import PhoneNormalIcon from "assets/svg/phone-normal-icon";
 
 import CirclesItems from "./CirclesItmes";
 import * as S from "./styles";
@@ -23,35 +26,75 @@ const MyInfo = () => {
       <S.MyInfoList>
         <S.MyInfoItem>
           <S.MyInfoTitle>
-            <BasicPhoneIcon />
+            <S.IconCircle
+              width={"20px"}
+              height={"20px"}
+              bg={"yellow_3"}
+              borderRadius={50}
+              overflow={"hidden"}
+            >
+              <ListNormalIcon />
+            </S.IconCircle>
             이름
           </S.MyInfoTitle>
           <S.MyInfoText>박유빈</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
-            <BasicPhoneIcon />
+            <S.IconCircle
+              width={"20px"}
+              height={"20px"}
+              bg={"yellow_3"}
+              borderRadius={50}
+              overflow={"hidden"}
+            >
+              <GirlNormalIcon />
+            </S.IconCircle>
             성별
           </S.MyInfoTitle>
           <S.MyInfoText>여</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
-            <BasicPhoneIcon />
+            <S.IconCircle
+              width={"20px"}
+              height={"20px"}
+              bg={"yellow_3"}
+              borderRadius={50}
+              overflow={"hidden"}
+            >
+              <PhoneNormalIcon />
+            </S.IconCircle>
             연락처
           </S.MyInfoTitle>
           <S.MyInfoText>010-1414-1414</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
-            <BasicPhoneIcon />
+            <S.IconCircle
+              width={"20px"}
+              height={"20px"}
+              bg={"yellow_3"}
+              borderRadius={50}
+              overflow={"hidden"}
+            >
+              <PhoneNormalIcon />
+            </S.IconCircle>
             비상연락처
           </S.MyInfoTitle>
           <S.MyInfoText>010-1414-1414</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem className="address">
           <S.MyInfoTitle>
-            <BasicPhoneIcon />
+            <S.IconCircle
+              width={"20px"}
+              height={"20px"}
+              bg={"yellow_3"}
+              borderRadius={50}
+              overflow={"hidden"}
+            >
+              <MapPinFootNormalIcon />
+            </S.IconCircle>
             주소
           </S.MyInfoTitle>
           <S.MyInfoText>서울 중구 덕수궁길 150 롯데캐슬 아파트 203동 1403호</S.MyInfoText>

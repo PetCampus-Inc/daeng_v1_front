@@ -1,3 +1,4 @@
+import { Box } from "components/common/Box";
 import { styled } from "styled-components";
 
 export const MyInfoContainer = styled.article`
@@ -90,4 +91,10 @@ export const MyInfoTitle = styled.h4`
 export const MyInfoText = styled.span`
   ${({ theme }) => theme.typo.label2_14_R};
   color: ${({ theme }) => theme.colors.gray_2};
+`;
+
+export const IconCircle = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
