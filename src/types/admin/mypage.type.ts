@@ -1,3 +1,5 @@
+import type { Nullable } from "types/helper.type";
+
 export interface IOwnerInfo {
   adminName: string;
   phoneNumber: string;
@@ -9,7 +11,7 @@ export interface IOwnerInfo {
   schoolNumber: string;
   address: string;
   registrationNumber: string;
-  registeredDate: number[];
+  registeredDate: Nullable<number[]>;
 }
 export interface ITeacherInfo {
   adminName: string;

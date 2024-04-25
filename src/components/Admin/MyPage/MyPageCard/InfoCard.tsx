@@ -38,7 +38,7 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
   );
 };
 
-const InfoItem = ({ title, icon }: { title: string; icon: JSX.Element }) => {
+const InfoItem = ({ title, icon }: { title?: string; icon: JSX.Element }) => {
   return (
     <>
       <StyledIcon>{icon}</StyledIcon>
@@ -67,13 +67,13 @@ const InfoCard = <T extends TRole>({ data, role }: InfoCardProps<T>) => {
     { title: data.schoolName, icon: <SchoolIcon /> },
     { title: data.schoolNumber, icon: <PhoneIcon /> },
     {
-      title: isOwner ? (data as IOwnerInfo).address : (data as ITeacherInfo).schoolAddress,
+      title: isOwner ? (data as IOwnerInfo)?.address : (data as ITeacherInfo)?.schoolAddress,
       icon: <MapIcon />
     },
     {
-      title: (isOwner ? (data as IOwnerInfo).registeredDate : (data as ITeacherInfo).enrollDate)
-        .map((num) => num.toString().padStart(2, "0"))
-        .join("."),
+      title: (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.enrollDate)
+        ?.map((num) => num.toString().padStart(2, "0"))
+        ?.join("."),
       icon: <CalendarIcon />
     }
   ];
