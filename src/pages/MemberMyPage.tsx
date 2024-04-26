@@ -24,7 +24,7 @@ const MemberMyPage = () => {
         </ContentContainer>
       </PageContainer>
       <LogOutButton />
-      <NavBar type="member" />
+      <NavBar type="mypage" />
     </>
   );
 };
