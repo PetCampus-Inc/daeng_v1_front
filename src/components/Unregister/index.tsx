@@ -1,5 +1,5 @@
 import ExclamationMarkIcon from "assets/svg/exclamationMark-icon";
-import BackgroundGrayButton from "components/common/Button/BackgroundGrayButton";
+import BackgroundButton from "components/common/Button/BackgroundButton";
 import Checkbox from "components/common/Checkbox";
 
 import * as S from "./styles";
@@ -32,7 +32,7 @@ const UnregisterInfo = () => {
         <S.CautionText>위 안내사항에 모두 동의해요</S.CautionText>
       </S.AllCheckBoxItem>
       <S.BackgroundButtonWrapper>
-        <BackgroundGrayButton>탈퇴하기</BackgroundGrayButton>
+        <BackgroundButton>탈퇴하기</BackgroundButton>
       </S.BackgroundButtonWrapper>
       <S.ExclamationMark>
         <ExclamationMarkIcon />

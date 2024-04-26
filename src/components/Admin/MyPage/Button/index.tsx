@@ -1,5 +1,5 @@
 import { BackgroundButtonWrapper } from "components/Admin/MyPage/styles";
-import BackgroundGrayButton from "components/common/Button/BackgroundGrayButton";
+import BackgroundButton from "components/common/Button/BackgroundButton";
 
 const LogOutButton = () => {
   const handleLogOut = () => {
@@ -9,9 +9,9 @@ const LogOutButton = () => {
   return (
     <>
       <BackgroundButtonWrapper>
-        <BackgroundGrayButton onClick={handleLogOut} className="logOut">
+        <BackgroundButton onClick={handleLogOut} className="logOut">
           로그아웃
-        </BackgroundGrayButton>
+        </BackgroundButton>
       </BackgroundButtonWrapper>
     </>
   );

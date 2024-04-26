@@ -324,6 +324,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.UnregisterSuccessPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_MY_INFO_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberMyInfoPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {

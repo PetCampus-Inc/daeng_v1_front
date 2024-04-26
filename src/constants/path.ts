@@ -38,5 +38,6 @@ export const PATH = {
   POLICY: "/policy", // 정책 페이지
   ENROLL: "/enrollment", // 견주 가입신청서
   MEMBER_MY_PAGE: "/mypage",
-  REDIRECT: "/auth/:provider"
+  REDIRECT: "/auth/:provider",
+  MEMBER_MY_INFO_PAGE: "/myPage/profile"
 } as const;
