@@ -1,6 +1,12 @@
 import { styled } from "styled-components";
 
-export const ContentContainer = styled.div`
+interface IProps {
+  px?: string;
+  py?: string;
+}
+
+export const ContentContainer = styled.div<IProps>`
+  padding: ${({ px, py }) => px && py && `${px}rem ${py}rem`};
   height: calc(100vh - 32vh);
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.colors.white};
