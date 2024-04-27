@@ -25,7 +25,7 @@ header type
 */
 
 interface Props {
-  type: "main" | "back" | "text" | "notice" | "setting" | "modify";
+  type: "main" | "back" | "text" | "notice" | "setting" | "edite";
   handleClick?: () => void | Promise<void>;
   text?: string;
   rightElement?: React.ReactNode;
@@ -85,7 +85,7 @@ const Header = ({ type, handleClick, text, rightElement, transparent }: Props) =
             </IconWrapper>
           </TextWrapper>
         )}
-        {type === "modify" && (
+        {type === "edite" && (
           <TextWrapper>
             <IconWrapper onClick={click}>
               <ArrowLeftIcon className="arrow-left" />
