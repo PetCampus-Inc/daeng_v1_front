@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 
-import AddDogSubmitButton from "./CareButton/AddDogSubmitButton";
+import AddDogButton from "./CareButton/AddDogButton";
 import AddDogAvatar from "./CareList/AddDogAvatar";
 import AddDogList from "./CareList/AddDogList";
 import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
@@ -18,7 +18,7 @@ const AttendCareInit = () => {
       <ListWrapper>
         <AddDogList adminId={adminId} />
       </ListWrapper>
-      <AddDogSubmitButton adminId={adminId} />
+      <AddDogButton adminId={adminId} />
     </SelectedDogsProvider>
   );
 };
