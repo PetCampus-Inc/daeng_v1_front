@@ -4,7 +4,7 @@ import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
 
-const MyInfoEdite = () => {
+const MyProfileEdite = () => {
   return (
     <>
       <S.MyProfileWrapper>
@@ -49,4 +49,4 @@ const MyInfoEdite = () => {
   );
 };
 
-export default MyInfoEdite;
+export default MyProfileEdite;
