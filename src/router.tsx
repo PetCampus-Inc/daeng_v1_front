@@ -72,11 +72,11 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
         },
         {
           path: PATH.ADMIN_CARE,
-          id: "caredog",
-          loader: () => caredogLoader({ adminId: auth.adminId, queryClient }),
           children: [
             {
               index: true,
+              id: "caredog",
+              loader: () => caredogLoader({ adminId: auth.adminId, queryClient }),
               element: (
                 <Suspense>
                   <Pages.AttendCarePage />
