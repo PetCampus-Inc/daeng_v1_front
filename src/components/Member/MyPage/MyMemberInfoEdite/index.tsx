@@ -1,6 +1,5 @@
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import InputBox from "components/common/InputBox";
-import Text from "components/common/Typo/index";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
