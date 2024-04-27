@@ -3,6 +3,7 @@ export {
   StyledThumbImg,
   InnerShadow
 } from "components/common/ImageUpload/styles";
+import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 import { remCalc } from "utils/calculator";
 
@@ -59,9 +60,56 @@ export const StyledThumbList = styled.ul`
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  touch-action: pan-y;
-
-  -webkit-overflow-scrolling: touch;
-
+  touch-action: pan-x;
   scrollbar-width: thin;
+`;
+
+export const StyledPreview = styled(motion.div)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 65%;
+  margin: 1rem;
+
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.black};
+`;
+
+export const PreviewItem = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const PreviewImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;
+
+export const DeleteButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background-color: transparent;
+
+  z-index: 3;
+
+  & > svg {
+    width: 30px;
+    height: 30px;
+
+    & > .icon-circle {
+      mix-blend-mode: difference;
+      fill: ${({ theme }) => theme.colors.darkBlack};
+      opacity: 0.7;
+    }
+
+    & > .icon-path {
+      color: ${({ theme }) => theme.colors.gray_4};
+    }
+  }
 `;

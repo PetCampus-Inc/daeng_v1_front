@@ -36,6 +36,7 @@ const getVideoThumb = (file: File): Promise<IFile> => {
         resolve({
           file,
           thumbnail,
+          video: URL.createObjectURL(file),
           duration: getVideoDuration(videoElement.duration)
         });
       } else {
@@ -65,8 +66,7 @@ const cleanUp = (videoElement: HTMLVideoElement, ...handlers: { (): void; (): vo
 const getImgThumb = (file: File): IFile => {
   return {
     file,
-    thumbnail: URL.createObjectURL(file),
-    duration: undefined
+    thumbnail: URL.createObjectURL(file)
   };
 };
 

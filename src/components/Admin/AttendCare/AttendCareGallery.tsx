@@ -16,14 +16,19 @@ const AttendCareGallery = () => {
   const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
+      if (dataSet.length + files.length > 20) {
+        alert("최대 20개의 파일만 업로드할 수 있습니다.");
+        return;
+      }
       const fileArray = await Promise.all(files.map(getFilePreview));
       setDataSet((prev) => [...prev, ...fileArray]);
     }
   };
 
   const handleDeleteImage = (index: number) => {
-    const image = dataSet[index];
-    URL.revokeObjectURL(image.thumbnail);
+    const data = dataSet[index];
+    URL.revokeObjectURL(data.thumbnail);
+    data.video && URL.revokeObjectURL(data.video);
     setDataSet((prev) => prev.filter((_, i) => i !== index));
   };
 
@@ -38,16 +43,20 @@ const AttendCareGallery = () => {
             한 번에 최대 nn장 까지 전송이 가능해요
           </Text>
           <Text typo="label2_14_R" color="gray_1">
-            12장
+            {dataSet.length}장
           </Text>
         </Flex>
 
         <StyledThumbList>
           <Flex gap={10} align="center">
-            <Upload onChange={handleUpload} accept={["image/*", "video/*"]} />
+            <Upload
+              onChange={handleUpload}
+              accept={["image/*", "video/*"]}
+              disabled={dataSet.length >= 20}
+            />
             {dataSet.map((data, index) => (
               <Box key={index} position="relative">
-                <Thumbnail file={data} index={index} onRemove={handleDeleteImage} />
+                <Thumbnail data={data} index={index} onRemove={handleDeleteImage} />
               </Box>
             ))}
           </Flex>
