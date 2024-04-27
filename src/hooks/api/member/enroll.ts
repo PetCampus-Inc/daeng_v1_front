@@ -6,7 +6,7 @@ import {
   handleGetBreed,
   handleGetEnrollment,
   handlePostEnrollment
-} from "apis/member/school.api";
+} from "apis/member/enrollment.api";
 import { Adapter } from "libs/Adapter";
 import { ReadModeAdapter } from "libs/Adapter/ServerToFormAdapter";
 import { useSetRecoilState } from "recoil";
