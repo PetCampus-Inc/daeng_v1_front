@@ -10,7 +10,7 @@ interface S3FolderProps {
 }
 
 // TODO: 사진 받아오는 방식 결정 필요함. 1. 백엔드에서 direct url을 주는 방식, 2. 폴더경로를 주는 방식
-const useS3Download = ({ folderPath }: S3FolderProps) => {
+export const useS3Download = ({ folderPath }: S3FolderProps) => {
   const [data, setData] = useState<TResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const s3Client = useMemo(() => new S3Client(s3ClientConfig), []);
@@ -62,5 +62,3 @@ const useS3Download = ({ folderPath }: S3FolderProps) => {
 
   return { data, isLoading };
 };
-
-export default useS3Download;
