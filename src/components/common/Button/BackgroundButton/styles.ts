@@ -5,13 +5,16 @@ export const Background = styled.div<{ $backgroundColor: string }>`
   padding: 16px 16px 42px;
 `;
 
-export const BackgroundButton = styled.button`
+export const BackgroundButton = styled.button<{ $buttonBackgroundColor: string }>`
   position: relative;
   width: 100%;
   min-height: 48px;
   height: 2rem;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.primaryColor};
+  background-color: ${(props) =>
+    props.$buttonBackgroundColor
+      ? ({ theme, $buttonBackgroundColor }) => theme.colors[$buttonBackgroundColor]
+      : ({ theme }) => theme.colors.primaryColor};
   color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.label1_16_B};
 
