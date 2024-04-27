@@ -1,4 +1,7 @@
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
+import InputBox from "components/common/InputBox";
+import Text from "components/common/Typo/index";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
 
@@ -17,13 +20,31 @@ const MyInfoEdite = () => {
             <PencilBrownNormalIcon />
           </S.ProfileEditeButton>
         </S.ProfileBox>
-        <div>
-          <div>
-            <input type="text" placeholder="뽀뽀" />
-            <span>의</span>
-          </div>
-          <button>아빠</button>
-        </div>
+        <S.NicNameWrapper>
+          <S.MyDogName>
+            <InputBox
+              width="100%"
+              height="49px"
+              color={ThemeConfig.colors.gray_1}
+              border={ThemeConfig.colors.primaryColor}
+              placeholdText="뽀뽀"
+              inputValue="뽀뽀"
+              type="text"
+              setInputValue={() => {
+                //TODO 작업 필요
+              }}
+            />
+            의
+          </S.MyDogName>
+          <S.RoleEditeButton
+            width="112px"
+            height="49px"
+            textcolor={ThemeConfig.colors.gray_1}
+            backcolor={ThemeConfig.colors.white}
+          >
+            아빠
+          </S.RoleEditeButton>
+        </S.NicNameWrapper>
       </S.MyProfileWrapper>
     </>
   );

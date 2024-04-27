@@ -1,11 +1,15 @@
+import Button from "components/common/Button";
 import { styled } from "styled-components";
 
 export const MyProfileWrapper = styled.section`
   display: flex;
+  justify-content: center;
   gap: 15px;
 `;
 
-export const ProfileEdite = styled.div``;
+export const ProfileEdite = styled.div`
+  flex: 1;
+`;
 
 export const ImageBox = styled.div`
   overflow: hidden;
@@ -42,3 +46,20 @@ export const ProfileEditeButton = styled.button`
   background-color: ${({ theme }) => theme.colors.br_4};
   border: 2px solid ${({ theme }) => theme.colors.white};
 `;
+
+export const NicNameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 2;
+`;
+
+export const MyDogName = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.gray_1};
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
+
+export const RoleEditeButton = styled(Button)``;
