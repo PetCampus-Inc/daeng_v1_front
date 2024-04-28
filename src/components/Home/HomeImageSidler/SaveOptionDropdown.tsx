@@ -11,14 +11,7 @@ interface SaveOption {
   onClick: (url: string) => void;
 }
 
-interface SaveOptionDropdownProps {
-  url: string[];
-  currentIndex: number;
-}
-
-const SaveOptionDropdown: React.FC<SaveOptionDropdownProps> = ({ url, currentIndex }) => {
-  const currentImageUrl = url[currentIndex];
-
+const SaveOptionDropdown = () => {
   const saveOptions: SaveOption[] = [
     {
       label: "이 사진만 저장",
@@ -52,7 +45,7 @@ const SaveOptionDropdown: React.FC<SaveOptionDropdownProps> = ({ url, currentInd
         </Dropdown.Trigger>
         <Dropdown.List customStyle={DropdownListStyle}>
           {saveOptions.map((option, index) => (
-            <Dropdown.Option key={index} onClick={() => option.onClick(url[index])}>
+            <Dropdown.Option key={index} onClick={() => console.log("클릭!")}>
               {option.icon}
               <span>{option.label}</span>
             </Dropdown.Option>
