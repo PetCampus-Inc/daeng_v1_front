@@ -8,6 +8,12 @@ export const MyProfileWrapper = styled.section`
   padding: 1.5rem 1rem;
 `;
 
+export const ProfileEditeWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+`;
+
 export const ProfileEdite = styled.div`
   flex: 1;
 `;
