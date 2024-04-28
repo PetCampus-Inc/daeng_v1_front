@@ -1,6 +1,6 @@
 import MultiplePhotoSaveIcon from "assets/svg/multiple-photo-save-icon";
 import PhotoSaveIcon from "assets/svg/photo-save-icon";
-import Dropdown from "components/common/Dropdown/OptionDropdown/Dropdown";
+import { Dropdown } from "components/common";
 
 import SaveButton from "./SaveButton";
 import { DropdownListStyle, IconWrapper } from "./styles";
