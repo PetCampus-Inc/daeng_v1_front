@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { QueryClient } from "@tanstack/react-query";
-import { handleGetCareDogs } from "apis/admin.caredog.api";
+import { handleGetCareDogs } from "apis/admin/care.api";
 
 const caredogLoader = async ({
   adminId,
