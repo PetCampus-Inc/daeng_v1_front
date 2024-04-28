@@ -19,10 +19,8 @@ export const ProfileEdite = styled.div`
   flex: 1;
 `;
 
-export const ImageBox = styled.div`
-  overflow: hidden;
+export const ProfileEditeBox = styled.div`
   position: relative;
-  border-radius: 40px;
   width: 107px;
   height: 0;
   padding-bottom: 107px;
@@ -35,6 +33,7 @@ export const UserImage = styled.img`
   inset: 0px;
   color: transparent;
   object-fit: cover;
+  border-radius: 40px;
 `;
 
 export const ProfileBox = styled.div`
@@ -69,5 +68,7 @@ export const MyDogName = styled.div`
   color: ${({ theme }) => theme.colors.gray_1};
   ${({ theme }) => theme.typo.body2_16_R};
 `;
+
+export const RoleEditeWrapper = styled.div``;
 
 export const RoleEditeButton = styled(Button)``;
