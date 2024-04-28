@@ -1,4 +1,5 @@
 import Header from "components/common/Header";
+import SaveButton from "components/Member/MyPage/Buttons/SaveButton";
 import { PageContainer } from "components/Member/MyPage/Container/styles";
 import MyInfoEdite from "components/Member/MyPage/MyMemberInfoEdite/MyInfoEdite";
 import MyProfileEdite from "components/Member/MyPage/MyMemberInfoEdite/MyProfileEdite";
@@ -26,6 +27,7 @@ const MemberMyInfoEditePage = () => {
             <MyInfoEdite requiredItems={requiredItemList} />
           </FormProvider>
         </ContentContainer>
+        <SaveButton />
       </PageContainer>
     </>
   );
