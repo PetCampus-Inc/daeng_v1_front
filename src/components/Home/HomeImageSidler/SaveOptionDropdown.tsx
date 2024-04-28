@@ -3,26 +3,46 @@ import PhotoSaveIcon from "assets/svg/photo-save-icon";
 import Dropdown from "components/common/Dropdown/OptionDropdown/DropdownRoot";
 
 import SaveButton from "./SaveButton";
-import { DropdownListStyle, IconWrapper } from "./style";
+import { DropdownListStyle, IconWrapper } from "./styles";
 
-interface OptionListProps {
-  options: string[];
-  handleOptionClick: (option: string) => void;
+interface SaveOption {
+  label: string;
+  icon: JSX.Element;
+  onClick: (url: string) => void;
 }
 
-const SaveOptionDropdown = ({ options, handleOptionClick }: OptionListProps) => {
-  const optionIcon = {
-    "이 사진만 저장": (
-      <IconWrapper>
-        <PhotoSaveIcon />
-      </IconWrapper>
-    ),
-    "전체 저장": (
-      <IconWrapper>
-        <MultiplePhotoSaveIcon />
-      </IconWrapper>
-    )
-  };
+interface SaveOptionDropdownProps {
+  url: string[];
+  currentIndex: number;
+}
+
+const SaveOptionDropdown: React.FC<SaveOptionDropdownProps> = ({ url, currentIndex }) => {
+  const currentImageUrl = url[currentIndex];
+
+  const saveOptions: SaveOption[] = [
+    {
+      label: "이 사진만 저장",
+      icon: (
+        <IconWrapper>
+          <PhotoSaveIcon />
+        </IconWrapper>
+      ),
+      onClick: (imageUrl) => {
+        console.log(`Saved image URL: ${imageUrl}`);
+      }
+    },
+    {
+      label: "전체 저장",
+      icon: (
+        <IconWrapper>
+          <MultiplePhotoSaveIcon />
+        </IconWrapper>
+      ),
+      onClick: (imageUrl) => {
+        console.log(`Saved image URL: ${imageUrl}`);
+      }
+    }
+  ];
 
   return (
     <Dropdown customStyle={"width: max-content"}>
@@ -31,15 +51,10 @@ const SaveOptionDropdown = ({ options, handleOptionClick }: OptionListProps) => 
           <SaveButton />
         </Dropdown.Trigger>
         <Dropdown.List customStyle={DropdownListStyle}>
-          {options.map((option, index) => (
-            <Dropdown.Option
-              key={index}
-              onClick={() => {
-                handleOptionClick(option);
-              }}
-            >
-              {optionIcon[option as keyof typeof optionIcon]}
-              <span>{option}</span>
+          {saveOptions.map((option, index) => (
+            <Dropdown.Option key={index} onClick={() => option.onClick(url[index])}>
+              {option.icon}
+              <span>{option.label}</span>
             </Dropdown.Option>
           ))}
         </Dropdown.List>
