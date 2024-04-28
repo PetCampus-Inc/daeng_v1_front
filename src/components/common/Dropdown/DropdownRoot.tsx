@@ -36,11 +36,9 @@ const OptionDropdownBase = ({
   );
 };
 
-const Dropdown = memo(OptionDropdownBase) as IDropdown;
+export const Dropdown = memo(OptionDropdownBase) as IDropdown;
 
 Dropdown.Trigger = DropdownTrigger;
 Dropdown.List = DropdownList;
 Dropdown.Option = DropdownOption;
 Dropdown.Content = DropdownContent;
-
-export default Dropdown;
