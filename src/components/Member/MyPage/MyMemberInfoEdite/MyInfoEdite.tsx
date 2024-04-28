@@ -58,14 +58,15 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           name="memberName"
           register={register}
           isRequired
-          placeholder=""
+          placeholder="견주 이름을 입력해주세요"
+          defaultValue="박유빈"
           value="박유빈"
         />
       </Flex>
 
       <Flex direction="column" gap={7}>
         <Typo text="성별" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <SingleRadio name="memberGender" radiosText={["남", "여"]} />
+        <SingleRadio name="memberGender" radiosText={["남", "여"]} defaultSelect="남" />
       </Flex>
 
       <Flex direction="column" gap={7}>
@@ -84,6 +85,8 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
         <InputField
           name="address.detail"
           register={register}
+          value="롯데캐슬 아파트 203동 1403호"
+          defaultValue="롯데캐슬 아파트 203동 1403호"
           placeholder="상세 주소를 입력해주세요"
         />
       </Flex>
@@ -97,6 +100,8 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           pattern={PHONE_REGEX}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
+          value="010-1234-1234"
+          defaultValue="010-1234-1234"
           type="tel"
         />
       </Flex>
@@ -110,6 +115,8 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           pattern={PHONE_REGEX}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="비상 연락처를 입력해주세요"
+          value="010-1234-1234"
+          defaultValue="010-1234-1234"
           type="tel"
         />
       </Flex>
