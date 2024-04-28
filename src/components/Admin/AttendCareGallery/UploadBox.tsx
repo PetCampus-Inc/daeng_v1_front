@@ -58,6 +58,7 @@ const UploadBox = () => {
           <Flex gap={10} align="center">
             <Uploader
               {...register("files")}
+              accept={["image/*", "video/*"]}
               onChange={handleFileChange}
               disabled={files.length >= MAX_FILE_COUNT}
             />
