@@ -14,16 +14,21 @@ import {
   SliderContainer,
   SliderHeader,
   SlideWrapper
-} from "./style";
+} from "./styles";
 import TransmissionTime from "./TransmissionTime";
 
 interface ImageSidlerProps {
   images: string[];
+  comments: string[];
 }
 
-const DogImageSidler = ({ images }: ImageSidlerProps) => {
+const DogImageSidler = ({ images, comments }: ImageSidlerProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
+
+  const handleComment = () => {
+    setIsCommentOpen(!isCommentOpen);
+  };
 
   const settings = {
     dots: true,
@@ -40,20 +45,6 @@ const DogImageSidler = ({ images }: ImageSidlerProps) => {
     )
   };
 
-  const handleComment = () => {
-    setIsCommentOpen(!isCommentOpen);
-  };
-
-  const SAVE_OPTIONS: { [key: string]: () => void } = {
-    "이 사진만 저장": () => console.log("개별 저장"),
-    "전체 저장": () => console.log("전체 저장")
-  };
-
-  const handleOptionClick = (option: string) => {
-    const action = SAVE_OPTIONS[option];
-    if (action) action();
-  };
-
   return (
     <SliderContainer>
       <ImageShadow className="shadow" />
@@ -61,17 +52,14 @@ const DogImageSidler = ({ images }: ImageSidlerProps) => {
         <TransmissionTime />
         <ButtonGroup>
           <CommentButton onClick={handleComment} isOpen={isCommentOpen} />
-          <SaveOptionDropdown
-            options={Object.keys(SAVE_OPTIONS)}
-            handleOptionClick={handleOptionClick}
-          />
+          <SaveOptionDropdown url={images} currentIndex={currentIndex} />
         </ButtonGroup>
       </SliderHeader>
       <Slider {...settings}>
         {images.map((image, index) => (
           <SlideWrapper key={index}>
-            <Image src={image} alt="slide" />
-            {currentIndex === index && isCommentOpen && <CommentBox index={index} />}
+            <Image src={image} alt={`Slide ${index + 1}`} />
+            {currentIndex === index && isCommentOpen && <CommentBox comment={comments[index]} />}
           </SlideWrapper>
         ))}
       </Slider>
