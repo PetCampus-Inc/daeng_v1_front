@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
+import RoleEditeButton from "../Buttons/RoleEditeButton";
 
 const MyProfileEdite = () => {
   const [isShowRoles, setIsShowRoles] = useState(false);
@@ -40,51 +41,7 @@ const MyProfileEdite = () => {
         />
         의
       </S.MyDogName>
-      <S.RoleEditeButton
-        width="100%"
-        height="49px"
-        textcolor={ThemeConfig.colors.gray_1}
-        backcolor={ThemeConfig.colors.white}
-        handleClick={handleShowRoles}
-      >
-        아빠
-      </S.RoleEditeButton>
-      {isShowRoles && (
-        <>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            엄마
-          </S.RoleSelectButton>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            언니/누나
-          </S.RoleSelectButton>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            오빠/형
-          </S.RoleSelectButton>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            친구
-          </S.RoleSelectButton>
-        </>
-      )}
+      <RoleEditeButton isShowRoles={isShowRoles} handleShowRoles={handleShowRoles} />
     </S.MyProfileWrapper>
   );
 };

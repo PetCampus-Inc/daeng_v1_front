@@ -1,11 +1,10 @@
-import Button from "components/common/Button";
 import { styled } from "styled-components";
 
-interface IProps {
+interface IMyInfoEditeProps {
   isShowRoles: boolean;
 }
 
-export const MyProfileWrapper = styled.section<IProps>`
+export const MyProfileWrapper = styled.section<IMyInfoEditeProps>`
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(112px, auto));
@@ -65,14 +64,4 @@ export const MyDogName = styled.div`
   color: ${({ theme }) => theme.colors.gray_1};
   ${({ theme }) => theme.typo.body2_16_R};
   grid-column: 2 / 4;
-`;
-
-export const RoleEditeButton = styled(Button)`
-  max-width: 112px;
-  min-height: 49px;
-`;
-
-export const RoleSelectButton = styled(Button)`
-  max-width: 112px;
-  min-height: 49px;
 `;
