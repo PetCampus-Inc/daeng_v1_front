@@ -1,14 +1,17 @@
 import Button from "components/common/Button";
 import { styled } from "styled-components";
 
-export const MyProfileWrapper = styled.section`
+interface IProps {
+  isShowRoles: boolean;
+}
+
+export const MyProfileWrapper = styled.section<IProps>`
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(112px, auto));
   gap: 12px 4px;
   justify-content: center;
-  padding: 1.5rem 1rem;
-  margin-bottom: 82px;
+  margin-bottom: ${(props) => (props.isShowRoles ? "21px" : "82px")};
 `;
 
 export const ProfileEditeWrapper = styled.section`
