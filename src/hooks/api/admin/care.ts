@@ -6,8 +6,9 @@ import {
   handleCreateCareDogs,
   handleDeleteCareDogs,
   handleGetCareDogs,
-  handleGetNewCareDogs
-} from "apis/admin.caredog.api";
+  handleGetNewCareDogs,
+  handlePostAlbum
+} from "apis/admin/care.api";
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
@@ -60,4 +61,14 @@ export const useDeleteCareDogs = () => {
   });
 
   return { mutateDeleteCareDogs: deleteCareDogsMutation.mutate };
+};
+
+export const useCreateAlbum = () => {
+  const createAlbumMutation = useMutation({
+    mutationFn: handlePostAlbum,
+    onSuccess: () => {
+      showToast("사진이 전송이 완료되었습니다", "bottom");
+    }
+  });
+  return { mutateAlbum: createAlbumMutation.mutate };
 };
