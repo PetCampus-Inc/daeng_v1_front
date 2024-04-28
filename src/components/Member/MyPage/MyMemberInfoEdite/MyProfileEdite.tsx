@@ -19,65 +19,63 @@ const MyProfileEdite = () => {
             </S.ProfileEditeButton>
           </S.ProfileEditeBox>
         </S.ProfileBox>
-        <S.NicNameWrapper>
-          <S.MyDogName>
-            <InputBox
-              width="100%"
-              height="49px"
-              color={ThemeConfig.colors.gray_1}
-              border={ThemeConfig.colors.primaryColor}
-              placeholdText="뽀뽀"
-              inputValue="뽀뽀"
-              type="text"
-              setInputValue={() => {
-                //TODO 작업 필요
-              }}
-            />
-            의
-          </S.MyDogName>
-          <S.RoleEditeWrapper>
-            <S.RoleEditeButton
-              width="112px"
-              height="49px"
-              textcolor={ThemeConfig.colors.gray_1}
-              backcolor={ThemeConfig.colors.white}
-            >
-              아빠
-            </S.RoleEditeButton>
-            <S.RoleEditeButton
-              width="112px"
-              height="49px"
-              textcolor={ThemeConfig.colors.gray_3}
-              backcolor={ThemeConfig.colors.gray_4}
-            >
-              엄마
-            </S.RoleEditeButton>
-            <S.RoleEditeButton
-              width="112px"
-              height="49px"
-              textcolor={ThemeConfig.colors.gray_3}
-              backcolor={ThemeConfig.colors.gray_4}
-            >
-              언니/누나
-            </S.RoleEditeButton>
-            <S.RoleEditeButton
-              width="112px"
-              height="49px"
-              textcolor={ThemeConfig.colors.gray_3}
-              backcolor={ThemeConfig.colors.gray_4}
-            >
-              오빠/형
-            </S.RoleEditeButton>
-            <S.RoleEditeButton
-              width="112px"
-              height="49px"
-              textcolor={ThemeConfig.colors.gray_3}
-              backcolor={ThemeConfig.colors.gray_4}
-            >
-              친구
-            </S.RoleEditeButton>
-          </S.RoleEditeWrapper>
-        </S.NicNameWrapper>
+
+        <S.MyDogName>
+          <InputBox
+            width="100%"
+            height="49px"
+            color={ThemeConfig.colors.gray_1}
+            border={ThemeConfig.colors.primaryColor}
+            placeholdText="뽀뽀"
+            inputValue="뽀뽀"
+            type="text"
+            setInputValue={() => {
+              //TODO 작업 필요
+            }}
+          />
+          의
+        </S.MyDogName>
+        <S.RoleSelectButton
+          width="100%"
+          height="49px"
+          textcolor={ThemeConfig.colors.gray_1}
+          backcolor={ThemeConfig.colors.white}
+        >
+          아빠
+        </S.RoleSelectButton>
+
+        <S.RoleSelectButton
+          width="100%"
+          height="49px"
+          textcolor={ThemeConfig.colors.gray_3}
+          backcolor={ThemeConfig.colors.gray_4}
+        >
+          엄마
+        </S.RoleSelectButton>
+        <S.RoleSelectButton
+          width="100%"
+          height="49px"
+          textcolor={ThemeConfig.colors.gray_3}
+          backcolor={ThemeConfig.colors.gray_4}
+        >
+          언니/누나
+        </S.RoleSelectButton>
+        <S.RoleSelectButton
+          width="100%"
+          height="49px"
+          textcolor={ThemeConfig.colors.gray_3}
+          backcolor={ThemeConfig.colors.gray_4}
+        >
+          오빠/형
+        </S.RoleSelectButton>
+        <S.RoleSelectButton
+          width="100%"
+          height="49px"
+          textcolor={ThemeConfig.colors.gray_3}
+          backcolor={ThemeConfig.colors.gray_4}
+        >
+          친구
+        </S.RoleSelectButton>
       </S.MyProfileWrapper>
     </>
   );
