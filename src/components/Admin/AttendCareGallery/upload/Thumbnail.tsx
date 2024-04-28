@@ -5,32 +5,32 @@ import {
   StyledDeleteButton,
   InnerShadow,
   StyledText
-} from "components/Admin/AttendCare/Upload/styles";
+} from "components/Admin/AttendCareGallery/upload/styles";
 import { Box } from "components/common";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
 
 import PreviewPopup from "./PreviewPopup";
 
-import type { IFile } from "components/Admin/AttendCare/Upload/types";
+import type { IFile } from "components/Admin/AttendCareGallery/upload/types";
 
 interface TumbnailProps {
-  data: IFile;
+  file: IFile;
   index: number;
   onRemove?: (index: number) => void;
 }
 
-const Thumbnail = ({ data, index, onRemove }: TumbnailProps) => {
+export const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
   const overlay = useOverlay();
   const openPopup = () =>
-    overlay.open(({ isOpen, close }) => <PreviewPopup isOpen={isOpen} close={close} data={data} />);
+    overlay.open(({ isOpen, close }) => <PreviewPopup isOpen={isOpen} close={close} data={file} />);
 
   return (
     <>
       <StyledThumb>
         <Box tag="button" width="100%" height="100%" onClick={openPopup}>
           <InnerShadow />
-          <StyledThumbImg src={data.thumbnail} alt={`preview-${index}`} />
-          {data.duration && <StyledText>{data.duration}</StyledText>}
+          <StyledThumbImg src={file.thumbnail} alt={`preview-${index}`} />
+          {file.duration && <StyledText>{file.duration}</StyledText>}
         </Box>
       </StyledThumb>
       {onRemove && (
@@ -41,5 +41,3 @@ const Thumbnail = ({ data, index, onRemove }: TumbnailProps) => {
     </>
   );
 };
-
-export default Thumbnail;

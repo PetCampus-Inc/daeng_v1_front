@@ -15,3 +15,9 @@ export interface ICareDogInfo {
 }
 
 export type TAgendaWriting = "COMPLETE" | "NOT_YET" | "WRITING";
+
+export interface IReqGallery {
+  dogId: number;
+  imageUriList: string[];
+  comment: string;
+}

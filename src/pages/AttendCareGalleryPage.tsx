@@ -1,9 +1,10 @@
-import { BackgroundButtonWrapper } from "components/Admin/Attendance/AttendanceButton/styles";
-import AttendCareGallery from "components/Admin/AttendCare/AttendCareGallery";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import CommentBox from "components/Admin/AttendCareGallery/CommentBox";
+import SendFileButton from "components/Admin/AttendCareGallery/SendFileButton";
+import UploadBox from "components/Admin/AttendCareGallery/UploadBox";
 import BasicModal from "components/common/ButtonModal/BasicModal";
 import Header from "components/common/Header";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const AttendCareGalleryPage = ({ type }: Props) => {
+  const methods = useForm({ mode: "onSubmit" });
   const navigate = useNavigate();
   const overlay = useOverlay();
 
@@ -33,10 +35,11 @@ const AttendCareGalleryPage = ({ type }: Props) => {
     <>
       <Header text="사진 전송" type="text" handleClick={openPreventLeavePopup} />
       <PageContainer color="gray_5" pt="1.75">
-        <AttendCareGallery />
-        <BackgroundButtonWrapper $isBottom>
-          <BackgroundButton>전송하기</BackgroundButton>
-        </BackgroundButtonWrapper>
+        <FormProvider {...methods}>
+          <UploadBox />
+          <CommentBox />
+          <SendFileButton />
+        </FormProvider>
       </PageContainer>
     </>
   );
