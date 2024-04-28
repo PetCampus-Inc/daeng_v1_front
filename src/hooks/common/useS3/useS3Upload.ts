@@ -1,5 +1,5 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { v1 as uuidv1 } from "uuid";
 
 import { s3ClientConfig, bucketName } from "./config";
@@ -16,38 +16,33 @@ interface MutateOptions<TData, TError, TVariables> {
   onSettled?: (data: TData | undefined, error: TError | null, variables: TVariables) => void;
 }
 
+interface UploadToS3Function<TData, TError, TVariables> {
+  (
+    variables: TVariables,
+    options?: MutateOptions<TData, TError, TVariables>
+  ): Promise<TData | void>;
+}
+
 function useS3Upload<
   TData = string[],
   TError = Error,
   TVariables extends UploadToS3Props = UploadToS3Props
 >(): {
-  uploadToS3: (
-    variables: TVariables,
-    options?: MutateOptions<TData, TError, TVariables>
-  ) => Promise<TData | { error: TError }>;
-  isLoading: boolean;
-  data: TData | null;
-  error: TError | null;
+  uploadToS3: UploadToS3Function<TData, TError, TVariables>;
 } {
   const s3Client = useMemo(() => new S3Client(s3ClientConfig), []);
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<TData | null>(null);
-  const [error, setError] = useState<TError | null>(null);
-
   const uploadToS3 = useCallback(
     async (
       variables: TVariables,
       options?: MutateOptions<TData, TError, TVariables>
-    ): Promise<TData | { error: TError }> => {
-      setIsLoading(true);
-      setError(null);
-
+    ): Promise<TData | void> => {
       if (!variables.files) {
-        const error = new Error("No files to upload.");
-        setError(error as TError);
-        options?.onError?.(error as TError, variables);
-        setIsLoading(false);
-        return { error: error as TError };
+        const error = new Error("No files to upload.") as TError;
+        if (options?.onError) {
+          options.onError(error, variables);
+          return;
+        }
+        throw error;
       }
 
       const acceptedTypes = Array.isArray(variables.accept) ? variables.accept : [variables.accept];
@@ -73,23 +68,24 @@ function useS3Upload<
           })
         );
 
-        setData(urls as TData);
+        options?.onSuccess?.(urls as TData, variables);
         options?.onSettled?.(urls as TData, null, variables);
         return urls as TData;
       } catch (err) {
-        const error = err instanceof Error ? err : new Error(String(err));
-        setError(error as TError);
-        options?.onError?.(error as TError, variables);
-        options?.onSettled?.(undefined, err as TError, variables);
-        return { error: error as TError };
-      } finally {
-        setIsLoading(false);
+        const error = err instanceof Error ? err : (new Error(String(err)) as TError);
+        if (options?.onError) {
+          options.onError(error as TError, variables);
+          options?.onSettled?.(undefined, error as TError, variables);
+          return;
+        }
+        options?.onSettled?.(undefined, error as TError, variables);
+        throw error;
       }
     },
     [s3Client]
   );
 
-  return { uploadToS3, isLoading, data, error };
+  return { uploadToS3 };
 }
 
 export { useS3Upload };
