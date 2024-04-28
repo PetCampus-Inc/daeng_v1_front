@@ -1,5 +1,5 @@
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import PhotoIcon from "assets/svg/photo-icon";
-import RightArrow from "assets/svg/right-arrow";
 
 import {
   ButtonWrapper,
@@ -29,7 +29,7 @@ const MainSendCard = ({ text, onClick }: MainSendCardProps) => {
         </CardTitleWrapper>
       </Stack>
       <ButtonWrapper type="button">
-        <RightArrow w="23" h="23" />
+        <ArrowRightIcon w="23" h="23" />
       </ButtonWrapper>
     </SendCardContainer>
   );
