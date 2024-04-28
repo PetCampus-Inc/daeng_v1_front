@@ -2,6 +2,15 @@ import styled, { css } from "styled-components";
 import { remCalc } from "utils/calculator";
 import { hexToRGBA } from "utils/color";
 
+export const StyledHeading = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 0 ${remCalc(10)};
+  margin-bottom: ${remCalc(16 + 5)};
+`;
+
 const ImgWrapperStyle = css`
   display: inline-block;
   overflow: hidden;
@@ -32,7 +41,7 @@ export const Img = styled.img`
 
 export const StyledNote = styled.div`
   position: relative;
-  max-width: 196px;
+  min-width: 196px;
 `;
 
 export const StyledBorder = styled.div`
@@ -59,8 +68,8 @@ export const StyledBorder = styled.div`
 `;
 
 export const StyledNoteContainer = styled.div`
-  max-height: 185px;
-  padding: ${remCalc(14 + 27)} ${remCalc(12)};
+  min-height: 185px;
+  padding: ${remCalc(14 + 27)} ${remCalc(12)} ${remCalc(14)};
 
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.yellow_3};
@@ -113,5 +122,19 @@ export const FootButton = styled.button`
     & > svg {
       color: ${({ theme }) => theme.colors.br_2};
     }
+  }
+`;
+
+export const StyledBox = styled.div`
+  min-width: 148px;
+  padding: ${remCalc(14)} ${remCalc(16)};
+
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.gray_5};
+  border-radius: 16px;
+  box-shadow: ${({ theme }) => theme.shadows.card};
+
+  &.collapse {
+    padding: ${remCalc(8)} ${remCalc(14)};
   }
 `;
