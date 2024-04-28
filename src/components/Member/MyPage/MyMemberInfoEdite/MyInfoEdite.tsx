@@ -109,7 +109,7 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           isRequired
           pattern={PHONE_REGEX}
           onChange={handleChangeNumber("phoneNumber")}
-          placeholder="연락처를 입력해주세요"
+          placeholder="비상 연락처를 입력해주세요"
           type="tel"
         />
       </Flex>
