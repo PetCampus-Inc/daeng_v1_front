@@ -55,11 +55,11 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
       <Flex direction="column" gap={7}>
         <Typo text="이름" color={ThemeConfig.colors.darkBlack} size="14px" />
         <InputField
+          name="memberName"
           register={register}
           isRequired
           placeholder=""
           value="박유빈"
-          name={`requiredItemList.${ITEM_KEYS.MEMBER_NAME}`}
         />
       </Flex>
 
