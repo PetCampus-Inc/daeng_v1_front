@@ -58,7 +58,6 @@ function useMulterS3Upload<
 
         uploader.on("httpUploadProgress", ({ loaded = 0, total = 0 }) => {
           const currentProgress = Math.floor((loaded / total) * 100);
-          console.log("progress:", currentProgress);
           setProgress(currentProgress);
         });
 
