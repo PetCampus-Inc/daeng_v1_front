@@ -6,6 +6,7 @@ export const MyProfileWrapper = styled.section`
   justify-content: center;
   gap: 15px;
   padding: 1.5rem 1rem;
+  margin-bottom: 82px;
 `;
 
 export const ProfileEditeWrapper = styled.section`
