@@ -1,5 +1,5 @@
 import { request } from "libs/CustomAxios/request";
-import { ICareDogInfo, ICareDogProps, ICareTempSave, IPastAgenda } from "types/admin/care.types";
+import { ICareDogInfo, ICareDogProps, ICareTempSave, IPastAgenda, IReqGallery } from "types/admin/care.types";
 import { IResponse } from "types/helper.type";
 
 export const handleGetCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
@@ -87,4 +87,17 @@ export const handleGetPastAgenda = async (dogId: number): Promise<IPastAgenda[]>
   const url = `school/agenda/past?dogId=${dogId}`;
   const { data } = await request<IResponse<IPastAgenda[]>>({ url });
   return data;
+};
+
+export const handlePostAlbum = async (req: IReqGallery): Promise<void> => {
+  const url = `admin/attendance/dog/image`;
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      dogId: req.dogId,
+      imageUriList: req.imageUriList,
+      comment: req.comment
+    }
+  });
 };
