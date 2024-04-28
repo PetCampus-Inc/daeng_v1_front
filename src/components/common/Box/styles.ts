@@ -5,6 +5,7 @@ import { remCalc } from "utils/calculator";
 export const StyledBox = styled.div.withConfig({
   shouldForwardProp: (prop) =>
     ![
+      "display",
       "width",
       "height",
       "margin",
@@ -30,18 +31,19 @@ export const StyledBox = styled.div.withConfig({
       "overflow"
     ].includes(prop)
 })<BoxOptions>`
-  width: ${({ width }) => (width ? `${width}` : undefined)};
-  height: ${({ height }) => (height ? `${height}` : undefined)};
-  margin: ${({ margin }) => (margin ? `${margin}` : undefined)};
-  margin-right: ${({ mr }) => (mr ? remCalc(mr) + "rem" : undefined)};
-  margin-top: ${({ mt }) => (mt ? remCalc(mt) + "rem" : undefined)};
-  margin-left: ${({ ml }) => (ml ? remCalc(ml) + "rem" : undefined)};
-  margin-bottom: ${({ mb }) => (mb ? remCalc(mb) + "rem" : undefined)};
+  display: ${({ display }) => (display ? display : undefined)};
+  width: ${({ width }) => (width ? width : undefined)};
+  height: ${({ height }) => (height ? height : undefined)};
+  margin: ${({ margin }) => (margin ? margin : undefined)};
+  margin-right: ${({ mr }) => (mr ? remCalc(mr) : undefined)};
+  margin-top: ${({ mt }) => (mt ? remCalc(mt) : undefined)};
+  margin-left: ${({ ml }) => (ml ? remCalc(ml) : undefined)};
+  margin-bottom: ${({ mb }) => (mb ? remCalc(mb) : undefined)};
   padding: ${({ padding }) => (padding ? padding : undefined)};
-  padding-top: ${({ pt }) => (pt ? remCalc(pt) + "rem" : undefined)};
-  padding-right: ${({ pr }) => (pr ? remCalc(pr) + "rem" : undefined)};
-  padding-bottom: ${({ pb }) => (pb ? remCalc(pb) + "rem" : undefined)};
-  padding-left: ${({ pl }) => (pl ? remCalc(pl) + "rem" : undefined)};
+  padding-top: ${({ pt }) => (pt ? remCalc(pt) : undefined)};
+  padding-right: ${({ pr }) => (pr ? remCalc(pr) : undefined)};
+  padding-bottom: ${({ pb }) => (pb ? remCalc(pb) : undefined)};
+  padding-left: ${({ pl }) => (pl ? remCalc(pl) : undefined)};
   border: ${({ border }) => (border ? `${border}px solid` : undefined)};
   border-radius: ${({ borderRadius }) => (borderRadius ? `${borderRadius}px` : undefined)};
   border-color: ${({ borderColor, theme }) =>
