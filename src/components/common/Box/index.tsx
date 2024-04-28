@@ -7,6 +7,7 @@ import { StyledBox } from "./styles";
 import type { TColor } from "styles/ThemeConfig";
 
 export type BoxOptions = {
+  display?: CSSProperties["display"];
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   margin?: CSSProperties["margin"];

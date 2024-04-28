@@ -25,14 +25,14 @@ export const StyledFlex = styled.div.withConfig({
       "shrink"
     ].includes(prop)
 })<FlexOptions>`
-  width: ${(props) => props.width || "auto"};
-  height: ${(props) => props.height || "auto"};
-  max-width: ${(props) => props.maxWidth || "none"};
-  max-height: ${(props) => props.maxHeight || "none"};
-  overflow-x: ${(props) => props.overflowX || "visible"};
-  overflow-y: ${(props) => props.overflowY || "visible"};
-  margin: ${(props) => props.margin || 0};
-  padding: ${(props) => props.padding || 0};
+  width: ${(props) => props.width || undefined};
+  height: ${(props) => props.height || undefined};
+  max-width: ${(props) => props.maxWidth || undefined};
+  max-height: ${(props) => props.maxHeight || undefined};
+  overflow-x: ${(props) => props.overflowX || undefined};
+  overflow-y: ${(props) => props.overflowY || undefined};
+  margin: ${(props) => props.margin || undefined};
+  padding: ${(props) => props.padding || undefined};
 
   display: ${(props) => props.display || "flex"};
   gap: ${(props) => (props.gap ? props.gap + "px" : undefined)};
