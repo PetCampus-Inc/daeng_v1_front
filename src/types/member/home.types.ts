@@ -7,8 +7,8 @@ export interface IHome {
   dogName: string;
   memberId: number;
   relation: string;
-  attendanceStatus: TAttendanceStatus;
-  attendanceDate: string;
+  attendanceStatus?: TAttendanceStatus;
+  attendanceDate?: string;
   todayAgendaStatus: TAgendaStatus;
   imageList: ImageList[][];
 }
