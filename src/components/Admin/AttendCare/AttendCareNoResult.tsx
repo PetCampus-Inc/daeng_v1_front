@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import CareDogIcon from "assets/svg/care-dog-icon";
-import RightArrow from "assets/svg/right-arrow";
 import { Link } from "react-router-dom";
 
 import { DescText, LinkText, NoResultContainer, SubTitle, Title } from "./styles";
@@ -15,7 +15,7 @@ const AttendCareNoResult = () => {
         <CareDogIcon aria-hidden="true" />
         <LinkText>
           <Link to={PATH.ADMIN_ATTENDANCE}>
-            출석 진행 하기 <RightArrow w={"20"} h={"20"} aria-hidden="true" />
+            출석 진행 하기 <ArrowRightIcon w={"20"} h={"20"} aria-hidden="true" />
           </Link>
         </LinkText>
         <DescText>출석 후에 관리할 강아지를 선택할 수 있어요</DescText>

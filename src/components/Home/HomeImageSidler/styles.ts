@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { convertHexToRGBA } from "utils/color";
+import { hexToRGBA } from "utils/color";
 
 export const SliderContainer = styled.div`
   position: relative;
@@ -108,11 +108,11 @@ export const IconButton = styled.button`
   align-items: center;
 
   border-radius: 50%;
-  border: 1px solid ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.8)};
-  background-color: ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.8)};
+  border: 1px solid ${({ theme }) => hexToRGBA(theme.colors.white, 0.8)};
+  background-color: ${({ theme }) => hexToRGBA(theme.colors.white, 0.8)};
 
   &.active {
-    border: 1px solid ${({ theme }) => convertHexToRGBA(theme.colors.white, 0.6)};
+    border: 1px solid ${({ theme }) => hexToRGBA(theme.colors.white, 0.6)};
     background-color: rgba(0, 0, 0, 0.5);
   }
 
