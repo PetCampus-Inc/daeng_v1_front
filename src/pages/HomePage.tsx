@@ -1,12 +1,20 @@
+import { Box } from "components/common";
 import NavBar from "components/common/NavBar";
+import HomeProfile from "components/Home/HomeProfile";
 import ImageSlider from "components/Home/ImageSlider";
+import { PageContainer } from "styles/StyleModule";
+import { remCalc } from "utils/calculator";
 
 import type { IHome } from "types/member/home.types";
 
 const HomePage = () => {
   return (
     <>
-      <ImageSlider images={mock.imageList} />
+      <PageContainer pt={remCalc("28px", false)}>
+        <HomeProfile data={mock} />
+        <Box height={remCalc("32px")} />
+        <ImageSlider images={mock.imageList} />
+      </PageContainer>
       <NavBar />
     </>
   );
@@ -18,8 +26,8 @@ const mock: IHome = {
   dogId: 3,
   dogName: "뚜비",
   memberId: 3,
-  relation: "MOTHER",
-  attendanceStatus: "ATTENDED",
+  relation: "엄마",
+  attendanceStatus: "NOT_ATTENDED",
   attendanceDate: "2024-04-28",
   todayAgendaStatus: "NOT_YET",
   imageList: [
