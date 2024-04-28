@@ -1,5 +1,5 @@
+import SearchInputField from "components/common/InputField/SearchInputField";
 import { styled } from "styled-components";
-
 interface IMyInfoEditeProps {
   isShowRoles: boolean;
 }
@@ -64,4 +64,9 @@ export const MyDogName = styled.div`
   color: ${({ theme }) => theme.colors.gray_1};
   ${({ theme }) => theme.typo.body2_16_R};
   grid-column: 2 / 4;
+`;
+
+export const SearchInputFieldStyle = styled(SearchInputField)`
+  padding-right: 50px;
+  text-overflow: ellipsis;
 `;

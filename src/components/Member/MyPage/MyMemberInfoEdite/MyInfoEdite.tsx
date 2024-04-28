@@ -71,16 +71,18 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
 
       <Flex direction="column" gap={7}>
         <Typo text="주소" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <SearchInputField
+        <S.SearchInputFieldStyle
           name={addressStreet}
           register={register}
           onSearch={() => openPopup()}
           onClick={() => openPopup()}
           onClear={handleClear}
           value={watchAddress}
+          defaultValue={watchAddress}
           isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
+          inputType="memberEdite"
         />
         <InputField
           name="address.detail"
