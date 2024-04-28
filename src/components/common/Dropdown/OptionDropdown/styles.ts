@@ -1,22 +1,39 @@
-import styled from "styled-components";
+import styled, { CSSProp, css } from "styled-components";
 
-export const DropdownRoot = styled.div`
+export interface ICustomStyle {
+  customStyle?: CSSProp;
+}
+
+const RootDefaultStyle = css`
   position: absolute;
   width: max-content;
   top: 0;
   right: 0;
 `;
 
-export const StyledDropdownList = styled.ul`
+const DropdownListDefaultStyle = css`
+  right: 0;
+  top: 25px;
+`;
+
+export const DropdownRoot = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "customStyle"
+})<ICustomStyle>`
+  ${({ customStyle }) => customStyle || RootDefaultStyle}
+`;
+
+export const StyledDropdownList = styled.ul.withConfig({
+  shouldForwardProp: (prop) => prop !== "customStyle"
+})<ICustomStyle>`
   min-width: 163px;
   position: absolute;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   border: solid 1px ${(props) => props.theme.colors.gray_4};
   box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.13);
   border-radius: 0.4rem;
-  right: 0;
-  top: 25px;
   z-index: 10;
+
+  ${({ customStyle }) => customStyle || DropdownListDefaultStyle}
 `;
 
 export const ItemWrapper = styled.li`

@@ -17,7 +17,7 @@ const AttendanceOptionList = ({ options, handleOptionClick }: Props) => {
   };
 
   return (
-    <Dropdown defaultOpen={false}>
+    <Dropdown>
       <Dropdown.Content>
         <Dropdown.Trigger>
           <IconWrapper>

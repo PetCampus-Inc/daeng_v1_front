@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import { QueryClient } from "@tanstack/react-query";
 import * as Pages from "pages";
 import { Suspense } from "react";
-import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
 import { adminLoginInfoAtom } from "store/admin";
@@ -265,8 +265,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       children: [
         {
           index: true,
-          // path: PATH.HOME,
-          loader: () => redirect(PATH.ADMIN_ATTENDANCE),
           element: (
             <Suspense>
               <Pages.HomePage />
