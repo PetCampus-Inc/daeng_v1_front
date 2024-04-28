@@ -1,8 +1,8 @@
 import MoreIcon from "assets/svg/more-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XCircleIcon from "assets/svg/x-circle-icon";
+import { Dropdown } from "components/common";
 import SimpleButton from "components/common/Button/SimpleButton";
-import Dropdown from "components/common/Dropdown/OptionDropdown/Dropdown";
 
 interface CareOptionListProps {
   options: string[];
