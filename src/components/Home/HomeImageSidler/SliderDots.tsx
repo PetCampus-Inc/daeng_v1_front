@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { DotContainer, DotWrapper } from "./style";
+import { DotContainer, DotWrapper } from "./styles";
 
 interface SliderDotsProps {
   dots: React.ReactElement[];

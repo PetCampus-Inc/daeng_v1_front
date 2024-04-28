@@ -1,6 +1,6 @@
 import DownloadIcon from "assets/svg/download-icon";
 
-import { IconButton } from "./style";
+import { IconButton } from "./styles";
 
 const SaveButton = ({ isOpen }: { isOpen?: boolean }) => {
   return (

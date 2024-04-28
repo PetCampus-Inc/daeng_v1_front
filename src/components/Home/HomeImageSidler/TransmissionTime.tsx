@@ -1,4 +1,4 @@
-import { TimeText } from "./style";
+import { TimeText } from "./styles";
 
 const TransmissionTime = () => {
   return <TimeText>1시간 전</TimeText>;

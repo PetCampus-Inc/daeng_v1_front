@@ -1,6 +1,6 @@
 import Chat from "assets/svg/chat";
 
-import { IconButton } from "./style";
+import { IconButton } from "./styles";
 
 interface CommentButtonProps {
   isOpen: boolean;
