@@ -1,9 +1,15 @@
 interface Props {
   className?: string;
   bg?: boolean;
+  colorScheme?: "gray" | "yellow";
 }
 
-const AgendaIcon = ({ className = "", bg = false }: Props) => {
+const AgendaIcon = ({ className = "", bg = false, colorScheme = "yellow" }: Props) => {
+  const colorMap = new Map<string, string>([
+    ["gray", "#E9E9E9"],
+    ["yellow", "#FFF7E1"]
+  ]);
+
   return (
     <svg
       className={className}
@@ -13,7 +19,7 @@ const AgendaIcon = ({ className = "", bg = false }: Props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {bg && <rect width="40" height="40" rx="20" fill="#E9E9E9" />}
+      {bg && <rect width="40" height="40" rx="20" fill={colorMap.get(colorScheme)} />}
       <path
         d="M12.9167 33.3333C11.3058 33.3333 10 31.8409 10 29.9999L10 9.99992C10 8.15897 11.3058 6.66659 12.9167 6.66659L30.4167 6.66659C32.0275 6.66659 33.3333 8.15897 33.3333 9.99992L33.3333 29.9999C33.3333 31.8409 32.0275 33.3333 30.4167 33.3333L12.9167 33.3333Z"
         fill="white"
