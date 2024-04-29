@@ -2,7 +2,7 @@ import { PATH } from "constants/path";
 import { FIELD_TO_STEP } from "constants/step";
 
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { Adapter } from "libs/Adapter";
 import { AdminFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";

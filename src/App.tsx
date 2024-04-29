@@ -1,4 +1,4 @@
-import OverlayProvider from "hooks/common/useOverlay/OverlayProvider";
+import { OverlayProvider } from "hooks/common/useOverlay";
 import { Outlet } from "react-router-dom";
 
 const App = () => {

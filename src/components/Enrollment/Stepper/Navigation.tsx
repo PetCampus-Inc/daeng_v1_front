@@ -1,5 +1,5 @@
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useFormContext } from "react-hook-form";
 import { FormButton, FormButtonWrapper, FormPrevButton } from "styles/StyleModule";
 
