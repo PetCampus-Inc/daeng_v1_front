@@ -55,7 +55,7 @@ export const MENU_ITEMS = {
     },
     {
       text: "홈",
-      path: PATH.ADMIN_CARE,
+      path: PATH.ROOT,
       blackImage: <HomeBlack />,
       colorImage: <HomeBrown />
     },
