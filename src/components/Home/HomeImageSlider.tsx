@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Slider from "react-slick";
 
-import CommentBox from "./HomeImageSidler/CommentBox";
-import CommentButton from "./HomeImageSidler/CommentButton";
-import SaveOptionDropdown from "./HomeImageSidler/SaveOptionDropdown";
-import SliderDots from "./HomeImageSidler/SliderDots";
+import CommentBox from "./ImageSidler/CommentBox";
+import CommentButton from "./ImageSidler/CommentButton";
+import SaveOptionDropdown from "./ImageSidler/SaveOptionDropdown";
+import SliderDots from "./ImageSidler/SliderDots";
 import {
   SlideWrapper,
   Image,
@@ -13,12 +13,12 @@ import {
   SliderHeader,
   ButtonGroup,
   SlideIndex
-} from "./HomeImageSidler/styles";
-import TransmissionTime from "./HomeImageSidler/TransmissionTime";
+} from "./ImageSidler/styles";
+import TransmissionTime from "./ImageSidler/TransmissionTime";
 
 import type { ImageList } from "types/member/home.types";
 
-const ImageSlider = ({ images }: { images: ImageList[][] }) => {
+const HomeImageSlider = ({ images }: { images: ImageList[][] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
 
@@ -66,4 +66,4 @@ const ImageSlider = ({ images }: { images: ImageList[][] }) => {
   );
 };
 
-export default ImageSlider;
+export default HomeImageSlider;
