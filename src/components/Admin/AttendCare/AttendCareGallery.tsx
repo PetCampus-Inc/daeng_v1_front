@@ -30,11 +30,11 @@ const AttendCareGallery = () => {
   return (
     <>
       <Box mb={remCalc(36)}>
-        <Text tag="p" typo="body2_16_R" color="black">
+        <Text as="p" typo="body2_16_R" color="black">
           사진 첨부
         </Text>
         <Flex justify="space-between">
-          <Text tag="span" typo="caption1_12_R" color="gray_2">
+          <Text typo="caption1_12_R" color="gray_2">
             한 번에 최대 nn장 까지 전송이 가능해요
           </Text>
           <Text typo="label2_14_R" color="gray_1">
@@ -54,7 +54,7 @@ const AttendCareGallery = () => {
         </StyledThumbList>
       </Box>
       <Flex direction="column" gap={8}>
-        <Text tag="p" typo="body2_16_R" color="black">
+        <Text as="p" typo="body2_16_R" color="black">
           코멘트
         </Text>
         <TextArea rows={7} placeholder="코멘트를 입력해주세요" />
