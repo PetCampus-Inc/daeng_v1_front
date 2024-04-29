@@ -1,6 +1,13 @@
-const ArrowDownIcon = () => {
+const ArrowDownIcon = ({ className = "", w = "17", h = "16" }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none" viewBox="0 0 17 16">
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={w}
+      height={h}
+      fill="none"
+      viewBox="0 0 17 16"
+    >
       <path
         fill="currentColor"
         fillRule="evenodd"
