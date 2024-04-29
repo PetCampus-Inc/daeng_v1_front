@@ -4,6 +4,8 @@ import AgendaIcon from "assets/svg/agenda-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import SpeakerIcon from "assets/svg/speaker-icon";
 import { Flex, Text } from "components/common";
+import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import { useOverlay } from "hooks/common/useOverlay";
 
 import { BoxContainer } from "./styles";
 
@@ -22,21 +24,36 @@ const HighlightText = ({ children }: PropsWithChildren) => (
 const statusConfig: Record<TAgendaStatus, { message: string; iconColor: "gray" | "yellow" }> = {
   COMPLETE: {
     message: "알림장이\\n도착했어요",
-    iconColor: "yellow" as const
+    iconColor: "yellow"
   },
   NOT_YET: {
     message: "알림장을\\n작성중이에요",
-    iconColor: "gray" as const
+    iconColor: "gray"
   },
   WRITING: {
     message: "알림장을\\n작성중이에요",
-    iconColor: "gray" as const
+    iconColor: "gray"
   }
 };
 
 const DogCard = ({ data }: DogCardProps) => {
+  const overlay = useOverlay();
+
   const { message, iconColor } = statusConfig[data.todayAgendaStatus];
   const parts = message.split(/(알림장)|\\n/);
+
+  const openSoonPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AlertBottomSheet
+        title="곧 출시 예정인 기능이에요"
+        subtitle="유치원 공지 기능이 곧 출시됩니다"
+        isOpen={isOpen}
+        close={close}
+        actionText="닫기"
+        actionFn={close}
+        hasControl
+      />
+    ));
 
   return (
     <>
@@ -57,7 +74,7 @@ const DogCard = ({ data }: DogCardProps) => {
         </Flex>
       </BoxContainer>
 
-      <BoxContainer className="collapse grid-bottom-right">
+      <BoxContainer className="collapse grid-bottom-right" onClick={openSoonPopup}>
         <Flex justify="space-between" align="center">
           <Flex gap="8" align="center">
             <SpeakerIcon bg />

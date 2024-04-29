@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { dragNone } from "styles/StyleModule";
 import { remCalc } from "utils/calculator";
 import { hexToRGBA } from "utils/color";
 
@@ -18,6 +19,9 @@ export const BoxContainer = styled.section`
   &.collapse {
     padding: ${remCalc(8)} ${remCalc(14)};
   }
+
+  ${dragNone}
+  cursor: pointer;
 `;
 
 export const NoteContainer = styled.section`
