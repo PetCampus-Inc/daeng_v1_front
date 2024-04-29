@@ -87,7 +87,20 @@ export const TitleText = styled.div<{ size?: string }>`
   }
 `;
 
-export const StyledImage = styled.img<{
-  src: string;
-  alt: string;
-}>``;
+export const TextButton = styled.button`
+  display: flex;
+  gap: 4px;
+  align-items: center;
+
+  & > svg {
+    border-radius: 8px;
+    transition: background-color 0.1s ease-out;
+  }
+
+  &:hover > svg {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+  }
+  &:active > svg {
+    background-color: ${({ theme }) => theme.colors.gray_4};
+  }
+`;
