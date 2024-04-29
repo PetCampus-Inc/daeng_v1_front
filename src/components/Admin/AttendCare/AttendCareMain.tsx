@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import AddIcon from "assets/svg/add-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import SimpleButton from "components/common/Button/SimpleButton";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { ICareDogInfo } from "types/admin/care.types";
 
