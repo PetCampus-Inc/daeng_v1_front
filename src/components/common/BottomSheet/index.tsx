@@ -38,14 +38,17 @@ const BottomSheetBase = ({ children, isOpen, close }: PropsWithChildren<IBottomS
   };
 
   const BottomSheetVariants = {
-    hidden: { y: "100%" },
+    hidden: { y: "80%" },
+    exist: { y: "100%" },
     visible: { y: 0 }
   };
 
   const transition = {
     type: "spring",
-    damping: 40,
-    stiffness: 400
+    damping: 45,
+    stiffness: 650,
+    duration: 0.1,
+    overshootClamping: true
   };
 
   return (
@@ -58,12 +61,12 @@ const BottomSheetBase = ({ children, isOpen, close }: PropsWithChildren<IBottomS
               animate="visible"
               exit="hidden"
               variants={backdropVariants}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.15 }}
             />
             <StyledBottomSheet
               initial="hidden"
               animate="visible"
-              exit="hidden"
+              exit="exist"
               variants={BottomSheetVariants}
               transition={transition}
               ref={bottomSheetRef}
