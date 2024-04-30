@@ -124,7 +124,7 @@ export const CancelApprovalButton = styled.button`
   }
 `;
 
-const ButtonStyle = css`
+const CurrentStatusTextStyle = css`
   position: relative;
   overflow: hidden;
   padding: 4px 8px;
@@ -148,18 +148,18 @@ const ButtonStyle = css`
 `;
 
 export const GotoSchoolInfoButton = styled.button`
-  ${ButtonStyle}
+  ${CurrentStatusTextStyle}
 `;
 
 export const AddDogButton = styled.button`
   position: absolute;
   bottom: 15px;
   z-index: 1;
-  ${ButtonStyle}
+  ${CurrentStatusTextStyle}
 `;
 
 export const StatusBox = styled.span`
-  ${ButtonStyle}
+  ${CurrentStatusTextStyle}
 `;
 
 export const InfoTextBox = styled.div<ICardStyleProps>`
