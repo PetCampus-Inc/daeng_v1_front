@@ -1,5 +1,6 @@
 import DogInfoBox from "components/Admin/AttendCareNotice/DogInfoBox";
 import { PaddingContainer } from "components/Admin/AttendCareNotice/styles";
+import WriteNotice from "components/Admin/AttendCareNotice/WriteNotice";
 import Header from "components/common/Header";
 import MenuToggle from "components/common/MenuToggle";
 import { useState } from "react";
@@ -13,11 +14,12 @@ const AttendCareNoticePage = () => {
 
   return (
     <>
-      <Header type="text" transparent text={`${searchParams.get("dog_name")} 상세 페이지`} />
-      <PageContainer ph="0" pt="1">
+      <Header type="text" text={`${searchParams.get("dog_name")} 상세 페이지`} />
+      <PageContainer ph="0" pb="2" auto="auto">
         <DogInfoBox />
         <PaddingContainer>
           <MenuToggle selectedTab={selectedTab} />
+          <WriteNotice />
         </PaddingContainer>
       </PageContainer>
     </>
