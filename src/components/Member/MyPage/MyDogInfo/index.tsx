@@ -24,7 +24,7 @@ const MyDogInfo = () => {
               schoolInfo={"바나나 유치원 잠실점"}
               createdTime={"2023.12.20"}
               profileUri={item.profileUri}
-              DogLength={mockupData.length}
+              DogLength={mockupData.length} //* 기능 작업을 위한 임시 데이터
             />
           ))}
 
@@ -39,6 +39,7 @@ const MyDogInfo = () => {
 
 export default MyDogInfo;
 
+//* 기능 작업을 위한 목업 데이터
 const mockupData = [
   {
     dogId: 1,

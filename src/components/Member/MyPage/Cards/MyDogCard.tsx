@@ -22,6 +22,7 @@ const MyDogCard = ({
   profileUri,
   DogLength
 }: IMyDogCardProps) => {
+  //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
   const overlay = useOverlay();
 
   const openInvalidInputPopup = () =>
