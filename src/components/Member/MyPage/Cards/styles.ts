@@ -89,17 +89,17 @@ export const DogName = styled.h3`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-const CurrentStatusTextStyle = css`
+const CurrentDateTextStyle = css`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.white};
 `;
 
 export const CurrentStatusText = styled.span`
-  ${CurrentStatusTextStyle}
+  ${CurrentDateTextStyle}
 `;
 
 export const CancelApprovalButton = styled.button`
-  ${CurrentStatusTextStyle}
+  ${CurrentDateTextStyle}
   position: absolute;
   bottom: 0;
   left: 0;
