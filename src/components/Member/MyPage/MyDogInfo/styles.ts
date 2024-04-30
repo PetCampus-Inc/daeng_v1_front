@@ -9,6 +9,7 @@ export const TitleBox = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
+  padding: 1.5rem 1rem 0;
 `;
 
 export const Title = styled.h3`
@@ -24,4 +25,5 @@ export const DeleteDogButton = styled.button`
 export const MyDogInfoList = styled.section`
   display: flex;
   gap: 0.75rem;
+  padding: 0 1rem;
 `;
