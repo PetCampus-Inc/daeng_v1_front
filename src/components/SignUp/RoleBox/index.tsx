@@ -2,7 +2,7 @@ import PrincipalIcon from "assets/svg/principal-icon";
 import PrincipalSelectedIcon from "assets/svg/principal-selected-icon";
 import TeacherIcon from "assets/svg/teacher-icon";
 import TeacherSelectedIcon from "assets/svg/teacher-selected-icon";
-import Text from "components/common/Text";
+import Typo from "components/common/Typo";
 import { memo } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
 
@@ -28,8 +28,8 @@ const RoleBox = ({ selected, Role, mainText, subText, handleClick }: Props) => {
       ) : (
         <PrincipalIcon />
       )}
-      <Text size="1.3rem" weight="bold" text={mainText} color={ThemeConfig.colors.darkBlack} />
-      <Text text={subText} color={ThemeConfig.colors.darkBlack} />
+      <Typo size="1.3rem" weight="bold" text={mainText} color={ThemeConfig.colors.darkBlack} />
+      <Typo text={subText} color={ThemeConfig.colors.darkBlack} />
     </StyledMainWrapper>
   );
 };

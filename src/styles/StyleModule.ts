@@ -111,3 +111,39 @@ export const BackDrop = styled(motion.div)`
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 9;
 `;
+
+// 폼 버튼 스타일
+
+export const FormButtonWrapper = styled.div`
+  display: flex;
+  margin: 0.25rem 0.15rem 1.25rem;
+  gap: 4px;
+`;
+
+export const FormButton = styled.button`
+  display: flex;
+  flex: 3;
+  width: 100%;
+  padding: 0.625rem 0;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.primaryColor};
+
+  ${({ theme }) => theme.typo.label1_16_B};
+  color: ${({ theme }) => theme.colors.white};
+
+  &[aria-disabled="true"] {
+    background-color: ${({ theme }) => theme.colors.gray_4};
+    color: ${({ theme }) => theme.colors.gray_2};
+    tabindex: -1;
+  }
+`;
+
+export const FormPrevButton = styled(FormButton)`
+  flex: 1;
+
+  background-color: ${({ theme }) => theme.colors.br_4};
+  color: ${({ theme }) => theme.colors.primaryColor};
+`;

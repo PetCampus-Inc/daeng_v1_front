@@ -1,5 +1,5 @@
 import { IconWrapper } from "components/Admin/DogDetailInfo/DogInfo/styles";
-import { Title } from "components/MembershipApplication/styles";
+import { Title } from "components/Enrollment/styles";
 import { StyledTextWrapper } from "components/SignIn/InputBoxAndText/styles";
 import { ReactNode } from "react";
 

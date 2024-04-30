@@ -9,7 +9,7 @@ export const TopWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  top: 0;
+  top: 5vh;
   padding: 28px 0;
   gap: 12px;
 
@@ -65,6 +65,6 @@ export const EditButton = styled.button`
   color: ${({ theme }) => theme.colors.gray_1};
 `;
 
-export { Card, Stack, Caption } from "components/MembershipApplication/Form/styles";
+export { Card, Stack, Caption } from "components/Enrollment/Form/styles";
 export { Label } from "components/common/Title/style";
-export { Content } from "components/MembershipApplication/styles";
+export { Content } from "components/Enrollment/styles";

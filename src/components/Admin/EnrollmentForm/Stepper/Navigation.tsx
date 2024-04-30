@@ -1,4 +1,5 @@
-import * as S from "./styles";
+import { FormButton, FormButtonWrapper, FormPrevButton } from "styles/StyleModule";
+
 import SubmitButton from "./SubmitButton";
 
 interface NavigationProps {
@@ -13,13 +14,11 @@ const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: Navigation
   const isLastStep = currentStep === stepsLength - 1;
 
   return (
-    <>
-      <S.ButtonWrapper>
-        {!isFirstStep && !isLastStep && <S.PrevButton onClick={prevStep}>이전</S.PrevButton>}
-        {!isLastStep && <S.Button onClick={nextStep}>다음</S.Button>}
-        {isLastStep && <SubmitButton />}
-      </S.ButtonWrapper>
-    </>
+    <FormButtonWrapper>
+      {!isFirstStep && !isLastStep && <FormPrevButton onClick={prevStep}>이전</FormPrevButton>}
+      {!isLastStep && <FormButton onClick={nextStep}>다음</FormButton>}
+      {isLastStep && <SubmitButton />}
+    </FormButtonWrapper>
   );
 };
 

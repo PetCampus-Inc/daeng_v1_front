@@ -5,7 +5,7 @@ import RightArrow from "assets/svg/right-arrow";
 import SimpleButton from "components/common/Button/SimpleButton";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useNavigate } from "react-router-dom";
-import { ICareDogInfo } from "types/admin.caredog.type";
+import { ICareDogInfo } from "types/admin/care.types";
 
 import CareOptionDropdown from "./CareButton/CareOptionDropdown";
 import MainSendCard from "./CareButton/MainSendCard";

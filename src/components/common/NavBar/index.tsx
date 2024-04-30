@@ -17,7 +17,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
 
   return (
     <S.Container>
-      {path.includes("/member")
+      {path.includes("/mypage")
         ? MENU_ITEMS.member.map((menuItem, index) => (
             <React.Fragment key={menuItem.text}>
               <S.NavButton to={menuItem.path}>

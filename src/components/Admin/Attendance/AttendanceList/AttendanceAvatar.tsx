@@ -1,6 +1,6 @@
 import ArrowLeftSquare from "assets/svg/arrow-left-square-icon";
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
-import CloseIcon from "assets/svg/close-icon";
+import CloseIcon from "assets/svg/x-circle-icon";
 import { useCallback, useRef, useState } from "react";
 import Slider from "react-slick";
 
