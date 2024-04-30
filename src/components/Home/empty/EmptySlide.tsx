@@ -1,6 +1,6 @@
 import { EmptyContainer } from "./styles";
 
-const EmptyImg = () => {
+const EmptySlide = () => {
   return (
     <EmptyContainer>
       <span>전송된 사진이 없어요</span>
@@ -8,4 +8,4 @@ const EmptyImg = () => {
   );
 };
 
-export default EmptyImg;
+export default EmptySlide;

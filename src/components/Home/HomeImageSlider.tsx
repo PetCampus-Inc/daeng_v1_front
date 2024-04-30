@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Slider from "react-slick";
 
-import EmptyImg from "./empty/EmptyImg";
+import EmptySlide from "./empty/EmptySlide";
 import CommentBox from "./ImageSidler/CommentBox";
 import CommentButton from "./ImageSidler/CommentButton";
 import SaveOptionDropdown from "./ImageSidler/SaveOptionDropdown";
@@ -42,7 +42,7 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
     )
   };
 
-  if (!images) return <EmptyImg />;
+  if (!images) return <EmptySlide />;
 
   return (
     <SliderContainer>

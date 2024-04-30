@@ -8,9 +8,7 @@ export const EmptyContainer = styled.div`
 
   aspect-ratio: 1 / 1;
   border-radius: 8px;
-
-  ${({ theme }) => theme.typo.label2_14_R};
-  color: ${({ theme }) => theme.colors.gray_1};
+  background-color: ${({ theme }) => theme.colors.white};
 
   &::after {
     content: "";
@@ -29,5 +27,8 @@ export const EmptyContainer = styled.div`
   & > span {
     height: 39%;
     margin-top: auto;
+
+    ${({ theme }) => theme.typo.label2_14_R};
+    color: ${({ theme }) => theme.colors.gray_1};
   }
 `;
