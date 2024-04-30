@@ -10,7 +10,6 @@ export const Input = styled.input<InputFieldStyleProps>`
   align-items: center;
   border: 1px solid
     ${({ borderColor }) => (borderColor ? borderColor : ({ theme }) => theme.colors.gray_4)};
-
   padding: 12px 18px;
   border-radius: 8px;
 
@@ -45,6 +44,11 @@ export const Input = styled.input<InputFieldStyleProps>`
 
   &[type="number"] {
     -moz-appearance: textfield;
+  }
+
+  &[type="search"] {
+    padding-right: 50px;
+    text-overflow: ellipsis;
   }
 
   &:disabled {
