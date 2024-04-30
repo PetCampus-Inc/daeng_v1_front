@@ -11,7 +11,7 @@ const RejectedCard = () => {
       </S.BgIconBox>
       <S.InfoTextBox>
         <S.DogName textColor={ThemeConfig.colors.gray_1}>뽀뽀</S.DogName>
-        <S.StatusBox>승인 거절</S.StatusBox>
+        <S.StatusBox bgColor={ThemeConfig.colors.red_1}>승인 거절</S.StatusBox>
         <S.CurrentStatusText textColor={ThemeConfig.colors.gray_1}>
           2023.12.20 제출
         </S.CurrentStatusText>

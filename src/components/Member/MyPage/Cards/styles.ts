@@ -3,6 +3,7 @@ import { css, styled } from "styled-components";
 interface ICardStyleProps {
   mb?: string;
   textColor?: string;
+  bgColor?: string;
 }
 
 export const Card = styled.div`
@@ -157,8 +158,13 @@ export const AddDogButton = styled.button`
   z-index: 1;
 `;
 
-export const StatusBox = styled.span`
+export const StatusBox = styled.span<ICardStyleProps>`
   ${CurrentStatusTextStyle}
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
+
+  &::before {
+    display: ${({ bgColor }) => (bgColor ? "none" : "unset")};
+  }
 `;
 
 export const InfoTextBox = styled.div<ICardStyleProps>`
