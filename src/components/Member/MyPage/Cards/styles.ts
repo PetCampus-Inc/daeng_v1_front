@@ -4,7 +4,7 @@ interface ICardStyleProps {
   mb?: string;
 }
 
-const CardStyle = css`
+export const Card = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 16px;
@@ -13,9 +13,7 @@ const CardStyle = css`
   padding-bottom: 60%;
 `;
 
-export const MyDogCard = styled.div`
-  ${CardStyle}
-
+export const MyDogCard = styled(Card)`
   &::before {
     content: "";
     width: 100%;
@@ -29,12 +27,11 @@ export const MyDogCard = styled.div`
   }
 `;
 
-export const AddMyDogCard = styled.div`
+export const AddMyDogCard = styled(Card)`
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${CardStyle}
   background-color: ${({ theme }) => theme.colors.gray_4};
 
   & > svg.addIcon {
@@ -44,8 +41,7 @@ export const AddMyDogCard = styled.div`
   }
 `;
 
-export const WaitingCard = styled.div`
-  ${CardStyle}
+export const WaitingCard = styled(Card)`
   background-color: ${({ theme }) => theme.colors.primaryColor};
   display: flex;
   justify-content: center;
@@ -63,8 +59,7 @@ export const WaitingCard = styled.div`
   }
 `;
 
-export const RejectedCard = styled.div`
-  ${CardStyle}
+export const RejectedCard = styled(Card)`
   background-color: ${({ theme }) => theme.colors.red_2};
   display: flex;
   justify-content: center;
@@ -159,10 +154,10 @@ export const GotoSchoolInfoButton = styled.button`
 `;
 
 export const AddDogButton = styled.button`
+  ${CurrentStatusTextStyle}
   position: absolute;
   bottom: 15px;
   z-index: 1;
-  ${CurrentStatusTextStyle}
 `;
 
 export const StatusBox = styled.span`
