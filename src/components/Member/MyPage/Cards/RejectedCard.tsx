@@ -6,9 +6,6 @@ import * as S from "./styles";
 const RejectedCard = () => {
   return (
     <S.RejectedCard>
-      <S.BgIconBox className="iconPosition">
-        <DogRejectedIcon />
-      </S.BgIconBox>
       <S.InfoTextBox>
         <S.DogName textColor={ThemeConfig.colors.gray_1}>뽀뽀</S.DogName>
         <S.StatusBox bgColor={ThemeConfig.colors.red_1}>승인 거절</S.StatusBox>
@@ -16,6 +13,9 @@ const RejectedCard = () => {
           2023.12.20 제출
         </S.CurrentStatusText>
       </S.InfoTextBox>
+      <S.BgIconBox>
+        <DogRejectedIcon />
+      </S.BgIconBox>
     </S.RejectedCard>
   );
 };

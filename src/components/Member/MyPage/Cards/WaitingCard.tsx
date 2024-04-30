@@ -6,9 +6,6 @@ import * as S from "./styles";
 const WaitingCard = () => {
   return (
     <S.WaitingCard>
-      <S.BgIconBox className="iconPosition">
-        <DogWaitingIcon />
-      </S.BgIconBox>
       <S.InfoTextBox mb="32">
         <S.DogName>뽀뽀</S.DogName>
         <S.StatusBox>승인 대기중</S.StatusBox>
@@ -17,6 +14,9 @@ const WaitingCard = () => {
         <S.CurrentStatusText>2023.12.20 제출 | 승인 취소</S.CurrentStatusText>
         <RightArrow />
       </S.CancelApprovalButton>
+      <S.BgIconBox>
+        <DogWaitingIcon />
+      </S.BgIconBox>
     </S.WaitingCard>
   );
 };
