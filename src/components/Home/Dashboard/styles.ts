@@ -9,7 +9,7 @@ export { Img } from "styles/StyleModule";
 
 export const BoxContainer = styled.section`
   min-width: 132px;
-  padding: ${remCalc(14)} ${remCalc(16)};
+  padding: ${remCalc(12)} ${remCalc(14)};
 
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.gray_5};
@@ -54,7 +54,7 @@ export const SpringBound = styled.div`
 
 export const NoteContent = styled.div`
   min-height: 185px;
-  padding: ${remCalc(14 + 27)} ${remCalc(12)} ${remCalc(16)};
+  padding: ${remCalc(14 + 27)} ${remCalc(10)} ${remCalc(14)} ${remCalc(10)};
 
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.yellow_3};
@@ -64,7 +64,7 @@ export const NoteContent = styled.div`
 export const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: ${remCalc(14)};
+  padding: ${remCalc(14)} ${remCalc(14)} ${remCalc(14)} ${remCalc(12)};
   margin-top: 1rem;
 
   border-image: linear-gradient(300deg, #fff9ea 0%, #ffffff 30%);
