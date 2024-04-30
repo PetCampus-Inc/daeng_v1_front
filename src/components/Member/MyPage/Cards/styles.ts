@@ -10,7 +10,7 @@ export const Card = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 16px;
-  min-width: 155px;
+  width: 155px;
   height: 0;
   padding-bottom: 216px;
 `;
