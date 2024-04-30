@@ -265,8 +265,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       children: [
         {
           index: true,
-          // path: PATH.HOME,
-          loader: () => redirect(PATH.ADMIN_ATTENDANCE),
           element: (
             <Suspense>
               <Pages.HomePage />

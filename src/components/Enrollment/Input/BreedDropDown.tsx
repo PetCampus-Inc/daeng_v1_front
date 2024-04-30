@@ -1,8 +1,8 @@
 import Button from "components/common/Button";
 import { useRef } from "react";
 
-import * as S from "../../common/Dropdown/styles";
-import { CommonDropdownProps } from "../../common/Dropdown/type";
+import * as S from "../../common/Dropdown/StringDropdown/styles";
+import { CommonDropdownProps } from "../../common/Dropdown/StringDropdown/type";
 
 interface IBreedDropdown extends CommonDropdownProps {
   dropDownList: { breedId: number; breedName: string }[];

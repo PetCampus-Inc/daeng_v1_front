@@ -49,5 +49,5 @@ const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-top: 28px;
+  margin-top: 8px;
 `;
