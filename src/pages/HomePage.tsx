@@ -1,10 +1,10 @@
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
+import EmptyAlbum from "components/Home/empty/EmptyAlbum";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
 import HomeImageSlider from "components/Home/HomeImageSlider";
-import { PageContainer } from "styles/StyleModule";
-import { remCalc } from "utils/calculator";
+import { StyledBox } from "components/Home/styles";
 
 import type { IHome } from "types/member/home.types";
 
@@ -12,11 +12,16 @@ const HomePage = () => {
   return (
     <>
       <Header type="main" text="뚜비" />
-      <PageContainer pt={remCalc("28px", false)}>
-        <HomeHeader data={mock} />
-        <HomeDashboard data={mock} />
-        <HomeImageSlider images={mock.imageList} />
-      </PageContainer>
+      <main>
+        <StyledBox type="top" pt={2} pb={2}>
+          <HomeHeader data={mock} />
+          <HomeDashboard data={mock} />
+        </StyledBox>
+        <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
+          <HomeImageSlider />
+          <EmptyAlbum />
+        </StyledBox>
+      </main>
       <NavBar />
     </>
   );
