@@ -1,5 +1,9 @@
 import { css, styled } from "styled-components";
 
+interface ICardStyleProps {
+  mb?: string;
+}
+
 const CardStyle = css`
   overflow: hidden;
   position: relative;
@@ -40,6 +44,36 @@ export const AddMyDogCard = styled.div`
   }
 `;
 
+export const WaitingCard = styled.div`
+  ${CardStyle}
+  background-color: ${({ theme }) => theme.colors.primaryColor};
+  display: flex;
+  justify-content: center;
+
+  & > .iconPosition {
+    position: absolute;
+    width: 70%;
+    height: calc(100% - 6.5rem);
+    margin-top: 0.75rem;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(transparent, ${({ theme }) => theme.colors.white});
+    opacity: 0.2;
+    z-index: 1;
+  }
+`;
+
 export const MyDogImg = styled.img`
   position: absolute;
   height: 100%;
@@ -54,12 +88,42 @@ export const DogName = styled.h3`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const CurrentStatusText = styled.span`
+const CurrentStatusTextStyle = css`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.white};
 `;
 
+export const CurrentStatusText = styled.span`
+  ${CurrentStatusTextStyle}
+`;
+
+export const CancelApprovalButton = styled.button`
+  ${CurrentStatusTextStyle}
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 29px;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: ${({ theme }) => theme.colors.primaryColor};
+    opacity: 0.4;
+    z-index: -1;
+  }
+`;
+
 const ButtonStyle = css`
+  position: relative;
   overflow: hidden;
   padding: 4px 8px;
   border-radius: 50px;
@@ -82,7 +146,6 @@ const ButtonStyle = css`
 `;
 
 export const GotoSchoolInfoButton = styled.button`
-  position: relative;
   ${ButtonStyle}
 `;
 
@@ -93,7 +156,11 @@ export const AddDogButton = styled.button`
   ${ButtonStyle}
 `;
 
-export const InfoTextBox = styled.div`
+export const StatusBox = styled.span`
+  ${ButtonStyle}
+`;
+
+export const InfoTextBox = styled.div<ICardStyleProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -102,5 +169,6 @@ export const InfoTextBox = styled.div`
   left: 0;
   width: 100%;
   z-index: 1;
-  padding: 8px 12px;
+  padding: 8px 12px ${({ mb }) => mb && "0"};
+  margin-bottom: ${({ mb }) => (mb ? `${mb}px` : "0")};
 `;
