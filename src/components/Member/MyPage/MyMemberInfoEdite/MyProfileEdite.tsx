@@ -1,12 +1,15 @@
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
-import InputBox from "components/common/InputBox";
+import InputField from "components/common/InputField";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
 import RoleEditeButton from "../Buttons/RoleEditeButton";
 
 const MyProfileEdite = () => {
+  // TODO setValue, watch의 경우 이후 기능 추가 후 삭제 여부 판단하기
+  const { register, setValue, watch } = useFormContext();
   const [isShowRoles, setIsShowRoles] = useState(false);
   const handleShowRoles = () => {
     console.log("호칭");
@@ -27,17 +30,14 @@ const MyProfileEdite = () => {
         </S.ProfileEditeBox>
       </S.ProfileBox>
       <S.MyDogName>
-        <InputBox
-          width="100%"
-          height="49px"
-          color={ThemeConfig.colors.gray_1}
-          border={ThemeConfig.colors.primaryColor}
-          placeholdText="뽀뽀"
-          inputValue="뽀뽀"
-          type="text"
-          setInputValue={() => {
-            //TODO 작업 필요
-          }}
+        <InputField
+          name="dogName"
+          register={register}
+          isRequired
+          borderColor={ThemeConfig.colors.white}
+          placeholder="강아지 이름을 입력해주세요"
+          defaultValue="뽀뽀"
+          value="뽀뽀"
         />
         의
       </S.MyDogName>

@@ -21,7 +21,9 @@ const MemberMyInfoEditePage = () => {
     <>
       <Header type="text" text="프로필 수정" transparent />
       <PageContainer pt="1" color="br_5">
-        <MyProfileEdite />
+        <FormProvider {...methods}>
+          <MyProfileEdite />
+        </FormProvider>
         <ContentContainer px="1.5" py="1">
           <FormProvider {...methods}>
             <MyInfoEdite requiredItems={requiredItemList} />
