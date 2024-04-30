@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Slider from "react-slick";
 
+import EmptyImg from "./empty/EmptyImg";
 import CommentBox from "./ImageSidler/CommentBox";
 import CommentButton from "./ImageSidler/CommentButton";
 import SaveOptionDropdown from "./ImageSidler/SaveOptionDropdown";
@@ -18,7 +19,7 @@ import TransmissionTime from "./ImageSidler/TransmissionTime";
 
 import type { ImageList } from "types/member/home.types";
 
-const HomeImageSlider = ({ images }: { images: ImageList[][] }) => {
+const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
 
@@ -40,6 +41,8 @@ const HomeImageSlider = ({ images }: { images: ImageList[][] }) => {
       <SliderDots dots={dots} numDotsToShow={5} dotWidth={20} />
     )
   };
+
+  if (!images) return <EmptyImg />;
 
   return (
     <SliderContainer>
