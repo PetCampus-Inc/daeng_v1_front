@@ -36,7 +36,6 @@ const MyProfileEdite = () => {
           isRequired
           borderColor={ThemeConfig.colors.white}
           placeholder="강아지 이름을 입력해주세요"
-          defaultValue="뽀뽀"
           value="뽀뽀"
         />
         의

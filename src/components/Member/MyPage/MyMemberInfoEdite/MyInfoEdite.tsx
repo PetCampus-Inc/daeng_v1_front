@@ -59,7 +59,6 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           register={register}
           isRequired
           placeholder="견주 이름을 입력해주세요"
-          defaultValue="박유빈"
           value="박유빈"
         />
       </Flex>
@@ -78,7 +77,6 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           onClick={() => openPopup()}
           onClear={handleClear}
           value={watchAddress}
-          defaultValue={watchAddress}
           isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
@@ -88,7 +86,6 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           name="address.detail"
           register={register}
           value="롯데캐슬 아파트 203동 1403호"
-          defaultValue="롯데캐슬 아파트 203동 1403호"
           placeholder="상세 주소를 입력해주세요"
         />
       </Flex>
@@ -103,7 +100,6 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
           value="010-1234-1234"
-          defaultValue="010-1234-1234"
           type="tel"
         />
       </Flex>
@@ -118,7 +114,6 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="비상 연락처를 입력해주세요"
           value="010-1234-1234"
-          defaultValue="010-1234-1234"
           type="tel"
         />
       </Flex>
