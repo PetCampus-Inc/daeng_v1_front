@@ -7,7 +7,7 @@ import SearchInputField from "components/common/InputField/SearchInputField";
 import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Typo from "components/common/Typo";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import * as useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ThemeConfig } from "styles/ThemeConfig";
@@ -22,7 +22,7 @@ interface MemberInfoProps {
 const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
   const { register, setValue, watch } = useFormContext();
   const [isAddressActive, setIsAddressActive] = useState(false);
-  const overlay = useOverlay();
+  const overlay = useOverlay.useOverlay();
 
   const addressStreet = "address.street";
   const watchAddress = watch(addressStreet, "");

@@ -6,7 +6,7 @@ import MyInfoEdite from "components/Member/MyPage/MyMemberInfoEdite/MyInfoEdite"
 import MyProfileEdite from "components/Member/MyPage/MyMemberInfoEdite/MyProfileEdite";
 import { ContentContainer } from "components/Member/MyPage/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import * as useOverlay from "hooks/common/useOverlay/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const MemberMyInfoEditePage = () => {
     defaultValues: {}
   });
   const navigate = useNavigate();
-  const overlay = useOverlay();
+  const overlay = useOverlay.useOverlay();
 
   const { data } = useGetEnrollment({ memberId: "1", schoolId: "2" });
   const { requiredItemList } = data;
