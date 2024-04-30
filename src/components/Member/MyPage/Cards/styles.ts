@@ -55,7 +55,7 @@ export const WaitingCard = styled(Card)`
     position: absolute;
     left: 0;
     bottom: 0;
-    background: linear-gradient(transparent, ${({ theme }) => theme.colors.white});
+    background-color: ${({ theme }) => theme.colors.white};
     opacity: 0.2;
     z-index: 1;
   }
@@ -141,7 +141,7 @@ const StatusBoxStyle = css`
     position: absolute;
     left: 0;
     bottom: 0;
-    background-color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.darkBlack};
     opacity: 0.6;
     z-index: -1;
   }
