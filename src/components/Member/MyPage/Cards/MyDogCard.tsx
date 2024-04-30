@@ -1,11 +1,31 @@
 import RightArrow from "assets/svg/right-arrow";
+import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import useOverlay from "hooks/common/useOverlay/useOverlay";
 
 import * as S from "./styles";
 
 const MyDogCard = ({ isOpen }: { isOpen: boolean }) => {
+  const overlay = useOverlay();
+
+  const openInvalidInputPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AlertBottomSheet
+        isOpen={isOpen}
+        close={() => {
+          close();
+        }}
+        title="강아지를 전부 삭제할 수 없어요"
+        subtitle="최소 한 마리의 강아지를 남겨주세요"
+        actionText="닫기"
+        actionFn={() => {
+          close();
+        }}
+      />
+    ));
+
   return (
     <S.MyDogCard>
-      {isOpen && <S.DeleteButton>삭제</S.DeleteButton>}
+      {isOpen && <S.DeleteButton onClick={openInvalidInputPopup}>삭제</S.DeleteButton>}
       <S.InfoTextBox>
         <S.DogName>뽀뽀</S.DogName>
         <S.GotoSchoolInfoButton>
