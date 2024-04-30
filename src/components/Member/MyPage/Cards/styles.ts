@@ -103,7 +103,7 @@ export const CancelApprovalButton = styled.button`
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
