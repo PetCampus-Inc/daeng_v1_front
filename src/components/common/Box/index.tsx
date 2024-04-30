@@ -35,6 +35,7 @@ export type BoxOptions = {
   color?: TColor;
   position?: CSSProperties["position"];
   overflow?: CSSProperties["overflow"];
+  align?: "center" | "start" | "end" | "left" | "right";
 };
 
 export type BoxProps = BoxOptions &
