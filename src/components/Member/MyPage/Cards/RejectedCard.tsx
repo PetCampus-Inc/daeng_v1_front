@@ -1,4 +1,5 @@
 import DogRejectedIcon from "assets/svg/dog-rejected-icon";
+import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
 
@@ -9,9 +10,11 @@ const RejectedCard = () => {
         <DogRejectedIcon />
       </S.BgIconBox>
       <S.InfoTextBox>
-        <S.DogName>뽀뽀</S.DogName>
+        <S.DogName textColor={ThemeConfig.colors.gray_1}>뽀뽀</S.DogName>
         <S.StatusBox>승인 거절</S.StatusBox>
-        <S.CurrentStatusText>2023.12.20 제출</S.CurrentStatusText>
+        <S.CurrentStatusText textColor={ThemeConfig.colors.gray_1}>
+          2023.12.20 제출
+        </S.CurrentStatusText>
       </S.InfoTextBox>
     </S.RejectedCard>
   );

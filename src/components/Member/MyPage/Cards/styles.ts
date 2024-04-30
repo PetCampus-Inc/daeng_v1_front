@@ -2,6 +2,7 @@ import { css, styled } from "styled-components";
 
 interface ICardStyleProps {
   mb?: string;
+  textColor?: string;
 }
 
 export const Card = styled.div`
@@ -86,22 +87,18 @@ export const MyDogImg = styled.img`
   object-fit: cover;
 `;
 
-export const DogName = styled.h3`
+export const DogName = styled.h3<ICardStyleProps>`
   ${({ theme }) => theme.typo.title2_20_B};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
 `;
 
-const CurrentDateTextStyle = css`
+export const CurrentStatusText = styled.span<ICardStyleProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ theme }) => theme.colors.white};
-`;
-
-export const CurrentStatusText = styled.span`
-  ${CurrentDateTextStyle}
+  color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
 `;
 
 export const CancelApprovalButton = styled.button`
-  ${CurrentDateTextStyle}
+  color: ${({ theme }) => theme.colors.white};
   position: absolute;
   bottom: 0;
   left: 0;
