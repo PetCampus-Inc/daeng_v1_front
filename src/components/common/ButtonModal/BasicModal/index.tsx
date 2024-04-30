@@ -8,7 +8,7 @@ interface Props extends IModalProps {
   actionText: string;
 }
 
-const NormalModal = ({ isOpen, close, action, title, subtitle, closeText, actionText }: Props) => {
+const BasicModal = ({ isOpen, close, action, title, subtitle, closeText, actionText }: Props) => {
   return (
     <Modal isOpen={isOpen} close={close}>
       <Modal.Content>
@@ -24,4 +24,4 @@ const NormalModal = ({ isOpen, close, action, title, subtitle, closeText, action
   );
 };
 
-export default NormalModal;
+export default BasicModal;

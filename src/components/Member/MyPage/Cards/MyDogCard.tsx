@@ -1,6 +1,6 @@
 import RightArrow from "assets/svg/right-arrow";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import NormalModal from "components/common/ButtonModal/NormalModal";
+import BasicModal from "components/common/ButtonModal/BasicModal";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
 
 import * as S from "./styles";
@@ -43,7 +43,7 @@ const MyDogCard = ({
 
   const openDeleteDogPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <NormalModal
+      <BasicModal
         isOpen={isOpen}
         close={close}
         action={handleDeleteDog}
