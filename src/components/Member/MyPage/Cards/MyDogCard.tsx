@@ -6,9 +6,21 @@ import * as S from "./styles";
 
 interface IMyDogCardProps {
   isOpen: boolean;
+  dogName: string;
+  schoolInfo: string;
+  createdTime: string;
+  profileUri: string;
+  DogLength: number;
 }
 
-const MyDogCard = ({ isOpen }: IMyDogCardProps) => {
+const MyDogCard = ({
+  isOpen,
+  dogName,
+  schoolInfo,
+  createdTime,
+  profileUri,
+  DogLength
+}: IMyDogCardProps) => {
   const overlay = useOverlay();
 
   const openInvalidInputPopup = () =>
@@ -27,21 +39,26 @@ const MyDogCard = ({ isOpen }: IMyDogCardProps) => {
       />
     ));
 
+  const handleDogDelete = () => {
+    console.log("삭제");
+  };
+
   return (
     <S.MyDogCard>
-      {isOpen && <S.DeleteButton onClick={openInvalidInputPopup}>삭제</S.DeleteButton>}
+      {isOpen && (
+        <S.DeleteButton onClick={DogLength <= 1 ? openInvalidInputPopup : handleDogDelete}>
+          삭제
+        </S.DeleteButton>
+      )}
       <S.InfoTextBox>
-        <S.DogName>뽀뽀</S.DogName>
+        <S.DogName>{dogName}</S.DogName>
         <S.GotoSchoolInfoButton>
-          바나나 유치원 잠실점
+          {schoolInfo}
           {!isOpen && <RightArrow />}
         </S.GotoSchoolInfoButton>
-        <S.DateText>2023.12.20 등록</S.DateText>
+        <S.DateText>{createdTime} 등록</S.DateText>
       </S.InfoTextBox>
-      <S.MyDogImg
-        src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="my-dog"
-      />
+      <S.MyDogImg src={profileUri} alt="my-dog" />
     </S.MyDogCard>
   );
 };

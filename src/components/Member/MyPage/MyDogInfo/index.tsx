@@ -16,7 +16,18 @@ const MyDogInfo = () => {
       </S.TitleBox>
       <div>
         <S.MyDogInfoList>
-          <MyDogCard isOpen={isOpen} />
+          {mockupData.map((item) => (
+            <MyDogCard
+              key={item.dogId}
+              isOpen={isOpen}
+              dogName={item.dogName}
+              schoolInfo={"바나나 유치원 잠실점"}
+              createdTime={"2023.12.20"}
+              profileUri={item.profileUri}
+              DogLength={mockupData.length}
+            />
+          ))}
+
           <AddMyDogCard />
           {/* <RejectedCard />
           <WaitingCard /> */}
@@ -27,3 +38,80 @@ const MyDogInfo = () => {
 };
 
 export default MyDogInfo;
+
+const mockupData = [
+  {
+    dogId: 1,
+    dogName: "뽀뽀",
+    dogGender: "남",
+    dogSize: "SMALL",
+    breedId: 1,
+    breedName: "사모예드",
+    dogBirthDate: "2024-04-30",
+    neutralization: "NEUTERED",
+    allergyDisease: "string",
+    vaccination: "VACCINATED",
+    profileUri:
+      "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    fileList: [
+      {
+        imageId: 0,
+        imageUri:
+          "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        imageType: "IMAGE",
+        comment: "string",
+        createdTime: "2024-04-30T15:18:07.028Z"
+      }
+    ],
+    pickDropRequest: "RUNNING",
+    pickDropType: "RUNNING",
+    pickDropMemo: "string",
+    member: {
+      memberId: 1,
+      memberName: "박유빈",
+      memberGender: "남자",
+      address: "서울 중구 덕수궁길 150",
+      phoneNumber: "010-1234-1234",
+      emergencyNumber: "010-1234-1234",
+      relation: "아빠"
+    },
+    dogMemo: "string"
+  },
+  {
+    dogId: 2,
+    dogName: "뿌뿌",
+    dogGender: "여",
+    dogSize: "SMALL",
+    breedId: 2,
+    breedName: "사모예드",
+    dogBirthDate: "2024-04-30",
+    neutralization: "NEUTERED",
+    allergyDisease: "string",
+    vaccination: "VACCINATED",
+    profileUri:
+      "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    fileList: [
+      {
+        imageId: 0,
+        imageUri:
+          "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        imageType: "IMAGE",
+        comment: "string",
+        createdTime: "2024-04-30T15:18:07.028Z"
+      }
+    ],
+    pickDropRequest: "RUNNING",
+    pickDropType: "RUNNING",
+    pickDropMemo: "string",
+    member: {
+      memberId: 1,
+      memberName: "박유빈",
+      memberGender: "남자",
+      address: "서울 중구 덕수궁길 150",
+      phoneNumber: "010-1234-1234",
+      emergencyNumber: "010-1234-1234",
+      relation: "아빠"
+    },
+    dogMemo: "string"
+  }
+];
