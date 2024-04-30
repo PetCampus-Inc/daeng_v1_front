@@ -1,7 +1,7 @@
-import RightArrow from "assets/svg/right-arrow";
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BasicModal from "components/common/ButtonModal/BasicModal";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import * as useOverlay from "hooks/common/useOverlay";
 
 import * as S from "./styles";
 
@@ -23,7 +23,7 @@ const MyDogCard = ({
   DogLength
 }: IMyDogCardProps) => {
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
-  const overlay = useOverlay();
+  const overlay = useOverlay.useOverlay();
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -69,7 +69,7 @@ const MyDogCard = ({
         <S.DogName>{dogName}</S.DogName>
         <S.GotoSchoolInfoButton>
           {schoolInfo}
-          {!isOpen && <RightArrow />}
+          {!isOpen && <ArrowRightIcon />}
         </S.GotoSchoolInfoButton>
         <S.DateText>{createdTime} 등록</S.DateText>
       </S.InfoTextBox>

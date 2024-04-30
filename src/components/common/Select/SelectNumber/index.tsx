@@ -1,5 +1,5 @@
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
-import StringDropdown from "components/common/Dropdown/StringDropdown";
+import StringDropdown from "components/common/Dropdown";
 import InputField, { InputFieldProps } from "components/common/InputField";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { useRef, useState } from "react";

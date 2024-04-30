@@ -7,18 +7,23 @@ import { StyledBox } from "./styles";
 import type { TColor } from "styles/ThemeConfig";
 
 export type BoxOptions = {
+  display?: CSSProperties["display"];
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   margin?: CSSProperties["margin"];
-  mr?: number | string;
-  mt?: number | string;
-  ml?: number | string;
-  mb?: number | string;
+  mr?: number | string; // margin right
+  ml?: number | string; // margin left
+  mt?: number | string; // margin top
+  mb?: number | string; // margin bottom
+  marginBlock?: number | string; // margin-block
+  marginInline?: number | string; // margin-inline
   padding?: CSSProperties["padding"];
-  pt?: number | string;
-  pr?: number | string;
-  pb?: number | string;
-  pl?: number | string;
+  pt?: number | string; // padding-top
+  pr?: number | string; // padding-right
+  pb?: number | string; // padding-bottom
+  pl?: number | string; // padding-left
+  paddingInline?: number | string; // padding-inline
+  paddingBlock?: number | string; // padding-block
   border?: number;
   borderRadius?: number;
   borderColor?: TColor;
