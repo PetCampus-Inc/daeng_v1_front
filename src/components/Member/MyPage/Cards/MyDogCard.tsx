@@ -2,15 +2,15 @@ import RightArrow from "assets/svg/right-arrow";
 
 import * as S from "./styles";
 
-const MyDogCard = () => {
+const MyDogCard = ({ isOpen }: { isOpen: boolean }) => {
   return (
     <S.MyDogCard>
-      <S.DeleteButton>삭제</S.DeleteButton>
+      {isOpen && <S.DeleteButton>삭제</S.DeleteButton>}
       <S.InfoTextBox>
         <S.DogName>뽀뽀</S.DogName>
         <S.GotoSchoolInfoButton>
           바나나 유치원 잠실점
-          <RightArrow />
+          {!isOpen && <RightArrow />}
         </S.GotoSchoolInfoButton>
         <S.DateText>2023.12.20 등록</S.DateText>
       </S.InfoTextBox>
