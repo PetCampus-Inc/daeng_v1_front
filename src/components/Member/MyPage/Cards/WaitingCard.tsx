@@ -1,5 +1,5 @@
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
-import RightArrow from "assets/svg/right-arrow";
 
 import * as S from "./styles";
 
@@ -12,7 +12,7 @@ const WaitingCard = () => {
       </S.InfoTextBox>
       <S.CancelApprovalButton>
         <S.DateText>2023.12.20 제출 | 승인 취소</S.DateText>
-        <RightArrow />
+        <ArrowRightIcon />
       </S.CancelApprovalButton>
       <S.BgIconBox>
         <DogWaitingIcon />
