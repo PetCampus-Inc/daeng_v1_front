@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
-export const Input = styled.input`
+interface InputFieldStyleProps {
+  borderColor?: string;
+}
+
+export const Input = styled.input<InputFieldStyleProps>`
   display: flex;
   width: 100%;
   align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors.gray_4};
+  border: 1px solid
+    ${({ borderColor }) => (borderColor ? borderColor : ({ theme }) => theme.colors.gray_4)};
 
   padding: 12px 18px;
   border-radius: 8px;
