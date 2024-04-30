@@ -6,9 +6,9 @@ import * as S from "./styles";
 const WaitingCard = () => {
   return (
     <S.WaitingCard>
-      <div className="iconPosition">
+      <S.BgIconBox className="iconPosition">
         <DogWaitingIcon />
-      </div>
+      </S.BgIconBox>
       <S.InfoTextBox mb="32">
         <S.DogName>뽀뽀</S.DogName>
         <S.StatusBox>승인 대기중</S.StatusBox>

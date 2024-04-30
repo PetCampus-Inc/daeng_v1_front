@@ -50,17 +50,6 @@ export const WaitingCard = styled.div`
   display: flex;
   justify-content: center;
 
-  & > .iconPosition {
-    position: absolute;
-    width: 70%;
-    height: calc(100% - 6.5rem);
-    margin-top: 0.75rem;
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
   &::before {
     content: "";
     width: 100%;
@@ -71,6 +60,18 @@ export const WaitingCard = styled.div`
     background: linear-gradient(transparent, ${({ theme }) => theme.colors.white});
     opacity: 0.2;
     z-index: 1;
+  }
+`;
+
+export const BgIconBox = styled.div`
+  position: absolute;
+  width: 70%;
+  height: calc(100% - 6.5rem);
+  margin-top: 0.75rem;
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -108,6 +109,7 @@ export const CancelApprovalButton = styled.button`
   justify-content: center;
   height: 29px;
   z-index: 1;
+  padding: 0 8.5px;
 
   &::before {
     content: "";
