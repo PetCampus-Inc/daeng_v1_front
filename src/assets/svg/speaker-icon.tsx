@@ -34,8 +34,8 @@ const SpeakerIcon = ({ className = "", w = "32", h = "32", bg = false }: Props) 
         fill="#C8A584"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M11.9922 8.33984C9.78305 8.33984 7.99219 10.1307 7.99219 12.3398C7.99219 14.549 9.78305 16.3398 11.9922 16.3398V8.33984Z"
         fill="#956F4C"
       />
