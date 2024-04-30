@@ -10,9 +10,9 @@ export const Card = styled.div`
   overflow: hidden;
   position: relative;
   border-radius: 16px;
-  width: 100%;
+  min-width: 155px;
   height: 0;
-  padding-bottom: 60%;
+  padding-bottom: 216px;
 `;
 
 export const MyDogCard = styled(Card)`
