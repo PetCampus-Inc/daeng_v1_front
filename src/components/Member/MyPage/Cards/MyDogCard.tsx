@@ -4,7 +4,11 @@ import useOverlay from "hooks/common/useOverlay/useOverlay";
 
 import * as S from "./styles";
 
-const MyDogCard = ({ isOpen }: { isOpen: boolean }) => {
+interface IMyDogCardProps {
+  isOpen: boolean;
+}
+
+const MyDogCard = ({ isOpen }: IMyDogCardProps) => {
   const overlay = useOverlay();
 
   const openInvalidInputPopup = () =>
