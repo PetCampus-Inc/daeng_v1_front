@@ -9,11 +9,15 @@ export const StyledBox = styled.div.withConfig({
       "width",
       "height",
       "margin",
+      "marginBlock",
+      "marginInline",
       "mr",
       "mt",
       "ml",
       "mb",
       "padding",
+      "paddingBlock",
+      "paddingInline",
       "pt",
       "pr",
       "pb",
@@ -39,11 +43,15 @@ export const StyledBox = styled.div.withConfig({
   margin-top: ${({ mt }) => (mt ? remCalc(mt) : undefined)};
   margin-left: ${({ ml }) => (ml ? remCalc(ml) : undefined)};
   margin-bottom: ${({ mb }) => (mb ? remCalc(mb) : undefined)};
+  margin-inline: ${({ marginInline }) => (marginInline ? remCalc(marginInline) : undefined)};
+  margin-block: ${({ marginBlock }) => (marginBlock ? remCalc(marginBlock) : undefined)};
   padding: ${({ padding }) => (padding ? padding : undefined)};
   padding-top: ${({ pt }) => (pt ? remCalc(pt) : undefined)};
   padding-right: ${({ pr }) => (pr ? remCalc(pr) : undefined)};
   padding-bottom: ${({ pb }) => (pb ? remCalc(pb) : undefined)};
   padding-left: ${({ pl }) => (pl ? remCalc(pl) : undefined)};
+  padding-inline: ${({ paddingInline }) => (paddingInline ? remCalc(paddingInline) : undefined)};
+  padding-block: ${({ paddingBlock }) => (paddingBlock ? remCalc(paddingBlock) : undefined)};
   border: ${({ border }) => (border ? `${border}px solid` : undefined)};
   border-radius: ${({ borderRadius }) => (borderRadius ? `${borderRadius}px` : undefined)};
   border-color: ${({ borderColor, theme }) =>
