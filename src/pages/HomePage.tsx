@@ -1,3 +1,4 @@
+import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
@@ -10,6 +11,7 @@ import type { IHome } from "types/member/home.types";
 const HomePage = () => {
   return (
     <>
+      <Header type="main" text="뚜비" />
       <PageContainer pt={remCalc("28px", false)}>
         <HomeHeader data={mock} />
         <HomeDashboard data={mock} />
