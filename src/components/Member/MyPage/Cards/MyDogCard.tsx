@@ -5,6 +5,7 @@ import * as S from "./styles";
 const MyDogCard = () => {
   return (
     <S.MyDogCard>
+      <S.DeleteButton>삭제</S.DeleteButton>
       <S.InfoTextBox>
         <S.DogName>뽀뽀</S.DogName>
         <S.GotoSchoolInfoButton>

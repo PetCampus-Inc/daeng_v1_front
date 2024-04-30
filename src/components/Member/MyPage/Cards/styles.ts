@@ -158,6 +158,14 @@ export const AddDogButton = styled.button`
   z-index: 1;
 `;
 
+export const DeleteButton = styled.button`
+  ${StatusBoxStyle}
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+`;
+
 export const CurrentStatusBox = styled.div<ICardStyleProps>`
   ${StatusBoxStyle}
   background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
