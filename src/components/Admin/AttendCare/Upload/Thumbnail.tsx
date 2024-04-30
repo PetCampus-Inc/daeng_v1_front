@@ -5,10 +5,10 @@ import {
   StyledDeleteButton,
   InnerShadow,
   StyledText
-} from "components/Admin/AttendCare/Upload/styles";
+} from "components/Admin/AttendCare/upload/styles";
 import { Box } from "components/common";
 
-import type { IFile } from "components/Admin/AttendCare/Upload/types";
+import type { IFile } from "components/Admin/AttendCare/upload/types";
 
 interface TumbnailProps {
   file: IFile;

@@ -1,7 +1,7 @@
-import { Upload } from "components/Admin/AttendCare/Upload/FileUpload";
-import { StyledThumbList } from "components/Admin/AttendCare/Upload/styles";
-import Thumbnail from "components/Admin/AttendCare/Upload/Thumbnail";
-import { IFile } from "components/Admin/AttendCare/Upload/types";
+import { Upload } from "components/Admin/AttendCare/upload/FileUpload";
+import { StyledThumbList } from "components/Admin/AttendCare/upload/styles";
+import Thumbnail from "components/Admin/AttendCare/upload/Thumbnail";
+import { IFile } from "components/Admin/AttendCare/upload/types";
 import { Flex, Text } from "components/common";
 import TextArea from "components/common/TextArea";
 import { ChangeEvent, useState } from "react";
