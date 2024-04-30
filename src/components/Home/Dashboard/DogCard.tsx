@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import AgendaIcon from "assets/svg/agenda-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import SpeakerIcon from "assets/svg/speaker-icon";
-import { Flex, Text } from "components/common";
+import { Box, Flex, Text } from "components/common";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
 
@@ -59,7 +59,9 @@ const DogCard = ({ data }: DogCardProps) => {
     <>
       <BoxContainer className="grid-top-right">
         <Flex display="inline-flex" direction="column" gap="14">
-          <AgendaIcon bg colorScheme={iconColor} />
+          <Box paddingInline={2}>
+            <AgendaIcon bg colorScheme={iconColor} />
+          </Box>
           <Text typo="body2_16_R" color="gray_1">
             {parts.map((part, index) =>
               part === "알림장" ? (
