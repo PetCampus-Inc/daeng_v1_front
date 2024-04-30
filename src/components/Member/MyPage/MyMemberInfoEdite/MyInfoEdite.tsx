@@ -3,6 +3,7 @@ import { PHONE_REGEX } from "constants/validCheck";
 
 import { Flex } from "components/common/Flex";
 import InputField from "components/common/InputField";
+import SearchInputField from "components/common/InputField/SearchInputField";
 import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Typo from "components/common/Typo";
@@ -70,7 +71,7 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
 
       <Flex direction="column" gap={7}>
         <Typo text="주소" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <S.SearchInputFieldStyle
+        <SearchInputField
           name={addressStreet}
           register={register}
           onSearch={() => openPopup()}
