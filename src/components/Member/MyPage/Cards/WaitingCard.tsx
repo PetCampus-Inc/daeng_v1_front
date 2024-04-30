@@ -8,10 +8,10 @@ const WaitingCard = () => {
     <S.WaitingCard>
       <S.InfoTextBox mb="32">
         <S.DogName>뽀뽀</S.DogName>
-        <S.StatusBox>승인 대기중</S.StatusBox>
+        <S.CurrentStatusBox>승인 대기중</S.CurrentStatusBox>
       </S.InfoTextBox>
       <S.CancelApprovalButton>
-        <S.CurrentStatusText>2023.12.20 제출 | 승인 취소</S.CurrentStatusText>
+        <S.DateText>2023.12.20 제출 | 승인 취소</S.DateText>
         <RightArrow />
       </S.CancelApprovalButton>
       <S.BgIconBox>

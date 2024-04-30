@@ -8,10 +8,8 @@ const RejectedCard = () => {
     <S.RejectedCard>
       <S.InfoTextBox>
         <S.DogName textColor={ThemeConfig.colors.gray_1}>뽀뽀</S.DogName>
-        <S.StatusBox bgColor={ThemeConfig.colors.red_1}>승인 거절</S.StatusBox>
-        <S.CurrentStatusText textColor={ThemeConfig.colors.gray_1}>
-          2023.12.20 제출
-        </S.CurrentStatusText>
+        <S.CurrentStatusBox bgColor={ThemeConfig.colors.red_1}>승인 거절</S.CurrentStatusBox>
+        <S.DateText textColor={ThemeConfig.colors.gray_1}>2023.12.20 제출</S.DateText>
       </S.InfoTextBox>
       <S.BgIconBox>
         <DogRejectedIcon />

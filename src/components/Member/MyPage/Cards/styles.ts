@@ -93,7 +93,7 @@ export const DogName = styled.h3<ICardStyleProps>`
   color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
 `;
 
-export const CurrentStatusText = styled.span<ICardStyleProps>`
+export const DateText = styled.span<ICardStyleProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
 `;
@@ -124,7 +124,7 @@ export const CancelApprovalButton = styled.button`
   }
 `;
 
-const CurrentStatusTextStyle = css`
+const StatusBoxStyle = css`
   position: relative;
   overflow: hidden;
   padding: 4px 8px;
@@ -148,18 +148,18 @@ const CurrentStatusTextStyle = css`
 `;
 
 export const GotoSchoolInfoButton = styled.button`
-  ${CurrentStatusTextStyle}
+  ${StatusBoxStyle}
 `;
 
 export const AddDogButton = styled.button`
-  ${CurrentStatusTextStyle}
+  ${StatusBoxStyle}
   position: absolute;
   bottom: 15px;
   z-index: 1;
 `;
 
-export const StatusBox = styled.span<ICardStyleProps>`
-  ${CurrentStatusTextStyle}
+export const CurrentStatusBox = styled.div<ICardStyleProps>`
+  ${StatusBoxStyle}
   background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
 
   &::before {
