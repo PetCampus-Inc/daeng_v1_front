@@ -1,9 +1,11 @@
+import { Box } from "components/common";
 import { useGetNewCareDogs } from "hooks/api/admin/care";
 import { useEffect } from "react";
 import { ICareDogInfo } from "types/admin/care.types";
 
 import { ListContainer, ListTitle, ListWrapper } from "./styles";
-import AddDogCard from "../CareCard/AddDogCard";
+import AddDogCard from "../card/AddDogCard";
+import EmptyCard from "../empty/EmptyDog";
 import { useSelectedDogs } from "../hooks/useSelectedDogs";
 
 type AddDogList = {
@@ -32,6 +34,14 @@ const AddDogList = ({ adminId }: AddDogList) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isFetchedAfterMount]);
+
+  if (!data)
+    // 관리할 강아지가 없는 경우
+    return (
+      <Box mt={50} mb={50} align="center">
+        <EmptyCard />
+      </Box>
+    );
 
   return (
     <ListContainer>

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ICareDogInfo } from "types/admin/care.types";
 
 import { MainDogGrid } from "./styles";
-import DeleteDogCard from "../CareCard/DeleteDogCard";
+import DeleteDogCard from "../card/DeleteDogCard";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
 interface DeleteDogListProps {

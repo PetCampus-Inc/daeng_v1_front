@@ -1,7 +1,7 @@
 import { ICareDogInfo } from "types/admin/care.types";
 
 import { MainDogGrid } from "./styles";
-import MainDogCard from "../CareCard/MainDogCard";
+import MainDogCard from "../card/MainDogCard";
 
 interface MainDogListProps {
   data: ICareDogInfo[];

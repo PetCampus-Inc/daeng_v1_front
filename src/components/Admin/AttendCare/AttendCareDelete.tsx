@@ -1,10 +1,10 @@
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 
-import AllSelectButton from "./CareButton/AllSelectButton";
-import DeleteDogButton from "./CareButton/DeleteDogButton";
-import DeleteDogList from "./CareList/DeleteDogList";
+import AllSelectButton from "./button/AllSelectButton";
+import DeleteDogButton from "./button/DeleteDogButton";
 import { SelectedIdsProvider } from "./context/SelectedIdsProvider";
+import DeleteDogList from "./list/DeleteDogList";
 import { DescTitle, ListWrapper, VStack } from "./styles";
 
 import type { ICareDogInfo } from "types/admin/care.types";

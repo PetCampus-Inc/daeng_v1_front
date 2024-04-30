@@ -1,10 +1,10 @@
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 
-import AddDogSubmitButton from "./CareButton/AddDogSubmitButton";
-import AddDogAvatar from "./CareList/AddDogAvatar";
-import AddDogList from "./CareList/AddDogList";
+import AddDogSubmitButton from "./button/AddDogSubmitButton";
 import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
+import AddDogAvatar from "./list/AddDogAvatar";
+import AddDogList from "./list/AddDogList";
 import { ListWrapper, SubTitle, Title } from "./styles";
 
 const AttendCareInit = () => {

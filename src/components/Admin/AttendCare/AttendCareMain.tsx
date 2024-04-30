@@ -7,12 +7,12 @@ import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { ICareDogInfo } from "types/admin/care.types";
 
-import CareOptionDropdown from "./CareButton/CareOptionDropdown";
-import MainSendCard from "./CareButton/MainSendCard";
-import MainDogList from "./CareList/MainDogList";
-import AddCaredogBottomSheet from "./CareModal/AddCaredogBottomSheet";
-import AgendaSchedulerBottomSheet from "./CareModal/AgendaSchedulerBottomSheet";
+import CareOptionDropdown from "./button/CareOptionDropdown";
+import MainSendCard from "./button/MainSendCard";
 import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
+import MainDogList from "./list/MainDogList";
+import AddCaredogBottomSheet from "./modal/AddCaredogBottomSheet";
+import AgendaSchedulerBottomSheet from "./modal/AgendaSchedulerBottomSheet";
 import { ButtonWrapper } from "./styles";
 
 interface AttendCareMainProps {

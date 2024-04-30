@@ -4,8 +4,8 @@ import { useOverlay } from "hooks/common/useOverlay";
 import { useContext } from "react";
 
 import { BackgroundButtonWrapper } from "./styles";
-import DeleteCareDogModal from "../CareModal/DeleteCareDogModal";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
+import DeleteCareDogModal from "../modal/DeleteCareDogModal";
 
 const DeleteDogButton = ({ adminId }: { adminId?: number }) => {
   const overlay = useOverlay();
