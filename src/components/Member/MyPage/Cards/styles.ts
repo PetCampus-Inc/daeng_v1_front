@@ -63,6 +63,13 @@ export const WaitingCard = styled.div`
   }
 `;
 
+export const RejectedCard = styled.div`
+  ${CardStyle}
+  background-color: ${({ theme }) => theme.colors.red_2};
+  display: flex;
+  justify-content: center;
+`;
+
 export const BgIconBox = styled.div`
   position: absolute;
   width: 70%;
