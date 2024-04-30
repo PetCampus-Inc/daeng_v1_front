@@ -1,5 +1,6 @@
 import RightArrow from "assets/svg/right-arrow";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import NormalModal from "components/common/ButtonModal/NormalModal";
 import useOverlay from "hooks/common/useOverlay/useOverlay";
 
 import * as S from "./styles";
@@ -39,14 +40,27 @@ const MyDogCard = ({
       />
     ));
 
-  const handleDogDelete = () => {
+  const openDeleteDogPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <NormalModal
+        isOpen={isOpen}
+        close={close}
+        action={handleDeleteDog}
+        title={`${dogName}를 삭제 하시겠습니까?`}
+        subtitle={"해당 강아지의 모든 정보가 초기화 됩니다"}
+        closeText={"취소"}
+        actionText={"삭제"}
+      />
+    ));
+
+  const handleDeleteDog = () => {
     console.log("삭제");
   };
 
   return (
     <S.MyDogCard>
       {isOpen && (
-        <S.DeleteButton onClick={DogLength <= 1 ? openInvalidInputPopup : handleDogDelete}>
+        <S.DeleteButton onClick={DogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
           삭제
         </S.DeleteButton>
       )}
