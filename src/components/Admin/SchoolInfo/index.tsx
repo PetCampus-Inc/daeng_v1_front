@@ -4,7 +4,7 @@ import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 

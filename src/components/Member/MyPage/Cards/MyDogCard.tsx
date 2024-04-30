@@ -1,4 +1,4 @@
-import RightArrow from "assets/svg/right-arrow";
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 
 import * as S from "./styles";
 
@@ -9,7 +9,7 @@ const MyDogCard = () => {
         <S.DogName>뽀뽀</S.DogName>
         <S.GotoSchoolInfoButton>
           바나나 유치원 잠실점
-          <RightArrow />
+          <ArrowRightIcon />
         </S.GotoSchoolInfoButton>
         <S.CurrentStatusText>2023.12.20 등록</S.CurrentStatusText>
       </S.InfoTextBox>

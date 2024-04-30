@@ -1,28 +1,25 @@
 import { useState } from "react";
-import React from "react";
 import Slider from "react-slick";
 
-import CommentBox from "./CommentBox";
-import CommentButton from "./CommentButton";
-import SaveOptionDropdown from "./SaveOptionDropdown";
-import SliderDots from "./SliderDots";
+import EmptySlide from "./empty/EmptySlide";
+import CommentBox from "./ImageSidler/CommentBox";
+import CommentButton from "./ImageSidler/CommentButton";
+import SaveOptionDropdown from "./ImageSidler/SaveOptionDropdown";
+import SliderDots from "./ImageSidler/SliderDots";
 import {
-  ButtonGroup,
+  SlideWrapper,
   Image,
-  ImageShadow,
-  SlideIndex,
   SliderContainer,
+  ImageShadow,
   SliderHeader,
-  SlideWrapper
-} from "./styles";
-import TransmissionTime from "./TransmissionTime";
+  ButtonGroup,
+  SlideIndex
+} from "./ImageSidler/styles";
+import TransmissionTime from "./ImageSidler/TransmissionTime";
 
-interface ImageSidlerProps {
-  images: string[];
-  comments: string[];
-}
+import type { ImageList } from "types/member/home.types";
 
-const DogImageSidler = ({ images, comments }: ImageSidlerProps) => {
+const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
 
@@ -45,6 +42,8 @@ const DogImageSidler = ({ images, comments }: ImageSidlerProps) => {
     )
   };
 
+  if (!images) return <EmptySlide />;
+
   return (
     <SliderContainer>
       <ImageShadow className="shadow" />
@@ -52,14 +51,14 @@ const DogImageSidler = ({ images, comments }: ImageSidlerProps) => {
         <TransmissionTime />
         <ButtonGroup>
           <CommentButton onClick={handleComment} isOpen={isCommentOpen} />
-          <SaveOptionDropdown url={images} currentIndex={currentIndex} />
+          <SaveOptionDropdown />
         </ButtonGroup>
       </SliderHeader>
       <Slider {...settings}>
-        {images.map((image, index) => (
+        {images[images.length - 1].map((item, index) => (
           <SlideWrapper key={index}>
-            <Image src={image} alt={`Slide ${index + 1}`} />
-            {currentIndex === index && isCommentOpen && <CommentBox comment={comments[index]} />}
+            <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
+            {currentIndex === index && isCommentOpen && <CommentBox comment={item.comment} />}
           </SlideWrapper>
         ))}
       </Slider>
@@ -70,4 +69,4 @@ const DogImageSidler = ({ images, comments }: ImageSidlerProps) => {
   );
 };
 
-export default DogImageSidler;
+export default HomeImageSlider;
