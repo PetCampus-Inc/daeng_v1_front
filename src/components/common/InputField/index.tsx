@@ -27,7 +27,7 @@ const InputField = ({
       id={name}
       disabled={disabled}
       placeholder={placeholder}
-      className={props.defaultValue !== props.value ? "default" : ""}
+      className={(props.defaultValue ?? props.value) !== props.value ? "default" : ""} // 변경
       borderColor={borderColor}
       {...props}
     />
