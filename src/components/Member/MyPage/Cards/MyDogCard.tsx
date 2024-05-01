@@ -12,7 +12,7 @@ interface IMyDogCardProps {
   schoolInfo: string;
   createdTime: string;
   profileUri: string;
-  DogLength: number;
+  dogLength: number;
   id: number;
 }
 
@@ -22,7 +22,7 @@ const MyDogCard = ({
   schoolInfo,
   createdTime,
   profileUri,
-  DogLength,
+  dogLength,
   id
 }: IMyDogCardProps) => {
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
@@ -69,7 +69,7 @@ const MyDogCard = ({
   return (
     <S.MyDogCard tabIndex={id} ref={divRef} onClick={handleCardFocus}>
       {isOpen && (
-        <S.DeleteButton onClick={DogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
+        <S.DeleteButton onClick={dogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
           삭제
         </S.DeleteButton>
       )}

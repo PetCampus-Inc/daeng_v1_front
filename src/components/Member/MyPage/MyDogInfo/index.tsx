@@ -17,6 +17,7 @@ const MyDogInfo = () => {
     slidesToScroll: 1,
     arrows: false
   };
+
   return (
     <S.DogInfoContainer>
       <S.TitleBox>
@@ -34,7 +35,7 @@ const MyDogInfo = () => {
               schoolInfo={"바나나 유치원 잠실점"}
               createdTime={"2023.12.20"}
               profileUri={item.profileUri}
-              DogLength={mockupData.length} //* 기능 작업을 위한 임시 데이터
+              dogLength={mockupData.length} //* 기능 작업을 위한 임시 데이터
             />
           ))}
           <AddMyDogCard />
@@ -50,7 +51,7 @@ const MyDogInfo = () => {
               schoolInfo={"바나나 유치원 잠실점"}
               createdTime={"2023.12.20"}
               profileUri={item.profileUri}
-              DogLength={mockupData.length} //* 기능 작업을 위한 임시 데이터
+              dogLength={mockupData.length} //* 기능 작업을 위한 임시 데이터
             />
           ))}
           <AddMyDogCard />
