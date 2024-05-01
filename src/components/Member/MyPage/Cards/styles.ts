@@ -138,7 +138,7 @@ export const CancelApprovalButton = styled.button`
 const StatusBoxStyle = css`
   position: relative;
   overflow: hidden;
-  padding: 4px 8px;
+  padding: 0.25px 0.5rem;
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -165,15 +165,15 @@ export const GotoSchoolInfoButton = styled.button`
 export const AddDogButton = styled.button`
   ${StatusBoxStyle}
   position: absolute;
-  bottom: 15px;
+  bottom: 0.9375rem;
   z-index: 1;
 `;
 
 export const DeleteButton = styled.button`
   ${StatusBoxStyle}
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 0.75rem;
+  right: 0.75rem;
   z-index: 1;
 `;
 
@@ -195,6 +195,6 @@ export const InfoTextBox = styled.div<ICardStyleProps>`
   left: 0;
   width: 100%;
   z-index: 1;
-  padding: 8px 12px ${({ mb }) => mb && "0"};
+  padding: 0.5rem 0.75rem ${({ mb }) => mb && "0"};
   margin-bottom: ${({ mb }) => (mb ? `${mb}px` : "0")};
 `;
