@@ -1,6 +1,7 @@
 import PoopBox from "components/common/PoopBox";
 import TextArea from "components/common/TextArea";
-import { useGetAgendaSaved, useTempSaveCareDog } from "hooks/api/admin/care";
+import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
+import { debounce } from "lodash";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -12,29 +13,40 @@ import SaveOrSendButton from "../SaveOrSendButton";
 import { NoticeItemContainer } from "../styles";
 
 const WriteNotice = () => {
-  const methods = useForm({
-    mode: "onChange",
-    shouldUnregister: false
-  });
-
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
   const dogId = useLocation().pathname.split("/").pop();
 
-  const { mutateTempSaveCareDog } = useTempSaveCareDog();
   const { data } = useGetAgendaSaved(Number(dogId));
+  const { mutateTempSaveCareDog } = useTempSaveCareDog();
+  const { mutateSendAgenda } = useSendAgenda();
 
-  const handleTempSave = () => {
-    console.log("sss");
-    mutateTempSaveCareDog({
-      agendaId: 63,
+  const methods = useForm({
+    mode: "onChange"
+  });
+
+  const agendaData = () => {
+    const agendaNote = methods.getValues("agendaNote");
+    const snack = methods.getValues("snackInfo");
+    const poopMemo = methods.getValues("poopMemo");
+
+    return {
+      agendaId: 6,
       adminId: adminId,
       dogId: Number(dogId),
-      agendaNote: methods.watch("agendaNote"),
-      snack: methods.watch("snackInfo"),
+      agendaNote,
+      snack,
       poop: "HARD",
-      poopMemo: methods.watch("poopMemo")
-    });
+      poopMemo
+    };
   };
+
+  const handleTempSave = debounce(() => {
+    mutateTempSaveCareDog(agendaData());
+  }, 1000);
+
+  const handleSend = debounce(() => {
+    mutateSendAgenda(agendaData());
+  }, 1000);
 
   return (
     <S.FlexContainer>
@@ -64,7 +76,7 @@ const WriteNotice = () => {
           defaultValue={data.poopMemo}
         />
       </NoticeItemContainer>
-      <SaveOrSendButton save={() => handleTempSave()} send={() => console.log("send")} />
+      <SaveOrSendButton save={handleTempSave} send={handleSend} />
     </S.FlexContainer>
   );
 };
