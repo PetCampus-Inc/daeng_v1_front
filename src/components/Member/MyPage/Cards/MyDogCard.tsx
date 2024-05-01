@@ -3,6 +3,7 @@ import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BasicModal from "components/common/ButtonModal/BasicModal";
 import * as useOverlay from "hooks/common/useOverlay";
 import { useRef } from "react";
+import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
@@ -50,7 +51,10 @@ const MyDogCard = ({
       <BasicModal
         isOpen={isOpen}
         close={close}
-        action={handleDeleteDog}
+        action={() => {
+          close();
+          handleDeleteDog();
+        }}
         title={`${dogName}를 삭제 하시겠습니까?`}
         subtitle={"해당 강아지의 모든 정보가 초기화 됩니다"}
         closeText={"취소"}
@@ -60,6 +64,8 @@ const MyDogCard = ({
 
   const handleDeleteDog = () => {
     console.log("삭제");
+    close;
+    showToast("강아지가 삭제되었습니다", "bottom");
   };
 
   const handleCardFocus = () => {
