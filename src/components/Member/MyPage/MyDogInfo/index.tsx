@@ -28,6 +28,7 @@ const MyDogInfo = () => {
           {mockupData.map((item) => (
             <MyDogCard
               key={item.dogId}
+              id={item.dogId}
               isOpen={isOpen}
               dogName={item.dogName}
               schoolInfo={"바나나 유치원 잠실점"}
@@ -43,6 +44,7 @@ const MyDogInfo = () => {
           {mockupData.map((item) => (
             <MyDogCard
               key={item.dogId}
+              id={item.dogId}
               isOpen={isOpen}
               dogName={item.dogName}
               schoolInfo={"바나나 유치원 잠실점"}

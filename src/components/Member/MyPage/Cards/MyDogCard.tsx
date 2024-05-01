@@ -2,6 +2,7 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BasicModal from "components/common/ButtonModal/BasicModal";
 import * as useOverlay from "hooks/common/useOverlay";
+import { useRef } from "react";
 
 import * as S from "./styles";
 
@@ -12,6 +13,7 @@ interface IMyDogCardProps {
   createdTime: string;
   profileUri: string;
   DogLength: number;
+  id: number;
 }
 
 const MyDogCard = ({
@@ -20,10 +22,12 @@ const MyDogCard = ({
   schoolInfo,
   createdTime,
   profileUri,
-  DogLength
+  DogLength,
+  id
 }: IMyDogCardProps) => {
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
   const overlay = useOverlay.useOverlay();
+  const divRef = useRef<HTMLDivElement>(null);
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -58,8 +62,12 @@ const MyDogCard = ({
     console.log("삭제");
   };
 
+  const handleCardFocus = () => {
+    divRef.current?.focus();
+  };
+
   return (
-    <S.MyDogCard>
+    <S.MyDogCard tabIndex={id} ref={divRef} onClick={handleCardFocus}>
       {isOpen && (
         <S.DeleteButton onClick={DogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
           삭제

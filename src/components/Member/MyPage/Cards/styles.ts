@@ -17,7 +17,7 @@ export const Card = styled.div`
 `;
 
 export const MyDogCard = styled(Card)`
-  &:hover::before {
+  &:focus::before {
     content: "";
     position: absolute;
     border-radius: 16px;
