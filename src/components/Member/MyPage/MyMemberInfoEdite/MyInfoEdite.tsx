@@ -117,6 +117,8 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           type="tel"
         />
       </Flex>
+
+      <S.KeyboardCompleteButton>완료</S.KeyboardCompleteButton>
     </S.ProfileEditeWrapper>
   );
 };
