@@ -8,13 +8,22 @@ import WaitingCard from "../Cards/WaitingCard";
 
 const MyDogInfo = () => {
   const { isOpen, toggle } = useToggle();
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2.3,
+    slidesToScroll: 1,
+    arrows: false
+  };
   return (
     <S.DogInfoContainer>
       <S.TitleBox>
         <S.Title>내 강아지 정보</S.Title>
         <S.DeleteDogButton onClick={toggle}>강아지 삭제</S.DeleteDogButton>
       </S.TitleBox>
-      <div>
+      {mockupData.length <= 1 ? (
         <S.MyDogInfoList>
           {mockupData.map((item) => (
             <MyDogCard
@@ -27,12 +36,26 @@ const MyDogInfo = () => {
               DogLength={mockupData.length} //* 기능 작업을 위한 임시 데이터
             />
           ))}
-
+          <AddMyDogCard />
+        </S.MyDogInfoList>
+      ) : (
+        <S.CarouselSlider {...settings}>
+          {mockupData.map((item) => (
+            <MyDogCard
+              key={item.dogId}
+              isOpen={isOpen}
+              dogName={item.dogName}
+              schoolInfo={"바나나 유치원 잠실점"}
+              createdTime={"2023.12.20"}
+              profileUri={item.profileUri}
+              DogLength={mockupData.length} //* 기능 작업을 위한 임시 데이터
+            />
+          ))}
           <AddMyDogCard />
           {/* <RejectedCard />
-          <WaitingCard /> */}
-        </S.MyDogInfoList>
-      </div>
+              <WaitingCard /> */}
+        </S.CarouselSlider>
+      )}
     </S.DogInfoContainer>
   );
 };
