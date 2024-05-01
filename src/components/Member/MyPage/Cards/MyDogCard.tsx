@@ -63,8 +63,8 @@ const MyDogCard = ({
     ));
 
   const handleDeleteDog = () => {
+    //TODO 강아지 리스트에서 삭제하기
     console.log("삭제");
-    close;
     showToast("강아지가 삭제되었습니다", "bottom");
   };
 
