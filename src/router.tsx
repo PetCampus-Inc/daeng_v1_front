@@ -330,6 +330,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberMyInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_DOG_INFO_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberDogInfoPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
