@@ -16,7 +16,18 @@ export const Card = styled.div`
 `;
 
 export const MyDogCard = styled(Card)`
-  &::before {
+  &:hover::before {
+    content: "";
+    position: absolute;
+    border-radius: 16px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border: 4px solid ${({ theme }) => theme.colors.primary_4};
+    z-index: 1;
+  }
+  &::after {
     content: "";
     width: 100%;
     height: 100%;
@@ -25,7 +36,6 @@ export const MyDogCard = styled(Card)`
     bottom: 0;
     background: linear-gradient(transparent, ${({ theme }) => theme.colors.black});
     opacity: 0.45;
-    z-index: 1;
   }
 `;
 
