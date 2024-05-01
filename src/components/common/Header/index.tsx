@@ -112,18 +112,6 @@ const Header = ({ type, handleClick, text, rightElement, transparent }: Props) =
             </IconWrapper>
           </TextWrapper>
         )}
-        {type === "setting" && (
-          <TextWrapper className="setting-right">
-            <TitleText className="setting">{text}</TitleText>
-            <IconWrapper
-              onClick={() => {
-                // TODO: 세팅 페이지로 이동
-              }}
-            >
-              <SettingWhiteIcon />
-            </IconWrapper>
-          </TextWrapper>
-        )}
       </HeaderWrapper>
     </Container>
   );
