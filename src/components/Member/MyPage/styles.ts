@@ -7,11 +7,7 @@ export const ContentContainer = styled.div`
 `;
 
 export const BackgroundButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0 1rem 7.625rem 1rem;
+  padding-bottom: 4.625rem;
 `;
 
 export const CardContainer = styled.div`
