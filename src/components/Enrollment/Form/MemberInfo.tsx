@@ -6,7 +6,7 @@ import SearchInputField from "components/common/InputField/SearchInputField";
 import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Title from "components/common/Title";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { formatPhoneNumber } from "utils/formatter";

@@ -1,9 +1,9 @@
 import { PATH } from "constants/path";
 
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import CalendarIcon from "assets/svg/calendar";
 import MapIcon from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone-basic";
-import RightArrow from "assets/svg/right-arrow";
 import SchoolIcon from "assets/svg/school-icon";
 import SimpleButton from "components/common/Button/SimpleButton";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
       <SimpleButton
         p={0}
         onClick={handleClick}
-        rightAddon={<RightArrow w={"20"} h={"20"} />}
+        rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}
         customStyle={MoreButtonStyle}
       >
         {text}
@@ -38,7 +38,7 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
   );
 };
 
-const InfoItem = ({ title, icon }: { title: string; icon: JSX.Element }) => {
+const InfoItem = ({ title, icon }: { title?: string; icon: JSX.Element }) => {
   return (
     <>
       <StyledIcon>{icon}</StyledIcon>
@@ -67,13 +67,13 @@ const InfoCard = <T extends TRole>({ data, role }: InfoCardProps<T>) => {
     { title: data.schoolName, icon: <SchoolIcon /> },
     { title: data.schoolNumber, icon: <PhoneIcon /> },
     {
-      title: isOwner ? (data as IOwnerInfo).address : (data as ITeacherInfo).schoolAddress,
+      title: isOwner ? (data as IOwnerInfo)?.address : (data as ITeacherInfo)?.schoolAddress,
       icon: <MapIcon />
     },
     {
-      title: (isOwner ? (data as IOwnerInfo).registeredDate : (data as ITeacherInfo).enrollDate)
-        .map((num) => num.toString().padStart(2, "0"))
-        .join("."),
+      title: (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.enrollDate)
+        ?.map((num) => num.toString().padStart(2, "0"))
+        ?.join("."),
       icon: <CalendarIcon />
     }
   ];

@@ -5,10 +5,10 @@ import { DropdownProvider } from "./DropdownContext";
 import DropdownList from "./DropdownList";
 import DropdownOption from "./DropdownOption";
 import DropdownTrigger from "./DropdownTrigger";
-import { DropdownRoot } from "./styles";
+import { DropdownRoot, type ICustomStyle } from "./styles";
 
-interface OptionDropdownProps {
-  defaultOpen: boolean;
+interface OptionDropdownProps extends ICustomStyle {
+  defaultOpen?: boolean;
   onSelect?: (index: number) => void;
 }
 
@@ -22,22 +22,23 @@ interface IDropdown
 
 const OptionDropdownBase = ({
   children,
-  defaultOpen,
-  onSelect
+  defaultOpen = false,
+  onSelect,
+  customStyle
 }: PropsWithChildren<OptionDropdownProps>) => {
   const dropdownRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   return (
     <DropdownProvider defaultOpen={defaultOpen} onSelect={onSelect}>
-      <DropdownRoot ref={dropdownRef}>{children}</DropdownRoot>
+      <DropdownRoot ref={dropdownRef} customStyle={customStyle}>
+        {children}
+      </DropdownRoot>
     </DropdownProvider>
   );
 };
 
-const Dropdown = memo(OptionDropdownBase) as IDropdown;
+export const Dropdown = memo(OptionDropdownBase) as IDropdown;
 
 Dropdown.Trigger = DropdownTrigger;
 Dropdown.List = DropdownList;
 Dropdown.Option = DropdownOption;
 Dropdown.Content = DropdownContent;
-
-export default Dropdown;

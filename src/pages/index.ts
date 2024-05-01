@@ -22,6 +22,13 @@ export { default as AttendCareDeletePage } from "./AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogGalleryPage";
 export { default as NewTicketPage } from "./NewTicketPage";
 export { default as MemberMyPage } from "./MemberMyPage";
+export { default as MemberMyInfoPage } from "./MemberMyInfoPage";
+export { default as SettingPage } from "./SettingPage";
+export { default as PolicyPage } from "./PolicyPage";
+export { default as UnregisterPage } from "./UnregisterPage";
+export { default as SettingNotificationPage } from "./SettingNotificationPage";
+export { default as UnregisterSuccessPage } from "./UnregisterSuccessPage";
 export { default as AttendCareGallery } from "./AttendCareGalleryPage";
 export { default as AttendCareInfo } from "./AttendCareInfoPage";
+
 export { default as MemberEnrollmentFormDetailPage } from "./MemberEnrollmentFormDetailPage";

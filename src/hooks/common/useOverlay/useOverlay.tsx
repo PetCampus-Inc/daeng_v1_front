@@ -57,4 +57,4 @@ const useOverlay = ({ exitOnUnmount = true }: Options = {}) => {
   );
 };
 
-export default useOverlay;
+export { useOverlay };
