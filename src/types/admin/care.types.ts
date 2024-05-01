@@ -25,3 +25,8 @@ export interface ICareTempSave {
   poop: string;
   poopMemo: string;
 }
+
+export interface IPastAgenda extends ICareTempSave {
+  dateTime: number[];
+  status: "COMPLETE" | "NOT_YET" | "WRITING";
+}

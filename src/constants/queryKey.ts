@@ -25,5 +25,6 @@ export const QUERY_KEY = {
   PRINCIPAL_INFO: ["principalInfo"], // 원장 마이페이지 데이터
   TEACHER_INFO: ["teacherInfo"], // 선상님 마이페이지 데이터
   CARE_DOG_TEMP_SAVE: ["careDogTempSave"], // 강아지 알림장 임시저장
-  CARE_DOG_AGENDA_SAVED: ["careDogAgendaSaved"] // 강아지 알림장 불러오기
+  CARE_DOG_AGENDA_SAVED: ["careDogAgendaSaved"], // 강아지 알림장 불러오기
+  CARE_DOG_PAST_AGENDA: ["careDogPastAgenda"] // 강아지 지난 알림장 불러오기
 };
