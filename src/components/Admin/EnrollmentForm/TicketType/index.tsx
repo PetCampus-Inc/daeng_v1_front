@@ -1,11 +1,12 @@
+import { INIT_COUNTER } from "constants/option";
+
 import AddIcon from "assets/svg/add-icon";
 import Modal from "components/common/ButtonModal";
-import EditableRadioGroup, {
-  ExtendedFieldArrayWithId
-} from "components/common/Select/EditableRadioGroup";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
+import { useOverlay } from "hooks/common/useOverlay";
 import useTicketFieldArray from "hooks/common/useTicketFieldArray";
-import { useState } from "react";
+import { useRecoilCallback } from "recoil";
+import { ticketCounterAtom } from "store/overlay";
 
 import * as S from "./styles";
 import TicketCounterBottomSheet from "../FormModal/TicketCounterBottomSheet";
@@ -20,14 +21,11 @@ type TicketTypeProps = {
 };
 
 const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTypeProps) => {
-  const INIT_COUNTER = 2;
   const FIELD_NAME = name;
   const MAX_ITEMS = 6;
   const MIN_ITEMS = 1;
   const TICKET_TYPE = ticketType === "ROUND" ? "회차권" : "정기권";
   const TIMES = ticketType === "ROUND" ? "회" : "주";
-
-  const [counter, setCounter] = useState<number>(INIT_COUNTER);
 
   const { fields, append, remove } = useTicketFieldArray({
     control,
@@ -37,15 +35,21 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
 
   const overlay = useOverlay();
 
-  const handleAddRadio = () => {
-    if (fields.length < MAX_ITEMS) {
-      append({ value: counter });
-      overlay.close();
-      setCounter(INIT_COUNTER);
-    } else {
-      alert("더 이상 추가할 수 없습니다.");
-    }
-  };
+  const handleAddRadio = useRecoilCallback(
+    ({ set, snapshot }) =>
+      async () => {
+        const counter = await snapshot.getPromise(ticketCounterAtom);
+
+        if (fields.length < MAX_ITEMS) {
+          append({ value: counter });
+          overlay.close();
+          set(ticketCounterAtom, INIT_COUNTER);
+        } else {
+          alert("더 이상 추가할 수 없습니다.");
+        }
+      },
+    []
+  );
 
   const handleRemove = (index: number) => {
     if (fields.length > MIN_ITEMS) {
@@ -55,21 +59,13 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
     }
   };
 
-  const isDuplication = fields.some((field) => {
-    const extendedField = field as ExtendedFieldArrayWithId;
-    return extendedField.value === counter;
-  });
-
   const openTicketCounter = () =>
     overlay.open(({ isOpen, close }) => (
       <TicketCounterBottomSheet
         isOpen={isOpen}
         close={close}
         ticketType={ticketType}
-        isDuplication={isDuplication}
-        INIT_COUNTER={INIT_COUNTER}
-        counter={counter}
-        setCounter={setCounter}
+        fields={fields}
         action={handleAddRadio}
       />
     ));

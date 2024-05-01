@@ -1,6 +1,6 @@
 import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
-import { useCreateCareDogs } from "hooks/api/caredogQuery";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useCreateCareDogs } from "hooks/api/admin/care";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
 import { styled } from "styled-components";

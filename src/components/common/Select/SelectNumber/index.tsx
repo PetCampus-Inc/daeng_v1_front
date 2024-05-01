@@ -1,8 +1,8 @@
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
-import StringDropdown from "components/common/Dropdown/StringDropdown";
+import StringDropdown from "components/common/Dropdown";
 import InputField, { InputFieldProps } from "components/common/InputField";
-import useDetectClose from "hooks/common/useDetectClose";
-import { useRef } from "react";
+import { useClickOutSide } from "hooks/common/useClickOutSide";
+import { useRef, useState } from "react";
 import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
 
 import { Container, InputWrapper, Button } from "./styles";
@@ -28,12 +28,20 @@ const SelectNumber = ({
   ...props
 }: ISelectNumber) => {
   const dropDownRef = useRef<HTMLDivElement | null>(null);
-  const [isOpen, setIsOpen] = useDetectClose(dropDownRef, false);
+  const [isDropdownOpen, isSetDropdownOpen] = useState<boolean>(false);
+
   const value = watch?.(name) ?? defaultValue;
+
+  // dropdown 열기/닫기 관리
+  useClickOutSide({
+    enabled: isDropdownOpen,
+    targetRef: dropDownRef,
+    onClickOutside: () => isSetDropdownOpen(false)
+  });
 
   return (
     <Container ref={dropDownRef}>
-      <InputWrapper onClick={() => setIsOpen(!isOpen)}>
+      <InputWrapper onClick={() => isSetDropdownOpen(!isDropdownOpen)}>
         <InputField
           {...props}
           name={name}
@@ -46,10 +54,10 @@ const SelectNumber = ({
           <ArrowDownIcon />
         </Button>
       </InputWrapper>
-      {isOpen && numberList && setValue && (
+      {isDropdownOpen && numberList && setValue && (
         <StringDropdown
           dropDownList={numberList}
-          setIsOpen={setIsOpen}
+          setIsOpen={isSetDropdownOpen}
           name={name}
           setValue={setValue}
           value={value}

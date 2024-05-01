@@ -3,7 +3,7 @@ import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
 import { differenceInDays, isAfter } from "date-fns";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { memo } from "react";
 import { ITicketDetail } from "types/admin.attendance.type";
 import { addZero } from "utils/date";

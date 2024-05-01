@@ -1,8 +1,8 @@
 import MoreIcon from "assets/svg/more-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
-import XBoxIcon from "assets/svg/x-box";
+import XCircleIcon from "assets/svg/x-circle-icon";
+import { Dropdown } from "components/common";
 import SimpleButton from "components/common/Button/SimpleButton";
-import Dropdown from "components/common/Dropdown/OptionDropdown/DropdownRoot";
 
 interface CareOptionListProps {
   options: string[];
@@ -11,7 +11,7 @@ interface CareOptionListProps {
 
 const CareOptionDropdown = ({ options, handleOptionClick }: CareOptionListProps) => {
   const optionIcon = {
-    "관리 강아지 삭제": <XBoxIcon />,
+    "관리 강아지 삭제": <XCircleIcon colorScheme="brown" />,
     "알림장 일괄 전송": <SendAlarmIcon />
   };
 

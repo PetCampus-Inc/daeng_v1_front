@@ -1,4 +1,4 @@
-import { LIST } from "constants/option";
+import { LIST, type TSortOptionList } from "constants/option";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -70,7 +70,7 @@ export const useCallMember = (dogId: number) => {
 };
 
 interface Props {
-  sortName: string;
+  sortName: TSortOptionList;
   schoolId: number;
   adminId: number;
 }

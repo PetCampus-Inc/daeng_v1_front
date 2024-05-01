@@ -1,50 +1,57 @@
-import styled from "styled-components";
+import styled, { CSSProp, css } from "styled-components";
 
-export const List = styled.ul`
+export interface ICustomStyle {
+  customStyle?: CSSProp;
+}
+
+const RootDefaultStyle = css`
+  position: absolute;
+  width: max-content;
+  top: 0;
+  right: 0;
+`;
+
+const DropdownListDefaultStyle = css`
+  right: 0;
+  top: 25px;
+`;
+
+export const DropdownRoot = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "customStyle"
+})<ICustomStyle>`
+  ${({ customStyle }) => customStyle || RootDefaultStyle}
+`;
+
+export const StyledDropdownList = styled.ul.withConfig({
+  shouldForwardProp: (prop) => prop !== "customStyle"
+})<ICustomStyle>`
+  min-width: 163px;
   position: absolute;
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.gray_4};
-  border-radius: 8px;
-  width: 100%;
-  max-height: 192px;
-  margin-top: 8px;
-  z-index: 2;
+  border: solid 1px ${(props) => props.theme.colors.gray_4};
+  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.13);
+  border-radius: 0.4rem;
+  z-index: 10;
 
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-snap-stop: always;
-  scrollbar-width: thin;
+  ${({ customStyle }) => customStyle || DropdownListDefaultStyle}
+`;
 
-  &.no-list {
-    overflow: auto;
-    padding: 30px 16px 16px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+export const ItemWrapper = styled.li`
+  padding: 10px 12px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.gray_4};
+
+  &:last-child {
+    border: none;
   }
-`;
-export const BoldText = styled.span`
-  ${({ theme }) => theme.typo.body2_16_B}
-  color: ${({ theme }) => theme.colors.gray_1};
-`;
-export const ThinText = styled.span`
-  ${({ theme }) => theme.typo.label2_14_R}
-  color: ${({ theme }) => theme.colors.gray_2};
+
+  user-select: none;
+  cursor: pointer;
 `;
 
-export const ListItem = styled.li`
+export const Item = styled.div`
   display: flex;
-  padding: 12px 12px 12px 16px;
-  justify-content: flex-start;
   align-items: center;
-  gap: 25px;
-  height: 48px;
-  color: ${({ theme }) => theme.colors.gray_3};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_4};
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  ${({ theme }) => theme.typo.body1_16_R}
-  &.chosen {
-    background-color: ${({ theme }) => theme.colors.gray_5};
-  }
+  gap: 4px;
+  ${({ theme }) => theme.typo.label2_14_R};
+  color: ${({ theme }) => theme.colors.gray_2};
 `;

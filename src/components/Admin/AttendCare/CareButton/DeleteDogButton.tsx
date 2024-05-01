@@ -1,6 +1,6 @@
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import { useDeleteCareDogs } from "hooks/api/caredogQuery";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useDeleteCareDogs } from "hooks/api/admin/care";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useContext } from "react";
 
 import { BackgroundButtonWrapper } from "./styles";

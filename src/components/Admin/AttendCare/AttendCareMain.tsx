@@ -1,11 +1,11 @@
 import { PATH } from "constants/path";
 
 import AddIcon from "assets/svg/add-icon";
-import RightArrow from "assets/svg/right-arrow";
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import SimpleButton from "components/common/Button/SimpleButton";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
-import { ICareDogInfo } from "types/admin.caredog.type";
+import { ICareDogInfo } from "types/admin/care.types";
 
 import CareOptionDropdown from "./CareButton/CareOptionDropdown";
 import MainSendCard from "./CareButton/MainSendCard";
@@ -36,7 +36,7 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
     ));
 
   const CARE_OPTIONS: { [key: string]: () => void } = {
-    "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE_DOG + "/delete"),
+    "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE + "/delete"),
     "알림장 일괄 전송": openSchedulerPopup
   };
 
@@ -55,7 +55,7 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
         <SimpleButton
           onClick={openAddDogPopup}
           leftAddon={<AddIcon />}
-          rightAddon={<RightArrow w={"20"} h={"20"} />}
+          rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}
         >
           강아지 추가하기
         </SimpleButton>

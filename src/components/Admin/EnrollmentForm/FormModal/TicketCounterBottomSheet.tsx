@@ -1,39 +1,37 @@
 import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
-import { TTicketType } from "types/School.type";
+import { ExtendedFieldArrayWithId } from "components/common/Select/EditableRadioGroup";
+import { useRecoilValue } from "recoil";
+import { ticketCounterAtom } from "store/overlay";
 
 import TicketCounter from "../TicketCounter";
 
+import type { TTicketType } from "types/admin/enrollment.types";
+
 interface TicketCounterProps extends IBottomSheetProps {
   ticketType: TTicketType;
-  isDuplication: boolean;
-  INIT_COUNTER: number;
-  counter: number;
-  setCounter: React.Dispatch<React.SetStateAction<number>>;
   action: () => void;
+  fields: Record<"id", string>[];
 }
 
 const TicketCounterBottomSheet = ({
   isOpen,
   close,
   ticketType,
-  isDuplication,
-  INIT_COUNTER,
-  counter,
-  setCounter,
-  action
+  action,
+  fields
 }: TicketCounterProps) => {
+  const counter = useRecoilValue(ticketCounterAtom);
+
+  const currentIsDuplication = fields.some(
+    (field: ExtendedFieldArrayWithId) => field.value === counter
+  );
+
   return (
     <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
         <BottomSheet.Control />
-        <TicketCounter
-          type={ticketType}
-          isDuplication={isDuplication}
-          initial={INIT_COUNTER}
-          counter={counter}
-          setCounter={setCounter}
-        />
-        <BottomSheet.Button actionText="추가" actionFn={action} disabled={isDuplication} />
+        <TicketCounter type={ticketType} isDuplication={currentIsDuplication} />
+        <BottomSheet.Button actionText="추가" actionFn={action} disabled={currentIsDuplication} />
       </BottomSheet.Content>
     </BottomSheet>
   );

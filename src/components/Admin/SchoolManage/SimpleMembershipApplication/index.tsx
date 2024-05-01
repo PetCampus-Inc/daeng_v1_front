@@ -1,5 +1,5 @@
 import ApplicationBrownIcon from "assets/svg/application-brown-icon";
-import RightArrow from "assets/svg/right-arrow";
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import YellowApplication from "assets/svg/yellow-application";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +52,7 @@ const SimpleMembershipApplication = ({
           <S.Date>{dateString} 작성됨</S.Date>
         </S.TextWrapper>
       </S.LeftBox>
-      <RightArrow />
+      <ArrowRightIcon />
     </S.Container>
   );
 };

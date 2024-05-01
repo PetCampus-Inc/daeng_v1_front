@@ -1,22 +1,27 @@
-import { memo } from "react";
+import { type ForwardedRef, type HTMLAttributes, type ReactNode, forwardRef } from "react";
 
-import { StyledText } from "./styles";
+import { type IStyledTextProps, StyledText } from "./styles";
 
-interface Props {
-  text?: string;
-  size?: string;
-  weight?: string;
-  color?: string;
-  height?: string;
-  margintop?: string;
-}
+export type TextProps = {
+  as?: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  children: ReactNode;
+} & HTMLAttributes<HTMLSpanElement> &
+  IStyledTextProps;
 
-const Text = ({ text, size, weight, color, height, margintop }: Props) => {
+export const Text = forwardRef(function Text(
+  {
+    as = "span",
+    children,
+    typo = "body2_16_R",
+    color = "black",
+    isEllipsis = false,
+    ...props
+  }: TextProps,
+  ref: ForwardedRef<HTMLSpanElement>
+) {
   return (
-    <StyledText size={size} weight={weight} color={color} height={height} margintop={margintop}>
-      {text}
+    <StyledText ref={ref} as={as} color={color} typo={typo} isEllipsis={isEllipsis} {...props}>
+      {children}
     </StyledText>
   );
-};
-
-export default memo(Text);
+});

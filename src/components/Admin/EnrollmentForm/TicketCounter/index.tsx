@@ -1,20 +1,22 @@
-import type { Dispatch, SetStateAction } from "react";
+import { INIT_COUNTER } from "constants/option";
 
 import AddBIcon from "assets/svg/add-b-icon";
 import SubtractBIcon from "assets/svg/subtract-b-icon";
+import { useRecoilState } from "recoil";
+import { ticketCounterAtom } from "store/overlay";
 
 import * as S from "./styles";
+
 interface Props {
   type: "ROUND" | "MONTHLY";
   isDuplication: boolean;
-  initial: number;
-  counter: number;
-  setCounter: Dispatch<SetStateAction<number>>;
 }
 
-const TicketCounter = ({ type, isDuplication, initial, counter, setCounter }: Props) => {
+const TicketCounter = ({ type, isDuplication }: Props) => {
   const text = type === "ROUND" ? "회차권" : "정기권";
   const times = type === "ROUND" ? "회" : "주";
+
+  const [counter, setCounter] = useRecoilState(ticketCounterAtom);
 
   return (
     <>
@@ -26,7 +28,7 @@ const TicketCounter = ({ type, isDuplication, initial, counter, setCounter }: Pr
       </S.TextWrapper>
       <S.CounterWrapper>
         <S.Counter>
-          <S.Button onClick={() => setCounter((prev) => (prev > initial ? prev - 1 : prev))}>
+          <S.Button onClick={() => setCounter((prev) => (prev > INIT_COUNTER ? prev - 1 : prev))}>
             <SubtractBIcon />
           </S.Button>
           <S.Text>

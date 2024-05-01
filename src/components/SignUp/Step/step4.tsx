@@ -3,7 +3,7 @@ import { PHONE_REGEX, REGISTRATION_REGEX, SCHOOL_PHONE_REGEX } from "constants/v
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import Button from "components/common/Button";
 import Header from "components/common/Header";
-import Text from "components/common/Text";
+import Typo from "components/common/Typo";
 import InputBoxAndText from "components/SignIn/InputBoxAndText";
 import Postcode from "components/SignUp/Postcode";
 import useSignUp from "hooks/api/useSignUp";
@@ -117,8 +117,8 @@ const Step4 = ({
           />
 
           <TextWrapper margin_bottom="8%">
-            <Text text={`${userName} 원장님`} size="1.4rem" weight="bold" height="2rem" />
-            <Text text={"유치원 정보를 입력해 주세요"} size="1.4rem" weight="bold" height="2rem" />
+            <Typo text={`${userName} 원장님`} size="1.4rem" weight="bold" height="2rem" />
+            <Typo text={"유치원 정보를 입력해 주세요"} size="1.4rem" weight="bold" height="2rem" />
           </TextWrapper>
           <InputBoxWrapper height="70%">
             <InputBoxAndText

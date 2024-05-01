@@ -1,27 +1,17 @@
 import { LIST } from "constants/option";
 
-import BottomSheet from "components/common/BottomSheet";
+import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
+import { useRecoilState } from "recoil";
+import { sortOptionAtom } from "store/overlay";
 import { ConfirmButton } from "styles/StyleModule";
 
 import { ListItem, ListWrapper } from "./styles";
 
-import type { TSortSelectBoxProps } from "../AttendanceButton/SortSelectBox";
+const SortOptionListBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
+  const [sortName, setSortName] = useRecoilState(sortOptionAtom);
 
-export type TBottomSheetProps = {
-  isVisible: boolean;
-  close: () => void;
-};
-
-type TSortOptionList = TSortSelectBoxProps & TBottomSheetProps;
-
-const SortOptionListBottomSheet = ({
-  isVisible,
-  close,
-  sortName,
-  setSortName
-}: TSortOptionList) => {
   return (
-    <BottomSheet isOpen={isVisible} close={close}>
+    <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
         <BottomSheet.Title variant="body">정렬</BottomSheet.Title>
         <ListWrapper>
@@ -29,6 +19,7 @@ const SortOptionListBottomSheet = ({
             className={sortName === LIST.REGISTERED ? "active" : ""}
             onClick={async () => {
               setSortName(LIST.REGISTERED);
+              close();
             }}
           >
             {LIST.REGISTERED}
@@ -37,6 +28,7 @@ const SortOptionListBottomSheet = ({
             className={sortName === LIST.PAYMENT ? "active" : ""}
             onClick={async () => {
               setSortName(LIST.PAYMENT);
+              close();
             }}
           >
             {LIST.PAYMENT}
@@ -45,6 +37,7 @@ const SortOptionListBottomSheet = ({
             className={sortName === LIST.DATE ? "active" : ""}
             onClick={async () => {
               setSortName(LIST.DATE);
+              close();
             }}
           >
             {LIST.DATE}
@@ -53,6 +46,7 @@ const SortOptionListBottomSheet = ({
             className={sortName === LIST.CHARGE ? "active" : ""}
             onClick={async () => {
               setSortName(LIST.CHARGE);
+              close();
             }}
           >
             {LIST.CHARGE}

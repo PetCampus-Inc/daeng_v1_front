@@ -12,6 +12,10 @@ export const Container = styled.div`
   align-items: center;
   background-color: ${(props) => props.theme.colors.white};
   z-index: 5;
+
+  &.transparent {
+    background-color: transparent;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
@@ -22,6 +26,10 @@ export const HeaderWrapper = styled.div`
   align-items: center;
   padding: 0 16px;
   box-shadow: ${({ theme }) => theme.shadows.card};
+
+  &.transparent {
+    box-shadow: none;
+  }
 `;
 
 export const LogoWrapper = styled(Link)`
@@ -49,6 +57,10 @@ export const TextWrapper = styled.div`
   width: 100%;
   height: 100%;
   text-align: center;
+
+  &.setting-right {
+    justify-content: flex-end;
+  }
 `;
 
 export const TitleText = styled.div<{ size?: string }>`
@@ -68,9 +80,27 @@ export const TitleText = styled.div<{ size?: string }>`
   &.text {
     ${({ theme }) => theme.typo.body2_16_B};
   }
+
+  &.setting {
+    color: ${({ theme }) => theme.colors.white};
+    ${({ theme }) => theme.typo.body2_16_B}
+  }
 `;
 
-export const StyledImage = styled.img<{
-  src: string;
-  alt: string;
-}>``;
+export const TextButton = styled.button`
+  display: flex;
+  gap: 4px;
+  align-items: center;
+
+  & > svg {
+    border-radius: 8px;
+    transition: background-color 0.1s ease-out;
+  }
+
+  &:hover > svg {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+  }
+  &:active > svg {
+    background-color: ${({ theme }) => theme.colors.gray_4};
+  }
+`;

@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
 import InputField from "components/common/InputField";
-import { useFormMutation } from "hooks/api/useFormMutation";
+import { useCreateAdminEnrollment } from "hooks/api/admin/enroll";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -14,7 +14,7 @@ const SubmitForm = () => {
   const { handleSubmit, register } = useForm();
 
   const formData = useRecoilValue(enrollmentFormAtom);
-  const mutateForm = useFormMutation();
+  const { mutateForm } = useCreateAdminEnrollment();
   const navigate = useNavigate();
 
   const defaultFormName = `가입신청서_${getCurrentDate()}`;

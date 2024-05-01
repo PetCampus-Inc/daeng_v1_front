@@ -1,9 +1,9 @@
-const FootIcon = ({ className = "" }) => {
+const FootIcon = ({ className = "", w = "22", h = "19" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="19"
+      width={w}
+      height={h}
       fill="none"
       viewBox="0 0 22 19"
       className={className}

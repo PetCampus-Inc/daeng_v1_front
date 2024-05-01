@@ -31,30 +31,6 @@ export const ITEM_KEYS = {
   PICKDROP_INFO: 30
 } as const;
 
-export interface ItemMapValue {
-  neutralization: string;
-  vaccination: string;
-}
-export const ITEM_MAP = new Map<string, string | ItemMapValue>([
-  ["남", "MALE"],
-  ["여", "FEMALE"],
-  ["수컷", "MALE"],
-  ["암컷", "FEMALE"],
-  ["대형견", "BIG"],
-  ["중형견", "MEDIUM"],
-  ["소형견", "SMALL"],
-  ["했어요", { neutralization: "NEUTERED", vaccination: "VACCINATED" }],
-  ["안했어요", { neutralization: "NOT_NEUTERED", vaccination: "NOT_VACCINATED" }],
-  ["신청", "REQUEST"],
-  ["미신청", "NOT_REQUEST"],
-  ["편도", "ONE_WAY"],
-  ["왕복", "ROUND"],
-  ["회차권", "ROUND"],
-  ["정기권", "MONTHLY"],
-  ["운영", "RUNNING"],
-  ["미운영", "NOT_RUNNING"]
-]);
-
 export type ItemMaps = {
   memberGender: { MALE: string; FEMALE: string };
   dogGender: { MALE: string; FEMALE: string };
@@ -86,3 +62,11 @@ export const ITEM_ENGLISH_TO_KOREAN = {
   MALE: "수컷",
   FEMALE: "암컷"
 };
+
+export const AGREEMENT_ITEM = new Map([
+  ["ticketInfo", 21],
+  ["limitsInfo", 22],
+  ["accidentInfo", 23],
+  ["abandonmentInfo", 24],
+  ["pickDropInfo", 30]
+]);

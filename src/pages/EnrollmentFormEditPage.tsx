@@ -18,25 +18,28 @@ import {
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
+import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
-import { useAdminEnrollQuery } from "hooks/api/useAdminEnrollQuery";
+import { useAdminEnrollment } from "hooks/api/admin/enroll";
+import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
-import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 const EnrollmentFormEditPage = () => {
   const { formId } = useParams();
+  const navigate = useNavigate();
+  const overlay = useOverlay();
   if (!formId) throw new Error("잘못된 formId 입니다");
 
-  const { data, isLoading } = useAdminEnrollQuery(formId, "EDIT");
+  const { data, isLoading } = useAdminEnrollment(formId, "EDIT");
 
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false,
-    defaultValues: data
+    defaultValues: data,
+    shouldFocusError: false
   });
 
   const currentSteps = ADMIN_CREATE_FORM_STEP;
@@ -45,13 +48,18 @@ const EnrollmentFormEditPage = () => {
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
+  const openPreventLeavePopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
+    ));
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
-      <Header type="text" text="가입신청서 수정" />
+      <Header type="text" text="가입신청서 수정" handleClick={openPreventLeavePopup} />
       <PageContainer color="BGray">
         <Container>
           <TopWrapper>
@@ -86,7 +94,6 @@ const EnrollmentFormEditPage = () => {
           </FormProvider>
         </Container>
       </PageContainer>
-      <NavBar type="admin" />
     </>
   );
 };

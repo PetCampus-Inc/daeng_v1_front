@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode } from "react";
+import React, { createContext, useContext, useReducer, PropsWithChildren } from "react";
 
 import type { IAttendDogInfo } from "types/admin.attendance.type";
 
@@ -29,11 +29,7 @@ const selectedDogsReducer = (state: IAttendDogInfo[], action: Action) => {
   }
 };
 
-interface SelectedDogsProviderProps {
-  children: ReactNode;
-}
-
-export const SelectedDogsProvider = ({ children }: SelectedDogsProviderProps) => {
+export const SelectedDogsProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(selectedDogsReducer, []);
 
   return (
