@@ -82,7 +82,7 @@ const MyDogCard = ({
       <S.InfoTextBox>
         <S.DogName>{dogName}</S.DogName>
         <S.GotoSchoolInfoButton>
-          {schoolInfo}
+          <span>{schoolInfo}</span>
           {!isOpen && <ArrowRightIcon />}
         </S.GotoSchoolInfoButton>
         <S.DateText>{createdTime} 등록</S.DateText>

@@ -138,12 +138,14 @@ export const CancelApprovalButton = styled.button`
 const StatusBoxStyle = css`
   position: relative;
   overflow: hidden;
-  padding: 0.25rem 0.5rem;
+  padding: 0.39rem 0.5rem 0.25rem;
   border-radius: 50px;
   display: flex;
   align-items: center;
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.white};
+  text-align: left;
+  word-break: keep-all;
 
   &::before {
     content: "";
@@ -160,6 +162,17 @@ const StatusBoxStyle = css`
 
 export const GotoSchoolInfoButton = styled.button`
   ${StatusBoxStyle}
+
+  & > span {
+    padding-right: 0.4375rem;
+  }
+
+  & > svg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 `;
 
 export const AddDogButton = styled.button`
