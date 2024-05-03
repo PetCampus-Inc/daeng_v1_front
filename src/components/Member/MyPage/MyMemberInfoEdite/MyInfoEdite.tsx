@@ -11,17 +11,13 @@ import * as useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { IMemberInfoEdite } from "types/Member.type";
 import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 
-interface MemberInfoProps {
-  requiredItems: Map<number, boolean>;
-  handleFocus: () => void;
-  handleBlur: () => void;
-}
-
-const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: MemberInfoProps) => {
+// TODO 코드 리팩토링 필요
+const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdite) => {
   const { register, setValue, watch } = useFormContext();
   const [isAddressActive, setIsAddressActive] = useState(false);
   const overlay = useOverlay.useOverlay();
