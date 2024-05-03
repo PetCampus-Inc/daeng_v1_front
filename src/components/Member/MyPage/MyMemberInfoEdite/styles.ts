@@ -64,15 +64,3 @@ export const MyDogName = styled.div`
   ${({ theme }) => theme.typo.body2_16_R};
   grid-column: 2 / 4;
 `;
-
-export const KeyboardCompleteButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.primaryColor};
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  min-height: 48px;
-  height: 2rem;
-  color: ${({ theme }) => theme.colors.white};
-  ${({ theme }) => theme.typo.label1_16_B};
-  z-index: 1;
-`;
