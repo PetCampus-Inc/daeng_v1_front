@@ -36,7 +36,7 @@ const MemberMyInfoEditePage = () => {
         <FormProvider {...methods}>
           <MyProfileEdite handleFocus={handleFocus} handleBlur={handleBlur} />
         </FormProvider>
-        <ContentContainer px="1.5" py="1">
+        <ContentContainer px="1.5" py="1" height="auto">
           <FormProvider {...methods}>
             <MyInfoEdite
               requiredItems={requiredItemList}
