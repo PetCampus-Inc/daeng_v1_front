@@ -6,10 +6,11 @@ type DisconnectModalProps = {
   close: () => void;
   action: () => void;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   closeText: string;
   actionText: string;
   colorScheme: "primary" | "red";
+  children?: React.ReactNode;
 };
 
 const BasicModal = ({
@@ -20,12 +21,13 @@ const BasicModal = ({
   subtitle,
   closeText,
   actionText,
-  colorScheme
+  colorScheme,
+  children
 }: DisconnectModalProps) => {
   return (
     <Modal isOpen={isOpen} close={close}>
       <Modal.Content variant="two">
-        <Modal.Title title={title} subtitle={subtitle} />
+        <Modal.Title title={title} subtitle={children ? children : subtitle} />
         <Modal.Button
           colorScheme={colorScheme}
           closeText={closeText}

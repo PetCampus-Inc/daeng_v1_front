@@ -40,6 +40,10 @@ export const SubText = styled(Text)`
   ${({ theme }) => theme.typo.body2_16_R};
   color: ${({ theme }) => theme.colors.gray_2};
   padding: 0 7px;
+
+  & > .emphasisText {
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
 `;
 
 export const TextWrapper = styled.div`

@@ -38,11 +38,14 @@ const SchoolInfo = () => {
           handleDeleteSchool();
         }}
         title="유치원과 연결을 끊으시겠습니까?"
-        subtitle="지금까지 주고 받은 채팅내역, 알림장, 사진앨범 등의 모든 기록은 유지되지만, 유치원과 연결이 끊겨 더 이상 해당 유치원의 소식을 받을 수 없어요"
         closeText="취소"
         actionText="연결 끊기"
         colorScheme="red"
-      />
+      >
+        지금까지 주고 받은 채팅내역, 알림장, 사진앨범 등의{" "}
+        <em className="emphasisText">모든 기록은 유지</em>되지만, 유치원과 연결이 끊겨 더 이상 해당
+        유치원의 소식을 받을 수 없어요
+      </BasicModal>
     ));
 
   const openAlertPopup = () =>
@@ -101,7 +104,11 @@ const SchoolInfo = () => {
           <S.ListTitle>2023.12.13 등록</S.ListTitle>
         </S.InfoList>
       </S.InfoContainer>
-      <S.DisconnectButton backgroundColor={"white"} onClick={openAlertPopup} className="disconnect">
+      <S.DisconnectButton
+        backgroundColor={"white"}
+        onClick={openDisconnectPopup}
+        className="disconnect"
+      >
         유치원 연결 끊기
       </S.DisconnectButton>
     </S.CardContainer>
