@@ -34,9 +34,7 @@ const MyDogCard = ({
     overlay.open(({ isOpen, close }) => (
       <AlertBottomSheet
         isOpen={isOpen}
-        close={() => {
-          close();
-        }}
+        close={close}
         title="강아지를 전부 삭제할 수 없어요"
         subtitle="최소 한 마리의 강아지를 남겨주세요"
         actionText="닫기"
