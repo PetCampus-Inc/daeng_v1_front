@@ -35,7 +35,7 @@ const useS3Upload = () => {
           const url = `https://${bucketName}.s3.amazonaws.com/${objectKey}`;
           setData((prev) => [...prev, { url, error: null }]);
         } catch (err) {
-          console.error("Upload error:", err);
+          console.error("upload error:", err);
           setData((prev) => [...prev, { url: "", error: "Failed to upload file." }]);
         }
       }

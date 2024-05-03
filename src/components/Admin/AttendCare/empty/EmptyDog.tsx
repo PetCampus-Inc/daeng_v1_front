@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
+import RightArrow from "assets/svg/arrow-right-icon";
 import CareDogIcon from "assets/svg/care-dog-icon";
-import RightArrow from "assets/svg/right-arrow";
 import { Text } from "components/common";
 import { Link } from "react-router-dom";
 
