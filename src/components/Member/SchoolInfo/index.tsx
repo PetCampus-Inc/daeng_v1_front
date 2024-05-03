@@ -101,9 +101,9 @@ const SchoolInfo = () => {
           <S.ListTitle>2023.12.13 등록</S.ListTitle>
         </S.InfoList>
       </S.InfoContainer>
-      <BackgroundButton backgroundColor={"white"} onClick={openAlertPopup} className="disconnect">
+      <S.DisconnectButton backgroundColor={"white"} onClick={openAlertPopup} className="disconnect">
         유치원 연결 끊기
-      </BackgroundButton>
+      </S.DisconnectButton>
     </S.CardContainer>
   );
 };

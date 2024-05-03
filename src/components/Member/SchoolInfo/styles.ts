@@ -1,3 +1,4 @@
+import BackgroundButton from "components/common/Button/BackgroundButton";
 import { styled } from "styled-components";
 
 export const CardContainer = styled.div`
@@ -78,4 +79,10 @@ export const YellowThickButton = styled.button`
   border-radius: 90px;
   color: ${({ theme }) => theme.colors.primaryColor};
   ${({ theme }) => theme.typo.caption1_12_B};
+`;
+
+export const DisconnectButton = styled(BackgroundButton)`
+  margin-top: 8px;
+  padding: 0;
+  color: ${({ theme }) => theme.colors.gray_3};
 `;
