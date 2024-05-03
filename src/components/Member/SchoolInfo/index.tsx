@@ -9,12 +9,15 @@ import BackgroundButton from "components/common/Button/BackgroundButton";
 import BasicModal from "components/common/Modal/BasicModal";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
 const SchoolInfo = () => {
+  const navigate = useNavigate();
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
   const { data } = useGetTeacherInfo(adminId);
 
@@ -38,6 +41,7 @@ const SchoolInfo = () => {
         action={() => {
           console.log("유치원 연결 끊기");
           close();
+          handleDeleteSchool();
         }}
         title="유치원과 연결을 끊으시겠습니까?"
         subtitle="지금까지 주고 받은 채팅내역, 알림장, 사진앨범 등의 모든 기록은 유지되지만, 유치원과 연결이 끊겨 더 이상 해당 유치원의 소식을 받을 수 없어요"
@@ -58,9 +62,17 @@ const SchoolInfo = () => {
         actionFn={() => {
           console.log("유치원 연결 끊기");
           close();
+          handleDeleteSchool();
         }}
       />
     ));
+
+  const handleDeleteSchool = () => {
+    //TODO 유치원 연결끊기
+    console.log("삭제");
+    navigate("/mypage");
+    showToast("유치원과 연결이 끊어졌습니다", "bottom");
+  };
 
   return (
     <S.CardContainer>
