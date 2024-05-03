@@ -22,6 +22,7 @@ header type
 - text : 뒤로가기 + 텍스트 + (오른쪽 버튼)
 - notice : 텍스트 + 알림 // TODO: 이러한 형태로 다른 아이콘 사용하는 경우가 있다면 수정하기
 - setting : 텍스트 + 세팅 (background-color, box-shadow 없음)
+- edite: 뒤로가기 + 텍스트 + 수정 버튼
 */
 
 interface Props {
