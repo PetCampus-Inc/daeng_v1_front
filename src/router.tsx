@@ -338,6 +338,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberMyInfoEditePage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_MY_SCHOOL_INFO,
+          element: (
+            <Suspense>
+              <Pages.MemberSchoolInfoPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
