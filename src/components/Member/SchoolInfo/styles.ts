@@ -6,9 +6,18 @@ export const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.shadows.card};
   margin-bottom: 4.25rem;
+
+  &.previous {
+    p {
+      color: ${({ theme }) => theme.colors.gray_2};
+    }
+    span {
+      color: ${({ theme }) => theme.colors.gray_3};
+    }
+  }
 `;
 
-export const CardTitle = styled.span`
+export const CardTitle = styled.p`
   ${({ theme }) => theme.typo.label1_16_B};
   color: ${({ theme }) => theme.colors.darkBlack};
 `;
@@ -49,6 +58,10 @@ export const IconWrapper = styled.div`
   flex-shrink: 0;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.yellow_3};
+
+  &.previous {
+    filter: grayscale(1);
+  }
 `;
 
 export const ListTitle = styled.span`
