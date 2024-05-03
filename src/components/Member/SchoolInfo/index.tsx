@@ -42,7 +42,7 @@ const SchoolInfo = () => {
         actionText="연결 끊기"
         colorScheme="red"
       >
-        지금까지 주고 받은 채팅내역, 알림장, 사진앨범 등의{" "}
+        지금까지 주고 받은 채팅내역, 알림장, 사진앨범 등의
         <em className="emphasisText">모든 기록은 유지</em>되지만, 유치원과 연결이 끊겨 더 이상 해당
         유치원의 소식을 받을 수 없어요
       </BasicModal>
