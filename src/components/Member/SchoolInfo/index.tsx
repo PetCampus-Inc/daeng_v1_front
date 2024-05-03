@@ -7,25 +7,19 @@ import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import BasicModal from "components/common/Modal/BasicModal";
-import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
 const SchoolInfo = () => {
   const navigate = useNavigate();
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
-  const { data } = useGetTeacherInfo(adminId);
-
   const overlay = useOverlay();
 
   const schoolCallInfo = {
-    schoolName: data.schoolName,
-    schoolNumber: data.schoolNumber
+    schoolName: "똑독",
+    schoolNumber: "02-0909-000"
   };
 
   const openCallPopup = () =>
@@ -76,13 +70,13 @@ const SchoolInfo = () => {
 
   return (
     <S.CardContainer>
-      <S.CardTitle>{data && data.schoolName ? `${data.schoolName} 유치원` : ""}</S.CardTitle>
+      <S.CardTitle>{schoolCallInfo ? schoolCallInfo.schoolName : ""} 유치원</S.CardTitle>
       <S.InfoContainer>
         <S.InfoList>
           <S.IconWrapper>
             <Phone />
           </S.IconWrapper>
-          <S.ListTitle>{data && data.schoolNumber ? data.schoolNumber : ""}</S.ListTitle>
+          <S.ListTitle>{schoolCallInfo ? schoolCallInfo.schoolNumber : ""}</S.ListTitle>
           <S.YellowThickButton onClick={openCallPopup}>
             <PhoneIcon />
             전화 걸기
@@ -98,13 +92,13 @@ const SchoolInfo = () => {
           <S.IconWrapper>
             <Map />
           </S.IconWrapper>
-          <S.ListTitle>{data && data.schoolAddress ? data.schoolAddress : ""}</S.ListTitle>
+          <S.ListTitle>서울시 광진구 이라동 780-3</S.ListTitle>
         </S.InfoList>
         <S.InfoList>
           <S.IconWrapper>
             <Calendar />
           </S.IconWrapper>
-          <S.ListTitle>{data && data.enrollDate ? `${data.enrollDate}등록` : ""}</S.ListTitle>
+          <S.ListTitle>2023.12.13 등록</S.ListTitle>
         </S.InfoList>
       </S.InfoContainer>
       <BackgroundButton backgroundColor={"white"} onClick={openAlertPopup} className="disconnect">
