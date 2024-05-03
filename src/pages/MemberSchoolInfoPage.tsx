@@ -1,5 +1,11 @@
+import Header from "components/common/Header";
+
 const MemberSchoolInfoPage = () => {
-  return <div>유치원 상세정보</div>;
+  return (
+    <>
+      <Header type="text" text="유치원 상세정보" />
+    </>
+  );
 };
 
 export default MemberSchoolInfoPage;
