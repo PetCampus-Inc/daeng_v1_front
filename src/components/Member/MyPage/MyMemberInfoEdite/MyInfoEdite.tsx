@@ -17,9 +17,11 @@ import * as S from "./styles";
 
 interface MemberInfoProps {
   requiredItems: Map<number, boolean>;
+  handleFocus: () => void;
+  handleBlur: () => void;
 }
 
-const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
+const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: MemberInfoProps) => {
   const { register, setValue, watch } = useFormContext();
   const [isAddressActive, setIsAddressActive] = useState(false);
   const overlay = useOverlay.useOverlay();
@@ -60,6 +62,8 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           isRequired
           placeholder="견주 이름을 입력해주세요"
           value="박유빈"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </Flex>
 
@@ -87,6 +91,8 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           register={register}
           value="롯데캐슬 아파트 203동 1403호"
           placeholder="상세 주소를 입력해주세요"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </Flex>
 
@@ -101,6 +107,8 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           placeholder="연락처를 입력해주세요"
           value="010-1234-1234"
           type="tel"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </Flex>
 
@@ -115,10 +123,10 @@ const MyInfoEdite = ({ requiredItems }: MemberInfoProps) => {
           placeholder="비상 연락처를 입력해주세요"
           value="010-1234-1234"
           type="tel"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
       </Flex>
-
-      <S.KeyboardCompleteButton>완료</S.KeyboardCompleteButton>
     </S.ProfileEditeWrapper>
   );
 };

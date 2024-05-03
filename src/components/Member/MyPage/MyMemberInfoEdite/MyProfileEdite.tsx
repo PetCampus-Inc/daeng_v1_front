@@ -7,7 +7,12 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import * as S from "./styles";
 import RoleEditeButton from "../Buttons/RoleEditeButton";
 
-const MyProfileEdite = () => {
+interface IProps {
+  handleFocus: () => void;
+  handleBlur: () => void;
+}
+
+const MyProfileEdite = ({ handleFocus, handleBlur }: IProps) => {
   // TODO setValue, watch의 경우 이후 기능 추가 후 삭제 여부 판단하기
   const { register, setValue, watch } = useFormContext();
   const [isShowRoles, setIsShowRoles] = useState(false);
@@ -37,6 +42,8 @@ const MyProfileEdite = () => {
           borderColor={ThemeConfig.colors.white}
           placeholder="강아지 이름을 입력해주세요"
           value="뽀뽀"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
         의
       </S.MyDogName>
