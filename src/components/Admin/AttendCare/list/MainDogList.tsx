@@ -11,15 +11,7 @@ const MainDogList = ({ data }: MainDogListProps) => {
   return (
     <MainDogGrid>
       {data.map((item) => (
-        <MainDogCard
-          key={item.dogId}
-          attendanceId={item.attendanceId}
-          dogId={item.dogId}
-          dogName={item.dogName}
-          adminName={item.adminName}
-          lastPhotoTime={item.lastPhotoTime}
-          agendaWriting={item.agendaWriting}
-        />
+        <MainDogCard key={item.dogId} info={item} />
       ))}
     </MainDogGrid>
   );

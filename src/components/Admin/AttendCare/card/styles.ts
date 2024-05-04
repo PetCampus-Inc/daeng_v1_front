@@ -37,11 +37,6 @@ export const ListItemImg = styled.div.withConfig({
   }
 `;
 
-export const ListItemTitle = styled.span`
-  ${({ theme }) => theme.typo.body2_16_B};
-  color: ${({ theme }) => theme.colors.darkBlack};
-`;
-
 export const ListItemTime = styled.span`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ theme }) => theme.colors.gray_2};

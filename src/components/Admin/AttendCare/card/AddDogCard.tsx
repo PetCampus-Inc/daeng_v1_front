@@ -1,9 +1,10 @@
 import AlertRed from "assets/svg/alert-red-icon";
+import { Text } from "components/common";
 import Badge from "components/common/Badge";
 import Checkbox from "components/common/Checkbox";
 import React from "react";
 
-import { CheckboxWrapper, ListItem, ListItemImg, ListItemTitle, ListItemWrapper } from "./styles";
+import { CheckboxWrapper, ListItem, ListItemImg, ListItemWrapper } from "./styles";
 
 interface AddDogCardProps {
   dogId: number;
@@ -26,7 +27,9 @@ const AddDogCard = React.memo(
               alt="dog"
             />
           </ListItemImg>
-          <ListItemTitle>{dogName}</ListItemTitle>
+          <Text typo="body2_16_B" color="darkBlack">
+            {dogName}
+          </Text>
           {isCared && <Badge variant="yellow" text={adminName + "T"} />}
         </ListItemWrapper>
         <CheckboxWrapper>
