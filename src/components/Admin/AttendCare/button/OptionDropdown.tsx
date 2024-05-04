@@ -9,7 +9,7 @@ interface CareOptionListProps {
   handleOptionClick: (option: string) => void;
 }
 
-const CareOptionDropdown = ({ options, handleOptionClick }: CareOptionListProps) => {
+const OptionDropdown = ({ options, handleOptionClick }: CareOptionListProps) => {
   const optionIcon = {
     "관리 강아지 삭제": <XCircleIcon colorScheme="brown" />,
     "알림장 일괄 전송": <SendAlarmIcon />
@@ -41,4 +41,4 @@ const CareOptionDropdown = ({ options, handleOptionClick }: CareOptionListProps)
   );
 };
 
-export default CareOptionDropdown;
+export default OptionDropdown;

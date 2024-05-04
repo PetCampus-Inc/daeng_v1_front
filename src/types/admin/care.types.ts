@@ -10,8 +10,10 @@ export interface ICareDogInfo {
   dogId: number;
   dogName: string;
   adminName: Nullable<string>;
+  profileUri: string;
   lastPhotoTime: Nullable<string>;
   agendaWriting: TAgendaWriting;
+  conflicted: boolean;
 }
 
 export type TAgendaWriting = "COMPLETE" | "NOT_YET" | "WRITING";
