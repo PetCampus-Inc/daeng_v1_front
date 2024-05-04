@@ -23,5 +23,6 @@ export const QUERY_KEY = {
   CARE_DOG_LIST: ["careDogList"], // 강아지 관리 리스트
   NEW_CARE_DOG_LIST: ["newCareDogList"], // 새로운 강아지 관리 리스트
   PRINCIPAL_INFO: ["principalInfo"], // 원장 마이페이지 데이터
-  TEACHER_INFO: ["teacherInfo"] // 선상님 마이페이지 데이터
+  TEACHER_INFO: ["teacherInfo"], // 선상님 마이페이지 데이터
+  MEMBER_INFO: (memberId: number) => ["memberInfo", memberId] // 견주 정보 데이터
 };
