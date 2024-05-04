@@ -9,7 +9,7 @@ import { CardContainer, ContentContainer } from "components/Member/MyPage/styles
 const MemberMyPage = () => {
   return (
     <>
-      <Header type="setting" text="마이페이지" transparent={true} />
+      <Header type="setting" text="마이페이지" transparent />
       <PageContainer
         pt="4"
         imageUrl={
