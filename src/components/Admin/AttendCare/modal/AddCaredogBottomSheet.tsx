@@ -9,7 +9,15 @@ import AlertAlreadySelectedModal from "./AlertAlreadySelectedModal";
 import { useSelectedDogs } from "../hooks/useSelectedDogs";
 import AddDogList from "../list/AddDogList";
 
-const AddCaredogBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
+interface IAddCaredogBottomSheetProps extends IBottomSheetProps {
+  handleSuccess: () => void;
+}
+
+const AddCaredogBottomSheet = ({
+  isOpen,
+  close: AddCareDogBottomClose,
+  handleSuccess
+}: IAddCaredogBottomSheetProps) => {
   const overlay = useOverlay();
 
   const openPopup = () =>
@@ -23,18 +31,20 @@ const AddCaredogBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
   const selectedDogId = selectedDogs.map((dog) => dog.attendanceId);
 
-  // TODO: 명확한 네이밍, useCreateCareDogs 내부의 onSuccess 분리하기!
   const handleSubmit = () => {
     mutateCreateCareDogs(
       { adminId, selectedDogId },
       {
-        onSuccess: () => close()
+        onSuccess: () => {
+          AddCareDogBottomClose();
+          handleSuccess();
+        }
       }
     );
   };
 
   return (
-    <BottomSheet isOpen={isOpen} close={close}>
+    <BottomSheet isOpen={isOpen} close={AddCareDogBottomClose}>
       <BottomSheet.Content>
         <BottomSheet.Control />
         <BottomSheet.Title align="left">오늘 관리할 강아지</BottomSheet.Title>
