@@ -11,7 +11,7 @@ interface CallSchoolBottomSheetProps {
 }
 
 const CallSchoolBottomSheet = memo(({ info, isOpen, close }: CallSchoolBottomSheetProps) => {
-  if (!info || info.schoolName === undefined || info.schoolNumber === undefined) return null;
+  if (!(info?.schoolName && info?.schoolNumber)) return null;
 
   const handleCallMember = (info: ISchoolCallInfo) => {
     console.log(info.schoolNumber);
