@@ -1,3 +1,5 @@
+import { PATH } from "constants/path";
+
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
 
 import * as S from "./styles";
@@ -16,7 +18,7 @@ const MemberProfile = () => {
       />
       <S.ProfileDetail>
         <S.DetailItem>
-          <S.GotoInfoButton>
+          <S.GotoInfoButton to={PATH.MEMBER_MY_INFO_PAGE}>
             <S.Text className="name">뽀뽀의 언니</S.Text>
             <ArrowRightSquare />
           </S.GotoInfoButton>
