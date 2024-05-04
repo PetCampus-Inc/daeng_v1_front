@@ -1,8 +1,9 @@
+import { Text } from "components/common";
 import Checkbox from "components/common/Checkbox";
 import { memo } from "react";
 import { ICareDogInfo } from "types/admin/care.types";
 
-import { CardCheckboxWrapper, CardContainer, ListItemImg, ListItemTitle } from "./styles";
+import { CardCheckboxWrapper, CardContainer, ListItemImg } from "./styles";
 
 type AttendanceData = Pick<ICareDogInfo, "dogId" | "dogName" | "attendanceId">;
 
@@ -28,7 +29,9 @@ const DeleteDogCard = memo(
             alt="dog"
           />
         </ListItemImg>
-        <ListItemTitle>{dogName}</ListItemTitle>
+        <Text typo="body2_16_B" color="darkBlack">
+          {dogName}
+        </Text>
       </CardContainer>
     );
   }
