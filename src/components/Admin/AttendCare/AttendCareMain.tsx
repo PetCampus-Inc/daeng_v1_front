@@ -8,6 +8,7 @@ import CareOptionDropdown from "./CareOptionDropdown";
 import MainDogList from "./list/MainDogList";
 import PreviousInfoGuideBottomSheet from "./modal/PreviousInfoGuideBottomSheet";
 import { ButtonWrapper } from "./styles";
+import { PATH } from "../../../constants/path";
 
 interface AttendCareMainProps {
   data: ICareDogInfo[];
@@ -24,7 +25,10 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
 
   return (
     <>
-      <MainSendCard text="견주에게 바로 사진을 보낼 수 있어요" onClick={openGuidePopup} />
+      <MainSendCard
+        text="견주에게 바로 사진을 보낼 수 있어요"
+        onClick={() => navigate(PATH.ADMIN_CARE_GALLERY)}
+      />
       <ButtonWrapper>
         <AddDogButton handleNextPopup={openGuidePopup} />
         <CareOptionDropdown />
