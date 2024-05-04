@@ -1,15 +1,16 @@
 import { PATH } from "constants/path";
 
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
+import { IMemberInfo } from "types/member/home.types";
 
 import * as S from "./styles";
 
-// TODO API 데이터에 따라 타입 수정 필요
-// interface MemberInfoProps {
-//   data: ITeacherInfo;
-// }
+interface MemberInfoProps {
+  data: IMemberInfo;
+}
 
-const MemberProfile = () => {
+const MemberProfile = ({ data }: MemberInfoProps) => {
+  console.log(data);
   return (
     <S.ProfileWrapper>
       <S.ProfileImage

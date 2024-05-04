@@ -5,8 +5,12 @@ import { PageContainer } from "components/Member/MyPage/Container/styles";
 import MemberProfile from "components/Member/MyPage/MemberProfile";
 import MyDogInfo from "components/Member/MyPage/MyDogInfo";
 import { CardContainer, ContentContainer } from "components/Member/MyPage/styles";
+import { useGetMemberInfo } from "hooks/api/member/member";
 
 const MemberMyPage = () => {
+  const memberId = 1;
+  const { data } = useGetMemberInfo(memberId);
+  console.log(data);
   return (
     <>
       <Header type="setting" text="마이페이지" transparent />
@@ -17,7 +21,7 @@ const MemberMyPage = () => {
         }
       >
         <ContentContainer>
-          <MemberProfile />
+          <MemberProfile data={data} />
           <CardContainer>
             <MyDogInfo />
           </CardContainer>
