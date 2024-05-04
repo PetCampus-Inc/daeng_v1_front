@@ -119,6 +119,7 @@ export const SubTitle = styled.p`
 
   &.bottom-sheet-subtitle.center {
     justify-content: center;
+    text-align: center;
   }
 `;
 
