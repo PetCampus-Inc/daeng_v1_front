@@ -16,10 +16,8 @@ const AttendCarePage = () => {
 
   const { data } = useGetCareDogList(adminId, initialData);
 
-  // TODO: 출석한 강아지가 없는 경우 null임. 관리할 강아지가 없는 경우 adminName가 null임. 이 부분을 명확히 해야함
-  const noCareDog = data.some((dog) => dog.adminName === null);
-  const isFirstVisit = noCareDog;
-  const hasNoCaredDog = data.length === 0;
+  const isFirstVisit = data.some((dog) => dog.adminName === null);
+  const isEmptyDog = data.length === 0;
 
   return (
     <>
@@ -27,7 +25,7 @@ const AttendCarePage = () => {
       <PageContainer color={isFirstVisit ? "white" : "BGray"} pt="2">
         {isFirstVisit ? (
           <AttendCareInit />
-        ) : hasNoCaredDog ? (
+        ) : isEmptyDog ? (
           <AttendCareEmpty />
         ) : (
           <AttendCareMain data={data} />
