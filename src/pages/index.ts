@@ -23,6 +23,8 @@ export { default as DogGalleryPage } from "./DogGalleryPage";
 export { default as NewTicketPage } from "./NewTicketPage";
 export { default as MemberMyPage } from "./MemberMyPage";
 export { default as MemberMyInfoPage } from "./MemberMyInfoPage";
+export { default as MemberMyInfoEditePage } from "./MemberMyInfoEditePage";
+export { default as MemberSchoolInfoPage } from "./MemberSchoolInfoPage";
 export { default as SettingPage } from "./SettingPage";
 export { default as PolicyPage } from "./PolicyPage";
 export { default as UnregisterPage } from "./UnregisterPage";

@@ -39,5 +39,7 @@ export const PATH = {
   ENROLL: "/enrollment", // 견주 가입신청서
   MEMBER_MY_PAGE: "/mypage",
   REDIRECT: "/auth/:provider",
-  MEMBER_MY_INFO_PAGE: "/mypage/profile"
+  MEMBER_MY_INFO_PAGE: "/myPage/profile",
+  MEMBER_MY_INFO_EDITE_PAGE: "/myPage/profile/edite",
+  MEMBER_MY_SCHOOL_INFO: "/myPage/school"
 } as const;

@@ -9,6 +9,7 @@ import type { InputFieldProps } from "../index";
 export interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   onSearch?: (value: string) => void;
   onClear?: () => void;
+  inputType?: string;
 }
 
 const SearchInputField = ({
@@ -18,6 +19,7 @@ const SearchInputField = ({
   onClear,
   disabled = false,
   readOnly = false,
+  inputType,
   ...props
 }: SearchInputFieldProps) => {
   const handleClear = () => {
@@ -44,7 +46,7 @@ const SearchInputField = ({
         readOnly={readOnly}
         {...props}
       />
-      {value ? (
+      {!inputType && value ? (
         <S.SearchInputButton onClick={handleClear}>
           <XCircleIcon />
         </S.SearchInputButton>

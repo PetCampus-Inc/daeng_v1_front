@@ -8,6 +8,7 @@ export interface InputFieldProps
   isRequired?: boolean;
   pattern?: ValidationRule<RegExp>;
   register?: UseFormRegister<FieldValues>;
+  borderColor?: string;
 }
 
 const InputField = ({
@@ -17,6 +18,7 @@ const InputField = ({
   placeholder,
   disabled = false,
   register,
+  borderColor,
   ...props
 }: InputFieldProps) => {
   return (
@@ -25,7 +27,8 @@ const InputField = ({
       id={name}
       disabled={disabled}
       placeholder={placeholder}
-      className={props.defaultValue !== props.value ? "default" : ""}
+      className={(props.defaultValue ?? props.value) !== props.value ? "default" : ""} // 변경
+      borderColor={borderColor}
       {...props}
     />
   );
