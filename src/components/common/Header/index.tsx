@@ -99,15 +99,10 @@ const Header = ({ type, handleClick, text, rightElement, transparent }: Props) =
               <ArrowLeftIcon className="arrow-left" />
             </IconWrapper>
             <TitleText className="text">{text}</TitleText>
-            <IconWrapper
-              onClick={() => {
-                // TODO: 수정 페이지로 이동
-                // FIXME 클릭 이벤트를 svg에 하지 않고 button에 추가히기
-              }}
-            >
+            <IconWrapper onClick={click}>
               <PencilIcon
                 handleTouch={() => {
-                  // TODO: 수정 페이지로 이동
+                  // FIXME 클릭 이벤트를 svg에 하지 않고 button에 추가히기
                 }}
               />
             </IconWrapper>
