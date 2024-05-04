@@ -1,3 +1,5 @@
+import { IResponse } from "types/Response.type";
+
 export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
 export type TImageType = "IMAGE" | "PROFILE";
@@ -22,19 +24,19 @@ export interface ImageList {
   createdTime: string;
 }
 
-export interface IDoglist {
+interface IDoglist {
   dogId: number;
   dogName: string;
   status: TDogStatus;
   schoolId: number;
   schoolName: string;
   registeredDate: number[];
-  dropOutDate: string;
+  dropOutDate: number[];
 }
-export interface IMemberInfo {
+export interface IMemberInfo extends IResponse {
   memberId: number;
   memberName: string;
   relation: string;
-  fileUrl: string;
+  fileUrl?: string;
   doglist: IDoglist[];
 }
