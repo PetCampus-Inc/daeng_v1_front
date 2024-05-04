@@ -20,7 +20,7 @@ const Navbar = ({ type, show, attendance }: Props) => {
       {path.includes("/mypage")
         ? MENU_ITEMS.member.map((menuItem, index) => (
             <React.Fragment key={menuItem.text}>
-              <S.NavButton to={menuItem.path}>
+              <S.NavButton to={String(menuItem.path)}>
                 {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
                 <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
               </S.NavButton>
