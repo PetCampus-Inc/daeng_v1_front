@@ -34,7 +34,6 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
           {data.doglist.map((item) => (
             <MyDogCard
               key={item.dogName}
-              id={item.dogName}
               isOpen={isOpen}
               dogName={item.dogName}
               schoolInfo={item.schoolName}
@@ -52,7 +51,6 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
           {data.doglist.map((item) => (
             <MyDogCard
               key={item.dogName}
-              id={item.dogName}
               isOpen={isOpen}
               dogName={item.dogName}
               schoolInfo={item.schoolName}
