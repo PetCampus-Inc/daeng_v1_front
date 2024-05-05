@@ -259,7 +259,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       ]
     },
     {
-      path: PATH.MEMBER_MY_PAGE(),
+      path: PATH.ROOT,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,
       children: [
