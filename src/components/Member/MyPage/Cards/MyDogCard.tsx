@@ -3,6 +3,7 @@ import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BasicModal from "components/common/ButtonModal/BasicModal";
 import * as useOverlay from "hooks/common/useOverlay";
 import { useRef } from "react";
+import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
@@ -11,22 +12,24 @@ interface IMyDogCardProps {
   isOpen: boolean;
   dogName: string;
   schoolInfo: string;
-  createdTime: string;
+  registeredDate: string[];
   profileUri: string;
   dogLength: number;
-  id: number;
+  id: string;
 }
 
 const MyDogCard = ({
   isOpen,
   dogName,
   schoolInfo,
-  createdTime,
+  registeredDate,
   profileUri,
   dogLength,
   id
 }: IMyDogCardProps) => {
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
+  const registeredTime = formatDate(registeredDate[0], registeredDate[1], registeredDate[2]);
+
   const overlay = useOverlay.useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -69,7 +72,7 @@ const MyDogCard = ({
   };
 
   return (
-    <S.MyDogCard tabIndex={id} ref={divRef} onClick={handleCardFocus}>
+    <S.MyDogCard tabIndex={dogLength} ref={divRef} onClick={handleCardFocus}>
       {isOpen && (
         <S.DeleteButton onClick={dogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
           삭제
@@ -81,7 +84,7 @@ const MyDogCard = ({
           <span>{schoolInfo}</span>
           {!isOpen && <ArrowRightIcon />}
         </S.GotoSchoolInfoButton>
-        <S.DateText>{createdTime} 등록</S.DateText>
+        <S.DateText>{registeredTime} 등록</S.DateText>
       </S.InfoTextBox>
       <S.MyDogImg src={profileUri} alt="my-dog" />
     </S.MyDogCard>

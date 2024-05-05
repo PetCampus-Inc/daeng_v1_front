@@ -23,7 +23,7 @@ const MemberMyPage = () => {
         <ContentContainer>
           <MemberProfile data={data} />
           <CardContainer>
-            <MyDogInfo />
+            <MyDogInfo data={data} />
           </CardContainer>
         </ContentContainer>
       </PageContainer>
