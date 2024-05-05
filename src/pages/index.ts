@@ -10,6 +10,7 @@ export { default as SchoolManagePage } from "./SchoolManagePage";
 export { default as PrincipalMyPage } from "./PrincipalMyPage";
 export { default as TeacherMyPage } from "./TeacherMyPage";
 export { default as SchoolInfoPage } from "./SchoolInfoPage";
+export { default as SchoolSearchPage } from "./SchoolSearchPage";
 export { default as EnrollmentPage } from "./EnrollmentPage";
 export { default as SchoolManageEnrollmentPage } from "./SchoolManageEnrollmentPage";
 export { default as EnrollmentFormDetailPage } from "./EnrollmentFormDetailPage";
