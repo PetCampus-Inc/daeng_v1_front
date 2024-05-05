@@ -9,7 +9,7 @@ const SchoolSearchPage = () => {
   return (
     <>
       <Header type="back" />
-      <PageContainer pt="2" color="white">
+      <PageContainer pt="2">
         <DogOwner currentMainStep={1} setCurrentMainStep={setCurrentMainStep} />
       </PageContainer>
     </>
