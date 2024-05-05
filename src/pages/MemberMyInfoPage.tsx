@@ -13,7 +13,7 @@ const MemberMyInfoPage = () => {
       <Header
         type="edite"
         text="내프로필"
-        handleClick={() => navigate(PATH.MEMBER_MY_INFO_EDITE_PAGE)}
+        actionFn={() => navigate(PATH.MEMBER_MY_INFO_EDITE_PAGE)}
         transparent
       />
       <PageContainer pt="1" color="br_5">
