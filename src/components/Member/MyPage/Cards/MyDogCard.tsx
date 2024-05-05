@@ -1,7 +1,7 @@
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BasicModal from "components/common/ButtonModal/BasicModal";
-import * as useOverlay from "hooks/common/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
@@ -15,7 +15,6 @@ interface IMyDogCardProps {
   registeredDate: string[];
   profileUri: string;
   dogLength: number;
-  id: string;
 }
 
 const MyDogCard = ({
@@ -24,13 +23,12 @@ const MyDogCard = ({
   schoolInfo,
   registeredDate,
   profileUri,
-  dogLength,
-  id
+  dogLength
 }: IMyDogCardProps) => {
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
   const registeredTime = formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
 
-  const overlay = useOverlay.useOverlay();
+  const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
 
   const openInvalidInputPopup = () =>
