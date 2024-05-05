@@ -5,6 +5,7 @@ import { PageContainer } from "styles/StyleModule";
 
 const SchoolSearchPage = () => {
   const { setCurrentMainStep } = useSignIn();
+  // FIXME 뒤로 가기 버튼 클릭 이슈 해결하기
   return (
     <>
       <Header type="back" />
