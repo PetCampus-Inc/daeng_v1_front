@@ -1,11 +1,13 @@
 import { ITEM_MAPS, type ItemMaps } from "constants/item";
 
-export const formatDate = (year: string, month: string, day: string) => {
+export const formatDate = (year: string, month: string, day: string, type?: string) => {
   if (!year || !month || !day) return "";
   const formattedMonth = month.padStart(2, "0");
   const formattedDay = day.padStart(2, "0");
 
-  return `${year}-${formattedMonth}-${formattedDay}`;
+  return type === "dot"
+    ? `${year}.${formattedMonth}.${formattedDay}`
+    : `${year}-${formattedMonth}-${formattedDay}`;
 };
 
 export const extractNumber = (text: string) => {
