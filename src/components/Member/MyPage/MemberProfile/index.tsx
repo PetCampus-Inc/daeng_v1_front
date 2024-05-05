@@ -1,4 +1,5 @@
 import { PATH } from "constants/path";
+import { RELATION_DATA } from "constants/relation";
 
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
 import { IMemberInfo } from "types/member/home.types";
@@ -10,7 +11,6 @@ interface MemberInfoProps {
 }
 
 const MemberProfile = ({ data }: MemberInfoProps) => {
-  console.log(data);
   return (
     <S.ProfileWrapper>
       <S.ProfileImage
@@ -20,10 +20,12 @@ const MemberProfile = ({ data }: MemberInfoProps) => {
       <S.ProfileDetail>
         <S.DetailItem>
           <S.GotoInfoButton to={PATH.MEMBER_MY_INFO_PAGE}>
-            <S.Text className="name">뽀뽀의 언니</S.Text>
+            <S.Text className="name">
+              {data.doglist[0].dogName}의 {RELATION_DATA[data.relation]}
+            </S.Text>
             <ArrowRightSquare />
           </S.GotoInfoButton>
-          <S.Text className="number">박유빈</S.Text>
+          <S.Text className="number">{data.memberName}</S.Text>
         </S.DetailItem>
       </S.ProfileDetail>
     </S.ProfileWrapper>
