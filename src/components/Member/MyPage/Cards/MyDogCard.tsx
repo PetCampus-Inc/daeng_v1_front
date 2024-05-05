@@ -58,9 +58,7 @@ const MyDogCard = ({
         title="등록된 유치원이 없어요"
         subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
         actionText="가입하기"
-        actionFn={() => {
-          //TODO 가입 신청 페이지로 이동
-        }}
+        actionFn={() => navigate(PATH.MEMBER_MY_SCHOOL_SEARCH)}
       />
     ));
 

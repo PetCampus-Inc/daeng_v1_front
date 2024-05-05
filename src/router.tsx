@@ -346,6 +346,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberSchoolInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_MY_SCHOOL_SEARCH,
+          element: (
+            <Suspense>
+              <Pages.SchoolSearchPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
