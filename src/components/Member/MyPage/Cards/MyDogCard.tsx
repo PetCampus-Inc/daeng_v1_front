@@ -9,20 +9,24 @@ import showToast from "utils/showToast";
 import * as S from "./styles";
 
 interface IMyDogCardProps {
+  dogId: number;
   isOpen: boolean;
   dogName: string;
   schoolInfo: string;
   registeredDate: string[];
   profileUri: string;
+  status: string;
   dogLength: number;
 }
 
 const MyDogCard = ({
+  dogId,
   isOpen,
   dogName,
   schoolInfo,
   registeredDate,
   profileUri,
+  status,
   dogLength
 }: IMyDogCardProps) => {
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
@@ -79,8 +83,14 @@ const MyDogCard = ({
       <S.InfoTextBox>
         <S.DogName>{dogName}</S.DogName>
         <S.GotoSchoolInfoButton>
-          <span>{schoolInfo}</span>
-          {!isOpen && <ArrowRightIcon />}
+          {status === "DROP_OUT" ? (
+            <span>등록된 유치원 없음</span>
+          ) : (
+            <>
+              <span>{schoolInfo}</span>
+              {!isOpen && <ArrowRightIcon />}
+            </>
+          )}
         </S.GotoSchoolInfoButton>
         <S.DateText>{registeredTime} 등록</S.DateText>
       </S.InfoTextBox>
