@@ -4,11 +4,9 @@ export interface IResponse {
 }
 
 export interface IError {
-  response: {
-    data: {
-      status: number;
-      message: string;
-      code: string;
-    };
+  data: {
+    status: number;
+    message: string;
+    code: string;
   };
 }
