@@ -10,7 +10,7 @@ export const handleLoginResult = async (): Promise<IResponse> => {
 
 // 견주 정보
 export const handleGetMemberInfo = async (memberId: number): Promise<IMemberInfo> => {
-  const url = `/member/info`;
+  const url = `/member/mypage`;
   const { data } = await customAxios.get(url, {
     params: {
       memberId
