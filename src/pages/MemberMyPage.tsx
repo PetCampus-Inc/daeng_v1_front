@@ -6,10 +6,11 @@ import MemberProfile from "components/Member/MyPage/MemberProfile";
 import MyDogInfo from "components/Member/MyPage/MyDogInfo";
 import { CardContainer, ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberInfo } from "hooks/api/member/member";
+import { useParams } from "react-router-dom";
 
 const MemberMyPage = () => {
-  const memberId = 1;
-  const { data } = useGetMemberInfo(memberId);
+  const { memberId } = useParams();
+  const { data } = useGetMemberInfo(Number(memberId));
   console.log(data);
   return (
     <>
