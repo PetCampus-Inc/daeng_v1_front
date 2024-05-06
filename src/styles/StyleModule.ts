@@ -147,3 +147,10 @@ export const FormPrevButton = styled(FormButton)`
   background-color: ${({ theme }) => theme.colors.br_4};
   color: ${({ theme }) => theme.colors.primaryColor};
 `;
+
+// img tag
+export const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;

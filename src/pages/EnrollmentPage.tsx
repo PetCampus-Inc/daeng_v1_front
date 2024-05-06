@@ -1,7 +1,7 @@
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import EnrollmentForm from "components/Enrollment";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 
 const EnrollmentPage = () => {

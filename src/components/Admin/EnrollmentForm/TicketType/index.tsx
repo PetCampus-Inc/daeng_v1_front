@@ -3,7 +3,7 @@ import { INIT_COUNTER } from "constants/option";
 import AddIcon from "assets/svg/add-icon";
 import Modal from "components/common/ButtonModal";
 import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import useTicketFieldArray from "hooks/common/useTicketFieldArray";
 import { useRecoilCallback } from "recoil";
 import { ticketCounterAtom } from "store/overlay";

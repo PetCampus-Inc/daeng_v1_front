@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import ListIconSmallRound from "assets/svg/list-icon-small-round";
-import RightArrow from "assets/svg/right-arrow";
 import { AnimatePresence } from "framer-motion";
 import { useApproveFormMutation, useDenyFormMutation } from "hooks/api/useApproveDenyMutation";
 import { useState } from "react";
@@ -74,7 +74,7 @@ const MemberWaitingCard = ({ data }: IOwnerWaitingCard) => {
               <ListIconSmallRound />
               <p>가입신청서 보기</p>
             </S.TextWrapper>
-            <RightArrow />
+            <ArrowRightIcon />
           </S.LinkToEnrollment>
         </S.CardContainer>
       )}

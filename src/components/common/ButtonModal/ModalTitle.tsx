@@ -2,7 +2,7 @@ import { MainText, SubText, TextWrapper } from "./styles";
 
 interface ModalTitleProps {
   title: string;
-  subtitle: string;
+  subtitle: string | React.ReactNode;
 }
 
 const ModalTitle = ({ title, subtitle }: ModalTitleProps) => {

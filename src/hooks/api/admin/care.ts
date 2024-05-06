@@ -36,19 +36,54 @@ export const useCreateCareDogs = (openPopup: () => void) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
+  const onSuccess = (data: ICareDogInfo[]) => {
+    if (!data.length) {
+      // 추가 요청 성공
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
+      navigate(PATH.ADMIN_CARE);
+      return;
+    }
+
+    const isConflicted = data.some((dog) => dog.conflicted);
+    if (isConflicted) {
+      // 추가 요청 실패
+      openPopup();
+      const currentDogs = queryClient.getQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST);
+      if (currentDogs) {
+        const updatedDogs = currentDogs.map((existingDog) => {
+          const newDogData = data.find(
+            (newDog) => newDog.dogId === existingDog.dogId && newDog.conflicted
+          );
+          return newDogData ? { ...existingDog, ...newDogData } : existingDog;
+        });
+        queryClient.setQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, updatedDogs);
+      }
+    } else {
+      // 추가 요청 성공, but 이전 기록이 있는 강아지
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
+      // 뮤테이션 결과를 queryCache에 저장
+      queryClient.setQueryData(QUERY_KEY.CACHED_CARE_DOG_INFO, data);
+    }
+  };
+
   const createCareDogsMutation = useMutation({
     mutationFn: handleCreateCareDogs,
-    onSuccess: (data) => {
-      if (data.length > 0) {
-        openPopup();
-        queryClient.setQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, data);
-      } else {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
-        navigate(PATH.ADMIN_CARE);
+    onSuccess,
+    meta: {
+      mutationCache: {
+        maxAge: 3600000 // 1시간 동안 캐시 유지
       }
     }
   });
   return { mutateCreateCareDogs: createCareDogsMutation.mutate };
+};
+
+export const useGetCachedCareDogInfo = () => {
+  const queryClient = useQueryClient();
+  const cachedData = queryClient.getQueryData<ICareDogInfo[]>(QUERY_KEY.CACHED_CARE_DOG_INFO);
+  const removeCachedData = () =>
+    queryClient.removeQueries({ queryKey: QUERY_KEY.CACHED_CARE_DOG_INFO, exact: true });
+  return { data: cachedData ? cachedData : null, removeCachedData };
 };
 
 export const useDeleteCareDogs = () => {

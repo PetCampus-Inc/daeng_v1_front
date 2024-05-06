@@ -1,7 +1,7 @@
 import { TSortOptionList } from "constants/option";
 
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { memo } from "react";
 
 import { ArrowDownButton, SelectBox, Text } from "./styles";

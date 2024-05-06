@@ -3,7 +3,7 @@ import CancelModal from "components/Admin/DogDetailInfo/NewTicket/CancelModal";
 import { NewTicketButton } from "components/Admin/DogDetailInfo/NewTicket/styles";
 import Header from "components/common/Header";
 import { useNewTicketMutation } from "hooks/api/useNewTicketMutation";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useForm, FormProvider } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";

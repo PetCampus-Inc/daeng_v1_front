@@ -21,6 +21,7 @@ export const QUERY_KEY = {
   MEMBER_PHONE_NUMBER: (dogId: number) => ["phoneNumber", dogId], // 견주 전화번호
   MEMBER_WAITING_LIST: ["WaitingMemberList"], // 가입신청 대기 중인 견주 리스트
   CARE_DOG_LIST: ["careDogList"], // 강아지 관리 리스트
+  CACHED_CARE_DOG_INFO: ["cachedCareDogInfo"], // 캐시된 강아지 관리 정보
   NEW_CARE_DOG_LIST: ["newCareDogList"], // 새로운 강아지 관리 리스트
   PRINCIPAL_INFO: ["principalInfo"], // 원장 마이페이지 데이터
   TEACHER_INFO: ["teacherInfo"], // 선상님 마이페이지 데이터

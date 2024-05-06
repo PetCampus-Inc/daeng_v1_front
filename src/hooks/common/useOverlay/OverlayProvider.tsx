@@ -41,4 +41,4 @@ const OverlayProvider = ({ children }: PropsWithChildren) => {
     </OverlayContext.Provider>
   );
 };
-export default OverlayProvider;
+export { OverlayProvider };
