@@ -5,4 +5,5 @@ export const Container = styled.div`
   border-radius: 90px;
   background-color: ${({ theme }) => theme.colors.br_5};
   color: ${({ theme }) => theme.colors.br_2};
+  margin: 2rem 0;
 `;

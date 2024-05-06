@@ -145,8 +145,17 @@ export const useSendAgenda = () => {
 
 // 강아지 지난 알림장 정보 가져오기
 export const useGetPastAgenda = (dogId: number) => {
+  const queryClient = useQueryClient();
+  const cachedData = queryClient.getQueryData<IPastAgenda[]>([
+    QUERY_KEY.CARE_DOG_PAST_AGENDA,
+    dogId
+  ]);
+
   return useSuspenseQuery<IPastAgenda[]>({
     queryKey: QUERY_KEY.CARE_DOG_PAST_AGENDA,
-    queryFn: () => handleGetPastAgenda(dogId)
+    queryFn: () => handleGetPastAgenda(dogId),
+    gcTime: 5 * 60 * 1000,
+    staleTime: 1 * 60 * 1000,
+    initialData: cachedData
   });
 };

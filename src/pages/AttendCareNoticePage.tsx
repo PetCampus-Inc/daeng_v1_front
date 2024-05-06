@@ -15,7 +15,7 @@ const AttendCareNoticePage = () => {
   return (
     <>
       <Header type="text" text={`${searchParams.get("dog_name")} 상세 페이지`} />
-      <PageContainer ph="0" pb="2" auto="auto">
+      <PageContainer ph="0" pb="2">
         <DogInfoBox />
         <PaddingContainer>
           <MenuToggle selectedTab={selectedTab} />

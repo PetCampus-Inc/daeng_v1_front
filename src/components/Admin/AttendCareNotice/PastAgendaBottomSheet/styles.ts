@@ -54,12 +54,15 @@ export const DateButton = styled.button.withConfig({
 export const AgendaContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.8rem;
   height: calc(100% - 20vh);
   padding: 2rem 1rem;
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
+  }
+  & div:last-child {
+    margin: 0;
   }
 `;
 
@@ -78,4 +81,6 @@ export const TitleAndButton = styled.div`
 
 export const TextSpan = styled.span`
   width: 100%;
+  color: ${({ theme }) => theme.colors.gray_1};
+  ${({ theme }) => theme.typo.label1_16_R};
 `;

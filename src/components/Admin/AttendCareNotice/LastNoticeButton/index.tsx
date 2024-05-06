@@ -1,5 +1,5 @@
 import PastNoticeIcon from "assets/svg/past-notice-icon";
-import useOverlay from "hooks/common/useOverlay/useOverlay";
+import { useOverlay } from "hooks/common/useOverlay";
 
 import * as S from "./styles";
 import PastAgendaBottomSheet from "../PastAgendaBottomSheet";
