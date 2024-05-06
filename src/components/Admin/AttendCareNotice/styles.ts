@@ -5,6 +5,7 @@ export const PaddingContainer = styled.div`
   height: 100%;
   padding: 0 1rem;
   overflow: scroll;
+  background-color: ${({ theme }) => theme.colors.white};
   &::-webkit-scrollbar {
     display: none;
   }

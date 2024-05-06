@@ -1,4 +1,5 @@
 import DogInfoBox from "components/Admin/AttendCareNotice/DogInfoBox";
+import PhotoAlbum from "components/Admin/AttendCareNotice/PhotoAlbum";
 import { PaddingContainer } from "components/Admin/AttendCareNotice/styles";
 import WriteNotice from "components/Admin/AttendCareNotice/WriteNotice";
 import Header from "components/common/Header";
@@ -18,8 +19,9 @@ const AttendCareNoticePage = () => {
       <PageContainer ph="0" pb="2">
         <DogInfoBox />
         <PaddingContainer>
-          <MenuToggle selectedTab={selectedTab} />
-          <WriteNotice />
+          <MenuToggle selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+          {selectedTab === "알림장" && <WriteNotice />}
+          {selectedTab === "사진앨범" && <PhotoAlbum />}
         </PaddingContainer>
       </PageContainer>
     </>
