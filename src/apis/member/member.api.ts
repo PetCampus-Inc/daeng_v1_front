@@ -18,3 +18,14 @@ export const handleGetMemberInfo = async (memberId: number): Promise<IMemberInfo
   });
   return data.data;
 };
+
+// 견주의 강아지 리스트
+export const handleGetMemberMainDogInfo = async (memberId: number): Promise<IMemberInfo> => {
+  const url = `/member/member/main/dog`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      memberId
+    }
+  });
+  return data.data;
+};
