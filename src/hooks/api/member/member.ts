@@ -12,7 +12,7 @@ export const useGetMemberInfo = (memberId: number) => {
 
 export const useGetMemberMainDogInfo = (memberId: number) => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_INFO(memberId),
+    queryKey: QUERY_KEY.MEMBER_MAIN_DOG_INFO(memberId),
     queryFn: () => handleGetMemberMainDogInfo(memberId)
   });
 };
