@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 const MemberMyPage = () => {
   const { memberId } = useParams();
   const { data } = useGetMemberInfo(Number(memberId));
-  console.log(data);
   return (
     <>
       <Header type="setting" text="마이페이지" transparent />
