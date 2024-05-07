@@ -1,5 +1,6 @@
 import { RELATION_DATA, RELATION_DATA_ARR } from "constants/relation";
 
+import { useState } from "react";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
@@ -13,11 +14,12 @@ interface IProps {
 console.log(RELATION_DATA_ARR);
 
 const RoleEditeButton = ({ isShowRoles, handleShowRoles, relationData }: IProps) => {
-  const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.type !== relationData);
+  const [currentRelation, setCurrentRelation] = useState<string>(RELATION_DATA[relationData]);
+  const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.relation !== currentRelation);
 
   const handleSelectedRelation = (relation: string) => {
     //TODO 버튼 클릭 시 호칭 영역 + 버튼 순서 변경
-    console.log(relation);
+    setCurrentRelation(RELATION_DATA[relation]);
   };
 
   return (
@@ -29,7 +31,7 @@ const RoleEditeButton = ({ isShowRoles, handleShowRoles, relationData }: IProps)
         backcolor={ThemeConfig.colors.white}
         handleClick={handleShowRoles}
       >
-        {RELATION_DATA[relationData]}
+        {currentRelation}
       </S.RoleEditeButton>
       {isShowRoles && (
         <>
