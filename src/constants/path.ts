@@ -37,7 +37,7 @@ export const PATH = {
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
   POLICY: "/policy", // 정책 페이지
   ENROLL: "/enrollment", // 견주 가입신청서
-  MEMBER_MY_PAGE: (memberId?: number) => `/mypage/${memberId ?? ":memberId"}`,
+  MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
   REDIRECT: "/auth/:provider",
   MEMBER_MY_INFO_PAGE: (memberId?: number) => `/mypage/${memberId ?? ":memberId"}/profile`,
   MEMBER_MY_INFO_EDITE_PAGE: "/mypage/profile/edite",
