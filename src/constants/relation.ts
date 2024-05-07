@@ -10,3 +10,26 @@ export const RELATION_DATA: IRelation = {
   BROTHER: "오빠/형",
   FRIEND: "친구"
 };
+
+export const RELATION_DATA_ARR: IRelation[] = [
+  {
+    relation: "아빠",
+    type: "FATHER"
+  },
+  {
+    relation: "엄마",
+    type: "MOTHER"
+  },
+  {
+    relation: "언니/누나",
+    type: "SISTER"
+  },
+  {
+    relation: "오빠/형",
+    type: "BROTHER"
+  },
+  {
+    relation: "친구",
+    type: "FRIEND"
+  }
+];
