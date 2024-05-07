@@ -123,7 +123,12 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
       </S.InfoContainer>
       <S.DisconnectButton
         backgroundColor={"white"}
-        onClick={openDisconnectPopup}
+        onClick={
+          remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0 ||
+          data.ticket.currentRoundTicket > 0
+            ? openAlertPopup
+            : openDisconnectPopup
+        }
         className="disconnect"
       >
         유치원 연결 끊기
