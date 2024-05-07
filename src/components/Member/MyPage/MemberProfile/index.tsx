@@ -8,7 +8,7 @@ import * as S from "./styles";
 
 interface MemberInfoProps {
   data: IMemberInfo;
-  memberId: number;
+  memberId: string;
 }
 
 const MemberProfile = ({ data, memberId }: MemberInfoProps) => {
