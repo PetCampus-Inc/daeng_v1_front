@@ -21,7 +21,7 @@ const MemberMyPage = () => {
         }
       >
         <ContentContainer>
-          <MemberProfile data={data} />
+          <MemberProfile data={data} memberId={Number(memberId)} />
           <CardContainer>
             <MyDogInfo data={data} />
           </CardContainer>
