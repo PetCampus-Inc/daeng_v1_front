@@ -1,3 +1,5 @@
+import { RELATION_DATA, RELATION_DATA_ARR } from "constants/relation";
+
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
@@ -5,9 +7,19 @@ import * as S from "./styles";
 interface IProps {
   isShowRoles: boolean;
   handleShowRoles: () => void;
+  relationData: string;
 }
 
-const RoleEditeButton = ({ isShowRoles, handleShowRoles }: IProps) => {
+console.log(RELATION_DATA_ARR);
+
+const RoleEditeButton = ({ isShowRoles, handleShowRoles, relationData }: IProps) => {
+  const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.type !== relationData);
+
+  const handleSelectedRelation = (relation: string) => {
+    //TODO 버튼 클릭 시 호칭 영역 + 버튼 순서 변경
+    console.log(relation);
+  };
+
   return (
     <>
       <S.RoleEditeButton
@@ -17,42 +29,22 @@ const RoleEditeButton = ({ isShowRoles, handleShowRoles }: IProps) => {
         backcolor={ThemeConfig.colors.white}
         handleClick={handleShowRoles}
       >
-        아빠
+        {RELATION_DATA[relationData]}
       </S.RoleEditeButton>
       {isShowRoles && (
         <>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            엄마
-          </S.RoleSelectButton>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            언니/누나
-          </S.RoleSelectButton>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            오빠/형
-          </S.RoleSelectButton>
-          <S.RoleSelectButton
-            width="100%"
-            height="49px"
-            textcolor={ThemeConfig.colors.gray_3}
-            backcolor={ThemeConfig.colors.gray_4}
-          >
-            친구
-          </S.RoleSelectButton>
+          {notSelectedRelation.map((item, idx) => (
+            <S.RoleSelectButton
+              key={idx}
+              width="100%"
+              height="49px"
+              textcolor={ThemeConfig.colors.gray_3}
+              backcolor={ThemeConfig.colors.gray_4}
+              handleClick={() => handleSelectedRelation(item.type)}
+            >
+              {item.relation}
+            </S.RoleSelectButton>
+          ))}
         </>
       )}
     </>
