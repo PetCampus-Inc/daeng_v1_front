@@ -1,14 +1,17 @@
+import { GENDER_DATA } from "constants/gender";
+import { RELATION_DATA } from "constants/relation";
+
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import ListNormalIcon from "assets/svg/list-normal-icon";
 import MapPinFootNormalIcon from "assets/svg/map-pin-foot-normal-icon";
 import PhoneNormalIcon from "assets/svg/phone-normal-icon";
-import { useGetMemberInfo } from "hooks/api/member/member";
+import { useGetMemberProfileInfo } from "hooks/api/member/member";
 
 import CirclesItems from "./CirclesItem";
 import * as S from "./styles";
 
 const MyInfo = ({ memberId }: { memberId: string }) => {
-  const { data } = useGetMemberInfo(memberId);
+  const { data } = useGetMemberProfileInfo(memberId);
   return (
     <S.MyInfoContainer>
       <CirclesItems />
@@ -23,7 +26,9 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             alt="user_profile"
           />
         </S.ImgageBox>
-        <S.UserName>뽀뽀의 언니/누나</S.UserName>
+        <S.UserName>
+          {data.nickName}의 {RELATION_DATA[data.relation]}
+        </S.UserName>
       </S.UserProfile>
       <S.MyInfoList>
         <S.MyInfoItem>
@@ -39,7 +44,7 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             이름
           </S.MyInfoTitle>
-          <S.MyInfoText>박유빈</S.MyInfoText>
+          <S.MyInfoText>{data.memberName}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -54,7 +59,7 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             성별
           </S.MyInfoTitle>
-          <S.MyInfoText>여</S.MyInfoText>
+          <S.MyInfoText>{data.memberGender ? GENDER_DATA[data.memberGender] : ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -69,7 +74,7 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>010-1414-1414</S.MyInfoText>
+          <S.MyInfoText>{data.phoneNumber ? data.phoneNumber : ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -84,7 +89,7 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             비상연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>010-1414-1414</S.MyInfoText>
+          <S.MyInfoText>{data.emergencyNumber ? data.emergencyNumber : ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem className="address">
           <S.MyInfoTitle>
@@ -99,7 +104,7 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             주소
           </S.MyInfoTitle>
-          <S.MyInfoText>서울 중구 덕수궁길 150 롯데캐슬 아파트 203동 1403호</S.MyInfoText>
+          <S.MyInfoText>{data.address ? data.address : ""}</S.MyInfoText>
         </S.MyInfoItem>
       </S.MyInfoList>
       <S.FootIconItem className="gray5-foot" />
