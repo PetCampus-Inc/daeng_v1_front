@@ -14,7 +14,16 @@ const MemberSchoolInfoPage = () => {
       <Header type="text" text="유치원 상세정보" />
       <PageContainer pt="2" color="gray_5">
         <SchoolInfo data={data} />
-        <PreviousSchoolInfo data={data} />
+        {data.pastDogSchoolList &&
+          data.pastDogSchoolList.map((item) => (
+            <PreviousSchoolInfo
+              key={item.schoolName}
+              schoolName={item.schoolName}
+              schoolNumber={item.schoolNumber}
+              schoolAddress={item.schoolAddress}
+              dropOutDate={item.dropOutDate}
+            />
+          ))}
       </PageContainer>
     </>
   );
