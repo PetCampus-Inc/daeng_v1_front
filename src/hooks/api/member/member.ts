@@ -10,7 +10,7 @@ export const useGetMemberInfo = (memberId: number) => {
   });
 };
 
-export const useGetMemberProfileInfo = (memberId: number) => {
+export const useGetMemberProfileInfo = (memberId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId),
     queryFn: () => handleGetMemberProfileInfo(memberId)
