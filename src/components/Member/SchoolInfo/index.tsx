@@ -75,7 +75,7 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
   const handleDeleteSchool = () => {
     //TODO 유치원 연결끊기
     console.log("삭제");
-    navigate("/mypage");
+    navigate(-1);
     showToast("유치원과 연결이 끊어졌습니다", "bottom");
   };
 
