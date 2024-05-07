@@ -79,7 +79,7 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
     showToast("유치원과 연결이 끊어졌습니다", "bottom");
   };
 
-  const tichetInfo = (ticketType: string) => {
+  const ticketInfo = (ticketType: string) => {
     switch (ticketType) {
       case "ROUND":
         return `회차권_${data.ticket.allRoundTicket}회 (잔여 ${data.ticket.currentRoundTicket}회)`;
@@ -106,7 +106,7 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
           <S.IconWrapper>
             <List />
           </S.IconWrapper>
-          <S.ListTitle>이용권 : {tichetInfo(data.ticket.ticketType)}</S.ListTitle>
+          <S.ListTitle>이용권 : {ticketInfo(data.ticket.ticketType)}</S.ListTitle>
         </S.InfoList>
         <S.InfoList>
           <S.IconWrapper>
