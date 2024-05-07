@@ -37,13 +37,17 @@ const MyProfileEdite = ({ handleFocus, handleBlur, memberData }: IMemberInfoEdit
           isRequired
           borderColor={ThemeConfig.colors.white}
           placeholder="강아지 이름을 입력해주세요"
-          value="뽀뽀"
+          value={memberData.nickName}
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
         의
       </S.MyDogName>
-      <RoleEditeButton isShowRoles={isShowRoles} handleShowRoles={handleShowRoles} />
+      <RoleEditeButton
+        isShowRoles={isShowRoles}
+        handleShowRoles={handleShowRoles}
+        relationData={memberData.relation}
+      />
     </S.MyProfileWrapper>
   );
 };
