@@ -9,17 +9,20 @@ import BasicModal from "components/common/Modal/BasicModal";
 import { useGetMemberSchoolInfo } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate, useParams } from "react-router-dom";
+import { IMemberSchoolInfo } from "types/member/school.types";
 import { formatDate } from "utils/formatter";
 import { remainingDays } from "utils/remainingDays";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
-const SchoolInfo = () => {
+interface ISchoolInfoProps {
+  data: IMemberSchoolInfo;
+}
+
+const SchoolInfo = ({ data }: ISchoolInfoProps) => {
   const navigate = useNavigate();
   const overlay = useOverlay();
-  const { dogId } = useParams();
-  const { data } = useGetMemberSchoolInfo(Number(dogId));
   const registeredDate = data.registeredDate.map((el) => String(el));
   const registeredTime = formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const schoolCallInfo = {

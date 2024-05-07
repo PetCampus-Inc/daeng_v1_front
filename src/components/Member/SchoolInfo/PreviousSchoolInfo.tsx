@@ -1,15 +1,19 @@
 import Calendar from "assets/svg/calendar";
 import Map from "assets/svg/map-pin-icon";
 import Phone from "assets/svg/phone-basic";
+import { IMemberSchoolInfo } from "types/member/school.types";
 
 import * as S from "./styles";
+interface ISchoolInfoProps {
+  data: IMemberSchoolInfo;
+}
 
 const schoolCallInfo = {
   schoolName: "거튼이네",
   schoolNumber: "02-0909-000"
 };
 
-const PreviousSchoolInfo = () => {
+const PreviousSchoolInfo = ({ data }: ISchoolInfoProps) => {
   return (
     <>
       <S.Title>이전 유치원 내역</S.Title>
