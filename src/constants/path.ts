@@ -40,7 +40,8 @@ export const PATH = {
   MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
   REDIRECT: "/auth/:provider",
   MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
-  MEMBER_MY_INFO_EDITE_PAGE: "/mypage/profile/edite",
+  MEMBER_MY_INFO_EDITE_PAGE: (memberId?: string) =>
+    `/mypage/${memberId ?? ":memberId"}/profile/edite`,
   MEMBER_MY_SCHOOL_INFO: "/mypage/school",
   MEMBER_MY_SCHOOL_SEARCH: "/school/search" // 견주 유치원 검색
 } as const;
