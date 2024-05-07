@@ -2,11 +2,13 @@ import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import ListNormalIcon from "assets/svg/list-normal-icon";
 import MapPinFootNormalIcon from "assets/svg/map-pin-foot-normal-icon";
 import PhoneNormalIcon from "assets/svg/phone-normal-icon";
+import { useGetMemberInfo } from "hooks/api/member/member";
 
 import CirclesItems from "./CirclesItem";
 import * as S from "./styles";
 
-const MyInfo = () => {
+const MyInfo = ({ memberId }: { memberId: string }) => {
+  const { data } = useGetMemberInfo(memberId);
   return (
     <S.MyInfoContainer>
       <CirclesItems />
