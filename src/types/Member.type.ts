@@ -1,3 +1,5 @@
+import { IMemberProfileInfo } from "./member/home.types";
+
 export interface ILoginInfo {
   id: string;
   password: string;
@@ -9,6 +11,7 @@ export interface IUserInfo {
 }
 
 export interface IMemberInfoEdite {
+  memberData: IMemberProfileInfo;
   requiredItems?: Map<number, boolean>;
   handleFocus?: () => void;
   handleBlur?: () => void;

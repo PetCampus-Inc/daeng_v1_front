@@ -17,7 +17,7 @@ import { formatPhoneNumber } from "utils/formatter";
 import * as S from "./styles";
 
 // TODO 코드 리팩토링 필요
-const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdite) => {
+const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMemberInfoEdite) => {
   const { register, setValue, watch } = useFormContext();
   const [isAddressActive, setIsAddressActive] = useState(false);
   const overlay = useOverlay.useOverlay();

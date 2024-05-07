@@ -8,7 +8,7 @@ import { IMemberInfoEdite } from "types/Member.type";
 import * as S from "./styles";
 import RoleEditeButton from "../Buttons/RoleEditeButton";
 
-const MyProfileEdite = ({ handleFocus, handleBlur }: IMemberInfoEdite) => {
+const MyProfileEdite = ({ handleFocus, handleBlur, memberData }: IMemberInfoEdite) => {
   // TODO setValue, watch의 경우 이후 기능 추가 후 삭제 여부 판단하기
   const { register, setValue, watch } = useFormContext();
   const [isShowRoles, setIsShowRoles] = useState(false);
