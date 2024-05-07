@@ -1,4 +1,4 @@
-import { DOG_NOTICE_LIST } from "constants/notice";
+import { MEMBER_DOG_NOTICE_LIST } from "constants/notice";
 
 import MapPinIcon from "assets/svg/map-pin-icon";
 import BasicPhoneIcon from "assets/svg/phone-basic";
@@ -50,7 +50,7 @@ const SchoolInfo = () => {
       </S.Wrapper>
       <S.DogDetailInfoText className="big">유의사항 동의</S.DogDetailInfoText>
       <S.ListContainer>
-        {DOG_NOTICE_LIST.map((item) => (
+        {MEMBER_DOG_NOTICE_LIST.map((item) => (
           <S.List key={item.id}>
             <S.FlexText className="title">
               {item.icon}
