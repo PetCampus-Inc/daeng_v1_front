@@ -1,5 +1,5 @@
 import customAxios from "libs/CustomAxios";
-import { IMemberInfo } from "types/member/home.types";
+import { IMemberInfo, IMemberProfileInfo } from "types/member/home.types";
 import { IResponse } from "types/Response.type";
 
 export const handleLoginResult = async (): Promise<IResponse> => {
@@ -20,7 +20,7 @@ export const handleGetMemberInfo = async (memberId: string): Promise<IMemberInfo
 };
 
 // 견주 상세 정보
-export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMemberInfo> => {
+export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMemberProfileInfo> => {
   const url = `/member/info`;
   const { data } = await customAxios.get(url, {
     params: {

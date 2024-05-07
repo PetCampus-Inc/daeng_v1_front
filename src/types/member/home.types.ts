@@ -42,3 +42,14 @@ export interface IMemberInfo extends IResponse {
   relation: string;
   doglist: IDoglist[];
 }
+
+export interface IMemberProfileInfo extends IResponse {
+  memberId: string;
+  memberName: string;
+  memberGender: string;
+  nickName: string;
+  address: string;
+  phoneNumber: string;
+  emergencyNumber: string;
+  relation: string;
+}
