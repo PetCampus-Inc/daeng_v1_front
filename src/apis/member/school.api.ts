@@ -90,7 +90,7 @@ export const handlePostAdminForm = async (
 };
 
 // 유치원 정보
-export const handleGetSchoolInfo = async (dogId: number): Promise<IMemberSchoolInfo> => {
+export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolInfo> => {
   const url = `/member/school`;
   const { data } = await customAxios.get(url, {
     params: {

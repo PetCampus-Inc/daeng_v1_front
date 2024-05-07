@@ -7,7 +7,7 @@ import { PageContainer } from "styles/StyleModule";
 
 const MemberSchoolInfoPage = () => {
   const { dogId } = useParams();
-  const { data } = useGetMemberSchoolInfo(Number(dogId));
+  const { data } = useGetMemberSchoolInfo(String(dogId));
 
   return (
     <>

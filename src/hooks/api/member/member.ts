@@ -11,7 +11,7 @@ export const useGetMemberInfo = (memberId: string) => {
   });
 };
 
-export const useGetMemberSchoolInfo = (dogId: number) => {
+export const useGetMemberSchoolInfo = (dogId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_SCHOOL_INFO(dogId),
     queryFn: () => handleGetSchoolInfo(dogId)
