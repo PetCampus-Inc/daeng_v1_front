@@ -10,6 +10,7 @@ import { useGetMemberSchoolInfo } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatDate } from "utils/formatter";
+import { remainingDays } from "utils/remainingDays";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
@@ -80,7 +81,7 @@ const SchoolInfo = () => {
       case "ROUND":
         return `회차권_${data.ticket.allRoundTicket}회 (잔여 ${data.ticket.currentRoundTicket}회)`;
       case "MONTHLY":
-        return `정기권_${data.ticket.monthlyTicketNumber}주 (만료 30일 전)`;
+        return `정기권_${data.ticket.monthlyTicketNumber}주 (${remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0 ? `만료 ${remainingDays}일 전` : `만료`})`;
     }
   };
 
@@ -102,7 +103,7 @@ const SchoolInfo = () => {
           <S.IconWrapper>
             <List />
           </S.IconWrapper>
-          <S.ListTitle>이용권 :{tichetInfo(data.ticket.ticketType)}</S.ListTitle>
+          <S.ListTitle>이용권 : {tichetInfo(data.ticket.ticketType)}</S.ListTitle>
         </S.InfoList>
         <S.InfoList>
           <S.IconWrapper>
