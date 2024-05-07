@@ -20,7 +20,7 @@ const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
   return (
     <>
       <StyledThumb>
-        <Box tag="button" width="100%" height="100%" onClick={() => console.log("이미지 클릭!")}>
+        <Box as="button" width="100%" height="100%" onClick={() => console.log("이미지 클릭!")}>
           <InnerShadow />
           <StyledThumbImg src={file.thumbnail} alt={`preview-${index}`} />
           {file.duration && <StyledText>{file.duration}</StyledText>}

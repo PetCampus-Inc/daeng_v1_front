@@ -48,7 +48,7 @@ const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
         {Children.map(children, (child) => {
           return isValidElement(child)
             ? cloneElement(child as ReactElement, {
-                isOpen: dropdownContext?.isOpen
+                $isOpen: dropdownContext?.isOpen
               })
             : child;
         })}

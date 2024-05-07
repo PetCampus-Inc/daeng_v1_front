@@ -1,17 +1,11 @@
+import { Text } from "components/common";
 import Badge, { BadgeProps } from "components/common/Badge";
 
-import { CardContainer, ListItemImg, ListItemTime, ListItemTitle } from "./styles";
+import { CardContainer, ListItemImg, ListItemTime } from "./styles";
 
 import type { ICareDogInfo, TAgendaWriting } from "types/admin/care.types";
 
-const MainDogCard = ({
-  attendanceId,
-  dogId,
-  dogName,
-  adminName,
-  lastPhotoTime,
-  agendaWriting
-}: ICareDogInfo) => {
+const MainDogCard = ({ info }: { info: ICareDogInfo }) => {
   const agendaWritingOptions = (
     agendaWriting: TAgendaWriting
   ): { variant: BadgeProps["variant"]; text: string } => {
@@ -27,18 +21,20 @@ const MainDogCard = ({
     }
   };
 
-  const { variant, text } = agendaWritingOptions(agendaWriting);
+  const { variant, text } = agendaWritingOptions(info.agendaWriting);
 
   return (
-    <CardContainer key={dogId}>
+    <CardContainer key={info.dogId}>
       <ListItemImg size="sm">
         <img
           src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="dog"
         />
       </ListItemImg>
-      <ListItemTitle>{dogName}</ListItemTitle>
-      <ListItemTime>{lastPhotoTime}</ListItemTime>
+      <Text typo="body2_16_B" color="darkBlack">
+        {info.dogName}
+      </Text>
+      <ListItemTime>{info.lastPhotoTime}</ListItemTime>
       <Badge variant={variant} text={text} />
     </CardContainer>
   );
