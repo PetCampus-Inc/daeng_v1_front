@@ -1,6 +1,17 @@
-const CarIcon = () => {
+export type IconProps = {
+  borderStyle?: string;
+};
+
+const CarIcon = ({ borderStyle = "" }: IconProps) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ borderRadius: `${borderStyle}` }}
+    >
       <rect width="24" height="24" rx="8" fill="#FFF7E1" />
       <path
         d="M5 16C5 15.4477 5.44772 15 6 15H8C8.55228 15 9 15.4477 9 16V18C9 18.5523 8.55228 19 8 19H6C5.44772 19 5 18.5523 5 18V16Z"

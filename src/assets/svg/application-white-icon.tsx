@@ -1,6 +1,17 @@
-const ApplicationWhiteIcon = () => {
+export type IconProps = {
+  borderStyle?: string;
+};
+
+const ApplicationWhiteIcon = ({ borderStyle = "" }: IconProps) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ borderRadius: `${borderStyle}` }}
+    >
       <rect width="24" height="24" rx="8" fill="#FFF7E1" />
       <path
         d="M17 3.5C17.8284 3.5 18.5 4.17157 18.5 5L18.5 19C18.5 19.8284 17.8284 20.5 17 20.5L7 20.5C6.17157 20.5 5.5 19.8284 5.5 19L5.5 5C5.5 4.17157 6.17157 3.5 7 3.5L17 3.5Z"
