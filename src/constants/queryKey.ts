@@ -25,5 +25,6 @@ export const QUERY_KEY = {
   PRINCIPAL_INFO: ["principalInfo"], // 원장 마이페이지 데이터
   TEACHER_INFO: ["teacherInfo"], // 선상님 마이페이지 데이터
   MEMBER_INFO: (memberId: string) => ["memberInfo", memberId], // 견주 정보 데이터
-  MEMBER_MAIN_DOG_INFO: (memberId: string) => ["memberMainDogInfo", memberId] // 견주의 강아지 리스트
+  MEMBER_MAIN_DOG_INFO: (memberId: string) => ["memberMainDogInfo", memberId], // 견주의 강아지 리스트
+  MEMBER_PROFILE_INFO: (memberId: string) => ["memberProfileInfo", memberId] // 견주의 상제 정보 데이터
 };

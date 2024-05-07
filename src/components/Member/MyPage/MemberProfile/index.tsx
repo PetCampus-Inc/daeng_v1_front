@@ -8,9 +8,10 @@ import * as S from "./styles";
 
 interface MemberInfoProps {
   data: IMemberInfo;
+  memberId: string;
 }
 
-const MemberProfile = ({ data }: MemberInfoProps) => {
+const MemberProfile = ({ data, memberId }: MemberInfoProps) => {
   return (
     <S.ProfileWrapper>
       <S.ProfileImage
@@ -20,7 +21,7 @@ const MemberProfile = ({ data }: MemberInfoProps) => {
       />
       <S.ProfileDetail>
         <S.DetailItem>
-          <S.GotoInfoButton to={PATH.MEMBER_MY_INFO_PAGE}>
+          <S.GotoInfoButton to={PATH.MEMBER_MY_INFO_PAGE(memberId)}>
             <S.Text className="name">
               {data.doglist[0].dogName}의 {RELATION_DATA[data.relation]}
             </S.Text>

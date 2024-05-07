@@ -272,7 +272,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_PAGE,
+          path: PATH.MEMBER_MY_INFO_PAGE(),
           element: (
             <Suspense>
               <Pages.MemberMyInfoPage />

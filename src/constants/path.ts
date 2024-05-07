@@ -39,7 +39,7 @@ export const PATH = {
   ENROLL: "/enrollment", // 견주 가입신청서
   MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
   REDIRECT: "/auth/:provider",
-  MEMBER_MY_INFO_PAGE: "/mypage/profile",
+  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
   MEMBER_MY_INFO_EDITE_PAGE: "/mypage/profile/edite",
   MEMBER_MY_SCHOOL_INFO: "/mypage/school",
   MEMBER_MY_SCHOOL_SEARCH: "/school/search" // 견주 유치원 검색
