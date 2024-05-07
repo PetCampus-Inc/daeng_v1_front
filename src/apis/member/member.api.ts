@@ -18,3 +18,14 @@ export const handleGetMemberInfo = async (memberId: number): Promise<IMemberInfo
   });
   return data.data;
 };
+
+// 견주 상세 정보
+export const handleGetMemberProfileInfo = async (memberId: number): Promise<IMemberInfo> => {
+  const url = `/member/info`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      memberId
+    }
+  });
+  return data.data;
+};
