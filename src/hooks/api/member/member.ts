@@ -4,7 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetMemberInfo } from "apis/member/member.api";
 import { handleGetSchoolInfo } from "apis/member/school.api";
 
-export const useGetMemberInfo = (memberId: number) => {
+export const useGetMemberInfo = (memberId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_INFO(memberId),
     queryFn: () => handleGetMemberInfo(memberId)
