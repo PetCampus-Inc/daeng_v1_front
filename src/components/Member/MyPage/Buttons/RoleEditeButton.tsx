@@ -1,6 +1,7 @@
 import { RELATION_DATA, RELATION_DATA_ARR } from "constants/relation";
 
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "./styles";
@@ -11,15 +12,15 @@ interface IProps {
   relationData: string;
 }
 
-console.log(RELATION_DATA_ARR);
-
 const RoleEditeButton = ({ isShowRoles, handleShowRoles, relationData }: IProps) => {
   const [currentRelation, setCurrentRelation] = useState<string>(RELATION_DATA[relationData]);
+  const { register, setValue, watch } = useFormContext();
   const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.relation !== currentRelation);
 
   const handleSelectedRelation = (relation: string) => {
     //TODO 버튼 클릭 시 호칭 영역 + 버튼 순서 변경
     setCurrentRelation(RELATION_DATA[relation]);
+    setValue("relation", relation);
   };
 
   return (
