@@ -34,7 +34,6 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.name, e.target.value);
-    console.log("test", e.target.name, e.target.value);
   };
 
   const handleClear = () => {
@@ -100,7 +99,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
         <InputField
           name="address.detail"
           register={register}
-          defaultValue={memberData.memberName}
+          defaultValue={memberData.address}
           value={watch("address.detail")}
           placeholder="상세 주소를 입력해주세요"
           onFocus={handleFocus}
