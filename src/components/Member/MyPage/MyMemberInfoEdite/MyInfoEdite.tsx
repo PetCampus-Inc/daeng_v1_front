@@ -32,6 +32,11 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
     setValue(field, formattedValue);
   };
 
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.name, e.target.value);
+    console.log("test", e.target.name, e.target.value);
+  };
+
   const handleClear = () => {
     setValue(addressStreet, "");
     setValue("address.detail", "");
@@ -49,6 +54,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
       />
     ));
 
+  //TODO input value 연동 작업하기
   return (
     <S.ProfileEditeWrapper>
       <Flex direction="column" gap={7}>
@@ -58,9 +64,12 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           register={register}
           isRequired
           placeholder="견주 이름을 입력해주세요"
-          value={memberData.memberName}
+          defaultValue={memberData.memberName}
+          value={watch("memberName")}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onChange={handleChangeInput}
+          className="defaultValue"
         />
       </Flex>
 
@@ -86,14 +95,17 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           readOnly
           placeholder="주소를 입력해주세요"
           inputType="memberEdite"
+          className="defaultValue"
         />
         <InputField
           name="address.detail"
           register={register}
-          value={memberData.address}
+          value={watch("address.detail")}
           placeholder="상세 주소를 입력해주세요"
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onChange={handleChangeInput}
+          className="defaultValue"
         />
       </Flex>
 
@@ -106,10 +118,11 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           pattern={PHONE_REGEX}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
-          value={memberData.phoneNumber}
+          value={watch("phoneNumber")}
           type="tel"
           onFocus={handleFocus}
           onBlur={handleBlur}
+          className="defaultValue"
         />
       </Flex>
 
@@ -120,12 +133,13 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           register={register}
           isRequired
           pattern={PHONE_REGEX}
-          onChange={handleChangeNumber("phoneNumber")}
+          onChange={handleChangeNumber("emergencyNumber")}
           placeholder="비상 연락처를 입력해주세요"
-          value={memberData.emergencyNumber}
+          value={watch("emergencyNumber")}
           type="tel"
           onFocus={handleFocus}
           onBlur={handleBlur}
+          className="defaultValue"
         />
       </Flex>
     </S.ProfileEditeWrapper>
