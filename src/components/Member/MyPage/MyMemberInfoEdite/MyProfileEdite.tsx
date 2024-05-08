@@ -13,8 +13,11 @@ const MyProfileEdite = ({ handleFocus, handleBlur, memberData }: IMemberInfoEdit
   const { register, setValue, watch } = useFormContext();
   const [isShowRoles, setIsShowRoles] = useState(false);
   const handleShowRoles = () => {
-    console.log("호칭");
     setIsShowRoles((prev) => !prev);
+  };
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.name, e.target.value);
   };
 
   return (
@@ -32,14 +35,17 @@ const MyProfileEdite = ({ handleFocus, handleBlur, memberData }: IMemberInfoEdit
       </S.ProfileBox>
       <S.MyDogName>
         <InputField
-          name="dogName"
+          name="nickName"
           register={register}
           isRequired
           borderColor={ThemeConfig.colors.white}
           placeholder="강아지 이름을 입력해주세요"
-          value={memberData.nickName}
+          defaultValue={memberData.nickName}
+          value={watch("nickName")}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onChange={handleChangeInput}
+          className="defaultValue"
         />
         의
       </S.MyDogName>
