@@ -1,10 +1,10 @@
-import { DOGOWNER } from "constants/className";
+import { PATH } from "constants/path";
 
 import Button from "components/common/Button";
-import Header from "components/common/Header";
 import InputBox from "components/common/InputBox";
 import Typo from "components/common/Typo";
 import { memo, Dispatch, SetStateAction, ChangeEvent } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { ISchoolInfo } from "types/admin/school.types";
 
@@ -52,6 +52,8 @@ const SchoolSearch = ({
   setCurrentMainStep,
   className
 }: Props) => {
+  const navigate = useNavigate();
+  const { memberId } = useParams();
   return (
     <>
       <Container>
@@ -116,9 +118,7 @@ const SchoolSearch = ({
             weight="bold"
             size="1.1rem"
             handleClick={() => {
-              if (selectedSearchText !== "") {
-                setCurrentStep(currentStep + 1);
-              }
+              navigate(PATH.MEMBER_MY_ENROLLMENT(String(memberId)));
             }}
             backcolor={
               selectedSearchText === ""
