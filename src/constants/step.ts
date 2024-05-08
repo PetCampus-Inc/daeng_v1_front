@@ -138,3 +138,5 @@ export const ADMIN_DOG_DETAIL_INFO_STEP = [
   "이용권",
   "유의사항"
 ] as const;
+
+export const MEMBER_DOG_INFO_STEP = ["강아지 정보", "유치원 정보", "출결 및 이용권"] as const;

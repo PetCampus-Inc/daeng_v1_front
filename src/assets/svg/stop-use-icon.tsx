@@ -1,6 +1,17 @@
-const StopUseIcon = () => {
+export type IconProps = {
+  borderStyle?: string;
+};
+
+const StopUseIcon = ({ borderStyle = "" }: IconProps) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ borderRadius: `${borderStyle}` }}
+    >
       <rect width="24" height="24" rx="8" fill="#FFF7E1" />
       <circle
         cx="12"
