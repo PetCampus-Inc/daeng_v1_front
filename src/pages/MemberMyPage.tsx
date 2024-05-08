@@ -6,11 +6,11 @@ import MemberProfile from "components/Member/MyPage/MemberProfile";
 import MyDogInfo from "components/Member/MyPage/MyDogInfo";
 import { CardContainer, ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberInfo } from "hooks/api/member/member";
+import { useParams } from "react-router-dom";
 
 const MemberMyPage = () => {
-  const memberId = 1;
-  const { data } = useGetMemberInfo(memberId);
-  console.log(data);
+  const { memberId } = useParams();
+  const { data } = useGetMemberInfo(String(memberId));
   return (
     <>
       <Header type="setting" text="마이페이지" transparent />
@@ -21,7 +21,7 @@ const MemberMyPage = () => {
         }
       >
         <ContentContainer>
-          <MemberProfile data={data} />
+          <MemberProfile data={data} memberId={String(memberId)} />
           <CardContainer>
             <MyDogInfo data={data} />
           </CardContainer>

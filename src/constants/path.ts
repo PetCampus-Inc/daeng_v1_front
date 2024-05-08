@@ -37,10 +37,10 @@ export const PATH = {
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
   POLICY: "/policy", // 정책 페이지
   ENROLL: "/enrollment", // 견주 가입신청서
-  MEMBER_MY_PAGE: (memberId?: number) => `/mypage/${memberId ?? ":memberId"}`,
+  MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
   REDIRECT: "/auth/:provider",
-  MEMBER_MY_INFO_PAGE: "/myPage/profile",
-  MEMBER_MY_INFO_EDITE_PAGE: "/myPage/profile/edite",
-  MEMBER_MY_SCHOOL_INFO: "/myPage/school",
+  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
+  MEMBER_MY_INFO_EDITE_PAGE: "/mypage/profile/edite",
+  MEMBER_MY_SCHOOL_INFO: "/mypage/school",
   MEMBER_MY_SCHOOL_SEARCH: "/school/search" // 견주 유치원 검색
 } as const;
