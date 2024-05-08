@@ -1,17 +1,46 @@
+import { DOGOWNER } from "constants/className";
+
 import Header from "components/common/Header";
-import DogOwner from "components/SignIn/DogOwner";
-import useSignIn from "hooks/api/useSignIn";
-import { PageContainer } from "styles/StyleModule";
+import SchoolSearch from "components/Member/SchoolInfo/SchoolSearch";
+import useSignUp from "hooks/api/useSignUp";
 
 const SchoolSearchPage = () => {
-  const { setCurrentMainStep } = useSignIn();
-  // FIXME 뒤로 가기 버튼 클릭 이슈 해결하기
+  const {
+    currentMainStep,
+    setCurrentMainStep,
+    currentStep,
+    setCurrentStep,
+    searchText,
+    setSearchText,
+    searchResultText,
+    setSearchResultText,
+    selectedSearchText,
+    setSelectedSearchText,
+    handlerGetSearchResult,
+    handlerDeleteSearchResult,
+    schoolId,
+    setSchoolId
+  } = useSignUp();
   return (
     <>
       <Header type="back" />
-      <PageContainer pt="2">
-        <DogOwner currentMainStep={1} setCurrentMainStep={setCurrentMainStep} />
-      </PageContainer>
+      <SchoolSearch
+        searchText={searchText}
+        setSearchText={setSearchText}
+        searchResultText={searchResultText}
+        setSearchResultText={setSearchResultText}
+        selectedSearchText={selectedSearchText}
+        setSelectedSearchText={setSelectedSearchText}
+        handlerGetSearchResult={handlerGetSearchResult}
+        handlerDeleteSearchResult={handlerDeleteSearchResult}
+        schoolId={schoolId}
+        setSchoolId={setSchoolId}
+        currentMainStep={currentMainStep}
+        setCurrentMainStep={setCurrentMainStep}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+        className={DOGOWNER}
+      />
     </>
   );
 };
