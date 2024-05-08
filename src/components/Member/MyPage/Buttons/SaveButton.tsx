@@ -1,24 +1,35 @@
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { usePostMemberProfileInfo } from "hooks/api/member/member";
-import { useForm, useFormContext } from "react-hook-form";
+import useMemberInfoFormValid from "hooks/common/useMemberInfoFormValid";
+import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 const SaveButton = () => {
   const { memberId } = useParams();
   const methods = useForm({ mode: "onSubmit" });
-  const { watch } = useFormContext();
   const mutatePostMemberInfo = usePostMemberProfileInfo();
+
+  const {
+    isDisabled,
+    memberName,
+    memberGender,
+    nickName,
+    address,
+    phoneNumber,
+    emergencyNumber,
+    relation
+  } = useMemberInfoFormValid(String(memberId));
 
   const updatedMemberInfo = {
     memberId: String(memberId),
-    memberName: watch("memberName"),
-    memberGender: watch("memberGender") === "여" ? "FEMALE" : "MALE",
+    memberName: memberName,
+    memberGender: memberGender,
     // memberProfileUri: "se_ryusun_smile_face",
-    nickName: watch("nickName"),
-    address: `${watch("address.street")} ${watch("address.detail")}`,
-    phoneNumber: watch("phoneNumber"),
-    emergencyNumber: watch("emergencyNumber"),
-    relation: watch("relation")
+    nickName: nickName,
+    address: address,
+    phoneNumber: phoneNumber,
+    emergencyNumber: emergencyNumber,
+    relation: relation
   };
 
   const onSubmit = methods.handleSubmit(() => {
@@ -39,6 +50,7 @@ const SaveButton = () => {
       onClick={onSubmit}
       backgroundColor="white"
       buttonBackgroundColor="primaryColor"
+      disabled={isDisabled}
     >
       수정 완료
     </BackgroundButton>
