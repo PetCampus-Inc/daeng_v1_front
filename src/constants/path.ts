@@ -42,5 +42,6 @@ export const PATH = {
   MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
   MEMBER_MY_INFO_EDITE_PAGE: "/mypage/profile/edite",
   MEMBER_MY_SCHOOL_INFO: "/mypage/school",
-  MEMBER_MY_SCHOOL_SEARCH: "/school/search" // 견주 유치원 검색
+  MEMBER_MY_SCHOOL_SEARCH: "/mypage/dog/school/search", // 견주 유치원 검색
+  MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/dog/enrollment?${memberId ?? ":memberId"}` // 강아지 추가
 } as const;
