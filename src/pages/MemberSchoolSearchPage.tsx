@@ -4,7 +4,7 @@ import Header from "components/common/Header";
 import SchoolSearch from "components/Member/SchoolInfo/SchoolSearch";
 import useSignUp from "hooks/api/useSignUp";
 
-const SchoolSearchPage = () => {
+const MemberSchoolSearchPage = () => {
   const {
     currentMainStep,
     setCurrentMainStep,
@@ -45,4 +45,4 @@ const SchoolSearchPage = () => {
   );
 };
 
-export default SchoolSearchPage;
+export default MemberSchoolSearchPage;
