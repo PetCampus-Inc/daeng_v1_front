@@ -35,6 +35,7 @@ interface Props {
   className?: string;
 }
 
+// TODO 유치원 정보 가입 신청서에 전달 필요
 const SchoolSearch = ({
   searchText,
   setSearchText,
@@ -45,12 +46,7 @@ const SchoolSearch = ({
   handlerGetSearchResult,
   handlerDeleteSearchResult,
   schoolId,
-  setSchoolId,
-  currentStep,
-  setCurrentStep,
-  currentMainStep,
-  setCurrentMainStep,
-  className
+  setSchoolId
 }: Props) => {
   const navigate = useNavigate();
   const { memberId } = useParams();
