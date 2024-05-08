@@ -1,5 +1,5 @@
 import customAxios from "libs/CustomAxios";
-import { IMemberInfo, IMemberProfileInfo } from "types/member/home.types";
+import { IMemberInfo, IMemberProfileInfo, IMemberProfilePostInfo } from "types/member/home.types";
 import { IResponse } from "types/Response.type";
 
 export const handleLoginResult = async (): Promise<IResponse> => {
@@ -28,4 +28,23 @@ export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMem
     }
   });
   return data.data;
+};
+
+// 견주 상세 정보 수정
+export const handleMemberInfoResult = async (
+  req: IMemberProfilePostInfo
+): Promise<IMemberProfilePostInfo> => {
+  const url = `/member/dog/info`;
+  const { data } = await customAxios.post(url, {
+    memberId: req.memberId,
+    memberName: req.memberName,
+    memberGender: req.memberGender,
+    memberProfileUri: req.memberProfileUri,
+    nickName: req.nickName,
+    address: req.address,
+    phoneNumber: req.phoneNumber,
+    emergencyNumber: req.emergencyNumber,
+    relation: req.relation
+  });
+  return data;
 };
