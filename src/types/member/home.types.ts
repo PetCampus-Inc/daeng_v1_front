@@ -53,3 +53,15 @@ export interface IMemberProfileInfo extends IResponse {
   emergencyNumber: string;
   relation: string;
 }
+
+export interface IMemberProfilePostInfo {
+  memberId: string;
+  memberName: string;
+  memberGender: string;
+  memberProfileUri?: string;
+  nickName: string;
+  address: string;
+  phoneNumber: string;
+  emergencyNumber: string;
+  relation: string;
+}
