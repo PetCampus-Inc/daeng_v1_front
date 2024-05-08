@@ -1,6 +1,6 @@
 import { RELATION_DATA, RELATION_DATA_ARR } from "constants/relation";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ThemeConfig } from "styles/ThemeConfig";
 
@@ -22,6 +22,13 @@ const RoleEditeButton = ({ isShowRoles, handleShowRoles, relationData }: IProps)
     setCurrentRelation(RELATION_DATA[relation]);
     setValue("relation", relation);
   };
+
+  useEffect(() => {
+    // watch("relation") 데이터가 없을 때 기존 데이터 저장
+    if (!watch("relation")) {
+      setValue("relation", relationData);
+    }
+  }, [relationData, setValue, watch]);
 
   return (
     <>
