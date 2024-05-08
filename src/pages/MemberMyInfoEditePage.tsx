@@ -42,18 +42,16 @@ const MemberMyInfoEditePage = () => {
             handleFocus={handleFocus}
             handleBlur={handleBlur}
           />
-        </FormProvider>
-        <ContentContainer px="1.5" py="1" height="auto">
-          <FormProvider {...methods}>
+          <ContentContainer px="1.5" py="1" height="auto">
             <MyInfoEdite
               requiredItems={requiredItemList}
               memberData={memberData}
               handleFocus={handleFocus}
               handleBlur={handleBlur}
             />
-          </FormProvider>
-        </ContentContainer>
-        <SaveButton />
+          </ContentContainer>
+          <SaveButton />
+        </FormProvider>
         <KeyboardCompleteButton
           memberData={memberData}
           handleBlur={handleBlur}
