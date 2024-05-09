@@ -9,7 +9,7 @@ export interface IStyledTextProps {
 }
 
 export const StyledText = styled.span.withConfig({
-  shouldForwardProp: (prop) => !["color", "typo", "isEllipsis"].includes(prop)
+  shouldForwardProp: (prop) => !["color", "typo", "isEllipsis", "accent"].includes(prop)
 })<IStyledTextProps>`
   color: ${({ color, theme }) => color && theme.colors[color]};
   ${({ theme, typo }) => theme.typo[typo]};
@@ -19,5 +19,15 @@ export const StyledText = styled.span.withConfig({
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-    `}
+    `};
+`;
+
+export type StyledEmEmProps = {
+  color?: TColor;
+};
+
+export const StyledEm = styled.em.withConfig({
+  shouldForwardProp: (prop) => !["color"].includes(prop)
+})<StyledEmEmProps>`
+  color: ${({ theme, color }) => (color && theme.colors[color]) || "inherit"};
 `;
