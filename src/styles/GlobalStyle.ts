@@ -30,15 +30,15 @@ ${reset}
 }
 
 a:link{
-  color: black;
+  color: inherit;
   text-decoration:none;
 }
 a:visited{
-  color: black;
+  color: inherit;
   text-decoration:none;
 }
 a:hover{
-  color: black;
+  color: inherit;
   text-decoration:none;
 }
 
