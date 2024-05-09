@@ -1,6 +1,7 @@
+import AdminLoginPage from "./LoginPage/AdminLoginPage";
+
 export { default as NotFoundPage } from "./NotFoundPage";
 export { default as HomePage } from "./HomePage";
-export { default as SignInPage } from "./SignInPage";
 export { default as SignUpPage } from "./SignUpPage";
 export { default as AttendancePage } from "./AttendancePage";
 export { default as AttendCarePage } from "./AttendCarePage";
@@ -35,3 +36,7 @@ export { default as AttendCareGallery } from "./AttendCareGalleryPage";
 export { default as AttendCareInfo } from "./AttendCareInfoPage";
 
 export { default as MemberEnrollmentFormDetailPage } from "./MemberEnrollmentFormDetailPage";
+
+export { default as LoginPage } from "./LoginPage/LoginPage";
+export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
+export { default as RedirectPage } from "./RedirectPage";
