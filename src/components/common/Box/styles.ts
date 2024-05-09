@@ -59,7 +59,12 @@ export const StyledBox = styled.div.withConfig({
       "backgroundColor",
       "color",
       "position",
-      "overflow"
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "overflow",
+      "textAlign"
     ].includes(prop)
 })<BoxOptions>`
   display: ${({ display }) => (display ? display : undefined)};
@@ -98,6 +103,11 @@ export const StyledBox = styled.div.withConfig({
   background-color: ${({ bg, backgroundColor, theme }) =>
     bg ? theme.colors[bg] : backgroundColor ? theme.colors[backgroundColor] : undefined};
   color: ${({ color, theme }) => (color ? theme.colors[color] : undefined)};
-  position: ${({ position }) => (position ? `${position}` : undefined)};
-  overflow: ${({ overflow }) => (overflow ? `${overflow}` : undefined)};
+  position: ${({ position }) => (position ? position : undefined)};
+  top: ${({ top }) => top ?? undefined};
+  bottom: ${({ bottom }) => bottom ?? undefined};
+  left: ${({ left }) => left ?? undefined};
+  right: ${({ right }) => right ?? undefined};
+  overflow: ${({ overflow }) => (overflow ? overflow : undefined)};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : undefined)};
 `;

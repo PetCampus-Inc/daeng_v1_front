@@ -40,8 +40,13 @@ type BoxColorProps = {
 
 type BoxPositionProps = {
   position?: CSSProperties["position"];
+  bottom?: CSSProperties["bottom"];
+  top?: CSSProperties["top"];
+  left?: CSSProperties["left"];
+  right?: CSSProperties["right"];
+
   overflow?: CSSProperties["overflow"];
-  align?: "center" | "start" | "end" | "left" | "right";
+  textAlign?: "center" | "start" | "end" | "left" | "right";
 };
 
 export type BoxBorderProps = {

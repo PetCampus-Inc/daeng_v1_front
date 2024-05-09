@@ -38,7 +38,7 @@ const AddDogList = ({ adminId }: AddDogList) => {
   if (!data)
     // 관리할 강아지가 없는 경우
     return (
-      <Box mt={50} mb={50} align="center">
+      <Box mt={50} mb={50} textAlign="center">
         <EmptyCard />
       </Box>
     );
