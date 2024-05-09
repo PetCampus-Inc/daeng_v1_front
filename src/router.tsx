@@ -20,6 +20,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       errorElement: <Pages.NotFoundPage />,
       children: [
         {
+          path: PATH.ADMIN_LOGIN,
+          element: <Pages.AdminLoginPage />
+        },
+        {
           path: PATH.ADMIN_ATTENDANCE,
           children: [
             {
@@ -275,7 +279,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           path: PATH.LOGIN,
           element: (
             <Suspense>
-              <Pages.SignInPage />
+              <Pages.LoginPage />
             </Suspense>
           )
         },
@@ -354,6 +358,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberDogInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.REDIRECT,
+          element: <Pages.RedirectPage />
         }
       ],
       loader: () => {
