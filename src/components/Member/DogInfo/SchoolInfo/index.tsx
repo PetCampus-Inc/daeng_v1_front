@@ -9,10 +9,27 @@ import {
   YellowThickButton
 } from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
 import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
+import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
+import { useOverlay } from "hooks/common/useOverlay";
+import { Suspense } from "react";
 
 import * as S from "./styles";
 
 const SchoolInfo = () => {
+  const overlay = useOverlay();
+  const schoolCallInfo = {
+    schoolName: "똑독",
+    schoolNumber: "02-1234-1234"
+  };
+
+  // dogId -> 유치원 전화번호로 변경
+  const openCallPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <Suspense>
+        <CallSchoolBottomSheet info={schoolCallInfo} isOpen={isOpen} close={close} />
+      </Suspense>
+    ));
+
   return (
     <FlexWrapper>
       <S.Wrapper>
@@ -25,7 +42,7 @@ const SchoolInfo = () => {
               <BasicPhoneIcon />
               {"연락처 없음"}
             </TextWrapper>
-            <YellowThickButton>
+            <YellowThickButton onClick={() => openCallPopup()}>
               <PhoneIcon />
               전화 걸기
             </YellowThickButton>
@@ -35,7 +52,7 @@ const SchoolInfo = () => {
               <BasicPhoneIcon />
               {"연락처 없음"}
             </TextWrapper>
-            <YellowThickButton>
+            <YellowThickButton onClick={() => openCallPopup()}>
               <PhoneIcon />
               전화 걸기
             </YellowThickButton>
