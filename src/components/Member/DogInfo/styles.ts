@@ -44,7 +44,7 @@ export const FootIconItem = styled(FootIcon)`
   }
 `;
 
-export const DogDetailBox = styled.section`
+export const DogInfoCard = styled.section`
   position: relative;
   border-radius: 16px;
   overflow: hidden;
