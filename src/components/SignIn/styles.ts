@@ -116,6 +116,20 @@ export const StyledButton = styled.button.withConfig({
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.gray_5};
+    color: ${(props) => props.theme.colors.gray_2};
+    cursor: not-allowed;
+  }
+
+  &:disabled > .inactive {
+    color: ${(props) => props.theme.colors.gray_2};
+  }
+
+  transition-duration: 0.2s;
+  transition-property: background-color, color;
+  transition-timing-function: ease-out;
 `;
 
 export const StyledText = styled(Text)`
