@@ -288,10 +288,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: <Pages.SignUpPage />
         },
         {
-          path: PATH.ENROLL,
+          path: PATH.REGISTRATION_STATUS,
           element: (
             <Suspense>
-              <Pages.EnrollmentPage />
+              <Pages.RegistrationStatus />
             </Suspense>
           )
         },
