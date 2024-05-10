@@ -39,6 +39,5 @@ export const Text = forwardRef(function Text(
 Text.defaultProps = {
   as: "span",
   typo: "body2_16_R",
-  color: "black",
   isEllipsis: false
 };
