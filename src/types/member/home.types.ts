@@ -62,6 +62,7 @@ export interface IMemberProfilePostInfo {
   memberProfileUri?: string;
   nickName: string;
   address: string;
+  addressDetail: string;
   phoneNumber: string;
   emergencyNumber: string;
   relation: string;
