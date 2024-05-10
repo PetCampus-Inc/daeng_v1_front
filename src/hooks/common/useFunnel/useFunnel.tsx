@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, SetStateAction } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { Funnel, FunnelProps, Step, StepProps } from "./Funnel";
@@ -31,11 +31,15 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
   }
 ): [
   FunnelComponent<Steps>,
-  (step: Steps[number], options?: SetStepOptions, additionalQuery?: Record<string, string>) => void
+  (step: Steps[number], options?: SetStepOptions, additionalQuery?: Record<string, string>) => void,
+  any,
+  React.Dispatch<SetStateAction<any>>
 ] => {
   const navigate = useNavigate();
   const location = useLocation();
   const stepQueryKey = options?.stepQueryKey ?? DEFAULT_STEP_QUERY_KEY;
+
+  const [state, setState] = useState({});
 
   const currentStep = useMemo(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -78,5 +82,5 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
     [navigate, location, stepQueryKey, options]
   );
 
-  return [FunnelComponent, setStep];
+  return [FunnelComponent, setStep, state, setState];
 };
