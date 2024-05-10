@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 
 const SaveButton = () => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const { watch } = useFormContext();
   const { memberId } = useParams();
   const methods = useForm({ mode: "onSubmit" });
+  const { watch } = useFormContext();
   const mutatePostMemberInfo = usePostMemberProfileInfo();
   const { data: previousValues } = useGetMemberProfileInfo(String(memberId));
 
@@ -21,6 +21,19 @@ const SaveButton = () => {
   const emergencyPhoneNumber = watch("emergencyNumber");
   const relation = watch("relation");
 
+  const updatedMemberInfo = {
+    memberId: Number(memberId),
+    memberName: memberName,
+    memberGender: memberGender,
+    memberProfileUri: "s3_uri_yubin's_cute_face", // TODO 데이터 연동 필요
+    nickName: nickName,
+    address: address,
+    addressDetail: addressDetail,
+    phoneNumber: phoneNumber,
+    emergencyPhoneNumber: emergencyPhoneNumber,
+    relation: relation
+  };
+
   const checkFormValidity = useCallback(() => {
     if (
       previousValues.memberName !== memberName ||
@@ -29,7 +42,7 @@ const SaveButton = () => {
       previousValues.address !== address ||
       previousValues.addressDetail !== addressDetail ||
       previousValues.phoneNumber !== phoneNumber ||
-      previousValues.emergencyNumber !== emergencyPhoneNumber ||
+      previousValues.emergencyPhoneNumber !== emergencyPhoneNumber ||
       previousValues.relation !== relation
     ) {
       return false;
@@ -45,7 +58,7 @@ const SaveButton = () => {
     phoneNumber,
     previousValues.address,
     previousValues.addressDetail,
-    previousValues.emergencyNumber,
+    previousValues.emergencyPhoneNumber,
     previousValues.memberGender,
     previousValues.memberName,
     previousValues.nickName,
@@ -54,22 +67,7 @@ const SaveButton = () => {
     relation
   ]);
 
-  const updatedMemberInfo = {
-    memberId: String(memberId),
-    memberName: String(memberName),
-    memberGender: String(memberGender),
-    memberProfileUri: "s3_uri_yubin's_cute_face",
-    nickName: String(nickName),
-    address: String(address),
-    addressDetail: String(addressDetail),
-    phoneNumber: String(phoneNumber),
-    emergencyPhoneNumber: String(emergencyPhoneNumber),
-    relation: String(relation)
-  };
-
   const onSubmit = methods.handleSubmit(() => {
-    console.log("updatedMemberInfo", updatedMemberInfo);
-    //FIXME 500에러 발생
     mutatePostMemberInfo.mutateAttend(updatedMemberInfo, {
       onError: (err) => {
         console.log(err);
