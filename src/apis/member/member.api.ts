@@ -34,7 +34,7 @@ export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMem
 export const handleMemberInfoResult = async (
   req: IMemberProfilePostInfo
 ): Promise<IMemberProfilePostInfo> => {
-  const url = `/member/dog/info`;
+  const url = `/member/info`;
   const { data } = await customAxios.post(url, {
     memberId: req.memberId,
     memberName: req.memberName,
@@ -42,9 +42,12 @@ export const handleMemberInfoResult = async (
     memberProfileUri: req.memberProfileUri,
     nickName: req.nickName,
     address: req.address,
+    addressDetail: req.addressDetail,
     phoneNumber: req.phoneNumber,
-    emergencyNumber: req.emergencyNumber,
+    emergencyPhoneNumber: req.emergencyPhoneNumber,
     relation: req.relation
   });
+
+  console.log("data", data);
   return data;
 };

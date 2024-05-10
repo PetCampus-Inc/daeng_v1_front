@@ -15,9 +15,10 @@ const SaveButton = () => {
   const memberName = watch("memberName");
   const memberGender = watch("memberGender") === "여" ? "FEMALE" : "MALE";
   const nickName = watch("nickName");
-  const address = `${watch("address.street")}${watch("address.detail")}`;
+  const address = watch("address.street");
+  const addressDetail = watch("address.detail");
   const phoneNumber = watch("phoneNumber");
-  const emergencyNumber = watch("emergencyNumber");
+  const emergencyPhoneNumber = watch("emergencyNumber");
   const relation = watch("relation");
 
   const checkFormValidity = useCallback(() => {
@@ -26,8 +27,9 @@ const SaveButton = () => {
       previousValues.memberGender !== memberGender ||
       previousValues.nickName !== nickName ||
       previousValues.address !== address ||
+      previousValues.addressDetail !== addressDetail ||
       previousValues.phoneNumber !== phoneNumber ||
-      previousValues.emergencyNumber !== emergencyNumber ||
+      previousValues.emergencyNumber !== emergencyPhoneNumber ||
       previousValues.relation !== relation
     ) {
       return false;
@@ -35,12 +37,14 @@ const SaveButton = () => {
     return true;
   }, [
     address,
-    emergencyNumber,
+    addressDetail,
+    emergencyPhoneNumber,
     memberGender,
     memberName,
     nickName,
     phoneNumber,
     previousValues.address,
+    previousValues.addressDetail,
     previousValues.emergencyNumber,
     previousValues.memberGender,
     previousValues.memberName,
@@ -52,27 +56,25 @@ const SaveButton = () => {
 
   const updatedMemberInfo = {
     memberId: String(memberId),
-    memberName: memberName,
-    memberGender: memberGender,
-    // memberProfileUri: "se_ryusun_smile_face",
-    nickName: nickName,
-    address: address,
-    phoneNumber: phoneNumber,
-    emergencyNumber: emergencyNumber,
-    relation: relation
+    memberName: String(memberName),
+    memberGender: String(memberGender),
+    memberProfileUri: "s3_uri_yubin's_cute_face",
+    nickName: String(nickName),
+    address: String(address),
+    addressDetail: String(addressDetail),
+    phoneNumber: String(phoneNumber),
+    emergencyPhoneNumber: String(emergencyPhoneNumber),
+    relation: String(relation)
   };
 
   const onSubmit = methods.handleSubmit(() => {
     console.log("updatedMemberInfo", updatedMemberInfo);
     //FIXME 500에러 발생
-    // mutatePostMemberInfo.mutateAttend(updatedMemberInfo, {
-    //   onError: (err) => {
-    //     console.log(err)
-    //   },
-    //   onSuccess: () => {
-    //     console.log('성공')
-    //   },
-    // });
+    mutatePostMemberInfo.mutateAttend(updatedMemberInfo, {
+      onError: (err) => {
+        console.log(err);
+      }
+    });
   });
 
   useEffect(() => {

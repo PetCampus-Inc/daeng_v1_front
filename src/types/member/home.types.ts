@@ -64,6 +64,7 @@ export interface IMemberProfilePostInfo {
   address: string;
   addressDetail: string;
   phoneNumber: string;
-  emergencyNumber: string;
+  emergencyPhoneNumber?: string;
+  emergencyNumber?: string;
   relation: string;
 }
