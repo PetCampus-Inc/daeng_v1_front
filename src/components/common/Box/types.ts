@@ -3,8 +3,8 @@ import { TColor } from "styles/ThemeConfig";
 
 export type BoxStyleProps = {
   display?: CSSProperties["display"];
-  width?: CSSProperties["width"];
-  height?: CSSProperties["height"];
+  width?: string | "full" | "auto";
+  height?: string | "full" | "auto";
 };
 
 export type SpacingProps = {
@@ -49,6 +49,13 @@ type BoxPositionProps = {
   textAlign?: "center" | "start" | "end" | "left" | "right";
 };
 
+type BoxFlexBoxProps = {
+  flex?: number;
+  direction?: "row" | "column";
+  justify?: "center" | "flex-start" | "flex-end" | "space-between" | "space-around";
+  align?: "center" | "flex-start" | "flex-end" | "stretch";
+};
+
 export type BoxBorderProps = {
   border?: number;
   borderRadius?: number | "rectangle" | "circle";
@@ -63,4 +70,5 @@ export type BoxOptions = BoxStyleProps &
   SpacingProps &
   BoxColorProps &
   BoxPositionProps &
-  BoxBorderProps;
+  BoxBorderProps &
+  BoxFlexBoxProps;
