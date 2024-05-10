@@ -174,3 +174,27 @@ export const GotoEnrollButton = styled.button`
   padding: 14px 0;
   ${({ theme }) => theme.typo.label2_14_R}
 `;
+
+export const DogMoreInfoCard = styled.section`
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 16px;
+  padding: 20px 16px;
+`;
+
+export const DogMoreInfo = styled.h3`
+  color: ${({ theme }) => theme.colors.darkBlack};
+  ${({ theme }) => theme.typo.label1_16_B};
+`;
+
+export const DogMoreInfoText = styled.div`
+  color: ${({ theme }) => theme.colors.gray_1};
+  ${({ theme }) => theme.typo.label2_14_R};
+`;
+
+export const DogMoreInfoEditeButton = styled.button`
+  background-color: ${({ theme }) => theme.colors.gray_5};
+  padding: 5px 8px 2px;
+  border-radius: 50px;
+  color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme }) => theme.typo.caption1_12_R};
+`;

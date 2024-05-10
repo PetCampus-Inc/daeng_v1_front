@@ -70,36 +70,36 @@ const DogInfo = () => {
       </S.DogInfoCard>
 
       <div>
-        <section>
-          <div>
-            <div>
+        <S.DogMoreInfoCard>
+          <S.TopInfoBox>
+            <Flex gap="4" align="center">
               <CarIcon />
-              <h3>픽드랍 메모</h3>
-            </div>
-            <button>수정</button>
-          </div>
-          <p>월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당</p>
-        </section>
+              <S.DogMoreInfo>픽드랍 메모</S.DogMoreInfo>
+            </Flex>
+            <S.DogMoreInfoEditeButton>수정</S.DogMoreInfoEditeButton>
+          </S.TopInfoBox>
+          <S.DogMoreInfoText>월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당</S.DogMoreInfoText>
+        </S.DogMoreInfoCard>
 
-        <section>
-          <div>
-            <div>
+        <S.DogMoreInfoCard>
+          <S.TopInfoBox>
+            <Flex gap="4" align="center">
               <CarIcon />
-              <h3>알러지 및 질병</h3>
-            </div>
-            <button>수정</button>
-          </div>
-          <p>뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.</p>
-        </section>
+              <S.DogMoreInfo>알러지 및 질병</S.DogMoreInfo>
+            </Flex>
+            <S.DogMoreInfoEditeButton>수정</S.DogMoreInfoEditeButton>
+          </S.TopInfoBox>
+          <S.DogMoreInfoText>뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.</S.DogMoreInfoText>
+        </S.DogMoreInfoCard>
 
-        <section>
-          <div>
-            <div>
+        <S.DogMoreInfoCard>
+          <S.TopInfoBox>
+            <Flex gap="4" align="center">
               <CarIcon />
-              <h3>예방접종 파일</h3>
-            </div>
-            <button>추가 업로드</button>
-          </div>
+              <S.DogMoreInfo>예방접종 파일</S.DogMoreInfo>
+            </Flex>
+            <S.DogMoreInfoEditeButton>추가 업로드</S.DogMoreInfoEditeButton>
+          </S.TopInfoBox>
           <div>
             <div>
               <img
@@ -130,7 +130,7 @@ const DogInfo = () => {
               <span>2023.12.12 업로드</span>
             </div>
           </div>
-        </section>
+        </S.DogMoreInfoCard>
       </div>
     </>
   );
