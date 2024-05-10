@@ -1,5 +1,6 @@
 import SearchIcon from "assets/svg/search-icon";
 import XCircleIcon from "assets/svg/x-circle-icon";
+import { forwardRef, type ForwardedRef } from "react";
 
 import * as S from "./styles";
 import InputField from "../index";
@@ -12,16 +13,19 @@ export interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   inputType?: string;
 }
 
-const SearchInputField = ({
-  name,
-  value,
-  onSearch,
-  onClear,
-  disabled = false,
-  readOnly = false,
-  inputType,
-  ...props
-}: SearchInputFieldProps) => {
+const SearchInputField = forwardRef(function SearchInputField(
+  {
+    name,
+    value,
+    onSearch,
+    onClear,
+    disabled = false,
+    readOnly = false,
+    inputType,
+    ...props
+  }: SearchInputFieldProps,
+  ref: ForwardedRef<HTMLInputElement>
+) {
   const handleClear = () => {
     onClear?.();
   };
@@ -34,6 +38,7 @@ const SearchInputField = ({
     <S.SearchInputWrapper>
       <InputField
         type="search"
+        ref={ref}
         name={name}
         value={value}
         onKeyDown={(e) => {
@@ -46,7 +51,7 @@ const SearchInputField = ({
         readOnly={readOnly}
         {...props}
       />
-      {!inputType && value ? (
+      {!inputType && value ? ( // FIXME: inputType 여부 재고필요.
         <S.SearchInputButton onClick={handleClear}>
           <XCircleIcon />
         </S.SearchInputButton>
@@ -57,6 +62,6 @@ const SearchInputField = ({
       )}
     </S.SearchInputWrapper>
   );
-};
+});
 
 export default SearchInputField;
