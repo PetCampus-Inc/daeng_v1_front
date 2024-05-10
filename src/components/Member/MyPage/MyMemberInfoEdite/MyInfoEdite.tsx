@@ -24,7 +24,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
   const overlay = useOverlay.useOverlay();
 
   const addressStreet = "address.street";
-  const watchAddress = watch(addressStreet, "");
+  const watchAddress = watch(addressStreet);
 
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -89,6 +89,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           onSearch={() => openPopup()}
           onClick={() => openPopup()}
           onClear={handleClear}
+          defaultValue={memberData.addressDetail}
           value={watchAddress}
           isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
