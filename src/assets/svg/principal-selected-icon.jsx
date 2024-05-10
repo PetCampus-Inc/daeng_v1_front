@@ -33,10 +33,10 @@ const PrincipalSelectedIcon = () => {
           height="60.651"
           x="5.305"
           y="13.744"
-          colorInterpolationFilters="sRGB"
+          color-interpolation-filters="sRGB"
           filterUnits="userSpaceOnUse"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             result="hardAlpha"
