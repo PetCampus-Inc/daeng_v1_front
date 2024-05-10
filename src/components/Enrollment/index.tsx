@@ -68,7 +68,7 @@ const EnrollmentForm = ({ isMemberAddDog }: IEnrollmentFormProps) => {
         </S.TopWrapper>
         <FormProvider {...methods}>
           <S.ContentWrapper>
-            {isMemberAddDog && (
+            {!isMemberAddDog && (
               <S.Content $isVisible={currentStep === 0}>
                 <MemberInfo requiredItems={requiredItemList} />
               </S.Content>
