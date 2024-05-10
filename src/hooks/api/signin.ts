@@ -1,8 +1,11 @@
 import { PATH } from "constants/path";
 
 import { useMutation } from "@tanstack/react-query";
+import { postAdminLogin } from "apis/admin/admin.api";
 import { handleKaKaoLogin } from "apis/auth.api";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
 
 interface LoginMutateProps {
   provider: "kakao" | "google" | "apple";
@@ -34,4 +37,25 @@ export const useLogInMutation = () => {
   });
 
   return loginMutate.mutate;
+};
+
+export const useAdminLogin = () => {
+  const navigate = useNavigate();
+  const setLoginInfo = useSetRecoilState(adminLoginInfoAtom);
+  const { mutate } = useMutation({
+    mutationFn: postAdminLogin,
+    onSuccess: (res) => {
+      setLoginInfo(() => ({
+        adminId: res.adminId,
+        adminName: res.adminName,
+        schoolId: res.schoolId,
+        role: res.role,
+        schoolName: res.schoolName
+      }));
+      navigate(PATH.ADMIN_ATTENDANCE);
+    },
+    throwOnError: false
+  });
+
+  return { mutateLogin: mutate };
 };

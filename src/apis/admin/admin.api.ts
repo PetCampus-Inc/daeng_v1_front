@@ -1,5 +1,6 @@
 import axios from "axios";
 import customAxios from "libs/CustomAxios";
+import { request } from "libs/CustomAxios/request";
 import {
   IAdminLoginInfo,
   INewEnrollmentList,
@@ -22,13 +23,15 @@ export const handleCheckId = async (id: string): Promise<number> => {
 };
 
 // 관리자 로그인
-export const handleAdminLoginResult = async (
-  req: IAdminLoginInfo
-): Promise<IResponse<TAdminLoginInfo>> => {
+export const postAdminLogin = async (req: IAdminLoginInfo): Promise<TAdminLoginInfo> => {
   const url = `admin/login`;
-  const { data } = await customAxios.post(url, {
-    id: req.inputId,
-    pwd: req.inputPw
+  const { data } = await request<IResponse<TAdminLoginInfo>>({
+    url,
+    method: "POST",
+    data: {
+      id: req.inputId,
+      pwd: req.inputPw
+    }
   });
   return data;
 };
