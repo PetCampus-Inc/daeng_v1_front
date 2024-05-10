@@ -35,9 +35,7 @@ const SignIn = () => {
           <StyledButton
             type="button"
             aria-label="구글로 계속하기"
-            onClick={() => {
-              console.log("구글 로그인");
-            }}
+            onClick={() => navigate(PATH.SIGNUP)}
             bg="white"
             borderColor="#CCCCCC"
           >
@@ -50,9 +48,7 @@ const SignIn = () => {
           <StyledButton
             type="button"
             aria-label="Apple로 로그인"
-            onClick={() => {
-              console.log("Apple로 로그인");
-            }}
+            onClick={() => navigate(PATH.SIGNUP)}
             bg="black"
             borderColor="black"
           >
