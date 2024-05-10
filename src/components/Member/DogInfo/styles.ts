@@ -198,3 +198,55 @@ export const DogMoreInfoEditeButton = styled.button`
   color: ${({ theme }) => theme.colors.gray_2};
   ${({ theme }) => theme.typo.caption1_12_R};
 `;
+
+export const CarouselContainer = styled.div`
+  overflow-x: auto;
+`;
+
+export const CarouselWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  width: calc(100% + 130px);
+`;
+
+export const CarouselCard = styled.div`
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  height: 72px;
+  max-width: 103px;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 4px 8px;
+
+  & > img {
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: ${({ theme }) => theme.colors.black};
+    opacity: 0.4;
+    z-index: 1;
+  }
+`;
+
+export const CarouselText = styled.span`
+  position: relative;
+  z-index: 1;
+  color: ${({ theme }) => theme.colors.white};
+  ${({ theme }) => theme.typo.caption1_10_R};
+`;
