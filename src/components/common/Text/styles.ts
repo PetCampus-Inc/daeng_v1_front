@@ -26,6 +26,10 @@ export const StyledText = styled.span.withConfig({
       white-space: nowrap;
       text-overflow: ellipsis;
     `};
+
+  &.pre {
+    white-space: pre-wrap;
+  }
 `;
 
 export const StyledEm = styled.em.withConfig({
