@@ -22,7 +22,7 @@ const SignUpFunnel = () => {
   return (
     <Funnel>
       <Funnel.Step name={유치원_검색}>
-        <SearchSchoolPage onNextStep={handleNextStep} />
+        <SearchSchoolPage type="MEMBER" onNextStep={handleNextStep} />
       </Funnel.Step>
       <Funnel.Step name={가입신청서_작성}>
         <Suspense>
