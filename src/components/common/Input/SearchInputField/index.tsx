@@ -3,9 +3,7 @@ import XCircleIcon from "assets/svg/x-circle-icon";
 import { forwardRef, type ForwardedRef } from "react";
 
 import * as S from "./styles";
-import InputField from "../index";
-
-import type { InputFieldProps } from "../index";
+import TextInputField, { type InputFieldProps } from "../TextInputField";
 
 export interface SearchInputFieldProps extends Omit<InputFieldProps, "type"> {
   onSearch?: (value: string) => void;
@@ -24,7 +22,7 @@ const SearchInputField = forwardRef(function SearchInputField(
     inputType,
     ...props
   }: SearchInputFieldProps,
-  ref: ForwardedRef<HTMLInputElement>
+  ref?: ForwardedRef<HTMLInputElement>
 ) {
   const handleClear = () => {
     onClear?.();
@@ -36,7 +34,7 @@ const SearchInputField = forwardRef(function SearchInputField(
 
   return (
     <S.SearchInputWrapper>
-      <InputField
+      <TextInputField
         type="search"
         ref={ref}
         name={name}

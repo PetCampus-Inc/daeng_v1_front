@@ -42,6 +42,10 @@ export const Input = styled.input<InputFieldStyleProps>`
     -webkit-appearance: none;
   }
 
+  &.error-input {
+    color: ${({ theme }) => theme.colors.red_1};
+  }
+
   &[type="number"] {
     -moz-appearance: textfield;
   }
@@ -49,6 +53,18 @@ export const Input = styled.input<InputFieldStyleProps>`
   &[type="search"] {
     padding-right: 50px;
     text-overflow: ellipsis;
+  }
+
+  &.pw {
+    &[type="text"] {
+      padding-right: 50px;
+      text-overflow: ellipsis;
+    }
+
+    &[type="password"] {
+      padding-right: 50px;
+      text-overflow: ellipsis;
+    }
   }
 
   &:disabled {

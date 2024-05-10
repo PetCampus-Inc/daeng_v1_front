@@ -12,7 +12,7 @@ export interface InputFieldProps
   borderColor?: string;
 }
 
-const InputField = forwardRef(function InputField(
+const TextInputField = forwardRef(function TextInputField(
   {
     name,
     isRequired,
@@ -23,7 +23,7 @@ const InputField = forwardRef(function InputField(
     borderColor,
     ...props
   }: InputFieldProps,
-  ref: ForwardedRef<HTMLInputElement>
+  ref?: ForwardedRef<HTMLInputElement>
 ) {
   return (
     <S.Input
@@ -39,4 +39,4 @@ const InputField = forwardRef(function InputField(
   );
 });
 
-export default InputField;
+export default TextInputField;
