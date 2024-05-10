@@ -1,5 +1,3 @@
-import AdminLoginPage from "./LoginPage/AdminLoginPage";
-
 export { default as NotFoundPage } from "./NotFoundPage";
 export { default as HomePage } from "./HomePage";
 export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";
@@ -40,3 +38,4 @@ export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
 export { default as RedirectPage } from "./RedirectPage";
 export { default as RegistrationStatus } from "./SignUpPage/RegistrationStatus";
+export { default as AdminSignupPage } from "./SignUpPage/AdminSignUpFunnel";
