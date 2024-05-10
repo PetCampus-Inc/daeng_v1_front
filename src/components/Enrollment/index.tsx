@@ -3,6 +3,8 @@ import { MEMBER_ENROLL_STEP } from "constants/step";
 import { useGetEnrollment } from "hooks/api/member/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
+import { useRecoilValue } from "recoil";
+import { schoolIdAtom } from "store/form";
 import { PageContainer } from "styles/StyleModule";
 
 import DogInfo from "./Form/DogInfo";
@@ -16,7 +18,9 @@ import * as S from "./styles";
 
 // TODO: page 컴포넌트에서 조합해서 사용하기!
 const EnrollmentForm = () => {
-  const { data } = useGetEnrollment({ memberId: "1", schoolId: "2" });
+  const schoolId = useRecoilValue(schoolIdAtom) ?? -1;
+
+  const { data } = useGetEnrollment({ memberId: "1", schoolId });
   const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
 
   const methods = useForm({
