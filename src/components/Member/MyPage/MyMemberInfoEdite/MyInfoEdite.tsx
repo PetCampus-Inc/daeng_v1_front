@@ -89,7 +89,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           onSearch={() => openPopup()}
           onClick={() => openPopup()}
           onClear={handleClear}
-          defaultValue={memberData.addressDetail}
+          defaultValue={memberData.address}
           value={watchAddress}
           isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
@@ -100,7 +100,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
         <InputField
           name="address.detail"
           register={register}
-          defaultValue={memberData.address}
+          defaultValue={memberData.addressDetail}
           value={watch("address.detail")}
           placeholder="상세 주소를 입력해주세요"
           onFocus={handleFocus}
@@ -137,7 +137,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           pattern={PHONE_REGEX}
           onChange={handleChangeNumber("emergencyNumber")}
           placeholder="비상 연락처를 입력해주세요"
-          defaultValue={memberData.emergencyNumber}
+          defaultValue={memberData.emergencyPhoneNumber}
           value={watch("emergencyNumber")}
           type="tel"
           onFocus={handleFocus}
