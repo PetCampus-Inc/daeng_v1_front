@@ -1,4 +1,4 @@
-import { useLogInMutation } from "hooks/api/login";
+import { useLogInMutation } from "hooks/api/signin";
 import { useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { isProviderValid } from "utils/auth";

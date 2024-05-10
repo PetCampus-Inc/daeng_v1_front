@@ -36,7 +36,7 @@ export const PATH = {
   SETTING: "/setting", // 설정 페이지
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
   POLICY: "/policy", // 정책 페이지
-  ENROLL: "/enrollment", // 견주 가입신청서
+  REGISTRATION_STATUS: `/approve`, // 가입신청 승인 상태
   MEMBER_MY_PAGE: "/mypage",
   REDIRECT: "/login/oauth2/code/:provider",
   MEMBER_MY_INFO_PAGE: "/myPage/profile",
