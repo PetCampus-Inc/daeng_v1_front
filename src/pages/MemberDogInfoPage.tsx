@@ -1,6 +1,7 @@
 import { MEMBER_DOG_INFO_STEP } from "constants/step";
 
 import Header from "components/common/Header";
+import DogInfo from "components/Member/DogInfo";
 import SchoolInfo from "components/Member/DogInfo/SchoolInfo";
 import { FootIconItem, Nav, NavItem, NavWrapper } from "components/Member/DogInfo/styles";
 import { useState } from "react";
@@ -32,7 +33,7 @@ const MemberDogInfoPage = () => {
         </NavWrapper>
       </Nav>
       <PageContainer color="gray_5">
-        {currentStep === 0 && ""}
+        {currentStep === 0 && <DogInfo />}
         {currentStep === 1 && <SchoolInfo />}
         {currentStep === 2 && ""}
       </PageContainer>
