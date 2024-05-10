@@ -24,6 +24,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: <Pages.AdminLoginPage />
         },
         {
+          path: PATH.ADMIN_SIGNUP,
+          element: <Pages.AdminSignupPage />
+        },
+        {
           path: PATH.ADMIN_ATTENDANCE,
           children: [
             {
