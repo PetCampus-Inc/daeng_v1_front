@@ -6,7 +6,7 @@ import {
   handleTeacherDeny,
   handleTeacherSignUpCancel,
   handleTeacherSignUpSubmit
-} from "apis/admin.api";
+} from "apis/admin/admin.api";
 // import { handleGetSearchResult } from "apis/member/school.api";
 import { useState, useCallback, Dispatch, SetStateAction } from "react";
 import { ISchoolInfo } from "types/admin/school.types";
