@@ -49,6 +49,7 @@ export interface IMemberProfileInfo extends IResponse {
   memberGender: string;
   nickName: string;
   address: string;
+  addressDetail: string;
   phoneNumber: string;
   emergencyNumber: string;
   relation: string;
