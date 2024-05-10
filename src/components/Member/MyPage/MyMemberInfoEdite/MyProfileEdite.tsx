@@ -1,5 +1,5 @@
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
-import InputField from "components/common/InputField";
+import { TextInput } from "components/common";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ThemeConfig } from "styles/ThemeConfig";
@@ -31,7 +31,7 @@ const MyProfileEdite = ({ handleFocus, handleBlur }: IMemberInfoEdite) => {
         </S.ProfileEditeBox>
       </S.ProfileBox>
       <S.MyDogName>
-        <InputField
+        <TextInput
           name="dogName"
           register={register}
           isRequired

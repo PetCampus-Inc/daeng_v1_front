@@ -1,5 +1,5 @@
 import { Flex } from "components/common";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import SearchInputField from "components/common/Input/SearchInputField";
 import { useGetSchool } from "hooks/api/signup";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { useState, useRef, type RefObject, useCallback, useEffect } from "react";

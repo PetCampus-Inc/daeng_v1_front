@@ -1,4 +1,4 @@
-import Typo from "components/common/Typo";
+import { Text } from "components/common";
 import useGetDogAndMemberDetail from "hooks/api/useGetDogAndMemberDetail";
 import { useLocation } from "react-router-dom";
 import { ThemeConfig } from "styles/ThemeConfig";
@@ -22,14 +22,15 @@ const DogInfo = () => {
       <Memo memo={data.dogInfo.dogMemo} id={data.dogInfo.dogId} refetch={refetch} />
 
       <S.AlbumWrapper>
-        <Typo text="사진 앨범" color={ThemeConfig.colors.darkBlack} size="1.1rem" weight="bold" />
+        <Text typo="body2_16_B" color="darkBlack">
+          사진 앨범
+        </Text>
         <S.Albums>
           {/* 사진이 있는경우 앨범 없을 경우 텍스트 */}
-          <Typo
-            text="앨범에 등록된 사진이 없습니다"
-            color={ThemeConfig.colors.gray_3}
-            size="0.9rem"
-          />
+          {/* FIXME: 정확한 typo 토큰 모르겠음. 피그마 확인 필요! */}
+          <Text typo="body2_16_R" color="gray_3">
+            앨범에 등록된 사진이 없습니다
+          </Text>
         </S.Albums>
       </S.AlbumWrapper>
     </InnerContainer>

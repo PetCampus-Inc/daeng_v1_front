@@ -1,6 +1,6 @@
 import SearchInputField, {
   type SearchInputFieldProps
-} from "components/common/InputField/SearchInputField";
+} from "components/common/Input/SearchInputField";
 import BreedDropDown from "components/Enrollment/Input/BreedDropDown";
 import { useGetBreed } from "hooks/api/member/enroll";
 import { useClickOutSide } from "hooks/common/useClickOutSide";

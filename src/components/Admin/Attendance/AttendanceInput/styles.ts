@@ -1,4 +1,4 @@
-import { SearchInputWrapper } from "components/common/InputField/SearchInputField/styles";
+import { SearchInputWrapper } from "components/common/Input/SearchInputField/styles";
 import styled from "styled-components";
 
 export const SearchInput = styled.input`

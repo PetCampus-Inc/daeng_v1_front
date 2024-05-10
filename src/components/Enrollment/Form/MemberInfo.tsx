@@ -1,8 +1,8 @@
 import { ITEM_KEYS } from "constants/item";
 import { PHONE_REGEX } from "constants/validCheck";
 
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import { TextInput } from "components/common";
+import SearchInputField from "components/common/Input/SearchInputField";
 import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Title from "components/common/Title";
@@ -51,7 +51,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
     <>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
-        <InputField
+        <TextInput
           name="memberName"
           register={register}
           isRequired
@@ -76,7 +76,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           placeholder="주소를 입력해주세요"
         />
         {isAddressActive && (
-          <InputField
+          <TextInput
             name="address.detail"
             register={register}
             placeholder="상세 주소를 입력해주세요"
@@ -85,7 +85,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_PHONE)}>연락처</Title>
-        <InputField
+        <TextInput
           name="phoneNumber"
           register={register}
           isRequired
@@ -96,7 +96,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
-        <InputField
+        <TextInput
           name="emergencyNumber"
           register={register}
           isRequired={requiredItems?.get(ITEM_KEYS.EMERGENCY_NUMBER)}

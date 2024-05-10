@@ -1,16 +1,15 @@
 import { ITEM_KEYS } from "constants/item";
 import { PHONE_REGEX } from "constants/validCheck";
 
+import { Text } from "components/common";
+import { TextInput } from "components/common";
 import { Flex } from "components/common/Flex";
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import SearchInputField from "components/common/Input/SearchInputField";
 import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
-import Typo from "components/common/Typo";
 import * as useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { ThemeConfig } from "styles/ThemeConfig";
 import { IMemberInfoEdite } from "types/Member.type";
 import { formatPhoneNumber } from "utils/formatter";
 
@@ -51,8 +50,10 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
   return (
     <S.ProfileEditeWrapper>
       <Flex direction="column" gap={7}>
-        <Typo text="이름" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <InputField
+        <Text typo="label2_14_R" color="darkBlack">
+          이름
+        </Text>
+        <TextInput
           name="memberName"
           register={register}
           isRequired
@@ -64,12 +65,16 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="성별" color={ThemeConfig.colors.darkBlack} size="14px" />
+        <Text typo="label2_14_R" color="darkBlack">
+          성별
+        </Text>
         <SingleRadio name="memberGender" radiosText={["남", "여"]} defaultSelect="남" />
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="주소" color={ThemeConfig.colors.darkBlack} size="14px" />
+        <Text typo="label2_14_R" color="darkBlack">
+          주소
+        </Text>
         <SearchInputField
           name={addressStreet}
           register={register}
@@ -82,7 +87,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
           placeholder="주소를 입력해주세요"
           inputType="memberEdite"
         />
-        <InputField
+        <TextInput
           name="address.detail"
           register={register}
           value="롯데캐슬 아파트 203동 1403호"
@@ -93,8 +98,10 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="연락처" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <InputField
+        <Text typo="label2_14_R" color="darkBlack">
+          연락처
+        </Text>
+        <TextInput
           name="phoneNumber"
           register={register}
           isRequired
@@ -109,8 +116,10 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="비상 연락처" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <InputField
+        <Text typo="label2_14_R" color="darkBlack">
+          비상 연락처
+        </Text>
+        <TextInput
           name="emergencyNumber"
           register={register}
           isRequired
