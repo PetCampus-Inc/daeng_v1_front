@@ -140,3 +140,16 @@ export const ADMIN_DOG_DETAIL_INFO_STEP = [
 ] as const;
 
 export const MEMBER_DOG_INFO_STEP = ["강아지 정보", "유치원 정보", "출결 및 이용권"] as const;
+
+export const SIGN_UP_STEP = {
+  유치원_검색: "search_school" as const,
+  가입신청서_작성: "enrollment_form" as const
+};
+
+export const ADMIN_SIGN_UP_STEP = {
+  역할_선택: "select_role" as const,
+  유치원_검색: "search_school" as const,
+  유치원_등록: "enroll_school" as const,
+  회원정보_입력: "personal_info" as const,
+  계정설정: "account_setup" as const
+};
