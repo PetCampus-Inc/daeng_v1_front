@@ -5,26 +5,11 @@ import * as S from "./styles";
 type DisconnectModalProps = {
   isOpen: boolean;
   close: () => void;
-  action: () => void;
   upDateData?: string;
-  closeText: string;
-  actionText: string;
-  colorScheme: "primary" | "red";
-  type?: string;
   imgUrl?: string;
 };
 
-const CarouselModal = ({
-  close,
-  action,
-  isOpen,
-  upDateData,
-  closeText,
-  actionText,
-  colorScheme,
-  type,
-  imgUrl
-}: DisconnectModalProps) => {
+const CarouselModal = ({ close, isOpen, upDateData, imgUrl }: DisconnectModalProps) => {
   const settings = {
     dots: false,
     infinite: true,
