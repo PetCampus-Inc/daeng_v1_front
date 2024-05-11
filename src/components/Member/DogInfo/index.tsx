@@ -4,13 +4,16 @@ import CalendarIcon from "assets/svg/calendar";
 import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
+import { StyledThumbList } from "components/Admin/AttendCare/upload/styles";
 import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
+import CarouselModal from "components/common/Modal/CarouselModal";
 import { useOverlay } from "hooks/common/useOverlay";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
+//TODO 리팩토링하기
 const DogInfo = () => {
   const overlay = useOverlay();
 
@@ -31,11 +34,22 @@ const DogInfo = () => {
       />
     ));
 
+  const openCarouselPopup = (imgUrl: string, upDateData: string) =>
+    overlay.open(({ isOpen, close }) => (
+      <CarouselModal imgUrl={imgUrl} upDateData={upDateData} isOpen={isOpen} close={close} />
+    ));
+
   const eventShowToast = (type: string) => {
-    if (type === "pickDrop" || type === "allergy") {
-      showToast("수정이 완료되었습니다.", "bottom");
-    } else {
-      showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
+    switch (type) {
+      case "pickDrop":
+        showToast("수정이 완료되었습니다.", "bottom");
+        break;
+      case "allergy":
+        showToast("수정이 완료되었습니다.", "bottom");
+        break;
+      case "vaccination":
+        showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
+        break;
     }
   };
 
@@ -159,7 +173,15 @@ const DogInfo = () => {
         </S.TopInfoBox>
         <S.CarouselContainer>
           <S.CarouselWrapper>
-            <S.CarouselCard>
+            <S.CarouselCard
+              role="button"
+              onClick={() =>
+                openCarouselPopup(
+                  "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  "2023.12.12"
+                )
+              }
+            >
               <img
                 src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="dog_img"
@@ -189,6 +211,7 @@ const DogInfo = () => {
             </S.CarouselCard>
           </S.CarouselWrapper>
         </S.CarouselContainer>
+        <StyledThumbList></StyledThumbList>
       </S.DogMoreInfoCard>
     </Flex>
   );
