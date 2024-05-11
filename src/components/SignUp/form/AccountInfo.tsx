@@ -2,7 +2,7 @@ import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 
 import { isAxiosError } from "axios";
 import { ButtonInput, Flex, PasswordInput, Text } from "components/common";
-import { useCheckId } from "hooks/api/signin";
+import { useCheckId } from "hooks/api/signup";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -18,8 +18,8 @@ const AccountInfo = () => {
   } = useFormContext();
 
   const id = watch("id");
-  const password = watch("pwd");
   const idFieldState = getFieldState("id");
+  const password = watch("pwd");
 
   const [isValidId, setIsValidId] = useState<boolean>(false);
 
