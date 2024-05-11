@@ -1,3 +1,4 @@
+import { PATH } from "constants/path";
 import { FIELD_TO_STEP } from "constants/step";
 
 import { usePostEnrollment } from "hooks/api/member/enroll";
@@ -5,7 +6,7 @@ import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import { Adapter } from "libs/Adapter";
 import { MemberFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 import { FormButton } from "styles/StyleModule";
@@ -14,6 +15,10 @@ import type { IRequestEnrollment } from "types/member/enrollment.types";
 
 const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => {
   const { memberId } = useParams();
+  const navigate = useNavigate();
+  const isMypage = useLocation()
+    .pathname.split("/")
+    .some((url) => url === "mypage");
   const { handleSubmit } = useFormContext();
   const enrollMutation = usePostEnrollment();
   const { data: memberInfoData } = useGetMemberProfileInfo(String(memberId));
@@ -25,7 +30,8 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
     memberId: Number(memberInfoData.memberId),
     memberName: memberInfoData.memberName,
     memberGender: memberInfoData.memberGender,
-    address: `${memberInfoData.address && memberInfoData.address} ${memberInfoData.address && memberInfoData.addressDetail}`,
+    address: `${memberInfoData.address && memberInfoData.address}`,
+    addressDetail: `${memberInfoData.address && memberInfoData.addressDetail}`,
     phoneNumber: memberInfoData.phoneNumber,
     emergencyNumber: memberInfoData.emergencyPhoneNumber
       ? memberInfoData.emergencyPhoneNumber
@@ -37,7 +43,6 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
     const requestData = Adapter.from(data).to<FieldValues, IRequestEnrollment>((item) =>
       new MemberFormToServerAdapter(item).adapt()
     );
-
     enrollMutation(requestData);
   };
 
@@ -50,6 +55,7 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
 
     const memberDogAddInfo = { ...requestData, ...memberInfo };
     enrollMutation(memberDogAddInfo);
+    navigate(PATH.MEMBER_MY_PAGE(memberId));
   };
 
   const onInvalid = (errors: FieldErrors) => {
@@ -64,7 +70,11 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   };
 
   return (
-    <FormButton type="submit" onClick={handleSubmit(onSubmit, onInvalid)} aria-label="제출하기">
+    <FormButton
+      type="submit"
+      onClick={handleSubmit(isMypage ? onSubmitMemberDogAdd : onSubmit, onInvalid)}
+      aria-label="제출하기"
+    >
       제출하기
     </FormButton>
   );
