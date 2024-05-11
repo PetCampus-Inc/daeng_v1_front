@@ -1,6 +1,6 @@
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
@@ -22,10 +22,17 @@ export const useGetMemberProfileInfo = (memberId: string) => {
 };
 
 // 견주 가입신청서 취소
-export const usePostMemberDogEnrollment = () => {
+export const usePostMemberDogEnrollment = (memberId: string) => {
+  const queryClient = useQueryClient();
   const enrollMemberDOgMutation = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
-    throwOnError: true
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+      console.log("성공");
+    },
+    onError: (err) => {
+      console.log(err);
+    }
   });
 
   return enrollMemberDOgMutation.mutate;
