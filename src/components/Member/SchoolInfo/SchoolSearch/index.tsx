@@ -5,6 +5,8 @@ import InputBox from "components/common/InputBox";
 import Typo from "components/common/Typo";
 import { memo, Dispatch, SetStateAction, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { memberEnrollmentSchoolAtom } from "store/member";
 import { ThemeConfig } from "styles/ThemeConfig";
 import { ISchoolInfo } from "types/admin/school.types";
 
@@ -48,6 +50,7 @@ const SchoolSearch = ({
   schoolId,
   setSchoolId
 }: Props) => {
+  const setMemberEnrollmentSchool = useSetRecoilState(memberEnrollmentSchoolAtom);
   const navigate = useNavigate();
   const { memberId } = useParams();
   return (
@@ -97,6 +100,10 @@ const SchoolSearch = ({
                     setSelectedSearchText(item.name);
                     setSearchText(item.name);
                     setSchoolId(item.schoolId);
+                    setMemberEnrollmentSchool({
+                      schoolName: item.name,
+                      schoolId: item.schoolId
+                    });
                   }}
                 >
                   <Typo text={item.name} color={ThemeConfig.colors.gray_1} />
