@@ -4,22 +4,22 @@ export interface IAdminLoginInfo {
 }
 
 export interface IOwnerSignUpInfo {
-  userId: string;
-  userPw: string;
-  userName: string;
-  userPhone: string;
+  id: string;
+  pwd: string;
+  name: string;
+  phoneNumber: string;
   schoolName: string;
-  schoolPhone: string;
+  schoolPhoneNumber: string;
   schoolAddress: string;
-  schoolNum: string;
+  registrationNumber: string;
 }
 
 export interface ITeacherSignUpInfo {
-  userId: string;
-  userPw: string;
+  id: string;
+  pwd: string;
   schoolId: number;
-  userName: string;
-  userPhone: string;
+  name: string;
+  phoneNumber: string;
 }
 
 export interface ITeacherApprove {
