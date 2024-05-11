@@ -1,14 +1,9 @@
 import XCircleIcon from "assets/svg/x-circle-icon";
-import {
-  StyledThumbImg,
-  StyledThumb,
-  StyledDeleteButton,
-  InnerShadow,
-  StyledText
-} from "components/Admin/AttendCare/Upload/styles";
 import { Box } from "components/common";
 
-import type { IFile } from "components/Admin/AttendCare/Upload/types";
+import { InnerShadow, StyledDeleteButton, StyledText, StyledThumb, StyledThumbImg } from "./styles";
+
+import type { IFile } from "./types";
 
 interface TumbnailProps {
   file: IFile;

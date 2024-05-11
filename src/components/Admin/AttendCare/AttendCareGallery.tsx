@@ -1,13 +1,13 @@
-import { Upload } from "components/Admin/AttendCare/Upload/FileUpload";
-import { StyledThumbList } from "components/Admin/AttendCare/Upload/styles";
-import Thumbnail from "components/Admin/AttendCare/Upload/Thumbnail";
-import { IFile } from "components/Admin/AttendCare/Upload/types";
+import { Upload } from "components/Admin/AttendCare/upload/FileUpload";
+import Thumbnail from "components/Admin/AttendCare/upload/Thumbnail";
+import { IFile } from "components/Admin/AttendCare/upload/types";
 import { Flex, Text } from "components/common";
 import TextArea from "components/common/TextArea";
 import { ChangeEvent, useState } from "react";
 import { remCalc } from "utils/calculator";
 import { getFilePreview } from "utils/thumb";
 
+import { StyledThumbList } from "./upload/styles";
 import { Box } from "../../common/Box";
 
 const AttendCareGallery = () => {

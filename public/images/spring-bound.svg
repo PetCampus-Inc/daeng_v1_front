@@ -8,8 +8,8 @@
 </g>
 <rect x="3" width="12" height="28" rx="6" fill="#525252"/>
 <defs>
-<filter id="filter0_d_6929_131895" x="-32" y="1" width="226" height="215" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-<feFlood floodOpacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_d_6929_131895" x="-32" y="1" width="226" height="215" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
 <feOffset dy="8"/>
 <feGaussianBlur stdDeviation="7.5"/>
