@@ -21,6 +21,7 @@ export const getCheckId = async (id: string): Promise<number> => {
   const { status } = await request<IResponse<void>>({ url, params: { id } });
   return status;
 };
+
 // 관리자 로그인
 export const postAdminLogin = async (req: IAdminLoginInfo): Promise<TAdminLoginInfo> => {
   const url = `admin/login`;
@@ -36,7 +37,7 @@ export const postAdminLogin = async (req: IAdminLoginInfo): Promise<TAdminLoginI
 };
 
 // 사업자번호 확인 api
-export const handleCheckRegistrationNumber = async (req: string): Promise<string> => {
+export const postRegistrationNumber = async (req: string): Promise<string> => {
   const url = `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${process.env.REACT_APP_BUSINESS_API_KEY}`;
   const { data } = await axios.post(url, {
     b_no: [req]

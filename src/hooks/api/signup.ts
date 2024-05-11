@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getCheckId, postRegistrationNumber } from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/school.api";
 
-const useGetSchool = (searchText: string) => {
+// 유치원 검색
+export const useGetSchool = (searchText: string) => {
   return useQuery({
     queryKey: ["schoolList", searchText],
     queryFn: () => handleGetSchool(searchText),
@@ -11,4 +13,20 @@ const useGetSchool = (searchText: string) => {
   });
 };
 
-export { useGetSchool };
+// 아이디 중복 확인
+export const useCheckId = () => {
+  const { mutate } = useMutation({
+    mutationFn: getCheckId
+  });
+
+  return { mutateCheckId: mutate };
+};
+
+// 사업자 등록번호 확인
+export const useCheckRegNum = () => {
+  const { mutate } = useMutation({
+    mutationFn: postRegistrationNumber
+  });
+
+  return { mutateCheckRegNum: mutate };
+};
