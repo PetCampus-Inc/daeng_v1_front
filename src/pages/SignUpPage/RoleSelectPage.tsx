@@ -4,12 +4,10 @@ import { StyledButton } from "components/SignIn/styles";
 import RoleBox from "components/SignUp/RoleBox";
 import { useState } from "react";
 
+import { Role } from "./AdminSignUpFunnel";
+
 interface IStepProps {
-  onNextStep: (role: "TEACHER" | "OWNER") => void;
-}
-export enum Role {
-  TEACHER = "TEACHER",
-  OWNER = "OWNER"
+  onNextStep: (role: Role) => void;
 }
 
 const RoleSelectPage = ({ onNextStep }: IStepProps) => {

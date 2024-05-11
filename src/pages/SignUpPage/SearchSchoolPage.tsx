@@ -11,6 +11,7 @@ interface SearchSchoolPageProps {
   onNextStep: () => void;
 }
 
+// TODO: useFormProvider 이용!!
 const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
   const schoolId = useRecoilValue(schoolIdAtom);
 
