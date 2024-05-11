@@ -19,8 +19,8 @@ const PrincipalSelectedIcon = () => {
           <rect width="9.722" height="9.722" x="43.875" y="42.67" fill="#EED5CD" rx="4.861" />
           <rect width="3.601" height="3.601" x="42.797" y="39.07" fill="#525252" rx="1.8" />
         </g>
-        <circle cx="32.5" cy="40.5" r="4.75" stroke="#C8A584" stroke-width="1.5" />
-        <circle cx="45.5" cy="40.5" r="4.75" stroke="#C8A584" stroke-width="1.5" />
+        <circle cx="32.5" cy="40.5" r="4.75" stroke="#C8A584" strokeWidth="1.5" />
+        <circle cx="45.5" cy="40.5" r="4.75" stroke="#C8A584" strokeWidth="1.5" />
         <path stroke="#C8A584" d="M37 40.5h4" />
       </g>
       <defs>
@@ -33,10 +33,10 @@ const PrincipalSelectedIcon = () => {
           height="60.651"
           x="5.305"
           y="13.744"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
           filterUnits="userSpaceOnUse"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             result="hardAlpha"
