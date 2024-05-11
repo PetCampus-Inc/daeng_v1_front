@@ -11,24 +11,40 @@ import {
 import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
-import { Suspense } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 
+import AgreementBottomSheet from "./AgreementBottomSheet";
 import * as S from "./styles";
 
 const SchoolInfo = () => {
   const overlay = useOverlay();
+  const [isExpire, setIsExpire] = useState(true);
   const schoolCallInfo = {
     schoolName: "똑독",
     schoolNumber: "02-1234-1234"
   };
 
-  // dogId -> 유치원 전화번호로 변경
   const openCallPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <Suspense>
         <CallSchoolBottomSheet info={schoolCallInfo} isOpen={isOpen} close={close} />
       </Suspense>
     ));
+
+  const openAgreementPopup = (title: string, icon: ReactNode) => {
+    overlay.open(({ isOpen, close }) => (
+      <Suspense>
+        <AgreementBottomSheet
+          title={title}
+          close={close}
+          isOpen={isOpen}
+          closeText="확인"
+          closeFn={close}
+          icon={icon}
+        />
+      </Suspense>
+    ));
+  };
 
   return (
     <FlexWrapper>
@@ -74,7 +90,13 @@ const SchoolInfo = () => {
               {item.title}
             </S.FlexText>
             <S.InnerFlexWrapper>
-              <S.FlexText className="date">{"2024.05.07"} 동의</S.FlexText>
+              {isExpire ? (
+                <YellowThickButton onClick={() => openAgreementPopup(item.title, item.icon)}>
+                  재동의 필요
+                </YellowThickButton>
+              ) : (
+                <S.FlexText className="date">{"2024.05.07"} 동의</S.FlexText>
+              )}
             </S.InnerFlexWrapper>
           </S.List>
         ))}
