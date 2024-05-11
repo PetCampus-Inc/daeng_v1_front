@@ -67,8 +67,8 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <SearchInputField
           name={addressStreet}
           register={register}
-          onSearch={() => openPopup()}
-          onClick={() => openPopup()}
+          onSearch={openPopup}
+          onClick={openPopup}
           onClear={handleClear}
           value={watchAddress}
           required={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
