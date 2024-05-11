@@ -32,48 +32,62 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       {data.doglist.length <= 1 ? (
         <S.MyDogInfoList>
           {data.doglist.map((item) => (
-            <MyDogCard
-              key={item.dogName}
-              dogId={item.dogId}
-              isOpen={isOpen}
-              dogName={item.dogName}
-              schoolInfo={item.schoolName}
-              registeredDate={item.registeredDate.map((item) => String(item))}
-              profileUri={
-                //FIXME dogProfile url 연결 필요
-                !item.dogProfile
-                  ? item.dogProfile
-                  : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              status={item.status}
-              dogLength={data.doglist.length}
-            />
+            <>
+              {item.status === "ENROLLED" && (
+                <MyDogCard
+                  key={item.dogName}
+                  dogId={item.dogId}
+                  isOpen={isOpen}
+                  dogName={item.dogName}
+                  schoolInfo={item.schoolName}
+                  registeredDate={item.registeredDate.map((item) => String(item))}
+                  profileUri={
+                    //FIXME dogProfile url 연결 필요
+                    !item.dogProfile
+                      ? item.dogProfile
+                      : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
+                  status={item.status}
+                  dogLength={data.doglist.length}
+                />
+              )}
+              {item.status === "APPROVAL_PENDING" && (
+                <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
+              )}
+              {item.status === "DROP_OUT" && <RejectedCard />}
+            </>
           ))}
           <AddMyDogCard />
         </S.MyDogInfoList>
       ) : (
         <S.CarouselSlider {...settings}>
           {data.doglist.map((item) => (
-            <MyDogCard
-              key={item.dogName}
-              dogId={item.dogId}
-              isOpen={isOpen}
-              dogName={item.dogName}
-              schoolInfo={item.schoolName}
-              registeredDate={item.registeredDate.map((item) => String(item))}
-              profileUri={
-                //FIXME dogProfile url 연결 필요
-                !item.dogProfile
-                  ? item.dogProfile
-                  : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              status={item.status}
-              dogLength={data.doglist.length}
-            />
+            <>
+              {item.status === "ENROLLED" && (
+                <MyDogCard
+                  key={item.dogName}
+                  dogId={item.dogId}
+                  isOpen={isOpen}
+                  dogName={item.dogName}
+                  schoolInfo={item.schoolName}
+                  registeredDate={item.registeredDate.map((item) => String(item))}
+                  profileUri={
+                    //FIXME dogProfile url 연결 필요
+                    !item.dogProfile
+                      ? item.dogProfile
+                      : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  }
+                  status={item.status}
+                  dogLength={data.doglist.length}
+                />
+              )}
+              {item.status === "APPROVAL_PENDING" && (
+                <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
+              )}
+              {item.status === "DROP_OUT" && <RejectedCard />}
+            </>
           ))}
           <AddMyDogCard />
-          {/* <RejectedCard />
-              <WaitingCard /> */}
         </S.CarouselSlider>
       )}
     </S.DogInfoContainer>
