@@ -7,6 +7,7 @@ import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
+import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
@@ -25,9 +26,18 @@ const DogInfo = () => {
         actionFn={() => {
           console.log("수정 완료");
           close();
+          eventShowToast(type);
         }}
       />
     ));
+
+  const eventShowToast = (type: string) => {
+    if (type === "pickDrop" || type === "allergy") {
+      showToast("수정이 완료되었습니다.", "bottom");
+    } else {
+      showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
+    }
+  };
 
   return (
     <Flex direction="column" gap="24">
