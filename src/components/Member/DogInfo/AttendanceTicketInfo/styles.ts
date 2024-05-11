@@ -1,3 +1,4 @@
+import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
@@ -44,6 +45,51 @@ export const DogDetailInfoText = styled.div`
   &.explanation {
     ${({ theme }) => theme.typo.label2_14_R};
     color: ${({ theme }) => theme.colors.gray_2};
+  }
+`;
+
+export const TicketInfoCard = styled(FlexWrapper)`
+  border-radius: 8px;
+  &.deadline {
+    position: relative;
+    overflow: hidden;
+
+    .deadlineIcon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: ${({ theme }) => theme.colors.red_2};
+      color: ${({ theme }) => theme.colors.red_1};
+      ${({ theme }) => theme.typo.label2_14_B};
+      padding: 8px 10px;
+      border-radius: 50px;
+    }
+  }
+
+  &.deadline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: ${({ theme }) => theme.colors.black};
+    opacity: 0.4;
+  }
+`;
+
+export const TicketTextBox = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  &.warning {
+    color: ${({ theme }) => theme.colors.red_1};
+  }
+
+  &.warning > span {
+    background-color: ${({ theme }) => theme.colors.red_2};
   }
 `;
 

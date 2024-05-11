@@ -1,8 +1,8 @@
+import AlertRed from "assets/svg/alert-red-icon";
 import AttendanceIcon from "assets/svg/attendance-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import { DetailItem, TextWrapper } from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
-import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
 import { Flex } from "components/common";
 
 import * as S from "./styles";
@@ -18,7 +18,9 @@ const AttendanceTicketInfo = () => {
 
       <section>
         <S.DogDetailInfoText className="big">이용권 정보</S.DogDetailInfoText>
-        <FlexWrapper>
+        {/* <S.TicketInfoCard className="deadline">  */}
+        <S.TicketInfoCard>
+          {/* <span className="deadlineIcon">만료됨</span> */}
           <S.Wrapper>
             <S.UpperContainer>
               <S.DogDetailInfoPointText>정기권</S.DogDetailInfoPointText>
@@ -26,12 +28,16 @@ const AttendanceTicketInfo = () => {
             </S.UpperContainer>
             <S.BottomContainer>
               <DetailItem className="row">
-                <TextWrapper>
+                {/* <S.TicketTextBox className="warning"> */}
+                <S.TicketTextBox>
                   <Icon>
                     <CalendarExpireIcon />
                   </Icon>
+                  {/* <Icon>
+                    <AlertRed />
+                  </Icon> */}
                   만료일 : 2024.02.01
-                </TextWrapper>
+                </S.TicketTextBox>
               </DetailItem>
               <DetailItem className="row">
                 <TextWrapper>
@@ -51,7 +57,7 @@ const AttendanceTicketInfo = () => {
               </DetailItem>
             </S.BottomContainer>
           </S.Wrapper>
-        </FlexWrapper>
+        </S.TicketInfoCard>
       </section>
     </Flex>
   );
