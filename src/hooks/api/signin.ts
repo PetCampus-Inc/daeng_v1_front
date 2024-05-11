@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
-import { useMutation } from "@tanstack/react-query";
-import { postAdminLogin } from "apis/admin/admin.api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getCheckId, postAdminLogin } from "apis/admin/admin.api";
 import { handleKaKaoLogin } from "apis/auth.api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -65,4 +65,13 @@ export const useAdminLogin = () => {
   });
 
   return { mutateLogin: mutate };
+};
+
+// 아이디 중복 확인
+export const useCheckId = () => {
+  const { mutate } = useMutation({
+    mutationFn: getCheckId
+  });
+
+  return { mutateCheckId: mutate };
 };
