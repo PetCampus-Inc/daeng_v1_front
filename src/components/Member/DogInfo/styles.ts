@@ -2,6 +2,10 @@ import FootIcon from "assets/svg/foot-icon";
 import { Box } from "components/common/Box";
 import styled from "styled-components";
 
+interface IProps {
+  size?: string; // width, height 사이즈 동일한 경우
+}
+
 export const Nav = styled.nav`
   width: 100vw;
   background-color: white;
@@ -136,11 +140,11 @@ export const DogSize = styled.span`
   ${({ theme }) => theme.typo.caption1_12_R};
 `;
 
-export const Icon = styled.span`
+export const Icon = styled.span<IProps>`
   border-radius: 50px;
   background-color: ${({ theme }) => theme.colors.yellow_3};
-  width: 20px;
-  height: 20px;
+  width: ${({ size }) => (size ? size : "20px")};
+  height: ${({ size }) => (size ? size : "20px")};
   display: flex;
   align-items: center;
   justify-content: center;

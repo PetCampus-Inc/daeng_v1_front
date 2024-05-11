@@ -1,7 +1,9 @@
+import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
+import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -11,11 +13,12 @@ import * as S from "./styles";
 const DogInfo = () => {
   const overlay = useOverlay();
 
-  const openTextAreaPopup = () =>
+  const openTextAreaPopup = (title: string, text: string, type: string) =>
     overlay.open(({ isOpen, close }) => (
       <TextAreaBottomSheet
-        title="픽드랍 메모"
-        text="월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당"
+        title={title}
+        text={text}
+        type={type}
         isOpen={isOpen}
         close={close}
         actionText={"수정 완료"}
@@ -91,10 +94,22 @@ const DogInfo = () => {
       <S.DogMoreInfoCard>
         <S.TopInfoBox>
           <Flex gap="4" align="center">
-            <CarIcon />
+            <S.Icon size="24px">
+              <CarIcon />
+            </S.Icon>
             <S.DogMoreInfo>픽드랍 메모</S.DogMoreInfo>
           </Flex>
-          <S.DogMoreInfoEditeButton onClick={openTextAreaPopup}>수정</S.DogMoreInfoEditeButton>
+          <S.DogMoreInfoEditeButton
+            onClick={() =>
+              openTextAreaPopup(
+                "픽드랍 메모",
+                "월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당",
+                "pickDrop"
+              )
+            }
+          >
+            수정
+          </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
         <S.DogMoreInfoText>월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
@@ -102,10 +117,22 @@ const DogInfo = () => {
       <S.DogMoreInfoCard>
         <S.TopInfoBox>
           <Flex gap="4" align="center">
-            <CarIcon />
+            <S.Icon size="24px">
+              <AllergyChartIcon />
+            </S.Icon>
             <S.DogMoreInfo>알러지 및 질병</S.DogMoreInfo>
           </Flex>
-          <S.DogMoreInfoEditeButton>수정</S.DogMoreInfoEditeButton>
+          <S.DogMoreInfoEditeButton
+            onClick={() =>
+              openTextAreaPopup(
+                "알러지 및 질병",
+                "뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.",
+                "allergy"
+              )
+            }
+          >
+            수정
+          </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
         <S.DogMoreInfoText>뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
@@ -113,7 +140,9 @@ const DogInfo = () => {
       <S.DogMoreInfoCard>
         <S.TopInfoBox>
           <Flex gap="4" align="center">
-            <CarIcon />
+            <S.Icon size="24px">
+              <VaccinationFileIcon />
+            </S.Icon>
             <S.DogMoreInfo>예방접종 파일</S.DogMoreInfo>
           </Flex>
           <S.DogMoreInfoEditeButton>추가 업로드</S.DogMoreInfoEditeButton>
