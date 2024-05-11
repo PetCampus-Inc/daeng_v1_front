@@ -16,12 +16,11 @@ import { ITeacherSubmitResponse } from "types/Response.type";
 import type { TAdminLoginInfo } from "types/admin.userInfo.type";
 
 // 아이디 중복확인
-export const handleCheckId = async (id: string): Promise<number> => {
-  const url = `admin/checkid?id=${id}`;
-  const { data } = await customAxios.get(url);
-  return data.status;
+export const getCheckId = async (id: string): Promise<number> => {
+  const url = `admin/checkid`;
+  const { status } = await request<IResponse<void>>({ url, params: { id } });
+  return status;
 };
-
 // 관리자 로그인
 export const postAdminLogin = async (req: IAdminLoginInfo): Promise<TAdminLoginInfo> => {
   const url = `admin/login`;
@@ -51,14 +50,14 @@ export const handleOwnerSignUpResult = async (
 ): Promise<IResponse<TAdminLoginInfo>> => {
   const url = `admin/join/owner`;
   const { data } = await customAxios.post(url, {
-    id: req.userId,
-    pwd: req.userPw,
-    name: req.userName,
-    phoneNumber: req.userPhone,
+    id: req.id,
+    pwd: req.pwd,
+    name: req.name,
+    phoneNumber: req.phoneNumber,
     schoolName: req.schoolName,
-    schoolPhoneNumber: req.schoolPhone,
+    schoolPhoneNumber: req.schoolPhoneNumber,
     schoolAddress: req.schoolAddress,
-    registrationNumber: req.schoolNum
+    registrationNumber: req.registrationNumber
   });
   return data;
 };
@@ -69,11 +68,11 @@ export const handleTeacherSignUpSubmit = async (
 ): Promise<ITeacherSubmitResponse> => {
   const url = `admin/submit/teacher/approval`;
   const { data } = await customAxios.post(url, {
-    id: req.userId,
-    pwd: req.userPw,
+    id: req.id,
+    pwd: req.pwd,
     schoolId: req.schoolId,
-    name: req.userName,
-    phoneNumber: req.userPhone
+    name: req.name,
+    phoneNumber: req.phoneNumber
   });
   return data;
 };

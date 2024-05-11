@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
-import { useMutation } from "@tanstack/react-query";
-import { postAdminLogin } from "apis/admin/admin.api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getCheckId, postAdminLogin } from "apis/admin/admin.api";
 import { handleKaKaoLogin } from "apis/auth.api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -12,6 +12,7 @@ interface LoginMutateProps {
   code: string;
 }
 
+// 멤버 (소셜) 로그인 요청
 export const useLogInMutation = () => {
   const navigate = useNavigate();
   const loginMutate = useMutation({
@@ -39,6 +40,7 @@ export const useLogInMutation = () => {
   return loginMutate.mutate;
 };
 
+// 관리자 로그인 요청
 export const useAdminLogin = () => {
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(adminLoginInfoAtom);
@@ -58,4 +60,13 @@ export const useAdminLogin = () => {
   });
 
   return { mutateLogin: mutate };
+};
+
+// 아이디 중복 확인
+export const useCheckId = () => {
+  const { mutate } = useMutation({
+    mutationFn: getCheckId
+  });
+
+  return { mutateCheckId: mutate };
 };
