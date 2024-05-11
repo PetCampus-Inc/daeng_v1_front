@@ -4,6 +4,9 @@ import { useGetEnrollment } from "hooks/api/member/enroll";
 import useStep from "hooks/common/useStep";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { memberEnrollmentSchoolAtom } from "store/member";
 import { PageContainer } from "styles/StyleModule";
 
 import DogInfo from "./Form/DogInfo";
@@ -21,7 +24,12 @@ interface IEnrollmentFormProps {
 
 // TODO: page 컴포넌트에서 조합해서 사용하기!
 const EnrollmentForm = ({ isMemberAddDog }: IEnrollmentFormProps) => {
-  const { data } = useGetEnrollment({ memberId: "1", schoolId: "2" });
+  const memberEnrollmentSchool = useRecoilValue(memberEnrollmentSchoolAtom);
+  const { memberId } = useParams();
+  const { data } = useGetEnrollment({
+    memberId: `${memberId ? memberId : 1}`,
+    schoolId: `${memberEnrollmentSchool ? memberEnrollmentSchool.schoolId : 2}`
+  });
   const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
 
   const methods = useForm({
