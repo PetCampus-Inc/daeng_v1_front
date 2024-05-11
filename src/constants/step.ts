@@ -37,7 +37,7 @@ export const MEMBER_DOG_ADD_ENROLL_STEP = [
   {
     title: "강아지 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
-    indicator: "강아지 정보1",
+    indicator: "강아지 정보",
     isVisible: () => true
   },
   {
