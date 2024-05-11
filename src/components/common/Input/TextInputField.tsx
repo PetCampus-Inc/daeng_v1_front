@@ -1,39 +1,37 @@
 import { type ForwardedRef, forwardRef } from "react";
-import { FieldValues, UseFormRegister, ValidationRule } from "react-hook-form";
+import { CSSProp } from "styled-components";
 
 import * as S from "./styles";
 
+import type {
+  FieldValues,
+  Message,
+  RegisterOptions,
+  UseFormRegister,
+  ValidationRule
+} from "react-hook-form";
+
 export interface InputFieldProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "pattern"> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "required"> {
   name?: string;
-  isRequired?: boolean;
-  pattern?: ValidationRule<RegExp>;
+  css?: CSSProp;
   register?: UseFormRegister<FieldValues>;
-  borderColor?: string;
+  rules?: RegisterOptions;
+  required?: Message | ValidationRule<boolean>;
 }
 
 const TextInputField = forwardRef(function TextInputField(
-  {
-    name,
-    isRequired,
-    pattern,
-    placeholder,
-    disabled = false,
-    register,
-    borderColor,
-    ...props
-  }: InputFieldProps,
+  { css, rules, register, required, name, ...props }: InputFieldProps,
   ref?: ForwardedRef<HTMLInputElement>
 ) {
+  const registerProps = name && register && register(name, { required, ...rules });
+
   return (
     <S.Input
       ref={ref}
-      {...(register && register(name || "", { required: isRequired, pattern }))}
-      id={name}
-      disabled={disabled}
-      placeholder={placeholder}
+      {...registerProps}
       className={(props.defaultValue ?? props.value) !== props.value ? "default" : ""}
-      borderColor={borderColor}
+      css={css}
       {...props}
     />
   );

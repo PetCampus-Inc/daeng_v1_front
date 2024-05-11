@@ -1,24 +1,31 @@
-import styled from "styled-components";
+import styled, { css, type CSSProp } from "styled-components";
+import { remCalc } from "utils/calculator";
 
 interface InputFieldStyleProps {
-  borderColor?: string;
+  css?: CSSProp;
 }
+
+const defaultStyles = css`
+  border: 1px solid ${({ theme }) => theme.colors.gray_4};
+  padding: 12px 18px;
+
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
 
 export const Input = styled.input<InputFieldStyleProps>`
   display: flex;
   width: 100%;
   align-items: center;
-  border: 1px solid
-    ${({ borderColor }) => (borderColor ? borderColor : ({ theme }) => theme.colors.gray_4)};
-  padding: 12px 18px;
-  border-radius: 8px;
 
   color: ${({ theme }) => theme.colors.gray_1};
-  ${({ theme }) => theme.typo.body2_16_R};
+  border-radius: 8px;
+
+  ${({ css }) => css || defaultStyles};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.gray_3};
   }
+
   &.default {
     color: ${({ theme }) => theme.colors.gray_3};
   }
@@ -76,4 +83,66 @@ export const Input = styled.input<InputFieldStyleProps>`
       color: ${({ theme }) => theme.colors.gray_4};
     }
   }
+`;
+
+export const StyledInputWrapper = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
+export const StyledInputButton = styled.button`
+  all: unset;
+  height: 100%;
+  padding-right: 1rem;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  & > svg {
+    color: ${({ theme }) => theme.colors.gray_2};
+  }
+
+  &:disabled > svg {
+    color: ${({ theme }) => theme.colors.gray_4};
+  }
+`;
+
+export const StyledButtonWrapper = styled.div`
+  all: unset;
+  padding-right: 1rem;
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+`;
+
+export const StyledConfirmButton = styled.button`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-inline: ${remCalc(10)};
+
+  ${({ theme }) => theme.typo.label2_14_M};
+
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.primaryColor};
+  color: ${({ theme }) => theme.colors.white};
+
+  &.inactive {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    color: ${({ theme }) => theme.colors.gray_3};
+  }
+
+  transition:
+    background-color 0.2s ease-out,
+    color 0.2s ease-out;
+
+  cursor: pointer;
 `;
