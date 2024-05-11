@@ -35,6 +35,10 @@ export const handlePostMemberDogEnrollment = async (
   enrollmentFormId: string
 ): Promise<IResponse> => {
   const url = `member/cancel/enrollmentForm`;
-  const { data } = await customAxios.post(url, enrollmentFormId);
+  const { data } = await customAxios.post(url, {
+    params: {
+      enrollmentFormId
+    }
+  });
   return data;
 };
