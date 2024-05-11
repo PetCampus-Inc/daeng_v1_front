@@ -34,11 +34,7 @@ export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMem
 export const handlePostMemberDogEnrollment = async (
   enrollmentFormId: string
 ): Promise<IResponse> => {
-  const url = `member/cancel/enrollmentForm`;
-  const { data } = await customAxios.post(url, {
-    params: {
-      enrollmentFormId
-    }
-  });
-  return data;
+  const url = `/member/cancel/enrollmentForm?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await customAxios.post(url);
+  return data.data;
 };
