@@ -1,6 +1,8 @@
 import { PATH } from "constants/path";
+import { QUERY_KEY } from "constants/queryKey";
 import { FIELD_TO_STEP } from "constants/step";
 
+import { useQueryClient } from "@tanstack/react-query";
 import { usePostEnrollment } from "hooks/api/member/enroll";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import { Adapter } from "libs/Adapter";
@@ -14,6 +16,7 @@ import { FormButton } from "styles/StyleModule";
 import type { IRequestEnrollment } from "types/member/enrollment.types";
 
 const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => {
+  const queryClient = useQueryClient();
   const { memberId } = useParams();
   const navigate = useNavigate();
   const isMypage = useLocation()
@@ -54,8 +57,12 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
     );
 
     const memberDogAddInfo = { ...requestData, ...memberInfo };
-    enrollMutation(memberDogAddInfo);
-    navigate(PATH.MEMBER_MY_PAGE(memberId));
+    enrollMutation(memberDogAddInfo, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(String(memberId)) });
+        navigate(PATH.MEMBER_MY_PAGE(memberId));
+      }
+    });
   };
 
   const onInvalid = (errors: FieldErrors) => {
