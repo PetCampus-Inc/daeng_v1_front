@@ -41,20 +41,24 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
       : null
   };
 
-  const onSubmit = (data: FieldValues) => {
-    // FIXME: memberId, fileUrl 추가 필요
-    const requestData = Adapter.from(data).to<FieldValues, IRequestEnrollment>((item) =>
+  // 공통 requestData
+  const getSubmitFormdata = (data: FieldValues) => {
+    return Adapter.from(data).to<FieldValues, IRequestEnrollment>((item) =>
       new MemberFormToServerAdapter(item).adapt()
     );
+  };
+
+  // 신규 가입신청서
+  const onSubmit = (data: FieldValues) => {
+    // FIXME: memberId, fileUrl 추가 필요
+    const requestData = getSubmitFormdata(data);
     enrollMutation(requestData);
   };
 
-  // TODO /member url 일 경우 해당 함수 실행 (member 강아지 추가)
+  // member 강아지 추가
   const onSubmitMemberDogAdd = (data: FieldValues) => {
     // FIXME: fileUrl 추가 필요
-    const requestData = Adapter.from(data).to<FieldValues, IRequestEnrollment>((item) =>
-      new MemberFormToServerAdapter(item).adapt()
-    );
+    const requestData = getSubmitFormdata(data);
 
     const memberDogAddInfo = { ...requestData, ...memberInfo };
     enrollMutation(memberDogAddInfo, {
