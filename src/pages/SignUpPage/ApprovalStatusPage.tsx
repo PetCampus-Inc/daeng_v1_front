@@ -1,7 +1,7 @@
 import React from "react";
 
-const RegistrationStatus = () => {
+const ApprovalStatusPage = () => {
   return <div>RegistrationStatus</div>;
 };
 
-export default RegistrationStatus;
+export default ApprovalStatusPage;
