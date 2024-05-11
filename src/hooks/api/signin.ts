@@ -61,12 +61,3 @@ export const useAdminLogin = () => {
 
   return { mutateLogin: mutate };
 };
-
-// 아이디 중복 확인
-export const useCheckId = () => {
-  const { mutate } = useMutation({
-    mutationFn: getCheckId
-  });
-
-  return { mutateCheckId: mutate };
-};
