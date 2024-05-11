@@ -26,25 +26,21 @@ export const formatPhoneNumber = (value: string): string => {
 
 export const formatSchoolNumber = (value: string) => {
   value = value.replace(/\D/g, "");
+
   if (value.length > 11) {
-    value = value.substring(0, 11);
+    return value.slice(0, 11);
   }
 
-  if (value.length > 7) {
-    // 8-10자리 숫자 (000-0000-0000 형식)
-    value = `${value.substring(0, 3)}-${value.substring(3, 7)}-${value.substring(7)}`;
-  } else if (value.length > 6) {
-    // 7자리 숫자 (000-000-0000 형식)
-    value = `${value.substring(0, 3)}-${value.substring(3, 6)}-${value.substring(6)}`;
-  } else if (value.length > 3) {
-    // 4-6자리 숫자 (00-000-0000 형식)
-    value = `${value.substring(0, 2)}-${value.substring(2, 5)}-${value.substring(5)}`;
+  if (value.length > 10) {
+    // 13자리 숫자일 때 (000-0000-0000 형식)
+    return value.replace(/^(\d{3})(\d{4})(\d{4})$/, "$1-$2-$3").replace(/(-)+$/, "");
+  } else if (value.length > 9) {
+    // 10자리 숫자일 때 (000-000-0000 형식)
+    return value.replace(/^(\d{3})(\d{3})(\d{4})$/, "$1-$2-$3").replace(/(-)+$/, "");
   } else {
-    // 3자리 이하 숫자
-    value;
+    // 9자리 이하일 때 (00-000-0000 형식)
+    return value.replace(/^(\d{2})(\d{3})(\d{4})$/, "$1-$2-$3").replace(/(-)+$/, "");
   }
-
-  return value.replace(/-$/, "");
 };
 
 export const formatBusinessNumber = (value: string) => {
