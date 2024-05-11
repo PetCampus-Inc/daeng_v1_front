@@ -33,10 +33,10 @@ const PrincipalIcon = () => {
           height="60.651"
           x="5.305"
           y="13.744"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
           filterUnits="userSpaceOnUse"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             result="hardAlpha"
