@@ -18,7 +18,7 @@ const AdminInfoPage = ({ onNextStep }: IStepProps) => {
         <Box mt={56}>
           <PersonalInfo />
         </Box>
-        <NextButton onNextStep={onNextStep} />
+        <NextButton onNextStep={onNextStep}>다음</NextButton>
       </Layout>
     </>
   );
