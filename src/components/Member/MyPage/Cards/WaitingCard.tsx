@@ -1,16 +1,9 @@
-import { QUERY_KEY } from "constants/queryKey";
-
-import { useQueryClient } from "@tanstack/react-query";
-import { handleGetSearchResult } from "apis/member/school.api";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
 import { useGetSchoolInfoList } from "hooks/api/member/school";
 import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { memberEnrollmentSchoolAtom } from "store/member";
 
 import * as S from "./styles";
 
