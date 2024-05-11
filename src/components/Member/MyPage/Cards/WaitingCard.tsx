@@ -1,7 +1,16 @@
+import { QUERY_KEY } from "constants/queryKey";
+
+import { useQueryClient } from "@tanstack/react-query";
+import { handleGetSearchResult } from "apis/member/school.api";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
-import { useGetMemberInfo } from "hooks/api/member/member";
+import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
+import { useGetSchoolInfoList } from "hooks/api/member/school";
+import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { memberEnrollmentSchoolAtom } from "store/member";
 
 import * as S from "./styles";
 
@@ -16,12 +25,25 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const approvalPendingDog = memberInfo.doglist.filter(
     (dog) => dog.status && dog.status === "APPROVAL_PENDING"
   );
-  const approvalPendingSchoolName = approvalPendingDog?.map((dog) => dog.schoolName)[0];
+  const { data: getSchoolInfoList } = useGetSchoolInfoList(
+    String(approvalPendingDog[0].schoolName)
+  );
+  const { data: waitingOwnersList } = useGetWaitingOwnersList(
+    Number(getSchoolInfoList[0].schoolId)
+  );
+  const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
 
   const handleCancelApproval = () => {
-    console.log("승인취소");
-    console.log("approvalPendingSchoolName", approvalPendingSchoolName);
+    const approvalPendingDogName = approvalPendingDog?.map((dog) => dog.dogName)[0];
+    const memberName = memberInfo.memberName;
+    const enrollmentForm = waitingOwnersList?.find(
+      (item) => item.memberName === memberName && item.dogName === approvalPendingDogName
+    );
+    if (enrollmentForm) {
+      mutateMemberDogEnrollment(String(enrollmentForm.enrollmentFormId));
+    }
   };
+
   return (
     <S.WaitingCard>
       <S.InfoTextBox mb="32">
