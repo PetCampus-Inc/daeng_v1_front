@@ -4,16 +4,18 @@ import { request } from "libs/CustomAxios/request";
 import {
   IAdminLoginInfo,
   INewEnrollmentList,
-  IOwnerSignUpInfo,
   ITeacherApprove,
   ITeacherList,
-  ITeacherSignUpInfo,
   IWaitingOwnerInfo
 } from "types/Admin.type";
 import { IResponse } from "types/helper.type";
-import { ITeacherSubmitResponse } from "types/Response.type";
 
-import type { TAdminLoginInfo } from "types/admin.userInfo.type";
+import type {
+  IOwnerSignUpInfo,
+  ITeacherSignUpData,
+  ITeacherSignUpInfo,
+  TAdminLoginInfo
+} from "types/admin/admin.type";
 
 // 아이디 중복확인
 export const getCheckId = async (id: string): Promise<number> => {
@@ -46,34 +48,39 @@ export const postRegistrationNumber = async (req: string): Promise<string> => {
 };
 
 // 원장 회원가입
-export const handleOwnerSignUpResult = async (
-  req: IOwnerSignUpInfo
-): Promise<IResponse<TAdminLoginInfo>> => {
+export const postOwnerSignUp = async (req: IOwnerSignUpInfo): Promise<void> => {
   const url = `admin/join/owner`;
-  const { data } = await customAxios.post(url, {
-    id: req.id,
-    pwd: req.pwd,
-    name: req.name,
-    phoneNumber: req.phoneNumber,
-    schoolName: req.schoolName,
-    schoolPhoneNumber: req.schoolPhoneNumber,
-    schoolAddress: req.schoolAddress,
-    registrationNumber: req.registrationNumber
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      id: req.id,
+      pwd: req.pwd,
+      name: req.name,
+      phoneNumber: req.phoneNumber,
+      schoolName: req.schoolName,
+      schoolPhoneNumber: req.schoolPhoneNumber,
+      schoolAddress: req.schoolAddress,
+      registrationNumber: req.registrationNumber
+    }
   });
-  return data;
 };
 
 // 선생님 회원가입 요청
-export const handleTeacherSignUpSubmit = async (
+export const postTeacherSignUpSubmit = async (
   req: ITeacherSignUpInfo
-): Promise<ITeacherSubmitResponse> => {
+): Promise<ITeacherSignUpData> => {
   const url = `admin/submit/teacher/approval`;
-  const { data } = await customAxios.post(url, {
-    id: req.id,
-    pwd: req.pwd,
-    schoolId: req.schoolId,
-    name: req.name,
-    phoneNumber: req.phoneNumber
+  const { data } = await request<IResponse<ITeacherSignUpData>>({
+    url,
+    method: "POST",
+    data: {
+      id: req.id,
+      pwd: req.pwd,
+      schoolId: req.schoolId,
+      name: req.name,
+      phoneNumber: req.phoneNumber
+    }
   });
   return data;
 };

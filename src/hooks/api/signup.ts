@@ -1,6 +1,29 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getCheckId, postRegistrationNumber } from "apis/admin/admin.api";
+import {
+  getCheckId,
+  postOwnerSignUp,
+  postRegistrationNumber,
+  postTeacherSignUpSubmit
+} from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/school.api";
+
+// 선생님 회원가입 요청
+export const useTeacherSinUp = () => {
+  const { mutate } = useMutation({
+    mutationFn: postTeacherSignUpSubmit
+  });
+
+  return { mutateTeacherSignUp: mutate };
+};
+
+// 원장님 회원가입 요청
+export const useOwnerSinUp = () => {
+  const { mutate } = useMutation({
+    mutationFn: postOwnerSignUp
+  });
+
+  return { mutateOwnerSignUp: mutate };
+};
 
 // 유치원 검색
 export const useGetSchool = (searchText: string) => {
