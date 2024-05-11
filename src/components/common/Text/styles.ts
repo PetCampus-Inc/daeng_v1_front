@@ -9,6 +9,10 @@ export interface IStyledTextProps {
   textAlign?: CSSProperties["textAlign"];
 }
 
+export type StyledEmEmProps = {
+  color?: TColor;
+};
+
 export const StyledText = styled.span.withConfig({
   shouldForwardProp: (prop) => !["color", "typo", "isEllipsis", "textAlign"].includes(prop)
 })<IStyledTextProps>`
@@ -22,11 +26,11 @@ export const StyledText = styled.span.withConfig({
       white-space: nowrap;
       text-overflow: ellipsis;
     `};
-`;
 
-export type StyledEmEmProps = {
-  color?: TColor;
-};
+  &.pre {
+    white-space: pre-wrap;
+  }
+`;
 
 export const StyledEm = styled.em.withConfig({
   shouldForwardProp: (prop) => !["color"].includes(prop)

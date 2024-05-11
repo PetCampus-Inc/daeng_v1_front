@@ -1,8 +1,8 @@
 import { ITEM_KEYS } from "constants/item";
 
+import { TextInput } from "components/common";
 import ImageUpload from "components/common/ImageUpload";
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import SearchInputField from "components/common/Input/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
@@ -20,7 +20,7 @@ const DogInfo = () => {
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_NAME}`} control={control}>
           이름
         </AdminTitle>
-        <InputField name="null" placeholder="강아지 이름을 입력해주세요" disabled />
+        <TextInput name="null" placeholder="강아지 이름을 입력해주세요" disabled />
       </Card>
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_GENDER}`} control={control}>

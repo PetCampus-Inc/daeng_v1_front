@@ -1,6 +1,6 @@
 import { PATH } from "constants/path";
 
-import InputField from "components/common/InputField";
+import { TextInput } from "components/common";
 import { useCreateAdminEnrollment } from "hooks/api/admin/enroll";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +40,7 @@ const SubmitForm = () => {
     <form>
       <S.TopWrapper>
         <S.Title>가입신청서의 이름을 작성해주세요</S.Title>
-        <InputField name="formName" register={register} placeholder={defaultFormName} />
+        <TextInput name="formName" register={register} placeholder={defaultFormName} />
       </S.TopWrapper>
       <S.Button type="submit" onClick={onSubmit} aria-label="제출하기">
         완료

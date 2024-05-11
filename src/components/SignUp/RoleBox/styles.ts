@@ -1,17 +1,26 @@
 import styled from "styled-components";
+import { remCalc } from "utils/calculator";
 
 export const StyledMainWrapper = styled.div<{ selected: boolean }>`
-  height: 40%;
-  width: 44%;
+  width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
+
+  padding-top: ${remCalc(40)};
+  padding-bottom: ${remCalc(24)};
+  padding-inline: ${remCalc(30)};
+
   background-color: ${(props) =>
     props.selected ? props.theme.colors.yellow_3 : props.theme.colors.white};
-  margin-left: 3%;
-  margin-right: 3%;
   border-radius: 8px;
-  flex-direction: column;
+  border: 2px solid
+    ${(props) => (props.selected ? props.theme.colors.yellow_2 : props.theme.colors.gray_5)};
+  box-shadow: ${(props) => props.theme.shadows.card};
+
   cursor: pointer;
-  box-shadow: 4px 2px 20px 0px rgba(0, 0, 0, 0.1);
+`;
+
+export const StyledIconWrapper = styled.div`
+  margin-bottom: ${remCalc(16)};
 `;

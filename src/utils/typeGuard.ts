@@ -1,4 +1,4 @@
-import { TRole } from "types/admin.userInfo.type";
+import { TRole } from "types/admin/admin.type";
 
 export function isTRole(role: unknown): role is TRole {
   return role === "ROLE_OWNER" || role === "ROLE_TEACHER";

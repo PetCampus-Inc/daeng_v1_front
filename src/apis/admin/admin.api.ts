@@ -1,40 +1,45 @@
 import axios from "axios";
 import customAxios from "libs/CustomAxios";
+import { request } from "libs/CustomAxios/request";
 import {
   IAdminLoginInfo,
   INewEnrollmentList,
-  IOwnerSignUpInfo,
   ITeacherApprove,
   ITeacherList,
-  ITeacherSignUpInfo,
   IWaitingOwnerInfo
 } from "types/Admin.type";
 import { IResponse } from "types/helper.type";
-import { ITeacherSubmitResponse } from "types/Response.type";
 
-import type { TAdminLoginInfo } from "types/admin.userInfo.type";
+import type {
+  IOwnerSignUpInfo,
+  ITeacherSignUpData,
+  ITeacherSignUpInfo,
+  TAdminLoginInfo
+} from "types/admin/admin.type";
 
 // 아이디 중복확인
-export const handleCheckId = async (id: string): Promise<number> => {
-  const url = `admin/checkid?id=${id}`;
-  const { data } = await customAxios.get(url);
-  return data.status;
+export const getCheckId = async (id: string): Promise<number> => {
+  const url = `admin/checkid`;
+  const { status } = await request<IResponse<void>>({ url, params: { id } });
+  return status;
 };
 
 // 관리자 로그인
-export const handleAdminLoginResult = async (
-  req: IAdminLoginInfo
-): Promise<IResponse<TAdminLoginInfo>> => {
+export const postAdminLogin = async (req: IAdminLoginInfo): Promise<TAdminLoginInfo> => {
   const url = `admin/login`;
-  const { data } = await customAxios.post(url, {
-    id: req.inputId,
-    pwd: req.inputPw
+  const { data } = await request<IResponse<TAdminLoginInfo>>({
+    url,
+    method: "POST",
+    data: {
+      id: req.inputId,
+      pwd: req.inputPw
+    }
   });
   return data;
 };
 
 // 사업자번호 확인 api
-export const handleCheckRegistrationNumber = async (req: string): Promise<string> => {
+export const postRegistrationNumber = async (req: string): Promise<string> => {
   const url = `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${process.env.REACT_APP_BUSINESS_API_KEY}`;
   const { data } = await axios.post(url, {
     b_no: [req]
@@ -43,34 +48,39 @@ export const handleCheckRegistrationNumber = async (req: string): Promise<string
 };
 
 // 원장 회원가입
-export const handleOwnerSignUpResult = async (
-  req: IOwnerSignUpInfo
-): Promise<IResponse<TAdminLoginInfo>> => {
+export const postOwnerSignUp = async (req: IOwnerSignUpInfo): Promise<void> => {
   const url = `admin/join/owner`;
-  const { data } = await customAxios.post(url, {
-    id: req.userId,
-    pwd: req.userPw,
-    name: req.userName,
-    phoneNumber: req.userPhone,
-    schoolName: req.schoolName,
-    schoolPhoneNumber: req.schoolPhone,
-    schoolAddress: req.schoolAddress,
-    registrationNumber: req.schoolNum
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      id: req.id,
+      pwd: req.pwd,
+      name: req.name,
+      phoneNumber: req.phoneNumber,
+      schoolName: req.schoolName,
+      schoolPhoneNumber: req.schoolPhoneNumber,
+      schoolAddress: req.schoolAddress,
+      registrationNumber: req.registrationNumber
+    }
   });
-  return data;
 };
 
 // 선생님 회원가입 요청
-export const handleTeacherSignUpSubmit = async (
+export const postTeacherSignUpSubmit = async (
   req: ITeacherSignUpInfo
-): Promise<ITeacherSubmitResponse> => {
+): Promise<ITeacherSignUpData> => {
   const url = `admin/submit/teacher/approval`;
-  const { data } = await customAxios.post(url, {
-    id: req.userId,
-    pwd: req.userPw,
-    schoolId: req.schoolId,
-    name: req.userName,
-    phoneNumber: req.userPhone
+  const { data } = await request<IResponse<ITeacherSignUpData>>({
+    url,
+    method: "POST",
+    data: {
+      id: req.id,
+      pwd: req.pwd,
+      schoolId: req.schoolId,
+      name: req.name,
+      phoneNumber: req.phoneNumber
+    }
   });
   return data;
 };

@@ -1,4 +1,4 @@
-import { SearchInputWrapper } from "components/common/InputField/SearchInputField/styles";
+import { StyledInputWrapper } from "components/common/Input/styles";
 import styled from "styled-components";
 
 export const SearchInput = styled.input`
@@ -56,6 +56,6 @@ export const SearchInputButton = styled.button`
   }
 `;
 
-export const SearchInputContainer = styled(SearchInputWrapper)`
+export const SearchInputContainer = styled(StyledInputWrapper)`
   margin-top: 16px;
 `;

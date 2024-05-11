@@ -1,6 +1,6 @@
 import SearchInputField, {
   type SearchInputFieldProps
-} from "components/common/InputField/SearchInputField";
+} from "components/common/Input/SearchInputField";
 import BreedDropDown from "components/Enrollment/Input/BreedDropDown";
 import { useGetBreed } from "hooks/api/member/enroll";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
@@ -71,7 +71,7 @@ const BreedInput = ({ name, register, setValue, watch, isRequired = false }: IBr
         onChange={handleInputChange}
         onClick={() => setIsDropdownOpen(!!watchInputValue)}
         onClear={() => setValue(name, "")}
-        isRequired={isRequired}
+        required={isRequired}
         placeholder="견종을 입력해주세요"
       />
       {isDropdownOpen && data && (

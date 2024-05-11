@@ -1,7 +1,7 @@
 import { ITEM_KEYS } from "constants/item";
 
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import { TextInput } from "components/common";
+import SearchInputField from "components/common/Input/SearchInputField";
 import SingleRadio from "components/common/Select/SingleRadio";
 import AdminTitle from "components/common/Title/AdminTitle";
 import { useFormContext } from "react-hook-form";
@@ -17,7 +17,7 @@ const MemberInfo = () => {
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_NAME}`} control={control}>
           이름
         </AdminTitle>
-        <InputField name="null" placeholder="견주 이름을 입력하는 칸이에요" disabled />
+        <TextInput name="null" placeholder="견주 이름을 입력하는 칸이에요" disabled />
       </Card>
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_GENDER}`} control={control}>
@@ -35,13 +35,13 @@ const MemberInfo = () => {
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_PHONE}`} control={control}>
           연락처
         </AdminTitle>
-        <InputField name="null" placeholder="견주가 연락처를 입력하는 칸이에요" disabled />
+        <TextInput name="null" placeholder="견주가 연락처를 입력하는 칸이에요" disabled />
       </Card>
       <Card>
         <AdminTitle name={`requiredItemList.${ITEM_KEYS.EMERGENCY_NUMBER}`} control={control}>
           비상 연락처
         </AdminTitle>
-        <InputField name="null" placeholder="견주가 비상연락처를 입력하는 칸이에요" disabled />
+        <TextInput name="null" placeholder="견주가 비상연락처를 입력하는 칸이에요" disabled />
       </Card>
     </>
   );

@@ -143,7 +143,8 @@ export const MEMBER_DOG_INFO_STEP = ["강아지 정보", "유치원 정보", "�
 
 export const SIGN_UP_STEP = {
   유치원_검색: "search_school" as const,
-  가입신청서_작성: "enrollment_form" as const
+  가입신청서_작성: "enrollment_form" as const,
+  승인상태: "registration_status" as const
 };
 
 export const ADMIN_SIGN_UP_STEP = {
@@ -151,5 +152,7 @@ export const ADMIN_SIGN_UP_STEP = {
   유치원_검색: "search_school" as const,
   유치원_등록: "enroll_school" as const,
   회원정보_입력: "personal_info" as const,
-  계정설정: "account_setup" as const
+  계정설정: "account_setup" as const,
+  승인상태: "registration_status" as const,
+  유치원_등록완료: "school_enrollment_complete" as const
 };

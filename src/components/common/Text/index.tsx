@@ -1,28 +1,22 @@
-import {
-  type ForwardedRef,
-  type HTMLAttributes,
-  type ReactNode,
-  forwardRef,
-  Children,
-  isValidElement
-} from "react";
+import { forwardRef, Children, isValidElement, ElementType } from "react";
 
 import { type IStyledTextProps, StyledText, type StyledEmEmProps, StyledEm } from "./styles";
 
-export type TextProps = {
-  as?: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  children: ReactNode;
-} & HTMLAttributes<HTMLSpanElement> &
-  IStyledTextProps &
-  StyledEmEmProps;
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../polymorphic";
 
-export const Text = forwardRef(function Text(
-  { as = "span", children, typo, color, isEllipsis, ...props }: TextProps,
-  ref: ForwardedRef<HTMLSpanElement>
+export type TextProps<C extends ElementType = "span"> = PolymorphicComponentPropsWithRef<
+  C,
+  IStyledTextProps & StyledEmEmProps
+>;
+
+export const Text = forwardRef(function Text<C extends ElementType = "span">(
+  props: TextProps<C>,
+  ref?: PolymorphicRef<C>
 ) {
+  const { as, color, typo, isEllipsis, children, ...rest } = props;
+
   const styledChildren = Children.map(children, (child) => {
     if (isValidElement(child) && child.type === "em") {
-      // StyledEm 컴포넌트로 자동으로 감싸고, 각 em 요소의 props를 존중하면서 색상 적용
       const color = child.props.color;
       return <StyledEm color={color}>{child.props.children}</StyledEm>;
     }
@@ -30,7 +24,7 @@ export const Text = forwardRef(function Text(
   });
 
   return (
-    <StyledText ref={ref} as={as} color={color} typo={typo} isEllipsis={isEllipsis} {...props}>
+    <StyledText ref={ref} as={as} color={color} typo={typo} isEllipsis={isEllipsis} {...rest}>
       {styledChildren}
     </StyledText>
   );

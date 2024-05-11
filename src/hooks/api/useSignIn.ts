@@ -1,6 +1,5 @@
 import { PATH } from "constants/path";
 
-import { handleAdminLoginResult } from "apis/admin.api";
 import { handleLoginResult } from "apis/member/member.api";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -32,30 +31,30 @@ const useSignIn = () => {
     }
   }, []);
 
-  const handlerAdminLogin = async () => {
-    try {
-      const data = await handleAdminLoginResult({
-        inputId,
-        inputPw
-      });
-      if (data.status === 200) {
-        setLoginInfo(() => ({
-          adminId: data.data.adminId,
-          adminName: data.data.adminName,
-          schoolId: data.data.schoolId,
-          role: data.data.role,
-          schoolName: data.data.schoolName
-        }));
-        navigate(PATH.ADMIN_ATTENDANCE);
-      }
-    } catch (error: any) {
-      // TODO: 에러처리 필요~!!~!
-      if (error.status === 400) {
-        setIsIdConfirmed(false);
-        setIsPwConfirmed(false);
-      }
-    }
-  };
+  // const handlerAdminLogin = async () => {
+  //   try {
+  //     const data = await handleAdminLoginResult({
+  //       inputId,
+  //       inputPw
+  //     });
+  //     if (data.status === 200) {
+  // setLoginInfo(() => ({
+  //   adminId: data.data.adminId,
+  //   adminName: data.data.adminName,
+  //   schoolId: data.data.schoolId,
+  //   role: data.data.role,
+  //   schoolName: data.data.schoolName
+  // }));
+  //       navigate(PATH.ADMIN_ATTENDANCE);
+  //     }
+  //   } catch (error: any) {
+  //     // TODO: 에러처리 필요~!!~!
+  //     if (error.status === 400) {
+  //       setIsIdConfirmed(false);
+  //       setIsPwConfirmed(false);
+  //     }
+  //   }
+  // };
 
   return {
     currentMainStep,
@@ -65,7 +64,7 @@ const useSignIn = () => {
     inputPw,
     setInputPw,
     handlerLogin,
-    handlerAdminLogin,
+    // handlerAdminLogin,
     isIdConfirmed,
     isPwConfirmed
   };

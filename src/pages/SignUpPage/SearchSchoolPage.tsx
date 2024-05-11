@@ -7,10 +7,12 @@ import { useRecoilValue } from "recoil";
 import { schoolIdAtom } from "store/form";
 
 interface SearchSchoolPageProps {
+  type: "TEACHER" | "MEMBER";
   onNextStep: () => void;
 }
 
-const SearchSchoolPage = ({ onNextStep }: SearchSchoolPageProps) => {
+// TODO: useFormProvider 이용!!
+const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
   const schoolId = useRecoilValue(schoolIdAtom);
 
   const [searchText, setSearchText] = useState("");
@@ -22,9 +24,9 @@ const SearchSchoolPage = ({ onNextStep }: SearchSchoolPageProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout position="relative" pt={"calc(5vh + 3.75rem)"} paddingInline={18} pb={24}>
+      <Layout position="relative" pt={"calc(5vh + 3.75rem)"} paddingInline={16} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
-          안녕하세요 견주님
+          안녕하세요 {type === "TEACHER" ? "선생님" : "견주님"}
           <br />
           어떤 유치원을 찾고 계시나요?
         </Text>
@@ -32,7 +34,7 @@ const SearchSchoolPage = ({ onNextStep }: SearchSchoolPageProps) => {
           <SchoolSearchInputBox searchText={searchText} setSearchText={setSearchText} />
         </Box>
 
-        <Box position="absolute" left={18} right={18} bottom={24}>
+        <Box position="absolute" left={16} right={16} bottom={24}>
           <StyledButton
             type="button"
             bg="primaryColor"

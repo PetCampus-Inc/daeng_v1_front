@@ -1,7 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  getCheckId,
+  postOwnerSignUp,
+  postRegistrationNumber,
+  postTeacherSignUpSubmit
+} from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/school.api";
 
-const useGetSchool = (searchText: string) => {
+// 선생님 회원가입 요청
+export const useTeacherSinUp = () => {
+  const { mutate } = useMutation({
+    mutationFn: postTeacherSignUpSubmit
+  });
+
+  return { mutateTeacherSignUp: mutate };
+};
+
+// 원장님 회원가입 요청
+export const useOwnerSinUp = () => {
+  const { mutate } = useMutation({
+    mutationFn: postOwnerSignUp
+  });
+
+  return { mutateOwnerSignUp: mutate };
+};
+
+// 유치원 검색
+export const useGetSchool = (searchText: string) => {
   return useQuery({
     queryKey: ["schoolList", searchText],
     queryFn: () => handleGetSchool(searchText),
@@ -11,4 +36,20 @@ const useGetSchool = (searchText: string) => {
   });
 };
 
-export { useGetSchool };
+// 아이디 중복 확인
+export const useCheckId = () => {
+  const { mutate } = useMutation({
+    mutationFn: getCheckId
+  });
+
+  return { mutateCheckId: mutate };
+};
+
+// 사업자 등록번호 확인
+export const useCheckRegNum = () => {
+  const { mutate } = useMutation({
+    mutationFn: postRegistrationNumber
+  });
+
+  return { mutateCheckRegNum: mutate };
+};
