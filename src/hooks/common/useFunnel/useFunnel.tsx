@@ -1,7 +1,7 @@
-import { useState, useMemo, useEffect, useCallback, SetStateAction } from "react";
+import { useMemo, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { Funnel, FunnelProps, Step, StepProps } from "./Funnel";
+import { Funnel, FunnelProps, Step } from "./Funnel";
 
 import type { NonEmptyArray } from "./types";
 
@@ -14,12 +14,6 @@ type RouteFunnelProps<Steps extends NonEmptyArray<string>> = Omit<
   "steps" | "step"
 >;
 
-type FunnelComponent<Steps extends NonEmptyArray<string>> = ((
-  props: RouteFunnelProps<Steps>
-) => JSX.Element) & {
-  Step: (props: StepProps<Steps>) => JSX.Element;
-};
-
 const DEFAULT_STEP_QUERY_KEY = "funnel-step";
 
 export const useFunnel = <Steps extends NonEmptyArray<string>>(
@@ -27,25 +21,18 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
   options?: {
     stepQueryKey?: string;
     initialStep?: Steps[number];
-    onStepChange?: (name: Steps[number]) => void;
   }
-): [
-  FunnelComponent<Steps>,
-  (step: Steps[number], options?: SetStepOptions, additionalQuery?: Record<string, string>) => void,
-  any,
-  React.Dispatch<SetStateAction<any>>
-] => {
+) => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const stepQueryKey = options?.stepQueryKey ?? DEFAULT_STEP_QUERY_KEY;
 
-  const [state, setState] = useState({});
+  if (steps.length === 0) {
+    throw new Error("steps가 비어있습니다.");
+  }
 
-  const currentStep = useMemo(() => {
-    const queryParams = new URLSearchParams(location.search);
-    return queryParams.get(stepQueryKey) || options?.initialStep || steps[0];
-  }, [location, stepQueryKey, options, steps]);
-
+  // 초기 스텝 쿼리 파라미터 설정
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     if (!queryParams.has(stepQueryKey) && options?.initialStep) {
@@ -58,29 +45,49 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
     () =>
       Object.assign(
         function RouteFunnel(props: RouteFunnelProps<Steps>) {
-          return <Funnel<Steps> steps={steps} step={currentStep as Steps[number]} {...props} />;
+          const step =
+            useQueryParam<Steps[number]>(stepQueryKey, { required: true }) ?? options?.initialStep;
+
+          return <Funnel<Steps> steps={steps} step={step} {...props} />;
         },
         { Step }
       ),
-    [steps, currentStep]
+    []
   );
 
   const setStep = useCallback(
-    (
-      step: Steps[number],
-      { stepChangeType = "push" }: SetStepOptions = {},
-      additionalQuery: Record<string, string> = {}
-    ) => {
+    (step: Steps[number], { stepChangeType = "push" }: SetStepOptions = {}) => {
       const queryParams = new URLSearchParams(location.search);
       queryParams.set(stepQueryKey, step);
-      Object.keys(additionalQuery).forEach((key) => queryParams.set(key, additionalQuery[key]));
-      options?.onStepChange?.(step);
       navigate(`${location.pathname}?${queryParams.toString()}`, {
         replace: stepChangeType === "replace"
       });
     },
-    [navigate, location, stepQueryKey, options]
+    [navigate, location, stepQueryKey]
   );
 
-  return [FunnelComponent, setStep, state, setState];
+  return [FunnelComponent, setStep] as const;
 };
+
+interface Options<T> {
+  parser?: (val: string) => T;
+  required?: boolean;
+}
+
+function useQueryParam<T = string>(name: string): T | undefined;
+function useQueryParam<T = string>(name: string, options: Options<T> & { required: true }): T;
+function useQueryParam<T = string>(name: string, options?: Options<T>) {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const value = queryParams.get(name);
+
+  if (options?.required && value === null) {
+    `${name} is required`;
+  }
+
+  if (options?.parser && value !== null) {
+    return options.parser(value);
+  }
+
+  return value;
+}
