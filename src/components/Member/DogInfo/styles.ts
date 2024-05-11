@@ -148,6 +148,12 @@ export const Icon = styled.span<IProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+
+  & > svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const InfoText = styled.div`
