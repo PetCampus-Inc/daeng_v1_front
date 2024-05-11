@@ -3,10 +3,29 @@ import CalendarIcon from "assets/svg/calendar";
 import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import { Flex } from "components/common";
+import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
+import { useOverlay } from "hooks/common/useOverlay";
 
 import * as S from "./styles";
 
 const DogInfo = () => {
+  const overlay = useOverlay();
+
+  const openTextAreaPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <TextAreaBottomSheet
+        title="픽드랍 메모"
+        text="월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당"
+        isOpen={isOpen}
+        close={close}
+        actionText={"수정 완료"}
+        actionFn={() => {
+          console.log("수정 완료");
+          close();
+        }}
+      />
+    ));
+
   return (
     <Flex direction="column" gap="24">
       <S.DogInfoCard>
@@ -75,7 +94,7 @@ const DogInfo = () => {
             <CarIcon />
             <S.DogMoreInfo>픽드랍 메모</S.DogMoreInfo>
           </Flex>
-          <S.DogMoreInfoEditeButton>수정</S.DogMoreInfoEditeButton>
+          <S.DogMoreInfoEditeButton onClick={openTextAreaPopup}>수정</S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
         <S.DogMoreInfoText>월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
