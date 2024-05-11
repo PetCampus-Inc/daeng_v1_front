@@ -1,13 +1,14 @@
 import customAxios from "libs/CustomAxios";
+import { request } from "libs/CustomAxios/request";
 
 import type { IRequestAdminEnrollment, IResponseAdminForm } from "types/admin/enrollment.types";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
+import type { IResponse } from "types/helper.type";
 import type { IResponseEnrollment, IRequestEnrollment } from "types/member/enrollment.types";
-import type { IResponse } from "types/Response.type";
 
 export interface IEnrollmentProps {
   memberId: string;
-  schoolId: string;
+  schoolId: number;
   requestUrl?: string;
 }
 
@@ -15,10 +16,15 @@ export interface IAdminEnrollmentProps {
   formId: string;
 }
 
-export const handleGetSearchResult = async (searchText: string): Promise<ISchoolInfo[]> => {
-  const url = `school/search?searchText=${searchText}`;
-  const { data } = await customAxios.get(url);
-  return data.data;
+export const handleGetSchool = async (searchText: string): Promise<ISchoolInfo[]> => {
+  const url = "school/search";
+  const { data } = await request<IResponse<ISchoolInfo[]>>({
+    url,
+    params: {
+      searchText
+    }
+  });
+  return data;
 };
 
 export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> => {
@@ -68,9 +74,7 @@ export const handleGetAdminForm = async ({
   return data.data;
 };
 
-export const handlePostEnrollment = async (
-  requestProps: IRequestEnrollment
-): Promise<IResponse> => {
+export const handlePostEnrollment = async (requestProps: IRequestEnrollment): Promise<void> => {
   const url = `school/member/enroll`;
   const { data } = await customAxios.post(url, {
     ...requestProps
@@ -78,9 +82,7 @@ export const handlePostEnrollment = async (
   return data.data;
 };
 
-export const handlePostAdminForm = async (
-  requestProps: IRequestAdminEnrollment
-): Promise<IResponse> => {
+export const handlePostAdminForm = async (requestProps: IRequestAdminEnrollment): Promise<void> => {
   const url = `school/form`;
   const { data } = await customAxios.post(url, {
     ...requestProps

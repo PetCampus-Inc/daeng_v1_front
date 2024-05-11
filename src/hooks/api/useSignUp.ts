@@ -7,7 +7,7 @@ import {
   handleTeacherSignUpCancel,
   handleTeacherSignUpSubmit
 } from "apis/admin.api";
-import { handleGetSearchResult } from "apis/member/school.api";
+// import { handleGetSearchResult } from "apis/member/school.api";
 import { useState, useCallback, Dispatch, SetStateAction } from "react";
 import { ISchoolInfo } from "types/admin/school.types";
 import showToast from "utils/showToast";
@@ -33,14 +33,14 @@ const useSignUp = () => {
   const [submittedAdminId, setSubmittedAdminId] = useState<number>(-1);
   const [submittedSchoolId, setSubmittedSchoolId] = useState<number>(-1);
 
-  const handlerGetSearchResult = useCallback(async () => {
-    try {
-      const data = await handleGetSearchResult(searchText);
-      setSearchResultText(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [searchText, setSearchText, searchResultText, setSearchResultText]);
+  // const handlerGetSearchResult = useCallback(async () => {
+  //   try {
+  //     const data = await handleGetSearchResult(searchText);
+  //     setSearchResultText(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [searchText, setSearchText, searchResultText, setSearchResultText]);
 
   const handlerDeleteSearchResult = () => {
     setSelectedSearchText("");
@@ -182,7 +182,6 @@ const useSignUp = () => {
     setSearchResultText,
     selectedSearchText,
     setSelectedSearchText,
-    handlerGetSearchResult,
     handlerDeleteSearchResult,
     userName,
     setUserName,

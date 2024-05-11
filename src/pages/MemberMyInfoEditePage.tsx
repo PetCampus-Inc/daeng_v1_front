@@ -21,7 +21,7 @@ const MemberMyInfoEditePage = () => {
   const navigate = useNavigate();
   const overlay = useOverlay.useOverlay();
   const { isFocusing, handleFocus, handleBlur } = useFocus();
-  const { data } = useGetEnrollment({ memberId: "1", schoolId: "2" });
+  const { data } = useGetEnrollment({ memberId: "1", schoolId: 2 });
   const { requiredItemList } = data;
 
   const openPreventLeavePopup = () =>
