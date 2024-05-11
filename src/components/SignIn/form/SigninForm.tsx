@@ -24,7 +24,7 @@ const SigninForm = () => {
           register={register}
           placeholder="아이디를 입력해 주세요"
           className={errors.inputId ? "error-input" : ""}
-          isRequired
+          required
         />
       </Flex>
       <Flex direction="column" gap={8}>
@@ -43,7 +43,7 @@ const SigninForm = () => {
           register={register}
           placeholder="비밀번호를 입력해 주세요"
           className={errors.inputPw ? "error-input" : ""}
-          isRequired
+          required
         />
       </Flex>
     </Flex>

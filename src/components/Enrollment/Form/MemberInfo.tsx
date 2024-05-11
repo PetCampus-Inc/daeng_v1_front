@@ -54,7 +54,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <TextInput
           name="memberName"
           register={register}
-          isRequired
+          required
           placeholder="견주 이름을 입력해주세요"
         />
       </Card>
@@ -71,7 +71,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           onClick={() => openPopup()}
           onClear={handleClear}
           value={watchAddress}
-          isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
+          required={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
         />
@@ -88,8 +88,8 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <TextInput
           name="phoneNumber"
           register={register}
-          isRequired
-          pattern={PHONE_REGEX}
+          required
+          rules={{ pattern: PHONE_REGEX }}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
         />
@@ -99,8 +99,8 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <TextInput
           name="emergencyNumber"
           register={register}
-          isRequired={requiredItems?.get(ITEM_KEYS.EMERGENCY_NUMBER)}
-          pattern={PHONE_REGEX}
+          required={requiredItems?.get(ITEM_KEYS.EMERGENCY_NUMBER)}
+          rules={{ pattern: PHONE_REGEX }}
           onChange={handleChangeNumber("emergencyNumber")}
           placeholder="비상 연락처를 입력해주세요"
         />

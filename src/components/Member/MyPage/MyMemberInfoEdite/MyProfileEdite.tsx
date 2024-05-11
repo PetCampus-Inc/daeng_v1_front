@@ -2,7 +2,7 @@ import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { TextInput } from "components/common";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { ThemeConfig } from "styles/ThemeConfig";
+import { css } from "styled-components";
 import { IMemberInfoEdite } from "types/Member.type";
 
 import * as S from "./styles";
@@ -32,14 +32,12 @@ const MyProfileEdite = ({ handleFocus, handleBlur }: IMemberInfoEdite) => {
       </S.ProfileBox>
       <S.MyDogName>
         <TextInput
-          name="dogName"
-          register={register}
-          isRequired
-          borderColor={ThemeConfig.colors.white}
+          {...register("dodName", { required: true })}
           placeholder="강아지 이름을 입력해주세요"
           value="뽀뽀"
           onFocus={handleFocus}
           onBlur={handleBlur}
+          css={InputStyle}
         />
         의
       </S.MyDogName>
@@ -49,3 +47,10 @@ const MyProfileEdite = ({ handleFocus, handleBlur }: IMemberInfoEdite) => {
 };
 
 export default MyProfileEdite;
+
+const InputStyle = css`
+  padding: 12px 18px;
+  border: 1px solid ${({ theme }) => theme.colors.gray_5};
+
+  ${({ theme }) => theme.typo.body2_16_R};
+`;

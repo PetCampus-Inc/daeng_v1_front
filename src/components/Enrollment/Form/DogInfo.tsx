@@ -27,7 +27,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           name="dogName"
           placeholder="강아지 이름을 입력해주세요"
           register={register}
-          isRequired
+          required
         />
       </Card>
       <Card>

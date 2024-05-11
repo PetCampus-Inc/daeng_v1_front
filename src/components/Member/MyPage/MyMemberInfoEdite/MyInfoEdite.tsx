@@ -56,7 +56,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
         <TextInput
           name="memberName"
           register={register}
-          isRequired
+          required
           placeholder="견주 이름을 입력해주세요"
           value="박유빈"
           onFocus={handleFocus}
@@ -82,7 +82,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
           onClick={() => openPopup()}
           onClear={handleClear}
           value={watchAddress}
-          isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
+          required={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
           inputType="memberEdite"
@@ -104,14 +104,16 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
         <TextInput
           name="phoneNumber"
           register={register}
-          isRequired
-          pattern={PHONE_REGEX}
+          rules={{
+            pattern: PHONE_REGEX
+          }}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
           value="010-1234-1234"
           type="tel"
           onFocus={handleFocus}
           onBlur={handleBlur}
+          required
         />
       </Flex>
 
@@ -122,14 +124,16 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur }: IMemberInfoEdit
         <TextInput
           name="emergencyNumber"
           register={register}
-          isRequired
-          pattern={PHONE_REGEX}
+          rules={{
+            pattern: PHONE_REGEX
+          }}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="비상 연락처를 입력해주세요"
           value="010-1234-1234"
           type="tel"
           onFocus={handleFocus}
           onBlur={handleBlur}
+          required
         />
       </Flex>
     </S.ProfileEditeWrapper>
