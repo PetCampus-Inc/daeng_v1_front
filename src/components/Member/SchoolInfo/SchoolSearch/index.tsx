@@ -1,9 +1,11 @@
+import { DOGOWNER } from "constants/className";
 import { PATH } from "constants/path";
 
 import Button from "components/common/Button";
 import InputBox from "components/common/InputBox";
 import Typo from "components/common/Typo";
-import { memo, Dispatch, SetStateAction, ChangeEvent } from "react";
+import useSignUp from "hooks/api/useSignUp";
+import { memo, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { memberEnrollmentSchoolAtom } from "store/member";
@@ -19,43 +21,26 @@ import {
   StyledSearchResult
 } from "./styles";
 
-interface Props {
-  searchText: string;
-  setSearchText: Dispatch<SetStateAction<string>>;
-  searchResultText: ISchoolInfo[] | any;
-  setSearchResultText: Dispatch<SetStateAction<ISchoolInfo[]>>;
-  selectedSearchText: string;
-  setSelectedSearchText: Dispatch<SetStateAction<string>>;
-  handlerGetSearchResult: () => void | Promise<void>;
-  handlerDeleteSearchResult: () => void | Promise<void>;
-  schoolId: number;
-  setSchoolId: Dispatch<SetStateAction<number>>;
-  currentMainStep: number;
-  setCurrentMainStep: Dispatch<SetStateAction<number>>;
-  currentStep: number;
-  setCurrentStep: Dispatch<SetStateAction<number>>;
-  className?: string;
-}
-
 // TODO 유치원 정보 가입 신청서에 전달 필요
-const SchoolSearch = ({
-  searchText,
-  setSearchText,
-  searchResultText,
-  setSearchResultText,
-  selectedSearchText,
-  setSelectedSearchText,
-  handlerGetSearchResult,
-  handlerDeleteSearchResult,
-  schoolId,
-  setSchoolId
-}: Props) => {
+const SchoolSearch = () => {
   const setMemberEnrollmentSchool = useSetRecoilState(memberEnrollmentSchoolAtom);
   const navigate = useNavigate();
   const { memberId } = useParams();
+
+  const {
+    searchText,
+    setSearchText,
+    searchResultText,
+    selectedSearchText,
+    setSelectedSearchText,
+    handlerGetSearchResult,
+    handlerDeleteSearchResult,
+    setSchoolId
+  } = useSignUp();
+
   return (
     <>
-      <Container>
+      <Container className={DOGOWNER}>
         <TextWrapper>
           <Typo
             text={"안녕하세요 견주님\n어떤 유치원을 찾고 계시나요?"}
