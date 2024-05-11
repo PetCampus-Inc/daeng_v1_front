@@ -29,3 +29,12 @@ export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMem
   });
   return data.data;
 };
+
+// 승인 대기 중 가입신청서 승인 취소 (강아지 추가 취소)
+export const handlePostMemberDogEnrollment = async (
+  enrollmentFormId: string
+): Promise<IResponse> => {
+  const url = `member/cancel/enrollmentForm`;
+  const { data } = await customAxios.post(url, enrollmentFormId);
+  return data;
+};
