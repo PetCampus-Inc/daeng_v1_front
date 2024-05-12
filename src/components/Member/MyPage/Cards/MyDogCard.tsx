@@ -3,6 +3,7 @@ import { PATH } from "constants/path";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BasicModal from "components/common/ButtonModal/BasicModal";
+import { usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -39,6 +40,7 @@ const MyDogCard = ({
   const navigate = useNavigate();
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
+  const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -81,8 +83,8 @@ const MyDogCard = ({
     ));
 
   const handleDeleteDog = () => {
-    //TODO 강아지 리스트에서 삭제하기
-    console.log("삭제");
+    //TODO 강아지 리스트에서 삭제되는지 테스트 필요
+    mutateMemberDogDelete(dogId);
     showToast("강아지가 삭제되었습니다", "bottom");
   };
 
