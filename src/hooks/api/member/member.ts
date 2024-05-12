@@ -1,9 +1,17 @@
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetSchoolInfo } from "apis/member/school.api";
-import { handleGetMemberInfo, handleGetMemberProfileInfo } from "apis/member/member.api";
 
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  handleGetMemberInfo,
+  handleGetMemberProfileInfo,
+  handleMemberInfoResult
+} from "apis/member/member.api";
+import { IMemberProfilePostInfo } from "types/member/home.types";
+import { handleGetSchoolInfo } from "apis/member/school.api";
+
+
+// 견주 정보
 export const useGetMemberInfo = (memberId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_INFO(memberId),
@@ -12,14 +20,28 @@ export const useGetMemberInfo = (memberId: string) => {
 };
 
 
+// 견주 상세 정보
 export const useGetMemberSchoolInfo = (dogId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_SCHOOL_INFO(dogId),
     queryFn: () => handleGetSchoolInfo(dogId)
+
 
 export const useGetMemberProfileInfo = (memberId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId),
     queryFn: () => handleGetMemberProfileInfo(memberId)
   });
+};
+
+// 견주 상세 정보 수정
+export const usePostMemberProfileInfo = () => {
+  const queryClient = useQueryClient();
+  const memberProfileInfoMutation = useMutation({
+    mutationFn: (req: IMemberProfilePostInfo) => handleMemberInfoResult(req),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_POST_INFO });
+    }
+  });
+  return { mutateAttend: memberProfileInfoMutation.mutate };
 };
