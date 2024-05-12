@@ -1,15 +1,16 @@
-import { Box, Text, Layout } from "components/common";
+import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import AccountInfo from "components/SignUp/form/AccountInfo";
-import NextButton from "components/SignUp/form/NextButton";
+import AccountInfo from "components/SignUp/SignUpForm/AccountInfo";
+import NextButton from "components/SignUp/SignUpForm/NextButton";
 import { useTeacherSinUp } from "hooks/api/signup";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { schoolIdAtom } from "store/form";
 
-import { Role } from "./AdminSignUpFunnel";
+import { AdminRole } from "./AdminSignUpFunnel";
+
 interface IStepProps {
-  type: Role;
+  type: AdminRole;
   onNextStep: () => void;
 }
 
@@ -26,11 +27,12 @@ const AccountSettingPage = ({ type, onNextStep }: IStepProps) => {
       pwd: data.pwd,
       name: data.name,
       phoneNumber: data.phoneNumber,
-      schoolId: schoolId ?? -1
+      schoolId: schoolId ?? -1 // FIXME: schoolId도 useForm으로 받아오기
     };
 
     mutateTeacherSignUp(req, {
       onSuccess: () => {
+        // TODO: role, adminId 저장하기
         onNextStep();
       }
     });

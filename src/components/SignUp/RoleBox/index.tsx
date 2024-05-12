@@ -3,7 +3,7 @@ import PrincipalSelectedIcon from "assets/svg/principal-selected-icon";
 import TeacherIcon from "assets/svg/teacher-icon";
 import TeacherSelectedIcon from "assets/svg/teacher-selected-icon";
 import { Box, Flex, Text } from "components/common";
-import { Role } from "pages/SignUpPage/AdminSignUpFunnel";
+import { AdminRole } from "pages/SignUpPage/AdminSignUpFunnel";
 import { memo } from "react";
 
 import { StyledMainWrapper } from "./styles";
@@ -20,7 +20,7 @@ const RoleBox = ({ role, mainText, subText, selected, handleClick }: Props) => {
   return (
     <StyledMainWrapper selected={selected} onClick={handleClick}>
       <Box mb={16}>
-        {role === Role.TEACHER ? (
+        {role === AdminRole.TEACHER ? (
           selected ? (
             <TeacherSelectedIcon />
           ) : (

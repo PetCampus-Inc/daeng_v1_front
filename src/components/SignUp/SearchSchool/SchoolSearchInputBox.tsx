@@ -2,11 +2,11 @@ import { Flex } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
 import { useGetSchool } from "hooks/api/signup";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
-import { useState, useRef, type RefObject, useCallback, useEffect } from "react";
+import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { schoolIdAtom } from "store/form";
 
-import SchoolListDropdown from "./dropdown/SchoolListDropdown";
+import SchoolListDropdown from "./SchoolListDropdown";
 
 interface SchoolSearchInputBoxProps {
   searchText: string;
