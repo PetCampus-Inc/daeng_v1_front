@@ -5,21 +5,28 @@ import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
-import BackgroundButton from "components/common/Button/BackgroundButton";
 import BasicModal from "components/common/Modal/BasicModal";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
+import { IMemberSchoolInfo } from "types/member/school.types";
+import { formatDate } from "utils/formatter";
+import { remainingDays } from "utils/remainingDays";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
-const SchoolInfo = () => {
+interface ISchoolInfoProps {
+  data: IMemberSchoolInfo;
+}
+
+const SchoolInfo = ({ data }: ISchoolInfoProps) => {
   const navigate = useNavigate();
   const overlay = useOverlay();
-
+  const registeredDate = data.registeredDate.map((el) => String(el));
+  const registeredTime = formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const schoolCallInfo = {
-    schoolName: "똑독",
-    schoolNumber: "02-0909-000"
+    schoolName: data.schoolName,
+    schoolNumber: data.schoolNumber
   };
 
   const openCallPopup = () =>
@@ -67,13 +74,22 @@ const SchoolInfo = () => {
   const handleDeleteSchool = () => {
     //TODO 유치원 연결끊기
     console.log("삭제");
-    navigate("/mypage");
+    navigate(-1);
     showToast("유치원과 연결이 끊어졌습니다", "bottom");
+  };
+
+  const ticketInfo = (ticketType: string) => {
+    switch (ticketType) {
+      case "ROUND":
+        return `회차권_${data.ticket.allRoundTicket}회 (잔여 ${data.ticket.currentRoundTicket}회)`;
+      case "MONTHLY":
+        return `정기권_${data.ticket.monthlyTicketNumber}주 (${remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0 ? `만료 ${remainingDays}일 전` : `만료`})`;
+    }
   };
 
   return (
     <S.CardContainer>
-      <S.CardTitle>{schoolCallInfo ? schoolCallInfo.schoolName : ""} 유치원</S.CardTitle>
+      <S.CardTitle>{schoolCallInfo ? `${schoolCallInfo.schoolName} 유치원` : ""}</S.CardTitle>
       <S.InfoContainer>
         <S.InfoList>
           <S.IconWrapper>
@@ -89,24 +105,29 @@ const SchoolInfo = () => {
           <S.IconWrapper>
             <List />
           </S.IconWrapper>
-          <S.ListTitle>이용권 : 정기권_12주 (만료 30일 전)</S.ListTitle>
+          <S.ListTitle>이용권 : {ticketInfo(data.ticket.ticketType)}</S.ListTitle>
         </S.InfoList>
         <S.InfoList>
           <S.IconWrapper>
             <Map />
           </S.IconWrapper>
-          <S.ListTitle>서울시 광진구 이라동 780-3</S.ListTitle>
+          <S.ListTitle>{data.schoolAddress}</S.ListTitle>
         </S.InfoList>
         <S.InfoList>
           <S.IconWrapper>
             <Calendar />
           </S.IconWrapper>
-          <S.ListTitle>2023.12.13 등록</S.ListTitle>
+          <S.ListTitle>{registeredTime} 등록</S.ListTitle>
         </S.InfoList>
       </S.InfoContainer>
       <S.DisconnectButton
         backgroundColor={"white"}
-        onClick={openDisconnectPopup}
+        onClick={
+          remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0 ||
+          data.ticket.currentRoundTicket > 0
+            ? openAlertPopup
+            : openDisconnectPopup
+        }
         className="disconnect"
       >
         유치원 연결 끊기

@@ -102,7 +102,7 @@ const MyDogCard = ({
             <span>등록된 유치원 없음</span>
           </S.GotoSchoolInfoButton>
         ) : (
-          <S.GotoSchoolInfoButton onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO)}>
+          <S.GotoSchoolInfoButton onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}>
             <span>{schoolInfo} 유치원</span>
             {!isOpen && <ArrowRightIcon />}
           </S.GotoSchoolInfoButton>
