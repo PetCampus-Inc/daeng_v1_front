@@ -1,7 +1,7 @@
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { StyledButton } from "components/SignIn/styles";
-import SchoolSearchInputBox from "components/SignUp/SchoolSearchInputBox";
+import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInputBox";
 import { memo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { schoolIdAtom } from "store/form";
