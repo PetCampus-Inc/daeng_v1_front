@@ -8,6 +8,7 @@ import NavBar from "components/common/NavBar";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { Role } from "types/admin/admin.type";
 
 const PrincipalMyPage = () => {
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
@@ -29,7 +30,7 @@ const PrincipalMyPage = () => {
         <ContentContainer>
           {data && <PrincipalProfile data={data} />}
           <CardContainer>
-            <InfoCard data={data} role={"ROLE_OWNER"} />
+            <InfoCard data={data} role={Role.ROLE_OWNER} />
           </CardContainer>
         </ContentContainer>
       </PageContainer>

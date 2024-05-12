@@ -8,6 +8,7 @@ import NavBar from "components/common/NavBar";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { Role } from "types/admin/admin.type";
 
 const TeacherMyPage = () => {
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
@@ -26,7 +27,7 @@ const TeacherMyPage = () => {
         <ContentContainer>
           {data && <TeacherProfile data={data} />}
           <CardContainer>
-            <InfoCard data={data} role={"ROLE_TEACHER"} />
+            <InfoCard data={data} role={Role.ROLE_TEACHER} />
           </CardContainer>
         </ContentContainer>
       </PageContainer>

@@ -4,16 +4,16 @@ import { StyledButton } from "components/SignIn/styles";
 import RoleBox from "components/SignUp/RoleBox";
 import { useState } from "react";
 
-import { Role } from "./AdminSignUpFunnel";
+import { AdminRole } from "./AdminSignUpFunnel";
 
 interface IStepProps {
-  onNextStep: (role: Role) => void;
+  onNextStep: (role: AdminRole) => void;
 }
 
 const RoleSelectPage = ({ onNextStep }: IStepProps) => {
-  const [selected, setSelected] = useState<Role | null>(null);
+  const [selected, setSelected] = useState<AdminRole | null>(null);
 
-  const handleSelected = (role: Role) => {
+  const handleSelected = (role: AdminRole) => {
     setSelected(role);
   };
 
@@ -27,16 +27,16 @@ const RoleSelectPage = ({ onNextStep }: IStepProps) => {
             mainText="선생님"
             subText="강아지 유치원에
 근무중인 선생님"
-            selected={selected === Role.TEACHER}
-            handleClick={() => handleSelected(Role.TEACHER)}
+            selected={selected === AdminRole.TEACHER}
+            handleClick={() => handleSelected(AdminRole.TEACHER)}
           />
           <RoleBox
             role="OWNER"
             mainText="원장님"
             subText="강아지 유치원을
 운영중인 원장님"
-            selected={selected === Role.OWNER}
-            handleClick={() => handleSelected(Role.OWNER)}
+            selected={selected === AdminRole.OWNER}
+            handleClick={() => handleSelected(AdminRole.OWNER)}
           />
         </Flex>
 
