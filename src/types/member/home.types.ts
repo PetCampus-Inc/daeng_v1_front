@@ -44,19 +44,19 @@ export interface IMemberInfo extends IResponse {
 }
 
 export interface IMemberProfileInfo extends IResponse {
-  memberId: string;
+  memberId: string | number;
   memberName: string;
   memberGender: string;
   nickName: string;
   address: string;
   addressDetail: string;
   phoneNumber: string;
-  emergencyNumber: string;
+  emergencyPhoneNumber: string;
   relation: string;
 }
 
 export interface IMemberProfilePostInfo {
-  memberId: string;
+  memberId: string | number;
   memberName: string;
   memberGender: string;
   memberProfileUri?: string;
@@ -64,7 +64,6 @@ export interface IMemberProfilePostInfo {
   address: string;
   addressDetail: string;
   phoneNumber: string;
-  emergencyPhoneNumber?: string;
-  emergencyNumber?: string;
+  emergencyPhoneNumber: string;
   relation: string;
 }

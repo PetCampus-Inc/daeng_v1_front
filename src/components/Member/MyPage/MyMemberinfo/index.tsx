@@ -95,7 +95,7 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             비상연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.emergencyNumber ? data.emergencyNumber : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.emergencyPhoneNumber ? data.emergencyPhoneNumber : ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem className="address">
           <S.MyInfoTitle>

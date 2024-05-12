@@ -9,7 +9,7 @@ const SaveButton = () => {
   const { memberId } = useParams();
   const methods = useForm({ mode: "onSubmit" });
   const { watch } = useFormContext();
-  const mutatePostMemberInfo = usePostMemberProfileInfo();
+  const mutatePostMemberInfo = usePostMemberProfileInfo(String(memberId));
   const { data: previousValues } = useGetMemberProfileInfo(String(memberId));
 
   const memberName = watch("memberName");
