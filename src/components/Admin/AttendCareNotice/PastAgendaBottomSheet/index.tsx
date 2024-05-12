@@ -2,16 +2,17 @@ import Badge from "components/common/Badge";
 import BottomSheet, { IBottomSheetProps } from "components/common/BottomSheet";
 import PoopBox from "components/common/PoopBox";
 import { format } from "date-fns";
-import { useGetPastAgenda } from "hooks/api/admin/care";
 import { Suspense, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { IPastAgenda } from "types/admin/care.types";
 import { IPoop } from "types/admin.attendance.type";
 
 import * as S from "./styles";
 
-const PastAgendaBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
-  const dogId = useLocation().pathname.split("/").pop();
-  const { data } = useGetPastAgenda(Number(dogId));
+interface PastAgendaBottomSheetProps extends IBottomSheetProps {
+  data: IPastAgenda[];
+}
+
+const PastAgendaBottomSheet = ({ isOpen, close, data }: PastAgendaBottomSheetProps) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const TITLE_LIST = ["알림장", "간식", "배변 상태"];
   const today = format(new Date(), "M월 dd일");
@@ -47,8 +48,8 @@ const PastAgendaBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
                     {title}
                     <Badge text="오늘 알림장에 붙여넣기" variant="brown" />
                   </S.TitleAndButton>
-                  {index === 2 && <PoopBox selected={data[selectedIndex].poop as IPoop} />}
-                  <S.TextSpan>{data && data[selectedIndex].agendaNote}</S.TextSpan>
+                  {index === 2 && <PoopBox selected={data[selectedIndex]?.poop as IPoop} />}
+                  <S.TextSpan>{data && data[selectedIndex]?.agendaNote}</S.TextSpan>
                 </S.AgendaItem>
               );
             })}
