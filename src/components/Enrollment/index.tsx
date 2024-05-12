@@ -24,20 +24,10 @@ interface IEnrollmentFormProps {
 }
 
 // TODO: page 컴포넌트에서 조합해서 사용하기!
-// TODO 새로 리팩톨이된 신청서 페이지를 기반으로 수정하기
 const EnrollmentForm = ({ isMemberAddDog }: IEnrollmentFormProps) => {
-  const memberEnrollmentSchool = useRecoilValue(memberEnrollmentSchoolAtom);
-  const commonSchoolId = useRecoilValue(schoolIdAtom) ?? -1;
-  const schoolId =
-    isMemberAddDog && memberEnrollmentSchool
-      ? Number(memberEnrollmentSchool.schoolId)
-      : commonSchoolId; // isMemberAddDog에 따라 데이터 다르게 표시(임시)
-  const { memberId } = useParams();
-  const { data } = useGetEnrollment({
-    memberId: `${memberId ? memberId : 1}`,
-    schoolId: schoolId
-  });
-
+  const schoolId = useRecoilValue(schoolIdAtom) ?? -1;
+  const { memberId } = useParams(); // memberId (mypage에서 추출)
+  const { data } = useGetEnrollment({ memberId: `${memberId ? memberId : 1}`, schoolId });
   const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
 
   const methods = useForm({

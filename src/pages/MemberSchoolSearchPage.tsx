@@ -1,11 +1,20 @@
+import { PATH } from "constants/path";
+
 import Header from "components/common/Header";
-import SchoolSearch from "components/Member/SchoolInfo/SchoolSearch";
+import { useParams, useNavigate } from "react-router-dom";
+
+import SearchSchoolPage from "./SignUpPage/SearchSchoolPage";
 
 const MemberSchoolSearchPage = () => {
+  const { memberId } = useParams();
+  const navigate = useNavigate();
+  const handleGotoPage = () => {
+    navigate(PATH.MEMBER_MY_ENROLLMENT(String(memberId)));
+  };
   return (
     <>
       <Header type="back" />
-      <SchoolSearch />
+      <SearchSchoolPage type="MEMBER" onNextStep={handleGotoPage} />
     </>
   );
 };
