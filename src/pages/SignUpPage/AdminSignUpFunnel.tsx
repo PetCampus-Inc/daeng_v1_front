@@ -12,7 +12,7 @@ import RoleSelectPage from "./RoleSelectPage";
 import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
 import SearchSchoolPage from "./SearchSchoolPage";
 
-export enum Role {
+export enum AdminRole {
   TEACHER = "TEACHER",
   OWNER = "OWNER"
 }
@@ -43,14 +43,14 @@ const AdminSignUpFunnel = () => {
     }
   );
 
-  const [role, setRole] = useState<Role | null>(null);
+  const [role, setRole] = useState<AdminRole | null>(null);
 
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange"
   });
 
-  const handleRoleSelection = (role: Role) => {
+  const handleRoleSelection = (role: AdminRole) => {
     setRole(role);
     if (role === "TEACHER") {
       setStep(유치원_검색);
@@ -59,7 +59,7 @@ const AdminSignUpFunnel = () => {
     }
   };
 
-  const handleNextStep = () => {
+  const handleAccountSettingStep = () => {
     if (role === "TEACHER") {
       setStep(승인상태);
     } else {
@@ -78,17 +78,20 @@ const AdminSignUpFunnel = () => {
         </Funnel.Step>
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={유치원_검색}>
-          <SearchSchoolPage type={Role.TEACHER} onNextStep={() => setStep(회원정보_입력)} />
+          <SearchSchoolPage type={AdminRole.TEACHER} onNextStep={() => setStep(회원정보_입력)} />
         </Funnel.Step>
         <Funnel.Step name={회원정보_입력}>
           <AdminInfoPage onNextStep={() => setStep(계정설정)} />
         </Funnel.Step>
         <Funnel.Step name={계정설정}>
-          <AccountSettingPage type={role as Role} onNextStep={handleNextStep} />
+          <AccountSettingPage type={role as AdminRole} onNextStep={handleAccountSettingStep} />
         </Funnel.Step>
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={승인상태}>
-          <ApprovalStatusPage />
+          <ApprovalStatusPage
+            onSearchSchoolClick={() => setStep(유치원_검색)}
+            onSelectRoleClick={() => setStep(역할_선택)}
+          />
         </Funnel.Step>
         {/* role: OWNER인 경우 */}
         <Funnel.Step name={유치원_등록}>
