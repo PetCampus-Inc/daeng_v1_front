@@ -44,14 +44,9 @@ export const handlePostMemberDogDelete = async (
   memberId: string,
   dogId: string
 ): Promise<IResponse> => {
-  const url = `/member/delete/dog`;
-  const { data } = await customAxios.post(url, {
-    params: {
-      memberId,
-      dogId
-    }
-  });
-  return data;
+  const url = `/member/delete/dog?memberId=${memberId}&dogId=${dogId}`;
+  const { data } = await customAxios.post(url);
+  return data.data;
 };
 
 // 견주 상세 정보 수정

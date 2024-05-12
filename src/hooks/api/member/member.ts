@@ -65,14 +65,14 @@ export const usePostMemberProfileInfo = (memberId: string) => {
 };
 
 // 강아지 삭제
-export const usePostMemberDogDelete = (memberId: string, dogId: string) => {
+export const usePostMemberDogDelete = (memberId: string) => {
   const queryClient = useQueryClient();
   const memberDogDeletMutation = useMutation({
-    mutationFn: () => handlePostMemberDogDelete(memberId, dogId),
+    mutationFn: (dogId: string) => handlePostMemberDogDelete(memberId, dogId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
     }
   });
 
-  return { mutateAttend: memberDogDeletMutation.mutate };
+  return memberDogDeletMutation.mutate;
 };
