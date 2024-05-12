@@ -13,7 +13,7 @@ import DirectionButton from "../button/DirectionButton";
 
 interface ApprovalSuccessProps {
   schoolName?: string;
-  adminId?: string;
+  adminId?: number;
   onNextStep?: () => void;
 }
 

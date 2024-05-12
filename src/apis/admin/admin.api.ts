@@ -83,13 +83,13 @@ export const postTeacherSignUp = async (req: ITeacherSignUpInfo): Promise<ITeach
 };
 
 // 선생님 회원가입 요청 취소
-export const postTeacherSignUpCancel = async (id: string): Promise<void> => {
+export const postTeacherSignUpCancel = async (adminId: number): Promise<void> => {
   const url = `admin/cancel/teacher/approval`;
   return await request<void>({
     url,
     method: "POST",
-    data: {
-      adminId: id
+    params: {
+      adminId
     }
   });
 };

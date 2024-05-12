@@ -8,7 +8,7 @@ import { schoolIdAtom } from "store/form";
 
 interface SearchSchoolPageProps {
   type: "TEACHER" | "MEMBER";
-  onNextStep: () => void;
+  onNextStep: (id: number) => void;
 }
 
 // TODO: useFormProvider 이용!!
@@ -16,10 +16,6 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
   const schoolId = useRecoilValue(schoolIdAtom);
 
   const [searchText, setSearchText] = useState("");
-
-  const handleNextStep = () => {
-    onNextStep();
-  };
 
   return (
     <>
@@ -38,7 +34,7 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
           <StyledButton
             type="button"
             bg="primaryColor"
-            onClick={handleNextStep}
+            onClick={() => onNextStep(schoolId ?? -1)}
             disabled={!schoolId || !searchText}
           >
             <Text
