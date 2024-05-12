@@ -32,15 +32,24 @@ interface Props {
   text?: string;
   rightElement?: React.ReactNode;
   transparent?: boolean;
+  shadow?: boolean;
 }
 
-const Header = ({ type, handleClick, actionFn, text, rightElement, transparent }: Props) => {
+const Header = ({
+  type,
+  handleClick,
+  actionFn,
+  text,
+  rightElement,
+  transparent,
+  shadow
+}: Props) => {
   const navigate = useNavigate();
 
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
     <Container className={transparent ? "transparent" : ""}>
-      <HeaderWrapper className={transparent ? "transparent" : ""}>
+      <HeaderWrapper className={transparent || shadow ? "transparent" : ""}>
         {type === "main" && (
           <TextWrapper>
             <TextButton type="button" onClick={handleClick}>

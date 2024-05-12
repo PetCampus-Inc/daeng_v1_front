@@ -66,7 +66,7 @@ const DogWaitingIcon = () => {
       <path
         d="M32.3886 78.3864L34.9422 80.676L38.6047 76.5238"
         stroke="white"
-        stroke-width="1.27118"
+        strokeWidth="1.27118"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
@@ -80,7 +80,7 @@ const DogWaitingIcon = () => {
       <path
         d="M35.1074 95.2854L37.661 97.5749L41.3234 93.4228"
         stroke="white"
-        stroke-width="1.27118"
+        strokeWidth="1.27118"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
@@ -163,9 +163,9 @@ const DogWaitingIcon = () => {
           width="110.402"
           height="117.076"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -191,9 +191,9 @@ const DogWaitingIcon = () => {
           width="35.9431"
           height="16.4995"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"

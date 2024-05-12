@@ -1,5 +1,10 @@
 import customAxios from "libs/CustomAxios";
-import { IMemberInfo, IMemberProfileInfo, IMemberProfilePostInfo } from "types/member/home.types";
+import {
+  IMemberInfo,
+  IMemberProfileInfo,
+  IMemberProfilePostInfo,
+  IMainAlbum
+} from "types/member/home.types";
 import { IResponse } from "types/Response.type";
 
 export const handleLoginResult = async (): Promise<IResponse> => {
@@ -14,6 +19,16 @@ export const handleGetMemberInfo = async (memberId: string): Promise<IMemberInfo
   const { data } = await customAxios.get(url, {
     params: {
       memberId
+    }
+  });
+  return data.data;
+};
+
+export const handleGetMainAlbum = async (req: IMainAlbum) => {
+  const url = `member/main/album?dogId=${req.dogId}`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      date: req.date
     }
   });
   return data.data;

@@ -12,7 +12,7 @@ import type { FieldValues, UseFormSetValue } from "react-hook-form";
 interface PostcodeProps extends IBottomSheetProps {
   field: string;
   setValue: UseFormSetValue<FieldValues>;
-  setIsAddressActive: Dispatch<SetStateAction<boolean>>;
+  setIsAddressActive?: Dispatch<SetStateAction<boolean>>;
 }
 
 const Postcode = ({ isOpen, close, field, setValue, setIsAddressActive }: PostcodeProps) => {
@@ -32,7 +32,7 @@ const Postcode = ({ isOpen, close, field, setValue, setIsAddressActive }: Postco
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
     setValue(field, fullAddress);
-    setIsAddressActive(true);
+    setIsAddressActive?.(true);
     close();
   };
 

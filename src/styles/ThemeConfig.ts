@@ -52,7 +52,7 @@ export const ThemeConfig = {
 
   shadows: {
     upper: "0px 5px 10px rgba(0, 0, 0, 0.04)",
-    card: "0px 8px 15px  0px rgba(0, 0, 0, 0.04)",
+    card: "0px 8px 15px 0px rgba(0, 0, 0, 0.04)",
     smallMenu: "-2px 8px 30px 45px rgba(0, 0, 0, 0.35)",
     alertCard: "0px 8px 15px 10px rgba(156, 155, 155, 0.07)",
     overlap: "-4px 0px 12px rgba(0,0,0,0.35)",
@@ -78,7 +78,8 @@ export const ThemeConfig = {
     label2_14_M: typoCreator("14px", 500, "0.28px", "25px"),
     label2_14_R: typoCreator("14px", 400, "0.28px", "20px"),
     caption1_12_R: typoCreator("12px", 400, "-0.12px", "17.5px"),
-    caption1_12_B: typoCreator("12px", 700, "0.24px", "20px")
+    caption1_12_B: typoCreator("12px", 700, "0.24px", "20px"),
+    caption1_10_R: typoCreator("10px", 400, "-0.12px", "17.5px")
   }
 };
 

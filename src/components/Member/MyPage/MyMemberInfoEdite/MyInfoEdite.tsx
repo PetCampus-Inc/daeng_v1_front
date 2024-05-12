@@ -2,16 +2,15 @@ import { GENDER_DATA } from "constants/gender";
 import { ITEM_KEYS } from "constants/item";
 import { PHONE_REGEX } from "constants/validCheck";
 
+import { Text } from "components/common";
+import { TextInput } from "components/common";
 import { Flex } from "components/common/Flex";
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import SearchInputField from "components/common/Input/SearchInputField";
 import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
-import Typo from "components/common/Typo";
 import * as useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { ThemeConfig } from "styles/ThemeConfig";
 import { IMemberInfoEdite } from "types/Member.type";
 import { formatPhoneNumber } from "utils/formatter";
 
@@ -57,11 +56,13 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
   return (
     <S.ProfileEditeWrapper>
       <Flex direction="column" gap={7}>
-        <Typo text="이름" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <InputField
+        <Text typo="label2_14_R" color="darkBlack">
+          이름
+        </Text>
+        <TextInput
           name="memberName"
           register={register}
-          isRequired
+          required
           placeholder="견주 이름을 입력해주세요"
           defaultValue={memberData.memberName}
           value={watch("memberName")}
@@ -73,7 +74,9 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="성별" color={ThemeConfig.colors.darkBlack} size="14px" />
+        <Text typo="label2_14_R" color="darkBlack">
+          성별
+        </Text>
         <SingleRadio
           name="memberGender"
           radiosText={["남", "여"]}
@@ -82,7 +85,9 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="주소" color={ThemeConfig.colors.darkBlack} size="14px" />
+        <Text typo="label2_14_R" color="darkBlack">
+          주소
+        </Text>
         <SearchInputField
           name={addressStreet}
           register={register}
@@ -91,13 +96,13 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           onClear={handleClear}
           defaultValue={memberData.address}
           value={watchAddress}
-          isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
+          required={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
           inputType="memberEdite"
           className="defaultValue"
         />
-        <InputField
+        <TextInput
           name="address.detail"
           register={register}
           defaultValue={memberData.addressDetail}
@@ -111,12 +116,15 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="연락처" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <InputField
+        <Text typo="label2_14_R" color="darkBlack">
+          연락처
+        </Text>
+        <TextInput
           name="phoneNumber"
           register={register}
-          isRequired
-          pattern={PHONE_REGEX}
+          rules={{
+            pattern: PHONE_REGEX
+          }}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
           defaultValue={memberData.phoneNumber}
@@ -125,17 +133,21 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           onFocus={handleFocus}
           onBlur={handleBlur}
           className="defaultValue"
+          required
         />
       </Flex>
 
       <Flex direction="column" gap={7}>
-        <Typo text="비상 연락처" color={ThemeConfig.colors.darkBlack} size="14px" />
-        <InputField
+        <Text typo="label2_14_R" color="darkBlack">
+          비상 연락처
+        </Text>
+        <TextInput
           name="emergencyNumber"
           register={register}
-          isRequired
-          pattern={PHONE_REGEX}
           onChange={handleChangeNumber("emergencyNumber")}
+          rules={{
+            pattern: PHONE_REGEX
+          }}
           placeholder="비상 연락처를 입력해주세요"
           defaultValue={memberData.emergencyPhoneNumber}
           value={watch("emergencyNumber")}
@@ -143,6 +155,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           onFocus={handleFocus}
           onBlur={handleBlur}
           className="defaultValue"
+          required
         />
       </Flex>
     </S.ProfileEditeWrapper>

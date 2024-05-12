@@ -1,6 +1,6 @@
+import AttendCareEmpty from "components/Admin/AttendCare/AttendCareEmpty";
 import AttendCareInit from "components/Admin/AttendCare/AttendCareInit";
 import AttendCareMain from "components/Admin/AttendCare/AttendCareMain";
-import AttendCareNoResult from "components/Admin/AttendCare/AttendCareNoResult";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import { useGetCareDogList } from "hooks/api/admin/care";
@@ -16,11 +16,8 @@ const AttendCarePage = () => {
 
   const { data } = useGetCareDogList(adminId, initialData);
 
-  // FIXME: 출석한 강아지가 없는 경우 [] 임.
-  // FIXME: get 강아지관리 api 수정되면 []로 최초진입 구분하기!!
-  const noCareDog = data.some((dog) => dog.adminName === null);
-  const isFirstVisit = noCareDog;
-  const hasNoCaredDog = data.length === 0;
+  const isFirstVisit = data.some((dog) => dog.adminName === null);
+  const isEmptyDog = data.length === 0;
 
   return (
     <>
@@ -28,8 +25,8 @@ const AttendCarePage = () => {
       <PageContainer color={isFirstVisit ? "white" : "BGray"} pt="2">
         {isFirstVisit ? (
           <AttendCareInit />
-        ) : hasNoCaredDog ? (
-          <AttendCareNoResult />
+        ) : isEmptyDog ? (
+          <AttendCareEmpty />
         ) : (
           <AttendCareMain data={data} />
         )}

@@ -1,6 +1,7 @@
 import { request } from "libs/CustomAxios/request";
-import { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.type";
-import { IResponse } from "types/helper.type";
+
+import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.type";
+import type { IResponse } from "types/helper.type";
 
 export const handleGetPrincipalInfo = async (adminId: number): Promise<IOwnerInfo> => {
   const url = `admin/owner/mypage`;

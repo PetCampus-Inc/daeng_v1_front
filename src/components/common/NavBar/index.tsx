@@ -16,9 +16,15 @@ const Navbar = ({ type, show, attendance }: Props) => {
   const path: string = usePathParams();
 
   return (
-    <S.Container>
-      {path.includes("/mypage")
-        ? MENU_ITEMS.member.map((menuItem, index) => (
+    <S.Container radius={`${path.includes("/admin") ? "0" : "20px 20px 0 0"}`}>
+      {path.includes("/admin")
+        ? MENU_ITEMS.admin.map((menuItem) => (
+            <S.NavButton key={menuItem.text} to={menuItem.path}>
+              {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
+              <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
+            </S.NavButton>
+          ))
+        : MENU_ITEMS.member.map((menuItem, index) => (
             <React.Fragment key={menuItem.text}>
               <S.NavButton to={String(menuItem.path)}>
                 {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
@@ -26,12 +32,6 @@ const Navbar = ({ type, show, attendance }: Props) => {
               </S.NavButton>
               {index === 0 && <S.Circle />}
             </React.Fragment>
-          ))
-        : MENU_ITEMS.admin.map((menuItem) => (
-            <S.NavButton key={menuItem.text} to={menuItem.path}>
-              {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
-              <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
-            </S.NavButton>
           ))}
     </S.Container>
   );

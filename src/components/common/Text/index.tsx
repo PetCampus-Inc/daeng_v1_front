@@ -1,27 +1,37 @@
-import { type ForwardedRef, type HTMLAttributes, type ReactNode, forwardRef } from "react";
+import { forwardRef, Children, isValidElement, ElementType } from "react";
 
-import { type IStyledTextProps, StyledText } from "./styles";
+import { type IStyledTextProps, StyledText, type StyledEmEmProps, StyledEm } from "./styles";
 
-export type TextProps = {
-  as?: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  children: ReactNode;
-} & HTMLAttributes<HTMLSpanElement> &
-  IStyledTextProps;
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../polymorphic";
 
-export const Text = forwardRef(function Text(
-  {
-    as = "span",
-    children,
-    typo = "body2_16_R",
-    color = "black",
-    isEllipsis = false,
-    ...props
-  }: TextProps,
-  ref: ForwardedRef<HTMLSpanElement>
+export type TextProps<C extends ElementType = "span"> = PolymorphicComponentPropsWithRef<
+  C,
+  IStyledTextProps & StyledEmEmProps
+>;
+
+export const Text = forwardRef(function Text<C extends ElementType = "span">(
+  props: TextProps<C>,
+  ref?: PolymorphicRef<C>
 ) {
+  const { as, color, typo, isEllipsis, children, ...rest } = props;
+
+  const styledChildren = Children.map(children, (child) => {
+    if (isValidElement(child) && child.type === "em") {
+      const color = child.props.color;
+      return <StyledEm color={color}>{child.props.children}</StyledEm>;
+    }
+    return child;
+  });
+
   return (
-    <StyledText ref={ref} as={as} color={color} typo={typo} isEllipsis={isEllipsis} {...props}>
-      {children}
+    <StyledText ref={ref} as={as} color={color} typo={typo} isEllipsis={isEllipsis} {...rest}>
+      {styledChildren}
     </StyledText>
   );
 });
+
+Text.defaultProps = {
+  as: "span",
+  typo: "body2_16_R",
+  isEllipsis: false
+};

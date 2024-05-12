@@ -1,14 +1,20 @@
+import { Text } from "components/common";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { TColor } from "styles/ThemeConfig";
+import { remCalc } from "utils/calculator";
 
 export const Container = styled.div<{ padding_top?: string }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   width: 100%;
-  height: 100%;
-  padding-top: ${(props) => (props.padding_top ? props.padding_top : "40%")};
-  padding-left: 5%;
-  padding-right: 5%;
+  height: 100dvh;
+  padding-top: ${remCalc(108)};
+  padding-bottom: ${remCalc(24)};
+  padding-inline: ${remCalc(18)};
   background-color: ${(props) => props.theme.colors.white};
-  justify-content: space-evenly;
 `;
 
 export const TextWrapper = styled.div<{ direction?: string; height?: string }>`
@@ -31,19 +37,18 @@ export const Keyword = styled.span`
 `;
 
 export const ButtonWrapper = styled.div`
-  height: 65%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 8px;
+
+  margin-top: 60%;
+  margin-bottom: ${remCalc(36)};
 `;
 
-export const StyledImage = styled.img<{
-  src: string;
-  alt: string;
-}>`
-  position: absolute;
-  left: 0;
-  padding-left: 10%;
+export const StyledImage = styled.img`
+  margin-right: auto;
+  display: inline-block;
 `;
 
 export const StyledBottomWrapper = styled.div`
@@ -83,4 +88,50 @@ export const StyledLink = styled(Link)`
   &:visited {
     color: ${(props) => props.theme.colors.gray_2};
   }
+`;
+
+interface ButtonProps {
+  bg: TColor | string;
+  borderColor?: TColor | string;
+}
+
+export const StyledButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !["bg", "borderColor"].includes(prop)
+})<ButtonProps>`
+  width: 100%;
+  padding-block: ${remCalc(12)};
+  padding-inline: ${remCalc(14)};
+  background-color: ${(props) =>
+    props.theme.colors[props.bg] ? props.theme.colors[props.bg] : props.bg};
+  border: 1px solid
+    ${(props) =>
+      props.borderColor
+        ? props.theme.colors[props.borderColor]
+          ? props.theme.colors[props.borderColor]
+          : props.borderColor
+        : "transparent"};
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.gray_5};
+    color: ${(props) => props.theme.colors.gray_2};
+    cursor: not-allowed;
+  }
+
+  &:disabled > .inactive {
+    color: ${(props) => props.theme.colors.gray_2};
+  }
+
+  transition-duration: 0.2s;
+  transition-property: background-color, color;
+  transition-timing-function: ease-out;
+`;
+
+export const StyledText = styled(Text)`
+  width: 100%;
 `;

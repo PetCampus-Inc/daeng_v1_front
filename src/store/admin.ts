@@ -1,9 +1,9 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
+import type { TAdminLoginInfo } from "types/admin/admin.type";
 import type { IAttendDogInfo, ITicketDetail } from "types/admin.attendance.type";
 import type { INewEnrollmentList } from "types/Admin.type";
-import type { TAdminLoginInfo } from "types/admin.userInfo.type";
 
 const { persistAtom } = recoilPersist();
 

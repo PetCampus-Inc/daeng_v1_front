@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ radius?: string }>`
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px 0 15px;
-
+  border-radius: ${(props) => (props.radius ? props.radius : "")};
   box-shadow: ${({ theme }) => theme.shadows.bottomTab};
   z-index: 5;
 `;

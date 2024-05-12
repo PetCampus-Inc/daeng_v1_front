@@ -1,8 +1,8 @@
 import { ITEM_KEYS } from "constants/item";
 
+import { TextInput } from "components/common";
 import ImageUpload from "components/common/ImageUpload";
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import SearchInputField from "components/common/Input/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
@@ -18,7 +18,7 @@ const DogInfo = ({ item }: DogInfoProps) => {
     <>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.DOG_NAME)}>이름</Title>
-        <InputField name="dogName" placeholder="강아지 이름을 입력해주세요" readOnly />
+        <TextInput name="dogName" placeholder="강아지 이름을 입력해주세요" readOnly />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.DOG_GENDER)}>성별</Title>

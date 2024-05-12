@@ -6,7 +6,7 @@ import {
   handlePostApproveTeacher,
   handlePostDenyForm,
   handlePostDenyTeacher
-} from "apis/admin.api";
+} from "apis/admin/admin.api";
 import showToast from "utils/showToast";
 
 export const useApproveFormMutation = () => {

@@ -18,7 +18,6 @@ const BreedDropDown = ({ dropDownList, setIsOpen, value, setValue }: IBreedDropd
     e.stopPropagation();
     setValue("newBreed", item.breedName);
     setValue("breedId", item.breedId);
-    console.log("닫힘!!");
     setIsOpen(false);
   };
 

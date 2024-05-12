@@ -1,5 +1,5 @@
 import { request } from "libs/CustomAxios/request";
-import { ICareDogInfo, ICareDogProps } from "types/admin/care.types";
+import { ICareDogInfo, ICareDogProps, ICareTempSave, IPastAgenda } from "types/admin/care.types";
 import { IResponse } from "types/helper.type";
 
 export const handleGetCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
@@ -37,4 +37,54 @@ export const handleDeleteCareDogs = async (req: ICareDogProps): Promise<void> =>
       attendanceIdList: req.selectedDogId
     }
   });
+};
+
+// 알림장 임시저장
+export const handleTempSaveCareDog = async (req: ICareTempSave) => {
+  const url = "school/agenda/tempsave";
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      agendaId: req.agendaId,
+      adminId: req.adminId,
+      dogId: req.dogId,
+      agendaNote: req.agendaNote,
+      snack: req.snack,
+      poop: req.poop,
+      poopMemo: req.poopMemo
+    }
+  });
+};
+
+// 알림장 가져오기
+export const handleGetAgenda = async (dogId: number): Promise<ICareTempSave> => {
+  const url = `school/agenda?dogId=${dogId}`;
+  const { data } = await request<IResponse<ICareTempSave>>({ url });
+  return data;
+};
+
+// 알림장 전송
+export const handleSendAgenda = async (req: ICareTempSave) => {
+  const url = "school/agenda/send";
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      agendaId: req.agendaId,
+      adminId: req.adminId,
+      dogId: req.dogId,
+      agendaNote: req.agendaNote,
+      snack: req.snack,
+      poop: req.poop,
+      poopMemo: req.poopMemo
+    }
+  });
+};
+
+// 지난 알림장 가져오기
+export const handleGetPastAgenda = async (dogId: number): Promise<IPastAgenda[]> => {
+  const url = `school/agenda/past?dogId=${dogId}`;
+  const { data } = await request<IResponse<IPastAgenda[]>>({ url });
+  return data;
 };

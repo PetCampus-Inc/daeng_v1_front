@@ -19,8 +19,8 @@ import {
   StyledTitleContainer
 } from "./styles";
 
+import type { TRole } from "types/admin/admin.type";
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.type";
-import type { TRole } from "types/admin.userInfo.type";
 
 const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: string }) => {
   return (
