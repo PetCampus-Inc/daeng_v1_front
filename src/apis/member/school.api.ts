@@ -1,4 +1,5 @@
 import customAxios from "libs/CustomAxios";
+import { IMemberSchoolInfo } from "types/member/school.types";
 
 import type { IRequestAdminEnrollment, IResponseAdminForm } from "types/admin/enrollment.types";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
@@ -84,6 +85,17 @@ export const handlePostAdminForm = async (
   const url = `school/form`;
   const { data } = await customAxios.post(url, {
     ...requestProps
+  });
+  return data.data;
+};
+
+// 유치원 정보
+export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolInfo> => {
+  const url = `/member/school`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      dogId
+    }
   });
   return data.data;
 };
