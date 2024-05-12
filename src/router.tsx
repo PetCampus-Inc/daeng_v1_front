@@ -275,6 +275,61 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       ),
       children: [
         {
+          path: PATH.MEMBER_MY_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberMyPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_INFO_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberMyInfoPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_INFO_EDITE_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberMyInfoEditePage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_SCHOOL_INFO(),
+          element: (
+            <Suspense>
+              <Pages.MemberSchoolInfoPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_SCHOOL_SEARCH(),
+          element: (
+            <Suspense>
+              <Pages.MemberSchoolSearchPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_ENROLLMENT(),
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentFormDogAddPage />
+            </Suspense>
+          )
+        }
+      ]
+    },
+    {
+      path: PATH.ROOT,
+      element: <App />,
+      errorElement: <Pages.NotFoundPage />,
+      children: [
+        {
           index: true,
           element: (
             <Suspense>
@@ -303,14 +358,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.MEMBER_MY_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyPage />
-            </Suspense>
-          )
-        },
-        {
           path: PATH.POLICY,
           element: (
             <Suspense>
@@ -331,30 +378,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: (
             <Suspense>
               <Pages.UnregisterSuccessPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_MY_INFO_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyInfoPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_MY_INFO_EDITE_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyInfoEditePage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_MY_SCHOOL_INFO,
-          element: (
-            <Suspense>
-              <Pages.MemberSchoolInfoPage />
             </Suspense>
           )
         },

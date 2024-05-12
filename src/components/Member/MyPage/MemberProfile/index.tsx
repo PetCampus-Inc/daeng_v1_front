@@ -1,26 +1,33 @@
+import { PATH } from "constants/path";
+import { RELATION_DATA } from "constants/relation";
+
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
+import { IMemberInfo } from "types/member/home.types";
 
 import * as S from "./styles";
 
-// TODO API 데이터에 따라 타입 수정 필요
-// interface MemberInfoProps {
-//   data: ITeacherInfo;
-// }
+interface MemberInfoProps {
+  data: IMemberInfo;
+  memberId: string;
+}
 
-const MemberProfile = () => {
+const MemberProfile = ({ data, memberId }: MemberInfoProps) => {
   return (
     <S.ProfileWrapper>
       <S.ProfileImage
-        src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        //FIXME memberProfileUri url 연결 필요
+        src={`${!data.memberProfileUri ? data.memberProfileUri : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}`}
         alt="member-image"
       />
       <S.ProfileDetail>
         <S.DetailItem>
-          <S.GotoInfoButton>
-            <S.Text className="name">뽀뽀의 언니</S.Text>
+          <S.GotoInfoButton to={PATH.MEMBER_MY_INFO_PAGE(memberId)}>
+            <S.Text className="name">
+              {data.memberNickName}의 {RELATION_DATA[data.relation]}
+            </S.Text>
             <ArrowRightSquare />
           </S.GotoInfoButton>
-          <S.Text className="number">박유빈</S.Text>
+          <S.Text className="number">{data.memberName}</S.Text>
         </S.DetailItem>
       </S.ProfileDetail>
     </S.ProfileWrapper>

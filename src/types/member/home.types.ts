@@ -1,6 +1,9 @@
+import { IResponse } from "types/Response.type";
+
 export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
 export type TImageType = "IMAGE" | "PROFILE";
+export type TDogStatus = "ENROLLED" | "DROP_OUT" | "APPROVAL_PENDING";
 
 export interface IHome {
   dogId: number;
@@ -20,7 +23,49 @@ export interface ImageList {
   comment?: string;
   createdTime: string;
 }
+interface IDoglist {
+  dogId: string;
+  dogName: string;
+  dogProfile: string;
+  status: TDogStatus;
+  schoolId: number;
+  schoolName: string;
+  registeredDate: number[];
+  dropOutDate: number[];
+}
+export interface IMemberInfo extends IResponse {
+  memberId: string;
+  memberName: string;
+  memberNickName: string;
+  memberProfileUri: string;
+  relation: string;
+  doglist: IDoglist[];
+}
 
+export interface IMemberProfileInfo extends IResponse {
+  memberId: string;
+  memberName: string;
+  memberGender: string;
+  nickName: string;
+  address: string;
+  addressDetail: string;
+  phoneNumber: string;
+  emergencyPhoneNumber: string;
+  relation: string;
+}
+
+export interface IMemberProfilePostInfo {
+  memberId: string;
+  memberName: string;
+  memberGender: string;
+  memberProfileUri?: string;
+  nickName: string;
+  address: string;
+  addressDetail: string;
+  phoneNumber: string;
+  emergencyPhoneNumber: string;
+  relation: string;
+}
 export interface IMainAlbumData extends Omit<ImageList, "createdTime"> {
   createdTime: number[];
 }

@@ -25,6 +25,12 @@ export const QUERY_KEY = {
   NEW_CARE_DOG_LIST: ["newCareDogList"], // 새로운 강아지 관리 리스트
   PRINCIPAL_INFO: ["principalInfo"], // 원장 마이페이지 데이터
   TEACHER_INFO: ["teacherInfo"], // 선상님 마이페이지 데이터
+  MEMBER_INFO: (memberId: string) => ["memberInfo", memberId], // 견주 정보 데이터
+  MEMBER_MAIN_DOG_INFO: (memberId: string) => ["memberMainDogInfo", memberId], // 견주의 강아지 리스트
+  MEMBER_PROFILE_INFO: (memberId: string) => ["memberProfileInfo", memberId], // 견주의 상제 정보 데이터
+  SHCOOL_INFO_LIST: ["shcollInfoList"],
+  MEMBER_MAIN_DOG_LIST: ["memberMainDogInfo"],
+  MEMBER_SCHOOL_INFO: (dogId: string) => ["memberSchoolInfo", dogId], // 유치원 정보
   CARE_DOG_TEMP_SAVE: ["careDogTempSave"], // 강아지 알림장 임시저장
   CARE_DOG_AGENDA_SAVED: ["careDogAgendaSaved"], // 강아지 알림장 불러오기
   CARE_DOG_PAST_AGENDA: ["careDogPastAgenda"], // 강아지 지난 알림장 불러오기

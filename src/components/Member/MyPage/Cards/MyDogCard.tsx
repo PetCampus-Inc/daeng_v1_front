@@ -1,34 +1,46 @@
+import { PATH } from "constants/path";
+
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import BasicModal from "components/common/ButtonModal/BasicModal";
-import * as useOverlay from "hooks/common/useOverlay";
+import { usePostMemberDogDelete } from "hooks/api/member/member";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
 interface IMyDogCardProps {
+  dogId: string;
   isOpen: boolean;
   dogName: string;
   schoolInfo: string;
-  createdTime: string;
+  registeredDate: string[];
   profileUri: string;
+  status: string;
   dogLength: number;
-  id: number;
 }
 
 const MyDogCard = ({
+  dogId,
   isOpen,
   dogName,
   schoolInfo,
-  createdTime,
+  registeredDate,
   profileUri,
-  dogLength,
-  id
+  status,
+  dogLength
 }: IMyDogCardProps) => {
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
-  const overlay = useOverlay.useOverlay();
+  const registeredTime =
+    registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
+  const { memberId } = useParams();
+  const navigate = useNavigate();
+  const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
+  const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -39,6 +51,18 @@ const MyDogCard = ({
         subtitle="최소 한 마리의 강아지를 남겨주세요"
         actionText="닫기"
         actionFn={close}
+      />
+    ));
+
+  const openAlertPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AlertBottomSheet
+        isOpen={isOpen}
+        close={close}
+        title="등록된 유치원이 없어요"
+        subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
+        actionText="가입하기"
+        actionFn={() => navigate(PATH.MEMBER_MY_SCHOOL_SEARCH(String(memberId)))}
       />
     ));
 
@@ -59,8 +83,8 @@ const MyDogCard = ({
     ));
 
   const handleDeleteDog = () => {
-    //TODO 강아지 리스트에서 삭제하기
-    console.log("삭제");
+    //TODO 강아지 리스트에서 삭제되는지 테스트 필요
+    mutateMemberDogDelete(dogId);
     showToast("강아지가 삭제되었습니다", "bottom");
   };
 
@@ -69,7 +93,7 @@ const MyDogCard = ({
   };
 
   return (
-    <S.MyDogCard tabIndex={id} ref={divRef} onClick={handleCardFocus}>
+    <S.MyDogCard tabIndex={dogLength} ref={divRef} onClick={handleCardFocus}>
       {isOpen && (
         <S.DeleteButton onClick={dogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
           삭제
@@ -77,11 +101,17 @@ const MyDogCard = ({
       )}
       <S.InfoTextBox>
         <S.DogName>{dogName}</S.DogName>
-        <S.GotoSchoolInfoButton>
-          <span>{schoolInfo}</span>
-          {!isOpen && <ArrowRightIcon />}
-        </S.GotoSchoolInfoButton>
-        <S.DateText>{createdTime} 등록</S.DateText>
+        {status === "DROP_OUT" ? (
+          <S.GotoSchoolInfoButton pr="0" onClick={openAlertPopup}>
+            <span>등록된 유치원 없음</span>
+          </S.GotoSchoolInfoButton>
+        ) : (
+          <S.GotoSchoolInfoButton onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}>
+            <span>{schoolInfo} 유치원</span>
+            {!isOpen && <ArrowRightIcon />}
+          </S.GotoSchoolInfoButton>
+        )}
+        <S.DateText>{registeredTime} 등록</S.DateText>
       </S.InfoTextBox>
       <S.MyDogImg src={profileUri} alt="my-dog" />
     </S.MyDogCard>

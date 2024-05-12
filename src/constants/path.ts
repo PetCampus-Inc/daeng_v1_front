@@ -37,11 +37,16 @@ export const PATH = {
   SETTING: "/setting", // 설정 페이지
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
   POLICY: "/policy", // 정책 페이지
+  ENROLL: "/enrollment", // 견주 가입신청서
+  MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
+  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
+  MEMBER_MY_INFO_EDITE_PAGE: (memberId?: string) =>
+    `/mypage/${memberId ?? ":memberId"}/profile/edite`,
+  MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/mypage/${dogId ?? ":dogId"}/school`,
+  MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
+    `/mypage/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
+  MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
   REGISTRATION_STATUS: `/approve`, // 가입신청 승인 상태
-  MEMBER_MY_PAGE: "/mypage",
   REDIRECT: "/login/oauth2/code/:provider",
-  MEMBER_MY_INFO_PAGE: "/myPage/profile",
-  MEMBER_MY_INFO_EDITE_PAGE: "/myPage/profile/edite",
-  MEMBER_MY_SCHOOL_INFO: "/myPage/school",
   MEMBER_DOG_INFO_PAGE: "/dogInfo"
 } as const;

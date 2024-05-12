@@ -1,5 +1,6 @@
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
+import { IMemberSchoolInfo } from "types/member/school.types";
 
 import type { IRequestAdminEnrollment, IResponseAdminForm } from "types/admin/enrollment.types";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
@@ -87,5 +88,29 @@ export const handlePostAdminForm = async (requestProps: IRequestAdminEnrollment)
   const { data } = await customAxios.post(url, {
     ...requestProps
   });
+  return data.data;
+};
+
+// 유치원 정보
+export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolInfo> => {
+  const url = `/member/school`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      dogId
+    }
+  });
+  return data.data;
+};
+
+// 유치원 연결 끊기
+export const handlePostMemberDogSchool = async (dogId: string): Promise<void> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};
+
+export const handleGetSearchResult = async (searchText: string): Promise<ISchoolInfo[]> => {
+  const url = `school/search?searchText=${searchText}`;
+  const { data } = await customAxios.get(url);
   return data.data;
 };
