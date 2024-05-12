@@ -1,3 +1,5 @@
+import BoneIcon from "assets/svg/bone-icon";
+import PoopStatusIcon from "assets/svg/poop-status-icon";
 import PoopBox from "components/common/PoopBox";
 import TextArea from "components/common/TextArea";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
@@ -30,7 +32,7 @@ const WriteNotice = () => {
     const poopMemo = methods.getValues("poopMemo");
 
     return {
-      agendaId: 6,
+      agendaId: data.agendaId,
       adminId: adminId,
       dogId: Number(dogId),
       agendaNote,
@@ -47,6 +49,44 @@ const WriteNotice = () => {
   const handleSend = debounce(() => {
     mutateSendAgenda(agendaData());
   }, 1000);
+
+  if (data?.status === "COMPLETE") {
+    return (
+      <S.CompleteNoteContainer>
+        <S.NoteSpring />
+        <S.NoteInnerContainer>
+          <S.NoteTitleWrapper>
+            <S.NoteText className="title main">전송된 알림장</S.NoteText>
+            <S.NoteText className="date">{data.dateTime}</S.NoteText>
+          </S.NoteTitleWrapper>
+
+          <S.NoteText className="content">
+            {data.agendaNote ?? "알림장 내용이 없습니다."}
+          </S.NoteText>
+          <S.NoteContentFlexBox>
+            <S.NoteText className="title content">
+              <BoneIcon />
+              간식
+            </S.NoteText>
+            <S.NoteText className="content">
+              {data.snack ?? "간식 관련 내용이 없습니다."}
+            </S.NoteText>
+          </S.NoteContentFlexBox>
+
+          <S.NoteContentFlexBox>
+            <S.NoteText className="title content">
+              <PoopStatusIcon />
+              배변 상태
+            </S.NoteText>
+            <S.NoteText className="content">
+              {data.poopMemo ?? "배변 상태 관련 내용이 없습니다."}.
+            </S.NoteText>
+            <PoopBox selected={data.poop} />
+          </S.NoteContentFlexBox>
+        </S.NoteInnerContainer>
+      </S.CompleteNoteContainer>
+    );
+  }
 
   return (
     <S.FlexContainer>
