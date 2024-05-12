@@ -1,7 +1,7 @@
 import { ADMIN_SIGN_UP_STEP } from "constants/step";
 
 import { useFunnel } from "hooks/common/useFunnel";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import AccountSettingPage from "./AccountSettingPage";
@@ -12,9 +12,18 @@ import RoleSelectPage from "./RoleSelectPage";
 import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
 import SearchSchoolPage from "./SearchSchoolPage";
 
+import type { Role } from "types/admin/admin.type";
+
 export enum AdminRole {
   TEACHER = "TEACHER",
   OWNER = "OWNER"
+}
+
+export interface ITeacherInfo {
+  schoolId?: number;
+  schoolName?: string;
+  role?: Role;
+  adminId?: number;
 }
 
 const AdminSignUpFunnel = () => {
@@ -27,7 +36,8 @@ const AdminSignUpFunnel = () => {
     승인상태,
     유치원_등록완료
   } = ADMIN_SIGN_UP_STEP;
-  const [Funnel, setStep] = useFunnel(
+
+  const [Funnel, state, setState] = useFunnel(
     [
       역할_선택,
       유치원_검색,
@@ -41,29 +51,58 @@ const AdminSignUpFunnel = () => {
       initialStep: 역할_선택,
       stepQueryKey: "step"
     }
-  );
-
-  const [role, setRole] = useState<AdminRole | null>(null);
+  ).withState<{
+    role?: Partial<AdminRole>;
+    teacherInfo?: ITeacherInfo;
+  }>({});
 
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange"
   });
 
+  // 역할 선택 처리
   const handleRoleSelection = (role: AdminRole) => {
-    setRole(role);
-    if (role === "TEACHER") {
-      setStep(유치원_검색);
+    setState((prev) => ({
+      ...prev,
+      role: role,
+      step: role === AdminRole.TEACHER ? 유치원_검색 : 회원정보_입력
+    }));
+  };
+
+  // 회원 정보 입력 단계 처리
+  const handleAdminInfoStep = () => {
+    if (state.role === AdminRole.TEACHER) {
+      setState((prev) => ({
+        ...prev,
+        step: 계정설정
+      }));
     } else {
-      setStep(회원정보_입력);
+      setState((prev) => ({
+        ...prev,
+        step: 계정설정
+      }));
     }
   };
 
-  const handleAccountSettingStep = () => {
-    if (role === "TEACHER") {
-      setStep(승인상태);
+  // 계정 설정 단계 처리
+  const handleAccountSettingStep = (data: ITeacherInfo) => {
+    if (state.role === AdminRole.TEACHER) {
+      setState((prev) => ({
+        ...prev,
+        teacherInfo: {
+          ...prev.teacherInfo,
+          role: data.role,
+          adminId: data.adminId,
+          schoolName: data.schoolName
+        },
+        step: 승인상태
+      }));
     } else {
-      setStep(유치원_등록);
+      setState((prev) => ({
+        ...prev,
+        step: 유치원_등록
+      }));
     }
   };
 
@@ -78,24 +117,40 @@ const AdminSignUpFunnel = () => {
         </Funnel.Step>
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={유치원_검색}>
-          <SearchSchoolPage type={AdminRole.TEACHER} onNextStep={() => setStep(회원정보_입력)} />
+          <SearchSchoolPage
+            type={AdminRole.TEACHER}
+            onNextStep={(schoolId) =>
+              setState((prev) => ({
+                ...prev,
+                step: 회원정보_입력,
+                teacherInfo: { ...prev.teacherInfo, schoolId: schoolId }
+              }))
+            }
+          />
         </Funnel.Step>
         <Funnel.Step name={회원정보_입력}>
-          <AdminInfoPage onNextStep={() => setStep(계정설정)} />
+          <AdminInfoPage onNextStep={handleAdminInfoStep} />
         </Funnel.Step>
         <Funnel.Step name={계정설정}>
-          <AccountSettingPage type={role as AdminRole} onNextStep={handleAccountSettingStep} />
+          <AccountSettingPage
+            type={state.role}
+            info={state.teacherInfo}
+            onNextStep={handleAccountSettingStep}
+          />
         </Funnel.Step>
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={승인상태}>
           <ApprovalStatusPage
-            onSearchSchoolClick={() => setStep(유치원_검색)}
-            onSelectRoleClick={() => setStep(역할_선택)}
+            info={state.teacherInfo}
+            onSearchSchoolClick={() => setState((prev) => ({ ...prev, step: 유치원_검색 }))}
+            onSelectRoleClick={() => setState((prev) => ({ ...prev, step: 역할_선택 }))}
           />
         </Funnel.Step>
         {/* role: OWNER인 경우 */}
         <Funnel.Step name={유치원_등록}>
-          <EnrollSchoolPage onNextStep={() => setStep(유치원_등록완료)} />
+          <EnrollSchoolPage
+            onNextStep={() => setState((prev) => ({ ...prev, step: 유치원_등록완료 }))}
+          />
         </Funnel.Step>
         <Funnel.Step name={유치원_등록완료}>
           <SchoolRegistrationCompletePage />
