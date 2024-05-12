@@ -4,7 +4,7 @@ import EnrollmentForm from "components/Enrollment";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const EnrollmentFormMemberDogAddPage = () => {
+const MemberEnrollmentFormDogAddPage = () => {
   const navigate = useNavigate();
   const overlay = useOverlay();
   const isMypage = useLocation()
@@ -24,4 +24,4 @@ const EnrollmentFormMemberDogAddPage = () => {
   );
 };
 
-export default EnrollmentFormMemberDogAddPage;
+export default MemberEnrollmentFormDogAddPage;

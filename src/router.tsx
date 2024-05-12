@@ -318,7 +318,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           path: PATH.MEMBER_MY_ENROLLMENT(),
           element: (
             <Suspense>
-              <Pages.EnrollmentFormMemberDogAddPage />
+              <Pages.MemberEnrollmentFormDogAddPage />
             </Suspense>
           )
         }
