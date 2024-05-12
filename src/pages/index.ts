@@ -20,6 +20,7 @@ export { default as AttendCareDeletePage } from "./AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogGalleryPage";
 export { default as NewTicketPage } from "./NewTicketPage";
 export { default as MemberMyPage } from "./MemberMyPage";
+export { default as AttendCareNoticePage } from "./AttendCareNoticePage";
 export { default as MemberMyInfoPage } from "./MemberMyInfoPage";
 export { default as MemberMyInfoEditePage } from "./MemberMyInfoEditePage";
 export { default as MemberSchoolInfoPage } from "./MemberSchoolInfoPage";

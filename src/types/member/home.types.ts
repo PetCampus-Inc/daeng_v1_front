@@ -20,3 +20,12 @@ export interface ImageList {
   comment?: string;
   createdTime: string;
 }
+
+export interface IMainAlbumData extends Omit<ImageList, "createdTime"> {
+  createdTime: number[];
+}
+
+export interface IMainAlbum {
+  dogId: number;
+  date?: string;
+}
