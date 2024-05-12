@@ -23,7 +23,7 @@ const MemberProfile = ({ data, memberId }: MemberInfoProps) => {
         <S.DetailItem>
           <S.GotoInfoButton to={PATH.MEMBER_MY_INFO_PAGE(memberId)}>
             <S.Text className="name">
-              {data.doglist[0].dogName}의 {RELATION_DATA[data.relation]}
+              {data.memberNickName}의 {RELATION_DATA[data.relation]}
             </S.Text>
             <ArrowRightSquare />
           </S.GotoInfoButton>
