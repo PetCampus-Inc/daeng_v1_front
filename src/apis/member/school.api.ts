@@ -99,3 +99,10 @@ export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolI
   });
   return data.data;
 };
+
+// 유치원 연결 끊기
+export const handlePostMemberDogSchool = async (dogId: string): Promise<IResponse> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.post(url);
+  return data;
+};

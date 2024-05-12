@@ -4,7 +4,6 @@ import { IMemberInfo } from "types/member/home.types";
 import * as S from "./styles";
 import AddMyDogCard from "../Cards/AddMyDogCard";
 import MyDogCard from "../Cards/MyDogCard";
-import RejectedCard from "../Cards/RejectedCard";
 import WaitingCard from "../Cards/WaitingCard";
 
 interface MemberInfoProps {
@@ -23,6 +22,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     arrows: false
   };
 
+  // TODO 반복되는 코드 리팩토링 작업 필요
   return (
     <S.DogInfoContainer>
       <S.TitleBox>
@@ -33,7 +33,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.MyDogInfoList>
           {data.doglist.map((item) => (
             <>
-              {item.status === "ENROLLED" && (
+              {item.dogId && (
                 <MyDogCard
                   key={item.dogName}
                   dogId={item.dogId}
@@ -54,7 +54,6 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               {item.status === "APPROVAL_PENDING" && (
                 <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
               )}
-              {item.status === "DROP_OUT" && <RejectedCard />}
             </>
           ))}
           <AddMyDogCard />
@@ -63,7 +62,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.CarouselSlider {...settings}>
           {data.doglist.map((item) => (
             <>
-              {item.status === "ENROLLED" && (
+              {item.dogId && (
                 <MyDogCard
                   key={item.dogName}
                   dogId={item.dogId}
@@ -84,7 +83,6 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               {item.status === "APPROVAL_PENDING" && (
                 <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
               )}
-              {item.status === "DROP_OUT" && <RejectedCard />}
             </>
           ))}
           <AddMyDogCard />
