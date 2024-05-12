@@ -2,6 +2,7 @@ import { useMemo, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { Funnel, FunnelProps, Step } from "./Funnel";
+import { useQueryParam } from "../useQueryParams";
 
 import type { NonEmptyArray } from "./types";
 
@@ -68,26 +69,3 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
 
   return [FunnelComponent, setStep] as const;
 };
-
-interface Options<T> {
-  parser?: (val: string) => T;
-  required?: boolean;
-}
-
-function useQueryParam<T = string>(name: string): T | undefined;
-function useQueryParam<T = string>(name: string, options: Options<T> & { required: true }): T;
-function useQueryParam<T = string>(name: string, options?: Options<T>) {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const value = queryParams.get(name);
-
-  if (options?.required && value === null) {
-    `${name} is required`;
-  }
-
-  if (options?.parser && value !== null) {
-    return options.parser(value);
-  }
-
-  return value;
-}
