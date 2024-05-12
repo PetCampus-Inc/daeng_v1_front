@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 
 type ButtonProps = {
   type?: "button" | "submit";
-  onNextStep: () => void;
+  onNextStep: (data: any) => void;
 };
 
 const NextButton = ({ onNextStep, type, children }: PropsWithChildren<ButtonProps>) => {
