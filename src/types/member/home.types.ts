@@ -3,7 +3,7 @@ import { IResponse } from "types/Response.type";
 export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
 export type TImageType = "IMAGE" | "PROFILE";
-export type TDogStatus = "ENROLLED" | "DROP_OUT";
+export type TDogStatus = "ENROLLED" | "DROP_OUT" | "APPROVAL_PENDING";
 
 export interface IHome {
   dogId: number;

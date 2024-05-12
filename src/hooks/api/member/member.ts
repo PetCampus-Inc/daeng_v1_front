@@ -4,6 +4,7 @@ import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-q
 import {
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
+  handlePostMemberDogEnrollment,
   handleMemberInfoResult
 } from "apis/member/member.api";
 import { handleGetSchoolInfo } from "apis/member/school.api";
@@ -30,6 +31,23 @@ export const useGetMemberProfileInfo = (memberId: string) => {
     queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId),
     queryFn: () => handleGetMemberProfileInfo(memberId)
   });
+};
+
+// 견주 가입신청서 취소
+export const usePostMemberDogEnrollment = (memberId: string) => {
+  const queryClient = useQueryClient();
+  const enrollMemberDOgMutation = useMutation({
+    mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+      console.log("성공");
+    },
+    onError: (err) => {
+      console.log(err);
+    }
+  });
+
+  return enrollMemberDOgMutation.mutate;
 };
 
 // 견주 상세 정보 수정
