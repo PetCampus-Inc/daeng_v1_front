@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import Header from "components/common/Header";
 import { useParams, useNavigate } from "react-router-dom";
 
-import SearchSchoolPage from "./SignUpPage/SearchSchoolPage";
+import SearchSchoolPage from "../SignUpPage/SearchSchoolPage";
 
 const MemberSchoolSearchPage = () => {
   const { memberId } = useParams();
