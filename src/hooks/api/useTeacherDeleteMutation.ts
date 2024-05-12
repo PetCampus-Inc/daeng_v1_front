@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { handleDeleteTeacher } from "apis/admin.api";
+import { handleDeleteTeacher } from "apis/admin/admin.api";
 
 const useTeacherDeleteMutation = () => {
   return useMutation({

@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
 import { remCalc } from "utils/calculator";
+import { isNumber } from "utils/typeGuard";
 
-import type { BoxBorderProps, BoxOptions } from "./types";
+import type { BoxBorderProps, BoxOptions, BoxStyleProps } from "./types";
 
 const getBorderRadiusStyle = ({ borderRadius }: Pick<BoxBorderProps, "borderRadius">) => {
   switch (borderRadius) {
@@ -19,6 +20,31 @@ const getBorderRadiusStyle = ({ borderRadius }: Pick<BoxBorderProps, "borderRadi
       `;
   }
 };
+
+const getWidthSize = ({ width }: Pick<BoxStyleProps, "width">) => {
+  switch (width) {
+    case "full":
+      return "100%";
+    case "auto":
+      return "auto";
+    default:
+      return width;
+  }
+};
+
+const getHeightSize = ({ height }: Pick<BoxStyleProps, "height">) => {
+  switch (height) {
+    case "full":
+      return "100vh";
+    case "auto":
+      return "auto";
+    default:
+      return height;
+  }
+};
+
+export const getPosition = (position: string | number) =>
+  isNumber(position) ? remCalc(position) : position;
 
 export const StyledBox = styled.div.withConfig({
   shouldForwardProp: (prop) =>
@@ -59,12 +85,26 @@ export const StyledBox = styled.div.withConfig({
       "backgroundColor",
       "color",
       "position",
-      "overflow"
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "overflow",
+      "textAlign",
+      "direction",
+      "justify",
+      "align",
+      "flex"
     ].includes(prop)
 })<BoxOptions>`
   display: ${({ display }) => (display ? display : undefined)};
-  width: ${({ width }) => (width ? width : undefined)};
-  height: ${({ height }) => (height ? height : undefined)};
+  flex-direction: ${({ direction }) => (direction ? direction : undefined)};
+  flex: ${({ flex }) => (flex ? flex : undefined)};
+  justify-content: ${({ justify }) => (justify ? justify : undefined)};
+  align-items: ${({ align }) => (align ? align : undefined)};
+
+  width: ${({ width }) => (width ? getWidthSize({ width }) : undefined)};
+  height: ${({ height }) => (height ? getHeightSize({ height }) : undefined)};
   margin: ${({ margin }) => (margin ? margin : undefined)};
   margin-right: ${({ mr, marginRight }) =>
     mr ? remCalc(mr) : marginRight ? remCalc(marginRight) : undefined};
@@ -89,15 +129,20 @@ export const StyledBox = styled.div.withConfig({
   padding-block: ${({ paddingBlock }) => (paddingBlock ? remCalc(paddingBlock) : undefined)};
   border: ${({ border }) => (border ? `${border}px solid` : undefined)};
   ${getBorderRadiusStyle};
+  border-top: ${({ borderTop }) => (borderTop ? `${borderTop}px solid` : undefined)};
+  border-right: ${({ borderRight }) => (borderRight ? `${borderRight}px solid` : undefined)};
+  border-bottom: ${({ borderBottom }) => (borderBottom ? `${borderBottom}px solid` : undefined)};
+  border-left: ${({ borderLeft }) => (borderLeft ? `${borderLeft}px solid` : undefined)};
   border-color: ${({ borderColor, theme }) =>
     borderColor ? theme.colors[borderColor] : undefined};
-  border-top: ${({ borderTop }) => (borderTop ? `${borderTop}px` : undefined)};
-  border-right: ${({ borderRight }) => (borderRight ? `${borderRight}px` : undefined)};
-  border-bottom: ${({ borderBottom }) => (borderBottom ? `${borderBottom}px` : undefined)};
-  border-left: ${({ borderLeft }) => (borderLeft ? `${borderLeft}px` : undefined)};
   background-color: ${({ bg, backgroundColor, theme }) =>
     bg ? theme.colors[bg] : backgroundColor ? theme.colors[backgroundColor] : undefined};
   color: ${({ color, theme }) => (color ? theme.colors[color] : undefined)};
-  position: ${({ position }) => (position ? `${position}` : undefined)};
-  overflow: ${({ overflow }) => (overflow ? `${overflow}` : undefined)};
+  position: ${({ position }) => (position ? position : undefined)};
+  top: ${({ top }) => (top ? getPosition(top) : "")};
+  bottom: ${({ bottom }) => (bottom ? getPosition(bottom) : "")};
+  left: ${({ left }) => (left ? getPosition(left) : "")};
+  right: ${({ right }) => (right ? getPosition(right) : "")};
+  overflow: ${({ overflow }) => (overflow ? overflow : undefined)};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : undefined)};
 `;

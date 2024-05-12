@@ -1,6 +1,7 @@
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
+import { TextInput } from "components/common";
 import StringDropdown from "components/common/Dropdown";
-import InputField, { InputFieldProps } from "components/common/InputField";
+import { type InputFieldProps } from "components/common/Input/TextInputField";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { useRef, useState } from "react";
 import { FieldValues, UseFormSetValue, UseFormWatch } from "react-hook-form";
@@ -42,7 +43,7 @@ const SelectNumber = ({
   return (
     <Container ref={dropDownRef}>
       <InputWrapper onClick={() => isSetDropdownOpen(!isDropdownOpen)}>
-        <InputField
+        <TextInput
           {...props}
           name={name}
           disabled={disabled}

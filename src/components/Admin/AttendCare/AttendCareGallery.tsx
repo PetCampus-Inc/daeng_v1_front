@@ -1,5 +1,4 @@
 import { Upload } from "components/Admin/AttendCare/upload/FileUpload";
-import { StyledThumbList } from "components/Admin/AttendCare/upload/styles";
 import Thumbnail from "components/Admin/AttendCare/upload/Thumbnail";
 import { IFile } from "components/Admin/AttendCare/upload/types";
 import { Flex, Text } from "components/common";
@@ -8,6 +7,7 @@ import { ChangeEvent, useState } from "react";
 import { remCalc } from "utils/calculator";
 import { getFilePreview } from "utils/thumb";
 
+import { StyledThumbList } from "./upload/styles";
 import { Box } from "../../common/Box";
 
 const AttendCareGallery = () => {

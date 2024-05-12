@@ -2,6 +2,7 @@ import { PATH } from "constants/path";
 
 import { QueryClient } from "@tanstack/react-query";
 import * as Pages from "pages";
+import LoaderErrorPage from "pages/LoaderErrorPage";
 import { Suspense } from "react";
 import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -9,6 +10,7 @@ import caredogLoader from "routes/caredogLoader";
 import { adminLoginInfoAtom } from "store/admin";
 import { isTRole } from "utils/typeGuard";
 
+import ApiErrorBoundary from "./ApiErrorBoundary";
 import App from "./App";
 
 const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
@@ -16,9 +18,21 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const router = createBrowserRouter([
     {
       path: PATH.ADMIN,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
+      element: (
+        <ApiErrorBoundary>
+          <App />
+        </ApiErrorBoundary>
+      ),
+      errorElement: <LoaderErrorPage />,
       children: [
+        {
+          path: PATH.ADMIN_LOGIN,
+          element: <Pages.AdminLoginPage />
+        },
+        {
+          path: PATH.ADMIN_SIGNUP,
+          element: <Pages.AdminSignupPage />
+        },
         {
           path: PATH.ADMIN_ATTENDANCE,
           children: [
@@ -253,32 +267,12 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       }
     },
     {
-      path: PATH.SETTING,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
-      children: [
-        {
-          path: PATH.SETTING,
-          element: (
-            <Suspense>
-              <Pages.SettingPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.SETTING_NOTIFICATION,
-          element: (
-            <Suspense>
-              <Pages.SettingNotificationPage />
-            </Suspense>
-          )
-        }
-      ]
-    },
-    {
       path: PATH.ROOT,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
+      element: (
+        <ApiErrorBoundary>
+          <App />
+        </ApiErrorBoundary>
+      ),
       children: [
         {
           index: true,
@@ -292,7 +286,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           path: PATH.LOGIN,
           element: (
             <Suspense>
-              <Pages.SignInPage />
+              <Pages.LoginPage />
             </Suspense>
           )
         },
@@ -301,10 +295,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: <Pages.SignUpPage />
         },
         {
-          path: PATH.ENROLL,
+          path: PATH.REGISTRATION_STATUS,
           element: (
             <Suspense>
-              <Pages.EnrollmentPage />
+              <Pages.RegistrationStatus />
             </Suspense>
           )
         },
@@ -363,6 +357,44 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberSchoolInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.SETTING,
+
+          children: [
+            {
+              path: PATH.SETTING,
+              element: (
+                <Suspense>
+                  <Pages.SettingPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.SETTING_NOTIFICATION,
+              element: (
+                <Suspense>
+                  <Pages.SettingNotificationPage />
+                </Suspense>
+              )
+            }
+          ]
+        },
+        {
+          path: PATH.MEMBER_DOG_INFO_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberDogInfoPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.REDIRECT,
+          element: <Pages.RedirectPage />
+        },
+        {
+          path: "*",
+          element: <Pages.NotFoundPage />
         }
       ],
       loader: () => {
