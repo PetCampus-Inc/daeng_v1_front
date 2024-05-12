@@ -8,8 +8,8 @@ import type { LayoutType, TPaddingOptions } from "./types";
 export const getPadding = ({ pt, pb, pl, pr, type }: TPaddingOptions & LayoutType) => {
   if (type === "page") {
     return css`
-      padding-top: ${pt ? `calc(5vh + ${remCalc(pt)})` : "calc(5vh)"};
-      padding-bottom: ${pb ? `calc(7vh + ${remCalc(pb)})` : "0"};
+      padding-top: ${pt ? `calc(5vh + ${remCalc(pt)})` : "5vh"};
+      padding-bottom: ${pb ? `calc(7vh + ${remCalc(pb)})` : remCalc(24)};
       padding-left: ${pl ? remCalc(pl) : "1rem"};
       padding-right: ${pr ? remCalc(pr) : "1rem"};
     `;
