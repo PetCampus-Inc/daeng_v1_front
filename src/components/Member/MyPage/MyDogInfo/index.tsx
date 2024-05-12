@@ -33,7 +33,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.MyDogInfoList>
           {data.doglist.map((item) => (
             <>
-              {item.status === "ENROLLED" && (
+              {item.dogId && (
                 <MyDogCard
                   key={item.dogName}
                   dogId={item.dogId}
@@ -54,7 +54,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               {item.status === "APPROVAL_PENDING" && (
                 <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
               )}
-              {item.status === "DROP_OUT" && <RejectedCard />}
+              {/* {item.status === "DROP_OUT" && <RejectedCard />} */}
             </>
           ))}
           <AddMyDogCard />
@@ -63,7 +63,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.CarouselSlider {...settings}>
           {data.doglist.map((item) => (
             <>
-              {item.status === "ENROLLED" && (
+              {item.dogId && (
                 <MyDogCard
                   key={item.dogName}
                   dogId={item.dogId}
@@ -84,7 +84,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               {item.status === "APPROVAL_PENDING" && (
                 <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
               )}
-              {item.status === "DROP_OUT" && <RejectedCard />}
+              {/* {item.status === "DROP_OUT" && <RejectedCard />} */}
             </>
           ))}
           <AddMyDogCard />
