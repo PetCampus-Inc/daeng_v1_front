@@ -56,11 +56,6 @@ const AdminSignUpFunnel = () => {
     teacherInfo?: ITeacherInfo;
   }>({});
 
-  const methods = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange"
-  });
-
   // 역할 선택 처리
   const handleRoleSelection = (role: AdminRole) => {
     setState((prev) => ({
@@ -105,6 +100,11 @@ const AdminSignUpFunnel = () => {
       }));
     }
   };
+
+  const methods = useForm({
+    mode: "onSubmit",
+    reValidateMode: "onChange"
+  });
 
   // 역할 선택 페이지 role: TEACHER -> 유치원 검색 페이지 -> 회원정보 입력 페이지 -> 계정 설정 페이지 -> 승인 상태 페이지(최종)
   // 역할 선택 페이지 role: OWNER -> 회원정보 입력 페이지 -> 계정 설정 페이지 -> 유치원 등록 페이지 -> 유치원 등록 완료 페아지(최종)

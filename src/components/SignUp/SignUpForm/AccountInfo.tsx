@@ -31,6 +31,10 @@ const AccountInfo = () => {
     }
   }, [id, idFieldState.isDirty]);
 
+  const handlePasswordChange = async () => {
+    clearErrors("pwd");
+  };
+
   const handleCheckId = () => {
     const idValue = getValues("id");
     mutateCheckId(idValue, {
@@ -99,11 +103,15 @@ const AccountInfo = () => {
           register={register}
           placeholder="영문 대소문자, 숫자포함 8~20자"
           className={errors.pwd ? "error-input" : ""}
+          onChange={(e) => {
+            register("pwd").onChange(e);
+            handlePasswordChange();
+          }}
           autoComplete="new-password"
           rules={{
             pattern: {
               value: PW_REGEX,
-              message: "영문 대소문자, 숫자포함 8~20자로 입력해주세요."
+              message: "잘못된 비밀번호 입니다."
             }
           }}
           required
