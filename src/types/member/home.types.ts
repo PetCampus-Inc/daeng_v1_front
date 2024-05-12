@@ -25,7 +25,7 @@ export interface ImageList {
 }
 
 interface IDoglist {
-  dogId: number;
+  dogId: string;
   dogName: string;
   dogProfile: string;
   status: TDogStatus;
@@ -35,10 +35,22 @@ interface IDoglist {
   dropOutDate: number[];
 }
 export interface IMemberInfo extends IResponse {
-  memberId: number;
+  memberId: string;
   memberName: string;
   memberNickName: string;
   memberProfileUri: string;
   relation: string;
   doglist: IDoglist[];
+}
+
+export interface IMemberProfileInfo extends IResponse {
+  memberId: string;
+  memberName: string;
+  memberGender: string;
+  nickName: string;
+  address: string;
+  addressDetail: string;
+  phoneNumber: string;
+  emergencyNumber: string;
+  relation: string;
 }

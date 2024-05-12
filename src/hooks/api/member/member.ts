@@ -1,8 +1,8 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetMemberInfo } from "apis/member/member.api";
 import { handleGetSchoolInfo } from "apis/member/school.api";
+import { handleGetMemberInfo, handleGetMemberProfileInfo } from "apis/member/member.api";
 
 export const useGetMemberInfo = (memberId: string) => {
   return useSuspenseQuery({
@@ -11,9 +11,15 @@ export const useGetMemberInfo = (memberId: string) => {
   });
 };
 
+
 export const useGetMemberSchoolInfo = (dogId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_SCHOOL_INFO(dogId),
     queryFn: () => handleGetSchoolInfo(dogId)
+
+export const useGetMemberProfileInfo = (memberId: string) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId),
+    queryFn: () => handleGetMemberProfileInfo(memberId)
   });
 };

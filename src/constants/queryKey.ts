@@ -27,4 +27,5 @@ export const QUERY_KEY = {
   MEMBER_INFO: (memberId: string) => ["memberInfo", memberId], // 견주 정보 데이터
   MEMBER_MAIN_DOG_INFO: (memberId: string) => ["memberMainDogInfo", memberId], // 견주의 강아지 리스트
   MEMBER_SCHOOL_INFO: (dogId: string) => ["memberSchoolInfo", dogId] // 유치원 정보
+  MEMBER_PROFILE_INFO: (memberId: string) => ["memberProfileInfo", memberId] // 견주의 상제 정보 데이터
 };

@@ -12,7 +12,7 @@ import showToast from "utils/showToast";
 import * as S from "./styles";
 
 interface IMyDogCardProps {
-  dogId: number;
+  dogId: string;
   isOpen: boolean;
   dogName: string;
   schoolInfo: string;
