@@ -4,8 +4,10 @@ import NextButton from "components/SignUp/SignUpForm/NextButton";
 import PersonalInfo from "components/SignUp/SignUpForm/PersonalInfo";
 import { memo } from "react";
 
+import type { ITeacherInfo } from "./AdminSignUpFunnel";
+
 interface IStepProps {
-  onNextStep: () => void;
+  onNextStep: (data: ITeacherInfo) => void;
 }
 
 const AdminInfoPage = ({ onNextStep }: IStepProps) => {
