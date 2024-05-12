@@ -1,12 +1,12 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useQuery } from "@tanstack/react-query";
-import { handleGetNewEnrollment } from "apis/admin/admin.api";
+import { getNewEnrollment } from "apis/admin/admin.api";
 
 const useGetNewEnrollment = (adminId: number, schoolId: number) => {
   return useQuery({
     queryKey: QUERY_KEY.NEW_ENROLLMENT_LIST(adminId),
-    queryFn: () => handleGetNewEnrollment(adminId, schoolId),
+    queryFn: () => getNewEnrollment(adminId, schoolId),
     enabled: false
   });
 };
