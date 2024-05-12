@@ -1,8 +1,9 @@
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import NextButton from "components/SignUp/form/NextButton";
-import PersonalInfo from "components/SignUp/form/PersonalInfo";
+import NextButton from "components/SignUp/SignUpForm/NextButton";
+import PersonalInfo from "components/SignUp/SignUpForm/PersonalInfo";
 import { memo } from "react";
+
 interface IStepProps {
   onNextStep: () => void;
 }
