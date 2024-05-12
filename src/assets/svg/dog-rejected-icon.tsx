@@ -1,12 +1,6 @@
-const DogRejectedIcon = () => {
+const DogRejectedIcon = ({ w = 130, h = 112 }) => {
   return (
-    <svg
-      width="130"
-      height="112"
-      viewBox="0 0 130 112"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width={w} height={h} viewBox="0 0 130 112" fill="none" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="109.969" cy="19" rx="13" ry="12.6667" fill="#DD5435" />
       <path
         fill-rule="evenodd"
