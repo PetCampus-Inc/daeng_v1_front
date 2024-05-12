@@ -26,6 +26,10 @@ export const Input = styled.input<InputFieldStyleProps>`
     color: ${({ theme }) => theme.colors.gray_3};
   }
 
+  &.defaultValue {
+    color: ${({ theme }) => theme.colors.gray_1};
+  }
+
   &.default {
     color: ${({ theme }) => theme.colors.gray_3};
   }
