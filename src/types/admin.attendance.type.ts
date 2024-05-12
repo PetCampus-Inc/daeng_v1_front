@@ -64,7 +64,7 @@ export interface IDogInfoAgenda {
   date: string;
 }
 
-export type IPoop = "HARD" | "HEALTHY" | "NOT_BROWN" | "WATERY" | "WARNING" | null;
+export type IPoop = "HARD" | "HEALTHY" | "NOT_BROWN" | "WATERY" | "WARNING" | undefined | string;
 
 export interface ITicketDetail {
   ticketType: string;

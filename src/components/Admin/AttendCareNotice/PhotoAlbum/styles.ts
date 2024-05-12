@@ -5,3 +5,7 @@ export const SentPhotosText = styled.p`
   ${({ theme }) => theme.typo.body2_16_B};
   padding-bottom: 1.25rem;
 `;
+
+export const Container = styled.div`
+  padding-top: 1.25rem;
+`;

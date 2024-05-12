@@ -58,9 +58,9 @@ export const handleTempSaveCareDog = async (req: ICareTempSave) => {
 };
 
 // 알림장 가져오기
-export const handleGetAgenda = async (dogId: number): Promise<ICareTempSave> => {
+export const handleGetAgenda = async (dogId: number): Promise<IPastAgenda> => {
   const url = `school/agenda?dogId=${dogId}`;
-  const { data } = await request<IResponse<ICareTempSave>>({ url });
+  const { data } = await request<IResponse<IPastAgenda>>({ url });
   return data;
 };
 

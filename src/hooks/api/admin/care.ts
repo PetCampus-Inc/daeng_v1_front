@@ -120,7 +120,7 @@ export const useTempSaveCareDog = () => {
 
 // 강아지 알림장 정보 가져오기
 export const useGetAgendaSaved = (dogId: number) => {
-  return useSuspenseQuery<ICareTempSave>({
+  return useSuspenseQuery<IPastAgenda>({
     queryKey: QUERY_KEY.CARE_DOG_AGENDA_SAVED,
     queryFn: () => handleGetAgenda(dogId)
   });

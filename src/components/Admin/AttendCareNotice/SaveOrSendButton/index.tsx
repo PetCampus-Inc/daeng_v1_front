@@ -9,7 +9,7 @@ const SaveOrSendButton = ({ save, send }: SaveOrSendButtonProps) => {
   return (
     <S.ButtonWrapper>
       <S.PrevButton onClick={save}>임시저장 </S.PrevButton>
-      <S.Button onSubmit={send}>전송하기</S.Button>
+      <S.Button onClick={send}>전송하기</S.Button>
     </S.ButtonWrapper>
   );
 };
