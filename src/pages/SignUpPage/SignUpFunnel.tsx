@@ -10,23 +10,26 @@ const SignUpFunnel = () => {
   const { 유치원_검색, 가입신청서_작성 } = SIGN_UP_STEP;
   const funnelSteps = [유치원_검색, 가입신청서_작성] as const;
 
-  const [Funnel, setStep] = useFunnel(funnelSteps, {
+  const [Funnel, state, setState] = useFunnel(funnelSteps, {
     initialStep: 유치원_검색,
     stepQueryKey: "step"
-  });
-
-  const handleNextStep = () => {
-    setStep(가입신청서_작성);
-  };
+  }).withState<{
+    schoolId?: number;
+  }>({});
 
   return (
     <Funnel>
       <Funnel.Step name={유치원_검색}>
-        <SearchSchoolPage type="MEMBER" onNextStep={handleNextStep} />
+        <SearchSchoolPage
+          type="MEMBER"
+          onNextStep={(schoolId) =>
+            setState((prev) => ({ ...prev, step: 가입신청서_작성, schoolId }))
+          }
+        />
       </Funnel.Step>
       <Funnel.Step name={가입신청서_작성}>
         <Suspense>
-          <EnrollmentPage />
+          <EnrollmentPage schoolId={state.schoolId} />
         </Suspense>
       </Funnel.Step>
     </Funnel>
