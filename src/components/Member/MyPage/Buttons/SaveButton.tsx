@@ -22,7 +22,7 @@ const SaveButton = () => {
   const relation = watch("relation");
 
   const updatedMemberInfo = {
-    memberId: Number(memberId),
+    memberId: String(memberId),
     memberName: memberName,
     memberGender: memberGender,
     memberProfileUri: "s3_uri_yubin's_cute_face", // TODO 데이터 연동 필요

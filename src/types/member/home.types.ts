@@ -44,7 +44,7 @@ export interface IMemberInfo extends IResponse {
 }
 
 export interface IMemberProfileInfo extends IResponse {
-  memberId: string | number;
+  memberId: string;
   memberName: string;
   memberGender: string;
   nickName: string;
@@ -56,7 +56,7 @@ export interface IMemberProfileInfo extends IResponse {
 }
 
 export interface IMemberProfilePostInfo {
-  memberId: string | number;
+  memberId: string;
   memberName: string;
   memberGender: string;
   memberProfileUri?: string;
