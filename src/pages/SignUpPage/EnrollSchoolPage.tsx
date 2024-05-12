@@ -1,7 +1,7 @@
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import NextButton from "components/SignUp/form/NextButton";
-import SchoolInfo from "components/SignUp/form/SchoolInfo";
+import NextButton from "components/SignUp/SignUpForm/NextButton";
+import SchoolInfo from "components/SignUp/SignUpForm/SchoolInfo";
 import { useOwnerSinUp } from "hooks/api/signup";
 import { type FieldValues, useFormContext } from "react-hook-form";
 
