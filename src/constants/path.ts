@@ -40,8 +40,9 @@ export const PATH = {
   MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
   REDIRECT: "/auth/:provider",
   MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
-  MEMBER_MY_INFO_EDITE_PAGE: "/mypage/profile/edite",
-  MEMBER_MY_SCHOOL_INFO: "/mypage/school",
+  MEMBER_MY_INFO_EDITE_PAGE: (memberId?: string) =>
+    `/mypage/${memberId ?? ":memberId"}/profile/edite`,
+  MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/mypage/${dogId ?? ":dogId"}/school`,
   MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
     `/mypage/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
   MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment` // 강아지 추가

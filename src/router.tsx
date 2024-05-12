@@ -280,7 +280,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_EDITE_PAGE,
+          path: PATH.MEMBER_MY_INFO_EDITE_PAGE(),
           element: (
             <Suspense>
               <Pages.MemberMyInfoEditePage />
@@ -288,7 +288,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.MEMBER_MY_SCHOOL_INFO,
+          path: PATH.MEMBER_MY_SCHOOL_INFO(),
           element: (
             <Suspense>
               <Pages.MemberSchoolInfoPage />

@@ -95,7 +95,7 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             비상연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.emergencyNumber ? data.emergencyNumber : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.emergencyPhoneNumber ? data.emergencyPhoneNumber : ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem className="address">
           <S.MyInfoTitle>
@@ -110,7 +110,9 @@ const MyInfo = ({ memberId }: { memberId: string }) => {
             </S.IconCircle>
             주소
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.address ? data.address : ""}</S.MyInfoText>
+          <S.MyInfoText>
+            {data.addressDetail && data.address ? `${data.addressDetail} ${data.address}` : ""}
+          </S.MyInfoText>
         </S.MyInfoItem>
       </S.MyInfoList>
       <S.FootIconItem className="gray5-foot" />
