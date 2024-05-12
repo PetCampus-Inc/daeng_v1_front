@@ -6,8 +6,9 @@ import PhoneIcon from "assets/svg/phone-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
 import BasicModal from "components/common/Modal/BasicModal";
+import { usePostMemberDogSchool } from "hooks/api/member/school";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IMemberSchoolInfo } from "types/member/school.types";
 import { formatDate } from "utils/formatter";
 import { remainingDays } from "utils/remainingDays";
@@ -20,8 +21,10 @@ interface ISchoolInfoProps {
 }
 
 const SchoolInfo = ({ data }: ISchoolInfoProps) => {
+  const { dogId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
+  const mutateMemberDogSchoolDelete = usePostMemberDogSchool(String(dogId));
   const registeredDate = data.registeredDate.map((el) => String(el));
   const registeredTime = formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const schoolCallInfo = {
@@ -72,10 +75,12 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
     ));
 
   const handleDeleteSchool = () => {
-    //TODO 유치원 연결끊기
-    console.log("삭제");
-    navigate(-1);
-    showToast("유치원과 연결이 끊어졌습니다", "bottom");
+    mutateMemberDogSchoolDelete(String(dogId), {
+      onSuccess: () => {
+        navigate(-1);
+        showToast("유치원과 연결이 끊어졌습니다", "bottom");
+      }
+    });
   };
 
   const ticketInfo = (ticketType: string) => {
