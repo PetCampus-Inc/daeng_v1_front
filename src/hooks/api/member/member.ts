@@ -5,7 +5,8 @@ import {
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
   handlePostMemberDogEnrollment,
-  handleMemberInfoResult
+  handleMemberInfoResult,
+  handlePostMemberDogDelete
 } from "apis/member/member.api";
 import { handleGetSchoolInfo } from "apis/member/school.api";
 import { IMemberProfilePostInfo } from "types/member/home.types";
@@ -61,4 +62,17 @@ export const usePostMemberProfileInfo = (memberId: string) => {
   });
 
   return { mutateAttend: memberProfileInfoMutation.mutate };
+};
+
+// 강아지 삭제
+export const usePostMemberDogDelete = (memberId: string, dogId: string) => {
+  const queryClient = useQueryClient();
+  const memberDogDeletMutation = useMutation({
+    mutationFn: () => handlePostMemberDogDelete(memberId, dogId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+    }
+  });
+
+  return { mutateAttend: memberDogDeletMutation.mutate };
 };
