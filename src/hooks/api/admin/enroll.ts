@@ -2,7 +2,7 @@ import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetMemberEnrollmentForm } from "apis/admin/enrollment.api";
-import { handleGetAdminForm, handlePostAdminForm } from "apis/member/school.api";
+import { handleGetAdminForm, handlePostAdminForm } from "apis/member/enrollment.api";
 import { Adapter } from "libs/Adapter";
 import {
   EditModeAdapter,

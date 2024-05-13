@@ -6,7 +6,7 @@ import {
   postTeacherSignUp,
   postTeacherSignUpCancel
 } from "apis/admin/admin.api";
-import { handleGetSchool } from "apis/member/school.api";
+import { handleGetSchool } from "apis/member/enrollment.api";
 
 // 선생님 회원가입 요청
 export const useTeacherSinUp = () => {

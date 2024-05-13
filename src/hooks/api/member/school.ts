@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetSearchResult, handlePostMemberDogSchool } from "apis/member/school.api";
+import { handleGetSearchResult, handlePostMemberDogSchool } from "apis/member/enrollment.api";
 
 export const useGetSchoolInfoList = (searchText: string) => {
   return useSuspenseQuery({

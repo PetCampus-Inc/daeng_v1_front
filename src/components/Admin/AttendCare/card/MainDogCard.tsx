@@ -25,6 +25,7 @@ const MainDogCard = ({ info }: { info: ICareDogInfo }) => {
 
   const { variant, text } = agendaWritingOptions(info.agendaWriting);
 
+  // FIXME: uri 안전하게 접근할 수 있도록 수정 필요
   return (
     <CardContainer
       key={info.dogId}
