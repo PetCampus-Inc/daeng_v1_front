@@ -17,9 +17,9 @@ import AttendanceOptionList from "../AttendanceButton/AttendanceOptionList";
 import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
 import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
 
-import type { IAttendDogInfo } from "types/admin.attendance.type";
+import type { AttendanceData } from "types/admin.attendance.type";
 
-type DogCardProps = { info: IAttendDogInfo };
+type DogCardProps = { info: AttendanceData };
 
 const DogCard = memo(({ info }: DogCardProps) => {
   const overlay = useOverlay();
