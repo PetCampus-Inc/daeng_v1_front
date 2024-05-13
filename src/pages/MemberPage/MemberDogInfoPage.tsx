@@ -11,6 +11,7 @@ import { PageContainer } from "styles/StyleModule";
 const MemberDogInfoPage = () => {
   const currentSteps = MEMBER_DOG_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
+  const dogId = 1;
 
   return (
     <>
@@ -34,7 +35,7 @@ const MemberDogInfoPage = () => {
         </NavWrapper>
       </Nav>
       <PageContainer color="gray_5">
-        {currentStep === 0 && <DogInfo />}
+        {currentStep === 0 && <DogInfo dogId={String(dogId)} />}
         {currentStep === 1 && <SchoolInfo />}
         {currentStep === 2 && <AttendanceTicketInfo />}
       </PageContainer>

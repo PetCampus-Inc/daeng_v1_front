@@ -13,8 +13,12 @@ import showToast from "utils/showToast";
 import * as S from "./styles";
 import { StyledThumbList } from "../../Admin/AttendCareGallery/upload";
 
+interface IProps {
+  dogId: string;
+}
+
 //TODO 리팩토링하기
-const DogInfo = () => {
+const DogInfo = ({ dogId }: IProps) => {
   const overlay = useOverlay();
 
   const openTextAreaPopup = (title: string, text: string, type: string) =>
