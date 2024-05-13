@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
+import { Role } from "types/admin/admin.type";
 
 import type { TAdminLoginInfo } from "types/admin/admin.type";
 import type { IAttendDogInfo, ITicketDetail } from "types/admin.attendance.type";
@@ -12,7 +13,7 @@ export const initAdminInfo: TAdminLoginInfo = {
   adminId: 2,
   adminName: "염원장",
   schoolId: 2,
-  role: "ROLE_OWNER",
+  role: Role.ROLE_OWNER,
   schoolName: "귀여운강아지월드"
 };
 

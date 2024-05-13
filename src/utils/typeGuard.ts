@@ -1,6 +1,6 @@
-import { TRole } from "types/admin/admin.type";
+import { Role } from "../types/admin/admin.type";
 
-export function isTRole(role: unknown): role is TRole {
+export function isTRole(role: unknown): role is Role {
   return role === "ROLE_OWNER" || role === "ROLE_TEACHER";
 }
 

@@ -1,10 +1,13 @@
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import NextButton from "components/SignUp/form/NextButton";
-import PersonalInfo from "components/SignUp/form/PersonalInfo";
+import NextButton from "components/SignUp/SignUpForm/NextButton";
+import PersonalInfo from "components/SignUp/SignUpForm/PersonalInfo";
 import { memo } from "react";
+
+import type { ITeacherInfo } from "./AdminSignUpFunnel";
+
 interface IStepProps {
-  onNextStep: () => void;
+  onNextStep: (data: ITeacherInfo) => void;
 }
 
 const AdminInfoPage = ({ onNextStep }: IStepProps) => {

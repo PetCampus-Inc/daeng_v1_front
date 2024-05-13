@@ -180,6 +180,6 @@ export const ADMIN_SIGN_UP_STEP = {
   유치원_등록: "enroll_school" as const,
   회원정보_입력: "personal_info" as const,
   계정설정: "account_setup" as const,
-  승인상태: "registration_status" as const,
+  승인상태: "approval_status" as const,
   유치원_등록완료: "school_enrollment_complete" as const
 };

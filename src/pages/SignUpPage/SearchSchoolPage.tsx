@@ -1,14 +1,14 @@
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { StyledButton } from "components/SignIn/styles";
-import SchoolSearchInputBox from "components/SignUp/SchoolSearchInputBox";
+import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInputBox";
 import { memo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { schoolIdAtom } from "store/form";
 
 interface SearchSchoolPageProps {
   type: "TEACHER" | "MEMBER";
-  onNextStep: () => void;
+  onNextStep: (id: number) => void;
 }
 
 // TODO: useFormProvider 이용!!
@@ -16,10 +16,6 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
   const schoolId = useRecoilValue(schoolIdAtom);
 
   const [searchText, setSearchText] = useState("");
-
-  const handleNextStep = () => {
-    onNextStep();
-  };
 
   return (
     <>
@@ -38,7 +34,7 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
           <StyledButton
             type="button"
             bg="primaryColor"
-            onClick={handleNextStep}
+            onClick={() => onNextStep(schoolId ?? -1)}
             disabled={!schoolId || !searchText}
           >
             <Text

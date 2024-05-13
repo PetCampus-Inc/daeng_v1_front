@@ -1,46 +1,46 @@
-import { Box, Text, Layout } from "components/common";
+import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import AccountInfo from "components/SignUp/form/AccountInfo";
-import NextButton from "components/SignUp/form/NextButton";
+import AccountInfo from "components/SignUp/SignUpForm/AccountInfo";
+import NextButton from "components/SignUp/SignUpForm/NextButton";
 import { useTeacherSinUp } from "hooks/api/signup";
 import { FieldValues, useFormContext } from "react-hook-form";
-import { useRecoilValue } from "recoil";
-import { schoolIdAtom } from "store/form";
 
-import { Role } from "./AdminSignUpFunnel";
+import { type AdminRole, type ITeacherInfo } from "./AdminSignUpFunnel";
+
 interface IStepProps {
-  type: Role;
-  onNextStep: () => void;
+  type?: AdminRole;
+  info?: ITeacherInfo;
+  onNextStep?: (data: ITeacherInfo) => void;
 }
 
-const AccountSettingPage = ({ type, onNextStep }: IStepProps) => {
+const AccountSettingPage = ({ type, info, onNextStep }: IStepProps) => {
   if (!type) new Error("Role is required");
   const { handleSubmit } = useFormContext();
-  const schoolId = useRecoilValue(schoolIdAtom);
 
   const { mutateTeacherSignUp } = useTeacherSinUp();
 
   const onSubmit = (data: FieldValues) => {
-    const req = {
+    const formData = {
       id: data.id,
-      pwd: data.pwd,
-      name: data.name,
-      phoneNumber: data.phoneNumber,
-      schoolId: schoolId ?? -1
+      pwd: data.pwd
     };
 
-    mutateTeacherSignUp(req, {
-      onSuccess: () => {
-        onNextStep();
-      }
-    });
-  };
-
-  const handleConditionalSubmit = () => {
     if (type === "TEACHER") {
-      handleSubmit(onSubmit)();
+      const req = {
+        ...formData,
+        name: data.name,
+        phoneNumber: data.phoneNumber,
+        schoolId: info?.schoolId ?? -1
+      };
+
+      mutateTeacherSignUp(req, {
+        onSuccess: (res) => {
+          onNextStep?.({ role: res.role, adminId: res.adminId, schoolName: res.schoolName });
+        }
+      });
     } else {
-      onNextStep();
+      // 원장인 경우
+      onNextStep?.({});
     }
   };
 
@@ -54,10 +54,7 @@ const AccountSettingPage = ({ type, onNextStep }: IStepProps) => {
         <Box mt={56}>
           <AccountInfo />
         </Box>
-        <NextButton
-          type={type === "TEACHER" ? "submit" : "button"}
-          onNextStep={handleConditionalSubmit}
-        >
+        <NextButton type="submit" onNextStep={handleSubmit(onSubmit)}>
           가입
         </NextButton>
       </Layout>
