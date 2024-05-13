@@ -3,7 +3,8 @@ import {
   IMemberInfo,
   IMemberProfileInfo,
   IMemberProfilePostInfo,
-  IMainAlbum
+  IMainAlbum,
+  IMemberDogInfo
 } from "types/member/home.types";
 import { IResponse } from "types/Response.type";
 
@@ -84,4 +85,15 @@ export const handleMemberInfoResult = async (
 
   console.log("data", data);
   return data;
+};
+
+// 강아지 상세 정보
+export const handleGetMemberDogInfo = async (dogId: string): Promise<IMemberDogInfo> => {
+  const url = `/member/dog/info`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      dogId
+    }
+  });
+  return data.data;
 };

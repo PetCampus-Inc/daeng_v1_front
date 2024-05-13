@@ -74,3 +74,23 @@ export interface IMainAlbum {
   dogId: number;
   date?: string;
 }
+
+export interface IMemberDogInfo extends IResponse {
+  dogId: number;
+  dogName: string;
+  dogGender: string;
+  dogSize: string;
+  breedId: number;
+  breedName: string;
+  dogBirthDate: number[];
+  neutralization: string;
+  allergyDisease: string;
+  vaccination: string;
+  profileUri: string;
+  vaccinationUri: string | null;
+  pickDropRequest: string;
+  pickDropType: string;
+  pickDropMemo: string;
+  member: IMemberProfilePostInfo;
+  dogMemo: string;
+}
