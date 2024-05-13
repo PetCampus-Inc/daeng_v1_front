@@ -108,13 +108,12 @@ export const ControlButton = styled.button.withConfig({
 `;
 
 export const ListContainer = styled.div`
-  height: 100%;
+  height: 100%; /* 스크롤 영역 보장 위해 필수 */
 `;
 
 export const ListWrapper = styled.div`
   width: 100%;
-  height: 75%;
-  padding-bottom: 5%;
+  height: calc(100% - 7vh - 280px); /* 리스트 영역 */
   overflow-y: auto;
   position: relative;
 `;
@@ -123,14 +122,6 @@ export const CardListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 16px;
-`;
-
-export const StyledListWrapper = styled.div`
-  width: 100%;
-  height: 75%;
-  padding-bottom: 5%;
-  overflow-y: auto;
-  position: relative;
 `;
 
 export const EmptyText = styled.div`

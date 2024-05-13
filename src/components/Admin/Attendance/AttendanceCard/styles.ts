@@ -42,7 +42,7 @@ export const InfoWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  min-width: 0;
+  min-width: 0; /* 말줄임표 설정하기 위함 */
 
   &.expired .dogName {
     color: ${({ theme }) => theme.colors.gray_3};
