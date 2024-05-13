@@ -88,7 +88,7 @@ export const handleMemberInfoResult = async (
 };
 
 // 강아지 상세 정보
-export const handleGetMemberDogInfo = async (dogId: string): Promise<IMemberDogInfo> => {
+export const handleGetMemberDogDetailInfo = async (dogId: string): Promise<IMemberDogInfo> => {
   const url = `/member/dog/info`;
   const { data } = await customAxios.get(url, {
     params: {

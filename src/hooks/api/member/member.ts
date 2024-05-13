@@ -3,6 +3,7 @@ import { QUERY_KEY } from "constants/queryKey";
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetSchoolInfo } from "apis/member/enrollment.api";
 import {
+  handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
   handleMemberInfoResult,
@@ -75,4 +76,12 @@ export const usePostMemberDogDelete = (memberId: string) => {
   });
 
   return memberDogDeletMutation.mutate;
+};
+
+// 강아지 상세 정보
+export const useGetMemberDogDetailnfo = (dogId: string) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_SCHOOL_INFO(dogId),
+    queryFn: () => handleGetMemberDogDetailInfo(dogId)
+  });
 };
