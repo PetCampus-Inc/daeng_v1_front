@@ -19,7 +19,7 @@ const AttendanceDogCard = ({ dogName, onClick, isSelected }: AttendanceCardProps
             alt={dogName + " 이미지"}
           />
         </S.ImageWrapper>
-        <S.Text>{dogName}</S.Text>
+        <S.StyledText>{dogName}</S.StyledText>
       </S.Stack>
       <S.FootButton type="button" className={isSelected ? "" : "active"} onClick={onClick}>
         <FootIcon />

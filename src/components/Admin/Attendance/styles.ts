@@ -54,6 +54,8 @@ export const FootButton = styled.button.withConfig({
   border: 1px solid ${({ theme }) => theme.colors.primaryColor};
   background-color: ${({ theme }) => theme.colors.primaryColor};
 
+  flex-shrink: 0; /* 아이콘 크기가 축소되지 않도록 설정 */
+
   & > svg {
     color: ${({ theme }) => theme.colors.white};
   }

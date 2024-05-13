@@ -1,3 +1,4 @@
+import { Text } from "components/common";
 import styled from "styled-components";
 export { FootButton } from "../styles";
 
@@ -13,6 +14,7 @@ export const CardContainer = styled.div<{ $isAvatar?: boolean }>`
   gap: 4px;
   justify-content: ${({ $isAvatar }) => ($isAvatar ? "space-between" : "flex-start")};
 
+  min-width: 0; /* 말줄임표 설정을 하기 위함 */
   cursor: pointer;
 `;
 
@@ -21,6 +23,8 @@ export const ImageWrapper = styled.div`
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
+
+  flex-shrink: 0; /* 이미지 크기가 축소되지 않도록 설정 */
 
   &.expired > img {
     filter: opacity(0.5);
@@ -37,6 +41,8 @@ export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  min-width: 0;
 
   &.expired .dogName {
     color: ${({ theme }) => theme.colors.gray_3};
@@ -56,9 +62,14 @@ export const Icon = styled.div`
   border-radius: 4px;
 `;
 
-export const Text = styled.span`
+export const StyledText = styled(Text)`
   ${({ theme }) => theme.typo.body2_16_B};
   color: ${({ theme }) => theme.colors.black};
+
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const Info = styled.span<{ $isBeforeExpiry: boolean }>`
@@ -87,4 +98,6 @@ export const Stack = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+
+  min-width: 0;
 `;

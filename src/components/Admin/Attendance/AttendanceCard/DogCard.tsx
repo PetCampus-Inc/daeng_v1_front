@@ -102,7 +102,7 @@ const DogCard = memo(({ info }: DogCardProps) => {
         />
       </S.ImageWrapper>
       <S.InfoWrapper className={isRoundExpired || isMonthlyExpired ? "expired" : ""}>
-        <S.Text className="dogName">{info.dogName}</S.Text>
+        <S.StyledText className="dogName">{info.dogName}</S.StyledText>
         <S.Info $isBeforeExpiry={isRoundExpiringSoon || isMonthlyExpiringSoon}>
           <S.Icon>
             {(isRoundExpiringSoon || isMonthlyExpiringSoon) && <AlertSmallIcon color="brown" />}
