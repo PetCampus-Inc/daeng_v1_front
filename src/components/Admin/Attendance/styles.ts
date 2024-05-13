@@ -114,7 +114,7 @@ export const ListContainer = styled.div`
 export const ListWrapper = styled.div`
   width: 100%;
   height: calc(100% - 7vh - 280px); /* 리스트 영역 */
-  overflow-y: auto;
+  overflow-y: visible; /* 리스트가 여백에 잘리지 않도록 영역 보장*/
   position: relative;
 `;
 
