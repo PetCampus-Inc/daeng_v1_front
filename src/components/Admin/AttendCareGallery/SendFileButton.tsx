@@ -10,6 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import showToast from "utils/showToast";
 
 const SendFileButton = () => {
+  // FIXME: dogId 쿼리파마리터로 꼭 전달해야함!!!!!!! 이전 페이지에서 전달을 못하고 있음 수정바람!!
   const { dogId } = useParams<{ dogId: string }>();
   const { handleSubmit } = useFormContext();
   const { uploadToS3, progress, uploaded } = useMulterS3Upload();
