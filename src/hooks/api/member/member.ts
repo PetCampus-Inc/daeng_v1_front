@@ -1,14 +1,14 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { handleGetSchoolInfo } from "apis/member/enrollment.api";
 import {
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
-  handlePostMemberDogEnrollment,
   handleMemberInfoResult,
-  handlePostMemberDogDelete
+  handlePostMemberDogDelete,
+  handlePostMemberDogEnrollment
 } from "apis/member/member.api";
-import { handleGetSchoolInfo } from "apis/member/school.api";
 import { IMemberProfilePostInfo } from "types/member/home.types";
 
 // 견주 정보

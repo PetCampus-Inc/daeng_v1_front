@@ -9,15 +9,14 @@ import {
   handleGetCareDogs,
   handleGetNewCareDogs,
   handleGetPastAgenda,
+  handlePostAlbum,
   handleSendAgenda,
-  handleTempSaveCareDog,
-  handlePostAlbum
-} from "apis/admin.caredog.api";
-
+  handleTempSaveCareDog
+} from "apis/admin/care.api";
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
-import type { ICareDogInfo, ICareTempSave, IPastAgenda } from "types/admin/care.types";
+import type { ICareDogInfo, IPastAgenda } from "types/admin/care.types";
 
 export const useGetCareDogList = (adminId: number, initialData: ICareDogInfo[]) => {
   return useSuspenseQuery<ICareDogInfo[]>({

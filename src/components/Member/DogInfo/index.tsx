@@ -4,7 +4,6 @@ import CalendarIcon from "assets/svg/calendar";
 import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
-import { StyledThumbList } from "components/Admin/AttendCare/upload/styles";
 import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import CarouselModal from "components/common/Modal/CarouselModal";
@@ -12,6 +11,7 @@ import { useOverlay } from "hooks/common/useOverlay";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
+import { StyledThumbList } from "../../Admin/AttendCareGallery/upload";
 
 //TODO 리팩토링하기
 const DogInfo = () => {
