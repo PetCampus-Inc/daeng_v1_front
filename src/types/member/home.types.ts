@@ -75,6 +75,11 @@ export interface IMainAlbum {
   date?: string;
 }
 
+export interface IDogMemoInfo {
+  dogId: string;
+  memo: string;
+}
+
 export interface IMemberDogInfo extends IResponse {
   dogId: number;
   dogName: string;
