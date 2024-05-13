@@ -1,3 +1,5 @@
+import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
+
 import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import CalendarIcon from "assets/svg/calendar";
@@ -7,7 +9,9 @@ import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import CarouselModal from "components/common/Modal/CarouselModal";
+import { useGetMemberDogDetailnfo } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
+import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
@@ -20,6 +24,13 @@ interface IProps {
 //TODO 리팩토링하기
 const DogInfo = ({ dogId }: IProps) => {
   const overlay = useOverlay();
+  const { data: dogDetailData } = useGetMemberDogDetailnfo(dogId);
+  const DOG_BIRETH = formatDate(
+    String(dogDetailData.dogBirthDate[0]),
+    String(dogDetailData.dogBirthDate[1]),
+    String(dogDetailData.dogBirthDate[2]),
+    "dot"
+  );
 
   const openTextAreaPopup = (title: string, text: string, type: string) =>
     overlay.open(({ isOpen, close }) => (
@@ -82,8 +93,8 @@ const DogInfo = ({ dogId }: IProps) => {
           <S.TextWrapper>
             <S.TopInfoBox>
               <S.Title>
-                <S.DogName>뽀뽀</S.DogName>
-                <S.DogSize>소형견</S.DogSize>
+                <S.DogName>{dogDetailData.dogName}</S.DogName>
+                <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[dogDetailData.dogSize]}</S.DogSize>
               </S.Title>
               <S.Editebutton>
                 <span>수정</span>
@@ -95,26 +106,27 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.Icon>
                   <GirlNormalIcon />
                 </S.Icon>
-                암컷 / 중성화 O
+                {ITEM_ENGLISH_TO_KOREAN[dogDetailData.dogGender]} / 중성화{" "}
+                {dogDetailData.neutralization === "NEUTERED" ? "O" : "X"}
               </S.InfoText>
               <S.InfoText>
                 <S.Icon>
                   <CalendarIcon />
                 </S.Icon>
-                2008.09.10
+                {DOG_BIRETH}
               </S.InfoText>
               <S.InfoText>
                 <S.Icon>
                   <CalendarIcon />
                 </S.Icon>
-                블랙 러시안 테리어
+                {dogDetailData.breedName}
               </S.InfoText>
             </Flex>
           </S.TextWrapper>
         </S.DogInfoBox>
 
         <S.GotoEnrollButton>
-          <span>뽀뽀의 가입신청서</span>
+          <span>{dogDetailData.dogName}의 가입신청서</span>
           <ArrowRightIcon />
         </S.GotoEnrollButton>
       </S.DogInfoCard>
@@ -131,7 +143,7 @@ const DogInfo = ({ dogId }: IProps) => {
             onClick={() =>
               openTextAreaPopup(
                 "픽드랍 메모",
-                "월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당",
+                dogDetailData.pickDropMemo ? dogDetailData.pickDropMemo : "",
                 "pickDrop"
               )
             }
@@ -139,7 +151,9 @@ const DogInfo = ({ dogId }: IProps) => {
             수정
           </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
-        <S.DogMoreInfoText>월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당</S.DogMoreInfoText>
+        <S.DogMoreInfoText>
+          {dogDetailData.pickDropMemo ? dogDetailData.pickDropMemo : ""}
+        </S.DogMoreInfoText>
       </S.DogMoreInfoCard>
 
       <S.DogMoreInfoCard>
@@ -154,7 +168,7 @@ const DogInfo = ({ dogId }: IProps) => {
             onClick={() =>
               openTextAreaPopup(
                 "알러지 및 질병",
-                "뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.",
+                dogDetailData.allergyDisease ? dogDetailData.allergyDisease : "",
                 "allergy"
               )
             }
@@ -162,9 +176,12 @@ const DogInfo = ({ dogId }: IProps) => {
             수정
           </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
-        <S.DogMoreInfoText>뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.</S.DogMoreInfoText>
+        <S.DogMoreInfoText>
+          {dogDetailData.allergyDisease ? dogDetailData.allergyDisease : ""}
+        </S.DogMoreInfoText>
       </S.DogMoreInfoCard>
 
+      {/* TODO 데이터 작업 필요vaccinationUri */}
       <S.DogMoreInfoCard>
         <S.TopInfoBox>
           <Flex gap="4" align="center">
