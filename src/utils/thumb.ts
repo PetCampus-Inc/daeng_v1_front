@@ -1,4 +1,4 @@
-import type { IFile } from "components/Admin/AttendCare/upload/types";
+import { IFile } from "components/Admin/AttendCareGallery/upload/types";
 
 export const getFilePreview = (file: File): Promise<IFile> => {
   return new Promise((resolve, reject) => {
