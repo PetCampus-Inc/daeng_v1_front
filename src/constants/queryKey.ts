@@ -28,11 +28,12 @@ export const QUERY_KEY = {
   MEMBER_INFO: (memberId: string) => ["memberInfo", memberId], // 견주 정보 데이터
   MEMBER_MAIN_DOG_INFO: (memberId: string) => ["memberMainDogInfo", memberId], // 견주의 강아지 리스트
   MEMBER_PROFILE_INFO: (memberId: string) => ["memberProfileInfo", memberId], // 견주의 상제 정보 데이터
-  SHCOOL_INFO_LIST: ["shcollInfoList"],
-  MEMBER_MAIN_DOG_LIST: ["memberMainDogInfo"],
+  SHCOOL_INFO_LIST: ["shcollInfoList"], // 마이페이지 견주의 강아지 유치원 정보
+  MEMBER_MAIN_DOG_LIST: ["memberMainDogInfo"], // 견주의 강아지 리스트 (업데이트)
   MEMBER_SCHOOL_INFO: (dogId: string) => ["memberSchoolInfo", dogId], // 유치원 정보
   CARE_DOG_TEMP_SAVE: ["careDogTempSave"], // 강아지 알림장 임시저장
   CARE_DOG_AGENDA_SAVED: ["careDogAgendaSaved"], // 강아지 알림장 불러오기
   CARE_DOG_PAST_AGENDA: ["careDogPastAgenda"], // 강아지 지난 알림장 불러오기
-  MEMBER_MAIN_ALBUM: (dogId: number, date?: string) => ["mainAlbum", dogId, date] // 멤버 메인 앨범
+  MEMBER_MAIN_ALBUM: (dogId: number, date?: string) => ["mainAlbum", dogId, date], // 멤버 메인 앨범
+  MEMBER_DOG_DETAIL_INFO: (dogId: string) => ["memberDogDetail", dogId] // 강아지 상세 정보
 };
