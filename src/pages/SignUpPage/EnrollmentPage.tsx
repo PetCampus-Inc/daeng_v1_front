@@ -1,4 +1,4 @@
-import { MEMBER_ENROLL_STEP, MEMBER_DOG_ADD_ENROLL_STEP } from "constants/step";
+import { MEMBER_DOG_ADD_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
 
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
@@ -13,6 +13,7 @@ import * as S from "components/Enrollment/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
 import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
@@ -27,7 +28,7 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
   const overlay = useOverlay();
 
   const { memberId } = useParams(); // MEMO: memberId (mypage에서 추출)
-  const MEMBERID = isMemberAddDog ? memberId : 1;
+  const MEMBERID = isMemberAddDog && memberId ? memberId : "1";
 
   const { data } = useGetEnrollment({ memberId: MEMBERID, schoolId: schoolId ?? -1 });
   const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;

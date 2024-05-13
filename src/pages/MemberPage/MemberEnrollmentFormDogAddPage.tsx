@@ -1,8 +1,9 @@
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
-import EnrollmentForm from "components/Enrollment";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import EnrollmentPage from "../SignUpPage/EnrollmentPage";
 
 const MemberEnrollmentFormDogAddPage = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const MemberEnrollmentFormDogAddPage = () => {
   return (
     <>
       <Header type="text" text="가입신청서" handleClick={openPreventLeavePopup} />
-      <EnrollmentForm isMemberAddDog={isMypage} />
+      <EnrollmentPage isMemberAddDog={isMypage} />
     </>
   );
 };
