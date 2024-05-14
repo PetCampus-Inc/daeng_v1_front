@@ -17,9 +17,9 @@ import AttendanceOptionList from "../AttendanceButton/AttendanceOptionList";
 import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
 import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
 
-import type { IAttendDogInfo } from "types/admin.attendance.type";
+import type { AttendanceData } from "types/admin.attendance.type";
 
-type DogCardProps = { info: IAttendDogInfo };
+type DogCardProps = { info: AttendanceData };
 
 const DogCard = memo(({ info }: DogCardProps) => {
   const overlay = useOverlay();
@@ -102,7 +102,7 @@ const DogCard = memo(({ info }: DogCardProps) => {
         />
       </S.ImageWrapper>
       <S.InfoWrapper className={isRoundExpired || isMonthlyExpired ? "expired" : ""}>
-        <S.Text className="dogName">{info.dogName}</S.Text>
+        <S.StyledText className="dogName">{info.dogName}</S.StyledText>
         <S.Info $isBeforeExpiry={isRoundExpiringSoon || isMonthlyExpiringSoon}>
           <S.Icon>
             {(isRoundExpiringSoon || isMonthlyExpiringSoon) && <AlertSmallIcon color="brown" />}
