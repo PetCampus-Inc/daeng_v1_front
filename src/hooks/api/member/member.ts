@@ -13,7 +13,7 @@ import {
   handlePostMemoDogAlleray,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
-import { IMemberDogInfo, IMemberProfilePostInfo } from "types/member/home.types";
+import { IMemberDogPostDetailInfo, IMemberProfilePostInfo } from "types/member/home.types";
 import showToast from "utils/showToast";
 
 // 견주 정보
@@ -94,11 +94,13 @@ export const useGetMemberDogDetailnfo = (dogId: number) => {
 export const usePostMemberDogDetailnfo = (dogId: number) => {
   const queryClient = useQueryClient();
   const memberDogDetailnfoMutation = useMutation({
-    mutationFn: ({ dogDetailInfo }: { dogDetailInfo: IMemberDogInfo }) =>
-      handlePostMemberDogDetailInfo(dogDetailInfo),
+    mutationFn: (data: IMemberDogPostDetailInfo) => handlePostMemberDogDetailInfo(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
       showToast("수정이 완료되었습니다.", "bottom");
+    },
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 

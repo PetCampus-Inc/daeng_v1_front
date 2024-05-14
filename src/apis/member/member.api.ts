@@ -4,7 +4,8 @@ import {
   IMemberProfileInfo,
   IMemberProfilePostInfo,
   IMainAlbum,
-  IMemberDogInfo
+  IMemberDogInfo,
+  IMemberDogPostDetailInfo
 } from "types/member/home.types";
 import { IResponse } from "types/Response.type";
 
@@ -100,8 +101,8 @@ export const handleGetMemberDogDetailInfo = async (dogId: number): Promise<IMemb
 
 // 강아지 상세 정보 수정
 export const handlePostMemberDogDetailInfo = async (
-  req: IMemberDogInfo
-): Promise<IMemberDogInfo> => {
+  req: IMemberDogPostDetailInfo
+): Promise<IMemberDogPostDetailInfo> => {
   const url = `/member/dog/info`;
   const { data } = await customAxios.post(url, {
     dogId: req.dogId,
@@ -109,11 +110,10 @@ export const handlePostMemberDogDetailInfo = async (
     dogGender: req.dogGender,
     dogSize: req.dogSize,
     breedId: req.breedId,
-    // newBreed: req.newBreed,
-    birthDate: req.dogBirthDate,
+    newBreed: req.newBreed,
+    birthDate: req.birthDate,
     neutralization: req.neutralization
   });
-
   return data;
 };
 
