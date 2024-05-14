@@ -89,7 +89,7 @@ export const handleMemberInfoResult = async (
 };
 
 // 강아지 상세 정보
-export const handleGetMemberDogDetailInfo = async (dogId: string): Promise<IMemberDogInfo> => {
+export const handleGetMemberDogDetailInfo = async (dogId: number): Promise<IMemberDogInfo> => {
   const url = `/member/dog/info`;
   const { data } = await customAxios.get(url, {
     params: {
@@ -100,21 +100,21 @@ export const handleGetMemberDogDetailInfo = async (dogId: string): Promise<IMemb
 };
 
 // 강아지의 알러지/질병 내용 수정
-export const handlePostMemoDogAlleray = async (req: IDogMemoInfo): Promise<IDogMemoInfo> => {
+export const handlePostMemoDogAlleray = async (dogId: number, memo: string): Promise<void> => {
   const url = `/member/dog/allergy`;
   const { data } = await customAxios.post(url, {
-    dogId: req.dogId,
-    memo: req.memo
+    dogId: dogId,
+    memo: memo
   });
-  return data.data;
+  return data;
 };
 
 // 강아지의 픽드랍 메모 수정
-export const handlePostMemoDogPickdrop = async (req: IDogMemoInfo): Promise<IDogMemoInfo> => {
+export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Promise<void> => {
   const url = `/member/dog/pickdrop`;
   const { data } = await customAxios.post(url, {
-    dogId: req.dogId,
-    memo: req.memo
+    dogId: dogId,
+    memo: memo
   });
   return data;
 };
