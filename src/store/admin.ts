@@ -3,7 +3,7 @@ import { recoilPersist } from "recoil-persist";
 import { Role } from "types/admin/admin.type";
 
 import type { TAdminLoginInfo } from "types/admin/admin.type";
-import type { IAttendDogInfo, ITicketDetail } from "types/admin.attendance.type";
+import type { AttendData, ITicketDetail } from "types/admin.attendance.type";
 import type { INewEnrollmentList } from "types/Admin.type";
 
 const { persistAtom } = recoilPersist();
@@ -23,7 +23,7 @@ export const adminLoginInfoAtom = atom<TAdminLoginInfo>({
   effects_UNSTABLE: [persistAtom]
 });
 
-export const attendDogListInfoAtom = atom<IAttendDogInfo[]>({
+export const attendDogListInfoAtom = atom<AttendData[]>({
   key: "attendDogListInfo",
   default: []
 });

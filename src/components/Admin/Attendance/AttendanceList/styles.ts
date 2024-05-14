@@ -43,6 +43,13 @@ export const Text = styled.span`
 export const Name = styled.span`
   ${({ theme }) => theme.typo.label2_14_R};
   color: ${({ theme }) => theme.colors.darkBlack};
+
+  width: 56px; /* 아바타 크기와 동일 */
+
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const Avatar = styled.div`

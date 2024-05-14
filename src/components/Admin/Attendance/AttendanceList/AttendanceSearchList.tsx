@@ -4,10 +4,10 @@ import AttendanceDogCard from "../AttendanceCard/AttendanceDogCard";
 import { useSelectedDogs } from "../context/SelectedDogProvider";
 import { CardListWrapper, EmptyText, ListWrapper } from "../styles";
 
-import type { IAttendDogInfo } from "types/admin.attendance.type";
+import type { AttendData } from "types/admin.attendance.type";
 
 interface AttendanceSearchListProps {
-  data?: IAttendDogInfo[];
+  data?: AttendData[];
   type: "search" | "list";
 }
 
@@ -16,7 +16,7 @@ const AttendanceSearchList = memo(({ data, type }: AttendanceSearchListProps) =>
 
   if (!data) return null;
 
-  const addDog = (dog: IAttendDogInfo) => {
+  const addDog = (dog: AttendData) => {
     dispatch({ type: "ADD_DOG", payload: dog });
   };
 
