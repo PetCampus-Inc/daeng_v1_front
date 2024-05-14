@@ -1,80 +1,87 @@
+import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
+
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import { useGetMemberProfileInfo, usePostMemberProfileInfo } from "hooks/api/member/member";
+import { useGetMemberDogDetailnfo, usePostMemberDogDetailnfo } from "hooks/api/member/member";
 import { useCallback, useEffect, useState } from "react";
 import { useForm, useFormContext } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { IMemberDogInfo } from "types/member/home.types";
+import { useNavigate } from "react-router-dom";
+import { formatDate } from "utils/formatter";
 
+// TODO 리팩토링 할 수 있는 부분 있으면 하기
 const SaveButton = ({ dogId }: { dogId: number }) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const methods = useForm({ mode: "onSubmit" });
+  const navigate = useNavigate();
   const { watch } = useFormContext();
+  const methods = useForm({ mode: "onSubmit" });
+  const mutatePostDogDetailInfo = usePostMemberDogDetailnfo(dogId);
+  const { data: previousValues } = useGetMemberDogDetailnfo(dogId);
 
-  // const memberName = watch("memberName");
-  // const memberGender = watch("memberGender") === "여" ? "FEMALE" : "MALE";
-  // const nickName = watch("nickName");
-  // const address = watch("address.street");
-  // const addressDetail = watch("address.detail");
-  // const phoneNumber = watch("phoneNumber");
-  // const emergencyPhoneNumber = watch("emergencyNumber");
-  // const relation = watch("relation");
+  const [prevYear, prevMonth, prevDay] = previousValues.dogBirthDate.map(String);
+  const prevBirth = formatDate(prevYear, prevMonth, prevDay);
 
-  const updatedDogInfo = {
+  const dogName = watch("dogName");
+  const dogGender = watch("dogGender") === "암컷" ? "FEMALE" : "MALE";
+  const dogSize = Object.keys(ITEM_ENGLISH_TO_KOREAN).find(
+    (key) => ITEM_ENGLISH_TO_KOREAN[key] === watch("dogSize")
+  );
+  const breedId = watch("breedId");
+  const newBreed = watch("breedName");
+  const birthDate = `${watch("year")}-${watch("month")}-${watch("day")}`;
+  const neutralization = watch("neutralization") === "했어요" ? "NEUTERED" : "NOT_NEUTERED";
+
+  const updatedDogDetailInfo = {
     dogId: dogId,
-    dogName: "string",
-    dogGender: "string",
-    dogSize: "string",
-    breedId: 0,
-    newBreed: "string",
-    birthDate: "2024-05-14",
-    neutralization: "string"
+    dogName: dogName,
+    dogGender: dogGender,
+    dogSize: dogSize,
+    breedId: breedId,
+    newBreed: newBreed,
+    birthDate: birthDate,
+    neutralization: neutralization
   };
 
-  // const checkFormValidity = useCallback(() => {
-  //   if (
-  //     previousValues.memberName !== memberName ||
-  //     previousValues.memberGender !== memberGender ||
-  //     previousValues.nickName !== nickName ||
-  //     previousValues.address !== address ||
-  //     previousValues.addressDetail !== addressDetail ||
-  //     previousValues.phoneNumber !== phoneNumber ||
-  //     previousValues.emergencyPhoneNumber !== emergencyPhoneNumber ||
-  //     previousValues.relation !== relation
-  //   ) {
-  //     return false;
-  //   }
-  //   return true;
-  // }, [
-  //   address,
-  //   addressDetail,
-  //   emergencyPhoneNumber,
-  //   memberGender,
-  //   memberName,
-  //   nickName,
-  //   phoneNumber,
-  //   previousValues.address,
-  //   previousValues.addressDetail,
-  //   previousValues.emergencyPhoneNumber,
-  //   previousValues.memberGender,
-  //   previousValues.memberName,
-  //   previousValues.nickName,
-  //   previousValues.phoneNumber,
-  //   previousValues.relation,
-  //   relation
-  // ]);
+  const checkFormValidity = useCallback(() => {
+    if (
+      previousValues.dogName !== dogName ||
+      previousValues.dogGender !== dogGender ||
+      previousValues.dogSize !== dogSize ||
+      previousValues.breedId !== breedId ||
+      previousValues.breedName !== newBreed ||
+      prevBirth !== birthDate ||
+      previousValues.neutralization !== neutralization
+    ) {
+      return false;
+    }
+    return true;
+  }, [
+    birthDate,
+    breedId,
+    dogGender,
+    dogName,
+    dogSize,
+    neutralization,
+    newBreed,
+    prevBirth,
+    previousValues.breedId,
+    previousValues.breedName,
+    previousValues.dogGender,
+    previousValues.dogName,
+    previousValues.dogSize,
+    previousValues.neutralization
+  ]);
 
   const onSubmit = methods.handleSubmit(() => {
-    // mutatePostMemberInfo.mutateAttend(updatedMemberInfo, {
-    //   onError: (err) => {
-    //     console.log(err);
-    //   }
-    // });
+    mutatePostDogDetailInfo(updatedDogDetailInfo, {
+      onSuccess: () => {
+        navigate(-1);
+      }
+    });
   });
 
-  // useEffect(() => {
-  //   const isValid = checkFormValidity();
-  //   setIsDisabled(isValid);
-  // }, [checkFormValidity]);
+  useEffect(() => {
+    const isValid = checkFormValidity();
+    setIsDisabled(isValid);
+  }, [checkFormValidity]);
 
   return (
     <BackgroundButton
