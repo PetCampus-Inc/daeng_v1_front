@@ -8,11 +8,13 @@ import {
   handleGetMemberProfileInfo,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
+  handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
   handlePostMemoDogAlleray,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
-import { IMemberProfilePostInfo } from "types/member/home.types";
+import { useNavigate } from "react-router-dom";
+import { IMemberDogPostDetailInfo, IMemberProfilePostInfo } from "types/member/home.types";
 import showToast from "utils/showToast";
 
 // 견주 정보
@@ -87,6 +89,27 @@ export const useGetMemberDogDetailnfo = (dogId: number) => {
     queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
     queryFn: () => handleGetMemberDogDetailInfo(dogId)
   });
+};
+
+// 강아지 상세 정보 수정
+export const usePostMemberDogDetailnfo = (dogId: number) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const memberDogDetailnfoMutation = useMutation({
+    mutationFn: (data: IMemberDogPostDetailInfo) => handlePostMemberDogDetailInfo(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      navigate(-1);
+      setTimeout(() => {
+        showToast("수정이 완료되었습니다.", "bottom");
+      }, 100);
+    },
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return memberDogDetailnfoMutation.mutate;
 };
 
 // 강아지의 알러지/질병 내용 수정

@@ -80,6 +80,17 @@ export interface IDogMemoInfo {
   memo: string;
 }
 
+export interface IMemberDogPostDetailInfo {
+  dogId: number;
+  dogName: string;
+  dogGender: string;
+  dogSize?: string;
+  breedId: number;
+  newBreed: string;
+  birthDate: string;
+  neutralization: string;
+}
+
 export interface IMemberDogInfo extends IResponse {
   dogId: number;
   dogName: string;

@@ -1,4 +1,5 @@
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
+import { PATH } from "constants/path";
 
 import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
@@ -16,6 +17,7 @@ import {
 } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
@@ -28,16 +30,17 @@ interface IProps {
 
 //TODO 리팩토링하기
 const DogInfo = ({ dogId }: IProps) => {
-  const methods = useForm({ mode: "onSubmit" });
   const overlay = useOverlay();
-  const { data: dogDetailData } = useGetMemberDogDetailnfo(dogId);
+  const navigate = useNavigate();
+  const methods = useForm({ mode: "onSubmit" });
+  const { data } = useGetMemberDogDetailnfo(dogId);
   const mutatePostDogAlleray = usePostMemberDogAlleray(dogId);
   const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
 
   const DOG_BIRETH = formatDate(
-    String(dogDetailData.dogBirthDate[0]),
-    String(dogDetailData.dogBirthDate[1]),
-    String(dogDetailData.dogBirthDate[2]),
+    String(data.dogBirthDate[0]),
+    String(data.dogBirthDate[1]),
+    String(data.dogBirthDate[2]),
     "dot"
   );
 
@@ -114,10 +117,10 @@ const DogInfo = ({ dogId }: IProps) => {
           <S.TextWrapper>
             <S.TopInfoBox>
               <S.Title>
-                <S.DogName>{dogDetailData.dogName}</S.DogName>
-                <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[dogDetailData.dogSize]}</S.DogSize>
+                <S.DogName>{data.dogName}</S.DogName>
+                <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
               </S.Title>
-              <S.Editebutton>
+              <S.Editebutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE)}>
                 <span>수정</span>
                 <ArrowRightIcon />
               </S.Editebutton>
@@ -127,8 +130,8 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.Icon>
                   <GirlNormalIcon />
                 </S.Icon>
-                {ITEM_ENGLISH_TO_KOREAN[dogDetailData.dogGender]} / 중성화{" "}
-                {dogDetailData.neutralization === "NEUTERED" ? "O" : "X"}
+                {ITEM_ENGLISH_TO_KOREAN[data.dogGender]} / 중성화{" "}
+                {data.neutralization === "NEUTERED" ? "O" : "X"}
               </S.InfoText>
               <S.InfoText>
                 <S.Icon>
@@ -140,14 +143,14 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.Icon>
                   <CalendarIcon />
                 </S.Icon>
-                {dogDetailData.breedName}
+                {data.breedName}
               </S.InfoText>
             </Flex>
           </S.TextWrapper>
         </S.DogInfoBox>
 
         <S.GotoEnrollButton>
-          <span>{dogDetailData.dogName}의 가입신청서</span>
+          <span>{data.dogName}의 가입신청서</span>
           <ArrowRightIcon />
         </S.GotoEnrollButton>
       </S.DogInfoCard>
@@ -164,7 +167,7 @@ const DogInfo = ({ dogId }: IProps) => {
             onClick={() =>
               openTextAreaPopup(
                 "픽드랍 메모",
-                dogDetailData.pickDropMemo ? dogDetailData.pickDropMemo : "",
+                data.pickDropMemo ? data.pickDropMemo : "",
                 "pickDrop"
               )
             }
@@ -172,9 +175,7 @@ const DogInfo = ({ dogId }: IProps) => {
             수정
           </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
-        <S.DogMoreInfoText>
-          {dogDetailData.pickDropMemo ? dogDetailData.pickDropMemo : ""}
-        </S.DogMoreInfoText>
+        <S.DogMoreInfoText>{data.pickDropMemo ? data.pickDropMemo : ""}</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
 
       <S.DogMoreInfoCard>
@@ -189,7 +190,7 @@ const DogInfo = ({ dogId }: IProps) => {
             onClick={() =>
               openTextAreaPopup(
                 "알러지 및 질병",
-                dogDetailData.allergyDisease ? dogDetailData.allergyDisease : "",
+                data.allergyDisease ? data.allergyDisease : "",
                 "allergy"
               )
             }
@@ -197,9 +198,7 @@ const DogInfo = ({ dogId }: IProps) => {
             수정
           </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
-        <S.DogMoreInfoText>
-          {dogDetailData.allergyDisease ? dogDetailData.allergyDisease : ""}
-        </S.DogMoreInfoText>
+        <S.DogMoreInfoText>{data.allergyDisease ? data.allergyDisease : ""}</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
 
       {/* TODO 데이터 작업 필요vaccinationUri */}

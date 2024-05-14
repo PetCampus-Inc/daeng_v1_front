@@ -48,5 +48,6 @@ export const PATH = {
   MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
   REGISTRATION_STATUS: `/approve`, // 가입신청 승인 상태
   REDIRECT: "/login/oauth2/code/:provider",
-  MEMBER_DOG_INFO_PAGE: "/dogInfo"
+  MEMBER_DOG_INFO_PAGE: "/dogInfo", // 강아지 상세정보
+  MEMBER_DOG_INFO_EDITE_PAGE: "/dogInfo/edite" // 강아지 가입정보 수정
 } as const;
