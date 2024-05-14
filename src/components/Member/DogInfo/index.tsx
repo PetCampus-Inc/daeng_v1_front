@@ -1,4 +1,5 @@
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
+import { PATH } from "constants/path";
 
 import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
@@ -16,6 +17,7 @@ import {
 } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
@@ -28,8 +30,9 @@ interface IProps {
 
 //TODO 리팩토링하기
 const DogInfo = ({ dogId }: IProps) => {
-  const methods = useForm({ mode: "onSubmit" });
   const overlay = useOverlay();
+  const navigate = useNavigate();
+  const methods = useForm({ mode: "onSubmit" });
   const { data: dogDetailData } = useGetMemberDogDetailnfo(dogId);
   const mutatePostDogAlleray = usePostMemberDogAlleray(dogId);
   const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
@@ -117,7 +120,7 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.DogName>{dogDetailData.dogName}</S.DogName>
                 <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[dogDetailData.dogSize]}</S.DogSize>
               </S.Title>
-              <S.Editebutton>
+              <S.Editebutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE)}>
                 <span>수정</span>
                 <ArrowRightIcon />
               </S.Editebutton>
