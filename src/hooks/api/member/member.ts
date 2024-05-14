@@ -12,7 +12,8 @@ import {
   handlePostMemoDogAlleray,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
-import { IDogMemoInfo, IMemberProfilePostInfo } from "types/member/home.types";
+import { IMemberProfilePostInfo } from "types/member/home.types";
+import showToast from "utils/showToast";
 
 // 견주 정보
 export const useGetMemberInfo = (memberId: string) => {
@@ -81,7 +82,7 @@ export const usePostMemberDogDelete = (memberId: string) => {
 };
 
 // 강아지 상세 정보
-export const useGetMemberDogDetailnfo = (dogId: string) => {
+export const useGetMemberDogDetailnfo = (dogId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
     queryFn: () => handleGetMemberDogDetailInfo(dogId)
@@ -89,27 +90,37 @@ export const useGetMemberDogDetailnfo = (dogId: string) => {
 };
 
 // 강아지의 알러지/질병 내용 수정
-export const usePostMemberDogAlleray = (dogId: string) => {
+export const usePostMemberDogAlleray = (dogId: number) => {
   const queryClient = useQueryClient();
   const memberDogAllerayMutation = useMutation({
-    mutationFn: (req: IDogMemoInfo) => handlePostMemoDogAlleray(req),
+    mutationFn: ({ dogId, memo }: { dogId: number; memo: string }) =>
+      handlePostMemoDogAlleray(dogId, memo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      showToast("수정이 완료되었습니다.", "bottom");
+    },
+    onError: () => {
+      showToast("메모 등록을 실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
-  return { mutateAttend: memberDogAllerayMutation.mutate };
+  return memberDogAllerayMutation.mutate;
 };
 
 // 강아지의 픽드랍 메모 수정
-export const usePostMemberDogPickdrop = (dogId: string) => {
+export const usePostMemberDogPickdrop = (dogId: number) => {
   const queryClient = useQueryClient();
   const memberDogPickdropMutation = useMutation({
-    mutationFn: (req: IDogMemoInfo) => handlePostMemoDogPickdrop(req),
+    mutationFn: ({ dogId, memo }: { dogId: number; memo: string }) =>
+      handlePostMemoDogPickdrop(dogId, memo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      showToast("수정이 완료되었습니다.", "bottom");
+    },
+    onError: () => {
+      showToast("메모 등록을 실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
-  return { mutateAttend: memberDogPickdropMutation.mutate };
+  return memberDogPickdropMutation.mutate;
 };

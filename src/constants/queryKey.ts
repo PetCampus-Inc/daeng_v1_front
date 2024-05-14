@@ -35,5 +35,5 @@ export const QUERY_KEY = {
   CARE_DOG_AGENDA_SAVED: ["careDogAgendaSaved"], // 강아지 알림장 불러오기
   CARE_DOG_PAST_AGENDA: ["careDogPastAgenda"], // 강아지 지난 알림장 불러오기
   MEMBER_MAIN_ALBUM: (dogId: number, date?: string) => ["mainAlbum", dogId, date], // 멤버 메인 앨범
-  MEMBER_DOG_DETAIL_INFO: (dogId: string) => ["memberDogDetail", dogId] // 강아지 상세 정보
+  MEMBER_DOG_DETAIL_INFO: (dogId: number) => ["memberDogDetail", dogId] // 강아지 상세 정보
 };
