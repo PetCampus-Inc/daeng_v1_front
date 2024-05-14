@@ -20,11 +20,10 @@ interface DogInfoProps {
 const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
 
-  const dogBirthDate = watch("dogBirthDate");
   const dogBirth = {
-    year: dogBirthDate[0],
-    month: String(addZero(dogBirthDate[2])),
-    day: String(addZero(dogBirthDate[1]))
+    year: watch("year"),
+    month: watch("month"),
+    day: watch("day")
   };
 
   return (

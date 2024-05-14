@@ -7,6 +7,7 @@ import { useOverlay } from "hooks/common/useOverlay/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
+import { addZero } from "utils/date";
 
 const MemberDogInfoEditePage = () => {
   const dogId = 1;
@@ -15,10 +16,18 @@ const MemberDogInfoEditePage = () => {
   const { ...rest } = data;
   const navigate = useNavigate();
 
+  const [year, month, day] = data.dogBirthDate.map(Number);
+
+  const dogBirth = {
+    year: year,
+    month: addZero(month),
+    day: addZero(day)
+  };
+
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false,
-    defaultValues: { ...rest }
+    defaultValues: { year: dogBirth.year, month: dogBirth.month, day: dogBirth.day, ...rest }
   });
 
   const openPreventLeavePopup = () =>
