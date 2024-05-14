@@ -4,13 +4,11 @@ import BackgroundButton from "components/common/Button/BackgroundButton";
 import { useGetMemberDogDetailnfo, usePostMemberDogDetailnfo } from "hooks/api/member/member";
 import { useCallback, useEffect, useState } from "react";
 import { useForm, useFormContext } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 
 // TODO 리팩토링 할 수 있는 부분 있으면 하기
 const SaveButton = ({ dogId }: { dogId: number }) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const navigate = useNavigate();
   const { watch } = useFormContext();
   const methods = useForm({ mode: "onSubmit" });
   const mutatePostDogDetailInfo = usePostMemberDogDetailnfo(dogId);
@@ -71,11 +69,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
   ]);
 
   const onSubmit = methods.handleSubmit(() => {
-    mutatePostDogDetailInfo(updatedDogDetailInfo, {
-      onSuccess: () => {
-        navigate(-1);
-      }
-    });
+    mutatePostDogDetailInfo(updatedDogDetailInfo);
   });
 
   useEffect(() => {

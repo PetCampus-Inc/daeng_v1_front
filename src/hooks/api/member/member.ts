@@ -13,6 +13,7 @@ import {
   handlePostMemoDogAlleray,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
+import { useNavigate } from "react-router-dom";
 import { IMemberDogPostDetailInfo, IMemberProfilePostInfo } from "types/member/home.types";
 import showToast from "utils/showToast";
 
@@ -92,12 +93,16 @@ export const useGetMemberDogDetailnfo = (dogId: number) => {
 
 // 강아지 상세 정보 수정
 export const usePostMemberDogDetailnfo = (dogId: number) => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const memberDogDetailnfoMutation = useMutation({
     mutationFn: (data: IMemberDogPostDetailInfo) => handlePostMemberDogDetailInfo(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
-      showToast("수정이 완료되었습니다.", "bottom");
+      navigate(-1);
+      setTimeout(() => {
+        showToast("수정이 완료되었습니다.", "bottom");
+      }, 100);
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
