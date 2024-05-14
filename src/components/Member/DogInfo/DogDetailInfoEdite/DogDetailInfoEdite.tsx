@@ -2,16 +2,12 @@ import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { ITEM_ENGLISH_TO_KOREAN, ITEM_KEYS } from "constants/item";
 
 import { TextInput } from "components/common";
-import ImageUpload from "components/common/ImageUpload";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
-import TextArea from "components/common/TextArea";
-import Title from "components/common/Title";
 import BreedInput from "components/Enrollment/Input/BreedInput";
 import { useFormContext } from "react-hook-form";
-import { addZero } from "utils/date";
 
-import { Caption, Card, Text } from "./styles";
+import { Card, Text } from "./styles";
 
 interface DogInfoProps {
   requiredItems?: Map<number, boolean>;
