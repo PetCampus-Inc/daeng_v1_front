@@ -23,7 +23,6 @@ const TextAreaBottomSheet = ({
   title,
   defaultValue,
   type,
-  name,
   placeholder,
   actionText,
   close,

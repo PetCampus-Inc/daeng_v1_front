@@ -4,8 +4,7 @@ import {
   IMemberProfileInfo,
   IMemberProfilePostInfo,
   IMainAlbum,
-  IMemberDogInfo,
-  IDogMemoInfo
+  IMemberDogInfo
 } from "types/member/home.types";
 import { IResponse } from "types/Response.type";
 
