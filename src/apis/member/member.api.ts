@@ -98,6 +98,25 @@ export const handleGetMemberDogDetailInfo = async (dogId: number): Promise<IMemb
   return data.data;
 };
 
+// 강아지 상세 정보 수정
+export const handlePostMemberDogDetailInfo = async (
+  req: IMemberDogInfo
+): Promise<IMemberDogInfo> => {
+  const url = `/member/dog/info`;
+  const { data } = await customAxios.post(url, {
+    dogId: req.dogId,
+    dogName: req.dogName,
+    dogGender: req.dogGender,
+    dogSize: req.dogSize,
+    breedId: req.breedId,
+    // newBreed: req.newBreed,
+    birthDate: req.dogBirthDate,
+    neutralization: req.neutralization
+  });
+
+  return data;
+};
+
 // 강아지의 알러지/질병 내용 수정
 export const handlePostMemoDogAlleray = async (dogId: number, memo: string): Promise<void> => {
   const url = `/member/dog/allergy`;
