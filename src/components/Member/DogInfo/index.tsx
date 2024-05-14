@@ -149,7 +149,7 @@ const DogInfo = ({ dogId }: IProps) => {
           </S.TextWrapper>
         </S.DogInfoBox>
 
-        <S.GotoEnrollButton>
+        <S.GotoEnrollButton onClick={() => navigate(PATH.MEMBER_DOG_ENROLLMENT_INFO_PAGE)}>
           <span>{data.dogName}의 가입신청서</span>
           <ArrowRightIcon />
         </S.GotoEnrollButton>

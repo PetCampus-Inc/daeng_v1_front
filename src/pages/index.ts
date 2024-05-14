@@ -16,6 +16,7 @@ export { default as EnrollmentFormCreatePage } from "./EnrollmentFormCreatePage"
 export { default as EnrollmentFormListPage } from "./EnrollmentFormListPage";
 export { default as EnrollmentFormSubmitPage } from "./EnrollmentFormSubmitPage";
 export { default as MemberEnrollmentFormDogAddPage } from "./MemberPage/MemberEnrollmentFormDogAddPage";
+export { default as MemberEnrollmentDogInfoPage } from "./MemberPage/MemberEnrollmentDogInfoPage";
 export { default as TeacherManagePage } from "./TeacherManagePage";
 export { default as AttendCareDeletePage } from "./AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogGalleryPage";
