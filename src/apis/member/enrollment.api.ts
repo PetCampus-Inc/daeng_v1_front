@@ -114,3 +114,9 @@ export const handleGetSearchResult = async (searchText: string): Promise<ISchool
   const { data } = await customAxios.get(url);
   return data.data;
 };
+
+export const handleGetDogEnrollment = async (dogId: number): Promise<ISchoolInfo> => {
+  const url = `/member/dog/enrollment=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};

@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetSchoolInfo } from "apis/member/enrollment.api";
+import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
 import {
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
@@ -88,6 +88,14 @@ export const useGetMemberDogDetailnfo = (dogId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
     queryFn: () => handleGetMemberDogDetailInfo(dogId)
+  });
+};
+
+// 강아지 가입신청서 보기 (read only)
+export const useGetMemberDogEnrollmemntInfo = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_DOG_ENROLLMENT_INFO(dogId),
+    queryFn: () => handleGetDogEnrollment(dogId)
   });
 };
 
