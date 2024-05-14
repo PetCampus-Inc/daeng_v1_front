@@ -5,7 +5,11 @@ import { IMemberSchoolInfo } from "types/member/school.types";
 import type { IRequestAdminEnrollment, IResponseAdminForm } from "types/admin/enrollment.types";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
 import type { IResponse } from "types/helper.type";
-import type { IResponseEnrollment, IRequestEnrollment } from "types/member/enrollment.types";
+import type {
+  IResponseEnrollment,
+  IRequestEnrollment,
+  IDogEnrollmentInfo
+} from "types/member/enrollment.types";
 
 export interface IEnrollmentProps {
   memberId: string;
@@ -115,7 +119,8 @@ export const handleGetSearchResult = async (searchText: string): Promise<ISchool
   return data.data;
 };
 
-export const handleGetDogEnrollment = async (dogId: number): Promise<ISchoolInfo> => {
+// 강아지 가입 신청서 보기
+export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
   const url = `/member/dog/enrollment=${dogId}`;
   const { data } = await customAxios.get(url);
   return data.data;

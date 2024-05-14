@@ -79,7 +79,7 @@ interface IschoolFormResponse {
 }
 
 // 강아지 가입 신청서
-export interface IRequestEnrollment {
+export interface IDogEnrollmentInfo {
   enrollmentFormId: number;
   memberId: number;
   memberName: string;
