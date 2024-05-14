@@ -35,7 +35,7 @@ const MemberDogInfoPage = () => {
         </NavWrapper>
       </Nav>
       <PageContainer color="gray_5">
-        {currentStep === 0 && <DogInfo dogId={String(dogId)} />}
+        {currentStep === 0 && <DogInfo dogId={dogId} />}
         {currentStep === 1 && <SchoolInfo />}
         {currentStep === 2 && <AttendanceTicketInfo />}
       </PageContainer>
