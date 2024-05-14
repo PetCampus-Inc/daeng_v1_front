@@ -9,8 +9,13 @@ import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import CarouselModal from "components/common/Modal/CarouselModal";
-import { useGetMemberDogDetailnfo } from "hooks/api/member/member";
+import {
+  useGetMemberDogDetailnfo,
+  usePostMemberDogAlleray,
+  usePostMemberDogPickdrop
+} from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
+import { FormProvider, useForm } from "react-hook-form";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
@@ -18,13 +23,17 @@ import * as S from "./styles";
 import { StyledThumbList } from "../../Admin/AttendCareGallery/upload";
 
 interface IProps {
-  dogId: string;
+  dogId: number;
 }
 
 //TODO 리팩토링하기
 const DogInfo = ({ dogId }: IProps) => {
+  const methods = useForm({ mode: "onSubmit" });
   const overlay = useOverlay();
   const { data: dogDetailData } = useGetMemberDogDetailnfo(dogId);
+  const mutatePostDogAlleray = usePostMemberDogAlleray(dogId);
+  const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
+
   const DOG_BIRETH = formatDate(
     String(dogDetailData.dogBirthDate[0]),
     String(dogDetailData.dogBirthDate[1]),
@@ -32,39 +41,51 @@ const DogInfo = ({ dogId }: IProps) => {
     "dot"
   );
 
-  const openTextAreaPopup = (title: string, text: string, type: string) =>
+  const openTextAreaPopup = (title: string, defaultValue: string, type: string) =>
     overlay.open(({ isOpen, close }) => (
-      <TextAreaBottomSheet
-        title={title}
-        text={text}
-        type={type}
-        isOpen={isOpen}
-        close={close}
-        actionText={"수정 완료"}
-        actionFn={() => {
-          console.log("수정 완료");
-          close();
-          eventShowToast(type);
-        }}
-      />
+      <FormProvider {...methods}>
+        <TextAreaBottomSheet
+          title={title}
+          defaultValue={defaultValue}
+          type={type}
+          isOpen={isOpen}
+          close={close}
+          register={methods.register}
+          name={type}
+          placeholder="메모를 입력해주세요"
+          actionText={"수정 완료"}
+          actionFn={() => {
+            close();
+            handleEventType(type);
+          }}
+        />
+      </FormProvider>
     ));
+
+  // MEMO 더 좋은 방법 있다면 개선하기
+  const handleEventType = (type: string) => {
+    const onSubmit = methods.handleSubmit(() => {
+      if (type === "pickDrop") {
+        const pickDrop = methods.getValues("pickDrop");
+        metatePostDogPickDrop({ dogId: dogId, memo: pickDrop });
+      }
+      if (type === "allergy") {
+        const allergy = methods.getValues("allergy");
+        mutatePostDogAlleray({ dogId: dogId, memo: allergy });
+      }
+    });
+    onSubmit();
+  };
 
   const openCarouselPopup = (imgUrl: string, upDateData: string) =>
     overlay.open(({ isOpen, close }) => (
       <CarouselModal imgUrl={imgUrl} upDateData={upDateData} isOpen={isOpen} close={close} />
     ));
 
+  // MEMO vaccination 추후 다른 방식으로 사용 예정
   const eventShowToast = (type: string) => {
-    switch (type) {
-      case "pickDrop":
-        showToast("수정이 완료되었습니다.", "bottom");
-        break;
-      case "allergy":
-        showToast("수정이 완료되었습니다.", "bottom");
-        break;
-      case "vaccination":
-        showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
-        break;
+    if (type === "vaccination") {
+      showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
     }
   };
 
