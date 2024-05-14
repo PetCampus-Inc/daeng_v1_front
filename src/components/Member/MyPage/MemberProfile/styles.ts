@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const ProfileWrapper = styled.div`
@@ -38,7 +39,7 @@ export const DetailItem = styled.div`
   }
 `;
 
-export const GotoInfoButton = styled.button`
+export const GotoInfoButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;

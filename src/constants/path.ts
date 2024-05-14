@@ -13,6 +13,7 @@ export const PATH = {
   ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: string) =>
     `/admin/attendance/${dogId ?? ":dogId"}/newTicket`, // 출석부 강아지 상세정보
   ADMIN_CARE: "/admin/care", // 오늘 관리할 강아지
+  ADMIN_CARE_NOTICE: (dogId?: string) => `/admin/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
   ADMIN_CARE_GALLERY: `/admin/care/gallery`, // 오늘 관리할 강아지 사진앨범 전송
   ADMIN_CARE_INFO: (dogId?: number) => `/admin/care/${dogId ?? ":dogId"}`, // 오늘 관리할 강아지 상세정보
   ADMIN_CARE_INFO_GALLERY: (dogId?: number) => `/admin/care/${dogId ?? ":dogId"}/gallery`, // 오늘 관리할 강아지 사진앨범 전송
@@ -37,7 +38,15 @@ export const PATH = {
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
   POLICY: "/policy", // 정책 페이지
   ENROLL: "/enrollment", // 견주 가입신청서
-  MEMBER_MY_PAGE: "/mypage",
-  REDIRECT: "/auth/:provider",
-  MEMBER_MY_INFO_PAGE: "/mypage/profile"
+  MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
+  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
+  MEMBER_MY_INFO_EDITE_PAGE: (memberId?: string) =>
+    `/mypage/${memberId ?? ":memberId"}/profile/edite`,
+  MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/mypage/${dogId ?? ":dogId"}/school`,
+  MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
+    `/mypage/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
+  MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
+  REGISTRATION_STATUS: `/approve`, // 가입신청 승인 상태
+  REDIRECT: "/login/oauth2/code/:provider",
+  MEMBER_DOG_INFO_PAGE: "/dogInfo"
 } as const;

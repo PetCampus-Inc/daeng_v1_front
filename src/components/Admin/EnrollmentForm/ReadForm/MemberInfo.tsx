@@ -1,7 +1,7 @@
 import { ITEM_KEYS } from "constants/item";
 
-import InputField from "components/common/InputField";
-import SearchInputField from "components/common/InputField/SearchInputField";
+import { TextInput } from "components/common";
+import SearchInputField from "components/common/Input/SearchInputField";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Title from "components/common/Title";
 
@@ -15,7 +15,7 @@ const MemberInfo = ({ item }: MemberInfoProps) => {
     <>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
-        <InputField name="memberName" placeholder="견주 이름을 입력해주세요" readOnly />
+        <TextInput name="memberName" placeholder="견주 이름을 입력해주세요" readOnly />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.MEMBER_GENDER)}>성별</Title>
@@ -27,11 +27,11 @@ const MemberInfo = ({ item }: MemberInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.MEMBER_PHONE)}>연락처</Title>
-        <InputField name="phoneNumber" placeholder="연락처를 입력해주세요" readOnly />
+        <TextInput name="phoneNumber" placeholder="연락처를 입력해주세요" readOnly />
       </Card>
       <Card>
         <Title isRequired={item?.get(ITEM_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
-        <InputField name="emergencyNumber" placeholder="비상 연락처를 입력해주세요" readOnly />
+        <TextInput name="emergencyNumber" placeholder="비상 연락처를 입력해주세요" readOnly />
       </Card>
     </>
   );

@@ -1,9 +1,10 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
+import { Role } from "types/admin/admin.type";
 
-import type { IAttendDogInfo, ITicketDetail } from "types/admin.attendance.type";
+import type { TAdminLoginInfo } from "types/admin/admin.type";
+import type { AttendData, ITicketDetail } from "types/admin.attendance.type";
 import type { INewEnrollmentList } from "types/Admin.type";
-import type { TAdminLoginInfo } from "types/admin.userInfo.type";
 
 const { persistAtom } = recoilPersist();
 
@@ -12,7 +13,7 @@ export const initAdminInfo: TAdminLoginInfo = {
   adminId: 2,
   adminName: "염원장",
   schoolId: 2,
-  role: "ROLE_OWNER",
+  role: Role.ROLE_OWNER,
   schoolName: "귀여운강아지월드"
 };
 
@@ -22,7 +23,7 @@ export const adminLoginInfoAtom = atom<TAdminLoginInfo>({
   effects_UNSTABLE: [persistAtom]
 });
 
-export const attendDogListInfoAtom = atom<IAttendDogInfo[]>({
+export const attendDogListInfoAtom = atom<AttendData[]>({
   key: "attendDogListInfo",
   default: []
 });

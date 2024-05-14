@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { StyledContainer } from "components/common/CustomToast/styles";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import AppRouter from "router";
@@ -26,19 +25,12 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={{ ...ThemeConfig, mediaQueries }}>
-      <RecoilRoot>
+    <RecoilRoot>
+      <ThemeProvider theme={{ ...ThemeConfig, mediaQueries }}>
         <GlobalStyle />
         <AppRouter queryClient={queryClient} />
-        <StyledContainer
-          position="bottom-center"
-          limit={1}
-          closeButton={false}
-          autoClose={2000}
-          hideProgressBar
-        />
-      </RecoilRoot>
-    </ThemeProvider>
+      </ThemeProvider>
+    </RecoilRoot>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 );

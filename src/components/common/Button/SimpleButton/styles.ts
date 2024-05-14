@@ -4,11 +4,11 @@ import type { ICustomStyle, TColorScheme, TPaddingOptions } from "./types";
 
 const colorSchemeStyles = (theme: DefaultTheme) => ({
   primary: css`
-    background-color: ${theme.colors.br_4};
+    background: ${theme.colors.br_4};
     color: ${theme.colors.primaryColor};
   `,
   gray: css`
-    background-color: ${theme.colors.gray_4};
+    background: ${theme.colors.gray_4};
     color: ${theme.colors.gray_2};
   `
 });
@@ -34,7 +34,7 @@ export const StyledButton = styled.button.withConfig({
   border-radius: 8px;
 
   ${({ theme, colorScheme, customStyle }) => {
-    const scheme = colorSchemeStyles(theme)[colorScheme];
+    const scheme = colorSchemeStyles(theme)[colorScheme as keyof typeof colorSchemeStyles];
     return customStyle ? customStyle : scheme;
   }};
 `;

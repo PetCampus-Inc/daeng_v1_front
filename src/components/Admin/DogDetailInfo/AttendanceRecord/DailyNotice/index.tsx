@@ -5,6 +5,7 @@ import PoopHealthy from "assets/svg/poop-healthy";
 import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopNeedAttention from "assets/svg/poop-warning";
 import PoopWatery from "assets/svg/poop-watery";
+import PoopBox from "components/common/PoopBox";
 import { IDogInfoAgenda } from "types/admin.attendance.type";
 
 import * as S from "./styles";
@@ -53,7 +54,8 @@ const DailyNotice = ({ data }: IDailyNoticeProps) => {
       <S.NoticeItemWrapper>
         <div>
           배변 상태
-          <S.PoopCardContainer>
+          <PoopBox selected={data.poop} />
+          {/* <S.PoopCardContainer>
             <S.PoopCard>
               <PoopHard poop={data.poop} />
               딱딱함
@@ -74,7 +76,7 @@ const DailyNotice = ({ data }: IDailyNoticeProps) => {
               <PoopNeedAttention poop={data.poop} />
               주의필요
             </S.PoopCard>
-          </S.PoopCardContainer>
+          </S.PoopCardContainer> */}
         </div>
 
         <S.NoticeContent>{data.poopMemo ? data.poopMemo : "전달 사항이 없습니다."}</S.NoticeContent>
