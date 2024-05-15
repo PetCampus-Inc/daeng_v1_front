@@ -1,11 +1,12 @@
 import { PATH } from "constants/path";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getCheckId, postAdminLogin } from "apis/admin/admin.api";
+import { useMutation } from "@tanstack/react-query";
+import { postAdminLogin } from "apis/admin/admin.api";
 import { handleKaKaoLogin } from "apis/auth.api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { Role } from "types/admin/admin.type";
 
 interface LoginMutateProps {
   provider: "kakao" | "google" | "apple";
@@ -54,7 +55,12 @@ export const useAdminLogin = () => {
         role: res.role,
         schoolName: res.schoolName
       }));
-      navigate(PATH.ADMIN_ATTENDANCE);
+
+      if (res.role === Role.APPROVAL_PENDING) {
+        navigate(`${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}?source=login`); // FIXME: 페이지가 안뜸..^ㅠ
+      } else {
+        navigate(PATH.ADMIN_ATTENDANCE);
+      }
     },
     throwOnError: false
   });

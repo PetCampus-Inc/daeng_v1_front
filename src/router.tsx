@@ -8,6 +8,7 @@ import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom"
 import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
 import { adminLoginInfoAtom } from "store/admin";
+import { Role } from "types/admin/admin.type";
 import { isTRole } from "utils/typeGuard";
 
 import ApiErrorBoundary from "./ApiErrorBoundary";
@@ -76,7 +77,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               index: true,
               id: "caredog",
-              loader: () => caredogLoader({ adminId: auth.adminId, queryClient }),
+              loader: () => caredogLoader({ adminId: auth?.adminId, queryClient }),
               element: (
                 <Suspense>
                   <Pages.AttendCarePage />
@@ -229,7 +230,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               index: true,
               element:
-                auth.role === "ROLE_OWNER" ? (
+                auth?.role === "ROLE_OWNER" ? (
                   <Suspense>
                     <Pages.PrincipalMyPage />
                   </Suspense>
@@ -260,11 +261,12 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             }
           ]
         }
-      ],
-      loader: () => {
-        if (!isTRole(auth.role)) return redirect("/");
-        return null;
-      }
+      ]
+      // FIXME: 권한에 따른 접근제어 필요
+      // loader: () => {
+      //   if (!isTRole(auth.role)) return redirect("/");
+      //   return null;
+      // }
     },
     {
       path: PATH.ROOT,
@@ -325,35 +327,34 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       ]
     },
     {
+      path: PATH.LOGIN,
+      element: (
+        <Suspense>
+          <Pages.LoginPage />
+        </Suspense>
+      )
+    },
+    {
+      path: PATH.SIGNUP,
+      element: <Pages.SignUpPage />
+    },
+    {
       path: PATH.ROOT,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,
+      loader: () => {
+        if (!auth || (auth.role !== Role.ROLE_TEACHER && auth.role !== Role.ROLE_OWNER)) {
+          console.log("Redirecting to login...");
+          return redirect(PATH.LOGIN);
+        }
+        return null;
+      },
       children: [
         {
           index: true,
           element: (
             <Suspense>
               <Pages.HomePage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.LOGIN,
-          element: (
-            <Suspense>
-              <Pages.LoginPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.SIGNUP,
-          element: <Pages.SignUpPage />
-        },
-        {
-          path: PATH.REGISTRATION_STATUS,
-          element: (
-            <Suspense>
-              <Pages.RegistrationStatus />
             </Suspense>
           )
         },
@@ -419,11 +420,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           path: "*",
           element: <Pages.NotFoundPage />
         }
-      ],
-      loader: () => {
-        // if (auth.role !== "USER") return redirect(PATH.LOGIN);
-        return null;
-      }
+      ]
     }
   ]);
   return <RouterProvider router={router} />;
