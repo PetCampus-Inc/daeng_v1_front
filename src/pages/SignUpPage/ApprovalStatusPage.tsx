@@ -2,6 +2,9 @@ import { Layout } from "components/common";
 import ApprovalFailed from "components/SignUp/ApprovalStatus/ApprovalFailed";
 import ApprovalPending from "components/SignUp/ApprovalStatus/ApprovalPending";
 import ApprovalSuccess from "components/SignUp/ApprovalStatus/ApprovalSuccess";
+import { useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { adminLoginInfoAtom } from "store/admin";
 import { Role } from "types/admin/admin.type";
 
 import type { ITeacherInfo } from "./AdminSignUpFunnel";
@@ -17,10 +20,15 @@ const ApprovalStatusPage = ({
   onSearchSchoolClick,
   onSelectRoleClick
 }: ApprovalStatusPageProps) => {
-  // FIXME: 가입 신청 과정 중에 접근한 경우 or 완료 후 재로그인 후 접근한 경우 `adminId`와 `schoolName` 꺼내오는 방법 다르게 해야함
-  const schoolName = info?.schoolName;
-  const adminId = info?.adminId;
-  const status = info?.role;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isLoginSource = searchParams.get("source") === "login";
+
+  const loginInfo = useRecoilValue(adminLoginInfoAtom);
+
+  const schoolName = isLoginSource ? loginInfo.schoolName : info?.schoolName;
+  const adminId = isLoginSource ? loginInfo.adminId : info?.adminId;
+  const status = isLoginSource ? loginInfo.role : info?.role;
 
   // MEMO: 승인 상태에 따라 다른 컴포넌트를 보여줄 수 있도록 구현
   // 최초 페이지 접근 시(가입신청 단계) ApprovalPending 컴포넌트를 보여줌
