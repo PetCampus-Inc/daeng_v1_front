@@ -16,7 +16,7 @@ export type TAdminLoginInfo = {
   adminName: string;
   schoolId: number;
   role: Role;
-  schoolName: Nullable<string>;
+  schoolName: string;
 };
 
 export interface ITeacherSignUpData {
