@@ -55,12 +55,11 @@ export const useAdminLogin = () => {
         role: res.role,
         schoolName: res.schoolName
       }));
-
-      if (res.role === Role.APPROVAL_PENDING) {
-        navigate(`${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}?source=login`); // FIXME: 페이지가 안뜸..^ㅠ
-      } else {
+      if (res.role === Role.ROLE_TEACHER || res.role === Role.ROLE_OWNER)
         navigate(PATH.ADMIN_ATTENDANCE);
-      }
+      // TODO: deny, cancel 상태일 때도 리다이렉트 처리 필요!
+      if (res.role === Role.APPROVAL_PENDING)
+        navigate(`${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}&source=login`);
     },
     throwOnError: false
   });
