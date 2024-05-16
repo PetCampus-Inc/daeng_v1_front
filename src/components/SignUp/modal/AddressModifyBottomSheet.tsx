@@ -4,7 +4,12 @@ import BottomSheet, { IBottomSheetProps } from "components/common/BottomSheet";
 
 import { ContentStyle, StyledBox } from "./styles";
 
-const AddressModifyBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
+interface Props extends IBottomSheetProps {
+  action: () => void;
+  address: string;
+}
+
+const AddressModifyBottomSheet = ({ isOpen, action, close, address }: Props) => {
   return (
     <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content css={ContentStyle}>
@@ -13,12 +18,15 @@ const AddressModifyBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
         <StyledBox>
           <MapPinIcon />
           <Text typo="body2_16_R" color="darkBlack">
-            서울 중구 덕수궁길 향교로 12-2 (똑독 유치원)
+            {address}
           </Text>
         </StyledBox>
         <BottomSheet.Button
           actionText="수정"
-          actionFn={() => console.log("적용")}
+          actionFn={() => {
+            action();
+            close();
+          }}
           closeText="닫기"
           closeFn={close}
         />
