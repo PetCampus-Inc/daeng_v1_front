@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import styled, { CSSProp } from "styled-components";
 export { Container, BackDrop } from "styles/StyleModule";
+
+import { remCalc } from "utils/calculator";
 
 import type { TitleProps } from "./BottomSheetTitle";
 
@@ -13,8 +15,14 @@ export const StyledBottomSheet = styled(motion.div)`
   z-index: 10;
 `;
 
-export const Content = styled.div`
-  padding: 1rem 1rem 2.625rem;
+export const Content = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["css"].includes(prop)
+})<{ css?: CSSProp }>`
+  padding-top: ${remCalc(16)};
+  padding-bottom: ${remCalc(42)};
+  padding-inline: ${remCalc(16)};
+
+  ${({ css }) => css};
 `;
 
 export const Control = styled.div`
