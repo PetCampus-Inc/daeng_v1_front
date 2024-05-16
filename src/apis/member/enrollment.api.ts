@@ -121,7 +121,7 @@ export const handleGetSearchResult = async (searchText: string): Promise<ISchool
 
 // 강아지 가입 신청서 보기
 export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
-  const url = `/member/dog/enrollment=${dogId}`;
+  const url = `member/dog/enrollment?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data.data;
 };
