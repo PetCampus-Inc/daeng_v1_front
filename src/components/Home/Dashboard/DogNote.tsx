@@ -1,6 +1,9 @@
+import { PATH } from "constants/path";
+
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import FootIcon from "assets/svg/foot-icon";
 import { Flex, Text } from "components/common";
+import { useNavigate } from "react-router-dom";
 import { getDaysAgo } from "utils/date";
 
 import {
@@ -42,6 +45,7 @@ const getAttendanceText = (status?: TAttendanceStatus, attendanceDate?: string) 
 };
 
 const DogNote = ({ data }: DogNoteProps) => {
+  const navigate = useNavigate();
   const { dogName, attendanceDate, attendanceStatus } = data;
   const attendanceClass = getAttendanceClass(attendanceStatus);
   const attendanceText = getAttendanceText(attendanceStatus, attendanceDate);
@@ -50,7 +54,7 @@ const DogNote = ({ data }: DogNoteProps) => {
     <NoteContainer className="grid-left">
       <SpringBound />
       <NoteContent>
-        <Flex gap="8">
+        <Flex gap="8" role="button" onClick={() => navigate(PATH.MEMBER_DOG_INFO_PAGE)}>
           <ProfileWrapper>
             <Img src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&w=2864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
           </ProfileWrapper>

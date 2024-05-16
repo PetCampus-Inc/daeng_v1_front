@@ -11,6 +11,7 @@ import Portal from "../Portal";
 export interface IModalProps {
   isOpen?: boolean;
   close: () => void;
+  className?: string;
 }
 
 interface IModal extends React.MemoExoticComponent<React.FC<PropsWithChildren<IModalProps>>> {
@@ -19,7 +20,12 @@ interface IModal extends React.MemoExoticComponent<React.FC<PropsWithChildren<IM
   Title: typeof ModalTitle;
 }
 
-const BaseButtonModal = ({ children, isOpen = false, close }: PropsWithChildren<IModalProps>) => {
+const BaseButtonModal = ({
+  children,
+  isOpen = false,
+  close,
+  className
+}: PropsWithChildren<IModalProps>) => {
   const backdropVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 }
@@ -49,6 +55,7 @@ const BaseButtonModal = ({ children, isOpen = false, close }: PropsWithChildren<
               exit="hidden"
               variants={modalVariants}
               transition={{ duration: 0.2 }}
+              className={className}
             >
               {children}
             </StyledModal>

@@ -1,7 +1,13 @@
 import { atom } from "recoil";
-import { IRequestAdminEnrollment } from "types/admin/enrollment.types";
 
+import type { IRequestAdminEnrollment } from "types/admin/enrollment.types";
+import type { Nullable } from "types/helper.type";
 import type { TMemberDto } from "types/member/enrollment.types";
+
+export const schoolIdAtom = atom<Nullable<number>>({
+  key: "schoolIdAtom",
+  default: null
+});
 
 export const currentStepState = atom({
   key: "currentStepState",

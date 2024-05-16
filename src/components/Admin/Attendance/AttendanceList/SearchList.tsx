@@ -3,10 +3,10 @@ import { memo } from "react";
 import DogCard from "../AttendanceCard/DogCard";
 import { ListWrapper, CardListWrapper, EmptyText } from "../styles";
 
-import type { IAttendDogInfo } from "types/admin.attendance.type";
+import type { AttendanceData } from "types/admin.attendance.type";
 
 type SearchListProps = {
-  data?: IAttendDogInfo[];
+  data?: AttendanceData[];
   type: "search" | "list";
 };
 

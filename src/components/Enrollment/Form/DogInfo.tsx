@@ -1,8 +1,8 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { ITEM_KEYS } from "constants/item";
 
+import { TextInput } from "components/common";
 import ImageUpload from "components/common/ImageUpload";
-import InputField from "components/common/InputField";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
@@ -23,11 +23,11 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
     <>
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.DOG_NAME)}>이름</Title>
-        <InputField
+        <TextInput
           name="dogName"
           placeholder="강아지 이름을 입력해주세요"
           register={register}
-          isRequired
+          required
         />
       </Card>
       <Card>

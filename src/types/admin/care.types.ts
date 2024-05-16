@@ -17,3 +17,24 @@ export interface ICareDogInfo {
 }
 
 export type TAgendaWriting = "COMPLETE" | "NOT_YET" | "WRITING";
+
+export interface IReqGallery {
+  dogId: number;
+  imageUriList: string[];
+  comment?: string;
+}
+
+export interface ICareTempSave {
+  agendaId: number;
+  adminId: number;
+  dogId: number;
+  agendaNote: string;
+  snack: string;
+  poop: string;
+  poopMemo: string;
+}
+
+export interface IPastAgenda extends ICareTempSave {
+  dateTime: number[];
+  status: "COMPLETE" | "NOT_YET" | "WRITING";
+}

@@ -2,13 +2,16 @@ import { PATH } from "constants/path";
 
 import { QueryClient } from "@tanstack/react-query";
 import * as Pages from "pages";
+import LoaderErrorPage from "pages/LoaderErrorPage";
 import { Suspense } from "react";
 import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
 import { adminLoginInfoAtom } from "store/admin";
+import { Role } from "types/admin/admin.type";
 import { isTRole } from "utils/typeGuard";
 
+import ApiErrorBoundary from "./ApiErrorBoundary";
 import App from "./App";
 
 const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
@@ -16,9 +19,21 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const router = createBrowserRouter([
     {
       path: PATH.ADMIN,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
+      element: (
+        <ApiErrorBoundary>
+          <App />
+        </ApiErrorBoundary>
+      ),
+      errorElement: <LoaderErrorPage />,
       children: [
+        {
+          path: PATH.ADMIN_LOGIN,
+          element: <Pages.AdminLoginPage />
+        },
+        {
+          path: PATH.ADMIN_SIGNUP,
+          element: <Pages.AdminSignupPage />
+        },
         {
           path: PATH.ADMIN_ATTENDANCE,
           children: [
@@ -58,11 +73,11 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
         },
         {
           path: PATH.ADMIN_CARE,
-          id: "caredog",
-          loader: () => caredogLoader({ adminId: auth.adminId, queryClient }),
           children: [
             {
               index: true,
+              id: "caredog",
+              loader: () => caredogLoader({ adminId: auth?.adminId, queryClient }),
               element: (
                 <Suspense>
                   <Pages.AttendCarePage />
@@ -72,6 +87,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               path: "delete",
               element: <Pages.AttendCareDeletePage />
+            },
+            {
+              path: PATH.ADMIN_CARE_NOTICE(),
+              element: (
+                <Suspense>
+                  <Pages.AttendCareNoticePage />
+                </Suspense>
+              )
             },
             {
               // 강아지 관리 메인 사진 앨범 전송
@@ -97,7 +120,16 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
         },
         {
           path: PATH.ADMIN_CHAT,
-          element: <Pages.Chat />
+          children: [
+            {
+              index: true,
+              element: (
+                <Suspense>
+                  <Pages.Chat />
+                </Suspense>
+              )
+            }
+          ]
         },
         {
           path: PATH.ADMIN_SCHOOL_MANAGE,
@@ -198,7 +230,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               index: true,
               element:
-                auth.role === "ROLE_OWNER" ? (
+                auth?.role === "ROLE_OWNER" ? (
                   <Suspense>
                     <Pages.PrincipalMyPage />
                   </Suspense>
@@ -229,73 +261,100 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             }
           ]
         }
-      ],
-      loader: () => {
-        if (!isTRole(auth.role)) return redirect("/");
-        return null;
-      }
+      ]
+      // FIXME: 권한에 따른 접근제어 필요
+      // loader: () => {
+      //   if (!isTRole(auth.role)) return redirect("/");
+      //   return null;
+      // }
     },
     {
-      path: PATH.SETTING,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
+      path: PATH.ROOT,
+      element: (
+        <ApiErrorBoundary>
+          <App />
+        </ApiErrorBoundary>
+      ),
       children: [
         {
-          path: PATH.SETTING,
+          path: PATH.MEMBER_MY_PAGE(),
           element: (
             <Suspense>
-              <Pages.SettingPage />
+              <Pages.MemberMyPage />
             </Suspense>
           )
         },
         {
-          path: PATH.SETTING_NOTIFICATION,
+          path: PATH.MEMBER_MY_INFO_PAGE(),
           element: (
             <Suspense>
-              <Pages.SettingNotificationPage />
+              <Pages.MemberMyInfoPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_INFO_EDITE_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberMyInfoEditePage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_SCHOOL_INFO(),
+          element: (
+            <Suspense>
+              <Pages.MemberSchoolInfoPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_SCHOOL_SEARCH(),
+          element: (
+            <Suspense>
+              <Pages.MemberSchoolSearchPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_MY_ENROLLMENT(),
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentFormDogAddPage />
             </Suspense>
           )
         }
       ]
     },
     {
+      path: PATH.LOGIN,
+      element: (
+        <Suspense>
+          <Pages.LoginPage />
+        </Suspense>
+      )
+    },
+    {
+      path: PATH.SIGNUP,
+      element: <Pages.SignUpPage />
+    },
+    {
       path: PATH.ROOT,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,
+      loader: () => {
+        if (!auth || (auth.role !== Role.ROLE_TEACHER && auth.role !== Role.ROLE_OWNER)) {
+          console.log("Redirecting to login...");
+          return redirect(PATH.LOGIN);
+        }
+        return null;
+      },
       children: [
         {
           index: true,
           element: (
             <Suspense>
               <Pages.HomePage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.LOGIN,
-          element: (
-            <Suspense>
-              <Pages.SignInPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.SIGNUP,
-          element: <Pages.SignUpPage />
-        },
-        {
-          path: PATH.ENROLL,
-          element: (
-            <Suspense>
-              <Pages.EnrollmentPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_MY_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyPage />
             </Suspense>
           )
         },
@@ -324,28 +383,26 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyInfoPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_MY_INFO_EDITE_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberMyInfoEditePage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_MY_SCHOOL_INFO,
-          element: (
-            <Suspense>
-              <Pages.MemberSchoolInfoPage />
-            </Suspense>
-          )
+          path: PATH.SETTING,
+
+          children: [
+            {
+              path: PATH.SETTING,
+              element: (
+                <Suspense>
+                  <Pages.SettingPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.SETTING_NOTIFICATION,
+              element: (
+                <Suspense>
+                  <Pages.SettingNotificationPage />
+                </Suspense>
+              )
+            }
+          ]
         },
         {
           path: PATH.MEMBER_DOG_INFO_PAGE,
@@ -354,12 +411,16 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberDogInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.REDIRECT,
+          element: <Pages.RedirectPage />
+        },
+        {
+          path: "*",
+          element: <Pages.NotFoundPage />
         }
-      ],
-      loader: () => {
-        // if (auth.role !== "USER") return redirect(PATH.LOGIN);
-        return null;
-      }
+      ]
     }
   ]);
   return <RouterProvider router={router} />;

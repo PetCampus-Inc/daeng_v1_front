@@ -1,4 +1,4 @@
-import { IFile } from "components/Admin/AttendCare/Upload/types";
+import { IFile } from "components/Admin/AttendCareGallery/upload/types";
 
 export const getFilePreview = (file: File): Promise<IFile> => {
   return new Promise((resolve, reject) => {
@@ -36,6 +36,7 @@ const getVideoThumb = (file: File): Promise<IFile> => {
         resolve({
           file,
           thumbnail,
+          video: URL.createObjectURL(file),
           duration: getVideoDuration(videoElement.duration)
         });
       } else {
@@ -65,8 +66,7 @@ const cleanUp = (videoElement: HTMLVideoElement, ...handlers: { (): void; (): vo
 const getImgThumb = (file: File): IFile => {
   return {
     file,
-    thumbnail: URL.createObjectURL(file),
-    duration: undefined
+    thumbnail: URL.createObjectURL(file)
   };
 };
 

@@ -64,6 +64,8 @@ export const CardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 
   box-shadow: ${({ theme }) => theme.shadows.card};
+
+  cursor: pointer;
 `;
 
 export const CardCheckboxWrapper = styled.div`

@@ -5,13 +5,18 @@ import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-q
 import {
   handleCreateCareDogs,
   handleDeleteCareDogs,
+  handleGetAgenda,
   handleGetCareDogs,
-  handleGetNewCareDogs
-} from "apis/admin.caredog.api";
+  handleGetNewCareDogs,
+  handleGetPastAgenda,
+  handlePostAlbum,
+  handleSendAgenda,
+  handleTempSaveCareDog
+} from "apis/admin/care.api";
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
-import type { ICareDogInfo } from "types/admin/care.types";
+import type { ICareDogInfo, IPastAgenda } from "types/admin/care.types";
 
 export const useGetCareDogList = (adminId: number, initialData: ICareDogInfo[]) => {
   return useSuspenseQuery<ICareDogInfo[]>({
@@ -95,4 +100,73 @@ export const useDeleteCareDogs = () => {
   });
 
   return { mutateDeleteCareDogs: deleteCareDogsMutation.mutate };
+};
+
+export const useCreateAlbum = () => {
+  const createAlbumMutation = useMutation({
+    mutationFn: handlePostAlbum,
+    onSuccess: () => {
+      showToast("사진이 전송이 완료되었습니다", "bottom");
+    }
+  });
+  return { mutateAlbum: createAlbumMutation.mutate };
+};
+
+// 강아지 알림장 임시저장
+export const useTempSaveCareDog = () => {
+  const queryClient = useQueryClient();
+  const tempSaveCareDog = useMutation({
+    mutationFn: handleTempSaveCareDog,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_TEMP_SAVE });
+      showToast("임시 저장되었습니다", "bottom");
+    },
+    onError: () => {
+      showToast("에러가 발생했습니다. 잠시후 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return { mutateTempSaveCareDog: tempSaveCareDog.mutate };
+};
+
+// 강아지 알림장 정보 가져오기
+export const useGetAgendaSaved = (dogId: number) => {
+  return useSuspenseQuery<IPastAgenda>({
+    queryKey: QUERY_KEY.CARE_DOG_AGENDA_SAVED,
+    queryFn: () => handleGetAgenda(dogId)
+  });
+};
+
+// 알림장 전송
+export const useSendAgenda = () => {
+  const queryClient = useQueryClient();
+  const sendAgenda = useMutation({
+    mutationFn: handleSendAgenda,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_TEMP_SAVE });
+      showToast("알림장 전송이 완료되었습니다", "bottom");
+    },
+    onError: () => {
+      showToast("에러가 발생했습니다. 잠시후 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return { mutateSendAgenda: sendAgenda.mutate };
+};
+
+// 강아지 지난 알림장 정보 가져오기
+export const useGetPastAgenda = (dogId: number) => {
+  const queryClient = useQueryClient();
+  const cachedData = queryClient.getQueryData<IPastAgenda[]>([
+    QUERY_KEY.CARE_DOG_PAST_AGENDA,
+    dogId
+  ]);
+
+  return useSuspenseQuery<IPastAgenda[]>({
+    queryKey: QUERY_KEY.CARE_DOG_PAST_AGENDA,
+    queryFn: () => handleGetPastAgenda(dogId),
+    gcTime: 5 * 60 * 1000,
+    staleTime: 1 * 60 * 1000,
+    initialData: cachedData
+  });
 };
