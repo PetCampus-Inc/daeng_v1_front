@@ -344,7 +344,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       errorElement: <Pages.NotFoundPage />,
       loader: () => {
         if (!auth || (auth.role !== Role.ROLE_TEACHER && auth.role !== Role.ROLE_OWNER)) {
-          console.log("Redirecting to login...");
           return redirect(PATH.LOGIN);
         }
         return null;
