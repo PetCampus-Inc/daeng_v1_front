@@ -1,6 +1,6 @@
 import { IconWrapper } from "components/Admin/DogDetailInfo/DogInfo/styles";
+import { Box } from "components/common";
 import { Title } from "components/Enrollment/styles";
-import { StyledTextWrapper } from "components/SignIn/InputBoxAndText/styles";
 import { ReactNode } from "react";
 
 interface ITitleWithIcon {
@@ -12,11 +12,11 @@ interface ITitleWithIcon {
 
 const TitleWithIcon = ({ title, icon, handleClick, children }: ITitleWithIcon) => {
   return (
-    <StyledTextWrapper style={{ margin: "0 0 12px", width: "100%" }}>
+    <Box display="flex" justify="center" mb={12} width="full">
       {children}
       <Title>{title}</Title>
       <IconWrapper onClick={handleClick}>{icon}</IconWrapper>
-    </StyledTextWrapper>
+    </Box>
   );
 };
 
