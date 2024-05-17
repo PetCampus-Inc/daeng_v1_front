@@ -1,4 +1,4 @@
-import { MEMBER_DOG_INFO_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
+import { MEMBER_DOG_INFO_ENROLL_STEP } from "constants/step";
 
 import Header from "components/common/Header";
 import DogInfo from "components/Enrollment/MemberForm/DogInfo";
@@ -7,29 +7,18 @@ import PickDropInfo from "components/Enrollment/MemberForm/PickDropInfo";
 import PolicyInfo from "components/Enrollment/MemberForm/PolicyInfo";
 import TicketInfo from "components/Enrollment/MemberForm/TicketInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
-import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
-import { useGetEnrollment } from "hooks/api/member/enroll";
 import { useGetMemberDogEnrollmemntInfo } from "hooks/api/member/member";
-import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
-import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 interface EnrollmentProps {
-  dogId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.
+  dogId?: number; // MEMO: 강아지 상세 정보에서 제공
 }
 
 const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
-  const navigate = useNavigate();
-  const overlay = useOverlay();
-
-  const { memberId } = useParams(); // MEMO: memberId (mypage에서 추출)
-
   const { data } = useGetMemberDogEnrollmemntInfo(Number(dogId));
-
   const { schoolFormResponse, ...rest } = data;
 
   const methods = useForm({
@@ -43,7 +32,7 @@ const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
   );
   const maxSteps = visibleSteps.length;
 
-  const { currentStep, nextStep, prevStep, setStep } = useStep(maxSteps - 1);
+  const { currentStep, setStep } = useStep(maxSteps - 1);
 
   const currentTitle = MEMBER_DOG_INFO_ENROLL_STEP[currentStep].title;
   const currentSubtitle = MEMBER_DOG_INFO_ENROLL_STEP[currentStep].subtitle;
@@ -54,12 +43,6 @@ const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
     roundTicketNumber: schoolFormResponse.roundTicketNumber,
     monthlyTicketNumber: schoolFormResponse.monthlyTicketNumber
   };
-
-  // useEffect(() => {
-  //   if (dogId) {
-  //     nextStep;
-  //   }
-  // }, [dogId, nextStep, prevStep, setStep]);
 
   return (
     <>
