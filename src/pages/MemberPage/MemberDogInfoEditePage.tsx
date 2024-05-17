@@ -5,14 +5,14 @@ import DogDetailInfoEdite from "components/Member/DogInfo/DogDetailInfoEdite/Dog
 import { useGetMemberDogDetailnfo } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 import { addZero } from "utils/date";
 
 const MemberDogInfoEditePage = () => {
-  const dogId = 1;
+  const { dogId } = useParams();
   const overlay = useOverlay();
-  const { data } = useGetMemberDogDetailnfo(dogId);
+  const { data } = useGetMemberDogDetailnfo(Number(dogId));
   const { ...rest } = data;
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const MemberDogInfoEditePage = () => {
       <PageContainer pt="1">
         <FormProvider {...methods}>
           <DogDetailInfoEdite />
-          <SaveButton dogId={dogId} />
+          <SaveButton dogId={Number(dogId)} />
         </FormProvider>
       </PageContainer>
     </>
