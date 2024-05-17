@@ -48,6 +48,7 @@ const TextAreaBottomSheet = ({
           id=""
           defaultValue={defaultValue}
           placeholder={placeholder}
+          rows={6}
           {...register(type)}
         />
         <BottomSheet.Button actionText={actionText} actionFn={actionFn} />
