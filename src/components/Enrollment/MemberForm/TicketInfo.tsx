@@ -21,8 +21,8 @@ interface TicketInfoProps {
 
 const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
   const requiredItemsMap = new Map<number, boolean>([
-    [ITEM_KEYS.TICKET_TYPE, true],
-    [ITEM_KEYS.MONTHLY_TICKET_NUMBER, true],
+    [ITEM_KEYS.TICKET_TYPE, false],
+    [ITEM_KEYS.MONTHLY_TICKET_NUMBER, false],
     [ITEM_KEYS.ROUND_TICKET_NUMBER, true],
     [ITEM_KEYS.OPEN_DAYS, true],
     [ITEM_KEYS.TICKET_INFO, true]

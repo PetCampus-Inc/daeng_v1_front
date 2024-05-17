@@ -20,11 +20,11 @@ interface MemberInfoProps {
 
 const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   const requiredItemsMap = new Map<number, boolean>([
-    [ITEM_KEYS.MEMBER_NAME, true],
+    [ITEM_KEYS.MEMBER_NAME, false],
     [ITEM_KEYS.MEMBER_GENDER, true],
-    [ITEM_KEYS.MEMBER_ADDRESS, true],
-    [ITEM_KEYS.MEMBER_PHONE, true],
-    [ITEM_KEYS.EMERGENCY_NUMBER, true]
+    [ITEM_KEYS.MEMBER_ADDRESS, false],
+    [ITEM_KEYS.MEMBER_PHONE, false],
+    [ITEM_KEYS.EMERGENCY_NUMBER, false]
   ]);
 
   const { register, setValue, watch } = useFormContext();
@@ -98,7 +98,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           name="address.detail"
           register={register}
           placeholder="상세 주소를 입력해주세요"
-          value={watch("addressDetail.detail") && watch("addressDetail.detail")}
+          value={watch("address.detail") && watch("address.detail")}
           readOnly
         />
       </Card>

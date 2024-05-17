@@ -20,16 +20,15 @@ interface DogInfoProps {
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
   const requiredItemsMap = new Map<number, boolean>([
-    [ITEM_KEYS.DOG_NAME, true],
+    [ITEM_KEYS.DOG_NAME, false],
     [ITEM_KEYS.DOG_GENDER, true],
-    [ITEM_KEYS.DOG_SIZE, true],
-    [ITEM_KEYS.DOG_BREED, true],
-    [ITEM_KEYS.DOG_BIRTHDAY, true],
+    [ITEM_KEYS.DOG_SIZE, false],
+    [ITEM_KEYS.DOG_BREED, false],
+    [ITEM_KEYS.DOG_BIRTHDAY, false],
     [ITEM_KEYS.NEUTRALIZATION, true],
     [ITEM_KEYS.VACCINATION, true],
-    [ITEM_KEYS.VACCINATION_FILE, true],
-    [ITEM_KEYS.ALLERGY_DISEASE, true],
-    [ITEM_KEYS.ALLERGY_DISEASE, true]
+    [ITEM_KEYS.VACCINATION_FILE, false],
+    [ITEM_KEYS.ALLERGY_DISEASE, false]
   ]);
   return (
     <>
