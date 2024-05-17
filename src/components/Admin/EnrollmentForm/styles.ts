@@ -9,7 +9,7 @@ export const TopWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  top: 5vh;
+  top: 0;
   padding: 28px 0;
   gap: 12px;
 
@@ -32,7 +32,9 @@ export const SubTitle = styled.h3`
   color: ${({ theme }) => theme.colors.gray_3};
 `;
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["withNav"].includes(prop)
+})<{ withNav?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -40,6 +42,8 @@ export const ContentWrapper = styled.div`
 
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
+
+  padding-bottom: ${({ withNav }) => withNav && "calc(7vh + 2.5rem)"};
 `;
 
 export const ButtonContainer = styled.div`
