@@ -1,7 +1,6 @@
 import AlertRed from "assets/svg/alert-red-icon";
 import AttendanceIcon from "assets/svg/attendance-icon";
 import CalendarIcon from "assets/svg/calendar";
-import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
 import { DetailItem, TextWrapper } from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
 import { Flex } from "components/common";
