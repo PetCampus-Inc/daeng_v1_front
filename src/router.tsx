@@ -339,6 +339,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberEnrollmentDogInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_DOG_INFO_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberDogInfoPage />
+            </Suspense>
+          )
         }
       ]
     },
@@ -419,14 +427,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             }
           ]
-        },
-        {
-          path: PATH.MEMBER_DOG_INFO_PAGE(),
-          element: (
-            <Suspense>
-              <Pages.MemberDogInfoPage />
-            </Suspense>
-          )
         },
         {
           path: PATH.REDIRECT,
