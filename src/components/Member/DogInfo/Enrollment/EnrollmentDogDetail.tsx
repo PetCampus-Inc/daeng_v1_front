@@ -1,5 +1,6 @@
 import { MEMBER_DOG_INFO_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
 
+import Header from "components/common/Header";
 import DogInfo from "components/Enrollment/MemberForm/DogInfo";
 import MemberInfo from "components/Enrollment/MemberForm/MemberInfo";
 import PickDropInfo from "components/Enrollment/MemberForm/PickDropInfo";
@@ -61,36 +62,39 @@ const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
   // }, [dogId, nextStep, prevStep, setStep]);
 
   return (
-    <PageContainer color="BGray" pb="2.5">
-      <S.Container>
-        <S.TopWrapper>
-          <S.TitleWrapper>
-            <S.Title>{currentTitle}</S.Title>
-            <S.SubTitle>{currentSubtitle}</S.SubTitle>
-          </S.TitleWrapper>
-          <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
-        </S.TopWrapper>
-        <FormProvider {...methods}>
-          <S.ContentWrapper>
-            <S.Content $isVisible={currentStep === 0}>
-              <MemberInfo requiredItems={schoolFormResponse.requiredItemList} />
-            </S.Content>
-            <S.Content $isVisible={currentStep === 1}>
-              <DogInfo requiredItems={schoolFormResponse.requiredItemList} />
-            </S.Content>
-            <S.Content $isVisible={currentStep === 2}>
-              <TicketInfo requiredItems={schoolFormResponse.requiredItemList} ticket={ticket} />
-            </S.Content>
-            <S.Content $isVisible={currentStep === 3}>
-              <PolicyInfo requiredItems={schoolFormResponse.requiredItemList} />
-            </S.Content>
-            <S.Content $isVisible={currentStep === 4}>
-              <PickDropInfo requiredItems={schoolFormResponse.requiredItemList} />
-            </S.Content>
-          </S.ContentWrapper>
-        </FormProvider>
-      </S.Container>
-    </PageContainer>
+    <>
+      <Header type="text" text={`${data.dogName}의 가입신청서`} />
+      <PageContainer color="BGray" pb="2.5">
+        <S.Container>
+          <S.TopWrapper>
+            <S.TitleWrapper>
+              <S.Title>{currentTitle}</S.Title>
+              <S.SubTitle>{currentSubtitle}</S.SubTitle>
+            </S.TitleWrapper>
+            <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
+          </S.TopWrapper>
+          <FormProvider {...methods}>
+            <S.ContentWrapper>
+              <S.Content $isVisible={currentStep === 0}>
+                <MemberInfo requiredItems={schoolFormResponse.requiredItemList} />
+              </S.Content>
+              <S.Content $isVisible={currentStep === 1}>
+                <DogInfo requiredItems={schoolFormResponse.requiredItemList} />
+              </S.Content>
+              <S.Content $isVisible={currentStep === 2}>
+                <TicketInfo requiredItems={schoolFormResponse.requiredItemList} ticket={ticket} />
+              </S.Content>
+              <S.Content $isVisible={currentStep === 3}>
+                <PolicyInfo requiredItems={schoolFormResponse.requiredItemList} />
+              </S.Content>
+              <S.Content $isVisible={currentStep === 4}>
+                <PickDropInfo requiredItems={schoolFormResponse.requiredItemList} />
+              </S.Content>
+            </S.ContentWrapper>
+          </FormProvider>
+        </S.Container>
+      </PageContainer>
+    </>
   );
 };
 
