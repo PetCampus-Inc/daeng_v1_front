@@ -76,6 +76,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItemsMap?.get(ITEM_KEYS.DOG_BREED)}>견종</Title>
+        {/* // TODO 수정되지 않도록 추후 작업 필요 */}
         <BreedInput
           name="breedName"
           register={register}
