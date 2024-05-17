@@ -4,14 +4,9 @@ import { PHONE_REGEX } from "constants/validCheck";
 
 import { TextInput } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
-import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Title from "components/common/Title";
-import { useOverlay } from "hooks/common/useOverlay";
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { IDogEnrollmentInfo } from "types/member/enrollment.types";
-import { formatPhoneNumber } from "utils/formatter";
 
 import { Card } from "./styles";
 interface MemberInfoProps {
@@ -19,6 +14,7 @@ interface MemberInfoProps {
 }
 
 const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
+  const { register, watch } = useFormContext();
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.MEMBER_NAME, false],
     [ITEM_KEYS.MEMBER_GENDER, true],
@@ -26,40 +22,6 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
     [ITEM_KEYS.MEMBER_PHONE, false],
     [ITEM_KEYS.EMERGENCY_NUMBER, false]
   ]);
-
-  const { register, setValue, watch } = useFormContext();
-  const [isAddressActive, setIsAddressActive] = useState(false);
-  const overlay = useOverlay();
-
-  const addressStreet = "address.street";
-  const watchAddress = watch(addressStreet, "");
-
-  const GENDER_DATAS = GENDER_DATA[watch("memberGender")] === "여성" ? "여" : "남";
-
-  console.log(watch("address"));
-
-  const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const formattedValue = formatPhoneNumber(value);
-    setValue(field, formattedValue);
-  };
-
-  const handleClear = () => {
-    setValue(addressStreet, "");
-    setValue("address.detail", "");
-    setIsAddressActive(false);
-  };
-
-  const openPopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <Postcode
-        isOpen={isOpen}
-        close={close}
-        field={addressStreet}
-        setValue={setValue}
-        setIsAddressActive={setIsAddressActive}
-      />
-    ));
 
   return (
     <>
@@ -78,27 +40,26 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <SingleRadio
           name="memberGender"
           radiosText={["남", "여"]}
-          defaultSelect={watch("memberGender") && GENDER_DATAS}
+          defaultSelect={
+            watch("memberGender") && GENDER_DATA[watch("memberGender")] === "여성" ? "여" : "남"
+          }
         />
       </Card>
       <Card>
         <Title isRequired={requiredItemsMap?.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
         <SearchInputField
-          name={addressStreet}
+          name="address"
           register={register}
-          onSearch={openPopup}
-          onClick={openPopup}
-          onClear={handleClear}
-          value={watch("address.street") && watch("address.street")}
+          value={watch("address") && watch("address")}
           required={requiredItemsMap?.get(ITEM_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
         />
         <TextInput
-          name="address.detail"
+          name="addressDetail"
           register={register}
           placeholder="상세 주소를 입력해주세요"
-          value={watch("address.detail") && watch("address.detail")}
+          value={watch("addressDetail") && watch("addressDetail")}
           readOnly
         />
       </Card>
@@ -109,7 +70,6 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           register={register}
           required
           rules={{ pattern: PHONE_REGEX }}
-          onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
           readOnly
         />
@@ -117,12 +77,10 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
       <Card>
         <Title isRequired={requiredItemsMap?.get(ITEM_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
         <TextInput
-          name="emergencyNumber"
+          name="emergencyPhoneNumber"
           register={register}
           required={requiredItemsMap?.get(ITEM_KEYS.EMERGENCY_NUMBER)}
           rules={{ pattern: PHONE_REGEX }}
-          onChange={handleChangeNumber("emergencyNumber")}
-          value={watch("emergencyPhoneNumber")}
           placeholder="비상 연락처를 입력해주세요"
           readOnly
         />
