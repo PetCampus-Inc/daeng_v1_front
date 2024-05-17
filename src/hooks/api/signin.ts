@@ -1,8 +1,8 @@
 import { PATH } from "constants/path";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getCheckId, postAdminLogin } from "apis/admin/admin.api";
-import { handleKaKaoLogin } from "apis/auth.api";
+import { useMutation } from "@tanstack/react-query";
+import { postAdminLogin } from "apis/admin/admin.api";
+import { postAppleLogin } from "apis/auth.api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
@@ -20,12 +20,8 @@ export const useLogInMutation = () => {
     mutationFn: (data: LoginMutateProps) => {
       const { provider, code } = data;
       switch (provider) {
-        case "kakao":
-          return handleKaKaoLogin(code);
-        case "google":
-          return handleKaKaoLogin(code); // FIXME: 구글 로그인 시 API 연동 필요
         case "apple":
-          return handleKaKaoLogin(code); // FIXME: 애플 로그인 시 API 연동 필요
+          return postAppleLogin(code); // FIXME: 애플 로그인 시 API 연동 필요
         default:
           throw new Error("Invalid provider");
       }
