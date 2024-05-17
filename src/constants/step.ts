@@ -88,7 +88,7 @@ export const MEMBER_DOG_INFO_ENROLL_STEP = [
   {
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "견주가 볼 가입신청서 화면이에요",
-    indicator: "픽드랍1",
+    indicator: "픽드랍",
     isVisible: (status: TPickDropRequest) => status === "REQUEST"
   }
 ];
