@@ -1,11 +1,26 @@
+const ADMIN = "admin";
+const LOGIN = "login";
+const SIGNUP = "signup";
+
+export const SIGNUP_PATH = {
+  ROLE_SELECT: "select_role",
+  SEARCH_SCHOOL: "search_school",
+  ENROLL_SCHOOL: "enroll_school",
+  PERSONAL_INFO: "personal_info",
+  ACCOUNT_SETUP: "account_setup",
+  SCHOOL_ENROLLMENT_COMPLETE: "school_enrollment_complete",
+  APPROVAL_STATUS: "approval_status"
+};
+
 export const PATH = {
   ROOT: "/",
   HOME: "/home",
-  LOGIN: "/login",
-  SIGNUP: "/signup",
-  ADMIN: "/admin",
-  ADMIN_LOGIN: "/admin/login",
-  ADMIN_SIGNUP: "/admin/signup",
+  LOGIN: `/login`,
+  SIGNUP: `/${SIGNUP}`,
+  ADMIN: `${ADMIN}`,
+  ADMIN_LOGIN: `/${ADMIN}/${LOGIN}`,
+  ADMIN_SIGNUP: `/${ADMIN}/${SIGNUP}`,
+  ADMIN_SIGNUP_APPROVAL_STATUS: `/${ADMIN}/${SIGNUP}?step=${SIGNUP_PATH.APPROVAL_STATUS}`,
   ADMIN_ATTENDANCE: "/admin/attendance", // 출석부
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/admin/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>
@@ -48,7 +63,8 @@ export const PATH = {
   MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
   REGISTRATION_STATUS: `/approve`, // 가입신청 승인 상태
   REDIRECT: "/login/oauth2/code/:provider",
-  MEMBER_DOG_INFO_PAGE: "/dogInfo", // 강아지 상세정보
-  MEMBER_DOG_INFO_EDITE_PAGE: "/dogInfo/edite", // 강아지 가입정보 수정
-  MEMBER_DOG_ENROLLMENT_INFO_PAGE: "/dogInfo/enrollment/detail" // 강아지 가입신청서 보기 (read only)
+  MEMBER_DOG_INFO_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}`, // 강아지 상세정보
+  MEMBER_DOG_INFO_EDITE_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}/edite`, // 강아지 가입정보 수정
+  MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
+    `/dogInfo/${dogId ?? ":dogId"}/enrollment/detail` // 강아지 가입신청서 보기 (read only)
 } as const;

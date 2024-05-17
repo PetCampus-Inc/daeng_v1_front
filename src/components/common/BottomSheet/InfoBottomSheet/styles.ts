@@ -6,7 +6,6 @@ export const TextAreaBox = styled(TextArea)`
     background-color: ${({ theme }) => theme.colors.gray_5};
     border: 1px solid ${({ theme }) => theme.colors.gray_5};
     padding: 10px 12px;
-    height: 140px;
 
     ${({ theme }) => theme.typo.label2_14_R};
   }

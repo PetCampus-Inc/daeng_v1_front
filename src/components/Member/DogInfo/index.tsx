@@ -3,6 +3,7 @@ import { PATH } from "constants/path";
 
 import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
+import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
@@ -120,7 +121,9 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.DogName>{data.dogName}</S.DogName>
                 <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
               </S.Title>
-              <S.Editebutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE)}>
+              <S.Editebutton
+                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE(String(dogId)))}
+              >
                 <span>수정</span>
                 <ArrowRightIcon />
               </S.Editebutton>
@@ -141,7 +144,7 @@ const DogInfo = ({ dogId }: IProps) => {
               </S.InfoText>
               <S.InfoText>
                 <S.Icon>
-                  <CalendarIcon />
+                  <BreedIcon />
                 </S.Icon>
                 {data.breedName}
               </S.InfoText>
@@ -149,7 +152,9 @@ const DogInfo = ({ dogId }: IProps) => {
           </S.TextWrapper>
         </S.DogInfoBox>
 
-        <S.GotoEnrollButton onClick={() => navigate(PATH.MEMBER_DOG_ENROLLMENT_INFO_PAGE)}>
+        <S.GotoEnrollButton
+          onClick={() => navigate(PATH.MEMBER_DOG_ENROLLMENT_INFO_PAGE(String(dogId)))}
+        >
           <span>{data.dogName}의 가입신청서</span>
           <ArrowRightIcon />
         </S.GotoEnrollButton>

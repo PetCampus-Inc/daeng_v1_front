@@ -7,9 +7,10 @@ const caredogLoader = async ({
   adminId,
   queryClient
 }: {
-  adminId: number;
+  adminId?: number;
   queryClient: QueryClient;
 }) => {
+  if (!adminId) throw new Error("adminId is required");
   const data = await queryClient.ensureQueryData({
     queryKey: QUERY_KEY.CARE_DOG_LIST,
     queryFn: () => handleGetCareDogs(adminId),

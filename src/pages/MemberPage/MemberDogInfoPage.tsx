@@ -5,17 +5,20 @@ import DogInfo from "components/Member/DogInfo";
 import AttendanceTicketInfo from "components/Member/DogInfo/AttendanceTicketInfo";
 import SchoolInfo from "components/Member/DogInfo/SchoolInfo";
 import { FootIconItem, Nav, NavItem, NavWrapper } from "components/Member/DogInfo/styles";
+import { useGetMemberDogDetailnfo } from "hooks/api/member/member";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 const MemberDogInfoPage = () => {
+  const { dogId } = useParams();
   const currentSteps = MEMBER_DOG_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
-  const dogId = 1;
+  const { data } = useGetMemberDogDetailnfo(Number(dogId));
 
   return (
     <>
-      <Header type="text" text="뽀뽀의 상세정보" shadow={true} />
+      <Header type="text" text={`${data.dogName}의 상세정보`} shadow={true} />
       <Nav>
         <NavWrapper>
           {currentSteps.map((item, index) => (
@@ -35,9 +38,9 @@ const MemberDogInfoPage = () => {
         </NavWrapper>
       </Nav>
       <PageContainer color="gray_5">
-        {currentStep === 0 && <DogInfo dogId={dogId} />}
+        {currentStep === 0 && <DogInfo dogId={Number(dogId)} />}
         {currentStep === 1 && <SchoolInfo />}
-        {currentStep === 2 && <AttendanceTicketInfo />}
+        {currentStep === 2 && <AttendanceTicketInfo dogId={Number(dogId)} />}
       </PageContainer>
     </>
   );
