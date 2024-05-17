@@ -30,8 +30,7 @@ export type MemberFormAdaptedData = Omit<
   monthlyTicketNumber: number[];
 };
 
-// 대기 목록 가입신청서 조회
-// FIXME: 타입 수정 필요함!!!!!!
+// 견주 가입신청서 조회
 export const useGetMemberEnrollment = (formId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_ENROLLMENT(formId),

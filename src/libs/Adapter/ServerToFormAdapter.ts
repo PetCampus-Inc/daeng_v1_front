@@ -8,8 +8,7 @@ import type {
   TPickDropState
 } from "types/admin/enrollment.types";
 
-// 대기 목록 가입 신청서 조회
-// Updated adapter class
+// 대기 중 견주 가입 신청서 조회
 export class MemberFormAdapter {
   protected value: MemberFormData;
 

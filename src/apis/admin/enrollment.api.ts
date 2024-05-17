@@ -3,7 +3,7 @@ import { IResponse } from "types/helper.type";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 
-// 대기 목록 가입신청서 보기
+// 대기 중 견주 가입신청서 보기
 // description: 승인 대기중인 견주의 가입신청서를 보여줍니다.
 export const handleGetMemberEnrollmentForm = async (
   enrollmentFormId: string
