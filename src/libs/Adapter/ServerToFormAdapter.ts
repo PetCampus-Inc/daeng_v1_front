@@ -2,21 +2,52 @@ import { AGREEMENT_ITEM } from "constants/item";
 
 import { getMapValue } from "utils/formatter";
 
-import type { IMemberForm, IResponseAdminForm, TPickDropState } from "types/admin/enrollment.types";
+import type {
+  MemberFormData,
+  IResponseAdminForm,
+  TPickDropState
+} from "types/admin/enrollment.types";
 
 // 대기 목록 가입 신청서 조회
+// Updated adapter class
 export class MemberFormAdapter {
-  protected value: IMemberForm;
+  protected value: MemberFormData;
 
-  constructor(obj: IMemberForm) {
+  constructor(obj: MemberFormData) {
     this.value = obj;
   }
+
   get getRequiredItemList(): Map<number, boolean> {
-    return new Map([1, 2, 3, 4, 5, 6, 7, 8, 9].map((itemNumber: number) => [itemNumber, true]));
+    return new Map(
+      this.value.schoolFormResponse.requiredItemList.map((itemNumber: number) => [itemNumber, true])
+    );
+  }
+
+  get pickDropState() {
+    return getMapValue(
+      "pickDropState",
+      this.value.schoolFormResponse.pickDropState
+    ) as TPickDropState;
+  }
+
+  get enrollmentTicketType() {
+    return getMapValue("ticketType", this.value.enrollmentTicketType);
   }
 
   get ticketType() {
-    return getMapValue("ticketType", this.value.ticketType);
+    return this.value.schoolFormResponse.ticketType.map((type) => getMapValue("ticketType", type));
+  }
+
+  get year() {
+    return this.value.dogBirthDate[0];
+  }
+
+  get month() {
+    return this.value.dogBirthDate[1];
+  }
+
+  get day() {
+    return this.value.dogBirthDate[2];
   }
 
   get pickDropRequest() {
@@ -62,8 +93,7 @@ export class MemberFormAdapter {
   adapt() {
     return {
       ...this.value,
-      requiredItemList: this.getRequiredItemList,
-      ticketType: this.ticketType,
+      enrollmentTicketType: this.enrollmentTicketType,
       pickDropRequest: this.pickDropRequest,
       pickDropType: this.pickDropType,
       memberGender: this.memberGender,
@@ -71,7 +101,27 @@ export class MemberFormAdapter {
       dogSize: this.dogSize,
       neutralization: this.neutralization,
       vaccination: this.vaccination,
-      agreements: this.agreementsList
+      agreements: this.agreementsList,
+      year: this.year,
+      month: this.month,
+      day: this.day,
+
+      requiredItemList: this.getRequiredItemList,
+      schoolFormId: this.value.schoolFormResponse.schoolFormId,
+      schoolFormName: this.value.schoolFormResponse.schoolFormName,
+      priceInfo: this.value.schoolFormResponse.priceInfo,
+      roundTicketNumber: this.value.schoolFormResponse.roundTicketNumber,
+      openDays: this.value.schoolFormResponse.openDays,
+      monthlyTicketNumber: this.value.schoolFormResponse.monthlyTicketNumber,
+      ticketType: this.ticketType,
+      ticketInfo: this.value.schoolFormResponse.ticketInfo,
+      limitsInfo: this.value.schoolFormResponse.limitsInfo,
+      accidentInfo: this.value.schoolFormResponse.accidentInfo,
+      abandonmentInfo: this.value.schoolFormResponse.abandonmentInfo,
+      pickDropState: this.pickDropState,
+      pickDropNotice: this.value.schoolFormResponse.pickDropNotice,
+      pickDropInfo: this.value.schoolFormResponse.pickDropInfo,
+      member: this.value.schoolFormResponse.member
     };
   }
 }
