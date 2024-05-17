@@ -22,14 +22,6 @@ type RouteFunnelProps<Steps extends NonEmptyArray<string>> = Omit<
   "steps" | "step"
 >;
 
-export interface UseFunnelReturn<Steps extends NonEmptyArray<string>, State> {
-  FunnelComponent: FunnelComponent<Steps>;
-  setStep: (step: Steps[number], options?: SetStepOptions) => void;
-  withState: <S extends Partial<State>>(
-    initialState: S
-  ) => readonly [FunnelComponent<Steps>, S, (next: Partial<S> | ((next: Partial<S>) => S)) => void];
-}
-
 const DEFAULT_STEP_QUERY_KEY = "funnel-step";
 
 export const useFunnel = <Steps extends NonEmptyArray<string>>(

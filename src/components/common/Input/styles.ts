@@ -18,6 +18,7 @@ export const Input = styled.input<InputFieldStyleProps>`
   align-items: center;
 
   color: ${({ theme }) => theme.colors.gray_1};
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
 
   ${({ css }) => css || defaultStyles};

@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { formatBusinessNumber, formatSchoolNumber } from "utils/formatter";
 
+import AddressModifyBottomSheet from "../modal/AddressModifyBottomSheet";
+
 const SchoolInfo = () => {
   const {
     register,
@@ -69,9 +71,27 @@ const SchoolInfo = () => {
     setValue("schoolAddress", "");
   };
 
+  const handleAddressFieldClick = () => {
+    if (watchAddress.length > 0) {
+      openAddressModifyPopup();
+    } else {
+      openPostCodePopup();
+    }
+  };
+
   const openPostCodePopup = () =>
     overlay.open(({ isOpen, close }) => (
       <Postcode isOpen={isOpen} close={close} field={"schoolAddress"} setValue={setValue} />
+    ));
+
+  const openAddressModifyPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AddressModifyBottomSheet
+        isOpen={isOpen}
+        close={close}
+        action={openPostCodePopup}
+        address={watchAddress}
+      />
     ));
 
   return (
@@ -117,7 +137,7 @@ const SchoolInfo = () => {
           register={register}
           placeholder="주소를 검색해 주세요"
           onSearch={openPostCodePopup}
-          onClick={openPostCodePopup}
+          onClick={handleAddressFieldClick}
           onClear={handleClear}
           value={watchAddress}
           readOnly
