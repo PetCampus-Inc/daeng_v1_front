@@ -20,6 +20,8 @@ interface TicketInfoProps {
 }
 
 const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
+  const { control, register, watch } = useFormContext();
+
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.TICKET_TYPE, false],
     [ITEM_KEYS.MONTHLY_TICKET_NUMBER, false],
@@ -27,13 +29,11 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
     [ITEM_KEYS.OPEN_DAYS, true],
     [ITEM_KEYS.TICKET_INFO, true]
   ]);
-  const { control, register, watch } = useFormContext();
 
   const selectedTicketType = watch("ticketType");
   const roundTicketText = ticket?.roundTicketNumber?.map((number) => `${number}회`) || [];
   const monthlyTicketText = ticket?.monthlyTicketNumber?.map((number) => `${number}주`) || [];
 
-  console.log(ITEM_ENGLISH_TO_KOREAN[watch("ticketType")]);
   return (
     <>
       <Card>
