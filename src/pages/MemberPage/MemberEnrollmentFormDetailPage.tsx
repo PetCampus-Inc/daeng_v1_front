@@ -14,13 +14,13 @@ import {
   SubTitle,
   ContentWrapper
 } from "components/Admin/EnrollmentForm/styles";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import { useGetMemberEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
 const MemberEnrollmentFormDetailPage = () => {
   const { formId } = useParams();
@@ -32,8 +32,6 @@ const MemberEnrollmentFormDetailPage = () => {
 
   const { data } = useGetMemberEnrollment(formId);
   const { pickDropState, requiredItemList, agreements, ...rest } = data;
-
-  console.log("data", data);
 
   const methods = useForm({
     mode: "onBlur",
@@ -62,7 +60,7 @@ const MemberEnrollmentFormDetailPage = () => {
   return (
     <>
       <Header type="text" text={`${memberName}의 가입신청서`} />
-      <PageContainer color="BGray" pb="2.5">
+      <Layout type="page" bg="BGray">
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -72,7 +70,7 @@ const MemberEnrollmentFormDetailPage = () => {
             <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
           </TopWrapper>
           <FormProvider {...methods}>
-            <ContentWrapper>
+            <ContentWrapper withNav>
               {currentStep === 0 && <MemberInfo item={requiredItemList} />}
               {currentStep === 1 && <DogInfo item={requiredItemList} />}
               {currentStep === 2 && (
@@ -85,7 +83,7 @@ const MemberEnrollmentFormDetailPage = () => {
             </ContentWrapper>
           </FormProvider>
         </Container>
-      </PageContainer>
+      </Layout>
       <NavBar type="admin" />
     </>
   );

@@ -16,13 +16,13 @@ import {
   ContentWrapper,
   EditButton
 } from "components/Admin/EnrollmentForm/styles";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import { type FormAdaptedData, useAdminEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
 const EnrollmentFormDetailPage = () => {
   const { formId } = useParams();
@@ -73,7 +73,7 @@ const EnrollmentFormDetailPage = () => {
           </EditButton>
         }
       />
-      <PageContainer color="BGray" pb="2.5">
+      <Layout type="page" bg="BGray" pb={40}>
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -83,7 +83,7 @@ const EnrollmentFormDetailPage = () => {
             <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
           </TopWrapper>
           <FormProvider {...methods}>
-            <ContentWrapper>
+            <ContentWrapper withNav>
               {currentStep === 0 && <MemberInfo item={requiredItemList} />}
               {currentStep === 1 && <DogInfo item={requiredItemList} />}
               {currentStep === 2 && <TicketInfo item={requiredItemList} ticket={ticket} />}
@@ -92,7 +92,7 @@ const EnrollmentFormDetailPage = () => {
             </ContentWrapper>
           </FormProvider>
         </Container>
-      </PageContainer>
+      </Layout>
       <NavBar type="admin" />
     </>
   );
