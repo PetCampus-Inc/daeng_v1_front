@@ -37,13 +37,6 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchTerms, setValue]);
 
-  const handleParentCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = event.target;
-    setValue("limitsInfo_agreement", checked);
-    setValue("accidentInfo_agreement", checked);
-    setValue("abandonmentInfo_agreement", checked);
-  };
-
   useEffect(() => {
     setValue("limitsInfo_agreement", true);
     setValue("accidentInfo_agreement", true);
@@ -60,7 +53,6 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
             <Checkbox
               label="유의사항 전체 동의하기"
               ref={ref}
-              onChange={handleParentCheckboxChange}
               isChecked={field.value}
               variant="fill"
             />
