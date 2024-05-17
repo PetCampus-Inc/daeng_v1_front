@@ -38,7 +38,7 @@ const Notice = ({ data }: NoticeProps) => {
               <S.FlexText className="re-agree">
                 {data.modifiedList?.includes(item.id) ? (
                   <>
-                    <AlertSmallIcon color="orange" /> "재동의 요청"
+                    <AlertSmallIcon color="orange" /> 재동의 요청
                   </>
                 ) : (
                   ""

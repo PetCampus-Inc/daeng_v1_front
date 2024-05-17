@@ -4,6 +4,7 @@ import PoopBox from "components/common/PoopBox";
 import TextArea from "components/common/TextArea";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
 import { debounce } from "lodash";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -17,6 +18,7 @@ import { NoticeItemContainer } from "../styles";
 const WriteNotice = () => {
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
   const dogId = useLocation().pathname.split("/").pop();
+  const [isComplete, setIsComplete] = useState(true);
 
   const { data } = useGetAgendaSaved(Number(dogId));
   const { mutateTempSaveCareDog } = useTempSaveCareDog();
@@ -47,10 +49,15 @@ const WriteNotice = () => {
   }, 1000);
 
   const handleSend = debounce(() => {
-    mutateSendAgenda(agendaData());
+    try {
+      mutateSendAgenda(agendaData());
+      setIsComplete(true);
+    } catch (e) {
+      throw new Error("알림장 전송 중 오류가 발생했습니다.");
+    }
   }, 1000);
 
-  if (data?.status === "COMPLETE") {
+  if (data?.status === "COMPLETE" || isComplete) {
     return (
       <S.CompleteNoteContainer>
         <S.NoteSpring />
