@@ -10,11 +10,8 @@ import { useFormContext } from "react-hook-form";
 import { handlePreventDefault } from "utils/preventDefault";
 
 import { Card } from "./styles";
-interface MemberInfoProps {
-  requiredItems: Map<number, boolean>;
-}
 
-const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
+const MemberInfo = () => {
   const { register, watch } = useFormContext();
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.MEMBER_NAME, false],

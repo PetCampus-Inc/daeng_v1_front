@@ -12,13 +12,8 @@ import { handlePreventDefault } from "utils/preventDefault";
 
 import { Card, Stack } from "./styles";
 
-interface PickDropInfoProps {
-  requiredItems: Map<number, boolean>;
-}
-
-const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
+const PickDropInfo = () => {
   const { register, control, watch, setValue } = useFormContext();
-
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.PICKDROP_REQUEST, true],
     [ITEM_KEYS.PICKDROP_TYPE, true],

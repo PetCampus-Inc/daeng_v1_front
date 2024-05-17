@@ -59,19 +59,19 @@ const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
           <FormProvider {...methods}>
             <S.ContentWrapper>
               <S.Content $isVisible={currentStep === 0}>
-                <MemberInfo requiredItems={schoolFormResponse.requiredItemList} />
+                <MemberInfo />
               </S.Content>
               <S.Content $isVisible={currentStep === 1}>
-                <DogInfo requiredItems={schoolFormResponse.requiredItemList} />
+                <DogInfo />
               </S.Content>
               <S.Content $isVisible={currentStep === 2}>
-                <TicketInfo requiredItems={schoolFormResponse.requiredItemList} ticket={ticket} />
+                <TicketInfo ticket={ticket} />
               </S.Content>
               <S.Content $isVisible={currentStep === 3}>
-                <PolicyInfo requiredItems={schoolFormResponse.requiredItemList} />
+                <PolicyInfo />
               </S.Content>
               <S.Content $isVisible={currentStep === 4}>
-                <PickDropInfo requiredItems={schoolFormResponse.requiredItemList} />
+                <PickDropInfo />
               </S.Content>
             </S.ContentWrapper>
           </FormProvider>

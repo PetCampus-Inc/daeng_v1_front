@@ -17,10 +17,9 @@ interface TicketInfoProps {
     monthlyTicketNumber: number[];
     openDays?: string[];
   };
-  requiredItems?: Map<number, boolean>;
 }
 
-const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
+const TicketInfo = ({ ticket }: TicketInfoProps) => {
   const { control, register, watch } = useFormContext();
 
   const requiredItemsMap = new Map<number, boolean>([

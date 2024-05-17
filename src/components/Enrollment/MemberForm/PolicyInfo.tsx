@@ -8,11 +8,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import * as S from "./styles";
 
-interface PolicyInfoProps {
-  requiredItems?: Map<number, boolean>;
-}
-
-const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
+const PolicyInfo = () => {
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.LIMITS_INFO, true],
     [ITEM_KEYS.ACCIDENT_INFO, true],

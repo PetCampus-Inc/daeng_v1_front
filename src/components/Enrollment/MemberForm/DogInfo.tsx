@@ -1,4 +1,3 @@
-import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { ITEM_ENGLISH_TO_KOREAN, ITEM_KEYS } from "constants/item";
 
 import { TextInput } from "components/common";
@@ -14,11 +13,7 @@ import { handlePreventDefault } from "utils/preventDefault";
 import { Caption, Card } from "./styles";
 import BreedInput from "../Input/BreedInput";
 
-interface DogInfoProps {
-  requiredItems?: Map<number, boolean>;
-}
-
-const DogInfo = ({ requiredItems }: DogInfoProps) => {
+const DogInfo = () => {
   const { register, watch, setValue } = useFormContext();
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.DOG_NAME, false],
