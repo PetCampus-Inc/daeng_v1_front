@@ -65,7 +65,13 @@ export const ITEM_ENGLISH_TO_KOREAN: IEnToKr = {
   MEDIUM: "중형견",
   BIG: "대형견",
   MALE: "수컷",
-  FEMALE: "암컷"
+  FEMALE: "암컷",
+  NEUTERED: "했어요", // neutralization
+  NOT_NEUTERED: "안했어요", // neutralization
+  VACCINATED: "했어요", // vaccination
+  NOT_VACCINATED: "안했어요", // vaccination
+  ROUND: "회차권",
+  MONTHLY: "정기권"
 };
 
 export const AGREEMENT_ITEM = new Map([
