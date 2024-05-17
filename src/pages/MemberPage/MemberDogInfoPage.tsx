@@ -7,13 +7,14 @@ import SchoolInfo from "components/Member/DogInfo/SchoolInfo";
 import { FootIconItem, Nav, NavItem, NavWrapper } from "components/Member/DogInfo/styles";
 import { useGetMemberDogDetailnfo } from "hooks/api/member/member";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 const MemberDogInfoPage = () => {
+  const { dogId } = useParams();
   const currentSteps = MEMBER_DOG_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
-  const dogId = 1; //TODO url로 전달 받을 수 있도로 수정
-  const { data } = useGetMemberDogDetailnfo(dogId);
+  const { data } = useGetMemberDogDetailnfo(Number(dogId));
 
   return (
     <>
@@ -37,9 +38,9 @@ const MemberDogInfoPage = () => {
         </NavWrapper>
       </Nav>
       <PageContainer color="gray_5">
-        {currentStep === 0 && <DogInfo dogId={dogId} />}
+        {currentStep === 0 && <DogInfo dogId={Number(dogId)} />}
         {currentStep === 1 && <SchoolInfo />}
-        {currentStep === 2 && <AttendanceTicketInfo dogId={dogId} />}
+        {currentStep === 2 && <AttendanceTicketInfo dogId={Number(dogId)} />}
       </PageContainer>
     </>
   );
