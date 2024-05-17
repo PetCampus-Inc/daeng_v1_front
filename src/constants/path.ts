@@ -12,11 +12,7 @@ export const SIGNUP_PATH = {
   APPROVAL_STATUS: "approval_status"
 };
 
-export const PATH = {
-  ROOT: "/",
-  HOME: "/home",
-  LOGIN: `/login`,
-  SIGNUP: `/${SIGNUP}`,
+const PRIVATE_PATH = {
   ADMIN: `${ADMIN}`,
   ADMIN_LOGIN: `/${ADMIN}/${LOGIN}`,
   ADMIN_SIGNUP: `/${ADMIN}/${SIGNUP}`,
@@ -45,7 +41,14 @@ export const PATH = {
   ADMIN_MY_PAGE: "/admin/mypage",
   ADMIN_MY_PAGE_EDIT: "/admin/mypage/profile/edit",
   ADMIN_MY_SCHOOL_INFO: `/admin/mypage/school`,
-  ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`,
+  ADMIN_MY_SCHOOL_INFO_EDIT: `/admin/mypage/school/edit`
+};
+
+const PUBLIC_PATH = {
+  ROOT: "/",
+  HOME: "/home",
+  LOGIN: `/login`,
+  SIGNUP: `/${SIGNUP}`,
   MEMBER: "/member",
   UNREGISTER: "/unregister", // 회원탈퇴 페이지
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지
@@ -53,6 +56,7 @@ export const PATH = {
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
   POLICY: "/policy", // 정책 페이지
   ENROLL: "/enrollment", // 견주 가입신청서
+
   MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
   MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
   MEMBER_MY_INFO_EDITE_PAGE: (memberId?: string) =>
@@ -61,7 +65,13 @@ export const PATH = {
   MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
     `/mypage/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
   MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
+
   REGISTRATION_STATUS: `/approve`, // 가입신청 승인 상태
   REDIRECT: "/login/oauth2/code/:provider",
   MEMBER_DOG_INFO_PAGE: "/dogInfo"
+};
+
+export const PATH = {
+  ...PRIVATE_PATH,
+  ...PUBLIC_PATH
 } as const;
