@@ -7,6 +7,7 @@ import { Caption } from "components/common/Select/styles";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { Controller, useFormContext } from "react-hook-form";
+import { handlePreventDefault } from "utils/preventDefault";
 
 import { Card, Stack, Label } from "./styles";
 
@@ -24,7 +25,7 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
 
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.TICKET_TYPE, false],
-    [ITEM_KEYS.MONTHLY_TICKET_NUMBER, false],
+    [ITEM_KEYS.MONTHLY_TICKET_NUMBER, true],
     [ITEM_KEYS.ROUND_TICKET_NUMBER, true],
     [ITEM_KEYS.OPEN_DAYS, true],
     [ITEM_KEYS.TICKET_INFO, true]
@@ -48,10 +49,11 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
           radiosText={["정기권", "회차권"]}
           isRequired={requiredItemsMap?.get(ITEM_KEYS.TICKET_TYPE)}
           defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("enrollmentTicketType")]}
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
       {selectedTicketType &&
-        (selectedTicketType === "정기권" ? (
+        (selectedTicketType === "정기권" && watch("enrollmentTicketType") === "MONTHLY" ? (
           <Card>
             <Title isRequired={requiredItemsMap?.get(ITEM_KEYS.MONTHLY_TICKET_NUMBER)}>
               정기권 유형
@@ -61,6 +63,7 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
               radiosText={monthlyTicketText}
               isRequired={requiredItemsMap?.get(ITEM_KEYS.MONTHLY_TICKET_NUMBER)}
               defaultSelect={`${watch("enrollmentMonthlyTicketNumber")}주`}
+              preventDefaultClick={handlePreventDefault}
             />
           </Card>
         ) : (
@@ -73,6 +76,7 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
               radiosText={roundTicketText}
               isRequired={requiredItemsMap?.get(ITEM_KEYS.ROUND_TICKET_NUMBER)}
               defaultSelect={`${watch("enrollmentRoundTicketNumber")}회`}
+              preventDefaultClick={handlePreventDefault}
             />
           </Card>
         ))}
@@ -81,6 +85,7 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
         <DayMultiCheck
           name="attendanceDays"
           isRequired={requiredItemsMap?.get(ITEM_KEYS.OPEN_DAYS)}
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
       <Card>

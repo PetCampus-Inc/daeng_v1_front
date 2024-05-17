@@ -7,6 +7,7 @@ import SearchInputField from "components/common/Input/SearchInputField";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Title from "components/common/Title";
 import { useFormContext } from "react-hook-form";
+import { handlePreventDefault } from "utils/preventDefault";
 
 import { Card } from "./styles";
 interface MemberInfoProps {
@@ -43,6 +44,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           defaultSelect={
             watch("memberGender") && GENDER_DATA[watch("memberGender")] === "여성" ? "여" : "남"
           }
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
       <Card>

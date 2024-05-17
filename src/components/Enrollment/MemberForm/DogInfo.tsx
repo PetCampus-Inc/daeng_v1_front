@@ -9,6 +9,7 @@ import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { useFormContext } from "react-hook-form";
 import { addZero } from "utils/date";
+import { handlePreventDefault } from "utils/preventDefault";
 
 import { Caption, Card } from "./styles";
 import BreedInput from "../Input/BreedInput";
@@ -59,6 +60,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           radiosText={["수컷", "암컷"]}
           isRequired
           defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("dogGender")]}
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
       <Card>
@@ -69,6 +71,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           radiosText={["소형견", "중형견", "대형견"]}
           isRequired
           defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("dogSize")]}
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
       <Card>
@@ -88,21 +91,18 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         <div style={{ display: "flex", gap: "5px" }}>
           <SelectNumber
             name="year"
-            numberList={yearsArray}
             defaultValue={dogBirthData.year}
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="month"
-            numberList={monthsArray}
             defaultValue={String(dogBirthData.month)}
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="day"
-            numberList={daysArray}
             defaultValue={String(dogBirthData.day)}
             watch={watch}
             setValue={setValue}
@@ -116,6 +116,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItemsMap?.get(ITEM_KEYS.NEUTRALIZATION)}
           defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("neutralization")]}
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
       <Card>
@@ -125,6 +126,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItemsMap?.get(ITEM_KEYS.VACCINATION)}
           defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("vaccination")]}
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
       {watch("vaccination") === "했어요" && (
@@ -145,6 +147,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           {...register("allergyDisease", {
             required: requiredItemsMap?.get(ITEM_KEYS.ALLERGY_DISEASE)
           })}
+          readOnly
         />
       </Card>
     </>

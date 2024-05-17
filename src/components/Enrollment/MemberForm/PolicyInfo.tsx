@@ -71,12 +71,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
             control={control}
             rules={{ required: requiredItemsMap?.get(ITEM_KEYS.LIMITS_INFO) }}
             render={({ field: { ref, ...field } }) => (
-              <Checkbox
-                label="동의합니다"
-                ref={ref}
-                isChecked={field.value}
-                onChange={field.onChange}
-              />
+              <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
             )}
           />
         </S.Stack>
@@ -93,12 +88,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
             control={control}
             rules={{ required: requiredItemsMap?.get(ITEM_KEYS.ACCIDENT_INFO) }}
             render={({ field: { ref, ...field } }) => (
-              <Checkbox
-                label="동의합니다"
-                ref={ref}
-                isChecked={field.value}
-                onChange={field.onChange}
-              />
+              <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
             )}
           />
         </S.Stack>
@@ -118,12 +108,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
             control={control}
             rules={{ required: requiredItemsMap?.get(ITEM_KEYS.ABANDONMENT_INFO) }}
             render={({ field: { ref, ...field } }) => (
-              <Checkbox
-                label="동의합니다"
-                ref={ref}
-                isChecked={field.value}
-                onChange={field.onChange}
-              />
+              <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
             )}
           />
         </S.Stack>

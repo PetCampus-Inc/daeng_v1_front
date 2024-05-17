@@ -8,6 +8,7 @@ import Title from "components/common/Title";
 import { Label } from "components/common/Title/style";
 import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { handlePreventDefault } from "utils/preventDefault";
 
 import { Card, Stack } from "./styles";
 
@@ -26,9 +27,18 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
     [ITEM_KEYS.ABANDONMENT_INFO, true]
   ]);
 
+  const pickDropRequest = watch("pickDropRequest");
+
   useEffect(() => {
     setValue("pickDropInfo_agreement", true);
   }, [setValue]);
+
+  useEffect(() => {
+    // 강제로 신청 버튼 되도록
+    if (pickDropRequest === "미신청") {
+      setValue("pickDropRequest", "신청");
+    }
+  }, [pickDropRequest, setValue, watch]);
 
   return (
     <>
@@ -42,10 +52,11 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
           name="pickDropRequest"
           radiosText={["신청", "미신청"]}
           isRequired={requiredItemsMap?.get(ITEM_KEYS.PICKDROP_REQUEST)}
-          defaultSelect={watch("pickDropRequest") === "REQUEST" ? "신청" : "미신청"}
+          defaultSelect={pickDropRequest === "REQUEST" ? "신청" : "미신청"}
+          preventDefaultClick={handlePreventDefault}
         />
       </Card>
-      {watch("pickDropRequest") === "신청" && (
+      {pickDropRequest === "신청" && (
         <>
           <Card>
             <Title isRequired={requiredItemsMap?.get(ITEM_KEYS.PICKDROP_TYPE)}>픽드랍 유형</Title>
@@ -54,6 +65,7 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
               radiosText={["편도", "왕복"]}
               isRequired={requiredItemsMap?.get(ITEM_KEYS.PICKDROP_TYPE)}
               defaultSelect={watch("pickDropType") === "ONE_WAY" ? "편도" : "왕복"}
+              preventDefaultClick={handlePreventDefault}
             />
           </Card>
           <Card>
@@ -63,6 +75,7 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
                 required: requiredItemsMap?.get(ITEM_KEYS.PICKDROP_MEMO)
               })}
               placeholder="픽드랍 장소, 시간에 대해 자세히 적어주세요."
+              readOnly
             />
           </Card>
           <Card>
@@ -77,12 +90,7 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
                 control={control}
                 rules={{ required: requiredItemsMap?.get(ITEM_KEYS.ABANDONMENT_INFO) }}
                 render={({ field: { ref, ...field } }) => (
-                  <Checkbox
-                    label="동의합니다"
-                    ref={ref}
-                    isChecked={field.value}
-                    onChange={field.onChange}
-                  />
+                  <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
                 )}
               />
             </Stack>
