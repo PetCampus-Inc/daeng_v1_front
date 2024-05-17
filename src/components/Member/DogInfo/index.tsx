@@ -3,6 +3,7 @@ import { PATH } from "constants/path";
 
 import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
+import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
@@ -141,7 +142,7 @@ const DogInfo = ({ dogId }: IProps) => {
               </S.InfoText>
               <S.InfoText>
                 <S.Icon>
-                  <CalendarIcon />
+                  <BreedIcon />
                 </S.Icon>
                 {data.breedName}
               </S.InfoText>
