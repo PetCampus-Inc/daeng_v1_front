@@ -16,6 +16,8 @@ interface PickDropInfoProps {
 }
 
 const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
+  const { register, control, watch, setValue } = useFormContext();
+
   const requiredItemsMap = new Map<number, boolean>([
     [ITEM_KEYS.PICKDROP_REQUEST, true],
     [ITEM_KEYS.PICKDROP_TYPE, true],
@@ -23,7 +25,6 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
     [ITEM_KEYS.PICKDROP_INFO, true],
     [ITEM_KEYS.ABANDONMENT_INFO, true]
   ]);
-  const { register, control, watch, setValue } = useFormContext();
 
   useEffect(() => {
     setValue("pickDropInfo_agreement", true);
