@@ -1,4 +1,4 @@
-import { TPickDropState } from "types/member/enrollment.types";
+import { TPickDropRequest, TPickDropState } from "types/member/enrollment.types";
 
 export const MEMBER_ENROLL_STEP = [
   {
@@ -57,6 +57,39 @@ export const MEMBER_DOG_ADD_ENROLL_STEP = [
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
     indicator: "픽드랍",
     isVisible: (status: TPickDropState) => status === "RUNNING"
+  }
+];
+
+export const MEMBER_DOG_INFO_ENROLL_STEP = [
+  {
+    title: "견주에게 받을 정보들이에요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "견주 정보",
+    isVisible: () => true
+  },
+  {
+    title: "반려견에 대해 받을 정보들이에요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "반려견 정보",
+    isVisible: () => true
+  },
+  {
+    title: "유치원 이용 형태를 선택해 주세요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "이용권",
+    isVisible: () => true
+  },
+  {
+    title: "견주에게 안내할 유의사항들이에요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "유의사항",
+    isVisible: () => true
+  },
+  {
+    title: "픽드랍 정보를 입력해 주세요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "픽드랍1",
+    isVisible: (status: TPickDropRequest) => status === "REQUEST"
   }
 ];
 
