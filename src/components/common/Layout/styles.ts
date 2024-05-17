@@ -53,6 +53,10 @@ export const StyledContainer = styled.div.withConfig({
   width: 100vw;
   height: 100%;
 
+  overflow: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   &::-webkit-scrollbar {
     display: none;
   }
