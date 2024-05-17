@@ -1,16 +1,15 @@
-import { MEMBER_DOG_ADD_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
+import { MEMBER_DOG_INFO_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
 
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
-import Header from "components/common/Header";
-import DogInfo from "components/Enrollment/Form/DogInfo";
-import MemberInfo from "components/Enrollment/Form/MemberInfo";
-import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
-import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
-import TicketInfo from "components/Enrollment/Form/TicketInfo";
+import DogInfo from "components/Enrollment/MemberForm/DogInfo";
+import MemberInfo from "components/Enrollment/MemberForm/MemberInfo";
+import PickDropInfo from "components/Enrollment/MemberForm/PickDropInfo";
+import PolicyInfo from "components/Enrollment/MemberForm/PolicyInfo";
+import TicketInfo from "components/Enrollment/MemberForm/TicketInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
+import { useGetMemberDogEnrollmemntInfo } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
 import { useEffect } from "react";
@@ -19,108 +18,79 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 interface EnrollmentProps {
-  schoolId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.
-  isMemberAddDog?: boolean; // MEMO: 마이페이지에서 강아지 추가할 경우
+  dogId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.
 }
 
-const EnrollmentDogDetail = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
+const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
   const navigate = useNavigate();
   const overlay = useOverlay();
 
   const { memberId } = useParams(); // MEMO: memberId (mypage에서 추출)
-  const MEMBERID = isMemberAddDog && memberId ? memberId : "1";
 
-  const { data } = useGetEnrollment({ memberId: "1", schoolId: schoolId ?? -1 });
-  const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
+  const { data } = useGetMemberDogEnrollmemntInfo(Number(dogId));
+
+  const { schoolFormResponse, ...rest } = data;
 
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...rest }
+    defaultValues: { ...rest, ...schoolFormResponse }
   });
 
-  const visibleSteps = (isMemberAddDog ? MEMBER_DOG_ADD_ENROLL_STEP : MEMBER_ENROLL_STEP).filter(
-    (step) => step.isVisible(pickDropState)
+  const visibleSteps = MEMBER_DOG_INFO_ENROLL_STEP.filter((step) =>
+    step.isVisible(data.pickDropRequest)
   );
   const maxSteps = visibleSteps.length;
 
   const { currentStep, nextStep, prevStep, setStep } = useStep(maxSteps - 1);
 
-  const currentTitle = isMemberAddDog
-    ? MEMBER_DOG_ADD_ENROLL_STEP[currentStep].title
-    : MEMBER_ENROLL_STEP[currentStep].title;
-  const currentSubtitle = isMemberAddDog
-    ? MEMBER_DOG_ADD_ENROLL_STEP[currentStep].subtitle
-    : MEMBER_ENROLL_STEP[currentStep].subtitle;
+  const currentTitle = MEMBER_DOG_INFO_ENROLL_STEP[currentStep].title;
+  const currentSubtitle = MEMBER_DOG_INFO_ENROLL_STEP[currentStep].subtitle;
 
   const indicators = visibleSteps.map((step) => step.indicator);
 
   const ticket = {
-    roundTicketNumber,
-    monthlyTicketNumber
+    roundTicketNumber: schoolFormResponse.roundTicketNumber,
+    monthlyTicketNumber: schoolFormResponse.monthlyTicketNumber
   };
 
-  // TODO: browser history stack 관리 필요..!
-  const openPreventLeavePopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
-    ));
-
-  useEffect(() => {
-    if (isMemberAddDog) {
-      nextStep;
-    }
-  }, [isMemberAddDog, nextStep, prevStep, setStep]);
+  // useEffect(() => {
+  //   if (dogId) {
+  //     nextStep;
+  //   }
+  // }, [dogId, nextStep, prevStep, setStep]);
 
   return (
-    <>
-      <Header
-        type="text"
-        text="가입신청서"
-        handleClick={() => {
-          openPreventLeavePopup();
-        }}
-      />
-      <PageContainer color="BGray" pb="2.5">
-        <S.Container>
-          <S.TopWrapper>
-            <S.TitleWrapper>
-              <S.Title>{currentTitle}</S.Title>
-              <S.SubTitle>{currentSubtitle}</S.SubTitle>
-            </S.TitleWrapper>
-            <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
-          </S.TopWrapper>
-          <FormProvider {...methods}>
-            <S.ContentWrapper>
-              {!isMemberAddDog && (
-                <S.Content $isVisible={currentStep === 0}>
-                  <MemberInfo requiredItems={requiredItemList} />
-                </S.Content>
-              )}
-
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 0 : 1)}>
-                <DogInfo requiredItems={requiredItemList} />
-              </S.Content>
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 1 : 2)}>
-                <TicketInfo requiredItems={requiredItemList} ticket={ticket} />
-              </S.Content>
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 2 : 3)}>
-                <PolicyInfo requiredItems={requiredItemList} />
-              </S.Content>
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 3 : 4)}>
-                <PickDropInfo requiredItems={requiredItemList} />
-              </S.Content>
-            </S.ContentWrapper>
-            <Navigation
-              currentStep={currentStep}
-              stepsLength={maxSteps}
-              nextStep={nextStep}
-              prevStep={prevStep}
-            />
-          </FormProvider>
-        </S.Container>
-      </PageContainer>
-    </>
+    <PageContainer color="BGray" pb="2.5">
+      <S.Container>
+        <S.TopWrapper>
+          <S.TitleWrapper>
+            <S.Title>{currentTitle}</S.Title>
+            <S.SubTitle>{currentSubtitle}</S.SubTitle>
+          </S.TitleWrapper>
+          <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
+        </S.TopWrapper>
+        <FormProvider {...methods}>
+          <S.ContentWrapper>
+            <S.Content $isVisible={currentStep === 0}>
+              <MemberInfo requiredItems={schoolFormResponse.requiredItemList} />
+            </S.Content>
+            <S.Content $isVisible={currentStep === 1}>
+              <DogInfo requiredItems={schoolFormResponse.requiredItemList} />
+            </S.Content>
+            <S.Content $isVisible={currentStep === 2}>
+              <TicketInfo requiredItems={schoolFormResponse.requiredItemList} ticket={ticket} />
+            </S.Content>
+            <S.Content $isVisible={currentStep === 3}>
+              <PolicyInfo requiredItems={schoolFormResponse.requiredItemList} />
+            </S.Content>
+            <S.Content $isVisible={currentStep === 4}>
+              <PickDropInfo requiredItems={schoolFormResponse.requiredItemList} />
+            </S.Content>
+          </S.ContentWrapper>
+        </FormProvider>
+      </S.Container>
+    </PageContainer>
   );
 };
 
