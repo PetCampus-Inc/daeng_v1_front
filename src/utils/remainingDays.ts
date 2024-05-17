@@ -1,7 +1,13 @@
-// MEMO expiration 데이터가 없고 monthlyNumber로 계산하는 경우 (주수)
-export const remainingDays = (StartDate: number[], monthlyNumber: number) => {
+/**
+ *  expirationDate(마감일)가 없고 monthlyNumber로 계산하는 경우 (주수) 마감일 계산
+ * @param startDateArr
+ * @param monthlyNumber
+ * @returns
+ */
+export const remainingDays = (startDateArr: number[], monthlyNumber: number) => {
   // 등록 날짜
-  const startDate = new Date(StartDate[0], StartDate[1] - 1, StartDate[2]);
+  const [year, month, day] = startDateArr;
+  const startDate = new Date(year, month - 1, day);
   // 현재 날짜
   const currentData = new Date();
 
@@ -14,12 +20,16 @@ export const remainingDays = (StartDate: number[], monthlyNumber: number) => {
   return remainingDays;
 };
 
-// MEMO expiration 데이터가 있는 경우
-export const remainingDaysDogInfo = (expirationArr: number[] | null) => {
+/**
+ * expirationDate(마감일)가 있는 경우 마감일 계산
+ * @param expirationArr
+ * @returns
+ */
+export const remainingExpirationDays = (expirationArr: number[] | null) => {
   if (!expirationArr) return null;
 
-  const [year, month, day] = expirationArr;
   // 마감 날짜
+  const [year, month, day] = expirationArr;
   const expirationDate = new Date(year, month - 1, day);
   // 현재 날짜
   const currentDate = new Date();
