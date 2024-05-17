@@ -1,5 +1,4 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
-import { GENDER_DATA } from "constants/gender";
 import { ITEM_ENGLISH_TO_KOREAN, ITEM_KEYS } from "constants/item";
 
 import { TextInput } from "components/common";
@@ -9,6 +8,7 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { useFormContext } from "react-hook-form";
+import { addZero } from "utils/date";
 
 import { Caption, Card } from "./styles";
 import BreedInput from "../Input/BreedInput";
@@ -30,6 +30,15 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
     [ITEM_KEYS.VACCINATION_FILE, false],
     [ITEM_KEYS.ALLERGY_DISEASE, false]
   ]);
+
+  const [birthYear, birthMonth, birthDay] = watch("dogBirthDate");
+
+  const dogBirthData = {
+    year: birthYear,
+    month: addZero(birthMonth),
+    day: addZero(birthDay)
+  };
+
   return (
     <>
       <Card>
@@ -80,21 +89,21 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           <SelectNumber
             name="year"
             numberList={yearsArray}
-            defaultValue="2000"
+            defaultValue={dogBirthData.year}
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="month"
             numberList={monthsArray}
-            defaultValue="01"
+            defaultValue={String(dogBirthData.month)}
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="day"
             numberList={daysArray}
-            defaultValue="01"
+            defaultValue={String(dogBirthData.day)}
             watch={watch}
             setValue={setValue}
           />
