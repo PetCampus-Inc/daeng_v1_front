@@ -18,7 +18,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const [auth] = useRecoilState(adminLoginInfoAtom);
   const router = createBrowserRouter([
     {
-      path: PATH.ADMIN,
       element: (
         <ApiErrorBoundary>
           <App />
@@ -397,15 +396,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               path: PATH.SETTING,
               element: (
                 <Suspense>
-                  <Pages.SettingPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.SETTING_NOTIFICATION,
-              element: (
-                <Suspense>
-                  <Pages.SettingNotificationPage />
+                  <Pages.MemberDogInfoPage />
                 </Suspense>
               )
             }
