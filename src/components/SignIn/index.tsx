@@ -1,4 +1,4 @@
-import { KAKAO_API_URL } from "constants/api";
+import { KAKAO_API_URL, GOOGLE_API_URL } from "constants/api";
 import { PATH } from "constants/path";
 
 import { Box, Flex, Layout, Text } from "components/common";
@@ -34,7 +34,9 @@ const SignIn = () => {
         <StyledButton
           type="button"
           aria-label="구글로 계속하기"
-          onClick={() => navigate(PATH.SIGNUP)}
+          onClick={() => {
+            window.location.href = GOOGLE_API_URL;
+          }}
           bg="white"
           borderColor="#CCCCCC"
         >
