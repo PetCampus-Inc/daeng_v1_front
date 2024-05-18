@@ -1,4 +1,5 @@
-import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
+import { useFormContext, Controller } from "react-hook-form";
 
 import * as S from "../styles";
 
@@ -21,27 +22,48 @@ const SingleRadio = ({
   defaultSelect,
   isPreviewMode
 }: ISingleRadio) => {
-  const { register } = useFormContext();
+  const { control, setValue } = useFormContext();
+
+  useEffect(() => {
+    if (defaultSelect) {
+      setValue(name, defaultSelect);
+    }
+  }, [defaultSelect, name, setValue]);
+
   return (
     <S.Container>
       {caption && <S.Caption>{caption}</S.Caption>}
       <S.RadioContainer>
-        {radiosText.map((text) => (
-          <div style={{ width: "100%" }} key={text}>
-            <S.StyledInput
-              id={text + name}
-              type="radio"
-              {...register(name, { required: isRequired })}
-              value={text}
-              disabled={disabled}
-              defaultChecked={defaultSelect === text}
-              className={isPreviewMode ? "preview" : ""}
-            />
-            <S.StyledLabel htmlFor={text + name}>{text}</S.StyledLabel>
-          </div>
-        ))}
+        <Controller
+          name={name}
+          control={control}
+          defaultValue={defaultSelect}
+          rules={{ required: isRequired }}
+          render={({ field }) => (
+            <>
+              {radiosText.map((text) => {
+                const isChecked = field.value === text;
+                return (
+                  <div style={{ width: "100%" }} key={text}>
+                    <S.StyledInput
+                      id={text + name}
+                      type="radio"
+                      value={text}
+                      disabled={disabled}
+                      checked={isChecked}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      className={isPreviewMode ? "preview" : ""}
+                    />
+                    <S.StyledLabel htmlFor={text + name}>{text}</S.StyledLabel>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        />
       </S.RadioContainer>
     </S.Container>
   );
 };
+
 export default SingleRadio;

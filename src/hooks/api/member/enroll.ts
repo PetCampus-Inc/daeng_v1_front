@@ -9,14 +9,11 @@ import {
 } from "apis/member/enrollment.api";
 import { Adapter } from "libs/Adapter";
 import { ReadModeAdapter } from "libs/Adapter/ServerToFormAdapter";
-import { useSetRecoilState } from "recoil";
-import { memberInfoState } from "store/form";
 
 import type { IResponseAdminForm } from "types/admin/enrollment.types";
 import type {
   IRequestEnrollment,
   IResponseEnrollment,
-  TMemberDto,
   TPickDropState
 } from "types/member/enrollment.types";
 
@@ -37,21 +34,12 @@ export type ReturnType = Omit<
 
 // 견주 가입신청서 조회
 export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
-  // const setMemberInfo = useSetRecoilState(memberInfoState);
-
   return useSuspenseQuery<IResponseEnrollment, Error, ReturnType>({
     queryKey: QUERY_KEY.ENROLLMENT(schoolId, memberId),
     queryFn: () => handleGetEnrollment({ schoolId, memberId }),
     refetchOnWindowFocus: false,
     select: (data): ReturnType => {
       const { schoolFormName, ...rest } = data;
-
-      // setMemberInfo({
-      //   member: rest.member,
-      //   schoolFormId: rest.schoolFormId,
-      //   schoolFormName
-      // });
-
       const formdata = Adapter.from(rest).to<IResponseAdminForm, ReturnType>((item) => {
         const adapterInstance = new ReadModeAdapter(item);
         return adapterInstance.adapt();

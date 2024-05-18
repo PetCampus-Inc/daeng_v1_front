@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { type AgreementsListType, ITEM_KEYS } from "constants/item";
 
 import Checkbox from "components/common/Checkbox";
 import SingleRadio from "components/common/Select/SingleRadio";
@@ -10,9 +10,12 @@ import { Caption, Card, Label, Stack } from "../styles";
 
 interface PickDropInfoProps {
   item?: Map<number, boolean>;
+  agreements: AgreementsListType;
 }
-const PickDropInfo = ({ item }: PickDropInfoProps) => {
+const PickDropInfo = ({ item, agreements }: PickDropInfoProps) => {
   const { register, watch } = useFormContext();
+
+  console.log(watch("pickDropRequest"));
 
   return (
     <>
@@ -41,9 +44,13 @@ const PickDropInfo = ({ item }: PickDropInfoProps) => {
           <Card>
             <Title isRequired={item?.get(ITEM_KEYS.PICKDROP_INFO)}>픽드랍 유의사항</Title>
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-            <TextArea {...register("pickDropInfo")} disabled />
+            <TextArea
+              {...register("pickDropInfo")}
+              isChecked={agreements.pickDropInfo_agreement}
+              disabled
+            />
             <Stack>
-              <Checkbox label="동의합니다" readOnly />
+              <Checkbox label="동의합니다" isChecked={agreements.pickDropInfo_agreement} readOnly />
             </Stack>
           </Card>
         </>

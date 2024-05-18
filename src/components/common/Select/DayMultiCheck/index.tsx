@@ -61,7 +61,7 @@ const DayMultiCheck = ({
               className={openDays && openDays?.includes(day) ? "open-day" : ""}
               {...props}
             />
-            <S.DayCheckLabel htmlFor={day} className={isPreviewMode ? " preview" : ""}>
+            <S.DayCheckLabel htmlFor={day} className={isPreviewMode ? "preview" : ""}>
               {day}
             </S.DayCheckLabel>
           </div>

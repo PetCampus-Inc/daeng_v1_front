@@ -64,9 +64,17 @@ export const ITEM_ENGLISH_TO_KOREAN = {
 };
 
 export const AGREEMENT_ITEM = new Map([
-  ["ticketInfo", 21],
-  ["limitsInfo", 22],
-  ["accidentInfo", 23],
-  ["abandonmentInfo", 24],
-  ["pickDropInfo", 30]
+  ["ticketInfo_agreement", 21],
+  ["limitsInfo_agreement", 22],
+  ["accidentInfo_agreement", 23],
+  ["abandonmentInfo_agreement", 24],
+  ["pickDropInfo_agreement", 30]
 ]);
+
+export type AgreementsListType = {
+  ticketInfo_agreement?: boolean;
+  limitsInfo_agreement?: boolean;
+  accidentInfo_agreement?: boolean;
+  abandonmentInfo_agreement?: boolean;
+  pickDropInfo_agreement?: boolean;
+};
