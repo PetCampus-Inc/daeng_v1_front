@@ -362,6 +362,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: (
             <Suspense>
               <Pages.HomePage />
+              <Pages.HomePage />
             </Suspense>
           )
         },
