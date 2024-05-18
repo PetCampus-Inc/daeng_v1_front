@@ -83,7 +83,7 @@ const EnrollmentFormDetailPage = () => {
             <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
           </TopWrapper>
           <FormProvider {...methods}>
-            <ContentWrapper withNav>
+            <ContentWrapper>
               {currentStep === 0 && <MemberInfo item={requiredItemList} />}
               {currentStep === 1 && <DogInfo item={requiredItemList} />}
               {currentStep === 2 && <TicketInfo item={requiredItemList} ticket={ticket} />}
