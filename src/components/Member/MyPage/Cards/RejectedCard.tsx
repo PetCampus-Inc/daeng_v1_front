@@ -4,7 +4,7 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import * as S from "./styles";
 interface IRejectedCardProps {
   dogName: string;
-  registeredDate?: number[] | null;
+  registeredDate: string;
 }
 
 const RejectedCard = ({ dogName, registeredDate }: IRejectedCardProps) => {

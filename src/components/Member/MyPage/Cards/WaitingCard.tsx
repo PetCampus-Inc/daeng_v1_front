@@ -4,17 +4,21 @@ import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/m
 import { useGetSchoolInfoList } from "hooks/api/member/school";
 import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
 import { useParams } from "react-router-dom";
+import { formatDate } from "utils/formatter";
 
+import RejectedCard from "./RejectedCard";
 import * as S from "./styles";
 
 interface IWaitingCardProps {
   dogName: string;
-  registeredDate?: number[] | null;
+  registeredDate: number[];
 }
 
 const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const { memberId } = useParams();
   const { data: memberInfo } = useGetMemberInfo(String(memberId));
+  const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
+
   const approvalPendingDog = memberInfo.doglist.filter(
     (dog) => dog.status && dog.status === "APPROVAL_PENDING"
   );
@@ -24,7 +28,9 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const { data: waitingOwnersList } = useGetWaitingOwnersList(
     Number(getSchoolInfoList[0].schoolId)
   );
-  const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
+
+  const [year, month, day] = registeredDate && registeredDate;
+  const registeredTime = formatDate(String(year), String(month), String(day), "dot");
 
   const handleCancelApproval = () => {
     const approvalPendingDogName = approvalPendingDog?.map((dog) => dog.dogName)[0];
@@ -45,14 +51,14 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
           <S.CurrentStatusBox>승인 대기중</S.CurrentStatusBox>
         </S.InfoTextBox>
         <S.CancelApprovalButton onClick={handleCancelApproval}>
-          <S.DateText>{registeredDate && registeredDate} 제출 | 승인 취소</S.DateText>
+          <S.DateText>{registeredTime} 제출 | 승인 취소</S.DateText>
           <ArrowRightIcon />
         </S.CancelApprovalButton>
         <S.BgIconBox>
           <DogWaitingIcon />
         </S.BgIconBox>
       </S.WaitingCard>
-      {/* <RejectedCard dogName={dogName} /> */}
+      {/* <RejectedCard dogName={dogName} registeredDate={registeredTime} /> */}
     </>
   );
 };
