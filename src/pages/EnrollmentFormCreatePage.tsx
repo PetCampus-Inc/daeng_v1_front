@@ -18,13 +18,13 @@ import {
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
+import { Layout } from "components/common";
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
 const EnrollmentFormCreatePage = () => {
   const methods = useForm({
@@ -51,7 +51,7 @@ const EnrollmentFormCreatePage = () => {
   return (
     <>
       <Header type="text" text="가입신청서" handleClick={openPreventLeavePopup} />
-      <PageContainer color="BGray">
+      <Layout type="page" bg="BGray">
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -89,7 +89,7 @@ const EnrollmentFormCreatePage = () => {
             </ButtonContainer>
           </FormProvider>
         </Container>
-      </PageContainer>
+      </Layout>
     </>
   );
 };

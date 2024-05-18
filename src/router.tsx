@@ -363,6 +363,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       element: <Pages.SignUpPage />
     },
     {
+      path: PATH.REDIRECT,
+      element: <Pages.RedirectPage />
+    },
+    {
+      path: "*",
+      element: <Pages.NotFoundPage />
+    },
+    {
       path: PATH.ROOT,
       element: <App />,
       errorElement: <Pages.NotFoundPage />,

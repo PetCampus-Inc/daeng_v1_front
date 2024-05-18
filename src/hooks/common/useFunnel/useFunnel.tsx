@@ -45,6 +45,7 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
 } => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const stepQueryKey = options?.stepQueryKey ?? DEFAULT_STEP_QUERY_KEY;
 
   if (steps.length === 0) {

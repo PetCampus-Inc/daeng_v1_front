@@ -118,6 +118,19 @@ export const StyledInputButton = styled.button`
   }
 `;
 
+export const StyledInputSuffix = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme }) => theme.typo.label2_14_R}
+`;
+
 export const StyledButtonWrapper = styled.div`
   all: unset;
   padding-right: 1rem;

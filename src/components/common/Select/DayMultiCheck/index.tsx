@@ -64,7 +64,7 @@ const DayMultiCheck = ({
               onClick={preventDefaultClick}
               {...props}
             />
-            <S.DayCheckLabel htmlFor={day} className={isPreviewMode ? " preview" : ""}>
+            <S.DayCheckLabel htmlFor={day} className={isPreviewMode ? "preview" : ""}>
               {day}
             </S.DayCheckLabel>
           </div>
