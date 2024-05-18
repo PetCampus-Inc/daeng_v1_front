@@ -14,23 +14,35 @@ interface LoginMutateProps {
 }
 
 // 멤버 (소셜) 로그인 요청
+
 export const useLogInMutation = () => {
   const navigate = useNavigate();
   const loginMutate = useMutation({
-    mutationFn: (data: LoginMutateProps) => {
+    mutationFn: async (data: { provider: string; code: string }) => {
       const { provider, code } = data;
       switch (provider) {
         case "apple":
-          return postAppleLogin(code); // FIXME: 애플 로그인 시 API 연동 필요
+          return postAppleLogin(code);
+        case "kakao":
+        case "google":
+          return console.log("카카오, 구글 로그인 중...");
         default:
           throw new Error("Invalid provider");
       }
     },
-    onSuccess: () => {
-      // 회원가입이 되어 있으면, 홈으로 이동
-      // 회원가입이 안되어 있으면,회원가입 페이지로 이동
+    onSuccess: (res) => {
+      const { auth } = res.data;
+      localStorage.setItem("token", auth);
+      if (auth) {
+        navigate("/signup"); // 회원가입 페이지로 이동
+      } else {
+        navigate("/"); // 홈으로 이동
+      }
     },
-    onError: (err: Error) => console.log(err),
+    onError: (err: Error) => {
+      console.error(err);
+      alert("로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+    },
     throwOnError: true
   });
 
