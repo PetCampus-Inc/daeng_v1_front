@@ -33,7 +33,7 @@ const PRIVATE_PATH = {
   ADMIN_ENROLLMENT: "/admin/school/enrollment", // 원장 신규가입 관리
   ADMIN_FORMS: "/admin/school/enrollment/list", // 원장 가입신청서 목록
   ADMIN_MEMBER_FORM: (formId?: string) => `/admin/school/enrollment/${formId ?? ":formId"}`, // 견주 가입신청서 상세 조회
-  ADMIN_FORM: (formId?: string) => `/admin/school/enrollment/list/${formId ?? ":formId"}`, // 원장 가입신청서 상세 조회
+  ADMIN_FORM: (formId?: number) => `/admin/school/enrollment/list/${formId ?? ":formId"}`, // 원장 가입신청서 상세 조회
   ADMIN_EDIT_FORM: (formId?: string) => `/admin/school/enrollment/list/${formId ?? ":formId"}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: "/admin/school/enrollment/new-enrollment", // 원장 가입신청서 등록
   ADMIN_SUBMIT_FORM: "/admin/school/enrollment/submit", // 원장 가입신청서 제출
