@@ -30,6 +30,7 @@ const RedirectPage = () => {
     }
   }, [code, token, loginMutate, provider]);
 
+  // TODO: 로그인 성공 후 홈으로 네비게이션 and 브라우저 히스토리 replace 해야함
   useEffect(() => {
     if (token) {
       localStorage.clear();

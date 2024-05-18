@@ -4,14 +4,13 @@ import AttendCareMain from "components/Admin/AttendCare/AttendCareMain";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import { useGetCareDogList } from "hooks/api/admin/care";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useRouteLoaderData } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import caredogLoader from "routes/caredogLoader";
-import { adminLoginInfoAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
 
 const AttendCarePage = () => {
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
   const initialData = useRouteLoaderData("caredog") as Awaited<ReturnType<typeof caredogLoader>>;
 
   const { data } = useGetCareDogList(adminId, initialData);

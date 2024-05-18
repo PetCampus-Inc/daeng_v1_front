@@ -5,7 +5,7 @@ import { postAdminLogin } from "apis/admin/admin.api";
 import { postAppleLogin } from "apis/auth.api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
+import { adminInfoState } from "store/admin";
 import { Role } from "types/admin/admin.type";
 
 interface LoginMutateProps {
@@ -52,7 +52,7 @@ export const useLogInMutation = () => {
 // 관리자 로그인 요청
 export const useAdminLogin = () => {
   const navigate = useNavigate();
-  const setLoginInfo = useSetRecoilState(adminLoginInfoAtom);
+  const setLoginInfo = useSetRecoilState(adminInfoState);
   const { mutate } = useMutation({
     mutationFn: postAdminLogin,
     onSuccess: (res) => {
