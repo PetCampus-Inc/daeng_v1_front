@@ -2,9 +2,8 @@ import { Layout } from "components/common";
 import ApprovalFailed from "components/SignUp/ApprovalStatus/ApprovalFailed";
 import ApprovalPending from "components/SignUp/ApprovalStatus/ApprovalPending";
 import ApprovalSuccess from "components/SignUp/ApprovalStatus/ApprovalSuccess";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useLocation } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 import { Role } from "types/admin/admin.type";
 
 import type { ITeacherInfo } from "./AdminSignUpFunnel";
@@ -24,7 +23,7 @@ const ApprovalStatusPage = ({
   const searchParams = new URLSearchParams(location.search);
   const isLoginSource = searchParams.get("source") === "login";
 
-  const loginInfo = useRecoilValue(adminLoginInfoAtom);
+  const loginInfo = useAdminInfo();
 
   const schoolName = isLoginSource ? loginInfo.schoolName : info?.schoolName;
   const adminId = isLoginSource ? loginInfo.adminId : info?.adminId;

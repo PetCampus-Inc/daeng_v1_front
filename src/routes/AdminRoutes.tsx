@@ -7,10 +7,10 @@ import { Suspense } from "react";
 import { createRoutesFromElements, Route } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
-import { adminLoginInfoAtom } from "store/admin";
+import { adminInfoState } from "store/admin";
 
 const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }) => {
-  const [auth] = useRecoilState(adminLoginInfoAtom);
+  const [auth] = useRecoilState(adminInfoState);
 
   return createRoutesFromElements(
     <Route path={PATH.ADMIN}>

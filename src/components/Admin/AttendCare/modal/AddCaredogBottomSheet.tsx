@@ -1,8 +1,7 @@
 import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
 import { useCreateCareDogs } from "hooks/api/admin/care";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 import { styled } from "styled-components";
 
 import AlertAlreadySelectedModal from "./AlertAlreadySelectedModal";
@@ -28,7 +27,7 @@ const AddCaredogBottomSheet = ({
   const { mutateCreateCareDogs } = useCreateCareDogs(openPopup);
   const [selectedDogs, _] = useSelectedDogs();
 
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
   const selectedDogId = selectedDogs.map((dog) => dog.attendanceId);
 
   const handleSubmit = () => {
