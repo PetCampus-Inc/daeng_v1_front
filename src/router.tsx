@@ -323,6 +323,30 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberEnrollmentFormDogAddPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_DOG_INFO_EDITE_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberDogInfoEditePage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_DOG_ENROLLMENT_INFO_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentDogInfoPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_DOG_INFO_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberDogInfoPage />
+            </Suspense>
+          )
         }
       ]
     },
@@ -412,12 +436,12 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           ]
         },
         {
-          path: PATH.MEMBER_DOG_INFO_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberDogInfoPage />
-            </Suspense>
-          )
+          path: PATH.REDIRECT,
+          element: <Pages.RedirectPage />
+        },
+        {
+          path: "*",
+          element: <Pages.NotFoundPage />
         }
       ]
     }

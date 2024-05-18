@@ -11,6 +11,7 @@ interface ISingleRadio extends ISelect {
   defaultSelect?: string;
   isPreviewMode?: boolean;
   isRequired?: boolean;
+  preventDefaultClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 const SingleRadio = ({
@@ -20,7 +21,8 @@ const SingleRadio = ({
   disabled = false,
   isRequired = false,
   defaultSelect,
-  isPreviewMode
+  isPreviewMode,
+  preventDefaultClick
 }: ISingleRadio) => {
   const { control, setValue } = useFormContext();
 

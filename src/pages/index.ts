@@ -16,6 +16,7 @@ export { default as EnrollmentFormCreatePage } from "./EnrollmentFormCreatePage"
 export { default as EnrollmentFormListPage } from "./EnrollmentFormListPage";
 export { default as EnrollmentFormSubmitPage } from "./EnrollmentFormSubmitPage";
 export { default as MemberEnrollmentFormDogAddPage } from "./MemberPage/MemberEnrollmentFormDogAddPage";
+export { default as MemberEnrollmentDogInfoPage } from "./MemberPage/MemberEnrollmentDogInfoPage";
 export { default as TeacherManagePage } from "./TeacherManagePage";
 export { default as AttendCareDeletePage } from "./AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogGalleryPage";
@@ -27,6 +28,7 @@ export { default as MemberMyInfoEditePage } from "./MemberPage/MemberMyInfoEdite
 export { default as MemberSchoolInfoPage } from "./MemberPage/MemberSchoolInfoPage";
 export { default as MemberSchoolSearchPage } from "./MemberPage/MemberSchoolSearchPage";
 export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
+export { default as MemberDogInfoEditePage } from "./MemberPage/MemberDogInfoEditePage";
 export { default as SettingPage } from "./SettingPage";
 export { default as PolicyPage } from "./PolicyPage";
 export { default as UnregisterPage } from "./UnregisterPage";

@@ -1,5 +1,9 @@
+import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
+import { PATH } from "constants/path";
+
 import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
+import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
@@ -7,49 +11,85 @@ import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import CarouselModal from "components/common/Modal/CarouselModal";
+import {
+  useGetMemberDogDetailnfo,
+  usePostMemberDogAlleray,
+  usePostMemberDogPickdrop
+} from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
+import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 import { StyledThumbList } from "../../Admin/AttendCareGallery/upload";
 
-//TODO 리팩토링하기
-const DogInfo = () => {
-  const overlay = useOverlay();
+interface IProps {
+  dogId: number;
+}
 
-  const openTextAreaPopup = (title: string, text: string, type: string) =>
+//TODO 리팩토링하기
+const DogInfo = ({ dogId }: IProps) => {
+  const overlay = useOverlay();
+  const navigate = useNavigate();
+  const methods = useForm({ mode: "onSubmit" });
+  const { data } = useGetMemberDogDetailnfo(dogId);
+  const mutatePostDogAlleray = usePostMemberDogAlleray(dogId);
+  const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
+
+  const DOG_BIRETH = formatDate(
+    String(data.dogBirthDate[0]),
+    String(data.dogBirthDate[1]),
+    String(data.dogBirthDate[2]),
+    "dot"
+  );
+
+  const openTextAreaPopup = (title: string, defaultValue: string, type: string) =>
     overlay.open(({ isOpen, close }) => (
-      <TextAreaBottomSheet
-        title={title}
-        text={text}
-        type={type}
-        isOpen={isOpen}
-        close={close}
-        actionText={"수정 완료"}
-        actionFn={() => {
-          console.log("수정 완료");
-          close();
-          eventShowToast(type);
-        }}
-      />
+      <FormProvider {...methods}>
+        <TextAreaBottomSheet
+          title={title}
+          defaultValue={defaultValue}
+          type={type}
+          isOpen={isOpen}
+          close={close}
+          register={methods.register}
+          name={type}
+          placeholder="메모를 입력해주세요"
+          actionText={"수정 완료"}
+          actionFn={() => {
+            close();
+            handleEventType(type);
+          }}
+        />
+      </FormProvider>
     ));
+
+  // MEMO 더 좋은 방법 있다면 개선하기
+  const handleEventType = (type: string) => {
+    const onSubmit = methods.handleSubmit(() => {
+      if (type === "pickDrop") {
+        const pickDrop = methods.getValues("pickDrop");
+        metatePostDogPickDrop({ dogId: dogId, memo: pickDrop });
+      }
+      if (type === "allergy") {
+        const allergy = methods.getValues("allergy");
+        mutatePostDogAlleray({ dogId: dogId, memo: allergy });
+      }
+    });
+    onSubmit();
+  };
 
   const openCarouselPopup = (imgUrl: string, upDateData: string) =>
     overlay.open(({ isOpen, close }) => (
       <CarouselModal imgUrl={imgUrl} upDateData={upDateData} isOpen={isOpen} close={close} />
     ));
 
+  // MEMO vaccination 추후 다른 방식으로 사용 예정
   const eventShowToast = (type: string) => {
-    switch (type) {
-      case "pickDrop":
-        showToast("수정이 완료되었습니다.", "bottom");
-        break;
-      case "allergy":
-        showToast("수정이 완료되었습니다.", "bottom");
-        break;
-      case "vaccination":
-        showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
-        break;
+    if (type === "vaccination") {
+      showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
     }
   };
 
@@ -78,10 +118,12 @@ const DogInfo = () => {
           <S.TextWrapper>
             <S.TopInfoBox>
               <S.Title>
-                <S.DogName>뽀뽀</S.DogName>
-                <S.DogSize>소형견</S.DogSize>
+                <S.DogName>{data.dogName}</S.DogName>
+                <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
               </S.Title>
-              <S.Editebutton>
+              <S.Editebutton
+                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE(String(dogId)))}
+              >
                 <span>수정</span>
                 <ArrowRightIcon />
               </S.Editebutton>
@@ -91,26 +133,29 @@ const DogInfo = () => {
                 <S.Icon>
                   <GirlNormalIcon />
                 </S.Icon>
-                암컷 / 중성화 O
+                {ITEM_ENGLISH_TO_KOREAN[data.dogGender]} / 중성화{" "}
+                {data.neutralization === "NEUTERED" ? "O" : "X"}
               </S.InfoText>
               <S.InfoText>
                 <S.Icon>
                   <CalendarIcon />
                 </S.Icon>
-                2008.09.10
+                {DOG_BIRETH}
               </S.InfoText>
               <S.InfoText>
                 <S.Icon>
-                  <CalendarIcon />
+                  <BreedIcon />
                 </S.Icon>
-                블랙 러시안 테리어
+                {data.breedName}
               </S.InfoText>
             </Flex>
           </S.TextWrapper>
         </S.DogInfoBox>
 
-        <S.GotoEnrollButton>
-          <span>뽀뽀의 가입신청서</span>
+        <S.GotoEnrollButton
+          onClick={() => navigate(PATH.MEMBER_DOG_ENROLLMENT_INFO_PAGE(String(dogId)))}
+        >
+          <span>{data.dogName}의 가입신청서</span>
           <ArrowRightIcon />
         </S.GotoEnrollButton>
       </S.DogInfoCard>
@@ -127,7 +172,7 @@ const DogInfo = () => {
             onClick={() =>
               openTextAreaPopup(
                 "픽드랍 메모",
-                "월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당",
+                data.pickDropMemo ? data.pickDropMemo : "",
                 "pickDrop"
               )
             }
@@ -135,7 +180,7 @@ const DogInfo = () => {
             수정
           </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
-        <S.DogMoreInfoText>월수금 픽드랍 필요해요 화요일에는 안오셔도 됩니당</S.DogMoreInfoText>
+        <S.DogMoreInfoText>{data.pickDropMemo ? data.pickDropMemo : ""}</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
 
       <S.DogMoreInfoCard>
@@ -150,7 +195,7 @@ const DogInfo = () => {
             onClick={() =>
               openTextAreaPopup(
                 "알러지 및 질병",
-                "뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.",
+                data.allergyDisease ? data.allergyDisease : "",
                 "allergy"
               )
             }
@@ -158,9 +203,10 @@ const DogInfo = () => {
             수정
           </S.DogMoreInfoEditeButton>
         </S.TopInfoBox>
-        <S.DogMoreInfoText>뽀뽀의 알러지는 요 눈을 긁으면 빨간 점이 생깁니다.</S.DogMoreInfoText>
+        <S.DogMoreInfoText>{data.allergyDisease ? data.allergyDisease : ""}</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
 
+      {/* TODO 데이터 작업 필요vaccinationUri */}
       <S.DogMoreInfoCard>
         <S.TopInfoBox>
           <Flex gap="4" align="center">
