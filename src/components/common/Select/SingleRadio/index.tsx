@@ -10,6 +10,7 @@ interface ISingleRadio extends ISelect {
   defaultSelect?: string;
   isPreviewMode?: boolean;
   isRequired?: boolean;
+  preventDefaultClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 const SingleRadio = ({
@@ -19,9 +20,11 @@ const SingleRadio = ({
   disabled = false,
   isRequired = false,
   defaultSelect,
-  isPreviewMode
+  isPreviewMode,
+  preventDefaultClick
 }: ISingleRadio) => {
   const { register } = useFormContext();
+
   return (
     <S.Container>
       {caption && <S.Caption>{caption}</S.Caption>}
@@ -36,6 +39,7 @@ const SingleRadio = ({
               disabled={disabled}
               defaultChecked={defaultSelect === text}
               className={isPreviewMode ? "preview" : ""}
+              onClick={preventDefaultClick}
             />
             <S.StyledLabel htmlFor={text + name}>{text}</S.StyledLabel>
           </div>

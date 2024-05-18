@@ -1,8 +1,6 @@
 import { Nullable } from "types/helper.type";
 import { IResponse } from "types/Response.type";
 
-import { IMemberProfileInfo } from "./home.types";
-
 export type TPickDropState = "RUNNING" | "NOT_RUNNING";
 export type TPickDropRequest = "REQUEST" | "NOT_REQUEST";
 export type TTicketType = "ROUND" | "MONTHLY";

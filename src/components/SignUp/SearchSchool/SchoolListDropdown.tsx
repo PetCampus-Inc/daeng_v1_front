@@ -1,4 +1,4 @@
-import { Box, Text } from "components/common";
+import { Flex, Box, Text } from "components/common";
 import styled from "styled-components";
 
 import type { ISchoolInfo } from "types/admin/school.types";
@@ -12,11 +12,14 @@ const SchoolListDropdown = ({ list, handleSelected }: SchoolListDropdownProps) =
   if (list.length === 0) {
     return (
       <Box borderRadius="rectangle" border={1} borderColor="gray_4" bg="white">
-        <Box paddingInline={16} paddingBlock={18}>
+        <Flex direction="column" gap={4} paddingInline={16} paddingBlock={40}>
           <Text as="p" typo="body2_16_R" color="gray_1" textAlign="center">
-            검색 결과가 없습니다.
+            검색 결과가 없어요
           </Text>
-        </Box>
+          <Text as="p" typo="caption1_12_R" color="gray_3" textAlign="center">
+            다시 입력해 주세요
+          </Text>
+        </Flex>
       </Box>
     );
   }
