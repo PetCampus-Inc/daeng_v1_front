@@ -1,4 +1,5 @@
 import { type AgreementsListType } from "constants/item";
+import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
@@ -10,10 +11,12 @@ import {
   MemberFormAdapter,
   ReadModeAdapter
 } from "libs/Adapter/ServerToFormAdapter";
+import { useNavigate } from "react-router-dom";
+import showToast from "utils/showToast";
 
 import type {
   MemberFormData,
-  IRequestAdminEnrollment,
+  AdminFormInfo,
   IResponseAdminForm,
   TPickDropState
 } from "types/admin/enrollment.types";
@@ -83,8 +86,13 @@ export const useAdminEnrollment = (formId: string, mode: Mode) => {
 
 // 원장 가입신청서 저장
 export const useCreateAdminEnrollment = () => {
+  const navigate = useNavigate();
   const mutateForm = useMutation({
-    mutationFn: (enrollmentData: IRequestAdminEnrollment) => handlePostAdminForm(enrollmentData),
+    mutationFn: (enrollmentData: AdminFormInfo) => handlePostAdminForm(enrollmentData),
+    onSuccess: () => {
+      navigate(PATH.ADMIN_ENROLLMENT);
+      showToast("가입신청서 등록이 완료되었습니다", "bottom");
+    },
     throwOnError: true
   });
 
