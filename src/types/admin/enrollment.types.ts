@@ -103,11 +103,11 @@ export interface IResponseAdminForm {
   member: Nullable<TMemberDto>;
 }
 
-// 원장 가입신청서 저장
-export interface IRequestAdminEnrollment {
+// 원장 가입신청서 서버 저장
+export interface AdminFormInfo {
   schoolId: number;
   adminId: number;
-  formName: Nullable<string>; // TODO: submit 폼 때문에 Nullable 처리되어 있지만, 다른 방안 고려해보기
+  formName: string;
   requiredItemList: number[];
   priceInfo: string;
   ticketType: string[];
@@ -121,4 +121,9 @@ export interface IRequestAdminEnrollment {
   pickDropState: TPickDropState;
   pickDropInfo: string;
   pickDropNotice: string;
+}
+
+// 원장 가입신청서 폼 저장
+export interface AdminFormSaveType extends Omit<AdminFormInfo, "formName"> {
+  formName: null;
 }
