@@ -2,7 +2,7 @@ import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
 import { IMemberSchoolInfo } from "types/member/school.types";
 
-import type { IRequestAdminEnrollment, IResponseAdminForm } from "types/admin/enrollment.types";
+import type { AdminFormInfo, IResponseAdminForm } from "types/admin/enrollment.types";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
 import type { IResponse } from "types/helper.type";
 import type {
@@ -87,7 +87,7 @@ export const handlePostEnrollment = async (requestProps: IRequestEnrollment): Pr
   return data.data;
 };
 
-export const handlePostAdminForm = async (requestProps: IRequestAdminEnrollment): Promise<void> => {
+export const handlePostAdminForm = async (requestProps: AdminFormInfo): Promise<void> => {
   const url = `school/form`;
   const { data } = await customAxios.post(url, {
     ...requestProps
