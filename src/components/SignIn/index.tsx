@@ -11,6 +11,8 @@ import { ButtonWrapper, StyledButton, StyledImage, StyledText } from "./styles";
 const SignIn = () => {
   const navigate = useNavigate();
 
+  console.log("REACT_APP_SERVER_DOMAIN:", process.env.REACT_APP_SERVER_DOMAIN);
+
   return (
     <Layout type="page" pt={76}>
       <Text typo="title1_24_B" color="darkBlack">
