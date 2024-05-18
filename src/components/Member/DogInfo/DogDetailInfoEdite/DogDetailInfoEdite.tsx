@@ -94,7 +94,7 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
           name="neutralization"
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItems?.get(ITEM_KEYS.NEUTRALIZATION)}
-          defaultSelect={"했어요"}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("neutralization")]}
         />
       </Card>
     </>
