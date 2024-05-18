@@ -26,7 +26,13 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const EnrollmentFormCreatePage = () => {
+import type { AdminFormSaveType } from "types/admin/enrollment.types";
+
+interface EnrollmentFormCreateProps {
+  onNextStep?: (formInfo: AdminFormSaveType) => void;
+}
+
+const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => {
   const methods = useForm({
     mode: "onBlur",
     shouldUnregister: false,
@@ -85,6 +91,7 @@ const EnrollmentFormCreatePage = () => {
                 stepsLength={currentSteps.length}
                 nextStep={nextStep}
                 prevStep={prevStep}
+                onNextStep={onNextStep}
               />
             </ButtonContainer>
           </FormProvider>

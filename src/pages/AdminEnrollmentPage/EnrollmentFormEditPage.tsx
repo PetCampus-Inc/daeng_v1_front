@@ -27,10 +27,17 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-const EnrollmentFormEditPage = () => {
+import type { AdminFormSaveType } from "types/admin/enrollment.types";
+
+interface EnrollmentFormEditProps {
+  onNextStep?: (formInfo: AdminFormSaveType) => void;
+}
+
+const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
   const { formId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
+
   if (!formId) throw new Error("잘못된 formId 입니다");
 
   const { data, isLoading } = useAdminEnrollment(formId, "EDIT");
@@ -89,7 +96,7 @@ const EnrollmentFormEditPage = () => {
             </ContentWrapper>
             <ButtonContainer>
               <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
-              <SubmitButton type="EDIT" />
+              <SubmitButton type="EDIT" onNextStep={onNextStep} />
             </ButtonContainer>
           </FormProvider>
         </Container>

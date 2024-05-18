@@ -1,18 +1,17 @@
-import { ADMIN_CREATE_FORM_PATH } from "constants/path";
+import { ADMIN_EDIT_FORM_PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
+import { AdminFormSaveType } from "types/admin/enrollment.types";
 
-import EnrollmentFormCreatePage from "./EnrollmentFormCreatePage";
+import EnrollmentFormEditPage from "./EnrollmentFormEditPage";
 import EnrollmentFormSubmitPage from "./EnrollmentFormSubmitPage";
 
-import type { AdminFormSaveType } from "types/admin/enrollment.types";
-
-const EnrollmentFormCreateFunnel = () => {
-  const { 가입신청서_생성, 가입신청서_제출 } = ADMIN_CREATE_FORM_PATH;
-  const funnelSteps = [가입신청서_생성, 가입신청서_제출] as const;
+const EnrollmentFormEditFunnel = () => {
+  const { 가입신청서_수정, 가입신청서_제출 } = ADMIN_EDIT_FORM_PATH;
+  const funnelSteps = [가입신청서_수정, 가입신청서_제출] as const;
 
   const [Funnel, state, setState] = useFunnel(funnelSteps, {
-    initialStep: 가입신청서_생성,
+    initialStep: 가입신청서_수정,
     stepQueryKey: "step"
   }).withState<{
     formInfo?: AdminFormSaveType;
@@ -20,8 +19,8 @@ const EnrollmentFormCreateFunnel = () => {
 
   return (
     <Funnel>
-      <Funnel.Step name={가입신청서_생성}>
-        <EnrollmentFormCreatePage
+      <Funnel.Step name={가입신청서_수정}>
+        <EnrollmentFormEditPage
           onNextStep={(formInfo) =>
             setState((prev) => ({
               ...prev,
@@ -38,4 +37,4 @@ const EnrollmentFormCreateFunnel = () => {
   );
 };
 
-export default EnrollmentFormCreateFunnel;
+export default EnrollmentFormEditFunnel;
