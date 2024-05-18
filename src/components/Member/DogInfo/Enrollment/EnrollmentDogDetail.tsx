@@ -1,11 +1,11 @@
 import { MEMBER_DOG_INFO_ENROLL_STEP } from "constants/step";
 
 import Header from "components/common/Header";
-import DogInfo from "components/Enrollment/MemberForm/DogInfo";
-import MemberInfo from "components/Enrollment/MemberForm/MemberInfo";
-import PickDropInfo from "components/Enrollment/MemberForm/PickDropInfo";
-import PolicyInfo from "components/Enrollment/MemberForm/PolicyInfo";
-import TicketInfo from "components/Enrollment/MemberForm/TicketInfo";
+import DogInfo from "components/Enrollment/MemberDogReadForm/DogInfo";
+import MemberInfo from "components/Enrollment/MemberDogReadForm/MemberInfo";
+import PickDropInfo from "components/Enrollment/MemberDogReadForm/PickDropInfo";
+import PolicyInfo from "components/Enrollment/MemberDogReadForm/PolicyInfo";
+import TicketInfo from "components/Enrollment/MemberDogReadForm/TicketInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import * as S from "components/Enrollment/styles";
 import { useGetMemberDogEnrollmemntInfo } from "hooks/api/member/member";
