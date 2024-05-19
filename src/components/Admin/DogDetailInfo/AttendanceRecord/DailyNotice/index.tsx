@@ -1,11 +1,10 @@
-import AlertSmallIcon from "assets/svg/alert-small-icon";
-import PencilCircleIcon from "assets/svg/pencil-circle-icon";
 import PoopBox from "components/common/PoopBox";
 import { format } from "date-fns";
 import useGetDogInfoAgenda from "hooks/api/useGetDogInfoAgenda";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 import * as S from "./styles";
+import StatusCard from "../StatusCard";
 
 const DailyNotice = () => {
   const [searchParams] = useSearchParams();
@@ -13,26 +12,8 @@ const DailyNotice = () => {
   const date = searchParams.get("date") || format(new Date(), "yyyy-MM-dd");
   const { data } = useGetDogInfoAgenda(Number(dogId), date);
 
-  const statusText = (status: string | undefined) => {
-    switch (status) {
-      case "NOT_YET":
-        return "알림장을 아직 작성하지 않았어요";
-      case "WRITING":
-        return "알림장을 작성중이에요";
-      default:
-        return "해당 날짜에 등원하지 않았어요";
-    }
-  };
-
   if (!data || data.status === "NOT_YET" || data.status === "WRITING") {
-    return (
-      <S.NoNoticeContainer>
-        <S.TextIconContainer>
-          {data?.status === "WRITING" ? <PencilCircleIcon /> : <AlertSmallIcon color="darkgray" />}
-          <span>{statusText(data?.status)}</span>
-        </S.TextIconContainer>
-      </S.NoNoticeContainer>
-    );
+    return StatusCard(data?.status);
   }
 
   return (

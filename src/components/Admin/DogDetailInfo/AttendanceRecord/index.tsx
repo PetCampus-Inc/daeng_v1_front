@@ -1,18 +1,17 @@
 import { format, parseISO } from "date-fns";
-import useGetDogInfoAgenda from "hooks/api/useGetDogInfoAgenda";
-import { useSearchParams, useLocation } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+import { useSearchParams } from "react-router-dom";
 
 import DailyNotice from "./DailyNotice";
+import StatusCard from "./StatusCard";
 import * as S from "./styles";
 import Calendar from "../DogInfo/Calendar";
 import { DogDetailInfoText } from "../DogInfo/styles";
 
 const AttendanceRecord = () => {
   const [searchParams] = useSearchParams();
-  const dogId = useLocation().pathname.split("/").pop();
   const date = searchParams.get("date") || format(new Date(), "yyyy-MM-dd");
   const formattedDate = format(parseISO(date), "M월 d일");
-  const data = useGetDogInfoAgenda(Number(dogId), date);
 
   return (
     <>
@@ -21,8 +20,10 @@ const AttendanceRecord = () => {
       </S.TopContainer>
       <Calendar />
       <S.NoticeContainer>
-        <DogDetailInfoText className="big header">{formattedDate} 알림장</DogDetailInfoText>
-        <DailyNotice data={data} />
+        <ErrorBoundary fallback={StatusCard("ERROR")}>
+          <DogDetailInfoText className="big header">{formattedDate} 알림장</DogDetailInfoText>
+          <DailyNotice />
+        </ErrorBoundary>
       </S.NoticeContainer>
     </>
   );
