@@ -49,11 +49,14 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
   const currentTitle = isMemberAddDog
     ? MEMBER_DOG_ADD_ENROLL_STEP[currentStep].title
     : MEMBER_ENROLL_STEP[currentStep].title;
+
   const currentSubtitle = isMemberAddDog
     ? MEMBER_DOG_ADD_ENROLL_STEP[currentStep].subtitle
     : MEMBER_ENROLL_STEP[currentStep].subtitle;
 
   const indicators = visibleSteps.map((step) => step.indicator);
+
+  console.log(indicators);
 
   const ticket = {
     roundTicketNumber,
@@ -66,11 +69,11 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
       <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
     ));
 
-  useEffect(() => {
-    if (isMemberAddDog) {
-      nextStep;
-    }
-  }, [isMemberAddDog, nextStep, prevStep, setStep]);
+  // useEffect(() => {
+  //   if (isMemberAddDog) {
+  //     nextStep;
+  //   }
+  // }, [isMemberAddDog, nextStep, prevStep, setStep]);
 
   return (
     <>
@@ -97,17 +100,16 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
                   <MemberInfo requiredItems={requiredItemList} />
                 </S.Content>
               )}
-
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 0 : 1)}>
+              <S.Content $isVisible={currentStep === 1}>
                 <DogInfo requiredItems={requiredItemList} />
               </S.Content>
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 1 : 2)}>
+              <S.Content $isVisible={currentStep === 2}>
                 <TicketInfo requiredItems={requiredItemList} ticket={ticket} />
               </S.Content>
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 2 : 3)}>
+              <S.Content $isVisible={currentStep === 3}>
                 <PolicyInfo requiredItems={requiredItemList} />
               </S.Content>
-              <S.Content $isVisible={currentStep === (isMemberAddDog ? 3 : 4)}>
+              <S.Content $isVisible={currentStep === 4}>
                 <PickDropInfo requiredItems={requiredItemList} />
               </S.Content>
             </S.ContentWrapper>

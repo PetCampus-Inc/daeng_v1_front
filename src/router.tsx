@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
-import { adminLoginInfoAtom } from "store/admin";
+import { adminInfoState } from "store/admin";
 import { Role } from "types/admin/admin.type";
 import { isTRole } from "utils/typeGuard";
 
@@ -15,10 +15,9 @@ import ApiErrorBoundary from "./ApiErrorBoundary";
 import App from "./App";
 
 const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
-  const [auth] = useRecoilState(adminLoginInfoAtom);
+  const [auth] = useRecoilState(adminInfoState);
   const router = createBrowserRouter([
     {
-      path: PATH.ADMIN,
       element: (
         <ApiErrorBoundary>
           <App />
@@ -293,7 +292,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_EDITE_PAGE(),
+          path: PATH.MEMBER_MY_INFO_EDIT_PAGE(),
           element: (
             <Suspense>
               <Pages.MemberMyInfoEditePage />
@@ -421,15 +420,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               path: PATH.SETTING,
               element: (
                 <Suspense>
-                  <Pages.SettingPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.SETTING_NOTIFICATION,
-              element: (
-                <Suspense>
-                  <Pages.SettingNotificationPage />
+                  <Pages.MemberDogInfoPage />
                 </Suspense>
               )
             }

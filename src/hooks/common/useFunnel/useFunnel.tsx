@@ -52,6 +52,15 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
     throw new Error("steps가 비어있습니다.");
   }
 
+  // 초기 스텝 쿼리 파라미터 설정
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (!queryParams.has(stepQueryKey) && options?.initialStep) {
+      queryParams.set(stepQueryKey, options.initialStep);
+      navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
+    }
+  }, [navigate, location, stepQueryKey, options?.initialStep]);
+
   const FunnelComponent = useMemo(
     () =>
       Object.assign(

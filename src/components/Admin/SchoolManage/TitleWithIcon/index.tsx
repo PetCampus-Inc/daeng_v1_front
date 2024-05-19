@@ -12,7 +12,7 @@ interface ITitleWithIcon {
 
 const TitleWithIcon = ({ title, icon, handleClick, children }: ITitleWithIcon) => {
   return (
-    <Box display="flex" justify="center" mb={12} width="full">
+    <Box display="flex" align="center" justify="space-between" mb={12} width="full">
       {children}
       <Title>{title}</Title>
       <IconWrapper onClick={handleClick}>{icon}</IconWrapper>

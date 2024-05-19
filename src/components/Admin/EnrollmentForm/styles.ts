@@ -32,9 +32,7 @@ export const SubTitle = styled.h3`
   color: ${({ theme }) => theme.colors.gray_3};
 `;
 
-export const ContentWrapper = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["withNav"].includes(prop)
-})<{ withNav?: boolean }>`
+export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -42,8 +40,6 @@ export const ContentWrapper = styled.div.withConfig({
 
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
-
-  padding-bottom: ${({ withNav }) => withNav && "calc(7vh + 2.5rem)"};
 `;
 
 export const ButtonContainer = styled.div`

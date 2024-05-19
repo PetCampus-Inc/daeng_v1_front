@@ -4,15 +4,14 @@ import WaitingTeacherList from "components/Admin/SchoolManage/TeacherList/Waitin
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import Header from "components/common/Header";
 import useGetTeacherList from "hooks/api/useGetTeacherList";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
 
 const TeacherManagePage = () => {
   const [isEditable, setIsEditable] = useState(false);
-  // FIXME: admin ID 관리 필요!
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+
+  const { adminId } = useAdminInfo();
   const { data } = useGetTeacherList(adminId);
   if (!data) return <div>로딩중..</div>;
 

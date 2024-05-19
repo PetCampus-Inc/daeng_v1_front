@@ -6,12 +6,11 @@ import { CardContainer, ContentContainer } from "components/Admin/MyPage/styles"
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { Role } from "types/admin/admin.type";
 
 const PrincipalMyPage = () => {
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
   const { data } = useGetPrincipalInfo(adminId);
 
   return (

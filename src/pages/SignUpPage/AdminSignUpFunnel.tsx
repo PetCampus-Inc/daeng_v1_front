@@ -1,7 +1,7 @@
-import { ADMIN_SIGN_UP_STEP } from "constants/step";
+import { ADMIN_SIGNUP_PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import AccountSettingPage from "./AccountSettingPage";
@@ -35,7 +35,7 @@ const AdminSignUpFunnel = () => {
     계정설정,
     승인상태,
     유치원_등록완료
-  } = ADMIN_SIGN_UP_STEP;
+  } = ADMIN_SIGNUP_PATH;
 
   const [Funnel, state, setState] = useFunnel(
     [

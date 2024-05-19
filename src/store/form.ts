@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import type { IRequestAdminEnrollment } from "types/admin/enrollment.types";
+import type { AdminFormSaveType } from "types/admin/enrollment.types";
 import type { Nullable } from "types/helper.type";
 import type { TMemberDto } from "types/member/enrollment.types";
 
@@ -24,12 +24,12 @@ export const imagePreviewAtom = atom<ImageFile[]>({
   default: []
 });
 
-export const enrollmentFormAtom = atom<IRequestAdminEnrollment>({
+export const enrollmentFormAtom = atom<AdminFormSaveType>({
   key: "enrollmentFormAtom",
   default: {
     schoolId: -1,
     adminId: -1,
-    formName: "",
+    formName: null,
     requiredItemList: [],
     priceInfo: "",
     ticketType: [],

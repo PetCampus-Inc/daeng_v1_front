@@ -5,16 +5,15 @@ import DeleteDogList from "components/Admin/AttendCare/list/DeleteDogList";
 import { Box, Flex, Text } from "components/common";
 import Header from "components/common/Header";
 import { useGetCareDogList } from "hooks/api/admin/care";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useRouteLoaderData } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import caredogLoader from "routes/caredogLoader";
-import { adminLoginInfoAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
 
 const AttendCareDeletePage = () => {
   const initialData = useRouteLoaderData("caredog") as Awaited<ReturnType<typeof caredogLoader>>;
 
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
   const { data } = useGetCareDogList(adminId, initialData);
 
   return (
