@@ -1,20 +1,18 @@
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import PencilCircleIcon from "assets/svg/pencil-circle-icon";
-import PoopHard from "assets/svg/poop-hard";
-import PoopHealthy from "assets/svg/poop-healthy";
-import PoopNotBrown from "assets/svg/poop-not-brown";
-import PoopNeedAttention from "assets/svg/poop-warning";
-import PoopWatery from "assets/svg/poop-watery";
 import PoopBox from "components/common/PoopBox";
-import { IDogInfoAgenda } from "types/admin.attendance.type";
+import { format } from "date-fns";
+import useGetDogInfoAgenda from "hooks/api/useGetDogInfoAgenda";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import * as S from "./styles";
 
-interface IDailyNoticeProps {
-  data: IDogInfoAgenda | undefined;
-}
+const DailyNotice = () => {
+  const [searchParams] = useSearchParams();
+  const dogId = useLocation().pathname.split("/").pop();
+  const date = searchParams.get("date") || format(new Date(), "yyyy-MM-dd");
+  const { data } = useGetDogInfoAgenda(Number(dogId), date);
 
-const DailyNotice = ({ data }: IDailyNoticeProps) => {
   const statusText = (status: string | undefined) => {
     switch (status) {
       case "NOT_YET":
@@ -55,28 +53,6 @@ const DailyNotice = ({ data }: IDailyNoticeProps) => {
         <div>
           배변 상태
           <PoopBox selected={data.poop} />
-          {/* <S.PoopCardContainer>
-            <S.PoopCard>
-              <PoopHard poop={data.poop} />
-              딱딱함
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopHealthy poop={data.poop} />
-              건강함
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopWatery poop={data.poop} />
-              묽은 변
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopNotBrown poop={data.poop} />
-              갈색이 아닌
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopNeedAttention poop={data.poop} />
-              주의필요
-            </S.PoopCard>
-          </S.PoopCardContainer> */}
         </div>
 
         <S.NoticeContent>{data.poopMemo ? data.poopMemo : "전달 사항이 없습니다."}</S.NoticeContent>

@@ -15,7 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
-import type { ICareDogInfo, ICareTempSave, IPastAgenda } from "types/admin/care.types";
+import type { ICareDogInfo, IPastAgenda } from "types/admin/care.types";
 
 export const useGetCareDogList = (adminId: number, initialData: ICareDogInfo[]) => {
   return useSuspenseQuery<ICareDogInfo[]>({
@@ -122,7 +122,10 @@ export const useTempSaveCareDog = () => {
 export const useGetAgendaSaved = (dogId: number) => {
   return useSuspenseQuery<IPastAgenda>({
     queryKey: QUERY_KEY.CARE_DOG_AGENDA_SAVED,
-    queryFn: () => handleGetAgenda(dogId)
+    queryFn: () => handleGetAgenda(dogId),
+    //FIXME: poopStatus를 제때 불러올 수 있는 다른 방법 생각해보기
+    gcTime: 10,
+    staleTime: 0
   });
 };
 
@@ -137,10 +140,11 @@ export const useSendAgenda = () => {
     },
     onError: () => {
       showToast("에러가 발생했습니다. 잠시후 다시 시도해주세요", "bottom");
-    }
+    },
+    gcTime: 5 * 60 * 1000
   });
 
-  return { mutateSendAgenda: sendAgenda.mutate };
+  return { mutateSendAgenda: sendAgenda.mutate, isComplete: sendAgenda.isSuccess };
 };
 
 // 강아지 지난 알림장 정보 가져오기

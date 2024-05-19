@@ -48,6 +48,42 @@ export interface IDogAndMemberInfo {
   member: TMemberDto;
 }
 
+export interface IDogAllDetails {
+  dogId: number;
+  dogName: string;
+  dogGender: "FEMALE" | "MALE";
+  dogSize: "SMALL" | "MEDIUM" | "BIG";
+  breedId: number;
+  breedName: string;
+  dogBirthDate: number[];
+  neutralization: "NEUTERED" | "NOT_NEUTERED";
+  allergyDisease: string;
+  vaccination: "VACCINATED" | "NOT_VACCINATED";
+  vaccinationUrl: string;
+  fileUrl: string[];
+  pickDropRequest: "NOT_REQUEST" | "NOT_RUNNING" | "ONE_WAY" | "REQUEST" | "ROUND" | "RUNNING";
+  pickDropType: "NOT_REQUEST" | "NOT_RUNNING" | "ONE_WAY" | "REQUEST" | "ROUND" | "RUNNING";
+  pickDropMemo: string;
+  dogMemo: string;
+  profileUrl: string;
+}
+
+export interface IMemberAllDetails {
+  memberId: number;
+  memberName: string;
+  nickName: string;
+  phoneNumber: string;
+  relation: "BROTHER" | "SISTER" | "FATHER" | "MOTHER" | "FRIEND";
+  address: string;
+  addressDetail: string;
+  emergencyPhoneNumber: Nullable<string>;
+  memberGender: "FEMALE" | "MALE";
+}
+
+export interface IDogAndMemberInfoForDetail extends IDogAllDetails {
+  member: IMemberAllDetails;
+}
+
 export interface IDogInfoRecord {
   date: number[];
   status: string; //TODO: ATTENDED 등으로 변경

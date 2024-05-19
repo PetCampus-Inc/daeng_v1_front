@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogAndMemberDetails } from "apis/admin.attendance.api";
-import { IDogAndMemberInfo } from "types/admin.attendance.type";
+import { IDogAndMemberInfoForDetail } from "types/admin.attendance.type";
 
 const useGetDogAndMemberDetail = (dogId: number) => {
   return useSuspenseQuery({
@@ -8,7 +8,7 @@ const useGetDogAndMemberDetail = (dogId: number) => {
     queryFn: () => handleGetDogAndMemberDetails(dogId),
     staleTime: 1000 * 60 * 60,
     select: ({ data }) => {
-      const { member, ...dogInfo } = data as IDogAndMemberInfo;
+      const { member, ...dogInfo } = data as IDogAndMemberInfoForDetail;
       return {
         dogInfo,
         memberInfo: member

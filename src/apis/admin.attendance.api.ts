@@ -101,7 +101,7 @@ export const handlePostAttend = async (req: IAttendInfoProps): Promise<void> => 
 };
 
 // 강아지 상세 - 강아지 상세 정보
-export const handleGetDogAndMemberDetails = async (dogId: number): Promise<any> => {
+export const handleGetDogAndMemberDetails = async (dogId: number) => {
   const url = `admin/attendance/dog/info?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data;

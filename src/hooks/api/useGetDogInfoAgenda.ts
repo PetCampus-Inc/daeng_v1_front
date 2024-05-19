@@ -8,7 +8,7 @@ const useGetDogInfoAgenda = (dogId: number, date?: string) => {
     staleTime: 1000 * 60 * 60,
     throwOnError: true
   });
-  return query.data;
+  return query;
 };
 
 export default useGetDogInfoAgenda;

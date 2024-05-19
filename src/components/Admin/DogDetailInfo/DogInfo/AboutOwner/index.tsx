@@ -1,14 +1,31 @@
 import MapPinIcon from "assets/svg/map-pin-icon";
 import BasicPhoneIcon from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
+import CallMemberBottomSheet from "components/Admin/Attendance/AttendanceModal/CallMemberBottomSheet";
+import { useOverlay } from "hooks/common/useOverlay";
+import { Suspense } from "react";
+import { IMemberAllDetails } from "types/admin.attendance.type";
 
 import * as S from "./styles";
 import { FlexWrapper } from "../../styles";
 import { DetailItem, TextWrapper, YellowThickButton } from "../AboutDog/styles";
 import { DogDetailInfoText } from "../styles";
 
-const AboutOwner = ({ data }: any) => {
-  const { memberName, memberPhone, memberAddress } = data;
+interface AboutOwnerProps {
+  data: IMemberAllDetails;
+  dogId: number;
+}
+
+const AboutOwner = ({ data, dogId }: AboutOwnerProps) => {
+  const { memberName, phoneNumber, address, addressDetail } = data;
+  const overlay = useOverlay();
+
+  const openCallBottomSheet = () =>
+    overlay.open(({ isOpen, close }) => (
+      <Suspense>
+        <CallMemberBottomSheet dogId={dogId} isOpen={isOpen} close={close} />
+      </Suspense>
+    ));
 
   return (
     <FlexWrapper>
@@ -21,17 +38,25 @@ const AboutOwner = ({ data }: any) => {
           <DetailItem className="row">
             <TextWrapper>
               <BasicPhoneIcon />
-              {memberPhone || "연락처 없음"}
+              {phoneNumber || "연락처 없음"}
             </TextWrapper>
-            <YellowThickButton>
-              <PhoneIcon />
-              전화 걸기
-            </YellowThickButton>
+            {phoneNumber && (
+              <YellowThickButton onClick={openCallBottomSheet}>
+                <PhoneIcon />
+                전화 걸기
+              </YellowThickButton>
+            )}
           </DetailItem>
           <DetailItem>
             <TextWrapper>
               <MapPinIcon />
-              {memberAddress || "주소 없음"}
+              {address ? (
+                <span>
+                  {address} {addressDetail}
+                </span>
+              ) : (
+                "주소 없음"
+              )}
             </TextWrapper>
           </DetailItem>
         </S.BottomContainer>
