@@ -42,11 +42,7 @@ const Memo = ({ memo, id, refetch }: MemoProps) => {
     <FlexWrapper>
       <InfoTop>
         <DogDetailInfoText className="big">메모</DogDetailInfoText>
-        <PencilIcon
-          handleTouch={() => {
-            setIsOpen(true);
-          }}
-        />
+        <PencilIcon handleTouch={() => setIsOpen(true)} />
       </InfoTop>
       <TextArea
         resizable={false}
@@ -66,7 +62,7 @@ const Memo = ({ memo, id, refetch }: MemoProps) => {
           name="memoModal"
           register={methods.register}
           actionFn={onSubmit}
-          defaultValue={memo}
+          defaultValue={memo ?? ""}
           placeholder="메모를 입력해주세요"
         />
       </FormProvider>

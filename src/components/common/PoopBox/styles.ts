@@ -7,7 +7,7 @@ export const PoopCardContainer = styled.div`
   margin-top: 8px;
 `;
 
-export const PoopCard = styled.div`
+export const PoopCard = styled.button`
   display: flex;
   flex-direction: column;
   gap: 3px;

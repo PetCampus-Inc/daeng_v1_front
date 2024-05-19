@@ -4,11 +4,12 @@ import PoopBox from "components/common/PoopBox";
 import TextArea from "components/common/TextArea";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
 import { debounce } from "lodash";
-import { useState } from "react";
+import { Dispatch, SetStateAction, Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { adminLoginInfoAtom } from "store/admin";
+import { IPoop } from "types/admin.attendance.type";
 
 import * as S from "./styles";
 import LastNoticeButton from "../LastNoticeButton";
@@ -18,11 +19,11 @@ import { NoticeItemContainer } from "../styles";
 const WriteNotice = () => {
   const { adminId } = useRecoilValue(adminLoginInfoAtom);
   const dogId = useLocation().pathname.split("/").pop();
-  const [isComplete, setIsComplete] = useState(true);
 
-  const { data } = useGetAgendaSaved(Number(dogId));
   const { mutateTempSaveCareDog } = useTempSaveCareDog();
-  const { mutateSendAgenda } = useSendAgenda();
+  const { mutateSendAgenda, isComplete } = useSendAgenda();
+  const { data } = useGetAgendaSaved(Number(dogId));
+  const [poopStatus, setPoopStatus] = useState(data.poop);
 
   const methods = useForm({
     mode: "onChange"
@@ -39,7 +40,7 @@ const WriteNotice = () => {
       dogId: Number(dogId),
       agendaNote,
       snack,
-      poop: "HARD",
+      poop: poopStatus,
       poopMemo
     };
   };
@@ -51,7 +52,6 @@ const WriteNotice = () => {
   const handleSend = debounce(() => {
     try {
       mutateSendAgenda(agendaData());
-      setIsComplete(true);
     } catch (e) {
       throw new Error("알림장 전송 중 오류가 발생했습니다.");
     }
@@ -88,7 +88,7 @@ const WriteNotice = () => {
             <S.NoteText className="content">
               {data.poopMemo ?? "배변 상태 관련 내용이 없습니다."}.
             </S.NoteText>
-            <PoopBox selected={data.poop} />
+            <PoopBox selected={poopStatus} />
           </S.NoteContentFlexBox>
         </S.NoteInnerContainer>
       </S.CompleteNoteContainer>
@@ -116,7 +116,10 @@ const WriteNotice = () => {
       </NoticeItemContainer>
       <NoticeItemContainer>
         배변 상태
-        <PoopBox selected={"HARD"} />
+        <PoopBox
+          selected={poopStatus}
+          setPoopStatus={setPoopStatus as Dispatch<SetStateAction<IPoop>>}
+        />
         <TextArea
           {...methods.register("poopMemo")}
           placeholder="오늘 하루 강아지 배변 상태에 대해 작성해 주세요"

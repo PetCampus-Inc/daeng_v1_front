@@ -34,8 +34,8 @@ const PoopStatusIcon = () => {
       />
       <g filter="url(#filter0_i_4_88244)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M13.1319 8.33085C13.6218 8.39539 14 8.81465 14 9.32224C14 9.36423 13.9974 9.40563 13.9924 9.44626H14C14.5523 9.44626 15 9.89398 15 10.4463C15 10.9985 14.5523 11.4463 14 11.4463H10C9.44772 11.4463 9 10.9985 9 10.4463C9 9.89398 9.44772 9.44626 10 9.44626H10.0076C10.0026 9.40563 10 9.36423 10 9.32224C10 8.76995 10.4477 8.32224 11 8.32224H11.262C11.5066 8.25623 11.6773 8.02431 11.6582 7.76299L11.6553 7.72269C11.6242 7.29793 12.0902 7.01906 12.4498 7.24726C12.5108 7.28593 12.563 7.3369 12.6031 7.3969L12.9988 7.98906C13.0699 8.09556 13.1137 8.21224 13.1319 8.33085Z"
           fill="#885D36"
         />
@@ -50,7 +50,7 @@ const PoopStatusIcon = () => {
           filterUnits="userSpaceOnUse"
           colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feColorMatrix
             in="SourceAlpha"
