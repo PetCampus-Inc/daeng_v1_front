@@ -1,21 +1,19 @@
 import { PATH } from "constants/path";
 
 import { QueryClient } from "@tanstack/react-query";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import * as Pages from "pages";
 import LoaderErrorPage from "pages/LoaderErrorPage";
 import { Suspense } from "react";
 import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import caredogLoader from "routes/caredogLoader";
-import { adminInfoState } from "store/admin";
-import { Role } from "types/admin/admin.type";
-import { isTRole } from "utils/typeGuard";
+import { isAdmin } from "utils/typeGuard";
 
 import ApiErrorBoundary from "./ApiErrorBoundary";
 import App from "./App";
 
 const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
-  const [auth] = useRecoilState(adminInfoState);
+  const auth = useAdminInfo();
   const router = createBrowserRouter([
     {
       element: (
@@ -26,6 +24,18 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       errorElement: <LoaderErrorPage />,
       children: [
         {
+          path: PATH.LOGIN,
+          element: (
+            <Suspense>
+              <Pages.LoginPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.SIGNUP,
+          element: <Pages.SignUpPage />
+        },
+        {
           path: PATH.ADMIN_LOGIN,
           element: <Pages.AdminLoginPage />
         },
@@ -34,256 +44,281 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           element: <Pages.AdminSignupPage />
         },
         {
-          path: PATH.ADMIN_ATTENDANCE,
+          path: PATH.REDIRECT,
+          element: <Pages.RedirectPage />
+        },
+        {
+          path: PATH.POLICY,
+          element: (
+            <Suspense>
+              <Pages.PolicyPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.UNREGISTER,
+          element: (
+            <Suspense>
+              <Pages.UnregisterPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.UNREGISTER_SUCCESS,
+          element: (
+            <Suspense>
+              <Pages.UnregisterSuccessPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.SETTING,
           children: [
             {
-              index: true,
+              path: PATH.SETTING,
               element: (
                 <Suspense>
-                  <Pages.AttendancePage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_ATTENDANCE_INFO(),
-              element: (
-                <Suspense>
-                  <Pages.DogInfoPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_ATTENDANCE_INFO_NEW_TICKET(),
-              element: (
-                <Suspense>
-                  <Pages.NewTicketPage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_ATTENDANCE_INFO_GALLERY(),
-              element: (
-                <Suspense>
-                  <Pages.DogGalleryPage />
+                  <Pages.MemberDogInfoPage />
                 </Suspense>
               )
             }
           ]
         },
         {
-          path: PATH.ADMIN_CARE,
+          path: "*",
+          element: <Pages.NotFoundPage />
+        },
+        {
+          // 교사,원장 페이지(로그인 필요)
+          path: PATH.ADMIN,
+          loader: () => {
+            if (!isAdmin(auth.role)) return redirect(PATH.ADMIN_LOGIN);
+            return null;
+          },
           children: [
             {
-              index: true,
-              id: "caredog",
-              loader: () => caredogLoader({ adminId: auth?.adminId, queryClient }),
-              element: (
-                <Suspense>
-                  <Pages.AttendCarePage />
-                </Suspense>
-              )
-            },
-            {
-              path: "delete",
-              element: <Pages.AttendCareDeletePage />
-            },
-            {
-              path: PATH.ADMIN_CARE_NOTICE(),
-              element: (
-                <Suspense>
-                  <Pages.AttendCareNoticePage />
-                </Suspense>
-              )
-            },
-            {
-              // 강아지 관리 메인 사진 앨범 전송
-              path: PATH.ADMIN_CARE_GALLERY,
+              path: PATH.ADMIN_ATTENDANCE,
               children: [
                 {
                   index: true,
+                  element: (
+                    <Suspense>
+                      <Pages.AttendancePage />
+                    </Suspense>
+                  )
+                },
+                {
+                  path: PATH.ADMIN_ATTENDANCE_INFO(),
+                  element: (
+                    <Suspense>
+                      <Pages.DogInfoPage />
+                    </Suspense>
+                  )
+                },
+                {
+                  path: PATH.ADMIN_ATTENDANCE_INFO_NEW_TICKET(),
+                  element: (
+                    <Suspense>
+                      <Pages.NewTicketPage />
+                    </Suspense>
+                  )
+                },
+                {
+                  path: PATH.ADMIN_ATTENDANCE_INFO_GALLERY(),
+                  element: (
+                    <Suspense>
+                      <Pages.DogGalleryPage />
+                    </Suspense>
+                  )
+                }
+              ]
+            },
+            {
+              path: PATH.ADMIN_CARE,
+              children: [
+                {
+                  index: true,
+                  id: "caredog",
+                  loader: () => caredogLoader({ adminId: auth?.adminId, queryClient }),
+                  element: (
+                    <Suspense>
+                      <Pages.AttendCarePage />
+                    </Suspense>
+                  )
+                },
+                {
+                  path: "delete",
+                  element: <Pages.AttendCareDeletePage />
+                },
+                {
+                  path: PATH.ADMIN_CARE_NOTICE(),
+                  element: (
+                    <Suspense>
+                      <Pages.AttendCareNoticePage />
+                    </Suspense>
+                  )
+                },
+                {
+                  path: PATH.ADMIN_CARE_GALLERY,
                   element: <Pages.AttendCareGallery type="main" />
                 },
                 {
-                  path: "select",
-                  element: <Pages.AttendCareSelectDog />
+                  path: PATH.ADMIN_CARE_INFO(),
+                  children: [
+                    {
+                      index: true,
+                      element: <Pages.AttendCareInfo />
+                    },
+                    {
+                      path: PATH.ADMIN_CARE_INFO_GALLERY(),
+                      element: <Pages.AttendCareGallery type="info" />
+                    }
+                  ]
                 }
               ]
             },
             {
-              path: PATH.ADMIN_CARE_INFO(),
-              children: [
-                {
-                  // 강아지 관리 상세
-                  index: true,
-                  element: <Pages.AttendCareInfo />
-                },
-                {
-                  // 강아지 관리 상세 사진 앨범 전송
-                  path: PATH.ADMIN_CARE_INFO_GALLERY(),
-                  element: <Pages.AttendCareGallery type="info" />
-                }
-              ]
-            }
-          ]
-        },
-        {
-          path: PATH.ADMIN_CHAT,
-          children: [
-            {
-              index: true,
-              element: (
-                <Suspense>
-                  <Pages.Chat />
-                </Suspense>
-              )
-            }
-          ]
-        },
-        {
-          path: PATH.ADMIN_SCHOOL_MANAGE,
-          children: [
-            {
-              index: true,
-              element: (
-                <Suspense>
-                  <Pages.SchoolManagePage />
-                </Suspense>
-              )
+              path: PATH.ADMIN_CHAT,
+              element: <Pages.Chat />
             },
             {
-              path: PATH.ADMIN_TEACHER_MANAGE,
-              element: (
-                <Suspense>
-                  <Pages.TeacherManagePage />
-                </Suspense>
-              )
-            },
-            {
-              path: PATH.ADMIN_ENROLLMENT,
+              path: PATH.ADMIN_SCHOOL_MANAGE,
               children: [
                 {
                   index: true,
                   element: (
                     <Suspense>
-                      <Pages.SchoolManageEnrollmentPage />
+                      <Pages.SchoolManagePage />
                     </Suspense>
                   )
                 },
                 {
-                  // 견주 가입신청서 상세 조회
-                  path: PATH.ADMIN_MEMBER_FORM(),
+                  path: PATH.ADMIN_TEACHER_MANAGE,
                   element: (
                     <Suspense>
-                      <Pages.MemberEnrollmentFormDetailPage />
+                      <Pages.TeacherManagePage />
                     </Suspense>
                   )
                 },
                 {
-                  // 원장 가입신청서 리스트
-                  path: PATH.ADMIN_FORMS,
+                  path: PATH.ADMIN_ENROLLMENT,
                   children: [
                     {
                       index: true,
                       element: (
                         <Suspense>
-                          <Pages.EnrollmentFormListPage />
+                          <Pages.SchoolManageEnrollmentPage />
                         </Suspense>
                       )
                     },
                     {
-                      // 원장 가입신청서 수정
-                      path: PATH.ADMIN_EDIT_FORM(),
+                      path: PATH.ADMIN_MEMBER_FORM(),
                       element: (
                         <Suspense>
-                          <Pages.EnrollmentFormEditPage />
+                          <Pages.MemberEnrollmentFormDetailPage />
                         </Suspense>
                       )
                     },
                     {
-                      // 원장 가입신청서 조회
-                      path: PATH.ADMIN_FORM(),
+                      path: PATH.ADMIN_FORMS,
+                      children: [
+                        {
+                          index: true,
+                          element: (
+                            <Suspense>
+                              <Pages.EnrollmentFormListPage />
+                            </Suspense>
+                          )
+                        },
+                        {
+                          path: PATH.ADMIN_EDIT_FORM(),
+                          element: (
+                            <Suspense>
+                              <Pages.EnrollmentFormEditPage />
+                            </Suspense>
+                          )
+                        },
+                        {
+                          path: PATH.ADMIN_FORM(),
+                          element: (
+                            <Suspense>
+                              <Pages.EnrollmentFormDetailPage />
+                            </Suspense>
+                          )
+                        }
+                      ]
+                    },
+                    {
+                      path: PATH.ADMIN_CREATE_FORM,
                       element: (
                         <Suspense>
-                          <Pages.EnrollmentFormDetailPage />
+                          <Pages.EnrollmentFormCreatePage />
                         </Suspense>
                       )
                     }
                   ]
+                }
+              ]
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE,
+              children: [
+                {
+                  index: true,
+                  element:
+                    auth?.role === "ROLE_OWNER" ? (
+                      <Suspense>
+                        <Pages.PrincipalMyPage />
+                      </Suspense>
+                    ) : (
+                      <Suspense>
+                        <Pages.TeacherMyPage />
+                      </Suspense>
+                    )
                 },
                 {
-                  // 원장 가입신청서 등록
-                  path: PATH.ADMIN_CREATE_FORM,
+                  // 마페 - 프로필 수정
+                  path: PATH.ADMIN_MY_PAGE_EDIT
+                  // element: <Pages.EditAdminProfile />
+                },
+                {
+                  // 교사 마페 - 유치원 상세 정보
+                  path: PATH.ADMIN_MY_SCHOOL_INFO,
                   element: (
                     <Suspense>
-                      <Pages.EnrollmentFormCreatePage />
+                      <Pages.SchoolInfoPage />
                     </Suspense>
                   )
                 },
                 {
-                  // FIXME: 라우터로 빼지 말고, 폼안에 페이지 만들기
-                  path: PATH.ADMIN_SUBMIT_FORM,
-                  element: (
-                    <Suspense>
-                      <Pages.EnrollmentFormSubmitPage />
-                    </Suspense>
-                  )
+                  // 원장 마페 - 유치원 정보 수정
+                  path: PATH.ADMIN_MY_SCHOOL_INFO_EDIT
+                  // element: <Pages.SchoolInfoEditPage />
                 }
               ]
             }
           ]
-        },
-        {
-          path: PATH.ADMIN_MY_PAGE,
-          children: [
-            {
-              index: true,
-              element:
-                auth?.role === "ROLE_OWNER" ? (
-                  <Suspense>
-                    <Pages.PrincipalMyPage />
-                  </Suspense>
-                ) : (
-                  <Suspense>
-                    <Pages.TeacherMyPage />
-                  </Suspense>
-                )
-            },
-            {
-              // 마페 - 프로필 수정
-              path: PATH.ADMIN_MY_PAGE_EDIT
-              // element: <Pages.EditAdminProfile />
-            },
-            {
-              // 교사 마페 - 유치원 상세 정보
-              path: PATH.ADMIN_MY_SCHOOL_INFO,
-              element: (
-                <Suspense>
-                  <Pages.SchoolInfoPage />
-                </Suspense>
-              )
-            },
-            {
-              // 원장 마페 - 유치원 정보 수정
-              path: PATH.ADMIN_MY_SCHOOL_INFO_EDIT
-              // element: <Pages.SchoolInfoEditPage />
-            }
-          ]
         }
       ]
-      // FIXME: 권한에 따른 접근제어 필요
-      // loader: () => {
-      //   if (!isTRole(auth.role)) return redirect("/");
-      //   return null;
-      // }
     },
     {
+      // 견주 페이지(로그인 필요)
       path: PATH.ROOT,
-      element: (
-        <ApiErrorBoundary>
-          <App />
-        </ApiErrorBoundary>
-      ),
+      element: <App />,
+      errorElement: <Pages.NotFoundPage />,
+      loader: () => {
+        if (!localStorage.getItem("token")) return redirect(PATH.LOGIN);
+        return null;
+      },
       children: [
+        {
+          index: true,
+          element: (
+            <Suspense>
+              <Pages.HomePage />
+            </Suspense>
+          )
+        },
         {
           path: PATH.MEMBER_MY_PAGE(),
           element: (
@@ -355,93 +390,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               <Pages.MemberDogInfoPage />
             </Suspense>
           )
-        }
-      ]
-    },
-    {
-      path: PATH.LOGIN,
-      element: (
-        <Suspense>
-          <Pages.LoginPage />
-        </Suspense>
-      )
-    },
-    {
-      path: PATH.SIGNUP,
-      element: <Pages.SignUpPage />
-    },
-    {
-      path: PATH.REDIRECT,
-      element: <Pages.RedirectPage />
-    },
-    {
-      path: "*",
-      element: <Pages.NotFoundPage />
-    },
-    {
-      path: PATH.ROOT,
-      element: <App />,
-      errorElement: <Pages.NotFoundPage />,
-      loader: () => {
-        if (!auth || (auth.role !== Role.ROLE_TEACHER && auth.role !== Role.ROLE_OWNER)) {
-          return redirect(PATH.LOGIN);
-        }
-        return null;
-      },
-      children: [
-        {
-          index: true,
-          element: (
-            <Suspense>
-              <Pages.HomePage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.POLICY,
-          element: (
-            <Suspense>
-              <Pages.PolicyPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.UNREGISTER,
-          element: (
-            <Suspense>
-              <Pages.UnregisterPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.UNREGISTER_SUCCESS,
-          element: (
-            <Suspense>
-              <Pages.UnregisterSuccessPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.SETTING,
-
-          children: [
-            {
-              path: PATH.SETTING,
-              element: (
-                <Suspense>
-                  <Pages.MemberDogInfoPage />
-                </Suspense>
-              )
-            }
-          ]
-        },
-        {
-          path: PATH.REDIRECT,
-          element: <Pages.RedirectPage />
-        },
-        {
-          path: "*",
-          element: <Pages.NotFoundPage />
         }
       ]
     }

@@ -1,7 +1,7 @@
 import { Role } from "../types/admin/admin.type";
 
-export function isTRole(role: unknown): role is Role {
-  return role === "ROLE_OWNER" || role === "ROLE_TEACHER";
+export function isAdmin(role: unknown): role is Role {
+  return role === Role.ROLE_TEACHER || role === Role.ROLE_OWNER;
 }
 
 export function isNumber(value: unknown): value is number {
