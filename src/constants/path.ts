@@ -42,6 +42,7 @@ const PRIVATE_PATH = {
   ADMIN_CARE: `/${ADMIN}/care`, // 오늘 관리할 강아지
   ADMIN_CARE_NOTICE: (dogId?: string) => `/${ADMIN}/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
   ADMIN_CARE_GALLERY: `/${ADMIN}/care/gallery`, // 오늘 관리할 강아지 사진앨범 전송
+  ADMIN_CARE_GALLERY_SELECT: `/${ADMIN}/care/gallery/select`,
   ADMIN_CARE_INFO: (dogId?: number) => `/${ADMIN}/care/${dogId ?? ":dogId"}`, // 오늘 관리할 강아지 상세정보
   ADMIN_CARE_INFO_GALLERY: (dogId?: number) => `/${ADMIN}/care/${dogId ?? ":dogId"}/gallery`, // 오늘 관리할 강아지 사진앨범 전송
   ADMIN_CHAT: `/${ADMIN}/chat`, // 채팅
@@ -86,7 +87,10 @@ const PUBLIC_PATH = {
   MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
     `/mypage/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
   MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
-  MEMBER_DOG_INFO_PAGE: "/dog-info"
+  MEMBER_DOG_INFO_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}`, // 강아지 상세정보
+  MEMBER_DOG_INFO_EDITE_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}/edite`, // 강아지 가입정보 수정
+  MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
+    `/dogInfo/${dogId ?? ":dogId"}/enrollment/detail` // 강아지 가입신청서 보기 (read only)
 };
 
 export const PATH = {
