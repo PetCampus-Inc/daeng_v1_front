@@ -1,13 +1,13 @@
-import CommentBox from "components/Admin/AttendCareGallery/CommentBox";
-import SendFileButton from "components/Admin/AttendCareGallery/SendFileButton";
-import UploadBox from "components/Admin/AttendCareGallery/UploadBox";
+import CommentBox from "components/Admin/AttendCare/AttendCareGallery/CommentBox";
+import SendFileButton from "components/Admin/AttendCare/AttendCareGallery/SendFileButton";
+import UploadBox from "components/Admin/AttendCare/AttendCareGallery/UploadBox";
 import Header from "components/common/Header";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
-import BasicModal from "../components/common/Modal/BasicModal";
+import BasicModal from "../../components/common/Modal/BasicModal";
 
 interface Props {
   type: "main" | "info";
@@ -38,7 +38,7 @@ const AttendCareGalleryPage = ({ type }: Props) => {
         <FormProvider {...methods}>
           <UploadBox />
           <CommentBox />
-          <SendFileButton />
+          <SendFileButton type={type} />
         </FormProvider>
       </PageContainer>
     </>
