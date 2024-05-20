@@ -15,7 +15,7 @@ const SignIn = () => {
     window.AppleID.auth.init({
       clientId: process.env.REACT_APP_APPLE_CLIENT_ID,
       scope: "name email",
-      redirectURI: `${process.env.REACT_APP_SERVER_DOMAIN}/login/oauth2/code/apple`,
+      redirectURI: process.env.REACT_APP_APPLE_REDIRECT_URI,
       state: uuidv4(),
       nonce: uuidv4(),
       usePopup: false
