@@ -6,8 +6,6 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { Nullable } from "types/helper.type";
 import { isProviderValid } from "utils/auth";
 
-import type { AppleLoginInfo } from "apis/auth.api";
-
 const RedirectPage = () => {
   const { provider } = useParams();
   const [searchParams] = useSearchParams();
@@ -52,9 +50,10 @@ const RedirectPage = () => {
       if (!token) {
         throw new Error("로그인에 필요한 토큰이 없습니다.");
       }
+
       localStorage.clear();
       localStorage.setItem("token", token);
-      window.location.replace(PATH.ADMIN_ATTENDANCE);
+      window.location.replace(PATH.ROOT);
     }
   }, [code, token, returnedState, loginMutate, provider]);
 
