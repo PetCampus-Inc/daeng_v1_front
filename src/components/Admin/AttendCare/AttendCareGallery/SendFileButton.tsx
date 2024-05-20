@@ -41,13 +41,16 @@ const SendFileButton = ({ type }: Props) => {
         showToast("업로드할 파일이 없습니다.", "ownerNav");
         return;
       }
+
+      if (!dogId) throw new Error("dogId is required");
+
       setTotalFiles(data.files.length);
 
       const params = {
         files: data.files,
         accept: ["image/*", "video/*"],
         path: "test_images/agenda",
-        dogIds: [Number(dogId)],
+        dogIds: [parseInt(dogId)],
         comment: data?.comment
       };
 
