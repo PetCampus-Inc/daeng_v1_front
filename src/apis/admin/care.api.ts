@@ -1,5 +1,11 @@
 import { request } from "libs/CustomAxios/request";
-import { ICareDogInfo, ICareDogProps, ICareTempSave, IPastAgenda, IReqGallery } from "types/admin/care.types";
+import {
+  ICareDogInfo,
+  ICareDogProps,
+  ICareTempSave,
+  IPastAgenda,
+  IReqGallery
+} from "types/admin/care.types";
 import { IResponse } from "types/helper.type";
 
 export const handleGetCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
