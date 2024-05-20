@@ -14,10 +14,10 @@ const GridAlbum = ({ mode }: IGridAlbumProps) => {
     },
     {
       "2024.04.01": [
-        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
-        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
-        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg",
-        "https://i.pinimg.com/736x/73/be/39/73be396c6ebfa53a14cf6f2282ebc001.jpg"
+        "https://i.pinimg.com/564x/5c/e2/c1/5ce2c1ca9f223453f573f4599e36aebd.jpg",
+        "https://i.pinimg.com/564x/25/69/d8/2569d89a06b4fb56cb66acb256ad8fca.jpg",
+        "https://i.pinimg.com/564x/44/27/b6/4427b695e48f110d6edb9d1d16754ded.jpg",
+        "https://i.pinimg.com/736x/9b/6c/d9/9b6cd98f361ea2bc9a729c3df5acfb3d.jpg"
       ]
     },
     {
@@ -52,7 +52,7 @@ const GridAlbum = ({ mode }: IGridAlbumProps) => {
           <S.GridAlbumContainer className="inner" key={index}>
             <S.TextContainer>
               <S.DateText>{date}</S.DateText>
-              <S.CountText>{`${pictures.length}장`}</S.CountText>
+              {mode === "view" && <S.CountText>{`${pictures.length}장`}</S.CountText>}
             </S.TextContainer>
             <S.GridPictures key={index}>
               {pictures.map((picture: string, index: number) => (

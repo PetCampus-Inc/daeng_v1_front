@@ -1,23 +1,54 @@
+import CircleSelectIcon from "assets/svg/circle-select-icon";
+import ZoomInIcon from "assets/svg/zoom-in-icon";
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+
 import * as S from "./styles";
 
-interface ISinglePictureProps {
+interface ISinglePictureProps extends React.InputHTMLAttributes<HTMLInputElement> {
   picture: string;
   mode: "view" | "edit";
 }
 
 const SinglePicture = ({ picture, mode }: ISinglePictureProps) => {
-  const handleTouch = () => {
-    if (mode === "edit") {
-      // 선택하기
-    } else if (mode === "view") {
-      // TODO: 확대 보기 열기
-    }
+  const [isChecked, setIsChecked] = useState(false);
+  const { register, watch, setValue } = useFormContext();
+
+  const isEditMode = mode === "edit";
+
+  const openZoomInModal = () => {
+    console.log("모달 열기");
   };
 
+  useEffect(() => {
+    setIsChecked(false);
+  }, [mode]);
+
   return (
-    <button onClick={handleTouch}>
-      <S.SinglePictureImg src={picture} />
-    </button>
+    <>
+      <S.SinglePictureInput
+        id={picture}
+        type="checkbox"
+        onClick={() => setIsChecked(!isChecked)}
+        disabled={!isEditMode}
+        checked={isChecked}
+        value={picture}
+        // {...register(name, { required: isRequired, onChange: handleTouch })}
+      />
+      <S.SinglePictureLabel htmlFor={picture}>
+        <S.SinglePictureImg src={picture} />
+        {isEditMode && (
+          <>
+            <S.CircleSelectIconWrapper>
+              <CircleSelectIcon isChosen={isChecked} />
+            </S.CircleSelectIconWrapper>
+            <S.ZoomInIconWrapper onClick={openZoomInModal}>
+              <ZoomInIcon />
+            </S.ZoomInIconWrapper>
+          </>
+        )}
+      </S.SinglePictureLabel>
+    </>
   );
 };
 
