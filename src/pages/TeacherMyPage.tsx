@@ -6,12 +6,11 @@ import TeacherProfile from "components/Admin/MyPage/TeacherProfile/index";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { Role } from "types/admin/admin.type";
 
 const TeacherMyPage = () => {
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
   const { data } = useGetTeacherInfo(adminId);
 
   return (

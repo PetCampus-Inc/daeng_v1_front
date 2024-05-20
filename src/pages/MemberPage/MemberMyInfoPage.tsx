@@ -14,7 +14,7 @@ const MemberMyInfoPage = () => {
       <Header
         type="edite"
         text="내프로필"
-        actionFn={() => navigate(PATH.MEMBER_MY_INFO_EDITE_PAGE(memberId))}
+        actionFn={() => navigate(PATH.MEMBER_MY_INFO_EDIT_PAGE(memberId))}
         transparent
       />
       <PageContainer pt="1" color="br_5">

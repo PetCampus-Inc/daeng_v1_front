@@ -60,7 +60,7 @@ const MemberEnrollmentFormDetailPage = () => {
   return (
     <>
       <Header type="text" text={`${memberName}의 가입신청서`} />
-      <Layout type="page" bg="BGray">
+      <Layout type="page" bg="BGray" pb={40}>
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -70,7 +70,7 @@ const MemberEnrollmentFormDetailPage = () => {
             <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
           </TopWrapper>
           <FormProvider {...methods}>
-            <ContentWrapper withNav>
+            <ContentWrapper>
               {currentStep === 0 && <MemberInfo item={requiredItemList} />}
               {currentStep === 1 && <DogInfo item={requiredItemList} />}
               {currentStep === 2 && (

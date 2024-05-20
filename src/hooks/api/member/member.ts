@@ -1,15 +1,21 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetSchoolInfo } from "apis/member/enrollment.api";
+import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
 import {
+  handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
-  handlePostMemberDogEnrollment
+  handlePostMemberDogDetailInfo,
+  handlePostMemberDogEnrollment,
+  handlePostMemoDogAlleray,
+  handlePostMemoDogPickdrop
 } from "apis/member/member.api";
-import { IMemberProfilePostInfo } from "types/member/home.types";
+import { useNavigate } from "react-router-dom";
+import { IMemberDogPostDetailInfo, IMemberProfilePostInfo } from "types/member/home.types";
+import showToast from "utils/showToast";
 
 // 견주 정보
 export const useGetMemberInfo = (memberId: string) => {
@@ -75,4 +81,77 @@ export const usePostMemberDogDelete = (memberId: string) => {
   });
 
   return memberDogDeletMutation.mutate;
+};
+
+// 강아지 상세 정보
+export const useGetMemberDogDetailnfo = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
+    queryFn: () => handleGetMemberDogDetailInfo(dogId)
+  });
+};
+
+// 강아지 가입신청서 보기 (read only)
+export const useGetMemberDogEnrollmemntInfo = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_DOG_ENROLLMENT_INFO(dogId),
+    queryFn: () => handleGetDogEnrollment(dogId)
+  });
+};
+
+// 강아지 상세 정보 수정
+export const usePostMemberDogDetailnfo = (dogId: number) => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const memberDogDetailnfoMutation = useMutation({
+    mutationFn: (data: IMemberDogPostDetailInfo) => handlePostMemberDogDetailInfo(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      navigate(-1);
+      setTimeout(() => {
+        showToast("수정이 완료되었습니다.", "bottom");
+      }, 100);
+    },
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return memberDogDetailnfoMutation.mutate;
+};
+
+// 강아지의 알러지/질병 내용 수정
+export const usePostMemberDogAlleray = (dogId: number) => {
+  const queryClient = useQueryClient();
+  const memberDogAllerayMutation = useMutation({
+    mutationFn: ({ dogId, memo }: { dogId: number; memo: string }) =>
+      handlePostMemoDogAlleray(dogId, memo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      showToast("수정이 완료되었습니다.", "bottom");
+    },
+    onError: () => {
+      showToast("메모 등록을 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return memberDogAllerayMutation.mutate;
+};
+
+// 강아지의 픽드랍 메모 수정
+export const usePostMemberDogPickdrop = (dogId: number) => {
+  const queryClient = useQueryClient();
+  const memberDogPickdropMutation = useMutation({
+    mutationFn: ({ dogId, memo }: { dogId: number; memo: string }) =>
+      handlePostMemoDogPickdrop(dogId, memo),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      showToast("수정이 완료되었습니다.", "bottom");
+    },
+    onError: () => {
+      showToast("메모 등록을 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return memberDogPickdropMutation.mutate;
 };

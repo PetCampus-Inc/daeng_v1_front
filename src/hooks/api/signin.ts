@@ -5,38 +5,20 @@ import { postAdminLogin } from "apis/admin/admin.api";
 import { postAppleLogin } from "apis/auth.api";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
+import { adminInfoState } from "store/admin";
 import { Role } from "types/admin/admin.type";
 
-interface LoginMutateProps {
-  provider: "kakao" | "google" | "apple";
-  code: string;
-}
-
 // 멤버 (소셜) 로그인 요청
-
 export const useLogInMutation = () => {
   const navigate = useNavigate();
-  const loginMutate = useMutation({
-    mutationFn: async (data: { provider: string; code: string }) => {
-      const { provider, code } = data;
-      switch (provider) {
-        case "apple":
-          return postAppleLogin(code);
-        case "kakao":
-        case "google":
-          return console.log("카카오, 구글 로그인 중...");
-        default:
-          throw new Error("Invalid provider");
-      }
-    },
+  const { mutate } = useMutation({
+    mutationFn: postAppleLogin,
     onSuccess: (res) => {
-      const { auth } = res.data;
-      localStorage.setItem("token", auth);
-      if (auth) {
-        navigate("/signup"); // 회원가입 페이지로 이동
+      if (res.authToken) {
+        localStorage.setItem("token", res.authToken);
+        navigate(PATH.HOME); // 홈 페이지로 이동
       } else {
-        navigate("/"); // 홈으로 이동
+        navigate(PATH.LOGIN); // 로그인 페이지로 이동
       }
     },
     onError: (err: Error) => {
@@ -46,13 +28,13 @@ export const useLogInMutation = () => {
     throwOnError: true
   });
 
-  return loginMutate.mutate;
+  return { loginMutate: mutate };
 };
 
 // 관리자 로그인 요청
 export const useAdminLogin = () => {
   const navigate = useNavigate();
-  const setLoginInfo = useSetRecoilState(adminLoginInfoAtom);
+  const setLoginInfo = useSetRecoilState(adminInfoState);
   const { mutate } = useMutation({
     mutationFn: postAdminLogin,
     onSuccess: (res) => {
