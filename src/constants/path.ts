@@ -86,7 +86,10 @@ const PUBLIC_PATH = {
   MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
     `/mypage/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
   MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
-  MEMBER_DOG_INFO_PAGE: "/dog-info"
+  MEMBER_DOG_INFO_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}`, // 강아지 상세정보
+  MEMBER_DOG_INFO_EDITE_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}/edite`, // 강아지 가입정보 수정
+  MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
+    `/dogInfo/${dogId ?? ":dogId"}/enrollment/detail` // 강아지 가입신청서 보기 (read only)
 };
 
 export const PATH = {
