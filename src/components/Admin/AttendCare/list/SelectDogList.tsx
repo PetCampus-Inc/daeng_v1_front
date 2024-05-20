@@ -2,20 +2,20 @@ import { useContext } from "react";
 import { ICareDogInfo } from "types/admin/care.types";
 
 import { MainDogGrid } from "./styles";
-import DeleteDogCard from "../card/DeleteDogCard";
+import SelectDogCard from "../card/SelectDogCard";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
-interface DeleteDogListProps {
+interface Props {
   data: ICareDogInfo[];
 }
 
-const DeleteDogList = ({ data }: DeleteDogListProps) => {
+const SelectDogList = ({ data }: Props) => {
   const selectIdsContext = useContext(SelectedIdsContext);
 
   return (
     <MainDogGrid>
       {data.map((item) => (
-        <DeleteDogCard
+        <SelectDogCard
           key={item.attendanceId}
           dogId={item.dogId}
           dogName={item.dogName}
@@ -28,4 +28,4 @@ const DeleteDogList = ({ data }: DeleteDogListProps) => {
   );
 };
 
-export default DeleteDogList;
+export default SelectDogList;
