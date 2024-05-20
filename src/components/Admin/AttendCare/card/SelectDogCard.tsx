@@ -5,21 +5,22 @@ import { ICareDogInfo } from "types/admin/care.types";
 
 import { CardCheckboxWrapper, CardContainer, ListItemImg } from "./styles";
 
-type AttendanceData = Pick<ICareDogInfo, "dogId" | "dogName" | "attendanceId">;
+type AttendanceData = Pick<ICareDogInfo, "dogId" | "dogName">;
 
 interface Props extends AttendanceData {
+  selectId: number;
   isChecked?: boolean;
   toggleId?: (id: number) => void;
 }
 
-const SelectDogCard = memo(({ dogId, dogName, attendanceId, isChecked, toggleId }: Props) => {
+const SelectDogCard = memo(({ dogId, dogName, selectId, isChecked, toggleId }: Props) => {
   return (
     <CardContainer as="label" key={dogId}>
       <CardCheckboxWrapper>
         <Checkbox
           id={dogId.toString()}
           isChecked={isChecked}
-          onChange={() => toggleId && toggleId(attendanceId)}
+          onChange={() => toggleId && toggleId(selectId)}
         />
       </CardCheckboxWrapper>
       <ListItemImg size="sm">

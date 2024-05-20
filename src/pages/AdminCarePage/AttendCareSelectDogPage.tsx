@@ -20,7 +20,7 @@ const AttendCareSelectDogPage = () => {
     <>
       <Header type="text" text="사진 전송" />
       <PageContainer color="BGray" pt="2">
-        <SelectedIdsProvider>
+        <SelectedIdsProvider idKey="dogId">
           <Flex justify="space-between" align="center">
             <Text as="h2" typo="body2_16_B" color="darkBlack">
               전송할 강아지 선택
@@ -28,7 +28,7 @@ const AttendCareSelectDogPage = () => {
             <AllSelectButton data={data} />
           </Flex>
           <Box as="section" marginBlock="24">
-            <SelectDogList data={data} />
+            <SelectDogList data={data} type={"select"} />
           </Box>
           <SubmitButton />
         </SelectedIdsProvider>
