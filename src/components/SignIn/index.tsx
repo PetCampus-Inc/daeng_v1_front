@@ -4,12 +4,25 @@ import { PATH } from "constants/path";
 import { Box, Flex, Layout, Text } from "components/common";
 import { memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 import { ButtonWrapper, StyledButton, StyledImage, StyledText } from "./styles";
 
-// **소셜 로그인 구현 필요**
 const SignIn = () => {
   const navigate = useNavigate();
+
+  const AppleLogin = () => {
+    window.AppleID.auth.init({
+      clientId: process.env.REACT_APP_APPLE_CLIENT_ID,
+      scope: "name email",
+      redirectURI: `${process.env.REACT_APP_SERVER_DOMAIN}/login/oauth2/code/apple`,
+      state: uuidv4(),
+      nonce: uuidv4(),
+      usePopup: false
+    });
+
+    window.AppleID.auth.signIn();
+  };
 
   return (
     <Layout type="page" pt={76}>
@@ -21,9 +34,7 @@ const SignIn = () => {
         <StyledButton
           type="button"
           aria-label="카카오로 계속하기"
-          onClick={() => {
-            window.location.href = KAKAO_API_URL;
-          }}
+          onClick={() => (window.location.href = KAKAO_API_URL)}
           bg="#FEE500"
         >
           <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
@@ -34,9 +45,7 @@ const SignIn = () => {
         <StyledButton
           type="button"
           aria-label="구글로 계속하기"
-          onClick={() => {
-            window.location.href = GOOGLE_API_URL;
-          }}
+          onClick={() => (window.location.href = GOOGLE_API_URL)}
           bg="white"
           borderColor="#CCCCCC"
         >
@@ -49,7 +58,7 @@ const SignIn = () => {
         <StyledButton
           type="button"
           aria-label="Apple로 로그인"
-          onClick={() => navigate(PATH.SIGNUP)}
+          onClick={AppleLogin}
           bg="black"
           borderColor="black"
         >
