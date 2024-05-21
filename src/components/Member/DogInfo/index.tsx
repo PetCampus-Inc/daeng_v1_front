@@ -23,7 +23,7 @@ import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
-import { StyledThumbList } from "../../Admin/AttendCareGallery/upload";
+import { StyledThumbList } from "../../Admin/AttendCare/AttendCareGallery/upload";
 
 interface IProps {
   dogId: number;

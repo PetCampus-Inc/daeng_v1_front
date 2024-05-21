@@ -98,7 +98,16 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               // 강아지 관리 메인 사진 앨범 전송
               path: PATH.ADMIN_CARE_GALLERY,
-              element: <Pages.AttendCareGallery type="main" />
+              children: [
+                {
+                  index: true,
+                  element: <Pages.AttendCareGallery type="main" />
+                },
+                {
+                  path: "select",
+                  element: <Pages.AttendCareSelectDog />
+                }
+              ]
             },
             {
               path: PATH.ADMIN_CARE_INFO(),

@@ -42,6 +42,7 @@ const PRIVATE_PATH = {
   ADMIN_CARE: `/${ADMIN}/care`, // 오늘 관리할 강아지
   ADMIN_CARE_NOTICE: (dogId?: string) => `/${ADMIN}/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
   ADMIN_CARE_GALLERY: `/${ADMIN}/care/gallery`, // 오늘 관리할 강아지 사진앨범 전송
+  ADMIN_CARE_GALLERY_SELECT: `/${ADMIN}/care/gallery/select`,
   ADMIN_CARE_INFO: (dogId?: number) => `/${ADMIN}/care/${dogId ?? ":dogId"}`, // 오늘 관리할 강아지 상세정보
   ADMIN_CARE_INFO_GALLERY: (dogId?: number) => `/${ADMIN}/care/${dogId ?? ":dogId"}/gallery`, // 오늘 관리할 강아지 사진앨범 전송
   ADMIN_CHAT: `/${ADMIN}/chat`, // 채팅
