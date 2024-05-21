@@ -13,7 +13,7 @@ export interface ITicket {
   currentRoundTicket: number;
   monthlyTicketNumber: number;
   ticketStartDate: number[];
-  ticketExpirationDate: string[];
+  ticketExpirationDate: number[] | null;
   attendanceDays: string[];
   ticketHistory: string[];
 }

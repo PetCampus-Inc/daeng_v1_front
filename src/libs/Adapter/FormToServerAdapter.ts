@@ -4,7 +4,7 @@ import { extractNumber, extractTicketValues, formatDate, reverseMapValue } from 
 import { isNumber } from "utils/typeGuard";
 
 import type { FieldValues } from "react-hook-form";
-import type { IRequestAdminEnrollment, TPickDropState } from "types/admin/enrollment.types";
+import type { AdminFormSaveType, TPickDropState } from "types/admin/enrollment.types";
 import type {
   IRequestEnrollment,
   TPickDropRequest,
@@ -127,10 +127,10 @@ export class AdminFormToServerAdapter {
     return extractTicketValues(this.value.monthlyTicketNumber);
   }
 
-  adapt(): IRequestAdminEnrollment {
+  adapt(): AdminFormSaveType {
     return {
-      schoolId: 3,
-      adminId: 2,
+      schoolId: this.value.schoolId,
+      adminId: this.value.adminId,
       formName: null,
       openDays: this.value.openDays || [],
       priceInfo: this.value.priceInfo || "",

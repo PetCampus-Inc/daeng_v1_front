@@ -18,6 +18,7 @@ export const Input = styled.input<InputFieldStyleProps>`
   align-items: center;
 
   color: ${({ theme }) => theme.colors.gray_1};
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
 
   ${({ css }) => css || defaultStyles};
@@ -115,6 +116,19 @@ export const StyledInputButton = styled.button`
   &:disabled > svg {
     color: ${({ theme }) => theme.colors.gray_4};
   }
+`;
+
+export const StyledInputSuffix = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme }) => theme.typo.label2_14_R}
 `;
 
 export const StyledButtonWrapper = styled.div`

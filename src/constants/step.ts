@@ -1,4 +1,4 @@
-import { TPickDropState } from "types/member/enrollment.types";
+import { TPickDropRequest, TPickDropState } from "types/member/enrollment.types";
 
 export const MEMBER_ENROLL_STEP = [
   {
@@ -57,6 +57,39 @@ export const MEMBER_DOG_ADD_ENROLL_STEP = [
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
     indicator: "픽드랍",
     isVisible: (status: TPickDropState) => status === "RUNNING"
+  }
+];
+
+export const MEMBER_DOG_INFO_ENROLL_STEP = [
+  {
+    title: "견주에게 받을 정보들이에요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "견주 정보",
+    isVisible: () => true
+  },
+  {
+    title: "반려견에 대해 받을 정보들이에요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "반려견 정보",
+    isVisible: () => true
+  },
+  {
+    title: "유치원 이용 형태를 선택해 주세요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "이용권",
+    isVisible: () => true
+  },
+  {
+    title: "견주에게 안내할 유의사항들이에요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "유의사항",
+    isVisible: () => true
+  },
+  {
+    title: "픽드랍 정보를 입력해 주세요",
+    subtitle: "견주가 볼 가입신청서 화면이에요",
+    indicator: "픽드랍",
+    isVisible: (status: TPickDropRequest) => status === "REQUEST"
   }
 ];
 
@@ -167,19 +200,3 @@ export const ADMIN_DOG_DETAIL_INFO_STEP = [
 ] as const;
 
 export const MEMBER_DOG_INFO_STEP = ["강아지 정보", "유치원 정보", "출결 및 이용권"] as const;
-
-export const SIGN_UP_STEP = {
-  유치원_검색: "search_school" as const,
-  가입신청서_작성: "enrollment_form" as const,
-  승인상태: "registration_status" as const
-};
-
-export const ADMIN_SIGN_UP_STEP = {
-  역할_선택: "select_role" as const,
-  유치원_검색: "search_school" as const,
-  유치원_등록: "enroll_school" as const,
-  회원정보_입력: "personal_info" as const,
-  계정설정: "account_setup" as const,
-  승인상태: "approval_status" as const,
-  유치원_등록완료: "school_enrollment_complete" as const
-};

@@ -22,14 +22,6 @@ type RouteFunnelProps<Steps extends NonEmptyArray<string>> = Omit<
   "steps" | "step"
 >;
 
-export interface UseFunnelReturn<Steps extends NonEmptyArray<string>, State> {
-  FunnelComponent: FunnelComponent<Steps>;
-  setStep: (step: Steps[number], options?: SetStepOptions) => void;
-  withState: <S extends Partial<State>>(
-    initialState: S
-  ) => readonly [FunnelComponent<Steps>, S, (next: Partial<S> | ((next: Partial<S>) => S)) => void];
-}
-
 const DEFAULT_STEP_QUERY_KEY = "funnel-step";
 
 export const useFunnel = <Steps extends NonEmptyArray<string>>(
@@ -53,11 +45,21 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
 } => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const stepQueryKey = options?.stepQueryKey ?? DEFAULT_STEP_QUERY_KEY;
 
   if (steps.length === 0) {
     throw new Error("steps가 비어있습니다.");
   }
+
+  // 초기 스텝 쿼리 파라미터 설정
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (!queryParams.has(stepQueryKey) && options?.initialStep) {
+      queryParams.set(stepQueryKey, options.initialStep);
+      navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true });
+    }
+  }, [navigate, location, stepQueryKey, options?.initialStep]);
 
   const FunnelComponent = useMemo(
     () =>

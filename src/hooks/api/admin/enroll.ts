@@ -1,3 +1,5 @@
+import { type AgreementsListType } from "constants/item";
+import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
@@ -9,33 +11,35 @@ import {
   MemberFormAdapter,
   ReadModeAdapter
 } from "libs/Adapter/ServerToFormAdapter";
+import { useNavigate } from "react-router-dom";
+import showToast from "utils/showToast";
 
 import type {
-  IMemberForm,
-  IRequestAdminEnrollment,
+  MemberFormData,
+  AdminFormInfo,
   IResponseAdminForm,
   TPickDropState
 } from "types/admin/enrollment.types";
 
 export type MemberFormAdaptedData = Omit<
-  IMemberForm,
-  "pickDropState" | "requiredItemList" | "roundTicketNumber" | "monthlyTicketNumber" | "agreements"
+  MemberFormData,
+  "pickDropState" | "requiredItemList" | "agreements"
 > & {
   pickDropState: TPickDropState;
   requiredItemList: Map<number, boolean>;
-  roundTicketNumber: number;
-  monthlyTicketNumber: number;
-  agreements: { [key: number]: boolean };
+  agreements: AgreementsListType;
+  openDays: string[];
+  roundTicketNumber: number[];
+  monthlyTicketNumber: number[];
 };
 
-// 대기 목록 가입신청서 조회
-// FIXME: 타입 수정 필요함!!!!!!
+// 견주 가입신청서 조회
 export const useGetMemberEnrollment = (formId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_ENROLLMENT(formId),
     queryFn: () => handleGetMemberEnrollmentForm(formId),
     select: (data) =>
-      Adapter.from(data).to<IMemberForm, MemberFormAdaptedData>((item) => {
+      Adapter.from(data).to<MemberFormData, MemberFormAdaptedData>((item) => {
         const adapterInstance = new MemberFormAdapter(item);
         return adapterInstance.adapt();
       })
@@ -82,8 +86,13 @@ export const useAdminEnrollment = (formId: string, mode: Mode) => {
 
 // 원장 가입신청서 저장
 export const useCreateAdminEnrollment = () => {
+  const navigate = useNavigate();
   const mutateForm = useMutation({
-    mutationFn: (enrollmentData: IRequestAdminEnrollment) => handlePostAdminForm(enrollmentData),
+    mutationFn: (enrollmentData: AdminFormInfo) => handlePostAdminForm(enrollmentData),
+    onSuccess: () => {
+      navigate(PATH.ADMIN_ENROLLMENT);
+      showToast("가입신청서 등록이 완료되었습니다", "bottom");
+    },
     throwOnError: true
   });
 

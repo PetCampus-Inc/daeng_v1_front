@@ -2,10 +2,14 @@ import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
 import { IMemberSchoolInfo } from "types/member/school.types";
 
-import type { IRequestAdminEnrollment, IResponseAdminForm } from "types/admin/enrollment.types";
+import type { AdminFormInfo, IResponseAdminForm } from "types/admin/enrollment.types";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
 import type { IResponse } from "types/helper.type";
-import type { IResponseEnrollment, IRequestEnrollment } from "types/member/enrollment.types";
+import type {
+  IResponseEnrollment,
+  IRequestEnrollment,
+  IDogEnrollmentInfo
+} from "types/member/enrollment.types";
 
 export interface IEnrollmentProps {
   memberId: string;
@@ -83,7 +87,7 @@ export const handlePostEnrollment = async (requestProps: IRequestEnrollment): Pr
   return data.data;
 };
 
-export const handlePostAdminForm = async (requestProps: IRequestAdminEnrollment): Promise<void> => {
+export const handlePostAdminForm = async (requestProps: AdminFormInfo): Promise<void> => {
   const url = `school/form`;
   const { data } = await customAxios.post(url, {
     ...requestProps
@@ -111,6 +115,13 @@ export const handlePostMemberDogSchool = async (dogId: string): Promise<void> =>
 
 export const handleGetSearchResult = async (searchText: string): Promise<ISchoolInfo[]> => {
   const url = `school/search?searchText=${searchText}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
+// 강아지 가입 신청서 보기
+export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
+  const url = `member/dog/enrollment?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data.data;
 };

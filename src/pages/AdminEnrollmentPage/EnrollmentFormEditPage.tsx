@@ -18,6 +18,7 @@ import {
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
+import { Layout } from "components/common";
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import { useAdminEnrollment } from "hooks/api/admin/enroll";
@@ -25,12 +26,18 @@ import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
-const EnrollmentFormEditPage = () => {
+import type { AdminFormSaveType } from "types/admin/enrollment.types";
+
+interface EnrollmentFormEditProps {
+  onNextStep?: (formInfo: AdminFormSaveType) => void;
+}
+
+const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
   const { formId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
+
   if (!formId) throw new Error("잘못된 formId 입니다");
 
   const { data, isLoading } = useAdminEnrollment(formId, "EDIT");
@@ -60,7 +67,7 @@ const EnrollmentFormEditPage = () => {
   return (
     <>
       <Header type="text" text="가입신청서 수정" handleClick={openPreventLeavePopup} />
-      <PageContainer color="BGray">
+      <Layout type="page" bg="BGray">
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -89,11 +96,11 @@ const EnrollmentFormEditPage = () => {
             </ContentWrapper>
             <ButtonContainer>
               <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
-              <SubmitButton type="EDIT" />
+              <SubmitButton type="EDIT" onNextStep={onNextStep} />
             </ButtonContainer>
           </FormProvider>
         </Container>
-      </PageContainer>
+      </Layout>
     </>
   );
 };

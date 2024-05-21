@@ -1,6 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { PropsWithChildren, RefObject, memo, useRef } from "react";
+import { bottomSheetAnimationVariants, dimmerAnimationVariants } from "styles/animation";
 
 import BottomSheetButton from "./BottomSheetButton";
 import BottomSheetContent from "./BottomSheetContent";
@@ -32,43 +33,27 @@ const BottomSheetBase = ({ children, isOpen, close }: PropsWithChildren<IBottomS
     onClickOutside: close
   });
 
-  const backdropVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  };
-
-  const BottomSheetVariants = {
-    hidden: { y: "80%" },
-    exist: { y: "100%" },
-    visible: { y: 0 }
-  };
-
-  const transition = {
-    type: "spring",
-    damping: 45,
-    stiffness: 650,
-    duration: 0.1,
-    overshootClamping: true
-  };
-
   return (
     <AnimatePresence mode="wait">
       {isOpen && (
         <BottomSheetProvider onClose={close}>
           <Container>
             <BackDrop
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={backdropVariants}
-              transition={{ duration: 0.15 }}
+              key="dimmer"
+              initial="initial"
+              animate="animate"
+              exit="initial"
+              variants={dimmerAnimationVariants}
+              aria-hidden="true"
             />
             <StyledBottomSheet
-              initial="hidden"
-              animate="visible"
-              exit="exist"
-              variants={BottomSheetVariants}
-              transition={transition}
+              role="dialog"
+              tabIndex={-1}
+              key="bottom-sheet"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={bottomSheetAnimationVariants}
               ref={bottomSheetRef}
             >
               {children}

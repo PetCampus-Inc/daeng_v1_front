@@ -1,5 +1,4 @@
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 import AddDogSubmitButton from "./button/AddDogSubmitButton";
 import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
@@ -8,7 +7,7 @@ import AddDogList from "./list/AddDogList";
 import { ListWrapper, SubTitle, Title } from "./styles";
 
 const AttendCareInit = () => {
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
 
   return (
     <SelectedDogsProvider>

@@ -1,4 +1,5 @@
 import { Nullable } from "types/helper.type";
+import { IResponse } from "types/Response.type";
 
 export type TPickDropState = "RUNNING" | "NOT_RUNNING";
 export type TPickDropRequest = "REQUEST" | "NOT_REQUEST";
@@ -55,4 +56,55 @@ export interface IRequestEnrollment extends Omit<TMemberDto, "title"> {
   pickDropType: string;
   pickDropMemo: string;
   agreementList: number[];
+}
+
+export interface ISchoolFormResponse {
+  schoolFormId: number;
+  schoolFormName: string;
+  requiredItemList: Map<number, boolean>;
+  priceInfo: string;
+  ticketType: string[];
+  roundTicketNumber: number[];
+  openDays: string[];
+  monthlyTicketNumber: number[];
+  ticketInfo: string;
+  limitsInfo: string;
+  accidentInfo: string;
+  abandonmentInfo: string;
+  pickDropState: TPickDropState;
+  pickDropNotice: string;
+  pickDropInfo: string;
+  member: TMemberDto;
+}
+
+// 강아지 가입 신청서
+export interface IDogEnrollmentInfo extends IResponse {
+  enrollmentFormId: number;
+  memberId: number;
+  memberName: string;
+  memberGender: string;
+  address: string;
+  addressDetail?: string;
+  phoneNumber: string;
+  emergencyPhoneNumber?: string;
+  dogName: string;
+  dogGender: string;
+  dogSize: string;
+  breedId: number;
+  breedName: string;
+  newBreed: string;
+  dogBirthDate: string[];
+  neutralization: string;
+  allergyDisease?: string;
+  vaccination: string;
+  vaccinationUri?: string[];
+  enrollmentTicketType: string;
+  enrollmentRoundTicketNumber: number;
+  enrollmentMonthlyTicketNumber: number;
+  attendanceDays: string[]; // MEMO API 명세서엔 string으로 되어있음
+  pickDropRequest: TPickDropRequest;
+  pickDropType: string;
+  pickDropMemo: string;
+  agreements: number[];
+  schoolFormResponse: ISchoolFormResponse;
 }
