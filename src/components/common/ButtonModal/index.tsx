@@ -1,5 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { PropsWithChildren, memo } from "react";
+import { dimmerAnimationVariants } from "styles/animation";
 
 import ModalButton from "./ModalButton";
 import ModalContent from "./ModalContent";
@@ -26,11 +27,6 @@ const BaseButtonModal = ({
   close,
   className
 }: PropsWithChildren<IModalProps>) => {
-  const backdropVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  };
-
   const modalVariants = {
     initial: { y: "-50%", x: "-50%", opacity: 0.5 },
     hidden: { y: "-50%", x: "-50%", opacity: 0 },
@@ -43,11 +39,12 @@ const BaseButtonModal = ({
         {isOpen && (
           <ModalProvider onClose={close}>
             <BackDrop
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={backdropVariants}
-              transition={{ duration: 0.2 }}
+              key="dimmer"
+              initial="initial"
+              animate="animate"
+              exit="initial"
+              variants={dimmerAnimationVariants}
+              aria-hidden="true"
             />
             <StyledModal
               initial="initial"
