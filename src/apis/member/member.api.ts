@@ -136,3 +136,13 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
   });
   return data;
 };
+
+export const handleGetMemberDogSchool = async (dogId: Request): Promise<IMemberDogInfo> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      dogId
+    }
+  });
+  return data.data;
+};

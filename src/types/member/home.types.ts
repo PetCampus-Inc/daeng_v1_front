@@ -110,3 +110,7 @@ export interface IMemberDogInfo extends IResponse {
   member: IMemberProfilePostInfo;
   dogMemo: string;
 }
+
+export interface IMemberDogInfo {
+  dogId: number;
+}
