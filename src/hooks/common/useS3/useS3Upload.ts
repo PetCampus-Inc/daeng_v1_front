@@ -1,5 +1,7 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { useMemo, useCallback } from "react";
+import { S3Client } from "@aws-sdk/client-s3";
+import { Upload } from "@aws-sdk/lib-storage";
+import { XhrHttpHandler } from "@aws-sdk/xhr-http-handler";
+import { useCallback, useMemo, useState } from "react";
 import { v1 as uuidv1 } from "uuid";
 
 import { s3ClientConfig, bucketName } from "./config";
@@ -12,69 +14,79 @@ interface UploadToS3Props {
   path: string;
 }
 
-function useS3Upload<
+interface UseS3UploadReturn<TData, TError, TVariables> {
+  uploadToS3: UploadToS3Function<TData, TError, TVariables>;
+  progress: number;
+  uploaded: number;
+  isLoading: boolean;
+}
+
+export function useS3Upload<
   TData = string[],
   TError = Error,
   TVariables extends UploadToS3Props = UploadToS3Props
->(): {
-  uploadToS3: UploadToS3Function<TData, TError, TVariables>;
-} {
-  const s3Client = useMemo(() => new S3Client(s3ClientConfig), []);
+>(): UseS3UploadReturn<TData, TError, TVariables> {
+  const s3Client = useMemo(
+    () => new S3Client({ requestHandler: new XhrHttpHandler({}), ...s3ClientConfig }),
+    []
+  );
+  const [progress, setProgress] = useState(0); // 업로드 진행률
+  const [uploaded, setUploaded] = useState(0); // 파일 업로드 수
+  const [isLoading, setIsLoading] = useState(false); // 업로드 진행 중 상태
+
   const uploadToS3 = useCallback(
-    async (
-      variables: TVariables,
-      options?: MutateOptions<TData, TError, TVariables>
-    ): Promise<TData | void> => {
-      if (!variables.files) {
-        const error = new Error("No files to upload.") as TError;
-        if (options?.onError) {
-          options.onError(error, variables);
-          return;
-        }
-        throw error;
+    async (variables: TVariables, options?: MutateOptions<TData, TError, TVariables>) => {
+      const { files, path } = variables;
+      if (!files || files.length === 0) {
+        throw new Error("No files to upload.");
       }
 
-      const acceptedTypes = Array.isArray(variables.accept) ? variables.accept : [variables.accept];
-      const fileTypeRegex = acceptedTypes
-        .filter((type) => type !== undefined)
-        .map((type) => type && new RegExp(type.replace("*", ".*")));
+      const urls: string[] = [];
+      setUploaded(0);
+      setIsLoading(true);
 
-      try {
-        const urls: string[] = await Promise.all(
-          Array.from(variables.files).map(async (file) => {
-            if (!fileTypeRegex.some((regex) => regex && regex.test(file.type))) {
-              throw new Error(`Unsupported file type: ${file.type}`);
-            }
-            const objectKey = `${variables.path}/${uuidv1().replace(/-/g, "")}.${file.type.split("/")[1]}`;
-            const command = new PutObjectCommand({
-              Bucket: bucketName,
-              Key: objectKey,
-              Body: file,
-              ContentType: file.type
-            });
-            await s3Client.send(command);
-            return `https://${bucketName}.s3.amazonaws.com/${objectKey}`;
-          })
-        );
+      for (const file of Array.from(files)) {
+        setProgress(0);
 
+        const key = `${path}/${uuidv1().replace(/-/g, "")}.${file.type.split("/")[1]}`;
+
+        const uploader = new Upload({
+          client: s3Client,
+          params: {
+            Bucket: bucketName,
+            Key: key,
+            Body: file
+          },
+          partSize: 5 * 1024 * 1024, // 5 MB
+          leavePartsOnError: false // 실패 시 파트 삭제 여부
+        });
+
+        uploader.on("httpUploadProgress", ({ loaded = 0, total = 0 }) => {
+          const currentProgress = Math.floor((loaded / total) * 100);
+          setProgress(currentProgress);
+        });
+
+        try {
+          await uploader.done();
+          urls.push(`https://${bucketName}.s3.amazonaws.com/${key}`);
+          setUploaded((prev) => prev + 1);
+          setIsLoading(false);
+        } catch (error) {
+          if (options?.onError) {
+            options.onError(error as TError, variables);
+          } else {
+            throw error;
+          }
+        }
+      }
+
+      if (urls.length > 0) {
         options?.onSuccess?.(urls as TData, variables);
         options?.onSettled?.(urls as TData, null, variables);
-        return urls as TData;
-      } catch (err) {
-        const error = err instanceof Error ? err : (new Error(String(err)) as TError);
-        if (options?.onError) {
-          options.onError(error as TError, variables);
-          options?.onSettled?.(undefined, error as TError, variables);
-          return;
-        }
-        options?.onSettled?.(undefined, error as TError, variables);
-        throw error;
       }
     },
     [s3Client]
   );
 
-  return { uploadToS3 };
+  return { uploadToS3, progress, uploaded, isLoading };
 }
-
-export { useS3Upload };
