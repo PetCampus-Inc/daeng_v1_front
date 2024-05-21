@@ -5,7 +5,8 @@ import {
   IMemberProfilePostInfo,
   IMainAlbum,
   IMemberDogInfo,
-  IMemberDogPostDetailInfo
+  IMemberDogPostDetailInfo,
+  IMemberDogSchoolInfo
 } from "types/member/home.types";
 import { IResponse } from "types/Response.type";
 
@@ -137,12 +138,24 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
   return data;
 };
 
-export const handleGetMemberDogSchool = async (dogId: Request): Promise<IMemberDogInfo> => {
-  const url = `member/dog/school?dogId=${dogId}`;
+// 강아지 유치원 정보
+export const handleGetMemberDogSchool = async (dogId: Request): Promise<IMemberDogSchoolInfo> => {
+  const url = `member/dog/school`;
   const { data } = await customAxios.get(url, {
     params: {
       dogId
     }
   });
-  return data.data;
+  return data.data.school;
+};
+
+// 강아지 유의사항 동의 정보
+export const handleGetMemberDogAgreements = async (dogId: Request): Promise<IMemberDogInfo> => {
+  const url = `member/dog/school`;
+  const { data } = await customAxios.get(url, {
+    params: {
+      dogId
+    }
+  });
+  return data.data.precaution;
 };

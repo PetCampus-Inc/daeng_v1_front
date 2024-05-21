@@ -111,6 +111,13 @@ export interface IMemberDogInfo extends IResponse {
   dogMemo: string;
 }
 
-export interface IMemberDogInfo {
-  dogId: number;
+export interface IMemberDogSchoolInfo extends IResponse {
+  schoolId: number;
+  name: string;
+  phoneNumber: string;
+  address: string;
+}
+
+export interface IMemberDogSchoolAgreements extends IResponse {
+  agreements: [];
 }
