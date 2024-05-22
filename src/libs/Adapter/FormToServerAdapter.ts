@@ -52,11 +52,11 @@ export class MemberFormToServerAdapter {
 
   get agreementList() {
     const item = {
-      ticketInfo: this.value?.ticketInfo_agreement,
-      limitsInfo: this.value?.limitsInfo_agreement,
-      accidentInfo: this.value?.accidentInfo_agreement,
-      abandonmentInfo: this.value?.abandonmentInfo_agreement,
-      pickDropInfo: this.value?.pickDropInfo_agreement
+      ticketInfo_agreement: this.value?.ticketInfo_agreement,
+      limitsInfo_agreement: this.value?.limitsInfo_agreement,
+      accidentInfo_agreement: this.value?.accidentInfo_agreement,
+      abandonmentInfo_agreement: this.value?.abandonmentInfo_agreement,
+      pickDropInfo_agreement: this.value?.pickDropInfo_agreement
     };
 
     return Object.entries(item)
