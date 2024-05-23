@@ -2,11 +2,12 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
 import { useGetSchoolInfoList } from "hooks/api/member/school";
+import useMemberRejected from "hooks/api/member/useMemberRejected";
 import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 
-import RejectedCard from "./RejectedCard";
 import * as S from "./styles";
 
 interface IWaitingCardProps {
@@ -58,7 +59,6 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
           <DogWaitingIcon />
         </S.BgIconBox>
       </S.WaitingCard>
-      {/* <RejectedCard dogName={dogName} registeredDate={registeredTime} /> */}
     </>
   );
 };
