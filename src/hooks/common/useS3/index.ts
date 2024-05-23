@@ -1,3 +1,2 @@
-export * from "./useS3Download";
-export * from "./useS3Upload";
-export * from "./useMulterS3Upload";
+export * from "./use-file-download";
+export * from "./use-s3-upload";
