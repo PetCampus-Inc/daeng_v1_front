@@ -2,10 +2,8 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
 import { useGetSchoolInfoList } from "hooks/api/member/school";
-import useMemberRejected from "hooks/api/member/useMemberRejected";
 import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
-import { useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
