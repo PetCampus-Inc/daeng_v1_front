@@ -1,9 +1,13 @@
+import useMemberRejected from "hooks/api/member/useMemberRejected";
 import { useToggle } from "hooks/common/useToggle";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { IMemberInfo } from "types/member/home.types";
 
 import * as S from "./styles";
 import AddMyDogCard from "../Cards/AddMyDogCard";
 import MyDogCard from "../Cards/MyDogCard";
+import RejectedCard from "../Cards/RejectedCard";
 import WaitingCard from "../Cards/WaitingCard";
 
 interface MemberInfoProps {
@@ -11,7 +15,35 @@ interface MemberInfoProps {
 }
 
 const MyDogInfo = ({ data }: MemberInfoProps) => {
+  const { pathname } = useLocation();
   const { isOpen, toggle } = useToggle();
+  const {
+    rejectedDogs,
+    IS_REJECTED,
+    VISIT_PATH_NAME,
+    updataStoragePendingDogs,
+    removeStorageDatas,
+    getPendingDogs,
+    getRejectedDogs,
+    STORAGE_KEY
+  } = useMemberRejected();
+
+  useEffect(() => {
+    updataStoragePendingDogs(); // storage data update
+    getPendingDogs({ data }); // pending data
+    getRejectedDogs({ data }); // rejected data
+  }, [data]);
+
+  useEffect(() => {
+    // 첫 방문시 mypage path localStorage에 저장
+    if (IS_REJECTED === "true" && !VISIT_PATH_NAME) {
+      localStorage.setItem(STORAGE_KEY.VISIT_PATH_NAME, pathname);
+    }
+    // VISIT_PATH_NAME, IS_REJECTED 둘다 있다면 삭제
+    if (VISIT_PATH_NAME && IS_REJECTED) {
+      removeStorageDatas();
+    }
+  }, [IS_REJECTED]);
 
   const settings = {
     dots: false,
@@ -54,6 +86,12 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               {item.status === "APPROVAL_PENDING" && (
                 <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
               )}
+              {IS_REJECTED &&
+                JSON.parse(IS_REJECTED) &&
+                rejectedDogs &&
+                rejectedDogs.map((el: { dogName: string; registeredDate: number[] }) => (
+                  <RejectedCard dogName={el.dogName} registeredDate={el.registeredDate} />
+                ))}
             </>
           ))}
           <AddMyDogCard />
@@ -85,6 +123,12 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               )}
             </>
           ))}
+          {IS_REJECTED &&
+            JSON.parse(IS_REJECTED) &&
+            rejectedDogs &&
+            rejectedDogs.map((el: { dogName: string; registeredDate: number[] }) => (
+              <RejectedCard dogName={el.dogName} registeredDate={el.registeredDate} />
+            ))}
           <AddMyDogCard />
         </S.CarouselSlider>
       )}
