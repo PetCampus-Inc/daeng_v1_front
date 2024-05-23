@@ -23,7 +23,7 @@ export interface ImageList {
   comment?: string;
   createdTime: string;
 }
-interface IDoglist {
+export interface IDoglist {
   dogId: string;
   dogName: string;
   dogProfile: string;
