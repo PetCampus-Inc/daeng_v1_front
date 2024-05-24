@@ -1,18 +1,16 @@
-import { useRecoilValue } from "recoil";
-import { adminInfoState } from "store/admin";
+import { AUTH_KEY } from "store/auth";
 
-import type { TAdminLoginInfo } from "types/admin/admin.type";
+import { useLocalStorageValue } from "./useLocalStorage";
+
+import type { AdminAuthType } from "types/admin/admin.type";
 import type { Nullable } from "types/helper.type";
 
-function isAdminLoginInfo(data: Nullable<TAdminLoginInfo>): data is TAdminLoginInfo {
-  return data !== null;
-}
+export const useAdminInfo = (): AdminAuthType => {
+  const auth = useLocalStorageValue<Nullable<AdminAuthType>>(AUTH_KEY, null);
 
-export const useAdminInfo = (): TAdminLoginInfo => {
-  const adminInfo = useRecoilValue(adminInfoState);
+  if (!auth) throw new Error("로그인 정보가 없습니다!");
+  // FIXME: 1) access token 디코딩해서 정보 가져오기 2) 에러바운더리로 던져서 login 페이지로 이동
 
-  if (!isAdminLoginInfo(adminInfo)) throw new Error("Admin login info is not valid");
-
-  const { adminId, adminName, schoolId, role, schoolName } = adminInfo;
+  const { adminId, adminName, schoolId, role, schoolName } = auth;
   return { adminId, adminName, schoolId, role, schoolName };
 };
