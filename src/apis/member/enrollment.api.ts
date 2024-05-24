@@ -6,8 +6,8 @@ import type { AdminFormInfo, IResponseAdminForm } from "types/admin/enrollment.t
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
 import type { IResponse } from "types/helper.type";
 import type {
-  IResponseEnrollment,
-  IRequestEnrollment,
+  EnrollmentData,
+  EnrollmentInfo,
   IDogEnrollmentInfo
 } from "types/member/enrollment.types";
 
@@ -47,7 +47,7 @@ export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> =>
 export const handleGetEnrollment = async ({
   schoolId,
   memberId
-}: IEnrollmentProps): Promise<IResponseEnrollment> => {
+}: IEnrollmentProps): Promise<EnrollmentData> => {
   const url = `school/member/enroll`;
   const { data } = await customAxios.get(url, {
     params: {
@@ -79,7 +79,7 @@ export const handleGetAdminForm = async ({
   return data.data;
 };
 
-export const handlePostEnrollment = async (requestProps: IRequestEnrollment): Promise<void> => {
+export const handlePostEnrollment = async (requestProps: EnrollmentInfo): Promise<void> => {
   const url = `school/member/enroll`;
   const { data } = await customAxios.post(url, {
     ...requestProps

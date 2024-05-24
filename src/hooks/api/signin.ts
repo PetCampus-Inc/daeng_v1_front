@@ -3,9 +3,9 @@ import { PATH } from "constants/path";
 import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
 import { postAppleLogin } from "apis/auth.api";
+import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { adminInfoState } from "store/admin";
+import { AUTH_KEY } from "store/auth";
 import { Role } from "types/admin/admin.type";
 
 // 멤버 (소셜) 로그인 요청
@@ -33,25 +33,33 @@ export const useLogInMutation = () => {
 
 // 관리자 로그인 요청
 export const useAdminLogin = () => {
-  const navigate = useNavigate();
-  const setLoginInfo = useSetRecoilState(adminInfoState);
+  const setAuth = useSetLocalStorage(AUTH_KEY);
   const { mutate } = useMutation({
     mutationFn: postAdminLogin,
     onSuccess: (res) => {
-      setLoginInfo(() => ({
+      const userInfo = {
         adminId: res.adminId,
         adminName: res.adminName,
         schoolId: res.schoolId,
         role: res.role,
         schoolName: res.schoolName
-      }));
-      if (res.role === Role.ROLE_TEACHER || res.role === Role.ROLE_OWNER)
-        navigate(PATH.ADMIN_ATTENDANCE);
-      // TODO: deny, cancel 상태일 때도 리다이렉트 처리 필요!
-      if (res.role === Role.APPROVAL_PENDING)
-        navigate(`${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}&source=login`);
+      };
+      setAuth(userInfo);
+
+      if (res.role === Role.ROLE_TEACHER || res.role === Role.ROLE_OWNER) {
+        location.href = PATH.ADMIN_ATTENDANCE;
+      }
+
+      if (
+        res.role === Role.APPROVAL_PENDING ||
+        res.role === Role.APPROVAL_DENIED ||
+        res.role === Role.APPROVAL_CANCEL
+      ) {
+        location.href = `${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}&source=login`;
+      }
     },
-    throwOnError: false
+    throwOnError: false,
+    retry: 0
   });
 
   return { mutateLogin: mutate };

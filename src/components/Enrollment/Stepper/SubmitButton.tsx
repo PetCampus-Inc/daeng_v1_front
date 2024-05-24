@@ -13,8 +13,9 @@ import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 import { FormButton } from "styles/StyleModule";
 
-import type { IRequestEnrollment } from "types/member/enrollment.types";
+import type { EnrollmentInfo, MemberGenderType } from "types/member/enrollment.types";
 
+// FIXME: 회원가입과 강아지 추가 로직 분리 필요
 const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => {
   const queryClient = useQueryClient();
   const { memberId } = useParams();
@@ -32,7 +33,7 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   const memberInfo = {
     memberId: Number(memberInfoData.memberId),
     memberName: memberInfoData.memberName,
-    memberGender: memberInfoData.memberGender,
+    memberGender: memberInfoData.memberGender as MemberGenderType,
     address: `${memberInfoData.address && memberInfoData.address}`,
     addressDetail: `${memberInfoData.address && memberInfoData.addressDetail}`,
     phoneNumber: memberInfoData.phoneNumber,
@@ -42,8 +43,8 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   };
 
   // 공통 requestData
-  const getSubmitFormdata = (data: FieldValues) => {
-    return Adapter.from(data).to<FieldValues, IRequestEnrollment>((item) =>
+  const getSubmitFormInfo = (data: FieldValues) => {
+    return Adapter.from(data).to<FieldValues, EnrollmentInfo>((item) =>
       new MemberFormToServerAdapter(item).adapt()
     );
   };
@@ -51,14 +52,14 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   // 신규 가입신청서
   const onSubmit = (data: FieldValues) => {
     // FIXME: memberId, fileUrl 추가 필요
-    const requestData = getSubmitFormdata(data);
+    const requestData = getSubmitFormInfo(data);
     enrollMutation(requestData);
   };
 
   // member 강아지 추가
   const onSubmitMemberDogAdd = (data: FieldValues) => {
     // FIXME: fileUrl 추가 필요
-    const requestData = getSubmitFormdata(data);
+    const requestData = getSubmitFormInfo(data);
 
     const memberDogAddInfo = { ...requestData, ...memberInfo };
     enrollMutation(memberDogAddInfo, {

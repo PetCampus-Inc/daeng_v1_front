@@ -56,7 +56,7 @@ const SendFileButton = ({ type }: Props) => {
 
       await uploadFiles(params, {
         onSuccess: () => {
-          navigate(PATH.ADMIN_CARE_INFO(Number(dogId)), { replace: true });
+          navigate(PATH.ADMIN_CARE_NOTICE(dogId), { replace: true });
         }
       });
     }

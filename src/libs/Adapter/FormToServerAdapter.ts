@@ -6,9 +6,10 @@ import { isNumber } from "utils/typeGuard";
 import type { FieldValues } from "react-hook-form";
 import type { AdminFormSaveType, TPickDropState } from "types/admin/enrollment.types";
 import type {
-  IRequestEnrollment,
-  TPickDropRequest,
-  TTicketType
+  EnrollmentInfo,
+  MemberGenderType,
+  PickDropRequestType,
+  TicketType
 } from "types/member/enrollment.types";
 
 export class MemberFormToServerAdapter {
@@ -19,7 +20,7 @@ export class MemberFormToServerAdapter {
   }
 
   get memberGender() {
-    return reverseMapValue("memberGender", this.value.memberGender);
+    return reverseMapValue("memberGender", this.value.memberGender) as MemberGenderType;
   }
 
   get dogGender() {
@@ -39,11 +40,11 @@ export class MemberFormToServerAdapter {
   }
 
   get ticketType() {
-    return reverseMapValue("ticketType", this.value.ticketType) as TTicketType;
+    return reverseMapValue("ticketType", this.value.ticketType) as TicketType;
   }
 
   get pickDropRequest() {
-    return reverseMapValue("pickDropRequest", this.value.pickDropRequest) as TPickDropRequest;
+    return reverseMapValue("pickDropRequest", this.value.pickDropRequest) as PickDropRequestType;
   }
 
   get pickDropType() {
@@ -65,7 +66,7 @@ export class MemberFormToServerAdapter {
       .filter(isNumber);
   }
 
-  adapt(): IRequestEnrollment {
+  adapt(): EnrollmentInfo {
     return {
       schoolFormId: this.value.schoolFormId,
       memberId: this.value.memberId,

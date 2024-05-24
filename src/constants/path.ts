@@ -1,6 +1,7 @@
 const ADMIN = "admin";
 const LOGIN = "login";
 const SIGNUP = "signup";
+const MYPAGE = "mypage";
 
 export const SIGNUP_PATH = {
   유치원_검색: "search" as const,
@@ -28,7 +29,7 @@ export const ADMIN_EDIT_FORM_PATH = {
   가입신청서_제출: "submit" as const
 };
 
-const PRIVATE_PATH = {
+const ADMIN_PATH = {
   ADMIN: `${ADMIN}`,
   ADMIN_LOGIN: `/${ADMIN}/${LOGIN}`,
   ADMIN_SIGNUP: `/${ADMIN}/${SIGNUP}`,
@@ -43,8 +44,7 @@ const PRIVATE_PATH = {
   ADMIN_CARE_NOTICE: (dogId?: string) => `/${ADMIN}/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
   ADMIN_CARE_GALLERY: `/${ADMIN}/care/gallery`, // 오늘 관리할 강아지 사진앨범 전송
   ADMIN_CARE_GALLERY_SELECT: `/${ADMIN}/care/gallery/select`,
-  ADMIN_CARE_INFO: (dogId?: number) => `/${ADMIN}/care/${dogId ?? ":dogId"}`, // 오늘 관리할 강아지 상세정보
-  ADMIN_CARE_INFO_GALLERY: (dogId?: number) => `/${ADMIN}/care/${dogId ?? ":dogId"}/gallery`, // 오늘 관리할 강아지 사진앨범 전송
+  ADMIN_CARE_INFO_GALLERY: (dogId?: number) => `/${ADMIN}/care/gallery/${dogId ?? ":dogId"}`, // 오늘 관리할 강아지 사진앨범 전송
   ADMIN_CHAT: `/${ADMIN}/chat`, // 채팅
 
   ADMIN_SCHOOL_MANAGE: `/${ADMIN}/school`, // 유치원 운영
@@ -60,10 +60,27 @@ const PRIVATE_PATH = {
   ADMIN_CREATE_FORM: `/${ADMIN}/school/enrollment/new`, // 원장 가입신청서 등록
   ADMIN_SUBMIT_FORM: `/${ADMIN}/school/enrollment/submit`, // 견주 가입신청서 제출
 
-  ADMIN_MY_PAGE: `/${ADMIN}/mypage`,
-  ADMIN_MY_PAGE_EDIT: `/${ADMIN}/mypage/profile/edit`,
-  ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/mypage/school`,
-  ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/mypage/school/edit`
+  ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`,
+  ADMIN_MY_PAGE_EDIT: `/${ADMIN}/${MYPAGE}/profile/edit`,
+  ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`,
+  ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit`
+};
+
+const MEMBER_PATH = {
+  MEMBER_MY_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}`,
+  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}/profile`,
+  MEMBER_MY_INFO_EDIT_PAGE: (memberId?: string) =>
+    `/${MYPAGE}/${memberId ?? ":memberId"}/profile/edit`,
+  MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/${MYPAGE}/dog/${dogId ?? ":dogId"}/school`,
+  MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
+    `/${MYPAGE}/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
+  MEMBER_MY_ENROLLMENT: (memberId?: string) =>
+    `/${MYPAGE}/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
+
+  MEMBER_DOG_INFO_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}`, // 강아지 상세정보
+  MEMBER_DOG_INFO_EDITE_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
+  MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
+    `/dog-info/${dogId ?? ":dogId"}/enrollment/detail` // 강아지 가입신청서 보기 (read only)
 };
 
 const PUBLIC_PATH = {
@@ -76,24 +93,11 @@ const PUBLIC_PATH = {
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지
   SETTING: "/setting", // 설정 페이지
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
-  POLICY: "/policy", // 정책 페이지
-  ENROLL: "/enrollment", // 견주 가입신청서
-
-  MEMBER_MY_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}`,
-  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/profile`,
-  MEMBER_MY_INFO_EDIT_PAGE: (memberId?: string) =>
-    `/mypage/${memberId ?? ":memberId"}/profile/edit`,
-  MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/mypage/${dogId ?? ":dogId"}/school`,
-  MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
-    `/mypage/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
-  MEMBER_MY_ENROLLMENT: (memberId?: string) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
-  MEMBER_DOG_INFO_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}`, // 강아지 상세정보
-  MEMBER_DOG_INFO_EDITE_PAGE: (dogId?: string) => `/dogInfo/${dogId ?? ":dogId"}/edite`, // 강아지 가입정보 수정
-  MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
-    `/dogInfo/${dogId ?? ":dogId"}/enrollment/detail` // 강아지 가입신청서 보기 (read only)
+  POLICY: "/policy" // 정책 페이지
 };
 
 export const PATH = {
-  ...PRIVATE_PATH,
+  ...ADMIN_PATH,
+  ...MEMBER_PATH,
   ...PUBLIC_PATH
 } as const;
