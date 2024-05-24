@@ -1,5 +1,5 @@
 import { useCreateAlbum } from "hooks/api/admin/care";
-import { useMulterS3Upload } from "hooks/common/useS3";
+import { useS3Upload } from "hooks/common/useS3";
 import showToast from "utils/showToast";
 
 interface UploadParams {
@@ -15,7 +15,7 @@ interface UploadAndCreateAlbumOptions {
 }
 
 const useUploadAndCreateAlbum = () => {
-  const { uploadToS3 } = useMulterS3Upload();
+  const { uploadToS3 } = useS3Upload();
   const { mutateAlbum } = useCreateAlbum();
 
   const uploadFiles = async (
