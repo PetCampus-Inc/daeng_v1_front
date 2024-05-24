@@ -1,7 +1,7 @@
-import { isAxiosError } from "axios";
 import { Text } from "components/common";
 import { useAdminLogin } from "hooks/api/signin";
 import { type FieldValues, useFormContext } from "react-hook-form";
+import { isCustomError } from "utils/typeGuard";
 
 import { StyledButton } from "../styles";
 
@@ -17,15 +17,15 @@ const SubmitButton = () => {
 
     mutateLogin(req, {
       onError: (error) => {
-        if (!isAxiosError(error)) throw error;
+        if (!isCustomError(error)) throw error;
 
-        // FIXME: 에러코드 정의 따로 해두기!!!
-        if (error?.response?.data.code === "COMMON-400-1") {
+        // FIXME: 에러코드 변경 예정
+        if (error?.data.code === "ADMIN-404-1") {
           setError("inputId", {
             type: "manual",
             message: "잘못된 아이디입니다."
           });
-        } else if (error?.response?.data.code === "AUTH-401-1") {
+        } else if (error?.data.code === "COMMON-400-1") {
           setError("inputPw", {
             type: "manual",
             message: "잘못된 비밀번호입니다."
