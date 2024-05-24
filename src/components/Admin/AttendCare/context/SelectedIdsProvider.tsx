@@ -8,9 +8,16 @@ interface SelectedIdsContextProps {
   selectAll: (data: ICareDogInfo[]) => void;
 }
 
+interface SelectedIdsProviderProps {
+  idKey: keyof ICareDogInfo;
+}
+
 export const SelectedIdsContext = createContext<SelectedIdsContextProps | null>(null);
 
-export const SelectedIdsProvider = ({ children }: PropsWithChildren) => {
+export const SelectedIdsProvider = ({
+  children,
+  idKey
+}: PropsWithChildren<SelectedIdsProviderProps>) => {
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
   const toggleId = useCallback((id: number) => {
@@ -25,18 +32,22 @@ export const SelectedIdsProvider = ({ children }: PropsWithChildren) => {
     });
   }, []);
 
-  const selectAll = useCallback((data: ICareDogInfo[]) => {
-    setSelectedIds((prevSelectedIds) => {
-      // 현재 선택된 항목이 없거나, 선택된 항목의 수가 전체 데이터보다 적은 경우 모든 항목을 선택
-      if (prevSelectedIds.size === 0 || prevSelectedIds.size < data.length) {
-        const newSet = new Set(data.map((item) => item.attendanceId));
-        return newSet;
-      } else {
-        // 이미 일부 또는 모든 항목이 선택된 상태라면 모든 선택을 해제
-        return new Set();
-      }
-    });
-  }, []);
+  const selectAll = useCallback(
+    (data: ICareDogInfo[]) => {
+      setSelectedIds((prevSelectedIds) => {
+        // 현재 선택된 항목이 없거나, 선택된 항목의 수가 전체 데이터보다 적은 경우 모든 항목을 선택
+        if (prevSelectedIds.size === 0 || prevSelectedIds.size < data.length) {
+          const newSet = new Set(data.map((item) => item[idKey] as number));
+          return newSet;
+        } else {
+          // 이미 일부 또는 모든 항목이 선택된 상태라면 모든 선택을 해제
+          return new Set();
+        }
+      });
+    },
+    [idKey]
+  );
+
   return (
     <SelectedIdsContext.Provider value={{ selectedIds, toggleId, selectAll }}>
       {children}

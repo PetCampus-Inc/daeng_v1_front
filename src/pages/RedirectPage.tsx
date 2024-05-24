@@ -1,8 +1,10 @@
 import { PATH } from "constants/path";
 
 import { useLogInMutation } from "hooks/api/signin";
+import { useSetLocalStorage, useLocalStorageClear } from "hooks/common/useLocalStorage";
 import { useEffect } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import { ACCESS_TOKEN_KEY } from "store/auth";
 import { Nullable } from "types/helper.type";
 import { isProviderValid } from "utils/auth";
 
@@ -20,6 +22,8 @@ const RedirectPage = () => {
   }
 
   const { loginMutate } = useLogInMutation();
+  const setLocalStorageValue = useSetLocalStorage<string>(ACCESS_TOKEN_KEY);
+  const clearLocalStorage = useLocalStorageClear();
 
   const handleAppleLogin = (code: Nullable<string>, user: Nullable<string>) => {
     if (!code) {
@@ -51,9 +55,9 @@ const RedirectPage = () => {
         throw new Error("로그인에 필요한 토큰이 없습니다.");
       }
 
-      localStorage.clear();
-      localStorage.setItem("token", token);
-      window.location.replace(PATH.ROOT);
+      clearLocalStorage();
+      setLocalStorageValue(token);
+      window.location.replace(PATH.ROOT); // FIXME: 회원일 경우 '/'(home)로 이동, 비회원일 경우 '/signup'으로 이동
     }
   }, [code, token, returnedState, loginMutate, provider]);
 

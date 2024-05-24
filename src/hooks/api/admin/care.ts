@@ -106,7 +106,7 @@ export const useCreateAlbum = () => {
   const createAlbumMutation = useMutation({
     mutationFn: handlePostAlbum,
     onSuccess: () => {
-      showToast("사진이 전송이 완료되었습니다", "bottom");
+      showToast("사진이 전송이 완료되었습니다", "ownerNav");
     }
   });
   return { mutateAlbum: createAlbumMutation.mutate };
