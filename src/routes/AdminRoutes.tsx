@@ -182,14 +182,6 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                       <Pages.EnrollmentFormCreatePage />
                     </Suspense>
                   )
-                },
-                {
-                  path: PATH.ADMIN_SUBMIT_FORM,
-                  element: (
-                    <Suspense>
-                      <Pages.EnrollmentFormSubmitPage />
-                    </Suspense>
-                  )
                 }
               ]
             }

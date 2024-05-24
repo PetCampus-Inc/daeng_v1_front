@@ -48,6 +48,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               element: <Pages.AdminSignupPage />
             },
             {
+              path: PATH.REDIRECT,
+              element: <Pages.RedirectPage />
+            },
+            {
               path: PATH.UNREGISTER,
               element: (
                 <Suspense>
