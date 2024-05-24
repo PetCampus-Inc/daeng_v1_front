@@ -13,7 +13,7 @@ import type {
   IOwnerSignUpInfo,
   ITeacherSignUpData,
   ITeacherSignUpInfo,
-  TAdminLoginInfo
+  AdminAuthType
 } from "types/admin/admin.type";
 
 // 아이디 중복확인
@@ -24,9 +24,9 @@ export const getCheckId = async (id: string): Promise<number> => {
 };
 
 // 관리자 로그인
-export const postAdminLogin = async (req: IAdminLoginInfo): Promise<TAdminLoginInfo> => {
+export const postAdminLogin = async (req: IAdminLoginInfo): Promise<AdminAuthType> => {
   const url = `admin/login`;
-  const { data } = await request<IResponse<TAdminLoginInfo>>({
+  const { data } = await request<IResponse<AdminAuthType>>({
     url,
     method: "POST",
     data: {
