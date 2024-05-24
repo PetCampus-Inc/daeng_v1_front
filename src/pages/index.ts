@@ -37,7 +37,6 @@ export { default as SettingNotificationPage } from "./SettingNotificationPage";
 export { default as UnregisterSuccessPage } from "./UnregisterSuccessPage";
 export { default as AttendCareGallery } from "./AdminCarePage/AttendCareGalleryPage";
 export { default as AttendCareSelectDog } from "./AdminCarePage/AttendCareSelectDogPage";
-export { default as AttendCareInfo } from "./AttendCareInfoPage";
 
 export { default as MemberEnrollmentFormDetailPage } from "./MemberPage/MemberEnrollmentFormDetailPage";
 
