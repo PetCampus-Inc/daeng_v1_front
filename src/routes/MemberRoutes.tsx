@@ -3,6 +3,7 @@ import { PATH } from "constants/path";
 import * as Pages from "pages";
 import { Suspense } from "react";
 import { RouteObject, redirect } from "react-router-dom";
+import { ACCESS_TOKEN_KEY } from "store/auth";
 
 const MemberRoutes = (): RouteObject[] => {
   return [
@@ -91,7 +92,7 @@ const MemberRoutes = (): RouteObject[] => {
         }
       ],
       loader: () => {
-        if (!localStorage.getItem("token")) return redirect(PATH.LOGIN);
+        if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
         return null;
       }
     }
