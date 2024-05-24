@@ -1,12 +1,14 @@
 import { Nullable } from "types/helper.type";
 import { IResponse } from "types/Response.type";
 
-export type TPickDropState = "RUNNING" | "NOT_RUNNING";
-export type TPickDropRequest = "REQUEST" | "NOT_REQUEST";
-export type TTicketType = "ROUND" | "MONTHLY";
+export type PickDropStateType = "RUNNING" | "NOT_RUNNING";
+export type PickDropRequestType = "REQUEST" | "NOT_REQUEST";
+export type TicketType = "ROUND" | "MONTHLY";
+export type MemberGenderType = "MALE" | "FEMALE";
+export type RelationType = "MOTHER" | "FATHER" | "SISTER" | "BROTHER" | "FRIEND";
 
 // 견주 가입신청서 조회
-export interface IResponseEnrollment {
+export interface EnrollmentData {
   schoolFormId: number;
   schoolFormName: string;
   requiredItemList: number[];
@@ -19,16 +21,16 @@ export interface IResponseEnrollment {
   limitsInfo: string;
   accidentInfo: string;
   abandonmentInfo: string;
-  pickDropState: TPickDropState;
+  pickDropState: PickDropStateType;
   pickDropNotice: string;
   pickDropInfo: string;
-  member: TMemberDto;
+  member: IMemberDto;
 }
 
-export interface TMemberDto {
+export interface IMemberDto {
   memberId: number;
   memberName: string;
-  memberGender: string;
+  memberGender: MemberGenderType;
   address: string;
   phoneNumber: string;
   emergencyNumber: Nullable<string>;
@@ -36,7 +38,7 @@ export interface TMemberDto {
 }
 
 // 견주 가입신청서 등록
-export interface IRequestEnrollment extends Omit<TMemberDto, "title"> {
+export interface EnrollmentInfo extends Omit<IMemberDto, "title"> {
   schoolFormId: number;
   dogName: string;
   dogGender: string;
@@ -48,11 +50,11 @@ export interface IRequestEnrollment extends Omit<TMemberDto, "title"> {
   vaccination: string;
   fileUrl: string;
   allergyDisease: string;
-  ticketType: TTicketType;
+  ticketType: TicketType;
   roundTicketNumber: number;
   monthlyTicketNumber: number;
   attendanceDays: number[];
-  pickDropRequest: TPickDropRequest;
+  pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;
   agreementList: number[];
@@ -71,10 +73,10 @@ export interface ISchoolFormResponse {
   limitsInfo: string;
   accidentInfo: string;
   abandonmentInfo: string;
-  pickDropState: TPickDropState;
+  pickDropState: PickDropStateType;
   pickDropNotice: string;
   pickDropInfo: string;
-  member: TMemberDto;
+  member: IMemberDto;
 }
 
 // 강아지 가입 신청서
@@ -102,7 +104,7 @@ export interface IDogEnrollmentInfo extends IResponse {
   enrollmentRoundTicketNumber: number;
   enrollmentMonthlyTicketNumber: number;
   attendanceDays: string[]; // MEMO API 명세서엔 string으로 되어있음
-  pickDropRequest: TPickDropRequest;
+  pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;
   agreements: number[];

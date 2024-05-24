@@ -1,4 +1,4 @@
-import { TPickDropRequest, TPickDropState } from "types/member/enrollment.types";
+import type { PickDropRequestType, PickDropStateType } from "types/member/enrollment.types";
 
 export const MEMBER_ENROLL_STEP = [
   {
@@ -29,7 +29,7 @@ export const MEMBER_ENROLL_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
     indicator: "픽드랍",
-    isVisible: (status: TPickDropState) => status === "RUNNING"
+    isVisible: (status: PickDropStateType) => status === "RUNNING"
   }
 ];
 
@@ -56,7 +56,7 @@ export const MEMBER_DOG_ADD_ENROLL_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "아래 내용을 빠짐없이 입력해 주세요",
     indicator: "픽드랍",
-    isVisible: (status: TPickDropState) => status === "RUNNING"
+    isVisible: (status: PickDropStateType) => status === "RUNNING"
   }
 ];
 
@@ -89,7 +89,7 @@ export const MEMBER_DOG_INFO_ENROLL_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "견주가 볼 가입신청서 화면이에요",
     indicator: "픽드랍",
-    isVisible: (status: TPickDropRequest) => status === "REQUEST"
+    isVisible: (status: PickDropRequestType) => status === "REQUEST"
   }
 ];
 
