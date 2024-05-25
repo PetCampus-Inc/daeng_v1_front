@@ -1,6 +1,6 @@
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
-import EmptyAlbum from "components/Home/empty/EmptyAlbum";
+import EmptyAlbum from "components/Home/Empty/EmptyAlbum";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
 import HomeImageSlider from "components/Home/HomeImageSlider";
@@ -56,7 +56,7 @@ const mock: HomeDataType = {
           "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&w=2864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         imageType: "IMAGE",
         comment: "갱얼지가\n몽몽몽몽\n몽몽\n몽몽이\n몽몽몽\n운다",
-        createdTime: "2024-05-26T00:14:51.149Z"
+        createdTime: "2024-05-25T18:08:12.368Z"
       }
     ],
     [

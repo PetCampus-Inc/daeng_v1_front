@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle } from "react";
 
 import { StyledTimeButton, StyledTimePickerWrapper, StyledTimeWrapper } from "./styles";
-import useTimePicker, { type TimeState } from "../hooks/useTimePicker";
+import useTimePicker, { type TimeState } from "../../hooks/useTimePicker";
 
 export interface TimePickerHandles {
   getTime: () => TimeState;
