@@ -44,26 +44,39 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
 
   if (!images) return <EmptySlide />;
 
+  // 모든 이미지를 하나의 배열로 합칩니다.
+  const allImages = images.flat();
+  const currentImage = allImages[currentIndex];
+
+  const isCommentVisible = (index: number) => {
+    return (
+      isCommentOpen &&
+      (index === currentIndex ||
+        index === (currentIndex - 1 + allImages.length) % allImages.length ||
+        index === (currentIndex + 1) % allImages.length)
+    );
+  };
+
   return (
     <SliderContainer>
       <ImageShadow className="shadow" />
       <SliderHeader>
-        <TransmissionTime />
+        <TransmissionTime time={currentImage.createdTime} />
         <ButtonGroup>
-          <CommentButton onClick={handleComment} isOpen={isCommentOpen} />
+          {currentImage.comment && <CommentButton onClick={handleComment} isOpen={isCommentOpen} />}
           <SaveOptionDropdown />
         </ButtonGroup>
       </SliderHeader>
       <Slider {...settings}>
-        {images[images.length - 1].map((item, index) => (
+        {allImages.map((item, index) => (
           <SlideWrapper key={index}>
             <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
-            {currentIndex === index && isCommentOpen && <CommentBox comment={item.comment} />}
+            {isCommentVisible(index) && <CommentBox comment={item.comment} />}
           </SlideWrapper>
         ))}
       </Slider>
       <SlideIndex>
-        {currentIndex + 1} / {images.length}
+        {currentIndex + 1} / {allImages.length}
       </SlideIndex>
     </SliderContainer>
   );
