@@ -3,7 +3,7 @@ import NavBar from "components/common/NavBar";
 import EmptyAlbum from "components/Home/Empty/EmptyAlbum";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
-import HomeImageSlider from "components/Home/HomeImageSlider";
+import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { StyledBox } from "components/Home/styles";
 import { useGetHomeInfo } from "hooks/api/member/member";
 import { Role } from "types/admin/admin.type";
@@ -22,7 +22,7 @@ const HomePage = () => {
           <HomeDashboard data={mock} />
         </StyledBox>
         <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
-          <HomeImageSlider images={mock.imageList} />
+          <HomeImageCommentSlider images={mock.imageList} />
           <EmptyAlbum />
         </StyledBox>
       </main>
