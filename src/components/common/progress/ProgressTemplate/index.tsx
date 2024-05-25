@@ -1,8 +1,8 @@
-import { Box, Flex, Progress, Text } from "components/common";
+import { Box, Progress, Text } from "components/common";
 import Portal from "components/common/Portal";
 import { BackDrop } from "styles/StyleModule";
 
-interface ProgressTemplateProps {
+export interface ProgressTemplateProps {
   totalFiles: number;
   currentIdx: number;
   progress: number;
