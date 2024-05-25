@@ -2,14 +2,14 @@ import { Flex, Text } from "components/common";
 
 import { Img, ImgWrapper, StyledHgroup } from "./styles";
 
-import type { IHome } from "types/member/home.types";
+import type { HomeDataType } from "types/member/home.types";
 
-const HomeHeader = ({ data }: { data: IHome }) => {
+const HomeHeader = ({ data }: { data: HomeDataType }) => {
   return (
     <StyledHgroup>
       <Flex align="center" gap="4">
         <ImgWrapper>
-          <Img src="https://github.githubassets.com/assets/pair-extraordinaire-default-579438a20e01.png" />
+          <Img src={data?.memberProfileUri} alt={`${data.dogName}님의 프로필`} />
         </ImgWrapper>
         <Text as="h2" typo="title2_20_B" color="darkBlack">
           {data.dogName} {data.relation}님
