@@ -59,6 +59,33 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
     );
   };
 
+  const saveOptions = [
+    {
+      label: "이 사진만 저장",
+      icon: (
+        <IconWrapper>
+          <PhotoSaveIcon />
+        </IconWrapper>
+      ),
+      onClick: () => {
+        setTotalFiles(1);
+        downloadFile({ urls: [currentImage.imageUri] });
+      }
+    },
+    {
+      label: "전체 저장",
+      icon: (
+        <IconWrapper>
+          <MultiplePhotoSaveIcon />
+        </IconWrapper>
+      ),
+      onClick: () => {
+        setTotalFiles(allImages.length);
+        downloadFile({ urls: allImages.map((image) => image.imageUri) });
+      }
+    }
+  ];
+
   return (
     <SliderContainer>
       <ImageShadow className="shadow" />
