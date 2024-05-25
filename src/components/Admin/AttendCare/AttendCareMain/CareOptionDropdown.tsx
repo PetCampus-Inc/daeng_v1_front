@@ -4,8 +4,8 @@ import { useOverlay } from "hooks/common/useOverlay";
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import OptionDropdown from "./button/OptionDropdown";
-import AgendaSchedulerBottomSheet from "./modal/AgendaSchedulerBottomSheet";
+import OptionDropdown from "../button/OptionDropdown";
+import AgendaSchedulerBottomSheet from "../modal/AgendaSchedulerBottomSheet";
 
 const CareOptionDropdown = () => {
   const navigate = useNavigate();

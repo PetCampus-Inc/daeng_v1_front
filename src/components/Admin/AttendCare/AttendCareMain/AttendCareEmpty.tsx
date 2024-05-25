@@ -1,6 +1,6 @@
-import { EmptyCardContainer } from "./card/styles";
-import EmptyCard from "./empty/EmptyDog";
-import { SubTitle, Title } from "./styles";
+import { EmptyCardContainer } from "../card/styles";
+import EmptyCard from "../empty/EmptyDog";
+import { SubTitle, Title } from "../styles";
 
 const AttendCareEmpty = () => {
   return (
