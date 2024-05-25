@@ -1,9 +1,13 @@
+import MultiplePhotoSaveIcon from "assets/svg/multiple-photo-save-icon";
+import PhotoSaveIcon from "assets/svg/photo-save-icon";
+import { useFileDownload } from "hooks/common/useS3";
 import { useState } from "react";
 import Slider from "react-slick";
 
 import EmptySlide from "./empty/EmptySlide";
 import CommentBox from "./ImageSidler/CommentBox";
 import CommentButton from "./ImageSidler/CommentButton";
+import ProgressScreen from "./ImageSidler/ProgressScreen";
 import SaveOptionDropdown from "./ImageSidler/SaveOptionDropdown";
 import SliderDots from "./ImageSidler/SliderDots";
 import {
@@ -13,7 +17,8 @@ import {
   ImageShadow,
   SliderHeader,
   ButtonGroup,
-  SlideIndex
+  SlideIndex,
+  IconWrapper
 } from "./ImageSidler/styles";
 import TransmissionTime from "./ImageSidler/TransmissionTime";
 
@@ -22,6 +27,8 @@ import type { ImageList } from "types/member/home.types";
 const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
+  const [totalFiles, setTotalFiles] = useState<number>(0);
+  const { isLoading, progress, downloaded, downloadFile } = useFileDownload();
 
   const handleComment = () => {
     setIsCommentOpen(!isCommentOpen);
@@ -44,7 +51,6 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
 
   if (!images) return <EmptySlide />;
 
-  // 모든 이미지를 하나의 배열로 합칩니다.
   const allImages = images.flat();
   const currentImage = allImages[currentIndex];
 
@@ -57,6 +63,33 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
     );
   };
 
+  const saveOptions = [
+    {
+      label: "이 사진만 저장",
+      icon: (
+        <IconWrapper>
+          <PhotoSaveIcon />
+        </IconWrapper>
+      ),
+      onClick: () => {
+        setTotalFiles(1);
+        downloadFile({ urls: [currentImage.imageUri] });
+      }
+    },
+    {
+      label: "전체 저장",
+      icon: (
+        <IconWrapper>
+          <MultiplePhotoSaveIcon />
+        </IconWrapper>
+      ),
+      onClick: () => {
+        setTotalFiles(allImages.length);
+        downloadFile({ urls: allImages.map((image) => image.imageUri) });
+      }
+    }
+  ];
+
   return (
     <SliderContainer>
       <ImageShadow className="shadow" />
@@ -64,14 +97,19 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
         <TransmissionTime time={currentImage.createdTime} />
         <ButtonGroup>
           {currentImage.comment && <CommentButton onClick={handleComment} isOpen={isCommentOpen} />}
-          <SaveOptionDropdown />
+          <SaveOptionDropdown option={saveOptions} />
         </ButtonGroup>
       </SliderHeader>
+      {isLoading && (
+        <ProgressScreen progress={progress} currentIdx={downloaded} totalFiles={totalFiles} />
+      )}
       <Slider {...settings}>
         {allImages.map((item, index) => (
-          <SlideWrapper key={index}>
+          <SlideWrapper key={`slide-${item.imageId}-${index}`}>
             <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
-            {isCommentVisible(index) && <CommentBox comment={item.comment} />}
+            {isCommentVisible(index) && (
+              <CommentBox key={`comment-${item.imageId}-${index}`} comment={item.comment} />
+            )}
           </SlideWrapper>
         ))}
       </Slider>
