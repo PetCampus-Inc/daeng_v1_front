@@ -1,14 +1,12 @@
-import MultiplePhotoSaveIcon from "assets/svg/multiple-photo-save-icon";
-import PhotoSaveIcon from "assets/svg/photo-save-icon";
 import { useFileDownload } from "hooks/common/useS3";
 import { useState } from "react";
 import Slider from "react-slick";
 
 import EmptySlide from "./empty/EmptySlide";
 import CommentBox from "./ImageSidler/CommentBox";
-import CommentButton from "./ImageSidler/CommentButton";
+import CommentSection from "./ImageSidler/CommentSection";
 import ProgressScreen from "./ImageSidler/ProgressScreen";
-import SaveOptionDropdown from "./ImageSidler/SaveOptionDropdown";
+import SaveSection from "./ImageSidler/SaveSection";
 import SliderDots from "./ImageSidler/SliderDots";
 import {
   SlideWrapper,
@@ -16,9 +14,8 @@ import {
   SliderContainer,
   ImageShadow,
   SliderHeader,
-  ButtonGroup,
   SlideIndex,
-  IconWrapper
+  ButtonGroup
 } from "./ImageSidler/styles";
 import TransmissionTime from "./ImageSidler/TransmissionTime";
 
@@ -53,7 +50,6 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
 
   const allImages = images.flat();
   const currentImage = allImages[currentIndex];
-
   const isCommentVisible = (index: number) => {
     return (
       isCommentOpen &&
@@ -63,41 +59,22 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
     );
   };
 
-  const saveOptions = [
-    {
-      label: "이 사진만 저장",
-      icon: (
-        <IconWrapper>
-          <PhotoSaveIcon />
-        </IconWrapper>
-      ),
-      onClick: () => {
-        setTotalFiles(1);
-        downloadFile({ urls: [currentImage.imageUri] });
-      }
-    },
-    {
-      label: "전체 저장",
-      icon: (
-        <IconWrapper>
-          <MultiplePhotoSaveIcon />
-        </IconWrapper>
-      ),
-      onClick: () => {
-        setTotalFiles(allImages.length);
-        downloadFile({ urls: allImages.map((image) => image.imageUri) });
-      }
-    }
-  ];
-
   return (
     <SliderContainer>
       <ImageShadow className="shadow" />
       <SliderHeader>
         <TransmissionTime time={currentImage.createdTime} />
         <ButtonGroup>
-          {currentImage.comment && <CommentButton onClick={handleComment} isOpen={isCommentOpen} />}
-          <SaveOptionDropdown option={saveOptions} />
+          {currentImage.comment && (
+            <CommentSection isOpen={isCommentOpen} handleClick={handleComment} />
+          )}
+
+          <SaveSection
+            currentImage={currentImage}
+            allImages={allImages}
+            setTotalFiles={setTotalFiles}
+            downloadFile={downloadFile}
+          />
         </ButtonGroup>
       </SliderHeader>
       {isLoading && (
