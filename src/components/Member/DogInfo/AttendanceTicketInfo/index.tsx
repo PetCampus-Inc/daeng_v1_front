@@ -8,6 +8,7 @@ import { useGetMemberDogEnrollmemntInfo, useGetMemberSchoolInfo } from "hooks/ap
 import { formatDate } from "utils/formatter";
 import { remainingExpirationDays } from "utils/remainingDays";
 
+import Calendar from "./Calender/Calendar";
 import * as S from "./styles";
 import { Icon } from "../styles";
 
@@ -47,7 +48,7 @@ const AttendanceTicketInfo = ({ dogId }: IProps) => {
     <Flex direction="column" gap="41">
       <section>
         <S.DogDetailInfoText className="big">출결</S.DogDetailInfoText>
-        <div>달력</div>
+        <Calendar />
       </section>
 
       <section>
