@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { IMemberDogInfo } from "types/member/home.types";
 
 interface ISchool {
   schoolName: string;
@@ -16,4 +17,9 @@ export const memberEnrollmentSchoolAtom = atom<ISchool | null>({
 export const memberEnrollmentRejectedAtom = atom({
   key: "isRejectedState",
   default: IS_REJECTED ? JSON.parse(IS_REJECTED) : false
+});
+
+export const memberEnrollmentDogDetailAtom = atom<IMemberDogInfo | null>({
+  key: "memberEnrollmentDogDetail",
+  default: null
 });
