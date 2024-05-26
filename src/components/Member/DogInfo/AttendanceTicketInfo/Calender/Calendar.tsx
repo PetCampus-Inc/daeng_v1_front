@@ -1,3 +1,4 @@
+import FootIcon from "assets/svg/foot-icon";
 import { format } from "date-fns";
 import useGetDogInfoRecord from "hooks/api/useGetDogInfoRecord";
 import moment from "moment";
@@ -58,7 +59,7 @@ const Calendar = () => {
             html.push(<S.Today key={"today"}>오늘</S.Today>);
           }
           if (attendDay.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
-            html.push(<S.Dot key={moment(date).format("YYYY-MM-DD")} />);
+            html.push(<FootIcon className="footIcon" key={moment(date).format("YYYY-MM-DD")} />);
           }
           return <>{html}</>;
         }}
