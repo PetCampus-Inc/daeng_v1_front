@@ -1,4 +1,5 @@
 import customAxios from "libs/CustomAxios";
+import { IPrecautionInfo } from "types/admin.attendance.type";
 import {
   IMemberInfo,
   IMemberProfileInfo,
@@ -139,23 +140,15 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
 };
 
 // 강아지 유치원 정보
-export const handleGetMemberDogSchool = async (dogId: Request): Promise<IMemberDogSchoolInfo> => {
-  const url = `member/dog/school`;
-  const { data } = await customAxios.get(url, {
-    params: {
-      dogId
-    }
-  });
+export const handleGetMemberDogSchool = async (dogId: number): Promise<IMemberDogSchoolInfo> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
   return data.data.school;
 };
 
 // 강아지 유의사항 동의 정보
-export const handleGetMemberDogAgreements = async (dogId: Request): Promise<IMemberDogInfo> => {
-  const url = `member/dog/school`;
-  const { data } = await customAxios.get(url, {
-    params: {
-      dogId
-    }
-  });
+export const handleGetMemberDogPrecaution = async (dogId: number): Promise<IPrecautionInfo> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
   return data.data.precaution;
 };

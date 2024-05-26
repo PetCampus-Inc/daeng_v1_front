@@ -2,6 +2,7 @@ import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetSearchResult, handlePostMemberDogSchool } from "apis/member/enrollment.api";
+import { handleGetMemberDogSchool } from "apis/member/member.api";
 
 export const useGetSchoolInfoList = (searchText: string) => {
   return useSuspenseQuery({
@@ -25,4 +26,11 @@ export const usePostMemberDogSchool = (dogId: string) => {
   });
 
   return enrollMemberDogSchoolMutation.mutate;
+};
+
+export const useGetDogSchoolInfo = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.DOG_SHCOOL_INFO,
+    queryFn: () => handleGetMemberDogSchool(dogId)
+  });
 };

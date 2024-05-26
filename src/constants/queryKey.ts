@@ -31,6 +31,7 @@ export const QUERY_KEY = {
   SHCOOL_INFO_LIST: ["shcollInfoList"], // 마이페이지 견주의 강아지 유치원 정보
   MEMBER_MAIN_DOG_LIST: ["memberMainDogInfo"], // 견주의 강아지 리스트 (업데이트)
   MEMBER_SCHOOL_INFO: (dogId: string) => ["memberSchoolInfo", dogId], // 유치원 정보
+  DOG_SHCOOL_INFO: ["memberDogSchoolInfo"],
   CARE_DOG_TEMP_SAVE: ["careDogTempSave"], // 강아지 알림장 임시저장
   CARE_DOG_AGENDA_SAVED: ["careDogAgendaSaved"], // 강아지 알림장 불러오기
   CARE_DOG_PAST_AGENDA: ["careDogPastAgenda"], // 강아지 지난 알림장 불러오기
