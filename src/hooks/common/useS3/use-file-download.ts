@@ -9,20 +9,22 @@ interface DownloadOptions<TData, TError, TVariables> {
   onSettled?: (data: TData | undefined, error: TError | null, variables: TVariables) => void;
 }
 
-interface DownloadProps {
-  urls: string | string[];
-}
+export type DownloadFileFunction<TData, TError, TVariables> = (
+  variables: TVariables,
+  options?: DownloadOptions<TData, TError, TVariables>
+) => Promise<void>;
 
 interface UseFileDownloadReturn<TData, TError, TVariables> {
-  downloadFile: (
-    variables: TVariables,
-    options?: DownloadOptions<TData, TError, TVariables>
-  ) => Promise<void>;
+  downloadFile: DownloadFileFunction<TData, TError, TVariables>;
   isSuccess: boolean;
   isLoading: boolean;
   progress: number;
   downloaded: number;
 }
+
+export type DownloadProps = {
+  urls: string | string[];
+};
 
 export const useFileDownload = <
   TData = void,

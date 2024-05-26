@@ -9,10 +9,10 @@ import { useOverlay } from "hooks/common/useOverlay";
 
 import { BoxContainer } from "./styles";
 
-import type { IHome, TAgendaStatus } from "types/member/home.types";
+import type { HomeDataType, TAgendaStatus } from "types/member/home.types";
 
 interface DogCardProps {
-  data: Pick<IHome, "todayAgendaStatus">;
+  data: Pick<HomeDataType, "todayAgendaStatus">;
 }
 
 const HighlightText = ({ children }: PropsWithChildren) => (
