@@ -11,7 +11,7 @@ export enum Role {
   WITHDRAWN = "WITHDRAWN"
 }
 
-export type TAdminLoginInfo = {
+export type AdminAuthType = {
   adminId: number;
   adminName: string;
   schoolId: number;

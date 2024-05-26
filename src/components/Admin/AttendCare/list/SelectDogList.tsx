@@ -2,25 +2,27 @@ import { useContext } from "react";
 import { ICareDogInfo } from "types/admin/care.types";
 
 import { MainDogGrid } from "./styles";
-import DeleteDogCard from "../card/DeleteDogCard";
+import SelectDogCard from "../card/SelectDogCard";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
-interface DeleteDogListProps {
+interface Props {
+  type: "delete" | "select";
   data: ICareDogInfo[];
 }
 
-const DeleteDogList = ({ data }: DeleteDogListProps) => {
+const SelectDogList = ({ data, type }: Props) => {
   const selectIdsContext = useContext(SelectedIdsContext);
+  const selectId = type === "select" ? "dogId" : "attendanceId";
 
   return (
     <MainDogGrid>
       {data.map((item) => (
-        <DeleteDogCard
+        <SelectDogCard
           key={item.attendanceId}
           dogId={item.dogId}
           dogName={item.dogName}
-          attendanceId={item.attendanceId}
-          isChecked={selectIdsContext?.selectedIds.has(item.attendanceId)}
+          selectId={item[selectId]}
+          isChecked={selectIdsContext?.selectedIds.has(item[selectId])}
           toggleId={selectIdsContext?.toggleId}
         />
       ))}
@@ -28,4 +30,4 @@ const DeleteDogList = ({ data }: DeleteDogListProps) => {
   );
 };
 
-export default DeleteDogList;
+export default SelectDogList;

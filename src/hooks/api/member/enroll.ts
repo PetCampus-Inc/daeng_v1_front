@@ -12,13 +12,13 @@ import { ReadModeAdapter } from "libs/Adapter/ServerToFormAdapter";
 
 import type { IResponseAdminForm } from "types/admin/enrollment.types";
 import type {
-  IRequestEnrollment,
-  IResponseEnrollment,
-  TPickDropState
+  EnrollmentInfo,
+  EnrollmentData,
+  PickDropStateType
 } from "types/member/enrollment.types";
 
 export type ReturnType = Omit<
-  IResponseEnrollment,
+  EnrollmentData,
   | "requiredItemList"
   | "pickDropState"
   | "roundTicketNumber"
@@ -27,14 +27,14 @@ export type ReturnType = Omit<
   | "member"
 > & {
   requiredItemList: Map<number, boolean>;
-  pickDropState: TPickDropState;
+  pickDropState: PickDropStateType;
   roundTicketNumber: number[];
   monthlyTicketNumber: number[];
 };
 
 // 견주 가입신청서 조회
 export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
-  return useSuspenseQuery<IResponseEnrollment, Error, ReturnType>({
+  return useSuspenseQuery<EnrollmentData, Error, ReturnType>({
     queryKey: QUERY_KEY.ENROLLMENT(schoolId, memberId),
     queryFn: () => handleGetEnrollment({ schoolId, memberId }),
     refetchOnWindowFocus: false,
@@ -53,7 +53,7 @@ export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
 // 견주 가입신청서 등록
 export const usePostEnrollment = () => {
   const enrollMutation = useMutation({
-    mutationFn: (enrollmentData: IRequestEnrollment) => handlePostEnrollment(enrollmentData),
+    mutationFn: (enrollmentData: EnrollmentInfo) => handlePostEnrollment(enrollmentData),
     throwOnError: true
   });
 

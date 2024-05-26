@@ -14,21 +14,25 @@ interface UploadToS3Props {
   path: string;
 }
 
-function useMulterS3Upload<
-  TData = string[],
-  TError = Error,
-  TVariables extends UploadToS3Props = UploadToS3Props
->(): {
+interface UseS3UploadReturn<TData, TError, TVariables> {
   uploadToS3: UploadToS3Function<TData, TError, TVariables>;
   progress: number;
   uploaded: number;
-} {
+  isLoading: boolean;
+}
+
+export function useS3Upload<
+  TData = string[],
+  TError = Error,
+  TVariables extends UploadToS3Props = UploadToS3Props
+>(): UseS3UploadReturn<TData, TError, TVariables> {
   const s3Client = useMemo(
     () => new S3Client({ requestHandler: new XhrHttpHandler({}), ...s3ClientConfig }),
     []
   );
-  const [progress, setProgress] = useState(0); // 전체 업로드 진행률
-  const [uploaded, setUploaded] = useState(0); // 파일 업로드 상태
+  const [progress, setProgress] = useState(0); // 업로드 진행률
+  const [uploaded, setUploaded] = useState(0); // 파일 업로드 수
+  const [isLoading, setIsLoading] = useState(false); // 업로드 진행 중 상태
 
   const uploadToS3 = useCallback(
     async (variables: TVariables, options?: MutateOptions<TData, TError, TVariables>) => {
@@ -37,8 +41,9 @@ function useMulterS3Upload<
         throw new Error("No files to upload.");
       }
 
-      const urls = [];
+      const urls: string[] = [];
       setUploaded(0);
+      setIsLoading(true);
 
       for (const file of Array.from(files)) {
         setProgress(0);
@@ -65,6 +70,7 @@ function useMulterS3Upload<
           await uploader.done();
           urls.push(`https://${bucketName}.s3.amazonaws.com/${key}`);
           setUploaded((prev) => prev + 1);
+          setIsLoading(false);
         } catch (error) {
           if (options?.onError) {
             options.onError(error as TError, variables);
@@ -82,7 +88,5 @@ function useMulterS3Upload<
     [s3Client]
   );
 
-  return { uploadToS3, progress, uploaded };
+  return { uploadToS3, progress, uploaded, isLoading };
 }
-
-export { useMulterS3Upload };

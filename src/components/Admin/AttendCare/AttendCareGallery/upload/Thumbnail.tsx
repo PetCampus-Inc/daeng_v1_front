@@ -5,13 +5,13 @@ import {
   StyledDeleteButton,
   InnerShadow,
   StyledText
-} from "components/Admin/AttendCareGallery/upload/styles";
+} from "components/Admin/AttendCare/AttendCareGallery/upload/styles";
 import { Box } from "components/common";
 import { useOverlay } from "hooks/common/useOverlay";
 
 import PreviewPopup from "./PreviewPopup";
 
-import type { IFile } from "components/Admin/AttendCareGallery/upload/types";
+import type { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload/types";
 
 interface TumbnailProps {
   file: IFile;
