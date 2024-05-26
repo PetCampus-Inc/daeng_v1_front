@@ -111,11 +111,11 @@ export const CalendarWrapper = styled.div`
   }
 
   .react-calendar__year-view__months__month {
-    flex: 0 0 calc(33.3333% - 10px) !important;
+    flex: 0 0 calc(25% - 10px) !important;
     margin-inline-start: 5px !important;
     margin-inline-end: 5px !important;
     margin-block-end: 10px;
-    padding: 20px 6.6667px;
+    padding: 10px 6.6667px;
     font-size: 0.9rem;
     font-weight: 600;
     color: ${(props) => props.theme.colors.gray_1};
@@ -134,7 +134,7 @@ export const StyledCalendar = styled(Calendar)``;
 export const Date = styled.div`
   position: absolute;
   right: 7%;
-  top: 5.5%;
+  top: 18px;
   background-color: ${(props) => props.theme.colors.br_4};
   color: ${(props) => props.theme.colors.primaryColor};
   width: 15%;
