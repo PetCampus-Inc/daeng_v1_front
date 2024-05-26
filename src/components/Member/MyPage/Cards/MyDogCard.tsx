@@ -2,10 +2,12 @@ import { PATH } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import { usePostMemberDogDelete } from "hooks/api/member/member";
+import { useGetMemberDogDetailnfo, usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { memberEnrollmentDogDetailAtom } from "store/member";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
@@ -36,11 +38,13 @@ const MyDogCard = ({
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
+  const setdogDetailinfo = useSetRecoilState(memberEnrollmentDogDetailAtom);
   const { memberId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
+  const { data: MemeberDogInfo } = useGetMemberDogDetailnfo(Number(dogId));
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -62,7 +66,10 @@ const MyDogCard = ({
         title="등록된 유치원이 없어요"
         subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
         actionText="가입하기"
-        actionFn={() => navigate(PATH.MEMBER_MY_SCHOOL_SEARCH(String(memberId)))}
+        actionFn={() => {
+          navigate(PATH.MEMBER_MY_SCHOOL_SEARCH(String(memberId)));
+          setdogDetailinfo(MemeberDogInfo);
+        }}
       />
     ));
 
@@ -83,7 +90,6 @@ const MyDogCard = ({
     ));
 
   const handleDeleteDog = () => {
-    //TODO 강아지 리스트에서 삭제되는지 테스트 필요
     mutateMemberDogDelete(dogId);
     showToast("강아지가 삭제되었습니다", "bottom");
   };

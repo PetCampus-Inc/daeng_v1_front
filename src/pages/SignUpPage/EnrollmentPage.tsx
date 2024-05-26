@@ -7,6 +7,7 @@ import MemberInfo from "components/Enrollment/Form/MemberInfo";
 import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
 import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
 import TicketInfo from "components/Enrollment/Form/TicketInfo";
+import MemberDogInfo from "components/Enrollment/MemberDogInfoForm/DogInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
@@ -99,7 +100,11 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
               )}
 
               <S.Content $isVisible={currentStep === (isMemberAddDog ? 0 : 1)}>
-                <DogInfo requiredItems={requiredItemList} />
+                {isMemberAddDog ? (
+                  <MemberDogInfo requiredItems={requiredItemList} />
+                ) : (
+                  <DogInfo requiredItems={requiredItemList} />
+                )}
               </S.Content>
               <S.Content $isVisible={currentStep === (isMemberAddDog ? 1 : 2)}>
                 <TicketInfo requiredItems={requiredItemList} ticket={ticket} />
