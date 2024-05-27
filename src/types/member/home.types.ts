@@ -1,18 +1,26 @@
-import { IResponse } from "types/Response.type";
+import type { Role } from "types/admin/admin.type";
+import type { Nullable } from "types/helper.type";
+import type { IResponse } from "types/Response.type";
 
 export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
 export type TImageType = "IMAGE" | "PROFILE";
 export type TDogStatus = "ENROLLED" | "DROP_OUT" | "APPROVAL_PENDING";
 
-export interface IHome {
+export interface HomeDataType {
+  memberId: number;
+  memberNickname: string;
+  role: Role.ROLE_MEMBER;
+  memberProfileUri: string;
   dogId: number;
   dogName: string;
-  memberId: number;
+  dogProfile: string;
+  status: Nullable<TAttendanceStatus>;
   relation: string;
-  attendanceStatus?: TAttendanceStatus;
-  attendanceDate?: string;
+  attendanceStatus: TAttendanceStatus;
+  attendanceDate: number[];
   todayAgendaStatus: TAgendaStatus;
+  schoolName: Nullable<string>;
   imageList: ImageList[][];
 }
 
