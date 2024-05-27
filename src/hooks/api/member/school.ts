@@ -2,7 +2,11 @@ import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetSearchResult, handlePostMemberDogSchool } from "apis/member/enrollment.api";
-import { handleGetMemberDogSchool } from "apis/member/member.api";
+import {
+  handleGetMemberAgreement,
+  handleGetMemberDogPrecaution,
+  handleGetMemberDogSchool
+} from "apis/member/member.api";
 
 export const useGetSchoolInfoList = (searchText: string) => {
   return useSuspenseQuery({
@@ -32,5 +36,20 @@ export const useGetDogSchoolInfo = (dogId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.DOG_SHCOOL_INFO,
     queryFn: () => handleGetMemberDogSchool(dogId)
+  });
+};
+
+export const useGetMemberPrecautions = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: ["getPrecautions"],
+    queryFn: () => handleGetMemberDogPrecaution(dogId),
+    staleTime: 1000 * 60 * 60
+  });
+};
+
+export const useGetMemberAgreement = (schoolId: number, agreementId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_AGREEMENT,
+    queryFn: () => handleGetMemberAgreement(schoolId, agreementId)
   });
 };

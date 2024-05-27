@@ -125,3 +125,8 @@ export interface IMemberDogSchoolInfo extends IResponse {
   phoneNumber: string;
   address: string;
 }
+
+export interface IMemberAgreement extends IResponse {
+  agreementId: number;
+  text: string;
+}

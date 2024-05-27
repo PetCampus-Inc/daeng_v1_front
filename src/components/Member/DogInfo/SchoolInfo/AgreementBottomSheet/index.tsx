@@ -11,6 +11,7 @@ interface IAlertBottomSheet extends IBottomSheetProps {
   closeText: string;
   closeFn: () => void;
   icon: ReactNode;
+  text: string;
 }
 
 const AgreementBottomSheet = ({
@@ -20,7 +21,8 @@ const AgreementBottomSheet = ({
   hasControl = false, // 바텀시트 상단 x 버튼
   closeText,
   closeFn,
-  icon
+  icon,
+  text
 }: IAlertBottomSheet) => {
   const [isChecked, setIsChecked] = useState(false);
 

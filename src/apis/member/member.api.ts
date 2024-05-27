@@ -11,7 +11,8 @@ import type {
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
   HomeDataType,
-  IMemberDogSchoolInfo
+  IMemberDogSchoolInfo,
+  IMemberAgreement
 } from "types/member/home.types";
 
 // 견주 홈 메인
@@ -155,4 +156,20 @@ export const handleGetMemberDogPrecaution = async (dogId: number): Promise<IPrec
   const url = `member/dog/school?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data.data.precaution;
+};
+
+// 멤버 유의사항 상세 내용
+export const handleGetMemberAgreement = async (schoolId: number, agreementId: number) => {
+  const url = `member/agreement?schoolId=${schoolId}&agreementId=${agreementId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
+//멤버 유의사항 재동의
+export const handlePostMemberAgreement = async (
+  dogId: number,
+  agreementId: number
+): Promise<void> => {
+  const url = `member/agreement?dogId=${dogId}&agreementId=${agreementId}`;
+  return await customAxios.post(url);
 };
