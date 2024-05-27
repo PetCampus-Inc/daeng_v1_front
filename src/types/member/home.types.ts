@@ -118,3 +118,9 @@ export interface IMemberDogInfo extends IResponse {
   member: IMemberProfilePostInfo;
   dogMemo: string;
 }
+
+export interface IDogVaccination extends IResponse {
+  dogIdList: number[];
+  imageUriList: string[];
+  comment: string;
+}
