@@ -12,10 +12,15 @@ import {
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
   handlePostMemoDogAlleray,
-  handlePostMemoDogPickdrop
+  handlePostMemoDogPickdrop,
+  handlePostMemoDogVaccination
 } from "apis/member/member.api";
 import { useNavigate } from "react-router-dom";
-import { IMemberDogPostDetailInfo, IMemberProfilePostInfo } from "types/member/home.types";
+import {
+  IDogVaccination,
+  IMemberDogPostDetailInfo,
+  IMemberProfilePostInfo
+} from "types/member/home.types";
 import showToast from "utils/showToast";
 
 // 견주 홈 메인
@@ -141,6 +146,23 @@ export const usePostMemberDogAlleray = (dogId: number) => {
     },
     onError: () => {
       showToast("메모 등록을 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return memberDogAllerayMutation.mutate;
+};
+
+// 강아지의 방접종 파일 파일 업로드
+export const usePostMembeVaccination = (dogId: number) => {
+  const queryClient = useQueryClient();
+  const memberDogAllerayMutation = useMutation({
+    mutationFn: ({ req }: { req: IDogVaccination }) => handlePostMemoDogVaccination(req),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
+    },
+    onError: () => {
+      showToast("업로드가 실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
