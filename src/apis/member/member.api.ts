@@ -9,7 +9,8 @@ import type {
   IMainAlbum,
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
-  HomeDataType
+  HomeDataType,
+  IDogVaccination
 } from "types/member/home.types";
 
 // 견주 홈 메인
@@ -137,6 +138,19 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
   const { data } = await customAxios.post(url, {
     dogId: dogId,
     memo: memo
+  });
+  return data;
+};
+
+// 강아지 예방 접종 파일 추가 업로드
+export const handlePostMemoDogVaccination = async (
+  req: IDogVaccination
+): Promise<IDogVaccination> => {
+  const url = `/member/vaccination`;
+  const { data } = await customAxios.post(url, {
+    dogIdList: req.dogIdList,
+    imageUriList: req.imageUriList,
+    comment: req.comment
   });
   return data;
 };
