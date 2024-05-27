@@ -125,7 +125,11 @@ export const CalendarWrapper = styled.div`
   .react-calendar__tile:enabled:focus,
   .react-calendar__tile--active {
     background-color: ${(props) => props.theme.colors.yellow_2};
+    color: ${(props) => props.theme.colors.primaryColor};
     border-radius: 0.3rem;
+  }
+  .react-calendar__tile--active abbr {
+    color: ${(props) => props.theme.colors.primaryColor};
   }
 `;
 
