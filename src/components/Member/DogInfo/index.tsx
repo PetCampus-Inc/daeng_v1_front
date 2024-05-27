@@ -13,6 +13,7 @@ import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/T
 import CarouselModal from "components/common/Modal/CarouselModal";
 import {
   useGetMemberDogDetailnfo,
+  usePostMembeVaccination,
   usePostMemberDogAlleray,
   usePostMemberDogPickdrop
 } from "hooks/api/member/member";
@@ -37,6 +38,7 @@ const DogInfo = ({ dogId }: IProps) => {
   const { data } = useGetMemberDogDetailnfo(dogId);
   const mutatePostDogAlleray = usePostMemberDogAlleray(dogId);
   const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
+  const mutatePostVaccination = usePostMembeVaccination(dogId);
 
   const DOG_BIRETH = formatDate(
     String(data.dogBirthDate[0]),
@@ -85,13 +87,6 @@ const DogInfo = ({ dogId }: IProps) => {
     overlay.open(({ isOpen, close }) => (
       <CarouselModal imgUrl={imgUrl} upDateData={upDateData} isOpen={isOpen} close={close} />
     ));
-
-  // MEMO vaccination 추후 다른 방식으로 사용 예정
-  const eventShowToast = (type: string) => {
-    if (type === "vaccination") {
-      showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
-    }
-  };
 
   return (
     <Flex direction="column" gap="24">
