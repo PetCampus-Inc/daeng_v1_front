@@ -19,7 +19,7 @@ const SimpleButton = ({
   leftAddon,
   rightAddon,
   colorScheme = "primary",
-  customStyle,
+  css,
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   const contentProps = {
@@ -29,7 +29,7 @@ const SimpleButton = ({
   };
 
   return (
-    <StyledButton colorScheme={colorScheme} customStyle={customStyle} {...props}>
+    <StyledButton colorScheme={colorScheme} css={css} {...props}>
       <ButtonContent {...contentProps} />
     </StyledButton>
   );

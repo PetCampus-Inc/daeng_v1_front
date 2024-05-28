@@ -57,6 +57,7 @@ type BoxFlexBoxProps = {
   direction?: "row" | "column";
   justify?: "center" | "flex-start" | "flex-end" | "space-between" | "space-around";
   align?: "center" | "flex-start" | "flex-end" | "stretch";
+  gap?: number;
 };
 
 export type BoxBorderProps = {

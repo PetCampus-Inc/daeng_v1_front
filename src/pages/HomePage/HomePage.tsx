@@ -1,9 +1,9 @@
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
-import EmptyAlbum from "components/Home/Empty/EmptyAlbum";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
-import HomeImageSlider from "components/Home/HomeImageSlider";
+import HomeImageAlbum from "components/Home/HomeImageAlbum";
+import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { StyledBox } from "components/Home/styles";
 import { useGetHomeInfo } from "hooks/api/member/member";
 import { Role } from "types/admin/admin.type";
@@ -11,19 +11,19 @@ import { Role } from "types/admin/admin.type";
 import type { HomeDataType } from "types/member/home.types";
 
 const HomePage = () => {
-  // const { data } = useGetHomeInfo(8, 8);
+  const { data } = useGetHomeInfo(8, 8);
 
   return (
     <>
-      <Header type="main" text={mock?.dogName} />
+      <Header type="main" text={data?.dogName} />
       <main>
         <StyledBox type="top" pt={2} pb={2}>
-          <HomeHeader data={mock} />
-          <HomeDashboard data={mock} />
+          <HomeHeader data={data} />
+          <HomeDashboard data={data} />
         </StyledBox>
         <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
-          <HomeImageSlider images={mock.imageList} />
-          <EmptyAlbum />
+          <HomeImageCommentSlider images={data.imageList} />
+          <HomeImageAlbum images={data.imageList} />
         </StyledBox>
       </main>
       <NavBar />
@@ -56,7 +56,7 @@ const mock: HomeDataType = {
           "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&w=2864&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         imageType: "IMAGE",
         comment: "갱얼지가\n몽몽몽몽\n몽몽\n몽몽이\n몽몽몽\n운다",
-        createdTime: "2024-05-26T00:14:51.149Z"
+        createdTime: "2024-05-25T18:08:12.368Z"
       }
     ],
     [

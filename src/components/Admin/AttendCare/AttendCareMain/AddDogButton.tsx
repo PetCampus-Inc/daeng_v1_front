@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
 
-import { SelectedDogsProvider } from "./context/SelectedDogsProvider";
-import AddCaredogBottomSheet from "./modal/AddCaredogBottomSheet";
-import AddIcon from "../../../assets/svg/add-icon";
-import ArrowRightIcon from "../../../assets/svg/arrow-right-icon";
-import { useOverlay } from "../../../hooks/common/useOverlay";
-import SimpleButton from "../../common/Button/SimpleButton";
+import AddIcon from "../../../../assets/svg/add-icon";
+import ArrowRightIcon from "../../../../assets/svg/arrow-right-icon";
+import { useOverlay } from "../../../../hooks/common/useOverlay";
+import SimpleButton from "../../../common/Button/SimpleButton";
+import { SelectedDogsProvider } from "../context/SelectedDogsProvider";
+import AddCaredogBottomSheet from "../modal/AddCaredogBottomSheet";
 
 interface AddButtonProps {
   handleNextPopup: () => void;

@@ -20,7 +20,7 @@ type ButtonProps = {
 
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) =>
-    !["p", "pt", "pb", "ph", "pr", "pl", "colorScheme", "customStyle"].includes(prop)
+    !["p", "pt", "pb", "ph", "pr", "pl", "colorScheme", "css"].includes(prop)
 })<ButtonProps>`
   display: flex;
   padding-top: ${({ p, pt }) => p ?? pt ?? 0.125}rem;
@@ -33,9 +33,9 @@ export const StyledButton = styled.button.withConfig({
   ${({ theme }) => theme.typo.label2_14_M};
   border-radius: 8px;
 
-  ${({ theme, colorScheme, customStyle }) => {
+  ${({ theme, colorScheme, css }) => {
     const scheme = colorSchemeStyles(theme)[colorScheme as keyof typeof colorSchemeStyles];
-    return customStyle ? customStyle : scheme;
+    return css ? css : scheme;
   }};
 `;
 
