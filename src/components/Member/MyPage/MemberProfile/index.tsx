@@ -2,7 +2,7 @@ import { PATH } from "constants/path";
 import { RELATION_DATA } from "constants/relation";
 
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
-import { IMemberInfo } from "types/member/home.types";
+import { IMemberInfo } from "types/member/main.types";
 
 import * as S from "./styles";
 
