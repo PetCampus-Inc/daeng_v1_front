@@ -33,6 +33,11 @@ const HomePage = () => {
       <DogManagerPopup isOpen={isOpen} close={close} memberId={memberId} />
     ));
 
+  const dogInfo = {
+    dogName: data.dogName,
+    dogId: data.dogId
+  };
+
   return (
     <>
       <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} />
@@ -43,7 +48,7 @@ const HomePage = () => {
         </StyledBox>
         <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
           <HomeImageCommentSlider images={data.imageList} />
-          <HomeImageAlbum images={data.imageList} />
+          <HomeImageAlbum images={data.imageList} dogInfo={dogInfo} />
         </StyledBox>
       </main>
       <NavBar />
