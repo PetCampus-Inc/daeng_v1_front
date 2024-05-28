@@ -1,6 +1,7 @@
 export interface IAdminLoginInfo {
   inputId: string;
   inputPw: string;
+  fcmToken: string;
 }
 
 export interface ITeacherApprove {

@@ -31,7 +31,8 @@ export const postAdminLogin = async (req: IAdminLoginInfo): Promise<AdminAuthTyp
     method: "POST",
     data: {
       id: req.inputId,
-      pwd: req.inputPw
+      pwd: req.inputPw,
+      fcmToken: req.fcmToken
     }
   });
   return data;
