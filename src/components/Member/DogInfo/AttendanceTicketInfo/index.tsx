@@ -4,11 +4,11 @@ import CalendarIcon from "assets/svg/calendar";
 import RemainCountIcon from "assets/svg/remain-count-icon";
 import { DetailItem, TextWrapper } from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
 import { Flex } from "components/common";
+import AllCalendar from "components/common/Calendar/AllCalendar";
 import { useGetMemberDogEnrollmemntInfo, useGetMemberSchoolInfo } from "hooks/api/member/member";
 import { formatDate } from "utils/formatter";
 import { remainingExpirationDays } from "utils/remainingDays";
 
-import Calendar from "./Calender/Calendar";
 import * as S from "./styles";
 import { Icon } from "../styles";
 
@@ -48,7 +48,7 @@ const AttendanceTicketInfo = ({ dogId }: IProps) => {
     <Flex direction="column" gap="41">
       <section>
         <S.DogDetailInfoText className="big">출결</S.DogDetailInfoText>
-        <Calendar />
+        <AllCalendar />
       </section>
 
       <section>
