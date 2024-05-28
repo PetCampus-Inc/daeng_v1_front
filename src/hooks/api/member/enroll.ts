@@ -6,22 +6,19 @@ import {
   handleGetBreed,
   handleGetEnrollment,
   handlePostEnrollment
-} from "apis/member/school.api";
+} from "apis/member/enrollment.api";
 import { Adapter } from "libs/Adapter";
 import { ReadModeAdapter } from "libs/Adapter/ServerToFormAdapter";
-import { useSetRecoilState } from "recoil";
-import { memberInfoState } from "store/form";
 
 import type { IResponseAdminForm } from "types/admin/enrollment.types";
 import type {
-  IRequestEnrollment,
-  IResponseEnrollment,
-  TMemberDto,
-  TPickDropState
+  EnrollmentInfo,
+  EnrollmentData,
+  PickDropStateType
 } from "types/member/enrollment.types";
 
 export type ReturnType = Omit<
-  IResponseEnrollment,
+  EnrollmentData,
   | "requiredItemList"
   | "pickDropState"
   | "roundTicketNumber"
@@ -30,28 +27,19 @@ export type ReturnType = Omit<
   | "member"
 > & {
   requiredItemList: Map<number, boolean>;
-  pickDropState: TPickDropState;
+  pickDropState: PickDropStateType;
   roundTicketNumber: number[];
   monthlyTicketNumber: number[];
 };
 
 // 견주 가입신청서 조회
 export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
-  // const setMemberInfo = useSetRecoilState(memberInfoState);
-
-  return useSuspenseQuery<IResponseEnrollment, Error, ReturnType>({
+  return useSuspenseQuery<EnrollmentData, Error, ReturnType>({
     queryKey: QUERY_KEY.ENROLLMENT(schoolId, memberId),
     queryFn: () => handleGetEnrollment({ schoolId, memberId }),
     refetchOnWindowFocus: false,
     select: (data): ReturnType => {
       const { schoolFormName, ...rest } = data;
-
-      // setMemberInfo({
-      //   member: rest.member,
-      //   schoolFormId: rest.schoolFormId,
-      //   schoolFormName
-      // });
-
       const formdata = Adapter.from(rest).to<IResponseAdminForm, ReturnType>((item) => {
         const adapterInstance = new ReadModeAdapter(item);
         return adapterInstance.adapt();
@@ -65,7 +53,7 @@ export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
 // 견주 가입신청서 등록
 export const usePostEnrollment = () => {
   const enrollMutation = useMutation({
-    mutationFn: (enrollmentData: IRequestEnrollment) => handlePostEnrollment(enrollmentData),
+    mutationFn: (enrollmentData: EnrollmentInfo) => handlePostEnrollment(enrollmentData),
     throwOnError: true
   });
 

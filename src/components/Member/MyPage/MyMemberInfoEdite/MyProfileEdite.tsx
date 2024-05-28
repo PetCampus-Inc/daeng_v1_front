@@ -8,13 +8,16 @@ import { IMemberInfoEdite } from "types/Member.type";
 import * as S from "./styles";
 import RoleEditeButton from "../Buttons/RoleEditeButton";
 
-const MyProfileEdite = ({ handleFocus, handleBlur }: IMemberInfoEdite) => {
+const MyProfileEdite = ({ handleFocus, handleBlur, memberData }: IMemberInfoEdite) => {
   // TODO setValue, watch의 경우 이후 기능 추가 후 삭제 여부 판단하기
   const { register, setValue, watch } = useFormContext();
   const [isShowRoles, setIsShowRoles] = useState(false);
   const handleShowRoles = () => {
-    console.log("호칭");
     setIsShowRoles((prev) => !prev);
+  };
+
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.name, e.target.value);
   };
 
   return (
@@ -32,16 +35,24 @@ const MyProfileEdite = ({ handleFocus, handleBlur }: IMemberInfoEdite) => {
       </S.ProfileBox>
       <S.MyDogName>
         <TextInput
-          {...register("dodName", { required: true })}
-          placeholder="강아지 이름을 입력해주세요"
-          value="뽀뽀"
+          register={register}
+          {...register("nickName", { required: true })}
+          placeholder="닉네임을 입력해주세요"
+          defaultValue={memberData.nickName}
+          value={watch("nickName")}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onChange={handleChangeInput}
+          className="defaultValue"
           css={InputStyle}
         />
         의
       </S.MyDogName>
-      <RoleEditeButton isShowRoles={isShowRoles} handleShowRoles={handleShowRoles} />
+      <RoleEditeButton
+        isShowRoles={isShowRoles}
+        handleShowRoles={handleShowRoles}
+        relationData={memberData.relation}
+      />
     </S.MyProfileWrapper>
   );
 };

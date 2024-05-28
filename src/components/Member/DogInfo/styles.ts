@@ -151,7 +151,6 @@ export const Icon = styled.span<IProps>`
   overflow: hidden;
 
   & > svg {
-    width: 100%;
     height: 100%;
   }
 `;

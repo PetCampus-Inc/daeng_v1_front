@@ -15,17 +15,34 @@ export type TSchoolInfo = {
   phoneNumber: string;
   address: string;
 };
+type TRoundTicketNumber = number[];
+type TMonthlyTicketNumber = number[];
+export type TPickDropState = "RUNNING" | "NOT_RUNNING";
+export type RelationType = "MOTHER" | "FATHER" | "SISTER" | "BROTHER" | "FRIEND";
+export type TMemberDto = {
+  memberId: number;
+  memberProfileUri: string;
+  memberName: string;
+  memberGender: string;
+  nickName: string;
+  address: string;
+  addressDetail: string;
+  memberAddress: string;
+  phoneNumber: string;
+  emergencyNumber: Nullable<string>;
+  relation: RelationType;
+};
 
-// 대기 목록 가입신청서 조회
-export interface IResponseMemberForm
-  extends Omit<IResponseAdminForm, "ticketType" | "roundTicketNumber" | "monthlyTicketNumber"> {
+// 견주 가입신청서 조회
+export interface MemberFormData {
   enrollmentFormId: number;
   memberId: number;
   memberName: string;
   memberGender: TMemberGender;
   address: string;
+  addressDetail: Nullable<string>;
   phoneNumber: string;
-  emergencyNumber: string;
+  emergencyNumber: Nullable<string>;
   dogName: string;
   dogGender: TDogGender;
   dogSize: TDogSize;
@@ -37,35 +54,35 @@ export interface IResponseMemberForm
   allergyDisease: string;
   vaccination: TVaccination;
   fileUrl: string;
-  ticketType: TTicketType;
-  roundTicketNumber: number;
-  monthlyTicketNumber: number;
+  enrollmentTicketType: TTicketType;
+  enrollmentRoundTicketNumber: number;
+  enrollmentMonthlyTicketNumber: number;
   attendanceDays: string[];
   pickDropRequest: TPickDropRequest;
   pickDropType: TPickDropType;
   pickDropMemo: string;
   agreements: number[];
-  dogId: number;
-  school: TSchoolInfo;
-  graduateDate: string;
-  status: TAttendanceStatus;
-
-  // FIXME: 백엔드에게 인터페이스 변경 요청!!
+  schoolFormResponse: ISchoolFormResponse;
 }
 
-export type IMemberForm = Omit<IResponseMemberForm, "status" | "graduateDate" | "school">;
-
-type TRoundTicketNumber = number[];
-type TMonthlyTicketNumber = number[];
-export type TPickDropState = "RUNNING" | "NOT_RUNNING";
-export type TMemberDto = {
-  memberId: number;
-  memberName: string;
-  memberGender: string;
-  memberAddress: string;
-  phoneNumber: string;
-  emergencyNumber: Nullable<string>;
-};
+interface ISchoolFormResponse {
+  schoolFormId: number;
+  schoolFormName: string;
+  requiredItemList: number[];
+  priceInfo: string;
+  ticketType: string[];
+  roundTicketNumber: number[];
+  openDays: string[];
+  monthlyTicketNumber: number[];
+  ticketInfo: string;
+  limitsInfo: string;
+  accidentInfo: string;
+  abandonmentInfo: string;
+  pickDropState: TPickDropState;
+  pickDropNotice: string;
+  pickDropInfo: string;
+  member: Nullable<TMemberDto>;
+}
 
 // 원장 가입신청서 미리보기
 export interface IResponseAdminForm {
@@ -86,11 +103,11 @@ export interface IResponseAdminForm {
   member: Nullable<TMemberDto>;
 }
 
-// 원장 가입신청서 저장
-export interface IRequestAdminEnrollment {
+// 원장 가입신청서 서버 저장
+export interface AdminFormInfo {
   schoolId: number;
   adminId: number;
-  formName: Nullable<string>; // TODO: submit 폼 때문에 Nullable 처리되어 있지만, 다른 방안 고려해보기
+  formName: string;
   requiredItemList: number[];
   priceInfo: string;
   ticketType: string[];
@@ -104,4 +121,9 @@ export interface IRequestAdminEnrollment {
   pickDropState: TPickDropState;
   pickDropInfo: string;
   pickDropNotice: string;
+}
+
+// 원장 가입신청서 폼 저장
+export interface AdminFormSaveType extends Omit<AdminFormInfo, "formName"> {
+  formName: null;
 }

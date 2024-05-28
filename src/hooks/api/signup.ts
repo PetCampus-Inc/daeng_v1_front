@@ -3,17 +3,27 @@ import {
   getCheckId,
   postOwnerSignUp,
   postRegistrationNumber,
-  postTeacherSignUpSubmit
+  postTeacherSignUp,
+  postTeacherSignUpCancel
 } from "apis/admin/admin.api";
-import { handleGetSchool } from "apis/member/school.api";
+import { handleGetSchool } from "apis/member/enrollment.api";
 
 // 선생님 회원가입 요청
 export const useTeacherSinUp = () => {
   const { mutate } = useMutation({
-    mutationFn: postTeacherSignUpSubmit
+    mutationFn: postTeacherSignUp
   });
 
   return { mutateTeacherSignUp: mutate };
+};
+
+// 선생님 회원가입 요청 취소
+export const useTeacherSinUpCancel = () => {
+  const { mutate } = useMutation({
+    mutationFn: postTeacherSignUpCancel
+  });
+
+  return { mutateTeacherSignUpCancel: mutate };
 };
 
 // 원장님 회원가입 요청

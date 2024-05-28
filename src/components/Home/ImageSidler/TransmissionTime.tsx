@@ -1,7 +1,11 @@
+import { getTimeAgo } from "utils/date";
+
 import { TimeText } from "./styles";
 
-const TransmissionTime = () => {
-  return <TimeText>1시간 전</TimeText>;
+const TransmissionTime = ({ time }: { time?: string }) => {
+  const timeAgo = time ? getTimeAgo(time) : null;
+
+  return <TimeText>{timeAgo}</TimeText>;
 };
 
 export default TransmissionTime;

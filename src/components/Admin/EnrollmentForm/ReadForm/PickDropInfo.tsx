@@ -14,8 +14,6 @@ interface PickDropInfoProps {
 const PickDropInfo = ({ item }: PickDropInfoProps) => {
   const { register, watch } = useFormContext();
 
-  console.log(watch("pickDropRequest"));
-
   return (
     <>
       <Card>

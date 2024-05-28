@@ -1,7 +1,6 @@
 import { useAttendDogSearchQuery, useGetAttendDogList } from "hooks/api/attendanceQuery";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { type SetStateAction, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 
 import AttendDogSubmitButton from "./AttendanceButton/AttendDogSubmitButton";
 import AttendanceSearchInput from "./AttendanceInput/AttendanceSearchInput";
@@ -17,7 +16,7 @@ interface AttendanceProps {
 }
 
 const AttendanceMode = ({ isFocus, setIsFocus, setMode }: AttendanceProps) => {
-  const { schoolId } = useRecoilValue(adminLoginInfoAtom);
+  const { schoolId } = useAdminInfo();
   const { data: dogList } = useGetAttendDogList(schoolId);
   const [searchText, setSearchText] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");

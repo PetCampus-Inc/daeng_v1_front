@@ -1,3 +1,5 @@
+import { PATH } from "constants/path";
+
 import { Text } from "components/common";
 import Badge, { BadgeProps } from "components/common/Badge";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +30,7 @@ const MainDogCard = ({ info }: { info: ICareDogInfo }) => {
   return (
     <CardContainer
       key={info.dogId}
-      onClick={() => navigate(`notice/${info.dogId}?dog_name=${info.dogName}`)}
+      onClick={() => navigate(PATH.ADMIN_CARE_NOTICE(`${info.dogId}?dog_name=${info.dogName}`))}
     >
       <ListItemImg size="sm">
         <img

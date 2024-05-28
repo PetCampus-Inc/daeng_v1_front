@@ -4,7 +4,6 @@ import { request } from "libs/CustomAxios/request";
 import {
   IAdminLoginInfo,
   INewEnrollmentList,
-  ITeacherApprove,
   ITeacherList,
   IWaitingOwnerInfo
 } from "types/Admin.type";
@@ -14,7 +13,7 @@ import type {
   IOwnerSignUpInfo,
   ITeacherSignUpData,
   ITeacherSignUpInfo,
-  TAdminLoginInfo
+  AdminAuthType
 } from "types/admin/admin.type";
 
 // 아이디 중복확인
@@ -25,9 +24,9 @@ export const getCheckId = async (id: string): Promise<number> => {
 };
 
 // 관리자 로그인
-export const postAdminLogin = async (req: IAdminLoginInfo): Promise<TAdminLoginInfo> => {
+export const postAdminLogin = async (req: IAdminLoginInfo): Promise<AdminAuthType> => {
   const url = `admin/login`;
-  const { data } = await request<IResponse<TAdminLoginInfo>>({
+  const { data } = await request<IResponse<AdminAuthType>>({
     url,
     method: "POST",
     data: {
@@ -67,9 +66,7 @@ export const postOwnerSignUp = async (req: IOwnerSignUpInfo): Promise<void> => {
 };
 
 // 선생님 회원가입 요청
-export const postTeacherSignUpSubmit = async (
-  req: ITeacherSignUpInfo
-): Promise<ITeacherSignUpData> => {
+export const postTeacherSignUp = async (req: ITeacherSignUpInfo): Promise<ITeacherSignUpData> => {
   const url = `admin/submit/teacher/approval`;
   const { data } = await request<IResponse<ITeacherSignUpData>>({
     url,
@@ -86,45 +83,33 @@ export const postTeacherSignUpSubmit = async (
 };
 
 // 선생님 회원가입 요청 취소
-export const handleTeacherSignUpCancel = async (adminId: number) => {
+export const postTeacherSignUpCancel = async (adminId: number): Promise<void> => {
   const url = `admin/cancel/teacher/approval`;
-  const { data } = await customAxios.post(url, adminId);
-  return data;
-};
-
-// 선생님 가입 승인
-export const handleTeacherApprove = async (req: ITeacherApprove) => {
-  const url = `admin/approve/teacher/approval`;
-  const { data } = await customAxios.post(url, {
-    adminId: req.submittedAdminId,
-    schoolId: req.submittedSchoolId
+  return await request<void>({
+    url,
+    method: "POST",
+    params: {
+      adminId
+    }
   });
-  return data;
-};
-
-// 선생님 가입 거절
-export const handleTeacherDeny = async (adminId: number) => {
-  const url = `admin/deny/teacher/approval`;
-  const { data } = await customAxios.post(url, adminId);
-  return data;
 };
 
 // 견주 가입 승인
-export const handleMemberApprove = async (memberId: number) => {
+export const postMemberApprove = async (memberId: number) => {
   const url = `admin/approve/member/approval`;
   const { data } = await customAxios.post(url, memberId);
   return data;
 };
 
 // 견주 가입 거절
-export const handleMemberDeny = async (memberId: number) => {
+export const postMemberDeny = async (memberId: number) => {
   const url = `admin/deny/member/approval`;
   const { data } = await customAxios.post(url, memberId);
   return data;
 };
 
 // 원장 선생님 목록 조회
-export const handleGetTeacherList = async (adminId: number): Promise<ITeacherList> => {
+export const getTeacherList = async (adminId: number): Promise<ITeacherList> => {
   const url = `admin/teachers/main`;
   const { data } = await customAxios.get(url, {
     params: {
@@ -135,7 +120,7 @@ export const handleGetTeacherList = async (adminId: number): Promise<ITeacherLis
 };
 
 // 원장 신규관리 메인페이지
-export const handleGetNewEnrollment = async (
+export const getNewEnrollment = async (
   adminId: number,
   schoolId: number
 ): Promise<INewEnrollmentList> => {
@@ -150,9 +135,7 @@ export const handleGetNewEnrollment = async (
 };
 
 // 원장 신규관리 - 가입 신청 승인 대기중인 견주 목록
-export const handleGetWaitingOwnersList = async (
-  schoolId: number
-): Promise<IWaitingOwnerInfo[]> => {
+export const getWaitingOwnersList = async (schoolId: number): Promise<IWaitingOwnerInfo[]> => {
   const url = `admin/enrollment/list`;
   const { data } = await customAxios.get(url, {
     params: {
@@ -163,35 +146,35 @@ export const handleGetWaitingOwnersList = async (
 };
 
 // 가입신청서 승인
-export const handlePostApproveForm = async (enrollmentFormId: number) => {
+export const postApproveForm = async (enrollmentFormId: number) => {
   const url = `admin/enrollment/approve?enrollmentFormId=${enrollmentFormId}`;
   const { data } = await customAxios.post(url);
   return data;
 };
 
 // 가입신청서 거절
-export const handlePostDenyForm = async (enrollmentFormId: number) => {
+export const postDenyForm = async (enrollmentFormId: number) => {
   const url = `admin/enrollment/deny?enrollmentFormId=${enrollmentFormId}`;
   const { data } = await customAxios.post(url);
   return data;
 };
 
 // 선생님 승인
-export const handlePostApproveTeacher = async (adminId: number) => {
+export const postApproveTeacher = async (adminId: number) => {
   const url = `admin/approve/teacher/approval?adminId=${adminId}`;
   const { data } = await customAxios.post(url);
   return data;
 };
 
 // 선생님 거절
-export const handlePostDenyTeacher = async (adminId: number) => {
+export const postDenyTeacher = async (adminId: number) => {
   const url = `admin/deny/teacher/approval?adminId=${adminId}`;
   const { data } = await customAxios.post(url);
   return data;
 };
 
 // 선생님 삭제 (유치원 admin에서 삭제)
-export const handleDeleteTeacher = async (adminId: number) => {
+export const postDeleteTeacher = async (adminId: number) => {
   const url = `admin/delete/teacher?adminId=${adminId}`;
   const { data } = await customAxios.post(url);
   return data;

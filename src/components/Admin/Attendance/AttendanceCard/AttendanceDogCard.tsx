@@ -11,7 +11,7 @@ interface AttendanceCardProps {
 
 const AttendanceDogCard = ({ dogName, onClick, isSelected }: AttendanceCardProps) => {
   return (
-    <S.CardContainer $isAvatar>
+    <S.CardContainer $isAvatar onClick={onClick}>
       <S.Stack>
         <S.ImageWrapper>
           <S.Image
@@ -19,9 +19,9 @@ const AttendanceDogCard = ({ dogName, onClick, isSelected }: AttendanceCardProps
             alt={dogName + " 이미지"}
           />
         </S.ImageWrapper>
-        <S.Text>{dogName}</S.Text>
+        <S.StyledText>{dogName}</S.StyledText>
       </S.Stack>
-      <S.FootButton type="button" className={isSelected ? "" : "active"} onClick={onClick}>
+      <S.FootButton type="button" className={isSelected ? "" : "active"}>
         <FootIcon />
       </S.FootButton>
     </S.CardContainer>

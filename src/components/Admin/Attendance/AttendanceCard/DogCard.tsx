@@ -3,12 +3,11 @@ import { PATH } from "constants/path";
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
 import { useDeleteAttendDog } from "hooks/api/attendanceQuery";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import useFormatDate from "hooks/common/useFormatDate";
 import { useOverlay } from "hooks/common/useOverlay";
 import { Suspense, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 import { getOptions } from "utils/options";
 import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/ticket";
 
@@ -17,9 +16,9 @@ import AttendanceOptionList from "../AttendanceButton/AttendanceOptionList";
 import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
 import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
 
-import type { IAttendDogInfo } from "types/admin.attendance.type";
+import type { AttendanceData } from "types/admin.attendance.type";
 
-type DogCardProps = { info: IAttendDogInfo };
+type DogCardProps = { info: AttendanceData };
 
 const DogCard = memo(({ info }: DogCardProps) => {
   const overlay = useOverlay();
@@ -37,7 +36,7 @@ const DogCard = memo(({ info }: DogCardProps) => {
 
   const { mutateDelete } = useDeleteAttendDog();
   const navigate = useNavigate();
-  const { role: adminRole } = useRecoilValue(adminLoginInfoAtom);
+  const { role: adminRole } = useAdminInfo();
 
   const openCallPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -102,7 +101,7 @@ const DogCard = memo(({ info }: DogCardProps) => {
         />
       </S.ImageWrapper>
       <S.InfoWrapper className={isRoundExpired || isMonthlyExpired ? "expired" : ""}>
-        <S.Text className="dogName">{info.dogName}</S.Text>
+        <S.StyledText className="dogName">{info.dogName}</S.StyledText>
         <S.Info $isBeforeExpiry={isRoundExpiringSoon || isMonthlyExpiringSoon}>
           <S.Icon>
             {(isRoundExpiringSoon || isMonthlyExpiringSoon) && <AlertSmallIcon color="brown" />}

@@ -9,9 +9,10 @@ import {
   handleGetCareDogs,
   handleGetNewCareDogs,
   handleGetPastAgenda,
+  handlePostAlbum,
   handleSendAgenda,
   handleTempSaveCareDog
-} from "apis/admin.caredog.api";
+} from "apis/admin/care.api";
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
@@ -99,6 +100,16 @@ export const useDeleteCareDogs = () => {
   });
 
   return { mutateDeleteCareDogs: deleteCareDogsMutation.mutate };
+};
+
+export const useCreateAlbum = () => {
+  const createAlbumMutation = useMutation({
+    mutationFn: handlePostAlbum,
+    onSuccess: () => {
+      showToast("사진이 전송이 완료되었습니다", "ownerNav");
+    }
+  });
+  return { mutateAlbum: createAlbumMutation.mutate };
 };
 
 // 강아지 알림장 임시저장

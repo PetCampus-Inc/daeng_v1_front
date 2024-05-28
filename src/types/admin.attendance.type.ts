@@ -2,14 +2,31 @@ import { TMemberDto } from "./admin/enrollment.types";
 
 import type { Nullable } from "./helper.type";
 
-export interface IAttendDogInfo {
+type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
+
+// MEMO: 출석모드 데이터
+export type AttendData = {
   attendanceId: number;
   dogId: number;
   dogName: string;
+  dogProfileUri: string;
   allRounds: Nullable<number>;
   currentRounds: Nullable<number>;
   monthlyTicket: Nullable<number[]>;
-}
+  status: AttendanceStatus;
+};
+
+// MEMO: 출석부 데이터
+export type AttendanceData = {
+  attendanceId: null;
+  dogId: number;
+  dogName: string;
+  dogProfileUri: string;
+  allRounds: Nullable<number>;
+  currentRounds: Nullable<number>;
+  monthlyTicket: Nullable<number[]>;
+  status: Nullable<AttendanceStatus>;
+};
 
 export interface IMemberCallInfo {
   dogName: string;

@@ -13,6 +13,7 @@ interface IDayMultiCheck
   defaultSelect?: string[];
   isPreviewMode?: boolean;
   isRequired?: boolean;
+  preventDefaultClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 // 요일 복수 선택
@@ -24,6 +25,7 @@ const DayMultiCheck = ({
   defaultSelect,
   isPreviewMode = false,
   isRequired = false,
+  preventDefaultClick,
   ...props
 }: IDayMultiCheck) => {
   const { register, watch, setValue } = useFormContext();
@@ -59,9 +61,10 @@ const DayMultiCheck = ({
               defaultChecked={defaultSelect?.includes(day)}
               disabled={disabled ? disabled : openDays && !openDays?.includes(day)}
               className={openDays && openDays?.includes(day) ? "open-day" : ""}
+              onClick={preventDefaultClick}
               {...props}
             />
-            <S.DayCheckLabel htmlFor={day} className={isPreviewMode ? " preview" : ""}>
+            <S.DayCheckLabel htmlFor={day} className={isPreviewMode ? "preview" : ""}>
               {day}
             </S.DayCheckLabel>
           </div>

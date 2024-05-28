@@ -7,6 +7,7 @@ import PhoneIcon from "assets/svg/phone-basic";
 import SchoolIcon from "assets/svg/school-icon";
 import SimpleButton from "components/common/Button/SimpleButton";
 import { useNavigate } from "react-router-dom";
+import { Role } from "types/admin/admin.type";
 
 import {
   MoreButtonStyle,
@@ -19,7 +20,6 @@ import {
   StyledTitleContainer
 } from "./styles";
 
-import type { TRole } from "types/admin/admin.type";
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.type";
 
 const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: string }) => {
@@ -47,12 +47,12 @@ const InfoItem = ({ title, icon }: { title?: string; icon: JSX.Element }) => {
   );
 };
 
-interface InfoCardProps<T extends TRole> {
+interface InfoCardProps<T extends Role> {
   data: T extends "ROLE_OWNER" ? IOwnerInfo : ITeacherInfo;
-  role: TRole;
+  role: Role;
 }
 
-const InfoCard = <T extends TRole>({ data, role }: InfoCardProps<T>) => {
+const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
   const navigate = useNavigate();
 
   const isOwner = role === "ROLE_OWNER";

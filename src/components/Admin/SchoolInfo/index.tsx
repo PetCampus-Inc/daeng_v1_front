@@ -4,16 +4,15 @@ import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 
 import CallSchoolBottomSheet from "./Modal/CallSchoolBottomSheet";
 import DisconnectModal from "./Modal/DisconnectModal";
 import * as S from "./styles";
 
 const SchoolInfo = () => {
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
   const { data } = useGetTeacherInfo(adminId);
 
   const overlay = useOverlay();

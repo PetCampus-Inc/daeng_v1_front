@@ -1,3 +1,5 @@
+import { PATH } from "constants/path";
+
 import ApplicationBrownIcon from "assets/svg/application-brown-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import YellowApplication from "assets/svg/yellow-application";
@@ -36,7 +38,7 @@ const SimpleMembershipApplication = ({
         isSelected ? prev.filter((id) => id !== data.schoolFormId) : [...prev, data.schoolFormId]
       );
     } else {
-      navigate(`/admin/schoolManage/enrollment/list/${data.schoolFormId}`);
+      navigate(PATH.ADMIN_FORM(data.schoolFormId));
     }
   };
 

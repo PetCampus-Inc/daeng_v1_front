@@ -1,14 +1,15 @@
 import BoneIcon from "assets/svg/bone-icon";
+import BoneIcon from "assets/svg/bone-icon";
+import PoopStatusIcon from "assets/svg/poop-status-icon";
 import PoopStatusIcon from "assets/svg/poop-status-icon";
 import PoopBox from "components/common/PoopBox";
 import TextArea from "components/common/TextArea";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { debounce } from "lodash";
 import { Dispatch, SetStateAction, Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
 import { IPoop } from "types/admin.attendance.type";
 
 import * as S from "./styles";
@@ -17,7 +18,7 @@ import SaveOrSendButton from "../SaveOrSendButton";
 import { NoticeItemContainer } from "../styles";
 
 const WriteNotice = () => {
-  const { adminId } = useRecoilValue(adminLoginInfoAtom);
+  const { adminId } = useAdminInfo();
   const dogId = useLocation().pathname.split("/").pop();
 
   const { mutateTempSaveCareDog } = useTempSaveCareDog();
@@ -35,6 +36,7 @@ const WriteNotice = () => {
     const poopMemo = methods.getValues("poopMemo");
 
     return {
+      agendaId: data.agendaId,
       agendaId: data.agendaId,
       adminId: adminId,
       dogId: Number(dogId),

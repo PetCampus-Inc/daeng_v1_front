@@ -1,42 +1,13 @@
-import MultiplePhotoSaveIcon from "assets/svg/multiple-photo-save-icon";
-import PhotoSaveIcon from "assets/svg/photo-save-icon";
 import { Dropdown } from "components/common";
 
 import SaveButton from "./SaveButton";
-import { DropdownListStyle, IconWrapper } from "./styles";
+import { DropdownListStyle } from "./styles";
 
-interface SaveOption {
-  label: string;
-  icon: JSX.Element;
-  onClick: (url: string) => void;
+interface SaveOptionProps {
+  option: { label: string; icon: JSX.Element; onClick: () => void }[];
 }
 
-const SaveOptionDropdown = () => {
-  const saveOptions: SaveOption[] = [
-    {
-      label: "이 사진만 저장",
-      icon: (
-        <IconWrapper>
-          <PhotoSaveIcon />
-        </IconWrapper>
-      ),
-      onClick: (imageUrl) => {
-        console.log(`Saved image URL: ${imageUrl}`);
-      }
-    },
-    {
-      label: "전체 저장",
-      icon: (
-        <IconWrapper>
-          <MultiplePhotoSaveIcon />
-        </IconWrapper>
-      ),
-      onClick: (imageUrl) => {
-        console.log(`Saved image URL: ${imageUrl}`);
-      }
-    }
-  ];
-
+const SaveOptionDropdown = ({ option }: SaveOptionProps) => {
   return (
     <Dropdown customStyle={"width: max-content"}>
       <Dropdown.Content>
@@ -44,10 +15,10 @@ const SaveOptionDropdown = () => {
           <SaveButton />
         </Dropdown.Trigger>
         <Dropdown.List customStyle={DropdownListStyle}>
-          {saveOptions.map((option, index) => (
-            <Dropdown.Option key={index} onClick={() => console.log("클릭!")}>
-              {option.icon}
-              <span>{option.label}</span>
+          {option.map((opt, idx) => (
+            <Dropdown.Option key={idx} onClick={opt.onClick}>
+              {opt.icon}
+              <span>{opt.label}</span>
             </Dropdown.Option>
           ))}
         </Dropdown.List>
