@@ -1,12 +1,14 @@
 import { CSSProperties } from "react";
 import { TColor } from "styles/ThemeConfig";
 
+export type SizeType = string | "full" | "fit" | "min" | "max" | "auto";
+
 export type BoxStyleProps = {
   display?: CSSProperties["display"];
-  width?: string | "full" | "auto";
-  maxWidth?: string | "full";
-  minWidth?: string;
-  height?: string | "full" | "auto";
+  width?: SizeType;
+  maxWidth?: SizeType;
+  minWidth?: SizeType;
+  height?: SizeType;
 };
 
 export type SpacingProps = {
