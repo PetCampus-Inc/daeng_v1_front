@@ -19,9 +19,9 @@ import {
 } from "./ImageSidler/styles";
 import TransmissionTime from "./ImageSidler/TransmissionTime";
 
-import type { ImageList } from "types/member/home.types";
+import type { ImageListType } from "types/member/home.types";
 
-const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
+const HomeImageSlider = ({ images }: { images?: ImageListType[][] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
   const [totalFiles, setTotalFiles] = useState<number>(0);

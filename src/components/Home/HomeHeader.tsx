@@ -2,9 +2,9 @@ import { Flex, Text } from "components/common";
 
 import { Img, ImgWrapper, StyledHgroup } from "./styles";
 
-import type { HomeDataType } from "types/member/home.types";
+import type { HomeInfoType } from "types/member/home.types";
 
-const HomeHeader = ({ data }: { data: HomeDataType }) => {
+const HomeHeader = ({ data }: { data: HomeInfoType }) => {
   return (
     <StyledHgroup>
       <Flex align="center" gap="4">
@@ -12,7 +12,7 @@ const HomeHeader = ({ data }: { data: HomeDataType }) => {
           <Img src={data?.memberProfileUri} alt={`${data.dogName}님의 프로필`} />
         </ImgWrapper>
         <Text as="h2" typo="title2_20_B" color="darkBlack">
-          {data.dogName} {data.relation}님
+          {data.dogName} {data?.relation}님
         </Text>
       </Flex>
       <Text as="p" typo="body2_16_R" color="gray_2">
