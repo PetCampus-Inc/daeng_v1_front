@@ -49,6 +49,7 @@ export const Name = styled.span`
   flex-shrink: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
   white-space: nowrap;
 `;
 
