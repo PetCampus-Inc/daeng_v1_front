@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
-import VaccinationBox from "./Main/VaccinationBox";
+import VaccinationBox from "./Main/Vaccination/VaccinationBox";
 import * as S from "./styles";
 import { StyledThumbList } from "../../Admin/AttendCare/AttendCareGallery/upload";
 
