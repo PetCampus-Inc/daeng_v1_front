@@ -1,8 +1,8 @@
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
-import EmptyAlbum from "components/Home/Empty/EmptyAlbum";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
+import HomeImageAlbum from "components/Home/HomeImageAlbum";
 import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { StyledBox } from "components/Home/styles";
 import { useGetHomeInfo } from "hooks/api/member/member";
@@ -11,19 +11,19 @@ import { Role } from "types/admin/admin.type";
 import type { HomeDataType } from "types/member/home.types";
 
 const HomePage = () => {
-  // const { data } = useGetHomeInfo(8, 8);
+  const { data } = useGetHomeInfo(8, 8);
 
   return (
     <>
-      <Header type="main" text={mock?.dogName} />
+      <Header type="main" text={data?.dogName} />
       <main>
         <StyledBox type="top" pt={2} pb={2}>
-          <HomeHeader data={mock} />
-          <HomeDashboard data={mock} />
+          <HomeHeader data={data} />
+          <HomeDashboard data={data} />
         </StyledBox>
         <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
-          <HomeImageCommentSlider images={mock.imageList} />
-          <EmptyAlbum />
+          <HomeImageCommentSlider images={data.imageList} />
+          <HomeImageAlbum images={data.imageList} />
         </StyledBox>
       </main>
       <NavBar />
