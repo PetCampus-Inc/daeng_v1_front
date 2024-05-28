@@ -1,18 +1,29 @@
 import customAxios from "libs/CustomAxios";
-import {
+import { request } from "libs/CustomAxios/request";
+import { IResponse } from "types/helper.type";
+
+import type {
   IMemberInfo,
   IMemberProfileInfo,
   IMemberProfilePostInfo,
   IMainAlbum,
   IMemberDogInfo,
-  IMemberDogPostDetailInfo
+  IMemberDogPostDetailInfo,
+  HomeDataType
 } from "types/member/home.types";
-import { IResponse } from "types/Response.type";
 
-export const handleLoginResult = async (): Promise<IResponse> => {
-  const url = `oauth2/authorization/kakao`;
-  const { data } = await customAxios.get(url);
-  return data.data;
+// 견주 홈 메인
+export const handleGetHomeInfo = async (memberId: number, dogId: number): Promise<HomeDataType> => {
+  const url = `/member/main`;
+  const { data } = await request<IResponse<HomeDataType>>({
+    url,
+    params: {
+      memberId,
+      dogId
+    }
+  });
+
+  return data;
 };
 
 // 견주 정보
@@ -48,22 +59,15 @@ export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMem
 };
 
 // 승인 대기 중 가입신청서 승인 취소 (강아지 추가 취소)
-export const handlePostMemberDogEnrollment = async (
-  enrollmentFormId: string
-): Promise<IResponse> => {
+export const handlePostMemberDogEnrollment = async (enrollmentFormId: string): Promise<void> => {
   const url = `/member/cancel/enrollmentForm?enrollmentFormId=${enrollmentFormId}`;
-  const { data } = await customAxios.post(url);
-  return data.data;
+  return await customAxios.post(url);
 };
 
 // 강아지 삭제하기
-export const handlePostMemberDogDelete = async (
-  memberId: string,
-  dogId: string
-): Promise<IResponse> => {
+export const handlePostMemberDogDelete = async (memberId: string, dogId: string): Promise<void> => {
   const url = `/member/delete/dog?memberId=${memberId}&dogId=${dogId}`;
-  const { data } = await customAxios.post(url);
-  return data.data;
+  return await customAxios.post(url);
 };
 
 // 견주 상세 정보 수정

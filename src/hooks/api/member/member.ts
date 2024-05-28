@@ -3,6 +3,7 @@ import { QUERY_KEY } from "constants/queryKey";
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
 import {
+  handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
@@ -16,6 +17,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import { IMemberDogPostDetailInfo, IMemberProfilePostInfo } from "types/member/home.types";
 import showToast from "utils/showToast";
+
+// 견주 홈 메인
+export const useGetHomeInfo = (memberId: number, dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.HOME(memberId, dogId),
+    queryFn: () => handleGetHomeInfo(memberId, dogId)
+  });
+};
 
 // 견주 정보
 export const useGetMemberInfo = (memberId: string) => {

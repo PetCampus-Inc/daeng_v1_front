@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 export const ProgressBar = styled.div`
   width: 100%;
-  height: 23px;
+  height: 20px;
   background-color: hsla(0, 0%, 40%, 0.75);
   border-radius: 12px;
   overflow: hidden;

@@ -209,3 +209,14 @@ export const IconWrapper = styled.span`
   background-color: ${({ theme }) => theme.colors.yellow_3};
   border-radius: 50%;
 `;
+
+export const Dimmer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9;
+`;
