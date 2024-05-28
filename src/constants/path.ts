@@ -67,6 +67,8 @@ const ADMIN_PATH = {
 };
 
 const MEMBER_PATH = {
+  ALBUM: "/album",
+
   MEMBER_MY_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}`,
   MEMBER_MY_INFO_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}/profile`,
   MEMBER_MY_INFO_EDIT_PAGE: (memberId?: string) =>

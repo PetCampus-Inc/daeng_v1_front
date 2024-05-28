@@ -19,6 +19,14 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
+          path: PATH.ALBUM,
+          element: (
+            <Suspense>
+              <Pages.ImageAlbumPage />
+            </Suspense>
+          )
+        },
+        {
           path: PATH.MEMBER_MY_PAGE(),
           element: (
             <Suspense>
