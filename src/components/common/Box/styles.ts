@@ -110,6 +110,7 @@ export const StyledBox = styled.div.withConfig({
       "justify",
       "align",
       "flex",
+      "gap",
       "zIndex"
     ].includes(prop)
 })<BoxOptions>`
@@ -118,6 +119,7 @@ export const StyledBox = styled.div.withConfig({
   flex: ${({ flex }) => (flex ? flex : undefined)};
   justify-content: ${({ justify }) => (justify ? justify : undefined)};
   align-items: ${({ align }) => (align ? align : undefined)};
+  gap: ${({ gap }) => (gap ? remCalc(gap) : undefined)};
 
   width: ${({ width }) => (width ? getWidthSize({ width }) : undefined)};
   max-width: ${({ maxWidth }) => (maxWidth ? getMaxWidth({ maxWidth }) : undefined)};
