@@ -2,7 +2,7 @@ import { useFileDownload } from "hooks/common/useS3";
 import { useState } from "react";
 import Slider from "react-slick";
 
-import EmptySlide from "./empty/EmptySlide";
+import EmptySlide from "./Empty/EmptySlide";
 import CommentBox from "./ImageSidler/CommentBox";
 import CommentSection from "./ImageSidler/CommentSection";
 import ProgressScreen from "./ImageSidler/ProgressScreen";
