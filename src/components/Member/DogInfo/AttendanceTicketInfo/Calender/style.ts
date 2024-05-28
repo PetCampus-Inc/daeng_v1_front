@@ -38,6 +38,7 @@ export const CalendarWrapper = styled.div`
 
   .react-calendar__navigation {
     justify-content: center;
+    align-items: center;
     gap: 8px;
   }
 
