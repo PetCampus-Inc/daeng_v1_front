@@ -10,7 +10,15 @@ import { MoreButtonStyle } from "./ImageAlbumSlider/styles";
 
 import type { ImageList } from "types/member/main.types";
 
-const HomeImageAlbum = ({ images }: { images?: ImageList[][] }) => {
+interface HomeImageAlbumProps {
+  dogInfo: {
+    dogName: string;
+    dogId: number;
+  };
+  images?: ImageList[][];
+}
+
+const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
   const navigate = useNavigate();
 
   return (
@@ -21,7 +29,9 @@ const HomeImageAlbum = ({ images }: { images?: ImageList[][] }) => {
         </Text>
         <SimpleButton
           p={0}
-          onClick={() => navigate(`${PATH.ALBUM}?dogId=${2}`)}
+          onClick={() =>
+            navigate(`${PATH.ALBUM}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`)
+          }
           rightAddon={<ArrowRightIcon w="24" h="24" colorScheme="gray_1" />}
           css={MoreButtonStyle}
         >
