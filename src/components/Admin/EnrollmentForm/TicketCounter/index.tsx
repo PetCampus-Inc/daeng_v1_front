@@ -3,7 +3,7 @@ import { INIT_COUNTER } from "constants/option";
 import AddBIcon from "assets/svg/add-b-icon";
 import SubtractBIcon from "assets/svg/subtract-b-icon";
 import { useRecoilState } from "recoil";
-import { ticketCounterAtom } from "store/overlay";
+import { ticketCounterState } from "store/form";
 
 import * as S from "./styles";
 
@@ -16,7 +16,7 @@ const TicketCounter = ({ type, isDuplication }: Props) => {
   const text = type === "ROUND" ? "회차권" : "정기권";
   const times = type === "ROUND" ? "회" : "주";
 
-  const [counter, setCounter] = useRecoilState(ticketCounterAtom);
+  const [counter, setCounter] = useRecoilState(ticketCounterState);
 
   return (
     <>
