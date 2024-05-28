@@ -1,6 +1,6 @@
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
-import EmptyAlbum from "components/Home/empty/EmptyAlbum";
+import EmptyAlbum from "components/Home/Empty/EmptyAlbum";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
 import HomeImageSlider from "components/Home/HomeImageSlider";
