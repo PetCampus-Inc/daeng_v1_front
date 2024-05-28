@@ -30,7 +30,7 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
         p={0}
         onClick={handleClick}
         rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}
-        customStyle={MoreButtonStyle}
+        css={MoreButtonStyle}
       >
         {text}
       </SimpleButton>
