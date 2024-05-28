@@ -5,9 +5,9 @@ import { getTimeAgo } from "utils/date";
 import { TransmissionTime, CountBadge, Dimmer, SlideWrapper } from "./styles";
 import EmptyAlbum from "../Empty/EmptyAlbum";
 
-import type { ImageListType } from "types/member/home.types";
+import type { ImageList } from "types/member/main.types";
 
-const ImageSlider = ({ images }: { images?: ImageListType[][] }) => {
+const ImageSlider = ({ images }: { images?: ImageList[][] }) => {
   if (!images) return <EmptyAlbum />;
 
   const getCountNum = (num: number) => {

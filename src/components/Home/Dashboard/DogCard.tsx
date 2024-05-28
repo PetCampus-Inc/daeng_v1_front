@@ -9,7 +9,7 @@ import { useOverlay } from "hooks/common/useOverlay";
 
 import { BoxContainer } from "./styles";
 
-import type { HomeDataType, TAgendaStatus } from "types/member/home.types";
+import type { HomeDataType, TAgendaStatus } from "types/member/main.types";
 
 interface DogCardProps {
   data: Pick<HomeDataType, "todayAgendaStatus">;

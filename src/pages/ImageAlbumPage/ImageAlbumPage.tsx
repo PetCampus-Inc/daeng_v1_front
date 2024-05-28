@@ -1,10 +1,10 @@
 import Header from "components/common/Header";
-import { useGetAlbum } from "hooks/api/member/main";
+import useGetMainAlbum from "hooks/api/member/useGetMainAlbum";
 import { useSearchParams } from "react-router-dom";
 const ImageAlbumPage = () => {
   const [searchParams] = useSearchParams();
   const dogId = parseInt(searchParams.get("dogId") ?? "");
-  const { data } = useGetAlbum({ dogId });
+  const { data } = useGetMainAlbum({ dogId });
 
   return (
     <>

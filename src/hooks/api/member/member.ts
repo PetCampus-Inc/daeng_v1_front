@@ -24,7 +24,7 @@ import type {
   HomeInfoType,
   IMemberDogPostDetailInfo,
   IMemberProfilePostInfo
-} from "types/member/home.types";
+} from "types/member/main.types";
 
 // 견주 홈 메인
 export const useGetHomeInfo = (memberId: number, dogId: number) => {
