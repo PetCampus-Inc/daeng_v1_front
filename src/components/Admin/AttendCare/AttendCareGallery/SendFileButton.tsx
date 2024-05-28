@@ -50,7 +50,7 @@ const SendFileButton = ({ type }: Props) => {
         files: data.files,
         accept: ["image/*", "video/*"],
         path: "test_images/agenda",
-        dogIds: [parseInt(dogId)],
+        dogIdList: [parseInt(dogId)],
         comment: data?.comment
       };
 
