@@ -29,18 +29,14 @@ export interface ImageList {
   imageUri: string;
   imageType: TImageType;
   comment?: string;
-  createdTime: string;
+  createdTime: number[];
 }
 
 export type AlbumDataType = {
-  imageId: number;
-  imageUri: string;
-  imageType: string;
-  comment: string;
   size: number;
   createdTime: number[];
   photoTime: string;
-};
+} & ImageList;
 
 interface IDoglist {
   dogId: string;
