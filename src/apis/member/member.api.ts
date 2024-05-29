@@ -10,7 +10,8 @@ import type {
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
   HomeDataType,
-  AlbumDataType
+  AlbumDataType,
+  DogsDataType
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -24,6 +25,16 @@ export const handleGetHomeInfo = async (memberId: number, dogId: number): Promis
     }
   });
 
+  return data;
+};
+
+// 견주 홈 - 강아지 리스트
+export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> => {
+  const url = `/member/main/dogs`;
+  const { data } = await request<IResponse<DogsDataType[]>>({
+    url,
+    params: { memberId }
+  });
   return data;
 };
 
