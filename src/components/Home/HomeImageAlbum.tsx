@@ -5,9 +5,9 @@ import SimpleButton from "components/common/Button/SimpleButton";
 import ImageSlider from "./ImageAlbumSlider/ImageSlider";
 import { MoreButtonStyle } from "./ImageAlbumSlider/styles";
 
-import type { ImageList } from "types/member/home.types";
+import type { ImageListType } from "types/member/home.types";
 
-const HomeImageAlbum = ({ images }: { images?: ImageList[][] }) => {
+const HomeImageAlbum = ({ images }: { images?: ImageListType[][] }) => {
   return (
     <Box display="flex" direction="column" mt={40} gap={8}>
       <Flex justify="space-between">
