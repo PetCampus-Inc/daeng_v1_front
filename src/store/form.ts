@@ -1,3 +1,5 @@
+import { INIT_COUNTER, LIST, type TSortOptionList } from "constants/option";
+
 import { atom } from "recoil";
 
 import type { Nullable } from "types/helper.type";
@@ -8,7 +10,7 @@ export const schoolIdAtom = atom<Nullable<number>>({
 });
 
 export const currentStepState = atom({
-  key: "currentStepState",
+  key: "currentStep",
   default: 0
 });
 
@@ -20,4 +22,14 @@ export interface ImageFile {
 export const imagePreviewAtom = atom<ImageFile[]>({
   key: "imagePreviewAtom",
   default: []
+});
+
+export const sortOptionState = atom<TSortOptionList>({
+  key: "sortOption",
+  default: LIST.REGISTERED
+});
+
+export const ticketCounterState = atom<number>({
+  key: "ticketCounter",
+  default: INIT_COUNTER
 });
