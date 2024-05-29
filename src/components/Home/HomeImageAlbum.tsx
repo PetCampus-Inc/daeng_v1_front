@@ -8,14 +8,14 @@ import { useNavigate } from "react-router-dom";
 import ImageSlider from "./ImageAlbumSlider/ImageSlider";
 import { MoreButtonStyle } from "./ImageAlbumSlider/styles";
 
-import type { ImageList } from "types/member/main.types";
+import type { ImageListType } from "types/member/main.types";
 
 interface HomeImageAlbumProps {
   dogInfo: {
     dogName: string;
     dogId: number;
   };
-  images?: ImageList[][];
+  images?: ImageListType[][];
 }
 
 const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {

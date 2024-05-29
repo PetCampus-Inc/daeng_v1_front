@@ -16,10 +16,10 @@ import {
   SpringBound
 } from "./styles";
 
-import type { HomeDataType, TAttendanceStatus } from "types/member/main.types";
+import type { HomeInfoType, TAttendanceStatus } from "types/member/main.types";
 
 interface DogNoteProps {
-  data: HomeDataType;
+  data: HomeInfoType;
 }
 
 const getAttendanceClass = (status?: TAttendanceStatus) => {

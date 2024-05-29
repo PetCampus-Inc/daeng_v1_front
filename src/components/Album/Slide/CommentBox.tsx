@@ -1,9 +1,9 @@
 import FootRoundIcon from "assets/svg/foot-round-icon";
 import { Box, Flex, Text } from "components/common";
 
-import type { AlbumDataType } from "types/member/main.types";
+import type { ImageAlbumType } from "types/member/main.types";
 
-const CommentBox = ({ commentList }: { commentList: AlbumDataType[] }) => {
+const CommentBox = ({ commentList }: { commentList: ImageAlbumType[] }) => {
   console.log(commentList);
   return (
     <Box bg="gray_5" paddingBlock={12} paddingInline={12} borderRadius={8}>

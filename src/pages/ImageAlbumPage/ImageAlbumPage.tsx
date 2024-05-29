@@ -6,7 +6,7 @@ import PhotoView from "components/Album/PhotoView";
 import ViewTabs from "components/Album/ViewTabs";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
-import useGetMainAlbum from "hooks/api/member/useGetMainAlbum";
+import { useGetMainAlbum } from "hooks/api/member/member";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 const ImageAlbumPage = () => {

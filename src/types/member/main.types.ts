@@ -7,6 +7,19 @@ export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
 export type TImageType = "IMAGE" | "PROFILE";
 export type TDogStatus = "ENROLLED" | "DROP_OUT" | "APPROVAL_PENDING";
 
+export interface HomeInfoType extends Omit<HomeDataType, "attendanceDate" | "imageList"> {
+  attendanceDate: string;
+  imageList?: ImageListType[][];
+}
+
+export interface ImageListType extends Omit<ImageList, "createdTime"> {
+  createdTime: string;
+}
+
+export type ImageAlbumType = Omit<ImageList, "createdTime"> & {
+  createdTime: string;
+};
+
 export interface HomeDataType {
   memberId: number;
   memberNickname: string;
@@ -21,7 +34,7 @@ export interface HomeDataType {
   attendanceDate: number[];
   todayAgendaStatus: TAgendaStatus;
   schoolName: Nullable<string>;
-  imageList: ImageList[][];
+  imageList: Nullable<ImageList[][]>;
 }
 
 export interface ImageList {
@@ -34,7 +47,6 @@ export interface ImageList {
 
 export type AlbumDataType = {
   size: number;
-  createdTime: number[];
   photoTime: string;
 } & ImageList;
 
@@ -122,3 +134,10 @@ export interface IMemberDogInfo extends IResponse {
   member: IMemberProfilePostInfo;
   dogMemo: string;
 }
+
+export type DogsDataType = {
+  memberId: number;
+  dogId: number;
+  dogName: string;
+  imageUri: string;
+};

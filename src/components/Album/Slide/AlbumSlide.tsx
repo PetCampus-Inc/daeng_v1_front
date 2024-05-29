@@ -7,9 +7,9 @@ import CommentBox from "./CommentBox";
 import SaveButton from "./SaveButton";
 import { SlideWrapper } from "./styles";
 
-import type { AlbumDataType } from "types/member/main.types";
+import type { ImageAlbumType } from "types/member/main.types";
 
-const AlbumSlide = ({ imageList }: { imageList: AlbumDataType[][] }) => {
+const AlbumSlide = ({ imageList }: { imageList: ImageAlbumType[][] }) => {
   const [isSaveMode, setSaveMode] = useState<boolean>(false);
 
   const handleSaveMode = () => {
