@@ -30,6 +30,7 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
 
   // TODO memberInfo데이터 recoil로 분리 등 리팩토링 필요
   const memberInfo = {
+    dogId: 0, // 신규 강아지의 경우
     memberId: Number(memberInfoData.memberId),
     memberName: memberInfoData.memberName,
     memberGender: memberInfoData.memberGender,
