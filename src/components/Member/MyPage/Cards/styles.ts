@@ -5,6 +5,7 @@ interface ICardStyleProps {
   pr?: string;
   textColor?: string;
   bgColor?: string;
+  isProfileNull?: boolean;
 }
 
 export const Card = styled.div`
@@ -17,7 +18,16 @@ export const Card = styled.div`
   padding-bottom: 216px;
 `;
 
-export const MyDogCard = styled(Card)`
+export const MyDogCard = styled(Card)<ICardStyleProps>`
+  ${({ isProfileNull, theme }) =>
+    isProfileNull &&
+    `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: ${theme.colors.gray_4};
+    `}
+
   &:focus::before {
     content: "";
     position: absolute;
@@ -38,6 +48,7 @@ export const MyDogCard = styled(Card)`
     bottom: 0;
     background: linear-gradient(transparent, ${({ theme }) => theme.colors.black});
     opacity: 0.45;
+    display: ${({ isProfileNull }) => (isProfileNull ? "none" : "block")};
   }
 `;
 
@@ -103,11 +114,19 @@ export const MyDogImg = styled.img`
 export const DogName = styled.h3<ICardStyleProps>`
   ${({ theme }) => theme.typo.title2_20_B};
   color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
+
+  &.colorGray1 {
+    color: ${({ theme }) => theme.colors.gray_1};
+  }
 `;
 
 export const DateText = styled.span<ICardStyleProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
+
+  &.colorGray1 {
+    color: ${({ theme }) => theme.colors.gray_1};
+  }
 `;
 
 export const CancelApprovalButton = styled.button`

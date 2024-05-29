@@ -1,6 +1,7 @@
 import { PATH } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
+import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useGetMemberDogDetailnfo, usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -98,15 +99,24 @@ const MyDogCard = ({
     divRef.current?.focus();
   };
 
+  console.log(profileUri);
+
+  const isProfileNull = profileUri === null;
+
   return (
-    <S.MyDogCard tabIndex={dogLength} ref={divRef} onClick={handleCardFocus}>
+    <S.MyDogCard
+      isProfileNull={isProfileNull}
+      tabIndex={dogLength}
+      ref={divRef}
+      onClick={handleCardFocus}
+    >
       {isOpen && (
         <S.DeleteButton onClick={dogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
           삭제
         </S.DeleteButton>
       )}
       <S.InfoTextBox>
-        <S.DogName>{dogName}</S.DogName>
+        <S.DogName className={isProfileNull ? "colorGray1" : ""}>{dogName}</S.DogName>
         {status === "DROP_OUT" ? (
           <S.GotoSchoolInfoButton pr="0" onClick={openAlertPopup}>
             <span>등록된 유치원 없음</span>
@@ -117,9 +127,15 @@ const MyDogCard = ({
             {!isOpen && <ArrowRightIcon />}
           </S.GotoSchoolInfoButton>
         )}
-        <S.DateText>{registeredTime} 등록</S.DateText>
+        <S.DateText className={isProfileNull ? "colorGray1" : ""}>{registeredTime} 등록</S.DateText>
       </S.InfoTextBox>
-      <S.MyDogImg src={profileUri} alt="my-dog" />
+      {profileUri === null ? (
+        <S.BgIconBox>
+          <DogNotfoundIcon />
+        </S.BgIconBox>
+      ) : (
+        <S.MyDogImg src={profileUri} alt="my-dog" />
+      )}
     </S.MyDogCard>
   );
 };
