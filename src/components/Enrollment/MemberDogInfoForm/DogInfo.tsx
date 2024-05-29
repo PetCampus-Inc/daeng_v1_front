@@ -24,9 +24,9 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
   const memberDogInfo = useRecoilValue(memberEnrollmentDogDetailAtom);
   const [Dogyear, Dogmonth, Dogday] = memberDogInfo ? memberDogInfo.dogBirthDate : [];
   const memeberDogBirth = {
-    year: String(Dogyear),
-    month: String(addZero(Dogmonth)),
-    day: String(addZero(Dogday))
+    year: Dogyear ? String(Dogyear) : "",
+    month: Dogmonth ? String(addZero(Dogmonth)) : "",
+    day: Dogday ? String(addZero(Dogday)) : ""
   };
   console.log(memberDogInfo);
   return (
@@ -79,21 +79,21 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           <SelectNumber
             name="year"
             numberList={yearsArray}
-            defaultValue={memeberDogBirth ? memeberDogBirth.year : "2000"}
+            defaultValue={memeberDogBirth.year === "" ? "2000" : memeberDogBirth.year}
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="month"
             numberList={monthsArray}
-            defaultValue={memeberDogBirth ? memeberDogBirth.month : "01"}
+            defaultValue={memeberDogBirth.month === "" ? "01" : memeberDogBirth.month}
             watch={watch}
             setValue={setValue}
           />
           <SelectNumber
             name="day"
             numberList={daysArray}
-            defaultValue={memeberDogBirth ? memeberDogBirth.day : "01"}
+            defaultValue={memeberDogBirth.day === "" ? "01" : memeberDogBirth.day}
             watch={watch}
             setValue={setValue}
           />
