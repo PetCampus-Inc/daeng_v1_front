@@ -2,7 +2,7 @@ import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
 
-const MemberProfileEditePage = () => {
+const MemberOnboardingProfileEditePage = () => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
@@ -18,4 +18,4 @@ const MemberProfileEditePage = () => {
   );
 };
 
-export default MemberProfileEditePage;
+export default MemberOnboardingProfileEditePage;

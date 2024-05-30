@@ -94,7 +94,7 @@ const MemberRoutes = (): RouteObject[] => {
           path: PATH.MEMEBER_PROFILE_EDITE_PAGE,
           element: (
             <Suspense>
-              <Pages.MemberProfileEditePage />
+              <Pages.MemberOnboardingProfileEditePage />
             </Suspense>
           )
         }
