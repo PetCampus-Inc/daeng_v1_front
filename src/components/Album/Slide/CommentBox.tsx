@@ -1,9 +1,12 @@
 import FootRoundIcon from "assets/svg/foot-round-icon";
 import { Accordion, Flex, Text } from "components/common";
+import { replaceNewline } from "utils/formatter";
 
 import type { ImageAlbumType } from "types/member/main.types";
 
 const CommentBox = ({ commentList }: { commentList: ImageAlbumType[] }) => {
+  if (!commentList[0].comment) return null;
+
   return (
     <Accordion>
       <Accordion.Title>
@@ -15,8 +18,8 @@ const CommentBox = ({ commentList }: { commentList: ImageAlbumType[] }) => {
         </Flex>
       </Accordion.Title>
       <Accordion.Content>
-        <Text typo="label1_16_R" color="gray_1">
-          {commentList[0].comment}
+        <Text typo="label1_16_R" color="gray_1" whiteSpace="pre-wrap">
+          {replaceNewline(commentList[0].comment)}
         </Text>
       </Accordion.Content>
     </Accordion>
