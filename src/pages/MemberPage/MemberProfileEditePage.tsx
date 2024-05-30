@@ -10,7 +10,7 @@ const MemberProfileEditePage = () => {
   });
 
   return (
-    <PageContainer pt="4" color="BGray">
+    <PageContainer ph="1.5" pt="4" color="BGray">
       <FormProvider {...methods}>
         <OnboardingProfile />
       </FormProvider>

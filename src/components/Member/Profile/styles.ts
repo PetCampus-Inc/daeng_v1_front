@@ -25,3 +25,11 @@ export const RoleSelectWrapper = styled(Flex)`
   gap: 6px;
   width: 100%;
 `;
+
+export const UploadProfileButton = styled(Flex)`
+  border-radius: 40px;
+  height: 160px;
+  width: 100%;
+  max-width: 160px;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
