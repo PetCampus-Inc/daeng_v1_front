@@ -30,6 +30,7 @@ export default NickNameEdite;
 const InputStyle = css`
   padding: 12px 18px;
   border: 1px solid ${({ theme }) => theme.colors.gray_5};
+  flex: 2;
 
   ${({ theme }) => theme.typo.body2_16_R};
 `;

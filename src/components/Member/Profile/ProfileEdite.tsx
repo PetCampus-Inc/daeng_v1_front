@@ -32,7 +32,7 @@ const ProfileEdite = () => {
         <Text as="span" typo="body2_16_R" color="gray_1">
           닉네임
         </Text>
-        <Flex>
+        <Flex align="center" gap="2">
           <NickNameEdite handleFocus={handleFocus} handleBlur={handleBlur} />의
           <RoleEdite />
         </Flex>
