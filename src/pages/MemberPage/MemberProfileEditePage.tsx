@@ -1,4 +1,4 @@
-import ProfileEdite from "components/Member/Profile/ProfileEdite";
+import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
 
@@ -12,7 +12,7 @@ const MemberProfileEditePage = () => {
   return (
     <PageContainer pt="4" color="BGray">
       <FormProvider {...methods}>
-        <ProfileEdite />
+        <OnboardingProfile />
       </FormProvider>
     </PageContainer>
   );
