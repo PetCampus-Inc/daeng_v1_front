@@ -1,5 +1,6 @@
 import { motion, useAnimation } from "framer-motion";
-import { useRef, useState, useLayoutEffect, useEffect } from "react";
+import { useRef, useState, useLayoutEffect, useEffect, isValidElement, cloneElement } from "react";
+import { accordionTransition } from "styles/animation";
 
 import { useAccordionContext } from "./context";
 import { StyledContentContainer } from "./styles";
@@ -8,6 +9,7 @@ export const AccordionContent = ({ children }: { children: React.ReactNode }) =>
   const { expanded } = useAccordionContext();
   const controls = useAnimation();
   const contentRef = useRef<HTMLDivElement>(null);
+  const childrenRef = useRef<HTMLElement>(null);
 
   const [lineHeight, setLineHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
@@ -16,8 +18,16 @@ export const AccordionContent = ({ children }: { children: React.ReactNode }) =>
   useLayoutEffect(() => {
     if (contentRef.current) {
       const computedStyle = getComputedStyle(contentRef.current);
-      setLineHeight(parseFloat(computedStyle.lineHeight));
       setContentHeight(contentRef.current.scrollHeight);
+
+      // children이 DOM 요소인 경우
+      if (childrenRef.current) {
+        const childStyle = getComputedStyle(childrenRef.current);
+        setLineHeight(parseFloat(childStyle.lineHeight));
+      } else {
+        // children이 DOM 요소가 아닌 경우 ContentContainer의 lineHeight 사용
+        setLineHeight(parseFloat(computedStyle.lineHeight));
+      }
     }
   }, [expanded]);
 
@@ -36,7 +46,10 @@ export const AccordionContent = ({ children }: { children: React.ReactNode }) =>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expanded, contentHeight, lineHeight]);
 
-  const transition = { type: "tween", duration: 0.6, ease: [0.4, 0, 0.2, 1] };
+  // cloneElement를 통해 children에 ref를 전달
+  const _children = isValidElement(children)
+    ? cloneElement(children as React.ReactElement<any>, { ref: childrenRef })
+    : children;
 
   return (
     <StyledContentContainer
@@ -44,13 +57,13 @@ export const AccordionContent = ({ children }: { children: React.ReactNode }) =>
       as={motion.div}
       initial={{ height: lineHeight }}
       animate={controls}
-      transition={transition}
+      transition={accordionTransition}
       expanded={expanded}
       isClosing={isClosing}
       role="region"
       data-state={expanded ? "open" : "closed"}
     >
-      {children}
+      {_children}
     </StyledContentContainer>
   );
 };

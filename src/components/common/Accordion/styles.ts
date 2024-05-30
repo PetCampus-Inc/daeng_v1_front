@@ -19,7 +19,9 @@ export const StyledTitleButton = styled.button<{ expand?: boolean }>`
   }
 `;
 
-export const StyledContentContainer = styled.div<{
+export const StyledContentContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["expanded", "isClosing"].includes(prop)
+})<{
   expanded: boolean;
   isClosing: boolean;
 }>`
