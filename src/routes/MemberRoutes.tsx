@@ -89,6 +89,14 @@ const MemberRoutes = (): RouteObject[] => {
               <Pages.MemberDogInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMEBER_PROFILE_EDITE_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberProfileEditePage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
