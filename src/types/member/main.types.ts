@@ -16,7 +16,7 @@ export interface ImageListType extends Omit<ImageList, "createdTime"> {
   createdTime: string;
 }
 
-export type ImageAlbumType = Omit<ImageList, "createdTime"> & {
+export type ImageAlbumType = Omit<AlbumDataType, "createdTime"> & {
   createdTime: string;
 };
 
