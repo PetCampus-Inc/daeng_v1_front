@@ -28,3 +28,5 @@ export const bottomSheetAnimationVariants: Variants = {
     willChange: "y"
   }
 };
+
+export const accordionTransition = { type: "tween", duration: 0.3, ease: [0.4, 0, 0.2, 1] };
