@@ -1,6 +1,6 @@
 import Button from "components/common/Button";
 import { Flex } from "components/common/Flex";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
 export const RoleEditeButton = styled(Button)`
   max-width: 112px;
@@ -32,4 +32,33 @@ export const UploadProfileButton = styled(Flex)`
   width: 100%;
   max-width: 160px;
   background-color: ${({ theme }) => theme.colors.white};
+  overflow: hidden;
+  position: relative;
+`;
+
+export const UploadImage = styled.img`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const StyledHiddenUpload = styled.input`
+  display: none;
+`;
+
+const ImgStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 90px;
+  height: 90px;
+  aspect-ratio: 1/1;
+
+  border-radius: 8px;
+
+  flex-shrink: 0; // flex item이 shrink되지 않도록 설정
 `;
