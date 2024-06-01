@@ -16,6 +16,7 @@ const RoleEdite = () => {
   const handleSelectedRelation = (relation: string) => {
     setCurrentRelation(RELATION_DATA[relation]);
     setValue("relation", relation);
+    setIsShowRoles(false);
   };
 
   const handleShowRoles = () => {
@@ -27,16 +28,16 @@ const RoleEdite = () => {
       <S.RoleEditeButton
         width="100%"
         height="49px"
-        textcolor={ThemeConfig.colors.gray_3}
-        backcolor={ThemeConfig.colors.gray_4}
+        textcolor={currentRelation ? ThemeConfig.colors.gray_1 : ThemeConfig.colors.gray_3}
+        backcolor={currentRelation ? ThemeConfig.colors.white : ThemeConfig.colors.gray_4}
         handleClick={handleShowRoles}
       >
-        호칭선택
+        {currentRelation ? currentRelation : "호칭선택"}
       </S.RoleEditeButton>
 
       {isShowRoles && (
         <S.RoleSelectWrapper direction="column">
-          {RELATION_DATA_ARR.map((item, idx) => (
+          {notSelectedRelation.map((item, idx) => (
             <S.RoleSelectButton
               key={idx}
               width="100%"
