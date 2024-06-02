@@ -26,7 +26,11 @@ export const RoleSelectWrapper = styled(Flex)`
   width: 100%;
 `;
 
-export const UploadProfileButton = styled(Flex)`
+export const UploadProfileButton = styled.button`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 40px;
   height: 160px;
   width: 100%;
@@ -34,6 +38,44 @@ export const UploadProfileButton = styled(Flex)`
   background-color: ${({ theme }) => theme.colors.white};
   overflow: hidden;
   position: relative;
+
+  .GalleryIcon {
+    position: relative;
+    z-index: 1;
+  }
+
+  .active {
+    display: none;
+  }
+
+  &:focus {
+    .active {
+      display: block;
+    }
+  }
+`;
+
+export const ActiveBox = styled.div``;
+
+export const BackDropBorder = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 5px solid ${({ theme }) => theme.colors.primary_4};
+  border-radius: 40px;
+  z-index: 1;
+`;
+
+export const BackDrop = styled.div`
+  position: absolute;
+  background-color: ${({ theme }) => theme.colors.black};
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0.3;
 `;
 
 export const UploadImage = styled.img`

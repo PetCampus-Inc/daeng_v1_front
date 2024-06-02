@@ -1,4 +1,5 @@
 import AddCIcon from "assets/svg/add-c-icon";
+import GalleryBasicIcon from "assets/svg/gallery-basic-icon";
 import {
   IFile,
   StyledThumb,
@@ -17,22 +18,25 @@ const ProfileEdite = () => {
   const { register, setValue, watch } = useFormContext();
   const [myProfile, setMyProfile] = useState<IFile[]>([]);
   const [dogProfile, setDogProfile] = useState<IFile[]>([]);
-  const [isMyEdite, setMyIsEdite] = useState(false);
-  const [isDogEdite, setDogIsEdite] = useState(false);
+  const [isMyActive, setMyIsActive] = useState(false);
+  const [isDogActive, setDogIsActive] = useState(false);
   const myFileInputRef = useRef<HTMLInputElement | null>(null);
   const dogFileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleClick = (type: "MY" | "DOG") => {
+  const TYPE_MY = "MY";
+  const TYPE_DOG = "DOG";
+
+  const handleClick = (type: string) => {
     if (myFileInputRef.current || dogFileInputRef) {
-      if (type === "MY") {
-        myFileInputRef.current?.click();
-      } else if (type === "DOG") {
-        dogFileInputRef.current?.click();
+      if (type === TYPE_MY) {
+        isMyActive ? setMyIsActive(false) : myFileInputRef.current?.click();
+      } else if (type === TYPE_DOG) {
+        isDogActive ? setDogIsActive(false) : dogFileInputRef.current?.click();
       }
     }
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, type: "MY" | "DOG") => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, type: string) => {
     const targetFile = e.currentTarget.files;
     if (targetFile) {
       if (targetFile.length > 1) {
@@ -43,43 +47,52 @@ const ProfileEdite = () => {
       const newFiles = Array.from(targetFile);
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
 
-      if (type === "MY") {
-        console.log("와타시");
+      if (type === TYPE_MY) {
         setMyProfile([...fileArray]);
         setValue("myProfile", [...newFiles]);
-        setMyIsEdite(true);
-      } else if (type === "DOG") {
-        console.log("강아지");
+        setMyIsActive(true);
+      } else if (type === TYPE_DOG) {
         setDogProfile([...fileArray]);
         setValue("dogProfile", [...newFiles]);
-        setDogIsEdite(true);
+        setDogIsActive(true);
       }
     }
   };
+
+  console.log("현재 상태", isMyActive, isDogActive);
 
   return (
     <>
       <Flex align="center" direction="column" justify="center" gap="12" width="100%">
         <S.UploadProfileButton
-          as="button"
-          onClick={() => handleClick("MY")}
-          align="center"
-          justify="center"
+          onClick={() => {
+            handleClick(TYPE_MY);
+          }}
+          onBlur={() => setMyIsActive(true)}
         >
           {myProfile.length > 0 ? (
-            <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            <>
+              <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+
+              {!isMyActive && (
+                <S.ActiveBox className="active">
+                  <GalleryBasicIcon className="GalleryIcon" />
+                  <S.BackDropBorder />
+                  <S.BackDrop />
+                </S.ActiveBox>
+              )}
+            </>
           ) : (
             <AddCIcon />
           )}
         </S.UploadProfileButton>
-
         <S.StyledHiddenUpload
           {...register("myProfile")}
           type="file"
           ref={myFileInputRef}
           multiple
           accept={"image/*"}
-          onChange={(e) => handleFileChange(e, "MY")}
+          onChange={(e) => handleFileChange(e, TYPE_MY)}
         />
         <Text as="span" typo="body2_16_R" color="gray_2">
           내 프로필
@@ -88,13 +101,20 @@ const ProfileEdite = () => {
 
       <Flex align="center" direction="column" justify="center" gap="12" width="100%">
         <S.UploadProfileButton
-          as="button"
-          onClick={() => handleClick("DOG")}
-          align="center"
-          justify="center"
+          onClick={() => handleClick(TYPE_DOG)}
+          onBlur={() => setDogIsActive(true)}
         >
           {dogProfile.length > 0 ? (
-            <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            <>
+              <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+              {!isDogActive && (
+                <S.ActiveBox className="active">
+                  <GalleryBasicIcon className="GalleryIcon" />
+                  <S.BackDropBorder />
+                  <S.BackDrop />
+                </S.ActiveBox>
+              )}
+            </>
           ) : (
             <AddCIcon />
           )}
@@ -105,7 +125,7 @@ const ProfileEdite = () => {
           ref={dogFileInputRef}
           multiple
           accept={"image/*"}
-          onChange={(e) => handleFileChange(e, "DOG")}
+          onChange={(e) => handleFileChange(e, TYPE_DOG)}
         />
         <Text as="span" typo="body2_16_R" color="gray_2">
           강아지 프로필
