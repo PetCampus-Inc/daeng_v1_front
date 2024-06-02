@@ -30,7 +30,7 @@ const SubmitButton = () => {
       files: galleryData.files,
       accept: ["image/*", "video/*"],
       path: "test_images/agenda",
-      dogIds: selectedDogIds,
+      dogIdList: selectedDogIds,
       comment: galleryData?.comment
     };
 

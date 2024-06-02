@@ -82,7 +82,17 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
             },
             {
               path: "gallery",
-              element: <Pages.AttendCareGallery type="main" />
+
+              children: [
+                {
+                  index: true,
+                  element: <Pages.AttendCareGallery type="main" />
+                },
+                {
+                  path: PATH.ADMIN_CARE_GALLERY_SELECT,
+                  element: <Pages.AttendCareSelectDog />
+                }
+              ]
             },
             {
               path: PATH.ADMIN_CARE_NOTICE(),

@@ -44,7 +44,8 @@ const MEMBER_QUERY_KEY = {
   MEMBER_AGREEMENT_INFO: (agreementId: number) => ["memberAgreementInfo", agreementId], // 유의사항 동의 정보
   DOG_SHCOOL_INFO: ["memberDogSchoolInfo"], // 강아지 유치원 정보
 
-  HOME: (memberId: number, dogId: number) => ["home", memberId, dogId] // 견주 홈 메인
+  HOME: (memberId: number, dogId: number) => ["home", memberId, dogId], // 견주 홈 메인
+  DOGS: (memberId: number) => ["dogs", memberId] // 견주 홈 강아지 리스트
 };
 
 export const QUERY_KEY = {

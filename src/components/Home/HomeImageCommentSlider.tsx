@@ -3,11 +3,11 @@ import { useState } from "react";
 import Slider from "react-slick";
 
 import EmptySlide from "./Empty/EmptySlide";
-import CommentBox from "./ImageSidler/CommentBox";
-import CommentSection from "./ImageSidler/CommentSection";
-import ProgressScreen from "./ImageSidler/ProgressScreen";
-import SaveSection from "./ImageSidler/SaveSection";
-import SliderDots from "./ImageSidler/SliderDots";
+import CommentBox from "./ImageCommentSidler/CommentBox";
+import CommentSection from "./ImageCommentSidler/CommentSection";
+import ProgressScreen from "./ImageCommentSidler/ProgressScreen";
+import SaveSection from "./ImageCommentSidler/SaveSection";
+import SliderDots from "./ImageCommentSidler/SliderDots";
 import {
   SlideWrapper,
   Image,
@@ -16,12 +16,12 @@ import {
   SliderHeader,
   SlideIndex,
   ButtonGroup
-} from "./ImageSidler/styles";
-import TransmissionTime from "./ImageSidler/TransmissionTime";
+} from "./ImageCommentSidler/styles";
+import TransmissionTime from "./ImageCommentSidler/TransmissionTime";
 
-import type { ImageList } from "types/member/home.types";
+import type { ImageListType } from "types/member/home.types";
 
-const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
+const HomeImageCommentSlider = ({ images }: { images?: ImageListType[][] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
   const [totalFiles, setTotalFiles] = useState<number>(0);
@@ -97,4 +97,4 @@ const HomeImageSlider = ({ images }: { images?: ImageList[][] }) => {
   );
 };
 
-export default HomeImageSlider;
+export default HomeImageCommentSlider;
