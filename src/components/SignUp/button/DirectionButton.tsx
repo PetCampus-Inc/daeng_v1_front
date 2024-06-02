@@ -17,7 +17,7 @@ const DirectionButton = ({
     <SimpleButton
       onClick={handleClick}
       rightAddon={<ArrowRightSquare w={24} h={24} />}
-      customStyle={ButtonStyle}
+      css={ButtonStyle}
       {...props}
     >
       {children}

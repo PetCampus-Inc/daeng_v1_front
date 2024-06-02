@@ -1,7 +1,7 @@
 import { CSSProp } from "styled-components";
 
 export type ICustomStyle = {
-  customStyle?: CSSProp;
+  css?: CSSProp;
 };
 
 export type TColorScheme = "primary" | "gray";

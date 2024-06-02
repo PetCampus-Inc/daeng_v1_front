@@ -4,3 +4,5 @@ export * from "./Box";
 export * from "./Dropdown";
 export * from "./Layout";
 export * from "./Input";
+export * from "./progress";
+export * from "./Carousel";

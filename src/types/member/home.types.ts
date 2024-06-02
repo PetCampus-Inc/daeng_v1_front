@@ -1,19 +1,36 @@
-import { IResponse } from "types/Response.type";
+import type { Role } from "types/admin/admin.type";
+import type { Nullable } from "types/helper.type";
+import type { IResponse } from "types/Response.type";
 
 export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
 export type TImageType = "IMAGE" | "PROFILE";
 export type TDogStatus = "ENROLLED" | "DROP_OUT" | "APPROVAL_PENDING";
 
-export interface IHome {
+export interface HomeInfoType extends Omit<HomeDataType, "attendanceDate" | "imageList"> {
+  attendanceDate: string;
+  imageList?: ImageListType[][];
+}
+
+export interface ImageListType extends Omit<ImageList, "createdTime"> {
+  createdTime: string;
+}
+
+export interface HomeDataType {
+  memberId: number;
+  memberNickname: string;
+  role: Role.ROLE_MEMBER;
+  memberProfileUri: string;
   dogId: number;
   dogName: string;
-  memberId: number;
+  dogProfile: string;
+  status: Nullable<TAttendanceStatus>;
   relation: string;
-  attendanceStatus?: TAttendanceStatus;
-  attendanceDate?: string;
+  attendanceStatus: TAttendanceStatus;
+  attendanceDate: number[];
   todayAgendaStatus: TAgendaStatus;
-  imageList: ImageList[][];
+  schoolName: Nullable<string>;
+  imageList: Nullable<ImageList[][]>;
 }
 
 export interface ImageList {
@@ -21,7 +38,7 @@ export interface ImageList {
   imageUri: string;
   imageType: TImageType;
   comment?: string;
-  createdTime: string;
+  createdTime: number[];
 }
 export interface IDoglist {
   dogId: string;
@@ -110,3 +127,10 @@ export interface IMemberDogInfo extends IResponse {
   member: IMemberProfilePostInfo;
   dogMemo: string;
 }
+
+export type DogsInfoType = {
+  memberId: number;
+  dogId: number;
+  dogName: string;
+  imageUri: string;
+};

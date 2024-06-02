@@ -32,6 +32,15 @@ const getWidthSize = ({ width }: Pick<BoxStyleProps, "width">) => {
   }
 };
 
+const getMaxWidth = ({ maxWidth }: Pick<BoxStyleProps, "maxWidth">) => {
+  switch (maxWidth) {
+    case "full":
+      return "100%";
+    default:
+      return maxWidth;
+  }
+};
+
 const getHeightSize = ({ height }: Pick<BoxStyleProps, "height">) => {
   switch (height) {
     case "full":
@@ -46,12 +55,18 @@ const getHeightSize = ({ height }: Pick<BoxStyleProps, "height">) => {
 export const getPosition = (position: string | number) =>
   isNumber(position) ? remCalc(position) : position;
 
+const isDefined = <T>(value: T | undefined): value is T => {
+  return value !== undefined;
+};
+
 export const StyledBox = styled.div.withConfig({
   shouldForwardProp: (prop) =>
     ![
       "display",
       "width",
       "height",
+      "maxWidth",
+      "minWidth",
       "margin",
       "marginBlock",
       "marginInline",
@@ -94,7 +109,9 @@ export const StyledBox = styled.div.withConfig({
       "direction",
       "justify",
       "align",
-      "flex"
+      "flex",
+      "gap",
+      "zIndex"
     ].includes(prop)
 })<BoxOptions>`
   display: ${({ display }) => (display ? display : undefined)};
@@ -102,8 +119,11 @@ export const StyledBox = styled.div.withConfig({
   flex: ${({ flex }) => (flex ? flex : undefined)};
   justify-content: ${({ justify }) => (justify ? justify : undefined)};
   align-items: ${({ align }) => (align ? align : undefined)};
+  gap: ${({ gap }) => (gap ? remCalc(gap) : undefined)};
 
   width: ${({ width }) => (width ? getWidthSize({ width }) : undefined)};
+  max-width: ${({ maxWidth }) => (maxWidth ? getMaxWidth({ maxWidth }) : undefined)};
+  min-width: ${({ minWidth }) => (minWidth ? minWidth : undefined)};
   height: ${({ height }) => (height ? getHeightSize({ height }) : undefined)};
   margin: ${({ margin }) => (margin ? margin : undefined)};
   margin-right: ${({ mr, marginRight }) =>
@@ -139,10 +159,11 @@ export const StyledBox = styled.div.withConfig({
     bg ? theme.colors[bg] : backgroundColor ? theme.colors[backgroundColor] : undefined};
   color: ${({ color, theme }) => (color ? theme.colors[color] : undefined)};
   position: ${({ position }) => (position ? position : undefined)};
-  top: ${({ top }) => (top ? getPosition(top) : "")};
-  bottom: ${({ bottom }) => (bottom ? getPosition(bottom) : "")};
-  left: ${({ left }) => (left ? getPosition(left) : "")};
-  right: ${({ right }) => (right ? getPosition(right) : "")};
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : undefined)};
+  top: ${({ top }) => (isDefined(top) ? getPosition(top) : "")};
+  bottom: ${({ bottom }) => (isDefined(bottom) ? getPosition(bottom) : "")};
+  left: ${({ left }) => (isDefined(left) ? getPosition(left) : "")};
+  right: ${({ right }) => (isDefined(right) ? getPosition(right) : "")};
   overflow: ${({ overflow }) => (overflow ? overflow : undefined)};
   text-align: ${({ textAlign }) => (textAlign ? textAlign : undefined)};
 `;

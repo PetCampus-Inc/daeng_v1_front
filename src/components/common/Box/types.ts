@@ -4,6 +4,8 @@ import { TColor } from "styles/ThemeConfig";
 export type BoxStyleProps = {
   display?: CSSProperties["display"];
   width?: string | "full" | "auto";
+  maxWidth?: string | "full";
+  minWidth?: string;
   height?: string | "full" | "auto";
 };
 
@@ -47,6 +49,7 @@ type BoxPositionProps = {
 
   overflow?: CSSProperties["overflow"];
   textAlign?: "center" | "start" | "end" | "left" | "right";
+  zIndex?: CSSProperties["zIndex"];
 };
 
 type BoxFlexBoxProps = {
@@ -54,6 +57,7 @@ type BoxFlexBoxProps = {
   direction?: "row" | "column";
   justify?: "center" | "flex-start" | "flex-end" | "space-between" | "space-around";
   align?: "center" | "flex-start" | "flex-end" | "stretch";
+  gap?: number;
 };
 
 export type BoxBorderProps = {

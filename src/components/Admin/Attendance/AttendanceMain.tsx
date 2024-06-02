@@ -1,8 +1,8 @@
 import { useDogListAndSortedList, useDogSearchQuery } from "hooks/api/attendanceQuery";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { type SetStateAction, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { adminLoginInfoAtom } from "store/admin";
-import { sortOptionAtom } from "store/overlay";
+import { sortOptionState } from "store/form";
 
 import SortSelectBox from "./AttendanceButton/SortSelectBox";
 import AttendanceSearchInput from "./AttendanceInput/AttendanceSearchInput";
@@ -15,8 +15,8 @@ interface AttendanceMainProps {
 }
 
 const AttendanceMain = ({ isFocus, setIsFocus }: AttendanceMainProps) => {
-  const { schoolId, adminId } = useRecoilValue(adminLoginInfoAtom);
-  const sortName = useRecoilValue(sortOptionAtom);
+  const { schoolId, adminId } = useAdminInfo();
+  const sortName = useRecoilValue(sortOptionState);
   const { data: dogList } = useDogListAndSortedList({ sortName, schoolId, adminId });
   const [searchText, setSearchText] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");

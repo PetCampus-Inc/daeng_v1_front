@@ -5,7 +5,7 @@ import { handleGetSearchResult, handlePostMemberDogSchool } from "apis/member/en
 
 export const useGetSchoolInfoList = (searchText: string) => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.SHCOOL_INFO_LIST,
+    queryKey: QUERY_KEY.SCHOOL_INFO_LIST,
     queryFn: () => handleGetSearchResult(searchText)
   });
 };

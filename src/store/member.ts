@@ -23,3 +23,9 @@ export const memberEnrollmentDogDetailAtom = atom<IMemberDogInfo | null>({
   key: "memberEnrollmentDogDetail",
   default: null
 });
+
+// FIXME: selector로 변경 필요!!
+export const dogIdState = atom<number | null>({
+  key: "dogId",
+  default: null
+});

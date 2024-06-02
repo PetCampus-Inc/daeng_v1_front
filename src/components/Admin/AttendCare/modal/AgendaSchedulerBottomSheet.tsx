@@ -10,7 +10,7 @@ import {
   TitleWrapper,
   ToggleWrapper
 } from "./styles";
-import TimePicker, { TimePickerHandles } from "../CareTimePicker/TimePicker";
+import TimePicker, { TimePickerHandles } from "../AttendCareMain/CareTimePicker/TimePicker";
 
 const AgendaSchedulerBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
   // FIXME: 토글 스위치는 useState 대신 label-input으로 리팩터링 할 것!!

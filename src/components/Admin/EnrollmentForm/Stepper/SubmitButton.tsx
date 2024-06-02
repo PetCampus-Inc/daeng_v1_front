@@ -1,29 +1,28 @@
-import { PATH } from "constants/path";
 import { FIELD_TO_STEP } from "constants/step";
 
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { Adapter } from "libs/Adapter";
 import { AdminFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { currentStepState, enrollmentFormAtom } from "store/form";
+import { currentStepState } from "store/form";
 import { FormButton } from "styles/StyleModule";
 
-import type { IRequestAdminEnrollment } from "types/admin/enrollment.types";
+import type { AdminFormSaveType } from "types/admin/enrollment.types";
 
 interface SubmitButtonProps {
   type?: "READ" | "CREATE" | "EDIT";
+  onNextStep?: (formInfo: AdminFormSaveType) => void;
 }
 
-const SubmitButton = ({ type }: SubmitButtonProps) => {
+const SubmitButton = ({ type, onNextStep }: SubmitButtonProps) => {
   const { handleSubmit, setFocus } = useFormContext();
-  const navigate = useNavigate();
   const overlay = useOverlay();
 
-  const setEnrollmentForm = useSetRecoilState(enrollmentFormAtom);
   const setStep = useSetRecoilState(currentStepState);
+  const { adminId, schoolId } = useAdminInfo();
 
   const text = type === "EDIT" ? "수정 완료" : "가입 신청서 등록";
 
@@ -46,12 +45,11 @@ const SubmitButton = ({ type }: SubmitButtonProps) => {
     ));
 
   const onSubmit = (data: FieldValues) => {
-    const requestData = Adapter.from(data).to<FieldValues, IRequestAdminEnrollment>((item) =>
+    const requestData = { ...data, adminId, schoolId };
+    const saveData = Adapter.from(requestData).to<FieldValues, AdminFormSaveType>((item) =>
       new AdminFormToServerAdapter(item).adapt()
     );
-
-    setEnrollmentForm(requestData);
-    navigate(PATH.ADMIN_SUBMIT_FORM);
+    onNextStep?.(saveData);
   };
 
   const onInvalid = (errors: FieldErrors) => {
