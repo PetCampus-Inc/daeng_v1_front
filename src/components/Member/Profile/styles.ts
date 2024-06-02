@@ -104,3 +104,10 @@ const ImgStyle = css`
 
   flex-shrink: 0; // flex item이 shrink되지 않도록 설정
 `;
+
+export const SavaProfileButton = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+`;

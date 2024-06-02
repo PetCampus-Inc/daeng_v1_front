@@ -1,4 +1,5 @@
 import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
+import SaveProfilButton from "components/Member/Profile/SaveProfilButton";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
 
@@ -10,9 +11,10 @@ const MemberOnboardingProfileEditePage = () => {
   });
 
   return (
-    <PageContainer ph="1.5" pt="4" color="BGray">
+    <PageContainer ph="1.5" pt="4" pb="4" color="BGray">
       <FormProvider {...methods}>
         <OnboardingProfile />
+        <SaveProfilButton />
       </FormProvider>
     </PageContainer>
   );
