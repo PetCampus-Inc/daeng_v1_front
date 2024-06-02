@@ -80,7 +80,8 @@ const MEMBER_PATH = {
   MEMBER_DOG_INFO_PAGE: (dogId?: number) => `/dog-info/${dogId ?? ":dogId"}`, // 강아지 상세정보
   MEMBER_DOG_INFO_EDITE_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
   MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
-    `/dog-info/${dogId ?? ":dogId"}/enrollment/detail` // 강아지 가입신청서 보기 (read only)
+    `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
+  MEMEBER_PROFILE_EDITE_PAGE: `/profile/edit` // 온보일 후 초기 프로필 설정
 };
 
 const PUBLIC_PATH = {

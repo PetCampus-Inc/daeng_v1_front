@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 import * as S from "./styles";
 
 interface IBackgroundButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  backgroundColor?: "white" | "gray_5" | "primaryColor";
+  backgroundColor?: "white" | "gray_5" | "primaryColor" | "transparent";
   buttonBackgroundColor?: "gray_4" | "primaryColor";
 }
 
