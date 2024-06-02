@@ -12,6 +12,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { getFilePreview } from "utils/thumb";
 
+import ProfileActiveBox from "./ProfileActiveBox";
 import * as S from "./styles";
 
 const ProfileEdite = () => {
@@ -73,14 +74,7 @@ const ProfileEdite = () => {
           {myProfile.length > 0 ? (
             <>
               <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-
-              {!isMyActive && (
-                <S.ActiveBox className="active">
-                  <GalleryBasicIcon className="GalleryIcon" />
-                  <S.BackDropBorder />
-                  <S.BackDrop />
-                </S.ActiveBox>
-              )}
+              {!isMyActive && <ProfileActiveBox />}
             </>
           ) : (
             <AddCIcon />
@@ -107,13 +101,7 @@ const ProfileEdite = () => {
           {dogProfile.length > 0 ? (
             <>
               <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-              {!isDogActive && (
-                <S.ActiveBox className="active">
-                  <GalleryBasicIcon className="GalleryIcon" />
-                  <S.BackDropBorder />
-                  <S.BackDrop />
-                </S.ActiveBox>
-              )}
+              {!isMyActive && <ProfileActiveBox />}
             </>
           ) : (
             <AddCIcon />
