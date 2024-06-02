@@ -39,6 +39,8 @@ export const UploadProfileButton = styled.button`
   overflow: hidden;
   position: relative;
 
+  aspect-ratio: 1/1;
+
   .GalleryIcon {
     position: relative;
     z-index: 1;
@@ -89,20 +91,6 @@ export const UploadImage = styled.img`
 
 export const StyledHiddenUpload = styled.input`
   display: none;
-`;
-
-const ImgStyle = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 90px;
-  height: 90px;
-  aspect-ratio: 1/1;
-
-  border-radius: 8px;
-
-  flex-shrink: 0; // flex item이 shrink되지 않도록 설정
 `;
 
 export const SavaProfileButton = styled.div`
