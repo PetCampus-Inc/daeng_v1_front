@@ -7,9 +7,13 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { getFilePreview } from "utils/thumb";
 
-import ProfileEdite from "./ProfileEdite";
+import ProfileEdite from "../Edite/ProfileEdite";
 
-const ProfileEditeBox = () => {
+interface IProfileEditeProps {
+  isOnlyProfile?: "MY" | "DOG";
+}
+
+const ProfileEditeBox = ({ isOnlyProfile }: IProfileEditeProps) => {
   const { register, setValue, watch } = useFormContext();
   const [myProfile, setMyProfile] = useState<IFile[]>([]);
   const [dogProfile, setDogProfile] = useState<IFile[]>([]);
@@ -56,17 +60,18 @@ const ProfileEditeBox = () => {
 
   return (
     <>
-      <ProfileEdite
-        isActive={isMyActive}
-        setIsActive={setMyIsActive}
-        profile={myProfile}
-        fileInputRef={myFileInputRef}
-        handleFileChange={handleFileChange}
-        handleClick={handleClick}
-        registerText="myProfile"
-        type={TYPE_MY}
-      />
-
+      {isOnlyProfile !== "DOG" && (
+        <ProfileEdite
+          isActive={isMyActive}
+          setIsActive={setMyIsActive}
+          profile={myProfile}
+          fileInputRef={myFileInputRef}
+          handleFileChange={handleFileChange}
+          handleClick={handleClick}
+          registerText="myProfile"
+          type={TYPE_MY}
+        />
+      )}
       <ProfileEdite
         isActive={isDogActive}
         setIsActive={setDogIsActive}

@@ -1,5 +1,5 @@
+import SaveProfilButton from "components/Member/Profile/Button/SaveProfilButton";
 import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
-import SaveProfilButton from "components/Member/Profile/SaveProfilButton";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
 

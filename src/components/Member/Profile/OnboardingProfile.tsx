@@ -2,9 +2,9 @@ import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
 import useFocus from "hooks/common/useFocus";
 
-import NickNameEdite from "./NickNameEdite";
-import ProfileEditeBox from "./ProfileEditeBox";
-import RoleEdite from "./RoleEdite";
+import ProfileEditeBox from "./Box/ProfileEditeBox";
+import NickNameEdite from "./Edite/NickNameEdite";
+import RoleEdite from "./Edite/RoleEdite";
 
 const OnboardingProfile = () => {
   const { isFocusing, handleFocus, handleBlur } = useFocus();

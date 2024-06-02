@@ -1,5 +1,23 @@
+import AddDogProfile from "components/Member/Profile/AddDogProfile";
+import SaveProfilButton from "components/Member/Profile/Button/SaveProfilButton";
+import { FormProvider, useForm } from "react-hook-form";
+import { PageContainer } from "styles/StyleModule";
+
 const MemberAddDogProfileEditePage = () => {
-  return <div>강아지 추가 프사 설정</div>;
+  const methods = useForm({
+    mode: "onChange",
+    shouldUnregister: false,
+    defaultValues: {}
+  });
+
+  return (
+    <PageContainer ph="1.5" pt="4" pb="4" color="BGray">
+      <FormProvider {...methods}>
+        <AddDogProfile />
+        <SaveProfilButton />
+      </FormProvider>
+    </PageContainer>
+  );
 };
 
 export default MemberAddDogProfileEditePage;

@@ -5,8 +5,8 @@ import { Text } from "components/common/Text";
 import { ChangeEvent } from "react";
 import { useFormContext } from "react-hook-form";
 
-import ProfileActiveBox from "./ProfileActiveBox";
-import * as S from "./styles";
+import ProfileActiveBox from "../Box/ProfileActiveBox";
+import * as S from "../styles";
 
 interface IProfileEdite {
   isActive: boolean;

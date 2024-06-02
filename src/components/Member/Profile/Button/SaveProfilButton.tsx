@@ -1,6 +1,6 @@
 import BackgroundButton from "components/common/Button/BackgroundButton";
 
-import * as S from "./styles";
+import * as S from "../styles";
 
 const SaveProfilButton = () => {
   return (

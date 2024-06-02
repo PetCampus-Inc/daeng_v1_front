@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ThemeConfig } from "styles/ThemeConfig";
 
-import * as S from "./styles";
+import * as S from "../styles";
 
 const RoleEdite = () => {
   const [currentRelation, setCurrentRelation] = useState<string>("");
