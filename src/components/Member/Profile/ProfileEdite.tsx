@@ -1,14 +1,12 @@
 import AddCIcon from "assets/svg/add-c-icon";
-import GalleryBasicIcon from "assets/svg/gallery-basic-icon";
 import {
   IFile,
   StyledThumb,
   StyledThumbImg
 } from "components/Admin/AttendCare/AttendCareGallery/upload";
-import { Box } from "components/common/Box";
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { getFilePreview } from "utils/thumb";
 
@@ -60,15 +58,11 @@ const ProfileEdite = () => {
     }
   };
 
-  console.log("현재 상태", isMyActive, isDogActive);
-
   return (
     <>
       <Flex align="center" direction="column" justify="center" gap="12" width="100%">
         <S.UploadProfileButton
-          onClick={() => {
-            handleClick(TYPE_MY);
-          }}
+          onClick={() => handleClick(TYPE_MY)}
           onBlur={() => setMyIsActive(true)}
         >
           {myProfile.length > 0 ? (
