@@ -97,6 +97,14 @@ const MemberRoutes = (): RouteObject[] => {
               <Pages.MemberOnboardingProfileEditePage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMEBER_ADD_DOG_PROFILE_EDITE_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberAddDogProfileEditePage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
