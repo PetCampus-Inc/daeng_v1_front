@@ -3,7 +3,7 @@ import { Text } from "components/common/Text";
 import useFocus from "hooks/common/useFocus";
 
 import NickNameEdite from "./NickNameEdite";
-import ProfileEdite from "./ProfileEdite";
+import ProfileEditeBox from "./ProfileEditeBox";
 import RoleEdite from "./RoleEdite";
 
 const OnboardingProfile = () => {
@@ -23,7 +23,7 @@ const OnboardingProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEdite />
+        <ProfileEditeBox />
       </Flex>
       <Flex direction="column" gap="4">
         <Text as="span" typo="body2_16_R" color="gray_1">
