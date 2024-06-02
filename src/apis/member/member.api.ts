@@ -11,8 +11,7 @@ import type {
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
   HomeDataType,
-  IMemberDogSchoolInfo,
-  IMemberAgreement
+  IMemberDogSchoolInfo
 } from "types/member/home.types";
 
 // 견주 홈 메인

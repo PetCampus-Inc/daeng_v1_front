@@ -11,11 +11,7 @@ import {
 } from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
 import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
-import {
-  useGetDogSchoolInfo,
-  useGetMemberAgreement,
-  useGetMemberPrecautions
-} from "hooks/api/member/school";
+import { useGetDogSchoolInfo, useGetMemberPrecautions } from "hooks/api/member/school";
 import { useOverlay } from "hooks/common/useOverlay";
 import { ReactNode, Suspense } from "react";
 
@@ -35,8 +31,6 @@ const SchoolInfo = ({ dogId }: IProps) => {
     schoolNumber: schoolData.phoneNumber
   };
 
-  const data = handleGetMemberAgreement(schoolData.schoolId, 21);
-  console.log(data);
   const findObject = (id: number) => {
     const object = memberPrecautions.agreements.find((obj) =>
       Object.prototype.hasOwnProperty.call(obj, id)
@@ -47,6 +41,15 @@ const SchoolInfo = ({ dogId }: IProps) => {
     return "";
   };
 
+  const openMemberAgreement = async (agreementId: number, title: string, icon: ReactNode) => {
+    try {
+      const data = await handleGetMemberAgreement(schoolData.schoolId, agreementId);
+      openAgreementPopup(agreementId, title, icon, data.text, dogId);
+    } catch (error) {
+      console.log("유의사항 재동의 팝업 에러", error);
+    }
+  };
+
   const openCallPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <Suspense>
@@ -54,10 +57,18 @@ const SchoolInfo = ({ dogId }: IProps) => {
       </Suspense>
     ));
 
-  const openAgreementPopup = (title: string, icon: ReactNode, text: string) => {
+  const openAgreementPopup = (
+    agreementId: number,
+    title: string,
+    icon: ReactNode,
+    text: string,
+    dogId: number
+  ) => {
     overlay.open(({ isOpen, close }) => (
       <Suspense>
         <AgreementBottomSheet
+          agreementId={agreementId}
+          dogId={dogId}
           title={title}
           close={close}
           isOpen={isOpen}
@@ -117,7 +128,7 @@ const SchoolInfo = ({ dogId }: IProps) => {
               {memberPrecautions.modifiedList?.includes(item.id) ? (
                 <YellowThickButton
                   onClick={() => {
-                    openAgreementPopup(item.title, item.icon, "text");
+                    openMemberAgreement(item.id, item.title, item.icon);
                   }}
                 >
                   재동의 필요

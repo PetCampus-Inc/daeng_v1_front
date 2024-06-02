@@ -1,5 +1,5 @@
-import ApplicationWhiteIcon from "assets/svg/application-white-icon";
 import BottomSheet, { IBottomSheetProps } from "components/common/BottomSheet";
+import { usePostMemberAgreement } from "hooks/api/member/school";
 import { ReactNode, useState } from "react";
 import styled from "styled-components";
 
@@ -12,6 +12,8 @@ interface IAlertBottomSheet extends IBottomSheetProps {
   closeFn: () => void;
   icon: ReactNode;
   text: string;
+  agreementId: number;
+  dogId: number;
 }
 
 const AgreementBottomSheet = ({
@@ -22,9 +24,18 @@ const AgreementBottomSheet = ({
   closeText,
   closeFn,
   icon,
-  text
+  text,
+  agreementId,
+  dogId
 }: IAlertBottomSheet) => {
   const [isChecked, setIsChecked] = useState(false);
+  const mutateMemberAgreement = usePostMemberAgreement(agreementId);
+  const handlePostAgreement = () => {
+    if (isChecked) {
+      mutateMemberAgreement(dogId);
+      closeFn();
+    }
+  };
 
   return (
     <BottomSheet isOpen={isOpen} close={close}>
@@ -33,13 +44,13 @@ const AgreementBottomSheet = ({
           {icon}
           <Title>{title}</Title>
         </TitleWrapper>
-        <Info>
-          {
-            "원장님이 입력한 가격안내 내용이 보이게 됩니다. 원장님이 입력한 가격안내 내용이 보이게 됩니다. 원장님이 입력한 가격안내 내용이 보이게 됩니다. 원장님이 입력한 가격안내 내용이 보이게 됩니다. "
-          }
-        </Info>
+        <Info>{text}</Info>
         <CheckButton isChecked={isChecked} setIsChecked={setIsChecked} />
-        <BottomSheet.Button actionText={closeText} actionFn={closeFn} disabled={!isChecked} />
+        <BottomSheet.Button
+          actionText={closeText}
+          actionFn={() => handlePostAgreement()}
+          disabled={!isChecked}
+        />
       </BottomSheet.Content>
     </BottomSheet>
   );
