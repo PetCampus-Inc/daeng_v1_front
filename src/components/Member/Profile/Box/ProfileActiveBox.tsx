@@ -1,6 +1,6 @@
 import GalleryBasicIcon from "assets/svg/gallery-basic-icon";
 
-import * as S from "./styles";
+import * as S from "../styles";
 
 const ProfileActiveBox = () => {
   return (

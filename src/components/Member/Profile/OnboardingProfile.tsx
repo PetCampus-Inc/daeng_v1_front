@@ -2,9 +2,9 @@ import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
 import useFocus from "hooks/common/useFocus";
 
-import NickNameEdite from "./NickNameEdite";
-import ProfileEdite from "./ProfileEdite";
-import RoleEdite from "./RoleEdite";
+import ProfileEditeBox from "./Box/ProfileEditeBox";
+import NickNameEdite from "./Edite/NickNameEdite";
+import RoleEdite from "./Edite/RoleEdite";
 
 const OnboardingProfile = () => {
   const { isFocusing, handleFocus, handleBlur } = useFocus();
@@ -23,7 +23,7 @@ const OnboardingProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEdite />
+        <ProfileEditeBox />
       </Flex>
       <Flex direction="column" gap="4">
         <Text as="span" typo="body2_16_R" color="gray_1">

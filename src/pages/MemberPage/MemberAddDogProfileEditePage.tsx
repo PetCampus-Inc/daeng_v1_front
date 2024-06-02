@@ -1,9 +1,9 @@
+import AddDogProfile from "components/Member/Profile/AddDogProfile";
 import SaveProfilButton from "components/Member/Profile/Button/SaveProfilButton";
-import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
 
-const MemberOnboardingProfileEditePage = () => {
+const MemberAddDogProfileEditePage = () => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
@@ -13,11 +13,11 @@ const MemberOnboardingProfileEditePage = () => {
   return (
     <PageContainer ph="1.5" pt="4" pb="4" color="BGray">
       <FormProvider {...methods}>
-        <OnboardingProfile />
+        <AddDogProfile />
         <SaveProfilButton />
       </FormProvider>
     </PageContainer>
   );
 };
 
-export default MemberOnboardingProfileEditePage;
+export default MemberAddDogProfileEditePage;
