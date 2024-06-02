@@ -17,10 +17,19 @@ const ProfileEdite = () => {
   const { register, setValue, watch } = useFormContext();
   const [myProfile, setMyProfile] = useState<IFile[]>([]);
   const [dogProfile, setDogProfile] = useState<IFile[]>([]);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [isMyEdite, setMyIsEdite] = useState(false);
+  const [isDogEdite, setDogIsEdite] = useState(false);
+  const myFileInputRef = useRef<HTMLInputElement | null>(null);
+  const dogFileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleClick = () => {
-    fileInputRef.current?.click();
+  const handleClick = (type: "MY" | "DOG") => {
+    if (myFileInputRef.current || dogFileInputRef) {
+      if (type === "MY") {
+        myFileInputRef.current?.click();
+      } else if (type === "DOG") {
+        dogFileInputRef.current?.click();
+      }
+    }
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, type: "MY" | "DOG") => {
@@ -35,11 +44,15 @@ const ProfileEdite = () => {
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
 
       if (type === "MY") {
+        console.log("와타시");
         setMyProfile([...fileArray]);
         setValue("myProfile", [...newFiles]);
+        setMyIsEdite(true);
       } else if (type === "DOG") {
+        console.log("강아지");
         setDogProfile([...fileArray]);
         setValue("dogProfile", [...newFiles]);
+        setDogIsEdite(true);
       }
     }
   };
@@ -47,17 +60,23 @@ const ProfileEdite = () => {
   return (
     <>
       <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-        <S.UploadProfileButton as="button" onClick={handleClick} align="center" justify="center">
-          {myProfile ? (
+        <S.UploadProfileButton
+          as="button"
+          onClick={() => handleClick("MY")}
+          align="center"
+          justify="center"
+        >
+          {myProfile.length > 0 ? (
             <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
           ) : (
             <AddCIcon />
           )}
         </S.UploadProfileButton>
+
         <S.StyledHiddenUpload
           {...register("myProfile")}
           type="file"
-          ref={fileInputRef}
+          ref={myFileInputRef}
           multiple
           accept={"image/*"}
           onChange={(e) => handleFileChange(e, "MY")}
@@ -68,8 +87,13 @@ const ProfileEdite = () => {
       </Flex>
 
       <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-        <S.UploadProfileButton as="button" onClick={handleClick} align="center" justify="center">
-          {dogProfile ? (
+        <S.UploadProfileButton
+          as="button"
+          onClick={() => handleClick("DOG")}
+          align="center"
+          justify="center"
+        >
+          {dogProfile.length > 0 ? (
             <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
           ) : (
             <AddCIcon />
@@ -78,7 +102,7 @@ const ProfileEdite = () => {
         <S.StyledHiddenUpload
           {...register("dogProfile")}
           type="file"
-          ref={fileInputRef}
+          ref={dogFileInputRef}
           multiple
           accept={"image/*"}
           onChange={(e) => handleFileChange(e, "DOG")}
