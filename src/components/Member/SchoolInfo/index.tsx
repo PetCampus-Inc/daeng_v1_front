@@ -37,6 +37,11 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
       <CallSchoolBottomSheet info={schoolCallInfo} isOpen={isOpen} close={close} />
     ));
 
+  const monthlyTicketRemainingDays = remainingDays(
+    data.ticket.ticketStartDate,
+    data.ticket.monthlyTicketNumber
+  );
+
   const openDisconnectPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <BasicModal
@@ -88,7 +93,7 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
       case "ROUND":
         return `회차권_${data.ticket.allRoundTicket}회 (잔여 ${data.ticket.currentRoundTicket}회)`;
       case "MONTHLY":
-        return `정기권_${data.ticket.monthlyTicketNumber}주 (${remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0 ? `만료 ${remainingDays}일 전` : `만료`})`;
+        return `정기권_${data.ticket.monthlyTicketNumber}주 (${monthlyTicketRemainingDays > 0 ? `만료 ${monthlyTicketRemainingDays}일 전` : `만료`})`;
     }
   };
 
