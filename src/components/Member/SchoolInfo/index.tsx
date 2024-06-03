@@ -42,6 +42,11 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
     data.ticket.monthlyTicketNumber
   );
 
+  const tickeyRemainingDays = remainingDays(
+    data.ticket.ticketStartDate,
+    data.ticket.monthlyTicketNumber
+  );
+
   const openDisconnectPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <BasicModal
@@ -72,7 +77,6 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
         close={close}
         actionText={"연결 끊기"}
         actionFn={() => {
-          console.log("유치원 연결 끊기");
           close();
           handleDeleteSchool();
         }}
@@ -131,10 +135,10 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
         </S.InfoList>
       </S.InfoContainer>
       <S.DisconnectButton
-        backgroundColor={"white"}
+        buttonBackgroundColor="gray_4"
+        backgroundColor="white"
         onClick={
-          remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0 ||
-          data.ticket.currentRoundTicket > 0
+          tickeyRemainingDays > 0 || data.ticket.currentRoundTicket > 0
             ? openAlertPopup
             : openDisconnectPopup
         }
