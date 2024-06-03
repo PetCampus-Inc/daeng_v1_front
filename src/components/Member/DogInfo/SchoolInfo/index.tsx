@@ -1,5 +1,6 @@
 import { MEMBER_DOG_NOTICE_LIST } from "constants/notice";
 
+import { handleGetMemberAgreement } from "apis/member/member.api";
 import MapPinIcon from "assets/svg/map-pin-icon";
 import BasicPhoneIcon from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
@@ -9,23 +10,90 @@ import {
   YellowThickButton
 } from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
 import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
+import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
+import { useGetDogSchoolInfo, useGetMemberPrecautions } from "hooks/api/member/school";
+import { useOverlay } from "hooks/common/useOverlay";
+import { ReactNode, Suspense } from "react";
 
+import AgreementBottomSheet from "./AgreementBottomSheet";
 import * as S from "./styles";
 
-const SchoolInfo = () => {
+interface IProps {
+  dogId: number;
+}
+
+const SchoolInfo = ({ dogId }: IProps) => {
+  const overlay = useOverlay();
+  const { data: schoolData } = useGetDogSchoolInfo(dogId);
+  const { data: memberPrecautions } = useGetMemberPrecautions(dogId);
+  const schoolCallInfo = {
+    schoolName: schoolData.name,
+    schoolNumber: schoolData.phoneNumber
+  };
+
+  const findObject = (id: number) => {
+    const object = memberPrecautions.agreements.find((obj) =>
+      Object.prototype.hasOwnProperty.call(obj, id)
+    );
+    if (object) {
+      return Object.values(object)[0];
+    }
+    return "";
+  };
+
+  const openMemberAgreement = async (agreementId: number, title: string, icon: ReactNode) => {
+    try {
+      const data = await handleGetMemberAgreement(schoolData.schoolId, agreementId);
+      openAgreementPopup(agreementId, title, icon, data.text, dogId);
+    } catch (error) {
+      console.log("유의사항 재동의 팝업 에러", error);
+    }
+  };
+
+  const openCallPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <Suspense>
+        <CallSchoolBottomSheet info={schoolCallInfo} isOpen={isOpen} close={close} />
+      </Suspense>
+    ));
+
+  const openAgreementPopup = (
+    agreementId: number,
+    title: string,
+    icon: ReactNode,
+    text: string,
+    dogId: number
+  ) => {
+    overlay.open(({ isOpen, close }) => (
+      <Suspense>
+        <AgreementBottomSheet
+          agreementId={agreementId}
+          dogId={dogId}
+          title={title}
+          close={close}
+          isOpen={isOpen}
+          closeText="확인"
+          closeFn={close}
+          icon={icon}
+          text={text}
+        />
+      </Suspense>
+    ));
+  };
+
   return (
     <FlexWrapper>
       <S.Wrapper>
         <S.UpperContainer>
-          <S.DogDetailInfoText className="big">유치원 이름</S.DogDetailInfoText>
+          <S.DogDetailInfoText className="big">{schoolData.name}</S.DogDetailInfoText>
         </S.UpperContainer>
         <S.BottomContainer>
           <DetailItem className="row">
             <TextWrapper>
               <BasicPhoneIcon />
-              {"연락처 없음"}
+              {schoolData.phoneNumber}
             </TextWrapper>
-            <YellowThickButton>
+            <YellowThickButton onClick={() => openCallPopup()}>
               <PhoneIcon />
               전화 걸기
             </YellowThickButton>
@@ -33,9 +101,9 @@ const SchoolInfo = () => {
           <DetailItem className="row">
             <TextWrapper>
               <BasicPhoneIcon />
-              {"연락처 없음"}
+              {schoolData.phoneNumber}
             </TextWrapper>
-            <YellowThickButton>
+            <YellowThickButton onClick={() => openCallPopup()}>
               <PhoneIcon />
               전화 걸기
             </YellowThickButton>
@@ -43,7 +111,7 @@ const SchoolInfo = () => {
           <DetailItem>
             <TextWrapper>
               <MapPinIcon />
-              {"주소 없음"}
+              {schoolData.address}
             </TextWrapper>
           </DetailItem>
         </S.BottomContainer>
@@ -57,7 +125,17 @@ const SchoolInfo = () => {
               {item.title}
             </S.FlexText>
             <S.InnerFlexWrapper>
-              <S.FlexText className="date">{"2024.05.07"} 동의</S.FlexText>
+              {memberPrecautions.modifiedList?.includes(item.id) ? (
+                <YellowThickButton
+                  onClick={() => {
+                    openMemberAgreement(item.id, item.title, item.icon);
+                  }}
+                >
+                  재동의 필요
+                </YellowThickButton>
+              ) : (
+                <S.FlexText className="date">{findObject(item.id)} 동의</S.FlexText>
+              )}
             </S.InnerFlexWrapper>
           </S.List>
         ))}

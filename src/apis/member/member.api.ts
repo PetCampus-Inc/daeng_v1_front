@@ -1,5 +1,6 @@
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
+import { IPrecautionInfo } from "types/admin.attendance.type";
 import { IResponse } from "types/helper.type";
 
 import type {
@@ -10,7 +11,8 @@ import type {
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
   HomeDataType,
-  DogsInfoType
+  DogsInfoType,
+  IMemberDogSchoolInfo
 } from "types/member/home.types";
 
 // 견주 홈 메인
@@ -150,4 +152,34 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
     memo: memo
   });
   return data;
+};
+
+// 강아지 유치원 정보
+export const handleGetMemberDogSchool = async (dogId: number): Promise<IMemberDogSchoolInfo> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data.data.school;
+};
+
+// 강아지 유의사항 동의 정보
+export const handleGetMemberDogPrecaution = async (dogId: number): Promise<IPrecautionInfo> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data.data.precaution;
+};
+
+// 멤버 유의사항 상세 내용
+export const handleGetMemberAgreement = async (schoolId: number, agreementId: number) => {
+  const url = `member/agreement?schoolId=${schoolId}&agreementId=${agreementId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
+//멤버 유의사항 재동의
+export const handlePostMemberAgreement = async (
+  dogId: number,
+  agreementId: number
+): Promise<void> => {
+  const url = `member/agreement?dogId=${dogId}&agreementId=${agreementId}`;
+  return await customAxios.post(url);
 };
