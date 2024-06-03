@@ -47,7 +47,7 @@ export const Title = styled.p`
 `;
 
 export const BackgroundButtonWrapper = styled.div<{ $isBottom?: boolean }>`
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
