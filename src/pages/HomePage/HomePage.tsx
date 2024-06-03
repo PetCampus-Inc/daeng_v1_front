@@ -14,8 +14,8 @@ import { dogIdState } from "store/member";
 const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
 
-  const defaultDogId = 2;
-  const memberId = 2;
+  const defaultDogId = 11;
+  const memberId = 1;
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
   const { data } = useGetHomeInfo(memberId, dogId);
