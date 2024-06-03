@@ -12,7 +12,8 @@ import type {
   IMemberDogPostDetailInfo,
   HomeDataType,
   DogsInfoType,
-  IMemberDogSchoolInfo
+  IMemberDogSchoolInfo,
+  IMemberProfile
 } from "types/member/home.types";
 
 // 견주 홈 메인
@@ -182,4 +183,18 @@ export const handlePostMemberAgreement = async (
 ): Promise<void> => {
   const url = `member/agreement?dogId=${dogId}&agreementId=${agreementId}`;
   return await customAxios.post(url);
+};
+
+// 회원 가입승인후 초기 견주, 강아지 프로필 설정
+export const handlePostMemoProfile = async (req: IMemberProfile): Promise<void> => {
+  const url = `member/main/profile`;
+  const { data } = await customAxios.post(url, {
+    memberId: req.memberId,
+    dogId: req.dogId,
+    memberProfileUri: req.memberProfileUri,
+    dogProfileUri: req.dogProfileUri,
+    dogName: req.dogName,
+    relation: req.relation
+  });
+  return data;
 };

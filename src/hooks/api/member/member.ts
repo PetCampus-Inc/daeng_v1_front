@@ -13,7 +13,8 @@ import {
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
   handlePostMemoDogAlleray,
-  handlePostMemoDogPickdrop
+  handlePostMemoDogPickdrop,
+  handlePostMemoProfile
 } from "apis/member/member.api";
 import { useNavigate } from "react-router-dom";
 import { getISOString } from "utils/date";
@@ -23,6 +24,7 @@ import type {
   HomeDataType,
   HomeInfoType,
   IMemberDogPostDetailInfo,
+  IMemberProfile,
   IMemberProfilePostInfo
 } from "types/member/home.types";
 
@@ -204,4 +206,19 @@ export const usePostMemberDogPickdrop = (dogId: number) => {
   });
 
   return memberDogPickdropMutation.mutate;
+};
+
+// 회원 가입승인후 초기 견주, 강아지 프로필을 설정
+export const usePostMemberProfile = () => {
+  const memberProfileMutation = useMutation({
+    mutationFn: ({ req }: { req: IMemberProfile }) => handlePostMemoProfile(req),
+    onSuccess: () => {
+      console.log("완료");
+    },
+    onError: () => {
+      showToast("프로필 등록을 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return memberProfileMutation.mutate;
 };
