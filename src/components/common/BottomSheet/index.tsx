@@ -42,7 +42,7 @@ const BottomSheetBase = ({ children, isOpen, close }: PropsWithChildren<IBottomS
               key="dimmer"
               initial="initial"
               animate="animate"
-              exit="initial"
+              exit="exit"
               variants={dimmerAnimationVariants}
               aria-hidden="true"
             />
