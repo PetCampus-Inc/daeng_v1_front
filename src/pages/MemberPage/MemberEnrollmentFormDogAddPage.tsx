@@ -2,8 +2,9 @@ import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { schoolIdAtom } from "store/form";
+import { memberEnrollmentDogDetailAtom } from "store/member";
 
 import EnrollmentPage from "../SignUpPage/EnrollmentPage";
 
@@ -11,13 +12,26 @@ const MemberEnrollmentFormDogAddPage = () => {
   const navigate = useNavigate();
   const overlay = useOverlay();
   const MemberschoolId = useRecoilValue(schoolIdAtom); // member에서 유치원 검색시 추출
+  const setMemberDogInfo = useSetRecoilState(memberEnrollmentDogDetailAtom);
   const isMypage = useLocation()
     .pathname.split("/")
     .some((url) => url === "mypage");
 
+  // 유치원 재등록할 경우 남아 있는 MemberDogInfo 삭제를 위해
+  const handleResetMemberDogInfo = () => {
+    setMemberDogInfo(null);
+  };
+
   const openPreventLeavePopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
+      <PreventLeaveModal
+        isOpen={isOpen}
+        close={close}
+        action={() => {
+          navigate(-1);
+          handleResetMemberDogInfo();
+        }}
+      />
     ));
 
   return (
