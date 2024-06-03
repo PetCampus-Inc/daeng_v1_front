@@ -7,9 +7,11 @@ import { arrowVariants } from "styles/animation";
 interface ArrowsProps {
   position: "next" | "prev";
   isDisabled: boolean;
+  currentSlide?: number;
+  slideCount?: number;
 }
 
-const Arrows = ({ position, isDisabled, ...props }: ArrowsProps) => {
+const Arrows = ({ position, isDisabled, currentSlide, slideCount, ...props }: ArrowsProps) => {
   return (
     <AnimatePresence mode="wait">
       {!isDisabled && (
