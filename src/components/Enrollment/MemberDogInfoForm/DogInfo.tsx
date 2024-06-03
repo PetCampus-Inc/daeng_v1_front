@@ -8,6 +8,7 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { Caption, Card } from "components/Enrollment/Form/styles";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { memberEnrollmentDogDetailAtom } from "store/member";
@@ -21,14 +22,20 @@ interface DogInfoProps {
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
+
   const memberDogInfo = useRecoilValue(memberEnrollmentDogDetailAtom);
+
   const [Dogyear, Dogmonth, Dogday] = memberDogInfo ? memberDogInfo.dogBirthDate : [];
   const memeberDogBirth = {
     year: Dogyear ? String(Dogyear) : "",
     month: Dogmonth ? String(addZero(Dogmonth)) : "",
     day: Dogday ? String(addZero(Dogday)) : ""
   };
-  console.log(memberDogInfo);
+
+  useEffect(() => {
+    setValue("newBreed", memberDogInfo ? memberDogInfo?.breedName : "");
+  }, []);
+
   return (
     <>
       <Card>
@@ -69,8 +76,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           setValue={setValue}
           watch={watch}
           isRequired={requiredItems?.get(ITEM_KEYS.DOG_BREED)}
-          // value={memberDogInfo ? memberDogInfo.breedName : ''}
-          value={watch("breedName")}
         />
       </Card>
       <Card>
