@@ -7,3 +7,4 @@ export * from "./Input";
 export * from "./progress";
 export * from "./Carousel";
 export * from "./Accordion";
+export * from "./Checkbox";

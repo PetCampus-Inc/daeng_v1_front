@@ -1,6 +1,6 @@
 import { type AgreementsListType, ITEM_KEYS } from "constants/item";
 
-import Checkbox from "components/common/Checkbox";
+import { Checkbox } from "components/common";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
