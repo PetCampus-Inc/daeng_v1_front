@@ -7,7 +7,9 @@ import type { ImageAlbumType } from "types/member/main.types";
 const AlbumView = ({ imageList }: { imageList: ImageAlbumType[][] }) => {
   return (
     <Flex direction="column" gap={32}>
-      <AlbumSlide imageList={imageList} />
+      {imageList.map((images) => (
+        <AlbumSlide key={images[0].createdTime} images={images} />
+      ))}
     </Flex>
   );
 };
