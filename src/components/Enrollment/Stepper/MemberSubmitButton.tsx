@@ -9,8 +9,9 @@ import { Adapter } from "libs/Adapter";
 import { MemberFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
+import { memberEnrollmentDogDetailAtom } from "store/member";
 import { FormButton } from "styles/StyleModule";
 
 import type { EnrollmentInfo, MemberGenderType } from "types/member/enrollment.types";
@@ -23,12 +24,13 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
   const { handleSubmit } = useFormContext();
   const enrollMutation = usePostEnrollment();
   const { data: memberInfoData } = useGetMemberProfileInfo(String(memberId));
+  const memberDogInfo = useRecoilValue(memberEnrollmentDogDetailAtom);
 
   const setStep = useSetRecoilState(currentStepState);
 
   // TODO memberInfo데이터 recoil로 분리 등 리팩토링 필요
   const memberInfo = {
-    dogId: 0, // 신규 강아지의 경우
+    dogId: Number(memberDogInfo ? memberDogInfo.dogId : 0), // Memo 신규 강아지의 경우 0
     memberId: Number(memberInfoData.memberId),
     memberName: memberInfoData.memberName,
     memberGender: memberInfoData.memberGender as MemberGenderType,
