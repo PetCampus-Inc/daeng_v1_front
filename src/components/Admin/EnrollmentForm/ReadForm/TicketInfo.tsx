@@ -1,6 +1,6 @@
 import { ITEM_KEYS } from "constants/item";
 
-import Checkbox from "components/common/Checkbox";
+import { Checkbox } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";

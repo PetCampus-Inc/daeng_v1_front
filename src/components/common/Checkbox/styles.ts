@@ -1,6 +1,6 @@
 import styled, { DefaultTheme, css } from "styled-components";
 
-import type { CheckboxProps } from "./index";
+import type { CheckboxProps } from "./FormCheckbox";
 
 export const CheckboxContainer = styled.label.withConfig({
   shouldForwardProp: (prop) => prop !== "variant"
