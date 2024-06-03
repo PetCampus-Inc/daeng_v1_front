@@ -141,3 +141,12 @@ export interface IMemberDogSchoolInfo extends IResponse {
   phoneNumber: string;
   address: string;
 }
+
+export interface IMemberProfile extends IResponse {
+  memberId: number;
+  dogId: number;
+  memberProfileUri: string;
+  dogProfileUri: string;
+  dogName: string;
+  relation: string;
+}
