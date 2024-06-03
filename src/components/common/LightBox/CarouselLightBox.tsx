@@ -1,4 +1,5 @@
 import CloseIcon from "assets/svg/x-circle-icon";
+import ProgressScreen from "components/Home/ImageCommentSidler/ProgressScreen";
 import { motion } from "framer-motion";
 import { useFileDownload } from "hooks/common/useS3";
 import { useState } from "react";
@@ -60,6 +61,9 @@ export const CarouselLightBox = ({ images, close, currentSlide }: CarouselLightB
     >
       <OverlayWrapper>
         <SliderContainer>
+          {isLoading && (
+            <ProgressScreen progress={progress} currentIdx={downloaded} totalFiles={totalFiles} />
+          )}
           <SliderHeader>
             <SaveOptionDropdown
               currentImage={currentImage}
