@@ -46,6 +46,7 @@ const MyDogCard = ({
   const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
   const { data: MemeberDogInfo } = useGetMemberDogDetailnfo(Number(dogId));
+  const isProfileNull = profileUri === null;
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -98,10 +99,6 @@ const MyDogCard = ({
   const handleCardFocus = () => {
     divRef.current?.focus();
   };
-
-  console.log(profileUri);
-
-  const isProfileNull = profileUri === null;
 
   return (
     <S.MyDogCard
