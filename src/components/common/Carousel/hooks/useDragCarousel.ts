@@ -39,7 +39,7 @@ export function useDragCarousel() {
       }
 
       // 이동 거리를 감쇠하는 비율을 조정
-      const threshold = 30; // 임계값
+      const threshold = 35; // 임계값
       let adjustedMoveWidth = 0;
 
       if (Math.abs(moveWidth) > threshold) {
