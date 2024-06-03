@@ -70,12 +70,6 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
       <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
     ));
 
-  // useEffect(() => {
-  //   if (isMemberAddDog) {
-  //     nextStep;
-  //   }
-  // }, [isMemberAddDog, nextStep, prevStep, setStep]);
-
   return (
     <>
       <Header
@@ -108,13 +102,13 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
                   <DogInfo requiredItems={requiredItemList} />
                 )}
               </S.Content>
-              <S.Content $isVisible={currentStep === 2}>
+              <S.Content $isVisible={currentStep === (isMemberAddDog ? 1 : 2)}>
                 <TicketInfo requiredItems={requiredItemList} ticket={ticket} />
               </S.Content>
-              <S.Content $isVisible={currentStep === 3}>
+              <S.Content $isVisible={currentStep === (isMemberAddDog ? 2 : 3)}>
                 <PolicyInfo requiredItems={requiredItemList} />
               </S.Content>
-              <S.Content $isVisible={currentStep === 4}>
+              <S.Content $isVisible={currentStep === (isMemberAddDog ? 3 : 4)}>
                 <PickDropInfo requiredItems={requiredItemList} />
               </S.Content>
             </S.ContentWrapper>
