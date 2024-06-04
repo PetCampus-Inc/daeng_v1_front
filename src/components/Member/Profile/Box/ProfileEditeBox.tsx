@@ -3,6 +3,7 @@ import {
   StyledThumb,
   StyledThumbImg
 } from "components/Admin/AttendCare/AttendCareGallery/upload";
+import { usePostMemberProfile } from "hooks/api/member/member";
 import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { getFilePreview } from "utils/thumb";
@@ -36,14 +37,11 @@ const ProfileEditeBox = ({ isOnlyProfile }: IProfileEditeProps) => {
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, type: string) => {
-    const targetFile = e.currentTarget.files;
-    if (targetFile) {
-      if (targetFile.length > 1) {
-        alert(`1개의 파일만 업로드할 수 있습니다.`);
-        return;
-      }
+    if (!e.target.files) return;
 
-      const newFiles = Array.from(targetFile);
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files);
+
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
 
       if (type === TYPE_MY) {
