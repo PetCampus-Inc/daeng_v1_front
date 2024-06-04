@@ -1,5 +1,5 @@
 import { DragCarousel, Flex, Text } from "components/common";
-import { Checkbox } from "components/common";
+import { AlbumCheckbox } from "components/common";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useCallback, useState } from "react";
 import { Img } from "styles/StyleModule";
@@ -25,13 +25,18 @@ const AlbumSlide = ({ images }: { images: ImageAlbumType[] }) => {
     }
   };
 
-  const handleSelectImage = useCallback((imageId: number) => {
+  const toggleSelection = (imageId: number) => {
+    const isSelected = selectedImages.has(imageId);
+    handleSelectImage(imageId, !isSelected);
+  };
+
+  const handleSelectImage = useCallback((imageId: number, checked: boolean) => {
     setSelectedImages((prev) => {
       const newSet = new Set(prev);
-      if (newSet.has(imageId)) {
-        newSet.delete(imageId);
-      } else {
+      if (checked) {
         newSet.add(imageId);
+      } else {
+        newSet.delete(imageId);
       }
       return newSet;
     });
@@ -54,17 +59,21 @@ const AlbumSlide = ({ images }: { images: ImageAlbumType[] }) => {
         <DragCarousel gap={8}>
           {images.map((item, index) => (
             <SlideWrapper
-              onClick={() => !isSaveMode && openLightBoxPopup(index)}
-              active={selectedImages.has(item.imageId)}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (isSaveMode) {
+                  toggleSelection(item.imageId);
+                } else {
+                  openLightBoxPopup(index);
+                }
+              }}
+              isActive={isSaveMode && !!selectedImages.has(item.imageId)}
               isSaveMode={isSaveMode}
             >
               {isSaveMode && (
                 <>
-                  <Dimmer onClick={(e) => e.stopPropagation()} />
-                  <Checkbox
-                    isChecked={selectedImages.has(item.imageId)}
-                    onChange={() => handleSelectImage(item.imageId)}
-                  />
+                  <Dimmer />
+                  <AlbumCheckbox checked={selectedImages.has(item.imageId)} />
                 </>
               )}
               <Img src={item.imageUri} alt={`${item.imageId} + 번째 강아지 사진`} />
