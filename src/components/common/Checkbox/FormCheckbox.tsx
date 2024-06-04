@@ -1,12 +1,11 @@
 import CheckIcon from "assets/svg/check-icon";
 import React, { type ChangeEvent } from "react";
 
-import * as S from "./styles";
+import { CheckboxContainer, HiddenCheckbox, LabelText, StyledCheckbox } from "./styles";
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue"> {
   isChecked?: boolean;
-  disabled?: boolean;
   variant?: "fill" | "outline" | "default";
   id?: string;
   name?: string;
@@ -16,16 +15,7 @@ export interface CheckboxProps
 
 const Checkbox = React.forwardRef(
   (
-    {
-      isChecked = false,
-      disabled = false,
-      variant = "default",
-      id,
-      name,
-      onChange,
-      label,
-      ...props
-    }: CheckboxProps,
+    { isChecked = false, variant = "default", id, name, onChange, label, ...props }: CheckboxProps,
     ref
   ) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,38 +25,37 @@ const Checkbox = React.forwardRef(
     };
 
     return (
-      <S.CheckboxContainer
+      <CheckboxContainer
         htmlFor={id}
         variant={variant}
         className={isChecked ? "checked" : ""}
-        aria-disabled={disabled ? "true" : undefined}
+        aria-disabled={props.disabled ? "true" : undefined}
       >
-        <S.HiddenCheckbox
+        <HiddenCheckbox
           type="checkbox"
           ref={ref as React.RefObject<HTMLInputElement>}
           id={id}
           name={name}
           checked={isChecked}
-          disabled={disabled}
           onChange={handleChange}
           {...props}
         />
-        <S.Checkbox
+        <StyledCheckbox
           className={isChecked ? "checked" : ""}
-          aria-disabled={disabled ? "true" : undefined}
+          aria-disabled={props.disabled ? "true" : undefined}
           variant={variant}
         >
           <CheckIcon className={`checkbox-icon ${variant}`} />
-        </S.Checkbox>
+        </StyledCheckbox>
         {label && (
-          <S.LabelText
+          <LabelText
             className={isChecked ? "checked" : ""}
-            aria-disabled={disabled ? "true" : undefined}
+            aria-disabled={props.disabled ? "true" : undefined}
           >
             {label}
-          </S.LabelText>
+          </LabelText>
         )}
-      </S.CheckboxContainer>
+      </CheckboxContainer>
     );
   }
 );
