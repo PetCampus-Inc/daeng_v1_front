@@ -3,6 +3,8 @@ import type { AdminAuthType } from "types/admin/admin.type";
 export const LOCAL_STORAGE_KEY = "KNOCK-DOG-STORAGE";
 export const ACCESS_TOKEN_KEY = "KNOCK-DOG-AUTH-TOKEN";
 export const AUTH_KEY = "KNOCK-DOG-AUTH";
+export const AUTH_MEMBER_ID = "KNOCK-DOG-MEMBER-ID";
+export const AUTH_DOG_IDS = "KNOCK-DOG-DOG-IDS";
 
 export const getAccessToken = () => {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
