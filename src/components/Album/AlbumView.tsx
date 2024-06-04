@@ -5,9 +5,9 @@ import SaveButton from "./Button/SaveButton";
 import { SelectedImageProvider } from "./context/SelectedImageProvider";
 import AlbumSlide from "./Slide/AlbumSlide";
 
-import type { ImageAlbumType } from "types/member/main.types";
+import type { ImageListType } from "types/member/main.types";
 
-const AlbumView = ({ imageList }: { imageList: ImageAlbumType[][] }) => {
+const AlbumView = ({ imageList }: { imageList: ImageListType[][] }) => {
   const [saveModes, setSaveModes] = useState<Record<number, boolean>>({});
 
   const toggleSaveMode = useCallback((albumId: number) => {

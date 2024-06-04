@@ -11,7 +11,7 @@ import type {
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
   HomeDataType,
-  AlbumDataType,
+  ImageList,
   DogsDataType,
   IMemberDogSchoolInfo
 } from "types/member/main.types";
@@ -41,9 +41,9 @@ export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> =
 };
 
 // 견주 홈 - 사진앨범
-export const handleGetAlbum = async (req: IMainAlbum): Promise<AlbumDataType[][]> => {
+export const handleGetAlbum = async (req: IMainAlbum): Promise<ImageList[][]> => {
   const url = `/member/main/album`;
-  const { data } = await request<IResponse<AlbumDataType[][]>>({
+  const { data } = await request<IResponse<ImageList[][]>>({
     url,
     params: {
       dogId: req.dogId,

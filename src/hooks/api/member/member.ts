@@ -21,13 +21,13 @@ import { getISOString } from "utils/date";
 import showToast from "utils/showToast";
 
 import type {
-  AlbumDataType,
+  ImageList,
   HomeDataType,
   HomeInfoType,
   IMainAlbum,
   IMemberDogPostDetailInfo,
   IMemberProfilePostInfo,
-  ImageAlbumType
+  ImageListType
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -74,7 +74,7 @@ export const usePrefetchDogs = (memberId: number) => {
 
 // 견주 홈 - 사진 앨범
 export const useGetMainAlbum = (req: IMainAlbum) => {
-  return useSuspenseQuery<AlbumDataType[][], unknown, ImageAlbumType[][]>({
+  return useSuspenseQuery<ImageList[][], unknown, ImageListType[][]>({
     queryKey: QUERY_KEY.MEMBER_MAIN_ALBUM(req.dogId, req.date),
     queryFn: () => handleGetAlbum(req),
     gcTime: 1000 * 60 * 60,

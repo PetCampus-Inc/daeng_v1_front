@@ -2,9 +2,9 @@ import FootRoundIcon from "assets/svg/foot-round-icon";
 import { Accordion, Flex, Text } from "components/common";
 import { replaceNewline } from "utils/formatter";
 
-import type { ImageAlbumType } from "types/member/main.types";
+import type { ImageListType } from "types/member/main.types";
 
-const CommentBox = ({ commentList }: { commentList: ImageAlbumType[] }) => {
+const CommentBox = ({ commentList }: { commentList: ImageListType[] }) => {
   if (!commentList[0].comment) return null;
 
   return (

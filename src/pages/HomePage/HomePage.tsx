@@ -47,7 +47,7 @@ const HomePage = () => {
           <HomeDashboard data={data} />
         </StyledBox>
         <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
-          <HomeImageCommentSlider images={data.imageList} />
+          <HomeImageCommentSlider images={data.imageList?.[0]} />
           <HomeImageAlbum images={data.imageList} dogInfo={dogInfo} />
         </StyledBox>
       </main>

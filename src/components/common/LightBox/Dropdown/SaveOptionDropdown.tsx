@@ -2,7 +2,8 @@ import DownloadIcon from "assets/svg/download-icon";
 import MultiplePhotoSaveIcon from "assets/svg/multiple-photo-save-icon";
 import PhotoSaveIcon from "assets/svg/photo-save-icon";
 import { Dropdown } from "components/common/Dropdown";
-import { DropdownListStyle, IconWrapper } from "components/Home/ImageCommentSidler/styles";
+import { IconWrapper } from "components/Home/ImageCommentSidler/styles";
+import { css } from "styled-components";
 
 import type { ImageListType } from "components/common/Carousel/types";
 import type { DownloadFileFunction, DownloadProps } from "hooks/common/useS3";
@@ -48,7 +49,7 @@ const SaveOptionDropdown = ({
   ];
 
   return (
-    <Dropdown customStyle={"width: max-content"}>
+    <Dropdown customStyle={"width: fit-content"}>
       <Dropdown.Content>
         <Dropdown.Trigger>
           <DownloadIcon colorScheme="black" w={20} h={20} opacity={0.7} hasRect />
@@ -67,3 +68,8 @@ const SaveOptionDropdown = ({
 };
 
 export default SaveOptionDropdown;
+
+const DropdownListStyle = css`
+  right: 0.625rem;
+  top: 2.5rem;
+`;

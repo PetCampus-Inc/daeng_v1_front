@@ -4,10 +4,10 @@ import Portal from "components/common/Portal";
 import { AnimatePresence } from "framer-motion";
 import { dimmerAnimationVariants } from "styles/animation";
 import { BackDrop } from "styles/StyleModule";
-import { ImageAlbumType } from "types/member/main.types";
+import { ImageListType } from "types/member/main.types";
 
 interface LightBoxPopupProps extends IModalProps {
-  images: ImageAlbumType[];
+  images: ImageListType[];
   currentSlide: number;
 }
 

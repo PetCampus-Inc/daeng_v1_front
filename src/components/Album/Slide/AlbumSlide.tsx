@@ -10,10 +10,10 @@ import { Dimmer, SlideWrapper } from "./styles";
 import { useSelectedImages } from "../context/SelectedImageProvider";
 import LightBoxPopup from "../LightBoxPopup";
 
-import type { ImageAlbumType } from "types/member/main.types";
+import type { ImageListType } from "types/member/main.types";
 
 interface AlbumSlidProps {
-  images: ImageAlbumType[];
+  images: ImageListType[];
   saveMode: boolean;
   toggleSaveMode: () => void;
 }

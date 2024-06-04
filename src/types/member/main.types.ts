@@ -16,10 +16,6 @@ export interface ImageListType extends Omit<ImageList, "createdTime"> {
   createdTime: string;
 }
 
-export type ImageAlbumType = Omit<AlbumDataType, "createdTime"> & {
-  createdTime: string;
-};
-
 export interface HomeDataType {
   memberId: number;
   memberNickname: string;
@@ -43,13 +39,8 @@ export interface ImageList {
   imageType: TImageType;
   comment?: string;
   createdTime: number[];
-}
-
-export type AlbumDataType = {
   size: number;
-  photoTime: string;
-} & ImageList;
-
+}
 interface IDoglist {
   dogId: string;
   dogName: string;

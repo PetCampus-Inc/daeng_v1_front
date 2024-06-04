@@ -21,7 +21,7 @@ import TransmissionTime from "./ImageCommentSidler/TransmissionTime";
 
 import type { ImageListType } from "types/member/main.types";
 
-const HomeImageCommentSlider = ({ images }: { images?: ImageListType[][] }) => {
+const HomeImageCommentSlider = ({ images }: { images?: ImageListType[] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isCommentOpen, setIsCommentOpen] = useState<boolean>(false);
   const [totalFiles, setTotalFiles] = useState<number>(0);
@@ -48,14 +48,13 @@ const HomeImageCommentSlider = ({ images }: { images?: ImageListType[][] }) => {
 
   if (!images) return <EmptySlide />;
 
-  const allImages = images.flat();
-  const currentImage = allImages[currentIndex];
+  const currentImage = images[currentIndex];
   const isCommentVisible = (index: number) => {
     return (
       isCommentOpen &&
       (index === currentIndex ||
-        index === (currentIndex - 1 + allImages.length) % allImages.length ||
-        index === (currentIndex + 1) % allImages.length)
+        index === (currentIndex - 1 + images.length) % images.length ||
+        index === (currentIndex + 1) % images.length)
     );
   };
 
@@ -71,7 +70,7 @@ const HomeImageCommentSlider = ({ images }: { images?: ImageListType[][] }) => {
 
           <SaveSection
             currentImage={currentImage}
-            allImages={allImages}
+            allImages={images}
             setTotalFiles={setTotalFiles}
             downloadFile={downloadFile}
           />
@@ -81,7 +80,7 @@ const HomeImageCommentSlider = ({ images }: { images?: ImageListType[][] }) => {
         <ProgressScreen progress={progress} currentIdx={downloaded} totalFiles={totalFiles} />
       )}
       <Slider {...settings}>
-        {allImages.map((item, index) => (
+        {images.map((item, index) => (
           <SlideWrapper key={`slide-${item.imageId}-${index}`}>
             <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
             {isCommentVisible(index) && (
@@ -91,7 +90,7 @@ const HomeImageCommentSlider = ({ images }: { images?: ImageListType[][] }) => {
         ))}
       </Slider>
       <SlideIndex>
-        {currentIndex + 1} / {allImages.length}
+        {currentIndex + 1} / {images.length}
       </SlideIndex>
     </SliderContainer>
   );

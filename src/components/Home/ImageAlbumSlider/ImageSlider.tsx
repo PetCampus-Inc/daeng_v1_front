@@ -19,7 +19,7 @@ const ImageSlider = ({ images }: { images?: ImageListType[][] }) => {
     <DragCarousel gap={12}>
       {images?.map((item, index) => (
         <SlideWrapper key={index} onClick={() => console.log(item[0].imageId)}>
-          {getCountNum(item.length) && <CountBadge>{getCountNum(item.length)}</CountBadge>}
+          {getCountNum(item.length) && <CountBadge>{getCountNum(item[0].size)}</CountBadge>}
           <Dimmer />
           <Img src={item[0].imageUri} alt={`item[0].imageId + 번째 강아지 사진`} />
           <TransmissionTime>{getTimeAgo(item[0].createdTime)}</TransmissionTime>
