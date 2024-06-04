@@ -45,11 +45,3 @@ export const Title = styled.p`
   color: ${({ theme }) => theme.colors.black};
   text-align: center;
 `;
-
-export const BackgroundButtonWrapper = styled.div<{ $isBottom?: boolean }>`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-bottom: ${({ $isBottom }) => ($isBottom ? 0 : "calc(7vh)")};
-`;
