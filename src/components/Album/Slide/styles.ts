@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 export const SlideWrapper = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["isSaveMode"].includes(prop)
-})<{ isSaveMode?: boolean; active?: boolean }>`
+  shouldForwardProp: (prop) => !["isSaveMode", "isActive"].includes(prop)
+})<{ isSaveMode?: boolean; isActive?: boolean }>`
   position: relative;
   display: inline-block;
 
@@ -15,9 +15,9 @@ export const SlideWrapper = styled.div.withConfig({
 
   box-shadow: ${({ theme }) => theme.shadows.card};
 
-  ${({ isSaveMode, active, theme }) => css`
+  ${({ isSaveMode, isActive, theme }) => css`
     ${isSaveMode && `border-color: ${theme.colors.gray_4};`}
-    ${active && `border-color: ${theme.colors.primary_3};`}
+    ${isActive && `border-color: ${theme.colors.primary_3};`}
   `}
 `;
 
