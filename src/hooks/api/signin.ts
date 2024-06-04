@@ -33,7 +33,7 @@ export const useLogInMutation = () => {
 
 // 관리자 로그인 요청
 export const useAdminLogin = () => {
-  const setAuth = useSetLocalStorage(AUTH_KEY);
+  const setAuth = useSetLocalStorage();
   const { mutate } = useMutation({
     mutationFn: postAdminLogin,
     onSuccess: (res) => {
@@ -44,7 +44,7 @@ export const useAdminLogin = () => {
         role: res.role,
         schoolName: res.schoolName
       };
-      setAuth(userInfo);
+      setAuth({ key: AUTH_KEY, value: userInfo });
 
       if (res.role === Role.ROLE_TEACHER || res.role === Role.ROLE_OWNER) {
         location.href = PATH.ADMIN_ATTENDANCE;

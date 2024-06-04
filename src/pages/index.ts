@@ -45,7 +45,7 @@ export { default as MemberEnrollmentFormDetailPage } from "./MemberPage/MemberEn
 
 export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
-export { default as RedirectPage } from "./RedirectPage";
+export { default as RedirectPage } from "./RedirectPage/RedirectPage";
 
 export { default as AdminSignupPage } from "./SignUpPage/AdminSignUpFunnel";
 
