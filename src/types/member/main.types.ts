@@ -141,3 +141,10 @@ export type DogsDataType = {
   dogName: string;
   imageUri: string;
 };
+
+export interface IMemberDogSchoolInfo extends IResponse {
+  schoolId: number;
+  name: string;
+  phoneNumber: string;
+  address: string;
+}
