@@ -2,9 +2,9 @@ import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { ICareDogInfo } from "types/admin/care.types";
 
-import AddDogButton from "./AddDogButton";
+import AddDogButton from "./AttendCareMain/AddDogButton";
+import CareOptionDropdown from "./AttendCareMain/CareOptionDropdown";
 import MainSendCard from "./button/MainSendCard";
-import CareOptionDropdown from "./CareOptionDropdown";
 import MainDogList from "./list/MainDogList";
 import PreviousInfoGuideBottomSheet from "./modal/PreviousInfoGuideBottomSheet";
 import { ButtonWrapper } from "./styles";

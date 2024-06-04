@@ -101,7 +101,7 @@ export const handlePostAlbum = async (req: IReqGallery): Promise<void> => {
     url,
     method: "POST",
     data: {
-      dogId: req.dogId,
+      dogIdList: req.dogIdList,
       imageUriList: req.imageUriList,
       comment: req.comment
     }

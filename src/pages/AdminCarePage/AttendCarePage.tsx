@@ -1,6 +1,6 @@
-import AttendCareEmpty from "components/Admin/AttendCare/AttendCareEmpty";
 import AttendCareInit from "components/Admin/AttendCare/AttendCareInit";
 import AttendCareMain from "components/Admin/AttendCare/AttendCareMain";
+import AttendCareEmpty from "components/Admin/AttendCare/AttendCareMain/AttendCareEmpty";
 import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import { useGetCareDogList } from "hooks/api/admin/care";

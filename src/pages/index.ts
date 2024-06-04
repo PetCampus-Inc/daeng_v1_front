@@ -30,6 +30,9 @@ export { default as MemberSchoolInfoPage } from "./MemberPage/MemberSchoolInfoPa
 export { default as MemberSchoolSearchPage } from "./MemberPage/MemberSchoolSearchPage";
 export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
 export { default as MemberDogInfoEditePage } from "./MemberPage/MemberDogInfoEditePage";
+export { default as MemberOnboardingProfileEditePage } from "./MemberPage/MemberOnboardingProfileEditePage";
+export { default as MemberAddDogProfileEditePage } from "./MemberPage/MemberAddDogProfileEditePage";
+
 export { default as SettingPage } from "./SettingPage";
 export { default as PolicyPage } from "./PolicyPage";
 export { default as UnregisterPage } from "./UnregisterPage";
@@ -45,3 +48,5 @@ export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
 export { default as RedirectPage } from "./RedirectPage";
 
 export { default as AdminSignupPage } from "./SignUpPage/AdminSignUpFunnel";
+
+export { default as ImageAlbumPage } from "./ImageAlbumPage/ImageAlbumPage";

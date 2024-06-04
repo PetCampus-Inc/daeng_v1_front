@@ -1,5 +1,5 @@
 import { useToggle } from "hooks/common/useToggle";
-import { IMemberInfo } from "types/member/home.types";
+import { IMemberInfo } from "types/member/main.types";
 
 import * as S from "./styles";
 import AddMyDogCard from "../Cards/AddMyDogCard";

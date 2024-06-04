@@ -25,6 +25,15 @@ export const addZero = (num: number | number[]) => {
 };
 
 /**
+ * number[] 시간을 ISO 8601 문자열로 변환하는 함수
+ */
+export const getISOString = (timeArray: number[]): string => {
+  const [year, month, day, hour, minute, second, millisecond] = timeArray;
+  const date = new Date(year, month - 1, day, hour, minute, second, millisecond / 1000000);
+  return date.toISOString();
+};
+
+/**
  * @description 현재 시간부터 주어진 날짜까지의 거리를 표시하는 함수
  * @param {string | string[]} str 날짜 문자열 또는 연, 월, 일이 담긴 배열
  * @returns {string} "오늘", "1일 전", "2일 전" 등
@@ -52,11 +61,21 @@ export const getDaysAgo = (str: string | string[]): string => {
 
 /**
  * @description 현재 시간부터 주어진 시간까지의 거리를 표시하는 함수
- * @param {string} str
- * @returns {string} "방 금전", "n분 전", "n시간 전", "n일 전" 등
+ * @param {string | number[]} str
+ * @returns {string} "방금 전", "n분 전", "n시간 전", "n일 전" 등
  */
-export const getTimeAgo = (str: string) => {
-  const date = parseISO(str);
+export const getTimeAgo = (str: string | number[]) => {
+  let date: Date;
+
+  // 배열이면 Date 객체로 변환
+  if (Array.isArray(str)) {
+    const [year, month, day, hour, minute, second, millisecond] = str;
+    date = new Date(year, month - 1, day, hour, minute, second, Math.floor(millisecond / 1000000));
+  } else {
+    // 문자열이면 parseISO 사용
+    date = parseISO(str);
+  }
+
   const now = new Date();
   const minutesDifference = differenceInMinutes(now, date);
   const hoursDifference = differenceInHours(now, date);

@@ -1,5 +1,6 @@
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
+import { IPrecautionInfo } from "types/admin.attendance.type";
 import { IResponse } from "types/helper.type";
 
 import type {
@@ -9,10 +10,13 @@ import type {
   IMainAlbum,
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
-  HomeDataType
-} from "types/member/home.types";
+  HomeDataType,
+  ImageList,
+  DogsDataType,
+  IMemberDogSchoolInfo
+} from "types/member/main.types";
 
-// 견주 홈 메인
+// 견주 홈 - 메인
 export const handleGetHomeInfo = async (memberId: number, dogId: number): Promise<HomeDataType> => {
   const url = `/member/main`;
   const { data } = await request<IResponse<HomeDataType>>({
@@ -26,22 +30,35 @@ export const handleGetHomeInfo = async (memberId: number, dogId: number): Promis
   return data;
 };
 
+// 견주 홈 - 강아지 리스트
+export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> => {
+  const url = `/member/main/dogs`;
+  const { data } = await request<IResponse<DogsDataType[]>>({
+    url,
+    params: { memberId }
+  });
+  return data;
+};
+
+// 견주 홈 - 사진앨범
+export const handleGetAlbum = async (req: IMainAlbum): Promise<ImageList[][]> => {
+  const url = `/member/main/album`;
+  const { data } = await request<IResponse<ImageList[][]>>({
+    url,
+    params: {
+      dogId: req.dogId,
+      date: req.date
+    }
+  });
+  return data;
+};
+
 // 견주 정보
 export const handleGetMemberInfo = async (memberId: string): Promise<IMemberInfo> => {
   const url = `/member/mypage`;
   const { data } = await customAxios.get(url, {
     params: {
       memberId
-    }
-  });
-  return data.data;
-};
-
-export const handleGetMainAlbum = async (req: IMainAlbum) => {
-  const url = `member/main/album?dogId=${req.dogId}`;
-  const { data } = await customAxios.get(url, {
-    params: {
-      date: req.date
     }
   });
   return data.data;
@@ -139,4 +156,34 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
     memo: memo
   });
   return data;
+};
+
+// 강아지 유치원 정보
+export const handleGetMemberDogSchool = async (dogId: number): Promise<IMemberDogSchoolInfo> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data.data.school;
+};
+
+// 강아지 유의사항 동의 정보
+export const handleGetMemberDogPrecaution = async (dogId: number): Promise<IPrecautionInfo> => {
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await customAxios.get(url);
+  return data.data.precaution;
+};
+
+// 멤버 유의사항 상세 내용
+export const handleGetMemberAgreement = async (schoolId: number, agreementId: number) => {
+  const url = `member/agreement?schoolId=${schoolId}&agreementId=${agreementId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
+//멤버 유의사항 재동의
+export const handlePostMemberAgreement = async (
+  dogId: number,
+  agreementId: number
+): Promise<void> => {
+  const url = `member/agreement?dogId=${dogId}&agreementId=${agreementId}`;
+  return await customAxios.post(url);
 };

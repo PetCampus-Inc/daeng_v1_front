@@ -16,10 +16,10 @@ import {
   SpringBound
 } from "./styles";
 
-import type { HomeDataType, TAttendanceStatus } from "types/member/home.types";
+import type { HomeInfoType, TAttendanceStatus } from "types/member/main.types";
 
 interface DogNoteProps {
-  data: HomeDataType;
+  data: HomeInfoType;
 }
 
 const getAttendanceClass = (status?: TAttendanceStatus) => {
@@ -47,10 +47,9 @@ const getAttendanceText = (status?: TAttendanceStatus, attendanceDate?: string) 
 const DogNote = ({ data }: DogNoteProps) => {
   const navigate = useNavigate();
   const { dogId, dogName, attendanceDate, attendanceStatus } = data;
-  const attendanceDateStr = attendanceDate?.join("-");
 
   const attendanceClass = getAttendanceClass(attendanceStatus);
-  const attendanceText = getAttendanceText(attendanceStatus, attendanceDateStr);
+  const attendanceText = getAttendanceText(attendanceStatus, attendanceDate);
 
   return (
     <NoteContainer className="grid-left">
@@ -58,7 +57,7 @@ const DogNote = ({ data }: DogNoteProps) => {
       <NoteContent>
         <Flex gap="8" role="button" onClick={() => navigate(PATH.MEMBER_DOG_INFO_PAGE(dogId))}>
           <ProfileWrapper>
-            <Img src={data.dogProfile} alt={`${data.dogName}의 프로필`} />
+            <Img src={data?.dogProfile} alt={`${data?.dogName}의 프로필`} />
           </ProfileWrapper>
           <Flex direction="column" grow="1">
             <Text typo="title2_20_B" color="darkBlack">
@@ -80,7 +79,7 @@ const DogNote = ({ data }: DogNoteProps) => {
             </Text>
             {attendanceStatus && attendanceDate && (
               <Text typo="label2_14_R" color="gray_2">
-                {attendanceDateStr?.replace(/-/g, ".")}
+                {attendanceDate?.replace(/-/g, ".")}
               </Text>
             )}
           </Flex>

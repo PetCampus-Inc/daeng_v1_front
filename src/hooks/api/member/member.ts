@@ -1,8 +1,10 @@
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
 import {
+  handleGetAlbum,
+  handleGetDogs,
   handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
@@ -15,14 +17,76 @@ import {
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
 import { useNavigate } from "react-router-dom";
-import { IMemberDogPostDetailInfo, IMemberProfilePostInfo } from "types/member/home.types";
+import { getISOString } from "utils/date";
 import showToast from "utils/showToast";
 
-// 견주 홈 메인
+import type {
+  ImageList,
+  HomeDataType,
+  HomeInfoType,
+  IMainAlbum,
+  IMemberDogPostDetailInfo,
+  IMemberProfilePostInfo,
+  ImageListType
+} from "types/member/main.types";
+
+// 견주 홈 - 메인
 export const useGetHomeInfo = (memberId: number, dogId: number) => {
-  return useSuspenseQuery({
+  return useSuspenseQuery<HomeDataType, unknown, HomeInfoType>({
     queryKey: QUERY_KEY.HOME(memberId, dogId),
-    queryFn: () => handleGetHomeInfo(memberId, dogId)
+    queryFn: () => handleGetHomeInfo(memberId, dogId),
+    select: (res) => {
+      const updatedImageList = res.imageList?.map((imageArray) =>
+        imageArray.map((image) => ({
+          ...image,
+          createdTime: getISOString(image.createdTime)
+        }))
+      );
+
+      return {
+        ...res,
+        attendanceDate: res.attendanceDate?.join("-"),
+        imageList: updatedImageList
+      };
+    }
+  });
+};
+
+// 견주 홈 - 강아지 리스트
+export const useGetDogs = (memberId: number) => {
+  return useQuery({
+    queryKey: QUERY_KEY.DOGS(memberId),
+    queryFn: () => handleGetDogs(memberId),
+    staleTime: 60000
+  });
+};
+
+// 견주 홈 - 강아지 리스트 프리패칭
+export const usePrefetchDogs = (memberId: number) => {
+  const queryClient = useQueryClient();
+  return () =>
+    queryClient.prefetchQuery({
+      queryKey: QUERY_KEY.DOGS(memberId),
+      queryFn: () => handleGetDogs(memberId),
+      staleTime: 60000
+    });
+};
+
+// 견주 홈 - 사진 앨범
+export const useGetMainAlbum = (req: IMainAlbum) => {
+  return useSuspenseQuery<ImageList[][], unknown, ImageListType[][]>({
+    queryKey: QUERY_KEY.MEMBER_MAIN_ALBUM(req.dogId, req.date),
+    queryFn: () => handleGetAlbum(req),
+    gcTime: 1000 * 60 * 60,
+    staleTime: 1000 * 60 * 60,
+    select: (res) => {
+      return res.map((imageArray) =>
+        imageArray.map((image) => ({
+          ...image,
+          createdTime: getISOString(image.createdTime)
+        }))
+      );
+    }
   });
 };
 

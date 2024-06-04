@@ -19,6 +19,14 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
+          path: PATH.ALBUM,
+          element: (
+            <Suspense>
+              <Pages.ImageAlbumPage />
+            </Suspense>
+          )
+        },
+        {
           path: PATH.MEMBER_MY_PAGE(),
           element: (
             <Suspense>
@@ -89,10 +97,26 @@ const MemberRoutes = (): RouteObject[] => {
               <Pages.MemberDogInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMEBER_PROFILE_EDITE_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberOnboardingProfileEditePage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMEBER_ADD_DOG_PROFILE_EDITE_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberAddDogProfileEditePage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {
-        if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
+        // if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
         return null;
       }
     }

@@ -6,7 +6,7 @@ interface UploadParams {
   files: FileList;
   path: string;
   accept: string[];
-  dogIds: number[];
+  dogIdList: number[];
   comment?: string;
 }
 
@@ -19,7 +19,7 @@ const useUploadAndCreateAlbum = () => {
   const { mutateAlbum } = useCreateAlbum();
 
   const uploadFiles = async (
-    { files, path, accept, dogIds, comment }: UploadParams,
+    { files, path, accept, dogIdList, comment }: UploadParams,
     options?: UploadAndCreateAlbumOptions
   ) => {
     if (!files || files.length === 0) {
@@ -28,7 +28,7 @@ const useUploadAndCreateAlbum = () => {
     }
 
     let allImageUriList: string[] = [];
-    for (const dogId of dogIds) {
+    for (const dogId of dogIdList) {
       const params = { files, accept, path: `${path}/${dogId}` };
 
       try {
@@ -46,10 +46,8 @@ const useUploadAndCreateAlbum = () => {
       }
     }
 
-    console.log(allImageUriList, comment, dogIds);
-
     mutateAlbum(
-      { dogId: dogIds, imageUriList: allImageUriList, comment },
+      { dogIdList: dogIdList, imageUriList: allImageUriList, comment },
       {
         onSuccess: () => {
           if (options?.onSuccess) {

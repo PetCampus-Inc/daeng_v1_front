@@ -1,10 +1,10 @@
-const ArrowLeftIcon = ({ className = "" }) => {
+const ArrowLeftIcon = ({ className = "", w = "24", h = "24" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      width="24"
-      height="24"
+      width={w}
+      height={h}
       fill="none"
       viewBox="0 0 24 24"
     >
