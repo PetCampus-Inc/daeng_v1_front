@@ -47,7 +47,9 @@ export const ThemeConfig = {
     backGroundColor: "#EEE5E8",
     navBg: "#ffc078",
     lightMainColor: "#fdf1e8",
-    interfaceBg: "#f7f9fc"
+    interfaceBg: "#f7f9fc",
+
+    transparent: "transparent"
   },
 
   shadows: {
