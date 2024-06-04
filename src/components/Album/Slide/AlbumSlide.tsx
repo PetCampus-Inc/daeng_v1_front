@@ -1,51 +1,37 @@
 import { DragCarousel, Flex, Text } from "components/common";
 import { AlbumCheckbox } from "components/common";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useCallback, useState } from "react";
 import { Img } from "styles/StyleModule";
 import { getTimeAgo } from "utils/date";
 
 import CommentBox from "./CommentBox";
 import SaveButton from "./SaveButton";
 import { Dimmer, SlideWrapper } from "./styles";
+import { useSelectedImages } from "../context/SelectedImageProvider";
 import LightBoxPopup from "../LightBoxPopup";
 
 import type { ImageAlbumType } from "types/member/main.types";
 
-const AlbumSlide = ({ images }: { images: ImageAlbumType[] }) => {
-  const [isSaveMode, setSaveMode] = useState<boolean>(false);
-  const [selectedImages, setSelectedImages] = useState(new Set());
+interface AlbumSlidProps {
+  images: ImageAlbumType[];
+  saveMode: boolean;
+  toggleSaveMode: () => void;
+}
+
+const AlbumSlide = ({ images, saveMode, toggleSaveMode }: AlbumSlidProps) => {
+  const { selectedImgIds, toggleImg, clearSelections } = useSelectedImages();
 
   const overlay = useOverlay();
-
-  const handleSaveMode = () => {
-    setSaveMode(!isSaveMode);
-    if (!isSaveMode) {
-      setSelectedImages(new Set());
-    }
-  };
-
-  const toggleSelection = (imageId: number) => {
-    const isSelected = selectedImages.has(imageId);
-    handleSelectImage(imageId, !isSelected);
-  };
-
-  const handleSelectImage = useCallback((imageId: number, checked: boolean) => {
-    setSelectedImages((prev) => {
-      const newSet = new Set(prev);
-      if (checked) {
-        newSet.add(imageId);
-      } else {
-        newSet.delete(imageId);
-      }
-      return newSet;
-    });
-  }, []);
 
   const openLightBoxPopup = (currentSlide: number) =>
     overlay.open(({ isOpen, close }) => (
       <LightBoxPopup isOpen={isOpen} close={close} images={images} currentSlide={currentSlide} />
     ));
+
+  const handleSaveMode = () => {
+    toggleSaveMode();
+    clearSelections();
+  };
 
   return (
     <Flex direction="column" gap={12}>
@@ -54,26 +40,26 @@ const AlbumSlide = ({ images }: { images: ImageAlbumType[] }) => {
           <Text typo="body2_16_R" color="darkBlack">
             {getTimeAgo(images[0].createdTime)}
           </Text>
-          <SaveButton isSaveMode={isSaveMode} handleSaveMode={handleSaveMode} />
+          <SaveButton isSaveMode={saveMode} handleSaveMode={handleSaveMode} />
         </Flex>
         <DragCarousel gap={8}>
           {images.map((item, index) => (
             <SlideWrapper
               onClick={(e) => {
                 e.stopPropagation();
-                if (isSaveMode) {
-                  toggleSelection(item.imageId);
+                if (saveMode) {
+                  toggleImg(item.imageId, item.imageUri);
                 } else {
                   openLightBoxPopup(index);
                 }
               }}
-              isActive={isSaveMode && !!selectedImages.has(item.imageId)}
-              isSaveMode={isSaveMode}
+              isActive={saveMode && !!selectedImgIds.has(item.imageId)}
+              isSaveMode={saveMode}
             >
-              {isSaveMode && (
+              {saveMode && (
                 <>
                   <Dimmer />
-                  <AlbumCheckbox checked={selectedImages.has(item.imageId)} />
+                  <AlbumCheckbox checked={selectedImgIds.has(item.imageId)} />
                 </>
               )}
               <Img src={item.imageUri} alt={`${item.imageId} + 번째 강아지 사진`} />
