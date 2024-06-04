@@ -1,5 +1,5 @@
 import { Text } from "components/common";
-import Checkbox from "components/common/Checkbox";
+import { Checkbox } from "components/common";
 import { memo } from "react";
 import { ICareDogInfo } from "types/admin/care.types";
 

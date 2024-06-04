@@ -1,6 +1,7 @@
 import styled, { DefaultTheme, css } from "styled-components";
+import { hexToRGBA } from "utils/color";
 
-import type { CheckboxProps } from "./index";
+import type { CheckboxProps } from "./FormCheckbox";
 
 export const CheckboxContainer = styled.label.withConfig({
   shouldForwardProp: (prop) => prop !== "variant"
@@ -66,7 +67,7 @@ const getVariantStyle = (theme: DefaultTheme, variant: CheckboxProps["variant"])
   }
 };
 
-export const Checkbox = styled.span.withConfig({
+export const StyledCheckbox = styled.span.withConfig({
   shouldForwardProp: (prop) => prop !== "variant"
 })<{ variant: CheckboxProps["variant"] }>`
   display: inline-flex;
@@ -150,4 +151,19 @@ export const LabelText = styled.span`
   color: ${({ theme }) => theme.colors.gray_1};
 
   user-select: none;
+`;
+
+export const StyledAlbumCheckbox = styled.span`
+  display: block;
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+  background-color: ${({ theme }) => hexToRGBA(theme.colors.white, 0.7)};
+  box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.gray_4};
+
+  &.checked {
+    background-color: ${({ theme }) => theme.colors.primary_3};
+    box-shadow: 0 0 0 3px ${({ theme }) => hexToRGBA(theme.colors.primary_3, 0.5)};
+  }
 `;
