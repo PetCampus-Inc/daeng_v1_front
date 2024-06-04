@@ -1,5 +1,5 @@
+import { Checkbox } from "components/common";
 import BottomSheet from "components/common/BottomSheet";
-import Checkbox from "components/common/Checkbox";
 import { addWeeks, format } from "date-fns";
 import { useNewTicketMutation } from "hooks/api/useNewTicketMutation";
 import { useEffect, useState } from "react";

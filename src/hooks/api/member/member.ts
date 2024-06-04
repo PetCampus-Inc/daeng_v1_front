@@ -3,6 +3,7 @@ import { QUERY_KEY } from "constants/queryKey";
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
 import {
+  handleGetAlbum,
   handleGetDogs,
   handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
@@ -20,13 +21,16 @@ import { getISOString } from "utils/date";
 import showToast from "utils/showToast";
 
 import type {
+  AlbumDataType,
   HomeDataType,
   HomeInfoType,
+  IMainAlbum,
   IMemberDogPostDetailInfo,
-  IMemberProfilePostInfo
-} from "types/member/home.types";
+  IMemberProfilePostInfo,
+  ImageAlbumType
+} from "types/member/main.types";
 
-// 견주 홈 메인
+// 견주 홈 - 메인
 export const useGetHomeInfo = (memberId: number, dogId: number) => {
   return useSuspenseQuery<HomeDataType, unknown, HomeInfoType>({
     queryKey: QUERY_KEY.HOME(memberId, dogId),
@@ -48,7 +52,7 @@ export const useGetHomeInfo = (memberId: number, dogId: number) => {
   });
 };
 
-// 견주 강아지 리스트
+// 견주 홈 - 강아지 리스트
 export const useGetDogs = (memberId: number) => {
   return useQuery({
     queryKey: QUERY_KEY.DOGS(memberId),
@@ -57,6 +61,7 @@ export const useGetDogs = (memberId: number) => {
   });
 };
 
+// 견주 홈 - 강아지 리스트 프리패칭
 export const usePrefetchDogs = (memberId: number) => {
   const queryClient = useQueryClient();
   return () =>
@@ -65,6 +70,24 @@ export const usePrefetchDogs = (memberId: number) => {
       queryFn: () => handleGetDogs(memberId),
       staleTime: 60000
     });
+};
+
+// 견주 홈 - 사진 앨범
+export const useGetMainAlbum = (req: IMainAlbum) => {
+  return useSuspenseQuery<AlbumDataType[][], unknown, ImageAlbumType[][]>({
+    queryKey: QUERY_KEY.MEMBER_MAIN_ALBUM(req.dogId, req.date),
+    queryFn: () => handleGetAlbum(req),
+    gcTime: 1000 * 60 * 60,
+    staleTime: 1000 * 60 * 60,
+    select: (res) => {
+      return res.map((imageArray) =>
+        imageArray.map((image) => ({
+          ...image,
+          createdTime: getISOString(image.createdTime)
+        }))
+      );
+    }
+  });
 };
 
 // 견주 정보

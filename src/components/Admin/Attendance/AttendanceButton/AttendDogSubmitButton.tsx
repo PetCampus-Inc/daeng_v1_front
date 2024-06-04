@@ -2,7 +2,6 @@ import BackgroundButton from "components/common/Button/BackgroundButton";
 import { useCreateAttendDog } from "hooks/api/attendanceQuery";
 import React from "react";
 
-import { BackgroundButtonWrapper } from "./styles";
 import { useSelectedDogs } from "../context/SelectedDogProvider";
 
 interface AttendDogSubmitButtonProps {
@@ -26,15 +25,14 @@ const AttendDogSubmitButton = ({ schoolId, setMode }: AttendDogSubmitButtonProps
   };
 
   return (
-    <BackgroundButtonWrapper>
-      <BackgroundButton
-        onClick={handlePostAttend}
-        disabled={selectedDogs.length === 0}
-        backgroundColor={"white"}
-      >
-        출석 완료
-      </BackgroundButton>
-    </BackgroundButtonWrapper>
+    <BackgroundButton
+      onClick={handlePostAttend}
+      disabled={selectedDogs.length === 0}
+      backgroundColor={"white"}
+      hasNav
+    >
+      출석 완료
+    </BackgroundButton>
   );
 };
 

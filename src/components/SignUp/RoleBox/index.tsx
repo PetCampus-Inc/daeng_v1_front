@@ -37,7 +37,7 @@ const RoleBox = ({ role, mainText, subText, selected, handleClick }: Props) => {
         <Text typo="title2_20_B" color="darkBlack">
           {mainText}
         </Text>
-        <Text className="pre" typo="label2_14_R" color="gray_2" textAlign="center">
+        <Text typo="label2_14_R" color="gray_2" textAlign="center" whiteSpace="pre-wrap">
           {subText}
         </Text>
       </Flex>

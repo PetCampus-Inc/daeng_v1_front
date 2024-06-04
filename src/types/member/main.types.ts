@@ -16,6 +16,10 @@ export interface ImageListType extends Omit<ImageList, "createdTime"> {
   createdTime: string;
 }
 
+export type ImageAlbumType = Omit<AlbumDataType, "createdTime"> & {
+  createdTime: string;
+};
+
 export interface HomeDataType {
   memberId: number;
   memberNickname: string;
@@ -40,6 +44,12 @@ export interface ImageList {
   comment?: string;
   createdTime: number[];
 }
+
+export type AlbumDataType = {
+  size: number;
+  photoTime: string;
+} & ImageList;
+
 interface IDoglist {
   dogId: string;
   dogName: string;
@@ -83,9 +93,6 @@ export interface IMemberProfilePostInfo {
   emergencyPhoneNumber: string;
   relation: string;
 }
-export interface IMainAlbumData extends Omit<ImageList, "createdTime"> {
-  createdTime: number[];
-}
 
 export interface IMainAlbum {
   dogId: number;
@@ -128,7 +135,7 @@ export interface IMemberDogInfo extends IResponse {
   dogMemo: string;
 }
 
-export type DogsInfoType = {
+export type DogsDataType = {
   memberId: number;
   dogId: number;
   dogName: string;

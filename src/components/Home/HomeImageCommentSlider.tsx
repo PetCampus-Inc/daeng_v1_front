@@ -19,7 +19,7 @@ import {
 } from "./ImageCommentSidler/styles";
 import TransmissionTime from "./ImageCommentSidler/TransmissionTime";
 
-import type { ImageListType } from "types/member/home.types";
+import type { ImageListType } from "types/member/main.types";
 
 const HomeImageCommentSlider = ({ images }: { images?: ImageListType[][] }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);

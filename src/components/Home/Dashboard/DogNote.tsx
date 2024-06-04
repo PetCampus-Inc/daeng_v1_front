@@ -16,7 +16,7 @@ import {
   SpringBound
 } from "./styles";
 
-import type { HomeInfoType, TAttendanceStatus } from "types/member/home.types";
+import type { HomeInfoType, TAttendanceStatus } from "types/member/main.types";
 
 interface DogNoteProps {
   data: HomeInfoType;

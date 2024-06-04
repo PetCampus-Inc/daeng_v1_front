@@ -48,3 +48,5 @@ export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
 export { default as RedirectPage } from "./RedirectPage";
 
 export { default as AdminSignupPage } from "./SignUpPage/AdminSignUpFunnel";
+
+export { default as ImageAlbumPage } from "./ImageAlbumPage/ImageAlbumPage";

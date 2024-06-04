@@ -11,11 +11,12 @@ import type {
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
   HomeDataType,
-  DogsInfoType,
+  AlbumDataType,
+  DogsDataType,
   IMemberDogSchoolInfo
-} from "types/member/home.types";
+} from "types/member/main.types";
 
-// 견주 홈 메인
+// 견주 홈 - 메인
 export const handleGetHomeInfo = async (memberId: number, dogId: number): Promise<HomeDataType> => {
   const url = `/member/main`;
   const { data } = await request<IResponse<HomeDataType>>({
@@ -29,12 +30,25 @@ export const handleGetHomeInfo = async (memberId: number, dogId: number): Promis
   return data;
 };
 
-// 견주 강아지 리스트
-export const handleGetDogs = async (memberId: number): Promise<DogsInfoType[]> => {
+// 견주 홈 - 강아지 리스트
+export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> => {
   const url = `/member/main/dogs`;
-  const { data } = await request<IResponse<DogsInfoType[]>>({
+  const { data } = await request<IResponse<DogsDataType[]>>({
     url,
     params: { memberId }
+  });
+  return data;
+};
+
+// 견주 홈 - 사진앨범
+export const handleGetAlbum = async (req: IMainAlbum): Promise<AlbumDataType[][]> => {
+  const url = `/member/main/album`;
+  const { data } = await request<IResponse<AlbumDataType[][]>>({
+    url,
+    params: {
+      dogId: req.dogId,
+      date: req.date
+    }
   });
   return data;
 };
@@ -45,16 +59,6 @@ export const handleGetMemberInfo = async (memberId: string): Promise<IMemberInfo
   const { data } = await customAxios.get(url, {
     params: {
       memberId
-    }
-  });
-  return data.data;
-};
-
-export const handleGetMainAlbum = async (req: IMainAlbum) => {
-  const url = `member/main/album?dogId=${req.dogId}`;
-  const { data } = await customAxios.get(url, {
-    params: {
-      date: req.date
     }
   });
   return data.data;
