@@ -14,6 +14,7 @@ const LoginPage = () => {
         <em color="primaryColor">우리 강아지</em>의 유치원
         <br /> 생활을 보러 갈까요?
       </Text>
+      <LoginButtonGroup />
       <Flex align="center" justify="center">
         <Link to={"서비스 체험하기"}>
           <Text typo="label2_14_B" color="gray_1">
@@ -21,7 +22,6 @@ const LoginPage = () => {
           </Text>
         </Link>
       </Flex>
-      <LoginButtonGroup />
       <Box position="absolute" left={16} right={16} bottom={24}>
         <Flex direction="column" align="center" gap={8}>
           <Text typo="label2_14_M" color="gray_2">

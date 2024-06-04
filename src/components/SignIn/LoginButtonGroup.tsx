@@ -1,29 +1,14 @@
-import { KAKAO_API_URL, GOOGLE_API_URL } from "constants/api";
-
-import { v4 as uuidv4 } from "uuid";
+import { KAKAO_LOGIN_URL, GOOGLE_LOGIN_URL, APPLE_LOGIN_URL } from "constants/api";
 
 import { ButtonWrapper, StyledButton, StyledImage, StyledText } from "./styles";
 
 const LoginButtonGroup = () => {
-  const AppleLogin = () => {
-    window.AppleID.auth.init({
-      clientId: process.env.REACT_APP_APPLE_CLIENT_ID,
-      scope: "name email",
-      redirectURI: process.env.REACT_APP_APPLE_REDIRECT_URI,
-      state: uuidv4(),
-      nonce: uuidv4(),
-      usePopup: false
-    });
-
-    window.AppleID.auth.signIn();
-  };
-
   return (
     <ButtonWrapper>
       <StyledButton
         type="button"
         aria-label="카카오로 계속하기"
-        onClick={() => (window.location.href = KAKAO_API_URL)}
+        onClick={() => (window.location.href = KAKAO_LOGIN_URL)}
         bg="#FEE500"
       >
         <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
@@ -34,7 +19,7 @@ const LoginButtonGroup = () => {
       <StyledButton
         type="button"
         aria-label="구글로 계속하기"
-        onClick={() => (window.location.href = GOOGLE_API_URL)}
+        onClick={() => (window.location.href = GOOGLE_LOGIN_URL)}
         bg="white"
         borderColor="#CCCCCC"
       >
@@ -47,7 +32,7 @@ const LoginButtonGroup = () => {
       <StyledButton
         type="button"
         aria-label="Apple로 로그인"
-        onClick={AppleLogin}
+        onClick={() => (window.location.href = APPLE_LOGIN_URL)}
         bg="black"
         borderColor="black"
       >

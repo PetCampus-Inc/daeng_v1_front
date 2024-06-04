@@ -69,12 +69,6 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
       <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
     ));
 
-  // useEffect(() => {
-  //   if (isMemberAddDog) {
-  //     nextStep;
-  //   }
-  // }, [isMemberAddDog, nextStep, prevStep, setStep]);
-
   return (
     <>
       <Header

@@ -6,9 +6,6 @@ declare namespace NodeJS {
     REACT_APP_SERVER_DOMAIN: string;
     REACT_APP_BUSINESS_API_KEY: string;
 
-    REACT_APP_APPLE_CLIENT_ID: string;
-    REACT_APP_APPLE_REDIRECT_URI: string;
-
     REACT_APP_AWS_BUCKET: string;
     REACT_APP_AWS_REGION: string;
     REACT_APP_AWS_ACCESS_KEY_ID: string;
