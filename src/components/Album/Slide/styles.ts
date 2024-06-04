@@ -19,6 +19,8 @@ export const SlideWrapper = styled.div.withConfig({
     ${isSaveMode && `border-color: ${theme.colors.gray_4};`}
     ${isActive && `border-color: ${theme.colors.primary_3};`}
   `}
+
+  cursor: pointer;
 `;
 
 export const Dimmer = styled.div`
