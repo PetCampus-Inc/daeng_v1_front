@@ -7,57 +7,39 @@ import {
   handleGetEnrollment,
   handlePostEnrollment
 } from "apis/member/enrollment.api";
-import { Adapter } from "libs/Adapter";
-import { ReadModeAdapter } from "libs/Adapter/ServerToFormAdapter";
+import { Adapter } from "libs/adapters";
+import { EnrollmentFormAdapter } from "libs/adapters/ServerToFormAdapter";
 
-import type { IResponseAdminForm } from "types/admin/enrollment.types";
 import type {
-  EnrollmentInfo,
-  EnrollmentData,
-  PickDropStateType
+  EnrollmentInfoType,
+  EnrollmentDataType,
+  EnrollmentFormDataType
 } from "types/member/enrollment.types";
 
-export type ReturnType = Omit<
-  EnrollmentData,
-  | "requiredItemList"
-  | "pickDropState"
-  | "roundTicketNumber"
-  | "monthlyTicketNumber"
-  | "schoolFormName"
-  | "member"
-> & {
-  requiredItemList: Map<number, boolean>;
-  pickDropState: PickDropStateType;
-  roundTicketNumber: number[];
-  monthlyTicketNumber: number[];
-};
-
-// 견주 가입신청서 조회
+// 가입신청서 조회
 export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
-  return useSuspenseQuery<EnrollmentData, Error, ReturnType>({
+  return useSuspenseQuery<EnrollmentDataType, Error, EnrollmentFormDataType>({
     queryKey: QUERY_KEY.ENROLLMENT(schoolId, memberId),
     queryFn: () => handleGetEnrollment({ schoolId, memberId }),
     refetchOnWindowFocus: false,
-    select: (data): ReturnType => {
-      const { schoolFormName, ...rest } = data;
-      const formdata = Adapter.from(rest).to<IResponseAdminForm, ReturnType>((item) => {
-        const adapterInstance = new ReadModeAdapter(item);
+    select: (data) => {
+      const fromData = Adapter.from(data).to<EnrollmentDataType, EnrollmentFormDataType>((item) => {
+        const adapterInstance = new EnrollmentFormAdapter(item);
         return adapterInstance.adapt();
       });
 
-      return { ...formdata, pickDropState: rest.pickDropState };
+      return { ...fromData, pickDropState: data.pickDropState };
     }
   });
 };
 
 // 견주 가입신청서 등록
 export const usePostEnrollment = () => {
-  const enrollMutation = useMutation({
-    mutationFn: (enrollmentData: EnrollmentInfo) => handlePostEnrollment(enrollmentData),
-    throwOnError: true
+  const { mutate } = useMutation({
+    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData)
   });
 
-  return enrollMutation.mutate;
+  return { mutateEnrollment: mutate };
 };
 
 // 견종 검색
