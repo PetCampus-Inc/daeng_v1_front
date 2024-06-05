@@ -14,7 +14,7 @@ interface TicketInfoProps {
   ticket?: {
     roundTicketNumber: number[];
     monthlyTicketNumber: number[];
-    openDays?: string[];
+    openDays: string[];
   };
   requiredItems?: Map<number, boolean>;
 }
@@ -76,7 +76,7 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
       <Card>
         <Title isRequired={requiredItems?.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea {...register("ticketInfo")} isChecked={watch("ticketInfo")} disabled />
+        <TextArea {...register("ticketInfo")} isChecked={watch("ticketInfo_agreement")} disabled />
         <Stack>
           <Controller
             name="ticketInfo_agreement"

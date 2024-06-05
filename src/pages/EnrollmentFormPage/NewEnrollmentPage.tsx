@@ -57,11 +57,10 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
 
   const indicators = visibleSteps.map((step) => step.indicator);
 
-  console.log(indicators);
-
   const ticket = {
     roundTicketNumber,
-    monthlyTicketNumber
+    monthlyTicketNumber,
+    openDays: rest.openDays
   };
 
   // TODO: browser history stack 관리 필요..!
