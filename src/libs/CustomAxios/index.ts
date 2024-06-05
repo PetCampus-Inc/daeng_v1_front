@@ -8,14 +8,14 @@ const customAxios: AxiosInstance = axios.create({
   }
 });
 
-customAxios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response.status === 404) {
-      window.location.href = "/NotFoundPage";
-    }
-    return Promise.reject(error);
-  }
-);
+// customAxios.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     if (error.response.status === 404) {
+//       window.location.href = "/NotFoundPage";
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export default customAxios;
