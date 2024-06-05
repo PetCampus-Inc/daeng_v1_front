@@ -121,7 +121,7 @@ const DogInfo = () => {
       </Card>
       {watch("vaccination") === "했어요" && (
         <Card>
-          <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.VACCINATION_FILE)}>
+          <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.VACCINATION_URL)}>
             예방접종 파일 첨부
           </Title>
           <Caption>최근 1년 내 접종 기록 증명을 위해 jpg, png 형태로 업로드해 주세요</Caption>

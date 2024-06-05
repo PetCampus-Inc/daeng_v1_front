@@ -1,4 +1,4 @@
-import { FIELD_KEYS } from "constants/field";
+import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import TextArea from "components/common/TextArea";
@@ -16,9 +16,9 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
   const { control, register, setValue, watch } = useFormContext();
   const allChecked = watch("all");
   const watchTerms = watch([
-    "limitsInfo_agreement",
-    "accidentInfo_agreement",
-    "abandonmentInfo_agreement"
+    FIELD.LIMITS_INFO_TERM,
+    FIELD.ACCIDENT_INFO_TERM,
+    FIELD.ABANDONMENT_INFO_TERM
   ]);
 
   useEffect(() => {
@@ -32,9 +32,9 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
 
   const handleParentCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
-    setValue("limitsInfo_agreement", checked);
-    setValue("accidentInfo_agreement", checked);
-    setValue("abandonmentInfo_agreement", checked);
+    setValue(FIELD.LIMITS_INFO_TERM, checked);
+    setValue(FIELD.ACCIDENT_INFO_TERM, checked);
+    setValue(FIELD.ABANDONMENT_INFO_TERM, checked);
   };
 
   return (
@@ -55,14 +55,14 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
         />
       </S.Card>
       <S.Card>
-        <Title htmlFor="limitsInfo" isRequired={requiredItems?.get(FIELD_KEYS.LIMITS_INFO)}>
+        <Title htmlFor={FIELD.LIMITS_INFO} isRequired={requiredItems?.get(FIELD_KEYS.LIMITS_INFO)}>
           이용 제한 유의 사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea {...register("limitsInfo")} isChecked={watchTerms[0]} disabled />
+        <TextArea {...register(FIELD.LIMITS_INFO)} isChecked={watchTerms[0]} disabled />
         <S.Stack>
           <Controller
-            name="limitsInfo_agreement"
+            name={FIELD.LIMITS_INFO_TERM}
             control={control}
             rules={{ required: requiredItems?.get(FIELD_KEYS.LIMITS_INFO) }}
             render={({ field: { ref, ...field } }) => (
@@ -77,14 +77,17 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
         </S.Stack>
       </S.Card>
       <S.Card>
-        <Title htmlFor="accidentInfo" isRequired={requiredItems?.get(FIELD_KEYS.ACCIDENT_INFO)}>
+        <Title
+          htmlFor={FIELD.ACCIDENT_INFO}
+          isRequired={requiredItems?.get(FIELD_KEYS.ACCIDENT_INFO)}
+        >
           상해 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea {...register("accidentInfo")} isChecked={watchTerms[1]} disabled />
+        <TextArea {...register(FIELD.ACCIDENT_INFO)} isChecked={watchTerms[1]} disabled />
         <S.Stack>
           <Controller
-            name="accidentInfo_agreement"
+            name={FIELD.ACCIDENT_INFO_TERM}
             control={control}
             rules={{ required: requiredItems?.get(FIELD_KEYS.ACCIDENT_INFO) }}
             render={({ field: { ref, ...field } }) => (
@@ -100,16 +103,16 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
       </S.Card>
       <S.Card>
         <Title
-          htmlFor="abandonmentInfo"
+          htmlFor={FIELD.ABANDONMENT_INFO}
           isRequired={requiredItems?.get(FIELD_KEYS.ABANDONMENT_INFO)}
         >
           유기 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea {...register("abandonmentInfo")} isChecked={watchTerms[2]} disabled />
+        <TextArea {...register(FIELD.ABANDONMENT_INFO)} isChecked={watchTerms[2]} disabled />
         <S.Stack>
           <Controller
-            name="abandonmentInfo_agreement"
+            name={FIELD.ABANDONMENT_INFO_TERM}
             control={control}
             rules={{ required: requiredItems?.get(FIELD_KEYS.ABANDONMENT_INFO) }}
             render={({ field: { ref, ...field } }) => (

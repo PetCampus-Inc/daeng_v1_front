@@ -1,5 +1,5 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
-import { FIELD_KEYS } from "constants/field";
+import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { TextInput } from "components/common";
 import ImageUpload from "components/common/ImageUpload";
@@ -24,7 +24,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_NAME)}>이름</Title>
         <TextInput
-          name="dogName"
+          name={FIELD.DOG_NAME}
           placeholder="강아지 이름을 입력해주세요"
           register={register}
           required
@@ -32,12 +32,12 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_GENDER)}>성별</Title>
-        <SingleRadio name="dogGender" radiosText={["수컷", "암컷"]} isRequired />
+        <SingleRadio name={FIELD.DOG_GENDER} radiosText={["수컷", "암컷"]} isRequired />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_SIZE)}>크기</Title>
         <SingleRadio
-          name="dogSize"
+          name={FIELD.DOG_SIZE}
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
           isRequired
@@ -46,7 +46,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_BREED)}>견종</Title>
         <BreedInput
-          name="newBreed"
+          name={FIELD.NEW_BREED}
           register={register}
           setValue={setValue}
           watch={watch}
@@ -82,7 +82,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.NEUTRALIZATION)}>중성화 여부</Title>
         <SingleRadio
-          name="neutralization"
+          name={FIELD.NEUTRALIZATION}
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItems?.get(FIELD_KEYS.NEUTRALIZATION)}
         />
@@ -90,14 +90,14 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.VACCINATION)}>예방접종 여부</Title>
         <SingleRadio
-          name="vaccination"
+          name={FIELD.VACCINATION}
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItems?.get(FIELD_KEYS.VACCINATION)}
         />
       </Card>
-      {watch("vaccination") === "했어요" && (
+      {watch(FIELD.VACCINATION) === "했어요" && (
         <Card>
-          <Title isRequired={requiredItems?.get(FIELD_KEYS.VACCINATION_FILE)}>
+          <Title isRequired={requiredItems?.get(FIELD_KEYS.VACCINATION_URL)}>
             예방접종 파일 첨부
           </Title>
           <Caption>최근 1년 내 접종 기록 증명을 위해 jpg, png 형태로 업로드해 주세요</Caption>
@@ -110,7 +110,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         </Title>
         <TextArea
           placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
-          {...register("allergyDisease", {
+          {...register(FIELD.ALLERGY_DISEASE, {
             required: requiredItems?.get(FIELD_KEYS.ALLERGY_DISEASE)
           })}
         />
