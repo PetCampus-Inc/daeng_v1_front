@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
 import { memberEnrollmentRejectedAtom } from "store/member";
-import { IDoglist, IMemberInfo } from "types/member/home.types";
+import { IDoglist, IMemberInfo } from "types/member/main.types";
 
 interface MemberInfoProps {
   data: IMemberInfo;

@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { IMemberDogInfo } from "types/member/home.types";
+import { IMemberDogInfo } from "types/member/main.types";
 
 interface ISchool {
   schoolName: string;
