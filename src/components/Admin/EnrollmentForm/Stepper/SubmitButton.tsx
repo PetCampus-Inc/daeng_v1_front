@@ -1,4 +1,4 @@
-import { FIELD_TO_STEP } from "constants/step";
+import { getFieldStep } from "constants/step";
 
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
@@ -54,7 +54,7 @@ const SubmitButton = ({ type, onNextStep }: SubmitButtonProps) => {
 
   const onInvalid = (errors: FieldErrors) => {
     const firstErrorField = Object.keys(errors)[0];
-    const step = FIELD_TO_STEP.get(firstErrorField);
+    const step = getFieldStep({ field: firstErrorField, enable: true });
     if (step !== undefined) {
       setStep(step);
       openPopup(firstErrorField);

@@ -1,4 +1,4 @@
-import { FIELD_TO_STEP } from "constants/step";
+import { getFieldStep } from "constants/step";
 
 import { usePostEnrollment } from "hooks/api/member/enroll";
 import { Adapter, MemberFormToServerAdapter } from "libs/adapters";
@@ -30,9 +30,15 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   const onInvalid = (errors: FieldErrors) => {
     console.log(errors);
     const firstErrorField = Object.keys(errors)[0];
-    const step = FIELD_TO_STEP.get(firstErrorField);
+
+    console.log(firstErrorField);
+    const step = getFieldStep({ field: firstErrorField, enable: true });
+
+    console.log(step);
+    // const step = FIELD_TO_STEP.get(firstErrorField);
 
     if (step !== undefined) {
+      console.log(step);
       openPopup(firstErrorField);
       setStep(step);
     }
