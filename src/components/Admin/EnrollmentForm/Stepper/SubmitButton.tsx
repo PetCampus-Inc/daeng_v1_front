@@ -3,18 +3,18 @@ import { FIELD_TO_STEP } from "constants/step";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
-import { Adapter } from "libs/Adapter";
-import { AdminFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
+import { Adapter } from "libs/adapters";
+import { AdminFormToServerAdapter } from "libs/adapters/FormToServerAdapter";
 import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 import { FormButton } from "styles/StyleModule";
 
-import type { AdminFormSaveType } from "types/admin/enrollment.types";
+import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
 interface SubmitButtonProps {
   type?: "READ" | "CREATE" | "EDIT";
-  onNextStep?: (formInfo: AdminFormSaveType) => void;
+  onNextStep?: (formInfo: AdminEnrollmentInfoType) => void;
 }
 
 const SubmitButton = ({ type, onNextStep }: SubmitButtonProps) => {
@@ -46,7 +46,7 @@ const SubmitButton = ({ type, onNextStep }: SubmitButtonProps) => {
 
   const onSubmit = (data: FieldValues) => {
     const requestData = { ...data, adminId, schoolId };
-    const saveData = Adapter.from(requestData).to<FieldValues, AdminFormSaveType>((item) =>
+    const saveData = Adapter.from(requestData).to<FieldValues, AdminEnrollmentInfoType>((item) =>
       new AdminFormToServerAdapter(item).adapt()
     );
     onNextStep?.(saveData);
