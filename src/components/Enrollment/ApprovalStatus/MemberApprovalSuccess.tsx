@@ -10,19 +10,19 @@ interface ApprovalSuccessProps {
   schoolName?: string;
 }
 
-const ApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
+const MemberApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
   const navigate = useNavigate();
-
+  const memberId = 11;
   const handleConfirm = () => {
-    // MEMO: 출석 페이지로 이동 (교사홈)
-    navigate(PATH.ADMIN_ATTENDANCE);
+    // MEMO: 프로필 설정 페이지로 이동
+    navigate(PATH.MEMEBER_PROFILE_EDITE_PAGE(String(memberId)));
   };
   return (
     <>
       <Text as="h2" typo="title1_24_B" color="darkBlack">
         <em color="primaryColor">
           {schoolName} 유치원 <br />
-          승인
+          가입 승인
         </em>
         이 완료되었습니다
       </Text>
@@ -38,4 +38,4 @@ const ApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
   );
 };
 
-export default ApprovalSuccess;
+export default MemberApprovalSuccess;

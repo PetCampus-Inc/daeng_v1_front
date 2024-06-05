@@ -99,7 +99,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMEBER_PROFILE_EDITE_PAGE,
+          path: PATH.MEMEBER_PROFILE_EDITE_PAGE(),
           element: (
             <Suspense>
               <Pages.MemberOnboardingProfileEditePage />
@@ -111,6 +111,14 @@ const MemberRoutes = (): RouteObject[] => {
           element: (
             <Suspense>
               <Pages.MemberAddDogProfileEditePage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_APPROVAL_STATUS_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberApprovalStatusPage />
             </Suspense>
           )
         }
