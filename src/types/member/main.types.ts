@@ -39,6 +39,7 @@ export interface ImageList {
   imageType: TImageType;
   comment?: string;
   createdTime: number[];
+  size: number;
 }
 export interface IDoglist {
   dogId: string;
@@ -83,9 +84,6 @@ export interface IMemberProfilePostInfo {
   emergencyPhoneNumber: string;
   relation: string;
 }
-export interface IMainAlbumData extends Omit<ImageList, "createdTime"> {
-  createdTime: number[];
-}
 
 export interface IMainAlbum {
   dogId: number;
@@ -128,9 +126,16 @@ export interface IMemberDogInfo extends IResponse {
   dogMemo: string;
 }
 
-export type DogsInfoType = {
+export type DogsDataType = {
   memberId: number;
   dogId: number;
   dogName: string;
   imageUri: string;
 };
+
+export interface IMemberDogSchoolInfo extends IResponse {
+  schoolId: number;
+  name: string;
+  phoneNumber: string;
+  address: string;
+}

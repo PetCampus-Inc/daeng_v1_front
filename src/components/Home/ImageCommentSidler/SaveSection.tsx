@@ -5,7 +5,7 @@ import SaveOptionDropdown from "./SaveOptionDropdown";
 import { IconWrapper } from "./styles";
 
 import type { DownloadFileFunction, DownloadProps } from "hooks/common/useS3";
-import type { ImageListType } from "types/member/home.types";
+import type { ImageListType } from "types/member/main.types";
 
 interface SaveSectionProps {
   setTotalFiles: React.Dispatch<React.SetStateAction<number>>;

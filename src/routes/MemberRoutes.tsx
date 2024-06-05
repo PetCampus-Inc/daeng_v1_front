@@ -19,6 +19,14 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
+          path: PATH.ALBUM,
+          element: (
+            <Suspense>
+              <Pages.ImageAlbumPage />
+            </Suspense>
+          )
+        },
+        {
           path: PATH.MEMBER_MY_PAGE(),
           element: (
             <Suspense>
@@ -108,7 +116,7 @@ const MemberRoutes = (): RouteObject[] => {
         }
       ],
       loader: () => {
-        if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
+        // if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
         return null;
       }
     }

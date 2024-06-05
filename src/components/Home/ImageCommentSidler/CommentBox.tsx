@@ -1,3 +1,5 @@
+import { replaceNewline } from "utils/formatter";
+
 import { CommentBoxWrapper, CommentText, CommentTextWrapper } from "./styles";
 
 const CommentBox = ({ comment }: { comment?: string }) => {
@@ -5,16 +7,7 @@ const CommentBox = ({ comment }: { comment?: string }) => {
   return (
     <CommentBoxWrapper>
       <CommentTextWrapper>
-        <CommentText>
-          {comment?.split("\n").map((line) => {
-            return (
-              <>
-                {line}
-                <br />
-              </>
-            );
-          })}
-        </CommentText>
+        <CommentText>{replaceNewline(comment)}</CommentText>
       </CommentTextWrapper>
     </CommentBoxWrapper>
   );

@@ -2,7 +2,7 @@ import { Flex, Text } from "components/common";
 
 import { Img, ImgWrapper, StyledHgroup } from "./styles";
 
-import type { HomeInfoType } from "types/member/home.types";
+import type { HomeInfoType } from "types/member/main.types";
 
 const HomeHeader = ({ data }: { data: HomeInfoType }) => {
   return (

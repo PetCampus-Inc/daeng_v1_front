@@ -1,4 +1,4 @@
-import { IMemberProfileInfo } from "./member/home.types";
+import { IMemberProfileInfo } from "./member/main.types";
 
 export interface ILoginInfo {
   id: string;

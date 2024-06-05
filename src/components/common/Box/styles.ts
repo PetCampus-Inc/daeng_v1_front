@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { remCalc } from "utils/calculator";
 import { isNumber } from "utils/typeGuard";
 
-import type { BoxBorderProps, BoxOptions, BoxStyleProps } from "./types";
+import type { BoxBorderProps, BoxOptions, SizeType } from "./types";
 
 const getBorderRadiusStyle = ({ borderRadius }: Pick<BoxBorderProps, "borderRadius">) => {
   switch (borderRadius) {
@@ -21,34 +21,20 @@ const getBorderRadiusStyle = ({ borderRadius }: Pick<BoxBorderProps, "borderRadi
   }
 };
 
-const getWidthSize = ({ width }: Pick<BoxStyleProps, "width">) => {
-  switch (width) {
+const getSize = (size: SizeType) => {
+  switch (size) {
     case "full":
       return "100%";
+    case "fit":
+      return "fit-content";
+    case "min":
+      return "min-content";
+    case "max":
+      return "max-content";
     case "auto":
       return "auto";
     default:
-      return width;
-  }
-};
-
-const getMaxWidth = ({ maxWidth }: Pick<BoxStyleProps, "maxWidth">) => {
-  switch (maxWidth) {
-    case "full":
-      return "100%";
-    default:
-      return maxWidth;
-  }
-};
-
-const getHeightSize = ({ height }: Pick<BoxStyleProps, "height">) => {
-  switch (height) {
-    case "full":
-      return "100vh";
-    case "auto":
-      return "auto";
-    default:
-      return height;
+      return size;
   }
 };
 
@@ -121,10 +107,10 @@ export const StyledBox = styled.div.withConfig({
   align-items: ${({ align }) => (align ? align : undefined)};
   gap: ${({ gap }) => (gap ? remCalc(gap) : undefined)};
 
-  width: ${({ width }) => (width ? getWidthSize({ width }) : undefined)};
-  max-width: ${({ maxWidth }) => (maxWidth ? getMaxWidth({ maxWidth }) : undefined)};
-  min-width: ${({ minWidth }) => (minWidth ? minWidth : undefined)};
-  height: ${({ height }) => (height ? getHeightSize({ height }) : undefined)};
+  width: ${({ width }) => (width ? getSize(width) : undefined)};
+  max-width: ${({ maxWidth }) => (maxWidth ? getSize(maxWidth) : undefined)};
+  min-width: ${({ minWidth }) => (minWidth ? getSize(minWidth) : undefined)};
+  height: ${({ height }) => (height ? getSize(height) : undefined)};
   margin: ${({ margin }) => (margin ? margin : undefined)};
   margin-right: ${({ mr, marginRight }) =>
     mr ? remCalc(mr) : marginRight ? remCalc(marginRight) : undefined};

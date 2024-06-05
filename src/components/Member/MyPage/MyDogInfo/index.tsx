@@ -2,7 +2,7 @@ import useMemberRejected from "hooks/api/member/useMemberRejected";
 import { useToggle } from "hooks/common/useToggle";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { IMemberInfo } from "types/member/home.types";
+import { IMemberInfo } from "types/member/main.types";
 
 import * as S from "./styles";
 import AddMyDogCard from "../Cards/AddMyDogCard";

@@ -1,13 +1,26 @@
+import { PATH } from "constants/path";
+
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import { Box, Flex, Text } from "components/common";
 import SimpleButton from "components/common/Button/SimpleButton";
+import { useNavigate } from "react-router-dom";
 
 import ImageSlider from "./ImageAlbumSlider/ImageSlider";
 import { MoreButtonStyle } from "./ImageAlbumSlider/styles";
 
-import type { ImageListType } from "types/member/home.types";
+import type { ImageListType } from "types/member/main.types";
 
-const HomeImageAlbum = ({ images }: { images?: ImageListType[][] }) => {
+interface HomeImageAlbumProps {
+  dogInfo: {
+    dogName: string;
+    dogId: number;
+  };
+  images?: ImageListType[][];
+}
+
+const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
+  const navigate = useNavigate();
+
   return (
     <Box display="flex" direction="column" mt={40} gap={8}>
       <Flex justify="space-between">
@@ -16,7 +29,9 @@ const HomeImageAlbum = ({ images }: { images?: ImageListType[][] }) => {
         </Text>
         <SimpleButton
           p={0}
-          onClick={() => console.log("클릭")}
+          onClick={() =>
+            navigate(`${PATH.ALBUM}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`)
+          }
           rightAddon={<ArrowRightIcon w="24" h="24" colorScheme="gray_1" />}
           css={MoreButtonStyle}
         >

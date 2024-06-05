@@ -190,7 +190,6 @@ export const CommentText = styled.pre`
   color: ${({ theme }) => theme.colors.darkBlack};
   ${({ theme }) => theme.typo.label1_16_R};
   text-wrap: pretty;
-  white-space: pre-wrap;
   overflow-wrap: break-word;
   padding: 0 0.25rem;
 `;

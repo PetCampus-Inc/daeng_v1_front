@@ -1,7 +1,7 @@
 import AlertRed from "assets/svg/alert-red-icon";
 import { Text } from "components/common";
+import { Checkbox } from "components/common";
 import Badge from "components/common/Badge";
-import Checkbox from "components/common/Checkbox";
 import React from "react";
 
 import { CheckboxWrapper, ListItem, ListItemImg, ListItemWrapper } from "./styles";

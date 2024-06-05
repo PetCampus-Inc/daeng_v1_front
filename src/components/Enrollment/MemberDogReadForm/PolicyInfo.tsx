@@ -1,7 +1,7 @@
 import { ITEM_KEYS } from "constants/item";
 import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 
-import Checkbox from "components/common/Checkbox";
+import { Checkbox } from "components/common";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { useEffect } from "react";
