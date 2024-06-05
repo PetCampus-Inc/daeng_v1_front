@@ -1,5 +1,4 @@
-import { TMemberDto } from "./admin/enrollment.types";
-
+import type { MemberDtoType } from "./admin/enrollment.types";
 import type { Nullable } from "./helper.type";
 
 type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
@@ -62,7 +61,7 @@ export interface IDogAndMemberInfo {
   pickDropType: string;
   pickDropMemo: string;
   dogMemo: string;
-  member: TMemberDto;
+  member: MemberDtoType;
 }
 
 export interface IDogInfoRecord {

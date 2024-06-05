@@ -1,15 +1,15 @@
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
-import { IMemberSchoolInfo } from "types/member/school.types";
 
-import type { AdminFormInfo, IResponseAdminForm } from "types/admin/enrollment.types";
+import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
 import type { IResponse } from "types/helper.type";
 import type {
-  EnrollmentData,
-  EnrollmentInfo,
+  EnrollmentDataType,
+  EnrollmentInfoType,
   IDogEnrollmentInfo
 } from "types/member/enrollment.types";
+import type { IMemberSchoolInfo } from "types/member/school.types";
 
 export interface IEnrollmentProps {
   memberId: string;
@@ -47,7 +47,7 @@ export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> =>
 export const handleGetEnrollment = async ({
   schoolId,
   memberId
-}: IEnrollmentProps): Promise<EnrollmentData> => {
+}: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll`;
   const { data } = await customAxios.get(url, {
     params: {
@@ -61,7 +61,7 @@ export const handleGetEnrollment = async ({
 export const handleGetEnrollmentUrl = async ({
   requestUrl,
   memberId
-}: IEnrollmentProps): Promise<IResponseAdminForm> => {
+}: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll/${requestUrl}`;
   const { data } = await customAxios.get(url, {
     params: {
@@ -73,24 +73,24 @@ export const handleGetEnrollmentUrl = async ({
 
 export const handleGetAdminForm = async ({
   formId
-}: IAdminEnrollmentProps): Promise<IResponseAdminForm> => {
+}: IAdminEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/form/list/${formId}`;
   const { data } = await customAxios.get(url);
   return data.data;
 };
 
-export const handlePostEnrollment = async (requestProps: EnrollmentInfo): Promise<void> => {
+export const handlePostEnrollment = async (req: EnrollmentInfoType): Promise<void> => {
   const url = `school/member/enroll`;
   const { data } = await customAxios.post(url, {
-    ...requestProps
+    ...req
   });
   return data.data;
 };
 
-export const handlePostAdminForm = async (requestProps: AdminFormInfo): Promise<void> => {
+export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise<void> => {
   const url = `school/form`;
   const { data } = await customAxios.post(url, {
-    ...requestProps
+    ...req
   });
   return data.data;
 };

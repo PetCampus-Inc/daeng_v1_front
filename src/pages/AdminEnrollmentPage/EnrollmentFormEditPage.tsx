@@ -27,10 +27,10 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import type { AdminFormSaveType } from "types/admin/enrollment.types";
+import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
 interface EnrollmentFormEditProps {
-  onNextStep?: (formInfo: AdminFormSaveType) => void;
+  onNextStep?: (formInfo: AdminEnrollmentInfoType) => void;
 }
 
 const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {

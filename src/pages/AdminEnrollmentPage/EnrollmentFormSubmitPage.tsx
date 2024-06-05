@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { getCurrentDate } from "utils/date";
 
-import type { AdminFormSaveType } from "types/admin/enrollment.types";
+import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
 interface SubmitFormProps {
-  formInfo?: AdminFormSaveType;
+  formInfo?: AdminEnrollmentInfoType;
 }
 
 const EnrollmentFormSubmitPage = ({ formInfo }: SubmitFormProps) => {
