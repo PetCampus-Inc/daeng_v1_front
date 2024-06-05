@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import TextArea from "components/common/TextArea";
@@ -55,7 +55,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
         />
       </S.Card>
       <S.Card>
-        <Title htmlFor="limitsInfo" isRequired={requiredItems?.get(ITEM_KEYS.LIMITS_INFO)}>
+        <Title htmlFor="limitsInfo" isRequired={requiredItems?.get(FIELD_KEYS.LIMITS_INFO)}>
           이용 제한 유의 사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
@@ -64,7 +64,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
           <Controller
             name="limitsInfo_agreement"
             control={control}
-            rules={{ required: requiredItems?.get(ITEM_KEYS.LIMITS_INFO) }}
+            rules={{ required: requiredItems?.get(FIELD_KEYS.LIMITS_INFO) }}
             render={({ field: { ref, ...field } }) => (
               <Checkbox
                 label="동의합니다"
@@ -77,7 +77,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
         </S.Stack>
       </S.Card>
       <S.Card>
-        <Title htmlFor="accidentInfo" isRequired={requiredItems?.get(ITEM_KEYS.ACCIDENT_INFO)}>
+        <Title htmlFor="accidentInfo" isRequired={requiredItems?.get(FIELD_KEYS.ACCIDENT_INFO)}>
           상해 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
@@ -86,7 +86,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
           <Controller
             name="accidentInfo_agreement"
             control={control}
-            rules={{ required: requiredItems?.get(ITEM_KEYS.ACCIDENT_INFO) }}
+            rules={{ required: requiredItems?.get(FIELD_KEYS.ACCIDENT_INFO) }}
             render={({ field: { ref, ...field } }) => (
               <Checkbox
                 label="동의합니다"
@@ -101,7 +101,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
       <S.Card>
         <Title
           htmlFor="abandonmentInfo"
-          isRequired={requiredItems?.get(ITEM_KEYS.ABANDONMENT_INFO)}
+          isRequired={requiredItems?.get(FIELD_KEYS.ABANDONMENT_INFO)}
         >
           유기 유의사항
         </Title>
@@ -111,7 +111,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
           <Controller
             name="abandonmentInfo_agreement"
             control={control}
-            rules={{ required: requiredItems?.get(ITEM_KEYS.ABANDONMENT_INFO) }}
+            rules={{ required: requiredItems?.get(FIELD_KEYS.ABANDONMENT_INFO) }}
             render={({ field: { ref, ...field } }) => (
               <Checkbox
                 label="동의합니다"

@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import SingleRadio from "components/common/Select/SingleRadio";
@@ -23,41 +23,41 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
         <TextArea {...register("pickDropNotice")} disabled />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_REQUEST)}>픽드랍 신청</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.PICKDROP_REQUEST)}>픽드랍 신청</Title>
         <SingleRadio
           name="pickDropRequest"
           radiosText={["신청", "미신청"]}
-          isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_REQUEST)}
+          isRequired={requiredItems?.get(FIELD_KEYS.PICKDROP_REQUEST)}
         />
       </Card>
       {watch("pickDropRequest") === "신청" && (
         <>
           <Card>
-            <Title isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_TYPE)}>픽드랍 유형</Title>
+            <Title isRequired={requiredItems?.get(FIELD_KEYS.PICKDROP_TYPE)}>픽드랍 유형</Title>
             <SingleRadio
               name="pickDropType"
               radiosText={["편도", "왕복"]}
-              isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_TYPE)}
+              isRequired={requiredItems?.get(FIELD_KEYS.PICKDROP_TYPE)}
             />
           </Card>
           <Card>
-            <Title isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_MEMO)}>픽드랍 메모</Title>
+            <Title isRequired={requiredItems?.get(FIELD_KEYS.PICKDROP_MEMO)}>픽드랍 메모</Title>
             <TextArea
               {...register("pickDropMemo", {
-                required: requiredItems?.get(ITEM_KEYS.PICKDROP_MEMO)
+                required: requiredItems?.get(FIELD_KEYS.PICKDROP_MEMO)
               })}
               placeholder="픽드랍 장소, 시간에 대해 자세히 적어주세요."
             />
           </Card>
           <Card>
-            <Title isRequired={requiredItems?.get(ITEM_KEYS.PICKDROP_INFO)}>픽드랍 유의사항</Title>
+            <Title isRequired={requiredItems?.get(FIELD_KEYS.PICKDROP_INFO)}>픽드랍 유의사항</Title>
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
             <TextArea {...register("pickDropInfo")} isChecked={watch("pickDropInfo")} disabled />
             <Stack>
               <Controller
                 name="pickDropInfo_agreement"
                 control={control}
-                rules={{ required: requiredItems?.get(ITEM_KEYS.ABANDONMENT_INFO) }}
+                rules={{ required: requiredItems?.get(FIELD_KEYS.ABANDONMENT_INFO) }}
                 render={({ field: { ref, ...field } }) => (
                   <Checkbox
                     label="동의합니다"

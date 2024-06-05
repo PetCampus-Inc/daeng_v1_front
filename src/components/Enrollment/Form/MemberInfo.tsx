@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 import { PHONE_REGEX } from "constants/validCheck";
 
 import { TextInput } from "components/common";
@@ -50,7 +50,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
   return (
     <>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.MEMBER_NAME)}>이름</Title>
         <TextInput
           name="memberName"
           register={register}
@@ -59,11 +59,11 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_GENDER)}>성별</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.MEMBER_GENDER)}>성별</Title>
         <SingleRadio name="memberGender" radiosText={["남", "여"]} />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.MEMBER_ADDRESS)}>주소</Title>
         <SearchInputField
           name={addressStreet}
           register={register}
@@ -71,7 +71,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
           onClick={openPopup}
           onClear={handleClear}
           value={watchAddress}
-          required={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
+          required={requiredItems?.get(FIELD_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
         />
@@ -84,22 +84,22 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         )}
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.MEMBER_PHONE)}>연락처</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.MEMBER_PHONE)}>연락처</Title>
         <TextInput
           name="phoneNumber"
           register={register}
-          required={requiredItems?.get(ITEM_KEYS.MEMBER_PHONE)}
+          required={requiredItems?.get(FIELD_KEYS.MEMBER_PHONE)}
           rules={{ pattern: PHONE_REGEX }}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
         />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
         <TextInput
           name="emergencyNumber"
           register={register}
-          required={requiredItems?.get(ITEM_KEYS.EMERGENCY_NUMBER)}
+          required={requiredItems?.get(FIELD_KEYS.EMERGENCY_NUMBER)}
           rules={{ pattern: PHONE_REGEX }}
           onChange={handleChangeNumber("emergencyNumber")}
           placeholder="비상 연락처를 입력해주세요"

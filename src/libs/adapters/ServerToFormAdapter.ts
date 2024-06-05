@@ -1,4 +1,4 @@
-import { AGREEMENT_ITEM } from "constants/item";
+import { AGREEMENT_ITEM } from "constants/field";
 
 import { getLabelForValue } from "utils/formatter";
 

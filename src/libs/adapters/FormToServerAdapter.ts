@@ -1,4 +1,4 @@
-import { AGREEMENT_ITEM, FIELD_ITEMS } from "constants/item";
+import { AGREEMENT_ITEM, FIELD_ITEMS } from "constants/field";
 
 import { extractNumber, formatDate, getKeyForLabel } from "utils/formatter";
 import { isNumber } from "utils/typeGuard";

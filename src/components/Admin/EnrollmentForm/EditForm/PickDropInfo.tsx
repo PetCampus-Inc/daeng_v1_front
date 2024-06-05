@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import SingleRadio from "components/common/Select/SingleRadio";
@@ -15,7 +15,7 @@ const PickDropInfo = () => {
     <>
       <Card>
         <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.PICKDROP_OPERATION}`}
+          name={`requiredItemList.${FIELD_KEYS.PICKDROP_OPERATION}`}
           control={control}
           hasBadge
         >
@@ -27,7 +27,7 @@ const PickDropInfo = () => {
         <>
           <Card>
             <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_NOTICE}`}
+              name={`requiredItemList.${FIELD_KEYS.PICKDROP_NOTICE}`}
               control={control}
               hasBadge
             >
@@ -40,19 +40,19 @@ const PickDropInfo = () => {
             />
           </Card>
           <Card>
-            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_REQUEST}`} control={control}>
+            <AdminTitle name={`requiredItemList.${FIELD_KEYS.PICKDROP_REQUEST}`} control={control}>
               픽드랍 신청
             </AdminTitle>
             <SingleRadio name="null" radiosText={["신청", "미신청"]} disabled />
           </Card>
           <Card>
-            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_TYPE}`} control={control}>
+            <AdminTitle name={`requiredItemList.${FIELD_KEYS.PICKDROP_TYPE}`} control={control}>
               픽드랍 유형
             </AdminTitle>
             <SingleRadio name="null" radiosText={["편도", "왕복"]} disabled />
           </Card>
           <Card>
-            <AdminTitle name={`requiredItemList.${ITEM_KEYS.PICKDROP_MEMO}`} control={control}>
+            <AdminTitle name={`requiredItemList.${FIELD_KEYS.PICKDROP_MEMO}`} control={control}>
               픽드랍 메모
             </AdminTitle>
             <TextArea
@@ -62,7 +62,7 @@ const PickDropInfo = () => {
           </Card>
           <Card>
             <AdminTitle
-              name={`requiredItemList.${ITEM_KEYS.PICKDROP_INFO}`}
+              name={`requiredItemList.${FIELD_KEYS.PICKDROP_INFO}`}
               control={control}
               hasBadge
             >

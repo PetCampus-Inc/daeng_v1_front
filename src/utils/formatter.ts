@@ -1,4 +1,4 @@
-import { FIELD_ITEMS, type FieldItemKeys, type FieldItemLabels } from "constants/item";
+import { FIELD_ITEMS, type FieldItemKeys, type FieldItemLabels } from "constants/field";
 
 /**
  * 문자열에서 `/n`을 개행 문자로 대체하는 함수

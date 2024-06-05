@@ -1,4 +1,3 @@
-import { type AgreementsListType } from "constants/item";
 import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
@@ -14,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
+import type { AgreementsListType } from "constants/field";
 import type { MemberFormData, AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 import type { EnrollmentDataType } from "types/member/enrollment.types";
 
