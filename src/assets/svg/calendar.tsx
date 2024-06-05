@@ -1,14 +1,14 @@
-const CalendarIcon = ({ className = "", w = "16", h = "16", rx = "4" }) => {
+const CalendarIcon = ({ className = "", w = "16", h = "17", rx = "4" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={w}
       height={h}
-      viewBox={`0 0 ${w} ${h}`}
+      viewBox={`0 0 16 17`}
       fill="none"
       className={className}
     >
-      <rect width={w} height={h} rx={rx} fill="#FFF7E1" />
+      <rect width={16} height={17} rx={rx} fill="#FFF7E1" />
       <path
         d="M3.33203 5.1684C3.33203 4.52419 3.85427 4.00195 4.49848 4.00195H11.4972C12.1414 4.00195 12.6636 4.52419 12.6636 5.1684V12.1671C12.6636 12.8113 12.1414 13.3335 11.4972 13.3335H4.49848C3.85427 13.3335 3.33203 12.8113 3.33203 12.1671V5.1684Z"
         fill="white"

@@ -14,8 +14,8 @@ import { dogIdState } from "store/member";
 const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
 
-  const defaultDogId = 11;
-  const memberId = 1;
+  const defaultDogId = 2;
+  const memberId = 2;
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
   const { data } = useGetHomeInfo(memberId, dogId);
@@ -33,6 +33,11 @@ const HomePage = () => {
       <DogManagerPopup isOpen={isOpen} close={close} memberId={memberId} />
     ));
 
+  const dogInfo = {
+    dogName: data.dogName,
+    dogId: data.dogId
+  };
+
   return (
     <>
       <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} />
@@ -42,8 +47,8 @@ const HomePage = () => {
           <HomeDashboard data={data} />
         </StyledBox>
         <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
-          <HomeImageCommentSlider images={data.imageList} />
-          <HomeImageAlbum images={data.imageList} />
+          <HomeImageCommentSlider images={data.imageList?.[0]} />
+          <HomeImageAlbum images={data.imageList} dogInfo={dogInfo} />
         </StyledBox>
       </main>
       <NavBar />

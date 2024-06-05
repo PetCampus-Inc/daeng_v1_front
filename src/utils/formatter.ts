@@ -1,5 +1,15 @@
 import { ITEM_MAPS, type ItemMaps } from "constants/item";
 
+/**
+ * 문자열에서 `/n`을 개행 문자로 대체하는 함수
+ *
+ * @param {string} str - 개행 문자가 포함된 입력 문자열
+ * @returns {string} - `/n`이 개행 문자로 대체된 문자열
+ */
+export const replaceNewline = (str: string) => {
+  return str.replace(/\/n/g, "\n");
+};
+
 export const formatDate = (year: string, month: string, day: string, type?: string) => {
   if (!year || !month || !day) return "";
   const formattedMonth = month.padStart(2, "0");

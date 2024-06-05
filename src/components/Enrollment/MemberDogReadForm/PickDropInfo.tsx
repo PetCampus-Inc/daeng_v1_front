@@ -1,7 +1,7 @@
 import { ITEM_KEYS } from "constants/item";
 import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 
-import Checkbox from "components/common/Checkbox";
+import { Checkbox } from "components/common";
 import SingleRadio from "components/common/Select/SingleRadio";
 import { Caption } from "components/common/Select/styles";
 import TextArea from "components/common/TextArea";
