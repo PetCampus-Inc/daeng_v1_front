@@ -36,19 +36,7 @@ export const ITEM_KEYS = {
   PICKDROP_INFO: 30
 } as const;
 
-export type ItemMaps = {
-  memberGender: { MALE: string; FEMALE: string };
-  dogGender: { MALE: string; FEMALE: string };
-  dogSize: { BIG: string; MEDIUM: string; SMALL: string };
-  neutralization: { NEUTERED: string; NOT_NEUTERED: string };
-  vaccination: { VACCINATED: string; NOT_VACCINATED: string };
-  pickDropRequest: { REQUEST: string; NOT_REQUEST: string };
-  pickDropType: { ONE_WAY: string; ROUND: string };
-  pickDropState: { RUNNING: string; NOT_RUNNING: string };
-  ticketType: { ROUND: string; MONTHLY: string };
-};
-
-export const ITEM_MAPS: ItemMaps = {
+export const FIELD_ITEMS = {
   memberGender: { MALE: "남", FEMALE: "여" },
   dogGender: { MALE: "수컷", FEMALE: "암컷" },
   dogSize: { BIG: "대형견", MEDIUM: "중형견", SMALL: "소형견" },
@@ -58,7 +46,9 @@ export const ITEM_MAPS: ItemMaps = {
   pickDropType: { ONE_WAY: "편도", ROUND: "왕복" },
   pickDropState: { RUNNING: "운영", NOT_RUNNING: "미운영" },
   ticketType: { ROUND: "회차권", MONTHLY: "정기권" }
-};
+} as const;
+export type FieldItemLabels = typeof FIELD_ITEMS;
+export type FieldItemKeys<K extends keyof FieldItemLabels> = keyof FieldItemLabels[K];
 
 export const ITEM_ENGLISH_TO_KOREAN: IEnToKr = {
   SMALL: "소형견",
