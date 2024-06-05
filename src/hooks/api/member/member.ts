@@ -9,6 +9,7 @@ import {
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
   handleGetMemberProfileInfo,
+  handleGetMemoProfile,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
   handlePostMemberDogDetailInfo,
@@ -232,6 +233,13 @@ export const usePostMemberDogPickdrop = (dogId: number) => {
 };
 
 // 회원 가입승인후 초기 견주, 강아지 프로필을 설정
+export const useGetMemberProfile = (memberId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_APPROVAL_STATUS_PAGE(memberId),
+    queryFn: () => handleGetMemoProfile(memberId)
+  });
+};
+
 export const usePostMemberProfile = () => {
   const memberProfileMutation = useMutation({
     mutationFn: ({ req }: { req: IMemberProfile }) => handlePostMemoProfile(req),
