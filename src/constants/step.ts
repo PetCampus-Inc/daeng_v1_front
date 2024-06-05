@@ -173,7 +173,7 @@ export const FIELD_TO_STEP = new Map<string, number>([
   ["birthdate", 1],
   ["neutralization", 1],
   ["vaccination", 1],
-  ["fileUrl", 1],
+  ["vaccinationUri", 1],
   ["allergyDisease", 1],
   ["priceInfo", 2],
   ["ticketType", 2],

@@ -88,7 +88,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <TextInput
           name="phoneNumber"
           register={register}
-          required
+          required={requiredItems?.get(ITEM_KEYS.MEMBER_PHONE)}
           rules={{ pattern: PHONE_REGEX }}
           onChange={handleChangeNumber("phoneNumber")}
           placeholder="연락처를 입력해주세요"
