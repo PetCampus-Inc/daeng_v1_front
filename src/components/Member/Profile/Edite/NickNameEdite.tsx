@@ -16,10 +16,11 @@ const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
         register={register}
         {...register("nickName", { required: true })}
         placeholder="닉네임을 입력해주세요"
-        value={watch("nickName")}
+        defaultValue={watch("dogName")}
         onFocus={handleFocus}
         onBlur={handleBlur}
         css={InputStyle}
+        className="defaultValue"
       />
     </>
   );
