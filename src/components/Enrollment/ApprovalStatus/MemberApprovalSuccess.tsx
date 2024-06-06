@@ -32,7 +32,7 @@ const MemberApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
       </StyledImgWrapper>
 
       <Box position="absolute" left={16} right={16} bottom={24}>
-        <Button handleClick={handleConfirm}>시작</Button>
+        <Button handleClick={handleConfirm}>시작하기</Button>
       </Box>
     </>
   );
