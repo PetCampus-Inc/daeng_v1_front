@@ -24,7 +24,7 @@ const SaveProfilButton = () => {
 
   // TODO 어뎁터 데이터에 추가하기
   const getSubmitFormInfo = (data: FieldValues) => {
-    const memberProfileData = {
+    return {
       memberId: data.memberId,
       dogId: data.dogId,
       memberProfileUri: data.memberProfileUri,
@@ -32,7 +32,6 @@ const SaveProfilButton = () => {
       dogName: data.dogName,
       relation: data.relation
     };
-    return memberProfileData;
   };
 
   const handleSubmitData = (data: FieldValues) => {
