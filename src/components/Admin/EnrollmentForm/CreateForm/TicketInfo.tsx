@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
@@ -32,7 +32,7 @@ const TicketInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.PRICE_INFO}`} control={control} hasBadge>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.PRICE_INFO}`} control={control} hasBadge>
           가격 안내
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
@@ -42,7 +42,7 @@ const TicketInfo = () => {
         />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_TYPE}`} control={control} hasBadge>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.TICKET_TYPE}`} control={control} hasBadge>
           이용권 종류
         </AdminTitle>
         <Caption>복수 선택이 가능해요</Caption>
@@ -51,7 +51,7 @@ const TicketInfo = () => {
       {isMonthlySelected && (
         <Card>
           <AdminTitle
-            name={`requiredItemList.${ITEM_KEYS.MONTHLY_TICKET_NUMBER}`}
+            name={`requiredItemList.${FIELD_KEYS.MONTHLY_TICKET_NUMBER}`}
             control={control}
             hasBadge
           >
@@ -69,7 +69,7 @@ const TicketInfo = () => {
       {isRoundSelected && (
         <Card>
           <AdminTitle
-            name={`requiredItemList.${ITEM_KEYS.ROUND_TICKET_NUMBER}`}
+            name={`requiredItemList.${FIELD_KEYS.ROUND_TICKET_NUMBER}`}
             control={control}
             hasBadge
           >
@@ -85,14 +85,14 @@ const TicketInfo = () => {
         </Card>
       )}
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.OPEN_DAYS}`} control={control} hasBadge>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.OPEN_DAYS}`} control={control} hasBadge>
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
         <DayMultiCheck name="openDays" defaultChecked isRequired />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.TICKET_INFO}`} control={control} hasBadge>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.TICKET_INFO}`} control={control} hasBadge>
           유의사항
         </AdminTitle>
         <TextArea

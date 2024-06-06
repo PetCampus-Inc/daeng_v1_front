@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { TextInput } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
@@ -14,20 +14,20 @@ const MemberInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_NAME}`} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.MEMBER_NAME}`} control={control} readOnly>
           이름
         </AdminTitle>
         <TextInput name="null" placeholder="견주 이름을 입력하는 칸이에요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_GENDER}`} control={control}>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.MEMBER_GENDER}`} control={control}>
           성별
         </AdminTitle>
         <SingleRadio name="null" radiosText={["남", "여"]} disabled />
       </Card>
       <Card>
         <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.MEMBER_ADDRESS}`}
+          name={`requiredItemList.${FIELD_KEYS.MEMBER_ADDRESS}`}
           control={control}
           readOnly
         >
@@ -36,13 +36,13 @@ const MemberInfo = () => {
         <SearchInputField name="null" placeholder="주소를 입력하는 칸이에요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.MEMBER_PHONE}`} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.MEMBER_PHONE}`} control={control} readOnly>
           연락처
         </AdminTitle>
         <TextInput name="null" placeholder="견주가 연락처를 입력하는 칸이에요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.EMERGENCY_NUMBER}`} control={control}>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.EMERGENCY_NUMBER}`} control={control}>
           비상 연락처
         </AdminTitle>
         <TextInput name="null" placeholder="견주가 비상연락처를 입력하는 칸이에요" disabled />

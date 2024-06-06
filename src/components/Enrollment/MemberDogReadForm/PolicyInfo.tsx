@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 
 import { Checkbox } from "components/common";
@@ -50,7 +50,10 @@ const PolicyInfo = () => {
         />
       </S.Card>
       <S.Card>
-        <Title htmlFor="limitsInfo" isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.LIMITS_INFO)}>
+        <Title
+          htmlFor="limitsInfo"
+          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.LIMITS_INFO)}
+        >
           이용 제한 유의 사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
@@ -59,7 +62,7 @@ const PolicyInfo = () => {
           <Controller
             name="limitsInfo_agreement"
             control={control}
-            rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.LIMITS_INFO) }}
+            rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.LIMITS_INFO) }}
             render={({ field: { ref, ...field } }) => (
               <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
             )}
@@ -69,7 +72,7 @@ const PolicyInfo = () => {
       <S.Card>
         <Title
           htmlFor="accidentInfo"
-          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.ACCIDENT_INFO)}
+          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ACCIDENT_INFO)}
         >
           상해 유의사항
         </Title>
@@ -79,7 +82,7 @@ const PolicyInfo = () => {
           <Controller
             name="accidentInfo_agreement"
             control={control}
-            rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.ACCIDENT_INFO) }}
+            rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ACCIDENT_INFO) }}
             render={({ field: { ref, ...field } }) => (
               <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
             )}
@@ -89,7 +92,7 @@ const PolicyInfo = () => {
       <S.Card>
         <Title
           htmlFor="abandonmentInfo"
-          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.ABANDONMENT_INFO)}
+          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ABANDONMENT_INFO)}
         >
           유기 유의사항
         </Title>
@@ -99,7 +102,7 @@ const PolicyInfo = () => {
           <Controller
             name="abandonmentInfo_agreement"
             control={control}
-            rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.ABANDONMENT_INFO) }}
+            rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ABANDONMENT_INFO) }}
             render={({ field: { ref, ...field } }) => (
               <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
             )}

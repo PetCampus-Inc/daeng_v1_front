@@ -1,5 +1,5 @@
+import { FIELD_KEYS } from "constants/field";
 import { GENDER_DATA } from "constants/gender";
-import { ITEM_KEYS } from "constants/item";
 import { PHONE_REGEX } from "constants/validCheck";
 
 import { Text } from "components/common";
@@ -96,7 +96,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           onClear={handleClear}
           defaultValue={memberData.address}
           value={watchAddress}
-          required={requiredItems?.get(ITEM_KEYS.MEMBER_ADDRESS)}
+          required={requiredItems?.get(FIELD_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
           inputType="memberEdite"

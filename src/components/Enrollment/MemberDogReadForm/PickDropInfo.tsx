@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 
 import { Checkbox } from "components/common";
@@ -35,13 +35,13 @@ const PickDropInfo = () => {
         <TextArea {...register("pickDropNotice")} disabled />
       </Card>
       <Card>
-        <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.PICKDROP_REQUEST)}>
+        <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_REQUEST)}>
           픽드랍 신청
         </Title>
         <SingleRadio
           name="pickDropRequest"
           radiosText={["신청", "미신청"]}
-          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.PICKDROP_REQUEST)}
+          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_REQUEST)}
           defaultSelect={pickDropRequest === "REQUEST" ? "신청" : "미신청"}
           preventDefaultClick={handlePreventDefault}
         />
@@ -49,31 +49,31 @@ const PickDropInfo = () => {
       {pickDropRequest === "신청" && (
         <>
           <Card>
-            <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.PICKDROP_TYPE)}>
+            <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_TYPE)}>
               픽드랍 유형
             </Title>
             <SingleRadio
               name="pickDropType"
               radiosText={["편도", "왕복"]}
-              isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.PICKDROP_TYPE)}
+              isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_TYPE)}
               defaultSelect={watch("pickDropType") === "ONE_WAY" ? "편도" : "왕복"}
               preventDefaultClick={handlePreventDefault}
             />
           </Card>
           <Card>
-            <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.PICKDROP_MEMO)}>
+            <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_MEMO)}>
               픽드랍 메모
             </Title>
             <TextArea
               {...register("pickDropMemo", {
-                required: REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.PICKDROP_MEMO)
+                required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_MEMO)
               })}
               placeholder="픽드랍 장소, 시간에 대해 자세히 적어주세요."
               readOnly
             />
           </Card>
           <Card>
-            <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.PICKDROP_INFO)}>
+            <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_INFO)}>
               픽드랍 유의사항
             </Title>
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
@@ -82,7 +82,7 @@ const PickDropInfo = () => {
               <Controller
                 name="pickDropInfo_agreement"
                 control={control}
-                rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(ITEM_KEYS.ABANDONMENT_INFO) }}
+                rules={{ required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ABANDONMENT_INFO) }}
                 render={({ field: { ref, ...field } }) => (
                   <Checkbox label="동의합니다" ref={ref} isChecked={field.value} />
                 )}
