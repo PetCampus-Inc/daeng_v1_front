@@ -10,6 +10,7 @@ interface ApprovalSuccessProps {
   schoolName?: string;
 }
 
+// TODO memberId params로 받아오도록 추후 수정 필요
 const MemberApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
   const navigate = useNavigate();
   const memberId = 11;
