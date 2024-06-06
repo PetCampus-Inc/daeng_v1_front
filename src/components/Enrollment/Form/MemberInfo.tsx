@@ -31,7 +31,7 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
 
   const handleClear = () => {
     setValue(FIELD.MEMBER_ADDRESS, "");
-    setValue("address.detail", "");
+    setValue(FIELD.MEMBER_ADDRESS_DETAIL, "");
     setIsAddressActive(false);
   };
 
