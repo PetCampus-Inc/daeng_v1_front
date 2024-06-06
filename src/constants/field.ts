@@ -96,7 +96,7 @@ export type FieldItemLabels = typeof FIELD_ITEMS;
 export type FieldItemKeys<K extends keyof FieldItemLabels> = keyof FieldItemLabels[K];
 
 export const AGREEMENT_ITEM: Map<string, number> = new Map([
-  [FIELD.ABANDONMENT_INFO_TERM, 21],
+  [FIELD.TICKET_INFO_TERM, 21],
   [FIELD.LIMITS_INFO_TERM, 22],
   [FIELD.ACCIDENT_INFO_TERM, 23],
   [FIELD.ABANDONMENT_INFO_TERM, 24],

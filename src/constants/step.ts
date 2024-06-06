@@ -168,7 +168,7 @@ type STEP_KEYS = (typeof STEP_KEYS)[number];
 const stepFields: { [key in STEP_KEYS]: string[] } = {
   견주정보: [
     FIELD.MEMBER_NAME,
-    FIELD.DOG_GENDER,
+    FIELD.MEMBER_GENDER,
     FIELD.MEMBER_ADDRESS,
     FIELD.MEMBER_ADDRESS_DETAIL,
     FIELD.MEMBER_PHONE,
