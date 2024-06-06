@@ -12,15 +12,16 @@ const SaveProfilButton = () => {
   const { register, setValue, watch, handleSubmit } = useFormContext();
   const mutateMemberProfile = usePostMemberProfile();
 
-  const memberId = watch("memberId");
-  const dogId = watch("dogId");
-  const memberProfileUri = watch("memberProfileUri");
-  const dogProfileUri = watch("dogProfileUri");
-  const dogName = watch("nickName");
-  const relation = watch("relation");
+  const profileData = {
+    memberId: watch("memberId"),
+    dogId: watch("dogId"),
+    memberProfileUri: watch("memberProfileUri"),
+    dogProfileUri: watch("dogProfileUri"),
+    dogName: watch("nickName"),
+    relation: watch("relation")
+  };
 
-  const isDisabled =
-    !!memberId && !!dogId && !!memberProfileUri && !!dogProfileUri && !!dogName && !!relation;
+  const isDisabled = Object.values(profileData).every((el: null | undefined) => el ?? false);
 
   // TODO 어뎁터 데이터에 추가하기
   const getSubmitFormInfo = (data: FieldValues) => {
