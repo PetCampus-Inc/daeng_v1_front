@@ -36,6 +36,7 @@ const RedirectPage = () => {
       // 회원 X -> '/signup'으로 이동
       clearLocalStorage();
       setLocalStorageValue({ key: ACCESS_TOKEN_KEY, value: token });
+      setLocalStorageValue({ key: AUTH_MEMBER_ID, value: memberId });
       window.location.replace(PATH.SIGNUP);
     }
 
