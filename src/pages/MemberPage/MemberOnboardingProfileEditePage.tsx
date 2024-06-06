@@ -2,12 +2,13 @@ import SaveProfilButton from "components/Member/Profile/Button/SaveProfilButton"
 import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
 import { useGetMemberProfile } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 const MemberOnboardingProfileEditePage = () => {
   // TODO memeberId 데이터 가져오기
-  const memberId = 11;
-  const { data } = useGetMemberProfile(memberId);
+  const { memberId } = useParams();
+  const { data } = useGetMemberProfile(Number(memberId));
   const { ...rest } = data;
 
   const methods = useForm({
