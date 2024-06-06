@@ -24,6 +24,8 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   const onSubmit = (data: FieldValues) => {
     const requestData = getSubmitFormInfo(data);
 
+    console.log(requestData);
+
     mutateEnrollment(requestData);
   };
 
@@ -35,7 +37,6 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
     const step = getFieldStep({ field: firstErrorField, enable: true });
 
     console.log(step);
-    // const step = FIELD_TO_STEP.get(firstErrorField);
 
     if (step !== undefined) {
       console.log(step);

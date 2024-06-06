@@ -35,7 +35,7 @@ export interface EnrollmentDataType {
 export interface MemberDtoType {
   address: string;
   addressDetail: string;
-  emergencyNumber: string;
+  emergencyPhoneNumber: string;
   memberGender: MemberGenderType;
   memberId: number;
   memberName: string;

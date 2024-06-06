@@ -10,6 +10,7 @@ const AGREEMENT_FIELD = {
  * @description 가입신청서 필드 이름
  */
 export const FIELD = {
+  REQUEST_ITEMS: "requiredItemList",
   MEMBER_NAME: "memberName",
   MEMBER_GENDER: "memberGender",
   MEMBER_ADDRESS: "address",
@@ -22,7 +23,7 @@ export const FIELD = {
   DOG_BREED: "breedId",
   NEW_BREED: "newBreed",
   DOG_BIRTHDAY: "birthDate",
-  NEUTRALIZATION: "nationalization",
+  NEUTRALIZATION: "neutralization",
   VACCINATION: "vaccination",
   VACCINATION_URL: "vaccinationUri",
   ALLERGY_DISEASE: "allergyDisease",
@@ -35,7 +36,7 @@ export const FIELD = {
   LIMITS_INFO: "limitsInfo",
   ACCIDENT_INFO: "accidentInfo",
   ABANDONMENT_INFO: "abandonmentInfo",
-  PICDROP_STATE: "pickDropState",
+  PICKDROP_STATE: "pickDropState",
   PICKDROP_NOTICE: "pickDropNotice",
   PICKDROP_REQUEST: "pickDropRequest",
   PICKDROP_TYPE: "pickDropType",
@@ -69,7 +70,7 @@ export const FIELD_KEYS = {
   LIMITS_INFO: 22,
   ACCIDENT_INFO: 23,
   ABANDONMENT_INFO: 24,
-  PICDROP_STATE: 25,
+  PICKDROP_STATE: 25,
   PICKDROP_NOTICE: 26,
   PICKDROP_REQUEST: 27,
   PICKDROP_TYPE: 28,
@@ -95,11 +96,11 @@ export type FieldItemLabels = typeof FIELD_ITEMS;
 export type FieldItemKeys<K extends keyof FieldItemLabels> = keyof FieldItemLabels[K];
 
 export const AGREEMENT_ITEM: Map<string, number> = new Map([
-  ["ticketInfo_agreement", 21],
-  ["limitsInfo_agreement", 22],
-  ["accidentInfo_agreement", 23],
-  ["abandonmentInfo_agreement", 24],
-  ["pickDropInfo_agreement", 30]
+  [FIELD.ABANDONMENT_INFO_TERM, 21],
+  [FIELD.LIMITS_INFO_TERM, 22],
+  [FIELD.ACCIDENT_INFO_TERM, 23],
+  [FIELD.ABANDONMENT_INFO_TERM, 24],
+  [FIELD.PICKDROP_INFO_TERM, 30]
 ]);
 
 export type AgreementsListType = {

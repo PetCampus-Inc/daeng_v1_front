@@ -99,7 +99,7 @@ export interface AdminEnrollmentInfoType {
   limitsInfo: string;
   accidentInfo: string;
   abandonmentInfo: string;
-  pickDropState: TPickDropState;
+  pickDropState: TPickDropState | "";
   pickDropInfo: string;
   pickDropNotice: string;
 }
