@@ -4,7 +4,7 @@ import { useFunnel } from "hooks/common/useFunnel";
 import { Suspense } from "react";
 
 import SearchSchoolPage from "./SearchSchoolPage";
-import EnrollmentPage from "../EnrollmentFormPage/NewEnrollmentPage";
+import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
 
 const SignUpFunnel = () => {
   const { 유치원_검색, 가입신청서_작성 } = SIGNUP_PATH;

@@ -3,7 +3,7 @@ import Header from "components/common/Header";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import EnrollmentPage from "../EnrollmentFormPage/NewEnrollmentPage";
+import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
 
 const MemberEnrollmentFormDogAddPage = () => {
   const navigate = useNavigate();
