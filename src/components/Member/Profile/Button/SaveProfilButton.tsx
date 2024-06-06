@@ -1,7 +1,9 @@
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import { Adapter } from "libs/Adapter";
+import { MemberFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
+import { EnrollmentInfo } from "types/member/enrollment.types";
 import { IMemberProfile } from "types/member/main.types";
 
 import * as S from "../styles";
@@ -12,32 +14,36 @@ const SaveProfilButton = () => {
 
   const memberId = watch("memberId");
   const dogId = watch("dogId");
-  const memberProfileUri = watch("myProfile");
-  const dogProfileUri = watch("dogProfile");
+  const memberProfileUri = watch("memberProfileUri");
+  const dogProfileUri = watch("dogProfileUri");
   const dogName = watch("nickName");
   const relation = watch("relation");
 
   const isDisabled =
     !!memberId && !!dogId && !!memberProfileUri && !!dogProfileUri && !!dogName && !!relation;
 
-  const data = {
-    memberId: memberId,
-    dogId: dogId,
-    memberProfileUri: memberProfileUri,
-    dogProfileUri: dogProfileUri,
-    dogName: dogName,
-    relation: relation
+  // TODO 어뎁터 데이터에 추가하기
+  const getSubmitFormInfo = (data: FieldValues) => {
+    const memberProfileData = {
+      memberId: data.memberId,
+      dogId: data.dogId,
+      memberProfileUri: data.memberProfileUri,
+      dogProfileUri: data.dogProfileUri,
+      dogName: data.dogName,
+      relation: data.relation
+    };
+    return memberProfileData;
   };
 
-  const handleSubmitData = () => {
-    console.log(data);
-    console.log(isDisabled);
+  const handleSubmitData = (data: FieldValues) => {
+    const requestData = getSubmitFormInfo(data);
+    console.log("requestData", requestData);
   };
 
   return (
     <S.SavaProfileButton>
       <BackgroundButton
-        onClick={handleSubmitData}
+        onClick={handleSubmit(handleSubmitData)}
         backgroundColor="transparent"
         disabled={!isDisabled}
       >
