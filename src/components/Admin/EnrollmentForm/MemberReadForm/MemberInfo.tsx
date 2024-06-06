@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { TextInput } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
@@ -16,24 +16,24 @@ const MemberInfo = ({ item }: MemberInfoProps) => {
   return (
     <>
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.MEMBER_NAME)}>이름</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.MEMBER_NAME)}>이름</Title>
         <TextInput {...register("memberName")} placeholder="견주 이름을 입력해주세요" readOnly />
       </Card>
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.MEMBER_GENDER)}>성별</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.MEMBER_GENDER)}>성별</Title>
         <SingleRadio name="memberGender" radiosText={["남", "여"]} isPreviewMode disabled />
       </Card>
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.MEMBER_ADDRESS)}>주소</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.MEMBER_ADDRESS)}>주소</Title>
         <SearchInputField {...register("address")} placeholder="주소를 입력해주세요" readOnly />
         <TextInput {...register("addressDetail")} placeholder="상세주소를 입력해주세요" readOnly />
       </Card>
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.MEMBER_PHONE)}>연락처</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.MEMBER_PHONE)}>연락처</Title>
         <TextInput {...register("phoneNumber")} placeholder="연락처를 입력해주세요" readOnly />
       </Card>
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.EMERGENCY_NUMBER)}>비상 연락처</Title>
         <TextInput
           {...register("emergencyNumber")}
           placeholder="비상 연락처를 입력해주세요"

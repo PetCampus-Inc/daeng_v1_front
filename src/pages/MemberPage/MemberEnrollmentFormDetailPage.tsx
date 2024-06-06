@@ -31,7 +31,7 @@ const MemberEnrollmentFormDetailPage = () => {
   if (!formId) throw new Error("잘못된 formId 입니다");
 
   const { data } = useGetMemberEnrollment(formId);
-  const { pickDropState, requiredItemList, agreements, ...rest } = data;
+  const { requiredItemList, agreements, ...rest } = data;
 
   const methods = useForm({
     mode: "onBlur",
@@ -41,7 +41,9 @@ const MemberEnrollmentFormDetailPage = () => {
     }
   });
 
-  const visibleSteps = MEMBER_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));
+  const visibleSteps = MEMBER_ENROLL_STEP.filter((step) =>
+    step.isVisible(data.schoolFormResponse.pickDropState)
+  );
   const maxSteps = visibleSteps.length;
   const { currentStep, setStep } = useStep(maxSteps - 1);
   const currentTitle = MEMBER_ENROLL_STEP[currentStep].title;

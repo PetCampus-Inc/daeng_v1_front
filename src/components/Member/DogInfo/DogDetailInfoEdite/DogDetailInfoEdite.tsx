@@ -1,5 +1,6 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
-import { ITEM_ENGLISH_TO_KOREAN, ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
+import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 
 import { TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
@@ -59,7 +60,7 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
           register={register}
           setValue={setValue}
           watch={watch}
-          isRequired={requiredItems?.get(ITEM_KEYS.DOG_BREED)}
+          isRequired={requiredItems?.get(FIELD_KEYS.DOG_BREED)}
         />
       </Card>
       <Card>
@@ -93,7 +94,7 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
         <SingleRadio
           name="neutralization"
           radiosText={["했어요", "안했어요"]}
-          isRequired={requiredItems?.get(ITEM_KEYS.NEUTRALIZATION)}
+          isRequired={requiredItems?.get(FIELD_KEYS.NEUTRALIZATION)}
           defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("neutralization")]}
         />
       </Card>

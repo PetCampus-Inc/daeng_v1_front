@@ -1,4 +1,4 @@
-import { AgreementsListType, ITEM_KEYS } from "constants/item";
+import { AgreementsListType, FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
@@ -37,7 +37,7 @@ const TicketInfo = ({ ticket, item, agreements }: TicketInfoProps) => {
         <TextArea {...register("priceInfo")} disabled />
       </Card>
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.TICKET_TYPE)}>이용권 종류</Title>
         <Caption>회차권과 정기권 중 원하시는 이용권 종류를 선택해 주세요</Caption>
         <SingleRadio
           name="ticketType"
@@ -48,7 +48,7 @@ const TicketInfo = ({ ticket, item, agreements }: TicketInfoProps) => {
       {selectedTicketType &&
         (selectedTicketType === "정기권" ? (
           <Card>
-            <Title isRequired={item?.get(ITEM_KEYS.MONTHLY_TICKET_NUMBER)}>정기권 유형</Title>
+            <Title isRequired={item?.get(FIELD_KEYS.MONTHLY_TICKET_NUMBER)}>정기권 유형</Title>
             <SingleRadio
               name="monthlyTicketNumber"
               radiosText={monthlyTicketText}
@@ -59,7 +59,7 @@ const TicketInfo = ({ ticket, item, agreements }: TicketInfoProps) => {
           </Card>
         ) : (
           <Card>
-            <Title isRequired={item?.get(ITEM_KEYS.ROUND_TICKET_NUMBER)}>회차권 유형</Title>
+            <Title isRequired={item?.get(FIELD_KEYS.ROUND_TICKET_NUMBER)}>회차권 유형</Title>
             <SingleRadio
               name="roundTicketNumber"
               radiosText={roundTicketText}
@@ -70,11 +70,11 @@ const TicketInfo = ({ ticket, item, agreements }: TicketInfoProps) => {
           </Card>
         ))}
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
         <DayMultiCheck name="openDays" openDays={ticket?.openDays} disabled isPreviewMode />
       </Card>
       <Card>
-        <Title isRequired={item?.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
         <TextArea
           {...register("ticketInfo")}

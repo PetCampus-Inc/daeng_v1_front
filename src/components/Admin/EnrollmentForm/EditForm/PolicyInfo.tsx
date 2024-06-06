@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import TextArea from "components/common/TextArea";
@@ -13,7 +13,7 @@ const PolicyInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.LIMITS_INFO}`} control={control} hasBadge>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.LIMITS_INFO}`} control={control} hasBadge>
           이용 제한 유의 사항
         </AdminTitle>
         <TextArea
@@ -25,7 +25,11 @@ const PolicyInfo = () => {
         </Stack>
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.ACCIDENT_INFO}`} control={control} hasBadge>
+        <AdminTitle
+          name={`requiredItemList.${FIELD_KEYS.ACCIDENT_INFO}`}
+          control={control}
+          hasBadge
+        >
           상해 유의사항
         </AdminTitle>
         <TextArea
@@ -38,7 +42,7 @@ const PolicyInfo = () => {
       </Card>
       <Card>
         <AdminTitle
-          name={`requiredItemList.${ITEM_KEYS.ABANDONMENT_INFO}`}
+          name={`requiredItemList.${FIELD_KEYS.ABANDONMENT_INFO}`}
           control={control}
           hasBadge
         >

@@ -11,11 +11,12 @@ import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
+import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
-import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AUTH_MEMBER_ID } from "store/auth";
 import { PageContainer } from "styles/StyleModule";
 
 interface EnrollmentProps {
@@ -23,14 +24,14 @@ interface EnrollmentProps {
   isMemberAddDog?: boolean; // MEMO: 마이페이지에서 강아지 추가할 경우
 }
 
-const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
+const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
   const navigate = useNavigate();
   const overlay = useOverlay();
 
-  const { memberId } = useParams(); // MEMO: memberId (mypage에서 추출)
-  const MEMBERID = isMemberAddDog && memberId ? memberId : "1";
+  // FIXME: memberId가 없을 경우 예외처리 필요
+  const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID) ?? "";
 
-  const { data } = useGetEnrollment({ memberId: MEMBERID, schoolId: schoolId ?? -1 });
+  const { data } = useGetEnrollment({ memberId, schoolId: schoolId ?? -1 });
   const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
 
   const methods = useForm({
@@ -56,11 +57,10 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
 
   const indicators = visibleSteps.map((step) => step.indicator);
 
-  console.log(indicators);
-
   const ticket = {
     roundTicketNumber,
-    monthlyTicketNumber
+    monthlyTicketNumber,
+    openDays: rest.openDays
   };
 
   // TODO: browser history stack 관리 필요..!
@@ -120,4 +120,4 @@ const EnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
   );
 };
 
-export default EnrollmentPage;
+export default NewEnrollmentPage;
