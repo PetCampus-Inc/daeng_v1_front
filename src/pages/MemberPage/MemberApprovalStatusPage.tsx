@@ -13,6 +13,7 @@ interface ApprovalStatusPageProps {
   onSelectRoleClick?: () => void;
 }
 
+// TODO 견주 정보에 맞게 코드 수정이 필요
 const MemberApprovalStatusPage = ({
   info,
   onSearchSchoolClick,
