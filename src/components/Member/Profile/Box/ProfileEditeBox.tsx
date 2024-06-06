@@ -46,11 +46,11 @@ const ProfileEditeBox = ({ isOnlyProfile }: IProfileEditeProps) => {
 
       if (type === TYPE_MY) {
         setMyProfile([...fileArray]);
-        setValue("myProfile", [...newFiles]);
+        setValue("memberProfileUri", [...newFiles]);
         setMyIsActive(true);
       } else if (type === TYPE_DOG) {
         setDogProfile([...fileArray]);
-        setValue("dogProfile", [...newFiles]);
+        setValue("dogProfileUri", [...newFiles]);
         setDogIsActive(true);
       }
     }
@@ -66,7 +66,7 @@ const ProfileEditeBox = ({ isOnlyProfile }: IProfileEditeProps) => {
           fileInputRef={myFileInputRef}
           handleFileChange={handleFileChange}
           handleClick={handleClick}
-          registerText="myProfile"
+          registerText="memberProfileUri"
           type={TYPE_MY}
         />
       )}
@@ -77,7 +77,7 @@ const ProfileEditeBox = ({ isOnlyProfile }: IProfileEditeProps) => {
         fileInputRef={dogFileInputRef}
         handleFileChange={handleFileChange}
         handleClick={handleClick}
-        registerText="dogProfile"
+        registerText="dogProfileUri"
         type={TYPE_DOG}
       />
     </>
