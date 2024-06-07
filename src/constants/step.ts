@@ -201,6 +201,7 @@ const stepFields: { [key in STEP_KEYS]: string[] } = {
     FIELD.PICKDROP_REQUEST,
     FIELD.PICKDROP_TYPE,
     FIELD.PICKDROP_MEMO,
+    FIELD.PICKDROP_INFO,
     FIELD.PICKDROP_INFO_TERM
   ]
 };
