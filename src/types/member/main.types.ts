@@ -140,7 +140,7 @@ export interface IMemberDogSchoolInfo extends IResponse {
   address: string;
 }
 
-export interface IMemberProfile extends IResponse {
+export interface IMemberProfile {
   memberId: number;
   dogId: number;
   memberProfileUri: string;
