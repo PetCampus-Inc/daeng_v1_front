@@ -4,10 +4,11 @@ import { useState } from "react";
 import showToast from "utils/showToast";
 
 interface UploadParams {
-  files: FileList;
-  path: string;
-  accept: string;
-  id: number;
+  files: FileList; // 파일 형식
+  path: string; // s3 path 설정
+  accept: string; // 파일 형식
+  id: number; // member, dog 인지 구분
+  name: string;
 }
 
 interface UploadAndCreateAlbumOptions {
@@ -15,40 +16,44 @@ interface UploadAndCreateAlbumOptions {
 }
 
 const useSubmitProfile = () => {
-  const [fileData, setfileData] = useState<FileList[]>([]);
+  const [s3ProfileData, setS3ProfileData] = useState<string[]>([]);
   const { uploadToS3 } = useS3Upload();
-  const { mutateAlbum } = useCreateAlbum();
 
   const uploadFiles = async (
-    { files, path, accept, id }: UploadParams,
+    paramsArray: UploadParams[],
     options?: UploadAndCreateAlbumOptions
   ) => {
-    if (!files || files.length === 0) {
-      showToast("업로드할 파일이 없습니다.", "ownerNav");
-      return;
-    }
+    console.log("paramsArray", paramsArray);
 
-    let allImageUriList: string[] = [];
-    for (const item of files) {
-      const params = { files, accept, path: `${path}/${id}` };
+    paramsArray.forEach(async (params) => {
+      const { files, path, accept, id, name } = params;
 
+      const profileParams = { files, path: `${path}/${id}`, accept, id, name };
+
+      if (!files || files.length === 0) {
+        showToast("업로드할 파일이 없습니다.", "ownerNav");
+        return;
+      }
+
+      let allImageUriList: string[] = [];
       try {
         const imageUriList = await new Promise<string[]>((resolve, reject) => {
-          uploadToS3(params, {
+          uploadToS3(profileParams, {
             onSuccess: (uriList) => resolve(uriList),
             onError: (error) => reject(error)
           });
         });
-
-        return (allImageUriList = [...allImageUriList, ...imageUriList]);
+        allImageUriList = [...allImageUriList, ...imageUriList];
+        setS3ProfileData(allImageUriList);
       } catch (error) {
         showToast("사진 업로드에 실패했습니다. 다시 시도해주세요.", "ownerNav");
         return;
       }
-    }
+      return console.log("profileParams!!!", profileParams, allImageUriList);
+    });
   };
 
-  return { uploadFiles };
+  return { uploadFiles, s3ProfileData };
 };
 
 export default useSubmitProfile;
