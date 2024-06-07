@@ -242,7 +242,7 @@ export const useGetMemberProfile = (memberId: number) => {
 
 export const usePostMemberProfile = () => {
   const memberProfileMutation = useMutation({
-    mutationFn: ({ req }: { req: IMemberProfile }) => handlePostMemoProfile(req),
+    mutationFn: (req: IMemberProfile) => handlePostMemoProfile(req),
     onSuccess: () => {
       console.log("완료");
     },
