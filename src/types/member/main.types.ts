@@ -145,6 +145,6 @@ export interface IMemberProfile {
   dogId: number;
   memberProfileUri: string;
   dogProfileUri: string;
-  dogName: string;
+  nickName: string;
   relation: string;
 }

@@ -203,7 +203,7 @@ export const handlePostMemoProfile = async (req: IMemberProfile): Promise<void> 
     dogId: req.dogId,
     memberProfileUri: req.memberProfileUri,
     dogProfileUri: req.dogProfileUri,
-    dogName: req.dogName,
+    nickName: req.nickName,
     relation: req.relation
   });
   return data;
