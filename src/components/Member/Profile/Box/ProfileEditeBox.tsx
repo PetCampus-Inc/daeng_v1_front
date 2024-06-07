@@ -6,6 +6,7 @@ import {
 import { usePostMemberProfile } from "hooks/api/member/member";
 import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
 
 import ProfileEdite from "../Edite/ProfileEdite";
@@ -37,13 +38,16 @@ const ProfileEditeBox = ({ isOnlyProfile }: IProfileEditeProps) => {
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, type: string) => {
-    if (!e.target.files) return;
+    if (!e.target.files) {
+      showToast("업로드할 파일이 없습니다.", "ownerNav");
+      return;
+    }
 
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
-
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
 
+      //TODO 중복파일 확인 필요
       if (type === TYPE_MY) {
         setMyProfile([...fileArray]);
         setValue("memberProfileUri", [...newFiles]);
