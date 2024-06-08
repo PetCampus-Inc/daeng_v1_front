@@ -1,14 +1,37 @@
-import { AGREEMENT_ITEM } from "constants/item";
+import { AGREEMENT_ITEM } from "constants/field";
 
-import { getMapValue } from "utils/formatter";
+import { getLabelForValue } from "utils/formatter";
 
-import type {
-  MemberFormData,
-  IResponseAdminForm,
-  TPickDropState
-} from "types/admin/enrollment.types";
+import type { MemberFormData, TPickDropState } from "types/admin/enrollment.types";
+import type { EnrollmentDataType, EnrollmentFormDataType } from "types/member/enrollment.types";
 
-// 대기 중 견주 가입 신청서 조회
+// 가입신청서 폼 조회
+// case1. (견주) 가입신청서 폼 조회, case2. (원장) 가입 신청서 폼 조회
+export class EnrollmentFormAdapter {
+  private value: EnrollmentDataType;
+
+  constructor(obj: EnrollmentDataType) {
+    this.value = obj;
+  }
+
+  get getRequiredItemList(): Map<number, boolean> {
+    return new Map(this.value.requiredItemList.map((itemNumber: number) => [itemNumber, true]));
+  }
+
+  get ticketType() {
+    return this.value.ticketType.map((type) => getLabelForValue("ticketType", type));
+  }
+
+  adapt(): EnrollmentFormDataType {
+    return {
+      ...this.value,
+      requiredItemList: this.getRequiredItemList,
+      ticketType: this.ticketType
+    };
+  }
+}
+
+// (견주가 작성한) 가입 신청서 조회
 export class MemberFormAdapter {
   protected value: MemberFormData;
 
@@ -22,19 +45,18 @@ export class MemberFormAdapter {
     );
   }
 
-  get pickDropState() {
-    return getMapValue(
-      "pickDropState",
-      this.value.schoolFormResponse.pickDropState
-    ) as TPickDropState;
+  // get pickDropState() {
+  //   return getLabelForValue("pickDropState", this.value.schoolFormResponse.pickDropState);
+  // }
+
+  get enrollmentTicketType(): string {
+    return getLabelForValue("ticketType", this.value.enrollmentTicketType);
   }
 
-  get enrollmentTicketType() {
-    return getMapValue("ticketType", this.value.enrollmentTicketType);
-  }
-
-  get ticketType() {
-    return this.value.schoolFormResponse.ticketType.map((type) => getMapValue("ticketType", type));
+  get ticketType(): string[] {
+    return this.value.schoolFormResponse.ticketType.map((type) =>
+      getLabelForValue("ticketType", type)
+    );
   }
 
   get year() {
@@ -50,31 +72,31 @@ export class MemberFormAdapter {
   }
 
   get pickDropRequest() {
-    return getMapValue("pickDropRequest", this.value.pickDropRequest);
+    return getLabelForValue("pickDropRequest", this.value.pickDropRequest);
   }
 
   get pickDropType() {
-    return getMapValue("pickDropType", this.value.pickDropType);
+    return getLabelForValue("pickDropType", this.value.pickDropType);
   }
 
   get memberGender() {
-    return getMapValue("memberGender", this.value.memberGender);
+    return getLabelForValue("memberGender", this.value.memberGender);
   }
 
-  get dogGender() {
-    return getMapValue("dogGender", this.value.dogGender);
+  get dogGender(): string {
+    return getLabelForValue("dogGender", this.value.dogGender);
   }
 
-  get dogSize() {
-    return getMapValue("dogSize", this.value.dogSize);
+  get dogSize(): string {
+    return getLabelForValue("dogSize", this.value.dogSize);
   }
 
-  get neutralization() {
-    return getMapValue("neutralization", this.value.neutralization);
+  get neutralization(): string {
+    return getLabelForValue("neutralization", this.value.neutralization);
   }
 
-  get vaccination() {
-    return getMapValue("vaccination", this.value.vaccination);
+  get vaccination(): string {
+    return getLabelForValue("vaccination", this.value.vaccination);
   }
 
   get agreementsList() {
@@ -104,7 +126,6 @@ export class MemberFormAdapter {
       year: this.year,
       month: this.month,
       day: this.day,
-
       requiredItemList: this.getRequiredItemList,
       schoolFormId: this.value.schoolFormResponse.schoolFormId,
       schoolFormName: this.value.schoolFormResponse.schoolFormName,
@@ -117,7 +138,6 @@ export class MemberFormAdapter {
       limitsInfo: this.value.schoolFormResponse.limitsInfo,
       accidentInfo: this.value.schoolFormResponse.accidentInfo,
       abandonmentInfo: this.value.schoolFormResponse.abandonmentInfo,
-      pickDropState: this.pickDropState,
       pickDropNotice: this.value.schoolFormResponse.pickDropNotice,
       pickDropInfo: this.value.schoolFormResponse.pickDropInfo,
       member: this.value.schoolFormResponse.member
@@ -127,18 +147,18 @@ export class MemberFormAdapter {
 
 // 원장 가입신청서
 class ServerToFormAdapter {
-  protected value: IResponseAdminForm;
+  protected value: EnrollmentDataType;
 
-  constructor(obj: IResponseAdminForm) {
+  constructor(obj: EnrollmentDataType) {
     this.value = obj;
   }
 
   get ticketType(): string[] {
-    return this.value.ticketType.map((type) => getMapValue("ticketType", type));
+    return this.value.ticketType.map((type) => getLabelForValue("ticketType", type));
   }
 
   get pickDropState() {
-    return getMapValue("pickDropState", this.value.pickDropState) as TPickDropState;
+    return getLabelForValue("pickDropState", this.value.pickDropState) as TPickDropState;
   }
 }
 

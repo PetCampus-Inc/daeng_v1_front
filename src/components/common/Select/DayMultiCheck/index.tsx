@@ -21,7 +21,6 @@ const DayMultiCheck = ({
   name,
   caption,
   openDays,
-  disabled = false,
   defaultSelect,
   isPreviewMode = false,
   isRequired = false,
@@ -59,7 +58,7 @@ const DayMultiCheck = ({
               {...register(`${name}`, { required: isRequired, onChange: handleTouch })}
               value={day}
               defaultChecked={defaultSelect?.includes(day)}
-              disabled={disabled ? disabled : openDays && !openDays?.includes(day)}
+              disabled={props.disabled ? props.disabled : openDays && !openDays?.includes(day)}
               className={openDays && openDays?.includes(day) ? "open-day" : ""}
               onClick={preventDefaultClick}
               {...props}

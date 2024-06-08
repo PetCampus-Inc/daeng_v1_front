@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
@@ -14,7 +14,7 @@ interface TicketInfoProps {
   ticket?: {
     roundTicketNumber: number[];
     monthlyTicketNumber: number[];
-    openDays?: string[];
+    openDays: string[];
   };
   requiredItems?: Map<number, boolean>;
 }
@@ -22,7 +22,7 @@ interface TicketInfoProps {
 const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
   const { control, register, watch } = useFormContext();
 
-  const selectedTicketType = watch("ticketType");
+  const selectedTicketType = watch(FIELD.TICKET_TYPE);
   const roundTicketText = ticket?.roundTicketNumber?.map((number) => `${number}회`) || [];
   const monthlyTicketText = ticket?.monthlyTicketNumber?.map((number) => `${number}주`) || [];
 
@@ -30,58 +30,62 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea {...register("priceInfo")} disabled />
+        <TextArea {...register(FIELD.PRICE_INFO)} disabled />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.TICKET_TYPE)}>이용권 종류</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.TICKET_TYPE)}>이용권 종류</Title>
         <Caption>회차권과 정기권 중 원하시는 이용권 종류를 선택해 주세요</Caption>
         <SingleRadio
-          name="ticketType"
+          name={FIELD.TICKET_TYPE}
           radiosText={["정기권", "회차권"]}
-          isRequired={requiredItems?.get(ITEM_KEYS.TICKET_TYPE)}
+          isRequired={requiredItems?.get(FIELD_KEYS.TICKET_TYPE)}
         />
       </Card>
       {selectedTicketType &&
         (selectedTicketType === "정기권" ? (
           <Card>
-            <Title isRequired={requiredItems?.get(ITEM_KEYS.MONTHLY_TICKET_NUMBER)}>
+            <Title isRequired={requiredItems?.get(FIELD_KEYS.MONTHLY_TICKET_NUMBER)}>
               정기권 유형
             </Title>
             <SingleRadio
-              name="monthlyTicketNumber"
+              name={FIELD.MONTHLY_TICKET_NUMBER}
               radiosText={monthlyTicketText}
-              isRequired={requiredItems?.get(ITEM_KEYS.MONTHLY_TICKET_NUMBER)}
+              isRequired={requiredItems?.get(FIELD_KEYS.MONTHLY_TICKET_NUMBER)}
             />
           </Card>
         ) : (
           <Card>
-            <Title isRequired={requiredItems?.get(ITEM_KEYS.ROUND_TICKET_NUMBER)}>
+            <Title isRequired={requiredItems?.get(FIELD_KEYS.ROUND_TICKET_NUMBER)}>
               회차권 유형
             </Title>
             <SingleRadio
-              name="roundTicketNumber"
+              name={FIELD.ROUND_TICKET_NUMBER}
               radiosText={roundTicketText}
-              isRequired={requiredItems?.get(ITEM_KEYS.ROUND_TICKET_NUMBER)}
+              isRequired={requiredItems?.get(FIELD_KEYS.ROUND_TICKET_NUMBER)}
             />
           </Card>
         ))}
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
         <DayMultiCheck
-          name="openDays"
+          name={FIELD.OPEN_DAYS}
           openDays={ticket?.openDays}
-          isRequired={requiredItems?.get(ITEM_KEYS.OPEN_DAYS)}
+          isRequired={requiredItems?.get(FIELD_KEYS.OPEN_DAYS)}
         />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(ITEM_KEYS.TICKET_INFO)}>유의사항</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea {...register("ticketInfo")} isChecked={watch("ticketInfo")} disabled />
+        <TextArea
+          {...register(FIELD.TICKET_INFO)}
+          isChecked={watch(FIELD.TICKET_INFO_TERM)}
+          disabled
+        />
         <Stack>
           <Controller
-            name="ticketInfo_agreement"
+            name={FIELD.TICKET_INFO_TERM}
             control={control}
-            rules={{ required: requiredItems?.get(ITEM_KEYS.TICKET_INFO) }}
+            rules={{ required: requiredItems?.get(FIELD_KEYS.TICKET_INFO) }}
             render={({ field: { ref, ...field } }) => (
               <Checkbox
                 label="동의합니다"

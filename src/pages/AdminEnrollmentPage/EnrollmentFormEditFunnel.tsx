@@ -1,10 +1,11 @@
 import { ADMIN_EDIT_FORM_PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
-import { AdminFormSaveType } from "types/admin/enrollment.types";
 
 import EnrollmentFormEditPage from "./EnrollmentFormEditPage";
 import EnrollmentFormSubmitPage from "./EnrollmentFormSubmitPage";
+
+import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
 const EnrollmentFormEditFunnel = () => {
   const { 가입신청서_수정, 가입신청서_제출 } = ADMIN_EDIT_FORM_PATH;
@@ -14,7 +15,7 @@ const EnrollmentFormEditFunnel = () => {
     initialStep: 가입신청서_수정,
     stepQueryKey: "step"
   }).withState<{
-    formInfo?: AdminFormSaveType;
+    formInfo?: AdminEnrollmentInfoType;
   }>({});
 
   return (

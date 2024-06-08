@@ -1,4 +1,4 @@
-import { ITEM_KEYS } from "constants/item";
+import { FIELD_KEYS } from "constants/field";
 
 import { TextInput } from "components/common";
 import ImageUpload from "components/common/ImageUpload";
@@ -17,19 +17,19 @@ const DogInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_NAME}`} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.DOG_NAME}`} control={control} readOnly>
           이름
         </AdminTitle>
         <TextInput name="null" placeholder="강아지 이름을 입력해주세요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_GENDER}`} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.DOG_GENDER}`} control={control} readOnly>
           성별
         </AdminTitle>
         <SingleRadio name="null" radiosText={["수컷", "암컷"]} disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_SIZE}`} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.DOG_SIZE}`} control={control} readOnly>
           크기
         </AdminTitle>
         <SingleRadio
@@ -40,13 +40,13 @@ const DogInfo = () => {
         />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_BREED}`} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.DOG_BREED}`} control={control} readOnly>
           견종
         </AdminTitle>
         <SearchInputField name="null" placeholder="견종을 선택하는 칸이에요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.DOG_BIRTHDAY}`} control={control} readOnly>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.DOG_BIRTHDAY}`} control={control} readOnly>
           생일
         </AdminTitle>
         <div style={{ display: "flex", gap: "5px" }}>
@@ -56,13 +56,13 @@ const DogInfo = () => {
         </div>
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.NEUTRALIZATION}`} control={control}>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.NEUTRALIZATION}`} control={control}>
           중성화 여부
         </AdminTitle>
         <SingleRadio name="null" radiosText={["했어요", "안했어요"]} disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.VACCINATION}`} control={control}>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.VACCINATION}`} control={control}>
           예방접종 여부
         </AdminTitle>
         <SingleRadio name="null" radiosText={["했어요", "안했어요"]} disabled />
@@ -70,7 +70,7 @@ const DogInfo = () => {
         <ImageUpload disabled />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${ITEM_KEYS.ALLERGY_DISEASE}`} control={control}>
+        <AdminTitle name={`requiredItemList.${FIELD_KEYS.ALLERGY_DISEASE}`} control={control}>
           알러지 및 질병 유무
         </AdminTitle>
         <TextArea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />

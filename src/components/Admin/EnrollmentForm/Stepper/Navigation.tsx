@@ -2,14 +2,14 @@ import { FormButton, FormButtonWrapper, FormPrevButton } from "styles/StyleModul
 
 import SubmitButton from "./SubmitButton";
 
-import type { AdminFormSaveType } from "types/admin/enrollment.types";
+import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
 interface NavigationProps {
   currentStep: number;
   stepsLength: number;
   nextStep: () => void;
   prevStep: () => void;
-  onNextStep?: (formInfo: AdminFormSaveType) => void;
+  onNextStep?: (formInfo: AdminEnrollmentInfoType) => void;
 }
 
 const Navigation = ({

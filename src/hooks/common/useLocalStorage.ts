@@ -32,8 +32,11 @@ export const useLocalStorage = <T>(keyName: string, defaultValue: T) => {
 };
 
 // 로컬 스토리지에서 값을 가져오는 훅
-export const useLocalStorageValue = <T>(keyName: string, defaultValue: T): T => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+export const useLocalStorageValue = <T>(
+  keyName: string,
+  defaultValue: T | null = null
+): T | null => {
+  const [storedValue, setStoredValue] = useState<T | null>(() => {
     try {
       const value = window.localStorage.getItem(keyName);
       if (value !== null) {

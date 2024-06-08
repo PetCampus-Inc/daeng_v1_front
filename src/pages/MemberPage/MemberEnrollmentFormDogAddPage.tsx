@@ -6,7 +6,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { schoolIdAtom } from "store/form";
 import { memberEnrollmentDogDetailAtom } from "store/member";
 
-import EnrollmentPage from "../SignUpPage/EnrollmentPage";
+import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
 
 const MemberEnrollmentFormDogAddPage = () => {
   const navigate = useNavigate();
