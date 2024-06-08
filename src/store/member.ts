@@ -28,3 +28,8 @@ export const memberHomeStateAtom = atom<IMemberHome | null>({
     dogId: null
   }
 });
+
+export const memberProfileAtom = atom<string | null>({
+  key: "memberHome",
+  default: null
+});

@@ -9,13 +9,14 @@ import { StyledBox } from "components/Home/styles";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRecoilState } from "recoil";
-import { dogIdState } from "store/member";
+import { dogIdState, memberHomeStateAtom } from "store/member";
 
 const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
+  const [memberHomeData] = useRecoilState(memberHomeStateAtom);
 
-  const defaultDogId = 2;
-  const memberId = 2;
+  const defaultDogId = memberHomeData?.dogId || 2;
+  const memberId = memberHomeData?.memberId || 2;
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
   const { data } = useGetHomeInfo(memberId, dogId);
