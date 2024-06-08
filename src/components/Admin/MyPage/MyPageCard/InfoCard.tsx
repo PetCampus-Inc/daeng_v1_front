@@ -1,6 +1,7 @@
 import { PATH } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
+import BuildingIcon from "assets/svg/building-icon";
 import CalendarIcon from "assets/svg/calendar";
 import MapIcon from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone-basic";
@@ -71,9 +72,10 @@ const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
       icon: <MapIcon />
     },
     {
-      title: (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.enrollDate)
-        ?.map((num) => num.toString().padStart(2, "0"))
-        ?.join("."),
+      title:
+        (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.enrollDate)
+          ?.map((num) => num.toString().padStart(2, "0"))
+          ?.join(".") + " 등록",
       icon: <CalendarIcon />
     }
   ];
@@ -88,6 +90,14 @@ const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
               <InfoItem title={item.title} icon={item.icon} />
             </StyledItemWrapper>
           ))}
+          {isOwner && (
+            <StyledItemWrapper>
+              <InfoItem
+                title={"사업자등록번호 : " + (data as IOwnerInfo)?.registrationNumber}
+                icon={<BuildingIcon />}
+              />
+            </StyledItemWrapper>
+          )}
         </StyledList>
       </StyledCard>
     </>

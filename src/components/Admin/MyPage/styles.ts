@@ -11,7 +11,7 @@ export const BackgroundButtonWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  padding-bottom: 78px;
+  margin-bottom: 78px;
 `;
 
 export const CardContainer = styled.div`

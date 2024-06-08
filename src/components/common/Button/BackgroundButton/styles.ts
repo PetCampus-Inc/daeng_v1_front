@@ -20,7 +20,7 @@ export const Button = styled.button.withConfig({
   border-radius: 8px;
   background-color: ${(props) =>
     props.bg ? ({ theme, bg }) => theme.colors[bg] : ({ theme }) => theme.colors.primaryColor};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.gray_3};
   ${({ theme }) => theme.typo.label1_16_B};
 
   &:disabled {
