@@ -86,7 +86,7 @@ export class MemberFormToServerAdapter {
       birthDate: formatDate(this.value.year || 0, this.value.month || 0, this.value.day || 0),
       neutralization: this.neutralization || "",
       vaccination: this.vaccination || "",
-      vaccinationUri: this.value[FIELD.VACCINATION_URL] || "",
+      vaccinationUri: this.value[FIELD.VACCINATION_URL] || [],
       allergyDisease: this.value[FIELD.ALLERGY_DISEASE] || "",
       ticketType: this.ticketType || "",
       monthlyTicketNumber: extractNumber(this.value[FIELD.MONTHLY_TICKET_NUMBER] || 0),
@@ -113,6 +113,8 @@ export class AdminFormToServerAdapter {
   };
 
   get requiredItemList(): number[] {
+    console.log(this.value[FIELD.REQUEST_ITEMS]);
+
     return this.value[FIELD.REQUEST_ITEMS]
       .map((item: boolean, idx: number) => (item ? idx : null)) // true일 때 id, 아니면 null
       .filter((id: number) => id !== null);
