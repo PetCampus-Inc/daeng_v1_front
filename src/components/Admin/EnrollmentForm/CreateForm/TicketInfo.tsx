@@ -32,11 +32,7 @@ const TicketInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle
-          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PRICE_INFO}`}
-          control={control}
-          hasBadge
-        >
+        <AdminTitle name="null" control={control} hasBadge noToggle>
           가격 안내
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>

@@ -13,23 +13,19 @@ import TicketType from "../TicketType";
 const TicketInfo = () => {
   const { register, control, watch } = useFormContext();
 
-  const selectedTicketTypes = watch("ticketType");
+  const selectedTicketTypes = watch(FIELD.TICKET_TYPE);
   const isMonthlySelected = selectedTicketTypes?.includes("정기권");
   const isRoundSelected = selectedTicketTypes?.includes("회차권");
 
   return (
     <>
       <Card>
-        <AdminTitle
-          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PRICE_INFO}`}
-          control={control}
-          hasBadge
-        >
+        <AdminTitle name="null" control={control} hasBadge noToggle>
           가격 안내
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
         <TextArea
-          {...register("priceInfo", { required: true })}
+          {...register(FIELD.PRICE_INFO, { required: true })}
           placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다."
         />
       </Card>
@@ -42,7 +38,7 @@ const TicketInfo = () => {
           이용권 종류
         </AdminTitle>
         <Caption>복수 선택이 가능해요</Caption>
-        <MultiCheck name="ticketType" radiosText={["정기권", "회차권"]} isRequired />
+        <MultiCheck name={FIELD.TICKET_TYPE} radiosText={["정기권", "회차권"]} isRequired />
       </Card>
       {isMonthlySelected && (
         <Card>
@@ -54,7 +50,7 @@ const TicketInfo = () => {
             정기권 유형
           </AdminTitle>
           <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-          <TicketType ticketType="MONTHLY" control={control} name="monthlyTicketNumber" />
+          <TicketType ticketType="MONTHLY" control={control} name={FIELD.MONTHLY_TICKET_NUMBER} />
         </Card>
       )}
       {isRoundSelected && (
@@ -67,7 +63,7 @@ const TicketInfo = () => {
             회차권 유형
           </AdminTitle>
           <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
-          <TicketType ticketType="ROUND" control={control} name="roundTicketNumber" />
+          <TicketType ticketType="ROUND" control={control} name={FIELD.ROUND_TICKET_NUMBER} />
         </Card>
       )}
       <Card>
@@ -79,7 +75,7 @@ const TicketInfo = () => {
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
-        <DayMultiCheck name="openDays" isRequired />
+        <DayMultiCheck name={FIELD.OPEN_DAYS} isRequired />
       </Card>
       <Card>
         <AdminTitle
@@ -90,7 +86,7 @@ const TicketInfo = () => {
           유의사항
         </AdminTitle>
         <TextArea
-          {...register("ticketInfo", { required: true })}
+          {...register(FIELD.TICKET_INFO, { required: true })}
           placeholder="유의사항을 입력해 주세요"
         />
         <Stack>
