@@ -131,7 +131,7 @@ export interface IDogEnrollmentInfo extends IResponse {
   breedId: number;
   breedName: string;
   newBreed: string;
-  dogBirthDate: string[];
+  birthDate: string[];
   neutralization: string;
   allergyDisease?: string;
   vaccination: string;

@@ -1,4 +1,4 @@
-import { FIELD_KEYS } from "constants/field";
+import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import TextArea from "components/common/TextArea";
@@ -13,11 +13,15 @@ const PolicyInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`requiredItemList.${FIELD_KEYS.LIMITS_INFO}`} control={control} hasBadge>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.LIMITS_INFO}`}
+          control={control}
+          hasBadge
+        >
           이용 제한 유의 사항
         </AdminTitle>
         <TextArea
-          {...register("limitsInfo", { required: true })}
+          {...register(FIELD.LIMITS_INFO, { required: true })}
           placeholder="이용 제한 관련 유의사항을 입력해 주세요"
         />
         <Stack>
@@ -26,14 +30,14 @@ const PolicyInfo = () => {
       </Card>
       <Card>
         <AdminTitle
-          name={`requiredItemList.${FIELD_KEYS.ACCIDENT_INFO}`}
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ACCIDENT_INFO}`}
           control={control}
           hasBadge
         >
           상해 유의사항
         </AdminTitle>
         <TextArea
-          {...register("accidentInfo", { required: true })}
+          {...register(FIELD.ACCIDENT_INFO, { required: true })}
           placeholder="상해 관련 유의사항을 입력해 주세요"
         />
         <Stack>
@@ -42,14 +46,14 @@ const PolicyInfo = () => {
       </Card>
       <Card>
         <AdminTitle
-          name={`requiredItemList.${FIELD_KEYS.ABANDONMENT_INFO}`}
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ABANDONMENT_INFO}`}
           control={control}
           hasBadge
         >
           유기 유의사항
         </AdminTitle>
         <TextArea
-          {...register("abandonmentInfo", { required: true })}
+          {...register(FIELD.ABANDONMENT_INFO, { required: true })}
           placeholder="유기 관련 유의사항을 입력해 주세요"
         />
         <Stack>

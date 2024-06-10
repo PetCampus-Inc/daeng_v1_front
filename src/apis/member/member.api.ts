@@ -4,16 +4,16 @@ import { IPrecautionInfo } from "types/admin.attendance.type";
 import { IResponse } from "types/helper.type";
 
 import type {
-  IMemberInfo,
-  IMemberProfileInfo,
-  IMemberProfilePostInfo,
+  DogsDataType,
+  HomeDataType,
+  ImageList,
   IMainAlbum,
   IMemberDogInfo,
   IMemberDogPostDetailInfo,
-  HomeDataType,
-  ImageList,
-  DogsDataType,
-  IMemberDogSchoolInfo
+  IMemberDogSchoolInfo,
+  IMemberInfo,
+  IMemberProfileInfo,
+  IMemberProfilePostInfo
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -139,7 +139,7 @@ export const handlePostMemberDogDetailInfo = async (
 };
 
 // 강아지의 알러지/질병 내용 수정
-export const handlePostMemoDogAlleray = async (dogId: number, memo: string): Promise<void> => {
+export const handlePostMemoDogAllergy = async (dogId: number, memo: string): Promise<void> => {
   const url = `/member/dog/allergy`;
   const { data } = await customAxios.post(url, {
     dogId: dogId,

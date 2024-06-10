@@ -1,4 +1,4 @@
-import { FIELD_KEYS } from "constants/field";
+import { FIELD, FIELD_KEYS } from "constants/field";
 import { GENDER_DATA } from "constants/gender";
 import { PHONE_REGEX } from "constants/validCheck";
 
@@ -17,12 +17,14 @@ import { formatPhoneNumber } from "utils/formatter";
 import * as S from "./styles";
 
 // TODO 코드 리팩토링 필요
+// MEMO: 여기서 handleFocus, handleBlur는 어떤 동작을 하고 있는건가요?
+
 const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMemberInfoEdite) => {
   const { register, setValue, watch } = useFormContext();
   const [isAddressActive, setIsAddressActive] = useState(false);
   const overlay = useOverlay.useOverlay();
 
-  const addressStreet = "address.street";
+  const addressStreet = FIELD.MEMBER_ADDRESS;
   const watchAddress = watch(addressStreet);
 
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +39,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
 
   const handleClear = () => {
     setValue(addressStreet, "");
-    setValue("address.detail", "");
+    setValue(FIELD.MEMBER_ADDRESS_DETAIL, "");
     setIsAddressActive(false);
   };
 
@@ -60,12 +62,11 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           이름
         </Text>
         <TextInput
-          name="memberName"
+          name={FIELD.MEMBER_NAME}
           register={register}
           required
           placeholder="견주 이름을 입력해주세요"
           defaultValue={memberData.memberName}
-          value={watch("memberName")}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChangeInput}
@@ -78,7 +79,7 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           성별
         </Text>
         <SingleRadio
-          name="memberGender"
+          name={FIELD.MEMBER_GENDER}
           radiosText={["남", "여"]}
           defaultSelect={GENDER_DATA[memberData.memberGender][0]}
         />
@@ -91,8 +92,8 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
         <SearchInputField
           name={addressStreet}
           register={register}
-          onSearch={() => openPopup()}
-          onClick={() => openPopup()}
+          onSearch={openPopup}
+          onClick={openPopup}
           onClear={handleClear}
           defaultValue={memberData.address}
           value={watchAddress}
@@ -103,10 +104,9 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           className="defaultValue"
         />
         <TextInput
-          name="address.detail"
+          name={FIELD.MEMBER_ADDRESS_DETAIL}
           register={register}
           defaultValue={memberData.addressDetail}
-          value={watch("address.detail")}
           placeholder="상세 주소를 입력해주세요"
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -120,15 +120,14 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           연락처
         </Text>
         <TextInput
-          name="phoneNumber"
+          name={FIELD.MEMBER_PHONE}
           register={register}
           rules={{
             pattern: PHONE_REGEX
           }}
-          onChange={handleChangeNumber("phoneNumber")}
+          onChange={handleChangeNumber(FIELD.MEMBER_PHONE)}
           placeholder="연락처를 입력해주세요"
           defaultValue={memberData.phoneNumber}
-          value={watch("phoneNumber")}
           type="tel"
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -142,15 +141,14 @@ const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMe
           비상 연락처
         </Text>
         <TextInput
-          name="emergencyNumber"
+          name={FIELD.EMERGENCY_NUMBER}
           register={register}
-          onChange={handleChangeNumber("emergencyNumber")}
+          onChange={handleChangeNumber(FIELD.EMERGENCY_NUMBER)}
           rules={{
             pattern: PHONE_REGEX
           }}
           placeholder="비상 연락처를 입력해주세요"
           defaultValue={memberData.emergencyPhoneNumber}
-          value={watch("emergencyNumber")}
           type="tel"
           onFocus={handleFocus}
           onBlur={handleBlur}

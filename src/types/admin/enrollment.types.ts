@@ -49,7 +49,7 @@ export interface MemberFormData {
   breedId: number;
   breedName: Nullable<string>;
   newBreed: Nullable<string>;
-  dogBirthDate: number[];
+  birthDate: number[];
   neutralization: TNeutralization;
   allergyDisease: string;
   vaccination: TVaccination;
