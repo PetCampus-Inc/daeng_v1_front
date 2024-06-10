@@ -1,4 +1,4 @@
-import { FIELD_KEYS } from "constants/field";
+import { FIELD, FIELD_KEYS } from "constants/field";
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 
@@ -30,50 +30,48 @@ const DogInfo = () => {
       <Card>
         <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.DOG_NAME)}>이름</Title>
         <TextInput
-          name="dogName"
+          name={FIELD.DOG_NAME}
           placeholder="강아지 이름을 입력해주세요"
           register={register}
           required
-          value={watch("dogName")}
           readOnly
         />
       </Card>
       <Card>
         <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.DOG_GENDER)}>성별</Title>
         <SingleRadio
-          name="dogGender"
+          name={FIELD.DOG_GENDER}
           radiosText={["수컷", "암컷"]}
           isRequired
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("dogGender")]}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.DOG_GENDER)]}
           preventDefaultClick={handlePreventDefault}
         />
       </Card>
       <Card>
         <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.DOG_SIZE)}>크기</Title>
         <SingleRadio
-          name="dogSize"
+          name={FIELD.DOG_SIZE}
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
           isRequired
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("dogSize")]}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.DOG_SIZE)]}
           preventDefaultClick={handlePreventDefault}
         />
       </Card>
       <Card>
-        <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.DOG_BREED)}>견종</Title>
+        <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.BREED_ID)}>견종</Title>
         {/* // TODO 수정되지 않도록 추후 작업 필요 */}
         <BreedInput
-          name="breedName"
+          name={FIELD.BREED_NAME}
           register={register}
           setValue={setValue}
           watch={watch}
-          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.DOG_BREED)}
-          value={watch("breedName")}
+          isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.BREED_ID)}
           readOnly
         />
       </Card>
       <Card>
-        <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.DOG_BIRTHDAY)}>생일</Title>
+        <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
           <SelectNumber
             name="year"
@@ -100,10 +98,10 @@ const DogInfo = () => {
           중성화 여부
         </Title>
         <SingleRadio
-          name="neutralization"
+          name={FIELD.NEUTRALIZATION}
           radiosText={["했어요", "안했어요"]}
           isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.NEUTRALIZATION)}
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("neutralization")]}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.NEUTRALIZATION)]}
           preventDefaultClick={handlePreventDefault}
         />
       </Card>
@@ -112,14 +110,14 @@ const DogInfo = () => {
           예방접종 여부
         </Title>
         <SingleRadio
-          name="vaccination"
+          name={FIELD.VACCINATION}
           radiosText={["했어요", "안했어요"]}
           isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.VACCINATION)}
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("vaccination")]}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.VACCINATION)]}
           preventDefaultClick={handlePreventDefault}
         />
       </Card>
-      {watch("vaccination") === "했어요" && (
+      {watch(FIELD.VACCINATION) === "했어요" && (
         <Card>
           <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.VACCINATION_URL)}>
             예방접종 파일 첨부
@@ -134,7 +132,7 @@ const DogInfo = () => {
         </Title>
         <TextArea
           placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
-          {...register("allergyDisease", {
+          {...register(FIELD.ALLERGY_DISEASE, {
             required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ALLERGY_DISEASE)
           })}
           readOnly

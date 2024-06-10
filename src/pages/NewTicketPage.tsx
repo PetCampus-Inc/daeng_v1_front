@@ -1,3 +1,5 @@
+import { FIELD } from "constants/field";
+
 import NewTicket from "components/Admin/DogDetailInfo/NewTicket";
 import CancelModal from "components/Admin/DogDetailInfo/NewTicket/CancelModal";
 import { NewTicketButton } from "components/Admin/DogDetailInfo/NewTicket/styles";
@@ -20,14 +22,14 @@ const NewTicketPage = () => {
 
   const dogId = Number(useLocation().pathname.split("/").at(-2));
   const methods = useForm({ mode: "onSubmit" });
-  const currentTicketType = currentTicket?.ticketType === "ROUND" ? "회차권" : "정기권";
-  const isRoundTicket = (methods.watch("ticketType") ?? currentTicketType) === "회차권";
+  const currentTicketType = currentTicket?.[FIELD.TICKET_TYPE] === "ROUND" ? "회차권" : "정기권";
+  const isRoundTicket = (methods.watch(FIELD.TICKET_TYPE) ?? currentTicketType) === "회차권";
 
   const ticketType = isRoundTicket ? "ROUND" : "MONTHLY";
   const roundTicketNumber =
-    methods.watch("roundTicketNumber") ?? `${currentTicket?.allRoundTicket}회`;
+    methods.watch(FIELD.ROUND_TICKET_NUMBER) ?? `${currentTicket?.allRoundTicket}회`;
   const monthlyTicketNumber =
-    methods.watch("monthlyTicketNumber") ?? `${currentTicket?.monthlyTicketNumber}회`;
+    methods.watch(FIELD.MONTHLY_TICKET_NUMBER) ?? `${currentTicket?.monthlyTicketNumber}회`;
 
   const updatedTicket = {
     dogId,
