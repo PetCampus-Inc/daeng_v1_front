@@ -63,15 +63,15 @@ export class MemberFormAdapter {
   }
 
   get year() {
-    return this.value[FIELD.DOG_BIRTHDAY][0];
+    return this.value[FIELD.BIRTHDAY][0];
   }
 
   get month() {
-    return this.value[FIELD.DOG_BIRTHDAY][1];
+    return this.value[FIELD.BIRTHDAY][1];
   }
 
   get day() {
-    return this.value[FIELD.DOG_BIRTHDAY][2];
+    return this.value[FIELD.BIRTHDAY][2];
   }
 
   get getPickDropRequest() {

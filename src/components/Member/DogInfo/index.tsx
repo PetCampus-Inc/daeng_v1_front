@@ -1,3 +1,4 @@
+import { FIELD } from "constants/field";
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 import { PATH } from "constants/path";
 
@@ -39,9 +40,9 @@ const DogInfo = ({ dogId }: IProps) => {
   const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
 
   const DOG_BIRETH = formatDate(
-    String(data.dogBirthDate[0]),
-    String(data.dogBirthDate[1]),
-    String(data.dogBirthDate[2]),
+    String(data[FIELD.BIRTHDAY][0]),
+    String(data[FIELD.BIRTHDAY][1]),
+    String(data[FIELD.BIRTHDAY][2]),
     "dot"
   );
 

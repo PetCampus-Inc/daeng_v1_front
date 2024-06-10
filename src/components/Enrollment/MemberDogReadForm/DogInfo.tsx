@@ -17,7 +17,7 @@ import BreedInput from "../Input/BreedInput";
 
 const DogInfo = () => {
   const { register, watch, setValue } = useFormContext();
-  const [birthYear, birthMonth, birthDay] = watch("dogBirthDate");
+  const [birthYear, birthMonth, birthDay] = watch(FIELD.BIRTHDAY);
 
   const dogBirthData = {
     year: birthYear,

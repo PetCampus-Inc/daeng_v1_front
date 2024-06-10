@@ -1,3 +1,5 @@
+import { FIELD } from "constants/field";
+
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import SaveButton from "components/Member/DogInfo/DogDetailInfoEdite/Buttons/SaveButton";
@@ -16,7 +18,7 @@ const MemberDogInfoEditePage = () => {
   const { ...rest } = data;
   const navigate = useNavigate();
 
-  const [year, month, day] = data.dogBirthDate.map(Number);
+  const [year, month, day] = data[FIELD.BIRTHDAY].map(Number);
 
   const dogBirth = {
     year: year,

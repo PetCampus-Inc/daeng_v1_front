@@ -1,3 +1,4 @@
+import { FIELD } from "constants/field";
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 
 import BackgroundButton from "components/common/Button/BackgroundButton";
@@ -14,18 +15,18 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
   const mutatePostDogDetailInfo = usePostMemberDogDetailnfo(dogId);
   const { data: previousValues } = useGetMemberDogDetailnfo(dogId);
 
-  const [prevYear, prevMonth, prevDay] = previousValues.dogBirthDate.map(String);
+  const [prevYear, prevMonth, prevDay] = previousValues[FIELD.BIRTHDAY].map(String);
   const prevBirth = formatDate(prevYear, prevMonth, prevDay);
 
-  const dogName = watch("dogName");
-  const dogGender = watch("dogGender") === "암컷" ? "FEMALE" : "MALE";
+  const dogName = watch(FIELD.DOG_NAME);
+  const dogGender = watch(FIELD.DOG_GENDER) === "암컷" ? "FEMALE" : "MALE";
   const dogSize = Object.keys(ITEM_ENGLISH_TO_KOREAN).find(
     (key) => ITEM_ENGLISH_TO_KOREAN[key] === watch("dogSize")
   );
-  const breedId = watch("breedId");
-  const newBreed = watch("breedName");
+  const breedId = watch(FIELD.BREED_ID);
+  const newBreed = watch(FIELD.NEW_BREED);
   const birthDate = `${watch("year")}-${watch("month")}-${watch("day")}`;
-  const neutralization = watch("neutralization") === "했어요" ? "NEUTERED" : "NOT_NEUTERED";
+  const neutralization = watch(FIELD.NEUTRALIZATION) === "했어요" ? "NEUTERED" : "NOT_NEUTERED";
 
   const updatedDogDetailInfo = {
     dogId: dogId,

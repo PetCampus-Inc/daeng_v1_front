@@ -52,7 +52,7 @@ export interface IDogAndMemberInfo {
   dogSize: "SMALL" | "MEDIUM" | "BIG";
   breedId: number;
   breedName: string;
-  dogBirthDate: number[];
+  birthDate: number[];
   neutralization: string;
   allergyDisease: string;
   vaccination: string;
