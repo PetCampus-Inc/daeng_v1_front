@@ -3,17 +3,19 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
+import { useInputFocus } from "./context/AttendanceProvider";
 import * as S from "./styles";
 
 interface IAttendanceTop {
   mode: "DEFAULT" | "ATTENDANCE";
   setMode: React.Dispatch<React.SetStateAction<"DEFAULT" | "ATTENDANCE">>;
-  isFocus: boolean;
 }
 
-const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
+const AttendanceTop = ({ mode, setMode }: IAttendanceTop) => {
   const { schoolName, adminName, role: adminRole } = useAdminInfo();
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
+
+  const { isFocused } = useInputFocus();
 
   const isAttendMode = mode === "ATTENDANCE";
 
@@ -36,14 +38,14 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
         </S.SubTitle>
       </S.TitleWrapper>
       <S.ButtonWrapper>
-        <S.FootButton type="button" className={isAttendMode ? "active" : ""} isFocus={isFocus}>
+        <S.FootButton type="button" className={isAttendMode ? "active" : ""} isFocus={isFocused}>
           <FootIcon />
         </S.FootButton>
         <S.ControlButton
           type="button"
           className={isAttendMode ? "active" : ""}
           onClick={handlerModeChange}
-          isFocus={isFocus}
+          isFocus={isFocused}
         >
           {isAttendMode ? "출석중단" : "출 석"}
         </S.ControlButton>
