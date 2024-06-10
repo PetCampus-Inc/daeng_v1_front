@@ -1,30 +1,32 @@
 import FootIcon from "assets/svg/foot-icon";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
 import { useInputFocus } from "./context/AttendanceProvider";
 import * as S from "./styles";
 
-interface IAttendanceTop {
-  mode: "DEFAULT" | "ATTENDANCE";
-  setMode: React.Dispatch<React.SetStateAction<"DEFAULT" | "ATTENDANCE">>;
-}
+const AttendanceTop = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const mode = searchParams.get("mode");
+  const isAttendMode = mode === "attend";
 
-const AttendanceTop = ({ mode, setMode }: IAttendanceTop) => {
   const { schoolName, adminName, role: adminRole } = useAdminInfo();
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
-
   const { isFocused } = useInputFocus();
-
-  const isAttendMode = mode === "ATTENDANCE";
 
   const handlerModeChange = () => {
     if (isAttendMode) {
       setIsCancelModalOpen(true);
     } else {
-      setMode("ATTENDANCE");
+      setSearchParams({ mode: "attend" });
     }
+  };
+
+  const handleCloseModal = () => {
+    setSearchParams({});
+    setIsCancelModalOpen(false);
   };
 
   return (
@@ -53,10 +55,7 @@ const AttendanceTop = ({ mode, setMode }: IAttendanceTop) => {
       <AttendanceExitModal
         isOpen={isCancelModalOpen}
         close={() => setIsCancelModalOpen(false)}
-        action={() => {
-          setMode("DEFAULT");
-          setIsCancelModalOpen(false);
-        }}
+        action={handleCloseModal}
       />
     </S.MainWrapper>
   );

@@ -1,26 +1,23 @@
 import AttendanceMain from "components/Admin/Attendance/AttendanceMain";
-import Attendance from "components/Admin/Attendance/AttendanceMode";
+import AttendanceManagement from "components/Admin/Attendance/AttendanceManagement";
 import AttendanceTop from "components/Admin/Attendance/AttendanceTop";
 import { AttendanceProvider } from "components/Admin/Attendance/context/AttendanceProvider";
 import Header from "components/common/Header";
 import Navbar from "components/common/NavBar";
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
 const AttendancePage = () => {
-  const [mode, setMode] = useState<"DEFAULT" | "ATTENDANCE">("DEFAULT");
-
-  const isAttendMode = mode === "ATTENDANCE";
-  const isDefaultMode = mode === "DEFAULT";
+  const [searchParams] = useSearchParams();
+  const mode = searchParams.get("mode");
 
   return (
     <>
       <Header type="notice" text="출석부" />
       <PageContainer color="BGray" pt="2">
         <AttendanceProvider>
-          <AttendanceTop mode={mode} setMode={setMode} />
-          {isDefaultMode && <AttendanceMain />}
-          {isAttendMode && <Attendance setMode={setMode} />}
+          <AttendanceTop />
+          {mode !== "attend" ? <AttendanceMain /> : <AttendanceManagement />}
         </AttendanceProvider>
       </PageContainer>
       <Navbar type="admin" />
