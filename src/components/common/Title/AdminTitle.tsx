@@ -8,6 +8,7 @@ interface AdminTitleProps extends Omit<ToggleBadgeProps, "control" | "name"> {
   control: ToggleBadgeProps["control"];
   name: ToggleBadgeProps["name"];
   hasBadge?: boolean;
+  noToggle?: boolean;
 }
 
 const AdminTitle = ({
@@ -15,16 +16,19 @@ const AdminTitle = ({
   control,
   name,
   readOnly,
+  noToggle = false,
   hasBadge = false,
   ...props
 }: AdminTitleProps) => {
+  const showToggle = !noToggle;
+
   return (
     <Label htmlFor={name + ".label"}>
       <Container>
         {children}
         {hasBadge && <Badge variant="yellow" />}
       </Container>
-      <ToggleBadge name={name} control={control} {...props} readOnly={readOnly} />
+      {showToggle && <ToggleBadge name={name} control={control} {...props} readOnly={readOnly} />}
     </Label>
   );
 };
