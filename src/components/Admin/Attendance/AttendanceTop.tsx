@@ -1,8 +1,6 @@
 import FootIcon from "assets/svg/foot-icon";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
-import { useResetRecoilState } from "recoil";
-import { attendDogListInfoAtom } from "store/admin";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
 import * as S from "./styles";
@@ -16,7 +14,6 @@ interface IAttendanceTop {
 const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
   const { schoolName, adminName, role: adminRole } = useAdminInfo();
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
-  const resetState = useResetRecoilState(attendDogListInfoAtom);
 
   const isAttendMode = mode === "ATTENDANCE";
 
@@ -24,7 +21,6 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
     if (isAttendMode) {
       setIsCancelModalOpen(true);
     } else {
-      resetState();
       setMode("ATTENDANCE");
     }
   };
@@ -58,7 +54,6 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
         action={() => {
           setMode("DEFAULT");
           setIsCancelModalOpen(false);
-          resetState();
         }}
       />
     </S.MainWrapper>
