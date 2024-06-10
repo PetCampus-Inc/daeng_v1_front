@@ -10,11 +10,7 @@ import { useInputFocus } from "./context/AttendanceProvider";
 import { SelectedDogsProvider } from "./context/SelectedDogProvider";
 import { Blur } from "./styles";
 
-interface AttendanceProps {
-  setMode: React.Dispatch<React.SetStateAction<"DEFAULT" | "ATTENDANCE">>;
-}
-
-const AttendanceMode = ({ setMode }: AttendanceProps) => {
+const AttendanceManagement = () => {
   const { schoolId } = useAdminInfo();
 
   const { data: dogList } = useGetAttendDogList(schoolId);
@@ -56,7 +52,7 @@ const AttendanceMode = ({ setMode }: AttendanceProps) => {
           <SelectedDogsProvider>
             <AttendanceAvatar />
             <AttendanceSearchList data={dataToShow} type={type} />
-            <AttendDogSubmitButton schoolId={schoolId} setMode={setMode} />
+            <AttendDogSubmitButton schoolId={schoolId} />
           </SelectedDogsProvider>
         )}
       </Blur>
@@ -64,4 +60,4 @@ const AttendanceMode = ({ setMode }: AttendanceProps) => {
   );
 };
 
-export default AttendanceMode;
+export default AttendanceManagement;
