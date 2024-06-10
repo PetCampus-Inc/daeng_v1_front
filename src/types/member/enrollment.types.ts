@@ -77,7 +77,7 @@ export interface EnrollmentInfoType extends MemberDtoInfoType {
   birthDate: string;
   neutralization: NeutralizationType | "";
   vaccination: VaccinationType | "";
-  vaccinationUri: string;
+  vaccinationUri: string[];
   allergyDisease: string;
   ticketType: TicketType | "";
   roundTicketNumber: number;
