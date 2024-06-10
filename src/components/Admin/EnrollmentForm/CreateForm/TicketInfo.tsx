@@ -36,6 +36,7 @@ const TicketInfo = () => {
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PRICE_INFO}`}
           control={control}
           hasBadge
+          noToggle
         >
           가격 안내
         </AdminTitle>
