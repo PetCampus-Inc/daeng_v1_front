@@ -23,22 +23,17 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   // 신규 가입신청서
   const onSubmit = (data: FieldValues) => {
     const requestData = getSubmitFormInfo(data);
-
     mutateEnrollment(requestData);
   };
 
   const onInvalid = (errors: FieldErrors) => {
-    console.log(errors);
     const firstErrorField = Object.keys(errors)[0];
 
     console.log(firstErrorField);
+
     const step = getFieldStep({ field: firstErrorField, enable: true });
 
-    console.log(step);
-    // const step = FIELD_TO_STEP.get(firstErrorField);
-
     if (step !== undefined) {
-      console.log(step);
       openPopup(firstErrorField);
       setStep(step);
     }

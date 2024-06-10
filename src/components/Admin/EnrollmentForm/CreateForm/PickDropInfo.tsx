@@ -15,7 +15,7 @@ const PickDropInfo = () => {
     <>
       <Card>
         <AdminTitle
-          name={`requiredItemList.${FIELD_KEYS.PICDROP_STATE}`}
+          name={`requiredItemList.${FIELD_KEYS.PICKDROP_STATE}`}
           control={control}
           hasBadge
         >
