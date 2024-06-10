@@ -33,7 +33,9 @@ export const Button = styled.button.withConfig({
     color 0.3s;
 `;
 
-export const BackgroundButtonWrapper = styled.div<{ hasNav?: boolean }>`
+export const BackgroundButtonWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["hasNav"].includes(prop)
+})<{ hasNav?: boolean }>`
   position: absolute;
   bottom: 0;
   left: 0;
