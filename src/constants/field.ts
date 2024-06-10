@@ -26,7 +26,7 @@ export const FIELD = {
   BREED_ID: "breedId",
   BREED_NAME: "breedName",
   NEW_BREED: "newBreed",
-  BIRTHDAY: "birthDate", // TODO: BIRTHDAY와 DOG_BIRTHDAY 통일 시키기
+  BIRTHDAY: "birthDate",
   NEUTRALIZATION: "neutralization",
   VACCINATION: "vaccination",
   VACCINATION_URL: "vaccinationUri",
