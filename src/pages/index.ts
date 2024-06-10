@@ -41,7 +41,7 @@ export { default as UnregisterSuccessPage } from "./UnregisterSuccessPage";
 export { default as AttendCareGallery } from "./AdminCarePage/AttendCareGalleryPage";
 export { default as AttendCareSelectDog } from "./AdminCarePage/AttendCareSelectDogPage";
 
-export { default as MemberEnrollmentFormDetailPage } from "./MemberPage/MemberEnrollmentFormDetailPage";
+export { default as MemberEnrollmentFormDetailPage } from "./EnrollmentPage/MemberEnrollmentFormDetailPage";
 
 export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
