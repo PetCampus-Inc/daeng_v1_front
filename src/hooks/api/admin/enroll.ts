@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
 import type { AgreementsListType } from "constants/field";
-import type { MemberFormData, AdminEnrollmentInfoType } from "types/admin/enrollment.types";
+import type { AdminEnrollmentInfoType, MemberFormData } from "types/admin/enrollment.types";
 import type { EnrollmentDataType } from "types/member/enrollment.types";
 
 // FIXME: Omit 타입을 사용하면서 필요없는 타입을 제거하는 것이 아닌 새로운 타입을 만드는게 나을 것 같습니다.
@@ -85,20 +85,16 @@ type Mode = "READ" | "EDIT";
 
 // 원장 가입신청서 조회, 수정
 export const useAdminEnrollment = (formId: string, mode: Mode) => {
-  const enlistmentQuery = useSuspenseQuery<EnrollmentDataType, Error, FormAdaptedData<typeof mode>>(
-    {
-      queryKey: QUERY_KEY.ADMIN_ENROLLMENT(formId),
-      queryFn: () => handleGetAdminForm(formId),
-      select: (data) =>
-        Adapter.from(data).to<EnrollmentDataType, FormAdaptedData<typeof mode>>((item) => {
-          const adapterInstance =
-            mode === "READ" ? new ReadModeAdapter(item) : new EditModeAdapter(item);
-          return adapterInstance.adapt();
-        })
-    }
-  );
-
-  return enlistmentQuery;
+  return useSuspenseQuery<EnrollmentDataType, Error, FormAdaptedData<typeof mode>>({
+    queryKey: QUERY_KEY.ADMIN_ENROLLMENT(formId),
+    queryFn: () => handleGetAdminForm(formId),
+    select: (data) =>
+      Adapter.from(data).to<EnrollmentDataType, FormAdaptedData<typeof mode>>((item) => {
+        const adapterInstance =
+          mode === "READ" ? new ReadModeAdapter(item) : new EditModeAdapter(item);
+        return adapterInstance.adapt();
+      })
+  });
 };
 
 // 원장 가입신청서 저장

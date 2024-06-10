@@ -8,7 +8,7 @@ import PolicyInfo from "components/Enrollment/MemberDogReadForm/PolicyInfo";
 import TicketInfo from "components/Enrollment/MemberDogReadForm/TicketInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import * as S from "components/Enrollment/styles";
-import { useGetMemberDogEnrollmemntInfo } from "hooks/api/member/member";
+import { useGetMemberDogEnrollmentInfo } from "hooks/api/member/member";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
@@ -18,7 +18,7 @@ interface EnrollmentProps {
 }
 
 const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
-  const { data } = useGetMemberDogEnrollmemntInfo(Number(dogId));
+  const { data } = useGetMemberDogEnrollmentInfo(Number(dogId));
   const { schoolFormResponse, ...rest } = data;
 
   const methods = useForm({

@@ -13,9 +13,9 @@ import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import CarouselModal from "components/common/Modal/CarouselModal";
 import {
-  useGetMemberDogDetailnfo,
-  usePostMemberDogAlleray,
-  usePostMemberDogPickdrop
+  useGetMemberDogDetailInfo,
+  usePostMemberDogAllergy,
+  usePostMemberDogPickDrop
 } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
@@ -35,9 +35,9 @@ const DogInfo = ({ dogId }: IProps) => {
   const overlay = useOverlay();
   const navigate = useNavigate();
   const methods = useForm({ mode: "onSubmit" });
-  const { data } = useGetMemberDogDetailnfo(dogId);
-  const mutatePostDogAlleray = usePostMemberDogAlleray(dogId);
-  const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
+  const { data } = useGetMemberDogDetailInfo(dogId);
+  const mutatePostDogAlleray = usePostMemberDogAllergy(dogId);
+  const metatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
 
   const DOG_BIRETH = formatDate(
     String(data[FIELD.BIRTHDAY][0]),

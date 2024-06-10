@@ -18,8 +18,7 @@ export interface IEnrollmentProps {
 
 /**
  * @description 견주 가입 신청 폼 데이터 반환 - 앱에서 견주 가입 신청 페이지에 접근합니다.
- * @param {string} memberId
- * @param {number} schoolId
+ * @param {number, string} schoolId, memberId
  */
 export const handleGetEnrollment = async ({
   schoolId,
@@ -37,8 +36,7 @@ export const handleGetEnrollment = async ({
 
 /**
  * @description 견주 가입 신청 URL 반환 - url 로 견주 가입 신청 페이지에 접근합니다.
- * @param {string} requestUrl
- * @param {string} memberId
+ * @param {string, string} requestUrl, memberId
  */
 export const handleGetEnrollmentUrl = async ({
   requestUrl,

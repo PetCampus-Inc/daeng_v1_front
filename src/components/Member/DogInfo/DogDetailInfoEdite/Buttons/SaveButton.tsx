@@ -2,7 +2,7 @@ import { FIELD } from "constants/field";
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import { useGetMemberDogDetailnfo, usePostMemberDogDetailnfo } from "hooks/api/member/member";
+import { useGetMemberDogDetailInfo, usePostMemberDogDetailInfo } from "hooks/api/member/member";
 import { useCallback, useEffect, useState } from "react";
 import { useForm, useFormContext } from "react-hook-form";
 import { formatDate } from "utils/formatter";
@@ -12,8 +12,8 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const { watch } = useFormContext();
   const methods = useForm({ mode: "onSubmit" });
-  const mutatePostDogDetailInfo = usePostMemberDogDetailnfo(dogId);
-  const { data: previousValues } = useGetMemberDogDetailnfo(dogId);
+  const mutatePostDogDetailInfo = usePostMemberDogDetailInfo(dogId);
+  const { data: previousValues } = useGetMemberDogDetailInfo(dogId);
 
   const [prevYear, prevMonth, prevDay] = previousValues[FIELD.BIRTHDAY].map(String);
   const prevBirth = formatDate(prevYear, prevMonth, prevDay);
@@ -40,7 +40,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
   };
 
   const checkFormValidity = useCallback(() => {
-    if (
+    return !(
       previousValues.dogName !== dogName ||
       previousValues.dogGender !== dogGender ||
       previousValues.dogSize !== dogSize ||
@@ -48,10 +48,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       previousValues.breedName !== newBreed ||
       prevBirth !== birthDate ||
       previousValues.neutralization !== neutralization
-    ) {
-      return false;
-    }
-    return true;
+    );
   }, [
     birthDate,
     breedId,
