@@ -17,19 +17,31 @@ const DogInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_NAME}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_NAME}`}
+          control={control}
+          readOnly
+        >
           이름
         </AdminTitle>
         <TextInput name="null" placeholder="강아지 이름을 입력해주세요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_GENDER}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_GENDER}`}
+          control={control}
+          readOnly
+        >
           성별
         </AdminTitle>
         <SingleRadio name="null" radiosText={["수컷", "암컷"]} disabled />
       </Card>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_SIZE}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_SIZE}`}
+          control={control}
+          readOnly
+        >
           크기
         </AdminTitle>
         <SingleRadio
@@ -40,13 +52,21 @@ const DogInfo = () => {
         />
       </Card>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.BREED_ID}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.BREED_ID}`}
+          control={control}
+          readOnly
+        >
           견종
         </AdminTitle>
         <SearchInputField name="null" placeholder="견종을 선택하는 칸이에요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.BIRTHDAY}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.BIRTHDAY}`}
+          control={control}
+          readOnly
+        >
           생일
         </AdminTitle>
         <div style={{ display: "flex", gap: "5px" }}>

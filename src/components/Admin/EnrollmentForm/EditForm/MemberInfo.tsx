@@ -14,7 +14,11 @@ const MemberInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_NAME}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_NAME}`}
+          control={control}
+          readOnly
+        >
           이름
         </AdminTitle>
         <TextInput name="null" placeholder="견주 이름을 입력하는 칸이에요" disabled />
@@ -26,13 +30,21 @@ const MemberInfo = () => {
         <SingleRadio name="null" radiosText={["남", "여"]} disabled />
       </Card>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_ADDRESS}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_ADDRESS}`}
+          control={control}
+          readOnly
+        >
           주소
         </AdminTitle>
         <SearchInputField name="null" placeholder="주소를 입력하는 칸이에요" disabled />
       </Card>
       <Card>
-        <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_PHONE}`} control={control}>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_PHONE}`}
+          control={control}
+          readOnly
+        >
           연락처
         </AdminTitle>
         <TextInput name="null" placeholder="견주가 연락처를 입력하는 칸이에요" disabled />
