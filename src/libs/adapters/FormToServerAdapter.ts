@@ -65,8 +65,8 @@ export class MemberFormToServerAdapter {
   adapt(): EnrollmentInfoType {
     // breedId가 존재하면 breedId를 그대로 사용하고, newBreed를 빈 문자열로 설정
     // breedId가 존재하지 않으면 breedId는 0으로, newBreed는 원래 값으로 설정
-    const breedId = this.value[FIELD.DOG_BREED] || 0;
-    const newBreed = this.value[FIELD.DOG_BREED] ? "" : this.value[FIELD.NEW_BREED] || "";
+    const breedId = this.value[FIELD.BREED_ID] || 0;
+    const newBreed = this.value[FIELD.BREED_ID] ? "" : this.value[FIELD.NEW_BREED] || "";
 
     return {
       schoolFormId: this.value.schoolFormId,
