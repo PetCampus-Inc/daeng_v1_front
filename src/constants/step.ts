@@ -178,7 +178,7 @@ const stepFields: { [key in STEP_KEYS]: string[] } = {
     FIELD.DOG_NAME,
     FIELD.DOG_GENDER,
     FIELD.DOG_SIZE,
-    FIELD.DOG_BREED,
+    FIELD.BREED_ID,
     FIELD.NEW_BREED,
     FIELD.DOG_BIRTHDAY,
     FIELD.NEUTRALIZATION,

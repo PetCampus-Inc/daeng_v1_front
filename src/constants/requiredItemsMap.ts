@@ -13,7 +13,7 @@ export const REQUIRED_ITEMS_DOG_MAP = new Map<number, boolean>([
   [FIELD_KEYS.DOG_NAME, false],
   [FIELD_KEYS.DOG_GENDER, true],
   [FIELD_KEYS.DOG_SIZE, false],
-  [FIELD_KEYS.DOG_BREED, false],
+  [FIELD_KEYS.BREED_ID, false],
   [FIELD_KEYS.DOG_BIRTHDAY, false],
   [FIELD_KEYS.NEUTRALIZATION, true],
   [FIELD_KEYS.VACCINATION, true],
