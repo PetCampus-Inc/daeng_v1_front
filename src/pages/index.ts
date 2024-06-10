@@ -1,7 +1,7 @@
 export { default as NotFoundPage } from "./NotFoundPage";
 export { default as HomePage } from "./HomePage/HomePage";
 export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";
-export { default as AttendancePage } from "./AttendancePage";
+export { default as AttendancePage } from "./AdminAtendancePage/AttendancePage";
 export { default as AttendCarePage } from "./AdminCarePage/AttendCarePage";
 export { default as DogInfoPage } from "./DogInfoPage";
 export { default as Chat } from "./Chat";
