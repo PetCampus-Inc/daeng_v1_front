@@ -40,6 +40,7 @@ export const FIELD = {
   ENROLLMENT_ROUND_TICKET_NUMBER: "enrollmentRoundTicketNumber",
   ENROLLMENT_MONTHLY_TICKET_NUMBER: "enrollmentMonthlyTicketNumber",
   OPEN_DAYS: "openDays",
+  ATTENDANCE_DAYS: "attendanceDays",
   TICKET_INFO: "ticketInfo",
   LIMITS_INFO: "limitsInfo",
   ACCIDENT_INFO: "accidentInfo",
