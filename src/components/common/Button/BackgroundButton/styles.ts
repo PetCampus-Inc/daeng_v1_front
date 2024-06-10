@@ -38,5 +38,5 @@ export const BackgroundButtonWrapper = styled.div<{ hasNav?: boolean }>`
   bottom: 0;
   left: 0;
   right: 0;
-  padding-bottom: ${({ hasNav }) => (hasNav ? "calc(7vh)" : 0)};
+  padding-bottom: ${({ hasNav }) => (hasNav ? "78px" : 0)};
 `;
