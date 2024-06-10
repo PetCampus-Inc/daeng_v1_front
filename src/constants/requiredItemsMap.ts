@@ -1,5 +1,8 @@
 import { FIELD_KEYS } from "./field";
 
+// MEMO: 값이 고정되어 있는 것 같은데,
+// 필수입력, 선택 입력 관리를 어떻게 하고 있는건 지 궁금합니다!
+
 /**
  * 강아지 상세 정보 > 가입신청서의 requiredItems
  * 필수입력, 선택 입력 표시
@@ -14,7 +17,7 @@ export const REQUIRED_ITEMS_DOG_MAP = new Map<number, boolean>([
   [FIELD_KEYS.DOG_GENDER, true],
   [FIELD_KEYS.DOG_SIZE, false],
   [FIELD_KEYS.BREED_ID, false],
-  [FIELD_KEYS.DOG_BIRTHDAY, false],
+  [FIELD_KEYS.BIRTHDAY, false],
   [FIELD_KEYS.NEUTRALIZATION, true],
   [FIELD_KEYS.VACCINATION, true],
   [FIELD_KEYS.VACCINATION_URL, false],
