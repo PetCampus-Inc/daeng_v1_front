@@ -2,8 +2,11 @@ import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetMemberEnrollmentForm } from "apis/admin/enrollment.api";
-import { handleGetAdminForm, handlePostAdminForm } from "apis/member/enrollment.api";
+import {
+  handleGetAdminForm,
+  handleGetMemberEnrollmentForm,
+  handlePostAdminForm
+} from "apis/admin/enrollment.api";
 import { Adapter } from "libs/adapters";
 import {
   EditModeAdapter,
@@ -85,7 +88,7 @@ export const useAdminEnrollment = (formId: string, mode: Mode) => {
   const enlistmentQuery = useSuspenseQuery<EnrollmentDataType, Error, FormAdaptedData<typeof mode>>(
     {
       queryKey: QUERY_KEY.ADMIN_ENROLLMENT(formId),
-      queryFn: () => handleGetAdminForm({ formId }),
+      queryFn: () => handleGetAdminForm(formId),
       select: (data) =>
         Adapter.from(data).to<EnrollmentDataType, FormAdaptedData<typeof mode>>((item) => {
           const adapterInstance =
