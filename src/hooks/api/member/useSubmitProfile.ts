@@ -1,4 +1,3 @@
-import { useCreateAlbum } from "hooks/api/admin/care";
 import { useS3Upload } from "hooks/common/useS3";
 import { useState } from "react";
 import showToast from "utils/showToast";
@@ -23,9 +22,7 @@ const useSubmitProfile = () => {
     paramsArray: UploadParams[],
     options?: UploadAndCreateAlbumOptions
   ) => {
-    console.log("paramsArray", paramsArray);
-
-    paramsArray.forEach(async (params) => {
+    const uploadPromises = paramsArray.map(async (params) => {
       const { files, path, accept, id, name } = params;
 
       const profileParams = { files, path: `${path}/${id}`, accept, id, name };
@@ -35,7 +32,6 @@ const useSubmitProfile = () => {
         return;
       }
 
-      let allImageUriList: string[] = [];
       try {
         const imageUriList = await new Promise<string[]>((resolve, reject) => {
           uploadToS3(profileParams, {
@@ -43,16 +39,22 @@ const useSubmitProfile = () => {
             onError: (error) => reject(error)
           });
         });
-        allImageUriList = [...allImageUriList, ...imageUriList];
-        setS3ProfileData(allImageUriList);
+        return imageUriList;
       } catch (error) {
         showToast("사진 업로드에 실패했습니다. 다시 시도해주세요.", "ownerNav");
         return;
       }
-      return console.log("profileParams!!!", profileParams, allImageUriList);
     });
-  };
 
+    try {
+      const allImgUriList = await Promise.all(uploadPromises);
+      const totalImgList = allImgUriList.flat().filter((el): el is string => el !== undefined);
+      setS3ProfileData([...totalImgList]);
+      if (options?.onSuccess) options.onSuccess();
+    } catch (error) {
+      return;
+    }
+  };
   return { uploadFiles, s3ProfileData };
 };
 
