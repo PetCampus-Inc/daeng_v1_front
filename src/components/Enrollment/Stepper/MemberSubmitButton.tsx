@@ -36,7 +36,7 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     address: `${memberInfoData.address && memberInfoData.address}`,
     addressDetail: `${memberInfoData.address && memberInfoData.addressDetail}`,
     phoneNumber: memberInfoData.phoneNumber,
-    emergencyNumber: memberInfoData.emergencyPhoneNumber || null
+    emergencyPhoneNumber: memberInfoData.emergencyPhoneNumber || ""
   };
 
   const getSubmitFormInfo = (data: FieldValues) => {
@@ -77,7 +77,7 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     <FormButton
       type="submit"
       onClick={handleSubmit(onSubmitMemberDogAdd, onInvalid)}
-      aria-label="제출하기"
+      aria-label="제출하기1"
     >
       제출하기1
     </FormButton>
