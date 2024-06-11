@@ -52,11 +52,8 @@ const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: Navigation
       <FormButtonWrapper>
         {!isFirstStep && !isLastStep && <FormPrevButton onClick={prevStep}>이전</FormPrevButton>}
         {!isLastStep && <FormButton onClick={nextStep}>다음</FormButton>}
-        {isLastStep && isMypage ? (
-          <MemberSubmitButton openPopup={openInvalidInputPopup} />
-        ) : (
-          <SubmitButton openPopup={openInvalidInputPopup} />
-        )}
+        {isLastStep && !isMypage && <SubmitButton openPopup={openInvalidInputPopup} />}
+        {isLastStep && isMypage && <MemberSubmitButton openPopup={openInvalidInputPopup} />}
       </FormButtonWrapper>
     </S.ButtonContainer>
   );
