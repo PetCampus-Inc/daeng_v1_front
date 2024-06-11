@@ -3,12 +3,13 @@ import { SIGNUP_PATH } from "constants/path";
 import { useFunnel } from "hooks/common/useFunnel";
 import { Suspense } from "react";
 
+import ApprovalStatusPage from "./ApprovalStatusPage";
 import SearchSchoolPage from "./SearchSchoolPage";
 import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
 
 const SignUpFunnel = () => {
-  const { 유치원_검색, 가입신청서_작성 } = SIGNUP_PATH;
-  const funnelSteps = [유치원_검색, 가입신청서_작성] as const;
+  const { 유치원_검색, 가입신청서_작성, 승인상태 } = SIGNUP_PATH;
+  const funnelSteps = [유치원_검색, 가입신청서_작성, 승인상태] as const;
 
   const [Funnel, state, setState] = useFunnel(funnelSteps, {
     initialStep: 유치원_검색,
@@ -30,6 +31,11 @@ const SignUpFunnel = () => {
       <Funnel.Step name={가입신청서_작성}>
         <Suspense>
           <EnrollmentPage schoolId={state.schoolId} />
+        </Suspense>
+      </Funnel.Step>
+      <Funnel.Step name={승인상태}>
+        <Suspense>
+          <ApprovalStatusPage />
         </Suspense>
       </Funnel.Step>
     </Funnel>

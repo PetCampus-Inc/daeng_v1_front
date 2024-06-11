@@ -1,5 +1,5 @@
 import { Layout } from "components/common";
-import RegisterSuccess from "components/SignUp/ApprovalStatus/RegisterSuccess";
+import SchoolRegisterSuccess from "components/SignUp/ApprovalStatus/SchoolRegisterSuccess";
 import { useFormContext } from "react-hook-form";
 
 const SchoolRegistrationCompletePage = () => {
@@ -9,7 +9,7 @@ const SchoolRegistrationCompletePage = () => {
 
   return (
     <Layout type="page" pt={76} position="relative">
-      <RegisterSuccess schoolName={schoolName} />
+      <SchoolRegisterSuccess schoolName={schoolName} />
     </Layout>
   );
 };

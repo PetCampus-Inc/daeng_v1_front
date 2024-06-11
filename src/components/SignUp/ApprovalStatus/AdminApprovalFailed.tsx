@@ -3,13 +3,24 @@ import DogRejectedBgIcon from "../../../assets/svg/dog-rejected-bg-icon";
 import { Box, Flex, Text } from "../../common";
 import Button from "../button/Button";
 
-const ApprovalFailed = () => {
+interface ApprovalFailedProps {
+  schoolName?: string;
+  onNextStep?: () => void;
+}
+
+const AdminApprovalFailed = ({ schoolName, onNextStep }: ApprovalFailedProps) => {
+  const handleConfirm = () => {
+    // MEMO: 유치원 검색 화면으로 이동
+    // TODO: 폼 초기화하기
+    onNextStep?.();
+  };
+
   return (
     <>
       <Flex direction="column" gap={3}>
         <Text as="h2" typo="title1_24_B" color="darkBlack">
           <em color="primaryColor">
-            뿅뿅애견 유치원 <br />
+            {schoolName} 유치원 <br />
             가입 승인
           </em>
           이 실패했습니다
@@ -24,10 +35,10 @@ const ApprovalFailed = () => {
       </StyledImgWrapper>
 
       <Box position="absolute" left={16} right={16} bottom={24}>
-        <Button>확인</Button>
+        <Button handleClick={handleConfirm}>확인</Button>
       </Box>
     </>
   );
 };
 
-export default ApprovalFailed;
+export default AdminApprovalFailed;
