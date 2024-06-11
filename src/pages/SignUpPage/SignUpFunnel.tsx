@@ -7,6 +7,7 @@ import ApprovalStatusPage from "./ApprovalStatusPage";
 import SearchSchoolPage from "./SearchSchoolPage";
 import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
 
+// TODO: schoolId를 로컬스토리지에 저장하고 EnrollmentPage에서 사용하도록 수정하기
 const SignUpFunnel = () => {
   const { 유치원_검색, 가입신청서_작성, 승인상태 } = SIGNUP_PATH;
   const funnelSteps = [유치원_검색, 가입신청서_작성, 승인상태] as const;
