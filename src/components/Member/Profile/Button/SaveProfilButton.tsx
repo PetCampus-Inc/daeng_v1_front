@@ -37,20 +37,6 @@ const SaveProfilButton = () => {
   const s3MemberUri = s3ProfileData.find((el) => el.split("/").includes("member"));
   const s3DogUri = s3ProfileData.find((el) => el.split("/").includes("dog"));
 
-  console.log("s3MemberUri", s3MemberUri);
-
-  // TODO 어뎁터 데이터에 추가하기
-  const getSubmitFormInfo = (data: FieldValues) => {
-    return {
-      memberId: data.memberId,
-      dogId: data.dogId,
-      memberProfileUri: s3MemberUri || "",
-      dogProfileUri: s3DogUri || "",
-      nickName: data.dogName,
-      relation: data.relation
-    };
-  };
-
   const requestForProfile = async (data: FieldValues) => {
     const memberParams = {
       name: "member",
@@ -78,21 +64,33 @@ const SaveProfilButton = () => {
     });
   };
 
+  // TODO 어뎁터 데이터에 추가하기
+  const getSubmitFormInfo = (data: FieldValues) => {
+    return {
+      memberId: data.memberId,
+      dogId: data.dogId,
+      memberProfileUri: s3MemberUri || "",
+      dogProfileUri: s3DogUri || "",
+      nickName: data.nickName,
+      relation: data.relation
+    };
+  };
+
   const handleSubmitData = (data: FieldValues) => {
     const requestData = getSubmitFormInfo(data);
     mutateMemberProfile(requestData, {
       onSuccess: () => {
-        navigate(PATH.ROOT);
-        setMemberHome({ memberId: requestData.memberId, dogId: requestData.dogId });
+        // navigate(PATH.ROOT);
+        // setMemberHome({ memberId: requestData.memberId, dogId: requestData.dogId });
+        console.log("완료");
       }
     });
+    console.log("requestData", requestData);
   };
 
   const handleSubmitProfile = (data: FieldValues) => {
     requestForProfile(data);
   };
-
-  console.log("s3ProfileData", s3ProfileData);
 
   return (
     <S.SavaProfileButton>
