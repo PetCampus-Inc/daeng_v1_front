@@ -10,7 +10,7 @@ import ApprovalStatusPage from "./ApprovalStatusPage";
 import EnrollSchoolPage from "./EnrollSchoolPage";
 import RoleSelectPage from "./RoleSelectPage";
 import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
-import SearchSchoolPage from "./SearchSchoolPage";
+import SearchSchoolPage from "../SignUpPage/SearchSchoolPage";
 
 import type { Role } from "types/admin/admin.type";
 
