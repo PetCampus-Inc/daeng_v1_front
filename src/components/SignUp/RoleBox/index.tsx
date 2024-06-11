@@ -3,7 +3,7 @@ import PrincipalSelectedIcon from "assets/svg/principal-selected-icon";
 import TeacherIcon from "assets/svg/teacher-icon";
 import TeacherSelectedIcon from "assets/svg/teacher-selected-icon";
 import { Box, Flex, Text } from "components/common";
-import { AdminRole } from "pages/SignUpPage/AdminSignUpFunnel";
+import { AdminRole } from "pages/AdminSignUp/AdminSignUpFunnel";
 import { memo } from "react";
 
 import { StyledMainWrapper } from "./styles";

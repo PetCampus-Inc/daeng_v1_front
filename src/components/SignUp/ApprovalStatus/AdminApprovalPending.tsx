@@ -17,7 +17,7 @@ interface ApprovalSuccessProps {
   onNextStep?: () => void;
 }
 
-const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessProps) => {
+const AdminApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessProps) => {
   const { mutateTeacherSignUpCancel } = useTeacherSinUpCancel();
   const navigate = useNavigate();
   const overlay = useOverlay();
@@ -83,4 +83,4 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
   );
 };
 
-export default ApprovalPending;
+export default AdminApprovalPending;

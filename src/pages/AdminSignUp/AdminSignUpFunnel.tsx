@@ -5,8 +5,8 @@ import { memo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import AccountSettingPage from "./AccountSettingPage";
+import AdminApprovalStatusPage from "./AdminApprovalStatusPage";
 import AdminInfoPage from "./AdminInfoPage";
-import ApprovalStatusPage from "./ApprovalStatusPage";
 import EnrollSchoolPage from "./EnrollSchoolPage";
 import RoleSelectPage from "./RoleSelectPage";
 import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
@@ -140,7 +140,7 @@ const AdminSignUpFunnel = () => {
         </Funnel.Step>
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={승인상태}>
-          <ApprovalStatusPage
+          <AdminApprovalStatusPage
             info={state.teacherInfo}
             onSearchSchoolClick={() => setState((prev) => ({ ...prev, step: 유치원_검색 }))}
             onSelectRoleClick={() => setState((prev) => ({ ...prev, step: 역할_선택 }))}

@@ -1,32 +1,35 @@
-import { PATH } from "constants/path";
-
-import RegisterSchoolIcon from "assets/svg/register-school-icon";
-import { Box, Text } from "components/common";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StyledImgWrapper } from "./styles";
+import DogApprovalBgIcon from "../../../assets/svg/dog-approval-bg-icon";
+import { PATH } from "../../../constants/path";
+import { Box, Text } from "../../common";
 import Button from "../button/Button";
 
-const RegisterSuccess = ({ schoolName }: { schoolName?: string }) => {
+interface ApprovalSuccessProps {
+  schoolName?: string;
+}
+
+const AdminApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
   const navigate = useNavigate();
 
   const handleConfirm = () => {
-    // MEMO: 출석 페이지로 이동 (원장홈)
+    // MEMO: 출석 페이지로 이동 (교사홈)
     navigate(PATH.ADMIN_ATTENDANCE);
   };
-
   return (
     <>
       <Text as="h2" typo="title1_24_B" color="darkBlack">
         <em color="primaryColor">
           {schoolName} 유치원 <br />
-          등록
+          승인
         </em>
         이 완료되었습니다
       </Text>
 
       <StyledImgWrapper>
-        <RegisterSchoolIcon />
+        <DogApprovalBgIcon />
       </StyledImgWrapper>
 
       <Box position="absolute" left={16} right={16} bottom={24}>
@@ -36,4 +39,4 @@ const RegisterSuccess = ({ schoolName }: { schoolName?: string }) => {
   );
 };
 
-export default RegisterSuccess;
+export default AdminApprovalSuccess;

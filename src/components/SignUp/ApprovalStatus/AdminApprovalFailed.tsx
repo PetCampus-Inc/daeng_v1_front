@@ -8,7 +8,7 @@ interface ApprovalFailedProps {
   onNextStep?: () => void;
 }
 
-const ApprovalFailed = ({ schoolName, onNextStep }: ApprovalFailedProps) => {
+const AdminApprovalFailed = ({ schoolName, onNextStep }: ApprovalFailedProps) => {
   const handleConfirm = () => {
     // MEMO: 유치원 검색 화면으로 이동
     // TODO: 폼 초기화하기
@@ -41,4 +41,4 @@ const ApprovalFailed = ({ schoolName, onNextStep }: ApprovalFailedProps) => {
   );
 };
 
-export default ApprovalFailed;
+export default AdminApprovalFailed;
