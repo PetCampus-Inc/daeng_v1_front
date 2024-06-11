@@ -8,7 +8,16 @@ import { PageContainer } from "styles/StyleModule";
 const MemberOnboardingProfileEditePage = () => {
   // TODO memeberId 데이터 가져오기
   const { memberId } = useParams();
-  const { data } = useGetMemberProfile(Number(memberId));
+  // const { data } = useGetMemberProfile(Number(memberId));
+  //TODO 수정필요 - 목업 데이터
+  const data = {
+    memberId: 1,
+    dogId: 1,
+    memberProfileUri: "",
+    dogProfileUri: "",
+    nickName: "거튼이",
+    relation: ""
+  };
   const { ...rest } = data;
 
   const methods = useForm({

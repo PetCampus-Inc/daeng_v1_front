@@ -16,7 +16,8 @@ const MemberApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
   const memberId = 11;
   const handleConfirm = () => {
     // MEMO: 프로필 설정 페이지로 이동
-    navigate(PATH.MEMEBER_PROFILE_EDITE_PAGE(String(memberId)));
+    // navigate(PATH.MEMEBER_PROFILE_EDITE_PAGE(String(memberId)));
+    navigate(PATH.MEMEBER_PROFILE_EDITE_PAGE);
   };
   return (
     <>
