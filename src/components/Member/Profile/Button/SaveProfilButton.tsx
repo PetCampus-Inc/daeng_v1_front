@@ -17,19 +17,19 @@ import { IMemberProfile } from "types/member/main.types";
 import * as S from "../styles";
 
 const SaveProfilButton = () => {
-  const { register, setValue, watch, handleSubmit } = useFormContext();
+  const { register, setValue, getValues, watch, handleSubmit } = useFormContext();
   const mutateMemberProfile = usePostMemberProfile();
   const { uploadFiles, s3ProfileData } = useSubmitProfile();
   const navigate = useNavigate();
   const setMemberHome = useSetRecoilState(memberHomeStateAtom);
 
   const profileData = {
-    memberId: watch("memberId"),
-    dogId: watch("dogId"),
-    memberProfileUri: watch("memberProfileUri"),
-    dogProfileUri: watch("dogProfileUri"),
-    nickName: watch("nickName"),
-    relation: watch("relation")
+    memberId: getValues("memberId"),
+    dogId: getValues("dogId"),
+    memberProfileUri: getValues("memberProfileUri"),
+    dogProfileUri: getValues("dogProfileUri"),
+    nickName: getValues("nickName"),
+    relation: getValues("relation")
   };
 
   const isDisabled = Object.values(profileData).every((el: null | undefined) => el ?? false);
