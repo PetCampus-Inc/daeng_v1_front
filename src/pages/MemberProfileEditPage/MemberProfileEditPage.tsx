@@ -5,7 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
-const MemberOnboardingProfileEditePage = () => {
+const MemberProfileEditPage = () => {
   // TODO memeberId 데이터 가져오기
   const { memberId } = useParams();
   // const { data } = useGetMemberProfile(Number(memberId));
@@ -36,4 +36,4 @@ const MemberOnboardingProfileEditePage = () => {
   );
 };
 
-export default MemberOnboardingProfileEditePage;
+export default MemberProfileEditPage;
