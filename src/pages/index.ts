@@ -32,7 +32,6 @@ export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
 export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEditPage";
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
 export { default as MemberAddDogProfileEditePage } from "./MemberPage/MemberAddDogProfileEditePage";
-export { default as MemberApprovalStatusPage } from "./MemberPage/MemberApprovalStatusPage";
 
 export { default as SettingPage } from "./SettingPage";
 export { default as PolicyPage } from "./PolicyPage";

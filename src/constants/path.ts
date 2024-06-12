@@ -85,8 +85,7 @@ const MEMBER_PATH = {
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
   // MEMEBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
   MEMEBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog`, // 추가된 강아지 홈 프사 설정
-  MEMBER_APPROVAL_STATUS_PAGE: `/approval`
+  MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
 };
 
 const PUBLIC_PATH = {

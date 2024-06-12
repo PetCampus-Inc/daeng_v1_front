@@ -114,14 +114,6 @@ const MemberRoutes = (): RouteObject[] => {
               <Pages.MemberAddDogProfileEditePage />
             </Suspense>
           )
-        },
-        {
-          path: PATH.MEMBER_APPROVAL_STATUS_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberApprovalStatusPage />
-            </Suspense>
-          )
         }
       ],
       loader: () => {
