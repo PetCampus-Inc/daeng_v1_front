@@ -64,7 +64,7 @@ const AttendanceAvatar = () => {
     arrows: false,
     infinite: false,
     speed: 500,
-    slidesToShow: Math.min(5, selectedDogs.length),
+    slidesToShow: 5,
     slidesToScroll: 5,
     beforeChange: (_: never, next: number) => {
       setCurrentIndex(next);
