@@ -10,7 +10,6 @@ import { useEffect } from "react";
 import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { memberHomeStateAtom } from "store/member";
 import { EnrollmentInfo } from "types/member/enrollment.types";
 import { IMemberProfile } from "types/member/main.types";
 
@@ -21,7 +20,6 @@ const SaveProfilButton = () => {
   const mutateMemberProfile = usePostMemberProfile();
   const { uploadFiles, s3ProfileData } = useSubmitProfile();
   const navigate = useNavigate();
-  const setMemberHome = useSetRecoilState(memberHomeStateAtom);
 
   const profileData = {
     memberId: getValues("memberId"),
@@ -81,7 +79,6 @@ const SaveProfilButton = () => {
     mutateMemberProfile(requestData, {
       onSuccess: () => {
         // navigate(PATH.ROOT);
-        // setMemberHome({ memberId: requestData.memberId, dogId: requestData.dogId });
         console.log("완료");
       }
     });

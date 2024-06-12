@@ -21,15 +21,7 @@ export const dogIdState = atom<number | null>({
   default: null
 });
 
-export const memberHomeStateAtom = atom<IMemberHome | null>({
-  key: "memberHome",
-  default: {
-    memberId: null,
-    dogId: null
-  }
-});
-
 export const memberProfileAtom = atom<string | null>({
-  key: "memberHome",
+  key: "memberProfile",
   default: null
 });
