@@ -131,11 +131,13 @@ export const EmptyText = styled.div`
   color: ${({ theme }) => theme.colors.gray_3};
 `;
 
-export const Blur = styled.div<{ $isFocus: boolean }>`
+export const Blur = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isFocus"
+})<{ isFocus: boolean }>`
   height: 100%;
 
   & > * {
-    opacity: ${({ $isFocus }) => ($isFocus ? 0.5 : 1)};
+    opacity: ${({ isFocus }) => (isFocus ? 0.5 : 1)};
   }
 `;
 
