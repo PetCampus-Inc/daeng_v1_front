@@ -20,8 +20,3 @@ export const dogIdState = atom<number | null>({
   key: "dogId",
   default: null
 });
-
-export const memberProfileAtom = atom<string | null>({
-  key: "memberProfile",
-  default: null
-});
