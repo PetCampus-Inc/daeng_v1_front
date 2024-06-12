@@ -8,15 +8,15 @@ import {
   handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
+  handleGetMemberProfile,
   handleGetMemberProfileInfo,
-  handleGetMemoProfile,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
+  handlePostMemberProfile,
   handlePostMemoDogAlleray,
-  handlePostMemoDogPickdrop,
-  handlePostMemoProfile
+  handlePostMemoDogPickdrop
 } from "apis/member/member.api";
 import { useNavigate } from "react-router-dom";
 import { getISOString } from "utils/date";
@@ -232,17 +232,17 @@ export const usePostMemberDogPickdrop = (dogId: number) => {
   return memberDogPickdropMutation.mutate;
 };
 
-// 회원 가입승인후 초기 견주, 강아지 프로필을 설정
+// 회원 가입승인후 초기 견주, 강아지 프로필을 설정 데이터 조회
 export const useGetMemberProfile = (memberId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_APPROVAL_STATUS_PAGE(memberId),
-    queryFn: () => handleGetMemoProfile(memberId)
+    queryFn: () => handleGetMemberProfile(memberId)
   });
 };
-
+// 회원 가입승인후 초기 견주, 강아지 프로필을 설정
 export const usePostMemberProfile = () => {
   const memberProfileMutation = useMutation({
-    mutationFn: (req: IMemberProfile) => handlePostMemoProfile(req),
+    mutationFn: (req: IMemberProfile) => handlePostMemberProfile(req),
     onSuccess: () => {
       console.log("완료");
     },
