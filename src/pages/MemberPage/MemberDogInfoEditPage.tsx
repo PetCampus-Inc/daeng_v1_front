@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 import { addZero } from "utils/date";
 
-const MemberDogInfoEditePage = () => {
+const MemberDogInfoEditPage = () => {
   const { dogId } = useParams();
   const overlay = useOverlay();
   const { data } = useGetMemberDogDetailnfo(Number(dogId));
@@ -52,4 +52,4 @@ const MemberDogInfoEditePage = () => {
   );
 };
 
-export default MemberDogInfoEditePage;
+export default MemberDogInfoEditPage;

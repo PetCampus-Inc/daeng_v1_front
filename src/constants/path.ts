@@ -80,12 +80,12 @@ const MEMBER_PATH = {
     `/${MYPAGE}/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
 
   MEMBER_DOG_INFO_PAGE: (dogId?: number) => `/dog-info/${dogId ?? ":dogId"}`, // 강아지 상세정보
-  MEMBER_DOG_INFO_EDITE_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
+  MEMBER_DOG_INFO_EDIT_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
   MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
-  // MEMEBER_PROFILE_EDITE_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_PROFILE_EDITE_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_ADD_DOG_PROFILE_EDITE_PAGE: `/profile/dog`, // 추가된 강아지 홈 프사 설정
+  // MEMEBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
+  MEMEBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
+  MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog`, // 추가된 강아지 홈 프사 설정
   MEMBER_APPROVAL_STATUS_PAGE: `/approval`
 };
 
