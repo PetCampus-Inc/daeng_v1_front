@@ -1,10 +1,10 @@
 import Modal, { type IModalProps } from "components/common/ButtonModal";
 
-interface LogoutModal extends IModalProps {
+interface LogoutAdminModal extends IModalProps {
   action: () => void;
 }
 
-const LogoutAdminModal = ({ close, action, isOpen }: LogoutModal) => {
+const LogoutModal = ({ close, action, isOpen }: LogoutAdminModal) => {
   return (
     <Modal isOpen={isOpen} close={close}>
       <Modal.Content variant="two">
@@ -15,4 +15,4 @@ const LogoutAdminModal = ({ close, action, isOpen }: LogoutModal) => {
   );
 };
 
-export default LogoutAdminModal;
+export default LogoutModal;
