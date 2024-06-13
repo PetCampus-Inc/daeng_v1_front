@@ -1,5 +1,6 @@
 import { PATH } from "constants/path";
 
+import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload/types";
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import useSubmitProfile from "hooks/api/member/useSubmitProfile";
@@ -7,7 +8,7 @@ import { useS3Upload } from "hooks/common/useS3";
 import { Adapter } from "libs/Adapter";
 import { MemberFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
 import { useEffect } from "react";
-import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
+import { FieldErrors, FieldValues, useForm, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { EnrollmentInfo } from "types/member/enrollment.types";
@@ -16,24 +17,21 @@ import { IMemberProfile } from "types/member/main.types";
 import * as S from "../styles";
 
 const SaveProfilButton = () => {
-  const { register, setValue, getValues, watch, handleSubmit } = useFormContext();
+  const {
+    getValues,
+    handleSubmit,
+    watch,
+    formState: { isValid }
+  } = useFormContext();
   const mutateMemberProfile = usePostMemberProfile();
   const { uploadFiles, s3ProfileData } = useSubmitProfile();
   const navigate = useNavigate();
 
-  const profileData = {
-    memberId: getValues("memberId"),
-    dogId: getValues("dogId"),
-    memberProfileUri: getValues("memberProfileUri"),
-    dogProfileUri: getValues("dogProfileUri"),
-    nickName: getValues("nickName"),
-    relation: getValues("relation")
-  };
-
-  const isDisabled = Object.values(profileData).every((el: null | undefined) => el ?? false);
+  const profileData = watch();
 
   const s3MemberUri = s3ProfileData.find((el) => el.split("/").includes("member"));
   const s3DogUri = s3ProfileData.find((el) => el.split("/").includes("dog"));
+  const isAllFilled = Object.values(profileData).every((el: null | undefined) => el ?? false);
 
   const requestForProfile = async (data: FieldValues) => {
     const memberParams = {
@@ -79,7 +77,6 @@ const SaveProfilButton = () => {
     mutateMemberProfile(requestData, {
       onSuccess: () => {
         // navigate(PATH.ROOT);
-        console.log("완료");
       }
     });
     console.log("requestData", requestData);
@@ -94,7 +91,7 @@ const SaveProfilButton = () => {
       <BackgroundButton
         onClick={handleSubmit(handleSubmitProfile)}
         backgroundColor="transparent"
-        disabled={!isDisabled}
+        disabled={!isValid || !isAllFilled}
       >
         프로필 완성하기
       </BackgroundButton>
