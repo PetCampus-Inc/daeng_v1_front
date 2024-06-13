@@ -235,7 +235,7 @@ export const usePostMemberDogPickdrop = (dogId: number) => {
 // 회원 가입승인후 초기 견주, 강아지 프로필을 설정 데이터 조회
 export const useGetMemberProfile = (memberId: number) => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_APPROVAL_STATUS_PAGE(memberId),
+    queryKey: QUERY_KEY.MEMBER_PROFILE(memberId),
     queryFn: () => handleGetMemberProfile(memberId)
   });
 };
