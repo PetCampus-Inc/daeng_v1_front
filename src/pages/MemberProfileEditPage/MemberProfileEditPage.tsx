@@ -15,7 +15,7 @@ const MemberProfileEditPage = () => {
     dogId: 1,
     memberProfileUri: "",
     dogProfileUri: "",
-    nickName: "거튼이",
+    dogName: "거튼이",
     relation: ""
   };
   const { ...rest } = data;
