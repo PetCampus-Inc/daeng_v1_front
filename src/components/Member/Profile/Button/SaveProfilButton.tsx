@@ -10,14 +10,14 @@ import { useNavigate } from "react-router-dom";
 import * as S from "../styles";
 
 const SaveProfilButton = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     watch,
     formState: { isValid }
   } = useFormContext();
-  const mutateMemberProfile = usePostMemberProfile();
   const { uploadFiles, s3ProfileData } = useSubmitProfile();
-  const navigate = useNavigate();
+  const mutateMemberProfile = usePostMemberProfile();
 
   const memebrProfileData = watch();
   const isAllFilled = Object.values(memebrProfileData).every((el: null | undefined) => el ?? false);
