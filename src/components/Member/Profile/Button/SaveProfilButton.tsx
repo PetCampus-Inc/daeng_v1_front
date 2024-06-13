@@ -47,7 +47,6 @@ const SaveProfilButton = () => {
 
     await uploadFiles(params, {
       onSuccess: () => {
-        console.log("성공");
         submitMemberProfile(data);
       }
     });
@@ -76,7 +75,6 @@ const SaveProfilButton = () => {
         navigate(PATH.ROOT);
       }
     });
-    console.log("requestData", requestData);
   };
 
   return (
