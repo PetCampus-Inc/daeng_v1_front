@@ -53,7 +53,7 @@ const SaveProfilButton = () => {
   };
 
   const convertProfileUri = (name: string) => {
-    return s3ProfileData.find((el) => el.split("/").includes(name)) || "";
+    return s3ProfileData.find((file) => file.split("/").includes(name)) || "";
   };
 
   // TODO 어뎁터 데이터에 추가하기
