@@ -20,9 +20,6 @@ const SaveProfilButton = () => {
   const navigate = useNavigate();
 
   const profileData = watch();
-
-  const s3MemberUri = s3ProfileData.find((el) => el.split("/").includes("member"));
-  const s3DogUri = s3ProfileData.find((el) => el.split("/").includes("dog"));
   const isAllFilled = Object.values(profileData).every((el: null | undefined) => el ?? false);
 
   const handleSubmitProfile = (data: FieldValues) => {
@@ -56,13 +53,17 @@ const SaveProfilButton = () => {
     });
   };
 
+  const convertProfileUri = (name: string) => {
+    return s3ProfileData.find((el) => el.split("/").includes(name)) || "";
+  };
+
   // TODO 어뎁터 데이터에 추가하기
   const getSubmitFormData = (data: FieldValues) => {
     return {
       memberId: data.memberId,
       dogId: data.dogId,
-      memberProfileUri: s3MemberUri || "",
-      dogProfileUri: s3DogUri || "",
+      memberProfileUri: convertProfileUri(PROFILE_NAME.MEMBER),
+      dogProfileUri: convertProfileUri(PROFILE_NAME.DOG),
       nickName: data.nickName,
       relation: data.relation
     };
