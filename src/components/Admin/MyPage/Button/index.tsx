@@ -27,7 +27,12 @@ const LogOutButton = () => {
   return (
     <>
       <BackgroundButtonWrapper>
-        <BackgroundButton onClick={openPopup} className="logOut">
+        <BackgroundButton
+          buttonBackgroundColor="gray_4"
+          fontColor="gray_3"
+          onClick={openPopup}
+          className="logOut"
+        >
           로그아웃
         </BackgroundButton>
       </BackgroundButtonWrapper>
