@@ -1,4 +1,4 @@
-import { PROFILE_NAME } from "constants/profile";
+import { ACCEPT_FILE_TYPE, PROFILE_NAME } from "constants/profile";
 
 import AddCIcon from "assets/svg/add-c-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
@@ -49,7 +49,7 @@ const ProfileEdite = ({
         {...register(registerText)}
         type="file"
         ref={fileInputRef}
-        accept={"image/*"}
+        accept={ACCEPT_FILE_TYPE.IMAGE}
         onChange={(e) => handleFileChange(e, type)}
       />
       <Text as="span" typo="body2_16_R" color="gray_2">
