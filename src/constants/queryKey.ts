@@ -43,7 +43,6 @@ const MEMBER_QUERY_KEY = {
   MEMBER_PHONE_NUMBER: (dogId: number) => ["phoneNumber", dogId], // 견주 전화번호
   MEMBER_AGREEMENT_INFO: (agreementId: number) => ["memberAgreementInfo", agreementId], // 유의사항 동의 정보
   DOG_SHCOOL_INFO: ["memberDogSchoolInfo"], // 강아지 유치원 정보
-  MEMBER_APPROVAL_STATUS_PAGE: (memberId: number) => ["memberProfile", memberId], // 온보딩 후 견주 프로필 정보
   HOME: (memberId: number, dogId: number) => ["home", memberId, dogId], // 견주 홈 메인
   DOGS: (memberId: number) => ["dogs", memberId] // 견주 홈 강아지 리스트
 };
