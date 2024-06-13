@@ -56,7 +56,8 @@ const MemberEnrollmentFormDetailPage = () => {
     monthlyTicketNumber: rest.monthlyTicketNumber,
     enrollmentRoundTicketNumber: rest.enrollmentRoundTicketNumber,
     enrollmentMonthlyTicketNumber: rest.enrollmentMonthlyTicketNumber,
-    openDays: rest.openDays
+    openDays: rest.openDays,
+    attendanceDays: rest.attendanceDays
   };
 
   return (

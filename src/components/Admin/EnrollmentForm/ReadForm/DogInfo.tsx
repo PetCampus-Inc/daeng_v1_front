@@ -35,11 +35,11 @@ const DogInfo = ({ item }: DogInfoProps) => {
         />
       </Card>
       <Card>
-        <Title isRequired={item?.get(FIELD_KEYS.DOG_BREED)}>견종</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.BREED_ID)}>견종</Title>
         <SearchInputField name="newBreed" placeholder="견종을 선택해 주세요" readOnly />
       </Card>
       <Card>
-        <Title isRequired={item?.get(FIELD_KEYS.DOG_BIRTHDAY)}>생일</Title>
+        <Title isRequired={item?.get(FIELD_KEYS.BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
           <SelectNumber name="year" defaultValue="2000" readOnly />
           <SelectNumber name="month" defaultValue="01" readOnly />

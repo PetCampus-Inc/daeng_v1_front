@@ -12,8 +12,8 @@ interface IBackgroundButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 const BackgroundButton = ({
   hasNav,
   backgroundColor = "gray_5",
-  buttonBackgroundColor = "gray_4",
-  pb = 42,
+  buttonBackgroundColor = "primaryColor",
+  pb = 32,
   children,
   ...props
 }: PropsWithChildren<IBackgroundButton>) => {

@@ -1,7 +1,7 @@
 export { default as NotFoundPage } from "./NotFoundPage";
 export { default as HomePage } from "./HomePage/HomePage";
 export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";
-export { default as AttendancePage } from "./AttendancePage";
+export { default as AttendancePage } from "./AdminAtendancePage/AttendancePage";
 export { default as AttendCarePage } from "./AdminCarePage/AttendCarePage";
 export { default as DogInfoPage } from "./DogInfoPage";
 export { default as Chat } from "./Chat";
@@ -41,7 +41,7 @@ export { default as UnregisterSuccessPage } from "./UnregisterSuccessPage";
 export { default as AttendCareGallery } from "./AdminCarePage/AttendCareGalleryPage";
 export { default as AttendCareSelectDog } from "./AdminCarePage/AttendCareSelectDogPage";
 
-export { default as MemberEnrollmentFormDetailPage } from "./MemberPage/MemberEnrollmentFormDetailPage";
+export { default as MemberEnrollmentFormDetailPage } from "./EnrollmentPage/MemberEnrollmentFormDetailPage";
 
 export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";

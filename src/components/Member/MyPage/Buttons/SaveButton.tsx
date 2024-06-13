@@ -1,3 +1,5 @@
+import { FIELD } from "constants/field";
+
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { useGetMemberProfileInfo, usePostMemberProfileInfo } from "hooks/api/member/member";
 import { useCallback, useEffect, useState } from "react";
@@ -12,14 +14,14 @@ const SaveButton = () => {
   const mutatePostMemberInfo = usePostMemberProfileInfo(String(memberId));
   const { data: previousValues } = useGetMemberProfileInfo(String(memberId));
 
-  const memberName = watch("memberName");
-  const memberGender = watch("memberGender") === "여" ? "FEMALE" : "MALE";
-  const nickName = watch("nickName");
-  const address = watch("address.street");
-  const addressDetail = watch("address.detail");
-  const phoneNumber = watch("phoneNumber");
-  const emergencyPhoneNumber = watch("emergencyNumber");
-  const relation = watch("relation");
+  const memberName = watch(FIELD.MEMBER_NAME);
+  const memberGender = watch(FIELD.MEMBER_GENDER) === "여" ? "FEMALE" : "MALE";
+  const nickName = watch(FIELD.NICK_NAME);
+  const address = watch(FIELD.MEMBER_ADDRESS);
+  const addressDetail = watch(FIELD.MEMBER_ADDRESS_DETAIL);
+  const phoneNumber = watch(FIELD.MEMBER_PHONE);
+  const emergencyPhoneNumber = watch(FIELD.EMERGENCY_NUMBER);
+  const relation = watch(FIELD.RELATION);
 
   const updatedMemberInfo = {
     memberId: String(memberId),

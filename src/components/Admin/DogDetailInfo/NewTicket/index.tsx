@@ -1,4 +1,5 @@
 import { newTicketYear, monthsArray, daysArray } from "constants/date";
+import { FIELD } from "constants/field";
 
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import SelectNumber from "components/common/Select/SelectNumber";
@@ -14,8 +15,7 @@ const NewTicket = () => {
   const [data] = useRecoilState(newTicketCardDataAtom);
   const { watch, setValue } = useFormContext();
   const ticketType = data?.ticketType === "ROUND" ? "회차권" : "정기권";
-  console.log(ticketType);
-  const selectedTicketType = watch("ticketType") ?? ticketType;
+  const selectedTicketType = watch(FIELD.TICKET_TYPE) ?? ticketType;
   const roundTicketText = [10, 20, 30].map((number) => `${number}회`) || [];
   const monthlyTicketText = [10, 11, 12]?.map((number) => `${number}주`) || [];
 
@@ -53,7 +53,7 @@ const NewTicket = () => {
       <S.Card>
         <S.Label>이용권 유형</S.Label>
         <SingleRadio
-          name="ticketType"
+          name={FIELD.TICKET_TYPE}
           radiosText={["정기권", "회차권"]}
           defaultSelect={ticketType}
         />
@@ -62,7 +62,7 @@ const NewTicket = () => {
         <S.Card>
           <S.Label>회차권 유형</S.Label>
           <SingleRadio
-            name="roundTicketNumber"
+            name={FIELD.ROUND_TICKET_NUMBER}
             defaultSelect={`${data.allRoundTicket.toString()}회`}
             radiosText={roundTicketText}
           />
@@ -71,7 +71,7 @@ const NewTicket = () => {
         <S.Card>
           <S.Label>정기권 유형</S.Label>
           <SingleRadio
-            name="monthlyTicketNumber"
+            name={FIELD.MONTHLY_TICKET_NUMBER}
             defaultSelect={`${data.monthlyTicketNumber.toString()}주`}
             radiosText={monthlyTicketText}
           />
@@ -80,7 +80,7 @@ const NewTicket = () => {
       <S.Card>
         <S.Label>요일 선택</S.Label>
         <DayMultiCheck
-          name="openDays"
+          name={FIELD.OPEN_DAYS}
           defaultSelect={data.attendanceDays}
           openDays={["월", "화", "금", "토", "일"]}
         />

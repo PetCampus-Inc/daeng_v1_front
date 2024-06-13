@@ -1,8 +1,10 @@
+import { FIELD } from "constants/field";
+
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import SaveButton from "components/Member/DogInfo/DogDetailInfoEdite/Buttons/SaveButton";
 import DogDetailInfoEdite from "components/Member/DogInfo/DogDetailInfoEdite/DogDetailInfoEdite";
-import { useGetMemberDogDetailnfo } from "hooks/api/member/member";
+import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,11 +14,11 @@ import { addZero } from "utils/date";
 const MemberDogInfoEditePage = () => {
   const { dogId } = useParams();
   const overlay = useOverlay();
-  const { data } = useGetMemberDogDetailnfo(Number(dogId));
+  const { data } = useGetMemberDogDetailInfo(Number(dogId));
   const { ...rest } = data;
   const navigate = useNavigate();
 
-  const [year, month, day] = data.dogBirthDate.map(Number);
+  const [year, month, day] = data[FIELD.BIRTHDAY].map(Number);
 
   const dogBirth = {
     year: year,

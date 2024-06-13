@@ -77,7 +77,7 @@ export interface EnrollmentInfoType extends MemberDtoInfoType {
   birthDate: string;
   neutralization: NeutralizationType | "";
   vaccination: VaccinationType | "";
-  vaccinationUri: string;
+  vaccinationUri: string[];
   allergyDisease: string;
   ticketType: TicketType | "";
   roundTicketNumber: number;
@@ -131,7 +131,7 @@ export interface IDogEnrollmentInfo extends IResponse {
   breedId: number;
   breedName: string;
   newBreed: string;
-  dogBirthDate: string[];
+  birthDate: string[];
   neutralization: string;
   allergyDisease?: string;
   vaccination: string;

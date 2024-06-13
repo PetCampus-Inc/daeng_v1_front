@@ -1,4 +1,4 @@
-import { FIELD_KEYS } from "constants/field";
+import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
@@ -14,17 +14,17 @@ import TicketType from "../TicketType";
 const TicketInfo = () => {
   const { register, control, watch, setValue } = useFormContext();
 
-  const selectedTicketTypes = watch("ticketType");
+  const selectedTicketTypes = watch(FIELD.TICKET_TYPE);
 
   const isMonthlySelected = selectedTicketTypes?.includes("정기권");
   const isRoundSelected = selectedTicketTypes?.includes("회차권");
 
   useEffect(() => {
     if (!isMonthlySelected) {
-      setValue("monthlyTicketNumber", []);
+      setValue(FIELD.MONTHLY_TICKET_NUMBER, []);
     }
     if (!isRoundSelected) {
-      setValue("roundTicketNumber", []);
+      setValue(FIELD.ROUND_TICKET_NUMBER, []);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMonthlySelected, isRoundSelected]);
@@ -32,26 +32,30 @@ const TicketInfo = () => {
   return (
     <>
       <Card>
-        <AdminTitle name={`requiredItemList.${FIELD_KEYS.PRICE_INFO}`} control={control} hasBadge>
+        <AdminTitle name="null" control={control} hasBadge noToggle>
           가격 안내
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
         <TextArea
-          {...register("priceInfo", { required: true })}
+          {...register(FIELD.PRICE_INFO, { required: true })}
           placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다."
         />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${FIELD_KEYS.TICKET_TYPE}`} control={control} hasBadge>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.TICKET_TYPE}`}
+          control={control}
+          hasBadge
+        >
           이용권 종류
         </AdminTitle>
         <Caption>복수 선택이 가능해요</Caption>
-        <MultiCheck name="ticketType" radiosText={["정기권", "회차권"]} isRequired />
+        <MultiCheck name={FIELD.TICKET_TYPE} radiosText={["정기권", "회차권"]} isRequired />
       </Card>
       {isMonthlySelected && (
         <Card>
           <AdminTitle
-            name={`requiredItemList.${FIELD_KEYS.MONTHLY_TICKET_NUMBER}`}
+            name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MONTHLY_TICKET_NUMBER}`}
             control={control}
             hasBadge
           >
@@ -61,7 +65,7 @@ const TicketInfo = () => {
           <TicketType
             ticketType="MONTHLY"
             control={control}
-            name="monthlyTicketNumber"
+            name={FIELD.MONTHLY_TICKET_NUMBER}
             defaultValues={[1, 2, 4, 8]}
           />
         </Card>
@@ -69,7 +73,7 @@ const TicketInfo = () => {
       {isRoundSelected && (
         <Card>
           <AdminTitle
-            name={`requiredItemList.${FIELD_KEYS.ROUND_TICKET_NUMBER}`}
+            name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ROUND_TICKET_NUMBER}`}
             control={control}
             hasBadge
           >
@@ -79,24 +83,32 @@ const TicketInfo = () => {
           <TicketType
             ticketType="ROUND"
             control={control}
-            name="roundTicketNumber"
+            name={FIELD.ROUND_TICKET_NUMBER}
             defaultValues={[1, 3, 5, 10]}
           />
         </Card>
       )}
       <Card>
-        <AdminTitle name={`requiredItemList.${FIELD_KEYS.OPEN_DAYS}`} control={control} hasBadge>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.OPEN_DAYS}`}
+          control={control}
+          hasBadge
+        >
           등원 요일 선택
         </AdminTitle>
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
-        <DayMultiCheck name="openDays" defaultChecked isRequired />
+        <DayMultiCheck name={FIELD.OPEN_DAYS} defaultChecked isRequired />
       </Card>
       <Card>
-        <AdminTitle name={`requiredItemList.${FIELD_KEYS.TICKET_INFO}`} control={control} hasBadge>
+        <AdminTitle
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.TICKET_INFO}`}
+          control={control}
+          hasBadge
+        >
           유의사항
         </AdminTitle>
         <TextArea
-          {...register("ticketInfo", { required: true })}
+          {...register(FIELD.TICKET_INFO, { required: true })}
           placeholder="유의사항을 입력해 주세요"
         />
         <Stack>
