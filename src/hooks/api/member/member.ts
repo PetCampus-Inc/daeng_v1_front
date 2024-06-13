@@ -1,3 +1,4 @@
+import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -241,15 +242,16 @@ export const useGetMemberProfile = (memberId: number) => {
 };
 // 회원 가입승인후 초기 견주, 강아지 프로필을 설정
 export const usePostMemberProfile = () => {
-  const memberProfileMutation = useMutation({
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
     mutationFn: (req: IMemberProfile) => handlePostMemberProfile(req),
     onSuccess: () => {
-      console.log("완료");
+      navigate(PATH.ROOT);
     },
     onError: () => {
       showToast("프로필 등록을 실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
-  return memberProfileMutation.mutate;
+  return { mutateMemberProfile: mutate };
 };

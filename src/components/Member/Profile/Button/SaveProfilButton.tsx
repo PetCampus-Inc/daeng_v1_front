@@ -1,23 +1,20 @@
-import { PATH } from "constants/path";
 import { ACCEPT_FILE_TYPE, PROFILE_NAME, PROFILE_PATHS } from "constants/profile";
 
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import useSubmitProfile from "hooks/api/member/useSubmitProfile";
 import { FieldValues, useFormContext } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 import * as S from "../styles";
 
 const SaveProfilButton = () => {
-  const navigate = useNavigate();
   const {
     handleSubmit,
     watch,
     formState: { isValid }
   } = useFormContext();
   const { uploadFiles, s3ProfileData } = useSubmitProfile();
-  const mutateMemberProfile = usePostMemberProfile();
+  const { mutateMemberProfile } = usePostMemberProfile();
 
   const memebrProfileData = watch();
   const isAllFilled = Object.values(memebrProfileData).every((el: null | undefined) => el ?? false);
@@ -70,11 +67,7 @@ const SaveProfilButton = () => {
 
   const submitMemberProfile = (data: FieldValues) => {
     const requestData = getSubmitFormData(data);
-    mutateMemberProfile(requestData, {
-      onSuccess: () => {
-        navigate(PATH.ROOT);
-      }
-    });
+    mutateMemberProfile(requestData);
   };
 
   return (
