@@ -1,3 +1,5 @@
+import { PROFILE_NAME } from "constants/profile";
+
 import AddCIcon from "assets/svg/add-c-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { Flex } from "components/common/Flex";
@@ -51,7 +53,7 @@ const ProfileEdite = ({
         onChange={(e) => handleFileChange(e, type)}
       />
       <Text as="span" typo="body2_16_R" color="gray_2">
-        {type === "MY" ? "내 프로필" : "강아지 프로필"}
+        {type === PROFILE_NAME.MEMBER ? "내 프로필" : "강아지 프로필"}
       </Text>
     </Flex>
   );

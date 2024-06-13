@@ -1,4 +1,5 @@
 import { PATH } from "constants/path";
+import { ACCEPT_FILE_TYPE, PROFILE_NAME, PROFILE_PATHS } from "constants/profile";
 
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { usePostMemberProfile } from "hooks/api/member/member";
@@ -30,19 +31,19 @@ const SaveProfilButton = () => {
 
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
-      name: "member",
+      name: PROFILE_NAME.MEMBER,
       id: profileData.memberId,
       files: profileData.memberProfileUri,
-      accept: "image/*",
-      path: "test_images/agenda/member/profile"
+      accept: ACCEPT_FILE_TYPE.IMAGE,
+      path: PROFILE_PATHS.MEMBER
     };
 
     const dogParams = {
-      name: "dog",
+      name: PROFILE_NAME.DOG,
       id: profileData.dogId,
       files: profileData.dogProfileUri,
-      accept: "image/*",
-      path: "test_images/agenda/dog/profile"
+      accept: ACCEPT_FILE_TYPE.IMAGE,
+      path: PROFILE_PATHS.DOG
     };
 
     const params = [memberParams, dogParams];

@@ -7,7 +7,7 @@ import { getFilePreview } from "utils/thumb";
 import ProfileEdite from "../Edite/ProfileEdite";
 
 interface IProfileEditeProps {
-  type: "MY" | "DOG";
+  type: string;
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   fileRef: React.RefObject<HTMLInputElement>;
