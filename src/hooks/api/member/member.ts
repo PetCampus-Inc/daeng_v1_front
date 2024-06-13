@@ -120,7 +120,7 @@ export const useGetMemberProfileInfo = (memberId: string) => {
 // 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = (memberId: string) => {
   const queryClient = useQueryClient();
-  const enrollMemberDOgMutation = useMutation({
+  const enrollMemberDogMutation = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
@@ -131,7 +131,7 @@ export const usePostMemberDogEnrollment = (memberId: string) => {
     }
   });
 
-  return enrollMemberDOgMutation.mutate;
+  return enrollMemberDogMutation.mutate;
 };
 
 // 견주 상세 정보 수정
