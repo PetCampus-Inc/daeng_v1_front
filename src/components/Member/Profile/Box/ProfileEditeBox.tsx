@@ -1,5 +1,5 @@
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
@@ -7,7 +7,6 @@ import { getFilePreview } from "utils/thumb";
 import ProfileEdite from "../Edite/ProfileEdite";
 
 interface IProfileEditeProps {
-  isOnlyProfile?: "MY" | "DOG";
   type: "MY" | "DOG";
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +15,6 @@ interface IProfileEditeProps {
 }
 
 const ProfileEditeBox = ({
-  isOnlyProfile,
   type,
   isActive,
   setIsActive,
@@ -24,12 +22,7 @@ const ProfileEditeBox = ({
   fileName
 }: IProfileEditeProps) => {
   const { setValue } = useFormContext();
-  const [myProfile, setMyProfile] = useState<IFile[]>([]);
-  const [dogProfile, setDogProfile] = useState<IFile[]>([]);
-  const [isMyActive, setMyIsActive] = useState(false);
-  const [isDogActive, setDogIsActive] = useState(false);
-  const myFileInputRef = useRef<HTMLInputElement | null>(null);
-  const dogFileInputRef = useRef<HTMLInputElement | null>(null);
+  const [profile, setProfile] = useState<IFile[]>([]);
 
   const handleClick = () => {
     if (fileRef && fileRef.current) {
@@ -47,8 +40,8 @@ const ProfileEditeBox = ({
       const newFiles = Array.from(e.target.files);
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
 
-      //TODO 중복파일 확인 필요
-      setMyProfile([...fileArray]);
+      //TODO 중복파일인 경우 확인 필요
+      setProfile([...fileArray]);
       setValue(fileName, [...newFiles]);
       setIsActive(true);
     }
@@ -59,24 +52,13 @@ const ProfileEditeBox = ({
       <ProfileEdite
         isActive={isActive}
         setIsActive={setIsActive}
-        profile={myProfile}
+        profile={profile}
         fileInputRef={fileRef}
         handleFileChange={handleFileChange}
         handleClick={handleClick}
         registerText={fileName}
         type={type}
       />
-
-      {/* <ProfileEdite
-        isActive={isDogActive}
-        setIsActive={setDogIsActive}
-        profile={dogProfile}
-        fileInputRef={dogFileInputRef}
-        handleFileChange={handleFileChange}
-        handleClick={handleClick}
-        registerText="dogProfileUri"
-        type={type}
-      /> */}
     </>
   );
 };

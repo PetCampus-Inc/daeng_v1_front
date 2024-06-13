@@ -8,7 +8,7 @@ import NickNameEdite from "./Edite/NickNameEdite";
 import RoleEdite from "./Edite/RoleEdite";
 
 const OnboardingProfile = () => {
-  const { isFocusing, handleFocus, handleBlur } = useFocus();
+  const { handleFocus, handleBlur } = useFocus();
   const [isMyActive, setMyIsActive] = useState(false);
   const [isDogActive, setDogIsActive] = useState(false);
   const myFileInputRef = useRef<HTMLInputElement>(null);

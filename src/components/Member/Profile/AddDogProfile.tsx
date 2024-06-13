@@ -23,7 +23,6 @@ const AddDogProfile = () => {
           isActive={isDogActive}
           setIsActive={setDogIsActive}
           fileRef={dogFileInputRef}
-          isOnlyProfile="DOG"
           fileName="dogProfileUri"
         />
       </Flex>
