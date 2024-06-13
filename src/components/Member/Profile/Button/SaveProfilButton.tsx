@@ -24,7 +24,11 @@ const SaveProfilButton = () => {
   const s3DogUri = s3ProfileData.find((el) => el.split("/").includes("dog"));
   const isAllFilled = Object.values(profileData).every((el: null | undefined) => el ?? false);
 
-  const requestForProfile = async (data: FieldValues) => {
+  const handleSubmitProfile = (data: FieldValues) => {
+    uploadProfileFiles(data);
+  };
+
+  const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: "member",
       id: profileData.memberId,
@@ -46,13 +50,13 @@ const SaveProfilButton = () => {
     await uploadFiles(params, {
       onSuccess: () => {
         console.log("성공");
-        handleSubmitData(data);
+        submitMemberProfile(data);
       }
     });
   };
 
   // TODO 어뎁터 데이터에 추가하기
-  const getSubmitFormInfo = (data: FieldValues) => {
+  const getSubmitFormData = (data: FieldValues) => {
     return {
       memberId: data.memberId,
       dogId: data.dogId,
@@ -63,18 +67,14 @@ const SaveProfilButton = () => {
     };
   };
 
-  const handleSubmitData = (data: FieldValues) => {
-    const requestData = getSubmitFormInfo(data);
+  const submitMemberProfile = (data: FieldValues) => {
+    const requestData = getSubmitFormData(data);
     mutateMemberProfile(requestData, {
       onSuccess: () => {
         navigate(PATH.ROOT);
       }
     });
     console.log("requestData", requestData);
-  };
-
-  const handleSubmitProfile = (data: FieldValues) => {
-    requestForProfile(data);
   };
 
   return (
