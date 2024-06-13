@@ -5,13 +5,8 @@ interface ISchool {
   schoolId: number;
 }
 
-interface IMemberHome {
-  memberId: number | null;
-  dogId: number | null;
-}
-
 export const memberEnrollmentSchoolAtom = atom<ISchool | null>({
-  key: "memberEnrollmentSchool",
+  key: "memberEnrollmentSchoolAtom",
   default: null
 });
 
