@@ -1,9 +1,12 @@
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
+import { useRef, useState } from "react";
 
 import ProfileEditeBox from "./Box/ProfileEditeBox";
 
 const AddDogProfile = () => {
+  const [isDogActive, setDogIsActive] = useState(false);
+  const dogFileInputRef = useRef<HTMLInputElement | null>(null);
   return (
     <>
       <Flex direction="column" marginBottom="14">
@@ -15,7 +18,14 @@ const AddDogProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEditeBox isOnlyProfile="DOG" />
+        <ProfileEditeBox
+          type="DOG"
+          isActive={isDogActive}
+          setIsActive={setDogIsActive}
+          fileRef={dogFileInputRef}
+          isOnlyProfile="DOG"
+          fileName="dogProfileUri"
+        />
       </Flex>
     </>
   );
