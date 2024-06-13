@@ -26,11 +26,11 @@ const ProfileEditeBox = ({
 
   const handleClick = () => {
     if (fileRef && fileRef.current) {
-      isActive ? setIsActive(false) : fileRef.current?.click();
+      isActive ? setIsActive(false) : fileRef.current.click();
     }
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, type: string) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       showToast("업로드할 파일이 없습니다.", "ownerNav");
       return;
