@@ -19,8 +19,8 @@ const SaveProfilButton = () => {
   const { uploadFiles, s3ProfileData } = useSubmitProfile();
   const navigate = useNavigate();
 
-  const profileData = watch();
-  const isAllFilled = Object.values(profileData).every((el: null | undefined) => el ?? false);
+  const memebrProfileData = watch();
+  const isAllFilled = Object.values(memebrProfileData).every((el: null | undefined) => el ?? false);
 
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);
@@ -29,16 +29,16 @@ const SaveProfilButton = () => {
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: PROFILE_NAME.MEMBER,
-      id: profileData.memberId,
-      files: profileData.memberProfileUri,
+      id: memebrProfileData.memberId,
+      files: memebrProfileData.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PROFILE_PATHS.MEMBER
     };
 
     const dogParams = {
       name: PROFILE_NAME.DOG,
-      id: profileData.dogId,
-      files: profileData.dogProfileUri,
+      id: memebrProfileData.dogId,
+      files: memebrProfileData.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PROFILE_PATHS.DOG
     };
