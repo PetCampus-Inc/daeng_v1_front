@@ -1,9 +1,4 @@
-import {
-  IFile,
-  StyledThumb,
-  StyledThumbImg
-} from "components/Admin/AttendCare/AttendCareGallery/upload";
-import { usePostMemberProfile } from "hooks/api/member/member";
+import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
@@ -16,7 +11,7 @@ interface IProfileEditeProps {
 }
 
 const ProfileEditeBox = ({ isOnlyProfile }: IProfileEditeProps) => {
-  const { register, setValue, watch } = useFormContext();
+  const { setValue } = useFormContext();
   const [myProfile, setMyProfile] = useState<IFile[]>([]);
   const [dogProfile, setDogProfile] = useState<IFile[]>([]);
   const [isMyActive, setMyIsActive] = useState(false);

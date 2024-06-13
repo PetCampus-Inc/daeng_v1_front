@@ -1,24 +1,15 @@
 import { PATH } from "constants/path";
 
-import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload/types";
 import BackgroundButton from "components/common/Button/BackgroundButton";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import useSubmitProfile from "hooks/api/member/useSubmitProfile";
-import { useS3Upload } from "hooks/common/useS3";
-import { Adapter } from "libs/Adapter";
-import { MemberFormToServerAdapter } from "libs/Adapter/FormToServerAdapter";
-import { useEffect } from "react";
-import { FieldErrors, FieldValues, useForm, useFormContext } from "react-hook-form";
+import { FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { EnrollmentInfo } from "types/member/enrollment.types";
-import { IMemberProfile } from "types/member/main.types";
 
 import * as S from "../styles";
 
 const SaveProfilButton = () => {
   const {
-    getValues,
     handleSubmit,
     watch,
     formState: { isValid }
@@ -76,7 +67,7 @@ const SaveProfilButton = () => {
     const requestData = getSubmitFormInfo(data);
     mutateMemberProfile(requestData, {
       onSuccess: () => {
-        // navigate(PATH.ROOT);
+        navigate(PATH.ROOT);
       }
     });
     console.log("requestData", requestData);

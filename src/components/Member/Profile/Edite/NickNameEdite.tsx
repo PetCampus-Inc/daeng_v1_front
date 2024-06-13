@@ -8,7 +8,7 @@ interface INickNameEditeProps {
 }
 
 const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
-  const { register, setValue, watch, getValues } = useFormContext();
+  const { register, getValues } = useFormContext();
 
   return (
     <>
