@@ -38,7 +38,7 @@ const ProfileEdite = ({
       <S.UploadProfileButton onClick={() => handleClick(type)} onBlur={() => setIsActive(true)}>
         {profile.length > 0 ? (
           <>
-            <S.UploadImage src={profile[0].thumbnail} alt={`${type}-PROFILE`} />
+            <S.UploadImage src={profile[0].thumbnail} alt={`${type}-profile`} />
             {!isActive && <ProfileActiveBox />}
           </>
         ) : (
