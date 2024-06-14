@@ -2,7 +2,7 @@ import { PATH } from "constants/path";
 
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
-import { useDeleteAttendDog } from "hooks/api/attendanceQuery";
+import { useDeleteAttendDog } from "hooks/api/admin/attendance";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import useFormatDate from "hooks/common/useFormatDate";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -16,7 +16,7 @@ import AttendanceOptionList from "../AttendanceButton/AttendanceOptionList";
 import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
 import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
 
-import type { AttendanceData } from "types/admin.attendance.type";
+import type { AttendanceData } from "types/admin/attendance.type";
 
 type DogCardProps = { info: AttendanceData };
 

@@ -11,13 +11,21 @@ export const ProfileWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-export const ProfileImage = styled.img`
+export const ProfileBox = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 50%;
   width: 5.5rem;
   height: 5.5rem;
-  object-fit: cover;
   position: absolute;
   top: -2.75rem;
+  overflow: hidden;
+`;
+
+export const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
 `;
 
 export const ProfileDetail = styled.div`

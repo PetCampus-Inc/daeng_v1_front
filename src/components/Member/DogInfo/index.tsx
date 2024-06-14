@@ -1,3 +1,4 @@
+import { FIELD } from "constants/field";
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 import { PATH } from "constants/path";
 
@@ -12,9 +13,9 @@ import { Flex } from "components/common";
 import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import CarouselModal from "components/common/Modal/CarouselModal";
 import {
-  useGetMemberDogDetailnfo,
-  usePostMemberDogAlleray,
-  usePostMemberDogPickdrop
+  useGetMemberDogDetailInfo,
+  usePostMemberDogAllergy,
+  usePostMemberDogPickDrop
 } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
@@ -34,14 +35,14 @@ const DogInfo = ({ dogId }: IProps) => {
   const overlay = useOverlay();
   const navigate = useNavigate();
   const methods = useForm({ mode: "onSubmit" });
-  const { data } = useGetMemberDogDetailnfo(dogId);
-  const mutatePostDogAlleray = usePostMemberDogAlleray(dogId);
-  const metatePostDogPickDrop = usePostMemberDogPickdrop(dogId);
+  const { data } = useGetMemberDogDetailInfo(dogId);
+  const mutatePostDogAlleray = usePostMemberDogAllergy(dogId);
+  const metatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
 
   const DOG_BIRETH = formatDate(
-    String(data.dogBirthDate[0]),
-    String(data.dogBirthDate[1]),
-    String(data.dogBirthDate[2]),
+    String(data[FIELD.BIRTHDAY][0]),
+    String(data[FIELD.BIRTHDAY][1]),
+    String(data[FIELD.BIRTHDAY][2]),
     "dot"
   );
 
@@ -122,7 +123,7 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
               </S.Title>
               <S.Editebutton
-                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE(String(dogId)))}
+                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}
               >
                 <span>수정</span>
                 <ArrowRightIcon />

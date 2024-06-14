@@ -12,7 +12,7 @@ import RoleSelectPage from "./RoleSelectPage";
 import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
 import SearchSchoolPage from "./SearchSchoolPage";
 
-import type { Role } from "types/admin/admin.type";
+import type { Role } from "types/admin/admin.types";
 
 export enum AdminRole {
   TEACHER = "TEACHER",

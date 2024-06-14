@@ -1,6 +1,6 @@
 import { FIELD } from "./field";
 
-import type { NonEmptyArray } from "types/helper.type";
+import type { NonEmptyArray } from "types/helper.types";
 import type { PickDropRequestType, PickDropStateType } from "types/member/enrollment.types";
 
 export const MEMBER_ENROLL_STEP = [
@@ -178,9 +178,9 @@ const stepFields: { [key in STEP_KEYS]: string[] } = {
     FIELD.DOG_NAME,
     FIELD.DOG_GENDER,
     FIELD.DOG_SIZE,
-    FIELD.DOG_BREED,
+    FIELD.BREED_ID,
     FIELD.NEW_BREED,
-    FIELD.DOG_BIRTHDAY,
+    FIELD.BIRTHDAY,
     FIELD.NEUTRALIZATION,
     FIELD.VACCINATION,
     FIELD.VACCINATION_URL,

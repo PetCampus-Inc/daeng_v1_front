@@ -1,14 +1,4 @@
-import { IMemberProfileInfo } from "./member/main.types";
-
-export interface ILoginInfo {
-  id: string;
-  password: string;
-}
-
-export interface IUserInfo {
-  name: string;
-  userId: number;
-}
+import { type IMemberProfileInfo } from "./main.types";
 
 export interface IMemberInfoEdite {
   memberData: IMemberProfileInfo;

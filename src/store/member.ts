@@ -9,7 +9,7 @@ interface ISchool {
 const IS_REJECTED = localStorage.getItem("IS_REJECTED");
 
 export const memberEnrollmentSchoolAtom = atom<ISchool | null>({
-  key: "memberEnrollmentSchool",
+  key: "memberEnrollmentSchoolAtom",
   default: null
 });
 

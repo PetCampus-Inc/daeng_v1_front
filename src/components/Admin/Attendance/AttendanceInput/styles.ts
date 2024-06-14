@@ -10,6 +10,7 @@ export const SearchInput = styled.input`
   border: none;
   border-radius: 12px;
   color: ${({ theme }) => theme.colors.gray_1};
+  background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.shadows.card};
   ${({ theme }) => theme.typo.label2_14_R};
   &::placeholder {

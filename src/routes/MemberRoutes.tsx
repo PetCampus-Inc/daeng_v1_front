@@ -75,10 +75,10 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_DOG_INFO_EDITE_PAGE(),
+          path: PATH.MEMBER_DOG_INFO_EDIT_PAGE(),
           element: (
             <Suspense>
-              <Pages.MemberDogInfoEditePage />
+              <Pages.MemberDogInfoEditPage />
             </Suspense>
           )
         },
@@ -99,15 +99,16 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMEBER_PROFILE_EDITE_PAGE,
+          // path: PATH.MEMEBER_PROFILE_EDIT_PAGE(),
+          path: PATH.MEMEBER_PROFILE_EDIT_PAGE,
           element: (
             <Suspense>
-              <Pages.MemberOnboardingProfileEditePage />
+              <Pages.MemberProfileEditPage />
             </Suspense>
           )
         },
         {
-          path: PATH.MEMEBER_ADD_DOG_PROFILE_EDITE_PAGE,
+          path: PATH.MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE,
           element: (
             <Suspense>
               <Pages.MemberAddDogProfileEditePage />

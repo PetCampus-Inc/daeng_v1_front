@@ -12,7 +12,7 @@ import {
   handleSortCharge,
   handleSortDate,
   handleSortPayment
-} from "apis/admin.attendance.api";
+} from "apis/admin/attendance.api";
 import showToast from "utils/showToast";
 
 export const useGetAttendDogList = (schoolId: number) => {

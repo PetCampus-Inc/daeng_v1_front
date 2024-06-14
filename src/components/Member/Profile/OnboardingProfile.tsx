@@ -1,14 +1,20 @@
+import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
+
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
 import useFocus from "hooks/common/useFocus";
+import { useRef, useState } from "react";
 
 import ProfileEditeBox from "./Box/ProfileEditeBox";
 import NickNameEdite from "./Edite/NickNameEdite";
 import RoleEdite from "./Edite/RoleEdite";
 
 const OnboardingProfile = () => {
-  const { isFocusing, handleFocus, handleBlur } = useFocus();
-
+  const { handleFocus, handleBlur } = useFocus();
+  const [isMyActive, setMyIsActive] = useState(false);
+  const [isDogActive, setDogIsActive] = useState(false);
+  const myFileInputRef = useRef<HTMLInputElement>(null);
+  const dogFileInputRef = useRef<HTMLInputElement>(null);
   return (
     <>
       <Flex direction="column" marginBottom="14">
@@ -23,7 +29,20 @@ const OnboardingProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEditeBox />
+        <ProfileEditeBox
+          type={PROFILE_NAME.MEMBER}
+          isActive={isMyActive}
+          setIsActive={setMyIsActive}
+          fileRef={myFileInputRef}
+          fileName={FILE_URI_NAME.MEMBER}
+        />
+        <ProfileEditeBox
+          type={PROFILE_NAME.DOG}
+          isActive={isDogActive}
+          setIsActive={setDogIsActive}
+          fileRef={dogFileInputRef}
+          fileName={FILE_URI_NAME.DOG}
+        />
       </Flex>
       <Flex direction="column" gap="4">
         <Text as="span" typo="body2_16_R" color="gray_1">

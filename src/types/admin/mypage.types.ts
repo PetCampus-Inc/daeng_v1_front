@@ -1,4 +1,4 @@
-import type { Nullable } from "types/helper.type";
+import type { Nullable } from "types/helper.types";
 
 export interface IOwnerInfo {
   adminName: string;

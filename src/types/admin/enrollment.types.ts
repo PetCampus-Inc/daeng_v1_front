@@ -1,4 +1,4 @@
-import type { Nullable } from "types/helper.type";
+import type { Nullable } from "types/helper.types";
 
 export type TNeutralization = "NEUTERED" | "NOT_NEUTERED";
 export type TVaccination = "VACCINATED" | "NOT_VACCINATED";
@@ -49,7 +49,7 @@ export interface MemberFormData {
   breedId: number;
   breedName: Nullable<string>;
   newBreed: Nullable<string>;
-  dogBirthDate: number[];
+  birthDate: number[];
   neutralization: TNeutralization;
   allergyDisease: string;
   vaccination: TVaccination;
