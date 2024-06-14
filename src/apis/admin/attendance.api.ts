@@ -1,16 +1,17 @@
 import { format } from "date-fns";
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
-import {
-  AttendanceData,
+
+import type {
   AttendData,
+  AttendanceData,
   IDogInfoAgenda,
   IDogInfoRecord,
   IMemberCallInfo,
   IPrecautionInfo,
   ITicketDetail
-} from "types/admin.attendance.type";
-import { IResponse } from "types/helper.type";
+} from "types/admin/attendance.type";
+import type { Response } from "types/helper.types";
 
 export const handleGetSearchDogs = async (
   schoolId: number,
@@ -22,14 +23,14 @@ export const handleGetSearchDogs = async (
     params.append("searchText", searchText);
   }
   const url = `admin/attendance/dog/search?${params.toString()}`;
-  const { data } = await request<IResponse<AttendanceData[]>>({ url });
+  const { data } = await request<Response<AttendanceData[]>>({ url });
 
   return data;
 };
 
 export const handleSortPayment = async (schoolId: number): Promise<AttendanceData[]> => {
   const url = `admin/attendance/dog/sort/payment?schoolId=${schoolId}`;
-  const { data } = await request<IResponse<AttendanceData[]>>({ url });
+  const { data } = await request<Response<AttendanceData[]>>({ url });
   return data;
 };
 
@@ -38,26 +39,26 @@ export const handleSortCharge = async (
   adminId: number
 ): Promise<AttendanceData[]> => {
   const url = `admin/attendance/dog/sort/charge?schoolId=${schoolId}&adminId=${adminId}`;
-  const { data } = await request<IResponse<AttendanceData[]>>({ url });
+  const { data } = await request<Response<AttendanceData[]>>({ url });
   return data;
 };
 
 export const handleSortDate = async (schoolId: number): Promise<AttendanceData[]> => {
   const url = `admin/attendance/dog/sort/date?schoolId=${schoolId}`;
-  const { data } = await request<IResponse<AttendanceData[]>>({ url });
+  const { data } = await request<Response<AttendanceData[]>>({ url });
   return data;
 };
 
 export const handleCallMember = async (dogId: number): Promise<IMemberCallInfo> => {
   const url = `admin/attendance/callowner/${dogId}`;
-  const { data } = await request<IResponse<IMemberCallInfo>>({ url });
+  const { data } = await request<Response<IMemberCallInfo>>({ url });
   return data;
 };
 
 // TODO: API 인터페이스 변경될 예정
 export const handleSendAlarm = async (dogId: number): Promise<AttendanceData[]> => {
   const url = `admin/attendance/send/alarm/${dogId}`;
-  const { data } = await request<IResponse<AttendanceData[]>>({ url });
+  const { data } = await request<Response<AttendanceData[]>>({ url });
   return data;
 };
 
@@ -71,7 +72,7 @@ export const handleDeleteDog = async (dogId: number): Promise<void> => {
 
 export const handleGetAttendDogs = async (schoolId: number): Promise<AttendData[]> => {
   const url = `admin/attendance/attend?schoolId=${schoolId}`;
-  const { data } = await request<IResponse<AttendData[]>>({ url });
+  const { data } = await request<Response<AttendData[]>>({ url });
   return data;
 };
 
@@ -84,8 +85,10 @@ export const handleGetAttendSearchDogs = async (
   schoolId: number,
   searchText?: string
 ): Promise<AttendData[]> => {
-  const url = `admin/attendance/attend/search?schoolId=${schoolId}&searchText=${searchText && searchText}`;
-  const { data } = await request<IResponse<AttendData[]>>({ url });
+  const url = `admin/attendance/attend/search?schoolId=${schoolId}&searchText=${
+    searchText && searchText
+  }`;
+  const { data } = await request<Response<AttendData[]>>({ url });
   return data;
 };
 

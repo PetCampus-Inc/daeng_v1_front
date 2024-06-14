@@ -1,4 +1,4 @@
-import type { Nullable } from "../helper.type";
+import type { Nullable } from "../helper.types";
 
 export enum Role {
   APPROVAL_CANCEL = "APPROVAL_CANCEL",
@@ -48,4 +48,10 @@ export interface ITeacherSignUpInfo {
   schoolId: number;
   name: string;
   phoneNumber: string;
+}
+
+export interface AdminLoginInfo {
+  inputId: string;
+  inputPw: string;
+  fcmToken: string;
 }

@@ -1,4 +1,4 @@
-import type { PropertyValues } from "types/helper.type";
+import type { PropertyValues } from "types/helper.types";
 
 export const LIST = {
   REGISTERED: "유치원 등록순",

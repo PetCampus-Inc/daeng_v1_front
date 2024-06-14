@@ -1,5 +1,5 @@
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import { useCreateAttendDog } from "hooks/api/attendanceQuery";
+import { useCreateAttendDog } from "hooks/api/admin/attendance";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 

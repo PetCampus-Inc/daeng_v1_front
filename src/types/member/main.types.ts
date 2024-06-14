@@ -1,5 +1,5 @@
-import type { Role } from "types/admin/admin.type";
-import type { Nullable } from "types/helper.type";
+import type { Role } from "types/admin/admin.types";
+import type { Nullable } from "types/helper.types";
 import type { IResponse } from "types/Response.type";
 
 export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";

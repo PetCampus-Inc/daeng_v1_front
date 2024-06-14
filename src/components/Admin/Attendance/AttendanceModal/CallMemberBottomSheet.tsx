@@ -1,9 +1,9 @@
 import { type IBottomSheetProps } from "components/common/BottomSheet";
 import CallBottomSheet from "components/common/BottomSheet/CallBottomSheet";
-import { useCallMember } from "hooks/api/attendanceQuery";
+import { useCallMember } from "hooks/api/admin/attendance";
 import { memo } from "react";
 
-import type { IMemberCallInfo } from "types/admin.attendance.type";
+import type { IMemberCallInfo } from "types/admin/attendance.type";
 
 interface CallMemberBottomSheetProps extends IBottomSheetProps {
   dogId: number;

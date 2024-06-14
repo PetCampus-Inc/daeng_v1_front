@@ -1,4 +1,4 @@
-import type { AdminAuthType } from "types/admin/admin.type";
+import type { AdminAuthType } from "types/admin/admin.types";
 
 export const LOCAL_STORAGE_KEY = "KNOCK-DOG-STORAGE";
 export const ACCESS_TOKEN_KEY = "KNOCK-DOG-AUTH-TOKEN";
