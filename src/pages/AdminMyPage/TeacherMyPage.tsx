@@ -31,7 +31,7 @@ const TeacherMyPage = () => {
         </ContentContainer>
       </PageContainer>
       <LogOutButton />
-      <NavBar type="admin" />
+      <NavBar />
     </>
   );
 };

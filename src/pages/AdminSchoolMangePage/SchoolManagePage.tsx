@@ -7,7 +7,7 @@ const SchoolManagePage = () => {
     <>
       <Header type="notice" text="유치원 운영" />
       <MenuCard />
-      <NavBar type="admin" />
+      <NavBar />
     </>
   );
 };

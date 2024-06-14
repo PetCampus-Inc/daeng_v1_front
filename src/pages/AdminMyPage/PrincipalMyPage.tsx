@@ -36,7 +36,7 @@ const PrincipalMyPage = () => {
 
       <LogOutButton />
 
-      <NavBar type="admin" />
+      <NavBar />
     </>
   );
 };

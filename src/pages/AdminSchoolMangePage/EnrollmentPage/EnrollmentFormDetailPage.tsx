@@ -93,7 +93,7 @@ const EnrollmentFormDetailPage = () => {
           </FormProvider>
         </Container>
       </Layout>
-      <NavBar type="admin" />
+      <NavBar />
     </>
   );
 };

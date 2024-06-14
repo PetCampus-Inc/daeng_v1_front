@@ -20,7 +20,7 @@ const AttendancePage = () => {
           {mode !== "attend" ? <AttendanceMain /> : <AttendanceManagement />}
         </AttendanceProvider>
       </PageContainer>
-      <Navbar type="admin" />
+      <Navbar />
     </>
   );
 };
