@@ -6,10 +6,11 @@ import { useSearchParams } from "react-router-dom";
 import { useSelectedDogs } from "../context/SelectedDogProvider";
 
 interface AttendDogSubmitButtonProps {
+  adminId: number;
   schoolId: number;
 }
 
-const AttendDogSubmitButton = ({ schoolId }: AttendDogSubmitButtonProps) => {
+const AttendDogSubmitButton = ({ adminId, schoolId }: AttendDogSubmitButtonProps) => {
   const { mutateAttend } = useCreateAttendDog();
   const [selectedDogs, _] = useSelectedDogs();
   const [, setSearchParams] = useSearchParams();
@@ -18,7 +19,7 @@ const AttendDogSubmitButton = ({ schoolId }: AttendDogSubmitButtonProps) => {
 
   const handlePostAttend = () => {
     mutateAttend(
-      { schoolId, selectedDogIds },
+      { adminId, schoolId, attendanceIdList: selectedDogIds },
       {
         onSuccess: () => setSearchParams({})
       }
