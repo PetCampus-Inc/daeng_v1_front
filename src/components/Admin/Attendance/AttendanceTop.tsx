@@ -1,32 +1,32 @@
 import FootIcon from "assets/svg/foot-icon";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
-import { useResetRecoilState } from "recoil";
-import { attendDogListInfoAtom } from "store/admin";
+import { useSearchParams } from "react-router-dom";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
+import { useInputFocus } from "./context/AttendanceProvider";
 import * as S from "./styles";
 
-interface IAttendanceTop {
-  mode: "DEFAULT" | "ATTENDANCE";
-  setMode: React.Dispatch<React.SetStateAction<"DEFAULT" | "ATTENDANCE">>;
-  isFocus: boolean;
-}
+const AttendanceTop = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const mode = searchParams.get("mode");
+  const isAttendMode = mode === "attend";
 
-const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
   const { schoolName, adminName, role: adminRole } = useAdminInfo();
   const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
-  const resetState = useResetRecoilState(attendDogListInfoAtom);
-
-  const isAttendMode = mode === "ATTENDANCE";
+  const { isFocused } = useInputFocus();
 
   const handlerModeChange = () => {
     if (isAttendMode) {
       setIsCancelModalOpen(true);
     } else {
-      resetState();
-      setMode("ATTENDANCE");
+      setSearchParams({ mode: "attend" });
     }
+  };
+
+  const handleCloseModal = () => {
+    setSearchParams({});
+    setIsCancelModalOpen(false);
   };
 
   return (
@@ -40,14 +40,14 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
         </S.SubTitle>
       </S.TitleWrapper>
       <S.ButtonWrapper>
-        <S.FootButton type="button" className={isAttendMode ? "active" : ""} isFocus={isFocus}>
+        <S.FootButton type="button" className={isAttendMode ? "active" : ""} isFocus={isFocused}>
           <FootIcon />
         </S.FootButton>
         <S.ControlButton
           type="button"
           className={isAttendMode ? "active" : ""}
           onClick={handlerModeChange}
-          isFocus={isFocus}
+          isFocus={isFocused}
         >
           {isAttendMode ? "출석중단" : "출 석"}
         </S.ControlButton>
@@ -55,11 +55,7 @@ const AttendanceTop = ({ mode, setMode, isFocus }: IAttendanceTop) => {
       <AttendanceExitModal
         isOpen={isCancelModalOpen}
         close={() => setIsCancelModalOpen(false)}
-        action={() => {
-          setMode("DEFAULT");
-          setIsCancelModalOpen(false);
-          resetState();
-        }}
+        action={handleCloseModal}
       />
     </S.MainWrapper>
   );

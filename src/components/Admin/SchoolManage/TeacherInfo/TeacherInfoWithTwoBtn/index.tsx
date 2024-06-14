@@ -4,7 +4,7 @@ import {
   useDenyTeacherMutation
 } from "hooks/api/useApproveDenyMutation";
 import { useState } from "react";
-import { ITeacherInfo } from "types/Admin.type";
+import { ITeacherInfo } from "types/admin/school.types";
 
 import ApproveDenyButton from "../../ApproveDenyButton";
 import * as S from "../styles";

@@ -5,7 +5,7 @@ import DogInfo from "components/Member/DogInfo";
 import AttendanceTicketInfo from "components/Member/DogInfo/AttendanceTicketInfo";
 import SchoolInfo from "components/Member/DogInfo/SchoolInfo";
 import { FootIconItem, Nav, NavItem, NavWrapper } from "components/Member/DogInfo/styles";
-import { useGetMemberDogDetailnfo } from "hooks/api/member/member";
+import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
@@ -14,7 +14,7 @@ const MemberDogInfoPage = () => {
   const { dogId } = useParams();
   const currentSteps = MEMBER_DOG_INFO_STEP;
   const [currentStep, setCurrentStep] = useState(0);
-  const { data } = useGetMemberDogDetailnfo(Number(dogId));
+  const { data } = useGetMemberDogDetailInfo(Number(dogId));
 
   return (
     <>

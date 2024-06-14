@@ -1,12 +1,12 @@
 import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
-import SomethingWrongPage from "pages/SomethingWrongPage";
+import SomethingWrongPage from "pages/ErrorPage/SomethingWrongPage";
 import { type PropsWithChildren } from "react";
 import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import { useLocation } from "react-router-dom";
 
 const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
-  console.log("error발생!!!!!!!1", error);
+  console.log("error발생!!!!!", error);
 
   if (
     isAxiosError<{

@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetDogInfoRecord } from "apis/admin.attendance.api";
+import { handleGetDogInfoRecord } from "apis/admin/attendance.api";
 
 const useGetDogInfoRecord = (dogId: number, date?: string) => {
   const query = useSuspenseQuery({

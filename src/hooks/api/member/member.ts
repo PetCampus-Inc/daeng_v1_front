@@ -9,14 +9,12 @@ import {
   handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
-  handleGetMemberProfile,
   handleGetMemberProfileInfo,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
-  handlePostMemberProfile,
-  handlePostMemoDogAlleray,
+  handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
 import { useNavigate } from "react-router-dom";
@@ -24,14 +22,13 @@ import { getISOString } from "utils/date";
 import showToast from "utils/showToast";
 
 import type {
-  ImageList,
   HomeDataType,
   HomeInfoType,
+  ImageList,
+  ImageListType,
   IMainAlbum,
   IMemberDogPostDetailInfo,
-  IMemberProfile,
-  IMemberProfilePostInfo,
-  ImageListType
+  IMemberProfilePostInfo
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -150,18 +147,18 @@ export const usePostMemberProfileInfo = (memberId: string) => {
 // 강아지 삭제
 export const usePostMemberDogDelete = (memberId: string) => {
   const queryClient = useQueryClient();
-  const memberDogDeletMutation = useMutation({
+  const memberDogDeleteMutation = useMutation({
     mutationFn: (dogId: string) => handlePostMemberDogDelete(memberId, dogId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
     }
   });
 
-  return memberDogDeletMutation.mutate;
+  return memberDogDeleteMutation.mutate;
 };
 
 // 강아지 상세 정보
-export const useGetMemberDogDetailnfo = (dogId: number) => {
+export const useGetMemberDogDetailInfo = (dogId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
     queryFn: () => handleGetMemberDogDetailInfo(dogId)
@@ -169,7 +166,7 @@ export const useGetMemberDogDetailnfo = (dogId: number) => {
 };
 
 // 강아지 가입신청서 보기 (read only)
-export const useGetMemberDogEnrollmemntInfo = (dogId: number) => {
+export const useGetMemberDogEnrollmentInfo = (dogId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_DOG_ENROLLMENT_INFO(dogId),
     queryFn: () => handleGetDogEnrollment(dogId)
@@ -177,10 +174,10 @@ export const useGetMemberDogEnrollmemntInfo = (dogId: number) => {
 };
 
 // 강아지 상세 정보 수정
-export const usePostMemberDogDetailnfo = (dogId: number) => {
+export const usePostMemberDogDetailInfo = (dogId: number) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const memberDogDetailnfoMutation = useMutation({
+  const memberDogDetailInfoMutation = useMutation({
     mutationFn: (data: IMemberDogPostDetailInfo) => handlePostMemberDogDetailInfo(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
@@ -194,15 +191,15 @@ export const usePostMemberDogDetailnfo = (dogId: number) => {
     }
   });
 
-  return memberDogDetailnfoMutation.mutate;
+  return memberDogDetailInfoMutation.mutate;
 };
 
 // 강아지의 알러지/질병 내용 수정
-export const usePostMemberDogAlleray = (dogId: number) => {
+export const usePostMemberDogAllergy = (dogId: number) => {
   const queryClient = useQueryClient();
-  const memberDogAllerayMutation = useMutation({
+  const memberDogAllergyMutation = useMutation({
     mutationFn: ({ dogId, memo }: { dogId: number; memo: string }) =>
-      handlePostMemoDogAlleray(dogId, memo),
+      handlePostMemoDogAllergy(dogId, memo),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
       showToast("수정이 완료되었습니다.", "bottom");
@@ -212,13 +209,13 @@ export const usePostMemberDogAlleray = (dogId: number) => {
     }
   });
 
-  return memberDogAllerayMutation.mutate;
+  return memberDogAllergyMutation.mutate;
 };
 
 // 강아지의 픽드랍 메모 수정
-export const usePostMemberDogPickdrop = (dogId: number) => {
+export const usePostMemberDogPickDrop = (dogId: number) => {
   const queryClient = useQueryClient();
-  const memberDogPickdropMutation = useMutation({
+  const memberDogPickDropMutation = useMutation({
     mutationFn: ({ dogId, memo }: { dogId: number; memo: string }) =>
       handlePostMemoDogPickdrop(dogId, memo),
     onSuccess: () => {
@@ -230,7 +227,7 @@ export const usePostMemberDogPickdrop = (dogId: number) => {
     }
   });
 
-  return memberDogPickdropMutation.mutate;
+  return memberDogPickDropMutation.mutate;
 };
 
 // 회원 가입승인후 초기 견주, 강아지 프로필을 설정 데이터 조회

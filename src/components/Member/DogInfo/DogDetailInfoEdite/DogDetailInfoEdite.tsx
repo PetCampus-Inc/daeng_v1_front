@@ -1,5 +1,6 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
-import { ITEM_ENGLISH_TO_KOREAN, ITEM_KEYS } from "constants/item";
+import { FIELD, FIELD_KEYS } from "constants/field";
+import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 
 import { TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
@@ -27,7 +28,7 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Text>이름</Text>
         <TextInput
-          name="dogName"
+          name={FIELD.DOG_NAME}
           placeholder="강아지 이름을 입력해주세요"
           register={register}
           required
@@ -36,30 +37,30 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Text>성별</Text>
         <SingleRadio
-          name="dogGender"
+          name={FIELD.DOG_GENDER}
           radiosText={["수컷", "암컷"]}
           isRequired
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("dogGender")]}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.DOG_GENDER)]}
         />
       </Card>
       <Card>
         <Text>크기</Text>
         <SingleRadio
-          name="dogSize"
+          name={FIELD.DOG_SIZE}
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
           isRequired
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("dogSize")]}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.DOG_SIZE)]}
         />
       </Card>
       <Card>
         <Text>견종</Text>
         <BreedInput
-          name="breedName"
+          name={FIELD.BREED_NAME}
           register={register}
           setValue={setValue}
           watch={watch}
-          isRequired={requiredItems?.get(ITEM_KEYS.DOG_BREED)}
+          isRequired={requiredItems?.get(FIELD_KEYS.BREED_ID)}
         />
       </Card>
       <Card>
@@ -91,10 +92,10 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Text>중성화 여부</Text>
         <SingleRadio
-          name="neutralization"
+          name={FIELD.NEUTRALIZATION}
           radiosText={["했어요", "안했어요"]}
-          isRequired={requiredItems?.get(ITEM_KEYS.NEUTRALIZATION)}
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch("neutralization")]}
+          isRequired={requiredItems?.get(FIELD_KEYS.NEUTRALIZATION)}
+          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.NEUTRALIZATION)]}
         />
       </Card>
     </>

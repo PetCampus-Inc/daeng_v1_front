@@ -62,7 +62,7 @@ export const useCreateCareDogs = (openPopup: () => void) => {
     } else {
       // 추가 요청 성공, but 이전 기록이 있는 강아지
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
-      // 뮤테이션 결과를 queryCache에 저장
+      // 뮤테이션 결과를 queryCache 저장
       queryClient.setQueryData(QUERY_KEY.CACHED_CARE_DOG_INFO, data);
     }
   };

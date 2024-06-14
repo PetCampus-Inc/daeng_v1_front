@@ -5,7 +5,6 @@ import { useRecoilState } from "recoil";
 import { imagePreviewAtom } from "store/form";
 
 import ImageModal from "./ImageModal";
-import { StyledDeleteButton, StyledThumbImg } from "./styles";
 import * as S from "./styles";
 
 import type { ImageFile } from "store/form";

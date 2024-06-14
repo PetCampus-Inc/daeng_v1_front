@@ -13,7 +13,7 @@ const BackgroundButton = ({
   hasNav,
   backgroundColor = "gray_5",
   buttonBackgroundColor = "primaryColor",
-  pb = 42,
+  pb = 32,
   children,
   ...props
 }: PropsWithChildren<IBackgroundButton>) => {

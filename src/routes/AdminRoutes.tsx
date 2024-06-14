@@ -12,7 +12,7 @@ import { AUTH_KEY } from "store/auth";
 import AdminAuthRouter from "./AdminAuthRouter";
 import AuthProvider from "./AuthProvider";
 
-import type { AdminAuthType } from "types/admin/admin.type";
+import type { AdminAuthType } from "types/admin/admin.types";
 
 const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject[] => {
   const auth = useLocalStorageValue<AdminAuthType | null>(AUTH_KEY, null);

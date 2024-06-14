@@ -1,4 +1,4 @@
-import { ITeacherInfo } from "types/Admin.type";
+import { ITeacherInfo } from "types/admin/school.types";
 
 import TeacherInfoWithDeleteBtn from "../../TeacherInfo/TeacherInfoWithDeleteBtn";
 import * as S from "../styles";
