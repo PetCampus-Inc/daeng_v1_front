@@ -4,6 +4,7 @@ import { request } from "libs/CustomAxios/request";
 
 import type {
   AttendData,
+  AttendReq,
   AttendanceData,
   IDogInfoAgenda,
   IDogInfoRecord,
@@ -70,17 +71,21 @@ export const handleDeleteDog = async (dogId: number): Promise<void> => {
   });
 };
 
+/**
+ * @description 출석 기능 조회 - 해당 유치원내 출석안한 강아지들만 반환합니다.
+ * @param {number} schoolId
+ */
 export const handleGetAttendDogs = async (schoolId: number): Promise<AttendData[]> => {
   const url = `admin/attendance/attend?schoolId=${schoolId}`;
   const { data } = await request<Response<AttendData[]>>({ url });
   return data;
 };
 
-interface IAttendInfoProps {
-  schoolId: number;
-  selectedDogIds: number[];
-}
-
+/**
+ * @description 출석 기능 강아지 검색 - 이용권이 유효하고 출석안한 강아지중에서 강아지를 검색합니다.
+ * @param {number} schoolId
+ * @param {string?} searchText
+ */
 export const handleGetAttendSearchDogs = async (
   schoolId: number,
   searchText?: string
@@ -92,14 +97,19 @@ export const handleGetAttendSearchDogs = async (
   return data;
 };
 
-export const handlePostAttend = async (req: IAttendInfoProps): Promise<void> => {
+/**
+ * @description 출석 기능 - 등원한 강아지를 출석체크 합니다.
+ * @param {AttendReq} req
+ */
+export const handlePostAttend = async (req: AttendReq): Promise<void> => {
   const url = `admin/attendance/attend`;
   return await request<void>({
     url,
     method: "POST",
     data: {
       schoolId: req.schoolId,
-      attendanceIdList: req.selectedDogIds
+      adminId: req.adminId,
+      attendanceIdList: req.attendanceIdList
     }
   });
 };

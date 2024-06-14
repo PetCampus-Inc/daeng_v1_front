@@ -6,7 +6,7 @@ type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 /**
  *  @description 출석모드 Dto
  */
-export type AttendData = {
+export interface AttendData {
   attendanceId: number;
   dogId: number;
   dogName: string;
@@ -15,12 +15,21 @@ export type AttendData = {
   currentRounds: Nullable<number>;
   monthlyTicket: Nullable<number[]>;
   status: AttendanceStatus;
-};
+}
+
+/**
+ * @description 출석모드 요청 Dto
+ */
+export interface AttendReq {
+  schoolId: number;
+  adminId: number;
+  attendanceIdList: number[];
+}
 
 /**
  *  @description 출석부 Dto
  */
-export type AttendanceData = {
+export interface AttendanceData {
   attendanceId: null;
   dogId: number;
   dogName: string;
@@ -29,7 +38,7 @@ export type AttendanceData = {
   currentRounds: Nullable<number>;
   monthlyTicket: Nullable<number[]>;
   status: Nullable<AttendanceStatus>;
-};
+}
 
 /**
  * @description 견주 전화번호 Dto

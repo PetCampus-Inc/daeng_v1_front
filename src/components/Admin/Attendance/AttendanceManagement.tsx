@@ -11,7 +11,7 @@ import { SelectedDogsProvider } from "./context/SelectedDogProvider";
 import { Blur } from "./styles";
 
 const AttendanceManagement = () => {
-  const { schoolId } = useAdminInfo();
+  const { adminId, schoolId } = useAdminInfo();
 
   const { data: dogList } = useGetAttendDogList(schoolId);
 
@@ -52,7 +52,7 @@ const AttendanceManagement = () => {
           <SelectedDogsProvider>
             <AttendanceAvatar />
             <AttendanceSearchList data={dataToShow} type={type} />
-            <AttendDogSubmitButton schoolId={schoolId} />
+            <AttendDogSubmitButton schoolId={schoolId} adminId={adminId} />
           </SelectedDogsProvider>
         )}
       </Blur>
