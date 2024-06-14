@@ -9,11 +9,13 @@ import {
   handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
+  handleGetMemberProfile,
   handleGetMemberProfileInfo,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
+  handlePostMemberProfile,
   handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
@@ -28,6 +30,7 @@ import type {
   ImageListType,
   IMainAlbum,
   IMemberDogPostDetailInfo,
+  IMemberProfile,
   IMemberProfilePostInfo
 } from "types/member/main.types";
 

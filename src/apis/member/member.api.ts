@@ -12,6 +12,7 @@ import type {
   IMemberDogPostDetailInfo,
   IMemberDogSchoolInfo,
   IMemberInfo,
+  IMemberProfile,
   IMemberProfileInfo,
   IMemberProfilePostInfo
 } from "types/member/main.types";
