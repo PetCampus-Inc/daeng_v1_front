@@ -1,5 +1,5 @@
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { AUTH_KEY, getUserInfo, hasToken } from "store/auth";
 import { AdminAuthType } from "types/admin/admin.types";
 
@@ -35,3 +35,7 @@ const AuthProvider = ({ children }: Props) => {
 };
 
 export default AuthProvider;
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
