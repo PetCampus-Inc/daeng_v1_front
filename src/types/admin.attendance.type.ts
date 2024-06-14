@@ -3,7 +3,9 @@ import type { Nullable } from "./helper.type";
 
 type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 
-// MEMO: 출석모드 데이터
+/**
+ *  @description 출석모드 Dto
+ */
 export type AttendData = {
   attendanceId: number;
   dogId: number;
@@ -15,7 +17,9 @@ export type AttendData = {
   status: AttendanceStatus;
 };
 
-// MEMO: 출석부 데이터
+/**
+ *  @description 출석부 Dto
+ */
 export type AttendanceData = {
   attendanceId: null;
   dogId: number;
@@ -27,22 +31,12 @@ export type AttendanceData = {
   status: Nullable<AttendanceStatus>;
 };
 
+/**
+ * @description 견주 전화번호 Dto
+ */
 export interface IMemberCallInfo {
   dogName: string;
   phoneNumber: string;
-}
-
-// TODO: 이 부분+ 이 타입을 사용한 기존 API들 삭제해도 되는지 검토 (API변동 이슈)
-export interface IDogDetails {
-  dogId: number;
-  dogName: string;
-  size: string;
-  gender: string;
-  allRounds: number;
-  currentRounds: number;
-  monthlyTicket: [];
-  dogAttendances: [];
-  status: number;
 }
 
 export interface IDogAndMemberInfo {
