@@ -4,6 +4,7 @@ import { request } from "libs/CustomAxios/request";
 
 import type {
   AttendData,
+  AttendReq,
   AttendanceData,
   IDogInfoAgenda,
   IDogInfoRecord,
@@ -76,11 +77,6 @@ export const handleGetAttendDogs = async (schoolId: number): Promise<AttendData[
   return data;
 };
 
-interface IAttendInfoProps {
-  schoolId: number;
-  selectedDogIds: number[];
-}
-
 export const handleGetAttendSearchDogs = async (
   schoolId: number,
   searchText?: string
@@ -92,14 +88,19 @@ export const handleGetAttendSearchDogs = async (
   return data;
 };
 
-export const handlePostAttend = async (req: IAttendInfoProps): Promise<void> => {
+/**
+ * @description 출석 기능 - 등원한 강아지를 출석체크 합니다.
+ * @param {AttendReq} req
+ */
+export const handlePostAttend = async (req: AttendReq): Promise<void> => {
   const url = `admin/attendance/attend`;
   return await request<void>({
     url,
     method: "POST",
     data: {
       schoolId: req.schoolId,
-      attendanceIdList: req.selectedDogIds
+      adminId: req.adminId,
+      attendanceIdList: req.attendanceIdList
     }
   });
 };
