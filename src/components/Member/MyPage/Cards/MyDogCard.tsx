@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import { useGetMemberDogDetailnfo, usePostMemberDogDelete } from "hooks/api/member/member";
+import { useGetMemberDogDetailInfo, usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -45,7 +45,7 @@ const MyDogCard = ({
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
-  const { data: MemeberDogInfo } = useGetMemberDogDetailnfo(Number(dogId));
+  const { data: MemeberDogInfo } = useGetMemberDogDetailInfo(Number(dogId));
   const isProfileNull = profileUri === null;
 
   const openInvalidInputPopup = () =>

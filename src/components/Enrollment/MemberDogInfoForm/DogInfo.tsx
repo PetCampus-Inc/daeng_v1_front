@@ -26,7 +26,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
 
   const memberDogInfo = useRecoilValue(memberEnrollmentDogDetailAtom);
 
-  const [Dogyear, Dogmonth, Dogday] = memberDogInfo ? memberDogInfo.dogBirthDate : [];
+  const [Dogyear, Dogmonth, Dogday] = memberDogInfo ? memberDogInfo.birthDate : [];
   const memeberDogBirth = {
     year: Dogyear ? String(Dogyear) : "",
     month: Dogmonth ? String(addZero(Dogmonth)) : "",
@@ -70,17 +70,17 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_BREED)}>견종</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.NEW_BREED)}>견종</Title>
         <BreedInput
           name={FIELD.NEW_BREED}
           register={register}
           setValue={setValue}
           watch={watch}
-          isRequired={requiredItems?.get(FIELD_KEYS.DOG_BREED)}
+          isRequired={requiredItems?.get(FIELD_KEYS.NEW_BREED)}
         />
       </Card>
       <Card>
-        <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_BIRTHDAY)}>생일</Title>
+        <Title isRequired={requiredItems?.get(FIELD_KEYS.BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
           <SelectNumber
             name="year"
