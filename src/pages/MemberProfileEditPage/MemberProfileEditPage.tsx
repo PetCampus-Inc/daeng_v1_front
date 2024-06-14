@@ -1,23 +1,14 @@
 import SaveProfilButton from "components/Member/Profile/Button/SaveProfilButton";
 import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
 import { useGetMemberProfile } from "hooks/api/member/member";
+import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { FormProvider, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { AUTH_MEMBER_ID } from "store/auth";
 import { PageContainer } from "styles/StyleModule";
 
 const MemberProfileEditPage = () => {
-  // TODO memeberId 데이터 가져오기
-  const { memberId } = useParams();
-  // const { data } = useGetMemberProfile(Number(memberId));
-  //TODO 수정필요 - 목업 데이터
-  const data = {
-    memberId: 1,
-    dogId: 1,
-    memberProfileUri: "",
-    dogProfileUri: "",
-    dogName: "거튼이",
-    relation: ""
-  };
+  const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID);
+  const { data } = useGetMemberProfile(Number(memberId));
   const { ...rest } = data;
 
   const methods = useForm({
