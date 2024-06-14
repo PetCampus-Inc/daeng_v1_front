@@ -8,9 +8,17 @@ import { PageContainer } from "styles/StyleModule";
 
 const MemberProfileEditPage = () => {
   const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID);
-  const { data } = useGetMemberProfile(Number(memberId));
+  // const { data } = useGetMemberProfile(Number(memberId));
+  //TODO 작업 이후 삭제 필요
+  const data = {
+    memberId: 1,
+    dogId: 1,
+    memberProfileUri: "",
+    dogProfileUri: "",
+    dogName: "거튼이",
+    relation: ""
+  };
   const { ...rest } = data;
-
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
