@@ -71,12 +71,21 @@ export const handleDeleteDog = async (dogId: number): Promise<void> => {
   });
 };
 
+/**
+ * @description 출석 기능 조회 - 해당 유치원내 출석안한 강아지들만 반환합니다.
+ * @param {number} schoolId
+ */
 export const handleGetAttendDogs = async (schoolId: number): Promise<AttendData[]> => {
   const url = `admin/attendance/attend?schoolId=${schoolId}`;
   const { data } = await request<Response<AttendData[]>>({ url });
   return data;
 };
 
+/**
+ * @description 출석 기능 강아지 검색 - 이용권이 유효하고 출석안한 강아지중에서 강아지를 검색합니다.
+ * @param {number} schoolId
+ * @param {string?} searchText
+ */
 export const handleGetAttendSearchDogs = async (
   schoolId: number,
   searchText?: string
