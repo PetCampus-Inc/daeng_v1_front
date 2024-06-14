@@ -2,7 +2,7 @@ import { PATH } from "constants/path";
 
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { Role } from "types/admin/admin.type";
+import { Role } from "types/admin/admin.types";
 
 import { AuthContext } from "./AuthProvider";
 

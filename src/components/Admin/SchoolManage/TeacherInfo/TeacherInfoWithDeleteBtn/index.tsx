@@ -3,7 +3,7 @@ import Modal from "components/common/ButtonModal";
 import { AnimatePresence } from "framer-motion";
 import useTeacherDeleteMutation from "hooks/api/useTeacherDeleteMutation";
 import { useState } from "react";
-import { ITeacherInfo } from "types/Admin.type";
+import { ITeacherInfo } from "types/admin/school.types";
 import showToast from "utils/showToast";
 
 import * as S from "../styles";

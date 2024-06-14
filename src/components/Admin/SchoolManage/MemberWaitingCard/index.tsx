@@ -5,12 +5,13 @@ import ListIconSmallRound from "assets/svg/list-icon-small-round";
 import { AnimatePresence } from "framer-motion";
 import { useApproveFormMutation, useDenyFormMutation } from "hooks/api/useApproveDenyMutation";
 import { useState } from "react";
-import { IWaitingOwnerInfo } from "types/Admin.type";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 import ApproveDenyButton from "../ApproveDenyButton";
 import { TextWrapper, Name, Contour, PhoneNum } from "../TeacherInfo/styles";
+
+import type { IWaitingOwnerInfo } from "types/admin/school.types";
 
 interface IOwnerWaitingCard {
   data: IWaitingOwnerInfo;

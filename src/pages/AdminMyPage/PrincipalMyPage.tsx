@@ -7,7 +7,7 @@ import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
-import { Role } from "types/admin/admin.type";
+import { Role } from "types/admin/admin.types";
 
 const PrincipalMyPage = () => {
   const { adminId } = useAdminInfo();

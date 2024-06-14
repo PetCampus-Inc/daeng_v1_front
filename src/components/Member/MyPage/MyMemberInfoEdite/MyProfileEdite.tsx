@@ -3,10 +3,11 @@ import { TextInput } from "components/common";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
-import { IMemberInfoEdite } from "types/Member.type";
 
 import * as S from "./styles";
 import RoleEditeButton from "../Buttons/RoleEditeButton";
+
+import type { IMemberInfoEdite } from "types/member/member.types";
 
 const MyProfileEdite = ({ handleFocus, handleBlur, memberData }: IMemberInfoEdite) => {
   // TODO setValue, watch의 경우 이후 기능 추가 후 삭제 여부 판단하기

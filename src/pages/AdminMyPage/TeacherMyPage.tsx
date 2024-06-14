@@ -7,7 +7,7 @@ import Header from "components/common/Header";
 import NavBar from "components/common/NavBar";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
-import { Role } from "types/admin/admin.type";
+import { Role } from "types/admin/admin.types";
 
 const TeacherMyPage = () => {
   const { adminId } = useAdminInfo();

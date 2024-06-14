@@ -1,5 +1,5 @@
-import type { MemberDtoType } from "./admin/enrollment.types";
-import type { Nullable } from "./helper.type";
+import type { MemberDtoType } from "./enrollment.types";
+import type { Nullable } from "../helper.types";
 
 type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 

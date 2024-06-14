@@ -1,6 +1,6 @@
 import { FIELD } from "./field";
 
-import type { NonEmptyArray } from "types/helper.type";
+import type { NonEmptyArray } from "types/helper.types";
 import type { PickDropRequestType, PickDropStateType } from "types/member/enrollment.types";
 
 export const MEMBER_ENROLL_STEP = [

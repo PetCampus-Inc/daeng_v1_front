@@ -1,7 +1,7 @@
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { createContext, ReactNode, useState } from "react";
 import { AUTH_KEY, getUserInfo, hasToken } from "store/auth";
-import { AdminAuthType } from "types/admin/admin.type";
+import { AdminAuthType } from "types/admin/admin.types";
 
 type AuthContextType = {
   isLoggedIn: boolean;

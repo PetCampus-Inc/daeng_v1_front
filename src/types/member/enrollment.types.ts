@@ -146,3 +146,8 @@ export interface IDogEnrollmentInfo extends IResponse {
   agreements: number[];
   schoolFormResponse: ISchoolFormResponse;
 }
+
+export interface BreedData {
+  breedId: number;
+  breedName: string;
+}

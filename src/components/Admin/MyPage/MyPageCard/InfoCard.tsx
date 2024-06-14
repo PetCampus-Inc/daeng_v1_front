@@ -7,7 +7,7 @@ import PhoneIcon from "assets/svg/phone-basic";
 import SchoolIcon from "assets/svg/school-icon";
 import SimpleButton from "components/common/Button/SimpleButton";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.type";
+import { Role } from "types/admin/admin.types";
 
 import {
   MoreButtonStyle,
@@ -20,7 +20,7 @@ import {
   StyledTitleContainer
 } from "./styles";
 
-import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.type";
+import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
 
 const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: string }) => {
   return (

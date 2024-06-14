@@ -11,13 +11,14 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import * as useOverlay from "hooks/common/useOverlay/useOverlay";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { IMemberInfoEdite } from "types/Member.type";
 import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 
+import type { IMemberInfoEdite } from "types/member/member.types";
+
 // TODO 코드 리팩토링 필요
-// MEMO: 여기서 handleFocus, handleBlur는 어떤 동작을 하고 있는건가요?
+// NOTE: 여기서 handleFocus, handleBlur는 어떤 동작을 하고 있는건가요?
 
 const MyInfoEdite = ({ requiredItems, handleFocus, handleBlur, memberData }: IMemberInfoEdite) => {
   const { register, setValue, watch } = useFormContext();

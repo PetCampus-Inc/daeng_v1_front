@@ -1,5 +1,5 @@
 import { ThemeConfig } from "styles/ThemeConfig";
-import { IPoop } from "types/admin.attendance.type";
+import { IPoop } from "types/admin/attendance.type";
 
 const PoopHard = ({ poop }: { poop?: IPoop }) => {
   const isSelected = poop && poop === "HARD" ? true : false;

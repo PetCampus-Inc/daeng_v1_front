@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
-import type { ITicketDetail } from "types/admin.attendance.type";
-import type { INewEnrollmentList } from "types/Admin.type";
+import type { INewEnrollmentList } from "../types/admin/school.types";
+import type { ITicketDetail } from "types/admin/attendance.type";
 
 const { persistAtom } = recoilPersist();
 

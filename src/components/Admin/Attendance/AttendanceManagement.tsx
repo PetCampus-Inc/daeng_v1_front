@@ -1,4 +1,4 @@
-import { useAttendDogSearchQuery, useGetAttendDogList } from "hooks/api/attendanceQuery";
+import { useAttendDogSearchQuery, useGetAttendDogList } from "hooks/api/admin/attendance";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 

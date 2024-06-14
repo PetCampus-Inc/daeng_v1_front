@@ -1,8 +1,8 @@
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
-import { IPrecautionInfo } from "types/admin.attendance.type";
-import { IResponse } from "types/helper.type";
+import { IPrecautionInfo } from "types/admin/attendance.type";
 
+import type { Response } from "types/helper.types";
 import type {
   DogsDataType,
   HomeDataType,
@@ -19,7 +19,7 @@ import type {
 // 견주 홈 - 메인
 export const handleGetHomeInfo = async (memberId: number, dogId: number): Promise<HomeDataType> => {
   const url = `/member/main`;
-  const { data } = await request<IResponse<HomeDataType>>({
+  const { data } = await request<Response<HomeDataType>>({
     url,
     params: {
       memberId,
@@ -33,7 +33,7 @@ export const handleGetHomeInfo = async (memberId: number, dogId: number): Promis
 // 견주 홈 - 강아지 리스트
 export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> => {
   const url = `/member/main/dogs`;
-  const { data } = await request<IResponse<DogsDataType[]>>({
+  const { data } = await request<Response<DogsDataType[]>>({
     url,
     params: { memberId }
   });
@@ -43,7 +43,7 @@ export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> =
 // 견주 홈 - 사진앨범
 export const handleGetAlbum = async (req: IMainAlbum): Promise<ImageList[][]> => {
   const url = `/member/main/album`;
-  const { data } = await request<IResponse<ImageList[][]>>({
+  const { data } = await request<Response<ImageList[][]>>({
     url,
     params: {
       dogId: req.dogId,

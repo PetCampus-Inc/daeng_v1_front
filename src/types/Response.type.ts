@@ -1,4 +1,4 @@
-import { Response } from "./helper.type";
+import { Response } from "./helper.types";
 
 /**
  * @deprecated Since version 1.0.0 Will be removed in version 2.0. Use {@link Response} instead.
