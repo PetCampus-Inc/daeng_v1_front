@@ -29,8 +29,8 @@ export { default as MemberMyInfoEditePage } from "./MemberPage/MemberMyInfoEdite
 export { default as MemberSchoolInfoPage } from "./MemberPage/MemberSchoolInfoPage";
 export { default as MemberSchoolSearchPage } from "./MemberPage/MemberSchoolSearchPage";
 export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
-export { default as MemberDogInfoEditePage } from "./MemberPage/MemberDogInfoEditePage";
-export { default as MemberOnboardingProfileEditePage } from "./MemberPage/MemberOnboardingProfileEditePage";
+export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEditPage";
+export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
 export { default as MemberAddDogProfileEditePage } from "./MemberPage/MemberAddDogProfileEditePage";
 
 export { default as SettingPage } from "./MyPage/SettingPage";

@@ -12,6 +12,7 @@ import type {
   IMemberDogPostDetailInfo,
   IMemberDogSchoolInfo,
   IMemberInfo,
+  IMemberProfile,
   IMemberProfileInfo,
   IMemberProfilePostInfo
 } from "types/member/main.types";
@@ -186,4 +187,25 @@ export const handlePostMemberAgreement = async (
 ): Promise<void> => {
   const url = `member/agreement?dogId=${dogId}&agreementId=${agreementId}`;
   return await customAxios.post(url);
+};
+
+// 회원 가입승인후 초기 견주, 강아지 프로필 설정 데이터 조회
+export const handleGetMemberProfile = async (memberId: number) => {
+  const url = `member/main/profile?memberId=${memberId}`;
+  const { data } = await customAxios.get(url);
+  return data.data;
+};
+
+// 회원 가입승인후 초기 견주, 강아지 프로필 설정
+export const handlePostMemberProfile = async (req: IMemberProfile): Promise<void> => {
+  const url = `member/main/profile`;
+  const { data } = await customAxios.post(url, {
+    memberId: req.memberId,
+    dogId: req.dogId,
+    memberProfileUri: req.memberProfileUri,
+    dogProfileUri: req.dogProfileUri,
+    nickName: req.nickName,
+    relation: req.relation
+  });
+  return data;
 };

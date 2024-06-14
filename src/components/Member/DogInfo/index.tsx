@@ -123,7 +123,7 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
               </S.Title>
               <S.Editebutton
-                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE(String(dogId)))}
+                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}
               >
                 <span>수정</span>
                 <ArrowRightIcon />
