@@ -4,7 +4,7 @@ import InfoCard from "components/Admin/MyPage/MyPageCard/InfoCard";
 import PrincipalProfile from "components/Admin/MyPage/PrincipalProfile/index";
 import { CardContainer, ContentContainer } from "components/Admin/MyPage/styles";
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
+import { AdminNavBar } from "components/common/NavBar";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { Role } from "types/admin/admin.types";
@@ -36,7 +36,7 @@ const PrincipalMyPage = () => {
 
       <LogOutButton />
 
-      <NavBar type="admin" />
+      <AdminNavBar />
     </>
   );
 };

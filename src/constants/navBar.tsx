@@ -27,6 +27,7 @@ export const MENU_ITEMS = {
       blackImage: <CheckBoardBlack />,
       colorImage: <CheckBoard />
     },
+    /* 채팅 기능은 ver 1.0.0 에선 없음 */
     {
       text: "채팅",
       path: PATH.ADMIN_CHAT,
@@ -47,6 +48,7 @@ export const MENU_ITEMS = {
     }
   ],
   member: [
+    /* 채팅 기능은 ver 1.0.0 에선 없음 */
     {
       text: "채팅",
       path: "",
@@ -66,4 +68,4 @@ export const MENU_ITEMS = {
       colorImage: <MyPageDog />
     }
   ]
-};
+} as const;
