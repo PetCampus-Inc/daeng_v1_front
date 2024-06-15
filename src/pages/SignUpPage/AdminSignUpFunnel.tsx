@@ -1,8 +1,9 @@
 import { ADMIN_SIGNUP_PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
-import { memo } from "react";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import AccountSettingPage from "./AccountSettingPage";
 import AdminInfoPage from "./AdminInfoPage";
@@ -101,6 +102,13 @@ const AdminSignUpFunnel = () => {
     }
   };
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 새로고침 시 초기 스텝으로 이동
+    navigate(`?step=${역할_선택}`, { replace: true });
+  }, [navigate]);
+
   const methods = useForm({
     mode: "onSubmit",
     reValidateMode: "onChange"
@@ -160,4 +168,4 @@ const AdminSignUpFunnel = () => {
   );
 };
 
-export default memo(AdminSignUpFunnel);
+export default AdminSignUpFunnel;
