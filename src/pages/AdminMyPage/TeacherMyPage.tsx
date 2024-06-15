@@ -4,7 +4,7 @@ import InfoCard from "components/Admin/MyPage/MyPageCard/InfoCard";
 import { CardContainer, ContentContainer } from "components/Admin/MyPage/styles";
 import TeacherProfile from "components/Admin/MyPage/TeacherProfile/index";
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
+import { AdminNavBar } from "components/common/NavBar";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { Role } from "types/admin/admin.types";
@@ -31,7 +31,7 @@ const TeacherMyPage = () => {
         </ContentContainer>
       </PageContainer>
       <LogOutButton />
-      <NavBar />
+      <AdminNavBar />
     </>
   );
 };

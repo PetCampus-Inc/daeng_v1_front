@@ -18,7 +18,7 @@ import {
 } from "components/Admin/EnrollmentForm/styles";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
+import { AdminNavBar } from "components/common/NavBar";
 import { type FormAdaptedData, useAdminEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
@@ -93,7 +93,7 @@ const EnrollmentFormDetailPage = () => {
           </FormProvider>
         </Container>
       </Layout>
-      <NavBar />
+      <AdminNavBar />
     </>
   );
 };

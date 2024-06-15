@@ -3,7 +3,7 @@ import AttendanceManagement from "components/Admin/Attendance/AttendanceManageme
 import AttendanceTop from "components/Admin/Attendance/AttendanceTop";
 import { AttendanceProvider } from "components/Admin/Attendance/context/AttendanceProvider";
 import Header from "components/common/Header";
-import Navbar from "components/common/NavBar";
+import { AdminNavBar } from "components/common/NavBar";
 import { useSearchParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 
@@ -20,7 +20,7 @@ const AttendancePage = () => {
           {mode !== "attend" ? <AttendanceMain /> : <AttendanceManagement />}
         </AttendanceProvider>
       </PageContainer>
-      <Navbar />
+      <AdminNavBar />
     </>
   );
 };
