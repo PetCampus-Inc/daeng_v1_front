@@ -33,7 +33,7 @@ const ADMIN_PATH = {
   ADMIN: `${ADMIN}`,
   ADMIN_LOGIN: `/${ADMIN}/${LOGIN}`,
   ADMIN_SIGNUP: `/${ADMIN}/${SIGNUP}`,
-  ADMIN_SIGNUP_APPROVAL_STATUS: `/${ADMIN}/${SIGNUP}?step=${ADMIN_SIGNUP_PATH.승인상태}`,
+  ADMIN_SIGNUP_APPROVAL_STATUS: `/${ADMIN}/${SIGNUP}/${ADMIN_SIGNUP_PATH.승인상태}`,
   ADMIN_ATTENDANCE: `/${ADMIN}/attendance`, // 출석부
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/${ADMIN}/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>

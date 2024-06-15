@@ -30,7 +30,7 @@ export const useAdminLogin = () => {
         res.role === Role.APPROVAL_DENIED ||
         res.role === Role.APPROVAL_CANCEL
       ) {
-        location.href = `${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}&source=login`;
+        location.href = `${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}?source=login`;
       }
     },
     throwOnError: false,
