@@ -2,7 +2,7 @@ import AttendCareInit from "components/Admin/AttendCare/AttendCareInit";
 import AttendCareMain from "components/Admin/AttendCare/AttendCareMain";
 import AttendCareEmpty from "components/Admin/AttendCare/AttendCareMain/AttendCareEmpty";
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
+import { AdminNavBar } from "components/common/NavBar";
 import { useGetCareDogList } from "hooks/api/admin/care";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useRouteLoaderData } from "react-router-dom";
@@ -30,7 +30,7 @@ const AttendCarePage = () => {
           <AttendCareMain data={data} />
         )}
       </PageContainer>
-      <NavBar />
+      <AdminNavBar />
     </>
   );
 };

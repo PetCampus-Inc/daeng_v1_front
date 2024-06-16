@@ -1,4 +1,4 @@
-import { useDogListAndSortedList, useDogSearchQuery } from "hooks/api/attendanceQuery";
+import { useDogListAndSortedList, useDogSearchQuery } from "hooks/api/admin/attendance";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState, useCallback } from "react";
 import { useRecoilValue } from "recoil";

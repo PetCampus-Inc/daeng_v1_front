@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
-import { INewEnrollmentList, ISimpleSchoolFormList } from "types/Admin.type";
+import { INewEnrollmentList, ISimpleSchoolFormList } from "types/admin/school.types";
 import showToast from "utils/showToast";
 
 const EnrollmentFormListPage = () => {

@@ -1,10 +1,12 @@
-import type { MemberDtoType } from "./admin/enrollment.types";
-import type { Nullable } from "./helper.type";
+import type { MemberDtoType } from "./enrollment.types";
+import type { Nullable } from "../helper.types";
 
 type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 
-// MEMO: 출석모드 데이터
-export type AttendData = {
+/**
+ *  @description 출석모드 Dto
+ */
+export interface AttendData {
   attendanceId: number;
   dogId: number;
   dogName: string;
@@ -13,10 +15,21 @@ export type AttendData = {
   currentRounds: Nullable<number>;
   monthlyTicket: Nullable<number[]>;
   status: AttendanceStatus;
-};
+}
 
-// MEMO: 출석부 데이터
-export type AttendanceData = {
+/**
+ * @description 출석모드 요청 Dto
+ */
+export interface AttendReq {
+  schoolId: number;
+  adminId: number;
+  attendanceIdList: number[];
+}
+
+/**
+ *  @description 출석부 Dto
+ */
+export interface AttendanceData {
   attendanceId: null;
   dogId: number;
   dogName: string;
@@ -25,24 +38,14 @@ export type AttendanceData = {
   currentRounds: Nullable<number>;
   monthlyTicket: Nullable<number[]>;
   status: Nullable<AttendanceStatus>;
-};
+}
 
+/**
+ * @description 견주 전화번호 Dto
+ */
 export interface IMemberCallInfo {
   dogName: string;
   phoneNumber: string;
-}
-
-// TODO: 이 부분+ 이 타입을 사용한 기존 API들 삭제해도 되는지 검토 (API변동 이슈)
-export interface IDogDetails {
-  dogId: number;
-  dogName: string;
-  size: string;
-  gender: string;
-  allRounds: number;
-  currentRounds: number;
-  monthlyTicket: [];
-  dogAttendances: [];
-  status: number;
 }
 
 export interface IDogAndMemberInfo {

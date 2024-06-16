@@ -1,5 +1,5 @@
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
+import { NavBar } from "components/common/NavBar";
 import LogOutButton from "components/Member/MyPage/Buttons/LogOutButton";
 import { PageContainer } from "components/Member/MyPage/Container/styles";
 import MemberProfile from "components/Member/MyPage/MemberProfile";
@@ -28,7 +28,7 @@ const MemberMyPage = () => {
         </ContentContainer>
       </PageContainer>
       <LogOutButton />
-      <NavBar type="mypage" />
+      <NavBar />
     </>
   );
 };

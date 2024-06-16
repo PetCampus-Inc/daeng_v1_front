@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { handlePostTicket } from "apis/admin.attendance.api";
+import { handlePostTicket } from "apis/admin/attendance.api";
 import showToast from "utils/showToast";
 
 export const useNewTicketMutation = (close?: any) => {

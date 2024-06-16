@@ -1,3 +1,4 @@
+import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -8,11 +9,13 @@ import {
   handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
+  handleGetMemberProfile,
   handleGetMemberProfileInfo,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
+  handlePostMemberProfile,
   handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
@@ -27,6 +30,7 @@ import type {
   ImageListType,
   IMainAlbum,
   IMemberDogPostDetailInfo,
+  IMemberProfile,
   IMemberProfilePostInfo
 } from "types/member/main.types";
 
@@ -116,7 +120,7 @@ export const useGetMemberProfileInfo = (memberId: string) => {
 // 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = (memberId: string) => {
   const queryClient = useQueryClient();
-  const enrollMemberDOgMutation = useMutation({
+  const enrollMemberDogMutation = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
@@ -127,7 +131,7 @@ export const usePostMemberDogEnrollment = (memberId: string) => {
     }
   });
 
-  return enrollMemberDOgMutation.mutate;
+  return enrollMemberDogMutation.mutate;
 };
 
 // 견주 상세 정보 수정
@@ -227,4 +231,27 @@ export const usePostMemberDogPickDrop = (dogId: number) => {
   });
 
   return memberDogPickDropMutation.mutate;
+};
+
+// 회원 가입승인후 초기 견주, 강아지 프로필을 설정 데이터 조회
+export const useGetMemberProfile = (memberId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_PROFILE(memberId),
+    queryFn: () => handleGetMemberProfile(memberId)
+  });
+};
+// 회원 가입승인후 초기 견주, 강아지 프로필을 설정
+export const usePostMemberProfile = () => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: (req: IMemberProfile) => handlePostMemberProfile(req),
+    onSuccess: () => {
+      navigate(PATH.ROOT);
+    },
+    onError: () => {
+      showToast("프로필 등록을 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return { mutateMemberProfile: mutate };
 };

@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useQuery } from "@tanstack/react-query";
-import { getNewEnrollment } from "apis/admin/admin.api";
+import { getNewEnrollment } from "apis/admin/school.api";
 
 const useGetNewEnrollment = (adminId: number, schoolId: number) => {
   return useQuery({

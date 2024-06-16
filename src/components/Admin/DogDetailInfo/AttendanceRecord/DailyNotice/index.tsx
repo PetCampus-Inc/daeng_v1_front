@@ -6,7 +6,7 @@ import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopNeedAttention from "assets/svg/poop-warning";
 import PoopWatery from "assets/svg/poop-watery";
 import PoopBox from "components/common/PoopBox";
-import { IDogInfoAgenda } from "types/admin.attendance.type";
+import { IDogInfoAgenda } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 

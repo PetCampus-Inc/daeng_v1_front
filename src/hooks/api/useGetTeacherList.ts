@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useQuery } from "@tanstack/react-query";
-import { getTeacherList } from "apis/admin/admin.api";
+import { getTeacherList } from "apis/admin/school.api";
 
 const useGetTeacherList = (adminId: number) => {
   return useQuery({

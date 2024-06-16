@@ -2,7 +2,7 @@ import { INIT_COUNTER, LIST, type TSortOptionList } from "constants/option";
 
 import { atom } from "recoil";
 
-import type { Nullable } from "types/helper.type";
+import type { Nullable } from "types/helper.types";
 
 export const schoolIdAtom = atom<Nullable<number>>({
   key: "schoolIdAtom",

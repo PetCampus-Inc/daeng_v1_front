@@ -1,8 +1,8 @@
 import { request } from "libs/CustomAxios/request";
-import { IResponse } from "types/helper.type";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
+import type { Response } from "types/helper.types";
 import type { EnrollmentDataType } from "types/member/enrollment.types";
 
 /**
@@ -11,7 +11,7 @@ import type { EnrollmentDataType } from "types/member/enrollment.types";
  */
 export const handleGetMemberEnrollmentForm = async (formId: string): Promise<MemberFormData> => {
   const url = `admin/enrollment/${formId}`;
-  const { data } = await request<IResponse<MemberFormData>>({ url });
+  const { data } = await request<Response<MemberFormData>>({ url });
   return data;
 };
 
@@ -21,7 +21,7 @@ export const handleGetMemberEnrollmentForm = async (formId: string): Promise<Mem
  */
 export const handleGetAdminForm = async (formId: string): Promise<EnrollmentDataType> => {
   const url = `school/form/list/${formId}`;
-  const { data } = await request<IResponse<EnrollmentDataType>>({ url });
+  const { data } = await request<Response<EnrollmentDataType>>({ url });
   return data;
 };
 

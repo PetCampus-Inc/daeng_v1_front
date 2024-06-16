@@ -8,7 +8,7 @@ interface INickNameEditeProps {
 }
 
 const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
-  const { register, setValue, watch } = useFormContext();
+  const { register, getValues } = useFormContext();
 
   return (
     <>
@@ -16,10 +16,11 @@ const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
         register={register}
         {...register("nickName", { required: true })}
         placeholder="닉네임을 입력해주세요"
-        value={watch("nickName")}
+        defaultValue={getValues("dogName")}
         onFocus={handleFocus}
         onBlur={handleBlur}
         css={InputStyle}
+        className="defaultValue"
       />
     </>
   );

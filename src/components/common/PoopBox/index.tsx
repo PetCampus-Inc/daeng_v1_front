@@ -3,7 +3,7 @@ import PoopHealthy from "assets/svg/poop-healthy";
 import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopWarning from "assets/svg/poop-warning";
 import PoopWatery from "assets/svg/poop-watery";
-import { IPoop } from "types/admin.attendance.type";
+import { IPoop } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 

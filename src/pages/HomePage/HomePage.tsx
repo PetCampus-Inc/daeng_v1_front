@@ -1,5 +1,5 @@
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
+import { NavBar } from "components/common/NavBar";
 import DogManagerPopup from "components/Home/DogManagerPopup";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";

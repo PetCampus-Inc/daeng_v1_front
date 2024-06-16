@@ -3,7 +3,7 @@ import { Flex } from "components/common";
 
 import * as S from "./styles";
 
-import type { IOwnerInfo } from "types/admin/mypage.type";
+import type { IOwnerInfo } from "types/admin/mypage.types";
 
 interface PrincipalInfoProps {
   data: IOwnerInfo;

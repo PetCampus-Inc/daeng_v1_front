@@ -1,3 +1,5 @@
+import { ACCEPT_FILE_TYPE, PROFILE_NAME } from "constants/profile";
+
 import AddCIcon from "assets/svg/add-c-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { Flex } from "components/common/Flex";
@@ -36,7 +38,7 @@ const ProfileEdite = ({
       <S.UploadProfileButton onClick={() => handleClick(type)} onBlur={() => setIsActive(true)}>
         {profile.length > 0 ? (
           <>
-            <S.UploadImage src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            <S.UploadImage src={profile[0].thumbnail} alt={`${type}-profile`} />
             {!isActive && <ProfileActiveBox />}
           </>
         ) : (
@@ -47,12 +49,11 @@ const ProfileEdite = ({
         {...register(registerText)}
         type="file"
         ref={fileInputRef}
-        multiple
-        accept={"image/*"}
+        accept={ACCEPT_FILE_TYPE.IMAGE}
         onChange={(e) => handleFileChange(e, type)}
       />
       <Text as="span" typo="body2_16_R" color="gray_2">
-        {type === "MY" ? "내 프로필" : "강아지 프로필"}
+        {type === PROFILE_NAME.MEMBER ? "내 프로필" : "강아지 프로필"}
       </Text>
     </Flex>
   );
