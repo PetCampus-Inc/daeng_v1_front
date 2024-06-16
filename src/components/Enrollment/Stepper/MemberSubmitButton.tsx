@@ -29,11 +29,11 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
 
   // TODO memberInfo데이터 recoil로 분리 등 리팩토링 필요
   const memberInfo = {
-    dogId: memberDogInfo ? memberDogInfo.dogId : 0, // Memo 신규 강아지의 경우 0
+    dogId: memberDogInfo?.dogId || 0, // Memo 신규 강아지의 경우 0
     memberId: Number(memberInfoData.memberId),
     memberName: memberInfoData.memberName,
     memberGender: memberInfoData.memberGender as MemberGenderType,
-    address: `${memberInfoData.address && memberInfoData.address}`,
+    address: memberInfoData.address || "",
     addressDetail: `${memberInfoData.address && memberInfoData.addressDetail}`,
     phoneNumber: memberInfoData.phoneNumber,
     emergencyPhoneNumber: memberInfoData.emergencyPhoneNumber || ""
