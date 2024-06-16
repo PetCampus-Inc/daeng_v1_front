@@ -1,11 +1,12 @@
-import {
+import type {
   DogGenderType,
   DogSizeType,
+  MemberGenderType,
   NeutralizationType,
   PickDropRequestType,
+  RelationType,
   VaccinationType
 } from "./enrollment.types";
-
 import type { Role } from "types/admin/admin.types";
 import type { Nullable } from "types/helper.types";
 import type { IResponse } from "types/Response.type";
@@ -71,13 +72,13 @@ export interface IMemberInfo extends IResponse {
 export interface IMemberProfileInfo extends IResponse {
   memberId: string;
   memberName: string;
-  memberGender: string;
+  memberGender: MemberGenderType;
   nickName: string;
   address: string;
   addressDetail: string;
   phoneNumber: string;
   emergencyPhoneNumber: string;
-  relation: string;
+  relation: RelationType;
 }
 
 export interface IMemberProfilePostInfo {
