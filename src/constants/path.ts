@@ -61,6 +61,7 @@ const ADMIN_PATH = {
   ADMIN_SUBMIT_FORM: `/${ADMIN}/school/enrollment/submit`, // 견주 가입신청서 제출
 
   ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`,
+  ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`,
   ADMIN_MY_PAGE_EDIT: `/${ADMIN}/${MYPAGE}/profile/edit`,
   ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`,
   ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit`

@@ -7,6 +7,7 @@ export { default as DogInfoPage } from "./AdminAtendancePage/DogDetailPage/DogIn
 export { default as Chat } from "./ChatPage/Chat";
 export { default as SchoolManagePage } from "./AdminSchoolMangePage/SchoolManagePage";
 export { default as PrincipalMyPage } from "./AdminMyPage/PrincipalMyPage";
+export { default as AdminSettingPage } from "./AdminMyPage/AdminSettingPage";
 export { default as TeacherMyPage } from "./AdminMyPage/TeacherMyPage";
 export { default as SchoolInfoEditPage } from "./AdminMyPage/SchoolInfoEditPage";
 export { default as SchoolInfoPage } from "./AdminMyPage/SchoolInfoPage";

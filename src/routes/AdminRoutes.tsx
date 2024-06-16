@@ -232,6 +232,14 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   <Pages.SchoolInfoEditPage />
                 </Suspense>
               )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_SETTING,
+              element: (
+                <Suspense>
+                  <Pages.AdminSettingPage />
+                </Suspense>
+              )
             }
           ]
         }
