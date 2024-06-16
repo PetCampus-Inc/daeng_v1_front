@@ -1,9 +1,10 @@
+import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import SaveButton from "components/Member/DogInfo/DogDetailInfoEdite/Buttons/SaveButton";
 import DogDetailInfoEdite from "components/Member/DogInfo/DogDetailInfoEdite/DogDetailInfoEdite";
 import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useBlocker, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
 import { addZero } from "utils/date";
 
@@ -36,8 +37,17 @@ const MemberDogInfoEditPage = () => {
     }
   });
 
+  const blocker = useBlocker(() => methods.formState.isDirty);
+
   return (
     <>
+      {blocker.state === "blocked" ? (
+        <PreventLeaveModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
       <Header type="text" text={`${data.dogName}의 가입정보 수정`} />
       <PageContainer pt="1">
         <FormProvider {...methods}>
