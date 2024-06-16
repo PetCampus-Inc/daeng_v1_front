@@ -1,6 +1,5 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { FIELD, FIELD_KEYS } from "constants/field";
-import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 
 import { TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
@@ -36,12 +35,7 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Text>성별</Text>
-        <SingleRadio
-          name={FIELD.DOG_GENDER}
-          radiosText={["수컷", "암컷"]}
-          isRequired
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.DOG_GENDER)]}
-        />
+        <SingleRadio name={FIELD.DOG_GENDER} radiosText={["수컷", "암컷"]} isRequired />
       </Card>
       <Card>
         <Text>크기</Text>
@@ -50,7 +44,6 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
           isRequired
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.DOG_SIZE)]}
         />
       </Card>
       <Card>
@@ -95,7 +88,6 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
           name={FIELD.NEUTRALIZATION}
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItems?.get(FIELD_KEYS.NEUTRALIZATION)}
-          defaultSelect={ITEM_ENGLISH_TO_KOREAN[watch(FIELD.NEUTRALIZATION)]}
         />
       </Card>
     </>
