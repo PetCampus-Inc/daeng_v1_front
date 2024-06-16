@@ -1,7 +1,10 @@
+import { useGetEnrollmentStatus } from "hooks/api/admin/enroll";
 import useMemberRejected from "hooks/api/member/useMemberRejected";
+import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useToggle } from "hooks/common/useToggle";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { IEnrollmentStatus } from "types/member/enrollment.types";
 import { IMemberInfo } from "types/member/main.types";
 
 import * as S from "./styles";
@@ -17,6 +20,11 @@ interface MemberInfoProps {
 const MyDogInfo = ({ data }: MemberInfoProps) => {
   const { pathname } = useLocation();
   const { isOpen, toggle } = useToggle();
+  const storageEnrollmentIdArr = useLocalStorageValue<number[]>("ENROLLMENT_FORM_ID") || [];
+  const { data: approvalDeniedDogArr } = useGetEnrollmentStatus(storageEnrollmentIdArr);
+  const approvalDeniedDog = approvalDeniedDogArr.filter((dog) => dog.status === "APPROVAL_DENIED");
+  console.log("approvalDeniedDog", approvalDeniedDogArr);
+
   const {
     rejectedDogs,
     IS_REJECTED,
@@ -49,7 +57,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 2.3,
+    slidesToShow: 6, //2.3
     slidesToScroll: 1,
     arrows: false
   };
@@ -61,6 +69,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.Title>내 강아지 정보</S.Title>
         <S.DeleteDogButton onClick={toggle}>강아지 삭제</S.DeleteDogButton>
       </S.TitleBox>
+
       {data.doglist.length <= 1 ? (
         <S.MyDogInfoList>
           {data.doglist.map((item) => (
@@ -86,6 +95,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               {item.status === "APPROVAL_PENDING" && (
                 <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
               )}
+
               {IS_REJECTED &&
                 JSON.parse(IS_REJECTED) &&
                 rejectedDogs &&
@@ -123,11 +133,16 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               )}
             </>
           ))}
-          {IS_REJECTED &&
-            JSON.parse(IS_REJECTED) &&
-            rejectedDogs &&
-            rejectedDogs.map((el: { dogName: string; registeredDate: number[] }) => (
-              <RejectedCard dogName={el.dogName} registeredDate={el.registeredDate} />
+
+          {/* {IS_REJECTED &&
+              JSON.parse(IS_REJECTED) &&
+              rejectedDogs &&
+              rejectedDogs.map((el: { dogName: string; registeredDate: number[] }) => (
+                <RejectedCard dogName={el.dogName} registeredDate={el.registeredDate} />
+              ))} */}
+          {approvalDeniedDog.length > 0 &&
+            approvalDeniedDog.map((dog, idx) => (
+              <RejectedCard key={idx} dogName={dog.dogName} registeredDate={[2024, 0, 1]} />
             ))}
           <AddMyDogCard />
         </S.CarouselSlider>
