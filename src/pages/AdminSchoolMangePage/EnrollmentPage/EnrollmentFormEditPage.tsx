@@ -23,7 +23,7 @@ import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import { useAdminEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
 
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
@@ -51,7 +51,8 @@ const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
-  const blocker = useBlocker(() => methods.formState.isDirty);
+  const { isDirty } = useFormState({ control: methods.control });
+  const blocker = useBlocker(() => isDirty);
 
   return (
     <>
