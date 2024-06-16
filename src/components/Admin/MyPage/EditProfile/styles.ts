@@ -45,7 +45,3 @@ export const ProfileEditeButton = styled.button`
   background-color: ${({ theme }) => theme.colors.br_4};
   border: 2px solid ${({ theme }) => theme.colors.white};
 `;
-
-export const contentWrapper = styled.div`
-  width: 100%;
-`;

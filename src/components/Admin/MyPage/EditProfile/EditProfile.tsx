@@ -1,8 +1,8 @@
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
-import { Layout, Text, TextInput } from "components/common";
+import { Flex, Layout, Text, TextInput } from "components/common";
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import { IOwnerInfo } from "types/admin/mypage.type";
-import { ITeacherInfo } from "types/admin/mypage.type";
+import { IOwnerInfo } from "types/admin/mypage.types";
+import { ITeacherInfo } from "types/admin/mypage.types";
 
 import * as S from "./styles";
 
@@ -13,7 +13,7 @@ interface ProfileInfoProps {
 
 const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
   return (
-    <Layout type="page" pt="5vh">
+    <Layout type="page" pt="10vh">
       <S.ProfileWrapper>
         <S.ProfileBox>
           <S.ProfileEditeBox>
@@ -26,18 +26,18 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
             </S.ProfileEditeButton>
           </S.ProfileEditeBox>
         </S.ProfileBox>
-        <S.contentWrapper>
+        <Flex direction="column" gap={6}>
           <Text typo="label2_14_R" color="darkBlack">
             이름
           </Text>
           <TextInput value={principalData ? principalData.adminName : teacherData?.adminName} />
-        </S.contentWrapper>
-        <S.contentWrapper>
+        </Flex>
+        <Flex direction="column" gap={6}>
           <Text typo="label2_14_R" color="darkBlack">
             전화번호
           </Text>
           <TextInput value={principalData ? principalData.phoneNumber : teacherData?.phoneNumber} />
-        </S.contentWrapper>
+        </Flex>
         <BackgroundButton backgroundColor="white">수정 완료</BackgroundButton>
       </S.ProfileWrapper>
     </Layout>
