@@ -29,10 +29,8 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     rejectedDogs,
     IS_REJECTED,
     VISIT_PATH_NAME,
-    updataStoragePendingDogs,
     removeStorageDatas,
     getPendingDogs,
-    getRejectedDogs,
     STORAGE_KEY
   } = useMemberRejected();
 
