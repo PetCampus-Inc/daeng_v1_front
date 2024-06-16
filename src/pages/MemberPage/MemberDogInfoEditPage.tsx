@@ -1,7 +1,7 @@
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
-import SaveButton from "components/Member/DogInfo/DogDetailInfoEdite/Buttons/SaveButton";
-import DogDetailInfoEdite from "components/Member/DogInfo/DogDetailInfoEdite/DogDetailInfoEdite";
+import SaveButton from "components/Member/DogInfo/DogDetailInfoEdit/Buttons/SaveButton";
+import DogDetailInfoEdit from "components/Member/DogInfo/DogDetailInfoEdit/DogDetailInfoEdit";
 import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
@@ -51,7 +51,7 @@ const MemberDogInfoEditPage = () => {
       <Header type="text" text={`${data.dogName}의 가입정보 수정`} />
       <PageContainer pt="1">
         <FormProvider {...methods}>
-          <DogDetailInfoEdite />
+          <DogDetailInfoEdit />
           <SaveButton dogId={Number(dogId)} />
         </FormProvider>
       </PageContainer>

@@ -13,7 +13,7 @@ interface DogInfoProps {
   requiredItems?: Map<number, boolean>;
 }
 
-const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
+const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
 
   const dogBirth = {
@@ -94,4 +94,4 @@ const DogDetailInfoEdite = ({ requiredItems }: DogInfoProps) => {
   );
 };
 
-export default DogDetailInfoEdite;
+export default DogDetailInfoEdit;
