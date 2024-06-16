@@ -151,3 +151,10 @@ export interface BreedData {
   breedId: number;
   breedName: string;
 }
+
+export interface IEnrollmentStatus {
+  enrollmentFormId: number;
+  memberName: string;
+  dogName: string;
+  status: string;
+}
