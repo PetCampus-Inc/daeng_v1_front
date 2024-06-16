@@ -1,4 +1,5 @@
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
+import { FIELD } from "constants/field";
+
 import Header from "components/common/Header";
 import KeyboardCompleteButton from "components/Member/MyPage/Buttons/KeyboardCompleteButton";
 import SaveButton from "components/Member/MyPage/Buttons/SaveButton";
@@ -8,56 +9,43 @@ import MyProfileEdite from "components/Member/MyPage/MyMemberInfoEdite/MyProfile
 import { ContentContainer } from "components/Member/MyPage/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
-import useFocus from "hooks/common/useFocus";
-import * as useOverlay from "hooks/common/useOverlay/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { getLabelForValue } from "utils/formatter";
 
 const MemberMyInfoEditePage = () => {
-  const methods = useForm({
-    mode: "onChange",
-    shouldUnregister: false,
-    defaultValues: {}
-  });
-  const navigate = useNavigate();
   const { memberId } = useParams();
-  const overlay = useOverlay.useOverlay();
-  const { isFocusing, handleFocus, handleBlur } = useFocus();
   const { data } = useGetEnrollment({ memberId: "1", schoolId: 2 });
-  const { data: memberData } = useGetMemberProfileInfo(String(memberId));
+  const { data: memberData } = useGetMemberProfileInfo(memberId);
+
+  // FIXME: `useGetMemberProfileInfo` select 단에서 데이터 가공해주면 좋을 것 같습니다.
+  const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, memberData.memberGender);
+
+  const methods = useForm({
+    mode: "onBlur",
+    defaultValues: { ...memberData, memberGender: formatMemberGender }
+  });
 
   const { requiredItemList } = data;
 
-  const openPreventLeavePopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
-    ));
+  if (!memberId) throw new Error("memberId가 없습니다.");
 
   return (
     <>
-      <Header type="text" text="프로필 수정" transparent handleClick={openPreventLeavePopup} />
+      <Header type="text" text="프로필 수정" transparent />
       <PageContainer pt="1" color="br_5">
         <FormProvider {...methods}>
-          <MyProfileEdite
-            memberData={memberData}
-            handleFocus={handleFocus}
-            handleBlur={handleBlur}
-          />
+          <MyProfileEdite />
           <ContentContainer px="1.5" py="1" height="auto">
-            <MyInfoEdite
-              requiredItems={requiredItemList}
-              memberData={memberData}
-              handleFocus={handleFocus}
-              handleBlur={handleBlur}
-            />
+            <MyInfoEdite requiredItems={requiredItemList} />
           </ContentContainer>
-          <SaveButton />
+          <SaveButton memberId={memberId} />
         </FormProvider>
-        <KeyboardCompleteButton
+        {/* <KeyboardCompleteButton
           memberData={memberData}
           handleBlur={handleBlur}
           isFocusing={isFocusing}
-        />
+        /> */}
       </PageContainer>
     </>
   );
