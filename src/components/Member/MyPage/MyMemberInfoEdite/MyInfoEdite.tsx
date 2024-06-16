@@ -25,16 +25,12 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const formattedValue = formatPhoneNumber(value);
-    setValue(field, formattedValue);
-  };
-
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.name, e.target.value);
+    setValue(field, formattedValue, { shouldDirty: true });
   };
 
   const handleClear = () => {
     setValue(addressStreet, "");
-    setValue(FIELD.MEMBER_ADDRESS_DETAIL, "");
+    setValue(FIELD.MEMBER_ADDRESS_DETAIL, "", { shouldDirty: true, shouldValidate: true });
   };
 
   const openPopup = () =>
@@ -52,10 +48,8 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
         <TextInput
           name={FIELD.MEMBER_NAME}
           register={register}
-          required
+          required={requiredItems?.get(FIELD_KEYS.MEMBER_NAME)}
           placeholder="견주 이름을 입력해주세요"
-          onChange={handleChangeInput}
-          className="defaultValue"
         />
       </Flex>
 
@@ -63,7 +57,11 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
         <Text typo="label2_14_R" color="darkBlack">
           성별
         </Text>
-        <SingleRadio name={FIELD.MEMBER_GENDER} radiosText={["남", "여"]} />
+        <SingleRadio
+          name={FIELD.MEMBER_GENDER}
+          radiosText={["남", "여"]}
+          isRequired={requiredItems?.get(FIELD_KEYS.MEMBER_GENDER)}
+        />
       </Flex>
 
       <Flex direction="column" gap={7}>
@@ -81,14 +79,11 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
           readOnly
           placeholder="주소를 입력해주세요"
           inputType="memberEdite"
-          className="defaultValue"
         />
         <TextInput
           name={FIELD.MEMBER_ADDRESS_DETAIL}
           register={register}
           placeholder="상세 주소를 입력해주세요"
-          onChange={handleChangeInput}
-          className="defaultValue"
         />
       </Flex>
 
@@ -105,8 +100,7 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
           onChange={handleChangeNumber(FIELD.MEMBER_PHONE)}
           placeholder="연락처를 입력해주세요"
           type="tel"
-          className="defaultValue"
-          required
+          required={requiredItems?.get(FIELD_KEYS.MEMBER_PHONE)}
         />
       </Flex>
 
@@ -123,8 +117,7 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
           }}
           placeholder="비상 연락처를 입력해주세요"
           type="tel"
-          className="defaultValue"
-          required
+          required={requiredItems?.get(FIELD_KEYS.EMERGENCY_NUMBER)}
         />
       </Flex>
     </S.ProfileEditeWrapper>
