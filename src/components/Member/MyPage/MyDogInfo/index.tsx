@@ -37,15 +37,9 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   } = useMemberRejected();
 
   useEffect(() => {
-    updataStoragePendingDogs(); // storage data update
-    getPendingDogs({ data }); // pending data
-    getRejectedDogs({ data }); // rejected data
-  }, [data]);
-
-  useEffect(() => {
     // 첫 방문시 mypage path localStorage에 저장
-    if (IS_REJECTED === "true" && !VISIT_PATH_NAME) {
-      localStorage.setItem(STORAGE_KEY.VISIT_PATH_NAME, pathname);
+    if (approvalDeniedDog && !VISIT_PATH_NAME) {
+      localStorage.setItem(STORAGE_KEY.VISIT_PATH_NAME, "mypage");
     }
     // VISIT_PATH_NAME, IS_REJECTED 둘다 있다면 삭제
     if (VISIT_PATH_NAME && IS_REJECTED) {
@@ -95,12 +89,9 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
               {item.status === "APPROVAL_PENDING" && (
                 <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
               )}
-
-              {IS_REJECTED &&
-                JSON.parse(IS_REJECTED) &&
-                rejectedDogs &&
-                rejectedDogs.map((el: { dogName: string; registeredDate: number[] }) => (
-                  <RejectedCard dogName={el.dogName} registeredDate={el.registeredDate} />
+              {approvalDeniedDog.length > 0 &&
+                approvalDeniedDog.map((dog, idx) => (
+                  <RejectedCard key={idx} dogName={dog.dogName} registeredDate={[2024, 0, 1]} />
                 ))}
             </>
           ))}
