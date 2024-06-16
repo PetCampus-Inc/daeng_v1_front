@@ -158,3 +158,9 @@ export interface IEnrollmentStatus {
   dogName: string;
   status: string;
 }
+
+export interface IEnrollmentDeleteData {
+  adminId: number;
+  teacherName: string;
+  phoneNumber: string;
+}
