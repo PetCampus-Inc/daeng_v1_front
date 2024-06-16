@@ -4,6 +4,7 @@ import { QUERY_KEY } from "constants/queryKey";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import {
   handleGetAdminForm,
+  handleGetEnrollmentStatus,
   handleGetMemberEnrollmentForm,
   handlePostAdminForm
 } from "apis/admin/enrollment.api";
@@ -110,4 +111,12 @@ export const useCreateAdminEnrollment = () => {
   });
 
   return { mutateForm: mutateForm.mutate };
+};
+
+// 가입 신청서 상태를 확인
+export const useGetEnrollmentStatus = (enrollmentFormId: number[]) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_MAIN_DOG_LIST,
+    queryFn: () => handleGetEnrollmentStatus(enrollmentFormId)
+  });
 };

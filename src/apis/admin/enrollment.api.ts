@@ -1,9 +1,10 @@
+import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 import type { Response } from "types/helper.types";
-import type { EnrollmentDataType } from "types/member/enrollment.types";
+import type { EnrollmentDataType, IEnrollmentStatus } from "types/member/enrollment.types";
 
 /**
  * @description 견주 가입신청서 보기 - 승인 대기중인 견주의 가입신청서를 보여줍니다.
@@ -36,4 +37,21 @@ export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise
     method: "POST",
     data: { ...req }
   });
+};
+
+/**
+ * @description 가입신청서 상태를 반환합니다.
+ * @param {IEnrollmentStatus} enrollmentFormId
+ * @returns
+ */
+export const handleGetEnrollmentStatus = async (
+  enrollmentFormId: number[]
+): Promise<IEnrollmentStatus[]> => {
+  const req = enrollmentFormId.map(async (id) => {
+    const url = `admin/enrollment/status?enrollmentFormId=${id}`;
+    const { data } = await customAxios.get(url);
+    return data.data;
+  });
+
+  return Promise.all(req);
 };
