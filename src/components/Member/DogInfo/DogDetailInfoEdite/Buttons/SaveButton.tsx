@@ -1,86 +1,44 @@
 import { FIELD } from "constants/field";
-import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 
 import BackgroundButton from "components/common/Button/BackgroundButton";
-import { useGetMemberDogDetailInfo, usePostMemberDogDetailInfo } from "hooks/api/member/member";
-import { useCallback, useEffect, useState } from "react";
-import { useForm, useFormContext } from "react-hook-form";
-import { formatDate } from "utils/formatter";
+import { usePostMemberDogDetailInfo } from "hooks/api/member/member";
+import { useFormContext } from "react-hook-form";
+import { type MemberDogInfoReq } from "types/member/main.types";
+import { getKeyForLabel } from "utils/formatter";
 
-// TODO 리팩토링 할 수 있는 부분 있으면 하기
 const SaveButton = ({ dogId }: { dogId: number }) => {
-  const [isDisabled, setIsDisabled] = useState(true);
-  const { watch } = useFormContext();
-  const methods = useForm({ mode: "onSubmit" });
-  const mutatePostDogDetailInfo = usePostMemberDogDetailInfo(dogId);
-  const { data: previousValues } = useGetMemberDogDetailInfo(dogId);
+  const {
+    getValues,
+    handleSubmit,
+    formState: { isDirty, isValid, isSubmitting }
+  } = useFormContext();
+  const { mutatePostDogDetailInfo } = usePostMemberDogDetailInfo(dogId);
 
-  const [prevYear, prevMonth, prevDay] = previousValues[FIELD.BIRTHDAY].map(String);
-  const prevBirth = formatDate(prevYear, prevMonth, prevDay);
-
-  const dogName = watch(FIELD.DOG_NAME);
-  const dogGender = watch(FIELD.DOG_GENDER) === "암컷" ? "FEMALE" : "MALE";
-  const dogSize = Object.keys(ITEM_ENGLISH_TO_KOREAN).find(
-    (key) => ITEM_ENGLISH_TO_KOREAN[key] === watch("dogSize")
-  );
-  const breedId = watch(FIELD.BREED_ID);
-  const newBreed = watch(FIELD.NEW_BREED);
-  const birthDate = `${watch("year")}-${watch("month")}-${watch("day")}`;
-  const neutralization = watch(FIELD.NEUTRALIZATION) === "했어요" ? "NEUTERED" : "NOT_NEUTERED";
-
-  const updatedDogDetailInfo = {
-    dogId: dogId,
-    dogName: dogName,
-    dogGender: dogGender,
-    dogSize: dogSize,
-    breedId: breedId,
-    newBreed: newBreed,
-    birthDate: birthDate,
-    neutralization: neutralization
+  const getFormValues = (): MemberDogInfoReq => {
+    const formData = getValues();
+    return {
+      dogId,
+      dogName: formData[FIELD.DOG_NAME],
+      dogGender: formData[FIELD.DOG_GENDER] === "암컷" ? "FEMALE" : "MALE",
+      dogSize: getKeyForLabel(FIELD.DOG_SIZE, formData[FIELD.DOG_SIZE]) || "",
+      breedId: formData[FIELD.BREED_ID],
+      newBreed: formData[FIELD.NEW_BREED],
+      birthDate: `${formData["year"]}-${formData["month"]}-${formData["day"]}`,
+      neutralization: formData[FIELD.NEUTRALIZATION] === "했어요" ? "NEUTERED" : "NOT_NEUTERED"
+    };
   };
 
-  const checkFormValidity = useCallback(() => {
-    return !(
-      previousValues.dogName !== dogName ||
-      previousValues.dogGender !== dogGender ||
-      previousValues.dogSize !== dogSize ||
-      previousValues.breedId !== breedId ||
-      previousValues.breedName !== newBreed ||
-      prevBirth !== birthDate ||
-      previousValues.neutralization !== neutralization
-    );
-  }, [
-    birthDate,
-    breedId,
-    dogGender,
-    dogName,
-    dogSize,
-    neutralization,
-    newBreed,
-    prevBirth,
-    previousValues.breedId,
-    previousValues.breedName,
-    previousValues.dogGender,
-    previousValues.dogName,
-    previousValues.dogSize,
-    previousValues.neutralization
-  ]);
-
-  const onSubmit = methods.handleSubmit(() => {
-    mutatePostDogDetailInfo(updatedDogDetailInfo);
-  });
-
-  useEffect(() => {
-    const isValid = checkFormValidity();
-    setIsDisabled(isValid);
-  }, [checkFormValidity]);
+  const onSubmit = () => {
+    const requestData = getFormValues();
+    mutatePostDogDetailInfo(requestData);
+  };
 
   return (
     <BackgroundButton
-      onClick={onSubmit}
+      onClick={handleSubmit(onSubmit)}
       backgroundColor="white"
       buttonBackgroundColor="primaryColor"
-      disabled={isDisabled}
+      disabled={!isDirty || !isValid || isSubmitting}
     >
       수정 완료
     </BackgroundButton>
