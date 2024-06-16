@@ -16,3 +16,12 @@ export function debounce<T extends (...args: any[]) => void>(func: T, wait: numb
     timeout = setTimeout(() => func(...args), wait);
   } as T;
 }
+
+/**
+ * @description Check if the object is empty
+ * @param obj
+ * @returns {boolean}
+ */
+export const isEmpty = (obj: object) => {
+  return Object.keys(obj).length === 0;
+};
