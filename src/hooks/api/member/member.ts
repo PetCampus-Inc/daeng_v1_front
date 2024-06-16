@@ -19,6 +19,7 @@ import {
   handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
+import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
 import { getISOString } from "utils/date";
 import showToast from "utils/showToast";
@@ -29,9 +30,10 @@ import type {
   ImageList,
   ImageListType,
   IMainAlbum,
-  IMemberDogPostDetailInfo,
   IMemberProfile,
-  IMemberProfilePostInfo
+  IMemberProfilePostInfo,
+  MemberDogInfoData,
+  MemberDogInfoFormData
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -160,14 +162,6 @@ export const usePostMemberDogDelete = (memberId: string) => {
   return memberDogDeleteMutation.mutate;
 };
 
-// 강아지 상세 정보
-export const useGetMemberDogDetailInfo = (dogId: number) => {
-  return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
-    queryFn: () => handleGetMemberDogDetailInfo(dogId)
-  });
-};
-
 // 강아지 가입신청서 보기 (read only)
 export const useGetMemberDogEnrollmentInfo = (dogId: number) => {
   return useSuspenseQuery({
@@ -176,15 +170,30 @@ export const useGetMemberDogEnrollmentInfo = (dogId: number) => {
   });
 };
 
+// 견주 홈 - 강아지 상세 정보
+export const useGetMemberDogDetailInfo = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
+    queryFn: () => handleGetMemberDogDetailInfo(dogId),
+    select: (data) => {
+      return Adapter.from(data).to<MemberDogInfoData, MemberDogInfoFormData>((item) => {
+        const adapterInstance = new DogInfoFormAdapter(item);
+        return adapterInstance.adapt();
+      });
+    }
+  });
+};
+
 // 강아지 상세 정보 수정
 export const usePostMemberDogDetailInfo = (dogId: number) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const memberDogDetailInfoMutation = useMutation({
-    mutationFn: (data: IMemberDogPostDetailInfo) => handlePostMemberDogDetailInfo(data),
+
+  const { mutate } = useMutation({
+    mutationFn: handlePostMemberDogDetailInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
-      navigate(-1);
+      navigate(PATH.MEMBER_DOG_INFO_PAGE(dogId), { replace: true });
       setTimeout(() => {
         showToast("수정이 완료되었습니다.", "bottom");
       }, 100);
@@ -194,7 +203,7 @@ export const usePostMemberDogDetailInfo = (dogId: number) => {
     }
   });
 
-  return memberDogDetailInfoMutation.mutate;
+  return { mutatePostDogDetailInfo: mutate };
 };
 
 // 강아지의 알러지/질병 내용 수정
