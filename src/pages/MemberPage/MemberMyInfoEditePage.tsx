@@ -1,5 +1,6 @@
 import { FIELD } from "constants/field";
 
+import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import KeyboardCompleteButton from "components/Member/MyPage/Buttons/KeyboardCompleteButton";
 import SaveButton from "components/Member/MyPage/Buttons/SaveButton";
@@ -10,7 +11,7 @@ import { ContentContainer } from "components/Member/MyPage/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useBlocker, useParams } from "react-router-dom";
 import { getLabelForValue } from "utils/formatter";
 
 const MemberMyInfoEditePage = () => {
@@ -27,11 +28,19 @@ const MemberMyInfoEditePage = () => {
   });
 
   const { requiredItemList } = data;
+  const blocker = useBlocker(() => methods.formState.isDirty);
 
   if (!memberId) throw new Error("memberId가 없습니다.");
 
   return (
     <>
+      {blocker.state === "blocked" ? (
+        <PreventLeaveModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
       <Header type="text" text="프로필 수정" transparent />
       <PageContainer pt="1" color="br_5">
         <FormProvider {...methods}>
