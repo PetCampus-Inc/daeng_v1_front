@@ -3,6 +3,7 @@ import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import {
+  handleDeleteEnrollment,
   handleGetAdminForm,
   handleGetEnrollmentStatus,
   handleGetMemberEnrollmentForm,
@@ -119,4 +120,16 @@ export const useGetEnrollmentStatus = (enrollmentFormId: number[]) => {
     queryKey: QUERY_KEY.MEMBER_MAIN_DOG_LIST,
     queryFn: () => handleGetEnrollmentStatus(enrollmentFormId)
   });
+};
+
+// 가입신청서 삭제
+export const useDeleteEnrollment = () => {
+  const { mutate } = useMutation({
+    mutationFn: (enrollmentFormId: number) => handleDeleteEnrollment(enrollmentFormId),
+    onSuccess: () => {
+      console.log("성공");
+    }
+  });
+
+  return { mutateDeleteEnrollment: mutate };
 };

@@ -4,7 +4,11 @@ import { request } from "libs/CustomAxios/request";
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 import type { Response } from "types/helper.types";
-import type { EnrollmentDataType, IEnrollmentStatus } from "types/member/enrollment.types";
+import type {
+  EnrollmentDataType,
+  IEnrollmentDeleteData,
+  IEnrollmentStatus
+} from "types/member/enrollment.types";
 
 /**
  * @description 견주 가입신청서 보기 - 승인 대기중인 견주의 가입신청서를 보여줍니다.
@@ -39,6 +43,7 @@ export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise
   });
 };
 
+// NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
 /**
  * @description 가입신청서 상태를 반환합니다.
  * @param {IEnrollmentStatus} enrollmentFormId
@@ -54,4 +59,17 @@ export const handleGetEnrollmentStatus = async (
   });
 
   return Promise.all(req);
+};
+
+/**
+ * @description 가입싱천서를 삭제합니다.
+ * @param {IEnrollmentDeleteData} enrollmentFormId
+ * @returns
+ */
+export const handleDeleteEnrollment = async (
+  enrollmentFormId: number
+): Promise<IEnrollmentDeleteData> => {
+  const url = `admin/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await customAxios.post(url);
+  return data.data;
 };
