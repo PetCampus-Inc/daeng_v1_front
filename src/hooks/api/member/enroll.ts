@@ -7,6 +7,7 @@ import {
   handleGetEnrollment,
   handlePostEnrollment
 } from "apis/member/enrollment.api";
+import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { Adapter } from "libs/adapters";
 import { EnrollmentFormAdapter } from "libs/adapters/ServerToFormAdapter";
 
@@ -35,8 +36,12 @@ export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
 
 // 견주 가입신청서 등록
 export const usePostEnrollment = () => {
+  const setEnrollmentFormId = useSetLocalStorage();
   const { mutate } = useMutation({
-    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData)
+    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData),
+    onSuccess: (enrollmentFormId) => {
+      setEnrollmentFormId({ key: "ENROLLMENT_FORM_ID", value: enrollmentFormId });
+    }
   });
 
   return { mutateEnrollment: mutate };
