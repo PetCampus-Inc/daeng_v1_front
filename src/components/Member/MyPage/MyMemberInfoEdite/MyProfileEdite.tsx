@@ -1,3 +1,5 @@
+import { FIELD } from "constants/field";
+
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { TextInput } from "components/common";
 import { useState } from "react";
@@ -29,9 +31,10 @@ const MyProfileEdite = () => {
       </S.ProfileBox>
       <S.MyDogName>
         <TextInput
-          {...register("nickName", { required: true })}
+          name={FIELD.NICK_NAME}
+          register={register}
           placeholder="닉네임을 입력해주세요"
-          className="defaultValue"
+          required
           css={InputStyle}
         />
         의
