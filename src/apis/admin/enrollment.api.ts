@@ -45,7 +45,7 @@ export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise
 
 // NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
 /**
- * @description 가입신청서 상태를 반환합니다.
+ * @description 가입신청서 상태 정보 반환 - 견주가 작성한 가입신청서 상태를 확인할 수 있습니다.
  * @param {IEnrollmentStatus} enrollmentFormId
  * @returns
  */
@@ -62,7 +62,7 @@ export const handleGetEnrollmentStatus = async (
 };
 
 /**
- * @description 가입싱천서를 삭제합니다.
+ * @description 가입싱천서 삭제 - 가입신청서를 완전히 삭제합니다.
  * @param {IEnrollmentDeleteData} enrollmentFormId
  * @returns
  */
