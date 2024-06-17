@@ -12,13 +12,24 @@ export interface ModalProps {
   close: () => void;
 }
 
-export const ModalRoot = ({ children, isOpen = false, close }: PropsWithChildren<ModalProps>) => {
+interface ModalRootProps extends ModalProps {
+  disableDimmed?: boolean;
+}
+
+export const ModalRoot = ({
+  children,
+  isOpen = false,
+  close,
+  disableDimmed
+}: PropsWithChildren<ModalRootProps>) => {
+  const floatingOverlayType = disableDimmed ? "default" : "dimmed";
+
   return (
     <Portal>
       <AnimatePresence mode="wait">
         {isOpen && (
           <ModalProvider onClose={close}>
-            <FloatingOverlay type="dimmed" animate lockScroll />
+            <FloatingOverlay type={floatingOverlayType} animate lockScroll />
             <StyledModal
               role="dialog"
               initial="initial"

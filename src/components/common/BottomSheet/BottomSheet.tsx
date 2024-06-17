@@ -6,17 +6,23 @@ import { bottomSheetAnimationVariants } from "styles/animation";
 import { BottomSheetProvider } from "./BottomSheetContext";
 import { StyledBottomSheet } from "./styles";
 import { FloatingOverlay } from "../FloatingOverlay";
+import Portal from "../Portal";
 
 export interface BottomSheetProps {
   isOpen: boolean;
   close: () => void;
 }
 
+interface BottomSheetRootProps extends BottomSheetProps {
+  disableDimmed?: boolean;
+}
+
 export const RootBottomSheet = ({
   children,
   isOpen,
-  close
-}: PropsWithChildren<BottomSheetProps>) => {
+  close,
+  disableDimmed
+}: PropsWithChildren<BottomSheetRootProps>) => {
   const bottomSheetRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   useClickOutSide({
@@ -25,25 +31,29 @@ export const RootBottomSheet = ({
     onClickOutside: close
   });
 
+  const floatingOverlayType = disableDimmed ? "default" : "dimmed";
+
   return (
-    <AnimatePresence mode="wait">
-      {isOpen && (
-        <BottomSheetProvider onClose={close}>
-          <FloatingOverlay type="dimmed" animate lockScroll />
-          <StyledBottomSheet
-            role="dialog"
-            tabIndex={-1}
-            key="bottom-sheet"
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={bottomSheetAnimationVariants}
-            ref={bottomSheetRef}
-          >
-            {children}
-          </StyledBottomSheet>
-        </BottomSheetProvider>
-      )}
-    </AnimatePresence>
+    <Portal>
+      <AnimatePresence mode="wait">
+        {isOpen && (
+          <BottomSheetProvider onClose={close}>
+            <FloatingOverlay type={floatingOverlayType} animate lockScroll />
+            <StyledBottomSheet
+              role="dialog"
+              tabIndex={-1}
+              key="bottom-sheet"
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={bottomSheetAnimationVariants}
+              ref={bottomSheetRef}
+            >
+              {children}
+            </StyledBottomSheet>
+          </BottomSheetProvider>
+        )}
+      </AnimatePresence>
+    </Portal>
   );
 };
