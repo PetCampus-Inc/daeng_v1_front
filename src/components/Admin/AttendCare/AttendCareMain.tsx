@@ -1,4 +1,3 @@
-import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { ICareDogInfo } from "types/admin/care.types";
 
@@ -6,7 +5,6 @@ import AddDogButton from "./AttendCareMain/AddDogButton";
 import CareOptionDropdown from "./AttendCareMain/CareOptionDropdown";
 import MainSendCard from "./button/MainSendCard";
 import MainDogList from "./list/MainDogList";
-import PreviousInfoGuideBottomSheet from "./modal/PreviousInfoGuideBottomSheet";
 import { ButtonWrapper } from "./styles";
 import { PATH } from "../../../constants/path";
 
@@ -15,13 +13,7 @@ interface AttendCareMainProps {
 }
 
 const AttendCareMain = ({ data }: AttendCareMainProps) => {
-  const overlay = useOverlay();
   const navigate = useNavigate();
-
-  const openGuidePopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <PreviousInfoGuideBottomSheet isOpen={isOpen} close={close} />
-    ));
 
   return (
     <>
@@ -30,7 +22,7 @@ const AttendCareMain = ({ data }: AttendCareMainProps) => {
         onClick={() => navigate(PATH.ADMIN_CARE_GALLERY)}
       />
       <ButtonWrapper>
-        <AddDogButton handleNextPopup={openGuidePopup} />
+        <AddDogButton />
         <CareOptionDropdown />
       </ButtonWrapper>
       <MainDogList data={data} />
