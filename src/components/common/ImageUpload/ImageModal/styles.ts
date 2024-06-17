@@ -1,5 +1,4 @@
 import styled from "styled-components";
-export { BackDrop } from "styles/StyleModule";
 
 export const MainWrapper = styled.div`
   position: relative;

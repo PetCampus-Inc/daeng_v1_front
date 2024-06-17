@@ -1,8 +1,8 @@
 import CloseIcon from "assets/svg/x-circle-icon";
+import { FloatingOverlay } from "components/common/FloatingOverlay";
 import { ModalProps } from "components/common/Modal";
 import Portal from "components/common/Portal";
 import { AnimatePresence } from "framer-motion";
-import { BackDrop } from "styles/StyleModule";
 
 import { DeleteButton, PreviewImg, PreviewItem, StyledPreview } from "./styles";
 
@@ -18,56 +18,32 @@ const PreviewPopup = ({ isOpen, close, data }: PreviewPopupProps) => {
   const isImage = file.type.startsWith("image/");
   const isVideo = file.type.startsWith("video/");
 
-  const backdropVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  };
-
-  const previewVariants = {
-    hidden: { y: 100 },
-    visible: { y: 0 }
-  };
-
-  const transition = {
-    type: "spring",
-    damping: 40,
-    stiffness: 400,
-    duration: 0.2
-  };
-
   return (
     <AnimatePresence mode="wait">
       {isOpen && (
         <Portal>
-          <BackDrop
+          <FloatingOverlay type="dimmed" animate lockScroll />
+          <StyledPreview
             initial="hidden"
             animate="visible"
             exit="hidden"
-            variants={backdropVariants}
-            transition={{ duration: 0.2 }}
+            variants={previewVariants}
+            transition={transition}
           >
-            <StyledPreview
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={previewVariants}
-              transition={transition}
-            >
-              <DeleteButton onClick={close}>
-                <CloseIcon />
-              </DeleteButton>
-              <PreviewItem>
-                {isImage && <PreviewImg src={data.thumbnail} alt={file.name} />}
-                {isVideo && (
-                  <video width="100%" height="100%" controls>
-                    <source src={data.video} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                )}
-                {!isImage && !isVideo && <p>Unsupported file type</p>}
-              </PreviewItem>
-            </StyledPreview>
-          </BackDrop>
+            <DeleteButton onClick={close}>
+              <CloseIcon />
+            </DeleteButton>
+            <PreviewItem>
+              {isImage && <PreviewImg src={data.thumbnail} alt={file.name} />}
+              {isVideo && (
+                <video width="100%" height="100%" controls>
+                  <source src={data.video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              {!isImage && !isVideo && <p>Unsupported file type</p>}
+            </PreviewItem>
+          </StyledPreview>
         </Portal>
       )}
     </AnimatePresence>
@@ -75,3 +51,15 @@ const PreviewPopup = ({ isOpen, close, data }: PreviewPopupProps) => {
 };
 
 export default PreviewPopup;
+
+const previewVariants = {
+  hidden: { y: 100 },
+  visible: { y: 0 }
+};
+
+const transition = {
+  type: "spring",
+  damping: 40,
+  stiffness: 400,
+  duration: 0.2
+};

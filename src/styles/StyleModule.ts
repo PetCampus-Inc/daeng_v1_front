@@ -93,25 +93,6 @@ export const ConfirmButton = styled.button`
   ${({ theme }) => theme.typo.label1_16_B};
 `;
 
-export const Container = styled.div`
-  position: relative;
-`;
-
-export const BackDrop = styled(motion.div)`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: fixed;
-  left: 0;
-  top: 0;
-
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 9;
-`;
-
 // 폼 버튼 스타일
 
 export const FormButtonWrapper = styled.div`

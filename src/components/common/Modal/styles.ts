@@ -4,8 +4,6 @@ import styled, { DefaultTheme, css } from "styled-components";
 import type { TColorScheme } from "./ModalButton";
 import type { ModalContentVariant } from "./ModalContent";
 
-export { Container, BackDrop } from "styles/StyleModule";
-
 export const StyledModal = styled(motion.div)`
   width: 90%;
   background-color: ${({ theme }) => theme.colors.white};
