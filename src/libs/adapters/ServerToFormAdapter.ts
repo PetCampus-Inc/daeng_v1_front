@@ -4,6 +4,7 @@ import { getLabelForValue } from "utils/formatter";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { EnrollmentDataType, EnrollmentFormDataType } from "types/member/enrollment.types";
+import type { MemberDogInfoData, MemberDogInfoFormData } from "types/member/main.types";
 
 // 가입신청서 폼 조회
 // case1. (견주) 가입신청서 폼 조회, case2. (원장) 가입 신청서 폼 조회
@@ -148,7 +149,47 @@ export class MemberFormAdapter {
   }
 }
 
-// 원장 가입신청서
+/**
+ * 강아지 정보 폼 어댑터
+ * use case: 견주 홈 - 강아지 상세 정보 조회
+ */
+export class DogInfoFormAdapter {
+  private value: MemberDogInfoData;
+
+  constructor(obj: MemberDogInfoData) {
+    this.value = obj;
+  }
+
+  // MEMO: "requireItemList" 필요함
+  // get getRequiredItemList(): Map<number, boolean> {
+  //   return new Map(this.value[FIELD.REQUEST_ITEMS].map((itemNumber: number) => [itemNumber, true]));
+  // }
+
+  get getDogGender(): string {
+    return getLabelForValue(FIELD.DOG_GENDER, this.value[FIELD.DOG_GENDER]);
+  }
+
+  get getDogSize(): string {
+    return getLabelForValue(FIELD.DOG_SIZE, this.value[FIELD.DOG_SIZE]);
+  }
+
+  get getNeutralization(): string {
+    return getLabelForValue(FIELD.NEUTRALIZATION, this.value[FIELD.NEUTRALIZATION]);
+  }
+
+  adapt(): MemberDogInfoFormData {
+    return {
+      ...this.value,
+      dogGender: this.getDogGender,
+      dogSize: this.getDogSize,
+      neutralization: this.getNeutralization
+    };
+  }
+}
+
+/**
+ * 원장 가입신청서
+ */
 class ServerToFormAdapter {
   protected value: EnrollmentDataType;
 

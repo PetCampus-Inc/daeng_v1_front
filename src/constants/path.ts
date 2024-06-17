@@ -33,7 +33,7 @@ const ADMIN_PATH = {
   ADMIN: `${ADMIN}`,
   ADMIN_LOGIN: `/${ADMIN}/${LOGIN}`,
   ADMIN_SIGNUP: `/${ADMIN}/${SIGNUP}`,
-  ADMIN_SIGNUP_APPROVAL_STATUS: `/${ADMIN}/${SIGNUP}?step=${ADMIN_SIGNUP_PATH.승인상태}`,
+  ADMIN_SIGNUP_APPROVAL_STATUS: `/${ADMIN}/${SIGNUP}/${ADMIN_SIGNUP_PATH.승인상태}`,
   ADMIN_ATTENDANCE: `/${ADMIN}/attendance`, // 출석부
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/${ADMIN}/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>
@@ -58,7 +58,6 @@ const ADMIN_PATH = {
   ADMIN_EDIT_FORM: (formId?: string) =>
     `/${ADMIN}/school/enrollment/owner-forms/${formId ?? ":formId"}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: `/${ADMIN}/school/enrollment/new`, // 원장 가입신청서 등록
-  ADMIN_SUBMIT_FORM: `/${ADMIN}/school/enrollment/submit`, // 견주 가입신청서 제출
 
   ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`,
   ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`,

@@ -1,9 +1,11 @@
 import { styled } from "styled-components";
 interface IMyInfoEditeProps {
-  isShowRoles: boolean;
+  isShowRoles?: boolean;
 }
 
-export const MyProfileWrapper = styled.section<IMyInfoEditeProps>`
+export const MyProfileWrapper = styled.section.withConfig({
+  shouldForwardProp: (prop) => prop !== "isShowRoles"
+})<IMyInfoEditeProps>`
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(112px, auto));

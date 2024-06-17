@@ -1,6 +1,8 @@
 import { ADMIN_EDIT_FORM_PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import EnrollmentFormEditPage from "./EnrollmentFormEditPage";
 import EnrollmentFormSubmitPage from "./EnrollmentFormSubmitPage";
@@ -17,6 +19,13 @@ const EnrollmentFormEditFunnel = () => {
   }).withState<{
     formInfo?: AdminEnrollmentInfoType;
   }>({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 새로고침 시 초기 스텝으로 이동
+    navigate(`?step=${가입신청서_수정}`, { replace: true });
+  }, [navigate]);
 
   return (
     <Funnel>
