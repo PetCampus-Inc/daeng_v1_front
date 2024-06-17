@@ -15,16 +15,16 @@ interface IAddCaredogBottomSheetProps extends IBottomSheetProps {
 const AddCaredogBottomSheet = ({
   isOpen,
   close: AddCareDogBottomClose,
-  handleSuccess
+  handleSuccess: openGuidePopup
 }: IAddCaredogBottomSheetProps) => {
   const overlay = useOverlay();
 
-  const openPopup = () =>
+  const openBlockingPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <AlertAlreadySelectedModal isOpen={isOpen} close={close} />
     ));
 
-  const { mutateCreateCareDogs } = useCreateCareDogs(openPopup);
+  const { mutateCreateCareDogs } = useCreateCareDogs({ openBlockingPopup, openGuidePopup });
   const [selectedDogs, _] = useSelectedDogs();
 
   const { adminId } = useAdminInfo();
@@ -36,7 +36,6 @@ const AddCaredogBottomSheet = ({
       {
         onSuccess: () => {
           AddCareDogBottomClose();
-          handleSuccess();
         }
       }
     );
