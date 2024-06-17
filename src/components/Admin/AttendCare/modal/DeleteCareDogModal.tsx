@@ -1,13 +1,13 @@
-import Modal, { type IModalProps } from "components/common/ButtonModal";
+import { Modal, type ModalProps } from "components/common/Modal";
 
-interface DeleteModal extends IModalProps {
+interface DeleteModal extends ModalProps {
   action: () => void;
 }
 
 const DeleteCareDogModal = ({ close, action, isOpen }: DeleteModal) => {
   return (
     <Modal isOpen={isOpen} close={close}>
-      <Modal.Content variant="two">
+      <Modal.Content variant="two-button">
         <Modal.Title
           title="선택된 강아지들을 삭제하시겠어요?"
           subtitle="선택된 강아지의 오늘 관리 기록은

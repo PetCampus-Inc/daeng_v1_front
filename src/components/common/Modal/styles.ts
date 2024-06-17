@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import styled, { DefaultTheme, css } from "styled-components";
 
 import type { TColorScheme } from "./ModalButton";
-import type { ModalButtonVariant } from "./type";
+import type { ModalContentVariant } from "./ModalContent";
 
 export { Container, BackDrop } from "styles/StyleModule";
 
@@ -20,9 +20,9 @@ export const StyledModal = styled(motion.div)`
 
 export const StyledContent = styled.div.withConfig({
   shouldForwardProp: (prop) => !["variant"].includes(prop)
-})<{ variant: ModalButtonVariant }>`
+})<{ variant: ModalContentVariant }>`
   width: 100%;
-  padding: ${({ variant }) => (variant === "one" ? "36px 14px 16px" : "36px 12px 14px")};
+  padding: ${({ variant }) => (variant === "one-button" ? "36px 14px 16px" : "36px 12px 14px")};
 `;
 
 const Text = styled.p`

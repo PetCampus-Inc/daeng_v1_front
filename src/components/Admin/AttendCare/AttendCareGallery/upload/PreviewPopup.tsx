@@ -1,5 +1,5 @@
 import CloseIcon from "assets/svg/x-circle-icon";
-import { IModalProps } from "components/common/ButtonModal";
+import { ModalProps } from "components/common/Modal";
 import Portal from "components/common/Portal";
 import { AnimatePresence } from "framer-motion";
 import { BackDrop } from "styles/StyleModule";
@@ -8,7 +8,7 @@ import { DeleteButton, PreviewImg, PreviewItem, StyledPreview } from "./styles";
 
 import type { IFile } from "./types";
 
-interface PreviewPopupProps extends IModalProps {
+interface PreviewPopupProps extends ModalProps {
   data: IFile;
 }
 

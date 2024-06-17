@@ -1,32 +1,17 @@
 import { AnimatePresence } from "framer-motion";
-import { PropsWithChildren, memo } from "react";
+import { type PropsWithChildren } from "react";
 import { dimmerAnimationVariants } from "styles/animation";
 
-import ModalButton from "./ModalButton";
-import ModalContent from "./ModalContent";
-import ModalTitle from "./ModalTitle";
-import { ModalProvider } from "./provider";
+import { ModalProvider } from "./ModalContext";
 import { BackDrop, StyledModal } from "./styles";
 import Portal from "../Portal";
 
-export interface IModalProps {
+export interface ModalProps {
   isOpen?: boolean;
   close: () => void;
-  className?: string;
 }
 
-interface IModal extends React.MemoExoticComponent<React.FC<PropsWithChildren<IModalProps>>> {
-  Content: typeof ModalContent;
-  Button: typeof ModalButton;
-  Title: typeof ModalTitle;
-}
-
-const BaseButtonModal = ({
-  children,
-  isOpen = false,
-  close,
-  className
-}: PropsWithChildren<IModalProps>) => {
+export const ModalRoot = ({ children, isOpen = false, close }: PropsWithChildren<ModalProps>) => {
   const modalVariants = {
     initial: { y: "-50%", x: "-50%", opacity: 0.5 },
     hidden: { y: "-50%", x: "-50%", opacity: 0 },
@@ -52,7 +37,6 @@ const BaseButtonModal = ({
               exit="hidden"
               variants={modalVariants}
               transition={{ duration: 0.2 }}
-              className={className}
             >
               {children}
             </StyledModal>
@@ -62,11 +46,3 @@ const BaseButtonModal = ({
     </Portal>
   );
 };
-
-const Modal = memo(BaseButtonModal) as IModal;
-
-Modal.Content = ModalContent;
-Modal.Title = ModalTitle;
-Modal.Button = ModalButton;
-
-export default Modal;

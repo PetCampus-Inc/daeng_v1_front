@@ -1,26 +1,18 @@
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import { FieldValues, type UseFormRegister } from "react-hook-form";
 
-import Modal from "../ButtonModal";
-import { ModalWithTextAreaContent } from "../ButtonModal/styles";
-import TextArea from "../TextArea";
+import TextArea, { type TextAreaProps } from "../../TextArea";
+import { Modal, type ModalProps } from "../index";
+import { type ModalButtonOptionType } from "../ModalButton";
+import { ModalWithTextAreaContent } from "../styles";
 
-interface Props {
-  children?: React.ReactNode;
-  isOpen: boolean;
-  onClose: () => void;
-  closeText?: string;
-  actionText: string;
-  closeFn?: () => void | Promise<void>;
-  actionFn: () => void | Promise<void>;
+interface TextAreaModalProps extends ModalProps, TextAreaProps, ModalButtonOptionType {
   name: string;
   register: UseFormRegister<FieldValues>;
-  defaultValue?: string;
-  placeholder?: string;
 }
 
 const TextAreaModal = ({
   isOpen,
-  onClose,
+  close,
   closeText,
   actionText,
   closeFn,
@@ -29,9 +21,9 @@ const TextAreaModal = ({
   defaultValue,
   placeholder,
   register
-}: Props) => {
+}: TextAreaModalProps) => {
   return (
-    <Modal isOpen={isOpen} close={onClose}>
+    <Modal isOpen={isOpen} close={close}>
       <ModalWithTextAreaContent>
         <TextArea
           {...register(name)}

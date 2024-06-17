@@ -10,7 +10,7 @@ import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
-import CarouselModal from "components/common/Modal/CarouselModal";
+import { CarouselModal } from "components/common/Modal";
 import {
   useGetMemberDogDetailInfo,
   usePostMemberDogAllergy,
