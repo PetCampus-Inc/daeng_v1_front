@@ -9,7 +9,7 @@ import PreviousInfoGuideBottomSheet from "../modal/PreviousInfoGuideBottomSheet"
 const AddDogButton = () => {
   const overlay = useOverlay();
 
-  const openGuidePopup = () =>
+  const openGuide = () =>
     overlay.open(({ isOpen, close }) => (
       <PreviousInfoGuideBottomSheet isOpen={isOpen} close={close} />
     ));
@@ -17,7 +17,7 @@ const AddDogButton = () => {
   const openAddDogPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <SelectedDogsProvider>
-        <AddCaredogBottomSheet isOpen={isOpen} close={close} handleSuccess={openGuidePopup} />
+        <AddCaredogBottomSheet isOpen={isOpen} close={close} openGuide={openGuide} />
       </SelectedDogsProvider>
     ));
 
