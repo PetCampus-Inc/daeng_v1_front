@@ -1,8 +1,10 @@
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
+import { useNavigate } from "react-router-dom";
 
 const AdminSettingPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Header type="text" text="설정" />
