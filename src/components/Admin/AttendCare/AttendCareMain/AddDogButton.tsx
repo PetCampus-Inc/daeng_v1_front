@@ -1,27 +1,23 @@
-import React, { useCallback, useState } from "react";
-
 import AddIcon from "../../../../assets/svg/add-icon";
 import ArrowRightIcon from "../../../../assets/svg/arrow-right-icon";
 import { useOverlay } from "../../../../hooks/common/useOverlay";
 import SimpleButton from "../../../common/Button/SimpleButton";
 import { SelectedDogsProvider } from "../context/SelectedDogsProvider";
 import AddCaredogBottomSheet from "../modal/AddCaredogBottomSheet";
+import PreviousInfoGuideBottomSheet from "../modal/PreviousInfoGuideBottomSheet";
 
-interface AddButtonProps {
-  handleNextPopup: () => void;
-}
-
-const AddDogButton = ({ handleNextPopup }: AddButtonProps) => {
+const AddDogButton = () => {
   const overlay = useOverlay();
 
-  const handleSuccess = useCallback(() => {
-    handleNextPopup();
-  }, []);
+  const openGuidePopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <PreviousInfoGuideBottomSheet isOpen={isOpen} close={close} />
+    ));
 
   const openAddDogPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <SelectedDogsProvider>
-        <AddCaredogBottomSheet isOpen={isOpen} close={close} handleSuccess={handleSuccess} />
+        <AddCaredogBottomSheet isOpen={isOpen} close={close} handleSuccess={openGuidePopup} />
       </SelectedDogsProvider>
     ));
 
