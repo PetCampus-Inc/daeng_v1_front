@@ -25,17 +25,16 @@ const MultiCheck = ({
   const [isAvailable, setIsAvailable] = useState(true);
 
   useEffect(() => {
-    if (watch(name) && watch(name).length <= 1) {
+    if (name && watch(name) && watch(name).length <= 1) {
       setIsAvailable(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [watch(name)]);
+  }, [name && watch(name)]);
 
   const handleTouch = (e: any) => {
     if (!e.target.checked && !isAvailable) {
       e.preventDefault();
       e.stopPropagation();
-      setValue(name, [e.target.value]);
+      name && setValue(name, [e.target.value]);
     } else {
       setIsAvailable(true);
     }
@@ -49,7 +48,7 @@ const MultiCheck = ({
             <S.StyledInput
               id={text}
               type="checkbox"
-              {...register(name, { required: isRequired, onChange: handleTouch })}
+              {...register(name || "", { required: isRequired, onChange: handleTouch })}
               value={text}
               disabled={disabled}
               defaultChecked={defaultSelect === text}

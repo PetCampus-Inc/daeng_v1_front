@@ -1,7 +1,6 @@
 import FootIcon from "assets/svg/foot-icon";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useBlocker, useSearchParams } from "react-router-dom";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
 import { useInputFocus } from "./context/AttendanceProvider";
@@ -11,22 +10,24 @@ const AttendanceTop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const mode = searchParams.get("mode");
   const isAttendMode = mode === "attend";
+  const blocker = useBlocker(() => {
+    // MEMO: isAttendMode일 때만 blocker를 사용하도록 설정
+    if (isAttendMode) {
+      // TODO: 선택한 값이 있을 때만 blocking 한다.
+      return true;
+    }
+    return false;
+  });
 
   const { schoolName, adminName, role: adminRole } = useAdminInfo();
-  const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
   const { isFocused } = useInputFocus();
 
   const handlerModeChange = () => {
     if (isAttendMode) {
-      setIsCancelModalOpen(true);
+      setSearchParams({});
     } else {
       setSearchParams({ mode: "attend" });
     }
-  };
-
-  const handleCloseModal = () => {
-    setSearchParams({});
-    setIsCancelModalOpen(false);
   };
 
   return (
@@ -52,11 +53,13 @@ const AttendanceTop = () => {
           {isAttendMode ? "출석중단" : "출 석"}
         </S.ControlButton>
       </S.ButtonWrapper>
-      <AttendanceExitModal
-        isOpen={isCancelModalOpen}
-        close={() => setIsCancelModalOpen(false)}
-        action={handleCloseModal}
-      />
+      {blocker.state === "blocked" ? (
+        <AttendanceExitModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
     </S.MainWrapper>
   );
 };

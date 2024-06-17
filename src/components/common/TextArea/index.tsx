@@ -40,20 +40,23 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     };
 
-    const handleChange = () => {
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       autoResize && adjustHeight();
+      if (props.onChange) {
+        props.onChange(e);
+      }
     };
 
     return (
       <S.TextAreaInput
-        {...props}
+        ref={textAreaRef}
         name={name}
         resizable={resizable}
         disabled={disabled}
         onChange={handleChange}
         rows={rows}
         $isChecked={isChecked}
-        ref={textAreaRef}
+        {...props}
       />
     );
   }

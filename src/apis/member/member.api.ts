@@ -8,13 +8,13 @@ import type {
   HomeDataType,
   ImageList,
   IMainAlbum,
-  IMemberDogInfo,
-  IMemberDogPostDetailInfo,
   IMemberDogSchoolInfo,
   IMemberInfo,
   IMemberProfile,
   IMemberProfileInfo,
-  IMemberProfilePostInfo
+  IMemberProfilePostInfo,
+  MemberDogInfoData,
+  MemberDogInfoReq
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -110,33 +110,35 @@ export const handleMemberInfoResult = async (
   return data;
 };
 
-// 강아지 상세 정보
-export const handleGetMemberDogDetailInfo = async (dogId: number): Promise<IMemberDogInfo> => {
+// 견주 홈 - 강아지 상세 정보
+export const handleGetMemberDogDetailInfo = async (dogId: number): Promise<MemberDogInfoData> => {
   const url = `/member/dog/info`;
-  const { data } = await customAxios.get(url, {
+  const { data } = await request<Response<MemberDogInfoData>>({
+    url,
     params: {
       dogId
     }
   });
-  return data.data;
+  return data;
 };
 
-// 강아지 상세 정보 수정
-export const handlePostMemberDogDetailInfo = async (
-  req: IMemberDogPostDetailInfo
-): Promise<IMemberDogPostDetailInfo> => {
+// 견주 홈 - 강아지 상세 정보 수정
+export const handlePostMemberDogDetailInfo = async (req: MemberDogInfoReq): Promise<void> => {
   const url = `/member/dog/info`;
-  const { data } = await customAxios.post(url, {
-    dogId: req.dogId,
-    dogName: req.dogName,
-    dogGender: req.dogGender,
-    dogSize: req.dogSize,
-    breedId: req.breedId,
-    newBreed: req.newBreed,
-    birthDate: req.birthDate,
-    neutralization: req.neutralization
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      dogId: req.dogId,
+      dogName: req.dogName,
+      dogGender: req.dogGender,
+      dogSize: req.dogSize,
+      breedId: req.breedId,
+      newBreed: req.newBreed,
+      birthDate: req.birthDate,
+      neutralization: req.neutralization
+    }
   });
-  return data;
 };
 
 // 강아지의 알러지/질병 내용 수정

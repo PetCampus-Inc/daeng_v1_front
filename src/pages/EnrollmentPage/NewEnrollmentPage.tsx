@@ -12,12 +12,12 @@ import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
-import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
-import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
+import { useBlocker } from "react-router-dom";
 import { AUTH_MEMBER_ID } from "store/auth";
 import { PageContainer } from "styles/StyleModule";
+import { isEmpty } from "utils/helper";
 
 interface EnrollmentProps {
   schoolId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.
@@ -25,9 +25,6 @@ interface EnrollmentProps {
 }
 
 const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
-  const navigate = useNavigate();
-  const overlay = useOverlay();
-
   // FIXME: memberId가 없을 경우 예외처리 필요
   const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID) ?? "";
 
@@ -37,7 +34,7 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...rest }
+    defaultValues: { ...defaultFormValues, ...rest }
   });
 
   const visibleSteps = (isMemberAddDog ? MEMBER_DOG_ADD_ENROLL_STEP : MEMBER_ENROLL_STEP).filter(
@@ -63,21 +60,19 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
     openDays: rest.openDays
   };
 
-  // TODO: browser history stack 관리 필요..!
-  const openPreventLeavePopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
-    ));
+  const { dirtyFields } = useFormState({ control: methods.control });
+  const blocker = useBlocker(() => !isEmpty(dirtyFields));
 
   return (
     <>
-      <Header
-        type="text"
-        text="가입신청서"
-        handleClick={() => {
-          openPreventLeavePopup();
-        }}
-      />
+      {blocker.state === "blocked" ? (
+        <PreventLeaveModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
+      <Header type="text" text="가입신청서" />
       <PageContainer color="BGray" pb="2.5">
         <S.Container>
           <S.TopWrapper>
@@ -121,3 +116,36 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
 };
 
 export default NewEnrollmentPage;
+
+const defaultFormValues = {
+  schoolFormId: 0,
+  schoolFormName: "",
+  priceInfo: "",
+  ticketType: [""],
+  openDays: [""],
+  ticketInfo: "",
+  limitsInfo: "",
+  accidentInfo: "",
+  abandonmentInfo: "",
+  pickDropNotice: "",
+  pickDropInfo: "",
+  member: {
+    memberId: 0,
+    memberProfileUri: "",
+    memberName: "",
+    memberGender: "",
+    nickName: "",
+    address: "",
+    addressDetail: "",
+    phoneNumber: "",
+    emergencyPhoneNumber: "",
+    relation: ""
+  },
+  memberName: "",
+  address: "",
+  phoneNumber: "",
+  emergencyPhoneNumber: "",
+  allergyDisease: "",
+  dogName: "",
+  newBreed: ""
+};

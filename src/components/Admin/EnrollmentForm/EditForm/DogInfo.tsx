@@ -24,7 +24,7 @@ const DogInfo = () => {
         >
           이름
         </AdminTitle>
-        <TextInput name="null" placeholder="강아지 이름을 입력해주세요" disabled />
+        <TextInput placeholder="강아지 이름을 입력해주세요" disabled />
       </Card>
       <Card>
         <AdminTitle
@@ -34,7 +34,7 @@ const DogInfo = () => {
         >
           성별
         </AdminTitle>
-        <SingleRadio name="null" radiosText={["수컷", "암컷"]} disabled />
+        <SingleRadio radiosText={["수컷", "암컷"]} disabled />
       </Card>
       <Card>
         <AdminTitle
@@ -45,7 +45,6 @@ const DogInfo = () => {
           크기
         </AdminTitle>
         <SingleRadio
-          name="null"
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
           disabled
@@ -79,13 +78,13 @@ const DogInfo = () => {
         <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.NEUTRALIZATION}`} control={control}>
           중성화 여부
         </AdminTitle>
-        <SingleRadio name="null" radiosText={["했어요", "안했어요"]} disabled />
+        <SingleRadio radiosText={["했어요", "안했어요"]} disabled />
       </Card>
       <Card>
         <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.VACCINATION}`} control={control}>
           예방접종 여부
         </AdminTitle>
-        <SingleRadio name="null" radiosText={["했어요", "안했어요"]} disabled />
+        <SingleRadio radiosText={["했어요", "안했어요"]} disabled />
         <Caption>접종을 한 견주가 예방접종 증명서를 업로드 하는 칸이에요</Caption>
         <ImageUpload disabled />
       </Card>

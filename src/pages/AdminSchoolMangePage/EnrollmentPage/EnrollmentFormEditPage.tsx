@@ -22,10 +22,9 @@ import { Layout } from "components/common";
 import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
 import { useAdminEnrollment } from "hooks/api/admin/enroll";
-import { useOverlay } from "hooks/common/useOverlay";
 import useStep from "hooks/common/useStep";
-import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
+import { useBlocker, useParams } from "react-router-dom";
 
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
@@ -35,16 +34,13 @@ interface EnrollmentFormEditProps {
 
 const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
   const { formId } = useParams();
-  const navigate = useNavigate();
-  const overlay = useOverlay();
 
   if (!formId) throw new Error("잘못된 formId 입니다");
 
-  const { data, isLoading } = useAdminEnrollment(formId, "EDIT");
+  const { data } = useAdminEnrollment(formId, "EDIT");
 
   const methods = useForm({
     mode: "onBlur",
-    shouldUnregister: false,
     defaultValues: data,
     shouldFocusError: false
   });
@@ -55,18 +51,19 @@ const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
-  const openPreventLeavePopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
-    ));
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { isDirty } = useFormState({ control: methods.control });
+  const blocker = useBlocker(() => isDirty);
 
   return (
     <>
-      <Header type="text" text="가입신청서 수정" handleClick={openPreventLeavePopup} />
+      {blocker.state === "blocked" ? (
+        <PreventLeaveModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
+      <Header type="text" text="가입신청서 수정" />
       <Layout type="page" bg="BGray">
         <Container>
           <TopWrapper>
