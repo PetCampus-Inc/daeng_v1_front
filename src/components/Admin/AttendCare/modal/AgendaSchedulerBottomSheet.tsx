@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import {
   TimePickerContainer,
   TimePickerTitle,
-  TimePickerWarper,
+  TimePickerWrapper,
   TitleContainer,
   TitleWrapper,
   ToggleWrapper
@@ -43,10 +43,10 @@ const AgendaSchedulerBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
         </TitleContainer>
         <TimePickerContainer $isActive={isOn}>
           <TimePickerTitle>시간 설정하기</TimePickerTitle>
-          <TimePickerWarper>
+          <TimePickerWrapper>
             <TimePicker ref={timePickerRef} disabled={!isOn} />
             <span className="text">에 일괄 전송</span>
-          </TimePickerWarper>
+          </TimePickerWrapper>
         </TimePickerContainer>
         <BottomSheet.Button actionText="일괄 전송 예약" actionFn={handleSubmit} />
       </BottomSheet.Content>

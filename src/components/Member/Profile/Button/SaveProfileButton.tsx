@@ -7,7 +7,7 @@ import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
-const SaveProfilButton = () => {
+const SaveProfileButton = () => {
   const {
     handleSubmit,
     watch,
@@ -16,8 +16,9 @@ const SaveProfilButton = () => {
   const { uploadFiles, s3ProfileData } = useSubmitProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
-  const memebrProfileData = watch();
-  const isAllFilled = Object.values(memebrProfileData).every((el: null | undefined) => el ?? false);
+  // FIXME: wathc로 데이터를 가져오는 것이 아닌, getValues 통해 가져오는 것으로 변경해주세요!
+  const memberProfileData = watch();
+  const isAllFilled = Object.values(memberProfileData).every((el: null | undefined) => el ?? false);
 
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);
@@ -26,16 +27,16 @@ const SaveProfilButton = () => {
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: PROFILE_NAME.MEMBER,
-      id: memebrProfileData.memberId,
-      files: memebrProfileData.memberProfileUri,
+      id: memberProfileData.memberId,
+      files: memberProfileData.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PROFILE_PATHS.MEMBER
     };
 
     const dogParams = {
       name: PROFILE_NAME.DOG,
-      id: memebrProfileData.dogId,
-      files: memebrProfileData.dogProfileUri,
+      id: memberProfileData.dogId,
+      files: memberProfileData.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PROFILE_PATHS.DOG
     };
@@ -83,4 +84,4 @@ const SaveProfilButton = () => {
   );
 };
 
-export default SaveProfilButton;
+export default SaveProfileButton;

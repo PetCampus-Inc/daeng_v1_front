@@ -2,10 +2,10 @@ import { FieldValues, type UseFormRegister } from "react-hook-form";
 
 import TextArea, { type TextAreaProps } from "../../TextArea";
 import { Modal, type ModalProps } from "../index";
-import { type ModalButtonOptionType } from "../ModalButton";
+import { type TicketInfo } from "../ModalButton";
 import { ModalWithTextAreaContent } from "../styles";
 
-interface TextAreaModalProps extends ModalProps, TextAreaProps, ModalButtonOptionType {
+interface TextAreaModalProps extends ModalProps, TextAreaProps, TicketInfo {
   name: string;
   register: UseFormRegister<FieldValues>;
 }

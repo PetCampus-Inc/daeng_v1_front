@@ -5,7 +5,7 @@ import { useModal } from "../BottomSheet/BottomSheetContext";
 
 export type TColorScheme = "primary" | "red";
 
-export interface ModalButtonOptionType {
+export interface TicketInfo {
   actionText: string;
   closeText?: string;
   actionFn: () => void | Promise<void>;
@@ -13,9 +13,7 @@ export interface ModalButtonOptionType {
   colorScheme?: TColorScheme;
 }
 
-export interface ModalButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    ModalButtonOptionType {}
+export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, TicketInfo {}
 
 export const ModalButton = ({
   closeText,

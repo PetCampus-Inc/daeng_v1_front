@@ -10,7 +10,7 @@ import { remainingExpirationDays } from "utils/remainingDays";
 import * as S from "./styles";
 import { Icon } from "../styles";
 
-const TiketInfo = ({ dogId }: { dogId: number }) => {
+const TicketInfo = ({ dogId }: { dogId: number }) => {
   const { data: schoolInfo } = useGetMemberSchoolInfo(String(dogId));
 
   const { ticket } = schoolInfo;
@@ -85,4 +85,4 @@ const TiketInfo = ({ dogId }: { dogId: number }) => {
   );
 };
 
-export default TiketInfo;
+export default TicketInfo;

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 
 import AddIcon from "../../../../assets/svg/add-icon";
 import ArrowRightIcon from "../../../../assets/svg/arrow-right-icon";
