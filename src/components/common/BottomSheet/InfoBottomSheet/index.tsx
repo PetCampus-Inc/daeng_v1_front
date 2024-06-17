@@ -4,9 +4,9 @@ import { Flex } from "components/common/Flex";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 import * as S from "./styles";
-import BottomSheet, { type IBottomSheetProps } from "../index";
+import { BottomSheet, type BottomSheetProps } from "../index";
 
-interface TextAreaBottomSheetProps extends IBottomSheetProps {
+interface TextAreaBottomSheetProps extends BottomSheetProps {
   title: string;
   defaultValue: string;
   type: string;
@@ -19,7 +19,7 @@ interface TextAreaBottomSheetProps extends IBottomSheetProps {
   register: UseFormRegister<FieldValues>;
 }
 
-const TextAreaBottomSheet = ({
+export const TextAreaBottomSheet = ({
   title,
   defaultValue,
   type,
@@ -56,5 +56,3 @@ const TextAreaBottomSheet = ({
     </BottomSheet>
   );
 };
-
-export default TextAreaBottomSheet;

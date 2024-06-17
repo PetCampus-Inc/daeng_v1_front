@@ -10,7 +10,6 @@ import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
-import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
 import CarouselModal from "components/common/Modal/CarouselModal";
 import {
   useGetMemberDogDetailInfo,
@@ -25,6 +24,7 @@ import showToast from "utils/showToast";
 
 import * as S from "./styles";
 import { StyledThumbList } from "../../Admin/AttendCare/AttendCareGallery/upload";
+import { TextAreaBottomSheet } from "../../common/BottomSheet";
 
 interface IProps {
   dogId: number;

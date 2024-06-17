@@ -1,4 +1,4 @@
-import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import Toggle from "components/common/Toggle/Toggle";
 import { useRef, useState } from "react";
 
@@ -12,7 +12,7 @@ import {
 } from "./styles";
 import TimePicker, { TimePickerHandles } from "../AttendCareMain/CareTimePicker/TimePicker";
 
-const AgendaSchedulerBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
+const AgendaSchedulerBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
   // FIXME: 토글 스위치는 useState 대신 label-input으로 리팩터링 할 것!!
   const [isOn, setIsOn] = useState(false);
   const timePickerRef = useRef<TimePickerHandles>(null);

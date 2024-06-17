@@ -37,7 +37,7 @@ const SchoolInfo = () => {
     }
   }, [regNum, regNumFieldState.isDirty]);
 
-  const handleVaild = () => {
+  const handleValid = () => {
     const schoolNum = getValues("registrationNumber").replace(/-/g, "");
     mutateCheckRegNum(schoolNum, {
       onSuccess: (res) => {
@@ -169,7 +169,7 @@ const SchoolInfo = () => {
             handleChangeBusinessNumber("registrationNumber")(e);
             register("registrationNumber").onChange(e);
           }}
-          handleClick={handleVaild}
+          handleClick={handleValid}
           rules={{
             pattern: REGISTRATION_REGEX
           }}

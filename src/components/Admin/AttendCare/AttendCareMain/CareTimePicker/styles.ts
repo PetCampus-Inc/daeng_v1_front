@@ -16,7 +16,7 @@ export const StyledTimeWrapper = styled.div`
 
   & > .text {
     ${({ theme }) => theme.typo.label2_14_M};
-  }ß
+  }
 `;
 
 export const StyledTimeButton = styled.button`

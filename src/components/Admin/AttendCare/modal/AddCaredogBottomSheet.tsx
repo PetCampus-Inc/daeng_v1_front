@@ -1,4 +1,4 @@
-import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import { useCreateCareDogs } from "hooks/api/admin/care";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -8,7 +8,7 @@ import AlertAlreadySelectedModal from "./AlertAlreadySelectedModal";
 import { useSelectedDogs } from "../hooks/useSelectedDogs";
 import AddDogList from "../list/AddDogList";
 
-interface IAddCaredogBottomSheetProps extends IBottomSheetProps {
+interface IAddCaredogBottomSheetProps extends BottomSheetProps {
   handleSuccess: () => void;
 }
 

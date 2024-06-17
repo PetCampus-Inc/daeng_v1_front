@@ -1,5 +1,4 @@
 import { Checkbox } from "components/common";
-import BottomSheet from "components/common/BottomSheet";
 import { addWeeks, format } from "date-fns";
 import { useNewTicketMutation } from "hooks/api/useNewTicketMutation";
 import { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import { newTicketCardDataAtom } from "store/admin";
 import { ITicketDetail } from "types/admin/attendance.type";
 
 import { NewTicketBottomSheetWrapper } from "./styles";
+import { BottomSheet } from "../../../../common/BottomSheet";
 import TicketCard from "../TicketCard";
 
 interface AddCaredogBottomSheetProps {
