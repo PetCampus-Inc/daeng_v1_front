@@ -35,10 +35,12 @@ export const useGetNewCareDogs = (adminId: number) => {
 
 export const useCreateCareDogs = ({
   openBlockingPopup,
-  openGuidePopup
+  openGuidePopup,
+  closeRootPopup
 }: {
   openBlockingPopup: () => void;
   openGuidePopup?: () => void;
+  closeRootPopup?: () => void;
 }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -46,16 +48,17 @@ export const useCreateCareDogs = ({
   const onSuccess = (data: ICareDogInfo[]) => {
     if (!data.length) {
       // 추가 요청 성공
-
-      console.log("정상적으로 처리됨!!!");
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
       navigate(PATH.ADMIN_CARE);
+      // 강아지 추가 팝업 닫기
+      closeRootPopup?.();
       return;
     }
 
     const isConflicted = data.some((dog) => dog.conflicted);
     if (isConflicted) {
       // 추가 요청 실패
+      // 이미 선택된 강아지 팝업 열기
       openBlockingPopup();
       const currentDogs = queryClient.getQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST);
       if (currentDogs) {
@@ -68,7 +71,6 @@ export const useCreateCareDogs = ({
         queryClient.setQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, updatedDogs);
       }
     } else {
-      console.log("이전 기록이 있음!!!");
       // 추가 요청 성공, but 이전 기록이 있는 강아지
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
       // 뮤테이션 결과를 queryCache 저장
