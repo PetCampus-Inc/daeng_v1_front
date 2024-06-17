@@ -23,11 +23,8 @@ export { default as AttendCareNoticePage } from "./AdminAttendCarePage/AttendCar
 
 /* Admin School Manage Page */
 export { default as SchoolManagePage } from "./AdminSchoolMangePage/SchoolManagePage";
-export { default as PrincipalMyPage } from "./AdminMyPage/PrincipalMyPage";
 export { default as AdminSettingPage } from "./AdminMyPage/AdminSettingPage";
-export { default as TeacherMyPage } from "./AdminMyPage/TeacherMyPage";
 export { default as SchoolInfoEditPage } from "./AdminMyPage/SchoolInfoEditPage";
-export { default as SchoolInfoPage } from "./AdminMyPage/SchoolInfoPage";
 export { default as TeacherManagePage } from "./AdminSchoolMangePage/TeacherManagePage/TeacherManagePage";
 export { default as SchoolManageEnrollmentPage } from "./AdminSchoolMangePage/EnrollmentPage/SchoolManageEnrollmentPage";
 export { default as EnrollmentFormDetailPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormDetailPage";
