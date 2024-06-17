@@ -9,41 +9,37 @@ import { useSelectedDogs } from "../hooks/useSelectedDogs";
 import AddDogList from "../list/AddDogList";
 
 interface IAddCaredogBottomSheetProps extends IBottomSheetProps {
-  handleSuccess: () => void;
+  openGuide: () => void;
 }
 
 const AddCaredogBottomSheet = ({
   isOpen,
-  close: AddCareDogBottomClose,
-  handleSuccess
+  close: closeAddCareDogPopup,
+  openGuide
 }: IAddCaredogBottomSheetProps) => {
   const overlay = useOverlay();
 
-  const openPopup = () =>
+  const openBlocking = () =>
     overlay.open(({ isOpen, close }) => (
       <AlertAlreadySelectedModal isOpen={isOpen} close={close} />
     ));
 
-  const { mutateCreateCareDogs } = useCreateCareDogs(openPopup);
+  const { mutateCreateCareDogs } = useCreateCareDogs({
+    openBlockingPopup: openBlocking,
+    openGuidePopup: openGuide,
+    closeRootPopup: closeAddCareDogPopup
+  });
   const [selectedDogs, _] = useSelectedDogs();
 
   const { adminId } = useAdminInfo();
   const selectedDogId = selectedDogs.map((dog) => dog.attendanceId);
 
   const handleSubmit = () => {
-    mutateCreateCareDogs(
-      { adminId, selectedDogId },
-      {
-        onSuccess: () => {
-          AddCareDogBottomClose();
-          handleSuccess();
-        }
-      }
-    );
+    mutateCreateCareDogs({ adminId, selectedDogId });
   };
 
   return (
-    <BottomSheet isOpen={isOpen} close={AddCareDogBottomClose}>
+    <BottomSheet isOpen={isOpen} close={closeAddCareDogPopup}>
       <BottomSheet.Content>
         <BottomSheet.Control />
         <BottomSheet.Title align="left">오늘 관리할 강아지</BottomSheet.Title>
@@ -63,8 +59,8 @@ const AddCaredogBottomSheet = ({
   );
 };
 
+export default AddCaredogBottomSheet;
+
 const ListWrapper = styled.div`
   padding-block: 0.75rem;
 `;
-
-export default AddCaredogBottomSheet;
