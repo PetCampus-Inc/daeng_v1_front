@@ -50,7 +50,7 @@ export interface ImageList {
   createdTime: number[];
   size: number;
 }
-interface IDoglist {
+export interface IDoglist {
   dogId: string;
   dogName: string;
   dogProfile: string;

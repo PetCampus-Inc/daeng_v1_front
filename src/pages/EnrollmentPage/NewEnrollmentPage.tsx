@@ -7,6 +7,7 @@ import MemberInfo from "components/Enrollment/Form/MemberInfo";
 import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
 import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
 import TicketInfo from "components/Enrollment/Form/TicketInfo";
+import MemberDogInfo from "components/Enrollment/MemberDogInfoForm/DogInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
@@ -89,16 +90,20 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
                   <MemberInfo requiredItems={requiredItemList} />
                 </S.Content>
               )}
-              <S.Content $isVisible={currentStep === 1}>
-                <DogInfo requiredItems={requiredItemList} />
+              <S.Content $isVisible={currentStep === (isMemberAddDog ? 0 : 1)}>
+                {isMemberAddDog ? (
+                  <MemberDogInfo requiredItems={requiredItemList} />
+                ) : (
+                  <DogInfo requiredItems={requiredItemList} />
+                )}
               </S.Content>
-              <S.Content $isVisible={currentStep === 2}>
+              <S.Content $isVisible={currentStep === (isMemberAddDog ? 1 : 2)}>
                 <TicketInfo requiredItems={requiredItemList} ticket={ticket} />
               </S.Content>
-              <S.Content $isVisible={currentStep === 3}>
+              <S.Content $isVisible={currentStep === (isMemberAddDog ? 2 : 3)}>
                 <PolicyInfo requiredItems={requiredItemList} />
               </S.Content>
-              <S.Content $isVisible={currentStep === 4}>
+              <S.Content $isVisible={currentStep === (isMemberAddDog ? 3 : 4)}>
                 <PickDropInfo requiredItems={requiredItemList} />
               </S.Content>
             </S.ContentWrapper>
