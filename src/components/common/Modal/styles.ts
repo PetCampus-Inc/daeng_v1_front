@@ -10,7 +10,6 @@ export const StyledModal = styled(motion.div)`
   width: 90%;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 0.8rem;
-  flex-direction: column;
   position: absolute;
   z-index: 10;
   top: 50%;
