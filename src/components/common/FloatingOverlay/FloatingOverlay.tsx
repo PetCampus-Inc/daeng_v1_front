@@ -134,21 +134,21 @@ const StyledFloatingElm = styled.div.withConfig({
     type === "dimmed" &&
     `
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 50;
+    z-index: 10;
   `}
 
   ${({ type }) =>
     type === "blurred" &&
     `
     backdrop-filter: blur(10px);
-    z-index: 50;
+    z-index: 10;
   `}
 
   ${({ type }) =>
     type === "default" &&
     `
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 50;
+    z-index: 10;
   `}
 
   ${({ css }) => css};
