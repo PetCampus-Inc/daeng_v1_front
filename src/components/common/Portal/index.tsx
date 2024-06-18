@@ -6,7 +6,7 @@ const Portal = (props: PropsWithChildren) => {
 
   useEffect(() => {
     const modalRoot = modalRootRef.current;
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
 
     if (!modalRoot.parentElement) {
       document.body.appendChild(modalRoot);
@@ -16,7 +16,7 @@ const Portal = (props: PropsWithChildren) => {
       if (modalRoot.parentElement) {
         document.body.removeChild(modalRoot);
       }
-      document.body.style.overflow = "unset";
+      // document.body.style.overflow = "unset";
     };
   }, [modalRootRef]);
 

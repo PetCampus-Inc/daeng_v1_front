@@ -1,10 +1,11 @@
-import { useContext, type ButtonHTMLAttributes } from "react";
+import { type ButtonHTMLAttributes } from "react";
 
-import { ModalContext } from "./provider";
 import { ActionButton, ButtonGroup, CloseButton } from "./styles";
+import { useModal } from "../BottomSheet/BottomSheetContext";
 
 export type TColorScheme = "primary" | "red";
-export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+
+export interface TicketInfo {
   actionText: string;
   closeText?: string;
   actionFn: () => void | Promise<void>;
@@ -12,7 +13,9 @@ export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
   colorScheme?: TColorScheme;
 }
 
-const ModalButton = ({
+export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, TicketInfo {}
+
+export const ModalButton = ({
   closeText,
   actionText,
   closeFn,
@@ -20,10 +23,9 @@ const ModalButton = ({
   colorScheme = "primary",
   ...props
 }: ModalButtonProps) => {
-  const modalContext = useContext(ModalContext);
-  if (!modalContext) throw new Error("ModalButton must be rendered within a Modal");
+  const modal = useModal();
 
-  const defaultCloseFn = closeFn ? closeFn : modalContext?.onClose;
+  const defaultCloseFn = closeFn ? closeFn : modal?.onClose;
 
   return (
     <ButtonGroup>
@@ -38,5 +40,3 @@ const ModalButton = ({
     </ButtonGroup>
   );
 };
-
-export default ModalButton;

@@ -59,7 +59,7 @@ export { default as MemberSchoolSearchPage } from "./MemberPage/MemberSchoolSear
 export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
 export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEditPage";
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
-export { default as MemberAddDogProfileEditePage } from "./MemberPage/MemberAddDogProfileEditePage";
+export { default as MemberAddDogProfileEditePage } from "./MemberPage/MemberAddDogProfileEditPage";
 
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";

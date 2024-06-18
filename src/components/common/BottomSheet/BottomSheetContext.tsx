@@ -1,4 +1,6 @@
-import { ReactNode, createContext, useMemo } from "react";
+import { ReactNode, createContext, useMemo, useContext } from "react";
+
+import { ModalContext } from "../Modal/ModalContext";
 
 interface BottomSheetContextProps {
   onClose: () => void;
@@ -14,4 +16,14 @@ export const BottomSheetProvider = ({ children, onClose }: BottomSheetProviderPr
   const ContextValue = useMemo(() => ({ onClose }), [onClose]);
 
   return <BottomSheetContext.Provider value={ContextValue}>{children}</BottomSheetContext.Provider>;
+};
+
+export const useModal = () => {
+  const context = useContext(ModalContext);
+
+  if (!context) {
+    throw new Error("useModalContext must be used within a ModalProvider");
+  }
+
+  return context;
 };

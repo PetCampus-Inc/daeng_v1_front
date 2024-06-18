@@ -2,7 +2,7 @@ import { PATH } from "constants/path";
 
 import DogWaitingBgIcon from "assets/svg/dog-waiting-bg-icon";
 import { Box, Flex, Text } from "components/common";
-import BasicModal from "components/common/Modal/BasicModal";
+import { BasicModal } from "components/common/Modal";
 import { useTeacherSinUpCancel } from "hooks/api/signup";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
@@ -47,7 +47,7 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
         title="승인 신청을 취소하고 싶으신가요?"
         subtitle="다른 유치원을 검색 후 승인 재신청을 해주세요"
         actionText="승인취소"
-        action={handleCancel}
+        actionFn={handleCancel}
         closeText="닫기"
       />
     ));

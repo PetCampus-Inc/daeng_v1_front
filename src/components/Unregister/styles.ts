@@ -59,17 +59,19 @@ const CheckBoxStyle = css`
 `;
 
 export const CheckBoxItem = styled.div<IUnregisterProps>`
-  ${CheckBoxStyle}
-  border: 1px solid ${(props) =>
-    props.isChecked ? ({ theme }) => theme.colors.br_5 : ({ theme }) => theme.colors.gray_5};
+  ${CheckBoxStyle};
+  border: 1px solid
+    ${(props) =>
+      props.isChecked ? ({ theme }) => theme.colors.br_5 : ({ theme }) => theme.colors.gray_5};
   background-color: ${(props) =>
     props.isChecked ? ({ theme }) => theme.colors.br_5 : ({ theme }) => theme.colors.white};
 `;
 
 export const AllCheckBoxItem = styled.div<IUnregisterProps>`
-  ${CheckBoxStyle}
-  border: 1px solid ${(props) =>
-    props.isChecked ? ({ theme }) => theme.colors.br_4 : ({ theme }) => theme.colors.gray_5};
+  ${CheckBoxStyle};
+  border: 1px solid
+    ${(props) =>
+      props.isChecked ? ({ theme }) => theme.colors.br_4 : ({ theme }) => theme.colors.gray_5};
   background-color: ${(props) =>
     props.isChecked ? ({ theme }) => theme.colors.br_4 : ({ theme }) => theme.colors.white};
 

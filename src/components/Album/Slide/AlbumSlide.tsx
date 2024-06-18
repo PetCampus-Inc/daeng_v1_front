@@ -53,7 +53,7 @@ const AlbumSlide = ({ images, saveMode, toggleSaveMode }: AlbumSlidProps) => {
                   openLightBoxPopup(index);
                 }
               }}
-              isActive={saveMode && !!selectedImgIds.has(item.imageId)}
+              isActive={saveMode && selectedImgIds.has(item.imageId)}
               isSaveMode={saveMode}
             >
               {saveMode && (

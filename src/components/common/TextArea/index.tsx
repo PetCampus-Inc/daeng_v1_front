@@ -2,7 +2,7 @@ import React, { useEffect, useImperativeHandle, useRef, forwardRef } from "react
 
 import * as S from "./styles";
 
-interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   name?: string;
   autoResize?: boolean;
   resizable?: boolean;
