@@ -24,20 +24,20 @@ const RedirectPage = () => {
   useEffect(() => {
     if (isMember && JSON.parse(isMember)) {
       // 회원 O -> '/'(home)로 이동
-      if (!token) {
-        throw new Error("로그인에 필요한 토큰이 없습니다.");
-      }
+      // if (!token) {
+      //   throw new Error("로그인에 필요한 토큰이 없습니다.");
+      // }
       clearLocalStorage();
       setLocalStorageValue({ key: ACCESS_TOKEN_KEY, value: token });
       setLocalStorageValue({ key: AUTH_MEMBER_ID, value: memberId });
       setLocalStorageValue({ key: AUTH_DOG_IDS, value: dogIds });
-      window.location.replace(PATH.ROOT);
+      // window.location.replace(PATH.ROOT);
     } else {
       // 회원 X -> '/signup'으로 이동
       clearLocalStorage();
       setLocalStorageValue({ key: ACCESS_TOKEN_KEY, value: token });
       setLocalStorageValue({ key: AUTH_MEMBER_ID, value: memberId });
-      window.location.replace(PATH.SIGNUP);
+      // window.location.replace(PATH.SIGNUP);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
