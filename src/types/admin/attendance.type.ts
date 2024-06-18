@@ -1,6 +1,11 @@
 import type { MemberDtoType } from "./enrollment.types";
 import type { Nullable } from "../helper.types";
 
+export enum TicketType {
+  MONTHLY = "MONTHLY",
+  ROUND = "ROUND"
+}
+
 type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 
 /**
@@ -85,15 +90,29 @@ export interface IDogInfoAgenda {
 
 export type IPoop = "HARD" | "HEALTHY" | "NOT_BROWN" | "WATERY" | "WARNING" | undefined | string;
 
-export interface ITicketDetail {
-  ticketType: string;
+/**
+ * @description 출석부 강아지 상세 이용권 정보 Dto
+ */
+export interface TicketDetailData {
+  ticketType: TicketType;
   allRoundTicket: number;
   currentRoundTicket: number;
   monthlyTicketNumber: number;
   ticketStartDate: number[];
   ticketExpirationDate: number[];
   attendanceDays: string[];
-  ticketHistory: ITicketDetail[];
+  ticketHistory: TicketDetailData[];
+}
+/**
+ * @description 출석부 강아지 상세 이용권 갱신 요청 Dto
+ */
+export interface NewTicketReq {
+  dogId: number;
+  startDate: string;
+  ticketType: TicketType;
+  roundTicketNumber: number;
+  monthlyTicketNumber: number;
+  attendanceDays: string[];
 }
 
 export interface IPrecautionInfo {
