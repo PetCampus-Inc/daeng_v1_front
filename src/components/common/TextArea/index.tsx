@@ -27,6 +27,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     useImperativeHandle(forwardedRef, () => textAreaRef.current!);
 
+    // TODO: useEffect대신 callbackRef를 활용해서 구현할 수 있을 것 같음.
     useEffect(() => {
       autoResize && adjustHeight();
     }, []);
