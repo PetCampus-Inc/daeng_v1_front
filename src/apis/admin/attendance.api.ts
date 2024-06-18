@@ -10,7 +10,8 @@ import type {
   IDogInfoRecord,
   IMemberCallInfo,
   IPrecautionInfo,
-  ITicketDetail
+  NewTicketReq,
+  TicketDetailData
 } from "types/admin/attendance.type";
 import type { Response } from "types/helper.types";
 
@@ -161,25 +162,33 @@ export const handleGetDogInfoAgenda = async (
   return data.data;
 };
 
-// 강아지 상세 - 이용권 상세정보
-export const handleGetTicketDetail = async (dogId: number): Promise<ITicketDetail> => {
-  const url = `admin/attendance/dog/ticket?dogId=${dogId}`;
-  const { data } = await customAxios.get(url);
-  return data.data;
+// 강아지 상세 - 이용권 정보
+export const handleGetTicketDetail = async (dogId: number): Promise<TicketDetailData> => {
+  const url = `admin/attendance/dog/ticket/info`;
+  const { data } = await request<Response<TicketDetailData>>({
+    url,
+    params: {
+      dogId
+    }
+  });
+  return data;
 };
 
 // 강아지 상세 - 이용권 갱신
-export const handlePostTicket = async (req: any): Promise<any> => {
+export const handlePostTicket = async (req: NewTicketReq): Promise<void> => {
   const url = `admin/attendance/dog/ticket`;
-  const { data } = await customAxios.post(url, {
-    dogId: req.dogId,
-    startDate: req.startDate,
-    ticketType: req.ticketType,
-    roundTicketNumber: req.roundTicketNumber,
-    monthlyTicketNumber: req.monthlyTicketNumber,
-    attendanceDays: req.attendanceDays
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      dogId: req.dogId,
+      startDate: req.startDate,
+      ticketType: req.ticketType,
+      roundTicketNumber: req.roundTicketNumber,
+      monthlyTicketNumber: req.monthlyTicketNumber,
+      attendanceDays: req.attendanceDays
+    }
   });
-  return data;
 };
 
 // 강아지 상세 - 유의사항
