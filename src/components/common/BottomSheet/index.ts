@@ -1,4 +1,4 @@
-import { RootBottomSheet } from "./BottomSheet";
+import { BottomSheetRoot } from "./BottomSheet";
 import { BottomSheetButton } from "./BottomSheetButton";
 import { BottomSheetContent } from "./BottomSheetContent";
 import { BottomSheetControl } from "./BottomSheetControl";
@@ -12,7 +12,7 @@ const BottomSheetComponents = {
   Control: BottomSheetControl
 };
 
-export const BottomSheet = Object.assign(RootBottomSheet, BottomSheetComponents);
+export const BottomSheet = Object.assign(BottomSheetRoot, BottomSheetComponents);
 
 export * from "./AlertBottomSheet";
 export * from "./CallBottomSheet";
