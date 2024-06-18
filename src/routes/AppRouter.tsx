@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import ApiErrorBoundary from "ApiErrorBoundary";
 import App from "App";
 import * as Pages from "pages";
-import LoaderErrorPage from "pages/LoaderErrorPage";
+import LoaderErrorPage from "pages/ErrorPage/LoaderErrorPage";
 import { Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -45,7 +45,16 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             },
             {
               path: PATH.ADMIN_SIGNUP,
-              element: <Pages.AdminSignupPage />
+              children: [
+                {
+                  index: true,
+                  element: <Pages.AdminSignupPage />
+                },
+                {
+                  path: PATH.ADMIN_SIGNUP_APPROVAL_STATUS,
+                  element: <Pages.AdminApprovalStatusPage />
+                }
+              ]
             },
             {
               path: PATH.REDIRECT,

@@ -1,7 +1,7 @@
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useQuery } from "@tanstack/react-query";
-import { getWaitingOwnersList } from "apis/admin/admin.api";
+import { getWaitingOwnersList } from "apis/admin/school.api";
 
 const useGetWaitingOwnersList = (schoolId: number) => {
   return useQuery({

@@ -1,15 +1,21 @@
 import { Variants } from "framer-motion";
 
-export const dimmerAnimationVariants = {
-  initial: { opacity: 0, transition: { duration: 0.05 } },
-  animate: { opacity: 1, transition: { duration: 0.05 } },
-  exit: { opacity: 0, transition: { duration: 0.05 } }
+export const dimmedAnimationVariants = {
+  initial: { opacity: 0, transition: { duration: 0.15 } },
+  animate: { opacity: 1, transition: { duration: 0.15 } },
+  exit: { opacity: 0, transition: { duration: 0.15 } }
+};
+
+export const modalAnimationVariants = {
+  initial: { y: "-50%", x: "-50%", opacity: 0.5 },
+  hidden: { y: "-50%", x: "-50%", opacity: 0 },
+  visible: { y: "-60%", x: "-50%", opacity: 1 }
 };
 
 export const bottomSheetTransition = {
   type: "tween",
   duration: 0.5,
-  ease: [0.32, 0.72, 0, 1]
+  ease: [0.4, 0.72, 0, 1]
 };
 
 export const bottomSheetAnimationVariants: Variants = {
@@ -19,7 +25,7 @@ export const bottomSheetAnimationVariants: Variants = {
     willChange: "y"
   },
   exit: {
-    y: "120%",
+    y: "110%",
     transition: bottomSheetTransition,
     willChange: "y"
   },

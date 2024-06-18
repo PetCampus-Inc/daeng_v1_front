@@ -5,7 +5,7 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import YellowApplication from "assets/svg/yellow-application";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ISimpleSchoolFormList } from "types/Admin.type";
+import { ISimpleSchoolFormList } from "types/admin/school.types";
 
 import * as S from "./styles";
 

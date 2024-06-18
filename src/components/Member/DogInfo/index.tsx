@@ -10,8 +10,7 @@ import CarIcon from "assets/svg/car-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Flex } from "components/common";
-import TextAreaBottomSheet from "components/common/BottomSheet/InfoBottomSheet/TextAreaBottomSheet";
-import CarouselModal from "components/common/Modal/CarouselModal";
+import { CarouselModal } from "components/common/Modal";
 import {
   useGetMemberDogDetailInfo,
   usePostMemberDogAllergy,
@@ -25,6 +24,7 @@ import showToast from "utils/showToast";
 
 import * as S from "./styles";
 import { StyledThumbList } from "../../Admin/AttendCare/AttendCareGallery/upload";
+import { TextAreaBottomSheet } from "../../common/BottomSheet";
 
 interface IProps {
   dogId: number;
@@ -123,7 +123,7 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
               </S.Title>
               <S.Editebutton
-                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDITE_PAGE(String(dogId)))}
+                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}
               >
                 <span>수정</span>
                 <ArrowRightIcon />

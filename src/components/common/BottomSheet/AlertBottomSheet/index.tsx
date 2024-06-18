@@ -1,11 +1,11 @@
 import AlertIcon from "assets/svg/alert-icon";
 import styled from "styled-components";
 
-import BottomSheet, { type IBottomSheetProps } from "../index";
+import { BottomSheet, BottomSheetProps } from "../index";
 
 import type { BottomSheetButtonProps } from "../BottomSheetButton";
 
-interface IAlertBottomSheet extends BottomSheetButtonProps, IBottomSheetProps {
+interface IAlertBottomSheet extends BottomSheetButtonProps, BottomSheetProps {
   title: string;
   subtitle: string;
   hasControl?: boolean;

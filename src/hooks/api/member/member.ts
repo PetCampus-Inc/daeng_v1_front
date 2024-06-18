@@ -1,3 +1,4 @@
+import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -8,14 +9,17 @@ import {
   handleGetHomeInfo,
   handleGetMemberDogDetailInfo,
   handleGetMemberInfo,
+  handleGetMemberProfile,
   handleGetMemberProfileInfo,
   handleMemberInfoResult,
   handlePostMemberDogDelete,
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
+  handlePostMemberProfile,
   handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop
 } from "apis/member/member.api";
+import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
 import { getISOString } from "utils/date";
 import showToast from "utils/showToast";
@@ -26,8 +30,10 @@ import type {
   ImageList,
   ImageListType,
   IMainAlbum,
-  IMemberDogPostDetailInfo,
-  IMemberProfilePostInfo
+  IMemberProfile,
+  IMemberProfilePostInfo,
+  MemberDogInfoData,
+  MemberDogInfoFormData
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -98,7 +104,6 @@ export const useGetMemberInfo = (memberId: string) => {
   });
 };
 
-// 견주 상세 정보
 export const useGetMemberSchoolInfo = (dogId: string) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_SCHOOL_INFO(dogId),
@@ -106,17 +111,34 @@ export const useGetMemberSchoolInfo = (dogId: string) => {
   });
 };
 
-export const useGetMemberProfileInfo = (memberId: string) => {
+// 마이페이지 - 견주 프로필 조회
+export const useGetMemberProfileInfo = (memberId?: string) => {
+  if (!memberId) throw new Error("memberId is required");
+
   return useSuspenseQuery({
+    // NOTE: 쿼리키를 memberId로 관리할 필요가 있을까요? 로그인, 로그아웃 외에 memberId가 변할 경우가 없어보여요!
     queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId),
     queryFn: () => handleGetMemberProfileInfo(memberId)
   });
 };
 
+// 마이페이지 - 견주 프로필 수정
+export const usePostMemberProfileInfo = (memberId: string) => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (req: IMemberProfilePostInfo) => handleMemberInfoResult(req),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId) });
+    }
+  });
+
+  return { mutateProfileInfo: mutate };
+};
+
 // 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = (memberId: string) => {
   const queryClient = useQueryClient();
-  const enrollMemberDOgMutation = useMutation({
+  const enrollMemberDogMutation = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
@@ -127,20 +149,7 @@ export const usePostMemberDogEnrollment = (memberId: string) => {
     }
   });
 
-  return enrollMemberDOgMutation.mutate;
-};
-
-// 견주 상세 정보 수정
-export const usePostMemberProfileInfo = (memberId: string) => {
-  const queryClient = useQueryClient();
-  const memberProfileInfoMutation = useMutation({
-    mutationFn: (req: IMemberProfilePostInfo) => handleMemberInfoResult(req),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId) });
-    }
-  });
-
-  return { mutateAttend: memberProfileInfoMutation.mutate };
+  return enrollMemberDogMutation.mutate;
 };
 
 // 강아지 삭제
@@ -156,14 +165,6 @@ export const usePostMemberDogDelete = (memberId: string) => {
   return memberDogDeleteMutation.mutate;
 };
 
-// 강아지 상세 정보
-export const useGetMemberDogDetailInfo = (dogId: number) => {
-  return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
-    queryFn: () => handleGetMemberDogDetailInfo(dogId)
-  });
-};
-
 // 강아지 가입신청서 보기 (read only)
 export const useGetMemberDogEnrollmentInfo = (dogId: number) => {
   return useSuspenseQuery({
@@ -172,15 +173,30 @@ export const useGetMemberDogEnrollmentInfo = (dogId: number) => {
   });
 };
 
+// 견주 홈 - 강아지 상세 정보
+export const useGetMemberDogDetailInfo = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId),
+    queryFn: () => handleGetMemberDogDetailInfo(dogId),
+    select: (data) => {
+      return Adapter.from(data).to<MemberDogInfoData, MemberDogInfoFormData>((item) => {
+        const adapterInstance = new DogInfoFormAdapter(item);
+        return adapterInstance.adapt();
+      });
+    }
+  });
+};
+
 // 강아지 상세 정보 수정
 export const usePostMemberDogDetailInfo = (dogId: number) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const memberDogDetailInfoMutation = useMutation({
-    mutationFn: (data: IMemberDogPostDetailInfo) => handlePostMemberDogDetailInfo(data),
+
+  const { mutate } = useMutation({
+    mutationFn: handlePostMemberDogDetailInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
-      navigate(-1);
+      navigate(PATH.MEMBER_DOG_INFO_PAGE(dogId), { replace: true });
       setTimeout(() => {
         showToast("수정이 완료되었습니다.", "bottom");
       }, 100);
@@ -190,7 +206,7 @@ export const usePostMemberDogDetailInfo = (dogId: number) => {
     }
   });
 
-  return memberDogDetailInfoMutation.mutate;
+  return { mutatePostDogDetailInfo: mutate };
 };
 
 // 강아지의 알러지/질병 내용 수정
@@ -227,4 +243,27 @@ export const usePostMemberDogPickDrop = (dogId: number) => {
   });
 
   return memberDogPickDropMutation.mutate;
+};
+
+// 회원 가입승인후 초기 견주, 강아지 프로필을 설정 데이터 조회
+export const useGetMemberProfile = (memberId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.MEMBER_PROFILE(memberId),
+    queryFn: () => handleGetMemberProfile(memberId)
+  });
+};
+// 회원 가입승인후 초기 견주, 강아지 프로필을 설정
+export const usePostMemberProfile = () => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: (req: IMemberProfile) => handlePostMemberProfile(req),
+    onSuccess: () => {
+      navigate(PATH.ROOT);
+    },
+    onError: () => {
+      showToast("프로필 등록을 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return { mutateMemberProfile: mutate };
 };

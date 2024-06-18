@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, PropsWithChildren } from "react";
 
-import type { AttendData } from "types/admin.attendance.type";
+import type { AttendData } from "types/admin/attendance.type";
 
 type Action = { type: "ADD_DOG"; payload: AttendData } | { type: "REMOVE_DOG"; payload: number };
 

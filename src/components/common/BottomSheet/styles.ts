@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import styled, { CSSProp } from "styled-components";
-export { Container, BackDrop } from "styles/StyleModule";
-
 import { remCalc } from "utils/calculator";
 
 import type { TitleProps } from "./BottomSheetTitle";

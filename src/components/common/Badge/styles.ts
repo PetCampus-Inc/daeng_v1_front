@@ -12,7 +12,9 @@ const badgeStyles = (theme: DefaultTheme) => ({
   lightBrown: `background-color: ${theme.colors.br_5}; color: ${theme.colors.primaryColor};`
 });
 
-export const Badge = styled.span<{
+export const Badge = styled.span.withConfig({
+  shouldForwardProp: (prop) => !["variant"].includes(prop)
+})<{
   variant: BadgeProps["variant"];
 }>`
   display: inline-flex;

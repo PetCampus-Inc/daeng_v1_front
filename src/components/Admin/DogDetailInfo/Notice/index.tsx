@@ -1,7 +1,7 @@
 import { DOG_NOTICE_LIST } from "constants/notice";
 
 import AlertSmallIcon from "assets/svg/alert-small-icon";
-import { IPrecautionInfo } from "types/admin.attendance.type";
+import { IPrecautionInfo } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 import { DogDetailInfoText } from "../DogInfo/styles";

@@ -1,7 +1,7 @@
 import { INIT_COUNTER } from "constants/option";
 
 import AddIcon from "assets/svg/add-icon";
-import Modal from "components/common/ButtonModal";
+import { Modal } from "components/common/Modal";
 import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
 import { useOverlay } from "hooks/common/useOverlay";
 import useTicketFieldArray from "hooks/common/useTicketFieldArray";

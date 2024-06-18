@@ -2,6 +2,7 @@ import { PATH } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
+import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
@@ -10,7 +11,6 @@ import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
-import BasicModal from "../../../common/Modal/BasicModal";
 
 interface IMyDogCardProps {
   dogId: string;
@@ -71,7 +71,7 @@ const MyDogCard = ({
       <BasicModal
         isOpen={isOpen}
         close={close}
-        action={() => {
+        actionFn={() => {
           close();
           handleDeleteDog();
         }}

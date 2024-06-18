@@ -6,7 +6,7 @@ interface ISchool {
 }
 
 export const memberEnrollmentSchoolAtom = atom<ISchool | null>({
-  key: "memberEnrollmentSchool",
+  key: "memberEnrollmentSchoolAtom",
   default: null
 });
 

@@ -4,12 +4,12 @@ import Portal from "components/common/Portal";
 import DaumPostcode, { Address } from "react-daum-postcode";
 
 import { Container } from "./styles";
-import { IBottomSheetProps } from "../BottomSheet";
+import { BottomSheetProps } from "../BottomSheet/BottomSheet";
 import Header from "../Header";
 
 import type { FieldValues, UseFormSetValue } from "react-hook-form";
 
-interface PostcodeProps extends IBottomSheetProps {
+interface PostcodeProps extends BottomSheetProps {
   field: string;
   setValue: UseFormSetValue<FieldValues>;
   setIsAddressActive?: Dispatch<SetStateAction<boolean>>;

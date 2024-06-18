@@ -1,5 +1,5 @@
 import { ThemeConfig } from "styles/ThemeConfig";
-import { IPoop } from "types/admin.attendance.type";
+import { IPoop } from "types/admin/attendance.type";
 
 const PoopWatery = ({ poop }: { poop?: IPoop }) => {
   const isSelected = poop && poop === "WATERY" ? true : false;

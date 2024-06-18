@@ -16,7 +16,7 @@ interface AddDogCardProps {
 
 const AddDogCard = React.memo(
   ({ dogId, dogName, adminName, isChecked, onClick }: AddDogCardProps) => {
-    const isCared = adminName ? true : false;
+    const isCared = !!adminName;
 
     return (
       <ListItem key={dogId}>

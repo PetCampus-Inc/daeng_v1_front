@@ -4,7 +4,7 @@ import ApprovalPending from "components/SignUp/ApprovalStatus/ApprovalPending";
 import ApprovalSuccess from "components/SignUp/ApprovalStatus/ApprovalSuccess";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useLocation } from "react-router-dom";
-import { Role } from "types/admin/admin.type";
+import { Role } from "types/admin/admin.types";
 
 import type { ITeacherInfo } from "./AdminSignUpFunnel";
 
