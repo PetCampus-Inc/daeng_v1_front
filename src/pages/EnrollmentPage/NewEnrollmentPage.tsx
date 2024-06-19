@@ -1,7 +1,7 @@
 import { MEMBER_DOG_ADD_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
 
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
+import { PreventLeaveModal } from "components/common/Modal";
 import DogInfo from "components/Enrollment/Form/DogInfo";
 import MemberInfo from "components/Enrollment/Form/MemberInfo";
 import PickDropInfo from "components/Enrollment/Form/PickDropInfo";

@@ -8,8 +8,6 @@ import useFormatDate from "hooks/common/useFormatDate";
 import { useOverlay } from "hooks/common/useOverlay";
 import { Suspense, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOptions } from "utils/options";
-import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/ticket";
 
 import * as S from "./styles";
 import AttendanceOptionList from "../AttendanceButton/AttendanceOptionList";
@@ -123,3 +121,51 @@ const DogCard = memo(({ info }: DogCardProps) => {
 });
 
 export default DogCard;
+
+type TicketValidationResult = {
+  isExpired: boolean;
+  isExpiringSoon: boolean;
+  isValid: boolean;
+};
+
+// Check the status of the ticket.
+const checkRoundTicketStatus = (round: number): TicketValidationResult => {
+  return {
+    isExpired: round === 0,
+    isExpiringSoon: round > 0 && round < 3,
+    isValid: round >= 3
+  };
+};
+const checkMonthlyTicketStatus = (monthlyTicket: number[]): TicketValidationResult => {
+  const today = new Date();
+  const expirationDate = new Date(monthlyTicket[0], monthlyTicket[1] - 1, monthlyTicket[2]);
+
+  const diffInTime = expirationDate.getTime() - today.getTime();
+  const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+
+  return {
+    isExpired: diffInDays < 0,
+    isExpiringSoon: diffInDays >= 0 && diffInDays <= 2,
+    isValid: diffInDays > 2
+  };
+};
+
+// 드롭다운 메뉴
+const getOptions = (
+  isRoundExpiringSoon: boolean,
+  isMonthlyExpiringSoon: boolean,
+  adminRole: string
+) => [
+  {
+    label: "견주에게 전화 걸기",
+    condition: () => true
+  },
+  {
+    label: "이용권 알림 전송하기",
+    condition: () => isRoundExpiringSoon || isMonthlyExpiringSoon
+  },
+  {
+    label: "강아지 삭제",
+    condition: () => adminRole === "ROLE_OWNER"
+  }
+];

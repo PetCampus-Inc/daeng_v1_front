@@ -20,7 +20,7 @@ export const BoxContainer = styled.section`
     padding: ${remCalc(8)} ${remCalc(14)};
   }
 
-  ${dragNone}
+  ${dragNone};
   cursor: pointer;
 `;
 

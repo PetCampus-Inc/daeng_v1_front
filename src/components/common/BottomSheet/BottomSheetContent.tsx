@@ -8,8 +8,9 @@ interface BottomSheetContentProps {
   css?: CSSProp;
 }
 
-const BottomSheetContent = ({ css, children }: PropsWithChildren<BottomSheetContentProps>) => {
+export const BottomSheetContent = ({
+  css,
+  children
+}: PropsWithChildren<BottomSheetContentProps>) => {
   return <Content css={css}>{children}</Content>;
 };
-
-export default BottomSheetContent;

@@ -1,10 +1,10 @@
-import Modal, { IModalProps } from "..";
+import { Modal, type ModalProps } from "../index";
 
-interface Props extends IModalProps {
+interface Props extends ModalProps {
   action: () => void; // 나가기 액션!
 }
 
-const PreventLeaveModal = ({ isOpen, close, action }: Props) => {
+export const PreventLeaveModal = ({ isOpen, close, action }: Props) => {
   return (
     <Modal isOpen={isOpen} close={close}>
       <Modal.Content>
@@ -17,5 +17,3 @@ const PreventLeaveModal = ({ isOpen, close, action }: Props) => {
     </Modal>
   );
 };
-
-export default PreventLeaveModal;

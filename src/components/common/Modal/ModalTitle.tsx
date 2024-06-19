@@ -1,11 +1,13 @@
+import { type ReactNode } from "react";
+
 import { MainText, SubText, TextWrapper } from "./styles";
 
 export interface ModalTitleProps {
   title: string;
-  subtitle: string | React.ReactNode;
+  subtitle: string | ReactNode;
 }
 
-const ModalTitle = ({ title, subtitle }: ModalTitleProps) => {
+export const ModalTitle = ({ title, subtitle }: ModalTitleProps) => {
   return (
     <TextWrapper>
       <MainText>{title}</MainText>
@@ -13,5 +15,3 @@ const ModalTitle = ({ title, subtitle }: ModalTitleProps) => {
     </TextWrapper>
   );
 };
-
-export default ModalTitle;

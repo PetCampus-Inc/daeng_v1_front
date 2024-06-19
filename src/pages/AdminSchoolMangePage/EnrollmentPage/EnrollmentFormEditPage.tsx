@@ -19,8 +19,8 @@ import {
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
 import { Layout } from "components/common";
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
+import { PreventLeaveModal } from "components/common/Modal";
 import { useAdminEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";

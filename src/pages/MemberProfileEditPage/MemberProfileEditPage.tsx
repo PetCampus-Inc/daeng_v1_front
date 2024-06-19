@@ -1,10 +1,10 @@
-import SaveProfilButton from "components/Member/Profile/Button/SaveProfilButton";
 import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
-import { useGetMemberProfile } from "hooks/api/member/member";
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { FormProvider, useForm } from "react-hook-form";
 import { AUTH_MEMBER_ID } from "store/auth";
 import { PageContainer } from "styles/StyleModule";
+
+import SaveProfileButton from "../../components/Member/Profile/Button/SaveProfileButton";
 
 const MemberProfileEditPage = () => {
   const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID);
@@ -29,7 +29,7 @@ const MemberProfileEditPage = () => {
     <PageContainer ph="1.5" pt="4" pb="4" color="BGray">
       <FormProvider {...methods}>
         <OnboardingProfile />
-        <SaveProfilButton />
+        <SaveProfileButton />
       </FormProvider>
     </PageContainer>
   );

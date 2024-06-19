@@ -1,35 +1,102 @@
-import styled from "styled-components";
-export { BackDrop } from "styles/StyleModule";
+import { motion } from "framer-motion";
+import styled, { DefaultTheme, css } from "styled-components";
 
-export const StyledModal = styled.div<{
-  width: string;
-  height: string;
-}>`
-  position: relative;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  border-radius: 12px;
+import type { TColorScheme } from "./ModalButton";
+import type { ModalContentVariant } from "./ModalContent";
+
+export const StyledModal = styled(motion.div)`
+  width: 90%;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 0.8rem;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+`;
+
+export const StyledContent = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["variant"].includes(prop)
+})<{ variant: ModalContentVariant }>`
+  width: 100%;
+  padding: ${({ variant }) => (variant === "one-button" ? "36px 14px 16px" : "36px 12px 14px")};
+`;
+
+const Text = styled.p`
+  text-align: center;
+  text-wrap: pretty;
+  word-break: keep-all;
+`;
+
+export const MainText = styled(Text)`
+  ${({ theme }) => theme.typo.title2_20_B};
+  color: ${({ theme }) => theme.colors.black};
+`;
+
+export const SubText = styled(Text)`
+  ${({ theme }) => theme.typo.body2_16_R};
+  color: ${({ theme }) => theme.colors.gray_2};
+  padding: 0 7px;
+
+  & > .emphasisText {
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+`;
+
+export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: white;
-  padding: 16px;
+  align-items: center;
+  gap: 4px;
+  height: 80%;
+  padding-bottom: 28px;
 `;
 
-export const StyledModalContent = styled.div`
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+`;
+
+const BaseButton = styled.button`
+  display: flex;
   width: 100%;
-  height: 100%;
+  padding: 11px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+
+  ${({ theme }) => theme.typo.label1_16_B};
 `;
 
-export const StyledCloseImage = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin-right: 12px;
-  margin-top: 12px;
-  cursor: pointer;
-  background: url("data:image/svg+xml,%3Csvg width='16px' height='16px' viewBox='0 0 16 16' class='bi bi-x' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fillRule='evenodd' d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E")
-    no-repeat right top;
-  background-size: 36px;
-  width: 36px;
-  height: 36px;
+export const CloseButton = styled(BaseButton)`
+  background-color: ${({ theme }) => theme.colors.gray_4};
+  color: ${({ theme }) => theme.colors.gray_2};
+`;
+
+const colorSchemeStyles = (theme: DefaultTheme) => ({
+  primary: css`
+    background-color: ${theme.colors.primaryColor};
+    color: ${theme.colors.white};
+  `,
+  red: css`
+    background-color: ${theme.colors.red_1};
+    color: ${theme.colors.white};
+  `
+});
+
+export const ActionButton = styled(BaseButton).withConfig({
+  shouldForwardProp: (prop) => !["colorScheme"].includes(prop)
+})<{ colorScheme: TColorScheme }>`
+  ${({ theme }) => theme.typo.label1_16_B};
+
+  ${({ theme, colorScheme }) => colorSchemeStyles(theme)[colorScheme]};
+`;
+
+export const ModalWithTextAreaContent = styled.div`
+  padding: 20px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;

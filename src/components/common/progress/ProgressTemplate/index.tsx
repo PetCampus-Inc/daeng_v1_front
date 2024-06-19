@@ -1,6 +1,6 @@
 import { Box, Progress, Text } from "components/common";
+import { FloatingOverlay } from "components/common/FloatingOverlay";
 import Portal from "components/common/Portal";
-import { BackDrop } from "styles/StyleModule";
 
 export interface ProgressTemplateProps {
   totalFiles: number;
@@ -11,7 +11,7 @@ export interface ProgressTemplateProps {
 export const ProgressTemplate = ({ currentIdx, totalFiles, progress }: ProgressTemplateProps) => {
   return (
     <Portal>
-      <BackDrop />
+      <FloatingOverlay type="dimmed" lockScroll />
       <Box
         position="fixed"
         width="65%"
