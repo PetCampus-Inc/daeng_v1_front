@@ -6,7 +6,6 @@ import { zIndex } from "./zIndex";
 
 export const foundations = {
   zIndex,
-  blur,
   colors,
   typo,
   shadows,
