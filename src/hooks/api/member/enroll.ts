@@ -38,14 +38,30 @@ export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
 // 견주 가입신청서 등록
 export const usePostEnrollment = () => {
   const setEnrollmentFormId = useSetLocalStorage();
-  const storageEnrollmentId = useLocalStorageValue<string>("ENROLLMENT_FORM_ID") || "[]";
+  const storageEnrollmentIds = useLocalStorageValue<string>("ENROLLMENT_FORM_ID") || "[]";
   const { mutate } = useMutation({
     mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData),
     onSuccess: (enrollmentFormId) => {
       // 데이터 배열 형식으로 저장
-      if (!JSON.parse(storageEnrollmentId).includes(enrollmentFormId)) {
-        const updateEnrollmentIds = [...storageEnrollmentId, enrollmentFormId];
-        setEnrollmentFormId({ key: "ENROLLMENT_FORM_ID", value: updateEnrollmentIds });
+      let enrollmentIdArr = [];
+
+      try {
+        enrollmentIdArr = JSON.parse(storageEnrollmentIds);
+      } catch (err) {
+        console.log(err);
+      }
+
+      //parseStorageEnrollmentId가 배열이 아닌 경우
+      if (!Array.isArray(enrollmentIdArr)) {
+        enrollmentIdArr = [];
+      }
+
+      if (!enrollmentIdArr.includes(enrollmentFormId)) {
+        const updateEnrollmentIds = [...enrollmentIdArr, enrollmentFormId];
+        setEnrollmentFormId({
+          key: "ENROLLMENT_FORM_ID",
+          value: JSON.stringify(updateEnrollmentIds)
+        });
       }
     }
   });
