@@ -46,13 +46,15 @@ export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise
 // NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
 /**
  * @description 가입신청서 상태 정보 반환 - 견주가 작성한 가입신청서 상태를 확인할 수 있습니다.
- * @param {IEnrollmentStatus} enrollmentFormId
+ * @param {IEnrollmentStatus} enrollmentFormIds
  * @returns
  */
 export const handleGetEnrollmentStatus = async (
-  enrollmentFormId: number[]
+  enrollmentFormIds: number[]
 ): Promise<IEnrollmentStatus[]> => {
-  const req = enrollmentFormId.map(async (id) => {
+  if (!Array.isArray(enrollmentFormIds)) return (enrollmentFormIds = []);
+
+  const req = enrollmentFormIds.map(async (id) => {
     const url = `admin/enrollment/status?enrollmentFormId=${id}`;
     const { data } = await customAxios.get(url);
     return data.data;
