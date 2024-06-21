@@ -115,10 +115,10 @@ export const useCreateAdminEnrollment = () => {
 };
 
 // 가입 신청서 상태를 확인
-export const useGetEnrollmentStatus = (enrollmentFormId: number[]) => {
+export const useGetEnrollmentStatus = (enrollmentFormIds: number[]) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_MAIN_DOG_LIST,
-    queryFn: () => handleGetEnrollmentStatus(enrollmentFormId)
+    queryFn: () => handleGetEnrollmentStatus(enrollmentFormIds)
   });
 };
 
