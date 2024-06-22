@@ -1,11 +1,11 @@
 interface IconProps {
   className?: string;
-  colorScheme?: TColorScheme;
+  colorScheme?: ColorKeysScheme;
   opacity?: number;
   w?: number | string;
   h?: number | string;
 }
-type TColorScheme = "gray" | "brown" | "black";
+type ColorKeysScheme = "gray" | "brown" | "black";
 
 const XCircleIcon = ({
   className = "",

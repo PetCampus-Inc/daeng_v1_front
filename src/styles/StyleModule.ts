@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
 import styled, { css, keyframes } from "styled-components";
 
-import type { TColor } from "./ThemeConfig";
+import type { ColorKeys } from "./types";
 
 // CSS 속성중 자주쓰이는 조합들 모아놓은것
 
@@ -50,7 +49,7 @@ export const PageContainer = styled.div.withConfig({
   ph?: string; // 좌우 동일 padding
   pr?: string;
   pl?: string;
-  color?: TColor;
+  color?: ColorKeys;
   auto?: string;
 }>`
   padding-top: ${({ pt }) => (pt ? `calc(5vh + ${pt}rem)` : "calc(5vh)")};

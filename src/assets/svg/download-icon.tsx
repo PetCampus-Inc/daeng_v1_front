@@ -1,12 +1,12 @@
 interface IconProps {
-  colorScheme?: TColorScheme;
+  colorScheme?: ColorKeysScheme;
   opacity?: number;
   w?: number | string;
   h?: number | string;
   hasRect?: boolean;
 }
 
-type TColorScheme = "gray" | "brown" | "black";
+type ColorKeysScheme = "gray" | "brown" | "black";
 
 const DownloadIcon = ({
   w = 24,

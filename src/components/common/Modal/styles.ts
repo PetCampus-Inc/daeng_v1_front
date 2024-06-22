@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled, { DefaultTheme, css } from "styled-components";
 
-import type { TColorScheme } from "./ModalButton";
+import type { ColorKeysScheme } from "./ModalButton";
 import type { ModalContentVariant } from "./ModalContent";
 
 export const StyledModal = styled(motion.div)`
@@ -88,7 +88,7 @@ const colorSchemeStyles = (theme: DefaultTheme) => ({
 
 export const ActionButton = styled(BaseButton).withConfig({
   shouldForwardProp: (prop) => !["colorScheme"].includes(prop)
-})<{ colorScheme: TColorScheme }>`
+})<{ colorScheme: ColorKeysScheme }>`
   ${({ theme }) => theme.typo.label1_16_B};
 
   ${({ theme, colorScheme }) => colorSchemeStyles(theme)[colorScheme]};

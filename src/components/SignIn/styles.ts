@@ -1,8 +1,9 @@
 import { Text } from "components/common";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { TColor } from "styles/ThemeConfig";
 import { remCalc } from "utils/calculator";
+
+import type { ColorKeys } from "styles/types";
 
 export const Container = styled.div<{ padding_top?: string }>`
   display: flex;
@@ -91,8 +92,8 @@ export const StyledLink = styled(Link)`
 `;
 
 interface ButtonProps {
-  bg: TColor | string;
-  borderColor?: TColor | string;
+  bg: ColorKeys | string;
+  borderColor?: ColorKeys | string;
 }
 
 export const StyledButton = styled.button.withConfig({
