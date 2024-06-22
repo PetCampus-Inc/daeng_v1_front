@@ -53,14 +53,3 @@ export const TransmissionTime = styled.span`
   right: 8px;
   bottom: 10px;
 `;
-
-export const MoreButtonStyle = css`
-  background-color: transparent;
-  border: none;
-  outline: none;
-
-  ${({ theme }) => theme.typo.body2_16_R};
-  color: ${({ theme }) => theme.colors.gray_1};
-
-  gap: 0;
-`;

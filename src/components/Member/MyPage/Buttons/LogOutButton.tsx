@@ -1,4 +1,4 @@
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { BackgroundButtonWrapper } from "components/Member/MyPage/styles";
 
 const LogOutButton = () => {
