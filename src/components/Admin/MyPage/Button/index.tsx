@@ -1,5 +1,5 @@
 import { BackgroundButtonWrapper } from "components/Admin/MyPage/styles";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 
 const LogOutButton = () => {
   const handleLogOut = () => {

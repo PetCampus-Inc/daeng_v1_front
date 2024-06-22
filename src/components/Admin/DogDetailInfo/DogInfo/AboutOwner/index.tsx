@@ -1,6 +1,7 @@
 import MapPinIcon from "assets/svg/map-pin-icon";
 import BasicPhoneIcon from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
+import { XSmallButton } from "components/common/Button/Templates";
 
 import * as S from "./styles";
 import { FlexWrapper } from "../../styles";
@@ -23,10 +24,14 @@ const AboutOwner = ({ data }: any) => {
               <BasicPhoneIcon />
               {memberPhone || "연락처 없음"}
             </TextWrapper>
-            <YellowThickButton>
-              <PhoneIcon />
+            <XSmallButton
+              typo="caption1_12_B"
+              colorScheme="yellow_3"
+              onClick={() => window.open(`tel:${memberPhone}`)}
+              leftAddon={<PhoneIcon />}
+            >
               전화 걸기
-            </YellowThickButton>
+            </XSmallButton>
           </DetailItem>
           <DetailItem>
             <TextWrapper>

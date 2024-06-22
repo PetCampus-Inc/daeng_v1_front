@@ -2,7 +2,7 @@ import MoreIcon from "assets/svg/more-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
 import XCircleIcon from "assets/svg/x-circle-icon";
 import { Dropdown } from "components/common";
-import SimpleButton from "components/common/Button/SimpleButton";
+import { Button } from "components/common/Button";
 
 interface CareOptionListProps {
   options: string[];
@@ -19,9 +19,9 @@ const OptionDropdown = ({ options, handleOptionClick }: CareOptionListProps) => 
     <Dropdown>
       <Dropdown.Content>
         <Dropdown.Trigger>
-          <SimpleButton ph={0.125}>
+          <Button colorScheme="br_4" paddingInline={2}>
             <MoreIcon />
-          </SimpleButton>
+          </Button>
         </Dropdown.Trigger>
         <Dropdown.List>
           {options.map((option, index) => (

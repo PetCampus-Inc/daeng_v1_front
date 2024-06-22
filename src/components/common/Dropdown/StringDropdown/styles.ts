@@ -29,15 +29,6 @@ export const List = styled.ul`
   ${dragNone}
 `;
 
-export const BoldText = styled.span`
-  ${({ theme }) => theme.typo.body2_16_B}
-  color: ${({ theme }) => theme.colors.gray_1};
-`;
-export const ThinText = styled.span`
-  ${({ theme }) => theme.typo.label2_14_R}
-  color: ${({ theme }) => theme.colors.gray_2};
-`;
-
 export const ListItem = styled.li`
   display: flex;
   padding: 12px 12px 12px 16px;
