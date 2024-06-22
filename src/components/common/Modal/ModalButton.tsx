@@ -3,14 +3,14 @@ import { type ButtonHTMLAttributes } from "react";
 import { ActionButton, ButtonGroup, CloseButton } from "./styles";
 import { useModal } from "../BottomSheet/BottomSheetContext";
 
-export type TColorScheme = "primary" | "red";
+export type ColorKeysScheme = "primary" | "red";
 
 export interface TicketInfo {
   actionText: string;
   closeText?: string;
   actionFn: (e: React.MouseEvent) => void | Promise<void>;
   closeFn?: (e: React.MouseEvent) => void | Promise<void>;
-  colorScheme?: TColorScheme;
+  colorScheme?: ColorKeysScheme;
   shouldPropagate?: boolean;
 }
 

@@ -1,5 +1,5 @@
 import type { CSSProperties } from "styled-components";
-import type { TColor } from "styles/ThemeConfig";
+import type { ColorKeys } from "styles/types";
 
 export type TPaddingOptions = {
   pt?: number | string;
@@ -15,9 +15,9 @@ export type TPaddingOptions = {
   paddingBlock?: number | string;
 };
 
-export type TColorScheme = {
-  backgroundColor?: TColor;
-  bg?: TColor;
+export type ColorKeysScheme = {
+  backgroundColor?: ColorKeys;
+  bg?: ColorKeys;
 };
 
 export type TPositionOptions = {
