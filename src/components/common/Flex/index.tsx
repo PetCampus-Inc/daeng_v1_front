@@ -2,13 +2,20 @@ import { type CSSProperties, type ForwardedRef, forwardRef, type HTMLAttributes 
 
 import { StyledFlex } from "./styles";
 
-import type { BoxStyleProps, SpacingProps } from "../Box/types";
+import type { BoxStyleProps, SizeType, SpacingProps } from "../Box/types";
+
+type FlexWidthSet = {
+  width?: SizeType;
+  maxWidth?: SizeType;
+  minWidth?: SizeType;
+  height?: SizeType;
+  maxHeight?: SizeType;
+};
 
 export type FlexOptions = BoxStyleProps &
-  SpacingProps & {
+  SpacingProps &
+  FlexWidthSet & {
     gap?: CSSProperties["gap"];
-    maxWidth?: CSSProperties["maxWidth"];
-    maxHeight?: CSSProperties["maxHeight"];
     overflowX?: CSSProperties["overflowX"];
     overflowY?: CSSProperties["overflowY"];
     direction?: CSSProperties["flexDirection"];

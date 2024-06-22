@@ -2,6 +2,24 @@ import styled from "styled-components";
 import { remCalc } from "utils/calculator";
 
 import type { FlexOptions } from ".";
+import type { SizeType } from "../Box/types";
+
+const getSize = (size: SizeType) => {
+  switch (size) {
+    case "full":
+      return "100%";
+    case "fit":
+      return "fit-content";
+    case "min":
+      return "min-content";
+    case "max":
+      return "max-content";
+    case "auto":
+      return "auto";
+    default:
+      return size;
+  }
+};
 
 export const StyledFlex = styled.div.withConfig({
   displayName: "Flex",
@@ -45,10 +63,11 @@ export const StyledFlex = styled.div.withConfig({
       "pl"
     ].includes(prop)
 })<FlexOptions>`
-  width: ${(props) => props.width || undefined};
-  height: ${(props) => props.height || undefined};
-  max-width: ${(props) => props.maxWidth || undefined};
-  max-height: ${(props) => props.maxHeight || undefined};
+  width: ${({ width }) => (width ? getSize(width) : undefined)};
+  max-width: ${({ maxWidth }) => (maxWidth ? getSize(maxWidth) : undefined)};
+  min-width: ${({ minWidth }) => (minWidth ? getSize(minWidth) : undefined)};
+  height: ${({ height }) => (height ? getSize(height) : undefined)};
+  max-height: ${({ maxHeight }) => (maxHeight ? getSize(maxHeight) : undefined)};
   overflow-x: ${(props) => props.overflowX || undefined};
   overflow-y: ${(props) => props.overflowY || undefined};
 
