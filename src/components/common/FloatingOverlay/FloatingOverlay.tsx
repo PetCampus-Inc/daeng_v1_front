@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useLayoutEffect, useId, forwardRef } from "react";
 import styled, { type CSSProp } from "styled-components";
-import { dimmedAnimationVariants } from "styles/animation";
+import { dimmedAnimationVariants } from "styles/foundations/animation";
 import { getPlatform } from "utils/cross-browsing";
 
 const activeLocks = new Set<string>();

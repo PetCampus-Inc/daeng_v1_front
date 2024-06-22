@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useFileDownload } from "hooks/common/useS3";
 import { useState } from "react";
 import Slider from "react-slick";
-import { dialogAnimationVariants } from "styles/animation";
+import { dialogAnimationVariants } from "styles/foundations/animation";
 
 import Arrows from "./Arrows";
 import SaveOptionDropdown from "./Dropdown/SaveOptionDropdown";
