@@ -1,6 +1,6 @@
 import { FIELD } from "constants/field";
 
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { usePostMemberDogDetailInfo } from "hooks/api/member/member";
 import { useFormContext } from "react-hook-form";
 import { type MemberDogInfoReq } from "types/member/main.types";

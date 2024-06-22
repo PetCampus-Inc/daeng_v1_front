@@ -1,6 +1,5 @@
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { useCreateAttendDog } from "hooks/api/admin/attendance";
-import React from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { useSelectedDogs } from "../context/SelectedDogProvider";

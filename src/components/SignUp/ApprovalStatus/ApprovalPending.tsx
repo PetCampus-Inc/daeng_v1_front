@@ -2,6 +2,7 @@ import { PATH } from "constants/path";
 
 import DogWaitingBgIcon from "assets/svg/dog-waiting-bg-icon";
 import { Box, Flex, Text } from "components/common";
+import { MoreButton } from "components/common/Button/Templates";
 import { BasicModal } from "components/common/Modal";
 import { useTeacherSinUpCancel } from "hooks/api/signup";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -9,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 import { StyledImgWrapper } from "./styles";
 import Button from "../button/Button";
-import DirectionButton from "../button/DirectionButton";
 
 interface ApprovalSuccessProps {
   schoolName?: string;
@@ -73,9 +73,15 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
 
       <Box position="absolute" left={16} right={16} bottom={24}>
         <Flex direction="column" justify="center" align="center" gap={24}>
-          <DirectionButton type="submit" handleClick={openCancelPopup}>
+          <MoreButton
+            type="submit"
+            onClick={openCancelPopup}
+            typo="label2_14_M"
+            color="gray_2"
+            iconSize={24}
+          >
             승인 신청 취소
-          </DirectionButton>
+          </MoreButton>
           <Button handleClick={handleConfirm}>확인</Button>
         </Flex>
       </Box>
