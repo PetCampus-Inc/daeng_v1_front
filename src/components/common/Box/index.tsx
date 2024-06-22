@@ -17,7 +17,7 @@ export const Box = forwardRef(function Box<C extends ElementType = "div">(
   const { as, children, ...rest } = props;
 
   return (
-    <StyledBox ref={ref} as={as} {...rest}>
+    <StyledBox ref={ref} as={as} color={"inherit"} {...rest}>
       {children}
     </StyledBox>
   );
