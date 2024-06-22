@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { type PropsWithChildren } from "react";
-import { modalAnimationVariants } from "styles/animation";
+import { modalAnimationVariants } from "styles/foundations/animation";
 
 import { ModalProvider } from "./ModalContext";
 import { StyledModal } from "./styles";

@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import { type PropsWithChildren, forwardRef, useRef } from "react";
-import { bottomSheetAnimationVariants } from "styles/animation";
+import { bottomSheetAnimationVariants } from "styles/foundations/animation";
 
 import { BottomSheetProvider } from "./BottomSheetContext";
 import { StyledBottomSheet } from "./styles";

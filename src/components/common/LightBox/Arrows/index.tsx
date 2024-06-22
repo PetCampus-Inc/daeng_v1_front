@@ -2,7 +2,7 @@ import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
-import { arrowVariants } from "styles/animation";
+import { arrowVariants } from "styles/foundations/animation";
 
 interface ArrowsProps {
   position: "next" | "prev";
