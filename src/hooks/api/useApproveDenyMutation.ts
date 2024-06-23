@@ -19,14 +19,9 @@ export const useApproveFormMutation = () => {
 };
 
 export const useDenyFormMutation = () => {
-  const { setIsRejected } = useMemberRejected();
   return useMutation({
     mutationFn: (enrollmentFormId: number) => postDenyForm(enrollmentFormId),
-    throwOnError: true,
-    onSuccess: () => {
-      // 관리자 -> 견주 강아지 추가 승인 거절 상태 감지
-      setIsRejected(true);
-    }
+    throwOnError: true
   }).mutate;
 };
 
