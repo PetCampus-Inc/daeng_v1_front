@@ -1,10 +1,6 @@
-import { useGetEnrollmentStatus } from "hooks/api/admin/enroll";
 import useMemberRejected from "hooks/api/member/useMemberRejected";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useToggle } from "hooks/common/useToggle";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { IEnrollmentStatus } from "types/member/enrollment.types";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IMemberInfo } from "types/member/main.types";
 
 import * as S from "./styles";
@@ -18,32 +14,33 @@ interface MemberInfoProps {
 }
 
 const MyDogInfo = ({ data }: MemberInfoProps) => {
-  const { pathname } = useLocation();
   const { isOpen, toggle } = useToggle();
-  const storageEnrollmentIdArr = useLocalStorageValue<number[]>("ENROLLMENT_FORM_ID") || [];
-  const { data: approvalDeniedDogArr } = useGetEnrollmentStatus(storageEnrollmentIdArr);
-  const approvalDeniedDog = approvalDeniedDogArr.filter((dog) => dog.status === "APPROVAL_DENIED");
-  console.log("approvalDeniedDog", approvalDeniedDogArr);
+  const approvalDeniedDogRef = useRef(true);
 
-  const {
-    rejectedDogs,
-    IS_REJECTED,
-    VISIT_PATH_NAME,
-    removeStorageDatas,
-    getPendingDogs,
-    STORAGE_KEY
-  } = useMemberRejected();
+  const { VISIT_MYPAGE, saveStorageData, approvalDeniedDogs, removeApprovalDeniedDog } =
+    useMemberRejected();
+
+  const approvalDeniedDogSetting = useCallback(async () => {
+    // 이미 데이터가 삭제된 경우 함수 호출 방지
+    if (!approvalDeniedDogs.length) return;
+
+    if (!VISIT_MYPAGE) {
+      saveStorageData();
+      approvalDeniedDogRef.current = false;
+      console.log("마이페이지 저장", approvalDeniedDogs);
+    } else {
+      await removeApprovalDeniedDog();
+      console.log("마이페이지 삭제", approvalDeniedDogs);
+    }
+  }, [VISIT_MYPAGE, saveStorageData, removeApprovalDeniedDog]);
 
   useEffect(() => {
-    // 첫 방문시 mypage path localStorage에 저장
-    if (approvalDeniedDog && !VISIT_PATH_NAME) {
-      localStorage.setItem(STORAGE_KEY.VISIT_PATH_NAME, "mypage");
+    if (approvalDeniedDogRef.current && approvalDeniedDogs.length > 0) {
+      // 첫 방문시 mypage path localStorage에 저장
+      approvalDeniedDogSetting();
+      approvalDeniedDogRef.current = false; // 함수 실행 후 플래그 해제
     }
-    // VISIT_PATH_NAME, IS_REJECTED 둘다 있다면 삭제
-    if (VISIT_PATH_NAME && IS_REJECTED) {
-      removeStorageDatas();
-    }
-  }, [IS_REJECTED]);
+  }, [approvalDeniedDogs, approvalDeniedDogSetting]);
 
   const settings = {
     dots: false,
@@ -64,11 +61,11 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
       {data.doglist.length <= 1 ? (
         <S.MyDogInfoList>
-          {data.doglist.map((item) => (
-            <>
-              {item.dogId && (
+          {data.doglist.map(
+            (item) =>
+              item.dogId && (
                 <MyDogCard
-                  key={item.dogName}
+                  key={item.dogId}
                   dogId={item.dogId}
                   isOpen={isOpen}
                   dogName={item.dogName}
@@ -83,25 +80,35 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
                   status={item.status}
                   dogLength={data.doglist.length}
                 />
-              )}
-              {item.status === "APPROVAL_PENDING" && (
-                <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
-              )}
-              {approvalDeniedDog.length > 0 &&
-                approvalDeniedDog.map((dog, idx) => (
-                  <RejectedCard key={idx} dogName={dog.dogName} registeredDate={[2024, 0, 1]} />
-                ))}
-            </>
-          ))}
+              )
+          )}
+          {data.doglist.map(
+            (item) =>
+              item.status === "APPROVAL_PENDING" && (
+                <WaitingCard
+                  key={item.dogId}
+                  dogName={item.dogName}
+                  registeredDate={item.registeredDate}
+                />
+              )
+          )}
+          {approvalDeniedDogs.length > 0 &&
+            approvalDeniedDogs.map((dog) => (
+              <RejectedCard
+                key={dog.enrollmentFormId}
+                dogName={dog.dogName}
+                registeredDate={[2024, 0, 1]}
+              />
+            ))}
           <AddMyDogCard />
         </S.MyDogInfoList>
       ) : (
         <S.CarouselSlider {...settings}>
-          {data.doglist.map((item) => (
-            <>
-              {item.dogId && (
+          {data.doglist.map(
+            (item) =>
+              item.dogId && (
                 <MyDogCard
-                  key={item.dogName}
+                  key={item.dogId}
                   dogId={item.dogId}
                   isOpen={isOpen}
                   dogName={item.dogName}
@@ -116,22 +123,25 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
                   status={item.status}
                   dogLength={data.doglist.length}
                 />
-              )}
-              {item.status === "APPROVAL_PENDING" && (
-                <WaitingCard dogName={item.dogName} registeredDate={item.registeredDate} />
-              )}
-            </>
-          ))}
-
-          {/* {IS_REJECTED &&
-              JSON.parse(IS_REJECTED) &&
-              rejectedDogs &&
-              rejectedDogs.map((el: { dogName: string; registeredDate: number[] }) => (
-                <RejectedCard dogName={el.dogName} registeredDate={el.registeredDate} />
-              ))} */}
-          {approvalDeniedDog.length > 0 &&
-            approvalDeniedDog.map((dog, idx) => (
-              <RejectedCard key={idx} dogName={dog.dogName} registeredDate={[2024, 0, 1]} />
+              )
+          )}
+          {data.doglist.map(
+            (item) =>
+              item.status === "APPROVAL_PENDING" && (
+                <WaitingCard
+                  key={item.dogId}
+                  dogName={item.dogName}
+                  registeredDate={item.registeredDate}
+                />
+              )
+          )}
+          {approvalDeniedDogs.length > 0 &&
+            approvalDeniedDogs.map((dog) => (
+              <RejectedCard
+                key={dog.enrollmentFormId}
+                dogName={dog.dogName}
+                registeredDate={[2024, 0, 1]}
+              />
             ))}
           <AddMyDogCard />
         </S.CarouselSlider>

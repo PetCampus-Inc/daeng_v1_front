@@ -1,56 +1,97 @@
-import { useEffect, useMemo, useState } from "react";
-import { useRecoilState } from "recoil";
-import { memberEnrollmentRejectedAtom } from "store/member";
-import { IDoglist, IMemberInfo } from "types/member/main.types";
+import {
+  useLocalStorageValue,
+  useResetLocalStorage,
+  useSetLocalStorage
+} from "hooks/common/useLocalStorage";
+import { useCallback, useEffect, useState } from "react";
+import { IEnrollmentStatus } from "types/member/enrollment.types";
 
-interface MemberInfoProps {
-  data: IMemberInfo;
-}
+import { useDeleteEnrollment, useGetEnrollmentStatus } from "../admin/enroll";
+
+const STORAGE_KEY = {
+  VISIT_MYPAGE: "VISIT_MYPAGE",
+  ENROLLMENT_FORM_ID: "ENROLLMENT_FORM_ID",
+  APPROVAL_DENIED: "APPROVAL_DENIED"
+};
 
 // 강아지 추가 승인 거부할 경우 상태 관리
 export const useMemberRejected = () => {
-  const STORAGE_KEY = {
-    IS_REJECTED: "IS_REJECTED",
-    VISIT_PATH_NAME: "VISIT_PATH_NAME"
+  const [approvalDeniedDogs, setApprovalDeniedDogs] = useState<IEnrollmentStatus[]>([]);
+  const setStoredValue = useSetLocalStorage();
+  const resetStoredEnrollmentIdValue = useResetLocalStorage(STORAGE_KEY.ENROLLMENT_FORM_ID);
+  const resetStoredVisitPathIdValue = useResetLocalStorage(STORAGE_KEY.VISIT_MYPAGE);
+  const { mutateDeleteEnrollment } = useDeleteEnrollment();
+  const storageEnrollmentIdArr: string[] =
+    useLocalStorageValue(STORAGE_KEY.ENROLLMENT_FORM_ID) || [];
+  const { data: enrollmentStatusArr } = useGetEnrollmentStatus(storageEnrollmentIdArr);
+
+  const deniedDogs = enrollmentStatusArr.filter(
+    (dog) => dog.status === STORAGE_KEY.APPROVAL_DENIED
+  );
+
+  const VISIT_MYPAGE = localStorage.getItem(STORAGE_KEY.VISIT_MYPAGE);
+
+  const saveStorageData = () => {
+    setStoredValue({ key: STORAGE_KEY.VISIT_MYPAGE, value: true });
   };
 
-  const [isRejected, setIsRejected] = useRecoilState(memberEnrollmentRejectedAtom);
-  const [rejectedDogs, setRejectedDogs] = useState([]);
-  const [pendingDogs, setPendingDogs] = useState<IDoglist[]>([]);
-  const IS_REJECTED = localStorage.getItem(STORAGE_KEY.IS_REJECTED);
-  const VISIT_PATH_NAME = localStorage.getItem(STORAGE_KEY.VISIT_PATH_NAME);
+  const updateEnrollmentStatus = (dataArr: string[]) => {
+    if (dataArr.length <= 0) return setApprovalDeniedDogs([]);
 
-  // pending 상태인 강아지만 저장하기
-  const getPendingDogs = ({ data }: MemberInfoProps) => {
-    const pendingDogList = data.doglist.filter((el) => el.status === "APPROVAL_PENDING");
-    setPendingDogs(pendingDogList);
-  };
-
-  // 1회 표시 후 불필요한 localStorage 데이터 없애기
-  const removeStorageDatas = () => {
-    localStorage.removeItem(STORAGE_KEY.IS_REJECTED);
-    localStorage.removeItem(STORAGE_KEY.VISIT_PATH_NAME);
-  };
-
-  // 관리자가 승인 거절 시 rejected 데이터 localStorage에 저장
-  useEffect(() => {
-    if (isRejected) {
-      localStorage.setItem(STORAGE_KEY.IS_REJECTED, JSON.stringify(isRejected));
+    if (dataArr.length > 0) {
+      const isDeniedDog = deniedDogs.length > 0;
+      if (isDeniedDog && enrollmentStatusArr.length > 0) {
+        setApprovalDeniedDogs(deniedDogs);
+      }
     }
-  }, [isRejected]);
+  };
+
+  const removeApprovalDeniedDog = useCallback(async () => {
+    if (approvalDeniedDogs.length <= 0) return;
+
+    const deleteApprovalDeniedDogs = approvalDeniedDogs?.map((el) =>
+      mutateDeleteEnrollment(String(el.enrollmentFormId), {
+        onSuccess: () => {
+          console.log("---deleteApprovalDeniedDogs 삭제 성공---");
+          const NewEnrollmentIdArr = storageEnrollmentIdArr.filter(
+            (enrollmentId, idx) =>
+              Number(enrollmentId) !== approvalDeniedDogs[idx]?.enrollmentFormId
+          );
+
+          if (NewEnrollmentIdArr.length <= 0) {
+            resetStoredEnrollmentIdValue();
+          } else {
+            setStoredValue({ key: STORAGE_KEY.ENROLLMENT_FORM_ID, value: NewEnrollmentIdArr });
+          }
+
+          setApprovalDeniedDogs([]);
+          resetStoredVisitPathIdValue();
+        }
+      })
+    );
+
+    try {
+      await Promise.all(deleteApprovalDeniedDogs);
+    } catch (error) {
+      return;
+    }
+  }, [approvalDeniedDogs, storageEnrollmentIdArr]);
+
+  useEffect(() => {
+    if (deniedDogs.length > 0) {
+      console.log("호출 싀바");
+      updateEnrollmentStatus(storageEnrollmentIdArr);
+    }
+  }, []);
 
   return {
-    isRejected,
-    setIsRejected,
-    rejectedDogs,
-    setRejectedDogs,
-    pendingDogs,
-    setPendingDogs,
-    getPendingDogs,
-    IS_REJECTED,
-    VISIT_PATH_NAME,
-    removeStorageDatas,
-    STORAGE_KEY
+    VISIT_MYPAGE,
+    saveStorageData,
+    STORAGE_KEY,
+    approvalDeniedDogs,
+    storageEnrollmentIdArr,
+    removeApprovalDeniedDog,
+    setApprovalDeniedDogs
   };
 };
 
