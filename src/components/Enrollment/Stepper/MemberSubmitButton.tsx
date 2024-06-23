@@ -57,7 +57,6 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
         navigate(PATH.MEMBER_MY_PAGE(memberId));
       }
     });
-    console.log("memberDogAddInfo", memberDogAddInfo);
   };
 
   const onInvalid = (errors: FieldErrors) => {
