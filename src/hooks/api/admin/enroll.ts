@@ -115,7 +115,7 @@ export const useCreateAdminEnrollment = () => {
 };
 
 // 가입 신청서 상태를 확인
-export const useGetEnrollmentStatus = (enrollmentFormIds: number[]) => {
+export const useGetEnrollmentStatus = (enrollmentFormIds: string[]) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_MAIN_DOG_LIST,
     queryFn: () => handleGetEnrollmentStatus(enrollmentFormIds)
@@ -125,9 +125,12 @@ export const useGetEnrollmentStatus = (enrollmentFormIds: number[]) => {
 // 가입신청서 삭제
 export const useDeleteEnrollment = () => {
   const { mutate } = useMutation({
-    mutationFn: (enrollmentFormId: number) => handleDeleteEnrollment(enrollmentFormId),
+    mutationFn: (enrollmentFormId: string) => handleDeleteEnrollment(enrollmentFormId),
     onSuccess: () => {
-      console.log("성공");
+      console.log("가입신청서 삭제 성공");
+    },
+    onError: (error) => {
+      console.log("가입신청서 삭제 실패", error);
     }
   });
 

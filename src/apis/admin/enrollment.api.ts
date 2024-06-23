@@ -50,7 +50,7 @@ export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise
  * @returns
  */
 export const handleGetEnrollmentStatus = async (
-  enrollmentFormIds: number[]
+  enrollmentFormIds: string[]
 ): Promise<IEnrollmentStatus[]> => {
   if (!Array.isArray(enrollmentFormIds)) return (enrollmentFormIds = []);
 
@@ -60,7 +60,7 @@ export const handleGetEnrollmentStatus = async (
     return data.data;
   });
 
-  return Promise.all(req);
+  return await Promise.all(req);
 };
 
 /**
@@ -69,7 +69,7 @@ export const handleGetEnrollmentStatus = async (
  * @returns
  */
 export const handleDeleteEnrollment = async (
-  enrollmentFormId: number
+  enrollmentFormId: string
 ): Promise<IEnrollmentDeleteData> => {
   const url = `admin/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
   const { data } = await customAxios.post(url);
