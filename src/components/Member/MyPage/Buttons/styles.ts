@@ -1,6 +1,14 @@
 import Button from "components/common/Button";
 import { css, styled } from "styled-components";
 
+interface ICardStyleProps {
+  mb?: string;
+  pr?: string;
+  textColor?: string;
+  bgColor?: string;
+  isprofilestring?: string;
+}
+
 const StatusBoxStyle = css`
   position: relative;
   overflow: hidden;
@@ -55,4 +63,19 @@ export const DeleteButton = styled.button`
   top: 0.75rem;
   right: 0.75rem;
   z-index: 1;
+`;
+
+export const GotoSchoolInfoButton = styled.button<ICardStyleProps>`
+  ${StatusBoxStyle}
+
+  & > span {
+    padding-right: ${({ pr }) => (pr ? pr : "0.4375rem")};
+  }
+
+  & > svg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 `;

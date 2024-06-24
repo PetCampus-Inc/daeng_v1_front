@@ -16,6 +16,7 @@ import showToast from "utils/showToast";
 import * as S from "./styles";
 import BasicModal from "../../../common/Modal/BasicModal";
 import DogDeleteButton from "../Buttons/DogDeleteButton";
+import GotoSchoolInfoButton from "../Buttons/GotoSchoolInfoButton";
 
 interface IMyDogCardProps {
   dogId: string;
@@ -117,14 +118,12 @@ const MyDogCard = ({
       <S.InfoTextBox>
         <S.DogName className={isProfileString === "true" ? "colorGray1" : ""}>{dogName}</S.DogName>
         {status === DOG_STATUS.DROP_OUT ? (
-          <S.GotoSchoolInfoButton pr="0" onClick={openAlertPopup}>
-            <span>등록된 유치원 없음</span>
-          </S.GotoSchoolInfoButton>
+          <GotoSchoolInfoButton pr="0" onClick={openAlertPopup} />
         ) : (
-          <S.GotoSchoolInfoButton onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}>
-            <span>{schoolInfo} 유치원</span>
-            {!isOpen && <ArrowRightIcon />}
-          </S.GotoSchoolInfoButton>
+          <GotoSchoolInfoButton
+            schoolInfo={schoolInfo}
+            onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}
+          />
         )}
         <S.DateText className={isProfileString === "true" ? "colorGray1" : ""}>
           {registeredTime} 등록
