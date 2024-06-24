@@ -49,7 +49,6 @@ const MyDogCard = ({
   const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
   const { data: MemeberDogInfo } = useGetMemberDogDetailInfo(Number(dogId));
-  const isProfileString = profileUri === null ? "true" : "false";
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -105,7 +104,7 @@ const MyDogCard = ({
 
   return (
     <S.MyDogCard
-      isprofilestring={isProfileString}
+      isprofilestring={profileUri === null ? "true" : "false"}
       tabIndex={dogLength}
       ref={divRef}
       onClick={handleCardFocus}
@@ -116,7 +115,7 @@ const MyDogCard = ({
       />
 
       <S.InfoTextBox>
-        <S.DogName className={isProfileString === "true" ? "colorGray1" : ""}>{dogName}</S.DogName>
+        <S.DogName className={profileUri === null ? "colorGray1" : ""}>{dogName}</S.DogName>
         {status === DOG_STATUS.DROP_OUT ? (
           <GotoSchoolInfoButton pr="0" onClick={openAlertPopup} />
         ) : (
@@ -125,7 +124,7 @@ const MyDogCard = ({
             onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}
           />
         )}
-        <S.DateText className={isProfileString === "true" ? "colorGray1" : ""}>
+        <S.DateText className={profileUri === null ? "colorGray1" : ""}>
           {registeredTime} 등록
         </S.DateText>
       </S.InfoTextBox>
