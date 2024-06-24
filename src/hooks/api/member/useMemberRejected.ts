@@ -52,7 +52,6 @@ export const useMemberRejected = () => {
     const deleteApprovalDeniedDogs = approvalDeniedDogs?.map((el) =>
       mutateDeleteEnrollment(String(el.enrollmentFormId), {
         onSuccess: () => {
-          console.log("---deleteApprovalDeniedDogs 삭제 성공---");
           const NewEnrollmentIdArr = storageEnrollmentIdArr.filter(
             (enrollmentId, idx) =>
               Number(enrollmentId) !== approvalDeniedDogs[idx]?.enrollmentFormId
@@ -79,7 +78,6 @@ export const useMemberRejected = () => {
 
   useEffect(() => {
     if (deniedDogs.length > 0) {
-      console.log("호출 싀바");
       updateEnrollmentStatus(storageEnrollmentIdArr);
     }
   }, []);
