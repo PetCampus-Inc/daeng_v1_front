@@ -5,7 +5,7 @@ interface ICardStyleProps {
   pr?: string;
   textColor?: string;
   bgColor?: string;
-  isProfileNull?: boolean;
+  isprofilestring?: string;
 }
 
 export const Card = styled.div`
@@ -19,8 +19,8 @@ export const Card = styled.div`
 `;
 
 export const MyDogCard = styled(Card)<ICardStyleProps>`
-  ${({ isProfileNull, theme }) =>
-    isProfileNull &&
+  ${({ isprofilestring, theme }) =>
+    isprofilestring == "true" &&
     `
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@ export const MyDogCard = styled(Card)<ICardStyleProps>`
     bottom: 0;
     background: linear-gradient(transparent, ${({ theme }) => theme.colors.black});
     opacity: 0.45;
-    display: ${({ isProfileNull }) => (isProfileNull ? "none" : "block")};
+    display: ${({ isprofilestring }) => (isprofilestring == "true" ? "none" : "block")};
   }
 `;
 
