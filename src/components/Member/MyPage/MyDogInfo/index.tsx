@@ -59,10 +59,8 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     if (!VISIT_MYPAGE) {
       saveStorageData();
       approvalDeniedDogRef.current = false;
-      console.log("마이페이지 저장", approvalDeniedDogs);
     } else {
       await removeApprovalDeniedDog();
-      console.log("마이페이지 삭제", approvalDeniedDogs);
     }
   }, [VISIT_MYPAGE, saveStorageData, removeApprovalDeniedDog]);
 
@@ -70,7 +68,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     if (approvalDeniedDogRef.current && approvalDeniedDogs.length > 0) {
       // 첫 방문시 mypage path localStorage에 저장
       approvalDeniedDogSetting();
-      approvalDeniedDogRef.current = false; // 함수 실행 후 플래그 해제
+      approvalDeniedDogRef.current = false; // 함수 실행 후 초기화
     }
   }, [approvalDeniedDogs, approvalDeniedDogSetting]);
 
