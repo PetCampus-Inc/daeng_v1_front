@@ -15,6 +15,7 @@ import showToast from "utils/showToast";
 
 import * as S from "./styles";
 import BasicModal from "../../../common/Modal/BasicModal";
+import DogDeleteButton from "../Buttons/DogDeleteButton";
 
 interface IMyDogCardProps {
   dogId: string;
@@ -108,11 +109,11 @@ const MyDogCard = ({
       ref={divRef}
       onClick={handleCardFocus}
     >
-      {isOpen && (
-        <S.DeleteButton onClick={dogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}>
-          삭제
-        </S.DeleteButton>
-      )}
+      <DogDeleteButton
+        isOpen={isOpen}
+        onClick={dogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}
+      />
+
       <S.InfoTextBox>
         <S.DogName className={isProfileString === "true" ? "colorGray1" : ""}>{dogName}</S.DogName>
         {status === DOG_STATUS.DROP_OUT ? (
