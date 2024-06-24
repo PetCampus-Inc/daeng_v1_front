@@ -1,3 +1,4 @@
+import { DOG_STATUS } from "constants/memebrDogStatus";
 import { PATH } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
@@ -114,7 +115,7 @@ const MyDogCard = ({
       )}
       <S.InfoTextBox>
         <S.DogName className={isProfileNull ? "colorGray1" : ""}>{dogName}</S.DogName>
-        {status === "DROP_OUT" ? (
+        {status === DOG_STATUS.DROP_OUT ? (
           <S.GotoSchoolInfoButton pr="0" onClick={openAlertPopup}>
             <span>등록된 유치원 없음</span>
           </S.GotoSchoolInfoButton>

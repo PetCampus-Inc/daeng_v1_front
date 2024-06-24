@@ -1,6 +1,8 @@
+import { DOG_STATUS } from "constants/memebrDogStatus";
+
 import useMemberRejected from "hooks/api/member/useMemberRejected";
 import { useToggle } from "hooks/common/useToggle";
-import { Key, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { IDoglist, IMemberInfo } from "types/member/main.types";
 
 import * as S from "./styles";
@@ -83,7 +85,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.MyDogInfoList>
           {data.doglist.map((item) => item.dogId && renderMyDogCard(item))}
           {data.doglist.map(
-            (item) => item.status === "APPROVAL_PENDING" && renderWaitingCard(item)
+            (item) => item.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(item)
           )}
           {approvalDeniedDogs.map((dog) => renderRejectedCard(dog))}
           <AddMyDogCard />
@@ -92,7 +94,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.CarouselSlider {...settings}>
           {data.doglist.map((item) => item.dogId && renderMyDogCard(item))}
           {data.doglist.map(
-            (item) => item.status === "APPROVAL_PENDING" && renderWaitingCard(item)
+            (item) => item.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(item)
           )}
           {approvalDeniedDogs.map((dog) => renderRejectedCard(dog))}
           <AddMyDogCard />

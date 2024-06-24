@@ -1,3 +1,5 @@
+import { DOG_STATUS } from "constants/memebrDogStatus";
+
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
@@ -19,7 +21,7 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
 
   const approvalPendingDog = memberInfo.doglist.filter(
-    (dog) => dog.status && dog.status === "APPROVAL_PENDING"
+    (dog) => dog.status && dog.status === DOG_STATUS.APPROVAL_PENDING
   );
   const { data: getSchoolInfoList } = useGetSchoolInfoList(
     String(approvalPendingDog[0].schoolName)
