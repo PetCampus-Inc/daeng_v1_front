@@ -1,6 +1,9 @@
 import * as S from "./styles";
-
-const DogDeleteButton = ({ onClick, isOpen }: { onClick: () => void; isOpen: boolean }) => {
+interface IDogDeleteButtonProps {
+  onClick: () => void;
+  isOpen: boolean;
+}
+const DogDeleteButton = ({ onClick, isOpen }: IDogDeleteButtonProps) => {
   return <>{isOpen && <S.DeleteButton onClick={onClick}>삭제</S.DeleteButton>}</>;
 };
 
