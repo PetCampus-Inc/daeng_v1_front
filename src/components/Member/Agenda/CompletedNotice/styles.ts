@@ -8,6 +8,7 @@ export const FlexContainer = styled.div`
 `;
 
 export const CompleteNoteContainer = styled.div`
+  background: ${({ theme }) => theme.colors.white};
   position: relative;
   width: 100%;
   box-shadow: ${({ theme }) => theme.shadows.card};
@@ -39,27 +40,31 @@ export const NoteSpringEllipse = styled.div`
   background-color: ${({ theme }) => theme.colors.gray_2};
 `;
 
+export const NoteOuterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 4.5rem 1rem 2rem;
+`;
+
 export const NoteInnerContainer = styled.div`
   display: flex;
   gap: 2.75rem;
   flex-direction: column;
-  padding: 4.5rem 1rem 2rem;
-`;
-
-export const NoteTitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
 `;
 
 export const NoteText = styled.div`
   &.title {
     ${({ theme }) => theme.typo.label1_16_B};
     &.main {
-      color: ${({ theme }) => theme.colors.gray_1};
+      ${({ theme }) => theme.typo.label1_16_B};
+
+      text-align: center;
+      color: ${({ theme }) => theme.colors.primaryColor};
     }
     &.content {
+      ${({ theme }) => theme.typo.label1_16_B};
+
       display: flex;
       align-items: center;
       gap: 4px;
@@ -85,4 +90,15 @@ export const NoteContentFlexBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+`;
+
+export const NoNoteInnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8.5px;
+  align-items: center;
+  padding: 5rem 0;
+
+  color: ${({ theme }) => theme.colors.gray_1};
+  ${({ theme }) => theme.typo.label2_14_R};
 `;

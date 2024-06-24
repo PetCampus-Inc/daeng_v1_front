@@ -89,6 +89,14 @@ const MemberRoutes = (): RouteObject[] => {
               <Pages.MemberDogInfoPage />
             </Suspense>
           )
+        },
+        {
+          path: PATH.MEMBER_AGENDA_PAGE(),
+          element: (
+            <Suspense>
+              <Pages.MemberAgendaPage />
+            </Suspense>
+          )
         }
       ],
       loader: () => {

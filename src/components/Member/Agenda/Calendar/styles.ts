@@ -10,7 +10,7 @@ export const CalendarWrapper = styled.div`
     width: 100%;
     border: none;
     border-radius: 0.5rem;
-    padding: 3vh 5% 0;
+    padding: 3vh 5% 5vh;
     background-color: white;
   }
 
@@ -130,17 +130,6 @@ export const Today = styled.div`
   font-weight: 600;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-
-export const Dot = styled.div`
-  background-color: ${(props) => props.theme.colors.br_2};
-  border-radius: 50%;
-  width: 0.3rem;
-  height: 0.3rem;
-  position: absolute;
-  top: 60%;
   left: 50%;
   transform: translateX(-50%);
 `;

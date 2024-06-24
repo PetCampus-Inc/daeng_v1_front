@@ -1,16 +1,15 @@
 import BoneIcon from "assets/svg/bone-icon";
-import BoneIcon from "assets/svg/bone-icon";
-import PoopStatusIcon from "assets/svg/poop-status-icon";
 import PoopStatusIcon from "assets/svg/poop-status-icon";
 import PoopBox from "components/common/PoopBox";
 import TextArea from "components/common/TextArea";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { debounce } from "lodash";
-import { Dispatch, SetStateAction, Suspense, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { IPoop } from "types/admin.attendance.type";
+import { addZero } from "utils/date";
 
 import * as S from "./styles";
 import LastNoticeButton from "../LastNoticeButton";
@@ -36,7 +35,6 @@ const WriteNotice = () => {
     const poopMemo = methods.getValues("poopMemo");
 
     return {
-      agendaId: data.agendaId,
       agendaId: data.agendaId,
       adminId: adminId,
       dogId: Number(dogId),
@@ -66,7 +64,7 @@ const WriteNotice = () => {
         <S.NoteInnerContainer>
           <S.NoteTitleWrapper>
             <S.NoteText className="title main">전송된 알림장</S.NoteText>
-            <S.NoteText className="date">{data.dateTime}</S.NoteText>
+            <S.NoteText className="date">{`${data.dateTime[0]}.${addZero(data.dateTime[1])}.${addZero(data.dateTime[2])}`}</S.NoteText>
           </S.NoteTitleWrapper>
 
           <S.NoteText className="content">
