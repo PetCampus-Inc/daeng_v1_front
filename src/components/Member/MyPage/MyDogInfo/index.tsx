@@ -38,11 +38,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       dogName={item.dogName}
       schoolInfo={item.schoolName}
       registeredDate={item.registeredDate.map(String)}
-      profileUri={
-        item.dogProfile
-          ? item.dogProfile
-          : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      }
+      profileUri={item.dogProfile && item.dogProfile}
       status={item.status}
       dogLength={data.doglist.length}
     />

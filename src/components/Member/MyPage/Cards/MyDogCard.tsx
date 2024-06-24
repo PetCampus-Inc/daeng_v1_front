@@ -21,7 +21,7 @@ interface IMyDogCardProps {
   dogName: string;
   schoolInfo: string;
   registeredDate: string[];
-  profileUri: string;
+  profileUri: string | null;
   status: string;
   dogLength: number;
 }
