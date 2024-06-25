@@ -36,3 +36,10 @@ export const CarouselSlider = styled(Slider)`
     padding: 0 0.25rem;
   }
 `;
+
+export const DragCarouselWrapper = styled.div`
+  width: 100%;
+  & > div > div {
+    padding: 0 1.5rem;
+  }
+`;
