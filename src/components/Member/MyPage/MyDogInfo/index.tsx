@@ -19,9 +19,9 @@ interface MemberInfoProps {
 const MyDogInfo = ({ data }: MemberInfoProps) => {
   const approvalDeniedDogRef = useRef(true);
   const { isOpen, toggle } = useToggle();
-
   const { VISIT_MYPAGE, saveStorageData, approvalDeniedDogs, removeApprovalDeniedDog } =
     useMemberRejected();
+  const { doglist } = data;
 
   // TODO 반복되는 코드 리팩토링 작업 필요
   const renderMyDogCard = (dog: IDoglist) => (
@@ -34,7 +34,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       registeredDate={dog.registeredDate.map(String)}
       profileUri={dog.dogProfile && dog.dogProfile}
       status={dog.status}
-      dogLength={data.doglist.length}
+      dogLength={doglist.length}
     />
   );
 
@@ -73,16 +73,16 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.DeleteDogButton onClick={toggle}>강아지 삭제</S.DeleteDogButton>
       </S.TitleBox>
 
-      {data.doglist.length <= 1 ? (
+      {doglist.length <= 1 ? (
         <S.MyDogInfoList>
-          {data.doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
+          {doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
           <AddMyDogCard />
         </S.MyDogInfoList>
       ) : (
         <S.DragCarouselWrapper>
           <DragCarousel gap={12}>
-            {data.doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
-            {data.doglist.map(
+            {doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
+            {doglist.map(
               (dog) => dog.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(dog)
             )}
             {approvalDeniedDogs.map((dog) => renderRejectedCard(dog))}
