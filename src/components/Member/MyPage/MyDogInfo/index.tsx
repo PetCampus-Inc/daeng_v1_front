@@ -1,8 +1,8 @@
 import { DOG_STATUS } from "constants/memebrDogStatus";
 
 import { DragCarousel } from "components/common/Carousel/DragCarousel ";
-import useMemberRejected from "hooks/api/member/useMemberRejected";
 import { useToggle } from "hooks/common/useToggle";
+import useDogRejected from "hooks/member/useDogRejected";
 import { useCallback, useEffect, useRef } from "react";
 import { IDogRejected, IDoglist, IMemberInfo } from "types/member/main.types";
 
@@ -20,7 +20,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   const approvalDeniedDogRef = useRef(true);
   const { isOpen, toggle } = useToggle();
   const { VISIT_MYPAGE, saveStorageData, approvalDeniedDogs, removeApprovalDeniedDog } =
-    useMemberRejected();
+    useDogRejected();
   const { doglist } = data;
 
   // TODO 반복되는 코드 리팩토링 작업 필요

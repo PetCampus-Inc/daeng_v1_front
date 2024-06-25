@@ -6,7 +6,7 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { IEnrollmentStatus } from "types/member/enrollment.types";
 
-import { useDeleteEnrollment, useGetEnrollmentStatus } from "../admin/enroll";
+import { useDeleteEnrollment, useGetEnrollmentStatus } from "../api/admin/enroll";
 
 const STORAGE_KEY = {
   VISIT_MYPAGE: "VISIT_MYPAGE",
@@ -15,7 +15,7 @@ const STORAGE_KEY = {
 };
 
 // 강아지 추가 승인 거부할 경우 상태 관리
-export const useMemberRejected = () => {
+export const useDogRejected = () => {
   const [approvalDeniedDogs, setApprovalDeniedDogs] = useState<IEnrollmentStatus[]>([]);
   const setStoredValue = useSetLocalStorage();
   const resetStoredEnrollmentIdValue = useResetLocalStorage(STORAGE_KEY.ENROLLMENT_FORM_ID);
@@ -93,4 +93,4 @@ export const useMemberRejected = () => {
   };
 };
 
-export default useMemberRejected;
+export default useDogRejected;

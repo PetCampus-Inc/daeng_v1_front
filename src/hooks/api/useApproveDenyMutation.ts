@@ -9,8 +9,6 @@ import {
 } from "apis/admin/school.api";
 import showToast from "utils/showToast";
 
-import useMemberRejected from "./member/useMemberRejected";
-
 export const useApproveFormMutation = () => {
   return useMutation({
     mutationFn: (enrollmentFormId: number) => postApproveForm(enrollmentFormId),
