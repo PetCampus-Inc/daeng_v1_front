@@ -158,7 +158,7 @@ export const CancelApprovalButton = styled.button`
 const StatusBoxStyle = css`
   position: relative;
   overflow: hidden;
-  padding: 0.39rem 0.5rem 0.25rem;
+  padding: 0.39rem 0.5rem;
   border-radius: 50px;
   display: flex;
   align-items: center;
