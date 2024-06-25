@@ -1,15 +1,12 @@
 import DogRejectedIcon from "assets/svg/dog-rejected-icon";
 import { ThemeConfig } from "styles/ThemeConfig";
+import { IDogRejected } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
-interface IRejectedCardProps {
-  dogName: string;
-  registeredDate: number[];
-}
 
-const RejectedCard = ({ dogName, registeredDate }: IRejectedCardProps) => {
-  const [year, month, day] = registeredDate && registeredDate;
+const RejectedCard = ({ dogName, registeredDate }: IDogRejected) => {
+  const [year, month, day] = registeredDate ? registeredDate : [];
   const registeredTime = formatDate(String(year), String(month), String(day), "dot");
 
   return (

@@ -51,6 +51,13 @@ export interface IDoglist {
   registeredDate: number[];
   dropOutDate: number[];
 }
+
+export interface IDogRejected {
+  enrollmentFormId?: number;
+  dogName: string;
+  registeredDate?: number[];
+}
+
 export interface IMemberInfo extends IResponse {
   memberId: string;
   memberName: string;

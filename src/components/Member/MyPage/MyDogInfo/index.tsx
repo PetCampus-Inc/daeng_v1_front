@@ -4,7 +4,7 @@ import { DragCarousel } from "components/common/Carousel/DragCarousel ";
 import useMemberRejected from "hooks/api/member/useMemberRejected";
 import { useToggle } from "hooks/common/useToggle";
 import { useCallback, useEffect, useRef } from "react";
-import { IDoglist, IMemberInfo } from "types/member/main.types";
+import { IDogRejected, IDoglist, IMemberInfo } from "types/member/main.types";
 
 import * as S from "./styles";
 import AddMyDogCard from "../Cards/AddMyDogCard";
@@ -24,25 +24,25 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     useMemberRejected();
 
   // TODO 반복되는 코드 리팩토링 작업 필요
-  const renderMyDogCard = (item: IDoglist) => (
+  const renderMyDogCard = (dog: IDoglist) => (
     <MyDogCard
-      key={item.dogId}
-      dogId={item.dogId}
+      key={dog.dogId}
+      dogId={dog.dogId}
       isOpen={isOpen}
-      dogName={item.dogName}
-      schoolInfo={item.schoolName}
-      registeredDate={item.registeredDate.map(String)}
-      profileUri={item.dogProfile && item.dogProfile}
-      status={item.status}
+      dogName={dog.dogName}
+      schoolInfo={dog.schoolName}
+      registeredDate={dog.registeredDate.map(String)}
+      profileUri={dog.dogProfile && dog.dogProfile}
+      status={dog.status}
       dogLength={data.doglist.length}
     />
   );
 
-  const renderWaitingCard = (item: IDoglist) => (
-    <WaitingCard key={item.dogId} dogName={item.dogName} registeredDate={item.registeredDate} />
+  const renderWaitingCard = (dog: IDoglist) => (
+    <WaitingCard key={dog.dogId} dogName={dog.dogName} registeredDate={dog.registeredDate} />
   );
 
-  const renderRejectedCard = (dog: { enrollmentFormId?: number; dogName: string }) => (
+  const renderRejectedCard = (dog: IDogRejected) => (
     <RejectedCard key={dog.enrollmentFormId} dogName={dog.dogName} registeredDate={[2024, 0, 1]} />
   );
 
@@ -75,15 +75,15 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
       {data.doglist.length <= 1 ? (
         <S.MyDogInfoList>
-          {data.doglist.map((item) => item.dogId && renderMyDogCard(item))}
+          {data.doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
           <AddMyDogCard />
         </S.MyDogInfoList>
       ) : (
         <S.DragCarouselWrapper>
           <DragCarousel gap={12}>
-            {data.doglist.map((item) => item.dogId && renderMyDogCard(item))}
+            {data.doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
             {data.doglist.map(
-              (item) => item.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(item)
+              (dog) => dog.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(dog)
             )}
             {approvalDeniedDogs.map((dog) => renderRejectedCard(dog))}
             <AddMyDogCard />
