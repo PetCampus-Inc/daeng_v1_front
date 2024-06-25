@@ -23,15 +23,6 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   const { VISIT_MYPAGE, saveStorageData, approvalDeniedDogs, removeApprovalDeniedDog } =
     useMemberRejected();
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 6, //2.3
-    slidesToScroll: 1,
-    arrows: false
-  };
-
   // TODO 반복되는 코드 리팩토링 작업 필요
   const renderMyDogCard = (item: IDoglist) => (
     <MyDogCard
