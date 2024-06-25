@@ -1,4 +1,4 @@
-import { DOG_STATUS } from "constants/memebrDogStatus";
+import { DOG_STATUS, STORAGE_KEY } from "constants/memebrDogStatus";
 
 import { DragCarousel } from "components/common/Carousel/DragCarousel ";
 import { useToggle } from "hooks/common/useToggle";
@@ -51,7 +51,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     if (!approvalDeniedDogs.length) return;
 
     if (!VISIT_MYPAGE) {
-      saveStorageData();
+      saveStorageData(STORAGE_KEY.VISIT_MYPAGE, true);
       approvalDeniedDogRef.current = false;
     } else {
       await removeApprovalDeniedDog();
