@@ -4,9 +4,11 @@ import type { ITeacherInfo } from "types/admin/mypage.types";
 
 interface TeacherInfoProps {
   data: ITeacherInfo;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditing: boolean;
 }
 
-const TeacherProfile = ({ data }: TeacherInfoProps) => {
+const TeacherProfile = ({ data, setIsEditing, isEditing }: TeacherInfoProps) => {
   return (
     <>
       <S.ProfileWrapper>
@@ -18,11 +20,12 @@ const TeacherProfile = ({ data }: TeacherInfoProps) => {
 
         <S.ProfileDetail>
           <S.DetailItem>
-            <S.PrimaryColorButton>프로필 수정</S.PrimaryColorButton>
+            <S.PrimaryColorButton onClick={() => setIsEditing(!isEditing)}>
+              프로필 수정
+            </S.PrimaryColorButton>
             <S.Text className="name">{data.adminName} 선생님</S.Text>
             <S.Text className="number">{data.phoneNumber}</S.Text>
-            <S.Text className="id">{data.schoolId}</S.Text>
-            {/* TODO: BE 확인 - principal 같이 id 받아와야 할듯 */}
+            <S.Text className="id">{data.id}</S.Text>
           </S.DetailItem>
         </S.ProfileDetail>
       </S.ProfileWrapper>

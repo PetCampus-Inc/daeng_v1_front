@@ -2,7 +2,7 @@ import Calendar from "assets/svg/calendar";
 import Map from "assets/svg/map-pin-icon";
 import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import Button from "components/common/Button";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -64,16 +64,20 @@ const SchoolInfo = () => {
             <S.IconWrapper>
               <Calendar />
             </S.IconWrapper>
-            <S.ListTitle>{data && data.enrollDate ? data.enrollDate : ""}</S.ListTitle>
+            <S.ListTitle>
+              {data && data.registeredDate.map((num) => num.toString().padStart(2, "0"))?.join(".")}{" "}
+              등록
+            </S.ListTitle>
           </S.InfoList>
         </S.InfoContainer>
-        <BackgroundButton
-          backgroundColor={"white"}
-          onClick={openDisconnectPopup}
-          className="disconnect"
+        <Button
+          handleClick={() => openDisconnectPopup()}
+          width="100%"
+          height="48px"
+          margintop="1rem"
         >
           유치원 연결 끊기
-        </BackgroundButton>
+        </Button>
       </S.CardContainer>
     </>
   );

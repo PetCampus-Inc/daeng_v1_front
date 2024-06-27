@@ -73,9 +73,9 @@ const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
     },
     {
       title:
-        (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.enrollDate)
+        (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.registeredDate)
           ?.map((num) => num.toString().padStart(2, "0"))
-          ?.join(".") + " 등록",
+          ?.join(".") + `${isOwner ? ` 등록` : ` 가입`}`,
       icon: <CalendarIcon />
     }
   ];

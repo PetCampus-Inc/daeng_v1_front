@@ -14,6 +14,7 @@ export interface IOwnerInfo {
   registeredDate: Nullable<number[]>;
 }
 export interface ITeacherInfo {
+  id: string;
   adminName: string;
   schoolId: number;
   schoolName: string;
@@ -21,7 +22,7 @@ export interface ITeacherInfo {
   schoolNumber: string;
   schoolAddress: string;
   enrollDate: number[];
-  resignedDate: number[];
+  registeredDate: number[];
   school: {
     schoolId: number;
     name: string;
