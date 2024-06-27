@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
-import { TColor } from "styles/ThemeConfig";
 import { remCalc } from "utils/calculator";
+
+import type { ColorKeys } from "styles/types";
 export { Img } from "styles/StyleModule";
 
 export const StyledHgroup = styled.hgroup`
@@ -56,7 +57,7 @@ export const StyledBox = styled.div.withConfig({
   type?: "top" | "container" | "bottom";
   pt?: number;
   pb?: number;
-  bg?: TColor;
+  bg?: ColorKeys;
 }>`
   padding-top: ${({ type, pt }) =>
     type === "top" ? `calc(5vh + ${pt ?? 0}rem)` : pt ? `${pt}rem` : undefined};

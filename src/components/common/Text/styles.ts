@@ -1,17 +1,17 @@
 import styled, { CSSProperties, css } from "styled-components";
 
-import { TColor, TTypo } from "../../../styles/ThemeConfig";
+import type { ColorKeys, TypoKeys } from "styles/types";
 
 export interface IStyledTextProps {
-  color?: TColor;
-  typo: TTypo;
+  color?: ColorKeys;
+  typo: TypoKeys;
   isEllipsis?: boolean;
   textAlign?: CSSProperties["textAlign"];
   whiteSpace?: CSSProperties["whiteSpace"];
 }
 
 export type StyledEmEmProps = {
-  color?: TColor;
+  color?: ColorKeys;
 };
 
 export const StyledText = styled.span.withConfig({

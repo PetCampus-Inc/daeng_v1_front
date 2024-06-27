@@ -1,6 +1,6 @@
 import { cloneElement, isValidElement, type ReactElement } from "react";
 
-import { StyledButtonAddon } from "./styles";
+import { Box } from "../Box";
 
 interface ButtonAddonProps {
   children: ReactElement;
@@ -10,16 +10,17 @@ const ButtonAddon = (props: ButtonAddonProps) => {
   const { children, ...rest } = props;
 
   const _children = isValidElement(children)
-    ? cloneElement<any>(children, {
+    ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      cloneElement<any>(children, {
         "aria-hidden": true,
         focusable: false
       })
     : children;
 
   return (
-    <StyledButtonAddon className="button_addon" {...rest}>
+    <Box as="span" display="flex" justify="center" align="center" {...rest}>
       {_children}
-    </StyledButtonAddon>
+    </Box>
   );
 };
 

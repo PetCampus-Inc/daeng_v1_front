@@ -3,15 +3,14 @@ import { type ButtonHTMLAttributes } from "react";
 import { ActionButton, ButtonGroup, CloseButton } from "./styles";
 import { useModal } from "../BottomSheet/BottomSheetContext";
 
-export type TColorScheme = "primary" | "red";
+export type ColorKeysScheme = "primary" | "red";
 
 export interface TicketInfo {
   actionText: string;
   closeText?: string;
-  actionFn: (e: React.MouseEvent) => void | Promise<void>;
-  closeFn?: (e: React.MouseEvent) => void | Promise<void>;
-  colorScheme?: TColorScheme;
-  shouldPropagate?: boolean;
+  actionFn: () => void | Promise<void>;
+  closeFn?: () => void | Promise<void>;
+  colorScheme?: ColorKeysScheme;
 }
 
 export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, TicketInfo {}
@@ -22,35 +21,20 @@ export const ModalButton = ({
   closeFn,
   actionFn,
   colorScheme = "primary",
-  shouldPropagate = false,
   ...props
 }: ModalButtonProps) => {
   const modal = useModal();
 
   const defaultCloseFn = closeFn ? closeFn : modal?.onClose;
 
-  const handleActionClick = (e: React.MouseEvent) => {
-    if (!shouldPropagate) {
-      e.stopPropagation();
-    }
-    actionFn(e);
-  };
-
-  const handleCloseClick = (e: React.MouseEvent) => {
-    if (!shouldPropagate) {
-      e.stopPropagation();
-    }
-    defaultCloseFn(e);
-  };
-
   return (
     <ButtonGroup>
       {closeText && (
-        <CloseButton onClick={handleCloseClick} {...props}>
+        <CloseButton onClick={defaultCloseFn} {...props}>
           {closeText}
         </CloseButton>
       )}
-      <ActionButton colorScheme={colorScheme} onClick={handleActionClick} {...props}>
+      <ActionButton colorScheme={colorScheme} onClick={actionFn} {...props}>
         {actionText}
       </ActionButton>
     </ButtonGroup>

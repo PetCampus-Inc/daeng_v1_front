@@ -65,18 +65,3 @@ export const StyledItemText = styled.span`
   color: ${({ theme }) => theme.colors.gray_1};
   ${({ theme }) => theme.typo.label2_14_R};
 `;
-
-export const MoreButtonStyle = css`
-  background-color: transparent;
-  border: none;
-  outline: none;
-
-  ${({ theme }) => theme.typo.label2_14_R};
-  color: ${({ theme }) => theme.colors.gray_1};
-
-  gap: 5px;
-
-  & > .button_addon {
-    color: ${({ theme }) => theme.colors.gray_3};
-  }
-`;

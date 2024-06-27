@@ -2,7 +2,7 @@ import SimpleMembershipApplication from "components/Admin/SchoolManage/SimpleMem
 import { ListContainer } from "components/Admin/SchoolManage/SimpleMembershipApplication/styles";
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import ButtonBadge from "components/common/Badge/ButtonBadge";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

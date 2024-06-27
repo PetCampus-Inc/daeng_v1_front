@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import { remCalc } from "utils/calculator";
 
-import type { TColor } from "styles/ThemeConfig";
+import type { ColorKeys } from "styles/types";
 
 export const Background = styled.div.withConfig({
   shouldForwardProp: (prop) => !["bg", "pb"].includes(prop)
-})<{ bg: TColor; pb: number }>`
+})<{ bg: ColorKeys; pb: number }>`
   background-color: ${({ theme, bg }) => theme.colors[bg]};
   padding: 16px 16px ${({ pb }) => remCalc(pb)};
 `;
 
 export const Button = styled.button.withConfig({
   shouldForwardProp: (prop) => !["bg", "fontColor"].includes(prop)
-})<{ bg: TColor; fontColor: TColor }>`
+})<{ bg: ColorKeys; fontColor: ColorKeys }>`
   position: relative;
   width: 100%;
   min-height: 48px;

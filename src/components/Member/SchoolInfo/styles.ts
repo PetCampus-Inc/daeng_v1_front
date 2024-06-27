@@ -1,4 +1,4 @@
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { styled } from "styled-components";
 
 export const CardContainer = styled.div`
