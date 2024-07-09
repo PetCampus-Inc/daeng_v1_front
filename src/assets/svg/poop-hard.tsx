@@ -1,8 +1,8 @@
 import { ThemeConfig } from "styles/ThemeConfig";
-import { IPoop } from "types/admin/attendance.type";
+import { PoopType } from "types/admin/attendance.type";
 
-const PoopHard = ({ poop }: { poop?: IPoop }) => {
-  const isSelected = poop && poop === "HARD" ? true : false;
+const PoopHard = ({ poop }: { poop?: PoopType }) => {
+  const isSelected = poop && poop === PoopType.HARD;
 
   return (
     <svg width="60" height="62" viewBox="0 0 60 62" fill="none" xmlns="http://www.w3.org/2000/svg">
