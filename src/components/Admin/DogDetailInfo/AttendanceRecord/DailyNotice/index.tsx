@@ -1,21 +1,18 @@
 import AlertSmallIcon from "assets/svg/alert-small-icon";
 import PencilCircleIcon from "assets/svg/pencil-circle-icon";
-import PoopHard from "assets/svg/poop-hard";
-import PoopHealthy from "assets/svg/poop-healthy";
-import PoopNotBrown from "assets/svg/poop-not-brown";
-import PoopNeedAttention from "assets/svg/poop-warning";
-import PoopWatery from "assets/svg/poop-watery";
 import PoopBox from "components/common/PoopBox";
-import { IDogInfoAgenda } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 
-interface IDailyNoticeProps {
-  data: IDogInfoAgenda | undefined;
+import type { DogInfoAgendaData } from "types/admin/attendance.type";
+
+interface DailyNoticeProps {
+  data?: DogInfoAgendaData;
 }
 
-const DailyNotice = ({ data }: IDailyNoticeProps) => {
-  const statusText = (status: string | undefined) => {
+// FIXME: UI 수정사항 반영 필요
+const DailyNotice = ({ data }: DailyNoticeProps) => {
+  const statusText = (status?: string) => {
     switch (status) {
       case "NOT_YET":
         return "알림장을 아직 작성하지 않았어요";
@@ -55,30 +52,7 @@ const DailyNotice = ({ data }: IDailyNoticeProps) => {
         <div>
           배변 상태
           <PoopBox selected={data.poop} />
-          {/* <S.PoopCardContainer>
-            <S.PoopCard>
-              <PoopHard poop={data.poop} />
-              딱딱함
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopHealthy poop={data.poop} />
-              건강함
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopWatery poop={data.poop} />
-              묽은 변
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopNotBrown poop={data.poop} />
-              갈색이 아닌
-            </S.PoopCard>
-            <S.PoopCard>
-              <PoopNeedAttention poop={data.poop} />
-              주의필요
-            </S.PoopCard>
-          </S.PoopCardContainer> */}
         </div>
-
         <S.NoticeContent>{data.poopMemo ? data.poopMemo : "전달 사항이 없습니다."}</S.NoticeContent>
       </S.NoticeItemWrapper>
     </>
