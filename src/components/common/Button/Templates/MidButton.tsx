@@ -5,7 +5,7 @@ import { Button } from "../Button";
 import type { ButtonProps } from "../types";
 
 interface MidButtonProps extends ButtonProps<"button"> {
-  colorScheme: "red_2";
+  colorScheme?: "red_2";
 }
 
 /**

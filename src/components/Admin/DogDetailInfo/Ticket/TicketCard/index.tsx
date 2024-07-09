@@ -3,7 +3,7 @@ import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
 import { Flex, Text } from "components/common";
-import { SimpleButton } from "components/common/Button";
+import { MidButton } from "components/common/Button/Templates";
 import { format, differenceInDays } from "date-fns";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useMemo } from "react";
@@ -84,9 +84,7 @@ const TicketCard = ({ dogId, data }: TicketCardProps) => {
     <S.Container position="relative" width="full">
       {isExpired && (
         <S.BlackCover>
-          <SimpleButton type="button" onClick={openPopup}>
-            이용권 갱신
-          </SimpleButton>
+          <MidButton onClick={openPopup}>이용권 갱신</MidButton>
         </S.BlackCover>
       )}
       <S.InnerBox className="upper">
