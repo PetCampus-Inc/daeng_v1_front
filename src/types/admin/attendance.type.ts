@@ -9,7 +9,7 @@ export enum TicketType {
 type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 
 /**
- *  @description 출석모드 Dto
+ *  @description 출석부 - 출석모드 Dto
  */
 export interface AttendData {
   attendanceId: number;
@@ -23,7 +23,7 @@ export interface AttendData {
 }
 
 /**
- * @description 출석모드 요청 Dto
+ * @description 출석부 - 출석모드 요청 Dto
  */
 export interface AttendReq {
   schoolId: number;
@@ -32,7 +32,7 @@ export interface AttendReq {
 }
 
 /**
- *  @description 출석부 Dto
+ *  @description 출석부 - 출석부 Dto
  */
 export interface AttendanceData {
   attendanceId: null;
@@ -53,7 +53,10 @@ export interface IMemberCallInfo {
   phoneNumber: string;
 }
 
-export interface IDogAndMemberInfo {
+/**
+ * @description 출석부 강아지 상세 - 강아지 정보 Dto
+ */
+export interface DogInfoDetailData {
   dogId: number;
   dogName: string;
   dogGender: "FEMALE" | "MALE";
@@ -72,26 +75,39 @@ export interface IDogAndMemberInfo {
   member: MemberDtoType;
 }
 
-export interface IDogInfoRecord {
+/**
+ * @description 출석부 강아지 상세 - 강아지 등원기록 Dto
+ */
+export interface DogInfoRecordData {
   date: number[];
-  status: string; //TODO: ATTENDED 등으로 변경
+  status: AttendanceStatus;
 }
 
-export interface IDogInfoAgenda {
+/**
+ * @description 출석부 강아지 상세 - 강아지 알림장 Dto
+ */
+export interface DogInfoAgendaData {
   agendaId: number;
   agendaNote: string;
   snack: string;
-  poop: IPoop;
+  poop: PoopType;
   poopMemo: string;
   dogId: number;
+  dogProfileUri: string;
   status: "NOT_YET" | "COMPLETE" | "WRITING";
-  date: string;
+  dateTime: string;
 }
 
-export type IPoop = "HARD" | "HEALTHY" | "NOT_BROWN" | "WATERY" | "WARNING" | undefined | string;
+export const enum PoopType {
+  HARD = "HARD",
+  HEALTHY = "HEALTHY",
+  NOT_BROWN = "NOT_BROWN",
+  WATERY = "WATERY",
+  WARNING = "WARNING"
+}
 
 /**
- * @description 출석부 강아지 상세 이용권 정보 Dto
+ * @description 출석부 강아지 상세 - 이용권 정보 Dto
  */
 export interface TicketDetailData {
   ticketType: TicketType;
@@ -104,7 +120,7 @@ export interface TicketDetailData {
   ticketHistory: TicketDetailData[];
 }
 /**
- * @description 출석부 강아지 상세 이용권 갱신 요청 Dto
+ * @description 출석부 강아지 상세 - 이용권 갱신 요청 Dto
  */
 export interface NewTicketReq {
   dogId: number;
@@ -115,6 +131,9 @@ export interface NewTicketReq {
   attendanceDays: string[];
 }
 
+/**
+ * @description 출석부 강아지 상세 - 이용권 갱신 응답 Dto
+ */
 export interface IPrecautionInfo {
   modifiedList: Nullable<number[]>;
   agreements: [{ 21: string }, { 22: string }, { 23: string }, { 24: string }, { 30: string }];

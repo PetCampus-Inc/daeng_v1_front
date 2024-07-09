@@ -1,3 +1,4 @@
+import type { PoopType } from "./attendance.type";
 import type { Nullable } from "../helper.types";
 
 export interface ICareDogProps {
@@ -30,11 +31,11 @@ export interface ICareTempSave {
   dogId: number;
   agendaNote: string;
   snack: string;
-  poop: string;
+  poop: PoopType;
   poopMemo: string;
 }
 
 export interface IPastAgenda extends ICareTempSave {
   dateTime: number[];
-  status: "COMPLETE" | "NOT_YET" | "WRITING";
+  status: TAgendaWriting;
 }
