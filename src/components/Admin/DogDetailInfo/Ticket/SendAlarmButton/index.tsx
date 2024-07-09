@@ -1,17 +1,18 @@
 import SendAlarmIcon from "assets/svg/send-alarm";
-import { SimpleButton } from "components/common/Button";
+import { XSmallButton } from "components/common/Button/Templates";
 
 const SendAlarmButton = () => {
   return (
-    <SimpleButton
-      type="button"
+    <XSmallButton
+      typo="caption1_12_B"
+      colorScheme="yellow_3"
       leftAddon={<SendAlarmIcon />}
       onClick={() => {
         /* 알림 전송 post api 연동 */
       }}
     >
       알림 전송
-    </SimpleButton>
+    </XSmallButton>
   );
 };
 
