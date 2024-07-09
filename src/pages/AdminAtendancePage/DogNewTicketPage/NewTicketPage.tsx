@@ -4,18 +4,19 @@ import NewTicket from "components/Admin/DogDetailInfo/NewTicket";
 import CancelModal from "components/Admin/DogDetailInfo/NewTicket/CancelModal";
 import { NewTicketButton } from "components/Admin/DogDetailInfo/NewTicket/styles";
 import Header from "components/common/Header";
-import { useNewTicketMutation } from "hooks/api/useNewTicketMutation";
+import { useCreateNewTicket } from "hooks/api/admin/attendance";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useForm, FormProvider } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { newTicketCardDataAtom } from "store/admin";
 import { PageContainer } from "styles/StyleModule";
+import { TicketType, type NewTicketReq } from "types/admin/attendance.type";
 import { addZero } from "utils/date";
 import showToast from "utils/showToast";
 
 const NewTicketPage = () => {
-  const mutateNewTicket = useNewTicketMutation();
+  const { mutateNewTicket } = useCreateNewTicket();
   const navigate = useNavigate();
   const [currentTicket, setCurrentTicket] = useRecoilState(newTicketCardDataAtom);
   const overlay = useOverlay();
@@ -25,13 +26,13 @@ const NewTicketPage = () => {
   const currentTicketType = currentTicket?.[FIELD.TICKET_TYPE] === "ROUND" ? "회차권" : "정기권";
   const isRoundTicket = (methods.watch(FIELD.TICKET_TYPE) ?? currentTicketType) === "회차권";
 
-  const ticketType = isRoundTicket ? "ROUND" : "MONTHLY";
+  const ticketType = isRoundTicket ? TicketType.ROUND : TicketType.MONTHLY;
   const roundTicketNumber =
     methods.watch(FIELD.ROUND_TICKET_NUMBER) ?? `${currentTicket?.allRoundTicket}회`;
   const monthlyTicketNumber =
     methods.watch(FIELD.MONTHLY_TICKET_NUMBER) ?? `${currentTicket?.monthlyTicketNumber}회`;
 
-  const updatedTicket = {
+  const updatedTicket: NewTicketReq = {
     dogId,
     ticketType,
     roundTicketNumber: isRoundTicket ? parseInt(roundTicketNumber) : 0,
