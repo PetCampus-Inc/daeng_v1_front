@@ -7,6 +7,8 @@ import {
   handleDeleteDog,
   handleGetAttendDogs,
   handleGetAttendSearchDogs,
+  handleGetDogDetail,
+  handleGetDogInfoRecord,
   handleGetSearchDogs,
   handleGetTicketDetail,
   handlePostAttend,
@@ -15,6 +17,7 @@ import {
   handleSortDate,
   handleSortPayment
 } from "apis/admin/attendance.api";
+import { format } from "date-fns";
 import showToast from "utils/showToast";
 
 export const useGetAttendDogList = (schoolId: number) => {
@@ -101,7 +104,33 @@ export const useDogListAndSortedList = ({ sortName, schoolId, adminId }: Props) 
   });
 };
 
-// 이용권 정보 조회
+// 강아지 상세 - 강아지 정보 조회
+export const useGetDogDetail = (dogId: number) => {
+  return useSuspenseQuery({
+    queryKey: ["dogDetail", dogId],
+    queryFn: () => handleGetDogDetail(dogId),
+    staleTime: 1000 * 60 * 60,
+    select: (data) => {
+      const { member, ...dogInfo } = data;
+      return {
+        dogInfo,
+        memberInfo: member
+      };
+    }
+  });
+};
+
+// 강아지 상세 - 등원기록 조회
+export const useGetDogInfoRecord = (dogId: number, date?: string) => {
+  return useSuspenseQuery({
+    queryKey: ["dogInfoRecord", dogId, date],
+    queryFn: () => handleGetDogInfoRecord(dogId, date),
+    select: (data) => data.map((item) => format(item.date.join("-"), "yyyy-MM-dd")),
+    staleTime: 1000 * 60 * 60
+  });
+};
+
+// 강아지 상세 - 이용권 정보 조회
 export const useGetTicketDetail = (dogId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.ATTENDANCE_DOG_TICKET(dogId),
@@ -110,7 +139,7 @@ export const useGetTicketDetail = (dogId: number) => {
   });
 };
 
-// 이용권 갱신 요청
+// 강아지 상세  - 이용권 갱신 요청
 export const useCreateNewTicket = () => {
   const { mutate } = useMutation({
     mutationFn: handlePostTicket,
