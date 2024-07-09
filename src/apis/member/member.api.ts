@@ -2,7 +2,6 @@ import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
 import { IPrecautionInfo } from "types/admin/attendance.type";
 
-import type { Response } from "types/helper.types";
 import type {
   DogsDataType,
   HomeDataType,
@@ -20,7 +19,7 @@ import type {
 // 견주 홈 - 메인
 export const handleGetHomeInfo = async (memberId: number, dogId: number): Promise<HomeDataType> => {
   const url = `/member/main`;
-  const { data } = await request<Response<HomeDataType>>({
+  const { data } = await request<HomeDataType>({
     url,
     params: {
       memberId,
@@ -34,7 +33,7 @@ export const handleGetHomeInfo = async (memberId: number, dogId: number): Promis
 // 견주 홈 - 강아지 리스트
 export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> => {
   const url = `/member/main/dogs`;
-  const { data } = await request<Response<DogsDataType[]>>({
+  const { data } = await request<DogsDataType[]>({
     url,
     params: { memberId }
   });
@@ -44,7 +43,7 @@ export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> =
 // 견주 홈 - 사진앨범
 export const handleGetAlbum = async (req: IMainAlbum): Promise<ImageList[][]> => {
   const url = `/member/main/album`;
-  const { data } = await request<Response<ImageList[][]>>({
+  const { data } = await request<ImageList[][]>({
     url,
     params: {
       dogId: req.dogId,
@@ -113,7 +112,7 @@ export const handleMemberInfoResult = async (
 // 견주 홈 - 강아지 상세 정보
 export const handleGetMemberDogDetailInfo = async (dogId: number): Promise<MemberDogInfoData> => {
   const url = `/member/dog/info`;
-  const { data } = await request<Response<MemberDogInfoData>>({
+  const { data } = await request<MemberDogInfoData>({
     url,
     params: {
       dogId
@@ -123,7 +122,7 @@ export const handleGetMemberDogDetailInfo = async (dogId: number): Promise<Membe
 };
 
 // 견주 홈 - 강아지 상세 정보 수정
-export const handlePostMemberDogDetailInfo = async (req: MemberDogInfoReq): Promise<void> => {
+export const handlePostMemberDogDetailInfo = async (req: MemberDogInfoReq) => {
   const url = `/member/dog/info`;
   return await request<void>({
     url,

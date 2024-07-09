@@ -2,7 +2,6 @@ import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
 
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
-import type { Response } from "types/helper.types";
 import type {
   EnrollmentDataType,
   EnrollmentInfoType,
@@ -69,7 +68,7 @@ export const handlePostEnrollment = async (req: EnrollmentInfoType): Promise<voi
  */
 export const handleGetSchool = async (searchText: string): Promise<ISchoolInfo[]> => {
   const url = "school/search";
-  const { data } = await request<Response<ISchoolInfo[]>>({
+  const { data } = await request<ISchoolInfo[]>({
     url,
     params: {
       searchText

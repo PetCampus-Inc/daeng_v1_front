@@ -2,7 +2,6 @@ import { request } from "libs/CustomAxios/request";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
-import type { Response } from "types/helper.types";
 import type { EnrollmentDataType } from "types/member/enrollment.types";
 
 /**
@@ -11,7 +10,7 @@ import type { EnrollmentDataType } from "types/member/enrollment.types";
  */
 export const handleGetMemberEnrollmentForm = async (formId: string): Promise<MemberFormData> => {
   const url = `admin/enrollment/${formId}`;
-  const { data } = await request<Response<MemberFormData>>({ url });
+  const { data } = await request<MemberFormData>({ url });
   return data;
 };
 
@@ -21,7 +20,7 @@ export const handleGetMemberEnrollmentForm = async (formId: string): Promise<Mem
  */
 export const handleGetAdminForm = async (formId: string): Promise<EnrollmentDataType> => {
   const url = `school/form/list/${formId}`;
-  const { data } = await request<Response<EnrollmentDataType>>({ url });
+  const { data } = await request<EnrollmentDataType>({ url });
   return data;
 };
 
@@ -29,7 +28,7 @@ export const handleGetAdminForm = async (formId: string): Promise<EnrollmentData
  * @description 유치원 가입신청서 폼 저장 - 원장이 작성한 가입신청서를 저장합니다.
  * @param {AdminEnrollmentInfoType} req
  */
-export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise<void> => {
+export const handlePostAdminForm = async (req: AdminEnrollmentInfoType) => {
   const url = `school/form`;
   return await request({
     url,

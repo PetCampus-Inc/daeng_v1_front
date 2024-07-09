@@ -3,10 +3,11 @@ import { isCustomError } from "utils/typeGuard";
 import customAxios from ".";
 
 import type { AxiosError, AxiosRequestConfig } from "axios";
+import type { Response } from "types/helper.types";
 
-export const request = async <T>(config: AxiosRequestConfig): Promise<T> => {
+export const request = async <T>(config: AxiosRequestConfig): Promise<Response<T>> => {
   try {
-    const { data } = await customAxios.request<T>({ ...config });
+    const { data } = await customAxios.request<Response<T>>({ ...config });
     return data;
   } catch (error) {
     if (isCustomError(error)) {
