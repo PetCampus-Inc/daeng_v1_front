@@ -9,45 +9,15 @@ import {
 } from "apis/admin/enrollment.api";
 import { Adapter } from "libs/adapters";
 import {
-  EditModeAdapter,
-  MemberFormAdapter,
-  ReadModeAdapter
+  AdminFormDetailAdapter,
+  AdminFormEditAdapter,
+  MemberFormAdapter
 } from "libs/adapters/ServerToFormAdapter";
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
-import type { AgreementsListType } from "constants/field";
 import type { AdminEnrollmentInfoType, MemberFormData } from "types/admin/enrollment.types";
 import type { EnrollmentDataType } from "types/member/enrollment.types";
-
-// FIXME: Omit 타입을 사용하면서 필요없는 타입을 제거하는 것이 아닌 새로운 타입을 만드는게 나을 것 같습니다.
-export type MemberFormAdaptedData = Omit<
-  MemberFormData,
-  | "requiredItemList"
-  | "agreements"
-  | "memberGender"
-  | "dogGender"
-  | "dogSize"
-  | "neutralization"
-  | "vaccination"
-  | "enrollmentTicketType"
-  | "pickDropRequest"
-  | "pickDropType"
-> & {
-  requiredItemList: Map<number, boolean>;
-  agreements: AgreementsListType;
-  openDays: string[];
-  roundTicketNumber: number[];
-  monthlyTicketNumber: number[];
-  memberGender: string;
-  dogGender: string;
-  dogSize: string;
-  neutralization: string;
-  vaccination: string;
-  enrollmentTicketType: string;
-  pickDropRequest: string;
-  pickDropType: string;
-};
 
 // 견주 가입신청서 조회
 export const useGetMemberEnrollment = (formId: string) => {
@@ -55,7 +25,7 @@ export const useGetMemberEnrollment = (formId: string) => {
     queryKey: QUERY_KEY.MEMBER_ENROLLMENT(formId),
     queryFn: () => handleGetMemberEnrollmentForm(formId),
     select: (data) =>
-      Adapter.from(data).to<MemberFormData, MemberFormAdaptedData>((item) => {
+      Adapter.from(data).to((item: MemberFormData) => {
         const adapterInstance = new MemberFormAdapter(item);
         return adapterInstance.adapt();
       })
@@ -89,9 +59,9 @@ export const useAdminEnrollment = (formId: string, mode: Mode) => {
     queryKey: QUERY_KEY.ADMIN_ENROLLMENT(formId),
     queryFn: () => handleGetAdminForm(formId),
     select: (data) =>
-      Adapter.from(data).to<EnrollmentDataType, FormAdaptedData<typeof mode>>((item) => {
+      Adapter.from(data).to((item: EnrollmentDataType) => {
         const adapterInstance =
-          mode === "READ" ? new ReadModeAdapter(item) : new EditModeAdapter(item);
+          mode === "READ" ? new AdminFormDetailAdapter(item) : new AdminFormEditAdapter(item);
         return adapterInstance.adapt();
       })
   });
