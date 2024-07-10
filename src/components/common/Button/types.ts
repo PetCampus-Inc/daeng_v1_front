@@ -17,6 +17,7 @@ export type ButtonSizeSet = "xs" | "sm" | "md" | "lg";
 export type ButtonColorScheme =
   | "primary"
   | "br_4"
+  | "br_5"
   | "yellow_3"
   | "gray_1"
   | "gray_2"

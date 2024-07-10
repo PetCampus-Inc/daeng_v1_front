@@ -14,6 +14,7 @@ export interface ColorSchemeStyles {
 export const colorSchemes: Record<ButtonColorScheme, ColorSchemeStyles> = {
   primary: { background: "primaryColor", color: "white" },
   br_4: { background: "br_4", color: "primaryColor" },
+  br_5: { background: "br_5", color: "primaryColor" },
   yellow_3: { background: "yellow_3", color: "primaryColor" },
   gray_1: { background: "gray_1", color: "white" },
   gray_2: { background: "gray_2", color: "white" },
