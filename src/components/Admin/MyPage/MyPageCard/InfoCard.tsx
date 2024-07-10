@@ -1,5 +1,6 @@
 import { PATH } from "constants/path";
 
+import BuildingIcon from "assets/svg/building-icon";
 import CalendarIcon from "assets/svg/calendar";
 import MapIcon from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone-basic";

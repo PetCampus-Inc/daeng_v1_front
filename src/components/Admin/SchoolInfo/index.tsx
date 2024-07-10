@@ -2,8 +2,9 @@ import Calendar from "assets/svg/calendar";
 import Map from "assets/svg/map-pin-icon";
 import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
+import { Box, Flex } from "components/common";
 import { BackgroundButton } from "components/common/Button";
-import { XSmallButton } from "components/common/Button/Templates";
+import { WideButton, XSmallButton } from "components/common/Button/Templates";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -46,19 +47,23 @@ const SchoolInfo = () => {
         <S.CardTitle>{data && data.schoolName ? `${data.schoolName} 유치원` : ""}</S.CardTitle>
         <S.InfoContainer>
           <S.InfoList>
-            <S.IconWrapper>
-              <Phone />
-            </S.IconWrapper>
-            <S.ListTitle>{data && data.schoolNumber ? data.schoolNumber : ""}</S.ListTitle>
-            <XSmallButton
-              size="sm"
-              typo="caption1_12_B"
-              colorScheme="yellow_3"
-              onClick={openCallPopup}
-              leftAddon={<PhoneIcon />}
-            >
-              전화 걸기
-            </XSmallButton>
+            <Flex justify="space-between" width="100%">
+              <Box display="flex">
+                <S.IconWrapper>
+                  <Phone />
+                </S.IconWrapper>
+                <S.ListTitle>{data && data.schoolNumber ? data.schoolNumber : ""}</S.ListTitle>
+              </Box>
+              <XSmallButton
+                size="sm"
+                typo="caption1_12_B"
+                colorScheme="yellow_3"
+                onClick={openCallPopup}
+                leftAddon={<PhoneIcon />}
+              >
+                전화 걸기
+              </XSmallButton>
+            </Flex>
           </S.InfoList>
           <S.InfoList>
             <S.IconWrapper>
@@ -75,14 +80,10 @@ const SchoolInfo = () => {
               등록
             </S.ListTitle>
           </S.InfoList>
+          <WideButton colorScheme="gray_4" typo="body2_16_B" onClick={openDisconnectPopup}>
+            유치원 연결 끊기
+          </WideButton>
         </S.InfoContainer>
-        <BackgroundButton
-          backgroundColor={"white"}
-          onClick={openDisconnectPopup}
-          className="disconnect"
-        >
-          유치원 연결 끊기
-        </BackgroundButton>
       </S.CardContainer>
     </>
   );

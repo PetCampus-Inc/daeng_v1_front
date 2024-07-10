@@ -1,6 +1,6 @@
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { Flex, Layout, Text, TextInput } from "components/common";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { IOwnerInfo } from "types/admin/mypage.types";
 import { ITeacherInfo } from "types/admin/mypage.types";
 

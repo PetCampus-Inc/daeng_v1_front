@@ -1,6 +1,6 @@
 import CancelModal from "components/Admin/DogDetailInfo/NewTicket/CancelModal";
 import { Flex, Layout, SearchInput, Text, TextInput } from "components/common";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import Header from "components/common/Header";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
