@@ -38,7 +38,7 @@ const ADMIN_PATH = {
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/${ADMIN}/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>
     `/${ADMIN}/attendance/${dogId ?? ":dogId"}/gallery`, // 출석부 강아지 갤러리
-  ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: string) =>
+  ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: number) =>
     `/${ADMIN}/attendance/${dogId ?? ":dogId"}/new-ticket`, // 출석부 강아지 상세정보
   ADMIN_CARE: `/${ADMIN}/care`, // 오늘 관리할 강아지
   ADMIN_CARE_NOTICE: (dogId?: string) => `/${ADMIN}/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
