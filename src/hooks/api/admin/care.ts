@@ -171,7 +171,7 @@ export const useSendAgenda = () => {
 export const useGetPastAgenda = (dogId: number) => {
   const queryClient = useQueryClient();
   const cachedData = queryClient.getQueryData<IPastAgenda[]>([
-    QUERY_KEY.CARE_DOG_PAST_AGENDA,
+    ...QUERY_KEY.CARE_DOG_PAST_AGENDA,
     dogId
   ]);
 
