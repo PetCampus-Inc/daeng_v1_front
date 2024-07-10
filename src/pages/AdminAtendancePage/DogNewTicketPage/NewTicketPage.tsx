@@ -1,68 +1,52 @@
-import { FIELD } from "constants/field";
-
-import NewTicket from "components/Admin/DogDetailInfo/NewTicket";
-import CancelModal from "components/Admin/DogDetailInfo/NewTicket/CancelModal";
-import { NewTicketButton } from "components/Admin/DogDetailInfo/NewTicket/styles";
+import NewTicketForm from "components/Admin/DogDetailInfo/NewTicketForm";
+import SubmitButton from "components/Admin/DogDetailInfo/NewTicketForm/SubmitButton";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
-import { useNewTicketMutation } from "hooks/api/useNewTicketMutation";
-import { useOverlay } from "hooks/common/useOverlay";
-import { useForm, FormProvider } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { newTicketCardDataAtom } from "store/admin";
-import { PageContainer } from "styles/StyleModule";
-import { addZero } from "utils/date";
-import showToast from "utils/showToast";
+import { PreventLeaveModal } from "components/common/Modal";
+import { useGetCachedTicketDetail, useGetNewTicket } from "hooks/api/admin/ticket";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
+import { useForm, FormProvider, useFormState } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { useBlocker } from "react-router-dom";
+import { isEmpty } from "utils/helper";
 
 const NewTicketPage = () => {
-  const mutateNewTicket = useNewTicketMutation();
-  const navigate = useNavigate();
-  const [currentTicket, setCurrentTicket] = useRecoilState(newTicketCardDataAtom);
-  const overlay = useOverlay();
+  const { schoolId } = useAdminInfo();
+  const { dogId } = useParams();
 
-  const dogId = Number(useLocation().pathname.split("/").at(-2));
-  const methods = useForm({ mode: "onSubmit" });
-  const currentTicketType = currentTicket?.[FIELD.TICKET_TYPE] === "ROUND" ? "회차권" : "정기권";
-  const isRoundTicket = (methods.watch(FIELD.TICKET_TYPE) ?? currentTicketType) === "회차권";
+  if (!dogId) throw new Error("id가 없습니다");
 
-  const ticketType = isRoundTicket ? "ROUND" : "MONTHLY";
-  const roundTicketNumber =
-    methods.watch(FIELD.ROUND_TICKET_NUMBER) ?? `${currentTicket?.allRoundTicket}회`;
-  const monthlyTicketNumber =
-    methods.watch(FIELD.MONTHLY_TICKET_NUMBER) ?? `${currentTicket?.monthlyTicketNumber}회`;
+  const { data: ticketData } = useGetCachedTicketDetail(Number(dogId));
+  const { data: formData } = useGetNewTicket(schoolId);
 
-  const updatedTicket = {
-    dogId,
-    ticketType,
-    roundTicketNumber: isRoundTicket ? parseInt(roundTicketNumber) : 0,
-    monthlyTicketNumber: isRoundTicket ? 0 : parseInt(monthlyTicketNumber),
-    startDate: `${methods.watch("year") ?? currentTicket!.ticketStartDate[0]}-${methods.watch("month") ?? addZero(currentTicket!.ticketStartDate[1])}-${methods.watch("day") ?? addZero(currentTicket!.ticketStartDate[2])}`,
-    attendanceDays: methods.watch("openDays") ?? currentTicket?.attendanceDays
-  };
-
-  const onSubmit = methods.handleSubmit(() => {
-    mutateNewTicket(updatedTicket, {
-      onSuccess: () => {
-        navigate(-1);
-        setCurrentTicket(null);
-      },
-      onError: () => {
-        showToast("갱신에 실패했습니다.", "bottom");
-      }
-    });
+  const methods = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      dogId,
+      ...ticketData
+    }
   });
 
-  const openModal = () =>
-    overlay.open(({ isOpen, close }) => <CancelModal isOpen={isOpen} close={close} />);
+  const { dirtyFields } = useFormState({ control: methods.control });
+  const blocker = useBlocker(() => !isEmpty(dirtyFields));
 
   return (
-    <FormProvider {...methods}>
-      <Header type="text" text="갱신될 이용권 정보 변경" handleClick={openModal} />
-      <PageContainer pt="2" ph="1">
-        <NewTicket />
-        <NewTicketButton onClick={onSubmit}>갱신하기</NewTicketButton>
-      </PageContainer>
-    </FormProvider>
+    <>
+      {blocker.state === "blocked" ? (
+        <PreventLeaveModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
+      <Header type="text" text="갱신될 이용권 정보 변경" />
+      <FormProvider {...methods}>
+        <Layout type="page" paddingInline={16}>
+          <NewTicketForm formData={formData} attendanceDays={ticketData.attendanceDays} />
+          <SubmitButton dogId={Number(dogId)} />
+        </Layout>
+      </FormProvider>
+    </>
   );
 };
 

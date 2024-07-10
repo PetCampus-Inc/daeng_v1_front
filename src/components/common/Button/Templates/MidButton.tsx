@@ -5,7 +5,7 @@ import { Button } from "../Button";
 import type { ButtonProps } from "../types";
 
 interface MidButtonProps extends ButtonProps<"button"> {
-  colorScheme: "red_2";
+  colorScheme?: "red_2";
 }
 
 /**
@@ -13,7 +13,7 @@ interface MidButtonProps extends ButtonProps<"button"> {
  * @default size: "md", variant: "pill", colorScheme: "red_2", typo="label2_14_B"
  */
 export const MidButton = ({
-  colorScheme,
+  colorScheme = "red_2",
   children,
   ...props
 }: PropsWithChildren<MidButtonProps>) => {

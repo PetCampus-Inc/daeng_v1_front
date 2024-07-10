@@ -1,4 +1,11 @@
-const CalendarIcon = ({ className = "", w = "16", h = "17", rx = "4" }) => {
+import type { IconSize } from "./types";
+
+interface IconProps extends IconSize {
+  className?: string;
+  rx?: string;
+}
+
+const CalendarIcon = ({ className = "", w = "16", h = "17", rx = "4" }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

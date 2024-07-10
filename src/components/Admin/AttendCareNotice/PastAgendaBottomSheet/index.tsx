@@ -3,7 +3,6 @@ import { BottomSheet, type BottomSheetProps } from "components/common/BottomShee
 import PoopBox from "components/common/PoopBox";
 import { format } from "date-fns";
 import { Suspense, useState } from "react";
-import { IPoop } from "types/admin/attendance.type";
 import { IPastAgenda } from "types/admin/care.types";
 
 import * as S from "./styles";
@@ -48,7 +47,7 @@ const PastAgendaBottomSheet = ({ isOpen, close, data }: PastAgendaBottomSheetPro
                     {title}
                     <Badge text="오늘 알림장에 붙여넣기" variant="brown" />
                   </S.TitleAndButton>
-                  {index === 2 && <PoopBox selected={data[selectedIndex]?.poop as IPoop} />}
+                  {index === 2 && <PoopBox selected={data[selectedIndex]?.poop} />}
                   <S.TextSpan>{data && data[selectedIndex]?.agendaNote}</S.TextSpan>
                 </S.AgendaItem>
               );

@@ -1,15 +1,15 @@
 import { DOG_NOTICE_LIST } from "constants/notice";
 
 import AlertSmallIcon from "assets/svg/alert-small-icon";
-import { IPrecautionInfo } from "types/admin/attendance.type";
+import { PrecautionData } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 import { DogDetailInfoText } from "../DogInfo/styles";
 import { InnerContainer } from "../styles";
-import SendAlermButton from "../Ticket/SendAlermButton";
+import SendAlarmButton from "../Ticket/SendAlarmButton";
 
 interface NoticeProps {
-  data: IPrecautionInfo;
+  data: PrecautionData;
 }
 const Notice = ({ data }: NoticeProps) => {
   const findObject = (id: number) => {
@@ -24,7 +24,7 @@ const Notice = ({ data }: NoticeProps) => {
     <InnerContainer style={{ gap: "12px" }}>
       <S.FlexWrapper>
         <DogDetailInfoText className="big">유의사항 동의</DogDetailInfoText>
-        <SendAlermButton />
+        <SendAlarmButton />
       </S.FlexWrapper>
 
       <S.ListContainer>
