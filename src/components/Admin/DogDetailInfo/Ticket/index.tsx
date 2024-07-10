@@ -1,8 +1,6 @@
 import { Flex, Text } from "components/common";
 import { useGetTicketDetail } from "hooks/api/admin/ticket";
 import { useParams } from "react-router-dom";
-import { TicketDetailData } from "types/admin/attendance.type";
-import { TicketType } from "types/member/enrollment.types";
 
 import PastTicketCard from "./PastTicketCard";
 import TicketCard from "./TicketCard";
@@ -14,7 +12,6 @@ const Ticket = () => {
   if (!dogId) throw new Error("id가 없습니다");
 
   const { data } = useGetTicketDetail(Number(dogId));
-  const { ticketHistory, ...ticketInfo } = data;
 
   return (
     <InnerContainer>
@@ -22,14 +19,14 @@ const Ticket = () => {
         <Text typo="body1_18_B" color="darkBlack">
           이용권 상세정보
         </Text>
-        <TicketCard dogId={Number(dogId)} data={ticketInfo} />
+        <TicketCard dogId={Number(dogId)} data={data} />
       </Flex>
-      {ticketHistory && (
+      {data.ticketHistory && (
         <Flex direction="column" gap={12}>
           <Text typo="body1_18_B" color="darkBlack">
             과거 이용권 정보
           </Text>
-          <PastTicketCard data={ticketHistory} />
+          <PastTicketCard data={data.ticketHistory} />
         </Flex>
       )}
     </InnerContainer>
