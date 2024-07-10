@@ -3,12 +3,12 @@ import PoopHealthy from "assets/svg/poop-healthy";
 import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopWarning from "assets/svg/poop-warning";
 import PoopWatery from "assets/svg/poop-watery";
-import { PoopType } from "types/admin/attendance.type";
+import { Poop } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 
 interface PoopBoxProps {
-  selected?: PoopType;
+  selected?: Poop;
 }
 
 const PoopBox = ({ selected }: PoopBoxProps) => {

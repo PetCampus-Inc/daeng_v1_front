@@ -7,7 +7,7 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { debounce } from "lodash";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
-import { PoopType } from "types/admin/attendance.type";
+import { Poop } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 import LastNoticeButton from "../LastNoticeButton";
@@ -37,7 +37,7 @@ const WriteNotice = () => {
       dogId: Number(dogId),
       agendaNote,
       snack,
-      poop: PoopType.HARD,
+      poop: Poop.HARD,
       poopMemo
     };
   };
@@ -109,7 +109,7 @@ const WriteNotice = () => {
       </NoticeItemContainer>
       <NoticeItemContainer>
         배변 상태
-        <PoopBox selected={PoopType.HARD} />
+        <PoopBox selected={Poop.HARD} />
         <TextArea
           {...methods.register("poopMemo")}
           placeholder="오늘 하루 강아지 배변 상태에 대해 작성해 주세요"

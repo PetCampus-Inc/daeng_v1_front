@@ -1,7 +1,7 @@
 import { DOG_NOTICE_LIST } from "constants/notice";
 
 import AlertSmallIcon from "assets/svg/alert-small-icon";
-import { IPrecautionInfo } from "types/admin/attendance.type";
+import { PrecautionData } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 import { DogDetailInfoText } from "../DogInfo/styles";
@@ -9,7 +9,7 @@ import { InnerContainer } from "../styles";
 import SendAlarmButton from "../Ticket/SendAlarmButton";
 
 interface NoticeProps {
-  data: IPrecautionInfo;
+  data: PrecautionData;
 }
 const Notice = ({ data }: NoticeProps) => {
   const findObject = (id: number) => {
