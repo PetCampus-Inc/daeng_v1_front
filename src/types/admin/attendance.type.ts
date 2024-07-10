@@ -1,10 +1,6 @@
 import type { MemberDtoType } from "./enrollment.types";
 import type { Nullable } from "../helper.types";
-
-export enum TicketType {
-  MONTHLY = "MONTHLY",
-  ROUND = "ROUND"
-}
+import type { TicketType } from "types/member/enrollment.types";
 
 type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 
@@ -90,7 +86,7 @@ export interface DogInfoAgendaData {
   agendaId: number;
   agendaNote: string;
   snack: string;
-  poop: PoopType;
+  poop: Poop;
   poopMemo: string;
   dogId: number;
   dogProfileUri: string;
@@ -98,7 +94,7 @@ export interface DogInfoAgendaData {
   dateTime: string;
 }
 
-export const enum PoopType {
+export enum Poop {
   HARD = "HARD",
   HEALTHY = "HEALTHY",
   NOT_BROWN = "NOT_BROWN",
@@ -115,26 +111,36 @@ export interface TicketDetailData {
   currentRoundTicket: number;
   monthlyTicketNumber: number;
   ticketStartDate: number[];
-  ticketExpirationDate: number[];
-  attendanceDays: string[];
-  ticketHistory: TicketDetailData[];
+  ticketExpirationDate: Nullable<number[]>;
+  attendanceDays: Nullable<string[]>;
+  ticketHistory: Nullable<TicketDetailData[]>;
 }
+/**
+ * @description 출석부 강아지 상세 - 이용권 갱신 정보 Dto
+ */
+export interface NewTicketData {
+  ticketType: TicketType[];
+  roundTicketNumber: number[];
+  openDays: string[];
+  monthlyTicketNumber: number[];
+}
+
 /**
  * @description 출석부 강아지 상세 - 이용권 갱신 요청 Dto
  */
 export interface NewTicketReq {
   dogId: number;
   startDate: string;
-  ticketType: TicketType;
+  ticketType: TicketType | "";
   roundTicketNumber: number;
   monthlyTicketNumber: number;
   attendanceDays: string[];
 }
 
 /**
- * @description 출석부 강아지 상세 - 이용권 갱신 응답 Dto
+ * @description 출석부 강아지 상세 - 유의사항 Dto
  */
-export interface IPrecautionInfo {
+export interface PrecautionData {
   modifiedList: Nullable<number[]>;
   agreements: [{ 21: string }, { 22: string }, { 23: string }, { 24: string }, { 30: string }];
 }
