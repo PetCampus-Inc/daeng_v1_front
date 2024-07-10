@@ -10,9 +10,10 @@ import type {
   DogInfoDetailData,
   DogInfoRecordData,
   IMemberCallInfo,
-  IPrecautionInfo,
+  PrecautionData,
   NewTicketReq,
-  TicketDetailData
+  TicketDetailData,
+  NewTicketData
 } from "types/admin/attendance.type";
 
 export const handleGetSearchDogs = async (schoolId: number, searchText?: string) => {
@@ -160,7 +161,7 @@ export const handleGetDogInfoAgenda = async (dogId: number, date?: string) => {
 };
 
 // 강아지 상세 - 이용권 정보
-export const handleGetTicketDetail = async (dogId: number): Promise<TicketDetailData> => {
+export const handleGetTicketDetail = async (dogId: number) => {
   const url = `admin/attendance/dog/ticket/info`;
   const { data } = await request<TicketDetailData>({
     url,
@@ -171,8 +172,20 @@ export const handleGetTicketDetail = async (dogId: number): Promise<TicketDetail
   return data;
 };
 
+// 강아지 상세 - 이용권 갱신 정보
+export const handleGetNewTicket = async (schoolId: number) => {
+  const url = `admin/attendance/dog/ticket`;
+  const { data } = await request<NewTicketData>({
+    url,
+    params: {
+      schoolId
+    }
+  });
+  return data;
+};
+
 // 강아지 상세 - 이용권 갱신
-export const handlePostTicket = async (req: NewTicketReq) => {
+export const handlePostNewTicket = async (req: NewTicketReq) => {
   const url = `admin/attendance/dog/ticket`;
   return await request<void>({
     url,
@@ -189,8 +202,13 @@ export const handlePostTicket = async (req: NewTicketReq) => {
 };
 
 // 강아지 상세 - 유의사항
-export const handleGetPrecautions = async (dogId: number): Promise<IPrecautionInfo> => {
-  const url = `admin/attendance/dog/precautions?dogId=${dogId}`;
-  const { data } = await customAxios.get(url);
-  return data.data;
+export const handleGetPrecautions = async (dogId: number) => {
+  const url = `admin/attendance/dog/precautions`;
+  const { data } = await request<PrecautionData>({
+    url,
+    params: {
+      dogId
+    }
+  });
+  return data;
 };

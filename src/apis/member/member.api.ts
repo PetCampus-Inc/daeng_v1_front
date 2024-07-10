@@ -1,6 +1,6 @@
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
-import { IPrecautionInfo } from "types/admin/attendance.type";
+import { PrecautionData } from "types/admin/attendance.type";
 
 import type {
   DogsDataType,
@@ -168,7 +168,7 @@ export const handleGetMemberDogSchool = async (dogId: number): Promise<IMemberDo
 };
 
 // 강아지 유의사항 동의 정보
-export const handleGetMemberDogPrecaution = async (dogId: number): Promise<IPrecautionInfo> => {
+export const handleGetMemberDogPrecaution = async (dogId: number): Promise<PrecautionData> => {
   const url = `member/dog/school?dogId=${dogId}`;
   const { data } = await customAxios.get(url);
   return data.data.precaution;
