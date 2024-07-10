@@ -10,9 +10,7 @@ import {
   handleGetDogDetail,
   handleGetDogInfoRecord,
   handleGetSearchDogs,
-  handleGetTicketDetail,
   handlePostAttend,
-  handlePostTicket,
   handleSortCharge,
   handleSortDate,
   handleSortPayment
@@ -128,24 +126,4 @@ export const useGetDogInfoRecord = (dogId: number, date?: string) => {
     select: (data) => data.map((item) => format(item.date.join("-"), "yyyy-MM-dd")),
     staleTime: 1000 * 60 * 60
   });
-};
-
-// 강아지 상세 - 이용권 정보 조회
-export const useGetTicketDetail = (dogId: number) => {
-  return useSuspenseQuery({
-    queryKey: QUERY_KEY.ATTENDANCE_DOG_TICKET(dogId),
-    queryFn: () => handleGetTicketDetail(dogId),
-    staleTime: 1000 * 60 * 60
-  });
-};
-
-// 강아지 상세  - 이용권 갱신 요청
-export const useCreateNewTicket = () => {
-  const { mutate } = useMutation({
-    mutationFn: handlePostTicket,
-    onError: () => {
-      showToast("갱신을 실패했습니다. 다시 시도해주세요.", "bottom");
-    }
-  });
-  return { mutateNewTicket: mutate };
 };
