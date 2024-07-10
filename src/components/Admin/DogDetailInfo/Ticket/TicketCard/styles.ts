@@ -2,32 +2,39 @@ import { Box } from "components/common";
 import styled from "styled-components";
 
 export const Container = styled(Box)`
-  box-shadow: ${({ theme }) => theme.shadows.card};
+  position: relative;
   border-radius: 8px;
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.card};
+  filter: ${({ grayScaleMode }) => (grayScaleMode ? "grayscale(100%)" : "none")};
 `;
 
 export const InnerBox = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 12px 20px 16px;
 
   &.upper {
-    border-radius: 8px 8px 0 0;
+    padding: 12px 20px 16px;
     background-color: ${({ theme }) => theme.colors.yellow_3};
   }
+
   &.lower {
-    border-radius: 0 0 8px 8px;
+    padding: 12px 16px;
     background-color: ${({ theme }) => theme.colors.white};
+
     gap: 8px;
   }
 `;
 
-export const BlackCover = styled.button`
+export const Dimmed = styled.div`
   position: absolute;
-  border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: grayscale(100%);
 `;
 
 export const RenewButton = styled.span`

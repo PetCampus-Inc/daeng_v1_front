@@ -1,6 +1,8 @@
 import { Flex, Text } from "components/common";
-import { useGetTicketDetail } from "hooks/api/admin/attendance";
+import { useGetTicketDetail } from "hooks/api/admin/ticket";
 import { useParams } from "react-router-dom";
+import { TicketDetailData } from "types/admin/attendance.type";
+import { TicketType } from "types/member/enrollment.types";
 
 import PastTicketCard from "./PastTicketCard";
 import TicketCard from "./TicketCard";
@@ -22,12 +24,14 @@ const Ticket = () => {
         </Text>
         <TicketCard dogId={Number(dogId)} data={ticketInfo} />
       </Flex>
-      <Flex direction="column" gap={12}>
-        <Text typo="body1_18_B" color="darkBlack">
-          과거 이용권 정보
-        </Text>
-        <PastTicketCard data={ticketHistory} />
-      </Flex>
+      {ticketHistory && (
+        <Flex direction="column" gap={12}>
+          <Text typo="body1_18_B" color="darkBlack">
+            과거 이용권 정보
+          </Text>
+          <PastTicketCard data={ticketHistory} />
+        </Flex>
+      )}
     </InnerContainer>
   );
 };

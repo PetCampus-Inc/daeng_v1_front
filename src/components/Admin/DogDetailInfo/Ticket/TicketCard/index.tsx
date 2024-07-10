@@ -16,55 +16,7 @@ import SendAlarmButton from "../SendAlarmButton";
 import type { TicketDetailData } from "types/admin/attendance.type";
 interface TicketCardProps {
   dogId: number;
-  data: Omit<TicketDetailData, "ticketHistory">;
-}
-
-// 회차권의 잔여 횟수를 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
-function getRoundTicketDetails(currentRoundTicket: number) {
-  const status = checkRoundTicketStatus(currentRoundTicket);
-  return {
-    icon: status.isExpired ? (
-      <CalendarExpireIcon w="24" h="24" />
-    ) : status.isExpiringSoon ? (
-      <AlertSmallIcon color="red" w="24" h="24" />
-    ) : (
-      <RemainCountIcon w="24" h="24" />
-    ),
-    statusText: `잔여횟수: ${currentRoundTicket}회`,
-    textColor: status.isExpired || status.isExpiringSoon ? "red_1" : "gray_1",
-    isExpiringSoon: status.isExpiringSoon,
-    isExpired: status.isExpired
-  };
-}
-
-// 정기권의 만료일을 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
-function getMonthlyTicketDetails(ticketExpirationDate: number[]) {
-  const expirationDate = new Date(
-    ticketExpirationDate[0],
-    ticketExpirationDate[1] - 1,
-    ticketExpirationDate[2]
-  );
-  const daysUntilExpiration = differenceInDays(expirationDate, new Date());
-  const status = checkMonthlyTicketStatus([
-    expirationDate.getFullYear(),
-    expirationDate.getMonth() + 1,
-    expirationDate.getDate()
-  ]);
-  return {
-    icon: status.isExpired ? (
-      <CalendarExpireIcon w="24" h="24" />
-    ) : status.isExpiringSoon ? (
-      <AlertSmallIcon color="red" />
-    ) : (
-      <CalendarIcon w="24" h="24" />
-    ),
-    statusText:
-      `만료일: ${format(expirationDate, "yyyy.MM.dd")}` +
-      (status.isExpiringSoon ? ` (만료 ${daysUntilExpiration}일전)` : ""),
-    textColor: status.isExpired || status.isExpiringSoon ? "red_1" : "gray_1",
-    isExpiringSoon: status.isExpiringSoon,
-    isExpired: status.isExpired
-  };
+  data: TicketDetailData;
 }
 
 const TicketCard = ({ dogId, data }: TicketCardProps) => {
@@ -77,15 +29,15 @@ const TicketCard = ({ dogId, data }: TicketCardProps) => {
 
   const openPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <NewTicketBottomSheet isOpen={isOpen} close={close} currentData={{ ...data, dogId }} />
+      <NewTicketBottomSheet isOpen={isOpen} close={close} info={{ ...data, dogId }} />
     ));
 
   return (
     <S.Container position="relative" width="full">
       {isExpired && (
-        <S.BlackCover>
+        <S.Dimmed>
           <MidButton onClick={openPopup}>이용권 갱신</MidButton>
-        </S.BlackCover>
+        </S.Dimmed>
       )}
       <S.InnerBox className="upper">
         <Text typo="caption1_12_B" color="primaryColor">
@@ -119,3 +71,61 @@ const TicketCard = ({ dogId, data }: TicketCardProps) => {
 };
 
 export default TicketCard;
+
+// 회차권의 잔여 횟수를 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
+function getRoundTicketDetails(currentRoundTicket: number) {
+  const status = checkRoundTicketStatus(currentRoundTicket);
+  return {
+    icon: status.isExpired ? (
+      <CalendarExpireIcon w="24" h="24" />
+    ) : status.isExpiringSoon ? (
+      <AlertSmallIcon color="red" w="24" h="24" />
+    ) : (
+      <RemainCountIcon w="24" h="24" />
+    ),
+    statusText: `잔여횟수: ${currentRoundTicket}회`,
+    textColor: status.isExpired || status.isExpiringSoon ? "red_1" : "gray_1",
+    isExpiringSoon: status.isExpiringSoon,
+    isExpired: status.isExpired
+  };
+}
+
+// 정기권의 만료일을 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
+function getMonthlyTicketDetails(ticketExpirationDate: number[] | null) {
+  if (!ticketExpirationDate) {
+    return {
+      icon: <CalendarExpireIcon w="24" h="24" />,
+      statusText: "만료일: N/A",
+      textColor: "red_1",
+      isExpiringSoon: false,
+      isExpired: true
+    };
+  }
+
+  const expirationDate = new Date(
+    ticketExpirationDate[0],
+    ticketExpirationDate[1] - 1,
+    ticketExpirationDate[2]
+  );
+  const daysUntilExpiration = differenceInDays(expirationDate, new Date());
+  const status = checkMonthlyTicketStatus([
+    expirationDate.getFullYear(),
+    expirationDate.getMonth() + 1,
+    expirationDate.getDate()
+  ]);
+  return {
+    icon: status.isExpired ? (
+      <CalendarExpireIcon w="24" h="24" />
+    ) : status.isExpiringSoon ? (
+      <AlertSmallIcon color="red" />
+    ) : (
+      <CalendarExpireIcon w="24" h="24" />
+    ),
+    statusText:
+      `만료일: ${format(expirationDate, "yyyy.MM.dd")}` +
+      (status.isExpiringSoon ? ` (만료 ${daysUntilExpiration}일전)` : ""),
+    textColor: status.isExpired || status.isExpiringSoon ? "red_1" : "gray_1",
+    isExpiringSoon: status.isExpiringSoon,
+    isExpired: status.isExpired
+  };
+}
