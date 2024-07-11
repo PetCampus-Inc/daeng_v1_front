@@ -43,9 +43,9 @@ const ProfileUpdate = ({
         >
           <S.UploadImage src={profile[0]?.thumbnail} alt={`${type}-profile`} />
         </S.UploadProfileButton>
-        <S.ProfileEditeButton>
+        <S.PencilIconBox>
           <PencilBrownNormalIcon />
-        </S.ProfileEditeButton>
+        </S.PencilIconBox>
       </S.ProfileBox>
 
       <S.StyledHiddenUpload

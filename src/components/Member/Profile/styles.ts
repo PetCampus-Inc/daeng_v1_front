@@ -111,7 +111,7 @@ export const ProfileBox = styled.div`
   position: relative;
 `;
 
-export const ProfileEditeButton = styled.button`
+export const PencilIconBox = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
