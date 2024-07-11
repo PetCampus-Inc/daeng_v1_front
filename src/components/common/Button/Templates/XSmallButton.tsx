@@ -1,8 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import { Button } from "../Button";
-
-import type { ButtonProps } from "../types";
+import { Button, type ButtonProps } from "../Button";
 
 interface XSmallButtonProps extends ButtonProps<"button"> {
   colorScheme: "yellow_3" | "gray_4" | "gray_5" | "white";

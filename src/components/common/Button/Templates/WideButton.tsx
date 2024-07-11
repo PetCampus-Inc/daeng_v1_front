@@ -1,8 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import { Button } from "../Button";
-
-import type { ButtonProps } from "../types";
+import { Button, type ButtonProps } from "../Button";
 
 /**
  * `WideButton` 컴포넌트는 버튼의 너비를 최대로 설정합니다.
