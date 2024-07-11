@@ -7,4 +7,4 @@ export const shadows = {
   input: "0px -5px 10px rgba(0,0,0,0.04)",
   bottomTab: "0px -17px 39px -15px rgba(167,167,167,0.15)",
   dogCard: "0px 2px 7px 0px rgba(0, 0, 0, 0.04);"
-};
+} as const;

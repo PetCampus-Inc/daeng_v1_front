@@ -34,4 +34,4 @@ export const typo = {
   caption1_12_R: typoCreator("12px", 400, "-0.12px", "17.5px"),
   caption1_12_B: typoCreator("12px", 700, "0.24px", "20px"),
   caption1_10_R: typoCreator("10px", 400, "-0.12px", "17.5px")
-};
+} as const;
