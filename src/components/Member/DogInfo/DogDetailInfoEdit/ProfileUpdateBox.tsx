@@ -7,25 +7,17 @@ import { getFilePreview } from "utils/thumb";
 
 interface IProfileEditeProps {
   type: string;
-  isActive: boolean;
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   fileRef: React.RefObject<HTMLInputElement>;
   fileName: string;
 }
 
-const ProfileUpdateBox = ({
-  type,
-  isActive,
-  setIsActive,
-  fileRef,
-  fileName
-}: IProfileEditeProps) => {
+const ProfileUpdateBox = ({ type, fileRef, fileName }: IProfileEditeProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
   const handleClick = () => {
     if (fileRef && fileRef.current) {
-      isActive ? setIsActive(false) : fileRef.current.click();
+      fileRef.current.click();
     }
   };
 
@@ -42,15 +34,12 @@ const ProfileUpdateBox = ({
       //TODO 중복파일인 경우 확인 필요
       setProfile([...fileArray]);
       setValue(fileName, [...newFiles]);
-      setIsActive(true);
     }
   };
 
   return (
     <>
       <ProfileUpdate
-        isActive={isActive}
-        setIsActive={setIsActive}
         profile={profile}
         fileInputRef={fileRef}
         handleFileChange={handleFileChange}

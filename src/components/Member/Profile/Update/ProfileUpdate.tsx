@@ -10,8 +10,6 @@ import { useFormContext } from "react-hook-form";
 import * as S from "../styles";
 
 interface IProfileEdite {
-  isActive: boolean;
-  setIsActive: (isActive: boolean) => void;
   handleClick: (type: string) => void;
   profile: IFile[];
   fileInputRef: React.LegacyRef<HTMLInputElement> | null;
@@ -21,7 +19,6 @@ interface IProfileEdite {
 }
 
 const ProfileUpdate = ({
-  setIsActive,
   handleClick,
   profile,
   fileInputRef,
@@ -33,14 +30,8 @@ const ProfileUpdate = ({
 
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.ProfileBox>
-        <S.UploadProfileButton
-          w="107"
-          h="107"
-          br="40"
-          onClick={() => handleClick(type)}
-          onBlur={() => setIsActive(true)}
-        >
+      <S.ProfileBox onClick={() => handleClick(type)}>
+        <S.UploadProfileButton w="107" h="107" br="40">
           <S.UploadImage src={profile[0]?.thumbnail} alt={`${type}-profile`} />
         </S.UploadProfileButton>
         <S.PencilIconBox>
