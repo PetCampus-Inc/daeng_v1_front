@@ -33,6 +33,7 @@ const MemberDogInfoEditPage = () => {
       dogName: rest.dogName,
       dogGender: rest.dogGender,
       dogSize: rest.dogSize,
+      profileUri: rest.profileUri,
       neutralization: rest.neutralization
     }
   });

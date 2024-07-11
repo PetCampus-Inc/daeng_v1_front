@@ -18,7 +18,7 @@ interface DogInfoProps {
 
 const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
-  const dogFileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const dogBirth = {
     year: watch("year"),
@@ -31,8 +31,8 @@ const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <ProfileUpdateBox
           type={PROFILE_NAME.DOG}
-          fileRef={dogFileInputRef}
-          fileName={FILE_URI_NAME.DOG}
+          fileRef={fileInputRef}
+          fileName={FILE_URI_NAME.COMMON}
         />
       </Card>
       <Card>
