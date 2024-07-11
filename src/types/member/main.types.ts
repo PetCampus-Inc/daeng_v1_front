@@ -130,6 +130,7 @@ export interface MemberDogInfoReq {
   dogSize: DogSizeType | "";
   breedId: number;
   newBreed: string;
+  profileUri: string | "";
   birthDate: string;
   neutralization: NeutralizationType | "";
 }

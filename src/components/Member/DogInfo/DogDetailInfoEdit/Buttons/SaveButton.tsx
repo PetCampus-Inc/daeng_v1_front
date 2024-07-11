@@ -23,6 +23,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       dogSize: getKeyForLabel(FIELD.DOG_SIZE, formData[FIELD.DOG_SIZE]) || "",
       breedId: formData[FIELD.BREED_ID],
       newBreed: formData[FIELD.NEW_BREED],
+      profileUri: "",
       birthDate: `${formData["year"]}-${formData["month"]}-${formData["day"]}`,
       neutralization: formData[FIELD.NEUTRALIZATION] === "했어요" ? "NEUTERED" : "NOT_NEUTERED"
     };
