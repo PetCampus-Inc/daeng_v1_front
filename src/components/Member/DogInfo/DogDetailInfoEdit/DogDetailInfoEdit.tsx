@@ -1,12 +1,15 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { FIELD, FIELD_KEYS } from "constants/field";
+import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
 
 import { TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import BreedInput from "components/Enrollment/Input/BreedInput";
+import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
+import ProfileUpdateBox from "./ProfileUpdateBox";
 import { Card, Text } from "./styles";
 
 interface DogInfoProps {
@@ -15,6 +18,8 @@ interface DogInfoProps {
 
 const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
+  const [isDogActive, setDogIsActive] = useState(false);
+  const dogFileInputRef = useRef<HTMLInputElement>(null);
 
   const dogBirth = {
     year: watch("year"),
@@ -24,6 +29,15 @@ const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
 
   return (
     <>
+      <Card>
+        <ProfileUpdateBox
+          type={PROFILE_NAME.DOG}
+          isActive={isDogActive}
+          setIsActive={setDogIsActive}
+          fileRef={dogFileInputRef}
+          fileName={FILE_URI_NAME.DOG}
+        />
+      </Card>
       <Card>
         <Text>이름</Text>
         <TextInput

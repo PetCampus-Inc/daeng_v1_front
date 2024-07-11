@@ -2,6 +2,12 @@ import { Button } from "components/common/Button";
 import { Flex } from "components/common/Flex";
 import { styled } from "styled-components";
 
+interface IEditProps {
+  w?: string;
+  h?: string;
+  br?: string;
+}
+
 export const RoleEditeButton = styled(Button)`
   max-width: 112px;
   min-height: 49px;
@@ -26,15 +32,15 @@ export const RoleSelectWrapper = styled(Flex)`
   width: 100%;
 `;
 
-export const UploadProfileButton = styled.button`
+export const UploadProfileButton = styled.button<IEditProps>`
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 40px;
-  height: 160px;
+  height: ${({ h }) => (h ? `${h}px` : "160px")};
+  max-width: ${({ w }) => (w ? `${w}px` : "160px")};
+  border-radius: ${({ br }) => (br ? `${br}px` : "40px")};
   width: 100%;
-  max-width: 160px;
   background-color: ${({ theme }) => theme.colors.white};
   overflow: hidden;
   position: relative;
@@ -99,4 +105,22 @@ export const SavaProfileButton = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
+`;
+
+export const ProfileBox = styled.div`
+  position: relative;
+`;
+
+export const ProfileEditeButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  width: 28px;
+  height: 28px;
+  background-color: ${({ theme }) => theme.colors.br_4};
+  border: 2px solid ${({ theme }) => theme.colors.white};
 `;
