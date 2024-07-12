@@ -2,7 +2,7 @@ import { ACCEPT_FILE_TYPE, PROFILE_NAME, PROFILE_PATHS } from "constants/profile
 
 import { BackgroundButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
-import useSubmitProfile from "hooks/api/member/useSubmitProfile";
+import useSubmitProfile from "hooks/common/useSubmitProfile";
 import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
