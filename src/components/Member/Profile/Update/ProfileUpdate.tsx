@@ -26,13 +26,16 @@ const ProfileUpdate = ({
   registerText,
   type
 }: IProfileEdite) => {
-  const { register } = useFormContext();
-
+  const { register, getValues } = useFormContext();
+  const { profileUri } = getValues();
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
       <S.ProfileBox onClick={() => handleClick(type)}>
         <S.UploadProfileButton w="107" h="107" br="40">
-          <S.UploadImage src={profile[0]?.thumbnail} alt={`${type}-profile`} />
+          <S.UploadImage
+            src={profile[0] ? profile[0].thumbnail : profileUri}
+            alt={`${type}-profile`}
+          />
         </S.UploadProfileButton>
         <S.PencilIconBox>
           <PencilBrownNormalIcon />
