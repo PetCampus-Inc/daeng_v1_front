@@ -20,12 +20,6 @@ const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const dogBirth = {
-    year: watch("year"),
-    month: watch("month"),
-    day: watch("day")
-  };
-
   return (
     <>
       <Card>
@@ -70,27 +64,9 @@ const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Text>생일</Text>
         <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber
-            name="year"
-            numberList={yearsArray}
-            defaultValue={dogBirth.year}
-            watch={watch}
-            setValue={setValue}
-          />
-          <SelectNumber
-            name="month"
-            numberList={monthsArray}
-            defaultValue={dogBirth.month}
-            watch={watch}
-            setValue={setValue}
-          />
-          <SelectNumber
-            name="day"
-            numberList={daysArray}
-            defaultValue={dogBirth.day}
-            watch={watch}
-            setValue={setValue}
-          />
+          <SelectNumber name="year" numberList={yearsArray} watch={watch} setValue={setValue} />
+          <SelectNumber name="month" numberList={monthsArray} watch={watch} setValue={setValue} />
+          <SelectNumber name="day" numberList={daysArray} watch={watch} setValue={setValue} />
         </div>
       </Card>
       <Card>
