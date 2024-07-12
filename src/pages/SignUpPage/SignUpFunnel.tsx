@@ -1,10 +1,11 @@
 import { SIGNUP_PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
-import EnrollmentPage from "pages/SignUpPage/EnrollmentPage";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import SearchSchoolPage from "./SearchSchoolPage";
+import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
 
 const SignUpFunnel = () => {
   const { 유치원_검색, 가입신청서_작성 } = SIGNUP_PATH;
@@ -16,6 +17,13 @@ const SignUpFunnel = () => {
   }).withState<{
     schoolId?: number;
   }>({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 새로고침 시 초기 스텝으로 이동
+    navigate(`?step=${유치원_검색}`, { replace: true });
+  }, [navigate]);
 
   return (
     <Funnel>

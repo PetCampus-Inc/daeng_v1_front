@@ -2,9 +2,9 @@ import DogCard from "./Dashboard/DogCard";
 import DogNote from "./Dashboard/DogNote";
 import { StyledDashboard } from "./styles";
 
-import type { HomeDataType } from "types/member/home.types";
+import type { HomeInfoType } from "types/member/main.types";
 
-const HomeDashboard = ({ data }: { data: HomeDataType }) => {
+const HomeDashboard = ({ data }: { data: HomeInfoType }) => {
   return (
     <StyledDashboard>
       <DogNote data={data} />

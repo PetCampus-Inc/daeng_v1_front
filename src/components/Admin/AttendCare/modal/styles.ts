@@ -38,7 +38,7 @@ export const TimePickerTitle = styled.p`
   ${({ theme }) => theme.typo.body2_16_B};
 `;
 
-export const TimePickerWarper = styled.div`
+export const TimePickerWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

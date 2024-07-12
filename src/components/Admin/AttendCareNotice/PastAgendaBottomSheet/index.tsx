@@ -1,14 +1,14 @@
 import Badge from "components/common/Badge";
-import BottomSheet, { IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import PoopBox from "components/common/PoopBox";
 import { format } from "date-fns";
 import { Suspense, useState } from "react";
+import { IPoop } from "types/admin/attendance.type";
 import { IPastAgenda } from "types/admin/care.types";
-import { IPoop } from "types/admin.attendance.type";
 
 import * as S from "./styles";
 
-interface PastAgendaBottomSheetProps extends IBottomSheetProps {
+interface PastAgendaBottomSheetProps extends BottomSheetProps {
   data: IPastAgenda[];
 }
 

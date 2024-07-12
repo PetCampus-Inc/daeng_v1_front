@@ -1,4 +1,4 @@
-import SimpleButton from "components/common/Button/SimpleButton";
+import { SmallButton } from "components/common/Button/Templates";
 import { useContext } from "react";
 
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
@@ -22,12 +22,12 @@ const AllSelectButton = ({ data }: AllSelectButtonProps) => {
   };
 
   const buttonText = isAllSelected ? "전체 해제" : "전체 선택";
-  const buttonColorScheme = isAllSelected ? "gray" : "primary";
+  const buttonColorScheme = isAllSelected ? "gray_4" : "br_4";
 
   return (
-    <SimpleButton onClick={() => handleClick(data)} colorScheme={buttonColorScheme}>
+    <SmallButton onClick={() => handleClick(data)} colorScheme={buttonColorScheme}>
       {buttonText}
-    </SimpleButton>
+    </SmallButton>
   );
 };
 

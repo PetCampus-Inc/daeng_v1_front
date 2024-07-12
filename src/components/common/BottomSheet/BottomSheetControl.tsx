@@ -1,10 +1,10 @@
 import XIcon from "assets/svg/x-icon";
 import { useContext } from "react";
 
-import { BottomSheetContext } from "./provider";
+import { BottomSheetContext } from "./BottomSheetContext";
 import { ControlButton, Control } from "./styles";
 
-const BottomSheetControl = () => {
+export const BottomSheetControl = () => {
   const bottomSheetContext = useContext(BottomSheetContext);
 
   if (!bottomSheetContext)
@@ -18,5 +18,3 @@ const BottomSheetControl = () => {
     </Control>
   );
 };
-
-export default BottomSheetControl;

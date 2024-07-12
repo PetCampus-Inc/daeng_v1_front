@@ -32,8 +32,11 @@ export const useLocalStorage = <T>(keyName: string, defaultValue: T) => {
 };
 
 // 로컬 스토리지에서 값을 가져오는 훅
-export const useLocalStorageValue = <T>(keyName: string, defaultValue: T): T => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+export const useLocalStorageValue = <T>(
+  keyName: string,
+  defaultValue: T | null = null
+): T | null => {
+  const [storedValue, setStoredValue] = useState<T | null>(() => {
     try {
       const value = window.localStorage.getItem(keyName);
       if (value !== null) {
@@ -52,17 +55,14 @@ export const useLocalStorageValue = <T>(keyName: string, defaultValue: T): T => 
 };
 
 // 로컬 스토리지에 값을 설정하는 훅
-export const useSetLocalStorage = <T>(keyName: string) => {
-  const setStoredValue = useCallback(
-    (newValue: T) => {
-      try {
-        window.localStorage.setItem(keyName, JSON.stringify(newValue));
-      } catch (err) {
-        console.error("Error setting localStorage key “" + keyName + "”: ", err);
-      }
-    },
-    [keyName]
-  );
+export const useSetLocalStorage = () => {
+  const setStoredValue = useCallback(<T>({ key, value }: { key: string; value: T }) => {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (err) {
+      console.error("Error setting localStorage key “" + key + "”: ", err);
+    }
+  }, []);
 
   return setStoredValue;
 };

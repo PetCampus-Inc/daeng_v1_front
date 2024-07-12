@@ -1,5 +1,5 @@
 import Chat from "assets/svg/chat";
-import SimpleButton from "components/common/Button/SimpleButton";
+import { SmallButton } from "components/common/Button/Templates";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import * as S from "./styles";
@@ -15,9 +15,9 @@ const DogInfoBox = () => {
         alt="dog-image"
       />
       <span>{searchParams.get("dog_name")}</span>
-      <SimpleButton onClick={() => navigate("/admin/chat")} leftAddon={<Chat />}>
+      <SmallButton onClick={() => navigate("/admin/chat")} leftAddon={<Chat />} gap={8}>
         채팅하기
-      </SimpleButton>
+      </SmallButton>
     </S.Container>
   );
 };

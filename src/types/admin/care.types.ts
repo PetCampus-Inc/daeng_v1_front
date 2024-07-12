@@ -1,4 +1,4 @@
-import type { Nullable } from "../helper.type";
+import type { Nullable } from "../helper.types";
 
 export interface ICareDogProps {
   adminId: number;
@@ -19,7 +19,7 @@ export interface ICareDogInfo {
 export type TAgendaWriting = "COMPLETE" | "NOT_YET" | "WRITING";
 
 export interface IReqGallery {
-  dogId: number[];
+  dogIdList: number[];
   imageUriList: string[];
   comment?: string;
 }

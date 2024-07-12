@@ -4,8 +4,9 @@ import BoyIcon from "assets/svg/boy-icon";
 import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
 import Badge from "components/common/Badge";
+import { XSmallButton } from "components/common/Button/Templates";
 import { differenceInMonths, format } from "date-fns";
-import { IDogAndMemberInfo } from "types/admin.attendance.type";
+import { IDogAndMemberInfo } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 import { DogDetailInfoText } from "../styles";
@@ -20,7 +21,7 @@ const AboutDog = ({ data }: AboutDogProps) => {
     dogGender,
     dogSize,
     breedName,
-    dogBirthDate,
+    birthDate,
     vaccination,
     neutralization,
     pickDropRequest,
@@ -28,11 +29,11 @@ const AboutDog = ({ data }: AboutDogProps) => {
 
     pickDropMemo
   } = data;
-  const birthDate = format(
-    new Date(dogBirthDate[0], dogBirthDate[1] - 1, dogBirthDate[2]),
+  const formatBirthDate = format(
+    new Date(birthDate[0], birthDate[1] - 1, birthDate[2]),
     "yyyy.MM.dd"
   );
-  const monthsDifference = differenceInMonths(new Date(), birthDate);
+  const monthsDifference = differenceInMonths(new Date(), formatBirthDate);
   const noTag =
     vaccination !== "VACCINATED" && neutralization !== "NEUTERED" && pickDropRequest !== "REQUEST";
 
@@ -78,7 +79,9 @@ const AboutDog = ({ data }: AboutDogProps) => {
         <S.DogDetailList>
           <S.DetailItem className="row">
             <DogDetailInfoText>예방접종 파일</DogDetailInfoText>
-            <S.YellowThickButton>파일 열람</S.YellowThickButton>
+            <XSmallButton size="sm" typo="caption1_12_B" colorScheme="yellow_3">
+              파일 열람
+            </XSmallButton>
           </S.DetailItem>
           <S.DetailItem>
             <DogDetailInfoText>알러지 및 질병</DogDetailInfoText>

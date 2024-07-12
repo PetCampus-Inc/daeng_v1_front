@@ -177,14 +177,14 @@ export const GotoSchoolInfoButton = styled.button<ICardStyleProps>`
 `;
 
 export const AddDogButton = styled.button`
-  ${StatusBoxStyle}
+  ${StatusBoxStyle};
   position: absolute;
   bottom: 0.9375rem;
   z-index: 1;
 `;
 
 export const DeleteButton = styled.button`
-  ${StatusBoxStyle}
+  ${StatusBoxStyle};
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
@@ -192,7 +192,7 @@ export const DeleteButton = styled.button`
 `;
 
 export const CurrentStatusBox = styled.div<ICardStyleProps>`
-  ${StatusBoxStyle}
+  ${StatusBoxStyle};
   background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
 
   &::before {

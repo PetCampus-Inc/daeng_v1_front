@@ -6,23 +6,24 @@ import {
   IPastAgenda,
   IReqGallery
 } from "types/admin/care.types";
-import { IResponse } from "types/helper.type";
+
+import type { Response } from "types/helper.types";
 
 export const handleGetCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
   const url = `admin/attendance/care?adminId=${adminId}`;
-  const { data } = await request<IResponse<ICareDogInfo[]>>({ url });
+  const { data } = await request<Response<ICareDogInfo[]>>({ url });
   return data;
 };
 
 export const handleGetNewCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
   const url = `admin/attendance/care/add?adminId=${adminId}`;
-  const { data } = await request<IResponse<ICareDogInfo[]>>({ url });
+  const { data } = await request<Response<ICareDogInfo[]>>({ url });
   return data;
 };
 
 export const handleCreateCareDogs = async (req: ICareDogProps): Promise<ICareDogInfo[]> => {
   const url = `admin/attendance/care/add`;
-  const { data } = await request<IResponse<ICareDogInfo[]>>({
+  const { data } = await request<Response<ICareDogInfo[]>>({
     url,
     method: "POST",
     data: {
@@ -66,7 +67,7 @@ export const handleTempSaveCareDog = async (req: ICareTempSave) => {
 // 알림장 가져오기
 export const handleGetAgenda = async (dogId: number): Promise<IPastAgenda> => {
   const url = `school/agenda?dogId=${dogId}`;
-  const { data } = await request<IResponse<IPastAgenda>>({ url });
+  const { data } = await request<Response<IPastAgenda>>({ url });
   return data;
 };
 
@@ -91,7 +92,7 @@ export const handleSendAgenda = async (req: ICareTempSave) => {
 // 지난 알림장 가져오기
 export const handleGetPastAgenda = async (dogId: number): Promise<IPastAgenda[]> => {
   const url = `school/agenda/past?dogId=${dogId}`;
-  const { data } = await request<IResponse<IPastAgenda[]>>({ url });
+  const { data } = await request<Response<IPastAgenda[]>>({ url });
   return data;
 };
 
@@ -101,7 +102,7 @@ export const handlePostAlbum = async (req: IReqGallery): Promise<void> => {
     url,
     method: "POST",
     data: {
-      dogId: req.dogId,
+      dogIdList: req.dogIdList,
       imageUriList: req.imageUriList,
       comment: req.comment
     }

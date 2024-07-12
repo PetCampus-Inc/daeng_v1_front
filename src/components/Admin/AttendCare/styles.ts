@@ -25,10 +25,3 @@ export const ButtonWrapper = styled.div`
 
   margin: 2.25rem 0px 0.75rem;
 `;
-
-// FIXME: 이런거 공통 모듈로 빼두면 좋을 듯..
-export const VStack = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;

@@ -1,15 +1,5 @@
-import Modal from "components/common/ButtonModal";
 import Slider from "react-slick";
 import styled from "styled-components";
-
-export const CarouselModal = styled(Modal)`
-  &.CarouselModal {
-    max-width: 358px;
-    overflow: hidden;
-  }
-`;
-
-export const CarouselContainer = styled.div``;
 
 export const CarouselSlider = styled(Slider)`
   .slick-prev {

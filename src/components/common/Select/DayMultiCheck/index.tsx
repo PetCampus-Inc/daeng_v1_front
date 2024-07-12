@@ -21,7 +21,6 @@ const DayMultiCheck = ({
   name,
   caption,
   openDays,
-  disabled = false,
   defaultSelect,
   isPreviewMode = false,
   isRequired = false,
@@ -32,16 +31,16 @@ const DayMultiCheck = ({
   const [isAvailable, setIsAvailable] = useState(true);
 
   useEffect(() => {
-    if (watch(name) && watch(name).length <= 1) {
+    if (name && watch(name) && watch(name).length <= 1) {
       setIsAvailable(false);
     }
-  }, [watch(name)]);
+  }, [name && watch(name)]);
 
   const handleTouch = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.checked && !isAvailable) {
       e.preventDefault();
       e.stopPropagation();
-      setValue(name, [e.target.value]);
+      name && setValue(name, [e.target.value]);
     } else {
       setIsAvailable(true);
     }
@@ -59,7 +58,7 @@ const DayMultiCheck = ({
               {...register(`${name}`, { required: isRequired, onChange: handleTouch })}
               value={day}
               defaultChecked={defaultSelect?.includes(day)}
-              disabled={disabled ? disabled : openDays && !openDays?.includes(day)}
+              disabled={props.disabled ? props.disabled : openDays && !openDays?.includes(day)}
               className={openDays && openDays?.includes(day) ? "open-day" : ""}
               onClick={preventDefaultClick}
               {...props}

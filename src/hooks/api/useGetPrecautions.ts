@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetPrecautions } from "apis/admin.attendance.api";
+import { handleGetPrecautions } from "apis/admin/attendance.api";
 
 const useGetPrecautions = (dogId: number) => {
   return useSuspenseQuery({

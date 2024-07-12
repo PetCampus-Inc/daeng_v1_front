@@ -1,16 +1,14 @@
 import { PATH } from "constants/path";
 
-import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import CalendarIcon from "assets/svg/calendar";
 import MapIcon from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone-basic";
 import SchoolIcon from "assets/svg/school-icon";
-import SimpleButton from "components/common/Button/SimpleButton";
+import { MoreButton } from "components/common/Button/Templates";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.type";
+import { Role } from "types/admin/admin.types";
 
 import {
-  MoreButtonStyle,
   StyledCard,
   StyledIcon,
   StyledItemWrapper,
@@ -20,20 +18,15 @@ import {
   StyledTitleContainer
 } from "./styles";
 
-import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.type";
+import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
 
 const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: string }) => {
   return (
     <StyledTitleContainer>
       <StyledTitle>소속 유치원</StyledTitle>
-      <SimpleButton
-        p={0}
-        onClick={handleClick}
-        rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}
-        customStyle={MoreButtonStyle}
-      >
+      <MoreButton onClick={handleClick} gap={4} iconColorScheme="gray_3">
         {text}
-      </SimpleButton>
+      </MoreButton>
     </StyledTitleContainer>
   );
 };

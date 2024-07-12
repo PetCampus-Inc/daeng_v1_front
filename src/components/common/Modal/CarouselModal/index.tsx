@@ -1,15 +1,15 @@
 import XCircleIcon from "assets/svg/x-circle-icon";
 
 import * as S from "./styles";
+import { type ModalProps } from "../index";
+import { ModalRoot } from "../ModalRoot";
 
-type DisconnectModalProps = {
-  isOpen: boolean;
-  close: () => void;
+interface DisconnectModalProps extends ModalProps {
   upDateData?: string;
   imgUrl?: string;
-};
+}
 
-const CarouselModal = ({ close, isOpen, upDateData, imgUrl }: DisconnectModalProps) => {
+export const CarouselModal = ({ close, isOpen, upDateData, imgUrl }: DisconnectModalProps) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -22,8 +22,8 @@ const CarouselModal = ({ close, isOpen, upDateData, imgUrl }: DisconnectModalPro
 
   return (
     // FIXME CarouselModal close 안되는 이슈 해결하기
-    <S.CarouselModal className="CarouselModal" isOpen={isOpen} close={close}>
-      <S.CarouselContainer>
+    <ModalRoot isOpen={isOpen} close={close}>
+      <div>
         <S.CloseButton onClick={close}>
           <XCircleIcon />
         </S.CloseButton>
@@ -37,9 +37,7 @@ const CarouselModal = ({ close, isOpen, upDateData, imgUrl }: DisconnectModalPro
             <S.CarouselText>{upDateData} 업로드</S.CarouselText>
           </S.CarouselBox>
         </S.CarouselSlider>
-      </S.CarouselContainer>
-    </S.CarouselModal>
+      </div>
+    </ModalRoot>
   );
 };
-
-export default CarouselModal;

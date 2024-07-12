@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import styled, { CSSProp } from "styled-components";
-export { Container, BackDrop } from "styles/StyleModule";
-
 import { remCalc } from "utils/calculator";
 
 import type { TitleProps } from "./BottomSheetTitle";
@@ -28,15 +26,16 @@ export const Content = styled.div.withConfig({
 export const Control = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding-right: 0.3rem;
 `;
 
 export const ControlButton = styled.button`
   display: inline-flex;
-  align-items: center;
+  border-radius: 50%;
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_5};
-    border-radius: 50%;
   }
 
   transition: background-color 0.2s ease-in-out;

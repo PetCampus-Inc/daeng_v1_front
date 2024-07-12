@@ -1,13 +1,13 @@
-import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import { ExtendedFieldArrayWithId } from "components/common/Select/EditableRadioGroup";
 import { useRecoilValue } from "recoil";
-import { ticketCounterAtom } from "store/overlay";
+import { ticketCounterState } from "store/form";
 
 import TicketCounter from "../TicketCounter";
 
 import type { TTicketType } from "types/admin/enrollment.types";
 
-interface TicketCounterProps extends IBottomSheetProps {
+interface TicketCounterProps extends BottomSheetProps {
   ticketType: TTicketType;
   action: () => void;
   fields: Record<"id", string>[];
@@ -20,7 +20,7 @@ const TicketCounterBottomSheet = ({
   action,
   fields
 }: TicketCounterProps) => {
-  const counter = useRecoilValue(ticketCounterAtom);
+  const counter = useRecoilValue(ticketCounterState);
 
   const currentIsDuplication = fields.some(
     (field: ExtendedFieldArrayWithId) => field.value === counter

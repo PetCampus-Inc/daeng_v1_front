@@ -1,4 +1,4 @@
-import type { PropertyValues } from "types/helper.type";
+import type { PropertyValues } from "types/helper.types";
 
 export const LIST = {
   REGISTERED: "유치원 등록순",
@@ -10,3 +10,10 @@ export const LIST = {
 export type TSortOptionList = PropertyValues<typeof LIST>;
 
 export const INIT_COUNTER = 2;
+
+export const GALLERY_VIEW = {
+  PHOTO: "photo",
+  ALBUM: "album"
+} as const;
+
+export type GalleryViewType = (typeof GALLERY_VIEW)[keyof typeof GALLERY_VIEW];

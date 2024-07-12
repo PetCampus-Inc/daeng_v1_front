@@ -1,8 +1,12 @@
-import { IMemberInfoEdite } from "types/Member.type";
-
 import * as S from "./styles";
 
-const KeyboardCompleteButton = ({ handleBlur, isFocusing, memberData }: IMemberInfoEdite) => {
+const KeyboardCompleteButton = ({
+  handleBlur,
+  isFocusing
+}: {
+  handleBlur: () => void;
+  isFocusing: boolean;
+}) => {
   return (
     <>
       {isFocusing && <S.KeyboardCompleteButton onClick={handleBlur}>완료</S.KeyboardCompleteButton>}

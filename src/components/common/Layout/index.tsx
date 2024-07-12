@@ -2,10 +2,10 @@ import type { PropsWithChildren } from "react";
 
 import { StyledContainer } from "./styles";
 
-import type { LayoutType, TColorScheme, TPaddingOptions, TPositionOptions } from "./types";
+import type { LayoutType, ColorKeysScheme, TPaddingOptions, TPositionOptions } from "./types";
 
 export type LayoutProps = TPaddingOptions &
-  TColorScheme &
+  ColorKeysScheme &
   TPositionOptions &
   LayoutType &
   React.HTMLAttributes<HTMLDivElement>;

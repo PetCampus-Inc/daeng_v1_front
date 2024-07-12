@@ -1,14 +1,14 @@
 import { LIST } from "constants/option";
 
-import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
 import { useRecoilState } from "recoil";
-import { sortOptionAtom } from "store/overlay";
+import { sortOptionState } from "store/form";
 import { ConfirmButton } from "styles/StyleModule";
 
 import { ListItem, ListWrapper } from "./styles";
+import { BottomSheet, type BottomSheetProps } from "../../../common/BottomSheet";
 
-const SortOptionListBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
-  const [sortName, setSortName] = useRecoilState(sortOptionAtom);
+const SortOptionListBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
+  const [sortName, setSortName] = useRecoilState(sortOptionState);
 
   return (
     <BottomSheet isOpen={isOpen} close={close}>

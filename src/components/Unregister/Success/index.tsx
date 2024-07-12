@@ -1,4 +1,4 @@
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 
 import * as S from "../styles";
 

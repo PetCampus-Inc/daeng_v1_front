@@ -1,24 +1,28 @@
 import styled, { CSSProperties, css } from "styled-components";
 
-import { TColor, TTypo } from "../../../styles/ThemeConfig";
+import type { ColorKeys, TypoKeys } from "styles/types";
 
 export interface IStyledTextProps {
-  color?: TColor;
-  typo: TTypo;
+  color?: ColorKeys;
+  typo: TypoKeys;
   isEllipsis?: boolean;
   textAlign?: CSSProperties["textAlign"];
+  whiteSpace?: CSSProperties["whiteSpace"];
 }
 
 export type StyledEmEmProps = {
-  color?: TColor;
+  color?: ColorKeys;
 };
 
 export const StyledText = styled.span.withConfig({
-  shouldForwardProp: (prop) => !["color", "typo", "isEllipsis", "textAlign"].includes(prop)
+  shouldForwardProp: (prop) =>
+    !["color", "typo", "isEllipsis", "textAlign", "whiteSpace"].includes(prop)
 })<IStyledTextProps>`
   color: ${({ color, theme }) => (color && theme.colors[color]) || "inherit"};
   ${({ theme, typo }) => theme.typo[typo]};
   text-align: ${({ textAlign }) => textAlign || ""};
+  white-space: ${({ whiteSpace }) => whiteSpace || ""};
+
   ${({ isEllipsis }) =>
     isEllipsis &&
     css`
@@ -26,10 +30,6 @@ export const StyledText = styled.span.withConfig({
       white-space: nowrap;
       text-overflow: ellipsis;
     `};
-
-  &.pre {
-    white-space: pre-wrap;
-  }
 `;
 
 export const StyledEm = styled.em.withConfig({

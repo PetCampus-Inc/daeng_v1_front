@@ -1,18 +1,18 @@
-import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import Toggle from "components/common/Toggle/Toggle";
 import { useRef, useState } from "react";
 
 import {
   TimePickerContainer,
   TimePickerTitle,
-  TimePickerWarper,
+  TimePickerWrapper,
   TitleContainer,
   TitleWrapper,
   ToggleWrapper
 } from "./styles";
-import TimePicker, { TimePickerHandles } from "../CareTimePicker/TimePicker";
+import TimePicker, { TimePickerHandles } from "../AttendCareMain/CareTimePicker/TimePicker";
 
-const AgendaSchedulerBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
+const AgendaSchedulerBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
   // FIXME: 토글 스위치는 useState 대신 label-input으로 리팩터링 할 것!!
   const [isOn, setIsOn] = useState(false);
   const timePickerRef = useRef<TimePickerHandles>(null);
@@ -43,10 +43,10 @@ const AgendaSchedulerBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
         </TitleContainer>
         <TimePickerContainer $isActive={isOn}>
           <TimePickerTitle>시간 설정하기</TimePickerTitle>
-          <TimePickerWarper>
+          <TimePickerWrapper>
             <TimePicker ref={timePickerRef} disabled={!isOn} />
             <span className="text">에 일괄 전송</span>
-          </TimePickerWarper>
+          </TimePickerWrapper>
         </TimePickerContainer>
         <BottomSheet.Button actionText="일괄 전송 예약" actionFn={handleSubmit} />
       </BottomSheet.Content>

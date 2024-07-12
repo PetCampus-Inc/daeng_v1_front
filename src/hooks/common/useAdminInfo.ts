@@ -2,8 +2,8 @@ import { AUTH_KEY } from "store/auth";
 
 import { useLocalStorageValue } from "./useLocalStorage";
 
-import type { AdminAuthType } from "types/admin/admin.type";
-import type { Nullable } from "types/helper.type";
+import type { AdminAuthType } from "types/admin/admin.types";
+import type { Nullable } from "types/helper.types";
 
 export const useAdminInfo = (): AdminAuthType => {
   const auth = useLocalStorageValue<Nullable<AdminAuthType>>(AUTH_KEY, null);

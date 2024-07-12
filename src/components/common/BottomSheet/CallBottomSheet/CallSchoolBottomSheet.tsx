@@ -2,7 +2,7 @@ import { memo } from "react";
 
 import CallBottomSheet from "./index";
 
-import type { ISchoolCallInfo } from "types/admin/mypage.type";
+import type { ISchoolCallInfo } from "types/admin/mypage.types";
 
 interface CallSchoolBottomSheetProps {
   info: ISchoolCallInfo | null;

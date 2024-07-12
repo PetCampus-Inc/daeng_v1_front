@@ -1,9 +1,9 @@
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
+import { PreventLeaveModal } from "components/common/Modal";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import EnrollmentPage from "../SignUpPage/EnrollmentPage";
+import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
 
 const MemberEnrollmentFormDogAddPage = () => {
   const navigate = useNavigate();

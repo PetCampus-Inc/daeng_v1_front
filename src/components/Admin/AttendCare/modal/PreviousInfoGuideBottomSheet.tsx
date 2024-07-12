@@ -1,9 +1,9 @@
 import { Box, Flex, Text } from "components/common";
-import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import { useGetCachedCareDogInfo } from "hooks/api/admin/care";
 import { Img } from "styles/StyleModule";
 
-const PreviousInfoGuideBottomSheet = ({ isOpen, close }: IBottomSheetProps) => {
+const PreviousInfoGuideBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
   const { data, removeCachedData } = useGetCachedCareDogInfo();
 
   return (

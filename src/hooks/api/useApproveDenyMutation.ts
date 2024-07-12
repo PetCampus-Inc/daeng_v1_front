@@ -6,7 +6,7 @@ import {
   postApproveTeacher,
   postDenyForm,
   postDenyTeacher
-} from "apis/admin/admin.api";
+} from "apis/admin/school.api";
 import showToast from "utils/showToast";
 
 export const useApproveFormMutation = () => {

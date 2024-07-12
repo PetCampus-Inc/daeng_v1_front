@@ -1,22 +1,23 @@
-import type { ElementType } from "react";
-
-import { type ForwardedRef, forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, type ElementType } from "react";
 
 import { StyledBox } from "./styles";
 
 import type { BoxOptions } from "./types";
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../polymorphic";
 
-export type BoxProps = BoxOptions &
-  HTMLAttributes<HTMLDivElement> & {
-    as?: ElementType;
-  };
+export type BoxProps<C extends ElementType = "div"> = PolymorphicComponentPropsWithRef<
+  C,
+  BoxOptions
+>;
 
-export const Box = forwardRef(function Box(
-  { as = "div", children, ...props }: BoxProps,
-  ref: ForwardedRef<HTMLDivElement>
+export const Box = forwardRef(function Box<C extends ElementType = "div">(
+  props: BoxProps<C>,
+  ref?: PolymorphicRef<C>
 ) {
+  const { as, children, ...rest } = props;
+
   return (
-    <StyledBox ref={ref} as={as} {...props}>
+    <StyledBox ref={ref} as={as} color={"inherit"} {...rest}>
       {children}
     </StyledBox>
   );

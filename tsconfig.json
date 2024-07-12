@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,24 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "typeRoots": ["./src/types/global"]
-  },
-
-  /* Path aliases */
-  "baseUrl": ".",
-  "paths": {
-    "@/*": ["./src/*"],
-    "@components/*": ["./src/components/*"],
-    "@hooks/*": ["./src/hooks/*"],
-    "@pages/*": ["./src/pages/*"],
-    "@styles/*": ["./src/styles/*"],
-    "@constants/*": ["./src/constants/*"],
-    "@assets/*": ["./src/assets/*"],
-    "@apis/*": ["./src/apis/*"],
-    "@router/*": ["./src/router/*"],
-    "@utils/*": ["./src/utils/*"],
-    "@type/*": ["./src/types/*"],
-    "@store/*": ["./src/store/*"],
-    "@libs/*": ["./src/libs/*"]
   },
 
   "include": ["src", ".eslintrc.cjs"]

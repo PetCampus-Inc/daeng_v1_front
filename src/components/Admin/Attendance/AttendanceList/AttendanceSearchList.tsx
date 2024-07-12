@@ -4,7 +4,7 @@ import AttendanceDogCard from "../AttendanceCard/AttendanceDogCard";
 import { useSelectedDogs } from "../context/SelectedDogProvider";
 import { CardListWrapper, EmptyText, ListWrapper } from "../styles";
 
-import type { AttendData } from "types/admin.attendance.type";
+import type { AttendData } from "types/admin/attendance.type";
 
 interface AttendanceSearchListProps {
   data?: AttendData[];

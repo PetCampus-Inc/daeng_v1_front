@@ -33,7 +33,15 @@ export const useGetNewCareDogs = (adminId: number) => {
   });
 };
 
-export const useCreateCareDogs = (openPopup: () => void) => {
+export const useCreateCareDogs = ({
+  openBlockingPopup,
+  openGuidePopup,
+  closeRootPopup
+}: {
+  openBlockingPopup: () => void;
+  openGuidePopup?: () => void;
+  closeRootPopup?: () => void;
+}) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -42,13 +50,16 @@ export const useCreateCareDogs = (openPopup: () => void) => {
       // 추가 요청 성공
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
       navigate(PATH.ADMIN_CARE);
+      // 강아지 추가 팝업 닫기
+      closeRootPopup?.();
       return;
     }
 
     const isConflicted = data.some((dog) => dog.conflicted);
     if (isConflicted) {
       // 추가 요청 실패
-      openPopup();
+      // 이미 선택된 강아지 팝업 열기
+      openBlockingPopup();
       const currentDogs = queryClient.getQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST);
       if (currentDogs) {
         const updatedDogs = currentDogs.map((existingDog) => {
@@ -62,8 +73,10 @@ export const useCreateCareDogs = (openPopup: () => void) => {
     } else {
       // 추가 요청 성공, but 이전 기록이 있는 강아지
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
-      // 뮤테이션 결과를 queryCache에 저장
+      // 뮤테이션 결과를 queryCache 저장
       queryClient.setQueryData(QUERY_KEY.CACHED_CARE_DOG_INFO, data);
+      // 이전 기록이 있는 강아지가 있을 경우 가이드 팝업 열기
+      openGuidePopup?.();
     }
   };
 

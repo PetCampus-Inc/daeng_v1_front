@@ -1,12 +1,12 @@
 import { INIT_COUNTER } from "constants/option";
 
 import AddIcon from "assets/svg/add-icon";
-import Modal from "components/common/ButtonModal";
+import { Modal } from "components/common/Modal";
 import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
 import { useOverlay } from "hooks/common/useOverlay";
 import useTicketFieldArray from "hooks/common/useTicketFieldArray";
 import { useRecoilCallback } from "recoil";
-import { ticketCounterAtom } from "store/overlay";
+import { ticketCounterState } from "store/form";
 
 import * as S from "./styles";
 import TicketCounterBottomSheet from "../FormModal/TicketCounterBottomSheet";
@@ -38,12 +38,12 @@ const TicketType = ({ control, name, ticketType, defaultValues = [] }: TicketTyp
   const handleAddRadio = useRecoilCallback(
     ({ set, snapshot }) =>
       async () => {
-        const counter = await snapshot.getPromise(ticketCounterAtom);
+        const counter = await snapshot.getPromise(ticketCounterState);
 
         if (fields.length < MAX_ITEMS) {
           append({ value: counter });
           overlay.close();
-          set(ticketCounterAtom, INIT_COUNTER);
+          set(ticketCounterState, INIT_COUNTER);
         } else {
           alert("더 이상 추가할 수 없습니다.");
         }

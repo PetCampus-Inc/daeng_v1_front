@@ -12,7 +12,8 @@ const SubmitButton = () => {
   const onSubmit = (data: FieldValues) => {
     const req = {
       inputId: data.inputId,
-      inputPw: data.inputPw
+      inputPw: data.inputPw,
+      fcmToken: "fcmToken" // FIXME: RN에서 받아와야함
     };
 
     mutateLogin(req, {
@@ -25,7 +26,7 @@ const SubmitButton = () => {
             type: "manual",
             message: "잘못된 아이디입니다."
           });
-        } else if (error?.data.code === "COMMON-400-1") {
+        } else if (error?.data.code === "AUTH-401-1") {
           setError("inputPw", {
             type: "manual",
             message: "잘못된 비밀번호입니다."

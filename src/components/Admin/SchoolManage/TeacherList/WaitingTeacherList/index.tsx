@@ -1,5 +1,5 @@
 import { LayoutGroup } from "framer-motion";
-import { ITeacherInfo } from "types/Admin.type";
+import { ITeacherInfo } from "types/admin/school.types";
 
 import TeacherInfoWithTwoBtn from "../../TeacherInfo/TeacherInfoWithTwoBtn";
 import * as S from "../styles";

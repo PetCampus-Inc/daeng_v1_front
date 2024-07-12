@@ -1,12 +1,15 @@
 import { CSSProperties } from "react";
-import { TColor } from "styles/ThemeConfig";
+
+import type { ColorKeys } from "styles/types";
+
+export type SizeType = string | "full" | "fit" | "min" | "max" | "auto";
 
 export type BoxStyleProps = {
   display?: CSSProperties["display"];
-  width?: string | "full" | "auto";
-  maxWidth?: string | "full";
-  minWidth?: string;
-  height?: string | "full" | "auto";
+  width?: SizeType;
+  maxWidth?: SizeType;
+  minWidth?: SizeType;
+  height?: SizeType;
 };
 
 export type SpacingProps = {
@@ -35,9 +38,9 @@ export type SpacingProps = {
 };
 
 type BoxColorProps = {
-  bg?: TColor;
-  backgroundColor?: TColor;
-  color?: TColor;
+  bg?: ColorKeys;
+  backgroundColor?: ColorKeys;
+  color?: ColorKeys;
 };
 
 type BoxPositionProps = {
@@ -57,12 +60,13 @@ type BoxFlexBoxProps = {
   direction?: "row" | "column";
   justify?: "center" | "flex-start" | "flex-end" | "space-between" | "space-around";
   align?: "center" | "flex-start" | "flex-end" | "stretch";
+  gap?: number;
 };
 
 export type BoxBorderProps = {
   border?: number;
   borderRadius?: number | "rectangle" | "circle";
-  borderColor?: TColor;
+  borderColor?: ColorKeys;
   borderTop?: number;
   borderRight?: number;
   borderBottom?: number;

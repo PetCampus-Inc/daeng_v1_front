@@ -1,3 +1,6 @@
+import { FIELD } from "./field";
+
+import type { NonEmptyArray } from "types/helper.types";
 import type { PickDropRequestType, PickDropStateType } from "types/member/enrollment.types";
 
 export const MEMBER_ENROLL_STEP = [
@@ -159,38 +162,95 @@ export const ADMIN_READ_FORM_STEP = [
   }
 ] as const;
 
-export const FIELD_TO_STEP = new Map<string, number>([
-  ["memberName", 0],
-  ["memberGender", 0],
-  ["address", 0],
-  ["phoneNumber", 0],
-  ["emergencyNumber", 0],
-  ["dogName", 1],
-  ["dogGender", 1],
-  ["dogSize", 1],
-  ["breedId", 1],
-  ["newBreed", 1],
-  ["birthdate", 1],
-  ["neutralization", 1],
-  ["vaccination", 1],
-  ["fileUrl", 1],
-  ["allergyDisease", 1],
-  ["priceInfo", 2],
-  ["ticketType", 2],
-  ["roundTicketNumber", 2],
-  ["monthlyTicketNumber", 2],
-  ["openDays", 2],
-  ["ticketInfo", 2],
-  ["limitsInfo", 3],
-  ["accidentInfo", 3],
-  ["abandonmentInfo", 3],
-  ["pickDropState", 4],
-  ["pickDropNotice", 4],
-  ["pickDropRequest", 4],
-  ["pickDropType", 4],
-  ["pickDropMemo", 4],
-  ["pickDropInfo", 4]
-]);
+const STEP_KEYS = ["견주정보", "강아지정보", "이용권", "유의사항", "픽드랍"] as const;
+type STEP_KEYS = (typeof STEP_KEYS)[number];
+
+const stepFields: { [key in STEP_KEYS]: string[] } = {
+  견주정보: [
+    FIELD.MEMBER_NAME,
+    FIELD.MEMBER_GENDER,
+    FIELD.MEMBER_ADDRESS,
+    FIELD.MEMBER_ADDRESS_DETAIL,
+    FIELD.MEMBER_PHONE,
+    FIELD.EMERGENCY_NUMBER
+  ],
+  강아지정보: [
+    FIELD.DOG_NAME,
+    FIELD.DOG_GENDER,
+    FIELD.DOG_SIZE,
+    FIELD.BREED_ID,
+    FIELD.NEW_BREED,
+    FIELD.BIRTHDAY,
+    FIELD.NEUTRALIZATION,
+    FIELD.VACCINATION,
+    FIELD.VACCINATION_URL,
+    FIELD.ALLERGY_DISEASE
+  ],
+  이용권: [
+    FIELD.PRICE_INFO,
+    FIELD.TICKET_TYPE,
+    FIELD.ROUND_TICKET_NUMBER,
+    FIELD.MONTHLY_TICKET_NUMBER,
+    FIELD.OPEN_DAYS,
+    FIELD.TICKET_INFO
+  ],
+  유의사항: [FIELD.LIMITS_INFO, FIELD.ACCIDENT_INFO, FIELD.ABANDONMENT_INFO],
+  픽드랍: [
+    FIELD.PICKDROP_STATE,
+    FIELD.PICKDROP_NOTICE,
+    FIELD.PICKDROP_REQUEST,
+    FIELD.PICKDROP_TYPE,
+    FIELD.PICKDROP_MEMO,
+    FIELD.PICKDROP_INFO,
+    FIELD.PICKDROP_INFO_TERM
+  ]
+};
+
+interface ConfigInterface {
+  excludeSteps?: NonEmptyArray<STEP_KEYS> | null;
+  field: string;
+  enable?: boolean;
+}
+
+/**
+ * 주어진 필드에 대해 지정된 스텝의 활성화 또는 비활성화 상태를 바탕으로 해당 필드의 스텝 인덱스를 가져옵니다.
+ * 기본적으로 모든 스텝은 활성화되며, `excludeSteps`를 통해 특정 스텝들만 비활성화할 수 있습니다.
+ *
+ * @param {Object} params - 스텝 결정을 위한 설정 파라미터
+ * @param {NonEmptyMatrix<STEP_KEYS> | null} [params.excludeSteps] - 활성화 상태를 변경할 스텝들의 배열. 이 배열에 있는 스텝들은 `enable`의 반대 상태로 설정됩니다.
+ * @param {string} params.field - 스텝 번호를 찾고자 하는 필드 이름
+ * @param {boolean} [params.enable=true] - 스텝들을 활성화할지 여부를 결정합니다. 기본값은 true로, 모든 스텝을 활성화합니다. `excludeSteps`가 주어지면, 해당 스텝들만 비활성화됩니다.
+ * @returns {number | undefined} - 필드가 속한 스텝의 인덱스를 반환합니다. 해당 필드가 어느 스텝에도 속하지 않거나 지정된 스텝이 비활성화된 경우 undefined를 반환합니다.
+ */
+export function getFieldStep({
+  excludeSteps = null,
+  field,
+  enable = true
+}: ConfigInterface): number | undefined {
+  const stepsActive: { [key in STEP_KEYS]: boolean } = {
+    견주정보: enable,
+    강아지정보: enable,
+    이용권: enable,
+    유의사항: enable,
+    픽드랍: enable
+  };
+
+  // excludeSteps가 주어지면, 해당 스텝만 반대 상태로 설정
+  if (excludeSteps) {
+    excludeSteps.forEach((step) => {
+      stepsActive[step] = !enable;
+    });
+  }
+
+  // 필드가 속한 스텝 번호 찾기
+  for (const stepName of STEP_KEYS) {
+    if (stepsActive[stepName] && stepFields[stepName].includes(field)) {
+      return STEP_KEYS.indexOf(stepName as STEP_KEYS); // 스텝 번호 반환
+    }
+  }
+
+  return undefined; // 필드가 어느 스텝에도 속하지 않거나 해당 스텝이 비활성화된 경우
+}
 
 export const ADMIN_DOG_DETAIL_INFO_STEP = [
   "강아지 정보",

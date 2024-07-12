@@ -1,6 +1,6 @@
 import { PATH } from "constants/path";
 
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -30,7 +30,7 @@ const SubmitButton = () => {
       files: galleryData.files,
       accept: ["image/*", "video/*"],
       path: "test_images/agenda",
-      dogIds: selectedDogIds,
+      dogIdList: selectedDogIds,
       comment: galleryData?.comment
     };
 
