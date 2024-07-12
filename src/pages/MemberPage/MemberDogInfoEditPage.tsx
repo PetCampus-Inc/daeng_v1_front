@@ -28,13 +28,7 @@ const MemberDogInfoEditPage = () => {
       year: dogBirth.year,
       month: dogBirth.month,
       day: dogBirth.day,
-      breedId: rest.breedId,
-      breedName: rest.breedName,
-      dogName: rest.dogName,
-      dogGender: rest.dogGender,
-      dogSize: rest.dogSize,
-      profileUri: rest.profileUri,
-      neutralization: rest.neutralization
+      ...rest
     }
   });
 
