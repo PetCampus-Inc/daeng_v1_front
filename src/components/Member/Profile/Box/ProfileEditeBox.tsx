@@ -4,9 +4,9 @@ import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
 
-import ProfileEdite from "../Edite/ProfileEdite";
+import ProfileEdit from "../Edite/ProfileEdite";
 
-interface IProfileEditeProps {
+interface IProfileEditProps {
   type: string;
   isActive: boolean;
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,13 +14,7 @@ interface IProfileEditeProps {
   fileName: string;
 }
 
-const ProfileEditeBox = ({
-  type,
-  isActive,
-  setIsActive,
-  fileRef,
-  fileName
-}: IProfileEditeProps) => {
+const ProfileEditBox = ({ type, isActive, setIsActive, fileRef, fileName }: IProfileEditProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
@@ -49,7 +43,7 @@ const ProfileEditeBox = ({
 
   return (
     <>
-      <ProfileEdite
+      <ProfileEdit
         isActive={isActive}
         setIsActive={setIsActive}
         profile={profile}
@@ -63,4 +57,4 @@ const ProfileEditeBox = ({
   );
 };
 
-export default ProfileEditeBox;
+export default ProfileEditBox;

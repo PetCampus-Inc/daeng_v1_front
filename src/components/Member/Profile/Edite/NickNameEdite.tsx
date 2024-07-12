@@ -2,12 +2,12 @@ import { TextInput } from "components/common";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
-interface INickNameEditeProps {
+interface INickNameEditProps {
   handleBlur: () => void;
   handleFocus: () => void;
 }
 
-const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
+const NickNameEdit = ({ handleBlur, handleFocus }: INickNameEditProps) => {
   const { register, getValues } = useFormContext();
 
   return (
@@ -26,7 +26,7 @@ const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
   );
 };
 
-export default NickNameEdite;
+export default NickNameEdit;
 
 const InputStyle = css`
   padding: 12px 18px;

@@ -7,7 +7,7 @@ import { ThemeConfig } from "styles/ThemeConfig";
 
 import * as S from "../styles";
 
-const RoleEdite = () => {
+const RoleEdit = () => {
   const [currentRelation, setCurrentRelation] = useState<string>("");
   const [isShowRoles, setIsShowRoles] = useState(false);
   const { register, setValue, watch } = useFormContext();
@@ -24,8 +24,8 @@ const RoleEdite = () => {
   };
 
   return (
-    <S.RoleEditeContainer>
-      <S.RoleEditeButton
+    <S.RoleEditContainer>
+      <S.RoleEditButton
         width="100%"
         height="49px"
         textcolor={currentRelation ? ThemeConfig.colors.gray_1 : ThemeConfig.colors.gray_3}
@@ -33,7 +33,7 @@ const RoleEdite = () => {
         handleClick={handleShowRoles}
       >
         {currentRelation ? currentRelation : "호칭선택"}
-      </S.RoleEditeButton>
+      </S.RoleEditButton>
 
       {isShowRoles && (
         <S.RoleSelectWrapper direction="column">
@@ -51,8 +51,8 @@ const RoleEdite = () => {
           ))}
         </S.RoleSelectWrapper>
       )}
-    </S.RoleEditeContainer>
+    </S.RoleEditContainer>
   );
 };
 
-export default RoleEdite;
+export default RoleEdit;

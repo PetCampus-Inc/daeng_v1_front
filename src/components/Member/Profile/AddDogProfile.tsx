@@ -4,7 +4,7 @@ import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
 import { useRef, useState } from "react";
 
-import ProfileEditeBox from "./Box/ProfileEditeBox";
+import ProfileEditBox from "./Box/ProfileEditeBox";
 
 const AddDogProfile = () => {
   const [isDogActive, setDogIsActive] = useState(false);
@@ -20,7 +20,7 @@ const AddDogProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEditeBox
+        <ProfileEditBox
           type={PROFILE_NAME.DOG}
           isActive={isDogActive}
           setIsActive={setDogIsActive}

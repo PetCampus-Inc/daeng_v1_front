@@ -122,12 +122,10 @@ const DogInfo = ({ dogId }: IProps) => {
                 <S.DogName>{data.dogName}</S.DogName>
                 <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
               </S.Title>
-              <S.Editebutton
-                onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}
-              >
+              <S.Editbutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}>
                 <span>수정</span>
                 <ArrowRightIcon />
-              </S.Editebutton>
+              </S.Editbutton>
             </S.TopInfoBox>
             <Flex wrap="wrap" gap="8">
               <S.InfoText>
@@ -169,7 +167,7 @@ const DogInfo = ({ dogId }: IProps) => {
             </S.Icon>
             <S.DogMoreInfo>픽드랍 메모</S.DogMoreInfo>
           </Flex>
-          <S.DogMoreInfoEditeButton
+          <S.DogMoreInfoEditButton
             onClick={() =>
               openTextAreaPopup(
                 "픽드랍 메모",
@@ -179,7 +177,7 @@ const DogInfo = ({ dogId }: IProps) => {
             }
           >
             수정
-          </S.DogMoreInfoEditeButton>
+          </S.DogMoreInfoEditButton>
         </S.TopInfoBox>
         <S.DogMoreInfoText>{data.pickDropMemo ? data.pickDropMemo : ""}</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
@@ -192,7 +190,7 @@ const DogInfo = ({ dogId }: IProps) => {
             </S.Icon>
             <S.DogMoreInfo>알러지 및 질병</S.DogMoreInfo>
           </Flex>
-          <S.DogMoreInfoEditeButton
+          <S.DogMoreInfoEditButton
             onClick={() =>
               openTextAreaPopup(
                 "알러지 및 질병",
@@ -202,7 +200,7 @@ const DogInfo = ({ dogId }: IProps) => {
             }
           >
             수정
-          </S.DogMoreInfoEditeButton>
+          </S.DogMoreInfoEditButton>
         </S.TopInfoBox>
         <S.DogMoreInfoText>{data.allergyDisease ? data.allergyDisease : ""}</S.DogMoreInfoText>
       </S.DogMoreInfoCard>
@@ -216,7 +214,7 @@ const DogInfo = ({ dogId }: IProps) => {
             </S.Icon>
             <S.DogMoreInfo>예방접종 파일</S.DogMoreInfo>
           </Flex>
-          <S.DogMoreInfoEditeButton>추가 업로드</S.DogMoreInfoEditeButton>
+          <S.DogMoreInfoEditButton>추가 업로드</S.DogMoreInfoEditButton>
         </S.TopInfoBox>
         <S.CarouselContainer>
           <S.CarouselWrapper>

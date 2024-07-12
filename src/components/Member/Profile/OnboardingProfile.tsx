@@ -5,9 +5,9 @@ import { Text } from "components/common/Text";
 import useFocus from "hooks/common/useFocus";
 import { useRef, useState } from "react";
 
-import ProfileEditeBox from "./Box/ProfileEditeBox";
-import NickNameEdite from "./Edite/NickNameEdite";
-import RoleEdite from "./Edite/RoleEdite";
+import ProfileEditBox from "./Box/ProfileEditeBox";
+import NickNameEdit from "./Edite/NickNameEdite";
+import RoleEdit from "./Edite/RoleEdite";
 
 const OnboardingProfile = () => {
   const { handleFocus, handleBlur } = useFocus();
@@ -29,14 +29,14 @@ const OnboardingProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEditeBox
+        <ProfileEditBox
           type={PROFILE_NAME.MEMBER}
           isActive={isMyActive}
           setIsActive={setMyIsActive}
           fileRef={myFileInputRef}
           fileName={FILE_URI_NAME.MEMBER}
         />
-        <ProfileEditeBox
+        <ProfileEditBox
           type={PROFILE_NAME.DOG}
           isActive={isDogActive}
           setIsActive={setDogIsActive}
@@ -49,8 +49,8 @@ const OnboardingProfile = () => {
           닉네임
         </Text>
         <Flex align="center" gap="2">
-          <NickNameEdite handleFocus={handleFocus} handleBlur={handleBlur} />의
-          <RoleEdite />
+          <NickNameEdit handleFocus={handleFocus} handleBlur={handleBlur} />의
+          <RoleEdit />
         </Flex>
       </Flex>
     </>

@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
-interface IMyInfoEditeProps {
+interface IMyInfoEditProps {
   isShowRoles?: boolean;
 }
 
 export const MyProfileWrapper = styled.section.withConfig({
   shouldForwardProp: (prop) => prop !== "isShowRoles"
-})<IMyInfoEditeProps>`
+})<IMyInfoEditProps>`
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(112px, auto));
@@ -14,7 +14,7 @@ export const MyProfileWrapper = styled.section.withConfig({
   margin-bottom: ${(props) => (props.isShowRoles ? "21px" : "82px")};
 `;
 
-export const ProfileEditeWrapper = styled.section`
+export const ProfileEditWrapper = styled.section`
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -27,7 +27,7 @@ export const ProfileBox = styled.div`
   grid-row: 1 / 3;
 `;
 
-export const ProfileEditeBox = styled.div`
+export const ProfileEditBox = styled.div`
   position: relative;
   width: 107px;
   height: 0;
@@ -44,7 +44,7 @@ export const UserImage = styled.img`
   border-radius: 40px;
 `;
 
-export const ProfileEditeButton = styled.button`
+export const ProfileEditButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -10,7 +10,7 @@ import { useFormContext } from "react-hook-form";
 import ProfileActiveBox from "../Box/ProfileActiveBox";
 import * as S from "../styles";
 
-interface IProfileEdite {
+interface IProfileEdit {
   isActive: boolean;
   setIsActive: (isActive: boolean) => void;
   handleClick: (type: string) => void;
@@ -21,7 +21,7 @@ interface IProfileEdite {
   type: string;
 }
 
-const ProfileEdite = ({
+const ProfileEdit = ({
   isActive,
   setIsActive,
   handleClick,
@@ -30,7 +30,7 @@ const ProfileEdite = ({
   handleFileChange,
   registerText,
   type
-}: IProfileEdite) => {
+}: IProfileEdit) => {
   const { register } = useFormContext();
 
   return (
@@ -59,4 +59,4 @@ const ProfileEdite = ({
   );
 };
 
-export default ProfileEdite;
+export default ProfileEdit;

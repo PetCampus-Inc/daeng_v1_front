@@ -8,7 +8,7 @@ interface IEditProps {
   br?: string;
 }
 
-export const RoleEditeButton = styled(Button)`
+export const RoleEditButton = styled(Button)`
   max-width: 112px;
   min-height: 49px;
 `;
@@ -18,7 +18,7 @@ export const RoleSelectButton = styled(Button)`
   min-height: 49px;
 `;
 
-export const RoleEditeContainer = styled.div`
+export const RoleEditContainer = styled.div`
   position: relative;
   flex: 1;
 `;
