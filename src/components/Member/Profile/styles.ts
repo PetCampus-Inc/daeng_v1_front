@@ -32,7 +32,11 @@ export const RoleSelectWrapper = styled(Flex)`
   width: 100%;
 `;
 
-export const UploadProfileButton = styled.button<IEditProps>`
+export const ProfileBox = styled.div`
+  position: relative;
+`;
+
+export const UploadProfileButton = styled.div<IEditProps>`
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -61,6 +65,20 @@ export const UploadProfileButton = styled.button<IEditProps>`
       display: block;
     }
   }
+`;
+
+export const PencilIconBox = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  width: 28px;
+  height: 28px;
+  background-color: ${({ theme }) => theme.colors.br_4};
+  border: 2px solid ${({ theme }) => theme.colors.white};
 `;
 
 export const ActiveBox = styled.div``;
@@ -105,22 +123,4 @@ export const SavaProfileButton = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-`;
-
-export const ProfileBox = styled.div`
-  position: relative;
-`;
-
-export const PencilIconBox = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  border-radius: 50px;
-  width: 28px;
-  height: 28px;
-  background-color: ${({ theme }) => theme.colors.br_4};
-  border: 2px solid ${({ theme }) => theme.colors.white};
 `;
