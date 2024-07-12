@@ -5,13 +5,13 @@ import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
 
-interface IProfileEditeProps {
+interface IProfileUpdateProps {
   type: string;
   fileRef: React.RefObject<HTMLInputElement>;
   fileName: string;
 }
 
-const ProfileUpdateBox = ({ type, fileRef, fileName }: IProfileEditeProps) => {
+const ProfileUpdateBox = ({ type, fileRef, fileName }: IProfileUpdateProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 

@@ -12,11 +12,11 @@ import { useFormContext } from "react-hook-form";
 import ProfileUpdateBox from "./ProfileUpdateBox";
 import { Card, Text } from "./styles";
 
-interface DogInfoProps {
+interface IDogInfoProps {
   requiredItems?: Map<number, boolean>;
 }
 
-const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
+const DogDetailInfoEdit = ({ requiredItems }: IDogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
   const fileInputRef = useRef<HTMLInputElement>(null);
 

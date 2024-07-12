@@ -9,7 +9,7 @@ import { useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
-interface IProfileEdite {
+interface IProfileUpdateProps {
   handleClick: (type: string) => void;
   profile: IFile[];
   fileInputRef: React.LegacyRef<HTMLInputElement> | null;
@@ -25,7 +25,7 @@ const ProfileUpdate = ({
   handleFileChange,
   registerText,
   type
-}: IProfileEdite) => {
+}: IProfileUpdateProps) => {
   const { register, getValues } = useFormContext();
   const { profileUri } = getValues();
   return (
