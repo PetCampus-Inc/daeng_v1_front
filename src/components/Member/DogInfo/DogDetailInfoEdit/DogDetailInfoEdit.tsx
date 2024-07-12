@@ -2,7 +2,7 @@ import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { FIELD, FIELD_KEYS } from "constants/field";
 import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
 
-import { TextInput } from "components/common";
+import { Flex, TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import BreedInput from "components/Enrollment/Input/BreedInput";
@@ -63,11 +63,11 @@ const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Text>생일</Text>
-        <div style={{ display: "flex", gap: "5px" }}>
+        <Flex gap="5">
           <SelectNumber name="year" numberList={yearsArray} watch={watch} setValue={setValue} />
           <SelectNumber name="month" numberList={monthsArray} watch={watch} setValue={setValue} />
           <SelectNumber name="day" numberList={daysArray} watch={watch} setValue={setValue} />
-        </div>
+        </Flex>
       </Card>
       <Card>
         <Text>중성화 여부</Text>
