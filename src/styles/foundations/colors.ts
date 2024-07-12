@@ -39,4 +39,4 @@ export const colors = {
   navBg: "#ffc078",
   lightMainColor: "#fdf1e8",
   interfaceBg: "#f7f9fc"
-};
+} as const;

@@ -1,8 +1,8 @@
 import { type CSSProp, css } from "styled-components";
 
-import type { ButtonVariant } from "../types";
+import type { ButtonOption, ButtonVariant } from "../types";
 
-export const getRadius = (radii: ButtonVariant): CSSProp => {
+export const getRadius = (radii: NonNullable<ButtonOption["variant"]>): CSSProp => {
   const radiusStyles: Record<ButtonVariant, CSSProp> = {
     rectangle: css`
       border-radius: 8px;

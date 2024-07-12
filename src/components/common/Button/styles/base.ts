@@ -1,31 +1,38 @@
-import styled, { CSSProp, css } from "styled-components";
+import { getColorStyle, getMarginStyle, getPaddingStyle } from "components/common/style-modules";
+import styled, { css } from "styled-components";
 
 import { getColorScheme } from "./colorScheme";
-import { getPadding } from "./margin";
 import { getRadius } from "./radius";
 import { getSize } from "./size";
 import { getWidth } from "./width";
 
-import type {
-  ButtonColorScheme,
-  ButtonVariant,
-  ButtonSizeSet,
-  ButtonWidth,
-  MarginOption
-} from "../types";
-import type { ColorKeys, TypoKeys } from "styles/types";
+import type { ButtonOption } from "../types";
 
-interface StyledButtonProps extends MarginOption {
-  colorScheme: ButtonColorScheme;
-  variant: ButtonVariant;
-  size: ButtonSizeSet;
-  width: ButtonWidth;
-  typo: TypoKeys;
-  gap?: number;
-  color?: ColorKeys;
-  bg?: ColorKeys;
-  css?: CSSProp;
-}
+const hasAnySpacingProp = (props: ButtonOption): boolean => {
+  const spacingProps = [
+    "m",
+    "p",
+    "margin",
+    "padding",
+    "mt",
+    "pt",
+    "mr",
+    "pr",
+    "mb",
+    "pb",
+    "ml",
+    "pl",
+    "mx",
+    "my",
+    "px",
+    "py",
+    "marginX",
+    "marginY",
+    "paddingX",
+    "paddingY"
+  ];
+  return spacingProps.some((prop) => props[prop as keyof ButtonOption] !== undefined);
+};
 
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) =>
@@ -36,44 +43,80 @@ export const StyledButton = styled.button.withConfig({
       "width",
       "typo",
       "bg",
+      "bgColor",
+      "backgroundColor",
       "color",
       "gap",
       "css",
+      "m",
+      "margin",
+      "mt",
+      "marginTop",
+      "mr",
+      "marginRight",
+      "me",
+      "marginEnd",
+      "mb",
+      "marginBottom",
+      "ml",
+      "marginLeft",
+      "ms",
+      "marginStart",
+      "mx",
+      "marginX",
+      "my",
+      "marginY",
+      "p",
+      "padding",
       "pt",
-      "pb",
-      "pl",
+      "paddingTop",
       "pr",
+      "paddingRight",
+      "pe",
+      "paddingEnd",
+      "pb",
+      "paddingBottom",
+      "pl",
+      "paddingLeft",
+      "ps",
+      "paddingStart",
+      "px",
+      "paddingX",
+      "py",
+      "paddingY",
+      "marginBlock",
+      "marginInline",
       "paddingBlock",
       "paddingInline"
     ].includes(prop)
-})<StyledButtonProps>`
+})<ButtonOption>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: none;
 
-  ${({ variant }) => getRadius(variant)};
-  ${({ width }) => getWidth(width)};
+  ${({ variant }) => variant && getRadius(variant)};
+  ${({ width }) => width && getWidth(width)};
 
-  ${({ size, pt, pb, pl, pr, paddingBlock, paddingInline }) =>
-    pt !== undefined ||
-    pb !== undefined ||
-    pl !== undefined ||
-    pr !== undefined ||
-    paddingBlock !== undefined ||
-    paddingInline !== undefined
-      ? getPadding({ pt, pb, pl, pr, paddingBlock, paddingInline })
-      : getSize(size)};
+  ${(props) => {
+    if (hasAnySpacingProp(props)) {
+      return css`
+        ${getMarginStyle(props)}
+        ${getPaddingStyle(props)}
+      `;
+    }
+    return props.size ? getSize(props.size) : null;
+  }};
 
-  ${({ theme, colorScheme, color, bg }) =>
-    color || bg
-      ? css`
-          color: ${theme.colors[color ?? ""]};
-          background-color: ${theme.colors[bg ?? ""]};
-        `
-      : getColorScheme(colorScheme)};
+  ${(props) => {
+    const { colorScheme, color, bg, bgColor, backgroundColor } = props;
+    if (color || bg || bgColor || backgroundColor) {
+      return getColorStyle({ color, bg, bgColor, backgroundColor });
+    }
+    return colorScheme ? getColorScheme(colorScheme) : null;
+  }};
 
-  ${({ theme, typo }) => theme.typo[typo]};
+  ${({ theme, typo }) => typo && theme.typo[typo]};
   gap: ${({ gap }) => (gap ? `${gap}px` : "")};
 
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;

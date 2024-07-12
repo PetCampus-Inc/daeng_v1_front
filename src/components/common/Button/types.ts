@@ -1,17 +1,8 @@
-import { type ElementType, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import { type CSSProp } from "styled-components";
 
-import type { PolymorphicComponentProp } from "../polymorphic";
-import type { ColorKeys, TypoKeys } from "styles/types";
-
-export interface MarginOption {
-  pt?: number;
-  pb?: number;
-  pr?: number;
-  pl?: number;
-  paddingInline?: number;
-  paddingBlock?: number;
-}
+import type { ColorProps, SpacingProps } from "../style-props.types";
+import type { TypoKeys } from "styles/types";
 
 export type ButtonSizeSet = "xs" | "sm" | "md" | "lg";
 export type ButtonColorScheme =
@@ -30,9 +21,8 @@ export type ButtonColorScheme =
 export type ButtonVariant = "rectangle" | "pill" | number;
 export type ButtonWidth = "full" | "auto" | number;
 
-export type ButtonProps<C extends ElementType> = PolymorphicComponentProp<
-  C,
-  {
+export type ButtonOption = SpacingProps &
+  ColorProps & {
     /**
      * 버튼의 변형 타입
      * @default "rectangle"
@@ -60,14 +50,6 @@ export type ButtonProps<C extends ElementType> = PolymorphicComponentProp<
      */
     typo?: TypoKeys;
     /**
-     * 버튼의 배경 색상
-     */
-    bg?: ColorKeys;
-    /**
-     * 버튼의 글자 색상
-     */
-    color?: ColorKeys;
-    /**
      * 버튼의 간격
      */
     gap?: number;
@@ -83,6 +65,4 @@ export type ButtonProps<C extends ElementType> = PolymorphicComponentProp<
      * 버튼에 적용할 스타일
      */
     css?: CSSProp;
-  }
-> &
-  MarginOption;
+  };

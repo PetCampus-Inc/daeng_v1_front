@@ -10,4 +10,4 @@ export const foundations = {
   typo,
   shadows,
   transition
-};
+} as const;

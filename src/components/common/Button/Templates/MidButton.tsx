@@ -1,8 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import { Button } from "../Button";
-
-import type { ButtonProps } from "../types";
+import { Button, type ButtonProps } from "../Button";
 
 interface MidButtonProps extends ButtonProps<"button"> {
   colorScheme?: "red_2";

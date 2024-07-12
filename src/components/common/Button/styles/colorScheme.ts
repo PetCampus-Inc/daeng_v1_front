@@ -3,12 +3,13 @@ import { ThemeConfig } from "styles/ThemeConfig";
 import { hexToHSL } from "utils/color";
 
 import type { ButtonColorScheme } from "../types";
+import type { ColorKeys } from "styles/types";
 
 const theme = ThemeConfig;
 
 export interface ColorSchemeStyles {
-  background: string;
-  color: string;
+  background: ColorKeys;
+  color: ColorKeys;
 }
 
 export const colorSchemes: Record<ButtonColorScheme, ColorSchemeStyles> = {
@@ -26,7 +27,7 @@ export const colorSchemes: Record<ButtonColorScheme, ColorSchemeStyles> = {
   red_2: { background: "red_2", color: "red_1" }
 };
 
-const createColorScheme = (color: string) => {
+const createColorScheme = (color: ColorKeys) => {
   const hexColor = theme.colors[color];
   return {
     base: hexColor,

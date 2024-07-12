@@ -40,7 +40,7 @@ export const ListItem = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_4};
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  ${({ theme }) => theme.typo.body1_16_R}
+  ${({ theme }) => theme.typo.body2_16_R}
 
   &:hover, &:active {
     background-color: ${({ theme }) => theme.colors.gray_5};

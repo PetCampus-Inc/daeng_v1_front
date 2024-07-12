@@ -1,16 +1,16 @@
-import { type ElementType, forwardRef, ForwardRefExoticComponent, RefAttributes } from "react";
+import { type ElementType, forwardRef, type ReactElement } from "react";
 
 import ButtonAddon from "./ButtonAddon";
 import { StyledButton } from "./styles";
-import { type ButtonProps } from "./types";
-import { PolymorphicComponentPropsWithRef, type PolymorphicRef } from "../polymorphic";
 
-type ButtonType = ForwardRefExoticComponent<
-  PolymorphicComponentPropsWithRef<ElementType, ButtonProps<ElementType>> &
-    RefAttributes<ElementType>
->;
+import type { ButtonOption } from "./types";
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../polymorphic";
 
-export const Button: ButtonType = forwardRef(function Button<C extends ElementType = "button">(
+export type ButtonProps<C extends ElementType> = PolymorphicComponentPropsWithRef<C, ButtonOption>;
+
+type ButtonComponent = <C extends ElementType = "button">(props: ButtonProps<C>) => ReactElement;
+
+export const Button: ButtonComponent = forwardRef(function Button<C extends ElementType = "button">(
   {
     as,
     variant = "rectangle",
@@ -45,7 +45,7 @@ export const Button: ButtonType = forwardRef(function Button<C extends ElementTy
       <ButtonContent {...contentProps} />
     </StyledButton>
   );
-});
+}) as ButtonComponent;
 
 type ButtonContentProps = Pick<ButtonProps<ElementType>, "leftAddon" | "rightAddon" | "children">;
 
