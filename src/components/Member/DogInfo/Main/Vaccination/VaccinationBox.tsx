@@ -1,12 +1,12 @@
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Box, Flex } from "components/common";
-import CarouselModal from "components/common/Modal/CarouselModal";
-import { useGetMemberDogDetailnfo, usePostMembeVaccination } from "hooks/api/member/member";
+import { CarouselModal } from "components/common/Modal/CarouselModal";
+import { useGetMemberDogDetailInfo, usePostMembeVaccination } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { ChangeEvent, useRef, useState } from "react";
 import { useForm, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { IDogVaccination } from "types/member/home.types";
+import { IDogVaccination } from "types/member/main.types";
 import { getFilePreview } from "utils/thumb";
 
 import { StyledHiddenUpload } from "./styles";
@@ -24,7 +24,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const { register, setValue, watch } = useFormContext();
   const [files, setFiles] = useState<IFile[]>([]);
   const methods = useForm({ mode: "onSubmit" });
-  const { data } = useGetMemberDogDetailnfo(dogId);
+  const { data } = useGetMemberDogDetailInfo(dogId);
   const mutatePostVaccination = usePostMembeVaccination(dogId);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const acceptType = Array.isArray(["image/*"]) ? ["image/*"].join(",") : ["image/*"];
@@ -99,27 +99,6 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
             />
             <S.CarouselText>2023.12.12 업로드</S.CarouselText>
           </S.CarouselCard>
-          {/* <S.CarouselCard>
-            <img
-              src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="dog_img"
-            />
-            <S.CarouselText>2023.12.12 업로드</S.CarouselText>
-          </S.CarouselCard>
-          <S.CarouselCard>
-            <img
-              src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="dog_img"
-            />
-            <S.CarouselText>2023.12.12 업로드</S.CarouselText>
-          </S.CarouselCard>
-          <S.CarouselCard>
-            <img
-              src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="dog_img"
-            />
-            <S.CarouselText>2023.12.12 업로드</S.CarouselText>
-          </S.CarouselCard> */}
         </S.CarouselWrapper>
       </S.CarouselContainer>
       <StyledThumbList></StyledThumbList>
