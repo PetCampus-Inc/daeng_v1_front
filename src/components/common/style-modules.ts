@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { ThemeConfig } from "styles/ThemeConfig";
+import { themeConfig } from "styles/themeConfig";
 import { remCalc } from "utils/calculator";
 import { isNumber } from "utils/typeGuard";
 
@@ -97,18 +97,18 @@ export const getBorderStyle = (props: BorderProps & RadiusProps) => css`
   border-right: ${props.borderRight ? `${props.borderRight}px solid` : undefined};
   border-bottom: ${props.borderBottom ? `${props.borderBottom}px solid` : undefined};
   border-left: ${props.borderLeft ? `${props.borderLeft}px solid` : undefined};
-  border-color: ${props.borderColor ? ThemeConfig.colors[props.borderColor] : undefined};
+  border-color: ${props.borderColor ? themeConfig.colors[props.borderColor] : undefined};
   border-radius: ${getBorderRadiusStyle(props.borderRadius || props.radius)};
 `;
 
 export const getColorStyle = (props: ColorProps) => css`
-  background: ${props.bg ? ThemeConfig.colors[props.bg] : undefined};
+  background: ${props.bg ? themeConfig.colors[props.bg] : undefined};
   background-color: ${props.bgColor
-    ? ThemeConfig.colors[props.bgColor]
+    ? themeConfig.colors[props.bgColor]
     : props.backgroundColor
-      ? ThemeConfig.colors[props.backgroundColor]
+      ? themeConfig.colors[props.backgroundColor]
       : undefined};
-  color: ${props.color ? ThemeConfig.colors[props.color] : undefined};
+  color: ${props.color ? themeConfig.colors[props.color] : undefined};
 `;
 
 export const getPositionStyle = (props: PositionProps) => css`
@@ -121,7 +121,6 @@ export const getPositionStyle = (props: PositionProps) => css`
 `;
 
 export const getFlexStyle = (props: FlexBoxProps) => css`
-  display: flex;
   flex-direction: ${props.direction};
   justify-content: ${props.justify};
   align-items: ${props.align};

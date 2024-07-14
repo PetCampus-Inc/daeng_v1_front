@@ -1,4 +1,4 @@
-import { ThemeConfig } from "styles/ThemeConfig";
+import { themeConfig } from "styles/themeConfig";
 import { Poop } from "types/admin/attendance.type";
 
 const PoopWarning = ({ poop }: { poop?: Poop }) => {
@@ -10,7 +10,7 @@ const PoopWarning = ({ poop }: { poop?: Poop }) => {
         width="62"
         height="62"
         rx="8"
-        fill={isSelected ? ThemeConfig.colors.yellow_3 : "#E9E9E9"}
+        fill={isSelected ? themeConfig.colors.yellow_3 : "#E9E9E9"}
       />
       <rect
         x="46.5"
@@ -19,7 +19,7 @@ const PoopWarning = ({ poop }: { poop?: Poop }) => {
         height="31"
         rx="2"
         transform="rotate(90 46.5 26.2852)"
-        fill={isSelected ? ThemeConfig.colors.red_1 : "#B5B5B5"}
+        fill={isSelected ? themeConfig.colors.red_1 : "#B5B5B5"}
       />
       <rect
         x="35.8672"
@@ -28,7 +28,7 @@ const PoopWarning = ({ poop }: { poop?: Poop }) => {
         height="30"
         rx="2"
         transform="rotate(-180 35.8672 46)"
-        fill={isSelected ? ThemeConfig.colors.red_1 : "#B5B5B5"}
+        fill={isSelected ? themeConfig.colors.red_1 : "#B5B5B5"}
       />
     </svg>
   );

@@ -92,8 +92,8 @@ export const StyledBox = styled.div.withConfig({
   ${(props) => getMarginStyle(props)};
   ${(props) => getPaddingStyle(props)};
   ${(props) => getBorderStyle(props)};
-  ${(props) => getColorStyle(props)}
-  ${(props) => getPositionStyle(props)}
+  ${(props) => getColorStyle(props)};
+  ${(props) => getPositionStyle(props)};
 
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.textAlign};
