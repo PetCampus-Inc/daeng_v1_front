@@ -2,14 +2,19 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertSetting from "components/Admin/MyPage/AlertSetting";
 import DeleteAccount from "components/Admin/MyPage/DeleteAccount";
 import PolicySetting from "components/Admin/MyPage/PolicySetting";
-import { Box, Layout, Text } from "components/common";
+import { Box, Flex, Layout, Text } from "components/common";
+import { Button } from "components/common/Button";
+import { XSmallButton } from "components/common/Button/Templates";
 import Header from "components/common/Header";
 import useStep from "hooks/common/useStep";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminSettingPage = () => {
   const navigate = useNavigate();
   const { currentStep, setStep } = useStep(3);
+  const [isNeedUpdate, setIsNeedUpdate] = useState(true);
+
   return (
     <>
       {currentStep === 0 && (
@@ -52,11 +57,18 @@ const AdminSettingPage = () => {
               borderBottom={1}
               borderColor="gray_5"
             >
-              <Text typo="body2_16_R" color="gray_1">
-                버전정보 및 업데이트
-              </Text>
-              <Text typo="caption1_12_R" color="gray_2">
-                가장 최신 버전입니다
+              <Flex justify="space-between">
+                <Text typo="body2_16_R" color="gray_1">
+                  버전정보 및 업데이트
+                </Text>
+                {isNeedUpdate && (
+                  <Button variant="pill" colorScheme="primary" typo="caption1_12_B" size="xs">
+                    업데이트 하기
+                  </Button>
+                )}
+              </Flex>
+              <Text typo="caption1_12_R" color={isNeedUpdate ? "primaryColor" : "gray_2"}>
+                {isNeedUpdate ? "업데이트가 필요합니다" : "가장 최신 버전입니다"}
               </Text>
               <Text typo="caption1_12_R" color="gray_2">
                 똑독 2.0
