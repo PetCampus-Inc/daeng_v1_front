@@ -4,6 +4,7 @@ import { PATH } from "constants/path";
 
 import ApiErrorBoundary from "ApiErrorBoundary";
 import App from "App";
+import { Layout } from "components/common";
 import * as Pages from "pages";
 import LoaderErrorPage from "pages/ErrorPage/LoaderErrorPage";
 import { Suspense } from "react";
@@ -17,7 +18,9 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
     {
       element: (
         <ApiErrorBoundary>
-          <App />
+          <Layout type="global">
+            <App />
+          </Layout>
         </ApiErrorBoundary>
       ),
       errorElement: <LoaderErrorPage />,
