@@ -1,34 +1,29 @@
 import usePostMessage from "hooks/native/usePostMessage";
 import NativeReceiver from "libs/nativeReceiver";
 import { useCallback, useEffect, useState } from "react";
-import { SaveImageProgress, WebViewMessage } from "types/native/message.types";
+import { WebViewGetMessage } from "types/native/message.types";
 
 interface NativeOptions {
-  onProgress?: (progress: SaveImageProgress) => void;
-  onComplete?: (success: boolean) => void;
+  onProgress?: (progress: number) => void;
+  onSuccess?: (success: boolean) => void;
 }
 
-const useSaveImage = ({ onProgress, onComplete }: NativeOptions = {}) => {
+const useSaveImage = ({ onProgress, onSuccess }: NativeOptions = {}) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [progress, setProgress] = useState<SaveImageProgress | null>(null);
+  const [progress, setProgress] = useState<number | null>(null);
 
   const { post } = usePostMessage();
 
   const save = useCallback(
-    (imageUrls: string[]) => {
+    (imageUrls: string | string[]) => {
       setLoading(true);
       post("SAVE_IMAGE", imageUrls);
     },
     [post]
   );
 
-  const reset = useCallback(() => {
-    setLoading(false);
-    setProgress(null);
-  }, []);
-
   const updateProgress = useCallback(
-    (progress: SaveImageProgress) => {
+    (progress: number) => {
       setProgress(progress);
       onProgress?.(progress);
     },
@@ -37,14 +32,16 @@ const useSaveImage = ({ onProgress, onComplete }: NativeOptions = {}) => {
 
   const completeImageSave = useCallback(
     (data: boolean) => {
-      reset();
-      onComplete?.(data);
+      onSuccess?.(data);
+
+      setLoading(false);
+      setProgress(null);
     },
-    [onComplete, reset]
+    [onSuccess]
   );
 
   useEffect(() => {
-    const handleMessage = ({ type, data }: WebViewMessage) => {
+    const handleMessage = ({ type, data }: WebViewGetMessage) => {
       switch (type) {
         case "SAVE_IMAGE_SUCCESS":
           completeImageSave(data);
@@ -59,7 +56,7 @@ const useSaveImage = ({ onProgress, onComplete }: NativeOptions = {}) => {
     return () => {
       NativeReceiver.unregisterCallback(handleMessage);
     };
-  }, [updateProgress, completeImageSave, reset]);
+  }, [updateProgress, completeImageSave]);
 
   return { loading, progress, save };
 };

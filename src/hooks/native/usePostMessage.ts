@@ -1,10 +1,16 @@
-import { PostMessage, PostMessageType } from "types/native/message.types";
+import { useCallback } from "react";
+import { MessageData, MessageType } from "types/native/message.types";
 
 const usePostMessage = () => {
-  const post = <T extends PostMessageType>(type: T, data: PostMessage[T]) => {
-    const message = JSON.stringify({ type, data });
-    window.ReactNativeWebView.postMessage(message);
-  };
+  const post = useCallback(
+    <T extends MessageType["POST"]>(type: T, data: MessageData["POST"][T]) => {
+      if (!window.ReactNativeWebView) return;
+
+      const message = JSON.stringify({ type, data });
+      window.ReactNativeWebView.postMessage(message);
+    },
+    []
+  );
 
   return { post };
 };
