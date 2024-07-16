@@ -59,12 +59,12 @@ const AccountInfo = () => {
     <Flex direction="column" gap={24}>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between" align="center">
-          <Text as="label" name="name" typo="body2_16_R" color="darkBlack">
+          <Text as="label" htmlFor="name" typo="body2_16_R" color="darkBlack">
             아이디
           </Text>
           {errors.id && (
             <Text as="span" typo="caption1_12_R" color="red_1">
-              {errors.id.message || "유효한 아이디를 입력해주세요."}
+              {errors.id.message?.toString()}
             </Text>
           )}
           {isValidId && !errors.id && (
@@ -88,12 +88,12 @@ const AccountInfo = () => {
       </Flex>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between" align="center">
-          <Text as="label" name="pwd" typo="body2_16_R" color="darkBlack">
+          <Text as="label" htmlFor="pwd" typo="body2_16_R" color="darkBlack">
             비밀번호
           </Text>
           {errors.pwd && (
             <Text as="span" typo="caption1_12_R" color="red_1">
-              {errors.pwd.message}
+              {errors.pwd.message?.toString()}
             </Text>
           )}
         </Flex>
@@ -119,12 +119,12 @@ const AccountInfo = () => {
       </Flex>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between" align="center">
-          <Text as="label" name="confirmPwd" typo="body2_16_R" color="darkBlack">
+          <Text as="label" htmlFor="confirmPwd" typo="body2_16_R" color="darkBlack">
             비밀번호 확인
           </Text>
           {errors.confirmPwd && (
             <Text as="span" typo="caption1_12_R" color="red_1">
-              {errors.confirmPwd.message}
+              {errors.confirmPwd.message?.toString()}
             </Text>
           )}
         </Flex>

@@ -42,11 +42,11 @@ const UploadBox = () => {
   return (
     <>
       <Box mb={remCalc(36)}>
-        <Text tag="p" typo="body2_16_R" color="black">
+        <Text as="p" typo="body2_16_R" color="black">
           사진 첨부
         </Text>
         <Flex justify="space-between">
-          <Text tag="span" typo="caption1_12_R" color="gray_2">
+          <Text as="span" typo="caption1_12_R" color="gray_2">
             한 번에 최대 {MAX_FILE_COUNT}장 까지 전송이 가능해요
           </Text>
           <Text typo="label2_14_R" color="gray_1">
