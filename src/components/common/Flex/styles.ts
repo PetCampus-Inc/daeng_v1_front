@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-import { getFlexStyle, getMarginStyle, getPaddingStyle, getSizeStyle } from "../style-modules";
+import { getFlexStyle, getMarginStyle, getPaddingStyle, getSizeStyle } from "styles/system";
 
 import type { FlexOptions } from ".";
 

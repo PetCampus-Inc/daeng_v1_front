@@ -24,7 +24,7 @@ import { PreventLeaveModal } from "components/common/Modal";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
-import { isEmpty } from "utils/helper";
+import { isEmpty } from "utils/is";
 
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 

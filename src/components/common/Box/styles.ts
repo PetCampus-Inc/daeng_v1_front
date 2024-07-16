@@ -8,11 +8,12 @@ import {
   getPaddingStyle,
   getPositionStyle,
   getSizeStyle
-} from "../style-modules";
+} from "../../../styles/system";
 
 import type { BoxOptions } from ".";
 
 export const StyledBox = styled.div.withConfig({
+  displayName: "Box",
   shouldForwardProp: (prop) =>
     ![
       "display",
