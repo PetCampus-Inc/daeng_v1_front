@@ -1,10 +1,11 @@
+import { Slot, Slottable } from "components/common/Slot";
 import { type ElementType, forwardRef, type ReactElement } from "react";
 
 import ButtonAddon from "./ButtonAddon";
 import { StyledButton } from "./styles";
 
 import type { ButtonOption } from "./types";
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../polymorphic";
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../../../styles/system";
 
 export type ButtonProps<C extends ElementType> = PolymorphicComponentPropsWithRef<C, ButtonOption>;
 
@@ -12,7 +13,8 @@ type ButtonComponent = <C extends ElementType = "button">(props: ButtonProps<C>)
 
 export const Button: ButtonComponent = forwardRef(function Button<C extends ElementType = "button">(
   {
-    as,
+    asChild,
+    as: Tag,
     variant = "rectangle",
     colorScheme = "primary",
     typo = "label1_16_B",
@@ -25,15 +27,11 @@ export const Button: ButtonComponent = forwardRef(function Button<C extends Elem
   }: ButtonProps<C>,
   ref?: PolymorphicRef<C>
 ) {
-  const contentProps = {
-    leftAddon,
-    rightAddon,
-    children
-  };
+  const Component = asChild ? Slot : Tag;
 
   return (
     <StyledButton
-      as={as || "button"}
+      as={Component}
       ref={ref}
       variant={variant}
       colorScheme={colorScheme}
@@ -42,21 +40,9 @@ export const Button: ButtonComponent = forwardRef(function Button<C extends Elem
       width={width}
       {...rest}
     >
-      <ButtonContent {...contentProps} />
+      {leftAddon && <ButtonAddon>{leftAddon}</ButtonAddon>}
+      <Slottable>{children}</Slottable>
+      {rightAddon && <ButtonAddon>{rightAddon}</ButtonAddon>}
     </StyledButton>
   );
 }) as ButtonComponent;
-
-type ButtonContentProps = Pick<ButtonProps<ElementType>, "leftAddon" | "rightAddon" | "children">;
-
-const ButtonContent = (props: ButtonContentProps) => {
-  const { leftAddon, rightAddon, children } = props;
-
-  return (
-    <>
-      {leftAddon && <ButtonAddon>{leftAddon}</ButtonAddon>}
-      {children}
-      {rightAddon && <ButtonAddon>{rightAddon}</ButtonAddon>}
-    </>
-  );
-};
