@@ -3,11 +3,16 @@ import type { PropsWithChildren } from "react";
 import { StyledContainer } from "./styles";
 import { ColorProps, SpacingProps } from "../style-props.types";
 
-export interface LayoutProps extends ColorProps, Pick<SpacingProps, "px" | "paddingX"> {
-  type?: "global" | "page";
+/**
+ * type: global - App에서 사용
+ * type: main - 메인 페이지에서 사용 (with NavBar)
+ * type: detail - 상세 페이지에서 사용 (without NavBar)
+ */
+export interface LayoutProps extends ColorProps, SpacingProps {
+  type?: "global" | "main" | "detail";
 }
 
-export const Layout = ({ type = "page", children, ...props }: PropsWithChildren<LayoutProps>) => {
+export const Layout = ({ type = "detail", children, ...props }: PropsWithChildren<LayoutProps>) => {
   return (
     <StyledContainer type={type} {...props}>
       {children}

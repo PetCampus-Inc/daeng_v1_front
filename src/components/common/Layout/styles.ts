@@ -1,14 +1,28 @@
 import { css, styled } from "styled-components";
 import { themeConfig } from "styles/themeConfig";
-import { remCalc } from "utils/calculator";
 
-import { getColorStyle } from "../style-modules";
+import { getColorStyle, getPaddingStyle } from "../style-modules";
 
 import type { LayoutProps } from ".";
 
 export const StyledContainer = styled.div.withConfig({
+  displayName: "Layout",
   shouldForwardProp: (prop) =>
-    !["type", "bg", "bgColor", "backgroundColor", "paddingX", "px"].includes(prop)
+    ![
+      "type",
+      "bg",
+      "bgColor",
+      "backgroundColor",
+      "paddingX",
+      "px",
+      "paddingTop",
+      "pt",
+      "paddingBlock",
+      "paddingY",
+      "py",
+      "paddingBottom",
+      "pb"
+    ].includes(prop)
 })<LayoutProps>`
   ${(props) => getColorStyle(props) ?? `background-color: ${props.theme.colors.white}`};
 
@@ -22,23 +36,30 @@ export const StyledContainer = styled.div.withConfig({
     display: none;
   }
 
-  padding-inline: ${({ paddingX, px }) =>
-    paddingX !== undefined ? remCalc(paddingX) : px !== undefined ? remCalc(px) : undefined};
+  ${(props) => getPaddingStyle(props)};
 
   ${({ type }) =>
     type === "global" &&
     css`
-      min-width: ${themeConfig.breakPoints.mobile};
-      max-width: ${themeConfig.breakPoints.tablet};
+      max-width: ${themeConfig.breakPoints.md};
       min-height: 100%;
       margin: 0 auto;
     `}
 
   ${({ type }) =>
-    type === "page" &&
+    type === "main" &&
     css`
       width: 100%;
-      height: 100%;
-      min-height: calc(100vh - 78px - 48px);
+      height: calc(100vh - 78px - 48px);
+      min-height: 100%;
+    `}
+
+
+  ${({ type }) =>
+    type === "detail" &&
+    css`
+      width: 100%;
+      height: calc(100vh - 48px);
+      min-height: 100%;
     `}
 `;
