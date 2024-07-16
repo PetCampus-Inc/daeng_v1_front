@@ -23,11 +23,9 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const navigate = useNavigate();
   const { register, setValue, watch } = useFormContext();
   const [files, setFiles] = useState<IFile[]>([]);
-  const methods = useForm({ mode: "onSubmit" });
   const { data } = useGetMemberDogDetailInfo(dogId);
   const mutatePostVaccination = usePostMembeVaccination(dogId);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const acceptType = Array.isArray(["image/*"]) ? ["image/*"].join(",") : ["image/*"];
 
   const MAX_FILE_COUNT = 20;
 
@@ -74,7 +72,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
           type="file"
           ref={fileInputRef}
           multiple
-          // accept={["image/*"]}
+          accept="image/*"
           onChange={handleFileChange}
           disabled={vaccinationUri ? vaccinationUri.length >= MAX_FILE_COUNT : true}
         />

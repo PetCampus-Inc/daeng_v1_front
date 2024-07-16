@@ -38,7 +38,7 @@ const DogInfo = ({ dogId }: IProps) => {
   const navigate = useNavigate();
   const methods = useForm({ mode: "onSubmit" });
   const { data } = useGetMemberDogDetailInfo(dogId);
-  const mutatePostDogAlleray = usePostMemberDogAllergy(dogId);
+  const mutatePostDogAllergy = usePostMemberDogAllergy(dogId);
   const metatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
   const mutatePostVaccination = usePostMembeVaccination(dogId);
 
@@ -82,7 +82,7 @@ const DogInfo = ({ dogId }: IProps) => {
       }
       if (type === "allergy") {
         const allergy = methods.getValues("allergy");
-        mutatePostDogAlleray({ dogId: dogId, memo: allergy });
+        mutatePostDogAllergy({ dogId: dogId, memo: allergy });
       }
     });
     onSubmit();
