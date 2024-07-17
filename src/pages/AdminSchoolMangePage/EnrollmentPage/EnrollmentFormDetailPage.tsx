@@ -73,7 +73,7 @@ const EnrollmentFormDetailPage = () => {
           </EditButton>
         }
       />
-      <Layout type="page" bg="BGray" pb={40}>
+      <Layout bgColor="BGray" px={16} pb={40}>
         <Container>
           <TopWrapper>
             <TitleWrapper>

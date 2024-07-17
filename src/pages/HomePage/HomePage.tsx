@@ -1,3 +1,4 @@
+import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
 import DogManagerPopup from "components/Home/DogManagerPopup";
@@ -5,7 +6,6 @@ import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
 import HomeImageAlbum from "components/Home/HomeImageAlbum";
 import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
-import { StyledBox } from "components/Home/styles";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRecoilState } from "recoil";
@@ -41,16 +41,16 @@ const HomePage = () => {
   return (
     <>
       <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} />
-      <main>
-        <StyledBox type="top" pt={2} pb={2}>
+      <Layout type="main">
+        <Box bgColor="white" py={32} px={16}>
           <HomeHeader data={data} />
           <HomeDashboard data={data} />
-        </StyledBox>
-        <StyledBox type="bottom" bg="BGray" pt={2} pb={3.438}>
+        </Box>
+        <Box bgColor="BGray" pt={32} pb={55} px={16}>
           <HomeImageCommentSlider images={data.imageList?.[0]} />
           <HomeImageAlbum images={data.imageList} dogInfo={dogInfo} />
-        </StyledBox>
-      </main>
+        </Box>
+      </Layout>
       <NavBar />
     </>
   );

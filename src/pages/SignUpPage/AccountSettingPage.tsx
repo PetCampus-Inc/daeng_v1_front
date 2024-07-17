@@ -47,7 +47,7 @@ const AccountSettingPage = ({ type, info, onNextStep }: IStepProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout type="page" pt={76} pb={24}>
+      <Layout bgColor="white" px={16} pt={76} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
           회원가입을 완료해주세요
         </Text>

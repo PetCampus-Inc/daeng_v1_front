@@ -1,8 +1,8 @@
 import GridAlbum from "components/Admin/DogGallery/GridAlbum";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { useState } from "react";
 import styled from "styled-components";
-import { PageContainer } from "styles/StyleModule";
 
 const DogGalleryPage = () => {
   const [mode, setMode] = useState<"view" | "edit">("view");
@@ -20,9 +20,9 @@ const DogGalleryPage = () => {
       ) : (
         <Header type="text" text={"저장"} handleClick={changeMode} />
       )}
-      <PageContainer pt="2" ph="0">
+      <Layout pt="32">
         <GridAlbum mode={mode} />
-      </PageContainer>
+      </Layout>
     </>
   );
 };
