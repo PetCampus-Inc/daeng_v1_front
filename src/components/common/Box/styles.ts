@@ -13,6 +13,7 @@ import {
 import type { BoxOptions } from ".";
 
 export const StyledBox = styled.div.withConfig({
+  displayName: "Box",
   shouldForwardProp: (prop) =>
     ![
       "display",
