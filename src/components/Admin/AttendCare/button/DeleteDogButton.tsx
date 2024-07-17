@@ -3,7 +3,6 @@ import { useDeleteCareDogs } from "hooks/api/admin/care";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useContext } from "react";
 
-import { BackgroundButtonWrapper } from "./styles";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 import DeleteCareDogModal from "../modal/DeleteCareDogModal";
 
@@ -27,15 +26,13 @@ const DeleteDogButton = ({ adminId }: { adminId?: number }) => {
     ));
 
   return (
-    <BackgroundButtonWrapper $isBottom>
-      <BackgroundButton
-        backgroundColor="white"
-        disabled={selectedDogId.length === 0}
-        onClick={openPopup}
-      >
-        삭제
-      </BackgroundButton>
-    </BackgroundButtonWrapper>
+    <BackgroundButton
+      backgroundColor="white"
+      disabled={selectedDogId.length === 0}
+      onClick={openPopup}
+    >
+      삭제
+    </BackgroundButton>
   );
 };
 

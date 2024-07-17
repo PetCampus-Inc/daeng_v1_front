@@ -30,7 +30,6 @@ const AttendDogSubmitButton = ({ adminId, schoolId }: AttendDogSubmitButtonProps
       onClick={handlePostAttend}
       disabled={selectedDogs.length === 0}
       backgroundColor={"white"}
-      hasNav
     >
       출석 완료
     </BackgroundButton>
