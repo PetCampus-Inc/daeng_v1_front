@@ -41,7 +41,7 @@ const UploadBox = () => {
 
   return (
     <>
-      <Box mb={remCalc(36)}>
+      <Box mb={36}>
         <Text tag="p" typo="body2_16_R" color="black">
           사진 첨부
         </Text>
