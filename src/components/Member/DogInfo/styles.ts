@@ -6,29 +6,34 @@ interface IProps {
   size?: string; // width, height 사이즈 동일한 경우
 }
 
-export const Nav = styled.nav`
-  width: 100vw;
-  background-color: white;
-  padding: 5rem 0 0.5rem 0;
-`;
-
 export const NavWrapper = styled.ul`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
   white-space: nowrap;
+
+  margin: 8px 26px;
 `;
 
 export const NavItem = styled.li`
-  width: 30%;
-  border-right: 1px solid ${({ theme }) => theme.colors.gray_5};
-  color: ${({ theme }) => theme.colors.gray_4};
-  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
+
+  color: ${({ theme }) => theme.colors.gray_4};
   ${({ theme }) => theme.typo.body2_16_B};
+
+  &:not(:first-child) {
+    border-left: 0.75px solid ${({ theme }) => theme.colors.gray_5};
+  }
+  &:not(:last-child) {
+    border-right: 0.75px solid ${({ theme }) => theme.colors.gray_5};
+  }
+
+  user-select: none;
+
   &.selected {
     color: ${({ theme }) => theme.colors.primaryColor};
   }
@@ -46,6 +51,12 @@ export const FootIconItem = styled(FootIcon)`
       fill: ${({ theme }) => theme.colors.br_3};
     }
   }
+`;
+
+export const ContentWrapper = styled.div`
+  flex: 1;
+  border-radius: 20px 20px 0 0;
+  background-color: ${({ theme }) => theme.colors.gray_5};
 `;
 
 export const DogInfoCard = styled.section`
