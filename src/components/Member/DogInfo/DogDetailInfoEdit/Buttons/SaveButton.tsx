@@ -39,8 +39,9 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
 
   const handleSubmitInfo = () => {
     const { profileUri } = getFormValues();
-    // profileUri 파일 수정 할 경우/안 할 경우
+    // profileUri 파일 수정 할 경우
     if (typeof profileUri !== "string") uploadProfileFiles(profileUri);
+    // profileUri 파일 수정 안 할 경우
     else onSubmit();
   };
 
