@@ -1,7 +1,8 @@
 import type { PropsWithChildren } from "react";
 
+import { ColorProps, SpacingProps } from "styles/system";
+
 import { StyledContainer } from "./styles";
-import { ColorProps, SpacingProps } from "../style-props.types";
 
 /**
  * type: global - App에서 사용

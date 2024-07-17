@@ -17,7 +17,7 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
 import { AUTH_MEMBER_ID } from "store/auth";
-import { isEmpty } from "utils/helper";
+import { isEmpty } from "utils/is";
 
 interface EnrollmentProps {
   schoolId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.

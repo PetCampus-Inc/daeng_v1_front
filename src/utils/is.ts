@@ -29,3 +29,12 @@ export function isCustomError(error: any): error is CustomError {
     typeof error.data.code === "string"
   );
 }
+
+/**
+ * @description Check if the object is empty
+ * @param obj
+ * @returns {boolean}
+ */
+export const isEmpty = (obj: object) => {
+  return Object.keys(obj).length === 0;
+};

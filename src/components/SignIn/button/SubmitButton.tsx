@@ -1,7 +1,7 @@
 import { Text } from "components/common";
 import { useAdminLogin } from "hooks/api/signin";
 import { type FieldValues, useFormContext } from "react-hook-form";
-import { isCustomError } from "utils/typeGuard";
+import { isCustomError } from "utils/is";
 
 import { StyledButton } from "../styles";
 

@@ -1,7 +1,7 @@
 import { type ReactElement } from "react";
 import { type CSSProp } from "styled-components";
 
-import type { ColorProps, SpacingProps } from "../style-props.types";
+import type { ColorProps, SpacingProps } from "../../../styles/system";
 import type { TypoKeys } from "styles/types";
 
 export type ButtonSizeSet = "xs" | "sm" | "md" | "lg";

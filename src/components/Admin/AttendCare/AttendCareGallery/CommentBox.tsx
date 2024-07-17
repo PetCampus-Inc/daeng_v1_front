@@ -6,7 +6,7 @@ const CommentBox = () => {
   const { register } = useFormContext();
   return (
     <Flex direction="column" gap={8}>
-      <Text tag="p" typo="body2_16_R" color="black">
+      <Text as="p" typo="body2_16_R" color="black">
         코멘트
       </Text>
       <TextArea

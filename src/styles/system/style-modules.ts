@@ -1,20 +1,21 @@
 import { css } from "styled-components";
 import { themeConfig } from "styles/themeConfig";
 import { remCalc } from "utils/calculator";
-import { isNumber } from "utils/typeGuard";
+import { isNumber } from "utils/is";
 
 import type {
   SizeType,
   SpaceType,
   RadiusType,
-  LayOutProps,
+  DisplayProps,
+  SizeProps,
   SpacingProps,
   ColorProps,
   PositionProps,
   FlexBoxProps,
   BorderProps,
   RadiusProps
-} from "./style-props.types";
+} from "./style-props";
 
 // Utility functions
 export const parseSize = (size?: SizeType): string | undefined => {
@@ -55,8 +56,12 @@ export const getBorderRadiusStyle = (radiusValue?: RadiusType): string | undefin
 };
 
 // Style functions
-export const getSizeStyle = (props: LayOutProps) => css`
+
+export const getDisplayStyle = (props: DisplayProps) => css`
   display: ${props.display};
+`;
+
+export const getSizeStyle = (props: SizeProps) => css`
   width: ${parseSize(props.width)};
   height: ${parseSize(props.height)};
   max-width: ${parseSize(props.maxWidth)};
@@ -121,6 +126,7 @@ export const getPositionStyle = (props: PositionProps) => css`
 `;
 
 export const getFlexStyle = (props: FlexBoxProps) => css`
+  display: ${props.display};
   flex-direction: ${props.direction};
   justify-content: ${props.justify};
   align-items: ${props.align};

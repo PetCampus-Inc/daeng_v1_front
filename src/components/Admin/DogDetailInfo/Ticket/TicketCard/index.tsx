@@ -72,8 +72,18 @@ const TicketCard = ({ dogId, data }: TicketCardProps) => {
 
 export default TicketCard;
 
+type TextColor = "red_1" | "gray_1";
+
+type TicketDetails = {
+  icon: JSX.Element;
+  statusText: string;
+  textColor: TextColor;
+  isExpiringSoon: boolean;
+  isExpired: boolean;
+};
+
 // 회차권의 잔여 횟수를 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
-function getRoundTicketDetails(currentRoundTicket: number) {
+function getRoundTicketDetails(currentRoundTicket: number): TicketDetails {
   const status = checkRoundTicketStatus(currentRoundTicket);
   return {
     icon: status.isExpired ? (
@@ -91,7 +101,7 @@ function getRoundTicketDetails(currentRoundTicket: number) {
 }
 
 // 정기권의 만료일을 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
-function getMonthlyTicketDetails(ticketExpirationDate: number[] | null) {
+function getMonthlyTicketDetails(ticketExpirationDate: number[] | null): TicketDetails {
   if (!ticketExpirationDate) {
     return {
       icon: <CalendarExpireIcon w="24" h="24" />,
