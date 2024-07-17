@@ -1,6 +1,6 @@
 import { css, styled } from "styled-components";
 import { remCalc } from "utils/calculator";
-import { isNumber } from "utils/typeGuard";
+import { isNumber } from "utils/is";
 
 import type { LayoutProps } from ".";
 import type { LayoutType, TPaddingOptions } from "./types";

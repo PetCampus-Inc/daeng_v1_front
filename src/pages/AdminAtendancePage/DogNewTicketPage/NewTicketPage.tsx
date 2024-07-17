@@ -8,7 +8,7 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useForm, FormProvider, useFormState } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useBlocker } from "react-router-dom";
-import { isEmpty } from "utils/helper";
+import { isEmpty } from "utils/is";
 
 const NewTicketPage = () => {
   const { schoolId } = useAdminInfo();

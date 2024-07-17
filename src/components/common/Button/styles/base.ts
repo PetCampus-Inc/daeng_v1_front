@@ -1,5 +1,5 @@
-import { getColorStyle, getMarginStyle, getPaddingStyle } from "components/common/style-modules";
 import styled, { css } from "styled-components";
+import { getColorStyle, getMarginStyle, getPaddingStyle } from "styles/system";
 
 import { getColorScheme } from "./colorScheme";
 import { getRadius } from "./radius";

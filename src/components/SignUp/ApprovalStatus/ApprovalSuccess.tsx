@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StyledImgWrapper } from "./styles";
@@ -21,10 +20,10 @@ const ApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
   return (
     <>
       <Text as="h2" typo="title1_24_B" color="darkBlack">
-        <em color="primaryColor">
+        <Text as="em" typo="inherit" color="primaryColor">
           {schoolName} 유치원 <br />
           승인
-        </em>
+        </Text>
         이 완료되었습니다
       </Text>
 
