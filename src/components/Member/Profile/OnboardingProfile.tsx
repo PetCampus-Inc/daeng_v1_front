@@ -5,9 +5,9 @@ import { Text } from "components/common/Text";
 import useFocus from "hooks/common/useFocus";
 import { useRef, useState } from "react";
 
-import ProfileEditBox from "./Box/ProfileEditeBox";
-import NickNameEdit from "./Edite/NickNameEdite";
-import RoleEdit from "./Edite/RoleEdite";
+import ProfileEditBox from "./Box/ProfileEditBox";
+import NickNameEdit from "./Edit/NickNameEdit";
+import RoleEdit from "./Edit/RoleEdit";
 
 const OnboardingProfile = () => {
   const { handleFocus, handleBlur } = useFocus();

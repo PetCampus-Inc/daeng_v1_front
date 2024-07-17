@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
 
-import ProfileEdit from "../Edite/ProfileEdite";
+import ProfileEdit from "../Edit/ProfileEdit";
 
 interface IProfileEditProps {
   type: string;

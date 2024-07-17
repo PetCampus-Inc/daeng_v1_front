@@ -4,7 +4,7 @@ import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
 import { useRef, useState } from "react";
 
-import ProfileEditBox from "./Box/ProfileEditeBox";
+import ProfileEditBox from "./Box/ProfileEditBox";
 
 const AddDogProfile = () => {
   const [isDogActive, setDogIsActive] = useState(false);
