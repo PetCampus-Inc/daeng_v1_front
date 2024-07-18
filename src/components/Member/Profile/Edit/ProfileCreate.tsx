@@ -11,7 +11,7 @@ import ProfileActiveBox from "../Box/ProfileActiveBox";
 import * as S from "../styles";
 
 interface ProfileCreateProps {
-  isActive: boolean;
+  isActive?: boolean;
   setIsActive?: (isActive: boolean) => void;
   handleClick: (type: string) => void;
   profile: IFile[];

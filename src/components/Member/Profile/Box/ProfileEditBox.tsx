@@ -31,8 +31,7 @@ const ProfileEditBox = ({
 
   const handleClick = () => {
     if (fileRef && fileRef.current) {
-      if (mode === "create" && isActive && setIsActive) setIsActive(false);
-      fileRef.current.click();
+      mode === "create" && isActive ? setIsActive && setIsActive(false) : fileRef.current.click();
     }
   };
 
@@ -57,7 +56,7 @@ const ProfileEditBox = ({
     <>
       {mode === "create" ? (
         <ProfileCreate
-          isActive={isActive || false}
+          isActive={isActive}
           setIsActive={setIsActive}
           profile={profile}
           fileInputRef={fileRef}
