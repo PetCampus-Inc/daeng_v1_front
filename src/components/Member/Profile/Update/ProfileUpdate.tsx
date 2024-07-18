@@ -1,6 +1,5 @@
 import { ACCEPT_FILE_TYPE, PROFILE_NAME } from "constants/profile";
 
-import AddCIcon from "assets/svg/add-c-icon";
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { Flex } from "components/common/Flex";
@@ -9,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
-interface IProfileUpdateProps {
+interface ProfileUpdateProps {
   handleClick: (type: string) => void;
   profile: IFile[];
   fileInputRef: React.LegacyRef<HTMLInputElement> | null;
@@ -25,7 +24,7 @@ const ProfileUpdate = ({
   handleFileChange,
   registerText,
   type
-}: IProfileUpdateProps) => {
+}: ProfileUpdateProps) => {
   const { register, getValues } = useFormContext();
   const { profileUri } = getValues();
   return (
