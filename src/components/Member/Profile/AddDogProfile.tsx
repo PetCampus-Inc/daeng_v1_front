@@ -26,6 +26,7 @@ const AddDogProfile = () => {
           setIsActive={setDogIsActive}
           fileRef={dogFileInputRef}
           fileName={FILE_URI_NAME.DOG}
+          mode="create"
         />
       </Flex>
     </>

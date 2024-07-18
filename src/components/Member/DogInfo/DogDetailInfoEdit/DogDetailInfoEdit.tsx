@@ -6,10 +6,10 @@ import { Flex, TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import BreedInput from "components/Enrollment/Input/BreedInput";
+import ProfileEditBox from "components/Member/Profile/Box/ProfileEditBox";
 import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
-import ProfileUpdateBox from "./ProfileUpdateBox";
 import { Card, Text } from "./styles";
 
 interface IDogInfoProps {
@@ -23,10 +23,11 @@ const DogDetailInfoEdit = ({ requiredItems }: IDogInfoProps) => {
   return (
     <>
       <Card>
-        <ProfileUpdateBox
+        <ProfileEditBox
           type={PROFILE_NAME.DOG}
           fileRef={fileInputRef}
           fileName={FILE_URI_NAME.COMMON}
+          mode="edit"
         />
       </Card>
       <Card>

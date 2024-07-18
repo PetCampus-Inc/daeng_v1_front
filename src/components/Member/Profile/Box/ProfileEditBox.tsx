@@ -4,23 +4,35 @@ import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
 
-import ProfileEdit from "../Edit/ProfileEdit";
+import ProfileCreate from "../Edit/ProfileCreate";
+import ProfileUpdate from "../Update/ProfileUpdate";
 
-interface IProfileEditProps {
+type Mode = "create" | "edit";
+
+interface ProfileEditProps {
   type: string;
-  isActive: boolean;
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isActive?: boolean;
+  setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
   fileRef: React.RefObject<HTMLInputElement>;
   fileName: string;
+  mode: Mode;
 }
 
-const ProfileEditBox = ({ type, isActive, setIsActive, fileRef, fileName }: IProfileEditProps) => {
+const ProfileEditBox = ({
+  type,
+  isActive,
+  setIsActive,
+  fileRef,
+  fileName,
+  mode
+}: ProfileEditProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
   const handleClick = () => {
     if (fileRef && fileRef.current) {
-      isActive ? setIsActive(false) : fileRef.current.click();
+      if (mode === "create" && isActive && setIsActive) setIsActive(false);
+      fileRef.current.click();
     }
   };
 
@@ -37,22 +49,33 @@ const ProfileEditBox = ({ type, isActive, setIsActive, fileRef, fileName }: IPro
       //TODO 중복파일인 경우 확인 필요
       setProfile([...fileArray]);
       setValue(fileName, [...newFiles]);
-      setIsActive(true);
+      if (mode === "create" && setIsActive) setIsActive(true);
     }
   };
 
   return (
     <>
-      <ProfileEdit
-        isActive={isActive}
-        setIsActive={setIsActive}
-        profile={profile}
-        fileInputRef={fileRef}
-        handleFileChange={handleFileChange}
-        handleClick={handleClick}
-        registerText={fileName}
-        type={type}
-      />
+      {mode === "create" ? (
+        <ProfileCreate
+          isActive={isActive || false}
+          setIsActive={setIsActive}
+          profile={profile}
+          fileInputRef={fileRef}
+          handleFileChange={handleFileChange}
+          handleClick={handleClick}
+          registerText={fileName}
+          type={type}
+        />
+      ) : (
+        <ProfileUpdate
+          profile={profile}
+          fileInputRef={fileRef}
+          handleFileChange={handleFileChange}
+          handleClick={handleClick}
+          registerText={fileName}
+          type={type}
+        />
+      )}
     </>
   );
 };

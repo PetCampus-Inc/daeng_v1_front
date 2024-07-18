@@ -35,6 +35,7 @@ const OnboardingProfile = () => {
           setIsActive={setMyIsActive}
           fileRef={myFileInputRef}
           fileName={FILE_URI_NAME.MEMBER}
+          mode="create"
         />
         <ProfileEditBox
           type={PROFILE_NAME.DOG}
@@ -42,6 +43,7 @@ const OnboardingProfile = () => {
           setIsActive={setDogIsActive}
           fileRef={dogFileInputRef}
           fileName={FILE_URI_NAME.DOG}
+          mode="create"
         />
       </Flex>
       <Flex direction="column" gap="4">
