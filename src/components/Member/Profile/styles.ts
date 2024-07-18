@@ -2,7 +2,7 @@ import { Button } from "components/common/Button";
 import { Flex } from "components/common/Flex";
 import { styled } from "styled-components";
 
-interface IEditProps {
+interface StyleProps {
   w?: string;
   h?: string;
   br?: string;
@@ -36,7 +36,7 @@ export const ProfileBox = styled.div`
   position: relative;
 `;
 
-export const UploadProfileButton = styled.div<IEditProps>`
+export const UploadProfileButton = styled.button<StyleProps>`
   cursor: pointer;
   display: flex;
   justify-content: center;
