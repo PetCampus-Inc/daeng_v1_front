@@ -11,13 +11,14 @@ const SaveProfileButton = () => {
   const {
     handleSubmit,
     watch,
+    getValues,
     formState: { isValid }
   } = useFormContext();
-  const { uploadFiles, s3ProfileData } = useSubmitProfile();
+  const { convertProfileUri, uploadFiles, s3ProfileData } = useSubmitProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
   // FIXME: wathc로 데이터를 가져오는 것이 아닌, getValues 통해 가져오는 것으로 변경해주세요!
-  const memberProfileData = watch();
+  const memberProfileData = getValues();
   const isAllFilled = Object.values(memberProfileData).every((el: null | undefined) => el ?? false);
 
   const handleSubmitProfile = (data: FieldValues) => {
@@ -48,10 +49,6 @@ const SaveProfileButton = () => {
         submitMemberProfile(data);
       }
     });
-  };
-
-  const convertProfileUri = (name: string) => {
-    return s3ProfileData.find((file) => file.split("/").includes(name)) || "";
   };
 
   // TODO 어뎁터 데이터에 추가하기

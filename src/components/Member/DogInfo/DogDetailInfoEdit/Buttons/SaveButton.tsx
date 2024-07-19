@@ -15,12 +15,8 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
     formState: { isDirty, isValid, isSubmitting }
   } = useFormContext();
 
-  const { uploadFiles, s3ProfileData } = useSubmitProfile();
+  const { convertProfileUri, uploadFiles, s3ProfileData } = useSubmitProfile();
   const { mutatePostDogDetailInfo } = usePostMemberDogDetailInfo(dogId);
-
-  const convertProfileUri = (name: string) => {
-    return s3ProfileData.find((file) => file.split("/").includes(name)) || "";
-  };
 
   const getFormValues = (): MemberDogInfoReq => {
     const formData = getValues();
@@ -37,8 +33,9 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
     };
   };
 
-  const handleSubmitInfo = () => {
+  const handleSubmitData = () => {
     const { profileUri } = getFormValues();
+
     // profileUri 파일 수정 할 경우
     if (typeof profileUri !== "string") uploadProfileFiles(profileUri);
     // profileUri 파일 수정 안 할 경우
@@ -69,12 +66,11 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       profileUri: convertProfileUri(PROFILE_NAME.DOG)
     });
     mutatePostDogDetailInfo(requestData);
-    console.log("requestData", requestData);
   };
 
   return (
     <BackgroundButton
-      onClick={handleSubmit(handleSubmitInfo)}
+      onClick={handleSubmit(handleSubmitData)}
       backgroundColor="white"
       buttonBackgroundColor="primaryColor"
       disabled={!isDirty || !isValid || isSubmitting}

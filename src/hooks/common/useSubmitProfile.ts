@@ -55,7 +55,12 @@ const useSubmitProfile = () => {
       return;
     }
   };
-  return { uploadFiles, s3ProfileData };
+
+  const convertProfileUri = (name: string) => {
+    return s3ProfileData.find((file) => file.split("/").includes(name)) || "";
+  };
+
+  return { convertProfileUri, uploadFiles, s3ProfileData };
 };
 
 export default useSubmitProfile;
