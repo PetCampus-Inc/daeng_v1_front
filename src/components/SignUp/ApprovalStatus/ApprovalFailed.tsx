@@ -19,10 +19,10 @@ const ApprovalFailed = ({ schoolName, onNextStep }: ApprovalFailedProps) => {
     <>
       <Flex direction="column" gap={3}>
         <Text as="h2" typo="title1_24_B" color="darkBlack">
-          <em color="primaryColor">
+          <Text as="em" color="primaryColor" typo="inherit">
             {schoolName} 유치원 <br />
             가입 승인
-          </em>
+          </Text>
           이 실패했습니다
         </Text>
         <Text typo="body2_16_R" color="gray_3">

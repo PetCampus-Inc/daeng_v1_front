@@ -1,7 +1,7 @@
 import { AGREEMENT_ITEM, FIELD, FIELD_ITEMS } from "constants/field";
 
 import { extractNumber, formatDate, getKeyForLabel } from "utils/formatter";
-import { isNumber } from "utils/typeGuard";
+import { isNumber } from "utils/is";
 
 import type { FieldValues } from "react-hook-form";
 import type { NewTicketReq } from "types/admin/attendance.type";
