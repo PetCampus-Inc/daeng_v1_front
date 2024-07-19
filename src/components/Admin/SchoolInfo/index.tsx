@@ -2,7 +2,8 @@ import Calendar from "assets/svg/calendar";
 import Map from "assets/svg/map-pin-icon";
 import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
+import { XSmallButton } from "components/common/Button/Templates";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -49,10 +50,15 @@ const SchoolInfo = () => {
               <Phone />
             </S.IconWrapper>
             <S.ListTitle>{data && data.schoolNumber ? data.schoolNumber : ""}</S.ListTitle>
-            <S.YellowThickButton onClick={openCallPopup}>
-              <PhoneIcon />
+            <XSmallButton
+              size="sm"
+              typo="caption1_12_B"
+              colorScheme="yellow_3"
+              onClick={openCallPopup}
+              leftAddon={<PhoneIcon />}
+            >
               전화 걸기
-            </S.YellowThickButton>
+            </XSmallButton>
           </S.InfoList>
           <S.InfoList>
             <S.IconWrapper>

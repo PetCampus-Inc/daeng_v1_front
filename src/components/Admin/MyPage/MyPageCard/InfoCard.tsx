@@ -6,12 +6,10 @@ import CalendarIcon from "assets/svg/calendar";
 import MapIcon from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone-basic";
 import SchoolIcon from "assets/svg/school-icon";
-import SimpleButton from "components/common/Button/SimpleButton";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/admin/admin.types";
 
 import {
-  MoreButtonStyle,
   StyledCard,
   StyledIcon,
   StyledItemWrapper,
@@ -20,6 +18,7 @@ import {
   StyledTitle,
   StyledTitleContainer
 } from "./styles";
+import { MoreButton } from "../../../common/Button/Templates";
 
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
 
@@ -27,14 +26,9 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
   return (
     <StyledTitleContainer>
       <StyledTitle>소속 유치원</StyledTitle>
-      <SimpleButton
-        p={0}
-        onClick={handleClick}
-        rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}
-        css={MoreButtonStyle}
-      >
+      <MoreButton p={0} onClick={handleClick} rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}>
         {text}
-      </SimpleButton>
+      </MoreButton>
     </StyledTitleContainer>
   );
 };

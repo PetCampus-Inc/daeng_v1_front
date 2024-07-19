@@ -1,6 +1,6 @@
 import { motion, useAnimation } from "framer-motion";
-import { useRef, useState, useLayoutEffect, useEffect, isValidElement, cloneElement } from "react";
-import { accordionTransition } from "styles/animation";
+import { cloneElement, isValidElement, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { accordionTransition } from "styles/foundations/animation";
 
 import { useAccordionContext } from "./context";
 import { StyledContentContainer } from "./styles";
@@ -20,12 +20,12 @@ export const AccordionContent = ({ children }: { children: React.ReactNode }) =>
       const computedStyle = getComputedStyle(contentRef.current);
       setContentHeight(contentRef.current.scrollHeight);
 
-      // children이 DOM 요소인 경우
+      // children DOM 요소인 경우
       if (childrenRef.current) {
         const childStyle = getComputedStyle(childrenRef.current);
         setLineHeight(parseFloat(childStyle.lineHeight));
       } else {
-        // children이 DOM 요소가 아닌 경우 ContentContainer의 lineHeight 사용
+        // children DOM 요소가 아닌 경우 ContentContainer lineHeight 사용
         setLineHeight(parseFloat(computedStyle.lineHeight));
       }
     }
@@ -46,7 +46,7 @@ export const AccordionContent = ({ children }: { children: React.ReactNode }) =>
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expanded, contentHeight, lineHeight]);
 
-  // cloneElement를 통해 children에 ref를 전달
+  // cloneElement 통해 children ref 전달
   const _children = isValidElement(children)
     ? cloneElement(children as React.ReactElement<any>, { ref: childrenRef })
     : children;

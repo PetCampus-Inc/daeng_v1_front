@@ -1,5 +1,5 @@
 import ExclamationMarkIcon from "assets/svg/exclamationMark-icon";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { Checkbox } from "components/common/Checkbox";
 
 import * as S from "./styles";

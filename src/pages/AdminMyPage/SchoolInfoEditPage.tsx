@@ -1,10 +1,11 @@
-import CancelModal from "components/Admin/DogDetailInfo/NewTicket/CancelModal";
 import { Flex, Layout, SearchInput, Text, TextInput } from "components/common";
-import BackgroundButton from "components/common/Button/BackgroundButton";
 import Header from "components/common/Header";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
+
+import { BackgroundButton } from "../../components/common/Button";
+import { PreventLeaveModal } from "../../components/common/Modal";
 
 const SchoolInfoEditPage = () => {
   const { adminId } = useAdminInfo();
@@ -12,7 +13,9 @@ const SchoolInfoEditPage = () => {
   const overlay = useOverlay();
 
   const openModal = () =>
-    overlay.open(({ isOpen, close }) => <CancelModal isOpen={isOpen} close={close} />);
+    overlay.open(({ isOpen, close }) => (
+      <PreventLeaveModal isOpen={isOpen} close={close} action={close} />
+    ));
 
   return (
     <>

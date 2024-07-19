@@ -2,97 +2,130 @@ import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
-import { differenceInDays, isAfter } from "date-fns";
+import { Flex, Text } from "components/common";
+import { MidButton } from "components/common/Button/Templates";
+import { format, differenceInDays } from "date-fns";
 import { useOverlay } from "hooks/common/useOverlay";
-import { memo } from "react";
-import { ITicketDetail } from "types/admin/attendance.type";
-import { addZero } from "utils/date";
+import { useMemo } from "react";
+import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/remainingDays";
 
 import * as S from "./styles";
-import NewTicketBottomSheet from "../NewTicketBotomSheet.tsx";
-import SendAlermButton from "../SendAlermButton";
+import NewTicketBottomSheet from "../NewTicketBottomSheet";
+import SendAlarmButton from "../SendAlarmButton";
 
+import type { TicketDetailData } from "types/admin/attendance.type";
 interface TicketCardProps {
-  data: Omit<ITicketDetail, "ticketHistory">;
+  dogId: number;
+  data: TicketDetailData;
 }
 
-const TicketCard = ({ data }: TicketCardProps) => {
-  const isRoundTicket = data?.ticketType === "ROUND";
+const TicketCard = ({ dogId, data }: TicketCardProps) => {
   const overlay = useOverlay();
-
-  if (!data) {
-    return <div>로딩중</div>;
-  }
-
-  const currentDate = new Date();
-  // const ticketStartDate = data.ticketStartDate
-  //   ? (addZero(data.ticketStartDate) as string[]).join(".")
-  //   : "";
-  const ticketEndDate = data.ticketExpirationDate
-    ? (addZero(data.ticketExpirationDate) as string[]).join(".")
-    : "";
-
-  const isSoonDeadline =
-    (data.currentRoundTicket <= 3 && data.currentRoundTicket > 0) ||
-    (differenceInDays(ticketEndDate, currentDate) > 0 &&
-      differenceInDays(ticketEndDate, currentDate) <= 3);
-  const isNeededRenewal =
-    (isRoundTicket && data.currentRoundTicket === 0) || isAfter(currentDate, ticketEndDate);
-
-  let statusIcon = <></>;
-  let statusText = <></>;
-  if (isRoundTicket) {
-    statusIcon = isSoonDeadline ? <AlertSmallIcon color="red" /> : <RemainCountIcon />;
-    statusText = (
-      <S.Text className={`detail ${isSoonDeadline ? "red" : ""}`}>
-        잔여횟수 : {data.currentRoundTicket || " 0 "}회
-      </S.Text>
-    );
-  } else {
-    statusIcon = isSoonDeadline ? <AlertSmallIcon color="red" /> : <CalendarExpireIcon />;
-    statusText = (
-      <S.Text className={`detail ${isSoonDeadline ? "red" : ""}`}>
-        만료일 : {ticketEndDate || "없음"}
-      </S.Text>
-    );
-  }
+  const { icon, statusText, textColor, isExpiringSoon, isExpired } = useMemo(() => {
+    return data.ticketType === "ROUND"
+      ? getRoundTicketDetails(data.currentRoundTicket)
+      : getMonthlyTicketDetails(data.ticketExpirationDate);
+  }, [data]);
 
   const openPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <NewTicketBottomSheet isOpen={isOpen} close={close} currentData={data} />
+      <NewTicketBottomSheet isOpen={isOpen} close={close} info={{ ...data, dogId }} />
     ));
 
   return (
-    <S.Container>
-      {isNeededRenewal && (
-        <S.BlackCover>
-          <S.RenewButton onClick={openPopup}>이용권 갱신</S.RenewButton>
-        </S.BlackCover>
+    <S.Container position="relative" width="full">
+      {isExpired && (
+        <S.Dimmed>
+          <MidButton onClick={openPopup}>이용권 갱신</MidButton>
+        </S.Dimmed>
       )}
       <S.InnerBox className="upper">
-        <S.Text className="ticket">{isRoundTicket ? "회차권" : "정기권"}</S.Text>
-        <S.Text className="count">
-          {isRoundTicket ? `${data.allRoundTicket}회` : `${data.monthlyTicketNumber}주`}
-        </S.Text>
+        <Text typo="caption1_12_B" color="primaryColor">
+          {data.ticketType === "ROUND" ? "회차권" : "정기권"}
+        </Text>
+        <Text typo="body1_18_B" color="darkBlack">
+          {data.ticketType === "ROUND"
+            ? `${data.allRoundTicket}회`
+            : `${data.monthlyTicketNumber}주`}
+        </Text>
       </S.InnerBox>
       <S.InnerBox className="lower">
-        <S.IconWrapper className="upper">
-          <S.IconWrapper>
-            {statusIcon}
-            {statusText}
-          </S.IconWrapper>
-          {isSoonDeadline && <SendAlermButton />}
-        </S.IconWrapper>
-
-        <S.IconWrapper>
-          <CalendarIcon />
-          <S.Text className="detail">
-            유치원 등원 요일 : {data.attendanceDays?.join(", ") ?? "미지정"}
-          </S.Text>
-        </S.IconWrapper>
+        <Flex align="center" justify="space-between">
+          <Flex gap={4} align="center">
+            {icon}
+            <Text typo="label2_14_R" color={textColor}>
+              {statusText}
+            </Text>
+          </Flex>
+          {isExpiringSoon && <SendAlarmButton />}
+        </Flex>
+        <Flex gap={4} align="center">
+          <CalendarIcon w="24" h="24" />
+          <Text typo="label2_14_R" color="gray_1">
+            유치원 등원 요일: {data.attendanceDays?.join(", ") || "미지정"}
+          </Text>
+        </Flex>
       </S.InnerBox>
     </S.Container>
   );
 };
 
-export default memo(TicketCard);
+export default TicketCard;
+
+// 회차권의 잔여 횟수를 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
+function getRoundTicketDetails(currentRoundTicket: number) {
+  const status = checkRoundTicketStatus(currentRoundTicket);
+  return {
+    icon: status.isExpired ? (
+      <CalendarExpireIcon w="24" h="24" />
+    ) : status.isExpiringSoon ? (
+      <AlertSmallIcon color="red" w="24" h="24" />
+    ) : (
+      <RemainCountIcon w="24" h="24" />
+    ),
+    statusText: `잔여횟수: ${currentRoundTicket}회`,
+    textColor: status.isExpired || status.isExpiringSoon ? "red_1" : "gray_1",
+    isExpiringSoon: status.isExpiringSoon,
+    isExpired: status.isExpired
+  };
+}
+
+// 정기권의 만료일을 기준으로 유형의 아이콘, 텍스트, 이용권 유효상태를 반환하는 함수
+function getMonthlyTicketDetails(ticketExpirationDate: number[] | null) {
+  if (!ticketExpirationDate) {
+    return {
+      icon: <CalendarExpireIcon w="24" h="24" />,
+      statusText: "만료일: N/A",
+      textColor: "red_1",
+      isExpiringSoon: false,
+      isExpired: true
+    };
+  }
+
+  const expirationDate = new Date(
+    ticketExpirationDate[0],
+    ticketExpirationDate[1] - 1,
+    ticketExpirationDate[2]
+  );
+  const daysUntilExpiration = differenceInDays(expirationDate, new Date());
+  const status = checkMonthlyTicketStatus([
+    expirationDate.getFullYear(),
+    expirationDate.getMonth() + 1,
+    expirationDate.getDate()
+  ]);
+  return {
+    icon: status.isExpired ? (
+      <CalendarExpireIcon w="24" h="24" />
+    ) : status.isExpiringSoon ? (
+      <AlertSmallIcon color="red" />
+    ) : (
+      <CalendarExpireIcon w="24" h="24" />
+    ),
+    statusText:
+      `만료일: ${format(expirationDate, "yyyy.MM.dd")}` +
+      (status.isExpiringSoon ? ` (만료 ${daysUntilExpiration}일전)` : ""),
+    textColor: status.isExpired || status.isExpiringSoon ? "red_1" : "gray_1",
+    isExpiringSoon: status.isExpiringSoon,
+    isExpired: status.isExpired
+  };
+}

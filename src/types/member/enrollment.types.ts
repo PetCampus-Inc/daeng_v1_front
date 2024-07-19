@@ -1,15 +1,68 @@
 import type { IResponse } from "types/Response.type";
 
-export type NeutralizationType = "NEUTERED" | "NOT_NEUTERED";
-export type VaccinationType = "VACCINATED" | "NOT_VACCINATED";
-export type DogSizeType = "SMALL" | "MEDIUM" | "BIG";
-export type DogGenderType = "MALE" | "FEMALE";
-export type PickDropType = "ROUND" | "ONE_WAY";
-export type PickDropStateType = "RUNNING" | "NOT_RUNNING";
-export type PickDropRequestType = "REQUEST" | "NOT_REQUEST";
-export type TicketType = "ROUND" | "MONTHLY";
-export type MemberGenderType = "MALE" | "FEMALE";
-export type RelationType = "MOTHER" | "FATHER" | "SISTER" | "BROTHER" | "FRIEND";
+export const NeutralizationType = {
+  NEUTERED: "NEUTERED",
+  NOT_NEUTERED: "NOT_NEUTERED"
+} as const;
+export type NeutralizationType = (typeof NeutralizationType)[keyof typeof NeutralizationType];
+
+export const VaccinationType = {
+  VACCINATED: "VACCINATED",
+  NOT_VACCINATED: "NOT_VACCINATED"
+} as const;
+export type VaccinationType = (typeof VaccinationType)[keyof typeof VaccinationType];
+
+export const DogSizeType = {
+  SMALL: "SMALL",
+  MEDIUM: "MEDIUM",
+  BIG: "BIG"
+} as const;
+export type DogSizeType = (typeof DogSizeType)[keyof typeof DogSizeType];
+
+export const DogGenderType = {
+  MALE: "MALE",
+  FEMALE: "FEMALE"
+} as const;
+export type DogGenderType = (typeof DogGenderType)[keyof typeof DogGenderType];
+
+export const PickDropType = {
+  ROUND: "ROUND",
+  ONE_WAY: "ONE_WAY"
+} as const;
+export type PickDropType = (typeof PickDropType)[keyof typeof PickDropType];
+
+export const PickDropStateType = {
+  RUNNING: "RUNNING",
+  NOT_RUNNING: "NOT_RUNNING"
+} as const;
+export type PickDropStateType = (typeof PickDropStateType)[keyof typeof PickDropStateType];
+
+export const PickDropRequestType = {
+  REQUEST: "REQUEST",
+  NOT_REQUEST: "NOT_REQUEST"
+} as const;
+export type PickDropRequestType = (typeof PickDropRequestType)[keyof typeof PickDropRequestType];
+
+export const TicketType = {
+  ROUND: "ROUND",
+  MONTHLY: "MONTHLY"
+} as const;
+export type TicketType = (typeof TicketType)[keyof typeof TicketType];
+
+export const MemberGenderType = {
+  MALE: "MALE",
+  FEMALE: "FEMALE"
+} as const;
+export type MemberGenderType = (typeof MemberGenderType)[keyof typeof MemberGenderType];
+
+export const RelationType = {
+  MOTHER: "MOTHER",
+  FATHER: "FATHER",
+  SISTER: "SISTER",
+  BROTHER: "BROTHER",
+  FRIEND: "FRIEND"
+} as const;
+export type RelationType = (typeof RelationType)[keyof typeof RelationType];
 
 // 가입신청서 폼 조회
 export interface EnrollmentDataType {

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { request } from "libs/CustomAxios/request";
-import { Response } from "types/helper.types";
 
 import type {
   IOwnerSignUpInfo,
@@ -13,14 +12,14 @@ import type {
 // 아이디 중복확인
 export const getCheckId = async (id: string): Promise<number> => {
   const url = `admin/checkid`;
-  const { status } = await request<Response<void>>({ url, params: { id } });
+  const { status } = await request<void>({ url, params: { id } });
   return status;
 };
 
 // 관리자 로그인
 export const postAdminLogin = async (req: AdminLoginInfo): Promise<AdminAuthType> => {
   const url = `admin/login`;
-  const { data } = await request<Response<AdminAuthType>>({
+  const { data } = await request<AdminAuthType>({
     url,
     method: "POST",
     data: {
@@ -42,7 +41,7 @@ export const postRegistrationNumber = async (req: string): Promise<string> => {
 };
 
 // 원장 회원가입
-export const postOwnerSignUp = async (req: IOwnerSignUpInfo): Promise<void> => {
+export const postOwnerSignUp = async (req: IOwnerSignUpInfo) => {
   const url = `admin/join/owner`;
   return await request<void>({
     url,
@@ -63,7 +62,7 @@ export const postOwnerSignUp = async (req: IOwnerSignUpInfo): Promise<void> => {
 // 선생님 회원가입
 export const postTeacherSignUp = async (req: ITeacherSignUpInfo): Promise<ITeacherSignUpData> => {
   const url = `admin/submit/teacher/approval`;
-  const { data } = await request<Response<ITeacherSignUpData>>({
+  const { data } = await request<ITeacherSignUpData>({
     url,
     method: "POST",
     data: {
@@ -78,7 +77,7 @@ export const postTeacherSignUp = async (req: ITeacherSignUpInfo): Promise<ITeach
 };
 
 // 선생님 회원가입 요청 취소
-export const postTeacherSignUpCancel = async (adminId: number): Promise<void> => {
+export const postTeacherSignUpCancel = async (adminId: number) => {
   const url = `admin/cancel/teacher/approval`;
   return await request<void>({
     url,

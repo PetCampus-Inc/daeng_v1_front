@@ -18,6 +18,7 @@ const ADMIN_QUERY_KEY = {
     searchText
   ], // 출석부 강아지 리스트 with 유치원아이디 and 검색어
   ATTENDANCE_LIST_SORTNAME: (sortName: string) => ["dogList", sortName],
+  ATTENDANCE_DOG_TICKET: (dogId: number) => ["dogTicket", dogId], // 출석부 강아지 상세 이용권 정보
 
   PRINCIPAL_INFO: ["principalInfo"], // 원장 마이페이지 데이터
   TEACHER_INFO: ["teacherInfo"], // 선상님 마이페이지 데이터

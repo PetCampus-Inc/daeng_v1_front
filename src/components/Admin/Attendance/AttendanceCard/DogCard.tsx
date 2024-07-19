@@ -4,12 +4,11 @@ import AlertSmallIcon from "assets/svg/alert-small-icon";
 import CalendarIcon from "assets/svg/calendar";
 import { useDeleteAttendDog } from "hooks/api/admin/attendance";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
-import useFormatDate from "hooks/common/useFormatDate";
 import { useOverlay } from "hooks/common/useOverlay";
 import { Suspense, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOptions } from "utils/options";
-import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/ticket";
+import { addZero } from "utils/date";
+import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/remainingDays";
 
 import * as S from "./styles";
 import AttendanceOptionList from "../AttendanceButton/AttendanceOptionList";
@@ -22,7 +21,7 @@ type DogCardProps = { info: AttendanceData };
 
 const DogCard = memo(({ info }: DogCardProps) => {
   const overlay = useOverlay();
-  const monthlyTicketDate = useFormatDate(info.monthlyTicket || []);
+  const monthlyTicketDate = addZero(info.monthlyTicket || []);
   const {
     isExpired: isRoundExpired,
     isExpiringSoon: isRoundExpiringSoon,
@@ -123,3 +122,23 @@ const DogCard = memo(({ info }: DogCardProps) => {
 });
 
 export default DogCard;
+
+// 드롭다운 메뉴
+const getOptions = (
+  isRoundExpiringSoon: boolean,
+  isMonthlyExpiringSoon: boolean,
+  adminRole: string
+) => [
+  {
+    label: "견주에게 전화 걸기",
+    condition: () => true
+  },
+  {
+    label: "이용권 알림 전송하기",
+    condition: () => isRoundExpiringSoon || isMonthlyExpiringSoon
+  },
+  {
+    label: "강아지 삭제",
+    condition: () => adminRole === "ROLE_OWNER"
+  }
+];

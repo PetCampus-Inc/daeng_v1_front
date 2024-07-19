@@ -1,13 +1,12 @@
-import BottomSheet, { IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import { usePostMemberAgreement } from "hooks/api/member/school";
 import { ReactNode, useState } from "react";
 import styled from "styled-components";
 
 import CheckButton from "./CheckButton";
 
-interface IAlertBottomSheet extends IBottomSheetProps {
+interface IAlertBottomSheet extends BottomSheetProps {
   title: string;
-  hasControl?: boolean;
   closeText: string;
   closeFn: () => void;
   icon: ReactNode;
@@ -20,7 +19,6 @@ const AgreementBottomSheet = ({
   title,
   close,
   isOpen,
-  hasControl = false, // 바텀시트 상단 x 버튼
   closeText,
   closeFn,
   icon,

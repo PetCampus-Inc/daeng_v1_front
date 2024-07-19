@@ -2,12 +2,11 @@ import CommentBox from "components/Admin/AttendCare/AttendCareGallery/CommentBox
 import SendFileButton from "components/Admin/AttendCare/AttendCareGallery/SendFileButton";
 import UploadBox from "components/Admin/AttendCare/AttendCareGallery/UploadBox";
 import Header from "components/common/Header";
+import { BasicModal } from "components/common/Modal";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
-
-import BasicModal from "../../components/common/Modal/BasicModal";
 
 interface Props {
   type: "main" | "info";
@@ -27,7 +26,7 @@ const AttendCareGalleryPage = ({ type }: Props) => {
         subtitle="작성중이던 사진 전송 내용이 모두 초기화됩니다"
         actionText="삭제"
         closeText="취소"
-        action={() => navigate(-1)}
+        actionFn={() => navigate(-1)}
       />
     ));
 

@@ -1,11 +1,11 @@
 import { PATH } from "constants/path";
 
 import { BackgroundButtonWrapper } from "components/Admin/MyPage/styles";
-import BackgroundButton from "components/common/Button/BackgroundButton";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { AUTH_KEY } from "store/auth";
 
+import { BackgroundButton } from "../../../common/Button";
 import LogoutModal from "../modal/LogoutModal";
 
 const LogOutButton = () => {

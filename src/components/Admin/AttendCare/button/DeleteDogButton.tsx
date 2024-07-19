@@ -1,4 +1,4 @@
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { useDeleteCareDogs } from "hooks/api/admin/care";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useContext } from "react";

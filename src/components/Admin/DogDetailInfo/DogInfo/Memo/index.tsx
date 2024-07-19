@@ -1,6 +1,6 @@
 import PencilIcon from "assets/svg/pencil-icon";
+import TextAreaModal from "components/common/Modal/TextAreaModal";
 import TextArea from "components/common/TextArea";
-import TextAreaModal from "components/common/TextAreaModal";
 import { useSubmitMemoMutation } from "hooks/api/useSubmitMemoMutation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -60,7 +60,7 @@ const Memo = ({ memo, id, refetch }: MemoProps) => {
       <FormProvider {...methods}>
         <TextAreaModal
           isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
+          close={() => setIsOpen(false)}
           actionText="저장"
           closeText="취소"
           name="memoModal"

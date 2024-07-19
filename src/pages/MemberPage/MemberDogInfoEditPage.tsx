@@ -1,5 +1,5 @@
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
+import { PreventLeaveModal } from "components/common/Modal";
 import SaveButton from "components/Member/DogInfo/DogDetailInfoEdit/Buttons/SaveButton";
 import DogDetailInfoEdit from "components/Member/DogInfo/DogDetailInfoEdit/DogDetailInfoEdit";
 import { useGetMemberDogDetailInfo } from "hooks/api/member/member";

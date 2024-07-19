@@ -1,9 +1,9 @@
 import BasicPhoneIcon from "assets/svg/phone-basic";
 
-import BottomSheet, { type IBottomSheetProps } from "../index";
+import { BottomSheet, type BottomSheetProps } from "../index";
 import { CallSubtitle } from "../styles";
 
-interface CallBottomSheetProps extends IBottomSheetProps {
+interface CallBottomSheetProps extends BottomSheetProps {
   dogName?: string;
   schoolName?: string;
   phoneNumber: string;

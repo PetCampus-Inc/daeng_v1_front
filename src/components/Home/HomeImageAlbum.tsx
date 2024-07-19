@@ -1,12 +1,10 @@
 import { PATH } from "constants/path";
 
-import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import { Box, Flex, Text } from "components/common";
-import SimpleButton from "components/common/Button/SimpleButton";
+import { MoreButton } from "components/common/Button/Templates";
 import { useNavigate } from "react-router-dom";
 
 import ImageSlider from "./ImageAlbumSlider/ImageSlider";
-import { MoreButtonStyle } from "./ImageAlbumSlider/styles";
 
 import type { ImageListType } from "types/member/main.types";
 
@@ -27,16 +25,16 @@ const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
         <Text typo="body2_16_R" color="darkBlack">
           사진 앨범
         </Text>
-        <SimpleButton
-          p={0}
+        <MoreButton
           onClick={() =>
             navigate(`${PATH.ALBUM}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`)
           }
-          rightAddon={<ArrowRightIcon w="24" h="24" colorScheme="gray_1" />}
-          css={MoreButtonStyle}
+          typo="body2_16_R"
+          iconSize={24}
+          iconColorScheme="gray_1"
         >
           전체보기
-        </SimpleButton>
+        </MoreButton>
       </Flex>
       <ImageSlider images={images} />
     </Box>

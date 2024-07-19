@@ -1,7 +1,7 @@
 import { FIELD } from "constants/field";
 
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
+import { PreventLeaveModal } from "components/common/Modal";
 import KeyboardCompleteButton from "components/Member/MyPage/Buttons/KeyboardCompleteButton";
 import SaveButton from "components/Member/MyPage/Buttons/SaveButton";
 import { PageContainer } from "components/Member/MyPage/Container/styles";

@@ -1,10 +1,10 @@
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { Flex, Layout, Text, TextInput } from "components/common";
-import BackgroundButton from "components/common/Button/BackgroundButton";
 import { IOwnerInfo } from "types/admin/mypage.types";
 import { ITeacherInfo } from "types/admin/mypage.types";
 
 import * as S from "./styles";
+import { BackgroundButton } from "../../../common/Button";
 
 interface ProfileInfoProps {
   principalData?: IOwnerInfo;
