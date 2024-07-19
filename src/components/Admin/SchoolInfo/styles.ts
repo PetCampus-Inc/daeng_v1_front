@@ -26,7 +26,7 @@ export const InfoContainer = styled.div`
   padding-top: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 
-  & > *:not(:last-child) {
+  & > *:not(:last-child):not(:nth-last-child(2)) {
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
   }
 `;

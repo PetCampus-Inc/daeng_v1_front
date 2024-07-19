@@ -1,6 +1,6 @@
-import { Modal } from "../../../common/Modal";
+import { Modal, ModalProps } from "components/common/Modal";
 
-interface LogoutAdminModal {
+interface LogoutAdminModal extends ModalProps {
   action: () => void;
   isOpen: boolean;
   close: () => void;
