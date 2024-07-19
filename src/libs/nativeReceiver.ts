@@ -1,6 +1,6 @@
-import { isWebViewMessage, validMessageData, WebViewGetMessage } from "types/native/message.types";
+import { isNativeMessage, isValidMessageData, NativeMessage } from "types/native/message.types";
 
-type EventCallback = (event: WebViewGetMessage) => void;
+type EventCallback = (event: NativeMessage) => void;
 
 class NativeReceiver {
   private static instance: NativeReceiver | null = null;
@@ -32,12 +32,12 @@ class NativeReceiver {
     try {
       const message = JSON.parse(event.data);
 
-      if (!isWebViewMessage(message)) {
+      if (!isNativeMessage(message)) {
         throw new Error("[Native 통신 오류]: 메시지 타입 오류");
       }
 
-      if (!validMessageData(message)) {
-        throw new Error("[Native 통신 오류]: 데이터 타입 오류");
+      if (!isValidMessageData(message)) {
+        throw new Error(`[Native 통신 오류]: 데이터 타입 오류 (${message})`);
       }
 
       this.callbacks.forEach((callback) => callback(message));

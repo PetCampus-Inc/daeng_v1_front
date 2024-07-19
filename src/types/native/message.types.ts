@@ -1,52 +1,54 @@
-interface ServiceData {
-  GET: {
-    IS_APP: string;
-    ID_TOKEN: string;
-  };
-  POST: {
-    GO_BACK: null;
+interface CoreMessage {
+  Request: {
     GET_ID_TOKEN: null;
+    GET_DEVICE_ID: null;
+  };
+  Response: {
+    ERROR: string;
+    GET_ID_TOKEN: string;
+    GET_DEVICE_ID: string;
   };
 }
 
-interface NativeData {
-  GET: {
-    SAVE_IMAGE_SUCCESS: boolean;
-    SAVE_IMAGE_PROGRESS: number;
-    SELECT_IMAGE_SUCCESS: string[] | boolean;
-  };
-  POST: {
+interface DeviceActionMessage {
+  Request: {
+    GO_BACK: null;
     SAVE_IMAGE: string | string[];
     SELECT_IMAGE: null;
+    LAUNCH_CAMERA: null;
+  };
+  Response: {
+    GO_BACK: null;
+    SAVE_IMAGE: boolean;
+    SELECT_IMAGE: string[] | boolean;
+    LAUNCH_CAMERA: string;
   };
 }
 
 export interface MessageData {
-  GET: NativeData["GET"] & ServiceData["GET"];
-  POST: NativeData["POST"] & ServiceData["POST"];
+  Request: CoreMessage["Request"] & DeviceActionMessage["Request"];
+  Response: CoreMessage["Response"] & DeviceActionMessage["Response"];
 }
 
 export interface MessageType {
-  GET: keyof MessageData["GET"];
-  POST: keyof MessageData["POST"];
+  Request: keyof MessageData["Request"];
+  Response: keyof MessageData["Response"];
 }
 
-export type MessageDataType = MessageData["GET"][MessageType["GET"]];
+export type MessageDataType = {
+  Request: MessageData["Request"][MessageType["Request"]];
+  Response: MessageData["Response"][MessageType["Response"]];
+};
 
-// export type WebViewGetMessage<T extends MessageType["GET"] = MessageType["GET"]> = T extends any
-//   ? { type: T; data: MessageData["GET"][T] }
-//   : never;
-
-export type WebViewGetMessage = {
-  [K in MessageType["GET"]]: { type: K; data: MessageData["GET"][K] };
-}[MessageType["GET"]];
+export type NativeMessage<T extends MessageType["Response"] = MessageType["Response"]> =
+  T extends unknown ? { type: T; data: MessageData["Response"][T] } : never;
 
 /**
  * 오브젝트가 WebViewGetMessage 타입인지 확인합니다.
  * @param obj - unknown
  * @returns boolean
  */
-export const isWebViewMessage = (obj: unknown): obj is WebViewGetMessage => {
+export const isNativeMessage = (obj: unknown): obj is NativeMessage => {
   return obj !== null && typeof obj === "object" && "type" in obj && "data" in obj;
 };
 
@@ -55,15 +57,17 @@ export const isWebViewMessage = (obj: unknown): obj is WebViewGetMessage => {
  * @param message - WebViewGetMessage
  * @returns boolean
  */
-export const validMessageData = (message: WebViewGetMessage): message is WebViewGetMessage => {
-  const { type, data } = message as WebViewGetMessage;
+export const isValidMessageData = (message: NativeMessage): message is NativeMessage => {
+  const { type, data } = message;
 
-  const validators: Record<MessageType["GET"], (data: unknown) => boolean> = {
-    IS_APP: (data): data is string => typeof data === "string",
-    ID_TOKEN: (data): data is string => typeof data === "string",
-    SAVE_IMAGE_SUCCESS: (data): data is boolean => typeof data === "boolean",
-    SAVE_IMAGE_PROGRESS: (data): data is number => typeof data === "number",
-    SELECT_IMAGE_SUCCESS: (data): data is string[] | boolean =>
+  const validators: Record<MessageType["Response"], (data: unknown) => boolean> = {
+    GO_BACK: (data): data is null => data === null,
+    GET_ID_TOKEN: (data): data is string => typeof data === "string",
+    GET_DEVICE_ID: (data): data is string => typeof data === "string",
+    ERROR: (data): data is string => typeof data === "string",
+    SAVE_IMAGE: (data): data is boolean => typeof data === "boolean",
+    LAUNCH_CAMERA: (data): data is string => typeof data === "string",
+    SELECT_IMAGE: (data): data is string[] | boolean =>
       typeof data === "boolean" ||
       (Array.isArray(data) && data.every((item) => typeof item === "string"))
   };
