@@ -61,6 +61,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               element: <Pages.RedirectPage />
             },
             {
+              path: PATH.NATIVE_LOGIN,
+              element: <Pages.NativeRedirectPage />
+            },
+            {
               path: PATH.UNREGISTER,
               element: (
                 <Suspense>

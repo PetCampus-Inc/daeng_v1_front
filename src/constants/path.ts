@@ -82,9 +82,9 @@ const MEMBER_PATH = {
   MEMBER_DOG_INFO_EDIT_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
   MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
-  // MEMEBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
+  // MEMBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
+  MEMBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
+  MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
 };
 
 const PUBLIC_PATH = {
@@ -92,6 +92,7 @@ const PUBLIC_PATH = {
   HOME: "/home",
   LOGIN: `/${LOGIN}`,
   SIGNUP: `/${SIGNUP}`,
+  NATIVE_LOGIN: `/${LOGIN}/oauth2/native-redirect`,
   REDIRECT: "/login/oauth2/code/:provider", // 소셜 로그인 리다이렉트
   UNREGISTER: "/unregister", // 회원탈퇴 페이지
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지

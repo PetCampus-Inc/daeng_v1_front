@@ -40,6 +40,7 @@ export { default as SchoolInfoPage } from "./AdminMyPage/SchoolInfoPage";
 /* Login Page */
 export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as RedirectPage } from "./RedirectPage/RedirectPage";
+export { default as NativeRedirectPage } from "./RedirectPage/NativeRedirectPage";
 
 /* SignUp Page */
 export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";
