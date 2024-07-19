@@ -11,3 +11,11 @@ export type MemberAuthType = {
   emergencyPhoneNumber: string;
   relation: RelationType;
 };
+
+export type LoginMethod = "kakao" | "google" | "apple" | "email";
+
+export interface MemberLoginInfo {
+  method: LoginMethod;
+  idToken: string;
+  deviceId: string;
+}

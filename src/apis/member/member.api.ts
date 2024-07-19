@@ -1,6 +1,7 @@
 import customAxios from "libs/CustomAxios";
 import { request } from "libs/CustomAxios/request";
 import { PrecautionData } from "types/admin/attendance.type";
+import { MemberAuthType, MemberLoginInfo } from "types/member/auth.types";
 
 import type {
   DogsDataType,
@@ -15,6 +16,21 @@ import type {
   MemberDogInfoData,
   MemberDogInfoReq
 } from "types/member/main.types";
+
+// 멤버 로그인
+export const postMemberLogin = async (req: MemberLoginInfo): Promise<MemberAuthType> => {
+  const url = `member/login`;
+  const { data } = await request<MemberAuthType>({
+    url,
+    method: "POST",
+    data: {
+      method: req.method,
+      idToken: req.idToken,
+      deviceId: req.deviceId
+    }
+  });
+  return data;
+};
 
 // 견주 홈 - 메인
 export const handleGetHomeInfo = async (memberId: number, dogId: number): Promise<HomeDataType> => {
@@ -181,7 +197,7 @@ export const handleGetMemberAgreement = async (schoolId: number, agreementId: nu
   return data.data;
 };
 
-//멤버 유의사항 재동의
+// 멤버 유의사항 재동의
 export const handlePostMemberAgreement = async (
   dogId: number,
   agreementId: number
