@@ -3,7 +3,7 @@ import { ACCEPT_FILE_TYPE, FILE_URI_NAME, PROFILE_NAME, PROFILE_PATHS } from "co
 
 import { BackgroundButton } from "components/common/Button";
 import { usePostMemberDogDetailInfo } from "hooks/api/member/member";
-import useSubmitProfile from "hooks/common/useSubmitProfile";
+import useUploadProfile from "hooks/common/useUploadProfile";
 import { useFormContext } from "react-hook-form";
 import { type MemberDogInfoReq } from "types/member/main.types";
 import { getKeyForLabel } from "utils/formatter";
@@ -15,7 +15,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
     formState: { isDirty, isValid, isSubmitting }
   } = useFormContext();
 
-  const { convertProfileUri, uploadFiles, s3ProfileData } = useSubmitProfile();
+  const { convertProfileUri, uploadFiles, s3ProfileData } = useUploadProfile();
   const { mutatePostDogDetailInfo } = usePostMemberDogDetailInfo(dogId);
 
   const getFormValues = (): MemberDogInfoReq => {

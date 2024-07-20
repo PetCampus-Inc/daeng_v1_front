@@ -2,7 +2,7 @@ import { ACCEPT_FILE_TYPE, PROFILE_NAME, PROFILE_PATHS } from "constants/profile
 
 import { BackgroundButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
-import useSubmitProfile from "hooks/common/useSubmitProfile";
+import useUploadProfile from "hooks/common/useUploadProfile";
 import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
@@ -14,7 +14,7 @@ const SaveProfileButton = () => {
     getValues,
     formState: { isValid }
   } = useFormContext();
-  const { convertProfileUri, uploadFiles, s3ProfileData } = useSubmitProfile();
+  const { convertProfileUri, uploadFiles, s3ProfileData } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
   // FIXME: wathc로 데이터를 가져오는 것이 아닌, getValues 통해 가져오는 것으로 변경해주세요!

@@ -14,7 +14,7 @@ interface UploadAndCreateAlbumOptions {
   onSuccess?: () => void;
 }
 
-const useSubmitProfile = () => {
+const useUploadProfile = () => {
   const [s3ProfileData, setS3ProfileData] = useState<string[]>([]);
   const { uploadToS3 } = useS3Upload();
 
@@ -63,4 +63,4 @@ const useSubmitProfile = () => {
   return { convertProfileUri, uploadFiles, s3ProfileData };
 };
 
-export default useSubmitProfile;
+export default useUploadProfile;
