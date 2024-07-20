@@ -1,11 +1,11 @@
 import { css } from "styled-components";
-import { ThemeConfig } from "styles/ThemeConfig";
+import { themeConfig } from "styles/themeConfig";
 import { hexToHSL } from "utils/color";
 
 import type { ButtonColorScheme } from "../types";
 import type { ColorKeys } from "styles/types";
 
-const theme = ThemeConfig;
+const theme = themeConfig;
 
 export interface ColorSchemeStyles {
   background: ColorKeys;
