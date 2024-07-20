@@ -17,13 +17,17 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const router = createBrowserRouter([
     {
       element: (
-        <ApiErrorBoundary>
-          <Layout type="global">
+        <Layout type="global">
+          <ApiErrorBoundary>
             <App />
-          </Layout>
-        </ApiErrorBoundary>
+          </ApiErrorBoundary>
+        </Layout>
       ),
-      errorElement: <LoaderErrorPage />,
+      errorElement: (
+        <Layout type="global">
+          <LoaderErrorPage />
+        </Layout>
+      ),
       children: [
         {
           id: "root",
