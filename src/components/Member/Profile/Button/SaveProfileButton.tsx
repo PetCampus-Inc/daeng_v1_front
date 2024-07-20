@@ -10,11 +10,10 @@ import * as S from "../styles";
 const SaveProfileButton = () => {
   const {
     handleSubmit,
-    watch,
     getValues,
     formState: { isValid }
   } = useFormContext();
-  const { convertProfileUri, uploadFiles, s3ProfileData } = useUploadProfile();
+  const { convertProfileUri, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
   // FIXME: wathc로 데이터를 가져오는 것이 아닌, getValues 통해 가져오는 것으로 변경해주세요!

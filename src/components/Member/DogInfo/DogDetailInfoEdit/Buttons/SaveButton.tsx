@@ -15,7 +15,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
     formState: { isDirty, isValid, isSubmitting }
   } = useFormContext();
 
-  const { convertProfileUri, uploadFiles, s3ProfileData } = useUploadProfile();
+  const { convertProfileUri, uploadFiles } = useUploadProfile();
   const { mutatePostDogDetailInfo } = usePostMemberDogDetailInfo(dogId);
 
   const getFormValues = (): MemberDogInfoReq => {
