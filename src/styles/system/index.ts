@@ -1,4 +1,4 @@
-export * from "./polymorphic";
 export * from "./style-modules";
-export * from "./polymorphic";
-export * from "./style-props";
+
+export type * from "./polymorphic";
+export type * from "./style-props";
