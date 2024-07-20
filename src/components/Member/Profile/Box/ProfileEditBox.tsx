@@ -7,6 +7,11 @@ import { getFilePreview } from "utils/thumb";
 import ProfileCreate from "../Edit/ProfileCreate";
 import ProfileUpdate from "../Update/ProfileUpdate";
 
+/**
+ * create | edit
+ * create : 프로필 신규 등록
+ * edit : 프로필 편집
+ */
 type Mode = "create" | "edit";
 
 interface ProfileEditProps {
