@@ -54,7 +54,7 @@ const ProfileEditBox = ({
 
   return (
     <>
-      {mode === "create" ? (
+      {mode === "create" && (
         <ProfileCreate
           isActive={isActive}
           setIsActive={setIsActive}
@@ -65,7 +65,8 @@ const ProfileEditBox = ({
           registerText={fileName}
           type={type}
         />
-      ) : (
+      )}
+      {mode === "edit" && (
         <ProfileUpdate
           profile={profile}
           fileInputRef={fileRef}
