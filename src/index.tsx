@@ -6,9 +6,8 @@ import { RecoilRoot } from "recoil";
 import AppRouter from "routes/AppRouter";
 import { ThemeProvider } from "styled-components";
 import { media } from "styles/MediaQuery";
-
-import { GlobalStyle } from "./styles/GlobalStyle";
-import { themeConfig } from "./styles/themeConfig";
+import { GlobalStyle } from "styles/GlobalStyle";
+import { themeConfig } from "styles/themeConfig";
 
 const queryClient = new QueryClient({
   defaultOptions: {
