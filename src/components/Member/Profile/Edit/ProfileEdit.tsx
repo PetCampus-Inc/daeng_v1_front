@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
-interface ProfileUpdateProps {
+interface ProfileEditProps {
   handleClick: (type: string) => void;
   profile: IFile[];
   fileInputRef: React.LegacyRef<HTMLInputElement> | null;
@@ -17,14 +17,14 @@ interface ProfileUpdateProps {
   type: string;
 }
 
-const ProfileUpdate = ({
+const ProfileEdit = ({
   handleClick,
   profile,
   fileInputRef,
   handleFileChange,
   registerText,
   type
-}: ProfileUpdateProps) => {
+}: ProfileEditProps) => {
   const { register, getValues } = useFormContext();
   const { profileUri } = getValues();
   return (
@@ -53,4 +53,4 @@ const ProfileUpdate = ({
   );
 };
 
-export default ProfileUpdate;
+export default ProfileEdit;

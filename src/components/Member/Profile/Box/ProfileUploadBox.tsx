@@ -5,7 +5,7 @@ import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
 
 import ProfileCreate from "../Edit/ProfileCreate";
-import ProfileUpdate from "../Edit/ProfileUpdate";
+import ProfileEdit from "../Edit/ProfileEdit";
 
 /**
  * create | edit
@@ -14,7 +14,7 @@ import ProfileUpdate from "../Edit/ProfileUpdate";
  */
 type Mode = "create" | "edit";
 
-interface ProfileEditProps {
+interface ProfileUploadProps {
   type: string;
   isActive?: boolean;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,14 +23,14 @@ interface ProfileEditProps {
   mode: Mode;
 }
 
-const ProfileEditBox = ({
+const ProfileUploadBox = ({
   type,
   isActive,
   setIsActive,
   fileRef,
   fileName,
   mode
-}: ProfileEditProps) => {
+}: ProfileUploadProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
@@ -81,7 +81,7 @@ const ProfileEditBox = ({
         />
       )}
       {mode === "edit" && (
-        <ProfileUpdate
+        <ProfileEdit
           profile={profile}
           fileInputRef={fileRef}
           handleFileChange={handleFileChange}
@@ -94,4 +94,4 @@ const ProfileEditBox = ({
   );
 };
 
-export default ProfileEditBox;
+export default ProfileUploadBox;

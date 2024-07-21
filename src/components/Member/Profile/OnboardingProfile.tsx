@@ -5,7 +5,7 @@ import { Text } from "components/common/Text";
 import useFocus from "hooks/common/useFocus";
 import { useRef, useState } from "react";
 
-import ProfileEditBox from "./Box/ProfileEditBox";
+import ProfileUploadBox from "./Box/ProfileUploadBox";
 import NickNameEdit from "./Edit/NickNameEdit";
 import RoleEdit from "./Edit/RoleEdit";
 
@@ -29,7 +29,7 @@ const OnboardingProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEditBox
+        <ProfileUploadBox
           type={PROFILE_NAME.MEMBER}
           isActive={isMyActive}
           setIsActive={setMyIsActive}
@@ -37,7 +37,7 @@ const OnboardingProfile = () => {
           fileName={FILE_URI_NAME.MEMBER}
           mode="create"
         />
-        <ProfileEditBox
+        <ProfileUploadBox
           type={PROFILE_NAME.DOG}
           isActive={isDogActive}
           setIsActive={setDogIsActive}
