@@ -50,10 +50,8 @@ const ProfileUploadBox = ({
 
     // 파일 변경 없을 경우
     if (FileList.length <= 0) {
-      if (!isActive && setIsActive) {
-        setIsActive(true);
-        return;
-      }
+      if (!isActive && setIsActive) setIsActive(true);
+      return;
     }
 
     if (FileList) {
