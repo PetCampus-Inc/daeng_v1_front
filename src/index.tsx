@@ -5,10 +5,9 @@ import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import AppRouter from "routes/AppRouter";
 import { ThemeProvider } from "styled-components";
-import mediaQueries from "styles/MediaQuery";
-
-import { GlobalStyle } from "./styles/GlobalStyle";
-import { themeConfig } from "./styles/themeConfig";
+import { media } from "styles/MediaQuery";
+import { GlobalStyle } from "styles/GlobalStyle";
+import { themeConfig } from "styles/themeConfig";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +27,7 @@ root.render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <ThemeProvider theme={{ ...themeConfig, mediaQueries }}>
+        <ThemeProvider theme={{ ...themeConfig, media }}>
           <GlobalStyle />
           <AppRouter queryClient={queryClient} />
         </ThemeProvider>

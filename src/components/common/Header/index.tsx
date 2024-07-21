@@ -12,7 +12,8 @@ import {
   TitleText,
   TextWrapper,
   IconWrapper,
-  TextButton
+  TextButton,
+  HeaderArea
 } from "./styles";
 
 /*
@@ -48,78 +49,81 @@ const Header = ({
 
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
-    <Container className={transparent ? "transparent" : ""}>
-      <HeaderWrapper className={transparent || shadow ? "transparent" : ""}>
-        {type === "main" && (
-          <TextWrapper>
-            <TextButton type="button" onClick={handleClick}>
-              <TitleText className="start">{text}</TitleText>
-              <ArrowDownIcon w="24" h="24" />
-            </TextButton>
-            <IconWrapper
-              onClick={() => {
-                // TODO: 알림 페이지로 이동
-              }}
-            >
-              <NoticeActiveIcon />
-            </IconWrapper>
-          </TextWrapper>
-        )}
-        {type === "back" && (
-          <IconWrapper onClick={click}>
-            <ArrowLeftIcon className="arrow-left" />
-          </IconWrapper>
-        )}
-        {type === "text" && (
-          <TextWrapper>
-            <IconWrapper onClick={click}>
-              <ArrowLeftIcon className="arrow-left" />
-            </IconWrapper>
-            <TitleText className="text">{text}</TitleText>
-            <IconWrapper>{rightElement}</IconWrapper>
-          </TextWrapper>
-        )}
-        {type === "notice" && (
-          <TextWrapper>
-            <TitleText className="start">{text}</TitleText>
-            <IconWrapper
-              onClick={() => {
-                // TODO: 알림 페이지로 이동
-              }}
-            >
-              <NoticeActiveIcon />
-            </IconWrapper>
-          </TextWrapper>
-        )}
-        {type === "setting" && (
-          <TextWrapper className="setting-right">
-            <TitleText className="setting">{text}</TitleText>
-            <IconWrapper
-              onClick={() => {
-                // TODO: 세팅 페이지로 이동
-              }}
-            >
-              <SettingWhiteIcon />
-            </IconWrapper>
-          </TextWrapper>
-        )}
-        {type === "edite" && (
-          <TextWrapper>
-            <IconWrapper onClick={click}>
-              <ArrowLeftIcon className="arrow-left" />
-            </IconWrapper>
-            <TitleText className="text">{text}</TitleText>
-            <IconWrapper onClick={actionFn}>
-              <PencilIcon
-                handleTouch={() => {
-                  // FIXME 클릭 이벤트를 svg에 하지 않고 button에 추가히기
+    <>
+      <Container className={transparent ? "transparent" : ""}>
+        <HeaderWrapper className={transparent || shadow ? "transparent" : ""}>
+          {type === "main" && (
+            <TextWrapper>
+              <TextButton type="button" onClick={handleClick}>
+                <TitleText className="start">{text}</TitleText>
+                <ArrowDownIcon w="24" h="24" />
+              </TextButton>
+              <IconWrapper
+                onClick={() => {
+                  // TODO: 알림 페이지로 이동
                 }}
-              />
+              >
+                <NoticeActiveIcon />
+              </IconWrapper>
+            </TextWrapper>
+          )}
+          {type === "back" && (
+            <IconWrapper onClick={click}>
+              <ArrowLeftIcon className="arrow-left" />
             </IconWrapper>
-          </TextWrapper>
-        )}
-      </HeaderWrapper>
-    </Container>
+          )}
+          {type === "text" && (
+            <TextWrapper>
+              <IconWrapper onClick={click}>
+                <ArrowLeftIcon className="arrow-left" />
+              </IconWrapper>
+              <TitleText className="text">{text}</TitleText>
+              <IconWrapper>{rightElement}</IconWrapper>
+            </TextWrapper>
+          )}
+          {type === "notice" && (
+            <TextWrapper>
+              <TitleText className="start">{text}</TitleText>
+              <IconWrapper
+                onClick={() => {
+                  // TODO: 알림 페이지로 이동
+                }}
+              >
+                <NoticeActiveIcon />
+              </IconWrapper>
+            </TextWrapper>
+          )}
+          {type === "setting" && (
+            <TextWrapper className="setting-right">
+              <TitleText className="setting">{text}</TitleText>
+              <IconWrapper
+                onClick={() => {
+                  // TODO: 세팅 페이지로 이동
+                }}
+              >
+                <SettingWhiteIcon />
+              </IconWrapper>
+            </TextWrapper>
+          )}
+          {type === "edite" && (
+            <TextWrapper>
+              <IconWrapper onClick={click}>
+                <ArrowLeftIcon className="arrow-left" />
+              </IconWrapper>
+              <TitleText className="text">{text}</TitleText>
+              <IconWrapper onClick={actionFn}>
+                <PencilIcon
+                  handleTouch={() => {
+                    // FIXME 클릭 이벤트를 svg에 하지 않고 button에 추가히기
+                  }}
+                />
+              </IconWrapper>
+            </TextWrapper>
+          )}
+        </HeaderWrapper>
+      </Container>
+      <HeaderArea />
+    </>
   );
 };
 

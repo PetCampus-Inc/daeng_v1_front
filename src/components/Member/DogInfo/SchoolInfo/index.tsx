@@ -10,6 +10,7 @@ import {
   YellowThickButton
 } from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
 import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
+import { Flex } from "components/common";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
 import { useGetDogSchoolInfo, useGetMemberPrecautions } from "hooks/api/member/school";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -82,7 +83,7 @@ const SchoolInfo = ({ dogId }: IProps) => {
   };
 
   return (
-    <FlexWrapper>
+    <Flex direction="column" gap={12} pt={28} px={16}>
       <S.Wrapper>
         <S.UpperContainer>
           <S.DogDetailInfoText className="big">{schoolData.name}</S.DogDetailInfoText>
@@ -140,7 +141,7 @@ const SchoolInfo = ({ dogId }: IProps) => {
           </S.List>
         ))}
       </S.ListContainer>
-    </FlexWrapper>
+    </Flex>
   );
 };
 

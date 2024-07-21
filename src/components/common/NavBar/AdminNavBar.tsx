@@ -12,27 +12,32 @@ import * as S from "./styles";
 const AdminNavbar = () => {
   const path: string = usePathParams();
   const adminContext = useAuth();
+  const role = adminContext?.auth?.role;
 
-  const getFilteredMenuItems = useMemo(() => {
+  const menuItems = useMemo(() => {
     if (!path.includes(PATH.ADMIN)) {
       return;
     }
-    if (adminContext?.auth?.role === Role.ROLE_TEACHER) {
-      return MENU_ITEMS.admin.filter((item) => item.text !== "유치원 운영");
+    if (role === Role.ROLE_TEACHER) {
+      return MENU_ITEMS.admin.filter((item) => item.id !== 2);
     }
     return MENU_ITEMS.admin;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adminContext?.auth?.role]);
+  }, [role]);
 
   return (
-    <S.Container radius={"0"}>
-      {getFilteredMenuItems?.map((menuItem) => (
-        <S.NavButton key={menuItem.text} to={menuItem.path}>
-          {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
-          <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
-        </S.NavButton>
+    <S.NavList>
+      {menuItems?.map((menuItem) => (
+        <S.NavItem key={menuItem.text}>
+          <S.NavLink to={menuItem.path} pb={18}>
+            <S.SvgIcon size={role === Role.ROLE_TEACHER ? 33 : 28}>
+              {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
+            </S.SvgIcon>
+            <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>
+          </S.NavLink>
+        </S.NavItem>
       ))}
-    </S.Container>
+    </S.NavList>
   );
 };
 

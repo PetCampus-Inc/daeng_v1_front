@@ -1,7 +1,6 @@
 import { Flex, Text, Box } from "components/common";
 import { ChangeEvent, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { remCalc } from "utils/calculator";
 import { getFilePreview } from "utils/thumb";
 
 import { StyledThumbList, Thumbnail, Uploader } from "./upload";
@@ -41,7 +40,7 @@ const UploadBox = () => {
 
   return (
     <>
-      <Box mb={remCalc(36)}>
+      <Box mb={36}>
         <Text as="p" typo="body2_16_R" color="black">
           사진 첨부
         </Text>

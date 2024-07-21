@@ -12,11 +12,11 @@ import {
   Underline
 } from "components/Admin/DogDetailInfo/styles";
 import Ticket from "components/Admin/DogDetailInfo/Ticket";
+import { Flex, Layout } from "components/common";
 import Header from "components/common/Header";
 import useGetPrecautions from "hooks/api/useGetPrecautions";
 import { Suspense, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
 const DogInfoPage = () => {
   const navigate = useNavigate();
@@ -41,38 +41,40 @@ const DogInfoPage = () => {
           />
         }
       />
-      <PageContainer pt="2" ph="0" color="primaryColor">
-        <nav>
-          <NavWrapper>
-            {currentSteps.map((item, index) => (
-              <NavItem
-                key={item}
-                className={index === currentStep ? "selected" : ""}
-                onClick={() => {
-                  setCurrentStep(index);
-                  if (searchParams.has("date")) {
-                    searchParams.delete("date");
-                    setSearchParams(searchParams);
-                  }
-                }}
-              >
-                {item}
-                {searchParams.get("ticket_status") === "true" && index === 2 ? <Circle /> : null}
-                {showNotice && index === 3 ? <Circle /> : null}
-                {index === currentStep ? <Underline layoutId="underline" /> : null}
-              </NavItem>
-            ))}
-          </NavWrapper>
-        </nav>
-        <ContentWrapper>
-          <Suspense>
-            {currentStep === 0 && <DogInfo />}
-            {currentStep === 1 && <AttendanceRecord />}
-            {currentStep === 2 && <Ticket />}
-            {currentStep === 3 && <Notice data={data} />}
-          </Suspense>
-        </ContentWrapper>
-      </PageContainer>
+      <Layout pt={32} bgColor="primaryColor">
+        <Flex direction="column" height="full">
+          <nav>
+            <NavWrapper>
+              {currentSteps.map((item, index) => (
+                <NavItem
+                  key={item}
+                  className={index === currentStep ? "selected" : ""}
+                  onClick={() => {
+                    setCurrentStep(index);
+                    if (searchParams.has("date")) {
+                      searchParams.delete("date");
+                      setSearchParams(searchParams);
+                    }
+                  }}
+                >
+                  {item}
+                  {searchParams.get("ticket_status") === "true" && index === 2 ? <Circle /> : null}
+                  {showNotice && index === 3 ? <Circle /> : null}
+                  {index === currentStep ? <Underline layoutId="underline" /> : null}
+                </NavItem>
+              ))}
+            </NavWrapper>
+          </nav>
+          <ContentWrapper>
+            <Suspense>
+              {currentStep === 0 && <DogInfo />}
+              {currentStep === 1 && <AttendanceRecord />}
+              {currentStep === 2 && <Ticket />}
+              {currentStep === 3 && <Notice data={data} />}
+            </Suspense>
+          </ContentWrapper>
+        </Flex>
+      </Layout>
     </>
   );
 };
