@@ -32,7 +32,7 @@ export const RoleSelectWrapper = styled(Flex)`
   width: 100%;
 `;
 
-export const ProfileBox = styled.div`
+export const ProfileBox = styled.label`
   position: relative;
 `;
 

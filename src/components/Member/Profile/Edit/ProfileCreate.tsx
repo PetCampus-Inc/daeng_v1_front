@@ -34,21 +34,26 @@ const ProfileCreate = ({
   const { register } = useFormContext();
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.UploadProfileButton
-        onClick={() => handleClick(type)}
-        onBlur={() => setIsActive && setIsActive(true)}
-      >
-        {profile.length > 0 ? (
-          <>
-            <S.UploadImage src={profile[0].thumbnail} alt={`${type}-profile`} />
-            {!isActive && <ProfileActiveBox />}
-          </>
-        ) : (
-          <AddCIcon />
-        )}
-      </S.UploadProfileButton>
+      <S.ProfileBox htmlFor="uploadProfile">
+        <S.UploadProfileButton
+          onClick={() => handleClick(type)}
+          onBlur={() => setIsActive && setIsActive(true)}
+          aria-label="uploadProfileButton"
+        >
+          {profile.length > 0 ? (
+            <>
+              <S.UploadImage src={profile[0].thumbnail} alt={`${type}-profile`} />
+              {!isActive && <ProfileActiveBox />}
+            </>
+          ) : (
+            <AddCIcon />
+          )}
+        </S.UploadProfileButton>
+      </S.ProfileBox>
+
       <S.StyledHiddenUpload
         {...register(registerText)}
+        id="uploadProfile"
         type="file"
         ref={fileInputRef}
         accept={ACCEPT_FILE_TYPE.IMAGE}

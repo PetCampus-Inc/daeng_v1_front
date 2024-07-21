@@ -29,8 +29,8 @@ const ProfileUpdate = ({
   const { profileUri } = getValues();
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.ProfileBox onClick={() => handleClick(type)}>
-        <S.UploadProfileButton w="107" h="107" br="40">
+      <S.ProfileBox htmlFor="uploadProfile" onClick={() => handleClick(type)}>
+        <S.UploadProfileButton w="107" h="107" br="40" aria-label="uploadProfileButton">
           <S.UploadImage
             src={profile[0] ? profile[0].thumbnail : profileUri}
             alt={`${type}-profile`}
@@ -43,6 +43,7 @@ const ProfileUpdate = ({
 
       <S.StyledHiddenUpload
         {...register(registerText)}
+        id="uploadProfile"
         type="file"
         ref={fileInputRef}
         accept={ACCEPT_FILE_TYPE.IMAGE}
