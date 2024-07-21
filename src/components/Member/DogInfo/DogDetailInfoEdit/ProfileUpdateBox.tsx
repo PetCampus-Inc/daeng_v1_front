@@ -1,5 +1,5 @@
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
-import ProfileUpdate from "components/Member/Profile/Update/ProfileUpdate";
+import ProfileUpdate from "components/Member/Profile/Edit/ProfileUpdate";
 import { ChangeEvent, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";

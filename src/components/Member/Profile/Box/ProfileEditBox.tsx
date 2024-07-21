@@ -5,7 +5,7 @@ import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
 
 import ProfileCreate from "../Edit/ProfileCreate";
-import ProfileUpdate from "../Update/ProfileUpdate";
+import ProfileUpdate from "../Edit/ProfileUpdate";
 
 /**
  * create | edit
