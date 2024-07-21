@@ -41,16 +41,25 @@ const ProfileEditBox = ({
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
+    const FileList = e.target.files;
+
+    if (!FileList) {
       showToast("업로드할 파일이 없습니다.", "ownerNav");
       return;
     }
 
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
+    // 파일 변경 없을 경우
+    if (FileList.length <= 0) {
+      if (!isActive && setIsActive) {
+        setIsActive(true);
+        return;
+      }
+    }
+
+    if (FileList) {
+      const newFiles = Array.from(FileList);
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
 
-      //TODO 중복파일인 경우 확인 필요
       setProfile([...fileArray]);
       setValue(fileName, [...newFiles]);
       if (mode === "create" && setIsActive) setIsActive(true);
