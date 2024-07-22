@@ -1,5 +1,5 @@
 import axios from "axios";
-import { request } from "libs/CustomAxios/request";
+import { request } from "libs/AuthAxios/request";
 
 import type {
   IOwnerSignUpInfo,

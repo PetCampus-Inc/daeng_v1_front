@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import customAxios from "libs/CustomAxios";
-import { request } from "libs/CustomAxios/request";
+import authAxios from "libs/AuthAxios";
+import { request } from "libs/AuthAxios/request";
 
 import type {
   AttendData,
@@ -127,7 +127,7 @@ export const handleGetDogDetail = async (dogId: number) => {
 // 강아지 상세 - 메모 수정
 export const handlePostDogMemo = async (dogId: number, memo: string): Promise<void> => {
   const url = `admin/attendance/dog/info/memo`;
-  const { data } = await customAxios.post(url, {
+  const { data } = await authAxios.post(url, {
     dogId,
     memo
   });

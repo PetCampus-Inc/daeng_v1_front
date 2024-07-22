@@ -1,29 +1,13 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from "axios";
 import { ACCESS_TOKEN_KEY } from "store/auth";
 
-const customAxios: AxiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_HOST,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    Authorization: ("Bearer " + localStorage.getItem("token")) as string
-  }
-});
+interface AuthAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean;
+}
 
-// customAxios.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     if (error.response.status === 404) {
-//       window.location.href = "/NotFoundPage";
-//     }
-//     return Promise.reject(error);
-//   }
-// );
-
-const authAxios = axios.create({
+export const authAxios: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_HOST,
-  headers: {
-    "Access-Control-Allow-Origin": "*"
-  }
+  withCredentials: true
 });
 
 let isTokenRefreshing = false;
@@ -45,35 +29,43 @@ const getRefreshToken = async (): Promise<string> => {
     onTokenRefreshed(newAccessToken);
     subscribers = [];
 
-    sessionStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
+    localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
     return newAccessToken;
   } catch (e) {
-    sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
     throw e instanceof Error ? e : new Error("Failed to refresh token");
   }
 };
 
-authAxios.interceptors.request.use((config) => {
-  const exceptionPath = ["admin/login", "member/login", "token/refresh"];
+authAxios.interceptors.request.use(
+  (config) => {
+    const exceptionPath = ["admin/login", "member/firebase/login", "token/refresh"];
 
-  if (config.url && !exceptionPath.includes(config.url)) {
-    const token = sessionStorage.getItem(ACCESS_TOKEN_KEY);
-    if (token) {
-      config.headers[ACCESS_TOKEN_KEY] = `Bearer ${token}`;
+    if (config.url && !exceptionPath.includes(config.url)) {
+      const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+      console.log(token);
+      if (token) {
+        config.headers[ACCESS_TOKEN_KEY] = `Bearer ${token}`;
+      }
     }
-  }
 
-  return config;
-});
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 authAxios.interceptors.response.use(
   (response) => response,
   async (error: unknown) => {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
-      const originalRequest = axiosError.config as InternalAxiosRequestConfig;
+      const originalRequest = axiosError.config as AuthAxiosRequestConfig;
 
-      if (error.code === "EXPIRED_TOKEN" || error.code === "INVALID_TOKEN") {
+      if (
+        originalRequest._retry &&
+        (error.code === "EXPIRED_TOKEN" || error.code === "INVALID_TOKEN")
+      ) {
+        originalRequest._retry = true;
         // 토큰 발행중일 경우
         if (isTokenRefreshing) {
           return new Promise((resolve) => {
@@ -104,4 +96,4 @@ authAxios.interceptors.response.use(
   }
 );
 
-export default customAxios;
+export default authAxios;

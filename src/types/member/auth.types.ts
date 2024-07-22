@@ -1,3 +1,5 @@
+import { Role } from "types/admin/admin.types";
+
 import type { MemberGenderType, RelationType } from "./enrollment.types";
 
 export type MemberAuthType = {
@@ -12,10 +14,27 @@ export type MemberAuthType = {
   relation: RelationType;
 };
 
-export type LoginMethod = "kakao" | "google" | "apple" | "email";
+export type LoginMethod = "kakao" | "google" | "apple";
 
-export interface MemberLoginInfo {
-  method: LoginMethod;
+export interface MemberLoginData {
   idToken: string;
   deviceId: string;
+}
+
+export interface MemberAuthResponse {
+  role: Role;
+  memberId: number | null;
+  dogIds: number[] | null;
+  schoolId: number | null;
+  schoolName: string | null;
+  enrollmentFormId: number | null;
+}
+
+export interface MemberAuthData {
+  role: Role;
+  memberId: number;
+  dogIds: number[];
+  schoolId: number;
+  schoolName: string;
+  enrollmentFormId: number;
 }

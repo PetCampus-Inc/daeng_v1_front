@@ -1,4 +1,4 @@
-import { request } from "libs/CustomAxios/request";
+import { request } from "libs/AuthAxios/request";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
