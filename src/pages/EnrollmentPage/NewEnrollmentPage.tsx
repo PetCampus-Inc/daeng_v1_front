@@ -1,5 +1,6 @@
 import { MEMBER_DOG_ADD_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
 
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
 import DogInfo from "components/Enrollment/Form/DogInfo";
@@ -16,7 +17,6 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
 import { AUTH_MEMBER_ID } from "store/auth";
-import { PageContainer } from "styles/StyleModule";
 import { isEmpty } from "utils/is";
 
 interface EnrollmentProps {
@@ -73,7 +73,7 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
         />
       ) : null}
       <Header type="text" text="가입신청서" />
-      <PageContainer color="BGray" pb="2.5">
+      <Layout bgColor="BGray" px={16} pb={40}>
         <S.Container>
           <S.TopWrapper>
             <S.TitleWrapper>
@@ -110,7 +110,7 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
             />
           </FormProvider>
         </S.Container>
-      </PageContainer>
+      </Layout>
     </>
   );
 };

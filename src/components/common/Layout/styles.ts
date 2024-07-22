@@ -1,63 +1,64 @@
 import { css, styled } from "styled-components";
-import { remCalc } from "utils/calculator";
-import { isNumber } from "utils/is";
+import { getColorStyle, getPaddingStyle } from "styles/system";
+import { themeConfig } from "styles/themeConfig";
 
 import type { LayoutProps } from ".";
-import type { LayoutType, TPaddingOptions } from "./types";
-
-export const getPadding = ({ pt, pb, pl, pr, type }: TPaddingOptions & LayoutType) => {
-  if (type === "page") {
-    return css`
-      padding-top: ${pt ? `calc(5vh + ${remCalc(pt)})` : "5vh"};
-      padding-bottom: ${pb ? `calc(7vh + ${remCalc(pb)})` : remCalc(24)};
-      padding-left: ${pl ? remCalc(pl) : "1rem"};
-      padding-right: ${pr ? remCalc(pr) : "1rem"};
-    `;
-  } else {
-    return css`
-      padding-top: ${pt ? (isNumber(pt) ? remCalc(pt) : pt) : ""};
-      padding-bottom: ${pb ? (isNumber(pb) ? remCalc(pb) : pb) : ""};
-      padding-left: ${pl ? (isNumber(pl) ? remCalc(pl) : pl) : ""};
-      padding-right: ${pr ? (isNumber(pr) ? remCalc(pr) : pr) : ""};
-    `;
-  }
-};
 
 export const StyledContainer = styled.div.withConfig({
+  displayName: "Layout",
   shouldForwardProp: (prop) =>
     ![
       "type",
-      "position",
-      "pt",
-      "pb",
-      "pr",
-      "pl",
-      "paddingInline",
-      "paddingBlock",
       "bg",
-      "backgroundColor"
+      "bgColor",
+      "backgroundColor",
+      "paddingX",
+      "px",
+      "paddingTop",
+      "pt",
+      "paddingBlock",
+      "paddingY",
+      "py",
+      "paddingBottom",
+      "pb"
     ].includes(prop)
 })<LayoutProps>`
-  position: ${({ position }) => position ?? position};
+  ${(props) => getColorStyle(props) ?? `background-color: ${props.theme.colors.white}`};
 
-  padding: ${({ padding }) => padding ?? padding};
-
-  ${({ type, pt, pb, pl, pr }) => getPadding({ type, pt, pb, pl, pr })};
-
-  padding-inline: ${({ paddingInline }) => (paddingInline ? remCalc(paddingInline) : undefined)};
-  padding-block: ${({ paddingBlock }) => (paddingBlock ? remCalc(paddingBlock) : undefined)};
-
-  background-color: ${({ bg, backgroundColor, theme }) =>
-    bg ? theme.colors[bg] : backgroundColor ? theme.colors[backgroundColor] : theme.colors.white};
-
-  width: 100vw;
-  height: 100%;
-
+  position: relative;
   overflow: auto;
 
   scrollbar-width: none;
   -ms-overflow-style: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
+
+  ${(props) => getPaddingStyle(props)};
+
+  ${({ type }) =>
+    type === "global" &&
+    css`
+      max-width: ${themeConfig.breakPoints.md};
+      min-height: 100%;
+      margin: 0 auto;
+    `}
+
+  ${({ type }) =>
+    type === "main" &&
+    css`
+      width: 100%;
+      height: calc(100vh - 78px - 48px);
+      min-height: 100%;
+    `}
+
+
+  ${({ type }) =>
+    type === "detail" &&
+    css`
+      width: 100%;
+      height: calc(100vh - 48px);
+      min-height: 100%;
+    `}
 `;

@@ -9,7 +9,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   return (
-    <Layout type="page" pt={76}>
+    <Layout px={16} pt={76}>
       <Text typo="title1_24_B" color="darkBlack">
         <Text as="em" typo="inherit" color="primaryColor">
           우리 강아지

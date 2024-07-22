@@ -4,6 +4,7 @@ import { PATH } from "constants/path";
 
 import ApiErrorBoundary from "ApiErrorBoundary";
 import App from "App";
+import { Layout } from "components/common";
 import * as Pages from "pages";
 import LoaderErrorPage from "pages/ErrorPage/LoaderErrorPage";
 import { Suspense } from "react";
@@ -16,11 +17,17 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const router = createBrowserRouter([
     {
       element: (
-        <ApiErrorBoundary>
-          <App />
-        </ApiErrorBoundary>
+        <Layout type="global">
+          <ApiErrorBoundary>
+            <App />
+          </ApiErrorBoundary>
+        </Layout>
       ),
-      errorElement: <LoaderErrorPage />,
+      errorElement: (
+        <Layout type="global">
+          <LoaderErrorPage />
+        </Layout>
+      ),
       children: [
         {
           id: "root",

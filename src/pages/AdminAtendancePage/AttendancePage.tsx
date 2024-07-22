@@ -2,10 +2,10 @@ import AttendanceMain from "components/Admin/Attendance/AttendanceMain";
 import AttendanceManagement from "components/Admin/Attendance/AttendanceManagement";
 import AttendanceTop from "components/Admin/Attendance/AttendanceTop";
 import { AttendanceProvider } from "components/Admin/Attendance/context/AttendanceProvider";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
 import { useSearchParams } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
 const AttendancePage = () => {
   const [searchParams] = useSearchParams();
@@ -14,12 +14,12 @@ const AttendancePage = () => {
   return (
     <>
       <Header type="notice" text="출석부" />
-      <PageContainer color="BGray" pt="2">
+      <Layout type="main" bgColor="BGray" pt={32} px={16}>
         <AttendanceProvider>
           <AttendanceTop />
           {mode !== "attend" ? <AttendanceMain /> : <AttendanceManagement />}
         </AttendanceProvider>
-      </PageContainer>
+      </Layout>
       <AdminNavBar />
     </>
   );

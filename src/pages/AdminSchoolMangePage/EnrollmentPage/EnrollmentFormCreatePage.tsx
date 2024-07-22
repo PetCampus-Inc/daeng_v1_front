@@ -60,7 +60,7 @@ const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => 
         />
       ) : null}
       <Header type="text" text="가입신청서" />
-      <Layout type="page" bg="BGray">
+      <Layout bg="BGray" px={16}>
         <Container>
           <TopWrapper>
             <TitleWrapper>

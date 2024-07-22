@@ -1,12 +1,11 @@
 import DogInfoBox from "components/Admin/AttendCareNotice/DogInfoBox";
 import PhotoAlbum from "components/Admin/AttendCareNotice/PhotoAlbum";
-import { PaddingContainer } from "components/Admin/AttendCareNotice/styles";
 import WriteNotice from "components/Admin/AttendCareNotice/WriteNotice";
+import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import MenuToggle from "components/common/MenuToggle";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
 const AttendCareNoticePage = () => {
   const [searchParams] = useSearchParams();
@@ -16,14 +15,14 @@ const AttendCareNoticePage = () => {
   return (
     <>
       <Header type="text" text={`${searchParams.get("dog_name")} 상세 페이지`} />
-      <PageContainer ph="0" pb="2">
+      <Layout>
         <DogInfoBox />
-        <PaddingContainer>
+        <Box bgColor="white" px={16} pb={42} overflow="auto">
           <MenuToggle selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
           {selectedTab === "알림장" && <WriteNotice />}
           {selectedTab === "사진앨범" && <PhotoAlbum />}
-        </PaddingContainer>
-      </PageContainer>
+        </Box>
+      </Layout>
     </>
   );
 };

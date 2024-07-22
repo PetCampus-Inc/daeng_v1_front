@@ -1,3 +1,4 @@
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
 import SaveButton from "components/Member/DogInfo/DogDetailInfoEdit/Buttons/SaveButton";
@@ -49,12 +50,12 @@ const MemberDogInfoEditPage = () => {
         />
       ) : null}
       <Header type="text" text={`${data.dogName}의 가입정보 수정`} />
-      <PageContainer pt="1">
+      <Layout pt={44} bgColor="white">
         <FormProvider {...methods}>
           <DogDetailInfoEdit />
           <SaveButton dogId={Number(dogId)} />
         </FormProvider>
-      </PageContainer>
+      </Layout>
     </>
   );
 };

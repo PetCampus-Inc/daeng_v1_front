@@ -95,7 +95,7 @@ const DogInfo = ({ dogId }: IProps) => {
   };
 
   return (
-    <Flex direction="column" gap="24">
+    <Flex direction="column" gap={24} pt={16} px={16}>
       <S.DogInfoCard>
         <S.BgImg>
           <img

@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const CardContainer = styled.div`
   display: flex;
   gap: 3vw;
-  margin: calc(48px + 3vh) 4vw;
 `;
 
 export const Card = styled.div`
