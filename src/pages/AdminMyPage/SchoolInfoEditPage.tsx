@@ -20,7 +20,7 @@ const SchoolInfoEditPage = () => {
   return (
     <>
       <Header type="text" text="유치원 정보 수정" handleClick={openModal} />
-      <Layout type="page" pt="6vh">
+      <Layout type="detail" pt="6vh">
         <Flex direction="column" marginTop="30rem" height="62%" justify="space-between">
           <Flex direction="column" gap={8}>
             <Text typo="label2_14_R" color="darkBlack">

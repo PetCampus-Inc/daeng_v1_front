@@ -9,7 +9,7 @@ const PolicySetting = ({ setStep }: PolicySettingProps) => {
   return (
     <>
       <Header type="text" text="정책" handleClick={() => setStep(0)} />
-      <Layout type="page" pt="30vh">
+      <Layout type="detail" pt="30vh">
         <Text typo="label2_14_R" color="gray_1">
           App Store의 기본 원칙은 간단합니다. 사용자에게는 안전하게 앱을 이용할 수 있는 경험,
           개발자에게는 뛰어난 앱을 개발할 수 있는 훌륭한 기회를 제공하는 것입니다. 이를 위해

@@ -13,7 +13,7 @@ interface ProfileInfoProps {
 
 const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
   return (
-    <Layout type="page" pt="10vh">
+    <Layout type="detail" pt="10vh">
       <S.ProfileWrapper>
         <S.ProfileBox>
           <S.ProfileEditeBox>
