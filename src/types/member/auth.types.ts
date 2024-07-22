@@ -21,15 +21,6 @@ export interface MemberLoginData {
   deviceId: string;
 }
 
-export interface MemberAuthResponse {
-  role: Role;
-  memberId: number | null;
-  dogIds: number[] | null;
-  schoolId: number | null;
-  schoolName: string | null;
-  enrollmentFormId: number | null;
-}
-
 export interface MemberAuthData {
   role: Role;
   memberId: number;
