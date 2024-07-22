@@ -20,7 +20,7 @@ const AdminSettingPage = () => {
       {currentStep === 0 && (
         <>
           <Header type="text" text="설정" />
-          <Layout type="detail" pt="6vh">
+          <Layout type="detail" pt="0.3rem" paddingX="1rem">
             <Box
               display="flex"
               height="56px"

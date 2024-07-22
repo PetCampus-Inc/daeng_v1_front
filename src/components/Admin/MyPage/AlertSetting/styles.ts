@@ -9,7 +9,7 @@ interface ISettingProps {
 export const SettingList = styled.ul``;
 
 export const SettingItem = styled.li<ISettingProps>`
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 1.5rem;
   display: flex;
   flex-direction: ${(props) => (props.type === "verUpdate" ? "column" : "row")};
   justify-content: ${(props) => (props.type === "notification" ? "space-between" : "normal")};

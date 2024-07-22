@@ -6,6 +6,7 @@ export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 0 16px;
 `;
 
 export const ProfileBox = styled.div`

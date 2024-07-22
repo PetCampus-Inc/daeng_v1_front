@@ -17,7 +17,7 @@ const AlertSetting = ({ setStep }: AlertSettingProps) => {
   return (
     <>
       <Header type="text" text="설정" handleClick={() => setStep(0)} />
-      <Box mt={45} bg={"white"} height={"100%"}>
+      <Box mt={5} bg={"white"} height={"100%"}>
         <S.TopWrapper>
           <div>
             <S.Title>서비스 알림</S.Title>

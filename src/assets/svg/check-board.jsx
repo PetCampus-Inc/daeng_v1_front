@@ -18,8 +18,8 @@ const CheckBoard = () => {
         fill="#EEE3D9"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M20.805 16.23a.676.676 0 0 0-.956 0l-3.344 3.345-2.39-2.39a.676.676 0 0 0-.956.956l2.849 2.849.018.019a.676.676 0 0 0 .956 0l3.823-3.823a.676.676 0 0 0 0-.956"
         fill="#C8A584"
       />
