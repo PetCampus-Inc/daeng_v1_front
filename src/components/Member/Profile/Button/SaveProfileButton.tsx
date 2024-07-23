@@ -16,7 +16,6 @@ const SaveProfileButton = () => {
   const { convertProfileUri, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
-  // FIXME: wathc로 데이터를 가져오는 것이 아닌, getValues 통해 가져오는 것으로 변경해주세요!
   const memberProfileData = getValues();
   const isAllFilled = Object.values(memberProfileData).every((el: null | undefined) => el ?? false);
 
