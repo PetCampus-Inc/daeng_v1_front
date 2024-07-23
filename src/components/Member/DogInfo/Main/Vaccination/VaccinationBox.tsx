@@ -1,5 +1,5 @@
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
-import { Box, Flex } from "components/common";
+import { Box, DragCarousel, Flex } from "components/common";
 import { CarouselModal } from "components/common/Modal/CarouselModal";
 import { useGetMemberDogDetailInfo, usePostMembeVaccination } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -77,27 +77,29 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
           disabled={vaccinationUri ? vaccinationUri.length >= MAX_FILE_COUNT : false}
         />
 
-        <S.CarouselWrapper>
-          {files.map((file, index) => (
-            <Thumbnail key={index} file={file} index={index} openPopup={openCarouselPopup} />
-          ))}
+        <S.DragCarouselWrapper>
+          <DragCarousel gap={10}>
+            {files.map((file, index) => (
+              <Thumbnail key={index} file={file} index={index} openPopup={openCarouselPopup} />
+            ))}
 
-          <S.CarouselCard
-            role="button"
-            onClick={() =>
-              openCarouselPopup(
-                "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                "2023.12.12"
-              )
-            }
-          >
-            <img
-              src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="dog_img"
-            />
-            <S.CarouselText>2023.12.12 업로드</S.CarouselText>
-          </S.CarouselCard>
-        </S.CarouselWrapper>
+            <S.CarouselCard
+              role="button"
+              onClick={() =>
+                openCarouselPopup(
+                  "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                  "2023.12.12"
+                )
+              }
+            >
+              <img
+                src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="dog_img"
+              />
+              <S.CarouselText>2023.12.12 업로드</S.CarouselText>
+            </S.CarouselCard>
+          </DragCarousel>
+        </S.DragCarouselWrapper>
       </S.CarouselContainer>
       <StyledThumbList></StyledThumbList>
     </S.DogMoreInfoCard>
