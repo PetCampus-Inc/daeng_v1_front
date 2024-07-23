@@ -52,7 +52,7 @@ const ProfileCreate = ({
       </S.ProfileBox>
 
       <S.StyledHiddenUpload
-        {...register(registerText)}
+        {...register(registerText, { required: true })}
         id="uploadProfile"
         type="file"
         ref={fileInputRef}
