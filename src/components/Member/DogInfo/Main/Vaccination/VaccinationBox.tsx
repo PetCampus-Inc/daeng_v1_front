@@ -74,7 +74,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
           multiple
           accept="image/*"
           onChange={handleFileChange}
-          disabled={vaccinationUri ? vaccinationUri.length >= MAX_FILE_COUNT : true}
+          disabled={vaccinationUri ? vaccinationUri.length >= MAX_FILE_COUNT : false}
         />
 
         <S.CarouselWrapper>
