@@ -6,11 +6,20 @@ interface StyleProps {
   w?: string;
   h?: string;
   br?: string;
+  color?: string;
+  bg?: string;
+  typo?: string;
 }
 
-export const RoleEditButton = styled(Button)`
-  max-width: 112px;
+export const RoleEditButton = styled.input<StyleProps>`
+  min-width: 112px;
   min-height: 49px;
+  ${({ theme }) => theme.typo.body2_16_R};
+  color: ${({ theme, color }) => theme.colors[color]};
+  background-color: ${({ theme, bg }) => theme.colors[bg]};
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
 `;
 
 export const RoleSelectButton = styled(Button)`
@@ -20,7 +29,6 @@ export const RoleSelectButton = styled(Button)`
 
 export const RoleEditContainer = styled.div`
   position: relative;
-  flex: 1;
 `;
 
 export const RoleSelectWrapper = styled(Flex)`

@@ -9,7 +9,7 @@ import * as S from "../styles";
 const RoleEdit = () => {
   const [currentRelation, setCurrentRelation] = useState<string>("");
   const [isShowRoles, setIsShowRoles] = useState(false);
-  const { setValue } = useFormContext();
+  const { register, setValue } = useFormContext();
   const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.relation !== currentRelation);
 
   const handleSelectedRelation = (relation: string) => {
@@ -25,15 +25,13 @@ const RoleEdit = () => {
   return (
     <S.RoleEditContainer>
       <S.RoleEditButton
-        width="112"
-        height="49"
-        typo="body2_16_R"
+        type="button"
+        onClick={handleShowRoles}
+        {...register(FIELD.RELATION, { required: true })}
+        value={currentRelation ? currentRelation : "호칭선택"}
         color={currentRelation ? "gray_1" : "gray_3"}
         bg={currentRelation ? "white" : "gray_4"}
-        onClick={handleShowRoles}
-      >
-        {currentRelation ? currentRelation : "호칭선택"}
-      </S.RoleEditButton>
+      />
 
       {isShowRoles && (
         <S.RoleSelectWrapper direction="column">

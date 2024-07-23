@@ -1,24 +1,20 @@
+import { FIELD } from "constants/field";
+
 import { TextInput } from "components/common";
+import useFocus from "hooks/common/useFocus";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
-interface INickNameEditProps {
-  handleBlur: () => void;
-  handleFocus: () => void;
-}
-
-const NickNameEdit = ({ handleBlur, handleFocus }: INickNameEditProps) => {
-  const { register, getValues } = useFormContext();
-
+const NickNameEdit = () => {
+  const { register, getValues, setValue } = useFormContext();
   return (
     <>
       <TextInput
+        {...register(FIELD.NICK_NAME, { required: true })}
         register={register}
-        {...register("nickName", { required: true })}
+        defaultValue={getValues(FIELD.DOG_NAME)}
         placeholder="닉네임을 입력해주세요"
-        defaultValue={getValues("dogName")}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         css={InputStyle}
         className="defaultValue"
       />

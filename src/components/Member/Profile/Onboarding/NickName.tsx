@@ -4,10 +4,9 @@ import NickNameEdit from "../Edit/NickNameEdit";
 import RoleEdit from "../Edit/RoleEdit";
 
 const NickName = () => {
-  const { handleFocus, handleBlur } = useFocus();
   return (
     <>
-      <NickNameEdit handleFocus={handleFocus} handleBlur={handleBlur} />의
+      <NickNameEdit />의
       <RoleEdit />
     </>
   );
