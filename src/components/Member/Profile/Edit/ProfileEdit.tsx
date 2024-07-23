@@ -29,8 +29,8 @@ const ProfileEdit = ({
   const { profileUri } = getValues();
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.ProfileBox htmlFor="uploadProfile" onClick={() => handleClick(type)}>
-        <S.UploadProfileButton w="107" h="107" br="40" aria-label="uploadProfileButton">
+      <S.ProfileBox htmlFor="uploadProfile" w="107" onClick={() => handleClick(type)}>
+        <S.UploadProfileButton br="40" aria-label="uploadProfileButton">
           <S.UploadImage
             src={profile[0] ? profile[0].thumbnail : profileUri}
             alt={`${type}-profile`}

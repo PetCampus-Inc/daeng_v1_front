@@ -40,8 +40,10 @@ export const RoleSelectWrapper = styled(Flex)`
   width: 100%;
 `;
 
-export const ProfileBox = styled.label`
+export const ProfileBox = styled.label<StyleProps>`
   position: relative;
+  width: 100%;
+  max-width: ${({ w }) => (w ? `${w}px` : "160px")};
 `;
 
 export const UploadProfileButton = styled.button<StyleProps>`
@@ -49,8 +51,6 @@ export const UploadProfileButton = styled.button<StyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${({ h }) => (h ? `${h}px` : "160px")};
-  max-width: ${({ w }) => (w ? `${w}px` : "160px")};
   border-radius: ${({ br }) => (br ? `${br}px` : "40px")};
   width: 100%;
   background-color: ${({ theme }) => theme.colors.white};
