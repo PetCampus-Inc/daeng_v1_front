@@ -1,8 +1,6 @@
 import { FIELD } from "constants/field";
 
 import { TextInput } from "components/common";
-import useFocus from "hooks/common/useFocus";
-import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 

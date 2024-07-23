@@ -1,5 +1,3 @@
-import useFocus from "hooks/common/useFocus";
-
 import NickNameEdit from "../Edit/NickNameEdit";
 import RoleEdit from "../Edit/RoleEdit";
 
