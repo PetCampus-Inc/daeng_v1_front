@@ -1,4 +1,4 @@
-import { DailyAgenda } from "components/Agenda";
+import { Calendar, DailyAgenda } from "components/Agenda";
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 
@@ -6,9 +6,9 @@ const Agenda = () => {
   return (
     <>
       <Header type="text" text="알림장" />
-      <Layout bgColor="BGray">
-        <section>캘린더 영역</section>
-        <Box px={16}>
+      <Layout bgColor="BGray" pb={40}>
+        <Calendar />
+        <Box mx={16} mt={40}>
           <DailyAgenda />
         </Box>
       </Layout>
