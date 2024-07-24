@@ -4,7 +4,7 @@ import type { ColorKeys } from "styles/types";
 
 export type SizeType = string | "full" | "fit" | "min" | "max" | "auto";
 export type SpaceType = number | string;
-export type RadiusType = number | "rectangle" | "circle";
+export type RadiusType = string | number | "rectangle" | "circle";
 
 export type DisplayProps = {
   display?: CSSProperties["display"];
