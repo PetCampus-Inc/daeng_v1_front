@@ -75,7 +75,7 @@ const MemberWaitingCard = ({ data }: IOwnerWaitingCard) => {
               <ListIconSmallRound />
               <p>가입신청서 보기</p>
             </S.TextWrapper>
-            <ArrowRightIcon />
+            <ArrowRightIcon w={16} />
           </S.LinkToEnrollment>
         </S.CardContainer>
       )}
