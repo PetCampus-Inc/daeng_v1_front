@@ -34,7 +34,7 @@ export const AgendaData = () => {
           5개 중 2개만 먹었습니다. 배변은 산책시 1회 원 내에서 1회 둘 다 묽은 상태였으니 보호자님은
           주의 부탁드립니다.
         </Text>
-        <PoopBox selected={Poop.HEALTHY} />
+        <PoopBox selected={Poop.HEALTHY} variant="sm" />
       </Flex>
     </Flex>
   );
