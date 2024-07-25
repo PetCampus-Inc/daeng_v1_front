@@ -10,14 +10,14 @@ import { IDogVaccination } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 import { getFilePreview } from "utils/thumb";
 
-import { StyledHiddenUpload } from "./styles";
-import { Thumbnail } from "./Thumbnail";
 import {
   IFile,
   StyledThumbList,
   Uploader
 } from "../../../../Admin/AttendCare/AttendCareGallery/upload";
 import * as S from "../../styles";
+import { StyledHiddenUpload } from "../Vaccination/styles";
+import { Thumbnail } from "../Vaccination/Thumbnail";
 
 const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const overlay = useOverlay();

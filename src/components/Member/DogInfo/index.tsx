@@ -10,7 +10,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import DogInfoBox from "./Main/Box/DogInfoBox";
 import DogMemoBox from "./Main/Box/DogMemoBox";
-import VaccinationBox from "./Main/Vaccination/VaccinationBox";
+import VaccinationBox from "./Main/Box/VaccinationBox";
 import { TextAreaBottomSheet } from "../../common/BottomSheet";
 
 interface IProps {
