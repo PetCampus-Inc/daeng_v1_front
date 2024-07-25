@@ -53,8 +53,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
   };
 
   const convertCreatedTime = (time: string) => {
-    const sliceTime = time.slice(0, 10).split("-");
-    const [year, day, month] = sliceTime;
+    const [year, day, month] = time.slice(0, 10).split("-");
     return formatDate(year, day, month, "dot");
   };
 
