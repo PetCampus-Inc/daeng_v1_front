@@ -2,7 +2,7 @@ import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import CarIcon from "assets/svg/car-icon";
 import { Flex } from "components/common/Flex";
 
-import * as S from "./../styles";
+import * as S from "../../styles";
 
 interface IProps {
   type: string;

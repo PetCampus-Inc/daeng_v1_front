@@ -8,8 +8,8 @@ import {
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
 
-import DogInfoBox from "./Box/DogInfoBox";
-import DogMemoBox from "./Box/DogMemoBox";
+import DogInfoBox from "./Main/Box/DogInfoBox";
+import DogMemoBox from "./Main/Box/DogMemoBox";
 import VaccinationBox from "./Main/Vaccination/VaccinationBox";
 import { TextAreaBottomSheet } from "../../common/BottomSheet";
 

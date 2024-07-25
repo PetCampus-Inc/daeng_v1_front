@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { MemberDogInfoFormData } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 
-import * as S from "./../styles";
+import * as S from "../../styles";
 
 interface IProps {
   data: MemberDogInfoFormData;
