@@ -7,6 +7,7 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useForm, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { IDogVaccination } from "types/member/main.types";
+import { formatDate } from "utils/formatter";
 import { getFilePreview } from "utils/thumb";
 
 import { StyledHiddenUpload } from "./styles";
@@ -21,16 +22,13 @@ import * as S from "../../styles";
 const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const overlay = useOverlay();
   const navigate = useNavigate();
-  const { register, setValue, watch } = useFormContext();
+  const { register, setValue, watch, getValues } = useFormContext();
   const [files, setFiles] = useState<IFile[]>([]);
   const { data } = useGetMemberDogDetailInfo(dogId);
   const mutatePostVaccination = usePostMembeVaccination(dogId);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const MAX_FILE_COUNT = 20;
-
-  const { vaccinationUri } = data;
-  console.log("vaccinationUri", vaccinationUri);
 
   const openCarouselPopup = (imgUrl: string, upDateData: string) =>
     overlay.open(({ isOpen, close }) => (
@@ -52,7 +50,12 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
 
   const uploadFile = () => {
     fileInputRef.current?.click();
-    console.log("파일 화면");
+  };
+
+  const convertCreatedTime = (time: string) => {
+    const sliceTime = time.slice(0, 10).split("-");
+    const [year, day, month] = sliceTime;
+    return formatDate(year, day, month, "dot");
   };
 
   return (
@@ -66,7 +69,21 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
         </Flex>
         <S.DogMoreInfoEditeButton onClick={uploadFile}>추가 업로드</S.DogMoreInfoEditeButton>
       </S.TopInfoBox>
+
       <S.CarouselContainer>
+        <S.DragCarouselWrapper>
+          <DragCarousel gap={10}>
+            {files.map((file, index) => (
+              <Thumbnail key={index} file={file} index={index} openPopup={openCarouselPopup} />
+            ))}
+            {vaccinationUriMockUp.map((file) => (
+              <S.CarouselCard key={file.imageId} role="button">
+                <img src={file.imageUri} alt="dog_img" />
+                <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
+              </S.CarouselCard>
+            ))}
+          </DragCarousel>
+        </S.DragCarouselWrapper>
         <StyledHiddenUpload
           {...register("vaccinationFiles")}
           type="file"
@@ -76,34 +93,28 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
           onChange={handleFileChange}
           disabled={vaccinationUri ? vaccinationUri.length >= MAX_FILE_COUNT : false}
         />
-
-        <S.DragCarouselWrapper>
-          <DragCarousel gap={10}>
-            {files.map((file, index) => (
-              <Thumbnail key={index} file={file} index={index} openPopup={openCarouselPopup} />
-            ))}
-
-            <S.CarouselCard
-              role="button"
-              onClick={() =>
-                openCarouselPopup(
-                  "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  "2023.12.12"
-                )
-              }
-            >
-              <img
-                src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="dog_img"
-              />
-              <S.CarouselText>2023.12.12 업로드</S.CarouselText>
-            </S.CarouselCard>
-          </DragCarousel>
-        </S.DragCarouselWrapper>
       </S.CarouselContainer>
-      <StyledThumbList></StyledThumbList>
     </S.DogMoreInfoCard>
   );
 };
 
 export default VaccinationBox;
+
+const vaccinationUriMockUp = [
+  {
+    imageId: 1,
+    imageUri:
+      "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageType: "IMAGE",
+    comment: "",
+    createdTime: "2024-07-25T07:24:49.701Z"
+  },
+  {
+    imageId: 2,
+    imageUri:
+      "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageType: "IMAGE",
+    comment: "",
+    createdTime: "2024-07-25T07:24:49.701Z"
+  }
+];
