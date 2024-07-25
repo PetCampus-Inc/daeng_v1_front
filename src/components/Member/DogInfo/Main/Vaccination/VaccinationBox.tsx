@@ -76,7 +76,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
             {files.map((file, index) => (
               <Thumbnail key={index} file={file} index={index} openPopup={openCarouselPopup} />
             ))}
-            {vaccinationUriMockUp.map((file) => (
+            {vaccinationUri.map((file) => (
               <S.CarouselCard key={file.imageId} role="button">
                 <img src={file.imageUri} alt="dog_img" />
                 <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
@@ -100,7 +100,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
 
 export default VaccinationBox;
 
-const vaccinationUriMockUp = [
+const vaccinationUri = [
   {
     imageId: 1,
     imageUri:
