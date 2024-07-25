@@ -39,6 +39,79 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
             }
           />
         </Box>
+        <Box
+          width="100%"
+          border={1}
+          borderRadius={8}
+          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
+          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
+          padding={12}
+        >
+          <Checkbox
+            isChecked={isAllChecked}
+            variant="default"
+            label={
+              <Text color="gray_1">
+                탈퇴 후 사용했던 소셜 아이디로{" "}
+                <Text color="primaryColor">재가입 시 신규회원으로 가입</Text> 돼요
+              </Text>
+            }
+          />
+        </Box>
+        <Box
+          width="100%"
+          border={1}
+          borderRadius={8}
+          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
+          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
+          padding={12}
+        >
+          <Checkbox
+            isChecked={isAllChecked}
+            variant="default"
+            label={
+              <Text color="gray_1">
+                원장님이 등록한 유치원의 <Text color="primaryColor">활동 기록</Text>과{" "}
+                <Text color="primaryColor">정보</Text>, 가입된{" "}
+                <Text color="primaryColor">회원 및 교사 정보</Text>는 모두{" "}
+                <Text color="primaryColor">초기화</Text>되고 복구되지 않아요
+              </Text>
+            }
+          />
+        </Box>
+        <Box
+          width="100%"
+          border={1}
+          borderRadius={8}
+          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
+          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
+          padding={12}
+        >
+          <Checkbox
+            isChecked={isAllChecked}
+            variant="default"
+            label={
+              <Text color="gray_1">
+                모든 <Text color="primaryColor">개인 정보</Text>가 삭제돼요
+              </Text>
+            }
+          />
+        </Box>
+        <Box
+          width="100%"
+          border={1}
+          borderRadius={8}
+          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
+          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
+          padding={12}
+        >
+          <Checkbox
+            onChange={() => setIsAllChecked(!isAllChecked)}
+            isChecked={isAllChecked}
+            variant="default"
+            label="위 안내사항에 모두 동의해요"
+          />
+        </Box>
       </Layout>
     </>
   );
