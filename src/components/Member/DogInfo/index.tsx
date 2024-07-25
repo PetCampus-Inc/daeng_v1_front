@@ -42,9 +42,6 @@ const DogInfo = ({ dogId }: IProps) => {
   const metatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
   const mutatePostVaccination = usePostMembeVaccination(dogId);
 
-  const { vaccinationUri } = data;
-  console.log("vaccinationUri", vaccinationUri);
-
   const DOG_BIRETH = formatDate(
     String(data[FIELD.BIRTHDAY][0]),
     String(data[FIELD.BIRTHDAY][1]),
@@ -77,11 +74,11 @@ const DogInfo = ({ dogId }: IProps) => {
   const handleEventType = (type: string) => {
     const onSubmit = methods.handleSubmit(() => {
       if (type === "pickDrop") {
-        const pickDrop = methods.getValues("pickDrop");
+        const pickDrop = methods.getValues(type);
         metatePostDogPickDrop({ dogId: dogId, memo: pickDrop });
       }
       if (type === "allergy") {
-        const allergy = methods.getValues("allergy");
+        const allergy = methods.getValues(type);
         mutatePostDogAllergy({ dogId: dogId, memo: allergy });
       }
     });
