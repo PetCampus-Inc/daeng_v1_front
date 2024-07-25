@@ -69,14 +69,14 @@ const DogInfo = ({ dogId }: IProps) => {
         title="픽드랍 메모"
         type="pickDrop"
         memo={data.pickDropMemo}
-        popUp={openTextAreaPopup}
+        openPopup={openTextAreaPopup}
       />
 
       <DogMemoBox
         title="알러지 및 질병"
         type="allergy"
         memo={data.allergyDisease}
-        popUp={openTextAreaPopup}
+        openPopup={openTextAreaPopup}
       />
 
       {/* TODO 데이터 작업 필요vaccinationUri */}

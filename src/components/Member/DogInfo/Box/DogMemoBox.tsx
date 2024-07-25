@@ -8,10 +8,10 @@ interface IProps {
   type: string;
   memo: string;
   title: string;
-  popUp: (title: string, memo: string, type: string) => void;
+  openPopup: (title: string, memo: string, type: string) => void;
 }
 
-const DogMemoBox = ({ type, memo, title, popUp }: IProps) => {
+const DogMemoBox = ({ type, memo, title, openPopup }: IProps) => {
   return (
     <S.DogMoreInfoCard>
       <S.TopInfoBox>
@@ -22,7 +22,7 @@ const DogMemoBox = ({ type, memo, title, popUp }: IProps) => {
           </S.Icon>
           <S.DogMoreInfo>{title}</S.DogMoreInfo>
         </Flex>
-        <S.DogMoreInfoEditeButton onClick={() => popUp(title, memo ? memo : "", type)}>
+        <S.DogMoreInfoEditeButton onClick={() => openPopup(title, memo ? memo : "", type)}>
           수정
         </S.DogMoreInfoEditeButton>
       </S.TopInfoBox>
