@@ -240,6 +240,14 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   <Pages.AdminSettingPage />
                 </Suspense>
               )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_DELETE_COMPLETE,
+              element: (
+                <Suspense>
+                  <Pages.AdminDeleteCompletePage />
+                </Suspense>
+              )
             }
           ]
         }

@@ -38,6 +38,7 @@ export { default as MemberEnrollmentFormDetailPage } from "./EnrollmentPage/Memb
 export { default as PrincipalMyPage } from "./AdminMyPage/PrincipalMyPage";
 export { default as TeacherMyPage } from "./AdminMyPage/TeacherMyPage";
 export { default as SchoolInfoPage } from "./AdminMyPage/SchoolInfoPage";
+export { default as AdminDeleteCompletePage } from "./AdminMyPage/AdminDeleteCompletePage";
 
 /* Login Page */
 export { default as LoginPage } from "./LoginPage/LoginPage";

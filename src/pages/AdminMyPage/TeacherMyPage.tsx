@@ -1,6 +1,6 @@
 import LogOutButton from "components/Admin/MyPage/Button/index";
 import { PageContainer } from "components/Admin/MyPage/Container/styles";
-import EditProfile from "components/Admin/MyPage/EditProfile/EditProfile";
+import EditProfile from "components/Admin/MyPage/EditProfile";
 import InfoCard from "components/Admin/MyPage/MyPageCard/InfoCard";
 import { CardContainer, ContentContainer } from "components/Admin/MyPage/styles";
 import TeacherProfile from "components/Admin/MyPage/TeacherProfile/index";

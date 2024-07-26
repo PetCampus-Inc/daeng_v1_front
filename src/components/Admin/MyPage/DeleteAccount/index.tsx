@@ -1,6 +1,10 @@
+import { PATH } from "constants/path";
+
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
+import { BackgroundButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;
@@ -8,6 +12,13 @@ interface DeleteAccountProps {
 
 const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
   const [isAllChecked, setIsAllChecked] = useState(false);
+  const navigate = useNavigate();
+
+  const onSubmit = () => {
+    navigate(PATH.ADMIN_MY_PAGE_DELETE_COMPLETE);
+    return;
+  };
+
   return (
     <>
       <Header type="back" handleClick={() => setStep(0)} shadow={true} />
@@ -27,6 +38,7 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
           borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
           backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
           padding={12}
+          marginTop={30}
         >
           <Checkbox
             isChecked={isAllChecked}
@@ -46,6 +58,7 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
           borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
           backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
           padding={12}
+          marginTop={15}
         >
           <Checkbox
             isChecked={isAllChecked}
@@ -65,6 +78,7 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
           borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
           backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
           padding={12}
+          marginTop={15}
         >
           <Checkbox
             isChecked={isAllChecked}
@@ -86,6 +100,7 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
           borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
           backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
           padding={12}
+          marginTop={15}
         >
           <Checkbox
             isChecked={isAllChecked}
@@ -102,16 +117,24 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
           border={1}
           borderRadius={8}
           borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
+          backgroundColor={`${isAllChecked ? "br_4" : "transparent"}`}
           padding={12}
+          marginTop={60}
         >
           <Checkbox
             onChange={() => setIsAllChecked(!isAllChecked)}
             isChecked={isAllChecked}
             variant="default"
-            label="위 안내사항에 모두 동의해요"
+            label={
+              <Text color={`${isAllChecked ? "primaryColor" : "gray_1"}`}>
+                위 안내사항에 모두 동의해요
+              </Text>
+            }
           />
         </Box>
+        <BackgroundButton onClick={onSubmit} disabled={!isAllChecked} backgroundColor="white">
+          탈퇴하기
+        </BackgroundButton>
       </Layout>
     </>
   );

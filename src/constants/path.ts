@@ -61,7 +61,7 @@ const ADMIN_PATH = {
 
   ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`,
   ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`,
-  ADMIN_MY_PAGE_EDIT: `/${ADMIN}/${MYPAGE}/profile/edit`,
+  ADMIN_MY_PAGE_DELETE_COMPLETE: `/${ADMIN}/${MYPAGE}/delete-complete`,
   ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`,
   ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit`
 };
