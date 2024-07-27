@@ -1,7 +1,6 @@
 import authAxios from "libs/AuthAxios";
-import { request } from "libs/AuthAxios/request";
+import { request, Response } from "libs/AuthAxios/request";
 import { PrecautionData } from "types/admin/attendance.type";
-import { Response } from "types/helper.types";
 import { MemberAuthData, MemberLoginData } from "types/member/auth.types";
 
 import type {
