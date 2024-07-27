@@ -5,7 +5,7 @@ export interface IOwnerInfo {
   phoneNumber: string;
   id: string;
   role: string;
-  imageUrl: string;
+  profileUri: string;
   schoolId: number;
   schoolName: string;
   schoolNumber: string;

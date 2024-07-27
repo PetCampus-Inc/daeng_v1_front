@@ -26,7 +26,11 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
   return (
     <StyledTitleContainer>
       <StyledTitle>소속 유치원</StyledTitle>
-      <MoreButton p={0} onClick={handleClick} rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}>
+      <MoreButton
+        p={0}
+        onClick={handleClick}
+        rightAddon={<ArrowRightIcon w={"20"} h={"20"} colorScheme="gray_3" />}
+      >
         {text}
       </MoreButton>
     </StyledTitleContainer>
@@ -70,7 +74,7 @@ const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
         (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.registeredDate)
           ?.map((num) => num.toString().padStart(2, "0"))
           ?.join(".") + `${isOwner ? ` 등록` : ` 가입`}`,
-      icon: <CalendarIcon />
+      icon: <CalendarIcon w="24" h="24" />
     }
   ];
 
