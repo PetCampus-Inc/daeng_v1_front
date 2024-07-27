@@ -8,7 +8,7 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useForm, FormProvider, useFormState } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useBlocker } from "react-router-dom";
-import { isEmpty } from "utils/helper";
+import { isEmpty } from "utils/is";
 
 const NewTicketPage = () => {
   const { schoolId } = useAdminInfo();
@@ -41,7 +41,7 @@ const NewTicketPage = () => {
       ) : null}
       <Header type="text" text="갱신될 이용권 정보 변경" />
       <FormProvider {...methods}>
-        <Layout type="page" paddingInline={16}>
+        <Layout px={16}>
           <NewTicketForm formData={formData} attendanceDays={ticketData.attendanceDays} />
           <SubmitButton dogId={Number(dogId)} />
         </Layout>

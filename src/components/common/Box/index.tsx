@@ -2,20 +2,22 @@ import { forwardRef, type ReactElement, type ElementType } from "react";
 
 import { StyledBox } from "./styles";
 
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../polymorphic";
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../../../styles/system";
 import type {
+  DisplayProps,
   BorderProps,
   ColorProps,
   FlexBoxProps,
-  LayOutProps,
+  SizeProps,
   OtherProps,
   PositionProps,
   RadiusProps,
   SpacingProps,
   TextStyleProps
-} from "../style-props.types";
+} from "../../../styles/system";
 
-export type BoxOptions = LayOutProps &
+export type BoxOptions = DisplayProps &
+  SizeProps &
   SpacingProps &
   ColorProps &
   PositionProps &

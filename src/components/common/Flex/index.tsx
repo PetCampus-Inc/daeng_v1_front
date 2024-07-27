@@ -2,18 +2,18 @@ import { type ForwardedRef, forwardRef, type HTMLAttributes } from "react";
 
 import { StyledFlex } from "./styles";
 
-import type { FlexBoxProps, LayOutProps, OtherProps, SpacingProps } from "../style-props.types";
+import type { FlexBoxProps, SizeProps, OtherProps, SpacingProps } from "../../../styles/system";
 
-export type FlexOptions = FlexBoxProps & LayOutProps & SpacingProps & OtherProps;
+export type FlexOptions = FlexBoxProps & SizeProps & SpacingProps & OtherProps;
 
 type FlexProps = FlexOptions & HTMLAttributes<HTMLDivElement>;
 
 export const Flex = forwardRef(function Flex(
-  { children, ...props }: FlexProps,
+  { children, display = "flex", ...props }: FlexProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   return (
-    <StyledFlex ref={ref} {...props}>
+    <StyledFlex {...props} ref={ref} display={display}>
       {children}
     </StyledFlex>
   );

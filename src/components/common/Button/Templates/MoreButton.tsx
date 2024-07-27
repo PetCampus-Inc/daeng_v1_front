@@ -22,6 +22,7 @@ export const MoreButton = ({
 }: PropsWithChildren<MoreButtonProps>) => {
   return (
     <Button
+      asChild
       typo="label2_14_R"
       color={color}
       bgColor="transparent"
@@ -31,7 +32,7 @@ export const MoreButton = ({
       rightAddon={<ArrowRightIcon colorScheme={iconColorScheme} w={iconSize} h={iconSize} />}
       {...props}
     >
-      {children}
+      <a>{children}</a>
     </Button>
   );
 };

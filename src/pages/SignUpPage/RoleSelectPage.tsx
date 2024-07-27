@@ -20,7 +20,7 @@ const RoleSelectPage = ({ onNextStep }: IStepProps) => {
   return (
     <>
       <Header type="text" text="역할 선택" />
-      <Layout type="page" pt={44}>
+      <Layout bgColor="white" pt={44} px={16}>
         <Flex justify="center" gap={16}>
           <RoleBox
             role="TEACHER"

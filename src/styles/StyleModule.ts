@@ -1,3 +1,4 @@
+import { Layout } from "components/common/Layout";
 import styled, { css, keyframes } from "styled-components";
 
 import type { ColorKeys } from "./types";
@@ -41,6 +42,9 @@ export const fadeIn = keyframes`
   }
 `;
 
+/**
+ * @deprecated 곧 제거될 예정입니다. 대신 {@link Layout} 을 사용해주세요
+ */
 export const PageContainer = styled.div.withConfig({
   shouldForwardProp: (prop) => !["pt", "pb", "ph", "pr", "pl", "color", "auto"].includes(prop)
 })<{

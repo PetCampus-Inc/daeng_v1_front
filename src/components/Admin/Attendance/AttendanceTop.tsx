@@ -1,4 +1,5 @@
 import FootIcon from "assets/svg/foot-icon";
+import { Text } from "components/common";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useBlocker, useSearchParams } from "react-router-dom";
 
@@ -33,9 +34,9 @@ const AttendanceTop = () => {
   return (
     <S.MainWrapper>
       <S.TitleWrapper>
-        <S.Title>
+        <Text as="h2" typo="title2_20_B" color="darkBlack">
           {adminName} {adminRole === "ROLE_OWNER" ? "원장님" : "선생님"} 안녕하세요
-        </S.Title>
+        </Text>
         <S.SubTitle>
           {isAttendMode ? "출석 진행중이에요" : `${schoolName} 강아지들이에요`}
         </S.SubTitle>

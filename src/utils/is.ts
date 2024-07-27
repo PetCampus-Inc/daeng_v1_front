@@ -10,6 +10,14 @@ export function isNumber(value: unknown): value is number {
   return typeof value === "number";
 }
 
+/* @description Check if the object is empty
+ * @param obj
+ * @returns {boolean}
+ */
+export const isEmpty = (obj: object) => {
+  return Object.keys(obj).length === 0;
+};
+
 interface CustomError {
   status: number;
   data: {

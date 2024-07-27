@@ -1,9 +1,15 @@
-import { isCustomError } from "utils/typeGuard";
+import { isCustomError } from "utils/is";
 
 import authAxios from ".";
 
 import type { AxiosError, AxiosRequestConfig } from "axios";
-import type { Response } from "types/helper.types";
+
+export interface Response<T> {
+  data: T;
+  status: number;
+  message: string;
+  responseTime?: number[];
+}
 
 export const request = async <T>(config: AxiosRequestConfig): Promise<Response<T>> => {
   try {

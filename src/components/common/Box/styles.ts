@@ -8,11 +8,12 @@ import {
   getPaddingStyle,
   getPositionStyle,
   getSizeStyle
-} from "../style-modules";
+} from "../../../styles/system";
 
 import type { BoxOptions } from ".";
 
 export const StyledBox = styled.div.withConfig({
+  displayName: "Box",
   shouldForwardProp: (prop) =>
     ![
       "display",
@@ -92,8 +93,8 @@ export const StyledBox = styled.div.withConfig({
   ${(props) => getMarginStyle(props)};
   ${(props) => getPaddingStyle(props)};
   ${(props) => getBorderStyle(props)};
-  ${(props) => getColorStyle(props)}
-  ${(props) => getPositionStyle(props)}
+  ${(props) => getColorStyle(props)};
+  ${(props) => getPositionStyle(props)};
 
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.textAlign};

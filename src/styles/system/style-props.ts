@@ -4,10 +4,13 @@ import type { ColorKeys } from "styles/types";
 
 export type SizeType = string | "full" | "fit" | "min" | "max" | "auto";
 export type SpaceType = number | string;
-export type RadiusType = number | "rectangle" | "circle";
+export type RadiusType = string | number | "rectangle" | "circle";
 
-export type LayOutProps = {
+export type DisplayProps = {
   display?: CSSProperties["display"];
+};
+
+export type SizeProps = {
   width?: SizeType;
   maxWidth?: SizeType;
   minWidth?: SizeType;
@@ -74,6 +77,7 @@ export type PositionProps = {
 };
 
 export type FlexBoxProps = {
+  display?: "flex" | "inline-flex";
   flex?: number;
   direction?: "row" | "column";
   justify?: CSSProperties["justifyContent"];

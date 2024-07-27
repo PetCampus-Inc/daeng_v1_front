@@ -25,16 +25,18 @@ const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
         <Text typo="body2_16_R" color="darkBlack">
           사진 앨범
         </Text>
-        <MoreButton
-          onClick={() =>
-            navigate(`${PATH.ALBUM}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`)
-          }
-          typo="body2_16_R"
-          iconSize={24}
-          iconColorScheme="gray_1"
-        >
-          전체보기
-        </MoreButton>
+        {images && (
+          <MoreButton
+            onClick={() =>
+              navigate(`${PATH.ALBUM}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`)
+            }
+            typo="body2_16_R"
+            iconSize={24}
+            iconColorScheme="gray_1"
+          >
+            전체보기
+          </MoreButton>
+        )}
       </Flex>
       <ImageSlider images={images} />
     </Box>

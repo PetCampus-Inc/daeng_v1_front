@@ -7,5 +7,6 @@ declare module "styled-components" {
     zIndex: (typeof foundations)["zIndex"];
     shadows: (typeof foundations)["shadows"];
     transition: (typeof foundations)["transition"];
+    breakPoints: (typeof foundations)["breakPoints"];
   }
 }

@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { ThemeProvider } from "styled-components";
-import { ThemeConfig } from "../src/styles/ThemeConfig";
+import { themeConfig } from "../src/styles/themeConfig";
 import React from "react";
 
 const preview: Preview = {
@@ -16,7 +16,7 @@ const preview: Preview = {
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={ThemeConfig}>
+    <ThemeProvider theme={themeConfig}>
       <Story />
     </ThemeProvider>
   )

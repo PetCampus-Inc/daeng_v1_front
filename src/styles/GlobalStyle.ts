@@ -103,7 +103,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: ${(props) => props.theme.colors.BGray};
   &::-webkit-scrollbar{
     display: none;
   }

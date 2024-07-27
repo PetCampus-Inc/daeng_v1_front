@@ -224,6 +224,30 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   <Pages.SchoolInfoPage />
                 </Suspense>
               )
+            },
+            {
+              path: PATH.ADMIN_MY_SCHOOL_INFO_EDIT,
+              element: (
+                <Suspense>
+                  <Pages.SchoolInfoEditPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_SETTING,
+              element: (
+                <Suspense>
+                  <Pages.AdminSettingPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_DELETE_COMPLETE,
+              element: (
+                <Suspense>
+                  <Pages.AdminDeleteCompletePage />
+                </Suspense>
+              )
             }
           ]
         }

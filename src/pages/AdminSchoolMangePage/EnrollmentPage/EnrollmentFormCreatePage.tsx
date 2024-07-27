@@ -24,7 +24,7 @@ import { PreventLeaveModal } from "components/common/Modal";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
-import { isEmpty } from "utils/helper";
+import { isEmpty } from "utils/is";
 
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
@@ -60,7 +60,7 @@ const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => 
         />
       ) : null}
       <Header type="text" text="가입신청서" />
-      <Layout type="page" bg="BGray">
+      <Layout bg="BGray" px={16}>
         <Container>
           <TopWrapper>
             <TitleWrapper>

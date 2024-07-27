@@ -11,7 +11,7 @@ interface IProps {
 const AttendanceTicketInfo = ({ dogId }: IProps) => {
   // FIXME useGetMemberDogEnrollmemntInfo와 useGetMemberSchoolInfo 불러오는 데이터가 달라 확인 필요
   return (
-    <Flex direction="column" gap="41">
+    <Flex direction="column" gap={42} pt={14} px={16}>
       <section>
         <S.DogDetailInfoText className="big">출결</S.DogDetailInfoText>
         <AllCalendar />
