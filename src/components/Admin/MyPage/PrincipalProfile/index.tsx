@@ -1,12 +1,17 @@
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
+import { Flex } from "components/common";
+
 import * as S from "./styles";
 
 import type { IOwnerInfo } from "types/admin/mypage.types";
 
 interface PrincipalInfoProps {
   data: IOwnerInfo;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditing: boolean;
 }
 
-const PrincipalProfile = ({ data }: PrincipalInfoProps) => {
+const PrincipalProfile = ({ data, setIsEditing, isEditing }: PrincipalInfoProps) => {
   return (
     <>
       <S.ProfileWrapper>
@@ -22,8 +27,13 @@ const PrincipalProfile = ({ data }: PrincipalInfoProps) => {
 
         <S.ProfileDetail>
           <S.DetailItem>
-            <S.PrimaryColorButton>프로필 수정</S.PrimaryColorButton>
-            <S.Text className="name">{data.adminName} 원장님</S.Text>
+            <S.PrimaryColorButton onClick={() => setIsEditing(!isEditing)}>
+              프로필 수정
+            </S.PrimaryColorButton>
+            <Flex justify="center" align="center">
+              <S.Text className="name">{data.adminName} 원장님</S.Text>
+              <ArrowRightIcon colorScheme="darkBlack" w="24" />
+            </Flex>
             <S.Text className="number">{data.phoneNumber}</S.Text>
             <S.Text className="id">{data.id}</S.Text>
           </S.DetailItem>

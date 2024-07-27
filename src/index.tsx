@@ -5,8 +5,8 @@ import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
 import AppRouter from "routes/AppRouter";
 import { ThemeProvider } from "styled-components";
-import { media } from "styles/MediaQuery";
 import { GlobalStyle } from "styles/GlobalStyle";
+import { media } from "styles/MediaQuery";
 import { themeConfig } from "styles/themeConfig";
 
 const queryClient = new QueryClient({

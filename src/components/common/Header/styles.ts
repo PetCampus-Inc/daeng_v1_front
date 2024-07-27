@@ -12,6 +12,9 @@ export const Container = styled.div`
   align-items: center;
   background-color: ${(props) => props.theme.colors.white};
   z-index: 5;
+  &.transparent {
+    background-color: transparent;
+  }
 `;
 
 export const HeaderArea = styled.div`

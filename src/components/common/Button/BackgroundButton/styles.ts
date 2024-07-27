@@ -11,8 +11,8 @@ export const Background = styled.div.withConfig({
 `;
 
 export const Button = styled.button.withConfig({
-  shouldForwardProp: (prop) => !["bg"].includes(prop)
-})<{ bg: ColorKeys }>`
+  shouldForwardProp: (prop) => !["bg", "fontColor"].includes(prop)
+})<{ bg: ColorKeys; fontColor: ColorKeys }>`
   position: relative;
   width: 100%;
   min-height: 48px;
@@ -20,7 +20,10 @@ export const Button = styled.button.withConfig({
   border-radius: 8px;
   background-color: ${(props) =>
     props.bg ? ({ theme, bg }) => theme.colors[bg] : ({ theme }) => theme.colors.primaryColor};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${(props) =>
+    props.fontColor
+      ? ({ theme, fontColor }) => theme.colors[fontColor]
+      : ({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.label1_16_B};
 
   &:disabled {
