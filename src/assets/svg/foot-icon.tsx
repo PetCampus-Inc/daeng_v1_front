@@ -1,4 +1,10 @@
-const FootIcon = ({ className = "", w = "22", h = "19" }) => {
+import type { IconSize } from "./types";
+
+interface IconProps extends IconSize {
+  className?: string;
+}
+
+const FootIcon = ({ className = "", w = "22", h = "19" }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

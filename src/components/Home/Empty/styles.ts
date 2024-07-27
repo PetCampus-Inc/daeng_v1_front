@@ -18,7 +18,7 @@ export const EmptyContainer = styled.div`
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    background-image: url(images/empty-image1.svg);
+    background-image: url(${process.env.REACT_APP_CLIENT_URL}/images/empty-image1.svg);
     background-size: 50% 50%;
     background-position: center 40%;
     background-repeat: no-repeat;
@@ -53,7 +53,7 @@ export const EmptyAlbumContainer = styled.div`
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    background-image: url(images/empty-image2.svg);
+    background-image: url(${process.env.REACT_APP_CLIENT_URL}/images/empty-image2.svg);
     background-size: 52% 52%;
     background-position: center 45%;
     background-repeat: no-repeat;
