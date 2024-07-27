@@ -1,4 +1,5 @@
-import { isNativeMessage, isValidMessageData, NativeMessage } from "types/native/message.types";
+import { NativeMessage } from "types/native/message.types";
+import { isNativeMessage, isValidMessageData } from "utils/typeGuard";
 
 type EventCallback = (event: NativeMessage) => void;
 
