@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig, isAxiosError } from "axios";
 import { ACCESS_TOKEN_KEY } from "store/auth";
 
 interface AuthAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -21,29 +21,34 @@ const onTokenRefreshed = (token: string) => {
 
 const getRefreshToken = async (): Promise<string> => {
   try {
-    const res = await authAxios.post("token/refresh");
+    const res = await authAxios.post("token");
     const newAccessToken = res.headers["authorization"];
 
-    if (!newAccessToken) throw new Error("Failed to refresh token");
+    if (!newAccessToken) throw new Error("Unable to find the access token in the header");
+    localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
 
     onTokenRefreshed(newAccessToken);
-    subscribers = [];
 
-    localStorage.setItem(ACCESS_TOKEN_KEY, newAccessToken);
     return newAccessToken;
-  } catch (e) {
+  } catch (error) {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
-    throw e instanceof Error ? e : new Error("Failed to refresh token");
+
+    if (isAxiosError(error)) {
+      if (error.code === "TOKEN-401-2") throw new Error("Failed to refresh token");
+      else if (error.code === "TOKEN-410-2") throw new Error("Refresh token expired");
+    }
+
+    throw error;
   }
 };
 
 authAxios.interceptors.request.use(
   (config) => {
-    const exceptionPath = ["admin/login", "member/firebase/login", "token/refresh"];
+    const exceptionPath = ["admin/login", "member/firebase/login", "token"];
 
+    // 로그인, 토큰 재발행 요청이 아닌 경우 AccessToken 헤더 추가
     if (config.url && !exceptionPath.includes(config.url)) {
       const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-      console.log(token);
       if (token) {
         config.headers[ACCESS_TOKEN_KEY] = `Bearer ${token}`;
       }
@@ -57,15 +62,16 @@ authAxios.interceptors.request.use(
 authAxios.interceptors.response.use(
   (response) => response,
   async (error: unknown) => {
-    if (axios.isAxiosError(error)) {
+    if (isAxiosError(error)) {
       const axiosError = error as AxiosError;
       const originalRequest = axiosError.config as AuthAxiosRequestConfig;
 
       if (
-        originalRequest._retry &&
-        (error.code === "EXPIRED_TOKEN" || error.code === "INVALID_TOKEN")
+        !originalRequest._retry &&
+        (error.code === "TOKEN-401-1" || error.code === "TOKEN-410-1")
       ) {
         originalRequest._retry = true;
+
         // 토큰 발행중일 경우
         if (isTokenRefreshing) {
           return new Promise((resolve) => {
@@ -84,8 +90,8 @@ authAxios.interceptors.response.use(
           originalRequest.headers["authorization"] = `Bearer ${newAccessToken}`;
           return authAxios(originalRequest);
         } catch (refreshError) {
-          console.error("[Refresh Token]", refreshError);
           // TODO: 로그아웃 엔드포인트 요청 (Refresh Token 쿠키 삭제 후 로그인 페이지로 리다이렉트)
+          console.error("[Refresh Token]", refreshError);
         } finally {
           isTokenRefreshing = false;
         }
