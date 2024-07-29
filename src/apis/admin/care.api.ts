@@ -1,4 +1,4 @@
-import { request } from "libs/CustomAxios/request";
+import { request } from "libs/AuthAxios/request";
 import {
   ICareDogInfo,
   ICareDogProps,
