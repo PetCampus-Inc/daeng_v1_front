@@ -1,6 +1,7 @@
 import type { Nullable } from "types/helper.types";
 
 export interface IOwnerInfo {
+  adminId: number;
   adminName: string;
   phoneNumber: string;
   id: string;
