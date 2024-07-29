@@ -2,8 +2,9 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
+    REACT_APP_CLIENT_BASE_URL: string;
     REACT_APP_SERVER_HOST: string;
-    REACT_APP_SERVER_DOMAIN: string;
+
     REACT_APP_BUSINESS_API_KEY: string;
 
     REACT_APP_AWS_BUCKET: string;

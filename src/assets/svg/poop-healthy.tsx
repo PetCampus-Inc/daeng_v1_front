@@ -10,13 +10,13 @@ const PoopHealthy = ({ poop }: { poop?: Poop }) => {
         width="62"
         height="62"
         rx="8"
-        fill={isSelected ? themeConfig.colors.yellow_3 : "#E9E9E9"}
+        fill={isSelected ? themeConfig.colors.yellow_3 : "#F6F6F6"}
       />
       <circle
         cx="31"
         cy="31"
         r="15"
-        fill={isSelected ? themeConfig.colors.primaryColor : "#B5B5B5"}
+        fill={isSelected ? themeConfig.colors.primaryColor : "#E9E9E9"}
       />
     </svg>
   );
