@@ -1,25 +1,28 @@
 import useNative from "hooks/native/useNative";
+import authAxios from "libs/AuthAxios";
 import { useEffect } from "react";
 
 const NativeRedirectPage = () => {
-  const { nativeEvent } = useNative();
+  const { native } = useNative();
 
   const handleTest = async () => {
-    const uri = await nativeEvent.getDeviceId();
+    const uri = await native.getDeviceId();
     console.log(uri);
   };
 
   useEffect(() => {
     const getToken = async () => {
-      const idToken = await nativeEvent.getIdToken();
-      const deviceId = await nativeEvent.getDeviceId();
-      const body = { idToken, deviceId };
+      const idToken = await native.getIdToken();
+      const deviceId = await native.getDeviceId();
+      const body = { idToken, deviceId, method: "KAKAO" };
 
       console.log(body);
+      const res = await authAxios.post("member/firebase/login", body);
+      console.log(res);
     };
 
     getToken();
-  }, [nativeEvent]);
+  }, [native]);
 
   return (
     <div>

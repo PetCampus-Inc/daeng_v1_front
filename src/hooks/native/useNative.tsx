@@ -32,13 +32,10 @@ const useNative = () => {
         const handler = (message: NativeMessage) => {
           const { type: resType, data: resData } = message;
 
-          if (resType === type) {
-            resolve(resData);
-            cleanup();
-          } else if (resType === "ERROR") {
-            reject(resData);
-            cleanup();
-          }
+          if (resType === type) resolve(resData);
+          else if (resType === "ERROR") reject(resData);
+
+          cleanup();
         };
 
         const cleanup = () => {
@@ -53,7 +50,7 @@ const useNative = () => {
     [postMessage]
   );
 
-  const nativeEvent = useMemo(
+  const native = useMemo(
     () => ({
       goBack: () => nativeRequest("GO_BACK", null, 2000),
       getIdToken: () => nativeRequest("GET_ID_TOKEN", null, 2000),
@@ -65,7 +62,7 @@ const useNative = () => {
     [nativeRequest]
   );
 
-  return { postMessage, nativeRequest, nativeEvent };
+  return { postMessage, nativeRequest, native };
 };
 
 export default useNative;
