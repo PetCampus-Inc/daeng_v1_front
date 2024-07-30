@@ -6,6 +6,15 @@ ${reset}
 
 *{
   box-sizing: border-box;
+
+  /* 앱 대응 스타일 */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color:rgba(255,255,255,0);
+
+  /* IOS 스크롤 바운스 방지 */
+  overscroll-behavior-y: none;
 }
 
 .swiper-button-next::after,

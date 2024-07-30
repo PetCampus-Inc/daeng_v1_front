@@ -1,4 +1,4 @@
-import { request } from "libs/CustomAxios/request";
+import { request } from "libs/AuthAxios/request";
 import { IOwnerProfileEdit } from "types/admin/admin.types";
 
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
