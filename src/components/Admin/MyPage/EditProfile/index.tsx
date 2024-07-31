@@ -1,9 +1,12 @@
+import { PHONE_REGEX } from "constants/validCheck";
+
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { Flex, Layout, Text, TextInput } from "components/common";
 import { useOwnerProfileEdit } from "hooks/api/admin/mypage";
 import { useForm } from "react-hook-form";
 import { IOwnerInfo } from "types/admin/mypage.types";
 import { ITeacherInfo } from "types/admin/mypage.types";
+import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 import { BackgroundButton } from "../../../common/Button";
@@ -14,8 +17,15 @@ interface ProfileInfoProps {
 }
 
 const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, setValue } = useForm();
   const { ownerProfileEditMutation } = useOwnerProfileEdit();
+
+  const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formattedValue = formatPhoneNumber(value);
+    setValue(field, formattedValue);
+  };
+
   const onSubmit = handleSubmit((data) => {
     const req = {
       imageUrl:
@@ -55,6 +65,9 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
             defaultValue={principalData?.adminName}
             name="newName"
             register={register}
+            rules={{
+              minLength: 1
+            }}
           />
         </Flex>
         <Flex direction="column" gap={6}>
@@ -66,6 +79,13 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
             defaultValue={principalData?.phoneNumber}
             name="newPhoneNumber"
             register={register}
+            rules={{
+              pattern: {
+                value: PHONE_REGEX,
+                message: "올바른 연락처를 입력해주세요"
+              }
+            }}
+            onChange={handleChangeNumber("newPhoneNumber")}
           />
         </Flex>
         <BackgroundButton backgroundColor="white" type="submit" onClick={onSubmit}>
