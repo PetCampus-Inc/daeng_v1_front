@@ -20,7 +20,7 @@ const SchoolInfoEditPage = () => {
   const overlay = useOverlay();
   const navigate = useNavigate();
   const { handleSubmit, register, setValue, watch } = useForm();
-  const watchAddress = watch("newSchoolAddress", "");
+  const watchAddress = watch("schoolAddress", "");
 
   const openModal = () =>
     overlay.open(({ isOpen, close }) => (
@@ -98,7 +98,7 @@ const SchoolInfoEditPage = () => {
                   message: "올바른 연락처를 입력해주세요"
                 }
               }}
-              onChange={handleChangeNumber("newPhoneNumber")}
+              onChange={handleChangeNumber("newSchoolNumber")}
             />
           </Flex>
           <Flex direction="column" gap={8}>
@@ -106,17 +106,24 @@ const SchoolInfoEditPage = () => {
               유치원 주소
             </Text>
             <SearchInput
-              name="newSchoolAddress"
+              name="schoolAddress"
+              className="defaultValue"
               register={register}
               placeholder="주소를 검색해 주세요"
               onSearch={openPostCodePopup}
               onClick={handleAddressFieldClick}
               onClear={handleClear}
-              value={watchAddress}
+              defaultValue={data?.address}
               readOnly
               required
             />
-            <TextInput />
+            <TextInput
+              name="schoolAddressDetail"
+              className="defaultValue"
+              register={register}
+              defaultValue={data.address}
+              required
+            />
           </Flex>
           <Flex direction="column" gap={8}>
             <Text typo="label2_14_R" color="darkBlack">
