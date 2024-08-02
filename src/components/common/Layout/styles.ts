@@ -38,27 +38,16 @@ export const StyledContainer = styled.div.withConfig({
   ${(props) => getPaddingStyle(props)};
 
   ${({ type }) =>
-    type === "global" &&
-    css`
-      max-width: ${themeConfig.breakPoints.md};
-      min-height: 100%;
-      margin: 0 auto;
-    `}
-
-  ${({ type }) =>
     type === "main" &&
     css`
       width: 100%;
-      height: calc(100vh - 78px - 48px);
-      min-height: 100%;
+      height: calc(100% - 78px - 48px);
     `}
-
 
   ${({ type }) =>
     type === "detail" &&
     css`
       width: 100%;
-      height: calc(100vh - 48px);
-      min-height: 100%;
+      height: calc(100% - 48px);
     `}
 `;
