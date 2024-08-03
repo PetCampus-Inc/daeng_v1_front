@@ -1,12 +1,12 @@
 import "styled-components";
-import type { ColorKeys, TypoKeys, ShadowKeys, transitionKeys } from "styles/ThemeConfig";
-
+import { foundations } from "./foundations";
 declare module "styled-components" {
   export interface DefaultTheme {
-    colors: ColorKeys;
-    typo: TypoKeys;
-    zIndex: ZIndexKeys;
-    shadows: ShadowKeys;
-    transition: transitionKeys;
+    colors: (typeof foundations)["colors"];
+    typo: (typeof foundations)["typo"];
+    zIndex: (typeof foundations)["zIndex"];
+    shadows: (typeof foundations)["shadows"];
+    transition: (typeof foundations)["transition"];
+    breakPoints: (typeof foundations)["breakPoints"];
   }
 }

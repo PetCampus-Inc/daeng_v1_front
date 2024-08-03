@@ -1,19 +1,21 @@
 import { css } from "styled-components";
-import { ThemeConfig } from "styles/ThemeConfig";
+import { themeConfig } from "styles/themeConfig";
 import { hexToHSL } from "utils/color";
 
 import type { ButtonColorScheme } from "../types";
+import type { ColorKeys } from "styles/types";
 
-const theme = ThemeConfig;
+const theme = themeConfig;
 
 export interface ColorSchemeStyles {
-  background: string;
-  color: string;
+  background: ColorKeys;
+  color: ColorKeys;
 }
 
 export const colorSchemes: Record<ButtonColorScheme, ColorSchemeStyles> = {
   primary: { background: "primaryColor", color: "white" },
   br_4: { background: "br_4", color: "primaryColor" },
+  br_5: { background: "br_5", color: "primaryColor" },
   yellow_3: { background: "yellow_3", color: "primaryColor" },
   gray_1: { background: "gray_1", color: "white" },
   gray_2: { background: "gray_2", color: "white" },
@@ -25,7 +27,7 @@ export const colorSchemes: Record<ButtonColorScheme, ColorSchemeStyles> = {
   red_2: { background: "red_2", color: "red_1" }
 };
 
-const createColorScheme = (color: string) => {
+const createColorScheme = (color: ColorKeys) => {
   const hexColor = theme.colors[color];
   return {
     base: hexColor,

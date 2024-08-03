@@ -1,12 +1,13 @@
 import { MENU_ITEMS } from "constants/navBar";
 
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
-import { Fragment, memo, useCallback } from "react";
+import { memo, useCallback } from "react";
 import { AUTH_MEMBER_ID } from "store/auth";
 
 import * as S from "./styles";
 
 // FIXME: routes가 변경될 때 마다 매번 새로 그려지고 있습니다. 함수호출을 줄일 수 있는 방법을 찾아야합니다.
+// MEMO: mypage 경우 url로 id를 넘겨주는 것보다 마이페이지에서 로컬스토리지에 저장된 memberId를 사용하는 게 좋을 것 같습니다.
 const Navbar = () => {
   const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID);
 
@@ -18,30 +19,34 @@ const Navbar = () => {
   );
 
   return (
-    <S.Container radius={"20px 20px 0 0"}>
-      {MENU_ITEMS.member.map((menuItem, index) => (
-        <Fragment key={menuItem.text}>
+    <S.NavList radius={"20px 20px 0 0"}>
+      {MENU_ITEMS.member.map((menuItem) => (
+        <S.NavItem key={menuItem.text}>
           {menuItem.text === "마이페이지" ? (
-            <S.NavButton to={menuItem.path(String(memberId))}>
-              {isCurrentPath(menuItem.path(String(memberId)))
-                ? menuItem.colorImage
-                : menuItem.blackImage}
+            <S.NavLink to={menuItem.path(String(memberId))} pb={13}>
+              <S.SvgIcon size={33}>
+                {isCurrentPath(menuItem.path(String(memberId)))
+                  ? menuItem.colorImage
+                  : menuItem.blackImage}
+              </S.SvgIcon>
               <S.Text className={isCurrentPath(menuItem.path(String(memberId))) ? "active" : ""}>
                 {menuItem.text}
               </S.Text>
-            </S.NavButton>
+            </S.NavLink>
           ) : (
-            <S.NavButton to={menuItem.path}>
-              {isCurrentPath(menuItem.path) ? menuItem.colorImage : menuItem.blackImage}
+            <S.NavLink to={menuItem.path} pb={13}>
+              <S.SvgIcon size={33}>
+                {isCurrentPath(menuItem.path) ? menuItem.colorImage : menuItem.blackImage}
+              </S.SvgIcon>
               <S.Text className={isCurrentPath(menuItem.path) ? "active" : ""}>
                 {menuItem.text}
               </S.Text>
-            </S.NavButton>
+            </S.NavLink>
           )}
-          {index === 0 && <S.Circle />}
-        </Fragment>
+          {menuItem.id === 0 && <S.Circle />}
+        </S.NavItem>
       ))}
-    </S.Container>
+    </S.NavList>
   );
 };
 

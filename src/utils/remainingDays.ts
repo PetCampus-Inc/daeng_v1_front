@@ -39,3 +39,41 @@ export const remainingExpirationDays = (expirationArr: number[] | null) => {
 
   return remainingDays;
 };
+
+type TicketValidationResult = {
+  isExpired: boolean;
+  isExpiringSoon: boolean;
+  isValid: boolean;
+};
+
+/**
+ * @description 회차권 유효 상태를 확인하는 함수
+ * @param round
+ * @returns
+ */
+export const checkRoundTicketStatus = (round: number): TicketValidationResult => {
+  return {
+    isExpired: round === 0,
+    isExpiringSoon: round > 0 && round < 3,
+    isValid: round >= 3
+  };
+};
+
+/**
+ * @description 정기권 유효 상태를 확인하는 함수
+ * @param monthlyTicket
+ * @returns
+ */
+export const checkMonthlyTicketStatus = (monthlyTicket: number[]): TicketValidationResult => {
+  const today = new Date();
+  const expirationDate = new Date(monthlyTicket[0], monthlyTicket[1] - 1, monthlyTicket[2]);
+
+  const diffInTime = expirationDate.getTime() - today.getTime();
+  const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+
+  return {
+    isExpired: diffInDays < 0,
+    isExpiringSoon: diffInDays >= 0 && diffInDays <= 2,
+    isValid: diffInDays > 2
+  };
+};

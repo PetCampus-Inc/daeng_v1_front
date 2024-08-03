@@ -1,64 +1,40 @@
+import { Box } from "components/common";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled(Box)`
   position: relative;
-  width: 100%;
-  box-shadow: ${({ theme }) => theme.shadows.card};
   border-radius: 8px;
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.card};
+  filter: ${({ grayScaleMode }) => (grayScaleMode ? "grayscale(100%)" : "none")};
 `;
 
 export const InnerBox = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 12px 20px 16px;
 
   &.upper {
-    border-radius: 8px 8px 0 0;
+    padding: 12px 20px 16px;
     background-color: ${({ theme }) => theme.colors.yellow_3};
   }
+
   &.lower {
-    border-radius: 0 0 8px 8px;
+    padding: 12px 16px;
     background-color: ${({ theme }) => theme.colors.white};
+
     gap: 8px;
   }
 `;
 
-export const IconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-
-  &.upper {
-    justify-content: space-between;
-  }
-`;
-
-export const Text = styled.p`
-  &.ticket {
-    color: ${({ theme }) => theme.colors.primaryColor};
-    ${({ theme }) => theme.typo.caption1_12_B};
-  }
-
-  &.count {
-    color: ${({ theme }) => theme.colors.darkBlack};
-    ${({ theme }) => theme.typo.body1_18_B};
-  }
-
-  &.detail {
-    color: ${({ theme }) => theme.colors.gray_1};
-    ${({ theme }) => theme.typo.label2_14_R};
-    &.red {
-      color: ${({ theme }) => theme.colors.red_1};
-    }
-  }
-`;
-
-export const BlackCover = styled.button`
+export const Dimmed = styled.div`
   position: absolute;
-  border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: grayscale(100%);
 `;
 
 export const RenewButton = styled.span`

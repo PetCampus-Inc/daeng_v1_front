@@ -21,7 +21,7 @@ const ImageAlbumPage = () => {
   return (
     <>
       <Header type="text" text="사진 앨범" />
-      <Layout type="page" pt={42} bg="white">
+      <Layout px={16} pt={42} bgColor="white">
         <AlbumHeader dogId={dogId} dogName={dogName} />
         <ViewTabs mode={mode} setMode={setMode} />
         {mode === GALLERY_VIEW.PHOTO && <PhotoView imageList={imageList} />}

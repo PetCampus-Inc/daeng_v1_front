@@ -62,7 +62,7 @@ const MemberEnrollmentFormDetailPage = () => {
   return (
     <>
       <Header type="text" text={`${memberName}의 가입신청서`} />
-      <Layout type="page" bg="BGray" pb={40}>
+      <Layout bg="BGray" px={16} pb={40}>
         <Container>
           <TopWrapper>
             <TitleWrapper>

@@ -36,7 +36,7 @@ const EnrollSchoolPage = ({ onNextStep }: IStepProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout type="page" pt={76} pb={24}>
+      <Layout bgColor="white" pt={76} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
           {name} 원장님
           <br />

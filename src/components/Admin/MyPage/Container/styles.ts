@@ -13,6 +13,9 @@ export const PageContainer = styled.div.withConfig({
       : theme.colors.br_2};
   width: 100vw;
   background-size: cover;
+  height: 100%;
+  position: absolute;
+  top: 0;
 
   &::-webkit-scrollbar {
     display: none;

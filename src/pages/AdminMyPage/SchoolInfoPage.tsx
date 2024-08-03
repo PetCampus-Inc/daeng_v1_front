@@ -1,14 +1,14 @@
 import SchoolInfo from "components/Admin/SchoolInfo";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
-import { PageContainer } from "styles/StyleModule";
 
 const SchoolInfoPage = () => {
   return (
     <>
-      <Header type="text" text="유치원 상세 정보" />
-      <PageContainer pt="2" color="gray_5">
+      <Header type="text" text="유치원 상세정보" />
+      <Layout type="detail" color="gray_5">
         <SchoolInfo />
-      </PageContainer>
+      </Layout>
     </>
   );
 };

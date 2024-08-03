@@ -6,7 +6,6 @@ export const MyInfoContainer = styled.article`
   position: relative;
   z-index: 1;
   background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: ${({ theme }) => theme.colors.alertCard};
   padding: 1.875rem 1rem;
   display: flex;
   flex-direction: column;

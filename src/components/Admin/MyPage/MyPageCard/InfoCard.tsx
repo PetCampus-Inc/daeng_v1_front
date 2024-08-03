@@ -1,10 +1,11 @@
 import { PATH } from "constants/path";
 
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
+import BuildingIcon from "assets/svg/building-icon";
 import CalendarIcon from "assets/svg/calendar";
 import MapIcon from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone-basic";
 import SchoolIcon from "assets/svg/school-icon";
-import { MoreButton } from "components/common/Button/Templates";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/admin/admin.types";
 
@@ -17,6 +18,7 @@ import {
   StyledTitle,
   StyledTitleContainer
 } from "./styles";
+import { MoreButton } from "../../../common/Button/Templates";
 
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
 
@@ -24,7 +26,7 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
   return (
     <StyledTitleContainer>
       <StyledTitle>소속 유치원</StyledTitle>
-      <MoreButton onClick={handleClick} gap={4} iconColorScheme="gray_3">
+      <MoreButton p={0} onClick={handleClick} rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}>
         {text}
       </MoreButton>
     </StyledTitleContainer>
@@ -64,9 +66,10 @@ const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
       icon: <MapIcon />
     },
     {
-      title: (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.enrollDate)
-        ?.map((num) => num.toString().padStart(2, "0"))
-        ?.join("."),
+      title:
+        (isOwner ? (data as IOwnerInfo)?.registeredDate : (data as ITeacherInfo)?.registeredDate)
+          ?.map((num) => num.toString().padStart(2, "0"))
+          ?.join(".") + `${isOwner ? ` 등록` : ` 가입`}`,
       icon: <CalendarIcon />
     }
   ];
@@ -81,6 +84,14 @@ const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
               <InfoItem title={item.title} icon={item.icon} />
             </StyledItemWrapper>
           ))}
+          {isOwner && (
+            <StyledItemWrapper>
+              <InfoItem
+                title={"사업자등록번호 : " + (data as IOwnerInfo)?.registrationNumber}
+                icon={<BuildingIcon />}
+              />
+            </StyledItemWrapper>
+          )}
         </StyledList>
       </StyledCard>
     </>

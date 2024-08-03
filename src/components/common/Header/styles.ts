@@ -4,18 +4,21 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: fixed;
   top: 0;
-  min-height: 48px;
-  height: 5vh;
   width: 100%;
+  max-width: ${({ theme }) => theme.breakPoints.md};
+  height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.white};
   z-index: 5;
-
   &.transparent {
     background-color: transparent;
   }
+`;
+
+export const HeaderArea = styled.div`
+  height: 48px;
 `;
 
 export const HeaderWrapper = styled.div`

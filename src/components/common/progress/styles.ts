@@ -32,11 +32,11 @@ export const ProgressFill = styled.div<{ width: number }>`
     right: 0;
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.primaryColor};
-    -webkit-mask-image: url(/images/foot-icon.svg);
+    -webkit-mask-image: url(${process.env.REACT_APP_CLIENT_URL}/images/foot-icon.svg);
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;
     -webkit-mask-size: 16px 16px;
-    mask-image: url(/images/foot-icon.svg);
+    mask-image: url(${process.env.REACT_APP_CLIENT_URL}/images/foot-icon.svg);
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: 16px 16px;

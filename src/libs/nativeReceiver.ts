@@ -1,10 +1,11 @@
-import { isValidGetMessage, WebViewMessage } from "types/native/message.types";
+import { NativeMessage } from "types/native/message.types";
+import { isNativeMessage, isValidMessageData } from "utils/is";
 
-type EventCallback = (event: WebViewMessage) => void;
+type EventCallback = (event: NativeMessage) => void;
 
 class NativeReceiver {
-  private static instance: NativeReceiver;
-  private callbacks: EventCallback[] = [];
+  private static instance: NativeReceiver | null = null;
+  private callbacks: Set<EventCallback> = new Set();
 
   private constructor() {
     const receiver = navigator.userAgent.includes("Android") ? document : window;
@@ -18,26 +19,31 @@ class NativeReceiver {
     return NativeReceiver.instance;
   }
 
-  public registerCallback(callback: EventCallback) {
-    this.callbacks.push(callback);
+  public registerCallback(callback: EventCallback): void {
+    this.callbacks.add(callback);
   }
 
-  public unregisterCallback(callback: EventCallback) {
-    this.callbacks = this.callbacks.filter((cb) => cb !== callback);
+  public unregisterCallback(callback: EventCallback): void {
+    this.callbacks.delete(callback);
   }
 
-  private handleMessage = (event: Event) => {
-    if (event instanceof MessageEvent) {
-      try {
-        const message = JSON.parse(event.data);
-        if (isValidGetMessage(message)) {
-          this.callbacks.forEach((callback) => callback(message));
-        } else {
-          throw new Error("메시지 타입 또는 데이터 오류");
-        }
-      } catch (error) {
-        console.error("[Native 통신 오류]:", error);
+  private handleMessage = (event: MessageEvent): void => {
+    if (typeof event.data !== "string" || event.data.includes("webpackHotUpdate")) return;
+
+    try {
+      const message = JSON.parse(event.data);
+
+      if (!isNativeMessage(message)) {
+        throw new Error("[Native 통신 오류]: 메시지 타입 오류");
       }
+
+      if (!isValidMessageData(message)) {
+        throw new Error(`[Native 통신 오류]: 데이터 타입 오류 (${message})`);
+      }
+
+      this.callbacks.forEach((callback) => callback(message));
+    } catch (error) {
+      console.error("[Native 통신 오류]:", error);
     }
   };
 }

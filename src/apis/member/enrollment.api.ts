@@ -1,8 +1,7 @@
-import customAxios from "libs/CustomAxios";
-import { request } from "libs/CustomAxios/request";
+import authAxios from "libs/AuthAxios";
+import { request } from "libs/AuthAxios/request";
 
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
-import type { Response } from "types/helper.types";
 import type {
   EnrollmentDataType,
   EnrollmentInfoType,
@@ -25,7 +24,7 @@ export const handleGetEnrollment = async ({
   memberId
 }: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll`;
-  const { data } = await customAxios.get(url, {
+  const { data } = await authAxios.get(url, {
     params: {
       schoolId,
       memberId
@@ -43,7 +42,7 @@ export const handleGetEnrollmentUrl = async ({
   memberId
 }: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll/${requestUrl}`;
-  const { data } = await customAxios.get(url, {
+  const { data } = await authAxios.get(url, {
     params: {
       memberId
     }
@@ -57,7 +56,7 @@ export const handleGetEnrollmentUrl = async ({
  */
 export const handlePostEnrollment = async (req: EnrollmentInfoType): Promise<void> => {
   const url = `school/member/enroll`;
-  const { data } = await customAxios.post(url, {
+  const { data } = await authAxios.post(url, {
     ...req
   });
   return data.data;
@@ -69,7 +68,7 @@ export const handlePostEnrollment = async (req: EnrollmentInfoType): Promise<voi
  */
 export const handleGetSchool = async (searchText: string): Promise<ISchoolInfo[]> => {
   const url = "school/search";
-  const { data } = await request<Response<ISchoolInfo[]>>({
+  const { data } = await request<ISchoolInfo[]>({
     url,
     params: {
       searchText
@@ -86,7 +85,7 @@ export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> =>
   const sanitizedSearchText = searchText.replace(/[^ㄱ-ㅎ가-힣a-zA-Z0-9()]/g, "");
 
   const url = `school/search/breed`;
-  const { data } = await customAxios.get(url, {
+  const { data } = await authAxios.get(url, {
     params: {
       searchText: sanitizedSearchText
     }
@@ -100,7 +99,7 @@ export const handleGetBreed = async (searchText: string): Promise<IBreedInfo> =>
  */
 export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolInfo> => {
   const url = `member/school`;
-  const { data } = await customAxios.get(url, {
+  const { data } = await authAxios.get(url, {
     params: {
       dogId
     }
@@ -114,7 +113,7 @@ export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolI
  */
 export const handlePostMemberDogSchool = async (dogId: string): Promise<void> => {
   const url = `member/dog/school?dogId=${dogId}`;
-  const { data } = await customAxios.post(url);
+  const { data } = await authAxios.post(url);
   return data;
 };
 
@@ -124,6 +123,6 @@ export const handlePostMemberDogSchool = async (dogId: string): Promise<void> =>
  */
 export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
   const url = `member/dog/enrollment?dogId=${dogId}`;
-  const { data } = await customAxios.get(url);
+  const { data } = await authAxios.get(url);
   return data.data;
 };

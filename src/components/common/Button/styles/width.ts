@@ -1,9 +1,8 @@
-import { type ElementType } from "react";
 import { css } from "styled-components";
 
-import { type ButtonProps } from "../types";
+import type { ButtonOption } from "../types";
 
-export const getWidth = (width: Pick<ButtonProps<ElementType>, "width">["width"]) => {
+export const getWidth = (width: ButtonOption["width"]) => {
   if (!width || width === "auto")
     return css`
       width: auto;

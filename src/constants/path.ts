@@ -38,7 +38,7 @@ const ADMIN_PATH = {
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/${ADMIN}/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>
     `/${ADMIN}/attendance/${dogId ?? ":dogId"}/gallery`, // 출석부 강아지 갤러리
-  ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: string) =>
+  ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: number) =>
     `/${ADMIN}/attendance/${dogId ?? ":dogId"}/new-ticket`, // 출석부 강아지 상세정보
   ADMIN_CARE: `/${ADMIN}/care`, // 오늘 관리할 강아지
   ADMIN_CARE_NOTICE: (dogId?: string) => `/${ADMIN}/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
@@ -60,7 +60,8 @@ const ADMIN_PATH = {
   ADMIN_CREATE_FORM: `/${ADMIN}/school/enrollment/new`, // 원장 가입신청서 등록
 
   ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`,
-  ADMIN_MY_PAGE_EDIT: `/${ADMIN}/${MYPAGE}/profile/edit`,
+  ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`,
+  ADMIN_MY_PAGE_DELETE_COMPLETE: `/${ADMIN}/${MYPAGE}/delete-complete`,
   ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`,
   ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit`
 };
@@ -82,9 +83,9 @@ const MEMBER_PATH = {
   MEMBER_DOG_INFO_EDIT_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
   MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
-  // MEMEBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
+  // MEMBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
+  MEMBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
+  MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
 };
 
 const PUBLIC_PATH = {
@@ -92,6 +93,7 @@ const PUBLIC_PATH = {
   HOME: "/home",
   LOGIN: `/${LOGIN}`,
   SIGNUP: `/${SIGNUP}`,
+  NATIVE_LOGIN: `/${LOGIN}/oauth2/native-redirect`,
   REDIRECT: "/login/oauth2/code/:provider", // 소셜 로그인 리다이렉트
   UNREGISTER: "/unregister", // 회원탈퇴 페이지
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지

@@ -26,4 +26,4 @@ export const transition = {
   property: transitionProperty,
   easing: transitionTimingFunction,
   duration: transitionDuration
-};
+} as const;

@@ -36,9 +36,11 @@ const BreedDropDown = ({ dropDownList, setIsOpen, value, setValue }: IBreedDropd
         </Text>
         <Button
           width="full"
-          height="48px"
-          handleClick={() => setIsOpen(false)}
-          css={{ marginTop: "20px" }}
+          onClick={() => setIsOpen(false)}
+          css={{
+            height: "48px",
+            marginTop: "20px"
+          }}
         >
           견종 등록하기
         </Button>

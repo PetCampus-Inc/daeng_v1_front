@@ -1,3 +1,4 @@
+import { breakPoints } from "./breakPoints";
 import { colors } from "./colors";
 import { shadows } from "./shadows";
 import { transition } from "./transition";
@@ -9,5 +10,6 @@ export const foundations = {
   colors,
   typo,
   shadows,
-  transition
-};
+  transition,
+  breakPoints
+} as const;
