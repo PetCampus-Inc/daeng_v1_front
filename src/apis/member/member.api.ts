@@ -182,7 +182,7 @@ export const handlePostMemoDogVaccination = async (
   req: IDogVaccination
 ): Promise<IDogVaccination> => {
   const url = `/member/vaccination`;
-  const { data } = await customAxios.post(url, {
+  const { data } = await authAxios.post(url, {
     dogIdList: req.dogIdList,
     imageUriList: req.imageUriList,
     comment: req.comment
