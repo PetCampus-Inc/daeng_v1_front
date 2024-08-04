@@ -10,7 +10,7 @@ import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
 
 const PrincipalMyPage = () => {
   const { adminId } = useAdminInfo();
@@ -44,7 +44,7 @@ const PrincipalMyPage = () => {
                 <PrincipalProfile data={data} setIsEditing={setIsEditing} isEditing={isEditing} />
               )}
               <CardContainer>
-                <InfoCard data={data} role={Role.ROLE_OWNER} />
+                <InfoCard data={data} role={AdminRole.ROLE_OWNER} />
               </CardContainer>
             </ContentContainer>
           </PageContainer>

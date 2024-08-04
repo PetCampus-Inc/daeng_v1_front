@@ -4,7 +4,8 @@ import ApprovalPending from "components/SignUp/ApprovalStatus/ApprovalPending";
 import ApprovalSuccess from "components/SignUp/ApprovalStatus/ApprovalSuccess";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useLocation } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
+import { ApprovalStatus } from "types/common/status.types";
 
 import type { ITeacherInfo } from "./AdminSignUpFunnel";
 
@@ -36,11 +37,11 @@ const ApprovalStatusPage = ({
 
   return (
     <Layout bgColor="white" px={16} pt={76}>
-      {status === Role.APPROVAL_PENDING && (
+      {status === ApprovalStatus.APPROVAL_PENDING && (
         <ApprovalPending adminId={adminId} schoolName={schoolName} onNextStep={onSelectRoleClick} />
       )}
-      {status === Role.ROLE_TEACHER && <ApprovalSuccess schoolName={schoolName} />}
-      {status === Role.APPROVAL_DENIED && (
+      {status === AdminRole.ROLE_TEACHER && <ApprovalSuccess schoolName={schoolName} />}
+      {status === ApprovalStatus.APPROVAL_DENIED && (
         <ApprovalFailed schoolName={schoolName} onNextStep={onSearchSchoolClick} />
       )}
     </Layout>

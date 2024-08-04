@@ -1,3 +1,5 @@
+import { MemberRole } from "types/common/role.types";
+
 import type {
   DogGenderType,
   DogSizeType,
@@ -7,7 +9,6 @@ import type {
   RelationType,
   VaccinationType
 } from "./enrollment.types";
-import type { Role } from "types/admin/admin.types";
 import type { Nullable } from "types/helper.types";
 import type { IResponse } from "types/Response.type";
 
@@ -28,7 +29,7 @@ export interface ImageListType extends Omit<ImageList, "createdTime"> {
 export interface HomeDataType {
   memberId: number;
   memberNickname: string;
-  role: Role.ROLE_MEMBER;
+  role: typeof MemberRole.ROLE_MEMBER;
   memberProfileUri: string;
   dogId: number;
   dogName: string;

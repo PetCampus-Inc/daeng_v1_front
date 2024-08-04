@@ -14,7 +14,7 @@ const MemberSchoolSearchPage = () => {
   return (
     <>
       <Header type="back" />
-      <SearchSchoolPage type="MEMBER" onNextStep={handleGotoPage} />
+      <SearchSchoolPage type="ROLE_MEMBER" onNextStep={handleGotoPage} />
     </>
   );
 };

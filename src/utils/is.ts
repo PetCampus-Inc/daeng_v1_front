@@ -1,9 +1,8 @@
+import { AdminRole } from "types/common/role.types";
 import { MessageType, NativeMessage } from "types/native/message.types";
 
-import { Role } from "../types/admin/admin.types";
-
-export function isAdmin(role: unknown): role is Role {
-  return role === Role.ROLE_TEACHER || role === Role.ROLE_OWNER;
+export function isAdmin(role: unknown): role is AdminRole {
+  return role === AdminRole.ROLE_TEACHER || role === AdminRole.ROLE_OWNER;
 }
 
 export function isNumber(value: unknown): value is number {

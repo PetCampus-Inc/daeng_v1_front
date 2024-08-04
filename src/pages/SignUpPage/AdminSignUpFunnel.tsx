@@ -4,6 +4,7 @@ import { useFunnel } from "hooks/common/useFunnel";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { AdminRole, Role } from "types/common/role.types";
 
 import AccountSettingPage from "./AccountSettingPage";
 import AdminInfoPage from "./AdminInfoPage";
@@ -12,13 +13,6 @@ import EnrollSchoolPage from "./EnrollSchoolPage";
 import RoleSelectPage from "./RoleSelectPage";
 import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
 import SearchSchoolPage from "./SearchSchoolPage";
-
-import type { Role } from "types/admin/admin.types";
-
-export enum AdminRole {
-  TEACHER = "TEACHER",
-  OWNER = "OWNER"
-}
 
 export interface ITeacherInfo {
   schoolId?: number;
@@ -62,13 +56,13 @@ const AdminSignUpFunnel = () => {
     setState((prev) => ({
       ...prev,
       role: role,
-      step: role === AdminRole.TEACHER ? 유치원_검색 : 회원정보_입력
+      step: role === AdminRole.ROLE_TEACHER ? 유치원_검색 : 회원정보_입력
     }));
   };
 
   // 회원 정보 입력 단계 처리
   const handleAdminInfoStep = () => {
-    if (state.role === AdminRole.TEACHER) {
+    if (state.role === AdminRole.ROLE_TEACHER) {
       setState((prev) => ({
         ...prev,
         step: 계정설정
@@ -83,7 +77,7 @@ const AdminSignUpFunnel = () => {
 
   // 계정 설정 단계 처리
   const handleAccountSettingStep = (data: ITeacherInfo) => {
-    if (state.role === AdminRole.TEACHER) {
+    if (state.role === AdminRole.ROLE_TEACHER) {
       setState((prev) => ({
         ...prev,
         teacherInfo: {
@@ -126,7 +120,7 @@ const AdminSignUpFunnel = () => {
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={유치원_검색}>
           <SearchSchoolPage
-            type={AdminRole.TEACHER}
+            type={AdminRole.ROLE_TEACHER}
             onNextStep={(schoolId) =>
               setState((prev) => ({
                 ...prev,

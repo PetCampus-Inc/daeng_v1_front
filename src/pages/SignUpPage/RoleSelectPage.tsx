@@ -3,8 +3,7 @@ import Header from "components/common/Header";
 import { StyledButton } from "components/SignIn/styles";
 import RoleBox from "components/SignUp/RoleBox";
 import { useState } from "react";
-
-import { AdminRole } from "./AdminSignUpFunnel";
+import { AdminRole } from "types/common/role.types";
 
 interface IStepProps {
   onNextStep: (role: AdminRole) => void;
@@ -23,20 +22,20 @@ const RoleSelectPage = ({ onNextStep }: IStepProps) => {
       <Layout bgColor="white" pt={44} px={16}>
         <Flex justify="center" gap={16}>
           <RoleBox
-            role="TEACHER"
+            role="ROLE_TEACHER"
             mainText="선생님"
             subText="강아지 유치원에
 근무중인 선생님"
-            selected={selected === AdminRole.TEACHER}
-            handleClick={() => handleSelected(AdminRole.TEACHER)}
+            selected={selected === AdminRole.ROLE_TEACHER}
+            handleClick={() => handleSelected(AdminRole.ROLE_TEACHER)}
           />
           <RoleBox
-            role="OWNER"
+            role="ROLE_OWNER"
             mainText="원장님"
             subText="강아지 유치원을
 운영중인 원장님"
-            selected={selected === AdminRole.OWNER}
-            handleClick={() => handleSelected(AdminRole.OWNER)}
+            selected={selected === AdminRole.ROLE_OWNER}
+            handleClick={() => handleSelected(AdminRole.ROLE_OWNER)}
           />
         </Flex>
 

@@ -10,7 +10,7 @@ import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
 
 const TeacherMyPage = () => {
   const { adminId } = useAdminInfo();
@@ -42,7 +42,7 @@ const TeacherMyPage = () => {
                 <TeacherProfile data={data} setIsEditing={setIsEditing} isEditing={isEditing} />
               )}
               <CardContainer>
-                <InfoCard data={data} role={Role.ROLE_TEACHER} />
+                <InfoCard data={data} role={AdminRole.ROLE_TEACHER} />
               </CardContainer>
             </ContentContainer>
           </PageContainer>
