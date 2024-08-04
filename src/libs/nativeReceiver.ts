@@ -5,7 +5,7 @@ type EventCallback = (event: NativeMessage) => void;
 
 class NativeReceiver {
   private static instance: NativeReceiver | null = null;
-  private callbacks: Set<EventCallback> = new Set();
+  private callbacks: Map<string, EventCallback> = new Map();
 
   private constructor() {
     const receiver = navigator.userAgent.includes("Android") ? document : window;
@@ -19,12 +19,12 @@ class NativeReceiver {
     return NativeReceiver.instance;
   }
 
-  public registerCallback(callback: EventCallback): void {
-    this.callbacks.add(callback);
+  public registerCallback(requestId: string, callback: EventCallback): void {
+    this.callbacks.set(requestId, callback);
   }
 
-  public unregisterCallback(callback: EventCallback): void {
-    this.callbacks.delete(callback);
+  public unregisterCallback(requestId: string): void {
+    this.callbacks.delete(requestId);
   }
 
   private handleMessage = (event: MessageEvent): void => {
@@ -41,7 +41,8 @@ class NativeReceiver {
         throw new Error(`[Native 통신 오류]: 데이터 타입 오류 (${message})`);
       }
 
-      this.callbacks.forEach((callback) => callback(message));
+      const callback = this.callbacks.get(message.requestId);
+      if (callback) callback(message);
     } catch (error) {
       console.error("[Native 통신 오류]:", error);
     }

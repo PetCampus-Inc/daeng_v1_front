@@ -43,4 +43,4 @@ export type MessageDataType = {
 };
 
 export type NativeMessage<T extends MessageType["Response"] = MessageType["Response"]> =
-  T extends unknown ? { type: T; data: MessageData["Response"][T] } : never;
+  T extends unknown ? { type: T; data: MessageData["Response"][T]; requestId: string } : never;
