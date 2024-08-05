@@ -1,6 +1,6 @@
-import XCircleIcon from "assets/svg/x-circle-icon";
+import CloseIcon from "assets/svg/x-circle-icon";
 import Arrows from "components/common/LightBox/Arrows";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Slider from "react-slick";
 import { formatDate } from "utils/formatter";
 
@@ -23,26 +23,18 @@ interface DisconnectModalProps extends ModalProps {
   vaccinationUri?: VaccinationUri[];
 }
 
-export const CarouselModal = ({
-  close,
-  isOpen,
-  upDateData,
-  imgIdx,
-  imgUrl,
-  vaccinationUri
-}: DisconnectModalProps) => {
+export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: DisconnectModalProps) => {
   const sliderRef = useRef<Slider | null>(null);
   const settings = {
+    initialSlide: imgIdx,
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    //TODO 뒤로가기, 앞으로가기 버튼 적용시키기
     nextArrow: <Arrows position="next" isDisabled={false} />,
     prevArrow: <Arrows position="prev" isDisabled={false} />
-    // prevArrow: <PrevArrow />,
   };
 
   const convertCreatedTime = (time: string) => {
@@ -50,23 +42,15 @@ export const CarouselModal = ({
     return formatDate(year, day, month, "dot");
   };
 
-  useEffect(() => {
-    const goToCurrentSlider = setTimeout(() => {
-      sliderRef.current?.slickGoTo(imgIdx, true);
-    }, 100);
-
-    return () => clearTimeout(goToCurrentSlider);
-  }, [imgIdx]);
-
   return (
     // FIXME CarouselModal close 안되는 이슈 해결하기
     <ModalRoot isOpen={isOpen} close={close}>
       <S.CloseButton onClick={close}>
-        <XCircleIcon />
+        <CloseIcon colorScheme="black" w={31} h={31} opacity={0.7} />
       </S.CloseButton>
       <S.CarouselSlider ref={sliderRef} {...settings}>
         {vaccinationUri?.map((file, idx) => (
-          <S.CarouselBox key={idx}>
+          <S.CarouselBox key={`slide-${file.imageId}-${idx}`}>
             <img src={file.imageUri} alt="file_img" />
             <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
           </S.CarouselBox>
