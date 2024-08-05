@@ -1,4 +1,5 @@
-import { Role } from "types/admin/admin.types";
+import { MemberRole } from "types/common/role.types";
+import { Status } from "types/common/status.types";
 
 import type { MemberGenderType, RelationType } from "./enrollment.types";
 
@@ -14,18 +15,19 @@ export type MemberAuthType = {
   relation: RelationType;
 };
 
-export type LoginMethod = "kakao" | "google" | "apple";
-
 export interface MemberLoginData {
   idToken: string;
   deviceId: string;
 }
 
 export interface MemberAuthData {
-  role: Role;
   memberId: number;
-  dogIds: number[];
-  schoolId: number;
+  role: typeof MemberRole.ROLE_ANONYMOUS | typeof MemberRole.ROLE_MEMBER;
+  dogs: DogResponse[];
+}
+
+export interface DogResponse {
+  dogId: number;
+  status: Status;
   schoolName: string;
-  enrollmentFormId: number;
 }

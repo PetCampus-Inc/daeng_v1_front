@@ -1,34 +1,28 @@
+import { useMemberLogin } from "hooks/api/signin";
 import useNative from "hooks/native/useNative";
-import authAxios from "libs/AuthAxios";
 import { useEffect } from "react";
 
 const NativeRedirectPage = () => {
   const { native } = useNative();
-
-  const handleTest = async () => {
-    const uri = await native.getDeviceId();
-    console.log(uri);
-  };
+  const { mutateLogin } = useMemberLogin();
 
   useEffect(() => {
     const getToken = async () => {
-      const idToken = await native.getIdToken();
-      const deviceId = await native.getDeviceId();
-      const body = { idToken, deviceId, method: "KAKAO" };
+      try {
+        const deviceId = await native.getDeviceId();
+        const idToken = await native.getIdToken();
+        const data = { idToken, deviceId };
 
-      console.log(body);
-      const res = await authAxios.post("member/firebase/login", body);
-      console.log(res);
+        mutateLogin(data);
+      } catch (error) {
+        console.error("Error in getToken:", error);
+      }
     };
 
     getToken();
-  }, [native]);
+  }, [native, mutateLogin]);
 
-  return (
-    <div>
-      <button onClick={handleTest}>TEST</button>
-    </div>
-  );
+  return <div>로그인중...</div>;
 };
 
 export default NativeRedirectPage;

@@ -88,6 +88,7 @@ authAxios.interceptors.response.use(
         try {
           const newAccessToken = await getRefreshToken();
           originalRequest.headers["authorization"] = `Bearer ${newAccessToken}`;
+
           return authAxios(originalRequest);
         } catch (refreshError) {
           // TODO: 로그아웃 엔드포인트 요청 (Refresh Token 쿠키 삭제 후 로그인 페이지로 리다이렉트)

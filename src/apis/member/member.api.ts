@@ -28,7 +28,8 @@ export const postMemberLogin = async (
     deviceId: req.deviceId
   });
 
-  const accessToken = response.headers["authorization"];
+  const token = response.headers["authorization"];
+  const accessToken = token.startsWith("Bearer ") ? token.slice(7) : token;
   return { data: response.data.data, accessToken };
 };
 
