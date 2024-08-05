@@ -30,9 +30,14 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
 
   const MAX_FILE_COUNT = 20;
 
-  const openCarouselPopup = (imgUrl: string, upDateData: string) =>
+  const openCarouselPopup = (imgIdx: number) =>
     overlay.open(({ isOpen, close }) => (
-      <CarouselModal imgUrl={imgUrl} upDateData={upDateData} isOpen={isOpen} close={close} />
+      <CarouselModal
+        vaccinationUri={vaccinationUri}
+        imgIdx={imgIdx}
+        isOpen={isOpen}
+        close={close}
+      />
     ));
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,11 +77,15 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       <S.CarouselContainer>
         <S.DragCarouselWrapper>
           <DragCarousel gap={10}>
-            {files.map((file, index) => (
+            {/* {files.map((file, index) => (
               <Thumbnail key={index} file={file} index={index} openPopup={openCarouselPopup} />
-            ))}
-            {vaccinationUri.map((file) => (
-              <S.CarouselCard key={file.imageId} role="button">
+            ))} */}
+            {vaccinationUri.map((file, idx) => (
+              <S.CarouselCard
+                key={file.imageId}
+                role="button"
+                onClick={() => openCarouselPopup(idx)}
+              >
                 <img src={file.imageUri} alt="dog_img" />
                 <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
               </S.CarouselCard>
@@ -111,7 +120,7 @@ const vaccinationUri = [
   {
     imageId: 2,
     imageUri:
-      "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imageType: "IMAGE",
     comment: "",
     createdTime: "2024-07-25T07:24:49.701Z"
