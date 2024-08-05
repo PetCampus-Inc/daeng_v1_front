@@ -6,10 +6,11 @@ import SpeakerIcon from "assets/svg/speaker-icon";
 import { Box, Flex, Text } from "components/common";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
+import { AgendaStatus } from "types/common/status.types";
 
 import { BoxContainer } from "./styles";
 
-import type { HomeInfoType, TAgendaStatus } from "types/member/main.types";
+import type { HomeInfoType } from "types/member/main.types";
 
 interface DogCardProps {
   data: Pick<HomeInfoType, "todayAgendaStatus">;
@@ -21,7 +22,7 @@ const HighlightText = ({ children }: PropsWithChildren) => (
   </Text>
 );
 
-const statusConfig: Record<TAgendaStatus, { message: string; iconColor: "gray" | "yellow" }> = {
+const statusConfig: Record<AgendaStatus, { message: string; iconColor: "gray" | "yellow" }> = {
   COMPLETE: {
     message: "알림장이\\n도착했어요",
     iconColor: "yellow"

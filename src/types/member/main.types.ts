@@ -1,4 +1,10 @@
 import { MemberRole } from "types/common/role.types";
+import {
+  AgendaStatus,
+  ApprovalStatus,
+  AttendanceStatus,
+  EnrollmentStatus
+} from "types/common/status.types";
 
 import type {
   DogGenderType,
@@ -12,10 +18,8 @@ import type {
 import type { Nullable } from "types/helper.types";
 import type { IResponse } from "types/Response.type";
 
-export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
-export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
 export type TImageType = "IMAGE" | "PROFILE";
-export type TDogStatus = "ENROLLED" | "DROP_OUT" | "APPROVAL_PENDING";
+export type TDogStatus = EnrollmentStatus | ApprovalStatus;
 
 export interface HomeInfoType extends Omit<HomeDataType, "attendanceDate" | "imageList"> {
   attendanceDate: string;
@@ -34,11 +38,11 @@ export interface HomeDataType {
   dogId: number;
   dogName: string;
   dogProfile: string;
-  status: Nullable<TAttendanceStatus>;
+  status: Nullable<AttendanceStatus>;
   relation: string;
-  attendanceStatus: TAttendanceStatus;
+  attendanceStatus: AttendanceStatus;
   attendanceDate: number[];
-  todayAgendaStatus: TAgendaStatus;
+  todayAgendaStatus: AgendaStatus;
   schoolName: Nullable<string>;
   imageList: Nullable<ImageList[][]>;
 }
@@ -51,6 +55,7 @@ export interface ImageList {
   createdTime: number[];
   size: number;
 }
+
 interface IDoglist {
   dogId: string;
   dogName: string;
@@ -61,6 +66,7 @@ interface IDoglist {
   registeredDate: number[];
   dropOutDate: number[];
 }
+
 export interface IMemberInfo extends IResponse {
   memberId: string;
   memberName: string;

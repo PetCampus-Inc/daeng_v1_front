@@ -4,6 +4,7 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import FootIcon from "assets/svg/foot-icon";
 import { Flex, Text } from "components/common";
 import { useNavigate } from "react-router-dom";
+import { AttendanceStatus } from "types/common/status.types";
 import { getDaysAgo } from "utils/date";
 
 import {
@@ -16,13 +17,13 @@ import {
   SpringBound
 } from "./styles";
 
-import type { HomeInfoType, TAttendanceStatus } from "types/member/main.types";
+import type { HomeInfoType } from "types/member/main.types";
 
 interface DogNoteProps {
   data: HomeInfoType;
 }
 
-const getAttendanceClass = (status?: TAttendanceStatus) => {
+const getAttendanceClass = (status?: AttendanceStatus) => {
   switch (status) {
     case "ATTENDED":
       return "active";
@@ -33,7 +34,7 @@ const getAttendanceClass = (status?: TAttendanceStatus) => {
   }
 };
 
-const getAttendanceText = (status?: TAttendanceStatus, attendanceDate?: string) => {
+const getAttendanceText = (status?: AttendanceStatus, attendanceDate?: string) => {
   switch (status) {
     case "ATTENDED":
       return "출석완료";

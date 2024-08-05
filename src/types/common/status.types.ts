@@ -3,7 +3,6 @@
  * - APPROVAL_CANCEL: 승인 취소
  * - APPROVAL_DENIED: 승인 거부
  * - APPROVAL_PENDING: 승인 대기
- * - WITHDRAWN: 탈퇴
  */
 export const ApprovalStatus = {
   /** 승인 취소 */
@@ -11,9 +10,7 @@ export const ApprovalStatus = {
   /** 승인 거부 */
   APPROVAL_DENIED: "APPROVAL_DENIED",
   /** 승인 대기 */
-  APPROVAL_PENDING: "APPROVAL_PENDING",
-  /** 탈퇴 */
-  WITHDRAWN: "WITHDRAWN"
+  APPROVAL_PENDING: "APPROVAL_PENDING"
 } as const;
 export type ApprovalStatus = (typeof ApprovalStatus)[keyof typeof ApprovalStatus];
 
