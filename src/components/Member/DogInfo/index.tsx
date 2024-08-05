@@ -62,7 +62,7 @@ const DogInfo = ({ dogId }: IProps) => {
     onSubmit();
   };
   return (
-    <Flex direction="column" gap="24">
+    <Flex direction="column" gap={24} pt={28} px={16}>
       <DogInfoBox data={data} dogId={dogId} />
 
       <DogMemoBox
