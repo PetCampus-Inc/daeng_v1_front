@@ -57,19 +57,17 @@ export const CarouselModal = ({
   return (
     // FIXME CarouselModal close 안되는 이슈 해결하기
     <ModalRoot isOpen={isOpen} close={close}>
-      <div>
-        <S.CloseButton onClick={close}>
-          <XCircleIcon />
-        </S.CloseButton>
-        <S.CarouselSlider ref={sliderRef} {...settings}>
-          {vaccinationUri?.map((file, idx) => (
-            <S.CarouselBox key={idx}>
-              <img src={file.imageUri} alt="file_img" />
-              <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
-            </S.CarouselBox>
-          ))}
-        </S.CarouselSlider>
-      </div>
+      <S.CloseButton onClick={close}>
+        <XCircleIcon />
+      </S.CloseButton>
+      <S.CarouselSlider ref={sliderRef} {...settings}>
+        {vaccinationUri?.map((file, idx) => (
+          <S.CarouselBox key={idx}>
+            <img src={file.imageUri} alt="file_img" />
+            <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
+          </S.CarouselBox>
+        ))}
+      </S.CarouselSlider>
     </ModalRoot>
   );
 };
