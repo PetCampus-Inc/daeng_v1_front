@@ -1,4 +1,5 @@
 import XCircleIcon from "assets/svg/x-circle-icon";
+import Arrows from "components/common/LightBox/Arrows";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import { formatDate } from "utils/formatter";
@@ -37,8 +38,11 @@ export const CarouselModal = ({
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true
+    arrows: true,
     //TODO 뒤로가기, 앞으로가기 버튼 적용시키기
+    nextArrow: <Arrows position="next" isDisabled={false} />,
+    prevArrow: <Arrows position="prev" isDisabled={false} />
+    // prevArrow: <PrevArrow />,
   };
 
   const convertCreatedTime = (time: string) => {
