@@ -185,7 +185,7 @@ export const handlePostMemoDogVaccination = async (
   const { data } = await authAxios.post(url, {
     dogIdList: req.dogIdList,
     imageUriList: req.imageUriList,
-    comment: req.comment
+    comment: null
   });
   return data;
 };

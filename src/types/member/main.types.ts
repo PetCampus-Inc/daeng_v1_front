@@ -126,7 +126,7 @@ export interface MemberDogInfoData {
 export interface IDogVaccination extends IResponse {
   dogIdList: number[];
   imageUriList: string[];
-  comment?: string;
+  comment: string | null;
 }
 
 export interface MemberDogInfoReq {
