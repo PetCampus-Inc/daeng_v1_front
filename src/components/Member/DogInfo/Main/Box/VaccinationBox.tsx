@@ -1,8 +1,11 @@
+import { ACCEPT_FILE_TYPE, PROFILE_PATHS } from "constants/profile";
+
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { Box, DragCarousel, Flex } from "components/common";
 import { CarouselModal } from "components/common/Modal/CarouselModal";
 import { useGetMemberDogDetailInfo, usePostMembeVaccination } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useS3Upload } from "hooks/common/useS3";
 import { ChangeEvent, useRef, useState } from "react";
 import { useForm, useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +30,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const { data } = useGetMemberDogDetailInfo(dogId);
   const mutatePostVaccination = usePostMembeVaccination(dogId);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const { uploadToS3 } = useS3Upload();
 
   const MAX_FILE_COUNT = 20;
 
@@ -50,6 +54,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
       setFiles((prevFiles) => [...prevFiles, ...fileArray]);
       setValue("files", [...watch("files", files), ...newFiles]);
+      uploadS3Files(newFiles);
     }
   };
 
@@ -60,6 +65,16 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const convertCreatedTime = (time: string) => {
     const [year, day, month] = time.slice(0, 10).split("-");
     return formatDate(year, day, month, "dot");
+  };
+
+  const uploadS3Files = (files: File[]) => {
+    const filesParams = {
+      name: "vaccination",
+      files: files,
+      accept: ACCEPT_FILE_TYPE.IMAGE,
+      path: PROFILE_PATHS.DOG
+    };
+    console.log("업로드 files", filesParams);
   };
 
   return (
