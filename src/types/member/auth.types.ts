@@ -15,7 +15,7 @@ export type MemberAuthType = {
   relation: RelationType;
 };
 
-export interface MemberLoginData {
+export interface FirebaseAuthData {
   idToken: string;
   deviceId: string;
 }
