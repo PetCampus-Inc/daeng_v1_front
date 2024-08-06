@@ -3,8 +3,8 @@ import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import NoticeActiveIcon from "assets/svg/notice-active-icon";
 import PencilIcon from "assets/svg/pencil-icon";
 import SettingWhiteIcon from "assets/svg/setting-white-icon";
+import useNavigateWithNative from "hooks/native/useNavigateWithNative";
 import { memo } from "react";
-import { useNavigate } from "react-router-dom";
 
 import {
   Container,
@@ -45,9 +45,9 @@ const Header = ({
   transparent,
   shadow
 }: Props) => {
-  const navigate = useNavigate();
+  const { goBack } = useNavigateWithNative();
 
-  const click = handleClick ? handleClick : () => navigate(-1);
+  const click = handleClick ? handleClick : () => goBack();
   return (
     <>
       <Container className={transparent ? "transparent" : ""}>
