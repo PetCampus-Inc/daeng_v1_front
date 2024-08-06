@@ -4,10 +4,9 @@ import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
 import { postMemberLogin } from "apis/member/member.api";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
-import { ACCESS_TOKEN_KEY, AUTH_KEY } from "store/auth";
-import { AdminRole, MemberRole } from "types/common/role.types";
+import { ACCESS_TOKEN_KEY, AUTH_KEY, AUTH_MEMBER_ID } from "store/auth";
+import { AdminRole } from "types/common/role.types";
 import { ApprovalStatus } from "types/common/status.types";
-import { MemberAuthData } from "types/member/auth.types";
 
 // 관리자 로그인 요청
 export const useAdminLogin = () => {
@@ -46,33 +45,11 @@ export const useAdminLogin = () => {
 export const useMemberLogin = () => {
   const setLocalStorageValue = useSetLocalStorage();
 
-  const dogStatusCheck = (dogs: any[]) => {
-    for (const dog of dogs) {
-      if (dog.status === "APPROVAL_PENDING") {
-        location.href = `${PATH.SIGNUP}?source=login`;
-        return;
-      }
-    }
-  };
-
   const { mutate } = useMutation({
     mutationFn: postMemberLogin,
     onSuccess: ({ data, accessToken }) => {
       setLocalStorageValue({ key: ACCESS_TOKEN_KEY, value: accessToken });
-
-      if (data.role === MemberRole.ROLE_MEMBER) {
-        const userInfo: MemberAuthData = {
-          memberId: data.memberId,
-          role: data.role,
-          dogs: data.dogs
-        };
-
-        setLocalStorageValue({ key: AUTH_KEY, value: userInfo });
-
-        location.href = PATH.ROOT;
-      } else if (data.role === MemberRole.ROLE_ANONYMOUS) {
-        location.href = PATH.SIGNUP;
-      }
+      setLocalStorageValue({ key: AUTH_MEMBER_ID, value: data.memberId });
     },
     throwOnError: false,
     retry: 0

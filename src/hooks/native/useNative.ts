@@ -61,8 +61,6 @@ const useNative = () => {
     () => ({
       call: (number: string) => nativeRequest("CALL", number),
       goBack: () => nativeRequest("GO_BACK", null, 2000),
-      getIdToken: () => nativeRequest("GET_ID_TOKEN", null, 2000),
-      getDeviceId: () => nativeRequest("GET_DEVICE_ID", null, 2000),
       saveImage: (uri: string | string[]) => nativeRequest("SAVE_IMAGE", uri),
       selectImage: () => nativeRequest("SELECT_IMAGE", null),
       launchCamera: () => nativeRequest("LAUNCH_CAMERA", null)
