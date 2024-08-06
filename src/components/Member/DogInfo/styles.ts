@@ -240,6 +240,7 @@ export const CarouselCard = styled.div`
   border-radius: 8px;
   overflow: hidden;
   padding: 4px 8px;
+  cursor: pointer;
 
   & > img {
     object-fit: cover;
