@@ -20,7 +20,7 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout position="relative" pt={"calc(5vh + 3.75rem)"} paddingInline={16} pb={24}>
+      <Layout pt={60} px={16} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
           안녕하세요 {type === "TEACHER" ? "선생님" : "견주님"}
           <br />

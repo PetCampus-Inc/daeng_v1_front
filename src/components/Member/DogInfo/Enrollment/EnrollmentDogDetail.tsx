@@ -1,5 +1,6 @@
 import { MEMBER_DOG_INFO_ENROLL_STEP } from "constants/step";
 
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import DogInfo from "components/Enrollment/MemberDogReadForm/DogInfo";
 import MemberInfo from "components/Enrollment/MemberDogReadForm/MemberInfo";
@@ -11,7 +12,6 @@ import * as S from "components/Enrollment/styles";
 import { useGetMemberDogEnrollmentInfo } from "hooks/api/member/member";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
-import { PageContainer } from "styles/StyleModule";
 
 interface EnrollmentProps {
   dogId?: number; // MEMO: 강아지 상세 정보에서 제공
@@ -47,7 +47,7 @@ const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
   return (
     <>
       <Header type="text" text={`${data.dogName}의 가입신청서`} />
-      <PageContainer color="BGray" pb="2.5">
+      <Layout bgColor="BGray" px={16} pb={40}>
         <S.Container>
           <S.TopWrapper>
             <S.TitleWrapper>
@@ -76,7 +76,7 @@ const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
             </S.ContentWrapper>
           </FormProvider>
         </S.Container>
-      </PageContainer>
+      </Layout>
     </>
   );
 };

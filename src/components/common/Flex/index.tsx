@@ -1,40 +1,19 @@
-import { type CSSProperties, type ForwardedRef, forwardRef, type HTMLAttributes } from "react";
+import { type ForwardedRef, forwardRef, type HTMLAttributes } from "react";
 
 import { StyledFlex } from "./styles";
 
-import type { BoxStyleProps, SizeType, SpacingProps } from "../Box/types";
+import type { FlexBoxProps, SizeProps, OtherProps, SpacingProps } from "../../../styles/system";
 
-type FlexWidthSet = {
-  width?: SizeType;
-  maxWidth?: SizeType;
-  minWidth?: SizeType;
-  height?: SizeType;
-  maxHeight?: SizeType;
-};
+export type FlexOptions = FlexBoxProps & SizeProps & SpacingProps & OtherProps;
 
-export type FlexOptions = BoxStyleProps &
-  SpacingProps &
-  FlexWidthSet & {
-    gap?: CSSProperties["gap"];
-    overflowX?: CSSProperties["overflowX"];
-    overflowY?: CSSProperties["overflowY"];
-    direction?: CSSProperties["flexDirection"];
-    align?: CSSProperties["alignItems"];
-    justify?: CSSProperties["justifyContent"];
-    wrap?: CSSProperties["flexWrap"];
-    basis?: CSSProperties["flexBasis"];
-    grow?: CSSProperties["flexGrow"];
-    shrink?: CSSProperties["flexShrink"];
-  };
-
-export type FlexProps = FlexOptions & HTMLAttributes<HTMLDivElement>;
+type FlexProps = FlexOptions & HTMLAttributes<HTMLDivElement>;
 
 export const Flex = forwardRef(function Flex(
-  { children, ...props }: FlexProps,
+  { children, display = "flex", ...props }: FlexProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   return (
-    <StyledFlex ref={ref} {...props}>
+    <StyledFlex {...props} ref={ref} display={display}>
       {children}
     </StyledFlex>
   );

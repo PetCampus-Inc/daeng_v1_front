@@ -56,10 +56,10 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
     <>
       <Flex direction="column" gap={3}>
         <Text as="h2" typo="title1_24_B" color="darkBlack">
-          <em color="primaryColor">
+          <Text as="em" typo="inherit" color="primaryColor">
             {schoolName} 유치원 <br />
             승인 신청{" "}
-          </em>
+          </Text>
           이 완료되었습니다
         </Text>
         <Text typo="body2_16_R" color="gray_3">

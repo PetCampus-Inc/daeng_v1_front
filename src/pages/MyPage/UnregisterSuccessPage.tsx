@@ -1,11 +1,11 @@
+import { Layout } from "components/common";
 import UnregisterSuccess from "components/Unregister/Success";
-import { PageContainer } from "styles/StyleModule";
 
 const UnregisterSuccessPage = () => {
   return (
-    <PageContainer color="white" pt="6.9">
+    <Layout bgColor="white" pt={76} px={16}>
       <UnregisterSuccess />
-    </PageContainer>
+    </Layout>
   );
 };
 

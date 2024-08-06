@@ -6,13 +6,14 @@ import CalendarIcon from "assets/svg/calendar";
 import Badge from "components/common/Badge";
 import { XSmallButton } from "components/common/Button/Templates";
 import { differenceInMonths, format } from "date-fns";
-import { IDogAndMemberInfo } from "types/admin/attendance.type";
 
 import * as S from "./styles";
 import { DogDetailInfoText } from "../styles";
 
+import type { DogInfoDetailData } from "types/admin/attendance.type";
+
 interface AboutDogProps {
-  data: Omit<IDogAndMemberInfo, "member">;
+  data: Omit<DogInfoDetailData, "member">;
 }
 
 const AboutDog = ({ data }: AboutDogProps) => {

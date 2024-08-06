@@ -64,7 +64,7 @@ const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
         />
       ) : null}
       <Header type="text" text="가입신청서 수정" />
-      <Layout type="page" bg="BGray">
+      <Layout bgColor="BGray" px={16}>
         <Container>
           <TopWrapper>
             <TitleWrapper>

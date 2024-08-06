@@ -1,8 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-import { Button } from "../Button";
-
-import type { ButtonProps } from "../types";
+import { Button, type ButtonProps } from "../Button";
 
 interface SmallButtonProps extends ButtonProps<"button"> {
   colorScheme?: "br_4" | "gray_4";
@@ -17,7 +15,7 @@ export const SmallButton = ({
   ...props
 }: PropsWithChildren<SmallButtonProps>) => {
   return (
-    <Button size="sm" typo="label2_14_M" colorScheme={colorScheme} radius="rectangle" {...props}>
+    <Button size="sm" typo="label2_14_M" colorScheme={colorScheme} variant="rectangle" {...props}>
       {children}
     </Button>
   );

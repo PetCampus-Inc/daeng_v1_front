@@ -1,8 +1,10 @@
-interface AlertIconProps {
+import type { IconSize } from "./types";
+
+interface AlertIconProps extends IconSize {
   color: "red" | "gray" | "brown" | "orange" | "darkgray";
 }
 
-const AlertSmallIcon = ({ color }: AlertIconProps) => {
+const AlertSmallIcon = ({ color, w = "16", h = "16" }: AlertIconProps) => {
   const colorMap = new Map<string, string[]>([
     ["red", ["#FAE7E3", "#DD5435", "#FAE7E3"]],
     ["gray", ["#F7F7F7", "#B5B5B5", "#F7F7F7"]],
@@ -12,7 +14,7 @@ const AlertSmallIcon = ({ color }: AlertIconProps) => {
   ]);
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width={w} height={h} fill="none" viewBox="0 0 16 16">
       <rect width="16" height="16" fill={colorMap.get(color)?.[0]} rx="4" />
       <circle cx="8.001" cy="7.999" r="5.333" fill={colorMap.get(color)?.[1]} />
       <path

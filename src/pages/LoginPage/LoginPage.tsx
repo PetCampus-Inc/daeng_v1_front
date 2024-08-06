@@ -9,9 +9,12 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   return (
-    <Layout type="page" pt={76}>
+    <Layout px={16} pt={76}>
       <Text typo="title1_24_B" color="darkBlack">
-        <em color="primaryColor">우리 강아지</em>의 유치원
+        <Text as="em" typo="inherit" color="primaryColor">
+          우리 강아지
+        </Text>
+        의 유치원
         <br /> 생활을 보러 갈까요?
       </Text>
       <LoginButtonGroup />

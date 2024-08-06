@@ -1,14 +1,14 @@
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import PolicyInfo from "components/Setting/Policy";
-import { PageContainer } from "styles/StyleModule";
 
 const PolicyPage = () => {
   return (
     <>
       <Header type="text" text="정책" />
-      <PageContainer color="white">
+      <Layout bgColor="white" px={16}>
         <PolicyInfo />
-      </PageContainer>
+      </Layout>
     </>
   );
 };

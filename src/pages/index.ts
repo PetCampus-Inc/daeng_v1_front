@@ -24,6 +24,8 @@ export { default as AttendCareNoticePage } from "./AdminAttendCarePage/AttendCar
 
 /* Admin School Manage Page */
 export { default as SchoolManagePage } from "./AdminSchoolMangePage/SchoolManagePage";
+export { default as AdminSettingPage } from "./AdminMyPage/AdminSettingPage";
+export { default as SchoolInfoEditPage } from "./AdminMyPage/SchoolInfoEditPage";
 export { default as TeacherManagePage } from "./AdminSchoolMangePage/TeacherManagePage/TeacherManagePage";
 export { default as SchoolManageEnrollmentPage } from "./AdminSchoolMangePage/EnrollmentPage/SchoolManageEnrollmentPage";
 export { default as EnrollmentFormDetailPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormDetailPage";
@@ -37,10 +39,12 @@ export { default as MemberEnrollmentFormDetailPage } from "./EnrollmentPage/Memb
 export { default as PrincipalMyPage } from "./AdminMyPage/PrincipalMyPage";
 export { default as TeacherMyPage } from "./AdminMyPage/TeacherMyPage";
 export { default as SchoolInfoPage } from "./AdminMyPage/SchoolInfoPage";
+export { default as AdminDeleteCompletePage } from "./AdminMyPage/AdminDeleteCompletePage";
 
 /* Login Page */
 export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as RedirectPage } from "./RedirectPage/RedirectPage";
+export { default as NativeRedirectPage } from "./RedirectPage/NativeRedirectPage";
 
 /* SignUp Page */
 export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";

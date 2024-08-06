@@ -1,10 +1,11 @@
-import { ITicketDetail } from "types/admin/attendance.type";
 import { addZero } from "utils/date";
 
 import * as S from "../PastTicketCard/styles";
 
+import type { TicketDetailData } from "types/admin/attendance.type";
+
 interface PastTicketProps {
-  data: ITicketDetail;
+  data: TicketDetailData;
 }
 
 const PastTicket = ({ data }: PastTicketProps) => {

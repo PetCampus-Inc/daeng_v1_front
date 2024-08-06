@@ -1,11 +1,10 @@
-import { request } from "libs/CustomAxios/request";
+import { request } from "libs/AuthAxios/request";
 
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
-import type { Response } from "types/helper.types";
 
-export const handleGetPrincipalInfo = async (adminId: number): Promise<IOwnerInfo> => {
+export const handleGetPrincipalInfo = async (adminId: number) => {
   const url = `admin/owner/mypage`;
-  const { data } = await request<Response<IOwnerInfo>>({
+  const { data } = await request<IOwnerInfo>({
     url,
     params: {
       adminId
@@ -14,9 +13,9 @@ export const handleGetPrincipalInfo = async (adminId: number): Promise<IOwnerInf
   return data;
 };
 
-export const handleGetTeacherInfo = async (adminId: number): Promise<ITeacherInfo> => {
+export const handleGetTeacherInfo = async (adminId: number) => {
   const url = `admin/teacher/mypage`;
-  const { data } = await request<Response<ITeacherInfo>>({
+  const { data } = await request<ITeacherInfo>({
     url,
     params: {
       adminId

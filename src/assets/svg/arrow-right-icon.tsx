@@ -1,6 +1,7 @@
-import type { IconProps } from "./add-c-icon";
+import type { IconSize } from "./types";
 
-interface Props extends Omit<IconProps, "colorScheme"> {
+interface Props extends IconSize {
+  className?: string;
   colorScheme?:
     | "gray_1"
     | "gray_2"

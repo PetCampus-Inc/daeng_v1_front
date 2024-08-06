@@ -1,26 +1,20 @@
-import { RuleSet, css } from "styled-components";
+import { CSSProp } from "styled-components";
 
-interface ISizes {
-  [key: string]: number;
-}
-
-const sizes: ISizes = {
-  mobile: 320,
-  tablet: 768,
-  laptop: 1024
+type MediaQueryProps = {
+  mobile: number;
+  tablet: number;
+  desktop: number;
 };
 
-interface MediaQueries {
-  [key: string]: (...args: any[]) => RuleSet<object>;
-}
-
-const mediaQueries: MediaQueries = Object.keys(sizes).reduce((acc: MediaQueries, label: string) => {
-  acc[label] = (...args: any[]) => css`
-    @media screen and (max-width: ${sizes[label]}px) {
-      ${css(...(args as [TemplateStringsArray, ...any[]]))};
-    }
-  `;
-  return acc;
-}, {});
-
-export default mediaQueries;
+const sizes: MediaQueryProps = {
+  mobile: 580,
+  tablet: 768,
+  desktop: 1024
+};
+export const media = (Object.keys(sizes) as Array<keyof typeof sizes>).reduce(
+  (acc, label) => {
+    acc[label] = (style: string) => `@media (max-width: ${sizes[label] / 16}em) { ${style} }`;
+    return acc;
+  },
+  {} as { [key in keyof typeof sizes]: (style: string) => CSSProp }
+);

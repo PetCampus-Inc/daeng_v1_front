@@ -7,7 +7,6 @@ import { useRecoilValue } from "recoil";
 import { galleryImgState } from "store/images";
 import showToast from "utils/showToast";
 
-import { BackgroundButtonWrapper } from "../button/styles";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 import useUploadAndCreateAlbum from "../hooks/useUploadAndCreateAlbum";
 
@@ -42,15 +41,13 @@ const SubmitButton = () => {
   };
 
   return (
-    <BackgroundButtonWrapper $isBottom>
-      <BackgroundButton
-        backgroundColor="white"
-        disabled={selectedDogIds.length === 0}
-        onClick={requestForCreateAlbum}
-      >
-        전송하기
-      </BackgroundButton>
-    </BackgroundButtonWrapper>
+    <BackgroundButton
+      backgroundColor="white"
+      disabled={selectedDogIds.length === 0}
+      onClick={requestForCreateAlbum}
+    >
+      전송하기
+    </BackgroundButton>
   );
 };
 

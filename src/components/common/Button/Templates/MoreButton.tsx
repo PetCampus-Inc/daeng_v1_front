@@ -2,9 +2,7 @@ import type { PropsWithChildren } from "react";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 
-import { Button } from "../Button";
-
-import type { ButtonProps } from "../types";
+import { Button, type ButtonProps } from "../Button";
 
 interface MoreButtonProps extends ButtonProps<"button"> {
   color?: "gray_1" | "gray_2" | "white";
@@ -24,16 +22,17 @@ export const MoreButton = ({
 }: PropsWithChildren<MoreButtonProps>) => {
   return (
     <Button
+      asChild
       typo="label2_14_R"
       color={color}
-      bg="transparent"
+      bgColor="transparent"
       paddingBlock={0}
       paddingInline={0}
       gap={0}
-      rightAddon={<ArrowRightIcon colorScheme={iconColorScheme} w={"20"} h={"20"} />}
+      rightAddon={<ArrowRightIcon colorScheme={iconColorScheme} w={iconSize} h={iconSize} />}
       {...props}
     >
-      {children}
+      <a>{children}</a>
     </Button>
   );
 };

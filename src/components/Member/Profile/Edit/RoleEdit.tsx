@@ -32,7 +32,6 @@ const RoleEdit = () => {
         color={currentRelation ? "gray_1" : "gray_3"}
         bg={currentRelation ? "white" : "gray_4"}
       />
-
       {isShowRoles && (
         <S.RoleSelectWrapper direction="column">
           {notSelectedRelation.map((item, idx) => (
