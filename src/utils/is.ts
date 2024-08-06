@@ -1,4 +1,5 @@
 import { AdminRole } from "types/common/role.types";
+import { FirebaseAuthData } from "types/member/auth.types";
 import { MessageType, NativeMessage } from "types/native/message.types";
 
 export function isAdmin(role: unknown): role is AdminRole {
@@ -65,12 +66,19 @@ const isBoolean: ValidatorFunction<boolean> = (v): v is boolean => v === "boolea
 const isString: ValidatorFunction<string> = (v): v is string => typeof v === "string";
 const isStringOrBoolean: ValidatorFunction<boolean | string[]> = (v): v is boolean | string[] =>
   isString(v) || isBoolean(v);
+const isFirebaseAuthData = (v: any): v is FirebaseAuthData => {
+  return (
+    typeof v === "object" &&
+    v !== null &&
+    typeof v.idToken === "string" &&
+    typeof v.deviceId === "string"
+  );
+};
 
 const validators: Record<MessageType["Response"], (v: unknown) => boolean> = {
   /** CORE */
-  GET_ID_TOKEN: isString,
-  GET_DEVICE_ID: isString,
   ERROR: isString,
+  FIREBASE_AUTH: isFirebaseAuthData,
 
   /** DEVICE ACTION */
   CALL: isNull,

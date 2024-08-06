@@ -1,14 +1,13 @@
+import { FirebaseAuthData } from "types/member/auth.types";
+
 interface CoreMessage {
   Request: {
     GO_BACK: null;
-    GET_ID_TOKEN: null;
-    GET_DEVICE_ID: null;
   };
   Response: {
     ERROR: string;
     GO_BACK: null;
-    GET_ID_TOKEN: string;
-    GET_DEVICE_ID: string;
+    FIREBASE_AUTH: FirebaseAuthData;
   };
 }
 
