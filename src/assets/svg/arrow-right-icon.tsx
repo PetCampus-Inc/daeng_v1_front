@@ -13,7 +13,7 @@ interface Props extends IconSize {
     | "none";
 }
 
-const ArrowRightIcon = ({ className = "", w = "16", h = w, colorScheme = "none" }: Props) => {
+const ArrowRightIcon = ({ className = "", w = "24", h = w, colorScheme = "none" }: Props) => {
   const colorMap = new Map<string, string>([
     ["gray_1", "#525252"],
     ["gray_2", "#858585"],

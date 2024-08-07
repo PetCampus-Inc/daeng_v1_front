@@ -108,7 +108,7 @@ const MyDogCard = ({
         ) : (
           <S.GotoSchoolInfoButton onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}>
             <span>{schoolInfo} 유치원</span>
-            {!isOpen && <ArrowRightIcon />}
+            {!isOpen && <ArrowRightIcon w={16} />}
           </S.GotoSchoolInfoButton>
         )}
         <S.DateText>{registeredTime} 등록</S.DateText>
