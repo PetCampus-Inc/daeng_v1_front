@@ -1,13 +1,14 @@
 import { Button } from "components/common/Button";
 import { Flex } from "components/common/Flex";
 import { styled } from "styled-components";
+import { ColorKeys } from "styles/types";
 
 interface StyleProps {
   w?: string;
   h?: string;
   br?: string;
-  color?: string;
-  bg?: string;
+  color?: ColorKeys;
+  bg?: ColorKeys;
   typo?: string;
 }
 
@@ -15,8 +16,8 @@ export const RoleEditButton = styled.input<StyleProps>`
   min-width: 112px;
   min-height: 49px;
   ${({ theme }) => theme.typo.body2_16_R};
-  color: ${({ theme, color }) => theme.colors[color]};
-  background-color: ${({ theme, bg }) => theme.colors[bg]};
+  color: ${({ color, theme }) => theme.colors[color || "gray_3"]};
+  background-color: ${({ theme, bg }) => theme.colors[bg || "gray_4"]};
   border: 0;
   border-radius: 8px;
   cursor: pointer;
