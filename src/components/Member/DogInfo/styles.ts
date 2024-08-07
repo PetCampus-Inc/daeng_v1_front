@@ -174,7 +174,7 @@ export const InfoText = styled.div`
   ${({ theme }) => theme.typo.label2_14_R};
 `;
 
-export const Editebutton = styled.button`
+export const Editbutton = styled.button`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.white};
@@ -211,7 +211,7 @@ export const DogMoreInfoText = styled.div`
   ${({ theme }) => theme.typo.label2_14_R};
 `;
 
-export const DogMoreInfoEditeButton = styled.button`
+export const DogMoreInfoEditButton = styled.button`
   background-color: ${({ theme }) => theme.colors.gray_5};
   padding: 5px 8px 2px;
   border-radius: 50px;
@@ -223,10 +223,10 @@ export const CarouselContainer = styled.div`
   overflow-x: auto;
 `;
 
-export const CarouselWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  width: calc(100% + 130px);
+export const DragCarouselWrapper = styled.div`
+  & > div > div {
+    width: calc(100% + 130px);
+  }
 `;
 
 export const CarouselCard = styled.div`
@@ -240,6 +240,7 @@ export const CarouselCard = styled.div`
   border-radius: 8px;
   overflow: hidden;
   padding: 4px 8px;
+  cursor: pointer;
 
   & > img {
     object-fit: cover;

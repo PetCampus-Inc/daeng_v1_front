@@ -2,6 +2,10 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 export const CarouselSlider = styled(Slider)`
+  .slick-slide {
+    height: 519px;
+  }
+
   .slick-prev {
     left: 16px;
   }
@@ -21,13 +25,16 @@ export const CarouselSlider = styled(Slider)`
 `;
 
 export const CarouselBox = styled.div`
+  border-radius: 0.8rem;
+  overflow: hidden;
   position: relative;
   width: 100%;
+  height: 519px;
 
   & > img {
     width: 100%;
-    max-width: 385px;
-    margin-bottom: -3px;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -56,6 +63,7 @@ export const CarouselText = styled.span`
 
 export const CloseButton = styled.button`
   position: absolute;
+  background: transparent;
   top: 16px;
   right: 16px;
   z-index: 1;

@@ -11,7 +11,7 @@ interface RoleEditButtonProps {
   handleShowRoles: () => void;
 }
 
-const RoleEditeButton = ({ isShowRoles, handleShowRoles }: RoleEditButtonProps) => {
+const RoleEditButton = ({ isShowRoles, handleShowRoles }: RoleEditButtonProps) => {
   const { setValue, getValues } = useFormContext();
 
   const [currentRelation, setCurrentRelation] = useState<string>(
@@ -49,4 +49,4 @@ const RoleEditeButton = ({ isShowRoles, handleShowRoles }: RoleEditButtonProps) 
   );
 };
 
-export default RoleEditeButton;
+export default RoleEditButton;

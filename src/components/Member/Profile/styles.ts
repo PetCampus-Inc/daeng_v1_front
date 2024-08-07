@@ -1,10 +1,26 @@
 import { Button } from "components/common/Button";
 import { Flex } from "components/common/Flex";
 import { styled } from "styled-components";
+import { ColorKeys } from "styles/types";
 
-export const RoleEditeButton = styled(Button)`
-  max-width: 112px;
+interface StyleProps {
+  w?: string;
+  h?: string;
+  br?: string;
+  color?: ColorKeys;
+  bg?: ColorKeys;
+  typo?: string;
+}
+
+export const RoleEditButton = styled.input<StyleProps>`
+  min-width: 112px;
   min-height: 49px;
+  ${({ theme }) => theme.typo.body2_16_R};
+  color: ${({ color, theme }) => theme.colors[color || "gray_3"]};
+  background-color: ${({ theme, bg }) => theme.colors[bg || "gray_4"]};
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
 `;
 
 export const RoleSelectButton = styled(Button)`
@@ -12,9 +28,8 @@ export const RoleSelectButton = styled(Button)`
   min-height: 49px;
 `;
 
-export const RoleEditeContainer = styled.div`
+export const RoleEditContainer = styled.div`
   position: relative;
-  flex: 1;
 `;
 
 export const RoleSelectWrapper = styled(Flex)`
@@ -26,15 +41,19 @@ export const RoleSelectWrapper = styled(Flex)`
   width: 100%;
 `;
 
-export const UploadProfileButton = styled.button`
+export const ProfileBox = styled.label<StyleProps>`
+  position: relative;
+  width: 100%;
+  max-width: ${({ w }) => (w ? `${w}px` : "160px")};
+`;
+
+export const UploadProfileButton = styled.button<StyleProps>`
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 40px;
-  height: 160px;
+  border-radius: ${({ br }) => (br ? `${br}px` : "40px")};
   width: 100%;
-  max-width: 160px;
   background-color: ${({ theme }) => theme.colors.white};
   overflow: hidden;
   position: relative;
@@ -55,6 +74,20 @@ export const UploadProfileButton = styled.button`
       display: block;
     }
   }
+`;
+
+export const PencilIconBox = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  width: 28px;
+  height: 28px;
+  background-color: ${({ theme }) => theme.colors.br_4};
+  border: 2px solid ${({ theme }) => theme.colors.white};
 `;
 
 export const ActiveBox = styled.div``;

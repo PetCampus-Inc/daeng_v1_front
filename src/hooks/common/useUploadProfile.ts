@@ -14,7 +14,7 @@ interface UploadAndCreateAlbumOptions {
   onSuccess?: () => void;
 }
 
-const useSubmitProfile = () => {
+const useUploadProfile = () => {
   const [s3ProfileData, setS3ProfileData] = useState<string[]>([]);
   const { uploadToS3 } = useS3Upload();
 
@@ -55,7 +55,12 @@ const useSubmitProfile = () => {
       return;
     }
   };
-  return { uploadFiles, s3ProfileData };
+
+  const convertProfileUri = (name: string) => {
+    return s3ProfileData.find((file) => file.split("/").includes(name)) || "";
+  };
+
+  return { convertProfileUri, uploadFiles, s3ProfileData };
 };
 
-export default useSubmitProfile;
+export default useUploadProfile;

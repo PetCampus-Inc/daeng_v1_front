@@ -5,8 +5,8 @@ import { PreventLeaveModal } from "components/common/Modal";
 import KeyboardCompleteButton from "components/Member/MyPage/Buttons/KeyboardCompleteButton";
 import SaveButton from "components/Member/MyPage/Buttons/SaveButton";
 import { PageContainer } from "components/Member/MyPage/Container/styles";
-import MyInfoEdite from "components/Member/MyPage/MyMemberInfoEdite/MyInfoEdite";
-import MyProfileEdite from "components/Member/MyPage/MyMemberInfoEdite/MyProfileEdite";
+import MyInfoEdit from "components/Member/MyPage/MyMemberInfoEdit/MyInfoEdit";
+import MyProfileEdit from "components/Member/MyPage/MyMemberInfoEdit/MyProfileEdit";
 import { ContentContainer } from "components/Member/MyPage/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
@@ -14,7 +14,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
 import { getLabelForValue } from "utils/formatter";
 
-const MemberMyInfoEditePage = () => {
+const MemberMyInfoEditPage = () => {
   const { memberId } = useParams();
   const { data } = useGetEnrollment({ memberId: "1", schoolId: 2 });
   const { data: memberData } = useGetMemberProfileInfo(memberId);
@@ -44,9 +44,9 @@ const MemberMyInfoEditePage = () => {
       <Header type="text" text="프로필 수정" transparent />
       <PageContainer pt="1" color="br_5">
         <FormProvider {...methods}>
-          <MyProfileEdite />
+          <MyProfileEdit />
           <ContentContainer px="1.5" py="1" height="auto">
-            <MyInfoEdite requiredItems={requiredItemList} />
+            <MyInfoEdit requiredItems={requiredItemList} />
           </ContentContainer>
           <SaveButton memberId={memberId} />
         </FormProvider>
@@ -60,4 +60,4 @@ const MemberMyInfoEditePage = () => {
   );
 };
 
-export default MemberMyInfoEditePage;
+export default MemberMyInfoEditPage;

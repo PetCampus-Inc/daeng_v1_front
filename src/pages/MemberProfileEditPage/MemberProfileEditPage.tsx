@@ -18,11 +18,11 @@ const MemberProfileEditPage = () => {
     dogName: "거튼이",
     relation: ""
   };
-  const { ...rest } = data;
+  const { relation, ...rest } = data;
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...rest }
+    defaultValues: { relation: "호칭선택", ...rest }
   });
 
   return (
