@@ -55,10 +55,10 @@ const DogInfoBox = ({ data, dogId }: IProps) => {
               <S.DogName>{data.dogName}</S.DogName>
               <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
             </S.Title>
-            <S.Editebutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}>
+            <S.Editbutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}>
               <span>수정</span>
               <ArrowRightIcon />
-            </S.Editebutton>
+            </S.Editbutton>
           </S.TopInfoBox>
           <Flex wrap="wrap" gap="8">
             <S.InfoText>

@@ -86,7 +86,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
           </S.Icon>
           <S.DogMoreInfo>예방접종 파일</S.DogMoreInfo>
         </Flex>
-        <S.DogMoreInfoEditeButton onClick={uploadFile}>추가 업로드</S.DogMoreInfoEditeButton>
+        <S.DogMoreInfoEditButton onClick={uploadFile}>추가 업로드</S.DogMoreInfoEditButton>
       </S.TopInfoBox>
 
       <S.CarouselContainer>

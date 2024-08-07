@@ -22,9 +22,9 @@ const DogMemoBox = ({ type, memo, title, openPopup }: IProps) => {
           </S.Icon>
           <S.DogMoreInfo>{title}</S.DogMoreInfo>
         </Flex>
-        <S.DogMoreInfoEditeButton onClick={() => openPopup(title, memo ? memo : "", type)}>
+        <S.DogMoreInfoEditButton onClick={() => openPopup(title, memo ? memo : "", type)}>
           수정
-        </S.DogMoreInfoEditeButton>
+        </S.DogMoreInfoEditButton>
       </S.TopInfoBox>
       <S.DogMoreInfoText>{memo ? memo : ""}</S.DogMoreInfoText>
     </S.DogMoreInfoCard>
