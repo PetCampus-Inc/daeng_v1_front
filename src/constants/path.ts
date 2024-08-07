@@ -59,11 +59,13 @@ const ADMIN_PATH = {
     `/${ADMIN}/school/enrollment/owner-forms/${formId ?? ":formId"}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: `/${ADMIN}/school/enrollment/new`, // 원장 가입신청서 등록
 
-  ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`,
-  ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`,
-  ADMIN_MY_PAGE_DELETE_COMPLETE: `/${ADMIN}/${MYPAGE}/delete-complete`,
-  ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`,
-  ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit`
+  ADMIN_NOTIFICATION_PAGE: `/${ADMIN}/"notification`, // 알림
+
+  ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`, // 어드민 마이페이지
+  ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`, // 마이페이지 설정
+  ADMIN_MY_PAGE_DELETE_COMPLETE: `/${ADMIN}/${MYPAGE}/delete-complete`, // 계정 탈퇴 완료
+  ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`, // 선생님 유치원 정보 확인
+  ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit` // 원장 유치원 정보 수정
 };
 
 const MEMBER_PATH = {

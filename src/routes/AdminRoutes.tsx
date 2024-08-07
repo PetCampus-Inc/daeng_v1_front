@@ -121,6 +121,14 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           )
         },
         {
+          path: PATH.ADMIN_NOTIFICATION_PAGE,
+          element: (
+            <Suspense>
+              <Pages.AdminNotificationPage />
+            </Suspense>
+          )
+        },
+        {
           // NOTE: 원장 권한의 페이지
           path: PATH.ADMIN_SCHOOL_MANAGE,
           element: <AdminAuthRouter isOwnerOnly />,

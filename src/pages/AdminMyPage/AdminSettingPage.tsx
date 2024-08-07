@@ -4,7 +4,6 @@ import DeleteAccount from "components/Admin/MyPage/DeleteAccount";
 import PolicySetting from "components/Admin/MyPage/PolicySetting";
 import { Box, Flex, Layout, Text } from "components/common";
 import { Button } from "components/common/Button";
-import { XSmallButton } from "components/common/Button/Templates";
 import Header from "components/common/Header";
 import useStep from "hooks/common/useStep";
 import { useState } from "react";
