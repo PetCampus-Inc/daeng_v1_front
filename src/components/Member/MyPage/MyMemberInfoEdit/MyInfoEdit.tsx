@@ -15,7 +15,7 @@ import * as S from "./styles";
 
 // TODO 코드 리팩토링 필요
 
-const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> }) => {
+const MyInfoEdit = ({ requiredItems }: { requiredItems: Map<number, boolean> }) => {
   const { register, setValue, watch } = useFormContext();
   const overlay = useOverlay.useOverlay();
 
@@ -40,7 +40,7 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
 
   //TODO input value 연동 작업하기
   return (
-    <S.ProfileEditeWrapper>
+    <S.ProfileEditWrapper>
       <Flex direction="column" gap={7}>
         <Text typo="label2_14_R" color="darkBlack">
           이름
@@ -78,7 +78,7 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
           required={requiredItems?.get(FIELD_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
-          inputType="memberEdite"
+          inputType="memberEdit"
         />
         <TextInput
           name={FIELD.MEMBER_ADDRESS_DETAIL}
@@ -120,8 +120,8 @@ const MyInfoEdite = ({ requiredItems }: { requiredItems: Map<number, boolean> })
           required={requiredItems?.get(FIELD_KEYS.EMERGENCY_NUMBER)}
         />
       </Flex>
-    </S.ProfileEditeWrapper>
+    </S.ProfileEditWrapper>
   );
 };
 
-export default MyInfoEdite;
+export default MyInfoEdit;

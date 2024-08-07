@@ -71,7 +71,7 @@ const DogInfo = ({ dogId }: IProps) => {
         memo={data.pickDropMemo}
         openPopup={openTextAreaPopup}
       />
-
+      
       <DogMemoBox
         title="알러지 및 질병"
         type="allergy"

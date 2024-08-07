@@ -19,5 +19,6 @@ export const PROFILE_NAME = {
 
 export const FILE_URI_NAME = {
   MEMBER: "memberProfileUri",
-  DOG: "dogProfileUri"
+  DOG: "dogProfileUri",
+  COMMON: "profilUri"
 };

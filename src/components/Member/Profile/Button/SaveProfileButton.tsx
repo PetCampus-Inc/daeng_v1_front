@@ -2,7 +2,7 @@ import { ACCEPT_FILE_TYPE, PROFILE_NAME, PROFILE_PATHS } from "constants/profile
 
 import { BackgroundButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
-import useSubmitProfile from "hooks/api/member/useSubmitProfile";
+import useUploadProfile from "hooks/common/useUploadProfile";
 import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
@@ -10,14 +10,13 @@ import * as S from "../styles";
 const SaveProfileButton = () => {
   const {
     handleSubmit,
-    watch,
+    getValues,
     formState: { isValid }
   } = useFormContext();
-  const { uploadFiles, s3ProfileData } = useSubmitProfile();
+  const { convertProfileUri, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
-  // FIXME: wathc로 데이터를 가져오는 것이 아닌, getValues 통해 가져오는 것으로 변경해주세요!
-  const memberProfileData = watch();
+  const memberProfileData = getValues();
   const isAllFilled = Object.values(memberProfileData).every((el: null | undefined) => el ?? false);
 
   const handleSubmitProfile = (data: FieldValues) => {
@@ -48,10 +47,6 @@ const SaveProfileButton = () => {
         submitMemberProfile(data);
       }
     });
-  };
-
-  const convertProfileUri = (name: string) => {
-    return s3ProfileData.find((file) => file.split("/").includes(name)) || "";
   };
 
   // TODO 어뎁터 데이터에 추가하기

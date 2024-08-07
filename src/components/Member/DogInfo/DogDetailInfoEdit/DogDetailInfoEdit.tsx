@@ -1,29 +1,35 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { FIELD, FIELD_KEYS } from "constants/field";
+import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
 
-import { TextInput } from "components/common";
+import { Flex, TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import BreedInput from "components/Enrollment/Input/BreedInput";
+import ProfileUploadBox from "components/Member/Profile/Box/ProfileUploadBox";
+import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Card, Text } from "./styles";
 
-interface DogInfoProps {
+interface IDogInfoProps {
   requiredItems?: Map<number, boolean>;
 }
 
-const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
+const DogDetailInfoEdit = ({ requiredItems }: IDogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
-
-  const dogBirth = {
-    year: watch("year"),
-    month: watch("month"),
-    day: watch("day")
-  };
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
+      <Card>
+        <ProfileUploadBox
+          type={PROFILE_NAME.DOG}
+          fileRef={fileInputRef}
+          fileName={FILE_URI_NAME.COMMON}
+          mode="edit"
+        />
+      </Card>
       <Card>
         <Text>이름</Text>
         <TextInput
@@ -58,29 +64,11 @@ const DogDetailInfoEdit = ({ requiredItems }: DogInfoProps) => {
       </Card>
       <Card>
         <Text>생일</Text>
-        <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber
-            name="year"
-            numberList={yearsArray}
-            defaultValue={dogBirth.year}
-            watch={watch}
-            setValue={setValue}
-          />
-          <SelectNumber
-            name="month"
-            numberList={monthsArray}
-            defaultValue={dogBirth.month}
-            watch={watch}
-            setValue={setValue}
-          />
-          <SelectNumber
-            name="day"
-            numberList={daysArray}
-            defaultValue={dogBirth.day}
-            watch={watch}
-            setValue={setValue}
-          />
-        </div>
+        <Flex gap="5">
+          <SelectNumber name="year" numberList={yearsArray} watch={watch} setValue={setValue} />
+          <SelectNumber name="month" numberList={monthsArray} watch={watch} setValue={setValue} />
+          <SelectNumber name="day" numberList={daysArray} watch={watch} setValue={setValue} />
+        </Flex>
       </Card>
       <Card>
         <Text>중성화 여부</Text>

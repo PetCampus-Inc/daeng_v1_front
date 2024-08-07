@@ -1,24 +1,18 @@
+import { FIELD } from "constants/field";
+
 import { TextInput } from "components/common";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
-interface INickNameEditeProps {
-  handleBlur: () => void;
-  handleFocus: () => void;
-}
-
-const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
-  const { register, getValues } = useFormContext();
-
+const NickNameEdit = () => {
+  const { register, getValues, setValue } = useFormContext();
   return (
     <>
       <TextInput
+        {...register(FIELD.NICK_NAME, { required: true })}
         register={register}
-        {...register("nickName", { required: true })}
+        defaultValue={getValues(FIELD.DOG_NAME)}
         placeholder="닉네임을 입력해주세요"
-        defaultValue={getValues("dogName")}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         css={InputStyle}
         className="defaultValue"
       />
@@ -26,7 +20,7 @@ const NickNameEdite = ({ handleBlur, handleFocus }: INickNameEditeProps) => {
   );
 };
 
-export default NickNameEdite;
+export default NickNameEdit;
 
 const InputStyle = css`
   padding: 12px 18px;

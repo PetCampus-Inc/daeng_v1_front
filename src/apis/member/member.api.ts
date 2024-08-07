@@ -151,6 +151,7 @@ export const handlePostMemberDogDetailInfo = async (req: MemberDogInfoReq) => {
       dogSize: req.dogSize,
       breedId: req.breedId,
       newBreed: req.newBreed,
+      profileUri: req.profileUri,
       birthDate: req.birthDate,
       neutralization: req.neutralization
     }
