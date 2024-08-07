@@ -223,10 +223,10 @@ export const CarouselContainer = styled.div`
   overflow-x: auto;
 `;
 
-export const CarouselWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  width: calc(100% + 130px);
+export const DragCarouselWrapper = styled.div`
+  & > div > div {
+    width: calc(100% + 130px);
+  }
 `;
 
 export const CarouselCard = styled.div`
@@ -240,6 +240,7 @@ export const CarouselCard = styled.div`
   border-radius: 8px;
   overflow: hidden;
   padding: 4px 8px;
+  cursor: pointer;
 
   & > img {
     object-fit: cover;
