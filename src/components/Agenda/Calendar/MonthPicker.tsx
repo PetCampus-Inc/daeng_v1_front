@@ -17,19 +17,19 @@ import {
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
 
-interface MonthSelectorProps {
+interface MonthPickerProps {
   isOpen: boolean;
   onClose: () => void;
-  activeStartDate: Date | null;
-  onSelect: (value: Value) => void;
+  activeDate: Date | null;
+  onMonthClick: (value: Value) => void;
   anchorRef: React.RefObject<HTMLDivElement>;
 }
 
-export const MonthSelector: React.FC<MonthSelectorProps> = ({
+export const MonthPicker: React.FC<MonthPickerProps> = ({
   isOpen,
   onClose,
-  activeStartDate,
-  onSelect,
+  activeDate,
+  onMonthClick,
   anchorRef
 }) => {
   const popupRef = useRef<HTMLDivElement>(null);
@@ -41,6 +41,7 @@ export const MonthSelector: React.FC<MonthSelectorProps> = ({
   });
 
   useEffect(() => {
+    // MonthPicker가 캘린더 타이틀 위치에 정확히 위치하도록 설정
     if (isOpen && popupRef.current && anchorRef.current) {
       const calendarNavigation = anchorRef.current;
       const popupNavigation = popupRef.current.querySelector(".react-calendar__navigation");
@@ -68,8 +69,8 @@ export const MonthSelector: React.FC<MonthSelectorProps> = ({
         <PopupWrapper ref={popupRef}>
           <StyledYearView>
             <Calendar
-              value={activeStartDate}
-              onChange={onSelect}
+              value={activeDate}
+              onChange={onMonthClick}
               view="year"
               maxDetail="year"
               minDetail="month"
