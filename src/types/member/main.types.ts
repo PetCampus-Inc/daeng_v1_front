@@ -123,10 +123,10 @@ export interface MemberDogInfoData {
   dogMemo: string;
 }
 
-export interface IDogVaccination extends IResponse {
+export interface IDogVaccination {
   dogIdList: number[];
   imageUriList: string[];
-  comment: string | null;
+  comment: string | "";
 }
 
 export interface MemberDogInfoReq {
