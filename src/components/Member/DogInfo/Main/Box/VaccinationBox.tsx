@@ -1,15 +1,11 @@
-import { ACCEPT_FILE_TYPE, PROFILE_PATHS } from "constants/profile";
+import { ACCEPT_FILE_TYPE } from "constants/profile";
 
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
-import { Box, DragCarousel, Flex } from "components/common";
+import { DragCarousel, Flex } from "components/common";
 import { CarouselModal } from "components/common/Modal/CarouselModal";
-import { useGetMemberDogDetailInfo, usePostMembeVaccination } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useS3Upload } from "hooks/common/useS3";
 import { ChangeEvent, useRef, useState } from "react";
-import { useForm, useFormContext } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { IDogVaccination } from "types/member/main.types";
+import { useFormContext } from "react-hook-form";
 import { formatDate } from "utils/formatter";
 import { getFilePreview } from "utils/thumb";
 
@@ -25,10 +21,8 @@ import { Thumbnail } from "../Vaccination/Thumbnail";
 
 const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const overlay = useOverlay();
-  const navigate = useNavigate();
-  const { register, setValue, watch, getValues } = useFormContext();
+  const { register, setValue, watch } = useFormContext();
   const [files, setFiles] = useState<IFile[]>([]);
-  const { data } = useGetMemberDogDetailInfo(dogId);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const { uploadFiles } = useUploadVaccintion(dogId);
 
