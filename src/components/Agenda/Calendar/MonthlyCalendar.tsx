@@ -13,69 +13,64 @@ import type { Value } from "react-calendar/dist/cjs/shared/types";
 const ATTEND_DAYS = ["2024-07-17", "2024-07-17", "2024-07-21", "2024-07-23"];
 
 interface MonthlyCalendarProps {
-  data: {
-    today: Date;
-    onDateClick: (newDate: Value) => void;
-    onTodayClick: () => void;
-    activeStartDate: Date | null;
-    onActiveStartDateChange: React.Dispatch<React.SetStateAction<Date | null>>;
-    onShowMonthSelectChange: React.Dispatch<React.SetStateAction<boolean>>;
-    headerRef: React.RefObject<HTMLDivElement>;
-  };
+  today: Date;
+  onDateClick: (newDate: Value) => void;
+  onTodayClick: () => void;
+  activeDate: Date | null;
+  onActiveDateChange: React.Dispatch<React.SetStateAction<Date | null>>;
+  onOpenMonthPicker: () => void;
+  headerRef: React.RefObject<HTMLDivElement>;
 }
 
-export const MonthlyCalendar: React.FC<MonthlyCalendarProps> = ({ data }) => {
+/* -------------------------------------------------------------------------------------------------
+ * MonthTile
+ * -----------------------------------------------------------------------------------------------*/
+
+const TileContent = ({ date, view, today }: { date: Date; view: string; today: Date }) => {
+  if (view !== "month") return null;
+
+  return (
+    <>
+      {isSameDay(date, today) && (
+        <Text typo="caption1_12_R" color="primaryColor">
+          오늘
+        </Text>
+      )}
+      {ATTEND_DAYS.some((day) => isSameDay(new Date(day), date)) && (
+        <Box as="span" color="br_3">
+          <FootIcon w={15} h={12} />
+        </Box>
+      )}
+    </>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * Monthly Calendar
+ * -----------------------------------------------------------------------------------------------*/
+
+export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
   const {
     today,
-    activeStartDate,
+    activeDate,
     onDateClick,
     onTodayClick,
-    onActiveStartDateChange,
-    onShowMonthSelectChange,
+    onActiveDateChange,
+    onOpenMonthPicker,
     headerRef: calendarRef
-  } = data;
+  } = props;
 
   const todayButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleDrillUp = useCallback(() => {
-    onShowMonthSelectChange(true);
-  }, [onShowMonthSelectChange]);
-
-  const handleActiveStartDateChange = useCallback(
-    ({ view, activeStartDate }: OnArgs) => {
-      if (view === "month") {
-        onActiveStartDateChange(activeStartDate);
-      }
-    },
-    [onActiveStartDateChange]
-  );
-
-  const renderTileContent = useCallback(
-    ({ date, view }: { date: Date; view: string }) => {
-      const contents = [];
-
-      if (view === "month" && isSameDay(date, today)) {
-        contents.push(
-          <Text key="today" typo="caption1_12_R" color="primaryColor">
-            오늘
-          </Text>
-        );
-      }
-
-      if (ATTEND_DAYS.some((day) => isSameDay(new Date(day), date))) {
-        contents.push(
-          <Box key="footIcon" as="span" color="br_3">
-            <FootIcon w={15} h={12} />
-          </Box>
-        );
-      }
-
-      return contents;
-    },
-    [today]
-  );
+  const handleActiveDateChange = ({ view, activeStartDate }: OnArgs) => {
+    // month가 변경될 때 activeDate를 변경
+    if (view === "month") {
+      onActiveDateChange(activeStartDate);
+    }
+  };
 
   const adjustTodayButtonPosition = useCallback(() => {
+    // "오늘" 버튼을 캘린더 타이틀 위치에 정확히 위치하도록 설정
     if (calendarRef.current && todayButtonRef.current) {
       const calendarNavigation = calendarRef.current.querySelector(".react-calendar__navigation");
       const todayButton = todayButtonRef.current;
@@ -103,10 +98,10 @@ export const MonthlyCalendar: React.FC<MonthlyCalendarProps> = ({ data }) => {
   return (
     <StyledMonthlyCalendar ref={calendarRef}>
       <Calendar
-        value={activeStartDate}
+        value={activeDate}
         onChange={onDateClick}
-        activeStartDate={activeStartDate || undefined}
-        onActiveStartDateChange={handleActiveStartDateChange}
+        activeStartDate={activeDate || undefined}
+        onActiveStartDateChange={handleActiveDateChange}
         formatDay={(locale, date) => format(date, "d")}
         formatWeekday={(locale, date) => format(date, "E")}
         formatMonthYear={(locale, date) => format(date, "yyyy. MM")}
@@ -119,8 +114,8 @@ export const MonthlyCalendar: React.FC<MonthlyCalendarProps> = ({ data }) => {
         prev2Label={null}
         minDetail="year"
         view="month"
-        onDrillUp={handleDrillUp}
-        tileContent={renderTileContent}
+        onDrillUp={onOpenMonthPicker}
+        tileContent={({ date, view }) => <TileContent date={date} view={view} today={today} />}
       />
       <GoToTodayButton type="button" ref={todayButtonRef} onClick={onTodayClick}>
         오늘
