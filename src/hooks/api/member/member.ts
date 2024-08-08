@@ -233,7 +233,7 @@ export const usePostMemberDogAllergy = (dogId: number) => {
 export const usePostMembeVaccination = (dogId: number) => {
   const queryClient = useQueryClient();
   const memberDogAllerayMutation = useMutation({
-    mutationFn: ({ req }: { req: IDogVaccination }) => handlePostMemoDogVaccination(req),
+    mutationFn: (req: IDogVaccination) => handlePostMemoDogVaccination(req),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
       showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
