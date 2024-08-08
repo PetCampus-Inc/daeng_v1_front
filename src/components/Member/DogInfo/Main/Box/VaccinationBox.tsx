@@ -21,9 +21,9 @@ import { Thumbnail } from "../Vaccination/Thumbnail";
 
 const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const overlay = useOverlay();
-  const { register, setValue, watch } = useFormContext();
   const [files, setFiles] = useState<IFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const { register, setValue, watch } = useFormContext();
   const { uploadFiles } = useUploadVaccintion(dogId);
 
   const MAX_FILE_COUNT = 20;

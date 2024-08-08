@@ -2,8 +2,7 @@ import { Flex } from "components/common";
 import {
   useGetMemberDogDetailInfo,
   usePostMemberDogAllergy,
-  usePostMemberDogPickDrop,
-  usePostMembeVaccination
+  usePostMemberDogPickDrop
 } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,18 +12,12 @@ import DogMemoBox from "./Main/Box/DogMemoBox";
 import VaccinationBox from "./Main/Box/VaccinationBox";
 import { TextAreaBottomSheet } from "../../common/BottomSheet";
 
-interface IProps {
-  dogId: number;
-}
-
-//TODO 리팩토링하기
-const DogInfo = ({ dogId }: IProps) => {
+const DogInfo = ({ dogId }: { dogId: number }) => {
   const overlay = useOverlay();
-  const { data } = useGetMemberDogDetailInfo(dogId);
   const methods = useForm({ mode: "onSubmit" });
+  const { data } = useGetMemberDogDetailInfo(dogId);
   const mutatePostDogAllergy = usePostMemberDogAllergy(dogId);
   const metatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
-  const mutatePostVaccination = usePostMembeVaccination(dogId);
 
   const openTextAreaPopup = (title: string, defaultValue: string, type: string) =>
     overlay.open(({ isOpen, close }) => (
@@ -41,14 +34,14 @@ const DogInfo = ({ dogId }: IProps) => {
           actionText={"수정 완료"}
           actionFn={() => {
             close();
-            handleEventType(type);
+            handleUpdateMemo(type);
           }}
         />
       </FormProvider>
     ));
 
   // MEMO 더 좋은 방법 있다면 개선하기
-  const handleEventType = (type: string) => {
+  const handleUpdateMemo = (type: string) => {
     const onSubmit = methods.handleSubmit(() => {
       if (type === "pickDrop") {
         const pickDrop = methods.getValues(type);
@@ -61,6 +54,7 @@ const DogInfo = ({ dogId }: IProps) => {
     });
     onSubmit();
   };
+
   return (
     <Flex direction="column" gap={24} pt={28} px={16}>
       <DogInfoBox data={data} dogId={dogId} />
@@ -71,7 +65,7 @@ const DogInfo = ({ dogId }: IProps) => {
         memo={data.pickDropMemo}
         openPopup={openTextAreaPopup}
       />
-      
+
       <DogMemoBox
         title="알러지 및 질병"
         type="allergy"
@@ -79,7 +73,6 @@ const DogInfo = ({ dogId }: IProps) => {
         openPopup={openTextAreaPopup}
       />
 
-      {/* TODO 데이터 작업 필요vaccinationUri */}
       <FormProvider {...methods}>
         <VaccinationBox dogId={dogId} />
       </FormProvider>
