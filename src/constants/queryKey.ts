@@ -46,7 +46,8 @@ const MEMBER_QUERY_KEY = {
   MEMBER_PROFILE: (memberId: number) => ["memberProfile", memberId], // 프로필 설정
   DOG_SHCOOL_INFO: ["memberDogSchoolInfo"], // 강아지 유치원 정보
   HOME: (memberId: number, dogId: number) => ["home", memberId, dogId], // 견주 홈 메인
-  DOGS: (memberId: number) => ["dogs", memberId] // 견주 홈 강아지 리스트
+  DOGS: (memberId: number) => ["dogs", memberId], // 견주 홈 강아지 리스트
+  AGENDA: (dogId: number, date?: string) => ["agenda", dogId, date] // 견주 홈 강아지 알림장
 };
 
 export const QUERY_KEY = {
