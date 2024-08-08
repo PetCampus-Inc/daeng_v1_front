@@ -48,8 +48,9 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
+    const vaccinationFilse = e.target.files;
+    if (vaccinationFilse) {
+      const newFiles = Array.from(vaccinationFilse);
       if (files.length + newFiles.length > MAX_FILE_COUNT) {
         alert(`최대 ${MAX_FILE_COUNT}개의 파일만 업로드할 수 있습니다.`);
         return;
@@ -57,7 +58,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
       setFiles((prevFiles) => [...prevFiles, ...fileArray]);
       setValue("files", [...watch("files", files), ...newFiles]);
-      uploadS3Files(e.target.files);
+      uploadS3Files(vaccinationFilse);
     }
   };
 
