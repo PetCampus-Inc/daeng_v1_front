@@ -255,13 +255,19 @@ export const WeekContainer = styled.div.withConfig({
   transition: opacity 0.3s ease;
 `;
 
-export const StyledWeeklyTitle = styled.div`
+export const StyledWeeklyHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+
   margin-bottom: ${remCalc(14)};
   height: 44px;
+`;
+
+export const StyledWeeklyTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 
 export const NavigationButton = styled.button`

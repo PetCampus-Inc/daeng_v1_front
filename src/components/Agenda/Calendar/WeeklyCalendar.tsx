@@ -1,9 +1,9 @@
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import FootIcon from "assets/svg/foot-icon";
 import { Box, Text } from "components/common";
-import { isSameDay, isBefore, format, isToday, parseISO } from "date-fns";
+import { isSameDay, format, isToday, parseISO } from "date-fns";
 import { ko } from "date-fns/locale";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
 
 import {
@@ -13,27 +13,24 @@ import {
   NavigationButton,
   StyledWeeklyCalendar,
   StyledWeeklyTitle,
-  WeekContainer
+  WeekContainer,
+  StyledWeeklyHeader
 } from "./styles";
 import { useWeekSwipe } from "./useWeekSwipe";
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
 
-const RECORD_DATE = ["2024-06-30", "2024-07-17", "2024-07-21", "2024-07-24", "2024-07-25"].map(
-  (d) => parseISO(d)
-);
-const USER_JOIN_DATE = parseISO("2024-02-15");
+const RECORD_DAYS = ["2024-06-30", "2024-07-17", "2024-07-21", "2024-07-24", "2024-07-25"];
+const USER_JOIN_DATE = "2024-02-15";
 
 interface WeeklyCalendarProps {
-  data: {
-    today: Date;
-    onDateClick: (newDate: Value) => void;
-    onTodayClick: () => void;
-    activeStartDate: Date | null;
-    onActiveStartDateChange: React.Dispatch<React.SetStateAction<Date | null>>;
-    onShowMonthSelectChange: React.Dispatch<React.SetStateAction<boolean>>;
-    headerRef: React.RefObject<HTMLDivElement>;
-  };
+  today: Date;
+  onDateClick: (newDate: Value) => void;
+  onTodayClick: () => void;
+  activeDate: Date | null;
+  onActiveDateChange: React.Dispatch<React.SetStateAction<Date | null>>;
+  onOpenMonthPicker: () => void;
+  headerRef: React.RefObject<HTMLDivElement>;
 }
 
 interface WeekViewProps {
@@ -62,7 +59,6 @@ const WeekView = ({
       <DayTile
         key={day.toISOString()}
         type="button"
-        aria-label={format(day, "yyyy년 M월 d일", { locale: ko })}
         className={`
           ${isSameDay(day, activeStartDate) ? "active" : ""}
           ${isDateDisabled(day) ? "disabled" : ""}
@@ -86,7 +82,7 @@ const WeekView = ({
             {format(day, "d")}
           </abbr>
           {isToday(day) && <p className="today">오늘</p>}
-          {RECORD_DATE.some((date) => isSameDay(date, day)) && (
+          {RECORD_DAYS.some((date) => isSameDay(date, day)) && (
             <Box as="span" color="br_3" key="footIcon">
               <FootIcon w={15} h={12} />
             </Box>
@@ -101,75 +97,77 @@ const WeekView = ({
  * WeeklyCalendar
  * -----------------------------------------------------------------------------------------------*/
 
-export const WeeklyCalendar = ({ data }: WeeklyCalendarProps) => {
+const WEEK_DAYS = ["일", "월", "화", "수", "목", "금", "토"];
+
+export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
   const {
     today,
     onDateClick,
     onTodayClick,
-    activeStartDate,
-    onActiveStartDateChange,
-    onShowMonthSelectChange,
+    activeDate,
+    onActiveDateChange,
+    onOpenMonthPicker,
     headerRef
-  } = data;
+  } = props;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const containerWidth = containerRef.current?.offsetWidth || 0;
 
-  const isDateDisabled = (date: Date) => {
-    return isBefore(date, USER_JOIN_DATE);
-  };
-
   const { weeks, controls, handleDragEnd, generateWeeks, setWeeks, isDateSelectable } =
-    useWeekSwipe(containerWidth, activeStartDate, onActiveStartDateChange, isDateDisabled, today);
+    useWeekSwipe({
+      containerWidth,
+      activeDate,
+      onActiveDateChange,
+      maxDate: parseISO(USER_JOIN_DATE),
+      today
+    });
 
   useEffect(() => {
-    if (activeStartDate) {
-      setWeeks(generateWeeks(activeStartDate));
+    if (activeDate) {
+      setWeeks(generateWeeks(activeDate));
       controls.set({ x: -containerWidth });
     }
-  }, [activeStartDate, generateWeeks, controls, setWeeks, containerWidth]);
+  }, [activeDate, generateWeeks, controls, setWeeks, containerWidth]);
 
-  const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
-
-  if (!activeStartDate) return null;
+  if (!activeDate) return null;
 
   return (
     <>
-      <StyledWeeklyTitle ref={headerRef}>
-        <Text typo="label1_16_B" color="primaryColor">
-          {format(activeStartDate, "yyyy. MM", { locale: ko })}
-        </Text>
-        <NavigationButton type="button" onClick={() => onShowMonthSelectChange(true)}>
-          <ArrowDownIcon w={20} h={20} />
-        </NavigationButton>
+      <StyledWeeklyHeader ref={headerRef}>
+        <StyledWeeklyTitle onClick={onOpenMonthPicker}>
+          <Text typo="label1_16_B" color="primaryColor">
+            {format(activeDate, "yyyy. MM", { locale: ko })}
+          </Text>
+          <NavigationButton>
+            <ArrowDownIcon w={20} h={20} />
+          </NavigationButton>
+        </StyledWeeklyTitle>
         <GoToTodayButton type="button" onClick={onTodayClick}>
           오늘
         </GoToTodayButton>
-      </StyledWeeklyTitle>
+      </StyledWeeklyHeader>
       <StyledWeeklyCalendar ref={containerRef}>
-        <AnimatePresence>
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: -containerWidth * 2, right: 0 }}
-            onDragEnd={handleDragEnd}
-            animate={controls}
-            initial={{ x: -containerWidth }}
-            dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
-            style={{ display: "flex" }}
-          >
-            {weeks.map((week, weekIndex) => (
-              <WeekView
-                key={weekIndex}
-                week={week}
-                activeStartDate={activeStartDate}
-                isDateDisabled={(date) => !isDateSelectable(date)}
-                onDateClick={onDateClick}
-                weekDays={weekDays}
-                isActive={weekIndex === 1}
-              />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: -containerWidth * 2, right: 0 }}
+          onDragEnd={handleDragEnd}
+          animate={controls}
+          initial={{ x: -containerWidth }}
+          dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+          style={{ display: "flex" }}
+        >
+          {weeks.map((week, weekIndex) => (
+            <WeekView
+              key={weekIndex}
+              week={week}
+              activeStartDate={activeDate}
+              isDateDisabled={(date) => !isDateSelectable(date)}
+              onDateClick={onDateClick}
+              weekDays={WEEK_DAYS}
+              isActive={weekIndex === 1}
+            />
+          ))}
+        </motion.div>
       </StyledWeeklyCalendar>
     </>
   );
