@@ -19,6 +19,7 @@ import {
   Uploader
 } from "../../../../Admin/AttendCare/AttendCareGallery/upload";
 import * as S from "../../styles";
+import useUploadVaccintion from "../hooks/useUploadVaccintion";
 import { StyledHiddenUpload } from "../Vaccination/styles";
 import { Thumbnail } from "../Vaccination/Thumbnail";
 
@@ -28,9 +29,8 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
   const { register, setValue, watch, getValues } = useFormContext();
   const [files, setFiles] = useState<IFile[]>([]);
   const { data } = useGetMemberDogDetailInfo(dogId);
-  const mutatePostVaccination = usePostMembeVaccination(dogId);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const { uploadToS3 } = useS3Upload();
+  const { uploadFiles } = useUploadVaccintion(dogId);
 
   const MAX_FILE_COUNT = 20;
 
@@ -44,6 +44,15 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       />
     ));
 
+  const convertCreatedTime = (time: string) => {
+    const [year, day, month] = time.slice(0, 10).split("-");
+    return formatDate(year, day, month, "dot");
+  };
+
+  const handleUploadFile = () => {
+    fileInputRef.current?.click();
+  };
+
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const newFiles = Array.from(e.target.files);
@@ -54,27 +63,21 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
       setFiles((prevFiles) => [...prevFiles, ...fileArray]);
       setValue("files", [...watch("files", files), ...newFiles]);
-      uploadS3Files(newFiles);
+      uploadS3Files(e.target.files);
     }
   };
 
-  const uploadFile = () => {
-    fileInputRef.current?.click();
-  };
-
-  const convertCreatedTime = (time: string) => {
-    const [year, day, month] = time.slice(0, 10).split("-");
-    return formatDate(year, day, month, "dot");
-  };
-
-  const uploadS3Files = (files: File[]) => {
-    const filesParams = {
-      name: "vaccination",
+  const uploadS3Files = (files: FileList) => {
+    const params = {
       files: files,
+      path: "vaccination",
       accept: ACCEPT_FILE_TYPE.IMAGE,
-      path: PROFILE_PATHS.DOG
+      dogIdList: [dogId],
+      comment: ""
     };
-    console.log("업로드 files", filesParams);
+    uploadFiles(params);
+
+    console.log("업로드 files", params);
   };
 
   return (
@@ -86,7 +89,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
           </S.Icon>
           <S.DogMoreInfo>예방접종 파일</S.DogMoreInfo>
         </Flex>
-        <S.DogMoreInfoEditButton onClick={uploadFile}>추가 업로드</S.DogMoreInfoEditButton>
+        <S.DogMoreInfoEditButton onClick={handleUploadFile}>추가 업로드</S.DogMoreInfoEditButton>
       </S.TopInfoBox>
 
       <S.CarouselContainer>
