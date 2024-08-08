@@ -1,4 +1,19 @@
-const ArrowLeftIcon = ({ className = "", w = "24", h = "24" }) => {
+import type { IconSize } from "./types";
+
+interface Props extends IconSize {
+  className?: string;
+  colorScheme?:
+    | "gray_1"
+    | "gray_2"
+    | "gray_3"
+    | "gray_4"
+    | "gray_5"
+    | "black"
+    | "darkBlack"
+    | "none";
+}
+
+const ArrowLeftIcon = ({ className = "", w = "24", h = "24" }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -28,7 +28,7 @@ export interface FloatingOverlayProps {
    * The element type to render as.
    * @default "default"
    */
-  type?: "dimmed" | "blurred" | "default";
+  type?: "dimmed" | "blurred" | "default" | "none";
 }
 
 /**
@@ -120,7 +120,7 @@ export const FloatingOverlay = forwardRef(function FloatingOverlay(
 const StyledFloatingElm = styled.div.withConfig({
   shouldForwardProp: (prop) => !["type", "css"].includes(prop)
 })<{
-  type: "dimmed" | "blurred" | "default";
+  type: "dimmed" | "blurred" | "default" | "none";
   css?: CSSProp;
 }>`
   position: fixed;
@@ -148,6 +148,13 @@ const StyledFloatingElm = styled.div.withConfig({
     type === "default" &&
     `
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  `}
+
+  ${({ type }) =>
+    type === "none" &&
+    `
+    background-color: transparent;
     z-index: 10;
   `}
 

@@ -28,7 +28,7 @@ const AddDogButton = () => {
       gap={10}
       onClick={openAddDogPopup}
       leftAddon={<AddIcon />}
-      rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}
+      rightAddon={<ArrowRightIcon w={20} h={20} />}
     >
       강아지 추가하기
     </SmallButton>
