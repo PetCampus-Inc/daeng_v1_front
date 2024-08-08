@@ -98,7 +98,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
                 role="button"
                 onClick={() => openCarouselPopup(idx)}
               >
-                <img src={file.imageUri} alt="dog_img" />
+                <img src={file.imageUri} alt={`vaccination-${file.imageId}`} />
                 <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
               </S.CarouselCard>
             ))}
@@ -111,7 +111,6 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
           multiple
           accept="image/*"
           onChange={handleFileChange}
-          disabled={vaccinationUri ? vaccinationUri.length >= MAX_FILE_COUNT : false}
         />
       </S.CarouselContainer>
     </S.DogMoreInfoCard>
