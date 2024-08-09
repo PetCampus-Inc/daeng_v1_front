@@ -95,7 +95,7 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
                 role="button"
                 onClick={() => openCarouselPopup(idx)}
               >
-                <img src={file.imageUri} alt={`vaccination-${file.imageId}`} />
+                <img src={file.imageUri} alt={`vaccination-${file.imageId}-${idx}`} />
                 <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
               </S.CarouselCard>
             ))}
