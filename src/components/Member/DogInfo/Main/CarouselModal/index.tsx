@@ -1,12 +1,12 @@
 import CloseIcon from "assets/svg/x-circle-icon";
 import Arrows from "components/common/LightBox/Arrows";
+import { type ModalProps } from "components/common/Modal/index";
+import { ModalRoot } from "components/common/Modal/ModalRoot";
 import { useRef } from "react";
 import Slider from "react-slick";
 import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
-import { type ModalProps } from "../index";
-import { ModalRoot } from "../ModalRoot";
 
 interface VaccinationUri {
   imageId: number;

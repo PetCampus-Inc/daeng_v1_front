@@ -7,7 +7,7 @@ import {
   StyledText
 } from "components/Admin/AttendCare/AttendCareGallery/upload/styles";
 import { Box } from "components/common";
-import { CarouselModal } from "components/common/Modal/CarouselModal";
+import { CarouselModal } from "components/Member/DogInfo/Main/CarouselModal";
 import { useOverlay } from "hooks/common/useOverlay";
 
 import * as S from "../../styles";

@@ -2,7 +2,7 @@ import { ACCEPT_FILE_TYPE } from "constants/profile";
 
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { DragCarousel, Flex } from "components/common";
-import { CarouselModal } from "components/common/Modal/CarouselModal";
+import { CarouselModal } from "components/Member/DogInfo/Main/CarouselModal";
 import { useOverlay } from "hooks/common/useOverlay";
 import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
