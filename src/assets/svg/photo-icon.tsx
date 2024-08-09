@@ -1,6 +1,19 @@
-const PhotoIcon = ({ w = "24", h = "24" }) => {
+interface Props {
+  w?: string;
+  h?: string;
+  bg?: boolean;
+  colorScheme?: "gray" | "yellow";
+}
+
+const PhotoIcon = ({ w = "24", h = "24", bg = false, colorScheme = "yellow" }: Props) => {
+  const colorMap = new Map<string, string>([
+    ["gray", "#E9E9E9"],
+    ["yellow", "#FFF7E1"]
+  ]);
+
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={w} height={h} viewBox="0 0 24 24" fill="none">
+      {bg && <rect width="40" height="40" rx="20" fill={colorMap.get(colorScheme)} />}
       <rect x="0.332031" y="0.333984" width="23.3333" height="23.3333" rx="1" fill="#C8A584" />
       <rect x="2.27734" y="2.2793" width="19.4444" height="15.5556" rx="1" fill="#E4CAB1" />
       <path
