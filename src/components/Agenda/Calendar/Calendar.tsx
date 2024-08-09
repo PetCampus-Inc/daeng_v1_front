@@ -1,26 +1,28 @@
+import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import { Box } from "components/common";
 import { format } from "date-fns";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { MonthlyCalendar } from "./MonthlyCalendar";
+import { MonthPicker } from "./MonthPicker";
+import { ToggleViewButton } from "./styles";
 import { WeeklyCalendar } from "./WeeklyCalendar";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import type { Value } from "react-calendar/dist/cjs/shared/types";
 
-export const Calendar = () => {
+export const Calendar: React.FC = () => {
   const today = new Date();
-  const [view, setView] = useState<"week" | "month">("week");
-  // 월이 바뀔때 view가 변경되려면 activeStartDate를 업데이트 시켜줘야함
-
-  const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
+  const [expanded, setExpanded] = useState(false);
+  const [activeDate, setActiveDate] = useState<Date | null>(new Date());
   const [searchParams, setSearchParams] = useSearchParams();
+  const [showMonthPicker, setShowMonthPicker] = useState(false);
+  const calendarHeaderRef = useRef<HTMLDivElement>(null);
 
-  const handleDateChange = (newDate: Value) => {
-    if (newDate instanceof Date) {
-      setActiveStartDate(newDate);
-      const formattedDate = format(newDate as Date, "yyyy-MM-dd");
+  const handleDateClick = (date: Value) => {
+    if (date instanceof Date) {
+      setActiveDate(date);
+      const formattedDate = format(date as Date, "yyyy-MM-dd");
       searchParams.set("date", formattedDate);
       setSearchParams(searchParams);
     }
@@ -28,38 +30,50 @@ export const Calendar = () => {
 
   const handleTodayClick = () => {
     const today = new Date();
-    setActiveStartDate(today);
+    handleDateClick(today);
   };
 
-  const handleExpand = () => {
-    setView("month");
+  const toggleExpanded = () => setExpanded((prev) => !prev);
+
+  const handleMonthClick = (date: Value) => {
+    handleDateClick(date);
+    setShowMonthPicker(false);
   };
 
-  const handleCollapse = () => {
-    setView("week");
+  const handleOpenMonthPicker = () => {
+    setShowMonthPicker(true);
   };
 
-  const monthlyData = {
+  const handleCloseMonthPicker = () => {
+    setShowMonthPicker(false);
+  };
+
+  const calendarProps = {
     today,
-    handleDateChange,
-    handleTodayClick,
-    activeStartDate,
-    setActiveStartDate
+    onDateClick: handleDateClick,
+    onTodayClick: handleTodayClick,
+    activeDate,
+    onActiveDateChange: setActiveDate,
+    onOpenMonthPicker: handleOpenMonthPicker,
+    headerRef: calendarHeaderRef
   };
 
   return (
     <Box bgColor="white" pt={28} radius="0px 0px 20px 20px">
-      {view === "week" ? (
-        <>
-          <WeeklyCalendar />
-          <button onClick={handleExpand}>펼치기</button>
-        </>
-      ) : (
-        <>
-          <MonthlyCalendar data={monthlyData} />
-          <button onClick={handleCollapse}>접기</button>
-        </>
-      )}
+      {expanded ? <MonthlyCalendar {...calendarProps} /> : <WeeklyCalendar {...calendarProps} />}
+      <ToggleViewButton type="button" onClick={toggleExpanded} expand={expanded}>
+        {expanded ? "닫기" : "펼쳐보기"}
+        <span>
+          <ArrowDownIcon w={20} h={20} />
+        </span>
+      </ToggleViewButton>
+      <MonthPicker
+        isOpen={showMonthPicker}
+        onClose={handleCloseMonthPicker}
+        onMonthClick={handleMonthClick}
+        activeDate={activeDate}
+        anchorRef={calendarHeaderRef}
+      />
     </Box>
   );
 };

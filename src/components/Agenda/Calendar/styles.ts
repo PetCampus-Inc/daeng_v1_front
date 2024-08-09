@@ -12,13 +12,13 @@ export const StyledMonthlyCalendar = styled.div`
   .react-calendar {
     width: 100%;
     border: none;
-    padding-bottom: ${remCalc(14)};
   }
 
   /* Navigation Styling */
   .react-calendar__navigation {
     justify-content: center;
     gap: 10px;
+    margin-bottom: ${remCalc(14)};
 
     button:enabled:hover,
     button:enabled:focus,
@@ -109,26 +109,6 @@ export const StyledMonthlyCalendar = styled.div`
       }
     }
   }
-`;
-
-// Styled Date Button
-export const StyledDate = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 52px;
-  width: 100%;
-  height: 24px;
-  position: absolute;
-  right: 36px;
-  font-size: 0.8rem;
-  letter-spacing: 0.015rem;
-  line-height: 1.25rem;
-  font-weight: 800;
-  font-family: "Pretendard Variable";
-  background-color: ${({ theme }) => theme.colors.primary_2};
-  color: ${({ theme }) => theme.colors.yellow_3};
-  border-radius: 15px;
 `;
 
 // Popup Container
@@ -231,4 +211,161 @@ export const ControlWrapper = styled.div`
 // Control Button
 export const ControlButton = styled.button`
   color: ${({ theme }) => theme.colors.gray_2};
+`;
+
+// Go to Today Button
+export const GoToTodayButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 52px;
+  width: 100%;
+  height: 24px;
+
+  position: absolute;
+  right: 36px;
+
+  font-size: 0.8rem;
+  letter-spacing: 0.015rem;
+  line-height: 1.25rem;
+  font-weight: 800;
+  font-family: "Pretendard Variable";
+
+  background-color: ${({ theme }) => theme.colors.primary_2};
+  color: ${({ theme }) => theme.colors.yellow_3};
+  border-radius: 15px;
+`;
+
+// Styled Weekly Calendar
+export const StyledWeeklyCalendar = styled.div`
+  width: calc(100% - 16px);
+  overflow: hidden;
+  margin: 0 auto;
+  margin-block-end: 12px;
+`;
+
+export const WeekContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["active"].includes(prop)
+})<{ active: boolean }>`
+  display: flex;
+  width: 100%;
+  flex-shrink: 0;
+  opacity: ${(props) => (props.active ? 1 : 0.3)};
+  transition: opacity 0.3s ease;
+`;
+
+export const StyledWeeklyHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: ${remCalc(14)};
+  height: 44px;
+`;
+
+export const StyledWeeklyTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const NavigationButton = styled.button`
+  width: 20px;
+  height: 20px;
+  color: ${({ theme }) => theme.colors.primaryColor};
+  background-color: ${({ theme }) => theme.colors.yellow_3};
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DayTile = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 calc(100% / 7);
+  scroll-snap-align: start;
+
+  min-height: 64px;
+  max-height: 64px;
+  height: 100%;
+
+  padding-inline: 13px;
+  border-radius: 12px;
+  color: ${({ theme }) => theme.colors.gray_3};
+  font-family: inherit;
+
+  &.active {
+    background-color: ${({ theme }) => theme.colors.yellow_3};
+    scroll-snap-align: center;
+  }
+
+  &.active .day {
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+
+  &.active .weekday {
+    color: ${({ theme }) => theme.colors.br_2};
+  }
+
+  &.active .weekday.sunday {
+    color: ${({ theme }) => theme.colors.red_1};
+  }
+
+  &.disabled {
+    color: ${({ theme }) => theme.colors.gray_4};
+  }
+
+  &.neighboring-week {
+    pointer-events: none;
+  }
+`;
+
+export const DayContent = styled.span`
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+
+  & > abbr.day {
+    ${({ theme }) => theme.typo.body2_16_B};
+    color: inherit;
+    text-decoration: none;
+    line-height: normal;
+  }
+
+  & > .today {
+    color: ${({ theme }) => theme.colors.br_2};
+    ${({ theme }) => theme.typo.caption1_12_R};
+    line-height: normal;
+  }
+`;
+
+// 캘린더 뷰 토글 버튼
+export const ToggleViewButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !["expand"].includes(prop)
+})<{ expand?: boolean }>`
+  padding-block: ${remCalc(14)};
+  color: ${({ theme }) => theme.colors.gray_1};
+  ${({ theme }) => theme.typo.label2_14_M};
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  & > span {
+    display: flex;
+    align-items: center;
+  }
+
+  & > span > svg {
+    transform: ${({ expand }) => (expand ? "rotate(180deg)" : "rotate(0deg)")};
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.15s;
+  }
 `;
