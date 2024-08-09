@@ -12,6 +12,7 @@ import { MemberDogInfoFormData } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 
 import * as S from "../../styles";
+import InfoText from "../DogInfo/InfoText";
 
 interface IProps {
   data: MemberDogInfoFormData;
@@ -33,7 +34,7 @@ const DogInfoBox = ({ data, dogId }: IProps) => {
       <S.BgImg>
         <img
           src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="dog_bg"
+          alt="card-bg"
         />
       </S.BgImg>
       <S.DogInfoBox>
@@ -46,7 +47,7 @@ const DogInfoBox = ({ data, dogId }: IProps) => {
         >
           <img
             src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="dog_img"
+            alt="dog-profile"
           />
         </S.ImageBox>
         <S.TextWrapper>
@@ -61,25 +62,13 @@ const DogInfoBox = ({ data, dogId }: IProps) => {
             </S.Editbutton>
           </S.TopInfoBox>
           <Flex wrap="wrap" gap="8">
-            <S.InfoText>
-              <S.Icon>
-                <GirlNormalIcon />
-              </S.Icon>
-              {ITEM_ENGLISH_TO_KOREAN[data.dogGender]} / 중성화{" "}
-              {data.neutralization === "NEUTERED" ? "O" : "X"}
-            </S.InfoText>
-            <S.InfoText>
-              <S.Icon>
-                <CalendarIcon />
-              </S.Icon>
-              {DOG_BIRETH}
-            </S.InfoText>
-            <S.InfoText>
-              <S.Icon>
-                <BreedIcon />
-              </S.Icon>
-              {data.breedName}
-            </S.InfoText>
+            <InfoText
+              icon={<GirlNormalIcon />}
+              text={`${ITEM_ENGLISH_TO_KOREAN[data.dogGender]} / 중성화 ${data.neutralization === "NEUTERED" ? "O" : "X"}`}
+            />
+
+            <InfoText icon={<CalendarIcon />} text={DOG_BIRETH} />
+            <InfoText icon={<BreedIcon />} text={data.breedName} />
           </Flex>
         </S.TextWrapper>
       </S.DogInfoBox>
