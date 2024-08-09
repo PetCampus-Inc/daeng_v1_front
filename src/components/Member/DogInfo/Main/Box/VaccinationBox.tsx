@@ -9,11 +9,7 @@ import { useFormContext } from "react-hook-form";
 import { formatDate } from "utils/formatter";
 import { getFilePreview } from "utils/thumb";
 
-import {
-  IFile,
-  StyledThumbList,
-  Uploader
-} from "../../../../Admin/AttendCare/AttendCareGallery/upload";
+import { IFile } from "../../../../Admin/AttendCare/AttendCareGallery/upload";
 import * as S from "../../styles";
 import useUploadVaccintion from "../hooks/useUploadVaccintion";
 import { StyledHiddenUpload } from "../Vaccination/styles";
@@ -43,8 +39,17 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
     return formatDate(year, day, month, "dot");
   };
 
-  const handleUploadFile = () => {
-    fileInputRef.current?.click();
+  const uploadS3Files = (files: FileList) => {
+    const params = {
+      files: files,
+      path: "vaccination",
+      accept: ACCEPT_FILE_TYPE.IMAGE,
+      dogIdList: [dogId],
+      comment: ""
+    };
+    uploadFiles(params);
+
+    console.log("업로드 files", params);
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -62,17 +67,8 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
     }
   };
 
-  const uploadS3Files = (files: FileList) => {
-    const params = {
-      files: files,
-      path: "vaccination",
-      accept: ACCEPT_FILE_TYPE.IMAGE,
-      dogIdList: [dogId],
-      comment: ""
-    };
-    uploadFiles(params);
-
-    console.log("업로드 files", params);
+  const handleUploadFile = () => {
+    fileInputRef.current?.click();
   };
 
   return (

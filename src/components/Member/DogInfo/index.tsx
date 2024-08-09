@@ -17,7 +17,7 @@ const DogInfo = ({ dogId }: { dogId: number }) => {
   const methods = useForm({ mode: "onSubmit" });
   const { data } = useGetMemberDogDetailInfo(dogId);
   const mutatePostDogAllergy = usePostMemberDogAllergy(dogId);
-  const metatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
+  const mutatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
 
   const openTextAreaPopup = (title: string, defaultValue: string, type: string) =>
     overlay.open(({ isOpen, close }) => (
@@ -40,15 +40,13 @@ const DogInfo = ({ dogId }: { dogId: number }) => {
       </FormProvider>
     ));
 
-  // MEMO 더 좋은 방법 있다면 개선하기
   const handleUpdateMemo = (type: string) => {
     const onSubmit = methods.handleSubmit(() => {
+      const { pickDrop, allergy } = methods.getValues();
+
       if (type === "pickDrop") {
-        const pickDrop = methods.getValues(type);
-        metatePostDogPickDrop({ dogId: dogId, memo: pickDrop });
-      }
-      if (type === "allergy") {
-        const allergy = methods.getValues(type);
+        mutatePostDogPickDrop({ dogId: dogId, memo: pickDrop });
+      } else if (type === "allergy") {
         mutatePostDogAllergy({ dogId: dogId, memo: allergy });
       }
     });
