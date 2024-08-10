@@ -49,6 +49,7 @@ const MyDogCard = ({
   const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
   const { data: MemeberDogInfo } = useGetMemberDogDetailInfo(Number(dogId));
+  console.log("MemeberDogInfo", MemeberDogInfo);
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -72,7 +73,7 @@ const MyDogCard = ({
         actionText="가입하기"
         actionFn={() => {
           navigate(PATH.MEMBER_MY_SCHOOL_SEARCH(String(memberId)));
-          setdogDetailinfo(MemeberDogInfo);
+          // setdogDetailinfo(MemeberDogInfo);
         }}
       />
     ));

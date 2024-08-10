@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { IMemberDogInfo } from "types/member/main.types";
+import { MemberDogInfoData } from "types/member/main.types";
 
 interface ISchool {
   schoolName: string;
@@ -19,7 +19,8 @@ export const memberEnrollmentRejectedAtom = atom({
   default: IS_REJECTED ? JSON.parse(IS_REJECTED) : false
 });
 
-export const memberEnrollmentDogDetailAtom = atom<IMemberDogInfo | null>({
+// FIXME memberEnrollmentDogDetailAtom 사용 유무 확인 후 수정하기
+export const memberEnrollmentDogDetailAtom = atom<MemberDogInfoData | null>({
   key: "memberEnrollmentDogDetail",
   default: null
 });
