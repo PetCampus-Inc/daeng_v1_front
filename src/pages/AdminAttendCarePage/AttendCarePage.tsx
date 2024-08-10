@@ -1,13 +1,13 @@
 import AttendCareInit from "components/Admin/AttendCare/AttendCareInit";
 import AttendCareMain from "components/Admin/AttendCare/AttendCareMain";
 import AttendCareEmpty from "components/Admin/AttendCare/AttendCareMain/AttendCareEmpty";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
-import NavBar from "components/common/NavBar";
+import { AdminNavBar } from "components/common/NavBar";
 import { useGetCareDogList } from "hooks/api/admin/care";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useRouteLoaderData } from "react-router-dom";
 import caredogLoader from "routes/caredogLoader";
-import { PageContainer } from "styles/StyleModule";
 
 const AttendCarePage = () => {
   const { adminId } = useAdminInfo();
@@ -21,7 +21,7 @@ const AttendCarePage = () => {
   return (
     <>
       <Header type="notice" text="강아지 관리" />
-      <PageContainer color={isFirstVisit ? "white" : "BGray"} pt="2">
+      <Layout type="main" bgColor={isFirstVisit ? "white" : "BGray"} pt={32} px={16}>
         {isFirstVisit ? (
           <AttendCareInit />
         ) : isEmptyDog ? (
@@ -29,8 +29,8 @@ const AttendCarePage = () => {
         ) : (
           <AttendCareMain data={data} />
         )}
-      </PageContainer>
-      <NavBar />
+      </Layout>
+      <AdminNavBar />
     </>
   );
 };

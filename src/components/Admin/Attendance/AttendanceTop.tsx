@@ -1,7 +1,7 @@
 import FootIcon from "assets/svg/foot-icon";
+import { Text } from "components/common";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useBlocker, useSearchParams } from "react-router-dom";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
 import { useInputFocus } from "./context/AttendanceProvider";
@@ -11,30 +11,32 @@ const AttendanceTop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const mode = searchParams.get("mode");
   const isAttendMode = mode === "attend";
+  const blocker = useBlocker(() => {
+    // MEMO: isAttendMode일 때만 blocker를 사용하도록 설정
+    if (isAttendMode) {
+      // TODO: 선택한 값이 있을 때만 blocking 한다.
+      return true;
+    }
+    return false;
+  });
 
   const { schoolName, adminName, role: adminRole } = useAdminInfo();
-  const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false);
   const { isFocused } = useInputFocus();
 
   const handlerModeChange = () => {
     if (isAttendMode) {
-      setIsCancelModalOpen(true);
+      setSearchParams({});
     } else {
       setSearchParams({ mode: "attend" });
     }
   };
 
-  const handleCloseModal = () => {
-    setSearchParams({});
-    setIsCancelModalOpen(false);
-  };
-
   return (
     <S.MainWrapper>
       <S.TitleWrapper>
-        <S.Title>
+        <Text as="h2" typo="title2_20_B" color="darkBlack">
           {adminName} {adminRole === "ROLE_OWNER" ? "원장님" : "선생님"} 안녕하세요
-        </S.Title>
+        </Text>
         <S.SubTitle>
           {isAttendMode ? "출석 진행중이에요" : `${schoolName} 강아지들이에요`}
         </S.SubTitle>
@@ -52,11 +54,13 @@ const AttendanceTop = () => {
           {isAttendMode ? "출석중단" : "출 석"}
         </S.ControlButton>
       </S.ButtonWrapper>
-      <AttendanceExitModal
-        isOpen={isCancelModalOpen}
-        close={() => setIsCancelModalOpen(false)}
-        action={handleCloseModal}
-      />
+      {blocker.state === "blocked" ? (
+        <AttendanceExitModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
     </S.MainWrapper>
   );
 };

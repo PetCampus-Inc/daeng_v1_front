@@ -20,7 +20,7 @@ export const BoxContainer = styled.section`
     padding: ${remCalc(8)} ${remCalc(14)};
   }
 
-  ${dragNone}
+  ${dragNone};
   cursor: pointer;
 `;
 
@@ -45,7 +45,7 @@ export const SpringBound = styled.div`
     right: 0;
     bottom: 5px;
     height: 30px;
-    background-image: url("/images/spring-bound.svg");
+    background-image: url("${process.env.REACT_APP_CLIENT_URL}/images/spring-bound.svg");
     background-repeat: repeat-x;
     background-position: left center;
     background-size: contain;

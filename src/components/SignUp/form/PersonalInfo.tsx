@@ -17,7 +17,7 @@ const PersonalInfo = () => {
     <Flex direction="column" gap={24}>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between" align="center">
-          <Text as="label" name="name" typo="body2_16_R" color="darkBlack">
+          <Text as="label" htmlFor="name" typo="body2_16_R" color="darkBlack">
             이름
           </Text>
         </Flex>
@@ -33,7 +33,7 @@ const PersonalInfo = () => {
       </Flex>
       <Flex direction="column" gap={8}>
         <Flex justify="space-between" align="center">
-          <Text as="label" name="phoneNumber" typo="body2_16_R" color="darkBlack">
+          <Text as="label" htmlFor="phoneNumber" typo="body2_16_R" color="darkBlack">
             연락처
           </Text>
         </Flex>

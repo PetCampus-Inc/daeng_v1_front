@@ -5,7 +5,7 @@ import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
-import BasicModal from "components/common/Modal/BasicModal";
+import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogSchool } from "hooks/api/member/school";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate, useParams } from "react-router-dom";
@@ -52,7 +52,7 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
       <BasicModal
         isOpen={isOpen}
         close={close}
-        action={() => {
+        actionFn={() => {
           console.log("유치원 연결 끊기");
           close();
           handleDeleteSchool();
@@ -97,7 +97,11 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
       case "ROUND":
         return `회차권_${data.ticket.allRoundTicket}회 (잔여 ${data.ticket.currentRoundTicket}회)`;
       case "MONTHLY":
-        return `정기권_${data.ticket.monthlyTicketNumber}주 (${monthlyTicketRemainingDays > 0 ? `만료 ${monthlyTicketRemainingDays}일 전` : `만료`})`;
+        return `정기권_${data.ticket.monthlyTicketNumber}주 (${
+          remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0
+            ? `만료 ${remainingDays}일 전`
+            : `만료`
+        })`;
     }
   };
 

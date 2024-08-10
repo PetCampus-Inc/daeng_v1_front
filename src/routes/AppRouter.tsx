@@ -4,6 +4,7 @@ import { PATH } from "constants/path";
 
 import ApiErrorBoundary from "ApiErrorBoundary";
 import App from "App";
+import { FullHeight } from "components/common";
 import * as Pages from "pages";
 import LoaderErrorPage from "pages/ErrorPage/LoaderErrorPage";
 import { Suspense } from "react";
@@ -16,11 +17,17 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const router = createBrowserRouter([
     {
       element: (
-        <ApiErrorBoundary>
-          <App />
-        </ApiErrorBoundary>
+        <FullHeight>
+          <ApiErrorBoundary>
+            <App />
+          </ApiErrorBoundary>
+        </FullHeight>
       ),
-      errorElement: <LoaderErrorPage />,
+      errorElement: (
+        <FullHeight>
+          <LoaderErrorPage />
+        </FullHeight>
+      ),
       children: [
         {
           id: "root",
@@ -45,11 +52,24 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             },
             {
               path: PATH.ADMIN_SIGNUP,
-              element: <Pages.AdminSignupPage />
+              children: [
+                {
+                  index: true,
+                  element: <Pages.AdminSignupPage />
+                },
+                {
+                  path: PATH.ADMIN_SIGNUP_APPROVAL_STATUS,
+                  element: <Pages.AdminApprovalStatusPage />
+                }
+              ]
             },
             {
               path: PATH.REDIRECT,
               element: <Pages.RedirectPage />
+            },
+            {
+              path: PATH.NATIVE_LOGIN,
+              element: <Pages.NativeRedirectPage />
             },
             {
               path: PATH.UNREGISTER,

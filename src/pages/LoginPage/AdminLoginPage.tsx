@@ -11,7 +11,7 @@ const AdminLoginPage = () => {
   return (
     <>
       <Header type="back" />
-      <Layout type="page" position="relative" pt={76}>
+      <Layout px={16} pt={76}>
         <Text typo="title1_24_B" color="darkBlack">
           똑독 관리자로 시작하기
         </Text>

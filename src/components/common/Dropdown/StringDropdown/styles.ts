@@ -29,15 +29,6 @@ export const List = styled.ul`
   ${dragNone}
 `;
 
-export const BoldText = styled.span`
-  ${({ theme }) => theme.typo.body2_16_B}
-  color: ${({ theme }) => theme.colors.gray_1};
-`;
-export const ThinText = styled.span`
-  ${({ theme }) => theme.typo.label2_14_R}
-  color: ${({ theme }) => theme.colors.gray_2};
-`;
-
 export const ListItem = styled.li`
   display: flex;
   padding: 12px 12px 12px 16px;
@@ -49,7 +40,7 @@ export const ListItem = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_4};
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  ${({ theme }) => theme.typo.body1_16_R}
+  ${({ theme }) => theme.typo.body2_16_R}
 
   &:hover, &:active {
     background-color: ${({ theme }) => theme.colors.gray_5};

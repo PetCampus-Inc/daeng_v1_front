@@ -35,7 +35,7 @@ const ApprovalStatusPage = ({
   // 로그인 후, 다시 가입 신청할 때 > 승인 실패 시 ApprovalFailed 컴포넌트를 보여줌
 
   return (
-    <Layout type="page" pt={76} position="relative">
+    <Layout bgColor="white" px={16} pt={76}>
       {status === Role.APPROVAL_PENDING && (
         <ApprovalPending adminId={adminId} schoolName={schoolName} onNextStep={onSelectRoleClick} />
       )}

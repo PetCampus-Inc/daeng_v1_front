@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
-import { TColor } from "styles/ThemeConfig";
 import { remCalc } from "utils/calculator";
+
+import type { ColorKeys } from "styles/types";
 export { Img } from "styles/StyleModule";
 
 export const StyledHgroup = styled.hgroup`
@@ -48,20 +49,4 @@ export const StyledDashboard = styled.div`
     grid-column: 2 / 3;
     grid-row: 2 / 3;
   }
-`;
-
-export const StyledBox = styled.div.withConfig({
-  shouldForwardProp: (prop) => !["type", "pt", "pb", "bg"].includes(prop)
-})<{
-  type?: "top" | "container" | "bottom";
-  pt?: number;
-  pb?: number;
-  bg?: TColor;
-}>`
-  padding-top: ${({ type, pt }) =>
-    type === "top" ? `calc(5vh + ${pt ?? 0}rem)` : pt ? `${pt}rem` : undefined};
-  padding-inline: 1rem;
-  padding-bottom: ${({ type, pb }) =>
-    type === "bottom" ? `calc(7vh + ${pb}rem)` : pb ? `${pb}rem` : undefined};
-  background-color: ${({ bg, theme }) => (bg ? theme.colors[bg] : theme.colors.white)};
 `;

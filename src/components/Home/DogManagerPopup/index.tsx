@@ -1,14 +1,14 @@
 import AddCIcon from "assets/svg/add-c-icon";
 import { Box, Flex, Text } from "components/common";
-import BottomSheet, { type IBottomSheetProps } from "components/common/BottomSheet";
 import { useGetDogs } from "hooks/api/member/member";
 import { useRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 
 import { DogAvatar, DogItem, ListContent, Name } from "./styles";
+import { BottomSheet, type BottomSheetProps } from "../../common/BottomSheet";
 import { Img } from "../styles";
 
-interface PopupProps extends IBottomSheetProps {
+interface PopupProps extends BottomSheetProps {
   memberId: number;
 }
 

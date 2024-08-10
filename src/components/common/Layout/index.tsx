@@ -2,23 +2,20 @@ import type { PropsWithChildren } from "react";
 
 import { StyledContainer } from "./styles";
 
-import type { LayoutType, TColorScheme, TPaddingOptions, TPositionOptions } from "./types";
+import type { ColorProps, SpacingProps } from "styles/system";
 
-export type LayoutProps = TPaddingOptions &
-  TColorScheme &
-  TPositionOptions &
-  LayoutType &
-  React.HTMLAttributes<HTMLDivElement>;
-const Layout = ({ type, children, ...props }: PropsWithChildren<LayoutProps>) => {
+/**
+ * type: main - 메인 페이지에서 사용 (with NavBar)
+ * type: detail - 상세 페이지에서 사용 (without NavBar)
+ */
+export interface LayoutProps extends ColorProps, SpacingProps {
+  type?: "main" | "detail";
+}
+
+export const Layout = ({ type = "detail", children, ...props }: PropsWithChildren<LayoutProps>) => {
   return (
     <StyledContainer type={type} {...props}>
       {children}
     </StyledContainer>
   );
-};
-
-export { Layout };
-
-Layout.defaultProps = {
-  type: "container"
 };

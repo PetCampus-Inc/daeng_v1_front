@@ -1,9 +1,9 @@
-type IconProps = {
+import type { IconSize } from "./types";
+
+interface IconProps extends IconSize {
   className?: string;
   colorScheme?: "primary" | "basic";
-  w?: string;
-  h?: string;
-};
+}
 
 const FootRoundIcon = ({ colorScheme = "primary", w = "16", h = "17" }: IconProps) => {
   const colorMap = new Map([

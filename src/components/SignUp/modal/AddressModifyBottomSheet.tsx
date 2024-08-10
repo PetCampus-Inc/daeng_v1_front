@@ -1,10 +1,10 @@
 import MapPinIcon from "assets/svg/map-pin-icon";
 import { Text } from "components/common";
-import BottomSheet, { IBottomSheetProps } from "components/common/BottomSheet";
+import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 
 import { ContentStyle, StyledBox } from "./styles";
 
-interface Props extends IBottomSheetProps {
+interface Props extends BottomSheetProps {
   action: () => void;
   address: string;
 }

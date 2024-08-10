@@ -1,3 +1,12 @@
+import type {
+  DogGenderType,
+  DogSizeType,
+  MemberGenderType,
+  NeutralizationType,
+  PickDropRequestType,
+  RelationType,
+  VaccinationType
+} from "./enrollment.types";
 import type { Role } from "types/admin/admin.types";
 import type { Nullable } from "types/helper.types";
 import type { IResponse } from "types/Response.type";
@@ -70,13 +79,13 @@ export interface IMemberInfo extends IResponse {
 export interface IMemberProfileInfo extends IResponse {
   memberId: string;
   memberName: string;
-  memberGender: string;
+  memberGender: MemberGenderType;
   nickName: string;
   address: string;
   addressDetail: string;
   phoneNumber: string;
   emergencyPhoneNumber: string;
-  relation: string;
+  relation: RelationType;
 }
 
 export interface IMemberProfilePostInfo {
@@ -101,36 +110,42 @@ export interface IDogMemoInfo {
   dogId: string;
   memo: string;
 }
-
-export interface IMemberDogPostDetailInfo {
+export interface MemberDogInfoData {
   dogId: number;
   dogName: string;
-  dogGender: string;
-  dogSize?: string;
-  breedId: number;
-  newBreed: string;
-  birthDate: string;
-  neutralization: string;
-}
-
-export interface IMemberDogInfo extends IResponse {
-  dogId: number;
-  dogName: string;
-  dogGender: string;
-  dogSize: string;
+  dogGender: DogGenderType;
+  dogSize: DogSizeType;
   breedId: number;
   breedName: string;
   birthDate: number[];
-  neutralization: string;
+  neutralization: NeutralizationType;
   allergyDisease: string;
-  vaccination: string;
+  vaccination: VaccinationType;
   profileUri: string;
-  vaccinationUri: string | null;
-  pickDropRequest: string;
+  vaccinationUri: string;
+  pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;
   member: IMemberProfilePostInfo;
   dogMemo: string;
+}
+
+export interface MemberDogInfoReq {
+  dogId: number;
+  dogName: string;
+  dogGender: DogGenderType | "";
+  dogSize: DogSizeType | "";
+  breedId: number;
+  newBreed: string;
+  birthDate: string;
+  neutralization: NeutralizationType | "";
+}
+
+export interface MemberDogInfoFormData
+  extends Omit<MemberDogInfoData, "dogGender" | "dogSize" | "neutralization"> {
+  dogGender: string;
+  dogSize: string;
+  neutralization: string;
 }
 
 export type DogsDataType = {
@@ -140,7 +155,7 @@ export type DogsDataType = {
   imageUri: string;
 };
 
-export interface IMemberDogSchoolInfo extends IResponse {
+export interface IMemberDogSchoolInfo {
   schoolId: number;
   name: string;
   phoneNumber: string;

@@ -1,7 +1,7 @@
 import { Text } from "components/common";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { TColor } from "styles/ThemeConfig";
+import { isColorToken, type ColorKeys } from "styles/types";
 import { remCalc } from "utils/calculator";
 
 export const Container = styled.div<{ padding_top?: string }>`
@@ -91,8 +91,8 @@ export const StyledLink = styled(Link)`
 `;
 
 interface ButtonProps {
-  bg: TColor | string;
-  borderColor?: TColor | string;
+  bg: ColorKeys | string;
+  borderColor?: ColorKeys | string;
 }
 
 export const StyledButton = styled.button.withConfig({
@@ -102,11 +102,11 @@ export const StyledButton = styled.button.withConfig({
   padding-block: ${remCalc(12)};
   padding-inline: ${remCalc(14)};
   background-color: ${(props) =>
-    props.theme.colors[props.bg] ? props.theme.colors[props.bg] : props.bg};
+    isColorToken(props.bg) ? props.theme.colors[props.bg] : props.bg};
   border: 1px solid
     ${(props) =>
       props.borderColor
-        ? props.theme.colors[props.borderColor]
+        ? isColorToken(props.borderColor)
           ? props.theme.colors[props.borderColor]
           : props.borderColor
         : "transparent"};

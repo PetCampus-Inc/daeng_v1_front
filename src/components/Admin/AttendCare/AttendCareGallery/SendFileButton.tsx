@@ -1,6 +1,6 @@
 import { PATH } from "constants/path";
 
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";

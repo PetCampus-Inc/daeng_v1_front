@@ -1,6 +1,8 @@
-const RemainCountIcon = () => {
+import type { IconSize } from "./types";
+
+const RemainCountIcon = ({ w = "24", h = "24" }: IconSize) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={w} height={h} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="24" height="24" rx="8" fill="#FFF7E1" />
       <rect x="11.0469" y="12" width="1.90625" height="8" rx="0.953125" fill="#525252" />
       <rect x="4.54688" y="5.54688" width="14.9063" height="8" rx="2" fill="#EEE3D9" />

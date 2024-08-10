@@ -1,4 +1,4 @@
-import { request } from "libs/CustomAxios/request";
+import { request } from "libs/AuthAxios/request";
 import {
   ICareDogInfo,
   ICareDogProps,
@@ -7,23 +7,21 @@ import {
   IReqGallery
 } from "types/admin/care.types";
 
-import type { Response } from "types/helper.types";
-
 export const handleGetCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
   const url = `admin/attendance/care?adminId=${adminId}`;
-  const { data } = await request<Response<ICareDogInfo[]>>({ url });
+  const { data } = await request<ICareDogInfo[]>({ url });
   return data;
 };
 
 export const handleGetNewCareDogs = async (adminId: number): Promise<ICareDogInfo[]> => {
   const url = `admin/attendance/care/add?adminId=${adminId}`;
-  const { data } = await request<Response<ICareDogInfo[]>>({ url });
+  const { data } = await request<ICareDogInfo[]>({ url });
   return data;
 };
 
 export const handleCreateCareDogs = async (req: ICareDogProps): Promise<ICareDogInfo[]> => {
   const url = `admin/attendance/care/add`;
-  const { data } = await request<Response<ICareDogInfo[]>>({
+  const { data } = await request<ICareDogInfo[]>({
     url,
     method: "POST",
     data: {
@@ -34,7 +32,7 @@ export const handleCreateCareDogs = async (req: ICareDogProps): Promise<ICareDog
   return data;
 };
 
-export const handleDeleteCareDogs = async (req: ICareDogProps): Promise<void> => {
+export const handleDeleteCareDogs = async (req: ICareDogProps) => {
   const url = `admin/attendance/care/delete`;
   return await request<void>({
     url,
@@ -67,7 +65,7 @@ export const handleTempSaveCareDog = async (req: ICareTempSave) => {
 // 알림장 가져오기
 export const handleGetAgenda = async (dogId: number): Promise<IPastAgenda> => {
   const url = `school/agenda?dogId=${dogId}`;
-  const { data } = await request<Response<IPastAgenda>>({ url });
+  const { data } = await request<IPastAgenda>({ url });
   return data;
 };
 
@@ -92,11 +90,11 @@ export const handleSendAgenda = async (req: ICareTempSave) => {
 // 지난 알림장 가져오기
 export const handleGetPastAgenda = async (dogId: number): Promise<IPastAgenda[]> => {
   const url = `school/agenda/past?dogId=${dogId}`;
-  const { data } = await request<Response<IPastAgenda[]>>({ url });
+  const { data } = await request<IPastAgenda[]>({ url });
   return data;
 };
 
-export const handlePostAlbum = async (req: IReqGallery): Promise<void> => {
+export const handlePostAlbum = async (req: IReqGallery) => {
   const url = `admin/attendance/dog/image`;
   return await request<void>({
     url,

@@ -99,8 +99,8 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          // path: PATH.MEMEBER_PROFILE_EDIT_PAGE(),
-          path: PATH.MEMEBER_PROFILE_EDIT_PAGE,
+          // path: PATH.MEMBER_PROFILE_EDIT_PAGE(),
+          path: PATH.MEMBER_PROFILE_EDIT_PAGE,
           element: (
             <Suspense>
               <Pages.MemberProfileEditPage />
@@ -108,7 +108,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE,
+          path: PATH.MEMBER_ADD_DOG_PROFILE_EDIT_PAGE,
           element: (
             <Suspense>
               <Pages.MemberAddDogProfileEditePage />
@@ -117,7 +117,7 @@ const MemberRoutes = (): RouteObject[] => {
         }
       ],
       loader: () => {
-        // if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
+        if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
         return null;
       }
     }

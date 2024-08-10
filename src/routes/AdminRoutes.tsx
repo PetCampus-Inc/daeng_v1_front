@@ -5,7 +5,7 @@ import { PATH } from "constants/path";
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import * as Pages from "pages";
 import { Suspense } from "react";
-import { RouteObject } from "react-router-dom";
+import { RouteObject, redirect } from "react-router-dom";
 import caredogLoader from "routes/caredogLoader";
 import { AUTH_KEY } from "store/auth";
 
@@ -26,6 +26,10 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
         </AuthProvider>
       ),
       children: [
+        {
+          index: true,
+          loader: () => redirect(PATH.ADMIN_ATTENDANCE)
+        },
         {
           path: PATH.ADMIN_ATTENDANCE,
           children: [
@@ -117,7 +121,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           )
         },
         {
-          // MEMO: 원장 권한의 페이지
+          // NOTE: 원장 권한의 페이지
           path: PATH.ADMIN_SCHOOL_MANAGE,
           element: <AdminAuthRouter isOwnerOnly />,
           children: [
@@ -218,6 +222,30 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               element: (
                 <Suspense>
                   <Pages.SchoolInfoPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_SCHOOL_INFO_EDIT,
+              element: (
+                <Suspense>
+                  <Pages.SchoolInfoEditPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_SETTING,
+              element: (
+                <Suspense>
+                  <Pages.AdminSettingPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_DELETE_COMPLETE,
+              element: (
+                <Suspense>
+                  <Pages.AdminDeleteCompletePage />
                 </Suspense>
               )
             }

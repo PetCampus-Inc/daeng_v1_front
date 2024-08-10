@@ -33,23 +33,3 @@ export const Dimmer = styled.div`
 `;
 
 export const Checkbox = styled.div``;
-
-export const GrayButtonStyle = css`
-  ${({ theme }) => theme.typo.caption1_12_R};
-  background-color: ${({ theme }) => theme.colors.gray_5};
-  color: ${({ theme }) => theme.colors.gray_2};
-
-  padding: 4px 10px;
-  border-radius: 90px;
-
-  height: 24px;
-`;
-
-export const DefaultButtonStyle = css`
-  background-color: transparent;
-
-  padding: 0px 8px;
-  border-radius: 90px;
-
-  height: 24px;
-`;

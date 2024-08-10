@@ -38,7 +38,7 @@ const EnrollmentFormSubmitPage = ({ formInfo }: SubmitFormProps) => {
   return (
     <>
       <Header type="text" text="가입신청서" />
-      <Layout type="page" bg="BGray" pt={72}>
+      <Layout bg="BGray" pt={72} px={16}>
         <form>
           <Flex direction="column" gap={8}>
             <Text typo="title2_20_B" color="black">

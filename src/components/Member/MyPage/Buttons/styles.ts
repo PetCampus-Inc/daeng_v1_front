@@ -1,4 +1,4 @@
-import Button from "components/common/Button";
+import { Button } from "components/common/Button";
 import { css, styled } from "styled-components";
 
 interface ICardStyleProps {
@@ -34,9 +34,12 @@ const StatusBoxStyle = css`
   }
 `;
 
-export const RoleEditeButton = styled(Button)`
+export const RoleEditButton = styled(Button)`
+  width: 100%;
   max-width: 112px;
   min-height: 49px;
+  ${({ theme }) => theme.typo.body2_16_R};
+  padding: 12px 0;
 `;
 
 export const RoleSelectButton = styled(Button)`

@@ -1,9 +1,8 @@
-import customAxios from "libs/CustomAxios";
-import { request } from "libs/CustomAxios/request";
+import authAxios from "libs/AuthAxios";
+import { request } from "libs/AuthAxios/request";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
-import type { Response } from "types/helper.types";
 import type {
   EnrollmentDataType,
   IEnrollmentDeleteData,
@@ -16,7 +15,7 @@ import type {
  */
 export const handleGetMemberEnrollmentForm = async (formId: string): Promise<MemberFormData> => {
   const url = `admin/enrollment/${formId}`;
-  const { data } = await request<Response<MemberFormData>>({ url });
+  const { data } = await request<MemberFormData>({ url });
   return data;
 };
 
@@ -26,7 +25,7 @@ export const handleGetMemberEnrollmentForm = async (formId: string): Promise<Mem
  */
 export const handleGetAdminForm = async (formId: string): Promise<EnrollmentDataType> => {
   const url = `school/form/list/${formId}`;
-  const { data } = await request<Response<EnrollmentDataType>>({ url });
+  const { data } = await request<EnrollmentDataType>({ url });
   return data;
 };
 
@@ -34,7 +33,7 @@ export const handleGetAdminForm = async (formId: string): Promise<EnrollmentData
  * @description 유치원 가입신청서 폼 저장 - 원장이 작성한 가입신청서를 저장합니다.
  * @param {AdminEnrollmentInfoType} req
  */
-export const handlePostAdminForm = async (req: AdminEnrollmentInfoType): Promise<void> => {
+export const handlePostAdminForm = async (req: AdminEnrollmentInfoType) => {
   const url = `school/form`;
   return await request({
     url,
@@ -56,7 +55,7 @@ export const handleGetEnrollmentStatus = async (
 
   const req = enrollmentFormIds.map(async (id) => {
     const url = `admin/enrollment/status?enrollmentFormId=${id}`;
-    const { data } = await customAxios.get(url);
+    const { data } = await authAxios.get(url);
     return data.data;
   });
 
@@ -72,6 +71,6 @@ export const handleDeleteEnrollment = async (
   enrollmentFormId: string
 ): Promise<IEnrollmentDeleteData> => {
   const url = `admin/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
-  const { data } = await customAxios.post(url);
+  const { data } = await authAxios.post(url);
   return data.data;
 };

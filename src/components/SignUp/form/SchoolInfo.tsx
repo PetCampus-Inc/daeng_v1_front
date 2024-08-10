@@ -35,7 +35,7 @@ const SchoolInfo = () => {
     }
   }, [regNum, regNumFieldState.isDirty]);
 
-  const handleVaild = () => {
+  const handleValid = () => {
     const schoolNum = getValues("registrationNumber").replace(/-/g, "");
     mutateCheckRegNum(schoolNum, {
       onSuccess: (res) => {
@@ -77,7 +77,7 @@ const SchoolInfo = () => {
   return (
     <Flex direction="column" gap={24}>
       <Flex direction="column" gap={8}>
-        <Text as="label" name="schoolName" typo="body2_16_R" color="darkBlack">
+        <Text as="label" htmlFor="schoolName" typo="body2_16_R" color="darkBlack">
           유치원명
         </Text>
         <TextInput
@@ -91,7 +91,7 @@ const SchoolInfo = () => {
         />
       </Flex>
       <Flex direction="column" gap={8}>
-        <Text as="label" name="schoolPhoneNumber" typo="body2_16_R" color="darkBlack">
+        <Text as="label" htmlFor="schoolPhoneNumber" typo="body2_16_R" color="darkBlack">
           유치원 연락처
         </Text>
         <TextInput
@@ -109,7 +109,7 @@ const SchoolInfo = () => {
         />
       </Flex>
       <Flex direction="column" gap={8}>
-        <Text as="label" name="schoolAddress" typo="body2_16_R" color="darkBlack">
+        <Text as="label" htmlFor="schoolAddress" typo="body2_16_R" color="darkBlack">
           유치원 주소
         </Text>
         <SearchInput
@@ -127,12 +127,12 @@ const SchoolInfo = () => {
 
       <Flex direction="column" gap={8}>
         <Flex justify="space-between" align="center">
-          <Text as="label" name="registrationNumber" typo="body2_16_R" color="darkBlack">
+          <Text as="label" htmlFor="registrationNumber" typo="body2_16_R" color="darkBlack">
             사업자 등록번호
           </Text>
           {errors.registrationNumber && (
             <Text as="span" typo="caption1_12_R" color="red_1">
-              {errors.registrationNumber.message}
+              {errors.registrationNumber.message?.toString()}
             </Text>
           )}
           {isValidRegNum && !errors.registrationNumber && (
@@ -149,7 +149,7 @@ const SchoolInfo = () => {
             handleChangeBusinessNumber("registrationNumber")(e);
             register("registrationNumber").onChange(e);
           }}
-          handleClick={handleVaild}
+          handleClick={handleValid}
           rules={{
             pattern: REGISTRATION_REGEX
           }}

@@ -57,11 +57,3 @@ export const Stack = styled.div`
   gap: 8px;
   align-items: center;
 `;
-
-export const BackgroundButtonWrapper = styled.div<{ $isBottom?: boolean }>`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-bottom: ${({ $isBottom }) => ($isBottom ? 0 : "calc(7vh)")};
-`;

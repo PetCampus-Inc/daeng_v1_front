@@ -1,5 +1,5 @@
 import { ProgressTemplate } from "components/common";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { useFileDownload } from "hooks/common/useS3";
 
 import { useSelectedImages } from "../context/SelectedImageProvider";

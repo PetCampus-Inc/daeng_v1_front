@@ -32,7 +32,7 @@ export const Underline = styled(motion.div)`
 `;
 
 export const ContentWrapper = styled.div`
-  height: 100%;
+  flex: 1;
   border-radius: 20px 20px 0 0;
   background-color: ${({ theme }) => theme.colors.white};
 `;

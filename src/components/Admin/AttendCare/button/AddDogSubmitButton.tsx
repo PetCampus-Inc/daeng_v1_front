@@ -1,9 +1,8 @@
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BackgroundButton } from "components/common/Button";
 import { useCreateCareDogs } from "hooks/api/admin/care";
 import { useOverlay } from "hooks/common/useOverlay";
 
-import { BackgroundButtonWrapper } from "./styles";
 import { useSelectedDogs } from "../hooks/useSelectedDogs";
 
 type AddDogSubmitButtonProps = {
@@ -13,7 +12,7 @@ type AddDogSubmitButtonProps = {
 const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
   const overlay = useOverlay();
 
-  const openPopup = () =>
+  const openBlockingPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <AlertBottomSheet
         title="다시 선택해 주세요"
@@ -26,7 +25,7 @@ const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
     ));
 
   // FIXME: 고려해야할 점) mutation 후 onSuccess가 실행되지 않았을 때 adminName으로 본인일 시에 핸들링 필요..!!
-  const { mutateCreateCareDogs } = useCreateCareDogs(openPopup);
+  const { mutateCreateCareDogs } = useCreateCareDogs({ openBlockingPopup });
 
   if (!adminId) throw new Error("adminId가 없습니다!");
   const [selectedDogs, _] = useSelectedDogs();
@@ -38,11 +37,9 @@ const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
   };
 
   return (
-    <BackgroundButtonWrapper>
-      <BackgroundButton disabled={selectedDogs.length === 0} onClick={() => handleSubmit()}>
-        선택완료
-      </BackgroundButton>
-    </BackgroundButtonWrapper>
+    <BackgroundButton disabled={selectedDogs.length === 0} onClick={() => handleSubmit()}>
+      선택완료
+    </BackgroundButton>
   );
 };
 

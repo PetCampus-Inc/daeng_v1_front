@@ -27,7 +27,7 @@ const SingleRadio = ({
   const { control, setValue } = useFormContext();
 
   useEffect(() => {
-    if (defaultSelect) {
+    if (name && defaultSelect) {
       setValue(name, defaultSelect);
     }
   }, [defaultSelect, name, setValue]);
@@ -37,7 +37,7 @@ const SingleRadio = ({
       {caption && <S.Caption>{caption}</S.Caption>}
       <S.RadioContainer>
         <Controller
-          name={name}
+          name={name ?? ""}
           control={control}
           defaultValue={defaultSelect}
           rules={{ required: isRequired }}

@@ -19,12 +19,12 @@ import {
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
 import { Layout } from "components/common";
-import PreventLeaveModal from "components/common/ButtonModal/PreventLeaveModal";
 import Header from "components/common/Header";
-import { useOverlay } from "hooks/common/useOverlay";
+import { PreventLeaveModal } from "components/common/Modal";
 import useStep from "hooks/common/useStep";
-import { FormProvider, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
+import { useBlocker } from "react-router-dom";
+import { isEmpty } from "utils/is";
 
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
@@ -40,8 +40,6 @@ const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => 
       ticketType: []
     }
   });
-  const navigate = useNavigate();
-  const overlay = useOverlay();
 
   const currentSteps = ADMIN_CREATE_FORM_STEP;
   const { currentStep, nextStep, prevStep, setStep } = useStep(currentSteps.length - 1);
@@ -49,15 +47,20 @@ const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => 
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
-  const openPreventLeavePopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate(-1)} />
-    ));
+  const { dirtyFields } = useFormState({ control: methods.control });
+  const blocker = useBlocker(() => !isEmpty(dirtyFields));
 
   return (
     <>
-      <Header type="text" text="가입신청서" handleClick={openPreventLeavePopup} />
-      <Layout type="page" bg="BGray">
+      {blocker.state === "blocked" ? (
+        <PreventLeaveModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
+      <Header type="text" text="가입신청서" />
+      <Layout bg="BGray" px={16}>
         <Container>
           <TopWrapper>
             <TitleWrapper>

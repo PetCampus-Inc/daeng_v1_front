@@ -1,5 +1,5 @@
 import ButtonBadge from "components/common/Badge/ButtonBadge";
-import Modal from "components/common/ButtonModal";
+import { Modal } from "components/common/Modal";
 import { AnimatePresence } from "framer-motion";
 import useTeacherDeleteMutation from "hooks/api/useTeacherDeleteMutation";
 import { useState } from "react";
@@ -42,7 +42,7 @@ const TeacherInfoWithDeleteBtn = ({ isEditable = false, data }: TeacherInfoWithD
             )}
           </AnimatePresence>
           <Modal isOpen={isOpen} close={() => setIsOpen(false)}>
-            <Modal.Content variant="two">
+            <Modal.Content variant="two-button">
               <Modal.Title
                 title={`${teacherName} 교사를 삭제하시겠습니까?`}
                 subtitle="소속 교사 리스트에서 삭제할 경우
