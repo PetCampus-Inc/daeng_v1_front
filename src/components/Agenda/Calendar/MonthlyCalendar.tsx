@@ -2,22 +2,24 @@ import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import FootIcon from "assets/svg/foot-icon";
 import { Box, Text } from "components/common";
-import { format, isSameDay } from "date-fns";
+import { format, isSameDay, parseISO } from "date-fns";
 import React, { useCallback, useEffect, useRef } from "react";
 import Calendar, { type OnArgs } from "react-calendar";
+import { getClosestValidDate } from "utils/date";
 
 import { StyledMonthlyCalendar, GoToTodayButton } from "./styles";
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
+import type { DogInfoRecord } from "types/member/dogs";
 
 const ATTEND_DAYS = ["2024-07-17", "2024-07-17", "2024-07-21", "2024-07-23"];
 
 interface MonthlyCalendarProps {
+  data: DogInfoRecord[];
   today: Date;
-  onDateClick: (newDate: Value) => void;
+  onDateChange: (newDate: Value) => void;
   onTodayClick: () => void;
   activeDate: Date | null;
-  onActiveDateChange: React.Dispatch<React.SetStateAction<Date | null>>;
   onOpenMonthPicker: () => void;
   headerRef: React.RefObject<HTMLDivElement>;
 }
@@ -49,13 +51,15 @@ const TileContent = ({ date, view, today }: { date: Date; view: string; today: D
  * Monthly Calendar
  * -----------------------------------------------------------------------------------------------*/
 
+const USER_REGISTRATION_DATE = parseISO("2024-06-28");
+
 export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
   const {
+    data,
     today,
     activeDate,
-    onDateClick,
+    onDateChange,
     onTodayClick,
-    onActiveDateChange,
     onOpenMonthPicker,
     headerRef: calendarRef
   } = props;
@@ -63,9 +67,15 @@ export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
   const todayButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleActiveDateChange = ({ view, activeStartDate }: OnArgs) => {
-    // month가 변경될 때 activeDate를 변경
-    if (view === "month") {
-      onActiveDateChange(activeStartDate);
+    // month가 변경될 때 activeDate를 변경해 표시범위를 조정
+    if (view === "month" && activeStartDate) {
+      // 가입일 이후, 오늘 이전의 가장 가까운 날짜로 activeDate를 변경
+      const selectableDate = getClosestValidDate({
+        date: activeStartDate,
+        maxDate: today,
+        minDate: USER_REGISTRATION_DATE
+      });
+      onDateChange(selectableDate);
     }
   };
 
@@ -99,17 +109,19 @@ export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
     <StyledMonthlyCalendar ref={calendarRef}>
       <Calendar
         value={activeDate}
-        onChange={onDateClick}
+        onChange={onDateChange}
         activeStartDate={activeDate || undefined}
         onActiveStartDateChange={handleActiveDateChange}
         formatDay={(locale, date) => format(date, "d")}
         formatWeekday={(locale, date) => format(date, "E")}
         formatMonthYear={(locale, date) => format(date, "yyyy. MM")}
         formatYear={(locale, date) => format(date, "yyyy")}
+        minDate={USER_REGISTRATION_DATE}
+        maxDate={new Date()}
         calendarType="gregory"
         showNeighboringMonth={true}
-        prevLabel={<ArrowLeftIcon w={24} colorScheme="darkBlack" />}
-        nextLabel={<ArrowRightIcon w={24} colorScheme="darkBlack" />}
+        prevLabel={<ArrowLeftIcon w={24} />}
+        nextLabel={<ArrowRightIcon w={24} />}
         next2Label={null}
         prev2Label={null}
         minDetail="year"
