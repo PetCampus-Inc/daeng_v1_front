@@ -8,7 +8,7 @@ import type { DogInfoAgenda, DogInfoRecord } from "types/member/dogs";
 export const handleGetDogInfoRecord = async (
   dogId: number,
   date?: string
-): Promise<DogInfoRecord> => {
+): Promise<DogInfoRecord[]> => {
   const url = "member/dog/info/record";
   const { data } = await authAxios.get(url, {
     params: {

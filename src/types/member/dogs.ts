@@ -1,4 +1,9 @@
-type Status = "NOT_YET" | "COMPLETE" | "WRITING";
+export const AGENDA_STATUS = {
+  NOT_YET: "NOT_YET",
+  COMPLETE: "COMPLETE",
+  WRITING: "WRITING"
+} as const;
+export type AgendaStatus = (typeof AGENDA_STATUS)[keyof typeof AGENDA_STATUS];
 
 export const POOP_STATUS = {
   HARD: "HARD",
@@ -20,7 +25,7 @@ export interface DogInfoAgenda {
   poopMemo: string;
   dogId: number;
   dogProfileUri: string;
-  status: Status;
+  status: AgendaStatus;
   dateTime: string;
 }
 
@@ -29,6 +34,6 @@ export interface DogInfoAgenda {
  */
 export interface DogInfoRecord {
   date: number[];
-  status: Status;
+  status: AgendaStatus;
   registeredDate: number[];
 }
