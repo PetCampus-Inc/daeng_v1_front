@@ -127,3 +127,26 @@ export const getSimpleRelativeTimeString = (timestampArray: number[]): string =>
   }
   return format(date, "yyyy.MM.dd");
 };
+
+/**
+ * 주어진 날짜가 유효 범위 내에 있는지 확인하고,
+ * 범위를 벗어나면 가장 가까운 유효한 날짜를 반환합니다.
+ *
+ * @param date 확인할 날짜
+ * @param minDate 선택 가능한 최소 날짜
+ * @param maxDate 선택 가능한 최대 날짜
+ * @returns 유효 범위 내의 가장 가까운 날짜
+ */
+export const getClosestValidDate = ({
+  date,
+  minDate,
+  maxDate
+}: {
+  date: Date;
+  minDate: Date;
+  maxDate: Date;
+}): Date => {
+  if (isBefore(date, minDate)) return minDate;
+  if (isAfter(date, maxDate)) return maxDate;
+  return date;
+};
