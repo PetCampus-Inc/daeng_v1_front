@@ -2,22 +2,24 @@ import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import XIcon from "assets/svg/x-icon";
 import { FloatingOverlay } from "components/common/FloatingOverlay";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
 import React, { useEffect, useRef } from "react";
 import Calendar from "react-calendar";
 
 import {
-  PopupContainer,
-  PopupWrapper,
-  StyledYearView,
+  MonthPickerContainer,
+  MonthPickerWrapper,
   ControlWrapper,
-  ControlButton
+  ControlButton,
+  MonthPickerCalendar
 } from "./styles";
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
+import type { DogInfoRecord } from "types/member/dogs";
 
 interface MonthPickerProps {
+  data: DogInfoRecord[];
   isOpen: boolean;
   onClose: () => void;
   activeDate: Date | null;
@@ -25,13 +27,17 @@ interface MonthPickerProps {
   anchorRef: React.RefObject<HTMLDivElement>;
 }
 
-export const MonthPicker: React.FC<MonthPickerProps> = ({
+const minDate = parseISO("2024-06-30");
+const maxDate = new Date();
+
+export const MonthPicker = ({
+  data,
   isOpen,
   onClose,
   activeDate,
   onMonthClick,
   anchorRef
-}) => {
+}: MonthPickerProps) => {
   const popupRef = useRef<HTMLDivElement>(null);
 
   useClickOutSide({
@@ -65,9 +71,9 @@ export const MonthPicker: React.FC<MonthPickerProps> = ({
   return (
     <>
       <FloatingOverlay type="none" />
-      <PopupContainer>
-        <PopupWrapper ref={popupRef}>
-          <StyledYearView>
+      <MonthPickerContainer>
+        <MonthPickerWrapper ref={popupRef}>
+          <MonthPickerCalendar>
             <Calendar
               value={activeDate}
               onChange={onMonthClick}
@@ -75,19 +81,21 @@ export const MonthPicker: React.FC<MonthPickerProps> = ({
               maxDetail="year"
               minDetail="month"
               formatYear={(locale, date) => format(date, "yyyy")}
-              prevLabel={<ArrowLeftIcon w={20} colorScheme="darkBlack" />}
-              nextLabel={<ArrowRightIcon w={20} colorScheme="darkBlack" />}
+              minDate={minDate}
+              maxDate={maxDate}
+              prevLabel={<ArrowLeftIcon w={20} />}
+              nextLabel={<ArrowRightIcon w={20} />}
               prev2Label={null}
               next2Label={null}
             />
-          </StyledYearView>
+          </MonthPickerCalendar>
           <ControlWrapper>
             <ControlButton type="button" onClick={onClose}>
               <XIcon />
             </ControlButton>
           </ControlWrapper>
-        </PopupWrapper>
-      </PopupContainer>
+        </MonthPickerWrapper>
+      </MonthPickerContainer>
     </>
   );
 };
