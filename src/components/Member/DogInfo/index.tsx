@@ -16,6 +16,7 @@ const DogInfo = ({ dogId }: { dogId: number }) => {
   const overlay = useOverlay();
   const methods = useForm({ mode: "onSubmit" });
   const { data } = useGetMemberDogDetailInfo(dogId);
+  const { vaccinationUri } = data;
   const mutatePostDogAllergy = usePostMemberDogAllergy(dogId);
   const mutatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
 
@@ -72,7 +73,7 @@ const DogInfo = ({ dogId }: { dogId: number }) => {
       />
 
       <FormProvider {...methods}>
-        <VaccinationBox dogId={dogId} />
+        <VaccinationBox dogId={dogId} vaccinationUri={vaccinationUri} />
       </FormProvider>
     </Flex>
   );

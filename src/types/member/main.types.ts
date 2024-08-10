@@ -103,6 +103,15 @@ export interface IDogMemoInfo {
   dogId: string;
   memo: string;
 }
+
+export interface VaccinationUri {
+  imageId: number;
+  imageUri: string;
+  imageType: string;
+  comment: string | null;
+  createdTime: number[];
+}
+
 export interface MemberDogInfoData {
   dogId: number;
   dogName: string;
@@ -115,7 +124,7 @@ export interface MemberDogInfoData {
   allergyDisease: string;
   vaccination: VaccinationType;
   profileUri: string;
-  vaccinationUri: string;
+  vaccinationUri: VaccinationUri[];
   pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;

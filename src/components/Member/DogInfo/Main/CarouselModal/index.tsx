@@ -4,23 +4,15 @@ import { type ModalProps } from "components/common/Modal/index";
 import { ModalRoot } from "components/common/Modal/ModalRoot";
 import { useRef } from "react";
 import Slider from "react-slick";
+import { VaccinationUri } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
-
-interface VaccinationUri {
-  imageId: number;
-  imageUri: string;
-  imageType: string;
-  comment: string;
-  createdTime: string;
-}
-
 interface DisconnectModalProps extends ModalProps {
   upDateData?: string;
   imgUrl?: string;
   imgIdx: number;
-  vaccinationUri?: VaccinationUri[];
+  vaccinationUri: VaccinationUri[];
 }
 
 export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: DisconnectModalProps) => {
@@ -37,9 +29,9 @@ export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: Disconn
     prevArrow: <Arrows position="prev" isDisabled={false} />
   };
 
-  const convertCreatedTime = (time: string) => {
-    const [year, day, month] = time.slice(0, 10).split("-");
-    return formatDate(year, day, month, "dot");
+  const convertCreatedTime = (time: number[]) => {
+    const [year, day, month] = time.slice(0, 10);
+    return formatDate(String(year), String(day), String(month), "dot");
   };
 
   return (

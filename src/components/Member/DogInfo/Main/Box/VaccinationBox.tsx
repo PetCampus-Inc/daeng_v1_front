@@ -6,6 +6,7 @@ import { CarouselModal } from "components/Member/DogInfo/Main/CarouselModal";
 import { useOverlay } from "hooks/common/useOverlay";
 import { ChangeEvent, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
+import { VaccinationUri } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 import { getFilePreview } from "utils/thumb";
 
@@ -13,9 +14,13 @@ import { IFile } from "../../../../Admin/AttendCare/AttendCareGallery/upload";
 import * as S from "../../styles";
 import useUploadVaccintion from "../hooks/useUploadVaccintion";
 import { StyledHiddenUpload } from "../Vaccination/styles";
-import { Thumbnail } from "../Vaccination/Thumbnail";
 
-const VaccinationBox = ({ dogId }: { dogId: number }) => {
+interface VaccinationProps {
+  dogId: number;
+  vaccinationUri: VaccinationUri[];
+}
+
+const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
   const overlay = useOverlay();
   const [files, setFiles] = useState<IFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -34,9 +39,9 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       />
     ));
 
-  const convertCreatedTime = (time: string) => {
-    const [year, day, month] = time.slice(0, 10).split("-");
-    return formatDate(year, day, month, "dot");
+  const convertCreatedTime = (time: number[]) => {
+    const [year, day, month] = time.slice(0, 10);
+    return formatDate(String(year), String(day), String(month), "dot");
   };
 
   const uploadS3Files = (files: FileList) => {
@@ -48,8 +53,6 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       comment: ""
     };
     uploadFiles(params);
-
-    console.log("업로드 files", params);
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,9 +89,6 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
       <S.CarouselContainer>
         <S.DragCarouselWrapper>
           <DragCarousel gap={10}>
-            {/* {files.map((file, index) => (
-              <Thumbnail key={index} file={file} index={index} openPopup={openCarouselPopup} />
-            ))} */}
             {vaccinationUri.map((file, idx) => (
               <S.CarouselCard
                 key={file.imageId}
@@ -116,21 +116,21 @@ const VaccinationBox = ({ dogId }: { dogId: number }) => {
 
 export default VaccinationBox;
 
-const vaccinationUri = [
-  {
-    imageId: 1,
-    imageUri:
-      "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageType: "IMAGE",
-    comment: "",
-    createdTime: "2024-07-25T07:24:49.701Z"
-  },
-  {
-    imageId: 2,
-    imageUri:
-      "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imageType: "IMAGE",
-    comment: "",
-    createdTime: "2024-07-25T07:24:49.701Z"
-  }
-];
+// const vaccinationUri = [
+//   {
+//     imageId: 1,
+//     imageUri:
+//       "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+//     imageType: "VACCINATION",
+//     comment: "",
+//     createdTime: [2024, 8, 10, 14, 55, 36, 133458000]
+//   },
+//   {
+//     imageId: 2,
+//     imageUri:
+//       "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+//     imageType: "VACCINATION",
+//     comment: "",
+//     createdTime: [2024, 8, 10, 14, 55, 36, 133458000]
+//   }
+// ];
