@@ -108,7 +108,6 @@ export const useWeekSwipe = ({
     handleDragEnd,
     generateWeeks,
     setWeeks,
-    isDateSelectable,
-    isSwipeAllowed
+    isDateSelectable
   };
 };
