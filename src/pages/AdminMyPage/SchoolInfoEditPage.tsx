@@ -1,9 +1,15 @@
+import { SCHOOL_PHONE_REGEX } from "constants/validCheck";
+
 import { Flex, Layout, SearchInput, Text, TextInput } from "components/common";
 import Header from "components/common/Header";
+import Postcode from "components/common/Postcode";
+import AddressModifyBottomSheet from "components/SignUp/modal/AddressModifyBottomSheet";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { formatSchoolNumber } from "utils/formatter";
 
 import { BackgroundButton } from "../../components/common/Button";
 import { PreventLeaveModal } from "../../components/common/Modal";
@@ -13,11 +19,50 @@ const SchoolInfoEditPage = () => {
   const { data } = useGetPrincipalInfo(adminId);
   const overlay = useOverlay();
   const navigate = useNavigate();
+  const { handleSubmit, register, setValue, watch } = useForm();
+  const watchAddress = watch("schoolAddress", "");
 
   const openModal = () =>
     overlay.open(({ isOpen, close }) => (
       <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate("/admin/mypage")} />
     ));
+
+  const openPostCodePopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <Postcode isOpen={isOpen} close={close} field={"schoolAddress"} setValue={setValue} />
+    ));
+
+  const handleAddressFieldClick = () => {
+    if (watchAddress.length > 0) {
+      openAddressModifyPopup();
+    } else {
+      openPostCodePopup();
+    }
+  };
+
+  const openAddressModifyPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AddressModifyBottomSheet
+        isOpen={isOpen}
+        close={close}
+        action={openPostCodePopup}
+        address={watchAddress}
+      />
+    ));
+
+  const handleClear = () => {
+    setValue("schoolAddress", "");
+  };
+
+  const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formattedValue = formatSchoolNumber(value);
+    setValue(field, formattedValue);
+  };
+
+  const onSubmit = handleSubmit((data) => {
+    const req = {};
+  });
 
   return (
     <>
@@ -28,20 +73,57 @@ const SchoolInfoEditPage = () => {
             <Text typo="label2_14_R" color="darkBlack">
               유치원 이름
             </Text>
-            <TextInput value={data.schoolName} />
+            <TextInput
+              className="defaultValue"
+              defaultValue={data.schoolName}
+              name="newSchoolName"
+              register={register}
+              rules={{
+                minLength: 1
+              }}
+            />
           </Flex>
           <Flex direction="column" gap={8}>
             <Text typo="label2_14_R" color="darkBlack">
               전화번호
             </Text>
-            <TextInput value={data.schoolNumber} />
+            <TextInput
+              className="defaultValue"
+              defaultValue={data.schoolNumber}
+              name="newSchoolNumber"
+              register={register}
+              rules={{
+                pattern: {
+                  value: SCHOOL_PHONE_REGEX,
+                  message: "올바른 연락처를 입력해주세요"
+                }
+              }}
+              onChange={handleChangeNumber("newSchoolNumber")}
+            />
           </Flex>
           <Flex direction="column" gap={8}>
             <Text typo="label2_14_R" color="darkBlack">
               유치원 주소
             </Text>
-            <SearchInput value={data.address} />
-            <TextInput />
+            <SearchInput
+              name="schoolAddress"
+              className="defaultValue"
+              register={register}
+              placeholder="주소를 검색해 주세요"
+              onSearch={openPostCodePopup}
+              onClick={handleAddressFieldClick}
+              onClear={handleClear}
+              defaultValue={data?.address}
+              readOnly
+              required
+            />
+            <TextInput
+              name="schoolAddressDetail"
+              className="defaultValue"
+              register={register}
+              defaultValue={data.address}
+              required
+            />
           </Flex>
           <Flex direction="column" gap={8}>
             <Text typo="label2_14_R" color="darkBlack">
@@ -57,6 +139,8 @@ const SchoolInfoEditPage = () => {
           backgroundColor="white"
           buttonBackgroundColor="primaryColor"
           fontColor="white"
+          type="submit"
+          onClick={onSubmit}
         >
           수정 완료
         </BackgroundButton>

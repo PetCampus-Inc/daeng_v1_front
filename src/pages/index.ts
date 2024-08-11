@@ -8,6 +8,9 @@ export { default as AdminApprovalStatusPage } from "./SignUpPage/ApprovalStatusP
 /* Admin Chat Page */
 export { default as Chat } from "./ChatPage/Chat";
 
+/* Admin Notification Page*/
+export { default as AdminNotificationPage } from "./AdminNotificationPage/AdminNotificationPage";
+
 /* Admin Attendance Page */
 export { default as AttendancePage } from "./AdminAtendancePage/AttendancePage";
 export { default as AttendCareDeletePage } from "./AdminAttendCarePage/AttendCareDeletePage";

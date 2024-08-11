@@ -1,7 +1,12 @@
+import { PHONE_REGEX } from "constants/validCheck";
+
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { Flex, Layout, Text, TextInput } from "components/common";
+import { useOwnerProfileEdit } from "hooks/api/admin/mypage";
+import { useForm } from "react-hook-form";
 import { IOwnerInfo } from "types/admin/mypage.types";
 import { ITeacherInfo } from "types/admin/mypage.types";
+import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 import { BackgroundButton } from "../../../common/Button";
@@ -12,6 +17,27 @@ interface ProfileInfoProps {
 }
 
 const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
+  const { handleSubmit, register, setValue } = useForm();
+  const { ownerProfileEditMutation } = useOwnerProfileEdit();
+
+  const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const formattedValue = formatPhoneNumber(value);
+    setValue(field, formattedValue);
+  };
+
+  const onSubmit = handleSubmit((data) => {
+    const req = {
+      imageUrl:
+        principalData?.profileUri ||
+        "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      adminId: Number(principalData?.adminId),
+      adminName: data.newName,
+      phoneNumber: data.phoneNumber
+    };
+    ownerProfileEditMutation(req);
+  });
+
   return (
     <Layout type="detail">
       <S.ProfileWrapper>
@@ -34,15 +60,37 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
           <Text typo="label2_14_R" color="darkBlack">
             이름
           </Text>
-          <TextInput value={principalData ? principalData.adminName : teacherData?.adminName} />
+          <TextInput
+            className="defaultValue"
+            defaultValue={principalData?.adminName}
+            name="newName"
+            register={register}
+            rules={{
+              minLength: 1
+            }}
+          />
         </Flex>
         <Flex direction="column" gap={6}>
           <Text typo="label2_14_R" color="darkBlack">
             전화번호
           </Text>
-          <TextInput value={principalData ? principalData.phoneNumber : teacherData?.phoneNumber} />
+          <TextInput
+            className="defaultValue"
+            defaultValue={principalData?.phoneNumber}
+            name="newPhoneNumber"
+            register={register}
+            rules={{
+              pattern: {
+                value: PHONE_REGEX,
+                message: "올바른 연락처를 입력해주세요"
+              }
+            }}
+            onChange={handleChangeNumber("newPhoneNumber")}
+          />
         </Flex>
-        <BackgroundButton backgroundColor="white">수정 완료</BackgroundButton>
+        <BackgroundButton backgroundColor="white" type="submit" onClick={onSubmit}>
+          수정 완료
+        </BackgroundButton>
       </S.ProfileWrapper>
     </Layout>
   );

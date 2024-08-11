@@ -1,6 +1,17 @@
-const SendAlarmIcon = () => {
+export type IconProps = {
+  borderStyle?: string;
+};
+
+const SendAlarmIcon = ({ borderStyle = "" }: IconProps) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      fill="none"
+      viewBox="0 0 20 20"
+      style={{ borderRadius: `${borderStyle}` }}
+    >
       <rect width="20" height="20" fill="#FFF7E1" rx="8" />
       <path
         fill="#956F4C"
