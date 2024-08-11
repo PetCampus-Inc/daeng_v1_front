@@ -1,5 +1,5 @@
 import { FIELD } from "constants/field";
-import { ACCEPT_FILE_TYPE, FILE_URI_NAME, PROFILE_NAME, PROFILE_PATHS } from "constants/profile";
+import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File";
 
 import { BackgroundButton } from "components/common/Button";
 import { usePostMemberDogDetailInfo } from "hooks/api/member/member";
@@ -27,7 +27,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       dogSize: getKeyForLabel(FIELD.DOG_SIZE, formData[FIELD.DOG_SIZE]) || "",
       breedId: formData[FIELD.BREED_ID],
       newBreed: formData[FIELD.NEW_BREED],
-      profileUri: formData[FILE_URI_NAME.COMMON],
+      profileUri: formData[FILE_NAME.PROFILE_COMMON],
       birthDate: `${formData["year"]}-${formData["month"]}-${formData["day"]}`,
       neutralization: formData[FIELD.NEUTRALIZATION] === "했어요" ? "NEUTERED" : "NOT_NEUTERED"
     };
@@ -44,11 +44,11 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
 
   const uploadProfileFiles = async (profileUri: FileList) => {
     const dogParams = {
-      name: PROFILE_NAME.DOG,
+      name: TYPE_NAME.DOG,
       id: dogId,
       files: profileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
-      path: PROFILE_PATHS.DOG
+      path: PATHS.PROFILE
     };
 
     const params = [dogParams];
@@ -63,7 +63,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
   const onSubmit = () => {
     const formData = getFormValues();
     const requestData = Object.assign(formData, {
-      profileUri: convertProfileUri(PROFILE_NAME.DOG)
+      profileUri: convertProfileUri(TYPE_NAME.DOG)
     });
     mutatePostDogDetailInfo(requestData);
   };

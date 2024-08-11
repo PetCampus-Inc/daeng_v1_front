@@ -1,4 +1,4 @@
-import { ACCEPT_FILE_TYPE, PROFILE_NAME, PROFILE_PATHS } from "constants/profile";
+import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File";
 
 import { BackgroundButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
@@ -25,19 +25,19 @@ const SaveProfileButton = () => {
 
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
-      name: PROFILE_NAME.MEMBER,
+      name: TYPE_NAME.MEMBER,
       id: memberProfileData.memberId,
       files: memberProfileData.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
-      path: PROFILE_PATHS.MEMBER
+      path: PATHS.PROFILE
     };
 
     const dogParams = {
-      name: PROFILE_NAME.DOG,
+      name: TYPE_NAME.DOG,
       id: memberProfileData.dogId,
       files: memberProfileData.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
-      path: PROFILE_PATHS.DOG
+      path: PATHS.PROFILE
     };
 
     const params = [memberParams, dogParams];
@@ -54,8 +54,8 @@ const SaveProfileButton = () => {
     return {
       memberId: data.memberId,
       dogId: data.dogId,
-      memberProfileUri: convertProfileUri(PROFILE_NAME.MEMBER),
-      dogProfileUri: convertProfileUri(PROFILE_NAME.DOG),
+      memberProfileUri: convertProfileUri(FILE_NAME.PROFILE_MEMBER),
+      dogProfileUri: convertProfileUri(FILE_NAME.PROFILE_DOG),
       nickName: data.nickName,
       relation: data.relation
     };

@@ -1,4 +1,4 @@
-import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
+import { TYPE_NAME, FILE_NAME } from "constants/s3File";
 
 import { useRef, useState } from "react";
 
@@ -13,19 +13,19 @@ const Profile = () => {
   return (
     <>
       <ProfileUploadBox
-        type={PROFILE_NAME.MEMBER}
+        type={TYPE_NAME.MEMBER}
         isActive={isMyActive}
         setIsActive={setIsMyActive}
         fileRef={myFileInputRef}
-        fileName={FILE_URI_NAME.MEMBER}
+        fileName={FILE_NAME.PROFILE_MEMBER}
         mode="create"
       />
       <ProfileUploadBox
-        type={PROFILE_NAME.DOG}
+        type={TYPE_NAME.DOG}
         isActive={isDogActive}
         setIsActive={setIsDogActive}
         fileRef={dogFileInputRef}
-        fileName={FILE_URI_NAME.DOG}
+        fileName={FILE_NAME.PROFILE_DOG}
         mode="create"
       />
     </>

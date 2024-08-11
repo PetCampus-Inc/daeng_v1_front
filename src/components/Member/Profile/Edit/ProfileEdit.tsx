@@ -1,4 +1,4 @@
-import { ACCEPT_FILE_TYPE, PROFILE_NAME } from "constants/profile";
+import { ACCEPT_FILE_TYPE } from "constants/s3File";
 
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";

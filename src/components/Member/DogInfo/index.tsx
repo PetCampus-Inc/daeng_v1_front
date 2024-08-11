@@ -15,10 +15,10 @@ import { TextAreaBottomSheet } from "../../common/BottomSheet";
 const DogInfo = ({ dogId }: { dogId: number }) => {
   const overlay = useOverlay();
   const methods = useForm({ mode: "onSubmit" });
-  const { data } = useGetMemberDogDetailInfo(dogId);
-  const { vaccinationUri } = data;
   const mutatePostDogAllergy = usePostMemberDogAllergy(dogId);
   const mutatePostDogPickDrop = usePostMemberDogPickDrop(dogId);
+  const { data } = useGetMemberDogDetailInfo(dogId);
+  const { vaccinationUri } = data;
 
   const openTextAreaPopup = (title: string, defaultValue: string, type: string) =>
     overlay.open(({ isOpen, close }) => (
@@ -35,13 +35,13 @@ const DogInfo = ({ dogId }: { dogId: number }) => {
           actionText={"수정 완료"}
           actionFn={() => {
             close();
-            handleUpdateMemo(type);
+            handleEditMemo(type);
           }}
         />
       </FormProvider>
     ));
 
-  const handleUpdateMemo = (type: string) => {
+  const handleEditMemo = (type: string) => {
     const onSubmit = methods.handleSubmit(() => {
       const { pickDrop, allergy } = methods.getValues();
 

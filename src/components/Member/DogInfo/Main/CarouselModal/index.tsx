@@ -12,7 +12,7 @@ interface DisconnectModalProps extends ModalProps {
   upDateData?: string;
   imgUrl?: string;
   imgIdx: number;
-  vaccinationUri: VaccinationUri[];
+  vaccinationUri: VaccinationUri[] | null;
 }
 
 export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: DisconnectModalProps) => {
@@ -29,13 +29,12 @@ export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: Disconn
     prevArrow: <Arrows position="prev" isDisabled={false} />
   };
 
-  const convertCreatedTime = (time: number[]) => {
+  const formatCreatedTime = (time: number[]) => {
     const [year, day, month] = time.slice(0, 10);
     return formatDate(String(year), String(day), String(month), "dot");
   };
 
   return (
-    // FIXME CarouselModal close 안되는 이슈 해결하기
     <ModalRoot isOpen={isOpen} close={close}>
       <S.CloseButton onClick={close}>
         <CloseIcon colorScheme="black" w={31} h={31} opacity={0.7} />
@@ -43,8 +42,8 @@ export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: Disconn
       <S.CarouselSlider ref={sliderRef} {...settings}>
         {vaccinationUri?.map((file, idx) => (
           <S.CarouselBox key={`slide-${file.imageId}-${idx}`}>
-            <img src={file.imageUri} alt="file_img" />
-            <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
+            <img src={file.imageUri} alt={`vaccination-${file.imageId}-${idx}`} />
+            <S.CarouselText>{formatCreatedTime(file.createdTime)} 업로드</S.CarouselText>
           </S.CarouselBox>
         ))}
       </S.CarouselSlider>

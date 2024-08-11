@@ -1,4 +1,4 @@
-import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
+import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
@@ -21,11 +21,11 @@ const AddDogProfile = () => {
       </Flex>
       <Flex gap="20" marginBottom="14">
         <ProfileUploadBox
-          type={PROFILE_NAME.DOG}
+          type={TYPE_NAME.DOG}
           isActive={isDogActive}
           setIsActive={setDogIsActive}
           fileRef={dogFileInputRef}
-          fileName={FILE_URI_NAME.DOG}
+          fileName={FILE_NAME.PROFILE_DOG}
           mode="create"
         />
       </Flex>

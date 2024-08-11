@@ -1,6 +1,6 @@
 import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { FIELD, FIELD_KEYS } from "constants/field";
-import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
+import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
 import { Flex, TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
@@ -24,9 +24,9 @@ const DogDetailInfoEdit = ({ requiredItems }: IDogInfoProps) => {
     <>
       <Card>
         <ProfileUploadBox
-          type={PROFILE_NAME.DOG}
+          type={TYPE_NAME.DOG}
           fileRef={fileInputRef}
-          fileName={FILE_URI_NAME.COMMON}
+          fileName={FILE_NAME.PROFILE_COMMON}
           mode="edit"
         />
       </Card>

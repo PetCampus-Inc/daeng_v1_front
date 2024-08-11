@@ -1,33 +1,30 @@
-import { ACCEPT_FILE_TYPE } from "constants/profile";
+import { ACCEPT_FILE_TYPE, PATHS } from "constants/s3File";
 
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { DragCarousel, Flex } from "components/common";
 import { CarouselModal } from "components/Member/DogInfo/Main/CarouselModal";
 import { useOverlay } from "hooks/common/useOverlay";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { VaccinationUri } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
-import { getFilePreview } from "utils/thumb";
 
-import { IFile } from "../../../../Admin/AttendCare/AttendCareGallery/upload";
 import * as S from "../../styles";
 import useUploadVaccintion from "../hooks/useUploadVaccintion";
 import { StyledHiddenUpload } from "../Vaccination/styles";
 
 interface VaccinationProps {
   dogId: number;
-  vaccinationUri: VaccinationUri[];
+  vaccinationUri: VaccinationUri[] | null;
 }
 
 const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
   const overlay = useOverlay();
-  const [files, setFiles] = useState<IFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const { register, setValue, watch } = useFormContext();
+  const { register } = useFormContext();
   const { uploadFiles } = useUploadVaccintion(dogId);
 
-  const MAX_FILE_COUNT = 20;
+  const MAX_FILE_COUNT = 30;
 
   const openCarouselPopup = (imgIdx: number) =>
     overlay.open(({ isOpen, close }) => (
@@ -39,40 +36,41 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
       />
     ));
 
-  const convertCreatedTime = (time: number[]) => {
+  const handleFileInputClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const vaccinationFileList = e.target.files;
+    if (vaccinationFileList) {
+      const newFiles = Array.from(vaccinationFileList);
+      if (vaccinationUri && vaccinationUri.length + newFiles.length > MAX_FILE_COUNT) {
+        alert(`최대 ${MAX_FILE_COUNT}개의 파일만 업로드할 수 있습니다.`);
+        return;
+      }
+
+      uploadFilesToS3(vaccinationFileList);
+    }
+  };
+
+  const formatCreatedTime = (time: number[]) => {
     const [year, day, month] = time.slice(0, 10);
     return formatDate(String(year), String(day), String(month), "dot");
   };
 
-  const uploadS3Files = (files: FileList) => {
+  const uploadFilesToS3 = (files: FileList) => {
     const params = {
       files: files,
-      path: "vaccination",
+      path: PATHS.VACCINATION,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       dogIdList: [dogId],
       comment: ""
     };
+
     uploadFiles(params);
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const vaccinationFilse = e.target.files;
-    if (vaccinationFilse) {
-      const newFiles = Array.from(vaccinationFilse);
-      if (files.length + newFiles.length > MAX_FILE_COUNT) {
-        alert(`최대 ${MAX_FILE_COUNT}개의 파일만 업로드할 수 있습니다.`);
-        return;
-      }
-      const fileArray = await Promise.all(newFiles.map(getFilePreview));
-      setFiles((prevFiles) => [...prevFiles, ...fileArray]);
-      setValue("files", [...watch("files", files), ...newFiles]);
-      uploadS3Files(vaccinationFilse);
-    }
-  };
-
-  const handleUploadFile = () => {
-    fileInputRef.current?.click();
-  };
+  console.log(vaccinationUri);
 
   return (
     <S.DogMoreInfoCard>
@@ -83,30 +81,32 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
           </S.Icon>
           <S.DogMoreInfo>예방접종 파일</S.DogMoreInfo>
         </Flex>
-        <S.DogMoreInfoEditButton onClick={handleUploadFile}>추가 업로드</S.DogMoreInfoEditButton>
+        <S.DogMoreInfoEditButton onClick={handleFileInputClick}>
+          추가 업로드
+        </S.DogMoreInfoEditButton>
       </S.TopInfoBox>
 
       <S.CarouselContainer>
         <S.DragCarouselWrapper>
           <DragCarousel gap={10}>
-            {vaccinationUri.map((file, idx) => (
+            {vaccinationUri?.map((file, idx) => (
               <S.CarouselCard
                 key={file.imageId}
                 role="button"
                 onClick={() => openCarouselPopup(idx)}
               >
                 <img src={file.imageUri} alt={`vaccination-${file.imageId}-${idx}`} />
-                <S.CarouselText>{convertCreatedTime(file.createdTime)} 업로드</S.CarouselText>
+                <S.CarouselText>{formatCreatedTime(file.createdTime)} 업로드</S.CarouselText>
               </S.CarouselCard>
             ))}
           </DragCarousel>
         </S.DragCarouselWrapper>
         <StyledHiddenUpload
-          {...register("vaccinationFiles")}
+          {...register("vaccinationUri")}
           type="file"
           ref={fileInputRef}
           multiple
-          accept="image/*"
+          accept={ACCEPT_FILE_TYPE.IMAGE}
           onChange={handleFileChange}
         />
       </S.CarouselContainer>
@@ -115,22 +115,3 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
 };
 
 export default VaccinationBox;
-
-// const vaccinationUri = [
-//   {
-//     imageId: 1,
-//     imageUri:
-//       "https://images.unsplash.com/photo-1591160690555-5debfba289f0?q=80&amp;w=2864&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//     imageType: "VACCINATION",
-//     comment: "",
-//     createdTime: [2024, 8, 10, 14, 55, 36, 133458000]
-//   },
-//   {
-//     imageId: 2,
-//     imageUri:
-//       "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//     imageType: "VACCINATION",
-//     comment: "",
-//     createdTime: [2024, 8, 10, 14, 55, 36, 133458000]
-//   }
-// ];
