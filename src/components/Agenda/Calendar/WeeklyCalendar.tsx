@@ -5,6 +5,7 @@ import { isSameDay, format, isToday, parseISO } from "date-fns";
 import { ko } from "date-fns/locale";
 import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
+import { convertArrayToDate } from "utils/date";
 
 import {
   DayTile,
@@ -19,16 +20,14 @@ import {
 import { useWeekSwipe } from "./useWeekSwipe";
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
-
-const RECORD_DAYS = ["2024-06-30", "2024-07-17", "2024-07-21", "2024-07-24", "2024-07-25"];
-const USER_JOIN_DATE = "2024-02-15";
+import type { DogInfoRecord } from "types/member/dogs";
 
 interface WeeklyCalendarProps {
+  data: DogInfoRecord[];
   today: Date;
-  onDateClick: (newDate: Value) => void;
+  onDateChange: (newDate: Value) => void;
   onTodayClick: () => void;
   activeDate: Date | null;
-  onActiveDateChange: React.Dispatch<React.SetStateAction<Date | null>>;
   onOpenMonthPicker: () => void;
   headerRef: React.RefObject<HTMLDivElement>;
 }
@@ -37,7 +36,7 @@ interface WeekViewProps {
   week: Date[];
   activeStartDate: Date;
   isDateDisabled: (date: Date) => boolean;
-  onDateClick: (date: Date) => void;
+  onDateChange: (date: Date) => void;
   weekDays: string[];
   isActive: boolean;
 }
@@ -50,7 +49,7 @@ const WeekView = ({
   week,
   activeStartDate,
   isDateDisabled,
-  onDateClick,
+  onDateChange,
   weekDays,
   isActive
 }: WeekViewProps) => (
@@ -64,7 +63,7 @@ const WeekView = ({
           ${isDateDisabled(day) ? "disabled" : ""}
           ${!isActive ? "neighboring-week" : ""}
         `.trim()}
-        onClick={() => onDateClick(day)}
+        onClick={() => onDateChange(day)}
         disabled={isDateDisabled(day)}
       >
         <Text
@@ -99,16 +98,13 @@ const WeekView = ({
 
 const WEEK_DAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
+const RECORD_DAYS = ["2024-06-30", "2024-07-17", "2024-07-21", "2024-07-24", "2024-07-25"];
+
+const USER_REGISTRATION_DATE = parseISO("2024-06-28");
+
 export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
-  const {
-    today,
-    onDateClick,
-    onTodayClick,
-    activeDate,
-    onActiveDateChange,
-    onOpenMonthPicker,
-    headerRef
-  } = props;
+  const { data, today, onDateChange, onTodayClick, activeDate, onOpenMonthPicker, headerRef } =
+    props;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const containerWidth = containerRef.current?.offsetWidth || 0;
@@ -117,9 +113,9 @@ export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
     useWeekSwipe({
       containerWidth,
       activeDate,
-      onActiveDateChange,
-      maxDate: parseISO(USER_JOIN_DATE),
-      today
+      onDateChange,
+      maxDate: today,
+      minDate: USER_REGISTRATION_DATE
     });
 
   useEffect(() => {
@@ -127,7 +123,8 @@ export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
       setWeeks(generateWeeks(activeDate));
       controls.set({ x: -containerWidth });
     }
-  }, [activeDate, generateWeeks, controls, setWeeks, containerWidth]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeDate, containerWidth]);
 
   if (!activeDate) return null;
 
@@ -155,6 +152,8 @@ export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
           initial={{ x: -containerWidth }}
           dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
           style={{ display: "flex" }}
+          dragElastic={0.2}
+          dragMomentum={false}
         >
           {weeks.map((week, weekIndex) => (
             <WeekView
@@ -162,7 +161,7 @@ export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
               week={week}
               activeStartDate={activeDate}
               isDateDisabled={(date) => !isDateSelectable(date)}
-              onDateClick={onDateClick}
+              onDateChange={onDateChange}
               weekDays={WEEK_DAYS}
               isActive={weekIndex === 1}
             />

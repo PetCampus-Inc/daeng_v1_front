@@ -1,6 +1,14 @@
 import styled from "styled-components";
 import { remCalc } from "utils/calculator";
 
+export const CalendarSection = styled.section`
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 0px 0px 20px 20px;
+  overflow: hidden;
+
+  margin-bottom: 40px;
+`;
+
 // Styled Monthly Calendar Container
 export const StyledMonthlyCalendar = styled.div`
   width: 100%;
@@ -21,9 +29,13 @@ export const StyledMonthlyCalendar = styled.div`
     margin-bottom: ${remCalc(14)};
 
     button:enabled:hover,
-    button:enabled:focus,
+    button:enabled:focus {
+      background-color: ${({ theme }) => theme.colors.white};
+    }
+
     button:disabled {
       background-color: ${({ theme }) => theme.colors.white};
+      color: ${({ theme }) => theme.colors.gray_4};
     }
 
     .react-calendar__navigation__label {
@@ -82,6 +94,12 @@ export const StyledMonthlyCalendar = styled.div`
         font-family: "Pretendard Variable";
       }
 
+      &.react-calendar__month-view__days__day--neighboringMonth {
+        abbr {
+          color: ${({ theme }) => theme.colors.gray_3};
+        }
+      }
+
       &.react-calendar__tile:enabled:hover,
       &.react-calendar__tile:enabled:focus,
       &.react-calendar__tile--now {
@@ -93,7 +111,6 @@ export const StyledMonthlyCalendar = styled.div`
       &.react-calendar__tile--rangeStart,
       &.react-calendar__tile--rangeEnd,
       &.react-calendar__tile--rangeBothEnds {
-        // 이 부분임
         background-color: ${({ theme }) => theme.colors.yellow_3} !important;
         border-radius: 12px;
 
@@ -102,23 +119,24 @@ export const StyledMonthlyCalendar = styled.div`
         }
       }
 
-      &.react-calendar__month-view__days__day--neighboringMonth {
+      &:disabled {
+        background-color: ${({ theme }) => theme.colors.white};
         abbr {
-          color: ${({ theme }) => theme.colors.gray_3};
+          color: ${({ theme }) => theme.colors.gray_4};
         }
       }
     }
   }
 `;
 
-// Popup Container
-export const PopupContainer = styled.div`
+// Month Picker Container
+export const MonthPickerContainer = styled.div`
   display: grid;
   place-items: center;
 `;
 
-// Popup Wrapper
-export const PopupWrapper = styled.div`
+// Month Picker Wrapper
+export const MonthPickerWrapper = styled.div`
   position: absolute;
   background-color: white;
   border-radius: 8px;
@@ -127,8 +145,8 @@ export const PopupWrapper = styled.div`
   z-index: 10;
 `;
 
-// Styled Year View Container
-export const StyledYearView = styled.div`
+// Month Picker Calendar
+export const MonthPickerCalendar = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -161,12 +179,12 @@ export const StyledYearView = styled.div`
     }
   }
 
-  /* Year View Container Styling */
+  /* Container Styling */
   .react-calendar__viewContainer {
     margin-top: ${remCalc(24)};
   }
 
-  /* Year View Months Styling */
+  /* Months Styling */
   .react-calendar__year-view__months {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr);
@@ -196,6 +214,12 @@ export const StyledYearView = styled.div`
 
       abbr {
         color: ${({ theme }) => theme.colors.white};
+      }
+    }
+
+    &.react-calendar__tile: disabled {
+      abbr {
+        color: ${({ theme }) => theme.colors.gray_4};
       }
     }
   }

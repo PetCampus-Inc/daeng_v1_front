@@ -7,7 +7,7 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { Suspense, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { addZero } from "utils/date";
+import { padToTwoDigits } from "utils/date";
 import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/remainingDays";
 
 import * as S from "./styles";
@@ -21,7 +21,7 @@ type DogCardProps = { info: AttendanceData };
 
 const DogCard = memo(({ info }: DogCardProps) => {
   const overlay = useOverlay();
-  const monthlyTicketDate = addZero(info.monthlyTicket || []);
+  const monthlyTicketDate = padToTwoDigits(info.monthlyTicket || []);
   const {
     isExpired: isRoundExpired,
     isExpiringSoon: isRoundExpiringSoon,

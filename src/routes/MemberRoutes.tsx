@@ -27,6 +27,10 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
+          path: PATH.AGENDA(),
+          element: <Pages.AgendaPage />
+        },
+        {
           path: PATH.MEMBER_MY_PAGE(),
           element: (
             <Suspense>
