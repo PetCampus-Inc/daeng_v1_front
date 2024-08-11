@@ -1,11 +1,21 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import "./CalendarStyle";
 
 export const GlobalStyle = createGlobalStyle`
 ${reset}
 
 *{
   box-sizing: border-box;
+
+  /* 앱 대응 스타일 */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color:rgba(255,255,255,0);
+
+  /* IOS 스크롤 바운스 방지 */
+  overscroll-behavior-y: none;
 }
 
 .swiper-button-next::after,
@@ -110,8 +120,16 @@ body {
   border-radius: 10px;
 }
 
-  #root {
-    width: 100vw;
-    height: 100vh;
+html,
+body {
+  height: 100vh;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  overflow: hidden;
   }
 `;

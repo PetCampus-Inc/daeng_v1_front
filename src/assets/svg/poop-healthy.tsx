@@ -1,8 +1,8 @@
 import { themeConfig } from "styles/themeConfig";
-import { Poop } from "types/admin/attendance.type";
+import { POOP_STATUS, type PoopStatus } from "types/member/dogs";
 
-const PoopHealthy = ({ poop }: { poop?: Poop }) => {
-  const isSelected = poop && poop === Poop.HEALTHY;
+const PoopHealthy = ({ poop }: { poop?: PoopStatus }) => {
+  const isSelected = poop && poop === POOP_STATUS.HEALTHY;
 
   return (
     <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,13 +10,13 @@ const PoopHealthy = ({ poop }: { poop?: Poop }) => {
         width="62"
         height="62"
         rx="8"
-        fill={isSelected ? themeConfig.colors.yellow_3 : "#E9E9E9"}
+        fill={isSelected ? themeConfig.colors.yellow_3 : "#F6F6F6"}
       />
       <circle
         cx="31"
         cy="31"
         r="15"
-        fill={isSelected ? themeConfig.colors.primaryColor : "#B5B5B5"}
+        fill={isSelected ? themeConfig.colors.primaryColor : "#E9E9E9"}
       />
     </svg>
   );

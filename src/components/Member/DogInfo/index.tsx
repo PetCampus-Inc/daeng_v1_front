@@ -126,7 +126,7 @@ const DogInfo = ({ dogId }: IProps) => {
                 onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}
               >
                 <span>수정</span>
-                <ArrowRightIcon />
+                <ArrowRightIcon w={16} />
               </S.Editebutton>
             </S.TopInfoBox>
             <Flex wrap="wrap" gap="8">

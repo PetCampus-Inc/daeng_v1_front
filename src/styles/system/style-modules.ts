@@ -45,13 +45,14 @@ export const parseSpacing = (value?: SpaceType): string | undefined => {
 
 export const getBorderRadiusStyle = (radiusValue?: RadiusType): string | undefined => {
   if (radiusValue === undefined) return undefined;
+  if (isNumber(radiusValue)) return `${radiusValue}px`;
   switch (radiusValue) {
     case "rectangle":
       return "8px";
     case "circle":
       return "50%";
     default:
-      return `${radiusValue}px`;
+      return radiusValue;
   }
 };
 

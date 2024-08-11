@@ -1,6 +1,6 @@
 import { isCustomError } from "utils/is";
 
-import customAxios from ".";
+import authAxios from ".";
 
 import type { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -13,7 +13,7 @@ export interface Response<T> {
 
 export const request = async <T>(config: AxiosRequestConfig): Promise<Response<T>> => {
   try {
-    const { data } = await customAxios.request<Response<T>>({ ...config });
+    const { data } = await authAxios.request<Response<T>>({ ...config });
     return data;
   } catch (error) {
     if (isCustomError(error)) {
