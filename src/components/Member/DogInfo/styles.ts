@@ -223,11 +223,7 @@ export const CarouselContainer = styled.div`
   overflow-x: auto;
 `;
 
-export const DragCarouselWrapper = styled.div`
-  & > div > div {
-    width: calc(100% + 130px);
-  }
-`;
+export const DragCarouselWrapper = styled.div``;
 
 export const CarouselCard = styled.div`
   position: relative;
@@ -236,7 +232,7 @@ export const CarouselCard = styled.div`
   justify-content: flex-end;
   width: 100%;
   height: 72px;
-  max-width: 103px;
+  min-width: 103px;
   border-radius: 8px;
   overflow: hidden;
   padding: 4px 8px;
