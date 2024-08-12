@@ -48,7 +48,6 @@ const PrincipalMyPage = () => {
               </CardContainer>
             </ContentContainer>
           </PageContainer>
-
           <LogOutButton />
 
           <AdminNavBar />

@@ -19,6 +19,7 @@ interface ProfileInfoProps {
 const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
   const { handleSubmit, register, setValue } = useForm();
   const { ownerProfileEditMutation } = useOwnerProfileEdit();
+  const roleData = principalData ? principalData : teacherData;
 
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -29,9 +30,9 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
   const onSubmit = handleSubmit((data) => {
     const req = {
       imageUrl:
-        principalData?.profileUri ||
+        roleData?.profileUri ||
         "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      adminId: Number(principalData?.adminId),
+      adminId: Number(roleData?.adminId),
       adminName: data.newName,
       phoneNumber: data.phoneNumber
     };
@@ -45,8 +46,8 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
           <S.ProfileEditeBox>
             <S.UserImage
               src={
-                principalData?.profileUri
-                  ? `${principalData.profileUri}`
+                roleData?.profileUri
+                  ? `${roleData.profileUri}`
                   : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               }
               alt="user_profile"
@@ -62,7 +63,7 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
           </Text>
           <TextInput
             className="defaultValue"
-            defaultValue={principalData?.adminName}
+            defaultValue={roleData?.adminName}
             name="newName"
             register={register}
             rules={{
@@ -76,7 +77,7 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
           </Text>
           <TextInput
             className="defaultValue"
-            defaultValue={principalData?.phoneNumber}
+            defaultValue={roleData?.phoneNumber}
             name="newPhoneNumber"
             register={register}
             rules={{

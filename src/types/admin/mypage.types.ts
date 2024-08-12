@@ -17,6 +17,8 @@ export interface IOwnerInfo {
 export interface ITeacherInfo {
   id: string;
   adminName: string;
+  adminId: number;
+  profileUri: string;
   schoolId: number;
   schoolName: string;
   phoneNumber: string;
