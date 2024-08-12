@@ -5,11 +5,13 @@ import { Box } from "components/common";
 import Header from "components/common/Header";
 import Toggle from "components/common/Toggle/Toggle";
 import { useState } from "react";
+import { Role } from "types/admin/admin.types";
 
 import * as S from "./styles";
 
 interface AlertSettingProps {
   setStep: (step: number) => void;
+  role: string;
 }
 
 type AlertSettings = {
@@ -18,7 +20,7 @@ type AlertSettings = {
   school: boolean;
 };
 
-const AlertSetting = ({ setStep }: AlertSettingProps) => {
+const AlertSetting = ({ setStep, role }: AlertSettingProps) => {
   const [alertSettings, setAlertSettings] = useState({
     attendance: false,
     careDog: false,
@@ -75,7 +77,8 @@ const AlertSetting = ({ setStep }: AlertSettingProps) => {
             "attendance"
           )}
           {alretItem(<CheckBoard />, "강아지 관리 알림", "알림장 전송, 사진 전송 등", "careDog")}
-          {alretItem(<SchoolIcon />, "유치원 운영 알림", "신규 가입, 교사 관리 등", "school")}
+          {role === Role.ROLE_OWNER &&
+            alretItem(<SchoolIcon />, "유치원 운영 알림", "신규 가입, 교사 관리 등", "school")}
         </S.SettingList>
       </Box>
     </>

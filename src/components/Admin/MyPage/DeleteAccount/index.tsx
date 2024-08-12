@@ -5,9 +5,11 @@ import { BackgroundButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Role } from "types/admin/admin.types";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;
+  role: string;
 }
 
 type ContentCheck = {
@@ -17,7 +19,7 @@ type ContentCheck = {
   4: boolean;
 };
 
-const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
+const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   const [contents, setContents] = useState({
     1: false,
     2: false,
@@ -105,12 +107,13 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
           "탈퇴 후 사용했던 소셜 아이디로 <재가입 시 신규회원으로 가입> 돼요",
           15
         )}
-        {renderCheckboxItem(
-          3,
-          "원장님이 등록한 유치원의 <활동 기록>과 <정보>, 가입된 <회원 및 교사 정보>는 모두 <초기화>되고 복구되지 않아요",
-          15
-        )}
-        {renderCheckboxItem(4, "모든 <개인 정보>가 삭제돼요", 15)}
+        {role === Role.ROLE_OWNER &&
+          renderCheckboxItem(
+            3,
+            "원장님이 등록한 유치원의 <활동 기록>과 <정보>, 가입된 <회원 및 교사 정보>는 모두 <초기화>되고 복구되지 않아요",
+            15
+          )}
+        {role === Role.ROLE_OWNER && renderCheckboxItem(4, "모든 <개인 정보>가 삭제돼요", 15)}
         <Box
           width="100%"
           border={1}
