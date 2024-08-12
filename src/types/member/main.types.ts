@@ -132,7 +132,7 @@ export interface MemberDogInfoData {
   dogMemo: string;
 }
 
-export interface IDogVaccination {
+export interface DogVaccination {
   dogIdList: number[];
   imageUriList: string[];
   comment: string | "";

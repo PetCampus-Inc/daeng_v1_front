@@ -35,7 +35,7 @@ import type {
   IMemberProfilePostInfo,
   MemberDogInfoData,
   MemberDogInfoFormData,
-  IDogVaccination
+  DogVaccination
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -233,7 +233,7 @@ export const usePostMemberDogAllergy = (dogId: number) => {
 export const usePostMembeVaccination = (dogId: number) => {
   const queryClient = useQueryClient();
   const memberDogAllerayMutation = useMutation({
-    mutationFn: (req: IDogVaccination) => handlePostMemoDogVaccination(req),
+    mutationFn: (req: DogVaccination) => handlePostMemoDogVaccination(req),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
       showToast("예방 접종 파일이 업로드되었습니다.", "bottom");

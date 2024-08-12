@@ -13,7 +13,7 @@ import type {
   IMemberProfile,
   IMemberProfileInfo,
   IMemberProfilePostInfo,
-  IDogVaccination,
+  DogVaccination,
   MemberDogInfoData,
   MemberDogInfoReq
 } from "types/member/main.types";
@@ -180,8 +180,8 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
 
 // 강아지 예방 접종 파일 추가 업로드
 export const handlePostMemoDogVaccination = async (
-  req: IDogVaccination
-): Promise<IDogVaccination> => {
+  req: DogVaccination
+): Promise<DogVaccination> => {
   const url = `/member/vaccination`;
   const { data } = await authAxios.post(url, {
     dogIdList: req.dogIdList,
