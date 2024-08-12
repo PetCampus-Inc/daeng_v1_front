@@ -4,14 +4,14 @@ import { Flex } from "components/common/Flex";
 
 import * as S from "../../styles";
 
-interface IProps {
+interface DogMemoProps {
   type: string;
   memo: string;
   title: string;
   openPopup: (title: string, memo: string, type: string) => void;
 }
 
-const DogMemoBox = ({ type, memo, title, openPopup }: IProps) => {
+const DogMemoBox = ({ type, memo, title, openPopup }: DogMemoProps) => {
   const memoData = memo ? memo : "";
 
   return (

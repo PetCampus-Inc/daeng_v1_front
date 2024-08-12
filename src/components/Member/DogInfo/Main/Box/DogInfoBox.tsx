@@ -14,12 +14,12 @@ import { formatDate } from "utils/formatter";
 import * as S from "../../styles";
 import InfoText from "../DogInfo/InfoText";
 
-interface IProps {
+interface DogInfoProps {
   data: MemberDogInfoFormData;
   dogId: number;
 }
 
-const DogInfoBox = ({ data, dogId }: IProps) => {
+const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
   const navigate = useNavigate();
 
   const DOG_BIRETH = formatDate(
