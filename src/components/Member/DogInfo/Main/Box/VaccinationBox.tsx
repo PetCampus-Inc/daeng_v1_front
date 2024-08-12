@@ -70,8 +70,6 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
     uploadFiles(params);
   };
 
-  console.log(vaccinationUri);
-
   return (
     <S.DogMoreInfoCard>
       <S.TopInfoBox>
