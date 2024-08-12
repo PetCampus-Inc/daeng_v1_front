@@ -11,7 +11,6 @@ import { formatDate } from "utils/formatter";
 
 import * as S from "../../styles";
 import useUploadVaccintion from "../hooks/useUploadVaccintion";
-import { StyledHiddenUpload } from "../Vaccination/styles";
 
 interface VaccinationProps {
   dogId: number;
@@ -100,7 +99,7 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
             ))}
           </DragCarousel>
         </S.DragCarouselWrapper>
-        <StyledHiddenUpload
+        <S.StyledHiddenUpload
           {...register("vaccinationUri")}
           type="file"
           ref={fileInputRef}

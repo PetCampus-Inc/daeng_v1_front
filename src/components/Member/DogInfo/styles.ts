@@ -267,3 +267,7 @@ export const CarouselText = styled.span`
   color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.caption1_10_R};
 `;
+
+export const StyledHiddenUpload = styled.input`
+  display: none;
+`;
