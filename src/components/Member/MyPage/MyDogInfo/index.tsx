@@ -31,7 +31,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       isOpen={isOpen}
       dogName={dog.dogName}
       schoolInfo={dog.schoolName}
-      registeredDate={dog.registeredDate.map(String)}
+      registeredDate={dog.registeredDate && dog.registeredDate.map(String)}
       profileUri={dog.dogProfile && dog.dogProfile}
       status={dog.status}
       dogLength={doglist.length}
