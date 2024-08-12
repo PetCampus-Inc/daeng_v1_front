@@ -5,7 +5,6 @@ import { ModalRoot } from "components/common/Modal/ModalRoot";
 import { useRef } from "react";
 import Slider from "react-slick";
 import { VaccinationUri } from "types/member/main.types";
-import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
 interface DisconnectModalProps extends ModalProps {
@@ -13,9 +12,16 @@ interface DisconnectModalProps extends ModalProps {
   imgUrl?: string;
   imgIdx: number;
   vaccinationUri: VaccinationUri[] | null;
+  formatCreatedTime: (time: number[]) => string;
 }
 
-export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: DisconnectModalProps) => {
+export const CarouselModal = ({
+  close,
+  isOpen,
+  imgIdx,
+  vaccinationUri,
+  formatCreatedTime
+}: DisconnectModalProps) => {
   const sliderRef = useRef<Slider | null>(null);
   const settings = {
     initialSlide: imgIdx,
@@ -27,11 +33,6 @@ export const CarouselModal = ({ close, isOpen, imgIdx, vaccinationUri }: Disconn
     arrows: true,
     nextArrow: <Arrows position="next" isDisabled={false} />,
     prevArrow: <Arrows position="prev" isDisabled={false} />
-  };
-
-  const formatCreatedTime = (time: number[]) => {
-    const [year, day, month] = time.slice(0, 10);
-    return formatDate(String(year), String(day), String(month), "dot");
   };
 
   return (

@@ -26,10 +26,16 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
 
   const MAX_FILE_COUNT = 30;
 
+  const formatCreatedTime = (time: number[]) => {
+    const [year, day, month] = time.slice(0, 10);
+    return formatDate(String(year), String(day), String(month), "dot");
+  };
+
   const openCarouselPopup = (imgIdx: number) =>
     overlay.open(({ isOpen, close }) => (
       <CarouselModal
         vaccinationUri={vaccinationUri}
+        formatCreatedTime={formatCreatedTime}
         imgIdx={imgIdx}
         isOpen={isOpen}
         close={close}
@@ -51,11 +57,6 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
 
       uploadFilesToS3(vaccinationFileList);
     }
-  };
-
-  const formatCreatedTime = (time: number[]) => {
-    const [year, day, month] = time.slice(0, 10);
-    return formatDate(String(year), String(day), String(month), "dot");
   };
 
   const uploadFilesToS3 = (files: FileList) => {
