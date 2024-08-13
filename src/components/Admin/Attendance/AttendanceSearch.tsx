@@ -1,11 +1,14 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 import AttendanceSearchInput from "./AttendanceInput/AttendanceSearchInput";
-import { useSearchContext } from "./hooks/useSearchContext";
 
-export function AttendanceSearch() {
+type AttendanceSearchProps = {
+  setSearchText: (text: string) => void;
+  setIsFocused: (focused: boolean) => void;
+};
+
+export function AttendanceSearch({ setSearchText, setIsFocused }: AttendanceSearchProps) {
   const [inputText, setInputText] = useState("");
-  const { setSearchText, setIsFocused } = useSearchContext();
 
   const handleSearch = useCallback(
     (value: string) => {

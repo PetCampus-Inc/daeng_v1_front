@@ -3,16 +3,18 @@ import { Flex, Text } from "components/common";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useSearchParams } from "react-router-dom";
 
-import { useSearchContext } from "./hooks/useSearchContext";
 import { AttendanceButton, FootButton } from "./styles";
 
-export function AttendanceHeader() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const mode = searchParams.get("mode");
+type AttendanceHeaderProps = {
+  isFocused: boolean;
+  mode: string | null;
+};
+
+export function AttendanceHeader({ isFocused, mode }: AttendanceHeaderProps) {
+  const [_, setSearchParams] = useSearchParams();
   const isAttendMode = mode === "attend";
 
   const { schoolName, adminName, role: adminRole } = useAdminInfo();
-  const { isFocused } = useSearchContext();
 
   const handlerModeChange = () => {
     if (isAttendMode) {

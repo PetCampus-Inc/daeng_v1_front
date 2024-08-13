@@ -9,14 +9,14 @@ import { AttendanceSearchList } from "./AttendanceList/AttendanceSearchList";
 import AttendanceCloseModal from "./AttendanceModal/AttendanceCloseModal";
 import { EmptyList } from "./EmptyList";
 import { useAttendanceModeContext } from "./hooks/useAttendanceModeContext";
-import { useSearchContext } from "./hooks/useSearchContext";
+import { ModeSearchContext } from "./hooks/useSearchContext";
 import { List } from "./styles";
 
 export function AttendanceMode() {
   const { schoolId, adminId } = useAdminInfo();
   const { data: dogList } = useGetAttendDogList(schoolId);
 
-  const { searchText, isFocused } = useSearchContext();
+  const { searchText, isFocused } = ModeSearchContext.useSearchContext();
   const { data: searchList } = useAttendDogSearchQuery(schoolId, searchText);
 
   const selectedDogs = useAttendanceModeContext();
