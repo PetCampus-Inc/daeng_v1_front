@@ -5,17 +5,21 @@ import { useCallback, useRef, useState } from "react";
 import Slider from "react-slick";
 
 import * as S from "./styles";
-import { useSelectedDogs } from "../context/SelectedDogProvider";
+import {
+  useAttendanceModeActions,
+  useAttendanceModeContext
+} from "../hooks/useAttendanceModeContext";
 import { Spacing } from "../styles";
 
-const AttendanceAvatar = () => {
+export function AttendanceAvatar() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const sliderRef = useRef<Slider>(null);
 
-  const [selectedDogs, dispatch] = useSelectedDogs();
+  const selectedDogs = useAttendanceModeContext();
+  const { remove } = useAttendanceModeActions();
 
   const handleRemoveDog = useCallback((dogId: number) => {
-    dispatch({ type: "REMOVE_DOG", payload: dogId });
+    remove(dogId);
   }, []);
 
   const navigate = (direction: "next" | "prev") => {
@@ -97,6 +101,6 @@ const AttendanceAvatar = () => {
       </S.SliderWrapper>
     </S.Container>
   );
-};
+}
 
 export default AttendanceAvatar;
