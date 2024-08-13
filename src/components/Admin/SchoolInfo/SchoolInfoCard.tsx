@@ -7,6 +7,7 @@ import { WideButton, XSmallButton } from "components/common/Button/Templates";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useState } from "react";
 
 import CallSchoolBottomSheet from "./Modal/CallSchoolBottomSheet";
 import DisconnectModal from "./Modal/DisconnectModal";
@@ -15,6 +16,7 @@ import * as S from "./styles";
 const SchoolInfoCard = () => {
   const { adminId } = useAdminInfo();
   const { data } = useGetTeacherInfo(adminId);
+  const [isPrevSchool, setIsPrevSchool] = useState(true);
 
   const overlay = useOverlay();
 
