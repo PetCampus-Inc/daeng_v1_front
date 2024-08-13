@@ -1,15 +1,14 @@
-import { type BottomSheetProps } from "components/common/BottomSheet";
 import CallBottomSheet from "components/common/BottomSheet/CallBottomSheet";
 import { useCallMember } from "hooks/api/admin/attendance";
-import { memo } from "react";
 
+import type { BottomSheetProps } from "components/common/BottomSheet";
 import type { IMemberCallInfo } from "types/admin/attendance.type";
 
 interface CallMemberBottomSheetProps extends BottomSheetProps {
   dogId: number;
 }
 
-const CallMemberBottomSheet = memo(({ dogId, isOpen, close }: CallMemberBottomSheetProps) => {
+export function CallMemberBottomSheet({ dogId, isOpen, close }: CallMemberBottomSheetProps) {
   const { data } = useCallMember(dogId);
 
   const handleCallMember = (data: IMemberCallInfo) => {
@@ -27,6 +26,4 @@ const CallMemberBottomSheet = memo(({ dogId, isOpen, close }: CallMemberBottomSh
       handleCall={() => handleCallMember(data)}
     />
   );
-});
-
-export default CallMemberBottomSheet;
+}

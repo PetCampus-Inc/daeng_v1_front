@@ -1,10 +1,10 @@
 import { Modal, type ModalProps } from "components/common/Modal";
 
-type DeleteDogModalProps = {
+interface DeleteDogModalProps extends ModalProps {
   action: () => void;
-} & ModalProps;
+}
 
-const DeleteDogModal = ({ close, action, isOpen }: DeleteDogModalProps) => {
+export function DeleteDogModal({ close, action, isOpen }: DeleteDogModalProps) {
   return (
     <Modal isOpen={isOpen} close={close}>
       <Modal.Content variant="two-button">
@@ -16,6 +16,4 @@ const DeleteDogModal = ({ close, action, isOpen }: DeleteDogModalProps) => {
       </Modal.Content>
     </Modal>
   );
-};
-
-export default DeleteDogModal;
+}

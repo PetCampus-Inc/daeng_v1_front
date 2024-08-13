@@ -4,7 +4,7 @@ type AttendanceCloseModalProps = {
   action: () => void;
 } & ModalProps;
 
-const AttendanceCloseModal = ({ close, action, isOpen }: AttendanceCloseModalProps) => {
+export function AttendanceCloseModal({ close, action, isOpen }: AttendanceCloseModalProps) {
   return (
     <Modal isOpen={isOpen} close={close}>
       <Modal.Content variant="two-button">
@@ -16,6 +16,4 @@ const AttendanceCloseModal = ({ close, action, isOpen }: AttendanceCloseModalPro
       </Modal.Content>
     </Modal>
   );
-};
-
-export default AttendanceCloseModal;
+}
