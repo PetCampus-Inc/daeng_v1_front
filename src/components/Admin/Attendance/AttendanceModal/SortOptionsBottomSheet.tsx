@@ -6,7 +6,7 @@ import { ListItem, ListWrapper } from "./styles";
 import { BottomSheet, type BottomSheetProps } from "../../../common/BottomSheet";
 import { SORT_OPTIONS } from "../constant";
 
-const SortOptionListBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
+export function SortOptionsBottomSheet({ isOpen, close }: BottomSheetProps) {
   const [sortName, setSortName] = useRecoilState(sortOptionState);
 
   return (
@@ -55,6 +55,4 @@ const SortOptionListBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
       </BottomSheet.Content>
     </BottomSheet>
   );
-};
-
-export default SortOptionListBottomSheet;
+}

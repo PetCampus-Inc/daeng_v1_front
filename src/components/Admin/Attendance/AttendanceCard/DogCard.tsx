@@ -12,8 +12,8 @@ import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/remainin
 
 import * as S from "./styles";
 import AttendanceOptionList from "../AttendanceButton/AttendanceOptionList";
-import CallMemberBottomSheet from "../AttendanceModal/CallMemberBottomSheet";
-import DeleteDogModal from "../AttendanceModal/DeleteDogModal";
+import { CallMemberBottomSheet } from "../AttendanceModal/CallMemberBottomSheet";
+import { DeleteDogModal } from "../AttendanceModal/DeleteDogModal";
 
 import type { Attendance } from "types/admin/attendance.type";
 
