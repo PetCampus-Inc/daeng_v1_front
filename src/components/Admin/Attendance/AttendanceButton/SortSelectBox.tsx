@@ -1,13 +1,12 @@
-import { TSortOptionList } from "constants/option";
-
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import { useOverlay } from "hooks/common/useOverlay";
-import { memo } from "react";
 
 import { ArrowDownButton, SelectBox, Text } from "./styles";
 import SortOptionListBottomSheet from "../AttendanceModal/SortOptionListBottomSheet";
 
-const SortSelectBox = memo(({ sortName }: { sortName: TSortOptionList }) => {
+import type { SortOptions } from "../constant";
+
+export function SortSelectBox({ sortName }: { sortName: SortOptions }) {
   const overlay = useOverlay();
 
   const openCallPopup = () =>
@@ -23,6 +22,4 @@ const SortSelectBox = memo(({ sortName }: { sortName: TSortOptionList }) => {
       </ArrowDownButton>
     </SelectBox>
   );
-});
-
-export default SortSelectBox;
+}

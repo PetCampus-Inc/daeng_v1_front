@@ -1,11 +1,10 @@
-import { LIST } from "constants/option";
-
 import { useRecoilState } from "recoil";
 import { sortOptionState } from "store/form";
 import { ConfirmButton } from "styles/StyleModule";
 
 import { ListItem, ListWrapper } from "./styles";
 import { BottomSheet, type BottomSheetProps } from "../../../common/BottomSheet";
+import { SORT_OPTIONS } from "../constant";
 
 const SortOptionListBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
   const [sortName, setSortName] = useRecoilState(sortOptionState);
@@ -16,40 +15,40 @@ const SortOptionListBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
         <BottomSheet.Title variant="body">정렬</BottomSheet.Title>
         <ListWrapper>
           <ListItem
-            className={sortName === LIST.REGISTERED ? "active" : ""}
+            className={sortName === SORT_OPTIONS.REGISTERED ? "active" : ""}
             onClick={async () => {
-              setSortName(LIST.REGISTERED);
+              setSortName(SORT_OPTIONS.REGISTERED);
               close();
             }}
           >
-            {LIST.REGISTERED}
+            {SORT_OPTIONS.REGISTERED}
           </ListItem>
           <ListItem
-            className={sortName === LIST.PAYMENT ? "active" : ""}
+            className={sortName === SORT_OPTIONS.PAYMENT ? "active" : ""}
             onClick={async () => {
-              setSortName(LIST.PAYMENT);
+              setSortName(SORT_OPTIONS.PAYMENT);
               close();
             }}
           >
-            {LIST.PAYMENT}
+            {SORT_OPTIONS.PAYMENT}
           </ListItem>
           <ListItem
-            className={sortName === LIST.DATE ? "active" : ""}
+            className={sortName === SORT_OPTIONS.DATE ? "active" : ""}
             onClick={async () => {
-              setSortName(LIST.DATE);
+              setSortName(SORT_OPTIONS.DATE);
               close();
             }}
           >
-            {LIST.DATE}
+            {SORT_OPTIONS.DATE}
           </ListItem>
           <ListItem
-            className={sortName === LIST.CHARGE ? "active" : ""}
+            className={sortName === SORT_OPTIONS.CHARGE ? "active" : ""}
             onClick={async () => {
-              setSortName(LIST.CHARGE);
+              setSortName(SORT_OPTIONS.CHARGE);
               close();
             }}
           >
-            {LIST.CHARGE}
+            {SORT_OPTIONS.CHARGE}
           </ListItem>
         </ListWrapper>
         <ConfirmButton onClick={() => close()}>닫기</ConfirmButton>
