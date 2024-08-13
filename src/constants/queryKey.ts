@@ -6,17 +6,9 @@ const ADMIN_QUERY_KEY = {
   TEACHER_LIST: ["teacherList"], // 선생님 리스트 조회
 
   ATTEND_LIST: ["attendDogList"], // 출석안한 강아지 리스트
-  ATTEND_LIST_SEARCH: (schoolId: number, searchText?: string) => [
-    "attendDogList",
-    schoolId,
-    searchText
-  ],
+  ATTEND_LIST_SEARCH: (searchText?: string) => ["attendDogList", searchText],
   ATTENDANCE_LIST: ["dogList"], // 출석부 강아지 리스트
-  ATTENDANCE_LIST_SEARCH: (schoolId: number, searchText?: string) => [
-    "dogList",
-    schoolId,
-    searchText
-  ], // 출석부 강아지 리스트 with 유치원아이디 and 검색어
+  ATTENDANCE_LIST_SEARCH: (searchText?: string) => ["dogList", searchText], // 출석부 강아지 리스트
   ATTENDANCE_LIST_SORTNAME: (sortName: string) => ["dogList", sortName],
   ATTENDANCE_DOG_TICKET: (dogId: number) => ["dogTicket", dogId], // 출석부 강아지 상세 이용권 정보
 

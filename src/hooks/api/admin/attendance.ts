@@ -33,7 +33,7 @@ export const useGetAttendDogList = (schoolId: number) => {
 
 export const useAttendDogSearchQuery = (schoolId: number, searchText?: string) => {
   return useQuery({
-    queryKey: QUERY_KEY.ATTEND_LIST_SEARCH(schoolId, searchText),
+    queryKey: QUERY_KEY.ATTEND_LIST_SEARCH(searchText),
     queryFn: () => handleGetAttendSearchDogs(schoolId, searchText),
     enabled: !!searchText
   });
@@ -41,7 +41,7 @@ export const useAttendDogSearchQuery = (schoolId: number, searchText?: string) =
 
 export const useDogSearchQuery = (schoolId: number, searchText?: string) => {
   return useQuery({
-    queryKey: QUERY_KEY.ATTENDANCE_LIST_SEARCH(schoolId, searchText),
+    queryKey: QUERY_KEY.ATTENDANCE_LIST_SEARCH(searchText),
     queryFn: () => handleGetSearchDogs(schoolId, searchText),
     enabled: !!searchText
   });
@@ -53,6 +53,7 @@ export const usePostAttendDog = () => {
     mutationFn: handlePostAttend,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.ATTENDANCE_LIST });
+      queryClient.removeQueries({ queryKey: QUERY_KEY.ATTEND_LIST }); // 출석안한 강아지 리스트 캐시 삭제
     }
   });
   return { mutateAttend: mutate };
