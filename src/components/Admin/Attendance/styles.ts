@@ -11,34 +11,12 @@ export const StyledHeadWrapper = styled.div`
   height: 20%;
 `;
 
-export const MainWrapper = styled.div`
+/* Attendance Top */
+export const TopContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const TitleWrapper = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  gap: 2px;
-`;
-
-export const Title = styled.h2`
-  color: ${({ theme }) => theme.colors.black};
-  ${({ theme }) => theme.typo.title2_20_B};
-`;
-export const SubTitle = styled.h4`
-  color: ${({ theme }) => theme.colors.gray_2};
-  ${({ theme }) => theme.typo.body2_16_R};
-`;
-
-export const ButtonWrapper = styled.div`
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
 `;
 
 export const FootButton = styled.button.withConfig({
@@ -81,7 +59,7 @@ export const FootButton = styled.button.withConfig({
     `}
 `;
 
-export const ControlButton = styled.button.withConfig({
+export const AttendanceButton = styled.button.withConfig({
   shouldForwardProp: (prop) => prop !== "isFocus"
 })<{ isFocus: boolean }>`
   min-width: 70px;
@@ -107,13 +85,13 @@ export const ControlButton = styled.button.withConfig({
     `}
 `;
 
-export const ListContainer = styled.div`
-  height: 100%; /* 스크롤 영역 보장 위해 필수 */
-`;
+// export const ListContainer = styled.div`
+//   height: calc(100% - 78px); /* 스크롤 영역 보장 위해 필수 (100% - navbar height) */
+// `;
 
 export const ListWrapper = styled.div`
   width: 100%;
-  height: calc(100% - 7vh - 280px); /* 리스트 영역 */
+  height: calc(100% - 78px - 280px); /* 리스트 영역 */
   overflow-y: visible; /* 리스트가 여백에 잘리지 않도록 영역 보장*/
   position: relative;
 `;
@@ -131,10 +109,10 @@ export const EmptyText = styled.div`
   color: ${({ theme }) => theme.colors.gray_3};
 `;
 
-export const Blur = styled.div.withConfig({
+export const List = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "isFocus"
 })<{ isFocus: boolean }>`
-  height: 100%;
+  height: calc(100% - 78px);
 
   & > * {
     opacity: ${({ isFocus }) => (isFocus ? 0.5 : 1)};
