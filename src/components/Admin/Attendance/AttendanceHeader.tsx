@@ -35,7 +35,12 @@ export function AttendanceHeader({ isFocused, mode }: AttendanceHeaderProps) {
         </Text>
       </Flex>
       <Flex justify="center" align="center" gap={4}>
-        <FootButton type="button" className={isAttendMode ? "active" : ""} isFocus={isFocused}>
+        <FootButton
+          type="button"
+          onClick={handlerModeChange}
+          className={isAttendMode ? "active" : ""}
+          isFocus={isFocused}
+        >
           <FootIcon />
         </FootButton>
         <AttendanceButton
