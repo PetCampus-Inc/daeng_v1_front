@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
 import { Layout, Text } from "components/common";
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { useNavigate } from "react-router-dom";
 
 const AdminDeleteCompletePage = () => {
@@ -18,9 +18,7 @@ const AdminDeleteCompletePage = () => {
         </Text>
         <Text color="gray_3">똑독 유치원에서 다시 만날 날을 기다릴게요</Text>
       </Layout>
-      <BackgroundButton onClick={() => navigate(PATH.LOGIN)} backgroundColor="white">
-        로그인 화면으로 이동
-      </BackgroundButton>
+      <BottomButton onClick={() => navigate(PATH.LOGIN)}>로그인 화면으로 이동</BottomButton>
     </>
   );
 };
