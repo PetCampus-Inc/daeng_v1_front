@@ -10,6 +10,7 @@ import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 import { BackgroundButton } from "../../../common/Button";
+import { useState } from "react";
 
 interface ProfileInfoProps {
   principalData?: IOwnerInfo;
@@ -17,14 +18,18 @@ interface ProfileInfoProps {
 }
 
 const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
-  const { handleSubmit, register, setValue } = useForm();
+  const { handleSubmit, register, setValue, getFieldState, watch } = useForm();
   const { ownerProfileEditMutation } = useOwnerProfileEdit();
+  const [isPhoneDirty, setIsPhoneDirty] = useState(false);
   const roleData = principalData ? principalData : teacherData;
+  const name = watch("newName");
+  const nameFieldState = getFieldState("newName");
 
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const formattedValue = formatPhoneNumber(value);
     setValue(field, formattedValue);
+    setIsPhoneDirty(true);
   };
 
   const onSubmit = handleSubmit((data) => {
@@ -89,7 +94,12 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
             onChange={handleChangeNumber("newPhoneNumber")}
           />
         </Flex>
-        <BackgroundButton backgroundColor="white" type="submit" onClick={onSubmit}>
+        <BackgroundButton
+          disabled={!nameFieldState.isDirty && !isPhoneDirty}
+          backgroundColor="white"
+          type="submit"
+          onClick={onSubmit}
+        >
           수정 완료
         </BackgroundButton>
       </S.ProfileWrapper>

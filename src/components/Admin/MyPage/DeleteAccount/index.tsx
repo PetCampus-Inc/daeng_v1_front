@@ -27,7 +27,8 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
     4: false
   });
 
-  const isAllChecked = Object.values(contents).every(Boolean);
+  const isAllChecked =
+    role === Role.ROLE_OWNER ? Object.values(contents).every(Boolean) : contents[1] && contents[2];
 
   const checkAll = () => {
     const newState = !isAllChecked;
