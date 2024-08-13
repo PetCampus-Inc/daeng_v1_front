@@ -47,15 +47,15 @@ export const useDogSearchQuery = (schoolId: number, searchText?: string) => {
   });
 };
 
-export const useCreateAttendDog = () => {
+export const usePostAttendDog = () => {
   const queryClient = useQueryClient();
-  const attendDogMutation = useMutation({
+  const { mutate } = useMutation({
     mutationFn: handlePostAttend,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.ATTENDANCE_LIST });
     }
   });
-  return { mutateAttend: attendDogMutation.mutate };
+  return { mutateAttend: mutate };
 };
 
 export const useDeleteAttendDog = () => {

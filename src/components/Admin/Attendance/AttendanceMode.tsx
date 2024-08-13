@@ -21,6 +21,7 @@ export function AttendanceMode() {
 
   const selectedDogs = useAttendanceModeContext();
   const [, setSearchParams] = useSearchParams();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const data = searchText ? searchList : dogList;
 
@@ -28,7 +29,7 @@ export function AttendanceMode() {
     setSearchParams({});
   }, [setSearchParams]);
 
-  const blocker = useBlocker(() => selectedDogs.length > 0);
+  const blocker = useBlocker(() => selectedDogs.length > 0 && !isSubmitting);
 
   return (
     <>
@@ -39,7 +40,12 @@ export function AttendanceMode() {
         ) : (
           <AttendanceSearchList data={data} />
         )}
-        <AttendDogSubmitButton schoolId={schoolId} adminId={adminId} />
+        <AttendDogSubmitButton
+          schoolId={schoolId}
+          adminId={adminId}
+          onSubmitStart={() => setIsSubmitting(true)}
+          onSubmitEnd={() => setIsSubmitting(false)}
+        />
       </List>
       {blocker.state === "blocked" && (
         <AttendanceCloseModal
