@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   height: 100vh;
@@ -11,7 +11,6 @@ export const StyledHeadWrapper = styled.div`
   height: 20%;
 `;
 
-/* Attendance Top */
 export const TopContainer = styled.div`
   display: flex;
   width: 100%;
@@ -25,37 +24,43 @@ export const FootButton = styled.button.withConfig({
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 35px;
   height: 35px;
   border-radius: 50%;
+  flex-shrink: 0;
   border: 1px solid ${({ theme }) => theme.colors.primaryColor};
   background-color: ${({ theme }) => theme.colors.primaryColor};
-
-  flex-shrink: 0; /* 아이콘 크기가 축소되지 않도록 설정 */
 
   & > svg {
     color: ${({ theme }) => theme.colors.white};
   }
 
   &.active {
-    border: 1px solid ${({ theme }) => theme.colors.br_2};
+    border-color: ${({ theme }) => theme.colors.br_2};
     background-color: ${({ theme }) => theme.colors.white};
-  }
 
-  &.active > svg {
-    color: ${({ theme }) => theme.colors.br_2};
+    & > svg {
+      color: ${({ theme }) => theme.colors.br_2};
+    }
   }
 
   ${({ isFocus, theme }) =>
     isFocus &&
-    `
-    opacity: 0.5;
-    border: 1px solid ${theme.colors.gray_3};
-    background-color: ${theme.colors.white};
-    & > svg {
-    color: ${theme.colors.gray_3};
-  }
+    css`
+      opacity: 0.5;
+      border-color: ${theme.colors.gray_3};
+      background-color: ${theme.colors.white};
+
+      & > svg {
+        color: ${theme.colors.gray_3};
+      }
+
+      &.active {
+        border-color: ${theme.colors.gray_3};
+        & > svg {
+          color: ${theme.colors.gray_3};
+        }
+      }
     `}
 `;
 
@@ -85,15 +90,27 @@ export const AttendanceButton = styled.button.withConfig({
     `}
 `;
 
-// export const ListContainer = styled.div`
-//   height: calc(100% - 78px); /* 스크롤 영역 보장 위해 필수 (100% - navbar height) */
-// `;
+export const RootContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isFocus"
+})<{ isFocus: boolean }>`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-inline: 16px;
 
-export const ListWrapper = styled.div`
-  width: 100%;
-  height: calc(100% - 78px - 280px); /* 리스트 영역 */
-  overflow-y: visible; /* 리스트가 여백에 잘리지 않도록 영역 보장*/
-  position: relative;
+  & > * {
+    opacity: ${({ isFocus }) => (isFocus ? 0.5 : 1)};
+  }
+
+  &.attend {
+    padding-bottom: 96px; /* 하단버튼 영역 */
+  }
+`;
+
+export const ScrollableContent = styled.div`
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-bottom: 16px;
 `;
 
 export const CardListWrapper = styled.div`
@@ -107,30 +124,4 @@ export const EmptyText = styled.div`
   text-align: center;
   ${({ theme }) => theme.typo.label2_14_R};
   color: ${({ theme }) => theme.colors.gray_3};
-`;
-
-export const List = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== "isFocus"
-})<{ isFocus: boolean }>`
-  height: calc(100% - 78px);
-
-  & > * {
-    opacity: ${({ isFocus }) => (isFocus ? 0.5 : 1)};
-  }
-`;
-
-export const StyledCardWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  padding-right: 2%;
-  gap: 4%;
-`;
-
-export const StyledTextWrapper = styled.div`
-  margin: 40% auto 0;
-`;
-
-export const Spacing = styled.div`
-  height: 52px;
 `;

@@ -1,4 +1,4 @@
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { usePostAttendDog } from "hooks/api/admin/attendance";
 import { useSearchParams } from "react-router-dom";
 
@@ -40,13 +40,14 @@ const AttendDogSubmitButton = ({
   };
 
   return (
-    <BackgroundButton
+    <BottomButton
+      position="fixed"
+      bottom={78}
       onClick={handlePostAttend}
       disabled={selectedDogs.length === 0}
-      backgroundColor="white"
     >
       출석 완료
-    </BackgroundButton>
+    </BottomButton>
   );
 };
 
