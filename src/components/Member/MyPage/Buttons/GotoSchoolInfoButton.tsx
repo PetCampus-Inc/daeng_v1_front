@@ -15,7 +15,7 @@ const GotoSchoolInfoButton = ({ onClick, isOpen, pr, schoolInfo }: ISchoolInfoBu
       {schoolInfo ? (
         <>
           <span>{schoolInfo} 유치원</span>
-          {!isOpen && <ArrowRightIcon />}
+          {!isOpen && <ArrowRightIcon w={19} />}
         </>
       ) : (
         <span>등록된 유치원 없음</span>
