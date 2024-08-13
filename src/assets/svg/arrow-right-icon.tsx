@@ -13,7 +13,7 @@ interface Props extends IconSize {
     | "none";
 }
 
-const ArrowRightIcon = ({ className = "", w = "16", h = w, colorScheme = "none" }: Props) => {
+const ArrowRightIcon = ({ className = "", w = "24", h = w, colorScheme = "none" }: Props) => {
   const colorMap = new Map<string, string>([
     ["gray_1", "#525252"],
     ["gray_2", "#858585"],
@@ -37,7 +37,6 @@ const ArrowRightIcon = ({ className = "", w = "16", h = w, colorScheme = "none" 
         fillRule="evenodd"
         clipRule="evenodd"
         d="M8.5353 5.39299C8.92583 5.00247 9.55899 5.00247 9.94952 5.39299L15.6008 11.0443C15.6027 11.0461 15.6046 11.048 15.6065 11.05C15.997 11.4405 15.997 12.0736 15.6065 12.4642L9.94967 18.121C9.55914 18.5115 8.92598 18.5115 8.53545 18.121C8.14493 17.7305 8.14493 17.0973 8.53545 16.7068L13.4852 11.7571L8.5353 6.8072C8.14478 6.41668 8.14478 5.78352 8.5353 5.39299Z"
-        fill={colorMap.get(colorScheme)}
       />
     </svg>
   );

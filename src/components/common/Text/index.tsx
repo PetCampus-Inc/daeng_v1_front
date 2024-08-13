@@ -11,6 +11,7 @@ export type TextOptions = {
   isEllipsis?: boolean;
   textAlign?: CSSProperties["textAlign"];
   whiteSpace?: CSSProperties["whiteSpace"];
+  textDecoration?: CSSProperties["textDecoration"];
 };
 
 type TextProps<C extends ElementType = "span"> = PolymorphicComponentPropsWithRef<C, TextOptions>;
