@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { memberEnrollmentDogDetailAtom } from "store/member";
-import { addZero } from "utils/date";
+import { padToTwoDigits } from "utils/date";
 
 import BreedInput from "../Input/BreedInput";
 
@@ -29,8 +29,8 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
   const [Dogyear, Dogmonth, Dogday] = memberDogInfo ? memberDogInfo.birthDate : [];
   const memeberDogBirth = {
     year: Dogyear ? String(Dogyear) : "",
-    month: Dogmonth ? String(addZero(Dogmonth)) : "",
-    day: Dogday ? String(addZero(Dogday)) : ""
+    month: Dogmonth ? String(padToTwoDigits(Dogmonth)) : "",
+    day: Dogday ? String(padToTwoDigits(Dogday)) : ""
   };
 
   useEffect(() => {
