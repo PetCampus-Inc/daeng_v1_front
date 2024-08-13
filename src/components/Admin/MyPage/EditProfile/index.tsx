@@ -3,6 +3,7 @@ import { PHONE_REGEX } from "constants/validCheck";
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { Flex, Layout, Text, TextInput } from "components/common";
 import { useOwnerProfileEdit } from "hooks/api/admin/mypage";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IOwnerInfo } from "types/admin/mypage.types";
 import { ITeacherInfo } from "types/admin/mypage.types";
@@ -10,7 +11,6 @@ import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 import { BackgroundButton } from "../../../common/Button";
-import { useState } from "react";
 
 interface ProfileInfoProps {
   principalData?: IOwnerInfo;
