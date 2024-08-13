@@ -3,41 +3,13 @@ import styled from "styled-components";
 import { ImageWrapper } from "../AttendanceCard/styles";
 export { Image } from "../AttendanceCard/styles";
 
-export const Container = styled.div``;
-
-export const TopWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 52px;
-`;
-
-export const SliderWrapper = styled.div`
-  margin-bottom: 23px;
-`;
-
-export const SliderPagination = styled.div`
-  display: flex;
-  gap: 2px;
-  color: ${({ theme }) => theme.colors.gray_3};
-
-  & > span {
-    ${({ theme }) => theme.typo.body2_16_R};
-    color: ${({ theme }) => theme.colors.gray_3};
-  }
-`;
-
 export const ArrowButton = styled.button`
   display: flex;
   align-items: center;
+
   & > svg {
     color: ${({ theme }) => theme.colors.gray_3};
   }
-`;
-
-export const Text = styled.span`
-  ${({ theme }) => theme.typo.body2_16_R};
-  color: ${({ theme }) => theme.colors.gray_2};
 `;
 
 export const Name = styled.span`

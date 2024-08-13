@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useBlocker } from "react-router-dom";
 
 import AttendDogSubmitButton from "./AttendanceButton/AttendDogSubmitButton";
-import AttendanceAvatar from "./AttendanceList/AttendanceAvatar";
+import { AttendanceAvatar } from "./AttendanceList/AttendanceAvatar";
 import { AttendanceSearchList } from "./AttendanceList/AttendanceSearchList";
 import { AttendanceCloseModal } from "./AttendanceModal/AttendanceCloseModal";
 import { EmptyList } from "./EmptyList";

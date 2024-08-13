@@ -1,6 +1,7 @@
 import ArrowLeftSquare from "assets/svg/arrow-left-square-icon";
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
 import CloseIcon from "assets/svg/x-circle-icon";
+import { Box, Flex, Text } from "components/common";
 import { useCallback, useRef, useState } from "react";
 import Slider from "react-slick";
 
@@ -9,7 +10,8 @@ import {
   useAttendanceModeActions,
   useAttendanceModeContext
 } from "../hooks/useAttendanceModeContext";
-import { Spacing } from "../styles";
+
+import type { Attend } from "types/admin/attendance.type";
 
 export function AttendanceAvatar() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -26,41 +28,19 @@ export function AttendanceAvatar() {
     direction === "next" ? sliderRef.current?.slickNext() : sliderRef.current?.slickPrev();
   };
 
-  if (selectedDogs.length === 0) return <Spacing />;
-
-  const adjustedSlides = () => {
-    const slides = selectedDogs.map((dog) => (
-      <S.Avatar key={dog.dogId}>
-        <S.AvatarWrapper>
-          <S.AvatarImgWrapper>
-            <S.Image
-              src={
-                "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt={`${dog.dogName} 이미지`}
-            />
-          </S.AvatarImgWrapper>
-          <S.Name>{dog.dogName}</S.Name>
-          <S.RemoveButton onClick={() => handleRemoveDog(dog.dogId)}>
-            <CloseIcon />
-          </S.RemoveButton>
-        </S.AvatarWrapper>
-      </S.Avatar>
+  const slides = () => {
+    const dogSlides = selectedDogs.map((dog) => (
+      <AvatarItem key={dog.dogId} dog={dog} onRemove={handleRemoveDog} />
     ));
-
-    // MEMO: 슬라우드 수가 5의 배수가 되도록 필요한 만큼의 빈 슬라이드(placeholder)를 추가는 로직
-    const remainder = slides.length % 5;
+    // 5개씩 끊어서 보여주기 위해 나머지가 있으면 빈 아바타로 채워줌
+    const remainder = dogSlides.length % 5;
     if (remainder > 0) {
       const placeholders = Array.from({ length: 5 - remainder }, (_, i) => (
-        <S.Avatar key={`placeholder-${i}`} className="placeholder">
-          <S.AvatarWrapper>
-            <S.AvatarImgWrapper />
-          </S.AvatarWrapper>
-        </S.Avatar>
+        <PlaceholderAvatar key={`placeholder-${i}`} />
       ));
-      return [...slides, ...placeholders];
+      return [...dogSlides, ...placeholders];
     }
-    return slides;
+    return dogSlides;
   };
 
   const settings = {
@@ -78,29 +58,60 @@ export function AttendanceAvatar() {
   const totalPageIndex = Math.ceil(selectedDogs.length / 5);
   const currentPageIndex = Math.ceil(currentIndex / 5) + 1;
 
+  if (selectedDogs.length === 0) return <Box height={"56px"} />;
+
   return (
-    <S.Container>
-      <S.TopWrapper>
-        <S.Text>출석이 완료된 강아지들이에요</S.Text>
-        <S.SliderPagination>
+    <>
+      <Flex justify="space-between" align="center" height="52px">
+        <Text typo="body2_16_R" color="gray_2">
+          출석이 완료된 강아지들이에요
+        </Text>
+        <Box display="flex" gap={2} color="gray_3">
           <S.ArrowButton type="button" className="prev" onClick={() => navigate("prev")}>
             <ArrowLeftSquare />
           </S.ArrowButton>
-          <span>
+          <Text typo="body2_16_R" color="gray_3">
             {currentPageIndex} / {totalPageIndex}
-          </span>
+          </Text>
           <S.ArrowButton type="button" className="next" onClick={() => navigate("next")}>
             <ArrowRightSquare />
           </S.ArrowButton>
-        </S.SliderPagination>
-      </S.TopWrapper>
-      <S.SliderWrapper>
+        </Box>
+      </Flex>
+      <Box mb={23}>
         <Slider ref={sliderRef} {...settings}>
-          {adjustedSlides()}
+          {slides()}
         </Slider>
-      </S.SliderWrapper>
-    </S.Container>
+      </Box>
+    </>
   );
 }
 
-export default AttendanceAvatar;
+function AvatarItem({ dog, onRemove }: { dog: Attend; onRemove: (id: number) => void }) {
+  return (
+    <S.Avatar>
+      <S.AvatarWrapper>
+        <S.AvatarImgWrapper>
+          <S.Image
+            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt={`${dog.dogName} 이미지`}
+          />
+        </S.AvatarImgWrapper>
+        <S.Name>{dog.dogName}</S.Name>
+        <S.RemoveButton onClick={() => onRemove(dog.dogId)}>
+          <CloseIcon />
+        </S.RemoveButton>
+      </S.AvatarWrapper>
+    </S.Avatar>
+  );
+}
+
+function PlaceholderAvatar() {
+  return (
+    <S.Avatar>
+      <S.AvatarWrapper>
+        <S.AvatarImgWrapper />
+      </S.AvatarWrapper>
+    </S.Avatar>
+  );
+}
