@@ -15,6 +15,7 @@ export const SelectBox = styled.div`
   padding: 4px 12px;
   align-items: center;
   gap: 3px;
+  width: fit-content;
 
   margin: 14px 0;
   border-radius: 12px;
