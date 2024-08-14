@@ -30,7 +30,8 @@ export interface AttendReq {
 /**
  *  @description 출석부 - 출석부 Dto
  */
-export interface Attendance extends Omit<Attend, "attendanceId"> {
+export interface Attendance extends Omit<Attend, "attendanceId" | "status"> {
+  status: null;
   attendanceId: null;
 }
 
