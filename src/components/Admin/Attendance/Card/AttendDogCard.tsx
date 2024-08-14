@@ -11,7 +11,7 @@ interface AttendanceCardProps {
 
 export function AttendDogCard({ dogName, onClick, isSelected }: AttendanceCardProps) {
   return (
-    <S.CardContainer $isAvatar onClick={onClick}>
+    <S.CardContainer hasAvatar onClick={onClick}>
       <S.Stack>
         <S.ImageWrapper>
           <S.Image
@@ -19,7 +19,7 @@ export function AttendDogCard({ dogName, onClick, isSelected }: AttendanceCardPr
             alt={dogName + " 이미지"}
           />
         </S.ImageWrapper>
-        <S.StyledText>{dogName}</S.StyledText>
+        <S.DogName>{dogName}</S.DogName>
       </S.Stack>
       <S.FootButton type="button" className={isSelected ? "" : "active"}>
         <FootIcon />
