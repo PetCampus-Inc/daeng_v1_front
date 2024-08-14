@@ -7,7 +7,6 @@ import { WideButton, XSmallButton } from "components/common/Button/Templates";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useState } from "react";
 
 import CallSchoolBottomSheet from "./Modal/CallSchoolBottomSheet";
 import DisconnectModal from "./Modal/DisconnectModal";

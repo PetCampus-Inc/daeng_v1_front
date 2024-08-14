@@ -13,7 +13,8 @@ import { useNavigate } from "react-router-dom";
 const AdminSettingPage = () => {
   const navigate = useNavigate();
   const { currentStep, setStep } = useStep(3);
-  const [isNeedUpdate, setIsNeedUpdate] = useState(true);
+  //FIXME: 업데이트 유무 리팩토링 필요!
+  const [isNeedUpdate, setIsNeedUpdate] = useState(false);
   const { role } = useAdminInfo();
 
   return (

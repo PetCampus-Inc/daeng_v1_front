@@ -3,11 +3,13 @@ import AgendaIcon from "assets/svg/agenda-icon";
 import AlertBrownIcon from "assets/svg/alert-brown-icon";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import CareDogIcon from "assets/svg/care-dog-icon";
+import CheckCircleBrown from "assets/svg/check-circle-brown";
 import ListYellowCircleIcon from "assets/svg/list-yellow-circle-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
 
 import { PATH } from "./path";
-import CheckCircleBrown from "assets/svg/check-circle-brown";
+
+export const ADMIN_NOTIFICATION_STEP = ["전체", "출석부", "강아지 관리", "유치원 운영"] as const;
 
 // FIXME PATH 경로 수정 필요
 export const ADMIN_NOTIFICATION = {
