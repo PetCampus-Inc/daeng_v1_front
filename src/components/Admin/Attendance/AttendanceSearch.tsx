@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-import AttendanceSearchInput from "./AttendanceInput/AttendanceSearchInput";
+import AttendanceSearchInput from "./Input/AttendanceSearchInput";
 
 type AttendanceSearchProps = {
   setSearchText: (text: string) => void;

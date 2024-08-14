@@ -9,7 +9,7 @@ interface AttendanceCardProps {
   isSelected: boolean;
 }
 
-const AttendanceDogCard = ({ dogName, onClick, isSelected }: AttendanceCardProps) => {
+export function AttendDogCard({ dogName, onClick, isSelected }: AttendanceCardProps) {
   return (
     <S.CardContainer $isAvatar onClick={onClick}>
       <S.Stack>
@@ -26,6 +26,4 @@ const AttendanceDogCard = ({ dogName, onClick, isSelected }: AttendanceCardProps
       </S.FootButton>
     </S.CardContainer>
   );
-};
-
-export default AttendanceDogCard;
+}

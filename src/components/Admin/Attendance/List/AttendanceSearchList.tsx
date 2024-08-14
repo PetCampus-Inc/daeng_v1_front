@@ -1,4 +1,4 @@
-import AttendanceDogCard from "../AttendanceCard/AttendanceDogCard";
+import { AttendDogCard } from "../Card/AttendDogCard";
 import {
   useAttendanceModeActions,
   useAttendanceModeContext
@@ -14,7 +14,7 @@ export function AttendanceSearchList({ data }: { data: Attend[] }) {
   return (
     <CardListWrapper>
       {data.map((item) => (
-        <AttendanceDogCard
+        <AttendDogCard
           key={item.dogId}
           attendanceId={item.attendanceId}
           dogName={item.dogName}

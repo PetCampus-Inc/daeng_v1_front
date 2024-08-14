@@ -1,4 +1,4 @@
-import DogCard from "../AttendanceCard/DogCard";
+import DogCard from "../Card/DogCard";
 import { CardListWrapper } from "../styles";
 
 import type { Attendance } from "types/admin/attendance.type";

@@ -4,10 +4,10 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useRecoilValue } from "recoil";
 import { sortOptionState } from "store/form";
 
-import { SortSelectBox } from "./AttendanceButton/SortSelectBox";
-import { MainList } from "./AttendanceList/MainList";
-import { EmptyList } from "./EmptyList";
+import { SortSelectBox } from "./Button/SortSelectBox";
 import { MainSearchContext } from "./hooks/useSearchContext";
+import { EmptyList } from "./List/EmptyList";
+import { MainList } from "./List/MainList";
 import { RootContainer, ScrollableContent } from "./styles";
 
 export function AttendanceMain() {
@@ -22,8 +22,8 @@ export function AttendanceMain() {
 
   return (
     <RootContainer isFocus={isFocused}>
+      {!searchText ? <SortSelectBox sortName={sortName} /> : <Box height="52px" />}
       <ScrollableContent>
-        {!searchText ? <SortSelectBox sortName={sortName} /> : <Box height="52px" />}
         {!data || data.length === 0 ? (
           <EmptyList isSearching={!!searchList} />
         ) : (

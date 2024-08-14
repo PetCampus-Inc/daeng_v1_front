@@ -3,13 +3,13 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useBlocker } from "react-router-dom";
 
-import AttendDogSubmitButton from "./AttendanceButton/AttendDogSubmitButton";
-import { AttendanceAvatar } from "./AttendanceList/AttendanceAvatar";
-import { AttendanceSearchList } from "./AttendanceList/AttendanceSearchList";
-import { AttendanceCloseModal } from "./AttendanceModal/AttendanceCloseModal";
-import { EmptyList } from "./EmptyList";
+import AttendDogSubmitButton from "./Button/AttendDogSubmitButton";
+import { AttendanceCloseModal } from "./Dialog/AttendanceCloseModal";
 import { useAttendanceModeContext } from "./hooks/useAttendanceModeContext";
 import { ModeSearchContext } from "./hooks/useSearchContext";
+import { AttendanceAvatar } from "./List/AttendanceAvatar";
+import { AttendanceSearchList } from "./List/AttendanceSearchList";
+import { EmptyList } from "./List/EmptyList";
 import { RootContainer, ScrollableContent } from "./styles";
 
 export function AttendanceMode() {

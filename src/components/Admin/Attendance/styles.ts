@@ -1,23 +1,5 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
-  height: 100vh;
-  width: 100%;
-  margin-top: 5vh;
-  position: relative;
-`;
-
-export const StyledHeadWrapper = styled.div`
-  height: 20%;
-`;
-
-export const TopContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 export const FootButton = styled.button.withConfig({
   shouldForwardProp: (prop) => prop !== "isFocus"
 })<{ isFocus?: boolean }>`
@@ -117,11 +99,4 @@ export const CardListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 16px;
-`;
-
-export const EmptyText = styled.div`
-  padding-top: 30%;
-  text-align: center;
-  ${({ theme }) => theme.typo.label2_14_R};
-  color: ${({ theme }) => theme.colors.gray_3};
 `;

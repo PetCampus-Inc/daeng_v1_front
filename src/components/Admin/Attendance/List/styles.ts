@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { ImageWrapper } from "../AttendanceCard/styles";
-export { Image } from "../AttendanceCard/styles";
+import { ImageWrapper } from "../Card/styles";
+export { Image } from "../Card/styles";
 
 export const ArrowButton = styled.button`
   display: flex;
@@ -57,4 +57,11 @@ export const RemoveButton = styled.button`
       color: ${({ theme }) => theme.colors.br_3};
     }
   }
+`;
+
+export const EmptyText = styled.div`
+  padding-top: 30%;
+  text-align: center;
+  ${({ theme }) => theme.typo.label2_14_R};
+  color: ${({ theme }) => theme.colors.gray_3};
 `;
