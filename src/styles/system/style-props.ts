@@ -61,10 +61,10 @@ export type SpacingProps = {
 };
 
 export type ColorProps = {
-  bg?: ColorKeys; // background
-  bgColor?: ColorKeys; // background-color
-  backgroundColor?: ColorKeys;
-  color?: ColorKeys;
+  bg?: ColorKeys | string; // background
+  bgColor?: ColorKeys | string; // background-color
+  backgroundColor?: ColorKeys | string;
+  color?: ColorKeys | string;
 };
 
 export type PositionProps = {
