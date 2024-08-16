@@ -1,4 +1,4 @@
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { useDeleteCareDogs } from "hooks/api/admin/care";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useContext } from "react";
@@ -26,13 +26,9 @@ const DeleteDogButton = ({ adminId }: { adminId?: number }) => {
     ));
 
   return (
-    <BackgroundButton
-      backgroundColor="white"
-      disabled={selectedDogId.length === 0}
-      onClick={openPopup}
-    >
+    <BottomButton disabled={selectedDogId.length === 0} onClick={openPopup}>
       삭제
-    </BackgroundButton>
+    </BottomButton>
   );
 };
 

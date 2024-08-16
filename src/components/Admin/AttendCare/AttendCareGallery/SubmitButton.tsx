@@ -1,6 +1,6 @@
 import { PATH } from "constants/path";
 
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -41,13 +41,9 @@ const SubmitButton = () => {
   };
 
   return (
-    <BackgroundButton
-      backgroundColor="white"
-      disabled={selectedDogIds.length === 0}
-      onClick={requestForCreateAlbum}
-    >
+    <BottomButton disabled={selectedDogIds.length === 0} onClick={requestForCreateAlbum}>
       전송하기
-    </BackgroundButton>
+    </BottomButton>
   );
 };
 

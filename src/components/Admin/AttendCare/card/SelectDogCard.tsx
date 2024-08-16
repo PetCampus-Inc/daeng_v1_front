@@ -5,9 +5,9 @@ import { ICareDogInfo } from "types/admin/care.types";
 
 import { CardCheckboxWrapper, CardContainer, ListItemImg } from "./styles";
 
-type AttendanceData = Pick<ICareDogInfo, "dogId" | "dogName">;
+type Attendance = Pick<ICareDogInfo, "dogId" | "dogName">;
 
-interface Props extends AttendanceData {
+interface Props extends Attendance {
   selectId: number;
   isChecked?: boolean;
   toggleId?: (id: number) => void;

@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -135,9 +135,9 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
             }
           />
         </Box>
-        <BackgroundButton onClick={onSubmit} disabled={!isAllChecked} backgroundColor="white">
+        <BottomButton onClick={onSubmit} disabled={!isAllChecked}>
           탈퇴하기
-        </BackgroundButton>
+        </BottomButton>
       </Layout>
     </>
   );

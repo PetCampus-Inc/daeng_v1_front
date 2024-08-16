@@ -8,32 +8,6 @@ import { getWidth } from "./width";
 
 import type { ButtonOption } from "../types";
 
-const hasAnySpacingProp = (props: ButtonOption): boolean => {
-  const spacingProps = [
-    "m",
-    "p",
-    "margin",
-    "padding",
-    "mt",
-    "pt",
-    "mr",
-    "pr",
-    "mb",
-    "pb",
-    "ml",
-    "pl",
-    "mx",
-    "my",
-    "px",
-    "py",
-    "marginX",
-    "marginY",
-    "paddingX",
-    "paddingY"
-  ];
-  return spacingProps.some((prop) => props[prop as keyof ButtonOption] !== undefined);
-};
-
 export const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) =>
     ![
@@ -98,15 +72,9 @@ export const StyledButton = styled.button.withConfig({
   ${({ variant }) => variant && getRadius(variant)};
   ${({ width }) => width && getWidth(width)};
 
-  ${(props) => {
-    if (hasAnySpacingProp(props)) {
-      return css`
-        ${getMarginStyle(props)}
-        ${getPaddingStyle(props)}
-      `;
-    }
-    return props.size ? getSize(props.size) : null;
-  }};
+  ${({ size }) => size && getSize(size)};
+  ${getMarginStyle};
+  ${getPaddingStyle};
 
   ${(props) => {
     const { colorScheme, color, bg, bgColor, backgroundColor } = props;

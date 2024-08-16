@@ -10,7 +10,7 @@ import { ITeacherInfo } from "types/admin/mypage.types";
 import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
-import { BackgroundButton } from "../../../common/Button";
+import { BottomButton } from "../../../common/Button";
 
 interface ProfileInfoProps {
   principalData?: IOwnerInfo;
@@ -94,14 +94,14 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
             onChange={handleChangeNumber("newPhoneNumber")}
           />
         </Flex>
-        <BackgroundButton
+        <BottomButton
           disabled={!nameFieldState.isDirty && !isPhoneDirty}
-          backgroundColor="white"
+          wrapColor="white"
           type="submit"
           onClick={onSubmit}
         >
           수정 완료
-        </BackgroundButton>
+        </BottomButton>
       </S.ProfileWrapper>
     </Layout>
   );

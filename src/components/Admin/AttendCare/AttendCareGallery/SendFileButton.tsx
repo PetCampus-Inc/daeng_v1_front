@@ -1,6 +1,6 @@
 import { PATH } from "constants/path";
 
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -62,9 +62,9 @@ const SendFileButton = ({ type }: Props) => {
   };
 
   return (
-    <BackgroundButton type="submit" onClick={handleSubmit(onSubmit)}>
+    <BottomButton type="submit" onClick={handleSubmit(onSubmit)}>
       전송하기
-    </BackgroundButton>
+    </BottomButton>
   );
 };
 
