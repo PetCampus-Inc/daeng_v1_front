@@ -75,13 +75,18 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
       {doglist.length <= 1 ? (
         <S.MyDogInfoList>
-          {doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
+          {doglist.map(
+            (dog) => dog.dogId && dog.status !== DOG_STATUS.APPROVAL_PENDING && renderMyDogCard(dog)
+          )}
           <AddMyDogCard />
         </S.MyDogInfoList>
       ) : (
         <S.DragCarouselWrapper>
           <DragCarousel gap={12}>
-            {doglist.map((dog) => dog.dogId && renderMyDogCard(dog))}
+            {doglist.map(
+              (dog) =>
+                dog.dogId && dog.status !== DOG_STATUS.APPROVAL_PENDING && renderMyDogCard(dog)
+            )}
             {doglist.map(
               (dog) => dog.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(dog)
             )}
