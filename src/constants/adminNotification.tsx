@@ -9,6 +9,15 @@ import SendAlarmIcon from "assets/svg/send-alarm";
 
 import { PATH } from "./path";
 
+interface NotificationItem {
+  id: number;
+  title: (name: string) => string;
+  text: (expired: string) => string;
+  path: string;
+  icon: React.ReactNode;
+  subtext?: (expired: string) => string;
+}
+
 export const ADMIN_NOTIFICATION_STEP = ["전체", "출석부", "강아지 관리", "유치원 운영"] as const;
 
 // FIXME PATH 경로 수정 필요
@@ -116,5 +125,5 @@ export const ADMIN_NOTIFICATION = {
       path: PATH.ADMIN_ATTENDANCE,
       icon: <AgendaIcon bg={true} />
     }
-  ]
+  ] as NotificationItem[]
 } as const;
