@@ -84,6 +84,37 @@ export interface EnrollmentDataType {
   member: MemberDtoType;
 }
 
+// 유치원 재등록 - 가입신청서 폼 조회
+export interface EnrollmentDogDataType {
+  abandonmentInfo: string;
+  accidentInfo: string;
+  allergyDisease: string;
+  breedId: number;
+  breedName: string;
+  dogBirthDate: number[];
+  dogGender: string;
+  dogId: number;
+  dogName: string;
+  dogSize: string;
+  fileUrl: string | null;
+  limitsInfo: string;
+  member: MemberDtoType;
+  monthlyTicketNumber: number[];
+  neutralization: string;
+  openDays: string[];
+  pickDropInfo: string;
+  pickDropNotice: string;
+  pickDropState: PickDropStateType;
+  priceInfo: string;
+  requiredItemList: number[];
+  roundTicketNumber: number[];
+  schoolFormId: number;
+  schoolFormName: string;
+  ticketInfo: string;
+  ticketType: TicketType[];
+  vaccination: string;
+}
+
 // 가입신청서 폼 조회 - 멤버 정보
 export interface MemberDtoType {
   address: string;
@@ -216,4 +247,25 @@ export interface IEnrollmentDeleteData {
   adminId: number;
   teacherName: string;
   phoneNumber: string;
+}
+
+// 유치원 재등록 시 기본적으로 제공되는 정보
+export interface IDogBasicEnrollmentInfo {
+  allergyDisease: string;
+  birthDate: number[];
+  breedId: number;
+  breedName: string;
+  dogGender: string;
+  dogId: number;
+  dogMemo: string | null;
+  dogName: string;
+  dogSize: string;
+  member: MemberDtoType;
+  neutralization: string;
+  pickDropMemo: string;
+  pickDropRequest: PickDropStateType;
+  pickDropType: PickDropType;
+  profileUri: string | null;
+  vaccination: VaccinationType;
+  vaccinationUri: string | null;
 }

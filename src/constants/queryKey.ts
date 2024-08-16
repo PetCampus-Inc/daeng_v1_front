@@ -54,5 +54,6 @@ export const QUERY_KEY = {
   ...ADMIN_QUERY_KEY,
   ...MEMBER_QUERY_KEY,
   ENROLLMENT: (schoolId: number, memberId: string) => ["enrollment", schoolId, memberId], // 견주 가입신청서 조회
+  DOG_ENROLLMENT: (dogId: string, schoolId: number) => ["dogEnrollment", dogId, schoolId], // 유치원 재등록 가입신청서
   BREED: (searchText?: string) => ["breed", searchText] // 견종 검색
 };
