@@ -1,28 +1,22 @@
 import { PATH } from "constants/path";
 
 import AddCIcon from "assets/svg/add-c-icon";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { memberEnrollmentDogDetailAtom } from "store/member";
+import { dogIdState } from "store/member";
 
 import * as S from "./styles";
 
 const AddMyDogCard = () => {
   const navigate = useNavigate();
-  const { memberId } = useParams();
-  const setMemberDogInfo = useSetRecoilState(memberEnrollmentDogDetailAtom);
-
-  // 유치원 재 등록할 경우 남아 있는 MemberDogInfo 삭제를 위해
-  const handleResetMemberDogInfo = () => {
-    setMemberDogInfo(null);
-  };
+  const setDogId = useSetRecoilState(dogIdState);
 
   return (
     <S.AddMyDogCard
       role="button"
       onClick={() => {
-        navigate(PATH.MEMBER_MY_SCHOOL_SEARCH(String(memberId)));
-        handleResetMemberDogInfo();
+        navigate(PATH.MEMBER_ENROLLMENT_PAGE);
+        setDogId(null); // dogId 초기화
       }}
     >
       <AddCIcon className="addIcon" />
