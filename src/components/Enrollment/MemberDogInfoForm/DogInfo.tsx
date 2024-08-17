@@ -11,9 +11,6 @@ import Title from "components/common/Title";
 import { Caption, Card } from "components/Enrollment/Form/styles";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { useRecoilValue } from "recoil";
-import { memberEnrollmentDogDetailAtom } from "store/member";
-import { padToTwoDigits } from "utils/date";
 
 import BreedInput from "../Input/BreedInput";
 
@@ -22,19 +19,19 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
-  const { register, watch, setValue } = useFormContext();
+  const { register, watch, setValue, getValues } = useFormContext();
 
-  const memberDogInfo = useRecoilValue(memberEnrollmentDogDetailAtom);
+  const { vaccination, dogGender, dogSize, neutralization } = getValues();
 
-  const [Dogyear, Dogmonth, Dogday] = memberDogInfo ? memberDogInfo.birthDate : [];
-  const memeberDogBirth = {
-    year: Dogyear ? String(Dogyear) : "",
-    month: Dogmonth ? String(padToTwoDigits(Dogmonth)) : "",
-    day: Dogday ? String(padToTwoDigits(Dogday)) : ""
+  const feildMappings: { [key: string]: string } = {
+    vaccination: ITEM_ENGLISH_TO_KOREAN[vaccination],
+    dogGender: ITEM_ENGLISH_TO_KOREAN[dogGender],
+    dogSize: ITEM_ENGLISH_TO_KOREAN[dogSize],
+    neutralization: ITEM_ENGLISH_TO_KOREAN[neutralization]
   };
 
   useEffect(() => {
-    setValue("newBreed", memberDogInfo ? memberDogInfo?.breedName : "");
+    Object.keys(feildMappings).forEach((key) => setValue(key, feildMappings[key]));
   }, []);
 
   return (
@@ -46,18 +43,12 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           placeholder="강아지 이름을 입력해주세요"
           register={register}
           required
-          defaultValue={memberDogInfo ? memberDogInfo.dogName : ""}
           className="defaultValue"
         />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_GENDER)}>성별</Title>
-        <SingleRadio
-          name={FIELD.DOG_GENDER}
-          radiosText={["수컷", "암컷"]}
-          isRequired
-          defaultSelect={memberDogInfo ? ITEM_ENGLISH_TO_KOREAN[memberDogInfo.dogGender] : ""}
-        />
+        <SingleRadio name={FIELD.DOG_GENDER} radiosText={["수컷", "암컷"]} isRequired />
       </Card>
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.DOG_SIZE)}>크기</Title>
@@ -66,7 +57,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
           radiosText={["소형견", "중형견", "대형견"]}
           isRequired
-          defaultSelect={memberDogInfo ? ITEM_ENGLISH_TO_KOREAN[memberDogInfo.dogSize] : ""}
         />
       </Card>
       <Card>
@@ -82,27 +72,9 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       <Card>
         <Title isRequired={requiredItems?.get(FIELD_KEYS.BIRTHDAY)}>생일</Title>
         <div style={{ display: "flex", gap: "5px" }}>
-          <SelectNumber
-            name="year"
-            numberList={yearsArray}
-            defaultValue={memeberDogBirth.year === "" ? "2000" : memeberDogBirth.year}
-            watch={watch}
-            setValue={setValue}
-          />
-          <SelectNumber
-            name="month"
-            numberList={monthsArray}
-            defaultValue={memeberDogBirth.month === "" ? "01" : memeberDogBirth.month}
-            watch={watch}
-            setValue={setValue}
-          />
-          <SelectNumber
-            name="day"
-            numberList={daysArray}
-            defaultValue={memeberDogBirth.day === "" ? "01" : memeberDogBirth.day}
-            watch={watch}
-            setValue={setValue}
-          />
+          <SelectNumber name="year" numberList={yearsArray} watch={watch} setValue={setValue} />
+          <SelectNumber name="month" numberList={monthsArray} watch={watch} setValue={setValue} />
+          <SelectNumber name="day" numberList={daysArray} watch={watch} setValue={setValue} />
         </div>
       </Card>
       <Card>
@@ -111,7 +83,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           name={FIELD.NEUTRALIZATION}
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItems?.get(FIELD_KEYS.NEUTRALIZATION)}
-          defaultSelect={memberDogInfo ? ITEM_ENGLISH_TO_KOREAN[memberDogInfo.neutralization] : ""}
         />
       </Card>
       <Card>
@@ -120,7 +91,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           name={FIELD.VACCINATION}
           radiosText={["했어요", "안했어요"]}
           isRequired={requiredItems?.get(FIELD_KEYS.VACCINATION)}
-          defaultSelect={memberDogInfo ? ITEM_ENGLISH_TO_KOREAN[memberDogInfo.vaccination] : ""}
         />
       </Card>
       {watch("vaccination") === "했어요" && (
@@ -141,7 +111,6 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
           {...register("allergyDisease", {
             required: requiredItems?.get(FIELD_KEYS.ALLERGY_DISEASE)
           })}
-          defaultValue={memberDogInfo ? memberDogInfo.allergyDisease : ""}
         />
       </Card>
     </>
