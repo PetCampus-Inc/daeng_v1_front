@@ -9,6 +9,11 @@ export const SIGNUP_PATH = {
   승인상태: "approval" as const
 };
 
+export const MEMBER_ENROLLMENT_PATH = {
+  유치원_검색: "search" as const,
+  가입신청서_작성: "form" as const
+};
+
 export const ADMIN_SIGNUP_PATH = {
   역할_선택: "role" as const,
   유치원_검색: "search" as const,
@@ -86,7 +91,8 @@ const MEMBER_PATH = {
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
   // MEMBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
   MEMBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
-  MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
+  MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog`, // 추가된 강아지 홈 프사 설정
+  MEMBER_ENROLLMENT_PAGE: `/${MYPAGE}/enrollment` // 견주 유치원 검색
 };
 
 const PUBLIC_PATH = {
