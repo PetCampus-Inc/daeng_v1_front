@@ -80,8 +80,6 @@ const MEMBER_PATH = {
   MEMBER_MY_INFO_EDIT_PAGE: (memberId?: string) =>
     `/${MYPAGE}/${memberId ?? ":memberId"}/profile/edit`,
   MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/${MYPAGE}/dog/${dogId ?? ":dogId"}/school`,
-  MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
-    `/${MYPAGE}/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
   MEMBER_MY_ENROLLMENT: (memberId?: string) =>
     `/${MYPAGE}/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
 
@@ -92,7 +90,7 @@ const MEMBER_PATH = {
   // MEMBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
   MEMBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
   MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog`, // 추가된 강아지 홈 프사 설정
-  MEMBER_ENROLLMENT_PAGE: `/${MYPAGE}/enrollment` // 견주 유치원 검색
+  MEMBER_ENROLLMENT_PAGE: `/${MYPAGE}/enrollment` // 강아지 추가, 유치원 재가입 페이지
 };
 
 const PUBLIC_PATH = {
