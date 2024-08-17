@@ -1,7 +1,7 @@
 import { FIELD } from "constants/field";
 import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File";
 
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { usePostMemberDogDetailInfo } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
 import { useFormContext } from "react-hook-form";
@@ -69,14 +69,12 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
   };
 
   return (
-    <BackgroundButton
+    <BottomButton
       onClick={handleSubmit(handleSubmitData)}
-      backgroundColor="white"
-      buttonBackgroundColor="primaryColor"
       disabled={!isDirty || !isValid || isSubmitting}
     >
       수정 완료
-    </BackgroundButton>
+    </BottomButton>
   );
 };
 
