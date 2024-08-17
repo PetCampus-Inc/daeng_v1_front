@@ -1,5 +1,4 @@
 import { atom } from "recoil";
-import { MemberDogInfoData } from "types/member/main.types";
 
 interface ISchool {
   schoolName: string;
@@ -19,12 +18,7 @@ export const memberEnrollmentRejectedAtom = atom({
   default: IS_REJECTED ? JSON.parse(IS_REJECTED) : false
 });
 
-// FIXME memberEnrollmentDogDetailAtom 사용 유무 확인 후 수정하기
-export const memberEnrollmentDogDetailAtom = atom<MemberDogInfoData | null>({
-  key: "memberEnrollmentDogDetail",
-  default: null
-});
-
+// FIXME dogId localStorage에서 가져올 수 있는지 확인하기 (우선 임시로 적용 함)
 // FIXME: selector로 변경 필요!!
 export const dogIdState = atom<number | null>({
   key: "dogId",
