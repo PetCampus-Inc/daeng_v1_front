@@ -110,24 +110,26 @@ export interface IDogMemoInfo {
   dogId: string;
   memo: string;
 }
+
+// TODO type 수정 (임시, 이후 다시 확인 후 수정하기)
 export interface MemberDogInfoData {
   dogId: number;
   dogName: string;
-  dogGender: DogGenderType;
-  dogSize: DogSizeType;
+  dogGender: DogGenderType | string;
+  dogSize: DogSizeType | string;
   breedId: number;
   breedName: string;
   birthDate: number[];
-  neutralization: NeutralizationType;
+  neutralization: NeutralizationType | string;
   allergyDisease: string;
   vaccination: VaccinationType;
   profileUri: string;
-  vaccinationUri: string;
+  vaccinationUri: string | null;
   pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;
   member: IMemberProfilePostInfo;
-  dogMemo: string;
+  dogMemo: string | null;
 }
 
 export interface MemberDogInfoReq {
