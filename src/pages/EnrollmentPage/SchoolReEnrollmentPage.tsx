@@ -1,10 +1,8 @@
-import { MEMBER_DOG_ADD_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
+import { MEMBER_DOG_ADD_ENROLL_STEP } from "constants/step";
 
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
-import DogInfo from "components/Enrollment/Form/DogInfo";
-import MemberInfo from "components/Enrollment/Form/MemberInfo";
 import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
 import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
 import TicketInfo from "components/Enrollment/Form/TicketInfo";
@@ -12,39 +10,65 @@ import MemberDogInfo from "components/Enrollment/MemberDogInfoForm/DogInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
-import { useGetEnrollment } from "hooks/api/member/enroll";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
+import { useGetMemberDogEnrollment } from "hooks/api/member/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
-import { AUTH_MEMBER_ID } from "store/auth";
+import { padToTwoDigits } from "utils/date";
 import { isEmpty } from "utils/is";
 
 interface EnrollmentProps {
   schoolId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.
+  dogId: number;
 }
 
-const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
-  // FIXME: memberId가 없을 경우 예외처리 필요
-  const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID) ?? "1";
+// 유치원 재가입신청 페이지
+const SchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
+  const { data } = useGetMemberDogEnrollment({
+    dogId: String(dogId),
+    schoolId: schoolId ?? -1
+  });
 
-  const { data } = useGetEnrollment({ memberId, schoolId: schoolId ?? -1 });
-  const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
+  const {
+    pickDropState,
+    roundTicketNumber,
+    monthlyTicketNumber,
+    requiredItemList,
+    dogBirthDate,
+    breedName,
+    member,
+    ...rest
+  } = data;
+
+  const [dogyear, dogMonth, dogDay] = dogBirthDate;
+  const dogBirth = {
+    year: dogyear ? dogyear : "",
+    month: dogMonth ? padToTwoDigits(Number(dogMonth)) : "",
+    day: dogDay ? padToTwoDigits(Number(dogDay)) : ""
+  };
 
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...defaultFormValues, ...rest }
+    defaultValues: {
+      ...defaultFormValues,
+      ...member,
+      newBreed: breedName,
+      year: dogBirth.year,
+      month: dogBirth.month,
+      day: dogBirth.day,
+      ...rest
+    }
   });
 
-  const visibleSteps = MEMBER_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));
+  const visibleSteps = MEMBER_DOG_ADD_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));
   const maxSteps = visibleSteps.length;
 
   const { currentStep, nextStep, prevStep, setStep } = useStep(maxSteps - 1);
 
-  const currentTitle = MEMBER_ENROLL_STEP[currentStep].title;
+  const currentTitle = MEMBER_DOG_ADD_ENROLL_STEP[currentStep].title;
 
-  const currentSubtitle = MEMBER_ENROLL_STEP[currentStep].subtitle;
+  const currentSubtitle = MEMBER_DOG_ADD_ENROLL_STEP[currentStep].subtitle;
 
   const indicators = visibleSteps.map((step) => step.indicator);
 
@@ -57,6 +81,12 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   const { dirtyFields } = useFormState({ control: methods.control });
   const blocker = useBlocker(() => !isEmpty(dirtyFields));
 
+  const createRequiredItemList = () => {
+    const mapList = new Map();
+    requiredItemList.forEach((item: number) => mapList.set(item, true));
+    return mapList;
+  };
+
   return (
     <>
       {blocker.state === "blocked" ? (
@@ -66,7 +96,7 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
           action={() => blocker.proceed()}
         />
       ) : null}
-      <Header type="text" text="가입신청서" />
+      <Header type="text" text="가입신청서1" />
       <Layout bgColor="BGray" px={16} pb={40}>
         <S.Container>
           <S.TopWrapper>
@@ -79,19 +109,16 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
           <FormProvider {...methods}>
             <S.ContentWrapper>
               <S.Content $isVisible={currentStep === 0}>
-                <MemberInfo requiredItems={requiredItemList} />
+                <MemberDogInfo requiredItems={createRequiredItemList()} />
               </S.Content>
               <S.Content $isVisible={currentStep === 1}>
-                <DogInfo requiredItems={requiredItemList} />
+                <TicketInfo requiredItems={createRequiredItemList()} ticket={ticket} />
               </S.Content>
               <S.Content $isVisible={currentStep === 2}>
-                <TicketInfo requiredItems={requiredItemList} ticket={ticket} />
+                <PolicyInfo requiredItems={createRequiredItemList()} />
               </S.Content>
               <S.Content $isVisible={currentStep === 3}>
-                <PolicyInfo requiredItems={requiredItemList} />
-              </S.Content>
-              <S.Content $isVisible={currentStep === 4}>
-                <PickDropInfo requiredItems={requiredItemList} />
+                <PickDropInfo requiredItems={createRequiredItemList()} />
               </S.Content>
             </S.ContentWrapper>
             <Navigation
@@ -107,7 +134,7 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   );
 };
 
-export default NewEnrollmentPage;
+export default SchoolReEnrollmentPage;
 
 const defaultFormValues = {
   schoolFormId: 0,
