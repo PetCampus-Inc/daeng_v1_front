@@ -1,8 +1,9 @@
 import { FIELD } from "constants/field";
+import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
-import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { TextInput } from "components/common";
-import { useState } from "react";
+import ProfileUploadBox from "components/Member/Profile/Box/ProfileUploadBox";
+import { useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
@@ -11,6 +12,7 @@ import RoleEditButton from "../Buttons/RoleEditeButton";
 
 const MyProfileEdit = () => {
   const { register } = useFormContext();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isShowRoles, setIsShowRoles] = useState(false);
   const handleShowRoles = () => {
     setIsShowRoles((prev) => !prev);
@@ -19,15 +21,12 @@ const MyProfileEdit = () => {
   return (
     <S.MyProfileWrapper isShowRoles={isShowRoles}>
       <S.ProfileBox>
-        <S.ProfileEditBox>
-          <S.UserImage
-            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="user_profile"
-          />
-          <S.ProfileEditButton>
-            <PencilBrownNormalIcon />
-          </S.ProfileEditButton>
-        </S.ProfileEditBox>
+        <ProfileUploadBox
+          type={TYPE_NAME.MEMBER}
+          fileRef={fileInputRef}
+          fileName={FILE_NAME.PROFILE_MEMBER}
+          mode="edit"
+        />
       </S.ProfileBox>
       <S.MyDogName>
         <TextInput
