@@ -4,7 +4,7 @@ import { IOwnerInfo } from "types/admin/mypage.types";
 import { ITeacherInfo } from "types/admin/mypage.types";
 
 import * as S from "./styles";
-import { BackgroundButton } from "../../../common/Button";
+import { BottomButton } from "../../../common/Button";
 
 interface ProfileInfoProps {
   principalData?: IOwnerInfo;
@@ -38,7 +38,7 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
           </Text>
           <TextInput value={principalData ? principalData.phoneNumber : teacherData?.phoneNumber} />
         </Flex>
-        <BackgroundButton backgroundColor="white">수정 완료</BackgroundButton>
+        <BottomButton>수정 완료</BottomButton>
       </S.ProfileWrapper>
     </Layout>
   );

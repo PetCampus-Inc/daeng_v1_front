@@ -5,7 +5,7 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 
-import { BackgroundButton } from "../../components/common/Button";
+import { BottomButton } from "../../components/common/Button";
 import { PreventLeaveModal } from "../../components/common/Modal";
 
 const SchoolInfoEditPage = () => {
@@ -53,13 +53,7 @@ const SchoolInfoEditPage = () => {
             <TextInput placeholder={data.registrationNumber} disabled />
           </Flex>
         </Flex>
-        <BackgroundButton
-          backgroundColor="white"
-          buttonBackgroundColor="primaryColor"
-          fontColor="white"
-        >
-          수정 완료
-        </BackgroundButton>
+        <BottomButton>수정 완료</BottomButton>
       </Layout>
     </>
   );

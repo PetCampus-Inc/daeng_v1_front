@@ -1,6 +1,6 @@
 import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File";
 
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
 import { FieldValues, useFormContext } from "react-hook-form";
@@ -68,13 +68,13 @@ const SaveProfileButton = () => {
 
   return (
     <S.SavaProfileButton>
-      <BackgroundButton
+      <BottomButton
         onClick={handleSubmit(handleSubmitProfile)}
-        backgroundColor="transparent"
+        wrapColor="transparent"
         disabled={!isValid || !isAllFilled}
       >
         프로필 완성하기
-      </BackgroundButton>
+      </BottomButton>
     </S.SavaProfileButton>
   );
 };

@@ -3,7 +3,6 @@ import Map from "assets/svg/map-pin-icon";
 import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import { Box, Flex } from "components/common";
-import { BackgroundButton } from "components/common/Button";
 import { WideButton, XSmallButton } from "components/common/Button/Templates";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";

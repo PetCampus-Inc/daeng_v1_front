@@ -1,5 +1,6 @@
-import { INIT_COUNTER, LIST, type TSortOptionList } from "constants/option";
+import { INIT_COUNTER } from "constants/option";
 
+import { SORT_OPTIONS, type SortOptions } from "components/Admin/Attendance";
 import { atom } from "recoil";
 
 import type { Nullable } from "types/helper.types";
@@ -24,9 +25,10 @@ export const imagePreviewAtom = atom<ImageFile[]>({
   default: []
 });
 
-export const sortOptionState = atom<TSortOptionList>({
+// FIXME: 전역 상태로 관리하는 것이 맞는지 확인 필요
+export const sortOptionState = atom<SortOptions>({
   key: "sortOption",
-  default: LIST.REGISTERED
+  default: SORT_OPTIONS.REGISTERED
 });
 
 export const ticketCounterState = atom<number>({

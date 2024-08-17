@@ -5,8 +5,7 @@ import { useLocation, useSearchParams } from "react-router-dom";
 
 import * as S from "./styles";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import type { Value } from "react-calendar/dist/cjs/shared/types";
 
 const Calendar = () => {
   const today = new Date();

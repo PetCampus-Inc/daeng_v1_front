@@ -10,11 +10,11 @@ export { default as AdminApprovalStatusPage } from "./SignUpPage/ApprovalStatusP
 export { default as Chat } from "./ChatPage/Chat";
 
 /* Admin Attendance Page */
-export { default as AttendancePage } from "./AdminAtendancePage/AttendancePage";
+export { default as AttendancePage } from "./AdminAttendancePage/AttendancePage";
 export { default as AttendCareDeletePage } from "./AdminAttendCarePage/AttendCareDeletePage";
-export { default as DogGalleryPage } from "./AdminAtendancePage/DogDetailGalleryPage/DogGalleryPage";
-export { default as DogInfoPage } from "./AdminAtendancePage/DogDetailPage/DogInfoPage";
-export { default as NewTicketPage } from "./AdminAtendancePage/DogNewTicketPage/NewTicketPage";
+export { default as DogGalleryPage } from "./DogDetailGalleryPage/DogGalleryPage";
+export { default as DogInfoPage } from "./AdminDogDetailPage/DogInfoPage";
+export { default as NewTicketPage } from "./DogNewTicketPage/NewTicketPage";
 
 /* Admin AttendCare Page */
 export { default as AttendCarePage } from "./AdminAttendCarePage/AttendCarePage";
@@ -52,6 +52,7 @@ export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";
 /* Home Page */
 export { default as HomePage } from "./HomePage/HomePage";
 export { default as ImageAlbumPage } from "./ImageAlbumPage/ImageAlbumPage";
+export { default as AgendaPage } from "./AgendaPage/AgendaPage";
 
 /* My Page */
 export { default as MemberMyPage } from "./MemberPage/MemberMyPage";

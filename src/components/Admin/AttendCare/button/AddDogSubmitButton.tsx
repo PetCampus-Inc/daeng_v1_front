@@ -1,5 +1,5 @@
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { useCreateCareDogs } from "hooks/api/admin/care";
 import { useOverlay } from "hooks/common/useOverlay";
 
@@ -37,9 +37,9 @@ const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
   };
 
   return (
-    <BackgroundButton disabled={selectedDogs.length === 0} onClick={() => handleSubmit()}>
+    <BottomButton disabled={selectedDogs.length === 0} onClick={() => handleSubmit()}>
       선택완료
-    </BackgroundButton>
+    </BottomButton>
   );
 };
 

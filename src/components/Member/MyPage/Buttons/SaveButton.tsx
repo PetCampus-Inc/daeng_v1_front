@@ -1,6 +1,6 @@
 import { FIELD } from "constants/field";
 
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import { usePostMemberProfileInfo } from "hooks/api/member/member";
 import { useFormContext } from "react-hook-form";
 
@@ -37,14 +37,9 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
   };
 
   return (
-    <BackgroundButton
-      onClick={handleSubmit(onSubmit)}
-      backgroundColor="white"
-      buttonBackgroundColor="primaryColor"
-      disabled={!isDirty || !isValid || isSubmitting}
-    >
+    <BottomButton onClick={handleSubmit(onSubmit)} disabled={!isDirty || !isValid || isSubmitting}>
       수정 완료
-    </BackgroundButton>
+    </BottomButton>
   );
 };
 
