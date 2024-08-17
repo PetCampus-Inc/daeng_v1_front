@@ -23,7 +23,7 @@ interface EnrollmentProps {
 }
 
 // 강아지 추가 가입신청 페이지
-const DogCreateEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
+const MemberDogCreateEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   // FIXME: memberId가 없을 경우 예외처리 필요
   const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID) ?? "1";
   const { data } = useGetEnrollment({ memberId, schoolId: schoolId ?? -1 });
@@ -109,7 +109,7 @@ const DogCreateEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   );
 };
 
-export default DogCreateEnrollmentPage;
+export default MemberDogCreateEnrollmentPage;
 
 const defaultFormValues = {
   schoolFormId: 0,

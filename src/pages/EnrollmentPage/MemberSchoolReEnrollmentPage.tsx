@@ -23,7 +23,7 @@ interface EnrollmentProps {
 }
 
 // 유치원 재가입신청 페이지
-const SchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
+const MemberSchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
   const { data } = useGetMemberDogEnrollment({
     dogId: String(dogId),
     schoolId: schoolId ?? -1
@@ -134,7 +134,7 @@ const SchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
   );
 };
 
-export default SchoolReEnrollmentPage;
+export default MemberSchoolReEnrollmentPage;
 
 const defaultFormValues = {
   schoolFormId: 0,

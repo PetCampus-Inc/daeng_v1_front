@@ -1,8 +1,8 @@
 import { MEMBER_ENROLLMENT_PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
-import DogCreateEnrollmentPage from "pages/EnrollmentPage/DogCreateEnrollmentPage";
-import SchoolReEnrollmentPage from "pages/EnrollmentPage/SchoolReEnrollmentPage";
+import MemberDogCreateEnrollmentPage from "pages/EnrollmentPage/MemberDogCreateEnrollmentPage";
+import MemberSchoolReEnrollmentPage from "pages/EnrollmentPage/MemberSchoolReEnrollmentPage";
 import SearchSchoolPage from "pages/SignUpPage/SearchSchoolPage";
 import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -42,10 +42,10 @@ const MemberEnrollmentFunnel = () => {
         <Suspense>
           {dogId ? (
             // 유치원 재가입
-            <SchoolReEnrollmentPage schoolId={state.schoolId} dogId={dogId} />
+            <MemberSchoolReEnrollmentPage schoolId={state.schoolId} dogId={dogId} />
           ) : (
             // 강아지 추가
-            <DogCreateEnrollmentPage schoolId={state.schoolId} />
+            <MemberDogCreateEnrollmentPage schoolId={state.schoolId} />
           )}
         </Suspense>
       </Funnel.Step>
