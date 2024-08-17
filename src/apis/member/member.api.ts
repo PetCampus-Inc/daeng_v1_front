@@ -13,6 +13,7 @@ import type {
   IMemberProfile,
   IMemberProfileInfo,
   IMemberProfilePostInfo,
+  DogVaccination,
   MemberDogInfoData,
   MemberDogInfoReq
 } from "types/member/main.types";
@@ -150,6 +151,7 @@ export const handlePostMemberDogDetailInfo = async (req: MemberDogInfoReq) => {
       dogSize: req.dogSize,
       breedId: req.breedId,
       newBreed: req.newBreed,
+      profileUri: req.profileUri,
       birthDate: req.birthDate,
       neutralization: req.neutralization
     }
@@ -172,6 +174,19 @@ export const handlePostMemoDogPickdrop = async (dogId: number, memo: string): Pr
   const { data } = await authAxios.post(url, {
     dogId: dogId,
     memo: memo
+  });
+  return data;
+};
+
+// 강아지 예방 접종 파일 추가 업로드
+export const handlePostMemoDogVaccination = async (
+  req: DogVaccination
+): Promise<DogVaccination> => {
+  const url = `/member/vaccination`;
+  const { data } = await authAxios.post(url, {
+    dogIdList: req.dogIdList,
+    imageUriList: req.imageUriList,
+    comment: req.comment
   });
   return data;
 };

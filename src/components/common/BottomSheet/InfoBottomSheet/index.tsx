@@ -45,7 +45,7 @@ export const TextAreaBottomSheet = ({
         </Flex>
         <S.TextAreaBox
           className="grayArea"
-          id=""
+          id={type}
           defaultValue={defaultValue}
           placeholder={placeholder}
           rows={6}

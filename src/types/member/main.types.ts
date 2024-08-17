@@ -103,6 +103,15 @@ export interface IDogMemoInfo {
   dogId: string;
   memo: string;
 }
+
+export interface VaccinationUri {
+  imageId: number;
+  imageUri: string;
+  imageType: string;
+  comment: string | null;
+  createdTime: number[];
+}
+
 export interface MemberDogInfoData {
   dogId: number;
   dogName: string;
@@ -115,12 +124,18 @@ export interface MemberDogInfoData {
   allergyDisease: string;
   vaccination: VaccinationType;
   profileUri: string;
-  vaccinationUri: string;
+  vaccinationUri: VaccinationUri[];
   pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;
   member: IMemberProfilePostInfo;
   dogMemo: string;
+}
+
+export interface DogVaccination {
+  dogIdList: number[];
+  imageUriList: string[];
+  comment: string | "";
 }
 
 export interface MemberDogInfoReq {
@@ -130,6 +145,7 @@ export interface MemberDogInfoReq {
   dogSize: DogSizeType | "";
   breedId: number;
   newBreed: string;
+  profileUri: string | "";
   birthDate: string;
   neutralization: NeutralizationType | "";
 }

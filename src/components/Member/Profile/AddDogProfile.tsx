@@ -1,10 +1,10 @@
-import { FILE_URI_NAME, PROFILE_NAME } from "constants/profile";
+import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
 import { useRef, useState } from "react";
 
-import ProfileEditeBox from "./Box/ProfileEditeBox";
+import ProfileUploadBox from "./Box/ProfileUploadBox";
 
 const AddDogProfile = () => {
   const [isDogActive, setDogIsActive] = useState(false);
@@ -20,12 +20,13 @@ const AddDogProfile = () => {
         </Text>
       </Flex>
       <Flex gap="20" marginBottom="14">
-        <ProfileEditeBox
-          type={PROFILE_NAME.DOG}
+        <ProfileUploadBox
+          type={TYPE_NAME.DOG}
           isActive={isDogActive}
           setIsActive={setDogIsActive}
           fileRef={dogFileInputRef}
-          fileName={FILE_URI_NAME.DOG}
+          fileName={FILE_NAME.PROFILE_DOG}
+          mode="create"
         />
       </Flex>
     </>

@@ -14,5 +14,4 @@ const ModalComps = {
 export const Modal = Object.assign(ModalRoot, ModalComps);
 
 export * from "./PreventLeaveModal";
-export * from "./CarouselModal";
 export * from "./BasicModal";

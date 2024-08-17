@@ -14,7 +14,7 @@ interface UploadAndCreateAlbumOptions {
   onSuccess?: () => void;
 }
 
-const useSubmitProfile = () => {
+const useUploadProfile = () => {
   const [s3ProfileData, setS3ProfileData] = useState<string[]>([]);
   const { uploadToS3 } = useS3Upload();
 
@@ -25,7 +25,7 @@ const useSubmitProfile = () => {
     const uploadPromises = paramsArray.map(async (params) => {
       const { files, path, accept, id, name } = params;
 
-      const profileParams = { files, path: `${path}/${id}`, accept, id, name };
+      const profileParams = { files, path: `${path}/${name}/${id}`, accept, id, name };
 
       if (!files || files.length === 0) {
         showToast("업로드할 파일이 없습니다.", "ownerNav");
@@ -55,7 +55,12 @@ const useSubmitProfile = () => {
       return;
     }
   };
-  return { uploadFiles, s3ProfileData };
+
+  const convertProfileUri = (name: string) => {
+    return s3ProfileData.find((file) => file.split("/").includes(name)) || "";
+  };
+
+  return { convertProfileUri, uploadFiles, s3ProfileData };
 };
 
-export default useSubmitProfile;
+export default useUploadProfile;

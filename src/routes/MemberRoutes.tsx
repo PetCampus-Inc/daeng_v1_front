@@ -50,7 +50,7 @@ const MemberRoutes = (): RouteObject[] => {
           path: PATH.MEMBER_MY_INFO_EDIT_PAGE(),
           element: (
             <Suspense>
-              <Pages.MemberMyInfoEditePage />
+              <Pages.MemberMyInfoEditPage />
             </Suspense>
           )
         },
@@ -115,7 +115,7 @@ const MemberRoutes = (): RouteObject[] => {
           path: PATH.MEMBER_ADD_DOG_PROFILE_EDIT_PAGE,
           element: (
             <Suspense>
-              <Pages.MemberAddDogProfileEditePage />
+              <Pages.MemberAddDogProfileEditPage />
             </Suspense>
           )
         }
