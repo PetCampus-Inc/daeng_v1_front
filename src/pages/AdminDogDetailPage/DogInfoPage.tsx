@@ -1,38 +1,28 @@
-import { ADMIN_DOG_DETAIL_INFO_STEP } from "constants/step";
-
 import GalleryIcon from "assets/svg/gallery-icon";
 import AttendanceRecord from "components/Admin/DogDetailInfo/AttendanceRecord";
 import DogInfo from "components/Admin/DogDetailInfo/DogInfo";
 import Notice from "components/Admin/DogDetailInfo/Notice";
-import {
-  Circle,
-  ContentWrapper,
-  NavItem,
-  NavWrapper,
-  Underline
-} from "components/Admin/DogDetailInfo/styles";
+import { ContentWrapper } from "components/Admin/DogDetailInfo/styles";
 import Ticket from "components/Admin/DogDetailInfo/Ticket";
-import { Flex, Layout } from "components/common";
+import { Layout } from "components/common";
 import Header from "components/common/Header";
-import useGetPrecautions from "hooks/api/useGetPrecautions";
-import { Suspense, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Tabs } from "components/common/Tabs";
+import { useDogInfoData } from "hooks/api/admin/dogs";
+import { Suspense } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 const DogInfoPage = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentSteps = ADMIN_DOG_DETAIL_INFO_STEP;
-  const [currentStep, setCurrentStep] = useState(0);
-  const dogId = useLocation().pathname.split("/").pop(); // TODO: 보안 측면에서 더 나은 방법이 있는지에 대한 고민
-  const { data } = useGetPrecautions(Number(dogId));
-  const showNotice = !!data.modifiedList;
+  const [searchParams] = useSearchParams();
+  const { dogId } = useParams<{ dogId: string }>();
+
+  const { showBadge } = useDogInfoData(Number(dogId));
 
   return (
     <>
       <Header
         type="text"
         text={`${searchParams.get("dog_name")}의 상세 정보`}
-        handleClick={() => navigate("/admin/attendance")}
         rightElement={
           <GalleryIcon
             handleTouch={() => {
@@ -42,38 +32,32 @@ const DogInfoPage = () => {
         }
       />
       <Layout pt={32} bgColor="primaryColor">
-        <Flex direction="column" height="full">
-          <nav>
-            <NavWrapper>
-              {currentSteps.map((item, index) => (
-                <NavItem
-                  key={item}
-                  className={index === currentStep ? "selected" : ""}
-                  onClick={() => {
-                    setCurrentStep(index);
-                    if (searchParams.has("date")) {
-                      searchParams.delete("date");
-                      setSearchParams(searchParams);
-                    }
-                  }}
-                >
-                  {item}
-                  {searchParams.get("ticket_status") === "true" && index === 2 ? <Circle /> : null}
-                  {showNotice && index === 3 ? <Circle /> : null}
-                  {index === currentStep ? <Underline layoutId="underline" /> : null}
-                </NavItem>
-              ))}
-            </NavWrapper>
-          </nav>
+        <Tabs.Root defaultValue="info">
+          <Tabs.List>
+            <Tabs.Trigger value="info">강아지 정보</Tabs.Trigger>
+            <Tabs.Trigger value="record">등원 기록</Tabs.Trigger>
+            <Tabs.Trigger value="ticket">이용권</Tabs.Trigger>
+            <Tabs.Trigger value="notice">
+              유의사항 {showBadge && <div>확인 필요!!</div>}
+            </Tabs.Trigger>
+          </Tabs.List>
           <ContentWrapper>
-            <Suspense>
-              {currentStep === 0 && <DogInfo />}
-              {currentStep === 1 && <AttendanceRecord />}
-              {currentStep === 2 && <Ticket />}
-              {currentStep === 3 && <Notice data={data} />}
+            <Suspense fallback={<div>Loading...</div>}>
+              <Tabs.Content value="info">
+                <DogInfo dogId={Number(dogId)} />
+              </Tabs.Content>
+              <Tabs.Content value="record">
+                <AttendanceRecord dogId={Number(dogId)} />
+              </Tabs.Content>
+              <Tabs.Content value="ticket">
+                <Ticket dogId={Number(dogId)} />
+              </Tabs.Content>
+              <Tabs.Content value="notice">
+                <Notice dogId={Number(dogId)} />
+              </Tabs.Content>
             </Suspense>
           </ContentWrapper>
-        </Flex>
+        </Tabs.Root>
       </Layout>
     </>
   );
