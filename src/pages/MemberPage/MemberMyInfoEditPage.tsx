@@ -16,18 +16,17 @@ import { getLabelForValue } from "utils/formatter";
 
 const MemberMyInfoEditPage = () => {
   const { memberId } = useParams();
-  const { data } = useGetEnrollment({ memberId: "1", schoolId: 2 });
-  const { data: memberData } = useGetMemberProfileInfo(memberId);
+  const { data } = useGetMemberProfileInfo(memberId);
+  const { memberProfileUri, ...rest } = data;
 
   // FIXME: `useGetMemberProfileInfo` select 단에서 데이터 가공해주면 좋을 것 같습니다.
-  const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, memberData.memberGender);
+  const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, data.memberGender);
 
   const methods = useForm({
     mode: "onBlur",
-    defaultValues: { ...memberData, memberGender: formatMemberGender }
+    defaultValues: { ...rest, profileUri: memberProfileUri, memberGender: formatMemberGender }
   });
 
-  const { requiredItemList } = data;
   const blocker = useBlocker(() => methods.formState.isDirty);
 
   if (!memberId) throw new Error("memberId가 없습니다.");
@@ -46,7 +45,7 @@ const MemberMyInfoEditPage = () => {
         <FormProvider {...methods}>
           <MyProfileEdit />
           <ContentContainer px="1.5" py="1" height="auto">
-            <MyInfoEdit requiredItems={requiredItemList} />
+            <MyInfoEdit />
           </ContentContainer>
           <SaveButton memberId={memberId} />
         </FormProvider>

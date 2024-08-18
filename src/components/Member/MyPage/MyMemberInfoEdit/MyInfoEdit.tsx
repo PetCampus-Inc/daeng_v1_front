@@ -15,7 +15,7 @@ import * as S from "./styles";
 
 // TODO 코드 리팩토링 필요
 
-const MyInfoEdit = ({ requiredItems }: { requiredItems: Map<number, boolean> }) => {
+const MyInfoEdit = () => {
   const { register, setValue, watch } = useFormContext();
   const overlay = useOverlay.useOverlay();
 
@@ -48,7 +48,6 @@ const MyInfoEdit = ({ requiredItems }: { requiredItems: Map<number, boolean> }) 
         <TextInput
           name={FIELD.MEMBER_NAME}
           register={register}
-          required={requiredItems?.get(FIELD_KEYS.MEMBER_NAME)}
           placeholder="견주 이름을 입력해주세요"
         />
       </Flex>
@@ -57,11 +56,7 @@ const MyInfoEdit = ({ requiredItems }: { requiredItems: Map<number, boolean> }) 
         <Text typo="label2_14_R" color="darkBlack">
           성별
         </Text>
-        <SingleRadio
-          name={FIELD.MEMBER_GENDER}
-          radiosText={["남", "여"]}
-          isRequired={requiredItems?.get(FIELD_KEYS.MEMBER_GENDER)}
-        />
+        <SingleRadio name={FIELD.MEMBER_GENDER} radiosText={["남", "여"]} />
       </Flex>
 
       <Flex direction="column" gap={7}>
@@ -75,7 +70,6 @@ const MyInfoEdit = ({ requiredItems }: { requiredItems: Map<number, boolean> }) 
           onClick={openPopup}
           onClear={handleClear}
           value={watchAddress}
-          required={requiredItems?.get(FIELD_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
           inputType="memberEdit"
@@ -100,7 +94,6 @@ const MyInfoEdit = ({ requiredItems }: { requiredItems: Map<number, boolean> }) 
           onChange={handleChangeNumber(FIELD.MEMBER_PHONE)}
           placeholder="연락처를 입력해주세요"
           type="tel"
-          required={requiredItems?.get(FIELD_KEYS.MEMBER_PHONE)}
         />
       </Flex>
 
@@ -117,7 +110,6 @@ const MyInfoEdit = ({ requiredItems }: { requiredItems: Map<number, boolean> }) 
           }}
           placeholder="비상 연락처를 입력해주세요"
           type="tel"
-          required={requiredItems?.get(FIELD_KEYS.EMERGENCY_NUMBER)}
         />
       </Flex>
     </S.ProfileEditWrapper>
