@@ -72,6 +72,7 @@ export interface IMemberInfo extends IResponse {
 export interface IMemberProfileInfo extends IResponse {
   memberId: string;
   memberName: string;
+  memberProfileUri: string;
   memberGender: MemberGenderType;
   nickName: string;
   address: string;
