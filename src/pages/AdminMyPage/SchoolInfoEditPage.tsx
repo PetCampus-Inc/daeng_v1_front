@@ -13,19 +13,36 @@ import { formatSchoolNumber } from "utils/formatter";
 
 import { BottomButton } from "../../components/common/Button";
 import { PreventLeaveModal } from "../../components/common/Modal";
+import { useState } from "react";
 
 const SchoolInfoEditPage = () => {
+  const [isPhoneDirty, setIsPhoneDirty] = useState(false);
   const { adminId } = useAdminInfo();
   const { data } = useGetPrincipalInfo(adminId);
   const overlay = useOverlay();
   const navigate = useNavigate();
-  const { handleSubmit, register, setValue, watch } = useForm();
+  const { handleSubmit, register, setValue, watch, getFieldState } = useForm();
   const watchAddress = watch("schoolAddress", "");
+  const watchSchoolName = watch("newSchoolName");
+  const watchSchoolAddressDetail = watch("schoolAddressDetail");
+  const schoolNameFieldState = getFieldState("newSchoolName");
+  const addressFieldState = getFieldState("schoolAddress");
+  const detailAddressFieldState = getFieldState("schoolAddressDetail");
 
-  const openModal = () =>
-    overlay.open(({ isOpen, close }) => (
-      <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate("/admin/mypage")} />
-    ));
+  const openModal = () => {
+    if (
+      schoolNameFieldState.isDirty ||
+      isPhoneDirty ||
+      addressFieldState.isTouched ||
+      detailAddressFieldState.isDirty
+    ) {
+      overlay.open(({ isOpen, close }) => (
+        <PreventLeaveModal isOpen={isOpen} close={close} action={() => navigate("/admin/mypage")} />
+      ));
+    } else {
+      navigate("/admin/mypage");
+    }
+  };
 
   const openPostCodePopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -58,6 +75,7 @@ const SchoolInfoEditPage = () => {
     const value = e.target.value;
     const formattedValue = formatSchoolNumber(value);
     setValue(field, formattedValue);
+    setIsPhoneDirty(true);
   };
 
   const onSubmit = handleSubmit((data) => {
@@ -114,7 +132,6 @@ const SchoolInfoEditPage = () => {
               onClick={handleAddressFieldClick}
               onClear={handleClear}
               defaultValue={data?.address}
-              readOnly
               required
             />
             <TextInput
@@ -135,7 +152,17 @@ const SchoolInfoEditPage = () => {
             <TextInput placeholder={data.registrationNumber} disabled />
           </Flex>
         </Flex>
-        <BottomButton wrapColor="white" type="submit" onClick={onSubmit}>
+        <BottomButton
+          disabled={
+            !schoolNameFieldState.isDirty &&
+            !isPhoneDirty &&
+            !addressFieldState.isTouched &&
+            !detailAddressFieldState.isDirty
+          }
+          wrapColor="white"
+          type="submit"
+          onClick={onSubmit}
+        >
           수정 완료
         </BottomButton>
       </Layout>

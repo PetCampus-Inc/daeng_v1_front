@@ -6,6 +6,7 @@ import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { useState } from "react";
 
+//FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
   const currentSteps = ADMIN_NOTIFICATION_STEP;
   const [currentStep, setCurrentStep] = useState(0);
