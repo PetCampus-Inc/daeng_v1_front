@@ -4,26 +4,19 @@ import { useFunnel } from "hooks/common/useFunnel";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { AdminRole } from "types/common/role.types";
 
 import AccountSettingPage from "./AccountSettingPage";
 import AdminInfoPage from "./AdminInfoPage";
-import ApprovalStatusPage from "./ApprovalStatusPage";
 import EnrollSchoolPage from "./EnrollSchoolPage";
 import RoleSelectPage from "./RoleSelectPage";
 import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
 import SearchSchoolPage from "./SearchSchoolPage";
 
-import type { Role } from "types/admin/admin.types";
-
-export enum AdminRole {
-  TEACHER = "TEACHER",
-  OWNER = "OWNER"
-}
-
 export interface ITeacherInfo {
   schoolId?: number;
   schoolName?: string;
-  role?: Role;
+  role?: AdminRole;
   adminId?: number;
 }
 
@@ -62,13 +55,13 @@ const AdminSignUpFunnel = () => {
     setState((prev) => ({
       ...prev,
       role: role,
-      step: role === AdminRole.TEACHER ? 유치원_검색 : 회원정보_입력
+      step: role === AdminRole.ROLE_TEACHER ? 유치원_검색 : 회원정보_입력
     }));
   };
 
   // 회원 정보 입력 단계 처리
   const handleAdminInfoStep = () => {
-    if (state.role === AdminRole.TEACHER) {
+    if (state.role === AdminRole.ROLE_TEACHER) {
       setState((prev) => ({
         ...prev,
         step: 계정설정
@@ -83,7 +76,7 @@ const AdminSignUpFunnel = () => {
 
   // 계정 설정 단계 처리
   const handleAccountSettingStep = (data: ITeacherInfo) => {
-    if (state.role === AdminRole.TEACHER) {
+    if (state.role === AdminRole.ROLE_TEACHER) {
       setState((prev) => ({
         ...prev,
         teacherInfo: {
@@ -114,8 +107,8 @@ const AdminSignUpFunnel = () => {
     reValidateMode: "onChange"
   });
 
-  // 역할 선택 페이지 role: TEACHER -> 유치원 검색 페이지 -> 회원정보 입력 페이지 -> 계정 설정 페이지 -> 승인 상태 페이지(최종)
-  // 역할 선택 페이지 role: OWNER -> 회원정보 입력 페이지 -> 계정 설정 페이지 -> 유치원 등록 페이지 -> 유치원 등록 완료 페아지(최종)
+  // 역할 선택 페이지 role: ROLE_TEACHER -> 유치원 검색 페이지 -> 회원정보 입력 페이지 -> 계정 설정 페이지 -> 승인 상태 페이지(최종)
+  // 역할 선택 페이지 role: ROLE_OWNER -> 회원정보 입력 페이지 -> 계정 설정 페이지 -> 유치원 등록 페이지 -> 유치원 등록 완료 페아지(최종)
 
   return (
     <FormProvider {...methods}>
@@ -126,7 +119,7 @@ const AdminSignUpFunnel = () => {
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={유치원_검색}>
           <SearchSchoolPage
-            type={AdminRole.TEACHER}
+            type={AdminRole.ROLE_TEACHER}
             onNextStep={(schoolId) =>
               setState((prev) => ({
                 ...prev,

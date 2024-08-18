@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { AUTH_KEY } from "store/auth";
-import { Role } from "types/admin/admin.types";
+import { Role } from "types/common/role.types";
 
 // 관리자 로그인 요청
 export const useAdminLogin = () => {

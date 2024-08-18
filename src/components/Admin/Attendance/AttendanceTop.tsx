@@ -2,6 +2,7 @@ import FootIcon from "assets/svg/foot-icon";
 import { Text } from "components/common";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useBlocker, useSearchParams } from "react-router-dom";
+import { AdminRole } from "types/common/role.types";
 
 import AttendanceExitModal from "./AttendanceModal/AttendanceCloseModal";
 import { useInputFocus } from "./context/AttendanceProvider";
@@ -35,7 +36,7 @@ const AttendanceTop = () => {
     <S.MainWrapper>
       <S.TitleWrapper>
         <Text as="h2" typo="title2_20_B" color="darkBlack">
-          {adminName} {adminRole === "ROLE_OWNER" ? "원장님" : "선생님"} 안녕하세요
+          {adminName} {adminRole === AdminRole.ROLE_OWNER ? "원장님" : "선생님"} 안녕하세요
         </Text>
         <S.SubTitle>
           {isAttendMode ? "출석 진행중이에요" : `${schoolName} 강아지들이에요`}

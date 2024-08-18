@@ -7,6 +7,7 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { Suspense, memo, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { AdminRole } from "types/common/role.types";
 import { addZero } from "utils/date";
 import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/remainingDays";
 
@@ -139,6 +140,6 @@ const getOptions = (
   },
   {
     label: "강아지 삭제",
-    condition: () => adminRole === "ROLE_OWNER"
+    condition: () => adminRole === AdminRole.ROLE_OWNER
   }
 ];

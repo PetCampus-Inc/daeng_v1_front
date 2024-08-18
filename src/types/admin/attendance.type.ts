@@ -1,8 +1,8 @@
+import { AttendanceStatus } from "types/common/status.types";
+
 import type { MemberDtoType } from "./enrollment.types";
 import type { Nullable } from "../helper.types";
 import type { TicketType } from "types/member/enrollment.types";
-
-type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 
 /**
  *  @description 출석부 - 출석모드 Dto

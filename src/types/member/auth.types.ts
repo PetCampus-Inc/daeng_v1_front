@@ -1,4 +1,4 @@
-import { Role } from "types/admin/admin.types";
+import { Role } from "types/common/role.types";
 
 import type { MemberGenderType, RelationType } from "./enrollment.types";
 

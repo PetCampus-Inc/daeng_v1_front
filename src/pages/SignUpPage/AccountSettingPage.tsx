@@ -4,8 +4,9 @@ import AccountInfo from "components/SignUp/SignUpForm/AccountInfo";
 import NextButton from "components/SignUp/SignUpForm/NextButton";
 import { useTeacherSinUp } from "hooks/api/signup";
 import { FieldValues, useFormContext } from "react-hook-form";
+import { AdminRole } from "types/common/role.types";
 
-import { type AdminRole, type ITeacherInfo } from "./AdminSignUpFunnel";
+import { type ITeacherInfo } from "./AdminSignUpFunnel";
 
 interface IStepProps {
   type?: AdminRole;
@@ -25,7 +26,7 @@ const AccountSettingPage = ({ type, info, onNextStep }: IStepProps) => {
       pwd: data.pwd
     };
 
-    if (type === "TEACHER") {
+    if (type === AdminRole.ROLE_TEACHER) {
       const req = {
         ...formData,
         name: data.name,
