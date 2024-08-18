@@ -1,6 +1,5 @@
 import { Text } from "components/common";
-import { useGetDogDetail } from "hooks/api/admin/attendance";
-import { useLocation } from "react-router-dom";
+import { useGetDogDetail } from "hooks/api/admin/dogs";
 
 import AboutDog from "./AboutDog";
 import AboutOwner from "./AboutOwner";
@@ -8,9 +7,8 @@ import Memo from "./Memo";
 import * as S from "./styles";
 import { InnerContainer } from "../styles";
 
-const DogInfo = () => {
-  const dogId = useLocation().pathname.split("/").pop();
-  const { data, refetch } = useGetDogDetail(Number(dogId));
+const DogInfo = ({ dogId }: { dogId: number }) => {
+  const { data, refetch } = useGetDogDetail(dogId);
 
   return (
     <InnerContainer>
