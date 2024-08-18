@@ -1,42 +1,33 @@
 import { PATH } from "constants/path";
 
 import DogWaitingBgIcon from "assets/svg/dog-waiting-bg-icon";
-import { Box, Flex, Text } from "components/common";
+import { Box, Flex, Text, Button } from "components/common";
 import { MoreButton } from "components/common/Button/Templates";
 import { BasicModal } from "components/common/Modal";
-import { useTeacherSinUpCancel } from "hooks/api/signup";
+import { useTeacherSignUpCancel } from "hooks/api/signup";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
+import { UserType } from "types/common/approval.types";
 
 import { StyledImgWrapper } from "./styles";
-import Button from "../button/Button";
 
 interface ApprovalSuccessProps {
-  schoolName?: string;
-  adminId?: number;
-  onNextStep?: () => void;
+  type: UserType;
+  schoolName: string;
 }
 
-const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessProps) => {
-  const { mutateTeacherSignUpCancel } = useTeacherSinUpCancel();
+export default function ApprovalPending({ type, schoolName }: ApprovalSuccessProps) {
   const navigate = useNavigate();
   const overlay = useOverlay();
 
-  const handleConfirm = () => {
-    // MEMO: 소셜 로그인 페이지로 이동)
-    navigate(PATH.ADMIN_LOGIN);
-  };
+  const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel({
+    onSuccess: () => navigate(PATH.ADMIN_SIGNUP)
+  });
 
+  const handleConfirm = () => navigate(PATH.ADMIN_LOGIN);
   const handleCancel = () => {
-    if (!adminId) throw new Error("AdminId is required");
-    mutateTeacherSignUpCancel(adminId, {
-      onSuccess: () => {
-        // MEMO: 역할 선택 페이지로 이동
-        // TODO: 폼 초기화하기
-        console.log("승인 신청이 취소되었습니다");
-        onNextStep?.();
-      }
-    });
+    if (type === "admin") mutateTeacherSignUpCancel();
+    // else if (type === "member") mutateMemberSignUpCancel();
   };
 
   const openCancelPopup = () =>
@@ -58,7 +49,7 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
         <Text as="h2" typo="title1_24_B" color="darkBlack">
           <Text as="em" typo="inherit" color="primaryColor">
             {schoolName} 유치원 <br />
-            승인 신청{" "}
+            {type === "member" ? "가입 " : ""}승인 신청
           </Text>
           이 완료되었습니다
         </Text>
@@ -82,11 +73,11 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
           >
             승인 신청 취소
           </MoreButton>
-          <Button handleClick={handleConfirm}>확인</Button>
+          <Button onClick={handleConfirm} width="full">
+            확인
+          </Button>
         </Flex>
       </Box>
     </>
   );
-};
-
-export default ApprovalPending;
+}

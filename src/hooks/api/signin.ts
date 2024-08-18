@@ -5,6 +5,7 @@ import { postAdminLogin } from "apis/admin/admin.api";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { AUTH_KEY } from "store/auth";
 import { Role } from "types/common/role.types";
+import { isApproval } from "utils/is";
 
 // 관리자 로그인 요청
 export const useAdminLogin = () => {
@@ -25,12 +26,8 @@ export const useAdminLogin = () => {
         location.href = PATH.ADMIN_ATTENDANCE;
       }
 
-      if (
-        res.role === Role.APPROVAL_PENDING ||
-        res.role === Role.APPROVAL_DENIED ||
-        res.role === Role.APPROVAL_CANCEL
-      ) {
-        location.href = `${PATH.ADMIN_SIGNUP_APPROVAL_STATUS}?source=login`;
+      if (isApproval(res.role)) {
+        location.href = `${PATH.APPROVAL_STATUS}?type=admin&schoolName=${res.schoolName}&status=${res.role}`;
       }
     },
     throwOnError: false,

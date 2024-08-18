@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, UseMutationOptions, useQuery } from "@tanstack/react-query";
 import {
   getCheckId,
   postOwnerSignUp,
@@ -7,6 +7,8 @@ import {
   postTeacherSignUpCancel
 } from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/enrollment.api";
+
+type TeacherSignUpCancelOptions = Omit<UseMutationOptions, "mutationFn">;
 
 // 선생님 회원가입 요청
 export const useTeacherSinUp = () => {
@@ -18,9 +20,10 @@ export const useTeacherSinUp = () => {
 };
 
 // 선생님 회원가입 요청 취소
-export const useTeacherSinUpCancel = () => {
+export const useTeacherSignUpCancel = (options?: TeacherSignUpCancelOptions) => {
   const { mutate } = useMutation({
-    mutationFn: postTeacherSignUpCancel
+    mutationFn: postTeacherSignUpCancel,
+    ...options
   });
 
   return { mutateTeacherSignUpCancel: mutate };

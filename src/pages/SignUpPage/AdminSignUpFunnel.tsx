@@ -4,64 +4,49 @@ import { useFunnel } from "hooks/common/useFunnel";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AdminRole } from "types/common/role.types";
+import { AdminRole as Role } from "types/common/role.types";
 
 import AccountSettingPage from "./AccountSettingPage";
 import AdminInfoPage from "./AdminInfoPage";
 import EnrollSchoolPage from "./EnrollSchoolPage";
 import RoleSelectPage from "./RoleSelectPage";
-import SchoolRegistrationCompletePage from "./SchoolRegistrationCompletePage";
 import SearchSchoolPage from "./SearchSchoolPage";
 
 export interface ITeacherInfo {
   schoolId?: number;
   schoolName?: string;
-  role?: AdminRole;
+  role?: Role;
   adminId?: number;
 }
 
+const { 역할_선택, 유치원_검색, 유치원_등록, 회원정보_입력, 계정설정 } = ADMIN_SIGNUP_PATH;
+
 const AdminSignUpFunnel = () => {
-  const {
-    역할_선택,
-    유치원_검색,
-    유치원_등록,
-    회원정보_입력,
-    계정설정,
-    승인상태,
-    유치원_등록완료
-  } = ADMIN_SIGNUP_PATH;
+  const navigate = useNavigate();
 
   const [Funnel, state, setState] = useFunnel(
-    [
-      역할_선택,
-      유치원_검색,
-      유치원_등록,
-      회원정보_입력,
-      계정설정,
-      승인상태,
-      유치원_등록완료
-    ] as const,
+    [역할_선택, 유치원_검색, 유치원_등록, 회원정보_입력, 계정설정] as const,
     {
       initialStep: 역할_선택,
       stepQueryKey: "step"
     }
   ).withState<{
-    role?: Partial<AdminRole>;
+    role?: Partial<Role>;
     teacherInfo?: ITeacherInfo;
   }>({});
 
   // 역할 선택 처리
-  const handleRoleSelection = (role: AdminRole) => {
+  const handleRoleSelection = (role: Role) => {
     setState((prev) => ({
       ...prev,
       role: role,
-      step: role === AdminRole.ROLE_TEACHER ? 유치원_검색 : 회원정보_입력
+      step: role === Role.ROLE_TEACHER ? 유치원_검색 : 회원정보_입력
     }));
   };
 
   // 회원 정보 입력 단계 처리
   const handleAdminInfoStep = () => {
-    if (state.role === AdminRole.ROLE_TEACHER) {
+    if (state.role === Role.ROLE_TEACHER) {
       setState((prev) => ({
         ...prev,
         step: 계정설정
@@ -76,17 +61,8 @@ const AdminSignUpFunnel = () => {
 
   // 계정 설정 단계 처리
   const handleAccountSettingStep = (data: ITeacherInfo) => {
-    if (state.role === AdminRole.ROLE_TEACHER) {
-      setState((prev) => ({
-        ...prev,
-        teacherInfo: {
-          ...prev.teacherInfo,
-          role: data.role,
-          adminId: data.adminId,
-          schoolName: data.schoolName
-        },
-        step: 승인상태
-      }));
+    if (state.role === Role.ROLE_TEACHER) {
+      navigate(`approval?type=admin&schoolName=${data.schoolName}&status=pending`);
     } else {
       setState((prev) => ({
         ...prev,
@@ -95,7 +71,9 @@ const AdminSignUpFunnel = () => {
     }
   };
 
-  const navigate = useNavigate();
+  const handleRegisterSchool = () => {
+    navigate(`approval?type=admin&schoolName=${state.teacherInfo?.schoolName}&status=pending`);
+  };
 
   useEffect(() => {
     // 새로고침 시 초기 스텝으로 이동
@@ -119,7 +97,7 @@ const AdminSignUpFunnel = () => {
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={유치원_검색}>
           <SearchSchoolPage
-            type={AdminRole.ROLE_TEACHER}
+            type={Role.ROLE_TEACHER}
             onNextStep={(schoolId) =>
               setState((prev) => ({
                 ...prev,
@@ -139,22 +117,9 @@ const AdminSignUpFunnel = () => {
             onNextStep={handleAccountSettingStep}
           />
         </Funnel.Step>
-        {/* role: TEACHER인 경우 */}
-        <Funnel.Step name={승인상태}>
-          <ApprovalStatusPage
-            info={state.teacherInfo}
-            onSearchSchoolClick={() => setState((prev) => ({ ...prev, step: 유치원_검색 }))}
-            onSelectRoleClick={() => setState((prev) => ({ ...prev, step: 역할_선택 }))}
-          />
-        </Funnel.Step>
         {/* role: OWNER인 경우 */}
         <Funnel.Step name={유치원_등록}>
-          <EnrollSchoolPage
-            onNextStep={() => setState((prev) => ({ ...prev, step: 유치원_등록완료 }))}
-          />
-        </Funnel.Step>
-        <Funnel.Step name={유치원_등록완료}>
-          <SchoolRegistrationCompletePage />
+          <EnrollSchoolPage onNextStep={handleRegisterSchool} />
         </Funnel.Step>
       </Funnel>
     </FormProvider>

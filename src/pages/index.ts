@@ -3,10 +3,12 @@ export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
 
 /* Admin SignUp Page */
 export { default as AdminSignupPage } from "./SignUpPage/AdminSignUpFunnel";
-export { default as AdminApprovalStatusPage } from "./SignUpPage/ApprovalStatusPage";
 
 /* Admin Chat Page */
 export { default as Chat } from "./ChatPage/Chat";
+
+/* Approval Status Page */
+export { default as ApprovalStatusPage } from "./ApprovalStatusPage/ApprovalStatusPage";
 
 /* Admin Attendance Page */
 export { default as AttendancePage } from "./AdminAtendancePage/AttendancePage";
