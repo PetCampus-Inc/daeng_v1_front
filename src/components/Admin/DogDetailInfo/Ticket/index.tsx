@@ -1,17 +1,12 @@
 import { Flex, Text } from "components/common";
 import { useGetTicketDetail } from "hooks/api/admin/ticket";
-import { useParams } from "react-router-dom";
 
 import PastTicketCard from "./PastTicketCard";
 import TicketCard from "./TicketCard";
 import { InnerContainer } from "../styles";
 
-const Ticket = () => {
-  const { dogId } = useParams();
-
-  if (!dogId) throw new Error("id가 없습니다");
-
-  const { data } = useGetTicketDetail(Number(dogId));
+const Ticket = ({ dogId }: { dogId: number }) => {
+  const { data } = useGetTicketDetail(dogId);
 
   return (
     <InnerContainer>

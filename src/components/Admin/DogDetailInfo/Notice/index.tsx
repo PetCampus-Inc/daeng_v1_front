@@ -1,17 +1,16 @@
 import { DOG_NOTICE_LIST } from "constants/notice";
 
 import AlertSmallIcon from "assets/svg/alert-small-icon";
-import { PrecautionData } from "types/admin/attendance.type";
+import { useGetPrecautions } from "hooks/api/admin/dogs";
 
 import * as S from "./styles";
 import { DogDetailInfoText } from "../DogInfo/styles";
 import { InnerContainer } from "../styles";
 import SendAlarmButton from "../Ticket/SendAlarmButton";
 
-interface NoticeProps {
-  data: PrecautionData;
-}
-const Notice = ({ data }: NoticeProps) => {
+const Notice = ({ dogId }: { dogId: number }) => {
+  const { data } = useGetPrecautions(dogId);
+
   const findObject = (id: number) => {
     const object = data.agreements.find((obj) => Object.prototype.hasOwnProperty.call(obj, id));
     if (object) {
