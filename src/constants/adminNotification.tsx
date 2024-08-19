@@ -35,7 +35,7 @@ export const ADMIN_NOTIFICATION = {
       title: (name: string) => `${name} 선생님이 유치원 가입 신청을 했어요`,
       text: "가입 신청 목록에서 승인 혹은 거절을 해주세요",
       path: PATH.ADMIN_ATTENDANCE,
-      icon: <SendAlarmIcon borderStyle="50%" />
+      icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },
     {
       id: 2,
@@ -67,7 +67,7 @@ export const ADMIN_NOTIFICATION = {
       title: (dog: string) => `${dog}의 정보가 수정되었어요`,
       text: "강아지 정보 수정은 견주가 할 수 있어요",
       path: PATH.ADMIN_ATTENDANCE,
-      icon: <DogFilledIcon rx={14} />
+      icon: <DogFilledIcon rx={14} w={28} h={28} />
     },
     {
       id: 1,
@@ -75,7 +75,7 @@ export const ADMIN_NOTIFICATION = {
       text: (expired: string) =>
         expired === "date" ? `[만료 ${expired}일 전]` : `[잔여 횟수:${expired}회]`,
       path: PATH.ADMIN_ATTENDANCE,
-      icon: <CalendarExpireIcon rx={14} />
+      icon: <CalendarExpireIcon rx={14} w={28} h={28} />
     },
     {
       id: 2,
@@ -84,7 +84,7 @@ export const ADMIN_NOTIFICATION = {
       subtext: (expired: string) =>
         expired === "date" ? `[시작일: ${expired}]` : `[만료된 이용권 정보:회차권 ${expired}회]`,
       path: PATH.ADMIN_ATTENDANCE,
-      icon: <SendAlarmIcon borderStyle="50%" />
+      icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },
     {
       id: 3,
@@ -94,7 +94,7 @@ export const ADMIN_NOTIFICATION = {
           ? `[시작일:${newTicket}]`
           : `[갱신된 이용권 정보:회차권 ${newTicket}회]`,
       path: PATH.ADMIN_ATTENDANCE,
-      icon: <SendAlarmIcon borderStyle="50%" />
+      icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },
     {
       id: 4,
@@ -116,14 +116,14 @@ export const ADMIN_NOTIFICATION = {
       text: "오늘이 지나면 알림장이 초기화 돼요 작성 중인 알림장을",
       subtext: "견주에게 전송해 주세요",
       path: PATH.ADMIN_ATTENDANCE,
-      icon: <AgendaIcon bg={true} />
+      icon: <AgendaIcon bg={true} w={28} h={28} />
     },
     {
       id: 7,
       title: (dog: string) => `${dog}의 사진을 아직 한장도 전송하지 않았어요`,
       text: "강아지의 유치원 활동 상황을 견주와 공유해 보세요",
       path: PATH.ADMIN_ATTENDANCE,
-      icon: <AgendaIcon bg={true} />
+      icon: <AgendaIcon bg={true} w={28} h={28} />
     }
   ] as NotificationItem[]
 } as const;
