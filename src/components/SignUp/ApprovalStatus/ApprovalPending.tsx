@@ -14,20 +14,24 @@ import { StyledImgWrapper } from "./styles";
 interface ApprovalSuccessProps {
   type: UserType;
   schoolName: string;
+  userId?: number;
 }
 
-export default function ApprovalPending({ type, schoolName }: ApprovalSuccessProps) {
+export default function ApprovalPending({ userId, type, schoolName }: ApprovalSuccessProps) {
+  if (!userId) throw new Error("User ID가 없습니다");
+
   const navigate = useNavigate();
   const overlay = useOverlay();
 
-  const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel({
-    onSuccess: () => navigate(PATH.ADMIN_SIGNUP)
-  });
+  const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel();
 
   const handleConfirm = () => navigate(PATH.ADMIN_LOGIN);
   const handleCancel = () => {
-    if (type === "admin") mutateTeacherSignUpCancel();
-    // else if (type === "member") mutateMemberSignUpCancel();
+    if (type === "admin")
+      mutateTeacherSignUpCancel(userId, {
+        onSuccess: () => navigate(PATH.ADMIN_LOGIN)
+      });
+    // else if (type === "member") mutateMemberSignUpCancel(userId, { onSuccess: () => navigate() });
   };
 
   const openCancelPopup = () =>

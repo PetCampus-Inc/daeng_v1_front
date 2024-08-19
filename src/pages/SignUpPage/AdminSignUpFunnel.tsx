@@ -1,4 +1,4 @@
-import { ADMIN_SIGNUP_PATH } from "constants/path";
+import { ADMIN_SIGNUP_PATH, PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
 import { useEffect } from "react";
@@ -62,8 +62,14 @@ const AdminSignUpFunnel = () => {
   // 계정 설정 단계 처리
   const handleAccountSettingStep = (data: ITeacherInfo) => {
     if (state.role === Role.ROLE_TEACHER) {
-      navigate(`/approval?type=admin&schoolName=${data.schoolName}&status=pending`, {
-        replace: true
+      navigate(PATH.APPROVAL_STATUS, {
+        replace: true,
+        state: {
+          type: "admin",
+          status: "pending",
+          userId: data.adminId,
+          schoolName: data.schoolName
+        }
       });
     } else {
       setState((prev) => ({
@@ -74,9 +80,13 @@ const AdminSignUpFunnel = () => {
   };
 
   const handleRegisterSchool = (schoolName: string) => {
-    console.log(schoolName);
-    navigate(`/approval?type=admin&schoolName=${schoolName}&status=register`, {
-      replace: true
+    navigate(PATH.APPROVAL_STATUS, {
+      replace: true,
+      state: {
+        type: "admin",
+        status: "register",
+        schoolName: schoolName
+      }
     });
   };
 
