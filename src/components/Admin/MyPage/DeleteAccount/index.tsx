@@ -6,6 +6,8 @@ import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/admin/admin.types";
+import { useDeleteTeacher } from "hooks/api/admin/mypage";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;
@@ -20,6 +22,8 @@ type ContentCheck = {
 };
 
 const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
+  const { mutateDeleteTeacher } = useDeleteTeacher();
+  const { adminId } = useAdminInfo();
   const [contents, setContents] = useState({
     1: false,
     2: false,
@@ -50,8 +54,10 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   const navigate = useNavigate();
 
   const onSubmit = () => {
-    // FIXME 탈퇴
-    navigate(PATH.ADMIN_MY_PAGE_DELETE_COMPLETE);
+    if (isAllChecked) {
+      mutateDeleteTeacher(adminId);
+      navigate(PATH.ADMIN_MY_PAGE_DELETE_COMPLETE);
+    }
     return;
   };
 
