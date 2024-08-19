@@ -1,7 +1,5 @@
-import PrincipalIcon from "assets/svg/principal-icon";
-import PrincipalSelectedIcon from "assets/svg/principal-selected-icon";
-import TeacherIcon from "assets/svg/teacher-icon";
-import TeacherSelectedIcon from "assets/svg/teacher-selected-icon";
+import DogCircleIcon from "assets/svg/dog-circle-icon";
+import DogGlassesCircleIcon from "assets/svg/dog-glasses-circle-icon";
 import { Box, Flex, Text } from "components/common";
 import { memo } from "react";
 import { AdminRole } from "types/common/role.types";
@@ -22,14 +20,14 @@ const RoleBox = ({ role, mainText, subText, selected, handleClick }: Props) => {
       <Box mb={16}>
         {role === AdminRole.ROLE_TEACHER ? (
           selected ? (
-            <TeacherSelectedIcon />
+            <DogCircleIcon colorScheme="primary" w={80} h={80} />
           ) : (
-            <TeacherIcon />
+            <DogCircleIcon colorScheme="yellow" w={80} h={80} />
           )
         ) : selected ? (
-          <PrincipalSelectedIcon />
+          <DogGlassesCircleIcon colorScheme="primary" w={80} h={80} />
         ) : (
-          <PrincipalIcon />
+          <DogGlassesCircleIcon colorScheme="yellow" w={80} h={80} />
         )}
       </Box>
 
