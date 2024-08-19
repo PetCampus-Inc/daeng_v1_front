@@ -1,19 +1,8 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-interface IconProps extends IconSize {
-  className?: string;
-}
-
-const ArrowDownIcon = ({ className = "", w = "16", h = "16" }: IconProps) => {
+const ArrowDownIcon = ({ w = "16", h = "16" }: IconProps) => {
   return (
-    <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      width={w}
-      height={h}
-      fill="none"
-      viewBox="0 0 16 16"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width={w} height={h} fill="none" viewBox="0 0 16 16">
       <path
         fill="currentColor"
         fillRule="evenodd"
