@@ -73,8 +73,9 @@ const AdminSignUpFunnel = () => {
     }
   };
 
-  const handleRegisterSchool = () => {
-    navigate(`/approval?type=admin&schoolName=${state.teacherInfo?.schoolName}&status=register`, {
+  const handleRegisterSchool = (schoolName: string) => {
+    console.log(schoolName);
+    navigate(`/approval?type=admin&schoolName=${schoolName}&status=register`, {
       replace: true
     });
   };
