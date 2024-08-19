@@ -15,6 +15,7 @@ import {
   TextButton,
   HeaderArea
 } from "./styles";
+import { PATH } from "constants/path";
 
 /*
 header type
@@ -60,7 +61,7 @@ const Header = ({
               </TextButton>
               <IconWrapper
                 onClick={() => {
-                  // TODO: 알림 페이지로 이동
+                  navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
                 <NoticeActiveIcon />
@@ -86,7 +87,7 @@ const Header = ({
               <TitleText className="start">{text}</TitleText>
               <IconWrapper
                 onClick={() => {
-                  // TODO: 알림 페이지로 이동
+                  navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
                 <NoticeActiveIcon />

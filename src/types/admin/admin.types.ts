@@ -55,3 +55,10 @@ export interface AdminLoginInfo {
   inputPw: string;
   fcmToken: string;
 }
+
+export interface IOwnerProfileEdit {
+  imageUrl: string;
+  adminId: number;
+  adminName: string;
+  phoneNumber: string;
+}
