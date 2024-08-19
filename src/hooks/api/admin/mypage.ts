@@ -1,11 +1,12 @@
 import { PATH } from "constants/path";
 
 import { useMutation } from "@tanstack/react-query";
-import { handleOwnerProfileEdit } from "apis/admin/mypage.api";
+import { handleOwnerProfileEdit, handlePostSchoolResigned } from "apis/admin/mypage.api";
 import { useNavigate } from "react-router-dom";
 import { IOwnerProfileEdit } from "types/admin/admin.types";
 import showToast from "utils/showToast";
 
+//원장 프로필 수정
 export const useOwnerProfileEdit = () => {
   const navigate = useNavigate();
   const ownerProfileEditMutation = useMutation({
@@ -17,4 +18,13 @@ export const useOwnerProfileEdit = () => {
     throwOnError: true
   });
   return { ownerProfileEditMutation: ownerProfileEditMutation.mutate };
+};
+
+//선생님 유치원 끊기
+export const useSchoolResigned = () => {
+  const { mutate } = useMutation({
+    mutationFn: handlePostSchoolResigned
+  });
+
+  return { mutateSchoolResigned: mutate };
 };

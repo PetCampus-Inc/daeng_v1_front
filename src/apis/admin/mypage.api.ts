@@ -25,6 +25,7 @@ export const handleGetTeacherInfo = async (adminId: number) => {
   return data;
 };
 
+//원장 프로필 수정
 export const handleOwnerProfileEdit = async (req: IOwnerProfileEdit) => {
   const url = `admin/owner/profile`;
   return await request<void>({
@@ -35,6 +36,18 @@ export const handleOwnerProfileEdit = async (req: IOwnerProfileEdit) => {
       adminId: req.adminId,
       adminName: req.adminName,
       phoneNumber: req.phoneNumber
+    }
+  });
+};
+
+//선생님 유치원 끊기
+export const handlePostSchoolResigned = async (adminId: number) => {
+  const url = `admin/teacher/school`;
+  return await request<void>({
+    url,
+    method: "POST",
+    params: {
+      adminId
     }
   });
 };

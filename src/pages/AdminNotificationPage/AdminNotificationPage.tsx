@@ -4,8 +4,8 @@ import EllipseOrangeIcon from "assets/svg/ellipse-orange-icon";
 import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import { useState } from "react";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
+import { useState } from "react";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {

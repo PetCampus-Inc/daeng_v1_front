@@ -12,7 +12,7 @@ const NotificationList = ({ currentStep, name }: Props) => {
   return (
     <Box gap={10} display="flex" direction="column">
       {ADMIN_NOTIFICATION.common.map((item, index) => (
-        <Box key={index} display="flex" gap={12} padding={20} borderBottom={1} borderColor="gray_5">
+        <Box key={index} display="flex" gap={12} padding={12} borderBottom={1} borderColor="gray_5">
           <Box width="29px" height="29px">
             {item.icon}
           </Box>
