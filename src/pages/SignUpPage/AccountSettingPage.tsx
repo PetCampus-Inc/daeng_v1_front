@@ -4,12 +4,12 @@ import AccountInfo from "components/SignUp/SignUpForm/AccountInfo";
 import NextButton from "components/SignUp/SignUpForm/NextButton";
 import { useTeacherSinUp } from "hooks/api/signup";
 import { FieldValues, useFormContext } from "react-hook-form";
-import { AdminRole } from "types/common/role.types";
+import { AdminRole, Role } from "types/common/role.types";
 
 import { type ITeacherInfo } from "./AdminSignUpFunnel";
 
 interface IStepProps {
-  type?: AdminRole;
+  type?: Role;
   info?: ITeacherInfo;
   onNextStep?: (data: ITeacherInfo) => void;
 }

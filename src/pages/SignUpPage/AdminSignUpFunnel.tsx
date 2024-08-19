@@ -4,7 +4,7 @@ import { useFunnel } from "hooks/common/useFunnel";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { AdminRole as Role } from "types/common/role.types";
+import { Role } from "types/common/role.types";
 
 import AccountSettingPage from "./AccountSettingPage";
 import AdminInfoPage from "./AdminInfoPage";
@@ -62,7 +62,9 @@ const AdminSignUpFunnel = () => {
   // 계정 설정 단계 처리
   const handleAccountSettingStep = (data: ITeacherInfo) => {
     if (state.role === Role.ROLE_TEACHER) {
-      navigate(`approval?type=admin&schoolName=${data.schoolName}&status=pending`);
+      navigate(`/approval?type=admin&schoolName=${data.schoolName}&status=pending`, {
+        replace: true
+      });
     } else {
       setState((prev) => ({
         ...prev,
@@ -72,7 +74,9 @@ const AdminSignUpFunnel = () => {
   };
 
   const handleRegisterSchool = () => {
-    navigate(`approval?type=admin&schoolName=${state.teacherInfo?.schoolName}&status=pending`);
+    navigate(`/approval?type=admin&schoolName=${state.teacherInfo?.schoolName}&status=register`, {
+      replace: true
+    });
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { AdminRole, Role } from "types/common/role.types";
+import { Role } from "types/common/role.types";
 
 import type { Nullable } from "../helper.types";
 
@@ -13,7 +13,7 @@ export type AdminAuthType = {
 export interface ITeacherSignUpData {
   adminId: number;
   adminName: string;
-  role: typeof AdminRole.ROLE_TEACHER;
+  role: Role;
   schoolId: number;
   schoolName: string;
   schoolNumber: Nullable<string>;
