@@ -1,6 +1,6 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-interface AlertIconProps extends IconSize {
+interface AlertIconProps extends Omit<IconProps, "color"> {
   color: "red" | "gray" | "brown" | "orange" | "darkgray";
 }
 

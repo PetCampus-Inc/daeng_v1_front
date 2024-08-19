@@ -1,18 +1,11 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-interface IconProps extends IconSize {
-  className?: string;
-  rx?: string;
+interface Props extends IconProps {
+  rx?: number | string;
   isGray?: boolean;
 }
 
-const CalendarIcon = ({
-  className = "",
-  w = "16",
-  h = "17",
-  rx = "4",
-  isGray = false
-}: IconProps) => {
+const CalendarIcon = ({ className = "", w = "16", h = "17", rx = "4", isGray = false }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

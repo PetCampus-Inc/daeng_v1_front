@@ -1,11 +1,10 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-interface IconProps extends IconSize {
-  className?: string;
+interface Props extends Omit<IconProps, "color"> {
   colorScheme?: "primary" | "basic";
 }
 
-const FootRoundIcon = ({ colorScheme = "primary", w = "16", h = "17" }: IconProps) => {
+const FootRoundIcon = ({ colorScheme = "primary", w = "16", h = "17" }: Props) => {
   const colorMap = new Map([
     ["primary", ["#956F4C", "#FFF7E1"]],
     ["basic", ["#956F4C", "white"]]

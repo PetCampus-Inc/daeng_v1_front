@@ -1,14 +1,9 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-interface Props extends IconSize {
-  className?: string;
-}
-
-const ArrowLeftIcon = ({ className = "", w = "24", h = "24" }: Props) => {
+const ArrowLeftIcon = ({ w = "24", h = "24" }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
       width={w}
       height={h}
       viewBox="0 0 24 24"
