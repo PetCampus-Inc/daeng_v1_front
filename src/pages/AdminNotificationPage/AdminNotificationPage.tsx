@@ -5,17 +5,20 @@ import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { useState } from "react";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
-  const currentSteps = ADMIN_NOTIFICATION_STEP;
+  const { role } = useAdminInfo();
+  const currentSteps =
+    role === "ROLE_OWNER" ? ADMIN_NOTIFICATION_STEP : ADMIN_NOTIFICATION_STEP.slice(0, 3);
   const [currentStep, setCurrentStep] = useState(0);
   const [isNewNotification, setIsNewNotification] = useState(true);
 
   return (
     <>
       <Header type="text" text="알림" />
-      <Layout type="main">
+      <Layout type="detail">
         <nav>
           <Box display="flex" gap={20} mt={25} paddingX={15} borderBottom={2} borderColor="gray_5">
             {currentSteps.map((item, index) => (

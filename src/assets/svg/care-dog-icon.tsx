@@ -1,12 +1,14 @@
+import { IconSize } from "./types";
+
 export type IconProps = {
   borderStyle?: string;
-};
+} & IconSize;
 
-const CareDogIcon = ({ borderStyle = "" }: IconProps) => {
+const CareDogIcon = ({ borderStyle = "", w = "40", h = "40" }: IconProps) => {
   return (
     <svg
-      width="40"
-      height="40"
+      width={w}
+      height={h}
       viewBox="0 0 40 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
