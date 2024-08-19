@@ -9,7 +9,7 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
 import { useFormContext } from "react-hook-form";
-import { addZero } from "utils/date";
+import { padToTwoDigits } from "utils/date";
 import { handlePreventDefault } from "utils/preventDefault";
 
 import { Caption, Card } from "./styles";
@@ -21,8 +21,8 @@ const DogInfo = () => {
 
   const dogBirthData = {
     year: birthYear,
-    month: addZero(birthMonth),
-    day: addZero(birthDay)
+    month: padToTwoDigits(birthMonth),
+    day: padToTwoDigits(birthDay)
   };
 
   return (

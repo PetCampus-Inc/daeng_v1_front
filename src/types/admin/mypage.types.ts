@@ -1,11 +1,12 @@
 import type { Nullable } from "types/helper.types";
 
 export interface IOwnerInfo {
+  adminId: number;
   adminName: string;
   phoneNumber: string;
   id: string;
   role: string;
-  imageUrl: string;
+  profileUri: string;
   schoolId: number;
   schoolName: string;
   schoolNumber: string;
@@ -16,6 +17,8 @@ export interface IOwnerInfo {
 export interface ITeacherInfo {
   id: string;
   adminName: string;
+  adminId: number;
+  profileUri: string;
   schoolId: number;
   schoolName: string;
   phoneNumber: string;

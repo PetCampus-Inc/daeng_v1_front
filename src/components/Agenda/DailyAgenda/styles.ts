@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
 export const AgendaContainer = styled.div`
-  position: relative;
   display: flex;
+  position: relative;
   flex-direction: column;
   padding: 72px 18px 76px;
+
+  min-height: 440px;
+
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.shadows.card};
 

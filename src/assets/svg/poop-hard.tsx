@@ -1,8 +1,8 @@
 import { themeConfig } from "styles/themeConfig";
-import { Poop } from "types/admin/attendance.type";
+import { POOP_STATUS, type PoopStatus } from "types/member/dogs";
 
-const PoopHard = ({ poop }: { poop?: Poop }) => {
-  const isSelected = poop && poop === Poop.HARD;
+const PoopHard = ({ poop }: { poop?: PoopStatus }) => {
+  const isSelected = poop === POOP_STATUS.HARD;
 
   return (
     <svg width="60" height="62" viewBox="0 0 60 62" fill="none" xmlns="http://www.w3.org/2000/svg">

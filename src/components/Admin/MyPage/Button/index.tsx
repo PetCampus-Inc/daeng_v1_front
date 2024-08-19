@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
-import { BackgroundButtonWrapper } from "components/Admin/MyPage/styles";
-import { BackgroundButton } from "components/common/Button";
+import { BottomButtonWrapper } from "components/Admin/MyPage/styles";
+import { BottomButton } from "components/common/Button";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { AUTH_KEY } from "store/auth";
@@ -26,16 +26,11 @@ const LogOutButton = () => {
 
   return (
     <>
-      <BackgroundButtonWrapper>
-        <BackgroundButton
-          buttonBackgroundColor="gray_4"
-          fontColor="gray_3"
-          onClick={openPopup}
-          className="logOut"
-        >
+      <BottomButtonWrapper>
+        <BottomButton wrapColor="transparent" colorScheme="gray_4" onClick={openPopup}>
           로그아웃
-        </BackgroundButton>
-      </BackgroundButtonWrapper>
+        </BottomButton>
+      </BottomButtonWrapper>
     </>
   );
 };

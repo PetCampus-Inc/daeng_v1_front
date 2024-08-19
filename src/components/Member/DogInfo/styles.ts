@@ -174,7 +174,7 @@ export const InfoText = styled.div`
   ${({ theme }) => theme.typo.label2_14_R};
 `;
 
-export const Editebutton = styled.button`
+export const Editbutton = styled.button`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.white};
@@ -211,7 +211,7 @@ export const DogMoreInfoText = styled.div`
   ${({ theme }) => theme.typo.label2_14_R};
 `;
 
-export const DogMoreInfoEditeButton = styled.button`
+export const DogMoreInfoEditButton = styled.button`
   background-color: ${({ theme }) => theme.colors.gray_5};
   padding: 5px 8px 2px;
   border-radius: 50px;
@@ -223,11 +223,7 @@ export const CarouselContainer = styled.div`
   overflow-x: auto;
 `;
 
-export const CarouselWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  width: calc(100% + 130px);
-`;
+export const DragCarouselWrapper = styled.div``;
 
 export const CarouselCard = styled.div`
   position: relative;
@@ -236,10 +232,11 @@ export const CarouselCard = styled.div`
   justify-content: flex-end;
   width: 100%;
   height: 72px;
-  max-width: 103px;
+  min-width: 103px;
   border-radius: 8px;
   overflow: hidden;
   padding: 4px 8px;
+  cursor: pointer;
 
   & > img {
     object-fit: cover;
@@ -269,4 +266,8 @@ export const CarouselText = styled.span`
   z-index: 1;
   color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.caption1_10_R};
+`;
+
+export const StyledHiddenUpload = styled.input`
+  display: none;
 `;

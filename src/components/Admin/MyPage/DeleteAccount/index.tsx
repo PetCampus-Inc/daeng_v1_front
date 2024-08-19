@@ -1,23 +1,90 @@
 import { PATH } from "constants/path";
 
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Role } from "types/admin/admin.types";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;
+  role: string;
 }
 
-const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
-  const [isAllChecked, setIsAllChecked] = useState(false);
+type ContentCheck = {
+  1: boolean;
+  2: boolean;
+  3: boolean;
+  4: boolean;
+};
+
+const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
+  const [contents, setContents] = useState({
+    1: false,
+    2: false,
+    3: false,
+    4: false
+  });
+
+  const isAllChecked =
+    role === Role.ROLE_OWNER ? Object.values(contents).every(Boolean) : contents[1] && contents[2];
+
+  const checkAll = () => {
+    const newState = !isAllChecked;
+    setContents({
+      1: newState,
+      2: newState,
+      3: newState,
+      4: newState
+    });
+  };
+
+  const checkIndividual = (key: keyof ContentCheck) => {
+    setContents((prev) => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
+  };
+
   const navigate = useNavigate();
 
   const onSubmit = () => {
+    // FIXME 탈퇴
     navigate(PATH.ADMIN_MY_PAGE_DELETE_COMPLETE);
     return;
   };
+
+  const renderCheckboxItem = (key: keyof ContentCheck, text: string, marginTop: number) => (
+    <Box
+      width="100%"
+      border={1}
+      borderRadius={8}
+      borderColor={contents[key] ? "transparent" : "gray_4"}
+      backgroundColor={contents[key] ? "br_5" : "transparent"}
+      padding={12}
+      marginTop={marginTop}
+    >
+      <Checkbox
+        onChange={() => checkIndividual(key)}
+        isChecked={contents[key]}
+        variant="default"
+        label={
+          <Text color="gray_1">
+            {text.split(/(<.*?>)/g).map((segment, index) =>
+              /<.*?>/.test(segment) ? (
+                <Text key={index} color="primaryColor">
+                  {segment.replace(/<|>/g, "")}
+                </Text>
+              ) : (
+                segment
+              )
+            )}
+          </Text>
+        }
+      />
+    </Box>
+  );
 
   return (
     <>
@@ -31,87 +98,23 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
             탈퇴 전, 아래 내용을 확인해 주세요
           </Text>
         </Flex>
-        <Box
-          width="100%"
-          border={1}
-          borderRadius={8}
-          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
-          padding={12}
-          marginTop={30}
-        >
-          <Checkbox
-            isChecked={isAllChecked}
-            variant="default"
-            label={
-              <Text color="gray_1">
-                지금까지 주고받은 채팅내역, 알림장, 사진앨범 등의 모든 기록이{" "}
-                <Text color="primaryColor">영구 삭제</Text>되며 복구할 수 없어요
-              </Text>
-            }
-          />
-        </Box>
-        <Box
-          width="100%"
-          border={1}
-          borderRadius={8}
-          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
-          padding={12}
-          marginTop={15}
-        >
-          <Checkbox
-            isChecked={isAllChecked}
-            variant="default"
-            label={
-              <Text color="gray_1">
-                탈퇴 후 사용했던 소셜 아이디로{" "}
-                <Text color="primaryColor">재가입 시 신규회원으로 가입</Text> 돼요
-              </Text>
-            }
-          />
-        </Box>
-        <Box
-          width="100%"
-          border={1}
-          borderRadius={8}
-          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
-          padding={12}
-          marginTop={15}
-        >
-          <Checkbox
-            isChecked={isAllChecked}
-            variant="default"
-            label={
-              <Text color="gray_1">
-                원장님이 등록한 유치원의 <Text color="primaryColor">활동 기록</Text>과{" "}
-                <Text color="primaryColor">정보</Text>, 가입된{" "}
-                <Text color="primaryColor">회원 및 교사 정보</Text>는 모두{" "}
-                <Text color="primaryColor">초기화</Text>되고 복구되지 않아요
-              </Text>
-            }
-          />
-        </Box>
-        <Box
-          width="100%"
-          border={1}
-          borderRadius={8}
-          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_5" : "transparent"}`}
-          padding={12}
-          marginTop={15}
-        >
-          <Checkbox
-            isChecked={isAllChecked}
-            variant="default"
-            label={
-              <Text color="gray_1">
-                모든 <Text color="primaryColor">개인 정보</Text>가 삭제돼요
-              </Text>
-            }
-          />
-        </Box>
+        {renderCheckboxItem(
+          1,
+          "지금까지 주고받은 채팅내역, 알림장, 사진앨범 등의 모든 기록이 <영구 삭제>되며 복구할 수 없어요",
+          30
+        )}
+        {renderCheckboxItem(
+          2,
+          "탈퇴 후 사용했던 소셜 아이디로 <재가입 시 신규회원으로 가입> 돼요",
+          15
+        )}
+        {role === Role.ROLE_OWNER &&
+          renderCheckboxItem(
+            3,
+            "원장님이 등록한 유치원의 <활동 기록>과 <정보>, 가입된 <회원 및 교사 정보>는 모두 <초기화>되고 복구되지 않아요",
+            15
+          )}
+        {role === Role.ROLE_OWNER && renderCheckboxItem(4, "모든 <개인 정보>가 삭제돼요", 15)}
         <Box
           width="100%"
           border={1}
@@ -122,7 +125,7 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
           marginTop={60}
         >
           <Checkbox
-            onChange={() => setIsAllChecked(!isAllChecked)}
+            onChange={checkAll}
             isChecked={isAllChecked}
             variant="default"
             label={
@@ -132,9 +135,9 @@ const DeleteAccount = ({ setStep }: DeleteAccountProps) => {
             }
           />
         </Box>
-        <BackgroundButton onClick={onSubmit} disabled={!isAllChecked} backgroundColor="white">
+        <BottomButton onClick={onSubmit} disabled={!isAllChecked}>
           탈퇴하기
-        </BackgroundButton>
+        </BottomButton>
       </Layout>
     </>
   );

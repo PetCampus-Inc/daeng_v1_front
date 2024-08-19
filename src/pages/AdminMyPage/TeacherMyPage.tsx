@@ -33,7 +33,9 @@ const TeacherMyPage = () => {
           <PageContainer
             pt="7"
             imageUrl={
-              "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              data && data.profileUri
+                ? data.profileUri
+                : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }
           >
             {/* TODO: data.imageURL 없는 경우 기본 이미지 url로 연결 */}

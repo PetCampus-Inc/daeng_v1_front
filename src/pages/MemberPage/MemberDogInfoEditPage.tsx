@@ -7,7 +7,7 @@ import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
 import { PageContainer } from "styles/StyleModule";
-import { addZero } from "utils/date";
+import { padToTwoDigits } from "utils/date";
 
 const MemberDogInfoEditPage = () => {
   const { dogId } = useParams();
@@ -18,8 +18,8 @@ const MemberDogInfoEditPage = () => {
 
   const dogBirth = {
     year: year,
-    month: addZero(month),
-    day: addZero(day)
+    month: padToTwoDigits(month),
+    day: padToTwoDigits(day)
   };
 
   const methods = useForm({
@@ -29,12 +29,7 @@ const MemberDogInfoEditPage = () => {
       year: dogBirth.year,
       month: dogBirth.month,
       day: dogBirth.day,
-      breedId: rest.breedId,
-      breedName: rest.breedName,
-      dogName: rest.dogName,
-      dogGender: rest.dogGender,
-      dogSize: rest.dogSize,
-      neutralization: rest.neutralization
+      ...rest
     }
   });
 
