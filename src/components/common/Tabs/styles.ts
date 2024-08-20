@@ -4,9 +4,13 @@ import styled, { css, type RuleSet, type CSSProp } from "styled-components";
 import type { TabsVariant } from "./tabs-ui";
 
 const sharedStyles = {
-  root: css`
-    width: 100%;
-  `,
+  root: {
+    underline: css`
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    `
+  },
   list: {
     underline: css`
       width: 100%;
@@ -14,6 +18,7 @@ const sharedStyles = {
       justify-content: space-around;
       align-items: center;
       gap: 24px;
+      padding-inline: 16px;
     `,
     toggle: css`
       width: 100%;
@@ -73,9 +78,7 @@ const sharedStyles = {
       }
     `
   },
-  content: css`
-    margin-top: 0.5rem;
-  `
+  content: css``
 };
 
 type StyleProps = {
@@ -104,7 +107,7 @@ export const TriggerButton = styled.button.withConfig({
   ${({ css }) => css}
 `;
 
-export const RootContainer = createStyledComponent("div", { underline: sharedStyles.root });
+export const RootContainer = createStyledComponent("div", sharedStyles.root);
 export const ListContainer = createStyledComponent("div", sharedStyles.list);
 export const ContentContainer = createStyledComponent("div", {
   underline: sharedStyles.content,
