@@ -36,7 +36,7 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
 
   const handleSubmitData = () => {
     const { memberProfileUri } = getFormValues();
-    console.log(memberProfileUri);
+
     // profileUri 파일 수정 할 경우
     if (memberProfileUri && typeof memberProfileUri !== "string")
       uploadProfileFiles(memberProfileUri);
