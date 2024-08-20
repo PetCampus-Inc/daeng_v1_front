@@ -11,7 +11,7 @@ const DogCircleIcon = ({ w = 80, h = 80, colorScheme = "primary" }: Props) => {
   const colorMap = new Map<string, [string, { r: number; g: number; b: number; a: number }]>([
     ["primary", [themeConfig.colors.primaryColor, { r: 136, g: 99, b: 66, a: 0.3 }]],
     ["yellow", [themeConfig.colors.yellow_3, { r: 235, g: 208, b: 135, a: 0.3 }]],
-    ["gray", [themeConfig.colors.gray_5, { r: 0, g: 0, b: 0, a: 0.1 }]]
+    ["gray", [themeConfig.colors.gray_5, { r: 0, g: 0, b: 0, a: 0 }]]
   ]);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const [fillColor, shadowColor] = colorMap.get(colorScheme) ?? colorMap.get("primary")!;
