@@ -40,7 +40,7 @@ const ProfileUploadBox = ({
     }
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const FileList = e.target.files;
 
     if (!FileList) {
@@ -55,13 +55,17 @@ const ProfileUploadBox = ({
     }
 
     if (FileList) {
-      const newFiles = Array.from(FileList);
-      const fileArray = await Promise.all(newFiles.map(getFilePreview));
-
-      setProfile([...fileArray]);
-      setValue(fileName, [...newFiles]);
+      updateFilePreview(FileList);
       if (mode === "create" && setIsActive) setIsActive(true);
     }
+  };
+
+  const updateFilePreview = async (FileList: FileList) => {
+    const newFiles = Array.from(FileList);
+    const fileArray = await Promise.all(newFiles.map(getFilePreview));
+
+    setProfile([...fileArray]);
+    setValue(fileName, [...newFiles]);
   };
 
   return (
@@ -81,9 +85,7 @@ const ProfileUploadBox = ({
       {mode === "edit" && (
         <ProfileEdit
           profile={profile}
-          fileInputRef={fileRef}
           handleFileChange={handleFileChange}
-          handleClick={handleClick}
           registerText={fileName}
           type={type}
         />
