@@ -1,4 +1,4 @@
-import { FIELD, FIELD_KEYS } from "constants/field";
+import { FIELD } from "constants/field";
 import { PHONE_REGEX } from "constants/validCheck";
 
 import { Text } from "components/common";
@@ -13,14 +13,11 @@ import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 
-// TODO 코드 리팩토링 필요
-
 const MyInfoEdit = () => {
-  const { register, setValue, watch } = useFormContext();
+  const { register, setValue } = useFormContext();
   const overlay = useOverlay.useOverlay();
 
   const addressStreet = FIELD.MEMBER_ADDRESS;
-  const watchAddress = watch(addressStreet);
 
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -38,7 +35,6 @@ const MyInfoEdit = () => {
       <Postcode isOpen={isOpen} close={close} field={addressStreet} setValue={setValue} />
     ));
 
-  //TODO input value 연동 작업하기
   return (
     <S.ProfileEditWrapper>
       <Flex direction="column" gap={7}>
@@ -48,6 +44,7 @@ const MyInfoEdit = () => {
         <TextInput
           name={FIELD.MEMBER_NAME}
           register={register}
+          required
           placeholder="견주 이름을 입력해주세요"
         />
       </Flex>
@@ -56,7 +53,7 @@ const MyInfoEdit = () => {
         <Text typo="label2_14_R" color="darkBlack">
           성별
         </Text>
-        <SingleRadio name={FIELD.MEMBER_GENDER} radiosText={["남", "여"]} />
+        <SingleRadio name={FIELD.MEMBER_GENDER} radiosText={["남", "여"]} isRequired />
       </Flex>
 
       <Flex direction="column" gap={7}>
@@ -69,7 +66,7 @@ const MyInfoEdit = () => {
           onSearch={openPopup}
           onClick={openPopup}
           onClear={handleClear}
-          value={watchAddress}
+          required
           readOnly
           placeholder="주소를 입력해주세요"
           inputType="memberEdit"
@@ -94,6 +91,7 @@ const MyInfoEdit = () => {
           onChange={handleChangeNumber(FIELD.MEMBER_PHONE)}
           placeholder="연락처를 입력해주세요"
           type="tel"
+          required
         />
       </Flex>
 
@@ -110,6 +108,7 @@ const MyInfoEdit = () => {
           }}
           placeholder="비상 연락처를 입력해주세요"
           type="tel"
+          required
         />
       </Flex>
     </S.ProfileEditWrapper>
