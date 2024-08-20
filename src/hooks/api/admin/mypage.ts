@@ -2,6 +2,7 @@ import { PATH } from "constants/path";
 
 import { useMutation } from "@tanstack/react-query";
 import {
+  handleDeleteOwner,
   handleDeleteTeacher,
   handleOwnerProfileEdit,
   handlePostSchoolResigned
@@ -31,6 +32,15 @@ export const useSchoolResigned = () => {
   });
 
   return { mutateSchoolResigned: mutate };
+};
+
+//원장 탈퇴
+export const useDeleteOwner = () => {
+  const { mutate } = useMutation({
+    mutationFn: handleDeleteOwner
+  });
+
+  return { mutateDeleteOwner: mutate };
 };
 
 //선생님 탈퇴

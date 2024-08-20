@@ -52,6 +52,18 @@ export const handlePostSchoolResigned = async (adminId: number) => {
   });
 };
 
+//원장 탈퇴
+export const handleDeleteOwner = async (adminId: number) => {
+  const url = `admin/delete/owner`;
+  return await request<void>({
+    url,
+    method: "POST",
+    params: {
+      adminId
+    }
+  });
+};
+
 //선생님 탈퇴
 export const handleDeleteTeacher = async (adminId: number) => {
   const url = `admin/delete/teacher`;

@@ -3,7 +3,7 @@ import { PATH } from "constants/path";
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
-import { useDeleteTeacher } from "hooks/api/admin/mypage";
+import { useDeleteOwner, useDeleteTeacher } from "hooks/api/admin/mypage";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ type ContentCheck = {
 
 const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   const { mutateDeleteTeacher } = useDeleteTeacher();
+  const { mutateDeleteOwner } = useDeleteOwner();
   const { adminId } = useAdminInfo();
   const [contents, setContents] = useState({
     1: false,
@@ -55,7 +56,7 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
 
   const onSubmit = () => {
     if (isAllChecked) {
-      mutateDeleteTeacher(adminId);
+      role === Role.ROLE_OWNER ? mutateDeleteOwner(adminId) : mutateDeleteTeacher(adminId);
       navigate(PATH.ADMIN_MY_PAGE_DELETE_COMPLETE);
     }
     return;
