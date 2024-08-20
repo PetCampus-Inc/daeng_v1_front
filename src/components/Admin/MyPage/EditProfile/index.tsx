@@ -1,7 +1,9 @@
+import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 import { PHONE_REGEX } from "constants/validCheck";
 
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { Flex, Layout, Text, TextInput } from "components/common";
+import ProfileUploadBox from "components/Member/Profile/Box/ProfileUploadBox";
 import { useOwnerProfileEdit, useTeacherProfileEdit } from "hooks/api/admin/mypage";
 import { useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -11,8 +13,6 @@ import { formatPhoneNumber } from "utils/formatter";
 
 import * as S from "./styles";
 import { BottomButton } from "../../../common/Button";
-import ProfileUploadBox from "components/Member/Profile/Box/ProfileUploadBox";
-import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
 interface ProfileInfoProps {
   principalData?: IOwnerInfo;
