@@ -2,7 +2,7 @@ import { PHONE_REGEX } from "constants/validCheck";
 
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { Flex, Layout, Text, TextInput } from "components/common";
-import { useOwnerProfileEdit } from "hooks/api/admin/mypage";
+import { useOwnerProfileEdit, useTeacherProfileEdit } from "hooks/api/admin/mypage";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IOwnerInfo } from "types/admin/mypage.types";
@@ -20,6 +20,7 @@ interface ProfileInfoProps {
 const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
   const { handleSubmit, register, setValue, getFieldState, watch } = useForm();
   const { ownerProfileEditMutation } = useOwnerProfileEdit();
+  const { teacherProfileEditMutation } = useTeacherProfileEdit();
   const [isPhoneDirty, setIsPhoneDirty] = useState(false);
   const roleData = principalData ? principalData : teacherData;
   const name = watch("newName");
@@ -41,7 +42,7 @@ const EditProfile = ({ principalData, teacherData }: ProfileInfoProps) => {
       adminName: data.newName,
       phoneNumber: data.phoneNumber
     };
-    ownerProfileEditMutation(req);
+    principalData ? ownerProfileEditMutation(req) : teacherProfileEditMutation(req);
   });
 
   return (

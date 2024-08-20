@@ -24,6 +24,7 @@ type ContentCheck = {
 const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   const { mutateDeleteTeacher } = useDeleteTeacher();
   const { mutateDeleteOwner } = useDeleteOwner();
+  const navigate = useNavigate();
   const { adminId } = useAdminInfo();
   const [contents, setContents] = useState({
     1: false,
@@ -51,8 +52,6 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
       [key]: !prev[key]
     }));
   };
-
-  const navigate = useNavigate();
 
   const onSubmit = () => {
     if (isAllChecked) {

@@ -1,5 +1,5 @@
 import { request } from "libs/AuthAxios/request";
-import { IOwnerProfileEdit } from "types/admin/admin.types";
+import { IAdminProfileEdit } from "types/admin/admin.types";
 
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
 
@@ -26,8 +26,23 @@ export const handleGetTeacherInfo = async (adminId: number) => {
 };
 
 //원장 프로필 수정
-export const handleOwnerProfileEdit = async (req: IOwnerProfileEdit) => {
+export const handleOwnerProfileEdit = async (req: IAdminProfileEdit) => {
   const url = `admin/owner/profile`;
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      imageUrl: req.imageUrl,
+      adminId: req.adminId,
+      adminName: req.adminName,
+      phoneNumber: req.phoneNumber
+    }
+  });
+};
+
+//선생님 프로필 수정
+export const handleTeacherProfileEdit = async (req: IAdminProfileEdit) => {
+  const url = `admin/teacher/profile`;
   return await request<void>({
     url,
     method: "POST",
