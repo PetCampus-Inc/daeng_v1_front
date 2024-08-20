@@ -1,6 +1,8 @@
-const PencilCircleIcon = () => {
+import type { IconProps } from "assets/svg/types";
+
+const PencilFilledIcon = ({ w = 24, h = 24 }: IconProps) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={w} height={h} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="24" height="24" rx="8" fill="#E9E9E9" />
       <path
         d="M10.9448 19.6379C10.574 20.2801 9.75279 20.5002 9.11055 20.1294L6.78476 18.7866C6.14251 18.4158 5.92246 17.5946 6.29326 16.9523L12.3358 6.48628C12.7066 5.84403 13.5279 5.62398 14.1701 5.99478L16.4959 7.33757C17.1381 7.70837 17.3582 8.52961 16.9874 9.17186L10.9448 19.6379Z"
@@ -19,4 +21,4 @@ const PencilCircleIcon = () => {
   );
 };
 
-export default PencilCircleIcon;
+export default PencilFilledIcon;
