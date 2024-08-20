@@ -38,7 +38,7 @@ const MemberMyInfoEditPage = () => {
           action={() => blocker.proceed()}
         />
       ) : null}
-      <Header type="text" text="프로필 수정1" transparent />
+      <Header type="text" text="프로필 수정" transparent />
       <PageContainer pt="1" backgroundColor="br_5">
         <FormProvider {...methods}>
           <MyProfileEdit />
