@@ -9,3 +9,4 @@ export * from "./Carousel";
 export * from "./Accordion";
 export * from "./Checkbox";
 export * from "./FullHeight";
+export * from "./Button";

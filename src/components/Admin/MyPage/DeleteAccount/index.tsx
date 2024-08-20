@@ -5,7 +5,7 @@ import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { Role } from "types/common/role.types";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;

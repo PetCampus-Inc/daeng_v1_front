@@ -5,13 +5,13 @@ import { Box } from "components/common";
 import Header from "components/common/Header";
 import Toggle from "components/common/Toggle/Toggle";
 import { useState } from "react";
-import { Role } from "types/admin/admin.types";
+import { Role } from "types/common/role.types";
 
 import * as S from "./styles";
 
 interface AlertSettingProps {
   setStep: (step: number) => void;
-  role: string;
+  role: Role;
 }
 
 type AlertSettings = {
