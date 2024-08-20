@@ -56,7 +56,7 @@ export interface AdminLoginInfo {
   fcmToken: string;
 }
 
-export interface IOwnerProfileEdit {
+export interface IAdminProfileEdit {
   imageUrl: string;
   adminId: number;
   adminName: string;

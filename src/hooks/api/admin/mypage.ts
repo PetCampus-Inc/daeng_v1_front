@@ -5,17 +5,18 @@ import {
   handleDeleteOwner,
   handleDeleteTeacher,
   handleOwnerProfileEdit,
-  handlePostSchoolResigned
+  handlePostSchoolResigned,
+  handleTeacherProfileEdit
 } from "apis/admin/mypage.api";
 import { useNavigate } from "react-router-dom";
-import { IOwnerProfileEdit } from "types/admin/admin.types";
+import { IAdminProfileEdit } from "types/admin/admin.types";
 import showToast from "utils/showToast";
 
 //원장 프로필 수정
 export const useOwnerProfileEdit = () => {
   const navigate = useNavigate();
   const ownerProfileEditMutation = useMutation({
-    mutationFn: (newData: IOwnerProfileEdit) => handleOwnerProfileEdit(newData),
+    mutationFn: (newData: IAdminProfileEdit) => handleOwnerProfileEdit(newData),
     onSuccess: () => {
       navigate(PATH.ADMIN_MY_PAGE);
       showToast("수정 완료되었습니다", "bottom");
@@ -23,6 +24,20 @@ export const useOwnerProfileEdit = () => {
     throwOnError: true
   });
   return { ownerProfileEditMutation: ownerProfileEditMutation.mutate };
+};
+
+//선생님 프로필 수정
+export const useTeacherProfileEdit = () => {
+  const navigate = useNavigate();
+  const teacherProfileEditMutation = useMutation({
+    mutationFn: (newData: IAdminProfileEdit) => handleTeacherProfileEdit(newData),
+    onSuccess: () => {
+      navigate(PATH.ADMIN_MY_PAGE);
+      showToast("수정 완료되었습니다", "bottom");
+    },
+    throwOnError: true
+  });
+  return { teacherProfileEditMutation: teacherProfileEditMutation.mutate };
 };
 
 //선생님 유치원 끊기
