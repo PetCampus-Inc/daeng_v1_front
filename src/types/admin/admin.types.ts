@@ -53,3 +53,11 @@ export interface IAdminProfileEdit {
   adminName: string;
   phoneNumber: string;
 }
+
+export interface ISchoolInfoEdit {
+  adminId: number;
+  schoolId: number;
+  schoolName: string;
+  phoneNumber: string;
+  address: string;
+}

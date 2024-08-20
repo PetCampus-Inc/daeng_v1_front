@@ -1,5 +1,5 @@
 import { request } from "libs/AuthAxios/request";
-import { IAdminProfileEdit } from "types/admin/admin.types";
+import { IAdminProfileEdit, ISchoolInfoEdit } from "types/admin/admin.types";
 
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
 
@@ -23,6 +23,22 @@ export const handleGetTeacherInfo = async (adminId: number) => {
     }
   });
   return data;
+};
+
+//원장 유치원 정보 수정
+export const handleSchoolInfoEdit = async (req: ISchoolInfoEdit) => {
+  const url = `admin/owner/school`;
+  return await request<void>({
+    url,
+    method: "POST",
+    data: {
+      adminId: req.adminId,
+      schoolId: req.schoolId,
+      schoolName: req.schoolName,
+      phoneNumber: req.phoneNumber,
+      address: req.address
+    }
+  });
 };
 
 //원장 프로필 수정
