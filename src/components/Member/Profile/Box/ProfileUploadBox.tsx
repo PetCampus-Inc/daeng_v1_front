@@ -21,6 +21,7 @@ interface ProfileUploadProps {
   fileRef: React.RefObject<HTMLInputElement>;
   fileName: string;
   mode: Mode;
+  onClick?: () => void;
 }
 
 const ProfileUploadBox = ({
@@ -29,7 +30,8 @@ const ProfileUploadBox = ({
   setIsActive,
   fileRef,
   fileName,
-  mode
+  mode,
+  onClick
 }: ProfileUploadProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
@@ -38,6 +40,7 @@ const ProfileUploadBox = ({
     if (fileRef && fileRef.current) {
       mode === "create" && isActive ? setIsActive && setIsActive(false) : fileRef.current.click();
     }
+    onClick && onClick();
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
