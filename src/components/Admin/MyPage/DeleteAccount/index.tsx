@@ -3,11 +3,11 @@ import { PATH } from "constants/path";
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
+import { useDeleteTeacher } from "hooks/api/admin/mypage";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/admin/admin.types";
-import { useDeleteTeacher } from "hooks/api/admin/mypage";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;
