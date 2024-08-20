@@ -47,21 +47,16 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               element: <Pages.SignUpPage />
             },
             {
+              path: PATH.APPROVAL_STATUS,
+              element: <Pages.ApprovalStatusPage />
+            },
+            {
               path: PATH.ADMIN_LOGIN,
               element: <Pages.AdminLoginPage />
             },
             {
               path: PATH.ADMIN_SIGNUP,
-              children: [
-                {
-                  index: true,
-                  element: <Pages.AdminSignupPage />
-                },
-                {
-                  path: PATH.ADMIN_SIGNUP_APPROVAL_STATUS,
-                  element: <Pages.AdminApprovalStatusPage />
-                }
-              ]
+              element: <Pages.AdminSignupPage />
             },
             {
               path: PATH.REDIRECT,

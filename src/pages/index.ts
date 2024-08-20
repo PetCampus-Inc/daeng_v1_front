@@ -4,13 +4,15 @@ export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
 
 /* Admin SignUp Page */
 export { default as AdminSignupPage } from "./SignUpPage/AdminSignUpFunnel";
-export { default as AdminApprovalStatusPage } from "./SignUpPage/ApprovalStatusPage";
 
 /* Admin Chat Page */
 export { default as Chat } from "./ChatPage/Chat";
 
 /* Admin Notification Page*/
 export { default as AdminNotificationPage } from "./AdminNotificationPage/AdminNotificationPage";
+
+/* Approval Status Page */
+export { default as ApprovalStatusPage } from "./ApprovalStatusPage/ApprovalStatusPage";
 
 /* Admin Attendance Page */
 export { default as AttendancePage } from "./AdminAttendancePage/AttendancePage";

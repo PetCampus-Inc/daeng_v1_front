@@ -7,7 +7,7 @@ import { useDeleteOwner, useDeleteTeacher } from "hooks/api/admin/mypage";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { Role } from "types/common/role.types";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;

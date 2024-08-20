@@ -2,6 +2,7 @@ import { PATH } from "constants/path";
 
 import Header from "components/common/Header";
 import { useParams, useNavigate } from "react-router-dom";
+import { MemberRole } from "types/common/role.types";
 
 import SearchSchoolPage from "../SignUpPage/SearchSchoolPage";
 
@@ -14,7 +15,7 @@ const MemberSchoolSearchPage = () => {
   return (
     <>
       <Header type="back" />
-      <SearchSchoolPage type="MEMBER" onNextStep={handleGotoPage} />
+      <SearchSchoolPage type={MemberRole.ROLE_MEMBER} onNextStep={handleGotoPage} />
     </>
   );
 };

@@ -7,7 +7,7 @@ import MapIcon from "assets/svg/map-pin-icon";
 import PhoneIcon from "assets/svg/phone-basic";
 import SchoolIcon from "assets/svg/school-icon";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
 
 import {
   StyledCard,
@@ -46,15 +46,15 @@ const InfoItem = ({ title, icon }: { title?: string; icon: JSX.Element }) => {
   );
 };
 
-interface InfoCardProps<T extends Role> {
+interface InfoCardProps<T extends AdminRole> {
   data: T extends "ROLE_OWNER" ? IOwnerInfo : ITeacherInfo;
-  role: Role;
+  role: AdminRole;
 }
 
-const InfoCard = <T extends Role>({ data, role }: InfoCardProps<T>) => {
+const InfoCard = <T extends AdminRole>({ data, role }: InfoCardProps<T>) => {
   const navigate = useNavigate();
 
-  const isOwner = role === "ROLE_OWNER";
+  const isOwner = role === AdminRole.ROLE_OWNER;
 
   const moreInfoText = isOwner ? "유치원 정보 수정" : "유치원 정보";
   const handleMoreInfoClick = () => {
