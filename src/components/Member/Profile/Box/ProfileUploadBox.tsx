@@ -40,6 +40,14 @@ const ProfileUploadBox = ({
     }
   };
 
+  const updateFilePreview = async (FileList: FileList) => {
+    const newFiles = Array.from(FileList);
+    const fileArray = await Promise.all(newFiles.map(getFilePreview));
+
+    setProfile([...fileArray]);
+    setValue(fileName, [...newFiles]);
+  };
+
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const FileList = e.target.files;
 
@@ -58,14 +66,6 @@ const ProfileUploadBox = ({
       updateFilePreview(FileList);
       if (mode === "create" && setIsActive) setIsActive(true);
     }
-  };
-
-  const updateFilePreview = async (FileList: FileList) => {
-    const newFiles = Array.from(FileList);
-    const fileArray = await Promise.all(newFiles.map(getFilePreview));
-
-    setProfile([...fileArray]);
-    setValue(fileName, [...newFiles]);
   };
 
   return (
