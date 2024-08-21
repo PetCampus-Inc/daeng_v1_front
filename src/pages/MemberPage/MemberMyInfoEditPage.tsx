@@ -10,19 +10,16 @@ import { ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
-import { getLabelForValue } from "utils/formatter";
 
 const MemberMyInfoEditPage = () => {
   const { memberId } = useParams();
   const { data: memberData } = useGetMemberProfileInfo(memberId);
   const { memberProfileUri } = memberData;
 
-  // FIXME: `useGetMemberProfileInfo` select 단에서 데이터 가공해주면 좋을 것 같습니다.
-  const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, memberData.memberGender);
-
+  console.log("memberData", memberData);
   const methods = useForm({
     mode: "onBlur",
-    defaultValues: { ...memberData, profileUri: memberProfileUri, memberGender: formatMemberGender }
+    defaultValues: { ...memberData, profileUri: memberProfileUri }
   });
 
   const blocker = useBlocker(() => methods.formState.isDirty);

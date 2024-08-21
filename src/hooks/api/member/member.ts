@@ -1,3 +1,4 @@
+import { FIELD } from "constants/field";
 import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
@@ -23,6 +24,7 @@ import {
 import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
 import { getISOString } from "utils/date";
+import { getLabelForValue } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import type {
@@ -120,7 +122,12 @@ export const useGetMemberProfileInfo = (memberId?: string) => {
   return useSuspenseQuery({
     // NOTE: 쿼리키를 memberId로 관리할 필요가 있을까요? 로그인, 로그아웃 외에 memberId가 변할 경우가 없어보여요!
     queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId),
-    queryFn: () => handleGetMemberProfileInfo(memberId)
+    queryFn: () => handleGetMemberProfileInfo(memberId),
+    select: (data) => {
+      const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, data.memberGender);
+
+      return { ...data, memberGender: formatMemberGender };
+    }
   });
 };
 
