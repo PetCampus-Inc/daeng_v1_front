@@ -8,7 +8,7 @@ import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
 import * as S from "./styles";
-import RoleEditButton from "../Buttons/RoleEditeButton";
+import RoleEditButton from "../Buttons/RoleEditButton";
 
 const MyProfileEdit = () => {
   const { register } = useFormContext();
