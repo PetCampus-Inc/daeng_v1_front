@@ -131,6 +131,9 @@ export const usePostMemberProfileInfo = (memberId: string) => {
     mutationFn: (req: IMemberProfilePostInfo) => handleMemberInfoResult(req),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId) });
+    },
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
