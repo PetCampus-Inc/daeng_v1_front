@@ -21,7 +21,6 @@ const RoleEditButton = ({ isShowRoles, handleShowRoles }: RoleEditButtonProps) =
   const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.relation !== currentRelation);
 
   const handleSelectedRelation = (relation: string) => {
-    //TODO 버튼 클릭 시 호칭 영역 + 버튼 순서 변경
     setCurrentRelation(RELATION_DATA[relation]);
     setValue(FIELD.RELATION, relation, { shouldDirty: true });
   };

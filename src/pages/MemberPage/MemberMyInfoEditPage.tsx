@@ -16,7 +16,6 @@ const MemberMyInfoEditPage = () => {
   const { data: memberData } = useGetMemberProfileInfo(memberId);
   const { memberProfileUri } = memberData;
 
-  console.log("memberData", memberData);
   const methods = useForm({
     mode: "onBlur",
     defaultValues: { ...memberData, profileUri: memberProfileUri }
