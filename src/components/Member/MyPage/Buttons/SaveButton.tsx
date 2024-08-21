@@ -13,6 +13,7 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
   const {
     getValues,
     handleSubmit,
+    reset,
     formState: { isDirty, isValid, isSubmitting }
   } = useFormContext();
   const [shouldSubmit, setShouldSubmit] = useState(false);
@@ -73,7 +74,12 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
       memberProfileUri: s3ProfileData[0] || memberProfileUri
     };
 
-    mutateProfileInfo(requestData);
+    mutateProfileInfo(requestData, {
+      onSuccess() {
+        // 요청 성공 시 defaultValues로 초기화
+        reset();
+      }
+    });
   };
 
   useEffect(() => {
