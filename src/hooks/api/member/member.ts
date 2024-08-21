@@ -120,8 +120,7 @@ export const useGetMemberProfileInfo = (memberId?: string) => {
   if (!memberId) throw new Error("memberId is required");
 
   return useSuspenseQuery({
-    // NOTE: 쿼리키를 memberId로 관리할 필요가 있을까요? 로그인, 로그아웃 외에 memberId가 변할 경우가 없어보여요!
-    queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId),
+    queryKey: QUERY_KEY.MEMBER_PROFILE_INFO,
     queryFn: () => handleGetMemberProfileInfo(memberId),
     select: (data) => {
       const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, data.memberGender);
@@ -132,12 +131,12 @@ export const useGetMemberProfileInfo = (memberId?: string) => {
 };
 
 // 마이페이지 - 견주 프로필 수정
-export const usePostMemberProfileInfo = (memberId: string) => {
+export const usePostMemberProfileInfo = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (req: IMemberProfilePostInfo) => handleMemberInfoResult(req),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_INFO(memberId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_INFO });
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");

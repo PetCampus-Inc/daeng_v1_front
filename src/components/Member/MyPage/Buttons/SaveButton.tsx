@@ -18,7 +18,7 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
   } = useFormContext();
   const [shouldSubmit, setShouldSubmit] = useState(false);
   const { uploadFiles, s3ProfileData } = useUploadProfile();
-  const { mutateProfileInfo } = usePostMemberProfileInfo(memberId);
+  const { mutateProfileInfo } = usePostMemberProfileInfo();
 
   const getFormValues = (): IMemberProfilePostInfo => {
     const formData = getValues();
