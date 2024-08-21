@@ -1,4 +1,5 @@
-import Button from "components/common/Button";
+import { Text } from "components/common";
+import { Button } from "components/common/Button";
 import { useRef } from "react";
 
 import * as S from "../../common/Dropdown/StringDropdown/styles";
@@ -25,13 +26,22 @@ const BreedDropDown = ({ dropDownList, setIsOpen, value, setValue }: IBreedDropd
   if (!dropDownList || dropDownList.length === 0) {
     return (
       <S.List className="no-list">
-        <S.BoldText>
+        <Text typo="body2_16_B" color="gray_1">
           검색 결과가 없어요
           <br />
           견종을 정확히 입력해주세요
-        </S.BoldText>
-        <S.ThinText>ex) 밀티즈(x) → 말티즈(O)</S.ThinText>
-        <Button width="100%" height="48px" margintop="20px" handleClick={() => setIsOpen(false)}>
+        </Text>
+        <Text typo="label2_14_R" color="gray_2">
+          ex) 밀티즈(x) → 말티즈(O)
+        </Text>
+        <Button
+          width="full"
+          onClick={() => setIsOpen(false)}
+          css={{
+            height: "48px",
+            marginTop: "20px"
+          }}
+        >
           견종 등록하기
         </Button>
       </S.List>

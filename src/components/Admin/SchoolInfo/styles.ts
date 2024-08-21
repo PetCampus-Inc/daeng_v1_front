@@ -1,16 +1,21 @@
 import { styled } from "styled-components";
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["isPrevSchool"].includes(prop)
+})<{ isPrevSchool?: boolean }>`
   padding: 20px 16px;
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: ${({ theme }) => theme.shadows.card};
+  box-shadow: ${({ theme, isPrevSchool }) => (isPrevSchool ? "none" : theme.shadows.card)};
   margin-bottom: 4.25rem;
 `;
 
-export const CardTitle = styled.span`
-  ${({ theme }) => theme.typo.label1_16_B};
-  color: ${({ theme }) => theme.colors.darkBlack};
+export const CardTitle = styled.span.withConfig({
+  shouldForwardProp: (prop) => !["isPrevSchool"].includes(prop)
+})<{ isPrevSchool?: boolean }>`
+  ${({ theme }) => theme.typo.body2_16_B};
+  color: ${({ theme, isPrevSchool }) =>
+    isPrevSchool ? theme.colors.gray_2 : theme.colors.darkBlack};
 `;
 
 export const Title = styled.p`
@@ -26,7 +31,7 @@ export const InfoContainer = styled.div`
   padding-top: 12px;
   background-color: ${({ theme }) => theme.colors.white};
 
-  & > *:not(:last-child) {
+  & > *:not(:last-child):not(:nth-last-child(2)) {
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
   }
 `;
@@ -51,8 +56,10 @@ export const IconWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.yellow_3};
 `;
 
-export const ListTitle = styled.span`
-  color: ${({ theme }) => theme.colors.gray_1};
+export const ListTitle = styled.span.withConfig({
+  shouldForwardProp: (prop) => !["isPrevSchool"].includes(prop)
+})<{ isPrevSchool?: boolean }>`
+  color: ${({ theme, isPrevSchool }) => (isPrevSchool ? theme.colors.gray_3 : theme.colors.gray_1)};
   ${({ theme }) => theme.typo.label2_14_R};
 `;
 

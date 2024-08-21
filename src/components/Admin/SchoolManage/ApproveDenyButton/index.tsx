@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { ThemeConfig } from "styles/ThemeConfig";
+import { themeConfig } from "styles/themeConfig";
 
 import * as S from "./styles";
 
@@ -24,11 +24,11 @@ const ApproveDenyButton = ({ setIsShow, approveFunc, denyFunc }: IApproveDenyBut
   };
 
   const customVariants = {
-    greenScaleUp: { backgroundColor: ThemeConfig.colors.green, width: "120px" },
+    greenScaleUp: { backgroundColor: themeConfig.colors.green, width: "120px" },
     redScaleUp: {
-      backgroundColor: ThemeConfig.colors.red_1,
+      backgroundColor: themeConfig.colors.red_1,
       width: "120px",
-      color: ThemeConfig.colors.white
+      color: themeConfig.colors.white
     },
     disappear: { opacity: 0, display: "none" }
   };

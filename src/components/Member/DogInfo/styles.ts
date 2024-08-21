@@ -6,29 +6,34 @@ interface IProps {
   size?: string; // width, height 사이즈 동일한 경우
 }
 
-export const Nav = styled.nav`
-  width: 100vw;
-  background-color: white;
-  padding: 5rem 0 0.5rem 0;
-`;
-
 export const NavWrapper = styled.ul`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
   white-space: nowrap;
+
+  margin: 8px 26px;
 `;
 
 export const NavItem = styled.li`
-  width: 30%;
-  border-right: 1px solid ${({ theme }) => theme.colors.gray_5};
-  color: ${({ theme }) => theme.colors.gray_4};
-  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
+
+  color: ${({ theme }) => theme.colors.gray_4};
   ${({ theme }) => theme.typo.body2_16_B};
+
+  &:not(:first-child) {
+    border-left: 0.75px solid ${({ theme }) => theme.colors.gray_5};
+  }
+  &:not(:last-child) {
+    border-right: 0.75px solid ${({ theme }) => theme.colors.gray_5};
+  }
+
+  user-select: none;
+
   &.selected {
     color: ${({ theme }) => theme.colors.primaryColor};
   }
@@ -46,6 +51,12 @@ export const FootIconItem = styled(FootIcon)`
       fill: ${({ theme }) => theme.colors.br_3};
     }
   }
+`;
+
+export const ContentWrapper = styled.div`
+  flex: 1;
+  border-radius: 20px 20px 0 0;
+  background-color: ${({ theme }) => theme.colors.gray_5};
 `;
 
 export const DogInfoCard = styled.section`
@@ -163,7 +174,7 @@ export const InfoText = styled.div`
   ${({ theme }) => theme.typo.label2_14_R};
 `;
 
-export const Editebutton = styled.button`
+export const Editbutton = styled.button`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.white};
@@ -200,7 +211,7 @@ export const DogMoreInfoText = styled.div`
   ${({ theme }) => theme.typo.label2_14_R};
 `;
 
-export const DogMoreInfoEditeButton = styled.button`
+export const DogMoreInfoEditButton = styled.button`
   background-color: ${({ theme }) => theme.colors.gray_5};
   padding: 5px 8px 2px;
   border-radius: 50px;
@@ -212,11 +223,7 @@ export const CarouselContainer = styled.div`
   overflow-x: auto;
 `;
 
-export const CarouselWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  width: calc(100% + 130px);
-`;
+export const DragCarouselWrapper = styled.div``;
 
 export const CarouselCard = styled.div`
   position: relative;
@@ -225,10 +232,11 @@ export const CarouselCard = styled.div`
   justify-content: flex-end;
   width: 100%;
   height: 72px;
-  max-width: 103px;
+  min-width: 103px;
   border-radius: 8px;
   overflow: hidden;
   padding: 4px 8px;
+  cursor: pointer;
 
   & > img {
     object-fit: cover;
@@ -258,4 +266,8 @@ export const CarouselText = styled.span`
   z-index: 1;
   color: ${({ theme }) => theme.colors.white};
   ${({ theme }) => theme.typo.caption1_10_R};
+`;
+
+export const StyledHiddenUpload = styled.input`
+  display: none;
 `;

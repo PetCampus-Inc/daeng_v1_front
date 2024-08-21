@@ -1,14 +1,14 @@
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import UnregisterInfo from "components/Unregister";
-import { PageContainer } from "styles/StyleModule";
 
 const UnregisterPage = () => {
   return (
     <>
       <Header type="back" />
-      <PageContainer color="white">
+      <Layout bgColor="white" px={16}>
         <UnregisterInfo />
-      </PageContainer>
+      </Layout>
     </>
   );
 };

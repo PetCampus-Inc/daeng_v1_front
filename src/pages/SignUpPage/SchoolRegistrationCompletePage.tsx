@@ -8,7 +8,7 @@ const SchoolRegistrationCompletePage = () => {
   const schoolName = getValues("schoolName");
 
   return (
-    <Layout type="page" pt={76} position="relative">
+    <Layout bgColor="white" px={16} pt={76}>
       <RegisterSuccess schoolName={schoolName} />
     </Layout>
   );

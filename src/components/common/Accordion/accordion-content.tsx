@@ -1,6 +1,6 @@
 import { motion, useAnimation } from "framer-motion";
 import { cloneElement, isValidElement, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { accordionTransition } from "styles/animation";
+import { accordionTransition } from "styles/foundations/animation";
 
 import { useAccordionContext } from "./context";
 import { StyledContentContainer } from "./styles";

@@ -1,4 +1,10 @@
-const ArrowDownIcon = ({ className = "", w = "17", h = "16" }) => {
+import type { IconSize } from "./types";
+
+interface IconProps extends IconSize {
+  className?: string;
+}
+
+const ArrowDownIcon = ({ className = "", w = "16", h = "16" }: IconProps) => {
   return (
     <svg
       className={className}
@@ -6,7 +12,7 @@ const ArrowDownIcon = ({ className = "", w = "17", h = "16" }) => {
       width={w}
       height={h}
       fill="none"
-      viewBox="0 0 17 16"
+      viewBox="0 0 16 16"
     >
       <path
         fill="currentColor"

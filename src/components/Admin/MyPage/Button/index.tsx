@@ -1,18 +1,36 @@
-import { BackgroundButtonWrapper } from "components/Admin/MyPage/styles";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { PATH } from "constants/path";
+
+import { BottomButtonWrapper } from "components/Admin/MyPage/styles";
+import { BottomButton } from "components/common/Button";
+import { useOverlay } from "hooks/common/useOverlay";
+import { useNavigate } from "react-router-dom";
+import { AUTH_KEY } from "store/auth";
+
+import LogoutModal from "../modal/LogoutModal";
 
 const LogOutButton = () => {
-  const handleLogOut = () => {
-    console.log("logout"); // TODO: 로그아웃 이벤트 추가
-  };
+  const navigate = useNavigate();
+  const overlay = useOverlay();
+
+  const openPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <LogoutModal
+        isOpen={isOpen}
+        close={close}
+        action={() => {
+          window.localStorage.removeItem(AUTH_KEY);
+          navigate(PATH.LOGIN);
+        }}
+      />
+    ));
 
   return (
     <>
-      <BackgroundButtonWrapper>
-        <BackgroundButton onClick={handleLogOut} className="logOut">
+      <BottomButtonWrapper>
+        <BottomButton wrapColor="transparent" colorScheme="gray_4" onClick={openPopup}>
           로그아웃
-        </BackgroundButton>
-      </BackgroundButtonWrapper>
+        </BottomButton>
+      </BottomButtonWrapper>
     </>
   );
 };

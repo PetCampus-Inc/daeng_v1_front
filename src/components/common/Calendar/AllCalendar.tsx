@@ -1,6 +1,6 @@
 import FootIcon from "assets/svg/foot-icon";
 import { format } from "date-fns";
-import useGetDogInfoRecord from "hooks/api/useGetDogInfoRecord";
+import { useGetDogInfoRecord } from "hooks/api/admin/attendance";
 import moment from "moment";
 import { useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
@@ -16,8 +16,7 @@ const Calendar = () => {
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
   const [searchParams, setSearchParams] = useSearchParams();
   const { dogId } = useParams();
-  const data = useGetDogInfoRecord(Number(dogId));
-  const attendDay = data.map((item) => format(item.date.join("-"), "yyyy-MM-dd"));
+  const { data: attendDay } = useGetDogInfoRecord(Number(dogId));
 
   const handleDateChange = (newDate: Value) => {
     setDate(newDate);

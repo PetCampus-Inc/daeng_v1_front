@@ -5,9 +5,10 @@ import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInp
 import { memo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { schoolIdAtom } from "store/form";
+import { Role } from "types/common/role.types";
 
 interface SearchSchoolPageProps {
-  type: "TEACHER" | "MEMBER";
+  type: typeof Role.ROLE_TEACHER | typeof Role.ROLE_MEMBER;
   onNextStep: (id: number) => void;
 }
 
@@ -20,9 +21,9 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout position="relative" pt={"calc(5vh + 3.75rem)"} paddingInline={16} pb={24}>
+      <Layout pt={60} px={16} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
-          안녕하세요 {type === "TEACHER" ? "선생님" : "견주님"}
+          안녕하세요 {type === Role.ROLE_TEACHER ? "선생님" : "견주님"}
           <br />
           어떤 유치원을 찾고 계시나요?
         </Text>

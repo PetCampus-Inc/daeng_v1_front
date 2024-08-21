@@ -1,10 +1,11 @@
-import { ITicketDetail } from "types/admin/attendance.type";
-import { addZero } from "utils/date";
+import { padToTwoDigits } from "utils/date";
 
 import * as S from "../PastTicketCard/styles";
 
+import type { TicketDetailData } from "types/admin/attendance.type";
+
 interface PastTicketProps {
-  data: ITicketDetail;
+  data: TicketDetailData;
 }
 
 const PastTicket = ({ data }: PastTicketProps) => {
@@ -22,9 +23,10 @@ const PastTicket = ({ data }: PastTicketProps) => {
     <S.List>
       <S.ListInnerBox className="left">{ticketInfo(data.ticketType)}</S.ListInnerBox>
       <S.ListInnerBox>
-        {data.ticketStartDate && (addZero(data.ticketStartDate) as string[]).join(".")}
+        {data.ticketStartDate && (padToTwoDigits(data.ticketStartDate) as string[]).join(".")}
         {" - "}
-        {data.ticketExpirationDate && (addZero(data.ticketExpirationDate) as string[]).join(".")}
+        {data.ticketExpirationDate &&
+          (padToTwoDigits(data.ticketExpirationDate) as string[]).join(".")}
       </S.ListInnerBox>
     </S.List>
   );

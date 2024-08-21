@@ -1,5 +1,3 @@
-import { KAKAO_LOGIN_URL, GOOGLE_LOGIN_URL, APPLE_LOGIN_URL } from "constants/api";
-
 import { ButtonWrapper, StyledButton, StyledImage, StyledText } from "./styles";
 
 const LoginButtonGroup = () => {
@@ -8,7 +6,7 @@ const LoginButtonGroup = () => {
       <StyledButton
         type="button"
         aria-label="카카오로 계속하기"
-        onClick={() => (window.location.href = KAKAO_LOGIN_URL)}
+        onClick={() => (window.location.href = "")}
         bg="#FEE500"
       >
         <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
@@ -19,7 +17,7 @@ const LoginButtonGroup = () => {
       <StyledButton
         type="button"
         aria-label="구글로 계속하기"
-        onClick={() => (window.location.href = GOOGLE_LOGIN_URL)}
+        onClick={() => (window.location.href = "")}
         bg="white"
         borderColor="#CCCCCC"
       >
@@ -32,7 +30,7 @@ const LoginButtonGroup = () => {
       <StyledButton
         type="button"
         aria-label="Apple로 로그인"
-        onClick={() => (window.location.href = APPLE_LOGIN_URL)}
+        onClick={() => (window.location.href = "")}
         bg="black"
         borderColor="black"
       >

@@ -13,7 +13,7 @@ export const ContentContainer = styled.div<IProps>`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-export const BackgroundButtonWrapper = styled.div`
+export const BottomButtonWrapper = styled.div`
   padding-bottom: 4.625rem;
 `;
 

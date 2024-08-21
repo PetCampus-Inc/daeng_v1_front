@@ -1,42 +1,37 @@
 import { PATH } from "constants/path";
 
 import DogWaitingBgIcon from "assets/svg/dog-waiting-bg-icon";
-import { Box, Flex, Text } from "components/common";
+import { Box, Flex, Text, Button } from "components/common";
+import { MoreButton } from "components/common/Button/Templates";
 import { BasicModal } from "components/common/Modal";
-import { useTeacherSinUpCancel } from "hooks/api/signup";
+import { useTeacherSignUpCancel } from "hooks/api/signup";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
+import { UserType } from "types/common/approval.types";
 
 import { StyledImgWrapper } from "./styles";
-import Button from "../button/Button";
-import DirectionButton from "../button/DirectionButton";
 
 interface ApprovalSuccessProps {
-  schoolName?: string;
-  adminId?: number;
-  onNextStep?: () => void;
+  type: UserType;
+  schoolName: string;
+  userId?: number;
 }
 
-const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessProps) => {
-  const { mutateTeacherSignUpCancel } = useTeacherSinUpCancel();
+export default function ApprovalPending({ userId, type, schoolName }: ApprovalSuccessProps) {
+  if (!userId) throw new Error("User ID가 없습니다");
+
   const navigate = useNavigate();
   const overlay = useOverlay();
 
-  const handleConfirm = () => {
-    // MEMO: 소셜 로그인 페이지로 이동)
-    navigate(PATH.ADMIN_LOGIN);
-  };
+  const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel();
 
+  const handleConfirm = () => navigate(PATH.ADMIN_LOGIN);
   const handleCancel = () => {
-    if (!adminId) throw new Error("AdminId is required");
-    mutateTeacherSignUpCancel(adminId, {
-      onSuccess: () => {
-        // MEMO: 역할 선택 페이지로 이동
-        // TODO: 폼 초기화하기
-        console.log("승인 신청이 취소되었습니다");
-        onNextStep?.();
-      }
-    });
+    if (type === "admin")
+      mutateTeacherSignUpCancel(userId, {
+        onSuccess: () => navigate(PATH.ADMIN_LOGIN)
+      });
+    // else if (type === "member") mutateMemberSignUpCancel(userId, { onSuccess: () => navigate() });
   };
 
   const openCancelPopup = () =>
@@ -56,10 +51,10 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
     <>
       <Flex direction="column" gap={3}>
         <Text as="h2" typo="title1_24_B" color="darkBlack">
-          <em color="primaryColor">
+          <Text as="em" typo="inherit" color="primaryColor">
             {schoolName} 유치원 <br />
-            승인 신청{" "}
-          </em>
+            {type === "member" ? "가입 " : ""}승인 신청
+          </Text>
           이 완료되었습니다
         </Text>
         <Text typo="body2_16_R" color="gray_3">
@@ -73,14 +68,20 @@ const ApprovalPending = ({ schoolName, adminId, onNextStep }: ApprovalSuccessPro
 
       <Box position="absolute" left={16} right={16} bottom={24}>
         <Flex direction="column" justify="center" align="center" gap={24}>
-          <DirectionButton type="submit" handleClick={openCancelPopup}>
+          <MoreButton
+            type="submit"
+            onClick={openCancelPopup}
+            typo="label2_14_M"
+            color="gray_2"
+            iconSize={24}
+          >
             승인 신청 취소
-          </DirectionButton>
-          <Button handleClick={handleConfirm}>확인</Button>
+          </MoreButton>
+          <Button onClick={handleConfirm} width="full">
+            확인
+          </Button>
         </Flex>
       </Box>
     </>
   );
-};
-
-export default ApprovalPending;
+}

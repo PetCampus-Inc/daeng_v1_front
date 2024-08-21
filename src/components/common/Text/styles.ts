@@ -1,39 +1,22 @@
-import styled, { CSSProperties, css } from "styled-components";
+import styled, { css } from "styled-components";
 
-import { TColor, TTypo } from "../../../styles/ThemeConfig";
-
-export interface IStyledTextProps {
-  color?: TColor;
-  typo: TTypo;
-  isEllipsis?: boolean;
-  textAlign?: CSSProperties["textAlign"];
-  whiteSpace?: CSSProperties["whiteSpace"];
-}
-
-export type StyledEmEmProps = {
-  color?: TColor;
-};
+import type { TextOptions } from ".";
 
 export const StyledText = styled.span.withConfig({
+  displayName: "Text",
   shouldForwardProp: (prop) =>
-    !["color", "typo", "isEllipsis", "textAlign", "whiteSpace"].includes(prop)
-})<IStyledTextProps>`
-  color: ${({ color, theme }) => (color && theme.colors[color]) || "inherit"};
-  ${({ theme, typo }) => theme.typo[typo]};
-  text-align: ${({ textAlign }) => textAlign || ""};
-  white-space: ${({ whiteSpace }) => whiteSpace || ""};
-
-  ${({ isEllipsis }) =>
-    isEllipsis &&
+    !["color", "typo", "isEllipsis", "textAlign", "whiteSpace", "textDecoration"].includes(prop)
+})<TextOptions>`
+  color: ${(props) => props.theme.colors[props.color || "darkBlack"]};
+  ${(props) => props.theme.typo[props.typo || "body2_16_R"]}
+  ${(props) =>
+    props.isEllipsis &&
     css`
       overflow: hidden;
-      white-space: nowrap;
       text-overflow: ellipsis;
-    `};
-`;
-
-export const StyledEm = styled.em.withConfig({
-  shouldForwardProp: (prop) => !["color"].includes(prop)
-})<StyledEmEmProps>`
-  color: ${({ theme, color }) => (color && theme.colors[color]) || "inherit"};
+      white-space: nowrap;
+    `}
+  text-align: ${(props) => props.textAlign};
+  white-space: ${(props) => props.whiteSpace};
+  text-decoration: ${(props) => props.textDecoration};
 `;

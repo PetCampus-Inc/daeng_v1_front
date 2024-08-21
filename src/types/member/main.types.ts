@@ -1,3 +1,5 @@
+import { Role } from "types/common/role.types";
+
 import type {
   DogGenderType,
   DogSizeType,
@@ -7,7 +9,6 @@ import type {
   RelationType,
   VaccinationType
 } from "./enrollment.types";
-import type { Role } from "types/admin/admin.types";
 import type { Nullable } from "types/helper.types";
 import type { IResponse } from "types/Response.type";
 
@@ -28,7 +29,7 @@ export interface ImageListType extends Omit<ImageList, "createdTime"> {
 export interface HomeDataType {
   memberId: number;
   memberNickname: string;
-  role: Role.ROLE_MEMBER;
+  role: typeof Role.ROLE_MEMBER;
   memberProfileUri: string;
   dogId: number;
   dogName: string;
@@ -103,6 +104,15 @@ export interface IDogMemoInfo {
   dogId: string;
   memo: string;
 }
+
+export interface VaccinationUri {
+  imageId: number;
+  imageUri: string;
+  imageType: string;
+  comment: string | null;
+  createdTime: number[];
+}
+
 export interface MemberDogInfoData {
   dogId: number;
   dogName: string;
@@ -115,12 +125,18 @@ export interface MemberDogInfoData {
   allergyDisease: string;
   vaccination: VaccinationType;
   profileUri: string;
-  vaccinationUri: string;
+  vaccinationUri: VaccinationUri[];
   pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;
   member: IMemberProfilePostInfo;
   dogMemo: string;
+}
+
+export interface DogVaccination {
+  dogIdList: number[];
+  imageUriList: string[];
+  comment: string | "";
 }
 
 export interface MemberDogInfoReq {
@@ -130,6 +146,7 @@ export interface MemberDogInfoReq {
   dogSize: DogSizeType | "";
   breedId: number;
   newBreed: string;
+  profileUri: string | "";
   birthDate: string;
   neutralization: NeutralizationType | "";
 }

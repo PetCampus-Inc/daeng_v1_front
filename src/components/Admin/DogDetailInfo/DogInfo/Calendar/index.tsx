@@ -1,13 +1,11 @@
-import { format } from "date-fns";
-import useGetDogInfoRecord from "hooks/api/useGetDogInfoRecord";
-import moment from "moment";
+import { format, isSameDay } from "date-fns";
+import { useGetDogInfoRecord } from "hooks/api/admin/attendance";
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 import * as S from "./styles";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import type { Value } from "react-calendar/dist/cjs/shared/types";
 
 const Calendar = () => {
   const today = new Date();
@@ -15,12 +13,11 @@ const Calendar = () => {
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
   const [searchParams, setSearchParams] = useSearchParams();
   const dogId = useLocation().pathname.split("/").pop();
-  const data = useGetDogInfoRecord(Number(dogId));
-  const attendDay = data.map((item) => format(item.date.join("-"), "yyyy-MM-dd"));
+  const { data: attendDay } = useGetDogInfoRecord(Number(dogId));
 
   const handleDateChange = (newDate: Value) => {
     setDate(newDate);
-    const formattedDate = format(`${newDate}`, "yyyy-MM-dd");
+    const formattedDate = format(newDate as Date, "yyyy-MM-dd");
     searchParams.set("date", formattedDate);
     setSearchParams(searchParams);
   };
@@ -40,9 +37,9 @@ const Calendar = () => {
         onActiveStartDateChange={({ activeStartDate }: { activeStartDate: Date | null }) =>
           setActiveStartDate(activeStartDate)
         }
-        formatDay={(locale: any, date: moment.MomentInput) => moment(date).format("D")}
-        formatYear={(locale: any, date: moment.MomentInput) => moment(date).format("YYYY")}
-        formatMonthYear={(locale: any, date: moment.MomentInput) => moment(date).format("YYYY. MM")}
+        formatDay={(locale: any, date: Date) => format(date, "d")}
+        formatYear={(locale: any, date: Date) => format(date, "yyyy")}
+        formatMonthYear={(locale: any, date: Date) => format(date, "yyyy. MM")}
         calendarType="gregory"
         showNeighboringMonth={false}
         next2Label={null}
@@ -50,15 +47,11 @@ const Calendar = () => {
         minDetail="year"
         tileContent={({ date, view }: { date: Date; view: string }) => {
           const html = [];
-          if (
-            view === "month" &&
-            date.getMonth() === today.getMonth() &&
-            date.getDate() === today.getDate()
-          ) {
+          if (view === "month" && isSameDay(date, today)) {
             html.push(<S.Today key={"today"}>오늘</S.Today>);
           }
-          if (attendDay.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
-            html.push(<S.Dot key={moment(date).format("YYYY-MM-DD")} />);
+          if (attendDay.some((day) => isSameDay(new Date(day), date))) {
+            html.push(<S.Dot key={format(date, "yyyy-MM-dd")} />);
           }
           return <>{html}</>;
         }}

@@ -3,7 +3,7 @@ import Header from "components/common/Header";
 import { useCreateAdminEnrollment } from "hooks/api/admin/enroll";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { getCurrentDate } from "utils/date";
+import { getCurrentDateString } from "utils/date";
 
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
@@ -16,7 +16,7 @@ const EnrollmentFormSubmitPage = ({ formInfo }: SubmitFormProps) => {
 
   const { mutateForm } = useCreateAdminEnrollment();
 
-  const defaultFormName = `가입신청서_${getCurrentDate()}`;
+  const defaultFormName = `가입신청서_${getCurrentDateString()}`;
 
   const onSubmit = handleSubmit((data) => {
     if (!formInfo) {
@@ -38,7 +38,7 @@ const EnrollmentFormSubmitPage = ({ formInfo }: SubmitFormProps) => {
   return (
     <>
       <Header type="text" text="가입신청서" />
-      <Layout type="page" bg="BGray" pt={72}>
+      <Layout bg="BGray" pt={72} px={16}>
         <form>
           <Flex direction="column" gap={8}>
             <Text typo="title2_20_B" color="black">

@@ -14,7 +14,7 @@ const AdminInfoPage = ({ onNextStep }: IStepProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout type="page" pt={76} pb={24}>
+      <Layout bgColor="white" px={16} pt={76} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
           정보를 입력해주세요
         </Text>

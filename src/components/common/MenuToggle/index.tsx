@@ -6,6 +6,7 @@ interface MenuToggleProps {
   selectedTab: string;
   setSelectedTab: (tab: string) => void;
 }
+// FIXME: 모션 수정
 const MenuToggle = ({ selectedTab, setSelectedTab }: MenuToggleProps) => {
   const initialTabs = ["알림장", "사진앨범"];
   return (

@@ -1,51 +1,19 @@
-import styled, { css } from "styled-components";
-import { remCalc } from "utils/calculator";
-import { isNumber } from "utils/typeGuard";
+import styled from "styled-components";
 
-import type { BoxBorderProps, BoxOptions, SizeType } from "./types";
+import {
+  getBorderStyle,
+  getColorStyle,
+  getFlexStyle,
+  getMarginStyle,
+  getPaddingStyle,
+  getPositionStyle,
+  getSizeStyle
+} from "../../../styles/system";
 
-const getBorderRadiusStyle = ({ borderRadius }: Pick<BoxBorderProps, "borderRadius">) => {
-  switch (borderRadius) {
-    case "rectangle":
-      return css`
-        border-radius: 8px;
-      `;
-    case "circle":
-      return css`
-        border-radius: 50%;
-      `;
-    default:
-      return css`
-        border-radius: ${borderRadius ? `${borderRadius}px` : undefined};
-      `;
-  }
-};
-
-const getSize = (size: SizeType) => {
-  switch (size) {
-    case "full":
-      return "100%";
-    case "fit":
-      return "fit-content";
-    case "min":
-      return "min-content";
-    case "max":
-      return "max-content";
-    case "auto":
-      return "auto";
-    default:
-      return size;
-  }
-};
-
-export const getPosition = (position: string | number) =>
-  isNumber(position) ? remCalc(position) : position;
-
-const isDefined = <T>(value: T | undefined): value is T => {
-  return value !== undefined;
-};
+import type { BoxOptions } from ".";
 
 export const StyledBox = styled.div.withConfig({
+  displayName: "Box",
   shouldForwardProp: (prop) =>
     ![
       "display",
@@ -53,36 +21,56 @@ export const StyledBox = styled.div.withConfig({
       "height",
       "maxWidth",
       "minWidth",
+      "m",
       "margin",
+      "mt",
+      "marginTop",
+      "mr",
+      "marginRight",
+      "me",
+      "marginEnd",
+      "mb",
+      "marginBottom",
+      "ml",
+      "marginLeft",
+      "ms",
+      "marginStart",
+      "mx",
+      "marginX",
+      "my",
+      "marginY",
+      "p",
+      "padding",
+      "pt",
+      "paddingTop",
+      "pr",
+      "paddingRight",
+      "pe",
+      "paddingEnd",
+      "pb",
+      "paddingBottom",
+      "pl",
+      "paddingLeft",
+      "ps",
+      "paddingStart",
+      "px",
+      "paddingX",
+      "py",
+      "paddingY",
       "marginBlock",
       "marginInline",
-      "mr",
-      "mt",
-      "ml",
-      "mb",
-      "marginRight",
-      "marginTop",
-      "marginLeft",
-      "marginBottom",
-      "padding",
       "paddingBlock",
       "paddingInline",
-      "paddingTop",
-      "paddingRight",
-      "paddingBottom",
-      "paddingLeft",
-      "pt",
-      "pr",
-      "pb",
-      "pl",
       "border",
-      "borderRadius",
       "borderColor",
       "borderTop",
       "borderRight",
       "borderBottom",
       "borderLeft",
+      "borderRadius",
+      "radius",
       "bg",
+      "bgColor",
       "backgroundColor",
       "color",
       "position",
@@ -97,59 +85,19 @@ export const StyledBox = styled.div.withConfig({
       "align",
       "flex",
       "gap",
-      "zIndex"
+      "zIndex",
+      "whiteSpace"
     ].includes(prop)
 })<BoxOptions>`
-  display: ${({ display }) => (display ? display : undefined)};
-  flex-direction: ${({ direction }) => (direction ? direction : undefined)};
-  flex: ${({ flex }) => (flex ? flex : undefined)};
-  justify-content: ${({ justify }) => (justify ? justify : undefined)};
-  align-items: ${({ align }) => (align ? align : undefined)};
-  gap: ${({ gap }) => (gap ? remCalc(gap) : undefined)};
+  ${(props) => getSizeStyle(props)};
+  ${(props) => getFlexStyle(props)};
+  ${(props) => getMarginStyle(props)};
+  ${(props) => getPaddingStyle(props)};
+  ${(props) => getBorderStyle(props)};
+  ${(props) => getColorStyle(props)};
+  ${(props) => getPositionStyle(props)};
 
-  width: ${({ width }) => (width ? getSize(width) : undefined)};
-  max-width: ${({ maxWidth }) => (maxWidth ? getSize(maxWidth) : undefined)};
-  min-width: ${({ minWidth }) => (minWidth ? getSize(minWidth) : undefined)};
-  height: ${({ height }) => (height ? getSize(height) : undefined)};
-  margin: ${({ margin }) => (margin ? margin : undefined)};
-  margin-right: ${({ mr, marginRight }) =>
-    mr ? remCalc(mr) : marginRight ? remCalc(marginRight) : undefined};
-  margin-top: ${({ mt, marginTop }) =>
-    mt ? remCalc(mt) : marginTop ? remCalc(marginTop) : undefined};
-  margin-left: ${({ ml, marginLeft }) =>
-    ml ? remCalc(ml) : marginLeft ? remCalc(marginLeft) : undefined};
-  margin-bottom: ${({ mb, marginBottom }) =>
-    mb ? remCalc(mb) : marginBottom ? remCalc(marginBottom) : undefined};
-  margin-inline: ${({ marginInline }) => (marginInline ? remCalc(marginInline) : undefined)};
-  margin-block: ${({ marginBlock }) => (marginBlock ? remCalc(marginBlock) : undefined)};
-  padding: ${({ padding }) => (padding ? padding : undefined)};
-  padding-top: ${({ pt, paddingTop }) =>
-    pt ? remCalc(pt) : paddingTop ? remCalc(paddingTop) : undefined};
-  padding-right: ${({ pr, paddingRight }) =>
-    pr ? remCalc(pr) : paddingRight ? remCalc(paddingRight) : undefined};
-  padding-bottom: ${({ pb, paddingBottom }) =>
-    pb ? remCalc(pb) : paddingBottom ? remCalc(paddingBottom) : undefined};
-  padding-left: ${({ pl, paddingLeft }) =>
-    pl ? remCalc(pl) : paddingLeft ? remCalc(paddingLeft) : undefined};
-  padding-inline: ${({ paddingInline }) => (paddingInline ? remCalc(paddingInline) : undefined)};
-  padding-block: ${({ paddingBlock }) => (paddingBlock ? remCalc(paddingBlock) : undefined)};
-  border: ${({ border }) => (border ? `${border}px solid` : undefined)};
-  ${getBorderRadiusStyle};
-  border-top: ${({ borderTop }) => (borderTop ? `${borderTop}px solid` : undefined)};
-  border-right: ${({ borderRight }) => (borderRight ? `${borderRight}px solid` : undefined)};
-  border-bottom: ${({ borderBottom }) => (borderBottom ? `${borderBottom}px solid` : undefined)};
-  border-left: ${({ borderLeft }) => (borderLeft ? `${borderLeft}px solid` : undefined)};
-  border-color: ${({ borderColor, theme }) =>
-    borderColor ? theme.colors[borderColor] : undefined};
-  background-color: ${({ bg, backgroundColor, theme }) =>
-    bg ? theme.colors[bg] : backgroundColor ? theme.colors[backgroundColor] : undefined};
-  color: ${({ color, theme }) => (color ? theme.colors[color] : undefined)};
-  position: ${({ position }) => (position ? position : undefined)};
-  z-index: ${({ zIndex }) => (zIndex ? zIndex : undefined)};
-  top: ${({ top }) => (isDefined(top) ? getPosition(top) : "")};
-  bottom: ${({ bottom }) => (isDefined(bottom) ? getPosition(bottom) : "")};
-  left: ${({ left }) => (isDefined(left) ? getPosition(left) : "")};
-  right: ${({ right }) => (isDefined(right) ? getPosition(right) : "")};
-  overflow: ${({ overflow }) => (overflow ? overflow : undefined)};
-  text-align: ${({ textAlign }) => (textAlign ? textAlign : undefined)};
+  white-space: ${(props) => props.whiteSpace};
+  overflow: ${(props) => props.overflow};
+  text-align: ${(props) => props.textAlign};
 `;

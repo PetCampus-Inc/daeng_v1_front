@@ -1,14 +1,14 @@
 import SimpleMembershipApplication from "components/Admin/SchoolManage/SimpleMembershipApplication";
 import { ListContainer } from "components/Admin/SchoolManage/SimpleMembershipApplication/styles";
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
+import { Layout } from "components/common";
 import ButtonBadge from "components/common/Badge/ButtonBadge";
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { newEnrollmentListAtom } from "store/admin";
-import { PageContainer } from "styles/StyleModule";
 import { INewEnrollmentList, ISimpleSchoolFormList } from "types/admin/school.types";
 import showToast from "utils/showToast";
 
@@ -51,7 +51,7 @@ const EnrollmentFormListPage = () => {
   return (
     <>
       <Header type="text" text="등록된 가입신청서" />
-      <PageContainer pt="2" color="gray_5">
+      <Layout pt={32} px={16} bgColor="gray_5">
         <TitleWithIcon
           title="가입신청서 목록"
           icon={
@@ -80,7 +80,7 @@ const EnrollmentFormListPage = () => {
           ))}
         </ListContainer>
         {isEditable && (
-          <BackgroundButton
+          <BottomButton
             disabled={
               selectedList.length > 0 &&
               !(selectedList.length === data?.simpleSchoolFormList.length)
@@ -88,9 +88,9 @@ const EnrollmentFormListPage = () => {
             onClick={handleTouch}
           >
             삭제
-          </BackgroundButton>
+          </BottomButton>
         )}
-      </PageContainer>
+      </Layout>
     </>
   );
 };

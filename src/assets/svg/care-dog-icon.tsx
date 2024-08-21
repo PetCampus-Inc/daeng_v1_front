@@ -1,6 +1,17 @@
-const CareDogIcon = () => {
+export type IconProps = {
+  borderStyle?: string;
+};
+
+const CareDogIcon = ({ borderStyle = "" }: IconProps) => {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ borderRadius: `${borderStyle}` }}
+    >
       <rect width="40" height="40" rx="8" fill="#FFF7E1" />
       <path
         d="M12.3324 16.8589C13.2456 13.3963 16.2388 11 19.6506 11H21.3962C24.8081 11 27.8013 13.3963 28.7145 16.8588L29.2419 18.8589C30.5863 23.9564 26.9466 29 21.9237 29H19.1232C14.1002 29 10.4606 23.9564 11.805 18.8589L12.3324 16.8589Z"

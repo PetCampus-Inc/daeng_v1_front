@@ -1,5 +1,5 @@
 import CheckIcon from "assets/svg/check-icon";
-import React, { type ChangeEvent } from "react";
+import React, { ReactNode, type ChangeEvent } from "react";
 
 import { CheckboxContainer, HiddenCheckbox, LabelText, StyledCheckbox } from "./styles";
 
@@ -10,7 +10,7 @@ export interface CheckboxProps
   id?: string;
   name?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  label?: string;
+  label?: string | ReactNode;
 }
 
 const Checkbox = React.forwardRef(

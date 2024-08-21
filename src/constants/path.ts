@@ -5,8 +5,7 @@ const MYPAGE = "mypage";
 
 export const SIGNUP_PATH = {
   유치원_검색: "search" as const,
-  가입신청서_작성: "form" as const,
-  승인상태: "approval" as const
+  가입신청서_작성: "form" as const
 };
 
 export const ADMIN_SIGNUP_PATH = {
@@ -15,7 +14,6 @@ export const ADMIN_SIGNUP_PATH = {
   유치원_등록: "enroll" as const,
   회원정보_입력: "info" as const,
   계정설정: "setup" as const,
-  승인상태: "approval" as const,
   유치원_등록완료: "complete" as const
 };
 
@@ -33,12 +31,11 @@ const ADMIN_PATH = {
   ADMIN: `${ADMIN}`,
   ADMIN_LOGIN: `/${ADMIN}/${LOGIN}`,
   ADMIN_SIGNUP: `/${ADMIN}/${SIGNUP}`,
-  ADMIN_SIGNUP_APPROVAL_STATUS: `/${ADMIN}/${SIGNUP}/${ADMIN_SIGNUP_PATH.승인상태}`,
   ADMIN_ATTENDANCE: `/${ADMIN}/attendance`, // 출석부
   ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/${ADMIN}/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>
     `/${ADMIN}/attendance/${dogId ?? ":dogId"}/gallery`, // 출석부 강아지 갤러리
-  ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: string) =>
+  ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: number) =>
     `/${ADMIN}/attendance/${dogId ?? ":dogId"}/new-ticket`, // 출석부 강아지 상세정보
   ADMIN_CARE: `/${ADMIN}/care`, // 오늘 관리할 강아지
   ADMIN_CARE_NOTICE: (dogId?: string) => `/${ADMIN}/care/notice/${dogId ?? ":dogId"}`, // 관리 강아지 알림장
@@ -59,14 +56,18 @@ const ADMIN_PATH = {
     `/${ADMIN}/school/enrollment/owner-forms/${formId ?? ":formId"}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: `/${ADMIN}/school/enrollment/new`, // 원장 가입신청서 등록
 
-  ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`,
-  ADMIN_MY_PAGE_EDIT: `/${ADMIN}/${MYPAGE}/profile/edit`,
-  ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`,
-  ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit`
+  ADMIN_NOTIFICATION_PAGE: `/${ADMIN}/"notification`, // 알림
+
+  ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`, // 어드민 마이페이지
+  ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`, // 마이페이지 설정
+  ADMIN_MY_PAGE_DELETE_COMPLETE: `/${ADMIN}/${MYPAGE}/delete-complete`, // 계정 탈퇴 완료
+  ADMIN_MY_SCHOOL_INFO: `/${ADMIN}/${MYPAGE}/school`, // 선생님 유치원 정보 확인
+  ADMIN_MY_SCHOOL_INFO_EDIT: `/${ADMIN}/${MYPAGE}/school/edit` // 원장 유치원 정보 수정
 };
 
 const MEMBER_PATH = {
   ALBUM: "/album",
+  AGENDA: (dogId?: number) => `/agenda/${dogId ?? ":dogId"}`,
 
   MEMBER_MY_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}`,
   MEMBER_MY_INFO_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}/profile`,
@@ -82,9 +83,9 @@ const MEMBER_PATH = {
   MEMBER_DOG_INFO_EDIT_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
   MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
-  // MEMEBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
-  MEMEBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
+  // MEMBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
+  MEMBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
+  MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
 };
 
 const PUBLIC_PATH = {
@@ -92,12 +93,14 @@ const PUBLIC_PATH = {
   HOME: "/home",
   LOGIN: `/${LOGIN}`,
   SIGNUP: `/${SIGNUP}`,
+  NATIVE_LOGIN: `/${LOGIN}/oauth2/native-redirect`,
   REDIRECT: "/login/oauth2/code/:provider", // 소셜 로그인 리다이렉트
   UNREGISTER: "/unregister", // 회원탈퇴 페이지
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지
   SETTING: "/setting", // 설정 페이지
   SETTING_NOTIFICATION: "/setting/notification", // 알림 설정 페이지
-  POLICY: "/policy" // 정책 페이지
+  POLICY: "/policy", // 정책 페이지
+  APPROVAL_STATUS: "/approval"
 };
 
 export const PATH = {

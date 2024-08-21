@@ -1,7 +1,8 @@
+import { SmallButton } from "components/common/Button/Templates";
+
 import AddIcon from "../../../../assets/svg/add-icon";
 import ArrowRightIcon from "../../../../assets/svg/arrow-right-icon";
 import { useOverlay } from "../../../../hooks/common/useOverlay";
-import SimpleButton from "../../../common/Button/SimpleButton";
 import { SelectedDogsProvider } from "../context/SelectedDogsProvider";
 import AddCaredogBottomSheet from "../modal/AddCaredogBottomSheet";
 import PreviousInfoGuideBottomSheet from "../modal/PreviousInfoGuideBottomSheet";
@@ -22,13 +23,15 @@ const AddDogButton = () => {
     ));
 
   return (
-    <SimpleButton
+    <SmallButton
+      colorScheme="br_4"
+      gap={10}
       onClick={openAddDogPopup}
       leftAddon={<AddIcon />}
-      rightAddon={<ArrowRightIcon w={"20"} h={"20"} />}
+      rightAddon={<ArrowRightIcon w={20} h={20} />}
     >
       강아지 추가하기
-    </SimpleButton>
+    </SmallButton>
   );
 };
 

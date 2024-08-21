@@ -1,4 +1,4 @@
-import BackgroundButton from "components/common/Button/BackgroundButton";
+import { BottomButton } from "components/common/Button";
 
 import * as S from "../styles";
 
@@ -12,9 +12,9 @@ const UnregisterSuccess = () => {
         <S.SubText>똑독 유치원에서 다시 만날 날을 기다릴게요</S.SubText>
       </S.TitleWrapper>
       <div></div>
-      <S.BackgroundButtonWrapper>
-        <BackgroundButton backgroundColor="white">로그인 화면으로 이동</BackgroundButton>
-      </S.BackgroundButtonWrapper>
+      <S.BottomButtonWrapper>
+        <BottomButton>로그인 화면으로 이동</BottomButton>
+      </S.BottomButtonWrapper>
     </>
   );
 };

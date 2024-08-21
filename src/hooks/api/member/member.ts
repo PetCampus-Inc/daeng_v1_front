@@ -15,6 +15,7 @@ import {
   handlePostMemberDogDelete,
   handlePostMemberDogDetailInfo,
   handlePostMemberDogEnrollment,
+  handlePostMemoDogVaccination,
   handlePostMemberProfile,
   handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop
@@ -33,7 +34,8 @@ import type {
   IMemberProfile,
   IMemberProfilePostInfo,
   MemberDogInfoData,
-  MemberDogInfoFormData
+  MemberDogInfoFormData,
+  DogVaccination
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -225,6 +227,23 @@ export const usePostMemberDogAllergy = (dogId: number) => {
   });
 
   return memberDogAllergyMutation.mutate;
+};
+
+// 강아지의 방접종 파일 파일 업로드
+export const usePostMembeVaccination = (dogId: number) => {
+  const queryClient = useQueryClient();
+  const memberDogAllerayMutation = useMutation({
+    mutationFn: (req: DogVaccination) => handlePostMemoDogVaccination(req),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
+      showToast("예방 접종 파일이 업로드되었습니다.", "bottom");
+    },
+    onError: () => {
+      showToast("업로드가 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return memberDogAllerayMutation.mutate;
 };
 
 // 강아지의 픽드랍 메모 수정

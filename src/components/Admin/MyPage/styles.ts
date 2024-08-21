@@ -6,16 +6,16 @@ export const ContentContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-export const BackgroundButtonWrapper = styled.div`
+export const BottomButtonWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  padding-bottom: 78px;
+  margin-bottom: 5.5rem;
 `;
 
 export const CardContainer = styled.div`
-  height: 100%;
+  height: 100vh;
   padding: 1.5rem 1rem;
   background-color: ${({ theme }) => theme.colors.gray_5};
 `;

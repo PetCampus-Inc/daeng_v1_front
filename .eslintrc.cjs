@@ -5,7 +5,8 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   ignorePatterns: ["build", "dist", "public"],
   parser: "@typescript-eslint/parser",
@@ -67,6 +68,6 @@ module.exports = {
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "react-refresh/only-export-components": ["warn", { allowConstantExport: true }]
+    "react-refresh/only-export-components": "off"
   }
 };

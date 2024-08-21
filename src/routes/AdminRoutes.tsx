@@ -35,11 +35,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           children: [
             {
               index: true,
-              element: (
-                <Suspense>
-                  <Pages.AttendancePage />
-                </Suspense>
-              )
+              element: <Pages.AttendancePage />
             },
             {
               path: PATH.ADMIN_ATTENDANCE_INFO(),
@@ -117,6 +113,14 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           element: (
             <Suspense>
               <Pages.Chat />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.ADMIN_NOTIFICATION_PAGE,
+          element: (
+            <Suspense>
+              <Pages.AdminNotificationPage />
             </Suspense>
           )
         },
@@ -222,6 +226,30 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               element: (
                 <Suspense>
                   <Pages.SchoolInfoPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_SCHOOL_INFO_EDIT,
+              element: (
+                <Suspense>
+                  <Pages.SchoolInfoEditPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_SETTING,
+              element: (
+                <Suspense>
+                  <Pages.AdminSettingPage />
+                </Suspense>
+              )
+            },
+            {
+              path: PATH.ADMIN_MY_PAGE_DELETE_COMPLETE,
+              element: (
+                <Suspense>
+                  <Pages.AdminDeleteCompletePage />
                 </Suspense>
               )
             }

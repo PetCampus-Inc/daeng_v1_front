@@ -1,12 +1,13 @@
+import { AttendanceStatus } from "types/common/status.types";
+
 import type { MemberDtoType } from "./enrollment.types";
 import type { Nullable } from "../helper.types";
-
-type AttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
+import type { TicketType } from "types/member/enrollment.types";
 
 /**
- *  @description 출석모드 Dto
+ *  @description 출석부 - 출석모드 Dto
  */
-export interface AttendData {
+export interface Attend {
   attendanceId: number;
   dogId: number;
   dogName: string;
@@ -18,7 +19,7 @@ export interface AttendData {
 }
 
 /**
- * @description 출석모드 요청 Dto
+ * @description 출석부 - 출석모드 요청 Dto
  */
 export interface AttendReq {
   schoolId: number;
@@ -27,17 +28,11 @@ export interface AttendReq {
 }
 
 /**
- *  @description 출석부 Dto
+ *  @description 출석부 - 출석부 Dto
  */
-export interface AttendanceData {
+export interface Attendance extends Omit<Attend, "attendanceId" | "status"> {
+  status: null;
   attendanceId: null;
-  dogId: number;
-  dogName: string;
-  dogProfileUri: string;
-  allRounds: Nullable<number>;
-  currentRounds: Nullable<number>;
-  monthlyTicket: Nullable<number[]>;
-  status: Nullable<AttendanceStatus>;
 }
 
 /**
@@ -48,7 +43,10 @@ export interface IMemberCallInfo {
   phoneNumber: string;
 }
 
-export interface IDogAndMemberInfo {
+/**
+ * @description 출석부 강아지 상세 - 강아지 정보 Dto
+ */
+export interface DogInfoDetailData {
   dogId: number;
   dogName: string;
   dogGender: "FEMALE" | "MALE";
@@ -67,36 +65,76 @@ export interface IDogAndMemberInfo {
   member: MemberDtoType;
 }
 
-export interface IDogInfoRecord {
+/**
+ * @description 출석부 강아지 상세 - 강아지 등원기록 Dto
+ */
+export interface DogInfoRecordData {
   date: number[];
-  status: string; //TODO: ATTENDED 등으로 변경
+  status: AttendanceStatus;
 }
 
-export interface IDogInfoAgenda {
+/**
+ * @description 출석부 강아지 상세 - 강아지 알림장 Dto
+ */
+export interface DogInfoAgendaData {
   agendaId: number;
   agendaNote: string;
   snack: string;
-  poop: IPoop;
+  poop: Poop;
   poopMemo: string;
   dogId: number;
+  dogProfileUri: string;
   status: "NOT_YET" | "COMPLETE" | "WRITING";
-  date: string;
+  dateTime: string;
 }
 
-export type IPoop = "HARD" | "HEALTHY" | "NOT_BROWN" | "WATERY" | "WARNING" | undefined | string;
+export enum Poop {
+  HARD = "HARD",
+  HEALTHY = "HEALTHY",
+  NOT_BROWN = "NOT_BROWN",
+  WATERY = "WATERY",
+  WARNING = "WARNING"
+}
 
-export interface ITicketDetail {
-  ticketType: string;
+/**
+ * @description 출석부 강아지 상세 - 이용권 정보 Dto
+ */
+export interface TicketDetailData {
+  ticketType: TicketType;
   allRoundTicket: number;
   currentRoundTicket: number;
   monthlyTicketNumber: number;
   ticketStartDate: number[];
-  ticketExpirationDate: number[];
-  attendanceDays: string[];
-  ticketHistory: ITicketDetail[];
+  ticketExpirationDate: Nullable<number[]>;
+  attendanceDays: Nullable<string[]>;
+  ticketHistory: Nullable<TicketDetailData[]>;
+}
+/**
+ * @description 출석부 강아지 상세 - 이용권 갱신 정보 Dto
+ */
+export interface NewTicketData {
+  ticketType: TicketType[];
+  roundTicketNumber: number[];
+  openDays: string[];
+  monthlyTicketNumber: number[];
 }
 
-export interface IPrecautionInfo {
+/**
+ * @description 출석부 강아지 상세 - 이용권 갱신 요청 Dto
+ */
+export interface NewTicketReq {
+  dogId: number;
+  startDate: string;
+  ticketType: TicketType | "";
+  roundTicketNumber: number;
+  monthlyTicketNumber: number;
+  attendanceDays: string[];
+}
+
+/**
+ * @description 출석부 강아지 상세 - 유의사항 Dto
+ */
+export interface PrecautionData {
   modifiedList: Nullable<number[]>;
   agreements: [{ 21: string }, { 22: string }, { 23: string }, { 24: string }, { 30: string }];
 }

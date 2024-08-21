@@ -1,10 +1,10 @@
-import { ITicketDetail } from "types/admin/attendance.type";
-
 import * as S from "./styles";
 import PastTicket from "../PastTicket";
 
+import type { TicketDetailData } from "types/admin/attendance.type";
+
 interface PastTicketCardProps {
-  data: ITicketDetail[];
+  data: TicketDetailData[];
 }
 
 const PastTicketCard = ({ data }: PastTicketCardProps) => {

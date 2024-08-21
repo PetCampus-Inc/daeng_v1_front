@@ -1,24 +1,44 @@
-import { forwardRef, type ElementType } from "react";
+import { forwardRef, type ReactElement, type ElementType } from "react";
 
 import { StyledBox } from "./styles";
 
-import type { BoxOptions } from "./types";
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../polymorphic";
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../../../styles/system";
+import type {
+  DisplayProps,
+  BorderProps,
+  ColorProps,
+  FlexBoxProps,
+  SizeProps,
+  OtherProps,
+  PositionProps,
+  RadiusProps,
+  SpacingProps,
+  TextStyleProps
+} from "../../../styles/system";
 
-export type BoxProps<C extends ElementType = "div"> = PolymorphicComponentPropsWithRef<
-  C,
-  BoxOptions
->;
+export type BoxOptions = DisplayProps &
+  SizeProps &
+  SpacingProps &
+  ColorProps &
+  PositionProps &
+  FlexBoxProps &
+  TextStyleProps &
+  BorderProps &
+  RadiusProps &
+  OtherProps;
 
-export const Box = forwardRef(function Box<C extends ElementType = "div">(
-  props: BoxProps<C>,
+type BoxProps<C extends ElementType> = PolymorphicComponentPropsWithRef<C, BoxOptions>;
+
+type BoxComponent = <C extends ElementType = "div">(props: BoxProps<C>) => ReactElement;
+
+export const Box: BoxComponent = forwardRef(function Box<C extends ElementType = "div">(
+  { as, children, ...props }: BoxProps<C>,
   ref?: PolymorphicRef<C>
 ) {
-  const { as, children, ...rest } = props;
-
+  const Component = as || "div";
   return (
-    <StyledBox ref={ref} as={as} {...rest}>
+    <StyledBox as={Component} {...props} ref={ref}>
       {children}
     </StyledBox>
   );
-});
+}) as BoxComponent;

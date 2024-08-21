@@ -4,11 +4,12 @@ import AccountInfo from "components/SignUp/SignUpForm/AccountInfo";
 import NextButton from "components/SignUp/SignUpForm/NextButton";
 import { useTeacherSinUp } from "hooks/api/signup";
 import { FieldValues, useFormContext } from "react-hook-form";
+import { AdminRole, Role } from "types/common/role.types";
 
-import { type AdminRole, type ITeacherInfo } from "./AdminSignUpFunnel";
+import { type ITeacherInfo } from "./AdminSignUpFunnel";
 
 interface IStepProps {
-  type?: AdminRole;
+  type?: Role;
   info?: ITeacherInfo;
   onNextStep?: (data: ITeacherInfo) => void;
 }
@@ -25,7 +26,7 @@ const AccountSettingPage = ({ type, info, onNextStep }: IStepProps) => {
       pwd: data.pwd
     };
 
-    if (type === "TEACHER") {
+    if (type === AdminRole.ROLE_TEACHER) {
       const req = {
         ...formData,
         name: data.name,
@@ -47,7 +48,7 @@ const AccountSettingPage = ({ type, info, onNextStep }: IStepProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout type="page" pt={76} pb={24}>
+      <Layout bgColor="white" px={16} pt={76} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
           회원가입을 완료해주세요
         </Text>

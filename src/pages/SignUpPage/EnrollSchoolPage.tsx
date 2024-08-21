@@ -6,7 +6,7 @@ import { useOwnerSinUp } from "hooks/api/signup";
 import { type FieldValues, useFormContext } from "react-hook-form";
 
 interface IStepProps {
-  onNextStep: () => void;
+  onNextStep: (schoolName: string) => void;
 }
 
 const EnrollSchoolPage = ({ onNextStep }: IStepProps) => {
@@ -26,9 +26,10 @@ const EnrollSchoolPage = ({ onNextStep }: IStepProps) => {
       schoolAddress: data.schoolAddress,
       registrationNumber: data.registrationNumber
     };
+
     mutateOwnerSignUp(req, {
       onSuccess: () => {
-        onNextStep();
+        onNextStep(data.schoolName);
       }
     });
   };
@@ -36,7 +37,7 @@ const EnrollSchoolPage = ({ onNextStep }: IStepProps) => {
   return (
     <>
       <Header type="back" />
-      <Layout type="page" pt={76} pb={24}>
+      <Layout bgColor="white" pt={76} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
           {name} 원장님
           <br />
