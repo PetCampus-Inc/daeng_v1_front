@@ -36,8 +36,11 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
     const cancelDog = storageEnrollmentDatas.find((el) => el.dogName === dogName);
     if (cancelDog) {
       const enrollmentFormId = cancelDog.enrollmentFormId;
-      mutateMemberDogEnrollment(String(enrollmentFormId));
-      mutateDeleteEnrollment(String(enrollmentFormId));
+      mutateMemberDogEnrollment(String(enrollmentFormId), {
+        onSuccess() {
+          mutateDeleteEnrollment(String(enrollmentFormId));
+        }
+      });
     }
   };
 
