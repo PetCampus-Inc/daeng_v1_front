@@ -2,9 +2,11 @@ import { DOG_STATUS } from "constants/memebrDogStatus";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
+import { useDeleteEnrollment } from "hooks/api/admin/enroll";
 import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
 import { useGetSchoolInfoList } from "hooks/api/member/school";
 import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
+import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useParams } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 
@@ -15,51 +17,44 @@ interface IWaitingCardProps {
   registeredDate: number[];
 }
 
+interface DogEnrollment {
+  enrollmentFormId: string;
+  dogName: string;
+  registeredDate: string[];
+}
+
 const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const { memberId } = useParams();
-  const { data: memberInfo } = useGetMemberInfo(String(memberId));
   const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
-
-  const approvalPendingDog = memberInfo.doglist.filter(
-    (dog) => dog.status && dog.status === DOG_STATUS.APPROVAL_PENDING
-  );
-  const { data: getSchoolInfoList } = useGetSchoolInfoList(
-    String(approvalPendingDog[0].schoolName)
-  );
-  const { data: waitingOwnersList } = useGetWaitingOwnersList(
-    Number(getSchoolInfoList[0].schoolId)
-  );
+  const storageEnrollmentDatas: DogEnrollment[] = useLocalStorageValue("DOG_ENROLLMENT_DATA") || [];
+  const { mutateDeleteEnrollment } = useDeleteEnrollment();
 
   const [year, month, day] = registeredDate && registeredDate;
   const registeredTime = formatDate(String(year), String(month), String(day), "dot");
 
-  const handleCancelApproval = () => {
-    const approvalPendingDogName = approvalPendingDog?.map((dog) => dog.dogName)[0];
-    const memberName = memberInfo.memberName;
-    const enrollmentForm = waitingOwnersList?.find(
-      (item) => item.memberName === memberName && item.dogName === approvalPendingDogName
-    );
-    if (enrollmentForm) {
-      mutateMemberDogEnrollment(String(enrollmentForm.enrollmentFormId));
+  const handleCancelApproval = (dogName: string) => {
+    const cancelDog = storageEnrollmentDatas.find((el) => el.dogName === dogName);
+    if (cancelDog) {
+      const enrollmentFormId = cancelDog.enrollmentFormId;
+      mutateMemberDogEnrollment(String(enrollmentFormId));
+      mutateDeleteEnrollment(String(enrollmentFormId));
     }
   };
 
   return (
-    <>
-      <S.WaitingCard>
-        <S.InfoTextBox mb="32">
-          <S.DogName>{dogName}</S.DogName>
-          <S.CurrentStatusBox>승인 대기중</S.CurrentStatusBox>
-        </S.InfoTextBox>
-        <S.CancelApprovalButton onClick={handleCancelApproval}>
-          <S.DateText>{registeredTime} 제출 | 승인 취소</S.DateText>
-          <ArrowRightIcon w={19} />
-        </S.CancelApprovalButton>
-        <S.BgIconBox>
-          <DogWaitingIcon />
-        </S.BgIconBox>
-      </S.WaitingCard>
-    </>
+    <S.WaitingCard>
+      <S.InfoTextBox mb="32">
+        <S.DogName>{dogName}</S.DogName>
+        <S.CurrentStatusBox>승인 대기중</S.CurrentStatusBox>
+      </S.InfoTextBox>
+      <S.CancelApprovalButton onClick={() => handleCancelApproval(dogName)}>
+        <S.DateText>{registeredTime} 제출 | 승인 취소</S.DateText>
+        <ArrowRightIcon w={19} />
+      </S.CancelApprovalButton>
+      <S.BgIconBox>
+        <DogWaitingIcon />
+      </S.BgIconBox>
+    </S.WaitingCard>
   );
 };
 
