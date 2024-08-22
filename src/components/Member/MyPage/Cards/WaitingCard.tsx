@@ -1,11 +1,7 @@
-import { DOG_STATUS } from "constants/memebrDogStatus";
-
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useDeleteEnrollment } from "hooks/api/admin/enroll";
-import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
-import { useGetSchoolInfoList } from "hooks/api/member/school";
-import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
+import { usePostMemberDogEnrollment } from "hooks/api/member/member";
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useParams } from "react-router-dom";
 import { formatDate } from "utils/formatter";
