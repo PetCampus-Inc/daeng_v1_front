@@ -34,6 +34,7 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
       const enrollmentFormId = cancelDog.enrollmentFormId;
       mutateMemberDogEnrollment(String(enrollmentFormId), {
         onSuccess() {
+          // 승인 취소시 가입신청서 폼 아예 삭제
           mutateDeleteEnrollment(String(enrollmentFormId));
         }
       });
