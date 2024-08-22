@@ -26,7 +26,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   // TODO 반복되는 코드 리팩토링 작업 필요
   const renderMyDogCard = (dog: IDoglist) => (
     <MyDogCard
-      key={dog.dogId}
+      key={dog.dogName}
       dogId={dog.dogId}
       isOpen={isOpen}
       dogName={dog.dogName}
@@ -39,7 +39,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   );
 
   const renderWaitingCard = (dog: IDoglist) => (
-    <WaitingCard key={dog.dogId} dogName={dog.dogName} registeredDate={dog.registeredDate} />
+    <WaitingCard key={dog.dogName} dogName={dog.dogName} registeredDate={dog.registeredDate} />
   );
 
   const renderRejectedCard = (dog: IDogRejected) => (
