@@ -47,7 +47,37 @@ export const ProfileBox = styled.label<StyleProps>`
   max-width: ${({ w }) => (w ? `${w}px` : "160px")};
 `;
 
+// TODO UploadProfileButton, UploadProfileBox 하나의 스타일로 통일 시키기
 export const UploadProfileButton = styled.button<StyleProps>`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: ${({ br }) => (br ? `${br}px` : "40px")};
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.white};
+  overflow: hidden;
+  position: relative;
+
+  aspect-ratio: 1/1;
+
+  .GalleryIcon {
+    position: relative;
+    z-index: 1;
+  }
+
+  .active {
+    display: none;
+  }
+
+  &:focus {
+    .active {
+      display: block;
+    }
+  }
+`;
+
+export const UploadProfileBox = styled.div<StyleProps>`
   cursor: pointer;
   display: flex;
   justify-content: center;
