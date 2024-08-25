@@ -2,7 +2,7 @@ import { DOG_STATUS } from "constants/memebrDogStatus";
 import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import {
   handleDeleteEnrollment,
   handleGetAdminForm,
@@ -10,7 +10,6 @@ import {
   handleGetMemberEnrollmentForm,
   handlePostAdminForm
 } from "apis/admin/enrollment.api";
-import { useEnrollmentStorage } from "components/Member/MyPage/hooks/useEnrollmentStorage";
 import { Adapter } from "libs/adapters";
 import {
   AdminFormDetailAdapter,
@@ -88,20 +87,11 @@ export const useCreateAdminEnrollment = () => {
 
 // 가입 신청서 상태를 확인
 export const useGetEnrollmentStatus = (enrollmentFormIds: string[]) => {
-  const { storageEnrollmentDatas } = useEnrollmentStorage();
-
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_ENROLLMENT_STATUS,
     queryFn: () => handleGetEnrollmentStatus(enrollmentFormIds && enrollmentFormIds),
     select: (data) => {
-      const deleteDog = storageEnrollmentDatas.filter(
-        (el) =>
-          !data.some(
-            (dog) =>
-              (dog.status === DOG_STATUS.APPROVAL_PENDING || dog.status === DOG_STATUS.ENROLLED) &&
-              String(dog.enrollmentFormId) === el.enrollmentFormId
-          )
-      );
+      const deleteDog = data.filter((dog) => dog.status === DOG_STATUS.APPROVAL_DENIED);
 
       // deleteDog 데이터만 반환하기
       return deleteDog.length > 0 ? [...deleteDog] : [];
@@ -111,12 +101,10 @@ export const useGetEnrollmentStatus = (enrollmentFormIds: string[]) => {
 
 // 가입신청서 삭제
 export const useDeleteEnrollment = () => {
-  const queryClient = useQueryClient();
-
   const { mutate } = useMutation({
-    mutationFn: (enrollmentFormId: string) => handleDeleteEnrollment(enrollmentFormId),
+    mutationFn: (enrollmentFormId: string) =>
+      handleDeleteEnrollment(enrollmentFormId && enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_ENROLLMENT_STATUS });
       console.log("가입신청서 삭제 성공");
     },
     onError: (error) => {
