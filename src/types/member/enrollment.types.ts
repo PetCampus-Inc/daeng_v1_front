@@ -241,6 +241,7 @@ export interface IEnrollmentStatus {
   memberName: string;
   dogName: string;
   status: string;
+  registeredDate: number[];
 }
 
 export interface IEnrollmentDeleteData {
