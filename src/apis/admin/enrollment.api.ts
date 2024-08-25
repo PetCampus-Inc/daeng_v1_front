@@ -62,6 +62,7 @@ export const handleGetEnrollmentStatus = async (
   return await Promise.all(req);
 };
 
+// NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
 /**
  * @description 가입싱천서 삭제 - 가입신청서를 완전히 삭제합니다.
  * @param {IEnrollmentDeleteData} enrollmentFormId
