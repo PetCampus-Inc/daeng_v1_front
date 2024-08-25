@@ -3,12 +3,10 @@ import { QUERY_KEY } from "constants/queryKey";
 import { getFieldStep } from "constants/step";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { PreventLeaveModal } from "components/common/Modal";
+import { useEnrollmentStorage } from "components/Member/MyPage/hooks/useEnrollmentStorage";
 import { usePostEnrollment } from "hooks/api/member/enroll";
-import { useLocalStorageValue, useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { Adapter, MemberFormToServerAdapter } from "libs/adapters";
-import { useEffect } from "react";
-import { FieldValues, useFormContext, useFormState, type FieldErrors } from "react-hook-form";
+import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
@@ -16,18 +14,12 @@ import { FormButton } from "styles/StyleModule";
 
 import type { EnrollmentInfoType, MemberGenderType } from "types/member/enrollment.types";
 
-interface DogEnrollment {
-  enrollmentFormId: string;
-  dogName: string;
-  registeredDate: string[];
-}
-
 const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { handleSubmit, getValues } = useFormContext();
   const { mutateEnrollment } = usePostEnrollment();
-  const setDogEnrollment = useSetLocalStorage();
+  const { createStorageEnrollment } = useEnrollmentStorage();
 
   const setStep = useSetRecoilState(currentStepState);
 
@@ -62,15 +54,6 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     return memberData;
   };
 
-  const getTodayDate = () => {
-    const today = new Date();
-    const year = today.getFullYear().toString();
-    const month = (today.getMonth() + 1).toString().padStart(2, "0");
-    const day = today.getDate().toString().padStart(2, "0");
-
-    return [year, month, day];
-  };
-
   // member - 강아지 추가 및 유치원 재등록
   const onSubmitMember = (data: FieldValues) => {
     const { memberId, dogName } = getValues();
@@ -85,22 +68,7 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
         queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(String(memberId)) });
         navigate(PATH.MEMBER_MY_PAGE(memberId));
 
-        const enrollmentDataArr: DogEnrollment | DogEnrollment[] = [];
-
-        if (!enrollmentDataArr.some((el) => el.enrollmentFormId === String(enrollmentFormId))) {
-          const updateEnrollmentData = [
-            ...enrollmentDataArr,
-            {
-              enrollmentFormId: String(enrollmentFormId),
-              dogName: dogName,
-              registeredDate: getTodayDate()
-            }
-          ];
-          setDogEnrollment({
-            key: "DOG_ENROLLMENT_DATA",
-            value: updateEnrollmentData
-          });
-        }
+        createStorageEnrollment(String(enrollmentFormId), dogName);
       }
     });
   };
@@ -122,9 +90,9 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     <FormButton
       type="submit"
       onClick={handleSubmit(onSubmitMember, onInvalid)}
-      aria-label="제출하기1"
+      aria-label="제출하기"
     >
-      제출하기1
+      제출하기
     </FormButton>
   );
 };
