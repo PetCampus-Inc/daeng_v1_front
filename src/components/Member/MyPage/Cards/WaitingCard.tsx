@@ -2,11 +2,11 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useDeleteEnrollment } from "hooks/api/admin/enroll";
 import { usePostMemberDogEnrollment } from "hooks/api/member/member";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useParams } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
+import { useEnrollmentStorage } from "../hooks/useEnrollmentStorage";
 
 interface IWaitingCardProps {
   dogName: string;
@@ -22,7 +22,7 @@ interface DogEnrollment {
 const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const { memberId } = useParams();
   const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
-  const storageEnrollmentDatas: DogEnrollment[] = useLocalStorageValue("DOG_ENROLLMENT_DATA") || [];
+  const { storageEnrollmentDatas } = useEnrollmentStorage(); // localStorage에서 가져오는 데이터
   const { mutateDeleteEnrollment } = useDeleteEnrollment();
 
   const [year, month, day] = registeredDate && registeredDate;
