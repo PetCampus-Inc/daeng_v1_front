@@ -59,8 +59,10 @@ const MemberDogCreateEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
     openDays: rest.openDays
   };
 
-  const { dirtyFields } = useFormState({ control: methods.control });
-  const blocker = useBlocker(() => !isEmpty(dirtyFields));
+  const { dirtyFields, isSubmitSuccessful } = useFormState({
+    control: methods.control
+  });
+  const blocker = useBlocker(() => !isSubmitSuccessful && !isEmpty(dirtyFields));
 
   return (
     <>

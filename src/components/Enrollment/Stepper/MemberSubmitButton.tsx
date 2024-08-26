@@ -61,8 +61,6 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     const memberData = getMemberData();
     const reqData = { ...requestData, ...memberData };
 
-    navigate(PATH.MEMBER_MY_PAGE(memberId));
-
     mutateEnrollment(reqData, {
       onSuccess: (enrollmentFormId) => {
         queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(String(memberId)) });
