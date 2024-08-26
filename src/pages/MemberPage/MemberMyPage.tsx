@@ -1,3 +1,5 @@
+import { PATH } from "constants/path";
+
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
 import LogOutButton from "components/Member/MyPage/Buttons/LogOutButton";
@@ -6,11 +8,23 @@ import MemberProfile from "components/Member/MyPage/MemberProfile";
 import MyDogInfo from "components/Member/MyPage/MyDogInfo";
 import { CardContainer, ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberInfo } from "hooks/api/member/member";
-import { useParams } from "react-router-dom";
+import { useLocalStorageValue } from "hooks/common/useLocalStorage";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AUTH_MEMBER_ID } from "store/auth";
 
 const MemberMyPage = () => {
-  const { memberId } = useParams();
+  const navigate = useNavigate();
+  const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID) ?? null;
   const { data } = useGetMemberInfo(String(memberId));
+
+  useEffect(() => {
+    // FIXME memberId가 없을 경우 예외처리 필요 (임시로 추가)
+    if (!memberId) {
+      navigate(PATH.LOGIN);
+    }
+  }, []);
+
   return (
     <>
       <Header type="setting" text="마이페이지" transparent />
