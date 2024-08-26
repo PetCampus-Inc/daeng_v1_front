@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
 import GalleryIcon from "assets/svg/gallery-icon";
-import { DogInfo, Notice, AttendanceRecord, Ticket } from "components/Admin/DogDetailInfo";
+import { Notice } from "components/Admin/DogDetailInfo";
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { Tabs } from "components/common/Tabs";
@@ -10,6 +10,10 @@ import { useEffect, useState } from "react";
 import { Suspense } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
+
+import { AttendanceRecord } from "./AttendanceRecord";
+import { DogInfo } from "./DogInfo";
+import { Ticket } from "./Ticket";
 
 export default function DogInfoPage() {
   const navigate = useNavigate();

@@ -8,8 +8,7 @@ import {
   DetailItem,
   TextWrapper,
   YellowThickButton
-} from "components/Admin/DogDetailInfo/DogInfo/AboutDog/styles";
-import { FlexWrapper } from "components/Admin/DogDetailInfo/styles";
+} from "components/Admin/DogDetailInfo/DogInfo/styles";
 import { Flex } from "components/common";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
 import { useGetDogSchoolInfo, useGetMemberPrecautions } from "hooks/api/member/school";
