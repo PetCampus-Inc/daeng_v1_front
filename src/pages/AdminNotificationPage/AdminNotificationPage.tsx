@@ -1,6 +1,7 @@
 import { ADMIN_NOTIFICATION_STEP } from "constants/adminNotification";
 
 import EllipseOrangeIcon from "assets/svg/ellipse-orange-icon";
+import { AlertSettingProvider } from "components/Admin/MyPage/AlertSetting/context/AlertSettingProvider";
 import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
@@ -16,7 +17,7 @@ const AdminNotificationPage = () => {
   const [isNewNotification, setIsNewNotification] = useState(true);
 
   return (
-    <>
+    <AlertSettingProvider>
       <Header type="text" text="알림" />
       <Layout type="detail">
         <nav>
@@ -58,7 +59,7 @@ const AdminNotificationPage = () => {
           </Box>
         )}
       </Layout>
-    </>
+    </AlertSettingProvider>
   );
 };
 
