@@ -8,10 +8,9 @@ interface Props {
 }
 
 const NotificationList = ({ currentStep, name }: Props) => {
-  //FIXME: 몇분전 시간 수정필요
   return (
     <Box gap={10} display="flex" direction="column">
-      {ADMIN_NOTIFICATION.common.map((item, index) => (
+      {ADMIN_NOTIFICATION.management.map((item, index) => (
         <Box key={index} display="flex" gap={12} padding={12} borderBottom={1} borderColor="gray_5">
           <Box width="29px" height="29px">
             {item.icon}

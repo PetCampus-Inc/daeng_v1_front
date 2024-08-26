@@ -6,7 +6,8 @@ import type {
   ITeacherSignUpData,
   ITeacherSignUpInfo,
   AdminAuthType,
-  AdminLoginInfo
+  AdminLoginInfo,
+  INewAlarm
 } from "types/admin/admin.types";
 
 // 아이디 중복확인
@@ -86,4 +87,16 @@ export const postTeacherSignUpCancel = async (adminId: number) => {
       adminId
     }
   });
+};
+
+//새로운 알림 여부
+export const handleGetNewAlarm = async (adminId: number) => {
+  const url = `admin/alarm/new`;
+  const { data } = await request<INewAlarm>({
+    url,
+    params: {
+      adminId
+    }
+  });
+  return data;
 };
