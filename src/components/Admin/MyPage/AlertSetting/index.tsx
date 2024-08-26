@@ -7,6 +7,7 @@ import Toggle from "components/common/Toggle/Toggle";
 import { useState } from "react";
 import { Role } from "types/common/role.types";
 
+import { AlertSettingProvider } from "./context/AlertSettingProvider";
 import * as S from "./styles";
 
 interface AlertSettingProps {
@@ -59,7 +60,7 @@ const AlertSetting = ({ setStep, role }: AlertSettingProps) => {
   );
 
   return (
-    <>
+    <AlertSettingProvider>
       <Header type="text" text="설정" handleClick={() => setStep(0)} />
       <Box mt={5} bg={"white"} height={"100%"}>
         <S.TopWrapper>
@@ -81,7 +82,7 @@ const AlertSetting = ({ setStep, role }: AlertSettingProps) => {
             alretItem(<SchoolIcon />, "유치원 운영 알림", "신규 가입, 교사 관리 등", "school")}
         </S.SettingList>
       </Box>
-    </>
+    </AlertSettingProvider>
   );
 };
 
