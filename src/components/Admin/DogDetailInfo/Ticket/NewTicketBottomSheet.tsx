@@ -2,25 +2,27 @@ import { PATH } from "constants/path";
 
 import { Box, Flex } from "components/common";
 import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
-import { WideButton } from "components/common/Button/Templates";
+import { WideButton } from "components/common/Button";
 import { Text } from "components/common/Text";
 import { useCreateNewTicket } from "hooks/api/admin/ticket";
 import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { padToTwoDigits } from "utils/date";
 
-import { calculateRenewal } from "../newTicket";
-import TicketCard from "../TicketCard";
+import { calculateRenewal } from "./newTicket";
+import { TicketCard } from "./TicketCard";
 
 import type { TicketDetailData } from "types/admin/attendance.type";
 
-interface AddCaredogBottomSheetProps extends BottomSheetProps {
+interface NewTicketBottomSheetProps extends BottomSheetProps {
   info: TicketDetailData & {
     dogId: number;
   };
 }
 
-const NewTicketBottomSheet = ({ isOpen, close, info }: AddCaredogBottomSheetProps) => {
+const NewTicketBottomSheet = ({ isOpen, close, info }: NewTicketBottomSheetProps) => {
   const navigate = useNavigate();
+  const { search } = useLocation();
   const { mutateNewTicket } = useCreateNewTicket(info.dogId);
 
   const newTicketData = useMemo(() => calculateRenewal(info), [info]);
@@ -32,7 +34,7 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: AddCaredogBottomSheetProp
         ticketType: newTicketData.ticketType,
         roundTicketNumber: newTicketData.allRoundTicket,
         monthlyTicketNumber: newTicketData.monthlyTicketNumber,
-        startDate: newTicketData.ticketStartDate.join("-"),
+        startDate: padToTwoDigits(newTicketData.ticketStartDate).join("-"),
         attendanceDays: newTicketData.attendanceDays ?? []
       },
       {
@@ -43,10 +45,15 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: AddCaredogBottomSheetProp
     );
   };
 
-  const handleRenewal = () => navigate(PATH.ADMIN_ATTENDANCE_INFO_NEW_TICKET(info.dogId));
+  const handleNavigate = () => {
+    // 쿼리 파라미터를 유지한 채로 이동합니다
+    // /admin/attendance/11/new-ticket?dog_name=%EC%A0%9C%EC%8B%9C%EC%B9%B4&ticket_status=true&tab=ticket
+    const path = `${PATH.ADMIN_ATTENDANCE_INFO_NEW_TICKET(info.dogId)}${search}`;
+    navigate(path);
+  };
 
   return (
-    <BottomSheet isOpen={isOpen} close={() => close()}>
+    <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
         <BottomSheet.Control />
         <Box marginBlock={12}>
@@ -61,7 +68,7 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: AddCaredogBottomSheetProp
             페이지로 이동해주세요
           </Text>
           <Flex gap={8} width="full">
-            <WideButton colorScheme="br_5" onClick={handleRenewal}>
+            <WideButton colorScheme="br_5" onClick={handleNavigate}>
               수정
             </WideButton>
             <WideButton onClick={handleSubmit}>갱신</WideButton>
