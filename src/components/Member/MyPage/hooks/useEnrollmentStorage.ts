@@ -46,5 +46,16 @@ export const useEnrollmentStorage = () => {
     }
   };
 
-  return { storageEnrollmentDatas, createStorageEnrollment };
+  // 삭제된 데이터를 제외해 localStorage에 데이터 저장
+  const removeStorageEnrollment = (enrollmentFormId: string) => {
+    const removeEnrollmentData = storageEnrollmentDatas.filter(
+      (el) => el.enrollmentFormId !== enrollmentFormId
+    );
+    setDogEnrollment({
+      key: STORAGE_KEY.DOG_ENROLLMENT_DATA,
+      value: removeEnrollmentData
+    });
+  };
+
+  return { storageEnrollmentDatas, createStorageEnrollment, removeStorageEnrollment };
 };

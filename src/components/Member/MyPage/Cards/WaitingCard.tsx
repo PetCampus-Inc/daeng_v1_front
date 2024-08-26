@@ -13,16 +13,10 @@ interface IWaitingCardProps {
   registeredDate: number[];
 }
 
-interface DogEnrollment {
-  enrollmentFormId: string;
-  dogName: string;
-  registeredDate: string[];
-}
-
 const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const { memberId } = useParams();
   const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
-  const { storageEnrollmentDatas } = useEnrollmentStorage(); // localStorage에서 가져오는 데이터
+  const { storageEnrollmentDatas, removeStorageEnrollment } = useEnrollmentStorage(); // localStorage에서 가져오는 데이터
   const { mutateDeleteEnrollment } = useDeleteEnrollment();
 
   const [year, month, day] = registeredDate && registeredDate;
@@ -31,13 +25,14 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const handleCancelApproval = (dogName: string) => {
     const cancelDog = storageEnrollmentDatas.find((el) => el.dogName === dogName);
     if (cancelDog) {
-      const enrollmentFormId = cancelDog.enrollmentFormId;
-      mutateMemberDogEnrollment(String(enrollmentFormId), {
-        onSuccess() {
-          // 승인 취소시 가입신청서 폼 아예 삭제
-          mutateDeleteEnrollment(String(enrollmentFormId));
-        }
-      });
+      const enrollmentFormId = String(cancelDog.enrollmentFormId);
+      mutateMemberDogEnrollment(enrollmentFormId),
+        {
+          onSuccess() {
+            mutateDeleteEnrollment(enrollmentFormId); // 승인 취소시 가입신청서 폼 아예 삭제
+            removeStorageEnrollment(enrollmentFormId); // localStorage에서도 삭제
+          }
+        };
     }
   };
 
