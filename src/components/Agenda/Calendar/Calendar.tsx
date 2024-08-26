@@ -1,10 +1,11 @@
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import { Box } from "components/common";
-import { format, parse } from "date-fns";
-import { useDogInfoRecord } from "hooks/api/member/dogs";
+import { format, parse, parseISO } from "date-fns";
+import { type DogInfoRecordType } from "hooks/api/member/dogs";
 import { useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AGENDA_STATUS, DogInfoRecord } from "types/member/dogs";
+import { AGENDA_STATUS } from "types/member/dogs";
+import { getClosestValidDate } from "utils/date";
 
 import { MonthlyCalendar } from "./MonthlyCalendar";
 import { MonthPicker } from "./MonthPicker";
@@ -12,6 +13,7 @@ import { CalendarSection, ToggleViewButton } from "./styles";
 import { WeeklyCalendar } from "./WeeklyCalendar";
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
+import type { OnArgs } from "react-calendar/dist/esm";
 
 export const Calendar = ({ id }: { id: number }) => {
   const today = new Date();
@@ -19,40 +21,62 @@ export const Calendar = ({ id }: { id: number }) => {
 
   const currentDateParam = searchParams.get("date");
   const currentDate = currentDateParam ? parse(currentDateParam, "yyyy-MM-dd", new Date()) : today;
-  const [activeDate, setActiveDate] = useState<Date | null>(currentDate);
+  const [date, setDate] = useState<Date | null>(currentDate);
+  const [activeStartDate, setActiveStartDate] = useState<Date | null>(currentDate);
 
   // const { data } = useDogInfoRecord(id);
-
-  const data: DogInfoRecord[] = [
-    {
-      date: [2024, 8, 8],
-      status: AGENDA_STATUS.COMPLETE,
-      registeredDate: [2024, 1, 11]
-    }
-  ];
 
   const [expanded, setExpanded] = useState(false);
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const calendarHeaderRef = useRef<HTMLDivElement>(null);
 
-  const handleDateClick = (date: Value) => {
+  // TODO: 임시 데이터, API 수정 완료 후 제거해주세요
+  const data: DogInfoRecordType[] = [
+    {
+      date: "2024-08-18",
+      status: AGENDA_STATUS.COMPLETE,
+      registeredDate: "2024-03-28"
+    }
+  ];
+
+  const handleDateChange = (date: Value) => {
     if (date instanceof Date) {
-      setActiveDate(date);
-      const formattedDate = format(date as Date, "yyyy-MM-dd");
+      setDate(date);
+      setActiveStartDate(date);
+      const formattedDate = format(date, "yyyy-MM-dd");
       searchParams.set("date", formattedDate);
       setSearchParams(searchParams);
     }
   };
 
+  const handleActiveStartDateChange = ({ activeStartDate, view }: OnArgs) => {
+    if (activeStartDate) {
+      setActiveStartDate(activeStartDate);
+      // 'month' 뷰에서만 date 업데이트
+      if (view === "month") {
+        // 가입일 이후, 오늘 이전의 가장 가까운 날짜로 date 변경
+        const selectableDate = getClosestValidDate({
+          date: activeStartDate,
+          maxDate: today,
+          minDate: parseISO("2024-06-28") // FIXME: API 수정 후 지워주세요~~
+        });
+        setDate(selectableDate);
+        const formattedDate = format(selectableDate, "yyyy-MM-dd");
+        searchParams.set("date", formattedDate);
+        setSearchParams(searchParams);
+      }
+    }
+  };
+
   const handleTodayClick = () => {
     const today = new Date();
-    handleDateClick(today);
+    handleDateChange(today);
   };
 
   const toggleExpanded = () => setExpanded((prev) => !prev);
 
   const handleMonthClick = (date: Value) => {
-    handleDateClick(date);
+    handleDateChange(date);
     setShowMonthPicker(false);
   };
 
@@ -66,9 +90,11 @@ export const Calendar = ({ id }: { id: number }) => {
 
   const calendarProps = {
     today,
-    onDateChange: handleDateClick,
+    onDateChange: handleDateChange,
+    onActiveStartDateChange: handleActiveStartDateChange,
     onTodayClick: handleTodayClick,
-    activeDate,
+    date,
+    activeStartDate,
     onOpenMonthPicker: handleOpenMonthPicker,
     headerRef: calendarHeaderRef
   };
@@ -77,9 +103,9 @@ export const Calendar = ({ id }: { id: number }) => {
     <CalendarSection>
       <Box bgColor="white" pt={28} radius="0px 0px 20px 20px" overflow="hidden">
         {expanded ? (
-          <MonthlyCalendar data={data} {...calendarProps} />
+          <MonthlyCalendar attendData={data} {...calendarProps} />
         ) : (
-          <WeeklyCalendar data={data} {...calendarProps} />
+          <WeeklyCalendar attendData={data} {...calendarProps} />
         )}
         <ToggleViewButton type="button" onClick={toggleExpanded} expand={expanded}>
           {expanded ? "닫기" : "펼쳐보기"}
@@ -89,10 +115,10 @@ export const Calendar = ({ id }: { id: number }) => {
         </ToggleViewButton>
         <MonthPicker
           data={data}
+          date={date}
           isOpen={showMonthPicker}
           onClose={handleCloseMonthPicker}
           onMonthClick={handleMonthClick}
-          activeDate={activeDate}
           anchorRef={calendarHeaderRef}
         />
       </Box>

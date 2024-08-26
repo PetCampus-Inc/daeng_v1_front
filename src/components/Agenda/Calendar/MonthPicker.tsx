@@ -15,14 +15,14 @@ import {
   MonthPickerCalendar
 } from "./styles";
 
+import type { DogInfoRecordType } from "hooks/api/member/dogs";
 import type { Value } from "react-calendar/dist/cjs/shared/types";
-import type { DogInfoRecord } from "types/member/dogs";
 
 interface MonthPickerProps {
-  data: DogInfoRecord[];
+  data?: DogInfoRecordType[];
   isOpen: boolean;
   onClose: () => void;
-  activeDate: Date | null;
+  date: Date | null;
   onMonthClick: (value: Value) => void;
   anchorRef: React.RefObject<HTMLDivElement>;
 }
@@ -34,7 +34,7 @@ export const MonthPicker = ({
   data,
   isOpen,
   onClose,
-  activeDate,
+  date,
   onMonthClick,
   anchorRef
 }: MonthPickerProps) => {
@@ -51,6 +51,8 @@ export const MonthPicker = ({
     if (isOpen && popupRef.current && anchorRef.current) {
       const calendarNavigation = anchorRef.current;
       const popupNavigation = popupRef.current.querySelector(".react-calendar__navigation");
+      console.log(popupNavigation);
+      console.log(calendarNavigation);
 
       if (calendarNavigation && popupNavigation) {
         const calendarRect = calendarNavigation.getBoundingClientRect();
@@ -75,7 +77,7 @@ export const MonthPicker = ({
         <MonthPickerWrapper ref={popupRef}>
           <MonthPickerCalendar>
             <Calendar
-              value={activeDate}
+              value={date}
               onChange={onMonthClick}
               view="year"
               maxDetail="year"
