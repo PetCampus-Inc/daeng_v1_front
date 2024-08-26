@@ -12,7 +12,7 @@ const MemberMyInfoPage = () => {
   return (
     <>
       <Header
-        type="edite"
+        type="edit"
         text="내프로필"
         actionFn={() => navigate(PATH.MEMBER_MY_INFO_EDIT_PAGE(memberId))}
         transparent
