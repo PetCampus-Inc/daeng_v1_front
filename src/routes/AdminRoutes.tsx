@@ -2,6 +2,7 @@ import type { QueryClient } from "@tanstack/react-query";
 
 import { PATH } from "constants/path";
 
+import { AlertSettingProvider } from "components/Admin/MyPage/AlertSetting/context/AlertSettingProvider";
 import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import * as Pages from "pages";
 import { Suspense } from "react";
@@ -120,7 +121,9 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           path: PATH.ADMIN_NOTIFICATION_PAGE,
           element: (
             <Suspense>
-              <Pages.AdminNotificationPage />
+              <AlertSettingProvider>
+                <Pages.AdminNotificationPage />
+              </AlertSettingProvider>
             </Suspense>
           )
         },

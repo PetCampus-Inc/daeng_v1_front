@@ -1,23 +1,26 @@
 import { ADMIN_NOTIFICATION_STEP } from "constants/adminNotification";
 
 import EllipseOrangeIcon from "assets/svg/ellipse-orange-icon";
-import { AlertSettingProvider } from "components/Admin/MyPage/AlertSetting/context/AlertSettingProvider";
+import { useAlertSetting } from "components/Admin/MyPage/AlertSetting/context/AlertSettingProvider";
 import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
+import useGetNewAlarm from "hooks/api/admin/alarm";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
+  const { alertSettings, isAllOn, toggleAll, toggleIndividual } = useAlertSetting();
+  const { adminId } = useAdminInfo();
+  const { data } = useGetNewAlarm(adminId);
   const { role } = useAdminInfo();
   const currentSteps =
     role === "ROLE_OWNER" ? ADMIN_NOTIFICATION_STEP : ADMIN_NOTIFICATION_STEP.slice(0, 3);
   const [currentStep, setCurrentStep] = useState(0);
-  const [isNewNotification, setIsNewNotification] = useState(true);
 
   return (
-    <AlertSettingProvider>
+    <>
       <Header type="text" text="알림" />
       <Layout type="detail">
         <nav>
@@ -40,7 +43,7 @@ const AdminNotificationPage = () => {
                   borderBottom={2}
                   borderColor={index === currentStep ? "darkBlack" : "transparent"}
                 />
-                {index !== 0 && isNewNotification && (
+                {index !== 0 && data && (
                   <Box position="absolute" top={-5} right={-8}>
                     <EllipseOrangeIcon />
                   </Box>
@@ -49,7 +52,7 @@ const AdminNotificationPage = () => {
             ))}
           </Box>
         </nav>
-        {isNewNotification ? (
+        {data ? (
           <NotificationList currentStep={currentStep} name="김똑똑" />
         ) : (
           <Box display="flex" justify="center" pt={80}>
@@ -59,7 +62,7 @@ const AdminNotificationPage = () => {
           </Box>
         )}
       </Layout>
-    </AlertSettingProvider>
+    </>
   );
 };
 

@@ -61,3 +61,7 @@ export interface ISchoolInfoEdit {
   phoneNumber: string;
   address: string;
 }
+
+export interface INewAlarm {
+  newAlarm: boolean;
+}
