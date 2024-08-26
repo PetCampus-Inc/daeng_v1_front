@@ -16,6 +16,7 @@ interface AlertSettingProps {
 export const AlertSettingContext = createContext<AlertSettingProps | null>(null);
 
 export const AlertSettingProvider = ({ children }: PropsWithChildren) => {
+  // FIXME 알림 여부 api 추가 필요
   const [alertSettings, setAlertSettings] = useState({
     attendance: false,
     careDog: false,
