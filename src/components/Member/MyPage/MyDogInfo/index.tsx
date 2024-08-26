@@ -69,7 +69,6 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   }, [VISIT_MYPAGE, approvalDeniedDogs, removeApprovalDeniedDog, saveStorageData]);
 
   useEffect(() => {
-    // FIXME 가입신청 후 false인데도 VISIT_MYPAGE에 데이터가 저장되는 이슈 확인하기!!
     if (approvalDeniedDogs.length <= 0) {
       resetStoradVisitPathIdValue();
       return;
@@ -90,7 +89,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       {doglist.length <= 1 ? (
         <S.MyDogInfoList>
           {doglist.map(
-            (dog) => dog.dogId && dog.status !== DOG_STATUS.APPROVAL_PENDING && renderMyDogCard(dog)
+            (dog) => dog.dogId && dog.status === DOG_STATUS.ENROLLED && renderMyDogCard(dog)
           )}
           <AddMyDogCard />
         </S.MyDogInfoList>
@@ -98,8 +97,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
         <S.DragCarouselWrapper>
           <DragCarousel gap={12}>
             {doglist.map(
-              (dog) =>
-                dog.dogId && dog.status !== DOG_STATUS.APPROVAL_PENDING && renderMyDogCard(dog)
+              (dog) => dog.dogId && dog.status === DOG_STATUS.ENROLLED && renderMyDogCard(dog)
             )}
             {doglist.map(
               (dog) => dog.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(dog)

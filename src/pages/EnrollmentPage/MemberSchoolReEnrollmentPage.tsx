@@ -96,7 +96,7 @@ const MemberSchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
           action={() => blocker.proceed()}
         />
       ) : null}
-      <Header type="text" text="가입신청서1" />
+      <Header type="text" text="가입신청서" />
       <Layout bgColor="BGray" px={16} pb={40}>
         <S.Container>
           <S.TopWrapper>
