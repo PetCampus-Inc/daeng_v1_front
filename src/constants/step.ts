@@ -252,11 +252,4 @@ export function getFieldStep({
   return undefined; // 필드가 어느 스텝에도 속하지 않거나 해당 스텝이 비활성화된 경우
 }
 
-export const ADMIN_DOG_DETAIL_INFO_STEP = [
-  "강아지 정보",
-  "등원 기록",
-  "이용권",
-  "유의사항"
-] as const;
-
 export const MEMBER_DOG_INFO_STEP = ["강아지 정보", "유치원 정보", "출결 및 이용권"] as const;
