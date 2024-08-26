@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import "./CalendarStyle";
+// import "./CalendarStyle";
 
 export const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -58,6 +58,10 @@ select {
 
 textarea:focus, input:focus{
     outline: none;
+}
+
+abbr {
+  text-decoration: none;
 }
 
 // Input type number 일때 input 오른쪽 화살표 없애기
