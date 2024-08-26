@@ -13,7 +13,13 @@ import { useCallback, useEffect, useState } from "react";
 
 import { useDeleteEnrollment, useGetEnrollmentStatus } from "../../../../hooks/api/admin/enroll";
 
-// FIXME 승인 거절 데이터 삭제 후 비동기 작업으로 인해 useGetEnrollmentStatus get 요청 시 에러 발생하는 이슈 해결하기!!
+// FIXME 삭제가 성공했음에도 불구하고 한 번 더 호출 되는 이슈
+
+/**
+ * 강아지 추가 승인 거부할 경우 상태 관리를 관리합니다.
+ * @returns
+ */
+
 // 강아지 추가 승인 거부할 경우 상태 관리
 export const useDogRejected = () => {
   const [dogs, setDogs] = useState<DogEnrollment[] | null>([]);
