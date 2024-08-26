@@ -19,8 +19,8 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const { storageEnrollmentDatas, removeStorageEnrollment } = useEnrollmentStorage(); // localStorage에서 가져오는 데이터
   const { mutateDeleteEnrollment } = useDeleteEnrollment();
 
-  const [year, month, day] = registeredDate && registeredDate;
-  const registeredTime = formatDate(String(year), String(month), String(day), "dot");
+  const [year, month, day] = registeredDate && registeredDate.map(String);
+  const registeredTime = formatDate(year, month, day, "dot");
 
   const handleCancelApproval = (dogName: string) => {
     const cancelDog = storageEnrollmentDatas.find((el) => el.dogName === dogName);
