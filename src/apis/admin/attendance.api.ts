@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import authAxios from "libs/AuthAxios";
 import { request } from "libs/AuthAxios/request";
 
@@ -124,40 +123,50 @@ export const handleGetDogDetail = async (dogId: number) => {
   return data;
 };
 
-// 강아지 상세 - 메모 수정
-export const handlePostDogMemo = async (dogId: number, memo: string): Promise<void> => {
+/**
+ * GET v0/admin/attendance/dog/info/memo (메모 등록)
+ */
+export const handlePostDogMemo = async (req: { dogId: number; memo: string }): Promise<void> => {
   const url = `admin/attendance/dog/info/memo`;
   const { data } = await authAxios.post(url, {
-    dogId,
-    memo
+    dogId: req.dogId,
+    memo: req.memo
   });
   return data;
 };
 
-// 강아지 상세 - 등원 기록
-export const handleGetDogInfoRecord = async (dogId: number, date?: string) => {
+/**
+ * GET v0/admin/attendance/dog/info/record (등원기록)
+ */
+export const handleGetDogInfoRecord = async (
+  dogId: number,
+  date?: string
+): Promise<DogInfoRecordData[]> => {
   const url = `admin/attendance/dog/info/record`;
-  const { data } = await request<DogInfoRecordData[]>({
-    url,
+  const { data } = await authAxios.get(url, {
     params: {
       dogId,
-      date: date || format(new Date(), "yyyy-MM-dd")
+      date
     }
   });
-  return data;
+  return data.data;
 };
 
-// 강아지 상세 - 알림장
-export const handleGetDogInfoAgenda = async (dogId: number, date?: string) => {
+/**
+ * GET v0/admin/attendance/dog/info/agenda (알림장)
+ */
+export const handleGetDogInfoAgenda = async (
+  dogId: number,
+  date?: string
+): Promise<DogInfoAgendaData> => {
   const url = `admin/attendance/dog/info/agenda`;
-  const { data } = await request<DogInfoAgendaData>({
-    url,
+  const { data } = await authAxios.get(url, {
     params: {
       dogId,
-      date: date || format(new Date(), "yyyy-MM-dd")
+      date
     }
   });
-  return data;
+  return data.data;
 };
 
 // 강아지 상세 - 이용권 정보
