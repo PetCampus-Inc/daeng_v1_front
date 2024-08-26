@@ -9,12 +9,12 @@ export const CalendarSection = styled.section`
   margin-bottom: 40px;
 `;
 
-// Styled Monthly Calendar Container
+// MonthlyCalendar Style
 export const StyledMonthlyCalendar = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: center;
   position: relative;
+  justify-content: center;
+  width: 100%;
 
   /* React Calendar Custom Styling */
   .react-calendar {
@@ -161,21 +161,20 @@ export const MonthPickerCalendar = styled.div`
 
   /* Navigation Styling */
   .react-calendar__navigation {
+    display: flex;
     justify-content: center;
-    gap: 10px;
-    margin: 0;
 
-    button:enabled:hover,
-    button:enabled:focus,
-    button:disabled {
-      background-color: ${({ theme }) => theme.colors.white};
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .react-calendar__navigation__label {
+    button.react-calendar__navigation__label {
       ${({ theme }) => theme.typo.label1_16_B};
       color: ${({ theme }) => theme.colors.primaryColor};
       font-family: "Pretendard Variable";
-      flex-grow: 0 !important;
+      flex-grow: 0.3 !important;
     }
   }
 
@@ -217,7 +216,7 @@ export const MonthPickerCalendar = styled.div`
       }
     }
 
-    &.react-calendar__tile: disabled {
+    &.react-calendar__tile:disabled {
       abbr {
         color: ${({ theme }) => theme.colors.gray_4};
       }
