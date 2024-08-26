@@ -41,7 +41,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               path: PATH.ADMIN_ATTENDANCE_INFO(),
               element: (
                 <Suspense>
-                  <Pages.DogInfoPage />
+                  <Pages.DogDetailInfoPage />
                 </Suspense>
               )
             },
