@@ -39,7 +39,6 @@ const MyDogCard = ({
   status,
   dogLength
 }: IMyDogCardProps) => {
-  //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const setDogId = useSetRecoilState(dogIdState);
@@ -48,6 +47,7 @@ const MyDogCard = ({
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
+  const isProfile = profileUri === null;
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -70,7 +70,6 @@ const MyDogCard = ({
         subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
         actionText="가입하기"
         actionFn={() => {
-          // navigate(PATH.MEMBER_MY_SCHOOL_SEARCH(String(memberId)));
           navigate(PATH.MEMBER_ENROLLMENT_PAGE);
           setDogId(Number(dogId));
         }}
@@ -115,7 +114,7 @@ const MyDogCard = ({
       />
 
       <S.InfoTextBox>
-        <S.DogName className={profileUri === null ? "colorGray1" : ""}>{dogName}</S.DogName>
+        <S.DogName className={isProfile ? "colorGray1" : ""}>{dogName}</S.DogName>
         {status === DOG_STATUS.DROP_OUT ? (
           <GotoSchoolInfoButton pr="0" onClick={openAlertPopup} />
         ) : (
@@ -124,11 +123,9 @@ const MyDogCard = ({
             onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}
           />
         )}
-        <S.DateText className={profileUri === null ? "colorGray1" : ""}>
-          {registeredTime} 등록
-        </S.DateText>
+        <S.DateText className={isProfile ? "colorGray1" : ""}>{registeredTime} 등록</S.DateText>
       </S.InfoTextBox>
-      {profileUri === null ? (
+      {isProfile ? (
         <S.BgIconBox>
           <DogNotfoundIcon />
         </S.BgIconBox>
