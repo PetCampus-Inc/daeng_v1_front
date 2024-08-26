@@ -30,16 +30,25 @@ export const getCurrentDateString = (): string => {
 };
 
 /**
- * 숫자 또는 숫자 배열의 각 요소를 2자리 문자열로 변환합니다.
- * @param {number | number[]} input - 변환할 숫자 또는 숫자 배열
- * @returns {string | string[]} 변환된 문자열 또는 문자열 배열
+ * 숫자를 2자리 문자열로 변환합니다.
+ * @param {number} input - 변환할 숫자
+ * @returns {string} 변환된 문자열
  */
-export const padToTwoDigits = (input: number | number[]): string | string[] => {
+export function padToTwoDigits(input: number): string;
+
+/**
+ * 숫자 배열의 각 요소를 2자리 문자열로 변환합니다.
+ * @param {number[]} input - 변환할 숫자 배열
+ * @returns {string[]} 변환된 문자열 배열
+ */
+export function padToTwoDigits(input: number[]): string[];
+
+export function padToTwoDigits(input: number | number[]): string | string[] {
   if (Array.isArray(input)) {
     return input.map((n) => n.toString().padStart(2, "0"));
   }
   return input.toString().padStart(2, "0");
-};
+}
 
 /**
  * 숫자 배열을 ISO 8601 문자열로 변환합니다.
