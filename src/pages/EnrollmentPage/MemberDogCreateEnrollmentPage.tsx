@@ -73,10 +73,10 @@ const MemberDogCreateEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
           action={() => blocker.proceed()}
         />
       ) : null}
-      <Header type="text" text="가입신청서2" />
+      <Header type="text" text="가입신청서" />
       <Layout bgColor="BGray" px={16} pb={40}>
         <S.Container>
-          <S.TopWrapper>
+          <S.TopWrapper top={0}>
             <S.TitleWrapper>
               <S.Title>{currentTitle}</S.Title>
               <S.SubTitle>{currentSubtitle}</S.SubTitle>
