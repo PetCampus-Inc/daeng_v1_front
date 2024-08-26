@@ -9,45 +9,36 @@ import { useFormContext } from "react-hook-form";
 import * as S from "../styles";
 
 interface ProfileEditProps {
-  handleClick: (type: string) => void;
   profile: IFile[];
-  fileInputRef: React.LegacyRef<HTMLInputElement> | null;
   handleFileChange: (e: ChangeEvent<HTMLInputElement>, type: string) => void;
   registerText: string;
   type: string;
 }
 
-const ProfileEdit = ({
-  handleClick,
-  profile,
-  fileInputRef,
-  handleFileChange,
-  registerText,
-  type
-}: ProfileEditProps) => {
+const ProfileEdit = ({ profile, handleFileChange, registerText, type }: ProfileEditProps) => {
   const { register, getValues } = useFormContext();
   const { profileUri } = getValues();
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.ProfileBox htmlFor="uploadProfile" w="107" onClick={() => handleClick(type)}>
-        <S.UploadProfileButton br="40" aria-label="uploadProfileButton">
+      <S.ProfileBox htmlFor={registerText} w="107">
+        <S.UploadProfileBox br="40" aria-label="uploadProfileButton">
           <S.UploadImage
             src={profile[0] ? profile[0].thumbnail : profileUri}
             alt={`${type}-profile`}
           />
-        </S.UploadProfileButton>
+        </S.UploadProfileBox>
         <S.PencilIconBox>
           <PencilBrownNormalIcon />
         </S.PencilIconBox>
       </S.ProfileBox>
 
       <S.StyledHiddenUpload
-        {...register(registerText)}
-        id="uploadProfile"
+        {...register(registerText, {
+          onChange: (e) => handleFileChange(e, type)
+        })}
+        id={registerText}
         type="file"
-        ref={fileInputRef}
         accept={ACCEPT_FILE_TYPE.IMAGE}
-        onChange={(e) => handleFileChange(e, type)}
       />
     </Flex>
   );
