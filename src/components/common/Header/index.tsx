@@ -16,6 +16,8 @@ import {
   HeaderArea
 } from "./styles";
 import { PATH } from "constants/path";
+import useGetNewAlarm from "hooks/api/admin/alarm";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 /*
 header type
@@ -47,6 +49,9 @@ const Header = ({
   shadow
 }: Props) => {
   const navigate = useNavigate();
+  const { adminId } = useAdminInfo();
+  //FIXME: 비활성화 아이콘 수정하기
+  const { data } = useGetNewAlarm(Number(adminId));
 
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
@@ -64,7 +69,7 @@ const Header = ({
                   navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
-                <NoticeActiveIcon />
+                {data ? <NoticeActiveIcon /> : <ArrowDownIcon w="24" h="24" />}
               </IconWrapper>
             </TextWrapper>
           )}
@@ -90,7 +95,7 @@ const Header = ({
                   navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
-                <NoticeActiveIcon />
+                {data ? <NoticeActiveIcon /> : <ArrowDownIcon w="24" h="24" />}
               </IconWrapper>
             </TextWrapper>
           )}

@@ -56,7 +56,7 @@ const ADMIN_PATH = {
     `/${ADMIN}/school/enrollment/owner-forms/${formId ?? ":formId"}/edit`, // 원장 가입신청서 수정
   ADMIN_CREATE_FORM: `/${ADMIN}/school/enrollment/new`, // 원장 가입신청서 등록
 
-  ADMIN_NOTIFICATION_PAGE: `/${ADMIN}/"notification`, // 알림
+  ADMIN_NOTIFICATION_PAGE: `/${ADMIN}/notification`, // 알림
 
   ADMIN_MY_PAGE: `/${ADMIN}/${MYPAGE}`, // 어드민 마이페이지
   ADMIN_MY_PAGE_SETTING: `/${ADMIN}/${MYPAGE}/setting`, // 마이페이지 설정
