@@ -8,11 +8,13 @@ import Header from "components/common/Header";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import useGetNewAlarm from "hooks/api/admin/alarm";
+import { handleGetNewAlarm } from "apis/admin/admin.api";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
   const { alertSettings, isAllOn, toggleAll, toggleIndividual } = useAlertSetting();
   const { adminId } = useAdminInfo();
+  //FIXME: data.newalarm 으로 수정 확인
   const { data } = useGetNewAlarm(adminId);
   const { role } = useAdminInfo();
   const currentSteps =
