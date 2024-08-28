@@ -1,11 +1,11 @@
 import { format, isSameDay } from "date-fns";
-import { useGetDogInfoRecord } from "hooks/api/admin/attendance";
 import { useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 import * as S from "./styles";
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
+import { useGetDogInfoRecord } from "hooks/api/admin/dogs";
 
 const Calendar = () => {
   const today = new Date();

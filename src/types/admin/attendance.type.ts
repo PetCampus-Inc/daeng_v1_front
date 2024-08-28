@@ -135,6 +135,6 @@ export interface NewTicketReq {
  * @description 출석부 강아지 상세 - 유의사항 Dto
  */
 export interface PrecautionData {
-  modifiedList: Nullable<number[]>;
+  modifiedList: number[];
   agreements: [{ 21: string }, { 22: string }, { 23: string }, { 24: string }, { 30: string }];
 }

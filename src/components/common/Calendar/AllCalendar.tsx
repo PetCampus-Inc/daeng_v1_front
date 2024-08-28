@@ -1,6 +1,6 @@
 import FootIcon from "assets/svg/foot-icon";
 import { format } from "date-fns";
-import { useGetDogInfoRecord } from "hooks/api/admin/attendance";
+import { useGetDogInfoRecord } from "hooks/api/admin/dogs";
 import moment from "moment";
 import { useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
