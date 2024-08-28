@@ -1,10 +1,10 @@
-import { IconSize } from "./types";
+import { IconProps } from "./types";
 
-export type IconProps = {
+export type Props = {
   borderStyle?: string;
-} & IconSize;
+} & IconProps;
 
-const SendAlarmIcon = ({ borderStyle = "", w = "20", h = "20" }: IconProps) => {
+const SendAlarmIcon = ({ borderStyle = "", w = "20", h = "20" }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

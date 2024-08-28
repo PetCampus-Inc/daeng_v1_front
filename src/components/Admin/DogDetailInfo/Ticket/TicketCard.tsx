@@ -14,6 +14,7 @@ import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/remainin
 import { CardContainer, CardInnerBox, Dimmed } from "./styles";
 
 import type { TicketDetailData } from "types/admin/attendance.type";
+
 interface TicketCardProps {
   dogId: number;
   data: TicketDetailData;
