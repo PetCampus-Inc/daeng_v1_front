@@ -2,7 +2,7 @@ import { DOG_STATUS } from "constants/memebrDogStatus";
 import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
   handleDeleteEnrollment,
   handleGetAdminForm,
@@ -101,10 +101,12 @@ export const useGetEnrollmentStatus = (enrollmentFormIds: string[]) => {
 
 // 가입신청서 삭제
 export const useDeleteEnrollment = () => {
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: string) =>
       handleDeleteEnrollment(enrollmentFormId && enrollmentFormId),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
       console.log("가입신청서 삭제 성공");
     },
     onError: (error) => {
