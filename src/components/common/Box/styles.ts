@@ -86,7 +86,10 @@ export const StyledBox = styled.div.withConfig({
       "flex",
       "gap",
       "zIndex",
-      "whiteSpace"
+      "whiteSpace",
+      "textWrap",
+      "typo",
+      "shadow"
     ].includes(prop)
 })<BoxOptions>`
   ${(props) => getSizeStyle(props)};
@@ -98,6 +101,9 @@ export const StyledBox = styled.div.withConfig({
   ${(props) => getPositionStyle(props)};
 
   white-space: ${(props) => props.whiteSpace};
+  text-wrap: ${(props) => props.textWrap};
+  box-shadow: ${({ shadow, theme }) => shadow && theme.shadows[shadow]};
   overflow: ${(props) => props.overflow};
   text-align: ${(props) => props.textAlign};
+  ${({ theme, typo }) => typo && theme.typo[typo]};
 `;

@@ -98,7 +98,7 @@ const SchoolInfoCard = ({ isPrevSchool }: Props) => {
           </S.InfoList>
           <S.InfoList>
             <S.IconWrapper>
-              <Calendar w={24} h={24} isGray={isPrevSchool} />
+              <Calendar w={24} h={24} colorScheme={isPrevSchool ? "gray" : "primary"} rx={14} />
             </S.IconWrapper>
             <S.ListTitle isPrevSchool={isPrevSchool}>
               {data.registeredDate

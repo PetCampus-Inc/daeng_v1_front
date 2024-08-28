@@ -29,7 +29,7 @@ export function DogCard({ info }: { info: Attendance }) {
       dog_name: info.dogName,
       ticket_status: ticketStatus.isExpired.toString()
     });
-    navigate(PATH.ADMIN_ATTENDANCE_INFO(`${info.dogId}?${params}`));
+    navigate(`${info.dogId}?${params}`);
   };
 
   const availableOptions = useMemo(
@@ -53,7 +53,6 @@ export function DogCard({ info }: { info: Attendance }) {
         </S.DogName>
         <S.Info $status={getStatusStyle(ticketStatus)}>
           <S.Icon>
-            colorScheme
             {ticketStatus.isExpiringSoon && <AlertFilledIcon colorScheme="brown" />}
             {ticketStatus.isExpired && <AlertFilledIcon colorScheme="gray" />}
             {ticketStatus.isValid && <CalendarIcon className="calendar-icon" />}

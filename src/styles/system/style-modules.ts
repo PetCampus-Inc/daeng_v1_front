@@ -53,16 +53,14 @@ export const getBorderRadiusStyle = (radiusValue?: RadiusType): string | undefin
       return "8px";
     case "circle":
       return "50%";
+    case "full":
+      return "9999px";
     default:
       return radiusValue;
   }
 };
 
 // Style functions
-export const getDisplayStyle = (props: DisplayProps) => css`
-  display: ${props.display};
-`;
-
 export const getSizeStyle = (props: SizeProps) => css`
   width: ${parseSize(props.width)};
   height: ${parseSize(props.height)};
