@@ -30,7 +30,7 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
       try {
         mutateCancelEnrollment(cancelDog.enrollmentFormId, {
           onSuccess: () => {
-            mutateDeleteEnrollment(cancelDog.enrollmentFormId); // 승인 취소시 가입신청서 폼 아예 삭제
+            mutateDeleteEnrollment(cancelDog.enrollmentFormId); // 승인 취소시 가입신청서 삭제
             removeStorageEnrollment(cancelDog.enrollmentFormId); // localStorage에서도 삭제
           }
         });

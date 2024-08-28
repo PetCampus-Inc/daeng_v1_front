@@ -1,15 +1,14 @@
 import { DOG_STATUS } from "constants/memebrDogStatus";
 import { PATH } from "constants/path";
 
-import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
-import { useGetMemberDogDetailInfo, usePostMemberDogDelete } from "hooks/api/member/member";
+import { usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
@@ -103,7 +102,7 @@ const MyDogCard = ({
 
   return (
     <S.MyDogCard
-      isprofilestring={profileUri === null ? "true" : "false"}
+      isprofilestring={isProfile ? "true" : "false"}
       tabIndex={dogLength}
       ref={divRef}
       onClick={handleCardFocus}
