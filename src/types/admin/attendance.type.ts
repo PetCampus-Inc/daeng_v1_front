@@ -1,8 +1,12 @@
-import { AttendanceStatus } from "types/common/status.types";
-
-import type { MemberDtoType } from "./enrollment.types";
-import type { Nullable } from "../helper.types";
+import type { Nullable, LocalDateTime, LocalDate } from "../helper.types";
+import type { PoopStatus, AgendaStatus } from "types/member/dogs";
 import type { TicketType } from "types/member/enrollment.types";
+
+export const ATTENDANCE_STATUS = {
+  ATTENDED: "ATTENDED",
+  NOT_ATTENDED: "NOT_ATTENDED"
+} as const;
+export type AttendanceStatus = (typeof ATTENDANCE_STATUS)[keyof typeof ATTENDANCE_STATUS];
 
 /**
  *  @description 출석부 - 출석모드 Dto
@@ -54,23 +58,45 @@ export interface DogInfoDetailData {
   breedId: number;
   breedName: string;
   birthDate: number[];
-  neutralization: string;
-  allergyDisease: string;
-  vaccination: string;
-  fileUrl: string[];
-  pickDropRequest: string;
-  pickDropType: string;
-  pickDropMemo: string;
-  dogMemo: string;
-  member: MemberDtoType;
+  neutralization: "NEUTERED" | "NOT_NEUTERED";
+  allergyDisease: Nullable<string>;
+  vaccination: "VACCINATED" | "NOT_VACCINATED";
+  profileUri: Nullable<string>;
+  vaccinationUri: Nullable<Vaccination[]>;
+  pickDropRequest: "REQUEST" | "NOT_REQUEST";
+  pickDropType: Nullable<"ROUND" | "ONE_WAY">;
+  pickDropMemo: Nullable<string>;
+  dogMemo: Nullable<string>;
+  member: Member;
+}
+
+interface Vaccination {
+  imageId: number;
+  imageUri: string;
+  imageType: "VACCINATION";
+  comment: null;
+  createdTime: number[];
+}
+
+interface Member {
+  memberId: null;
+  memberProfileUri: null;
+  memberName: string;
+  memberGender: null;
+  nickName: null;
+  address: string;
+  addressDetail: Nullable<string>;
+  phoneNumber: string;
+  emergencyNumber: Nullable<string>;
+  relation: null;
 }
 
 /**
  * @description 출석부 강아지 상세 - 강아지 등원기록 Dto
  */
 export interface DogInfoRecordData {
-  date: number[];
-  status: AttendanceStatus;
+  date: LocalDate;
+  status: AgendaStatus;
 }
 
 /**
@@ -80,12 +106,12 @@ export interface DogInfoAgendaData {
   agendaId: number;
   agendaNote: string;
   snack: string;
-  poop: Poop;
+  poop: PoopStatus;
   poopMemo: string;
   dogId: number;
   dogProfileUri: string;
-  status: "NOT_YET" | "COMPLETE" | "WRITING";
-  dateTime: string;
+  status: AgendaStatus;
+  dateTime: LocalDateTime;
 }
 
 export enum Poop {
@@ -104,7 +130,7 @@ export interface TicketDetailData {
   allRoundTicket: number;
   currentRoundTicket: number;
   monthlyTicketNumber: number;
-  ticketStartDate: number[];
+  ticketStartDate: LocalDate;
   ticketExpirationDate: Nullable<number[]>;
   attendanceDays: Nullable<string[]>;
   ticketHistory: Nullable<TicketDetailData[]>;

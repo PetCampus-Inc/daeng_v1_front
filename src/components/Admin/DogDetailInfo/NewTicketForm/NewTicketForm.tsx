@@ -5,6 +5,7 @@ import { Flex } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
+import { FIELD_MAPPING } from "libs/adapters";
 import { useFormContext } from "react-hook-form";
 
 import * as S from "./styles";
@@ -16,7 +17,7 @@ interface NewTicketFormProps {
   attendanceDays: string[];
 }
 
-const NewTicketForm = ({ formData, attendanceDays }: NewTicketFormProps) => {
+export function NewTicketForm({ formData, attendanceDays }: NewTicketFormProps) {
   const { watch, setValue } = useFormContext();
 
   const selectedTicketType = watch(FIELD.TICKET_TYPE);
@@ -42,7 +43,7 @@ const NewTicketForm = ({ formData, attendanceDays }: NewTicketFormProps) => {
         <S.Label>이용권 유형</S.Label>
         <SingleRadio name={FIELD.TICKET_TYPE} radiosText={TicketTypeText} />
       </S.Card>
-      {selectedTicketType === "정기권" ? (
+      {selectedTicketType === FIELD_MAPPING["ticketType"].MONTHLY ? (
         <S.Card>
           <S.Label>정기권 유형</S.Label>
           <SingleRadio name={FIELD.MONTHLY_TICKET_NUMBER} radiosText={monthlyTicketText} />
@@ -59,6 +60,4 @@ const NewTicketForm = ({ formData, attendanceDays }: NewTicketFormProps) => {
       </S.Card>
     </Flex>
   );
-};
-
-export default NewTicketForm;
+}
