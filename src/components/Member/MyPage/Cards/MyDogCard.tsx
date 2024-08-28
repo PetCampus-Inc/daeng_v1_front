@@ -115,7 +115,7 @@ const MyDogCard = ({
 
       <S.InfoTextBox>
         <S.DogName className={isProfile ? "colorGray1" : ""}>{dogName}</S.DogName>
-        {status === DOG_STATUS.DROP_OUT ? (
+        {status === DOG_STATUS.DROP_OUT || status === DOG_STATUS.APPROVAL_CANCEL ? (
           <GotoSchoolInfoButton pr="0" onClick={openAlertPopup} />
         ) : (
           <GotoSchoolInfoButton
