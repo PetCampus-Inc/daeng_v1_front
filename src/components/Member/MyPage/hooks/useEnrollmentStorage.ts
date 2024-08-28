@@ -14,7 +14,7 @@ export interface DogEnrollment {
 
 /**
  * 마이페이지에서 가입신청 제출 시 localStorage에 enrollmentId 등 가입 신청 정보를 관리합니다.
- * @returns storageEnrollmentDatas createStorageEnrollment
+ * @returns storageEnrollmentDatas createStorageEnrollment removeStorageEnrollment
  */
 export const useEnrollmentStorage = () => {
   const setDogEnrollment = useSetLocalStorage(); // 생성
