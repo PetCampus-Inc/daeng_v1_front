@@ -2,7 +2,6 @@ import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useDeleteEnrollment } from "hooks/api/admin/enroll";
 import { usePostMemberDogEnrollment } from "hooks/api/member/member";
-import { useParams } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
@@ -14,24 +13,29 @@ interface IWaitingCardProps {
 }
 
 const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
-  const mutateMemberDogEnrollment = usePostMemberDogEnrollment();
+  const { mutateCancelEnrollment } = usePostMemberDogEnrollment();
   const { storageEnrollmentDatas, removeStorageEnrollment } = useEnrollmentStorage(); // localStorage에서 가져오는 데이터
   const { mutateDeleteEnrollment } = useDeleteEnrollment();
 
   const [year, month, day] = registeredDate && registeredDate.map(String);
   const registeredTime = formatDate(year, month, day, "dot");
 
-  const handleCancelApproval = (dogName: string) => {
+  const handleCancelApproval = async (dogName: string) => {
     const cancelDog = storageEnrollmentDatas.find((el) => el.dogName === dogName);
+
+    if (!cancelDog) return;
+
     if (cancelDog) {
-      const enrollmentFormId = String(cancelDog.enrollmentFormId);
-      mutateMemberDogEnrollment(enrollmentFormId),
-        {
-          onSuccess() {
-            mutateDeleteEnrollment(enrollmentFormId); // 승인 취소시 가입신청서 폼 아예 삭제
-            removeStorageEnrollment(enrollmentFormId); // localStorage에서도 삭제
+      try {
+        mutateCancelEnrollment(cancelDog.enrollmentFormId, {
+          onSuccess: () => {
+            mutateDeleteEnrollment(cancelDog.enrollmentFormId); // 승인 취소시 가입신청서 폼 아예 삭제
+            removeStorageEnrollment(cancelDog.enrollmentFormId); // localStorage에서도 삭제
           }
-        };
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

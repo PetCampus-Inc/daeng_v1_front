@@ -1,6 +1,10 @@
 import { STORAGE_KEY } from "constants/memebrDogStatus";
 
-import { useLocalStorageValue, useSetLocalStorage } from "hooks/common/useLocalStorage";
+import {
+  useLocalStorageValue,
+  useResetLocalStorage,
+  useSetLocalStorage
+} from "hooks/common/useLocalStorage";
 
 export interface DogEnrollment {
   enrollmentFormId: string;
@@ -16,6 +20,7 @@ export const useEnrollmentStorage = () => {
   const setDogEnrollment = useSetLocalStorage(); // 생성
   const storageEnrollmentDatas: DogEnrollment[] =
     useLocalStorageValue(STORAGE_KEY.DOG_ENROLLMENT_DATA) || []; // 데이터
+  const resetStoradEnrollmentValue = useResetLocalStorage(STORAGE_KEY.DOG_ENROLLMENT_DATA);
 
   const getTodayDate = () => {
     const today = new Date();
@@ -51,6 +56,12 @@ export const useEnrollmentStorage = () => {
     const removeEnrollmentData = storageEnrollmentDatas.filter(
       (el) => el.enrollmentFormId !== enrollmentFormId
     );
+
+    if (removeEnrollmentData.length === 0) {
+      resetStoradEnrollmentValue();
+      return;
+    }
+
     setDogEnrollment({
       key: STORAGE_KEY.DOG_ENROLLMENT_DATA,
       value: removeEnrollmentData
