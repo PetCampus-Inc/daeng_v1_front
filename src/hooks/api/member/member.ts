@@ -99,7 +99,7 @@ export const useGetMainAlbum = (req: IMainAlbum) => {
 // 견주 정보
 export const useGetMemberInfo = (memberId: string) => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_INFO(memberId),
+    queryKey: QUERY_KEY.MEMBER_INFO,
     queryFn: () => handleGetMemberInfo(memberId)
   });
 };
@@ -136,12 +136,12 @@ export const usePostMemberProfileInfo = (memberId: string) => {
 };
 
 // 견주 가입신청서 취소
-export const usePostMemberDogEnrollment = (memberId: string) => {
+export const usePostMemberDogEnrollment = () => {
   const queryClient = useQueryClient();
   const enrollMemberDogMutation = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
       console.log("성공");
     },
     onError: (err) => {
@@ -158,7 +158,7 @@ export const usePostMemberDogDelete = (memberId: string) => {
   const memberDogDeleteMutation = useMutation({
     mutationFn: (dogId: string) => handlePostMemberDogDelete(memberId, dogId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
     }
   });
 

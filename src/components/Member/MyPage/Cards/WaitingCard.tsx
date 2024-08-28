@@ -14,8 +14,7 @@ interface IWaitingCardProps {
 }
 
 const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
-  const { memberId } = useParams();
-  const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
+  const mutateMemberDogEnrollment = usePostMemberDogEnrollment();
   const { storageEnrollmentDatas, removeStorageEnrollment } = useEnrollmentStorage(); // localStorage에서 가져오는 데이터
   const { mutateDeleteEnrollment } = useDeleteEnrollment();
 

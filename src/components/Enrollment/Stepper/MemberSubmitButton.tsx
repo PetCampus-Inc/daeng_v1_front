@@ -63,7 +63,7 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
 
     mutateEnrollment(reqData, {
       onSuccess: (enrollmentFormId) => {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(String(memberId)) });
+        queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
         navigate(PATH.MEMBER_MY_PAGE(memberId));
 
         createStorageEnrollment(String(enrollmentFormId), dogName);
