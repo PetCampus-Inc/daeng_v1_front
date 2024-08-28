@@ -1,4 +1,4 @@
-import AlertSmallIcon from "assets/svg/alert-small-icon";
+import AlertFilledIcon from "assets/svg/alert-filled-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
@@ -14,6 +14,7 @@ import NewTicketBottomSheet from "../NewTicketBottomSheet";
 import SendAlarmButton from "../SendAlarmButton";
 
 import type { TicketDetailData } from "types/admin/attendance.type";
+
 interface TicketCardProps {
   dogId: number;
   data: TicketDetailData;
@@ -89,7 +90,7 @@ function getRoundTicketDetails(currentRoundTicket: number): TicketDetails {
     icon: status.isExpired ? (
       <CalendarExpireIcon w="24" h="24" />
     ) : status.isExpiringSoon ? (
-      <AlertSmallIcon color="red" w="24" h="24" />
+      <AlertFilledIcon colorScheme="red" w="24" h="24" />
     ) : (
       <RemainCountIcon w="24" h="24" />
     ),
@@ -127,7 +128,7 @@ function getMonthlyTicketDetails(ticketExpirationDate: number[] | null): TicketD
     icon: status.isExpired ? (
       <CalendarExpireIcon w="24" h="24" />
     ) : status.isExpiringSoon ? (
-      <AlertSmallIcon color="red" />
+      <AlertFilledIcon colorScheme="red" />
     ) : (
       <CalendarExpireIcon w="24" h="24" />
     ),

@@ -1,6 +1,6 @@
 import { DOG_NOTICE_LIST } from "constants/notice";
 
-import AlertSmallIcon from "assets/svg/alert-small-icon";
+import AlertFilledIcon from "assets/svg/alert-filled-icon";
 import { useGetPrecautions } from "hooks/api/admin/dogs";
 
 import * as S from "./styles";
@@ -37,7 +37,7 @@ const Notice = ({ dogId }: { dogId: number }) => {
               <S.FlexText className="re-agree">
                 {data.modifiedList?.includes(item.id) ? (
                   <>
-                    <AlertSmallIcon color="orange" /> "재동의 요청"
+                    <AlertFilledIcon colorScheme="orange" /> "재동의 요청"
                   </>
                 ) : (
                   ""

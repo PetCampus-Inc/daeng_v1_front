@@ -1,10 +1,10 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
 type Props = {
   className?: string;
   bg?: boolean;
   colorScheme?: "gray" | "yellow";
-} & IconSize;
+} & IconProps;
 
 const AgendaIcon = ({
   className = "",

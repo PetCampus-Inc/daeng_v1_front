@@ -1,5 +1,5 @@
-import AlertSmallIcon from "assets/svg/alert-small-icon";
-import PencilCircleIcon from "assets/svg/pencil-circle-icon";
+import AlertFilledIcon from "assets/svg/alert-filled-icon";
+import PencilFilledIcon from "assets/svg/pencil-filled-icon";
 import PoopBox from "components/common/PoopBox";
 
 import * as S from "./styles";
@@ -27,7 +27,11 @@ const DailyNotice = ({ data }: DailyNoticeProps) => {
     return (
       <S.NoNoticeContainer>
         <S.TextIconContainer>
-          {data?.status === "WRITING" ? <PencilCircleIcon /> : <AlertSmallIcon color="darkgray" />}
+          {data?.status === "WRITING" ? (
+            <PencilFilledIcon />
+          ) : (
+            <AlertFilledIcon colorScheme="darkgray" />
+          )}
           <span>{statusText(data?.status)}</span>
         </S.TextIconContainer>
       </S.NoNoticeContainer>

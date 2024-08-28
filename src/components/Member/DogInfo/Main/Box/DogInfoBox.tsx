@@ -3,8 +3,8 @@ import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 import { PATH } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
-import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
+import DogCardIcon from "assets/svg/dog-card-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import { Flex } from "components/common";
 import { useNavigate } from "react-router-dom";
@@ -68,7 +68,7 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
             />
 
             <InfoText icon={<CalendarIcon />} text={DOG_BIRETH} />
-            <InfoText icon={<BreedIcon />} text={data.breedName} />
+            <InfoText icon={<DogCardIcon />} text={data.breedName} />
           </Flex>
         </S.TextWrapper>
       </S.DogInfoBox>

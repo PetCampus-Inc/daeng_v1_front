@@ -1,4 +1,4 @@
-import NewTicketForm from "components/Admin/DogDetailInfo/NewTicketForm";
+import { NewTicketForm } from "components/Admin/DogDetailInfo/NewTicketForm";
 import SubmitButton from "components/Admin/DogDetailInfo/NewTicketForm/SubmitButton";
 import { Layout } from "components/common";
 import Header from "components/common/Header";

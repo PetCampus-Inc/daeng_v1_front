@@ -1,10 +1,10 @@
-import { IconSize } from "./types";
+import { IconProps } from "./types";
 
-export type IconProps = {
+export type Props = {
   borderStyle?: string;
-} & IconSize;
+} & IconProps;
 
-const CareDogIcon = ({ borderStyle = "", w = "40", h = "40" }: IconProps) => {
+const CareDogIcon = ({ borderStyle = "", w = "40", h = "40" }: Props) => {
   return (
     <svg
       width={w}

@@ -1,8 +1,8 @@
 import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 
 import BoyIcon from "assets/svg/boy-icon";
-import BreedIcon from "assets/svg/breed-icon";
 import CalendarIcon from "assets/svg/calendar";
+import DogCardIcon from "assets/svg/dog-card-icon";
 import Badge from "components/common/Badge";
 import { XSmallButton } from "components/common/Button/Templates";
 import { differenceInMonths, format } from "date-fns";
@@ -58,7 +58,7 @@ const AboutDog = ({ data }: AboutDogProps) => {
               {ITEM_ENGLISH_TO_KOREAN[dogGender]}
             </S.IconWrapper>
             <S.IconWrapper>
-              <BreedIcon />
+              <DogCardIcon />
               {breedName}
             </S.IconWrapper>
           </S.InfoIcons>

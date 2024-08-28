@@ -1,6 +1,6 @@
 import { PATH } from "constants/path";
 
-import AlertSmallIcon from "assets/svg/alert-small-icon";
+import AlertFilledIcon from "assets/svg/alert-filled-icon";
 import CalendarIcon from "assets/svg/calendar";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useMemo } from "react";
@@ -53,8 +53,9 @@ export function DogCard({ info }: { info: Attendance }) {
         </S.DogName>
         <S.Info $status={getStatusStyle(ticketStatus)}>
           <S.Icon>
-            {ticketStatus.isExpiringSoon && <AlertSmallIcon color="brown" />}
-            {ticketStatus.isExpired && <AlertSmallIcon color="gray" />}
+            colorScheme
+            {ticketStatus.isExpiringSoon && <AlertFilledIcon colorScheme="brown" />}
+            {ticketStatus.isExpired && <AlertFilledIcon colorScheme="gray" />}
             {ticketStatus.isValid && <CalendarIcon className="calendar-icon" />}
           </S.Icon>
           <span>{ticketStatusText}</span>
