@@ -13,18 +13,14 @@ import { useCallback, useEffect, useState } from "react";
 
 import { useDeleteEnrollment, useGetEnrollmentStatus } from "../../../../hooks/api/admin/enroll";
 
-// FIXME 삭제가 성공했음에도 불구하고 한 번 더 호출 되는 이슈
-
 /**
  * 강아지 추가 승인 거부할 경우 상태 관리를 관리합니다.
  * @returns
  */
 
-// 강아지 추가 승인 거부할 경우 상태 관리
 export const useDogRejected = () => {
   const [dogs, setDogs] = useState<DogEnrollment[] | null>([]);
   const [initialVisit, setInitialVisit] = useState(false);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isDeleteSuccessful, setIsDeleteSuccessful] = useState(false);
   const setStoredValue = useSetLocalStorage();
   const resetStoradVisitPathIdValue = useResetLocalStorage(STORAGE_KEY.VISIT_MYPAGE);
@@ -65,10 +61,9 @@ export const useDogRejected = () => {
 
   // ApprovalDenied 강아지 삭제 & localStorage에 데이터 업데이트
   const removeApprovalDeniedDog = useCallback(async () => {
+    console.log(!approvalDeniedDogs, approvalDeniedDogs.length === 0, isDeleteSuccessful);
     if (
-      storageEnrollmentDatas.length <= 0 ||
-      !approvalDeniedDogs ||
-      approvalDeniedDogs.length <= 0 ||
+      (storageEnrollmentDatas.length === 0 || approvalDeniedDogs.length === 0) &&
       isDeleteSuccessful
     ) {
       return;
@@ -79,9 +74,9 @@ export const useDogRejected = () => {
     );
 
     try {
-      // 삭제된 강아지 여러 마리 일 수 있어 병렬적으로 처리
       await Promise.all(deleteApprovalDeniedDogs);
-      // 삭제한 강아지를 제외한 데이터
+
+      // 삭제할 강아지를 제외한 데이터
       const updateEnrollmentDatas =
         storageEnrollmentDatas.filter(
           (localDog) =>
@@ -90,27 +85,28 @@ export const useDogRejected = () => {
             )
         ) || [];
 
+      saveStorageData(STORAGE_KEY.DOG_ENROLLMENT_DATA, [...updateEnrollmentDatas]);
       updateDogs(updateEnrollmentDatas); // data update
       resetStoradVisitPathIdValue(); // mypage path 초기화
-      setIsDeleteSuccessful(true);
-      console.log("에러 그만 생겨라 그리고 중복 호출 멈춰!");
+      setIsDeleteSuccessful(true); // isDeleteSuccessful 초기화
     } catch (error) {
       console.error(error);
+      return;
     }
   }, [
     isDeleteSuccessful,
     approvalDeniedDogs,
+    storageEnrollmentDatas,
     mutateDeleteEnrollment,
     resetStoradVisitPathIdValue,
     updateDogs
   ]);
 
   useEffect(() => {
-    if (!isDataLoaded && storageEnrollmentDatas?.length > 0) {
+    if (storageEnrollmentDatas?.length > 0) {
       setDogs(storageEnrollmentDatas);
-      setIsDataLoaded(true); // useEffect 무한 로딩 방지 되도록
     }
-  }, [isDataLoaded, storageEnrollmentDatas]);
+  }, [storageEnrollmentDatas]);
 
   return {
     VISIT_MYPAGE,
@@ -120,6 +116,7 @@ export const useDogRejected = () => {
     resetStoradVisitPathIdValue,
     removeApprovalDeniedDog,
     initialVisit,
+    isDeleteSuccessful,
     setInitialVisit
   };
 };

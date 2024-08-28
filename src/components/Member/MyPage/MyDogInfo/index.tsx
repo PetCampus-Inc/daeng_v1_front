@@ -3,7 +3,7 @@ import { DOG_STATUS, STORAGE_KEY } from "constants/memebrDogStatus";
 import { DragCarousel } from "components/common/Carousel/DragCarousel ";
 import useDogRejected from "components/Member/MyPage/hooks/useDogRejected";
 import { useToggle } from "hooks/common/useToggle";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { IEnrollmentStatus } from "types/member/enrollment.types";
 import { IDoglist, IMemberInfo } from "types/member/main.types";
 
@@ -20,13 +20,16 @@ interface MemberInfoProps {
 const MyDogInfo = ({ data }: MemberInfoProps) => {
   const { isOpen, toggle } = useToggle();
   const { doglist } = data;
+  const dogDeniedStatus = doglist.filter((el) => el.status === DOG_STATUS.APPROVAL_DENIED);
+  const approvalDeniedDogSettingCalled = useRef(false); // 함수 호출 추적
+
   const {
     VISIT_MYPAGE,
     saveStorageData,
-    approvalDeniedDogs,
     resetStoradVisitPathIdValue,
     removeApprovalDeniedDog,
     initialVisit,
+    isDeleteSuccessful,
     setInitialVisit
   } = useDogRejected();
 
@@ -48,9 +51,9 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     <WaitingCard key={dog.dogName} dogName={dog.dogName} registeredDate={dog.registeredDate} />
   );
 
-  const renderRejectedCard = (dog: IEnrollmentStatus) => (
+  const renderRejectedCard = (dog: IEnrollmentStatus | IDoglist) => (
     <RejectedCard
-      key={dog.enrollmentFormId}
+      key={dog.dogName}
       dogName={dog.dogName}
       registeredDate={dog.registeredDate.map(Number)}
     />
@@ -58,26 +61,31 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
   const approvalDeniedDogSetting = useCallback(async () => {
     // 이미 데이터가 삭제된 경우 함수 호출 방지
-    if (approvalDeniedDogs.length <= 0) return;
+    if (approvalDeniedDogSettingCalled.current) return;
 
-    if (approvalDeniedDogs.length > 0 && !VISIT_MYPAGE) {
+    if (dogDeniedStatus.length <= 0 || isDeleteSuccessful) return;
+
+    if (dogDeniedStatus.length > 0 && !VISIT_MYPAGE) {
       saveStorageData(STORAGE_KEY.VISIT_MYPAGE, true);
       setInitialVisit(true);
       return;
+    } else {
+      approvalDeniedDogSettingCalled.current = true;
+      return await removeApprovalDeniedDog();
     }
-    return await removeApprovalDeniedDog();
-  }, [VISIT_MYPAGE, approvalDeniedDogs, removeApprovalDeniedDog, saveStorageData]);
+  }, [VISIT_MYPAGE, dogDeniedStatus.length, isDeleteSuccessful]);
 
   useEffect(() => {
-    if (approvalDeniedDogs.length <= 0) {
+    if (dogDeniedStatus.length <= 0) {
       resetStoradVisitPathIdValue();
       return;
     }
-    if (approvalDeniedDogs.length > 0 && !initialVisit) {
+
+    if (dogDeniedStatus.length > 0 && !initialVisit) {
       // 첫 방문시 mypage path localStorage에 저장
       approvalDeniedDogSetting();
     }
-  }, [approvalDeniedDogs, approvalDeniedDogSetting, initialVisit]);
+  }, [dogDeniedStatus, initialVisit]);
 
   return (
     <S.DogInfoContainer>
@@ -103,7 +111,8 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
             {doglist.map(
               (dog) => dog.status === DOG_STATUS.APPROVAL_PENDING && renderWaitingCard(dog)
             )}
-            {approvalDeniedDogs.map(
+
+            {doglist.map(
               (dog) => dog.status === DOG_STATUS.APPROVAL_DENIED && renderRejectedCard(dog)
             )}
             <AddMyDogCard />
