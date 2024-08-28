@@ -1,7 +1,11 @@
 import { PATH } from "constants/path";
 
 import { useMutation } from "@tanstack/react-query";
-import { handleOwnerProfileEdit, handlePostSchoolResigned } from "apis/admin/mypage.api";
+import {
+  handleDeleteTeacher,
+  handleOwnerProfileEdit,
+  handlePostSchoolResigned
+} from "apis/admin/mypage.api";
 import { useNavigate } from "react-router-dom";
 import { IOwnerProfileEdit } from "types/admin/admin.types";
 import showToast from "utils/showToast";
@@ -27,4 +31,13 @@ export const useSchoolResigned = () => {
   });
 
   return { mutateSchoolResigned: mutate };
+};
+
+//선생님 탈퇴
+export const useDeleteTeacher = () => {
+  const { mutate } = useMutation({
+    mutationFn: handleDeleteTeacher
+  });
+
+  return { mutateDeleteTeacher: mutate };
 };
