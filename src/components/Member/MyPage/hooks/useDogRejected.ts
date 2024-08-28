@@ -61,7 +61,6 @@ export const useDogRejected = () => {
 
   // ApprovalDenied 강아지 삭제 & localStorage에 데이터 업데이트
   const removeApprovalDeniedDog = useCallback(async () => {
-    console.log(!approvalDeniedDogs, approvalDeniedDogs.length === 0, isDeleteSuccessful);
     if (
       (storageEnrollmentDatas.length === 0 || approvalDeniedDogs.length === 0) &&
       isDeleteSuccessful
@@ -111,8 +110,6 @@ export const useDogRejected = () => {
   return {
     VISIT_MYPAGE,
     saveStorageData,
-    STORAGE_KEY,
-    approvalDeniedDogs,
     resetStoradVisitPathIdValue,
     removeApprovalDeniedDog,
     initialVisit,
