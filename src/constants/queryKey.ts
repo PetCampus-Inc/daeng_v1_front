@@ -6,17 +6,9 @@ const ADMIN_QUERY_KEY = {
   TEACHER_LIST: ["teacherList"], // 선생님 리스트 조회
 
   ATTEND_LIST: ["attendDogList"], // 출석안한 강아지 리스트
-  ATTEND_LIST_SEARCH: (schoolId: number, searchText?: string) => [
-    "attendDogList",
-    schoolId,
-    searchText
-  ],
+  ATTEND_LIST_SEARCH: (searchText?: string) => ["attendDogList", searchText],
   ATTENDANCE_LIST: ["dogList"], // 출석부 강아지 리스트
-  ATTENDANCE_LIST_SEARCH: (schoolId: number, searchText?: string) => [
-    "dogList",
-    schoolId,
-    searchText
-  ], // 출석부 강아지 리스트 with 유치원아이디 and 검색어
+  ATTENDANCE_LIST_SEARCH: (searchText?: string) => ["dogList", searchText], // 출석부 강아지 리스트
   ATTENDANCE_LIST_SORTNAME: (sortName: string) => ["dogList", sortName],
   ATTENDANCE_DOG_TICKET: (dogId: number) => ["dogTicket", dogId], // 출석부 강아지 상세 이용권 정보
 
@@ -40,7 +32,7 @@ const MEMBER_QUERY_KEY = {
   MEMBER_SCHOOL_INFO: (dogId: string) => ["memberSchoolInfo", dogId], // 유치원 정보
   MEMBER_INFO: ["memberInfo"], // 견주 정보 데이터
   MEMBER_MAIN_DOG_INFO: (memberId: string) => ["memberMainDogInfo", memberId], // 견주의 강아지 리스트
-  MEMBER_PROFILE_INFO: (memberId: string) => ["memberProfileInfo", memberId], // 견주의 상제 정보 데이터
+  MEMBER_PROFILE_INFO: ["memberProfileInfo"], // 견주의 상제 정보 데이터
   MEMBER_PHONE_NUMBER: (dogId: number) => ["phoneNumber", dogId], // 견주 전화번호
   MEMBER_AGREEMENT_INFO: (agreementId: number) => ["memberAgreementInfo", agreementId], // 유의사항 동의 정보
   MEMBER_PROFILE: (memberId: number) => ["memberProfile", memberId], // 프로필 설정

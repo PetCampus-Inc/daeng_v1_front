@@ -1,21 +1,24 @@
-import { LIST, type TSortOptionList } from "constants/option";
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery
+} from "@tanstack/react-query";
 import {
   handleCallMember,
   handleDeleteDog,
   handleGetAttendDogs,
   handleGetAttendSearchDogs,
-  handleGetDogDetail,
-  handleGetDogInfoRecord,
   handleGetSearchDogs,
   handlePostAttend,
   handleSortCharge,
   handleSortDate,
   handleSortPayment
 } from "apis/admin/attendance.api";
-import { format } from "date-fns";
+import { SORT_OPTIONS, type SortOptions } from "components/Admin/Attendance";
 import showToast from "utils/showToast";
 
 export const useGetAttendDogList = (schoolId: number) => {
@@ -27,7 +30,7 @@ export const useGetAttendDogList = (schoolId: number) => {
 
 export const useAttendDogSearchQuery = (schoolId: number, searchText?: string) => {
   return useQuery({
-    queryKey: QUERY_KEY.ATTEND_LIST_SEARCH(schoolId, searchText),
+    queryKey: QUERY_KEY.ATTEND_LIST_SEARCH(searchText),
     queryFn: () => handleGetAttendSearchDogs(schoolId, searchText),
     enabled: !!searchText
   });
@@ -35,21 +38,22 @@ export const useAttendDogSearchQuery = (schoolId: number, searchText?: string) =
 
 export const useDogSearchQuery = (schoolId: number, searchText?: string) => {
   return useQuery({
-    queryKey: QUERY_KEY.ATTENDANCE_LIST_SEARCH(schoolId, searchText),
+    queryKey: QUERY_KEY.ATTENDANCE_LIST_SEARCH(searchText),
     queryFn: () => handleGetSearchDogs(schoolId, searchText),
     enabled: !!searchText
   });
 };
 
-export const useCreateAttendDog = () => {
+export const usePostAttendDog = () => {
   const queryClient = useQueryClient();
-  const attendDogMutation = useMutation({
+  const { mutate } = useMutation({
     mutationFn: handlePostAttend,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.ATTENDANCE_LIST });
+      queryClient.removeQueries({ queryKey: QUERY_KEY.ATTEND_LIST }); // 출석안한 강아지 리스트 캐시 삭제
     }
   });
-  return { mutateAttend: attendDogMutation.mutate };
+  return { mutateAttend: mutate };
 };
 
 export const useDeleteAttendDog = () => {
@@ -72,58 +76,42 @@ export const useCallMember = (dogId: number) => {
   });
 };
 
-interface Props {
-  sortName: TSortOptionList;
+/**
+ * 출석부 - 메인 조회
+ */
+export const useDogListAndSortedList = ({
+  sortName,
+  schoolId,
+  adminId
+}: {
+  sortName: SortOptions;
   schoolId: number;
   adminId: number;
-}
+}) => {
+  const fetchSortedDogs = async () => {
+    switch (sortName) {
+      case SORT_OPTIONS.REGISTERED:
+        return await handleGetSearchDogs(schoolId);
+      case SORT_OPTIONS.PAYMENT:
+        return await handleSortPayment(schoolId);
+      case SORT_OPTIONS.DATE:
+        return await handleSortDate(schoolId);
+      case SORT_OPTIONS.CHARGE:
+        return await handleSortCharge(schoolId, adminId);
+      default:
+        return await handleGetSearchDogs(schoolId);
+    }
+  };
 
-const fetchSortedDogs = async ({ sortName, schoolId, adminId }: Props) => {
-  switch (sortName) {
-    case LIST.REGISTERED:
-      return await handleGetSearchDogs(schoolId);
-    case LIST.PAYMENT:
-      return await handleSortPayment(schoolId);
-    case LIST.DATE:
-      return await handleSortDate(schoolId);
-    case LIST.CHARGE:
-      return await handleSortCharge(schoolId, adminId);
-    default:
-      return await handleGetSearchDogs(schoolId);
-  }
-};
-
-export const useDogListAndSortedList = ({ sortName, schoolId, adminId }: Props) => {
-  return useSuspenseQuery({
-    queryKey: QUERY_KEY.ATTENDANCE_LIST_SORTNAME(sortName),
-    queryFn: () => fetchSortedDogs({ sortName, schoolId, adminId }),
+  return useQuery({
+    queryKey: [QUERY_KEY.ATTENDANCE_LIST_SORTNAME, sortName, schoolId, adminId],
+    queryFn: fetchSortedDogs,
+    /**
+     * keepPreviousData를 사용하여 이전 데이터를 유지
+     * @see {@link https://tanstack.com/query/latest/docs/framework/react/guides/migrating-to-v5#removed-keeppreviousdata-in-favor-of-placeholderdata-identity-function}
+     */
+    placeholderData: keepPreviousData,
     gcTime: 5 * 60 * 1000,
     staleTime: 1 * 60 * 1000
-  });
-};
-
-// 강아지 상세 - 강아지 정보 조회
-export const useGetDogDetail = (dogId: number) => {
-  return useSuspenseQuery({
-    queryKey: ["dogDetail", dogId],
-    queryFn: () => handleGetDogDetail(dogId),
-    staleTime: 1000 * 60 * 60,
-    select: (data) => {
-      const { member, ...dogInfo } = data;
-      return {
-        dogInfo,
-        memberInfo: member
-      };
-    }
-  });
-};
-
-// 강아지 상세 - 등원기록 조회
-export const useGetDogInfoRecord = (dogId: number, date?: string) => {
-  return useSuspenseQuery({
-    queryKey: ["dogInfoRecord", dogId, date],
-    queryFn: () => handleGetDogInfoRecord(dogId, date),
-    select: (data) => data.map((item) => format(item.date.join("-"), "yyyy-MM-dd")),
-    staleTime: 1000 * 60 * 60
   });
 };

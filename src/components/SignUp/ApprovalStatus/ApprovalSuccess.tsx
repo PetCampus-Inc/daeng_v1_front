@@ -1,22 +1,25 @@
+import { PATH } from "constants/path";
+
+import DogApprovalBgIcon from "assets/svg/dog-approval-bg-icon";
+import { Box, Button, Text } from "components/common";
 import { useNavigate } from "react-router-dom";
+import { UserType } from "types/common/approval.types";
 
 import { StyledImgWrapper } from "./styles";
-import DogApprovalBgIcon from "../../../assets/svg/dog-approval-bg-icon";
-import { PATH } from "../../../constants/path";
-import { Box, Text } from "../../common";
-import Button from "../button/Button";
 
 interface ApprovalSuccessProps {
+  type?: UserType;
   schoolName?: string;
 }
 
-const ApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
+export default function ApprovalSuccess({ type, schoolName }: ApprovalSuccessProps) {
   const navigate = useNavigate();
 
   const handleConfirm = () => {
-    // MEMO: 출석 페이지로 이동 (교사홈)
-    navigate(PATH.ADMIN_ATTENDANCE);
+    if (type === "admin") navigate(PATH.ADMIN_ATTENDANCE, { replace: true });
+    else if (type === "member") navigate(PATH.ROOT, { replace: true });
   };
+
   return (
     <>
       <Text as="h2" typo="title1_24_B" color="darkBlack">
@@ -32,10 +35,10 @@ const ApprovalSuccess = ({ schoolName }: ApprovalSuccessProps) => {
       </StyledImgWrapper>
 
       <Box position="absolute" left={16} right={16} bottom={24}>
-        <Button handleClick={handleConfirm}>시작</Button>
+        <Button onClick={handleConfirm} width="full">
+          시작
+        </Button>
       </Box>
     </>
   );
-};
-
-export default ApprovalSuccess;
+}

@@ -10,7 +10,7 @@ import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
 
 const PrincipalMyPage = () => {
   const { adminId } = useAdminInfo();
@@ -33,8 +33,8 @@ const PrincipalMyPage = () => {
           <PageContainer
             pt="7"
             imageUrl={
-              data && data.imageUrl
-                ? data.imageUrl
+              data && data.profileUri
+                ? data.profileUri
                 : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }
           >
@@ -44,11 +44,10 @@ const PrincipalMyPage = () => {
                 <PrincipalProfile data={data} setIsEditing={setIsEditing} isEditing={isEditing} />
               )}
               <CardContainer>
-                <InfoCard data={data} role={Role.ROLE_OWNER} />
+                <InfoCard data={data} role={AdminRole.ROLE_OWNER} />
               </CardContainer>
             </ContentContainer>
           </PageContainer>
-
           <LogOutButton />
 
           <AdminNavBar />

@@ -5,6 +5,7 @@ import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
+import { WideButton } from "components/common/Button";
 import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogSchool } from "hooks/api/member/school";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -25,8 +26,9 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
   const navigate = useNavigate();
   const overlay = useOverlay();
   const mutateMemberDogSchoolDelete = usePostMemberDogSchool(String(dogId));
-  const registeredDate = data.registeredDate.map((el) => String(el));
-  const registeredTime = formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
+  const registeredDate = data.registeredDate?.map((el) => String(el));
+  const registeredTime =
+    registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const schoolCallInfo = {
     schoolName: data.schoolName,
     schoolNumber: data.schoolNumber
@@ -138,18 +140,17 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
           <S.ListTitle>{registeredTime} 등록</S.ListTitle>
         </S.InfoList>
       </S.InfoContainer>
-      <S.DisconnectButton
-        buttonBackgroundColor="gray_4"
-        backgroundColor="white"
+      <WideButton
+        mt={8}
+        colorScheme="gray_4"
         onClick={
           tickeyRemainingDays > 0 || data.ticket.currentRoundTicket > 0
             ? openAlertPopup
             : openDisconnectPopup
         }
-        className="disconnect"
       >
         유치원 연결 끊기
-      </S.DisconnectButton>
+      </WideButton>
     </S.CardContainer>
   );
 };

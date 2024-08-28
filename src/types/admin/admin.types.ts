@@ -1,15 +1,6 @@
-import type { Nullable } from "../helper.types";
+import { Role } from "types/common/role.types";
 
-export enum Role {
-  APPROVAL_CANCEL = "APPROVAL_CANCEL",
-  APPROVAL_DENIED = "APPROVAL_DENIED",
-  APPROVAL_PENDING = "APPROVAL_PENDING",
-  ROLE_ANONYMOUS = "ROLE_ANONYMOUS",
-  ROLE_MEMBER = "ROLE_MEMBER",
-  ROLE_OWNER = "ROLE_OWNER",
-  ROLE_TEACHER = "ROLE_TEACHER",
-  WITHDRAWN = "WITHDRAWN"
-}
+import type { Nullable } from "../helper.types";
 
 export type AdminAuthType = {
   adminId: number;
@@ -54,4 +45,11 @@ export interface AdminLoginInfo {
   inputId: string;
   inputPw: string;
   fcmToken: string;
+}
+
+export interface IOwnerProfileEdit {
+  imageUrl: string;
+  adminId: number;
+  adminName: string;
+  phoneNumber: string;
 }

@@ -1,7 +1,10 @@
-const PhoneIcon = () => {
+import { IconProps } from "assets/svg/types";
+import { themeConfig } from "styles/themeConfig";
+
+const PhoneIcon = ({ w = 20, h = 20, color = "yellow_3" }: IconProps) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
-      <rect width="20" height="20" fill="#FFF7E1" rx="8" />
+    <svg xmlns="http://www.w3.org/2000/svg" width={w} height={h} fill="none" viewBox="0 0 20 20">
+      <rect width="20" height="20" fill={themeConfig.colors[color]} rx="8" />
       <path
         fill="#E4CAB1"
         fillRule="evenodd"

@@ -7,6 +7,7 @@ import {
 } from "constants/field";
 
 import { NewTicketData, TicketDetailData } from "types/admin/attendance.type";
+import { padToTwoDigits } from "utils/date";
 import { getLabelForValue } from "utils/formatter";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
@@ -287,20 +288,22 @@ export class TicketDetailFormAdapter extends BaseAdapter<
     monthlyTicketNumber: string;
     roundTicketNumber: string;
     attendanceDays: string[];
-    year: number;
-    month: number;
-    day: number;
+    year: string;
+    month: string;
+    day: string;
   }
 > {
   adapt() {
+    const currentDate = new Date();
+
     return {
       ticketType: this.getFieldLabel(FIELD.TICKET_TYPE),
       monthlyTicketNumber: this.value[FIELD.MONTHLY_TICKET_NUMBER] + "주",
       roundTicketNumber: this.value.allRoundTicket + "회",
       attendanceDays: this.value[FIELD.ATTENDANCE_DAYS] ?? [],
-      year: new Date().getFullYear(),
-      month: new Date().getMonth() + 1,
-      day: new Date().getDate()
+      year: currentDate.getFullYear().toString(),
+      month: padToTwoDigits(currentDate.getMonth() + 1),
+      day: padToTwoDigits(currentDate.getDate())
     };
   }
 }

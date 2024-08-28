@@ -1,9 +1,18 @@
+import { UserType } from "types/common/approval.types";
+import { Role } from "types/common/role.types";
+import { ApprovalStatus } from "types/common/status.types";
 import { MessageType, NativeMessage } from "types/native/message.types";
-
-import { Role } from "../types/admin/admin.types";
 
 export function isAdmin(role: unknown): role is Role {
   return role === Role.ROLE_TEACHER || role === Role.ROLE_OWNER;
+}
+
+export function isApproval(status: string): status is ApprovalStatus {
+  return Object.values(ApprovalStatus).includes(status as ApprovalStatus);
+}
+
+export function isUserType(value: string): value is UserType {
+  return value === "admin" || value === "member";
 }
 
 export function isNumber(value: unknown): value is number {

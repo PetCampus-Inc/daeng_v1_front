@@ -10,7 +10,7 @@ import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
 
 const TeacherMyPage = () => {
   const { adminId } = useAdminInfo();
@@ -33,7 +33,9 @@ const TeacherMyPage = () => {
           <PageContainer
             pt="7"
             imageUrl={
-              "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              data && data.profileUri
+                ? data.profileUri
+                : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }
           >
             {/* TODO: data.imageURL 없는 경우 기본 이미지 url로 연결 */}
@@ -42,7 +44,7 @@ const TeacherMyPage = () => {
                 <TeacherProfile data={data} setIsEditing={setIsEditing} isEditing={isEditing} />
               )}
               <CardContainer>
-                <InfoCard data={data} role={Role.ROLE_TEACHER} />
+                <InfoCard data={data} role={AdminRole.ROLE_TEACHER} />
               </CardContainer>
             </ContentContainer>
           </PageContainer>

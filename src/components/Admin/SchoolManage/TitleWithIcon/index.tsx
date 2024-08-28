@@ -1,5 +1,4 @@
-import { IconWrapper } from "components/Admin/DogDetailInfo/DogInfo/styles";
-import { Box } from "components/common";
+import { Box, Flex } from "components/common";
 import { Title } from "components/Enrollment/styles";
 import { ReactNode } from "react";
 
@@ -15,7 +14,9 @@ const TitleWithIcon = ({ title, icon, handleClick, children }: ITitleWithIcon) =
     <Box display="flex" align="center" justify="space-between" mb={12} width="full">
       {children}
       <Title>{title}</Title>
-      <IconWrapper onClick={handleClick}>{icon}</IconWrapper>
+      <Flex align={"center"} gap={4} onClick={handleClick}>
+        {icon}
+      </Flex>
     </Box>
   );
 };

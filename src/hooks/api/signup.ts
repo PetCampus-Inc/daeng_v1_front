@@ -18,7 +18,7 @@ export const useTeacherSinUp = () => {
 };
 
 // 선생님 회원가입 요청 취소
-export const useTeacherSinUpCancel = () => {
+export const useTeacherSignUpCancel = () => {
   const { mutate } = useMutation({
     mutationFn: postTeacherSignUpCancel
   });

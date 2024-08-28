@@ -1,18 +1,23 @@
+import { PATH } from "constants/path";
+
+import DogRejectedBgIcon from "assets/svg/dog-rejected-bg-icon";
+import { Box, Flex, Text, Button } from "components/common";
+import { useNavigate } from "react-router-dom";
+import { UserType } from "types/common/approval.types";
+
 import { StyledImgWrapper } from "./styles";
-import DogRejectedBgIcon from "../../../assets/svg/dog-rejected-bg-icon";
-import { Box, Flex, Text } from "../../common";
-import Button from "../button/Button";
 
 interface ApprovalFailedProps {
+  type?: UserType;
   schoolName?: string;
-  onNextStep?: () => void;
 }
 
-const ApprovalFailed = ({ schoolName, onNextStep }: ApprovalFailedProps) => {
+export default function ApprovalFailed({ type, schoolName }: ApprovalFailedProps) {
+  const navigate = useNavigate();
+
   const handleConfirm = () => {
-    // MEMO: 유치원 검색 화면으로 이동
-    // TODO: 폼 초기화하기
-    onNextStep?.();
+    if (type === "admin") navigate(PATH.ADMIN_SIGNUP, { replace: true });
+    if (type === "member") navigate(PATH.SIGNUP, { replace: true });
   };
 
   return (
@@ -35,10 +40,10 @@ const ApprovalFailed = ({ schoolName, onNextStep }: ApprovalFailedProps) => {
       </StyledImgWrapper>
 
       <Box position="absolute" left={16} right={16} bottom={24}>
-        <Button handleClick={handleConfirm}>확인</Button>
+        <Button onClick={handleConfirm} width="full">
+          확인
+        </Button>
       </Box>
     </>
   );
-};
-
-export default ApprovalFailed;
+}

@@ -4,8 +4,8 @@ import DeleteAccount from "components/Admin/MyPage/DeleteAccount";
 import PolicySetting from "components/Admin/MyPage/PolicySetting";
 import { Box, Flex, Layout, Text } from "components/common";
 import { Button } from "components/common/Button";
-import { XSmallButton } from "components/common/Button/Templates";
 import Header from "components/common/Header";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import useStep from "hooks/common/useStep";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,9 @@ import { useNavigate } from "react-router-dom";
 const AdminSettingPage = () => {
   const navigate = useNavigate();
   const { currentStep, setStep } = useStep(3);
-  const [isNeedUpdate, setIsNeedUpdate] = useState(true);
+  //FIXME: 업데이트 유무 리팩토링 필요!
+  const [isNeedUpdate, setIsNeedUpdate] = useState(false);
+  const { role } = useAdminInfo();
 
   return (
     <>
@@ -91,9 +93,9 @@ const AdminSettingPage = () => {
           </Layout>
         </>
       )}
-      {currentStep === 1 && <AlertSetting setStep={setStep} />}
+      {currentStep === 1 && <AlertSetting setStep={setStep} role={role} />}
       {currentStep === 2 && <PolicySetting setStep={setStep} />}
-      {currentStep === 3 && <DeleteAccount setStep={setStep} />}
+      {currentStep === 3 && <DeleteAccount setStep={setStep} role={role} />}
     </>
   );
 };

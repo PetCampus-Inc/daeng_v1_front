@@ -1,11 +1,10 @@
-import { format } from "date-fns";
 import authAxios from "libs/AuthAxios";
 import { request } from "libs/AuthAxios/request";
 
 import type {
-  AttendData,
+  Attend,
   AttendReq,
-  AttendanceData,
+  Attendance,
   DogInfoAgendaData,
   DogInfoDetailData,
   DogInfoRecordData,
@@ -18,7 +17,7 @@ import type {
 
 export const handleGetSearchDogs = async (schoolId: number, searchText?: string) => {
   const url = `admin/attendance/dog/search`;
-  const { data } = await request<AttendanceData[]>({
+  const { data } = await request<Attendance[]>({
     url,
     params: {
       schoolId,
@@ -29,24 +28,24 @@ export const handleGetSearchDogs = async (schoolId: number, searchText?: string)
   return data;
 };
 
-export const handleSortPayment = async (schoolId: number): Promise<AttendanceData[]> => {
+export const handleSortPayment = async (schoolId: number): Promise<Attendance[]> => {
   const url = `admin/attendance/dog/sort/payment?schoolId=${schoolId}`;
-  const { data } = await request<AttendanceData[]>({ url });
+  const { data } = await request<Attendance[]>({ url });
   return data;
 };
 
 export const handleSortCharge = async (
   schoolId: number,
   adminId: number
-): Promise<AttendanceData[]> => {
+): Promise<Attendance[]> => {
   const url = `admin/attendance/dog/sort/charge?schoolId=${schoolId}&adminId=${adminId}`;
-  const { data } = await request<AttendanceData[]>({ url });
+  const { data } = await request<Attendance[]>({ url });
   return data;
 };
 
-export const handleSortDate = async (schoolId: number): Promise<AttendanceData[]> => {
+export const handleSortDate = async (schoolId: number): Promise<Attendance[]> => {
   const url = `admin/attendance/dog/sort/date?schoolId=${schoolId}`;
-  const { data } = await request<AttendanceData[]>({ url });
+  const { data } = await request<Attendance[]>({ url });
   return data;
 };
 
@@ -57,9 +56,9 @@ export const handleCallMember = async (dogId: number): Promise<IMemberCallInfo> 
 };
 
 // TODO: API 인터페이스 변경될 예정
-export const handleSendAlarm = async (dogId: number): Promise<AttendanceData[]> => {
+export const handleSendAlarm = async (dogId: number): Promise<Attendance[]> => {
   const url = `admin/attendance/send/alarm/${dogId}`;
-  const { data } = await request<AttendanceData[]>({ url });
+  const { data } = await request<Attendance[]>({ url });
   return data;
 };
 
@@ -75,9 +74,9 @@ export const handleDeleteDog = async (dogId: number) => {
  * @description 출석 기능 조회 - 해당 유치원내 출석안한 강아지들만 반환합니다.
  * @param {number} schoolId
  */
-export const handleGetAttendDogs = async (schoolId: number): Promise<AttendData[]> => {
+export const handleGetAttendDogs = async (schoolId: number): Promise<Attend[]> => {
   const url = `admin/attendance/attend?schoolId=${schoolId}`;
-  const { data } = await request<AttendData[]>({ url });
+  const { data } = await request<Attend[]>({ url });
   return data;
 };
 
@@ -89,11 +88,11 @@ export const handleGetAttendDogs = async (schoolId: number): Promise<AttendData[
 export const handleGetAttendSearchDogs = async (
   schoolId: number,
   searchText?: string
-): Promise<AttendData[]> => {
+): Promise<Attend[]> => {
   const url = `admin/attendance/attend/search?schoolId=${schoolId}&searchText=${
     searchText && searchText
   }`;
-  const { data } = await request<AttendData[]>({ url });
+  const { data } = await request<Attend[]>({ url });
   return data;
 };
 
@@ -124,40 +123,50 @@ export const handleGetDogDetail = async (dogId: number) => {
   return data;
 };
 
-// 강아지 상세 - 메모 수정
-export const handlePostDogMemo = async (dogId: number, memo: string): Promise<void> => {
+/**
+ * GET v0/admin/attendance/dog/info/memo (메모 등록)
+ */
+export const handlePostDogMemo = async (req: { dogId: number; memo: string }): Promise<void> => {
   const url = `admin/attendance/dog/info/memo`;
   const { data } = await authAxios.post(url, {
-    dogId,
-    memo
+    dogId: req.dogId,
+    memo: req.memo
   });
   return data;
 };
 
-// 강아지 상세 - 등원 기록
-export const handleGetDogInfoRecord = async (dogId: number, date?: string) => {
+/**
+ * GET v0/admin/attendance/dog/info/record (등원기록)
+ */
+export const handleGetDogInfoRecord = async (
+  dogId: number,
+  date?: string
+): Promise<DogInfoRecordData[]> => {
   const url = `admin/attendance/dog/info/record`;
-  const { data } = await request<DogInfoRecordData[]>({
-    url,
+  const { data } = await authAxios.get(url, {
     params: {
       dogId,
-      date: date || format(new Date(), "yyyy-MM-dd")
+      date
     }
   });
-  return data;
+  return data.data;
 };
 
-// 강아지 상세 - 알림장
-export const handleGetDogInfoAgenda = async (dogId: number, date?: string) => {
+/**
+ * GET v0/admin/attendance/dog/info/agenda (알림장)
+ */
+export const handleGetDogInfoAgenda = async (
+  dogId: number,
+  date?: string
+): Promise<DogInfoAgendaData> => {
   const url = `admin/attendance/dog/info/agenda`;
-  const { data } = await request<DogInfoAgendaData>({
-    url,
+  const { data } = await authAxios.get(url, {
     params: {
       dogId,
-      date: date || format(new Date(), "yyyy-MM-dd")
+      date
     }
   });
-  return data;
+  return data.data;
 };
 
 // 강아지 상세 - 이용권 정보

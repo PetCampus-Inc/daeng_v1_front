@@ -2,7 +2,7 @@ import { PATH } from "constants/path";
 
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
 
 import { AuthContext } from "./AuthProvider";
 
@@ -25,7 +25,7 @@ const AdminAuthRouter = ({ isOwnerOnly = false }: Props) => {
 
   // owner 권한이 필요한 경우
   if (isOwnerOnly) {
-    if (role === Role.ROLE_OWNER) {
+    if (role === AdminRole.ROLE_OWNER) {
       return <Outlet />;
     } else {
       return <Navigate replace to={PATH.ADMIN_ATTENDANCE} />;
@@ -33,7 +33,7 @@ const AdminAuthRouter = ({ isOwnerOnly = false }: Props) => {
   }
 
   // teacher 또는 owner 권한이 필요한 경우
-  if (role === Role.ROLE_TEACHER || role === Role.ROLE_OWNER) {
+  if (role === AdminRole.ROLE_TEACHER || role === AdminRole.ROLE_OWNER) {
     return <Outlet />;
   }
 

@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { colors } from "styles/foundations/colors";
 import { themeConfig } from "styles/themeConfig";
 import { remCalc } from "utils/calculator";
 import { isNumber } from "utils/is";
@@ -16,6 +17,7 @@ import type {
   BorderProps,
   RadiusProps
 } from "./style-props";
+import type { ColorKeys } from "styles/types";
 
 // Utility functions
 export const parseSize = (size?: SizeType): string | undefined => {
@@ -51,17 +53,14 @@ export const getBorderRadiusStyle = (radiusValue?: RadiusType): string | undefin
       return "8px";
     case "circle":
       return "50%";
+    case "full":
+      return "9999px";
     default:
       return radiusValue;
   }
 };
 
 // Style functions
-
-export const getDisplayStyle = (props: DisplayProps) => css`
-  display: ${props.display};
-`;
-
 export const getSizeStyle = (props: SizeProps) => css`
   width: ${parseSize(props.width)};
   height: ${parseSize(props.height)};
@@ -107,14 +106,18 @@ export const getBorderStyle = (props: BorderProps & RadiusProps) => css`
   border-radius: ${getBorderRadiusStyle(props.borderRadius || props.radius)};
 `;
 
+const getColor = (color: ColorKeys | string) => {
+  return color in colors ? colors[color as ColorKeys] : color;
+};
+
 export const getColorStyle = (props: ColorProps) => css`
-  background: ${props.bg ? themeConfig.colors[props.bg] : undefined};
+  background: ${props.bg ? getColor(props.bg) : undefined};
   background-color: ${props.bgColor
-    ? themeConfig.colors[props.bgColor]
+    ? getColor(props.bgColor)
     : props.backgroundColor
-      ? themeConfig.colors[props.backgroundColor]
+      ? getColor(props.backgroundColor)
       : undefined};
-  color: ${props.color ? themeConfig.colors[props.color] : undefined};
+  color: ${props.color ? getColor(props.color) : undefined};
 `;
 
 export const getPositionStyle = (props: PositionProps) => css`

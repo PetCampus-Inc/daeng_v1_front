@@ -1,15 +1,13 @@
-import PrincipalIcon from "assets/svg/principal-icon";
-import PrincipalSelectedIcon from "assets/svg/principal-selected-icon";
-import TeacherIcon from "assets/svg/teacher-icon";
-import TeacherSelectedIcon from "assets/svg/teacher-selected-icon";
+import DogCircleIcon from "assets/svg/dog-circle-icon";
+import DogGlassesCircleIcon from "assets/svg/dog-glasses-circle-icon";
 import { Box, Flex, Text } from "components/common";
-import { AdminRole } from "pages/SignUpPage/AdminSignUpFunnel";
 import { memo } from "react";
+import { AdminRole } from "types/common/role.types";
 
 import { StyledMainWrapper } from "./styles";
 
 interface Props {
-  role: "TEACHER" | "OWNER";
+  role: AdminRole;
   mainText: string;
   subText: string;
   selected: boolean;
@@ -20,16 +18,16 @@ const RoleBox = ({ role, mainText, subText, selected, handleClick }: Props) => {
   return (
     <StyledMainWrapper selected={selected} onClick={handleClick}>
       <Box mb={16}>
-        {role === AdminRole.TEACHER ? (
+        {role === AdminRole.ROLE_TEACHER ? (
           selected ? (
-            <TeacherSelectedIcon />
+            <DogCircleIcon colorScheme="primary" w={80} h={80} />
           ) : (
-            <TeacherIcon />
+            <DogCircleIcon colorScheme="yellow" w={80} h={80} />
           )
         ) : selected ? (
-          <PrincipalSelectedIcon />
+          <DogGlassesCircleIcon colorScheme="primary" w={80} h={80} />
         ) : (
-          <PrincipalIcon />
+          <DogGlassesCircleIcon colorScheme="yellow" w={80} h={80} />
         )}
       </Box>
 

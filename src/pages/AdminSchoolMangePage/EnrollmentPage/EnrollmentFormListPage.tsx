@@ -3,7 +3,7 @@ import { ListContainer } from "components/Admin/SchoolManage/SimpleMembershipApp
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import { Layout } from "components/common";
 import ButtonBadge from "components/common/Badge/ButtonBadge";
-import { BackgroundButton } from "components/common/Button";
+import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -80,7 +80,7 @@ const EnrollmentFormListPage = () => {
           ))}
         </ListContainer>
         {isEditable && (
-          <BackgroundButton
+          <BottomButton
             disabled={
               selectedList.length > 0 &&
               !(selectedList.length === data?.simpleSchoolFormList.length)
@@ -88,7 +88,7 @@ const EnrollmentFormListPage = () => {
             onClick={handleTouch}
           >
             삭제
-          </BackgroundButton>
+          </BottomButton>
         )}
       </Layout>
     </>

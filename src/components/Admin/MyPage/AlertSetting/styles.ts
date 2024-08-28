@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface ISettingProps {
   type?: string;
-  marginTop?: string;
+  margintop?: string;
 }
 
 export const SettingList = styled.ul``;
@@ -17,7 +17,7 @@ export const SettingItem = styled.li<ISettingProps>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
   ${({ theme }) => theme.typo.label1_16_M};
   color: ${({ theme }) => theme.colors.gray_1};
-  margin-top: ${(props) => props.marginTop && props.marginTop};
+  margin-top: ${(props) => props.margintop && props.margintop};
 `;
 
 export const TopWrapper = styled.div`

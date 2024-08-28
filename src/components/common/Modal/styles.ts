@@ -93,10 +93,3 @@ export const ActionButton = styled(BaseButton).withConfig({
 
   ${({ theme, colorScheme }) => colorSchemeStyles(theme)[colorScheme]};
 `;
-
-export const ModalWithTextAreaContent = styled.div`
-  padding: 20px 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;

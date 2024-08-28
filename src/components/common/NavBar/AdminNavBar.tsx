@@ -4,7 +4,7 @@ import { PATH } from "constants/path";
 import usePathParams from "hooks/common/usePathParams";
 import { memo, useMemo } from "react";
 import { useAuth } from "routes/AuthProvider";
-import { Role } from "types/admin/admin.types";
+import { AdminRole } from "types/common/role.types";
 
 import * as S from "./styles";
 
@@ -18,7 +18,7 @@ const AdminNavbar = () => {
     if (!path.includes(PATH.ADMIN)) {
       return;
     }
-    if (role === Role.ROLE_TEACHER) {
+    if (role === AdminRole.ROLE_TEACHER) {
       return MENU_ITEMS.admin.filter((item) => item.id !== 2);
     }
     return MENU_ITEMS.admin;
@@ -30,7 +30,7 @@ const AdminNavbar = () => {
       {menuItems?.map((menuItem) => (
         <S.NavItem key={menuItem.text}>
           <S.NavLink to={menuItem.path} pb={18}>
-            <S.SvgIcon size={role === Role.ROLE_TEACHER ? 33 : 28}>
+            <S.SvgIcon size={role === AdminRole.ROLE_TEACHER ? 33 : 28}>
               {path === menuItem.path ? menuItem.colorImage : menuItem.blackImage}
             </S.SvgIcon>
             <S.Text className={path === menuItem.path ? "active" : ""}>{menuItem.text}</S.Text>

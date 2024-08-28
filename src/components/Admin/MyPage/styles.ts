@@ -6,7 +6,7 @@ export const ContentContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-export const BackgroundButtonWrapper = styled.div`
+export const BottomButtonWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
