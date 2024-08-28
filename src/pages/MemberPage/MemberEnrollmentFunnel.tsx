@@ -32,7 +32,7 @@ const MemberEnrollmentFunnel = () => {
     <Funnel>
       <Funnel.Step name={유치원_검색}>
         <SearchSchoolPage
-          type="MEMBER"
+          type="ROLE_MEMBER"
           onNextStep={(schoolId) =>
             setState((prev) => ({ ...prev, step: 가입신청서_작성, schoolId }))
           }

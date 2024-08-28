@@ -68,7 +68,7 @@ export { default as MemberSchoolInfoPage } from "./MemberPage/MemberSchoolInfoPa
 export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
 export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEditPage";
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
-export { default as MemberAddDogProfileEditePage } from "./MemberPage/MemberAddDogProfileEditPage";
+export { default as MemberAddDogProfileEditPage } from "./MemberPage/MemberAddDogProfileEditPage";
 export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFunnel";
 
 /* Common Page */
