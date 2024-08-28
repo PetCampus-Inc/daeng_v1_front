@@ -1,6 +1,6 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-const AttendanceBlackIcon = ({ w = 33, h = 33 }: IconSize) => {
+const AttendanceBlackIcon = ({ w = 33, h = 33 }: IconProps) => {
   return (
     <svg width={w} height={h} viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

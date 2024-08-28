@@ -1,6 +1,6 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-export function XCircleFilledIcon({ w = 20, h = 20 }: IconSize) {
+export function XCircleFilledIcon({ w = 20, h = 20 }: IconProps) {
   return (
     <svg width={w} height={h} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="20" height="20" rx="8" fill="#FFF7E1" />

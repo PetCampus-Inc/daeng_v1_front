@@ -2,7 +2,8 @@ import AddBrownIcon from "assets/svg/add-brown-icon";
 import AgendaIcon from "assets/svg/agenda-icon";
 import AlertBrownIcon from "assets/svg/alert-brown-icon";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
-import CareDogIcon from "assets/svg/care-dog-icon";
+import DogFilledIcon from "assets/svg/dog-filled-icon";
+import CheckCircleBrown from "assets/svg/check-circle-brown";
 import ListYellowCircleIcon from "assets/svg/list-yellow-circle-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
 
@@ -26,7 +27,7 @@ export const ADMIN_NOTIFICATION = {
       title: (dog: string) => `${dog}의 정보가 수정되었어요`,
       text: "강아지 정보 수정은 견주가 할 수 있어요",
       path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(`${dogId}?${params}`),
-      icon: <CareDogIcon borderStyle="50%" w={28} h={28} />
+      icon: <DogFilledIcon rx={14} w={28} h={28} />
     },
     {
       id: 1,
@@ -34,7 +35,7 @@ export const ADMIN_NOTIFICATION = {
       text: (expired: string) =>
         expired === "date" ? `[만료 ${expired}일 전]` : `[잔여 횟수:${expired}회]`,
       path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(`${dogId}?${params}`),
-      icon: <CalendarExpireIcon borderStyle="50%" w={28} h={28} />
+      icon: <CalendarExpireIcon rx={14} w={28} h={28} />
     },
     {
       id: 2,

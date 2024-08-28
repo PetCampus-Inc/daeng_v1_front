@@ -29,7 +29,7 @@ type TabsProps = {
   /** uncontrolled 컴포넌트로 사용 시, 기본적으로 선택된 탭 */
   defaultValue?: string;
   /** 새로운 탭이 선택될 때 호출되는 함수 */
-  onValueChange?: (value: string) => void;
+  onValueChange?: (newValue: string) => void;
   /**
    * 탭이 자동으로 활성화될지 또는 수동으로 활성화될지 여부
    * @defaultValue automatic
@@ -51,12 +51,14 @@ const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(
     ref
   ) => {
     const isControlled = controlledValue !== undefined;
-    const [value, setValue] = useState(defaultValue);
+    const [internalValue, setInternalValue] = useState(defaultValue);
     const baseId = useId();
+
+    const value = isControlled ? controlledValue : internalValue;
 
     const handleValueChange = (newValue: string) => {
       if (!isControlled) {
-        setValue(newValue);
+        setInternalValue(newValue);
       }
       onValueChange?.(newValue);
     };

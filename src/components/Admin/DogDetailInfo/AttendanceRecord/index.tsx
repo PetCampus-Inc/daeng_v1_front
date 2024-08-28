@@ -1,18 +1,17 @@
 import { format, parseISO } from "date-fns";
 import useGetDogInfoAgenda from "hooks/api/useGetDogInfoAgenda";
-import { useSearchParams, useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import DailyNotice from "./DailyNotice";
 import * as S from "./styles";
 import Calendar from "../DogInfo/Calendar";
 import { DogDetailInfoText } from "../DogInfo/styles";
 
-const AttendanceRecord = () => {
+const AttendanceRecord = ({ dogId }: { dogId: number }) => {
   const [searchParams] = useSearchParams();
-  const dogId = useLocation().pathname.split("/").pop();
   const date = searchParams.get("date") || format(new Date(), "yyyy-MM-dd");
   const formattedDate = format(parseISO(date), "M월 d일");
-  const data = useGetDogInfoAgenda(Number(dogId), date);
+  const data = useGetDogInfoAgenda(dogId, date);
 
   return (
     <>
