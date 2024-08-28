@@ -1,6 +1,8 @@
-const BreedIcon = () => {
+import type { IconProps } from "./types";
+
+const DogCardIcon = ({ w = 24, h = 24 }: IconProps) => {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={w} height={h} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="24" height="24" rx="12" fill="#FFF7E1" />
       <path
         d="M3.5 8C3.5 7.17157 4.17157 6.5 5 6.5H19C19.8284 6.5 20.5 7.17157 20.5 8V16C20.5 16.8284 19.8284 17.5 19 17.5H5C4.17157 17.5 3.5 16.8284 3.5 16V8Z"
@@ -40,4 +42,4 @@ const BreedIcon = () => {
   );
 };
 
-export default BreedIcon;
+export default DogCardIcon;

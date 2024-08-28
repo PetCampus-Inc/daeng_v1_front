@@ -1,7 +1,7 @@
 import { PATH } from "constants/path";
 
 import RightArrow from "assets/svg/arrow-right-icon";
-import CareDogIcon from "assets/svg/care-dog-icon";
+import DogFilledIcon from "assets/svg/dog-filled-icon";
 import { Text } from "components/common";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import { LinkText } from "../card/styles";
 const EmptyDog = () => {
   return (
     <>
-      <CareDogIcon aria-hidden="true" />
+      <DogFilledIcon w={40} h={40} rx={8} aria-hidden="true" />
       <LinkText>
         <Link to={PATH.ADMIN_ATTENDANCE}>
           출석 진행 하기 <RightArrow w={"20"} h={"20"} aria-hidden="true" />
