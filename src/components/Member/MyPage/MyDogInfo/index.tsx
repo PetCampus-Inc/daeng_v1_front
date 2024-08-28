@@ -61,11 +61,11 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
   const approvalDeniedDogSetting = useCallback(async () => {
     // 이미 데이터가 삭제된 경우 함수 호출 방지
-    if (approvalDeniedDogSettingCalled.current) return;
-
-    if (dogDeniedStatus.length <= 0 || isDeleteSuccessful) return;
+    if (approvalDeniedDogSettingCalled.current || dogDeniedStatus.length <= 0 || isDeleteSuccessful)
+      return;
 
     if (dogDeniedStatus.length > 0 && !VISIT_MYPAGE) {
+      // 첫 방문시 mypage path localStorage에 저장
       saveStorageData(STORAGE_KEY.VISIT_MYPAGE, true);
       setInitialVisit(true);
       return;
@@ -82,7 +82,6 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     }
 
     if (dogDeniedStatus.length > 0 && !initialVisit) {
-      // 첫 방문시 mypage path localStorage에 저장
       approvalDeniedDogSetting();
     }
   }, [dogDeniedStatus, initialVisit]);
