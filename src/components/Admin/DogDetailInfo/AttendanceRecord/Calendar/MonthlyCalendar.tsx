@@ -1,20 +1,18 @@
 import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
-import FootIcon from "assets/svg/foot-icon";
-import { Box, Text } from "components/common";
+import { GoToTodayButton } from "components/Agenda/Calendar/styles";
 import { format, isSameDay, parseISO } from "date-fns";
-import React, { useCallback, useEffect, useRef } from "react";
-import Calendar, { type OnArgs } from "react-calendar";
+import { useCallback, useEffect, useRef } from "react";
+import Calendar from "react-calendar";
+import { OnArgs } from "react-calendar/dist/esm";
 
-import { StyledMonthlyCalendar, GoToTodayButton } from "./styles";
+import { Dot, StyledMonthlyCalendar, TileText } from "./styles";
 
 import type { DogInfoRecordType } from "hooks/api/admin/dogs";
 import type { Value } from "react-calendar/dist/cjs/shared/types";
 
-const ATTEND_DAYS = ["2024-07-17", "2024-07-17", "2024-07-21", "2024-07-23"];
-
 interface MonthlyCalendarProps {
-  attendData?: DogInfoRecordType[];
+  attendData: DogInfoRecordType[];
   today: Date;
   onDateChange: (newDate: Value) => void;
   onTodayClick: () => void;
@@ -25,37 +23,10 @@ interface MonthlyCalendarProps {
   headerRef: React.RefObject<HTMLDivElement>;
 }
 
-/* -------------------------------------------------------------------------------------------------
- * MonthTile
- * -----------------------------------------------------------------------------------------------*/
-
-const TileContent = ({ date, view, today }: { date: Date; view: string; today: Date }) => {
-  if (view !== "month") return null;
-
-  return (
-    <>
-      {isSameDay(date, today) && (
-        <Text typo="caption1_12_R" color="primaryColor">
-          오늘
-        </Text>
-      )}
-      {ATTEND_DAYS.some((day) => isSameDay(new Date(day), date)) && (
-        <Box as="span" color="br_3">
-          <FootIcon w={15} h={12} />
-        </Box>
-      )}
-    </>
-  );
-};
-
-/* -------------------------------------------------------------------------------------------------
- * Monthly Calendar
- * -----------------------------------------------------------------------------------------------*/
-
 // FIXME: api 수정이 안돼서 하드코딩함 지워주세요~
 const USER_REGISTRATION_DATE = parseISO("2024-06-28");
 
-export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
+export function MonthlyCalendar(props: MonthlyCalendarProps) {
   const {
     attendData,
     today,
@@ -103,14 +74,14 @@ export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
         onChange={onDateChange}
         activeStartDate={activeStartDate || undefined}
         onActiveStartDateChange={(args: OnArgs) => onActiveStartDateChange(args)}
-        formatDay={(locale, date) => format(date, "d")}
+        formatDay={(locale, date: Date) => format(date, "d")}
         formatWeekday={(locale, date) => format(date, "E")}
-        formatMonthYear={(locale, date) => format(date, "yyyy. MM")}
-        formatYear={(locale, date) => format(date, "yyyy")}
+        formatYear={(locale, date: Date) => format(date, "yyyy")}
+        formatMonthYear={(locale, date: Date) => format(date, "yyyy. MM")}
         minDate={USER_REGISTRATION_DATE}
         maxDate={new Date()}
         calendarType="gregory"
-        showNeighboringMonth={true}
+        showNeighboringMonth={false}
         prevLabel={<ArrowLeftIcon w={24} />}
         nextLabel={<ArrowRightIcon w={24} />}
         next2Label={null}
@@ -118,11 +89,34 @@ export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
         minDetail="year"
         view="month"
         onDrillUp={onOpenMonthPicker}
-        tileContent={({ date, view }) => <TileContent date={date} view={view} today={today} />}
+        tileContent={({ date, view }) => (
+          <TileContent attendData={attendData} date={date} view={view} today={today} />
+        )}
       />
       <GoToTodayButton type="button" ref={todayButtonRef} onClick={onTodayClick}>
         오늘
       </GoToTodayButton>
     </StyledMonthlyCalendar>
+  );
+}
+
+const TileContent = ({
+  attendData,
+  date,
+  view,
+  today
+}: {
+  attendData: DogInfoRecordType[];
+  date: Date;
+  view: string;
+  today: Date;
+}) => {
+  if (view !== "month") return null;
+
+  return (
+    <>
+      {isSameDay(date, today) && <TileText>오늘</TileText>}
+      {attendData.some((data) => isSameDay(parseISO(data.date), date)) && <Dot />}
+    </>
   );
 };

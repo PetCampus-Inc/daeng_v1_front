@@ -1,21 +1,18 @@
-import ArrowDownIcon from "assets/svg/arrow-down-icon";
+import { MonthPicker } from "components/Agenda/Calendar/MonthPicker";
+import { CalendarSection } from "components/Agenda/Calendar/styles";
 import { Box } from "components/common";
 import { format, parse, parseISO } from "date-fns";
-import { type DogInfoRecordType } from "hooks/api/member/dogs";
-import { useState, useRef } from "react";
+import { useGetDogInfoRecord } from "hooks/api/admin/dogs";
+import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AGENDA_STATUS } from "types/member/dogs";
 import { getClosestValidDate } from "utils/date";
 
 import { MonthlyCalendar } from "./MonthlyCalendar";
-import { MonthPicker } from "./MonthPicker";
-import { CalendarSection, ToggleViewButton } from "./styles";
-import { WeeklyCalendar } from "./WeeklyCalendar";
 
 import type { Value } from "react-calendar/dist/cjs/shared/types";
 import type { OnArgs } from "react-calendar/dist/esm";
 
-export const Calendar = ({ id }: { id: number }) => {
+export function Calendar({ dogId }: { dogId: number }) {
   const today = new Date();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -24,20 +21,10 @@ export const Calendar = ({ id }: { id: number }) => {
   const [date, setDate] = useState<Date | null>(currentDate);
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(currentDate);
 
-  // const { data } = useDogInfoRecord(id);
+  const { data: attendData } = useGetDogInfoRecord(dogId);
 
-  const [expanded, setExpanded] = useState(false);
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const calendarHeaderRef = useRef<HTMLDivElement>(null);
-
-  // TODO: 임시 데이터, API 수정 완료 후 제거해주세요
-  const data: DogInfoRecordType[] = [
-    {
-      date: "2024-08-18",
-      status: AGENDA_STATUS.COMPLETE,
-      registeredDate: "2024-03-28"
-    }
-  ];
 
   const handleDateChange = (date: Value) => {
     if (date instanceof Date) {
@@ -49,6 +36,7 @@ export const Calendar = ({ id }: { id: number }) => {
     }
   };
 
+  // month가 변경될 때 activeStartDate를 변경해 표시범위를 조정합니다
   const handleActiveStartDateChange = ({ activeStartDate, view }: OnArgs) => {
     if (activeStartDate) {
       setActiveStartDate(activeStartDate);
@@ -72,8 +60,6 @@ export const Calendar = ({ id }: { id: number }) => {
     const today = new Date();
     handleDateChange(today);
   };
-
-  const toggleExpanded = () => setExpanded((prev) => !prev);
 
   const handleMonthClick = (date: Value) => {
     handleDateChange(date);
@@ -101,27 +87,16 @@ export const Calendar = ({ id }: { id: number }) => {
 
   return (
     <CalendarSection>
-      <Box bgColor="white" pt={28} radius="0px 0px 20px 20px" overflow="hidden">
-        {expanded ? (
-          <MonthlyCalendar attendData={data} {...calendarProps} />
-        ) : (
-          <WeeklyCalendar attendData={data} {...calendarProps} />
-        )}
-        <ToggleViewButton type="button" onClick={toggleExpanded} expand={expanded}>
-          {expanded ? "닫기" : "펼쳐보기"}
-          <span>
-            <ArrowDownIcon w={20} h={20} />
-          </span>
-        </ToggleViewButton>
+      <Box bgColor="white" pt={28} overflow="hidden">
+        <MonthlyCalendar attendData={attendData} {...calendarProps} />
         <MonthPicker
-          data={data}
-          date={date}
           isOpen={showMonthPicker}
           onClose={handleCloseMonthPicker}
           onMonthClick={handleMonthClick}
+          date={date}
           anchorRef={calendarHeaderRef}
         />
       </Box>
     </CalendarSection>
   );
-};
+}
