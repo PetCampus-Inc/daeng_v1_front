@@ -21,6 +21,7 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const registeredTime = formatDate(year, month, day, "dot");
 
   const handleCancelApproval = async (dogName: string) => {
+    // FIXME 강아지 이름이 동일할 경우 어떻게 거를지 확인 필요
     const cancelDog = storageEnrollmentDatas.find((el) => el.dogName === dogName);
 
     if (!cancelDog) return;
