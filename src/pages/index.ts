@@ -18,8 +18,8 @@ export { default as ApprovalStatusPage } from "./ApprovalStatusPage/ApprovalStat
 export { default as AttendancePage } from "./AdminAttendancePage/AttendancePage";
 export { default as AttendCareDeletePage } from "./AdminAttendCarePage/AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogDetailGalleryPage/DogGalleryPage";
-export { default as DogInfoPage } from "./AdminDogDetailPage/DogInfoPage";
-export { default as NewTicketPage } from "./DogNewTicketPage/NewTicketPage";
+export { default as DogDetailInfoPage } from "./AdminDogDetailInfoPage/DogDetailInfoPage";
+export { default as NewTicketPage } from "./AdminNewTicketPage/NewTicketPage";
 
 /* Admin AttendCare Page */
 export { default as AttendCarePage } from "./AdminAttendCarePage/AttendCarePage";

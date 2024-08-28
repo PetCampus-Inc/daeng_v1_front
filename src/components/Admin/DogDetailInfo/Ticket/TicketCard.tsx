@@ -1,7 +1,9 @@
-import AlertSmallIcon from "assets/svg/alert-small-icon";
+import AlertFilledIcon from "assets/svg/alert-filled-icon";
 import CalendarIcon from "assets/svg/calendar";
 import CalendarExpireIcon from "assets/svg/calendar-expire";
 import RemainCountIcon from "assets/svg/remain-count-icon";
+import NewTicketBottomSheet from "components/Admin/DogDetailInfo/Ticket/NewTicketBottomSheet";
+import SendAlarmButton from "components/Admin/DogDetailInfo/Ticket/SendAlarmButton";
 import { Flex, Text } from "components/common";
 import { MidButton } from "components/common/Button/Templates";
 import { format, differenceInDays } from "date-fns";
@@ -9,9 +11,7 @@ import { useOverlay } from "hooks/common/useOverlay";
 import { useMemo } from "react";
 import { checkMonthlyTicketStatus, checkRoundTicketStatus } from "utils/remainingDays";
 
-import * as S from "./styles";
-import NewTicketBottomSheet from "../NewTicketBottomSheet";
-import SendAlarmButton from "../SendAlarmButton";
+import { CardContainer, CardInnerBox, Dimmed } from "./styles";
 
 import type { TicketDetailData } from "types/admin/attendance.type";
 interface TicketCardProps {
@@ -19,7 +19,7 @@ interface TicketCardProps {
   data: TicketDetailData;
 }
 
-const TicketCard = ({ dogId, data }: TicketCardProps) => {
+export function TicketCard({ dogId, data }: TicketCardProps) {
   const overlay = useOverlay();
   const { icon, statusText, textColor, isExpiringSoon, isExpired } = useMemo(() => {
     return data.ticketType === "ROUND"
@@ -33,13 +33,13 @@ const TicketCard = ({ dogId, data }: TicketCardProps) => {
     ));
 
   return (
-    <S.Container position="relative" width="full">
+    <CardContainer>
       {isExpired && (
-        <S.Dimmed>
+        <Dimmed>
           <MidButton onClick={openPopup}>이용권 갱신</MidButton>
-        </S.Dimmed>
+        </Dimmed>
       )}
-      <S.InnerBox className="upper">
+      <CardInnerBox className="upper">
         <Text typo="caption1_12_B" color="primaryColor">
           {data.ticketType === "ROUND" ? "회차권" : "정기권"}
         </Text>
@@ -48,8 +48,8 @@ const TicketCard = ({ dogId, data }: TicketCardProps) => {
             ? `${data.allRoundTicket}회`
             : `${data.monthlyTicketNumber}주`}
         </Text>
-      </S.InnerBox>
-      <S.InnerBox className="lower">
+      </CardInnerBox>
+      <CardInnerBox className="lower">
         <Flex align="center" justify="space-between">
           <Flex gap={4} align="center">
             {icon}
@@ -62,15 +62,13 @@ const TicketCard = ({ dogId, data }: TicketCardProps) => {
         <Flex gap={4} align="center">
           <CalendarIcon w="24" h="24" />
           <Text typo="label2_14_R" color="gray_1">
-            유치원 등원 요일: {data.attendanceDays?.join(", ") || "미지정"}
+            유치원 등원 요일: {data.attendanceDays?.join(".") || "미지정"}
           </Text>
         </Flex>
-      </S.InnerBox>
-    </S.Container>
+      </CardInnerBox>
+    </CardContainer>
   );
-};
-
-export default TicketCard;
+}
 
 type TextColor = "red_1" | "gray_1";
 
@@ -89,7 +87,7 @@ function getRoundTicketDetails(currentRoundTicket: number): TicketDetails {
     icon: status.isExpired ? (
       <CalendarExpireIcon w="24" h="24" />
     ) : status.isExpiringSoon ? (
-      <AlertSmallIcon color="red" w="24" h="24" />
+      <AlertFilledIcon colorScheme="red" w="24" h="24" />
     ) : (
       <RemainCountIcon w="24" h="24" />
     ),
@@ -127,7 +125,7 @@ function getMonthlyTicketDetails(ticketExpirationDate: number[] | null): TicketD
     icon: status.isExpired ? (
       <CalendarExpireIcon w="24" h="24" />
     ) : status.isExpiringSoon ? (
-      <AlertSmallIcon color="red" />
+      <AlertFilledIcon colorScheme="red" />
     ) : (
       <CalendarExpireIcon w="24" h="24" />
     ),
