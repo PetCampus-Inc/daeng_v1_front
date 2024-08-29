@@ -15,7 +15,7 @@ const MemberProfile = ({ data, memberId }: MemberInfoProps) => {
   return (
     <S.ProfileWrapper>
       <S.ProfileBox>
-        <S.ProfileImage src={`${data.memberProfileUri}`} alt="member-image" />
+        <S.ProfileImage src={`${data.memberProfileUri ?? ""}`} alt="member-image" />
       </S.ProfileBox>
       <S.ProfileDetail>
         <S.DetailItem>
