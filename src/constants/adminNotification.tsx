@@ -25,7 +25,7 @@ export const ADMIN_NOTIFICATION = {
       id: 0,
       title: (dog: string) => `${dog}의 정보가 수정되었어요`,
       text: "강아지 정보 수정은 견주가 할 수 있어요",
-      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(`${dogId}?${params}`),
+      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <DogFilledIcon rx={14} w={28} h={28} />
     },
     {
@@ -33,7 +33,7 @@ export const ADMIN_NOTIFICATION = {
       title: (dog: string) => `${dog}의 이용권 만료일이 임박했어요`,
       text: (expired: string) =>
         expired === "date" ? `[만료 ${expired}일 전]` : `[잔여 횟수:${expired}회]`,
-      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(`${dogId}?${params}`),
+      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <CalendarExpireIcon rx={14} w={28} h={28} />
     },
     {
@@ -42,7 +42,7 @@ export const ADMIN_NOTIFICATION = {
       text: "이용권 갱신은 원장님만 가능해요",
       subtext: (expired: string) =>
         expired === "date" ? `[시작일: ${expired}]` : `[만료된 이용권 정보:회차권 ${expired}회]`,
-      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(`${dogId}?${params}`),
+      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },
     {
@@ -52,7 +52,7 @@ export const ADMIN_NOTIFICATION = {
         newTicket === "date"
           ? `[시작일:${newTicket}]`
           : `[갱신된 이용권 정보:회차권 ${newTicket}회]`,
-      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(`${dogId}?${params}`),
+      path: (dogId: number, params: string) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },
     {
