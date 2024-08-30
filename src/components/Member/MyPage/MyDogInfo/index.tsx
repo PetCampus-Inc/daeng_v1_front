@@ -2,6 +2,7 @@ import { DOG_STATUS, STORAGE_KEY } from "constants/memebrDogStatus";
 
 import { DragCarousel } from "components/common/Carousel/DragCarousel ";
 import useDogRejected from "components/Member/MyPage/hooks/useDogRejected";
+import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useToggle } from "hooks/common/useToggle";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { IEnrollmentStatus } from "types/member/enrollment.types";
@@ -18,9 +19,12 @@ interface MemberInfoProps {
 }
 
 const MyDogInfo = ({ data }: MemberInfoProps) => {
-  const [activeDogId, setActiveDogId] = useState("");
-  const { isOpen, toggle } = useToggle();
   const { doglist } = data;
+  const [activeDogId, setActiveDogId] = useState("");
+  const [upDateDoglist, setUpDatsDoglist] = useState([...doglist]);
+  const { isOpen, toggle } = useToggle();
+  const CURRENT_DOG_ID = useLocalStorageValue<string>("CURRENT-DOG-ID");
+
   const dogDeniedStatus = doglist.filter((el) => el.status === DOG_STATUS.APPROVAL_DENIED);
   const approvalDeniedDogSettingCalled = useRef(false); // 함수 호출 추적
 
@@ -36,6 +40,14 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
   const handleCardFocus = (dogId: string) => {
     setActiveDogId(dogId);
+  };
+
+  const updateDoglist = () => {
+    if (CURRENT_DOG_ID) {
+      const currentDog = upDateDoglist.filter((el) => el.dogId === CURRENT_DOG_ID);
+      const removeDogs = upDateDoglist.filter((el) => el.dogId !== CURRENT_DOG_ID);
+      setUpDatsDoglist([...currentDog, ...removeDogs]);
+    }
   };
 
   const approvalDeniedDogSetting = useCallback(async () => {
@@ -57,16 +69,14 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   const renderMyDogCard = (dog: IDoglist) => (
     <MyDogCard
       key={dog.dogName}
-      dogId={dog.dogId}
-      isOpen={isOpen}
-      dogName={dog.dogName}
+      dogData={dog}
       schoolInfo={dog.schoolName}
-      registeredDate={dog.registeredDate && dog.registeredDate.map(String)}
       profileUri={dog.dogProfile && dog.dogProfile}
-      status={dog.status}
       dogLength={doglist.length}
+      isOpen={isOpen}
       isActive={dog.dogId === activeDogId}
       onCardFocus={handleCardFocus}
+      onClick={updateDoglist}
     />
   );
 
@@ -110,7 +120,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       ) : (
         <S.DragCarouselWrapper>
           <DragCarousel gap={12}>
-            {doglist.map(
+            {upDateDoglist.map(
               (dog) =>
                 dog.dogId && dog.status !== DOG_STATUS.APPROVAL_PENDING && renderMyDogCard(dog)
             )}

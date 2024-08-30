@@ -11,6 +11,7 @@ import { memo, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { dogIdState } from "store/member";
+import { IDoglist } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
@@ -19,32 +20,29 @@ import DogDeleteButton from "../Buttons/DogDeleteButton";
 import GotoSchoolInfoButton from "../Buttons/GotoSchoolInfoButton";
 
 interface IMyDogCardProps {
-  dogId: string;
+  dogData: IDoglist;
   isOpen: boolean;
-  dogName: string;
   schoolInfo: string;
-  registeredDate: string[];
   profileUri: string | null;
-  status: string;
   dogLength: number;
   onCardFocus: (dogId: string) => void;
+  onClick: () => void;
   isActive: boolean;
 }
 
 const MyDogCard = ({
-  dogId,
+  dogData,
   isOpen,
-  dogName,
   schoolInfo,
-  registeredDate,
   profileUri,
-  status,
   dogLength,
   onCardFocus,
+  onClick,
   isActive
 }: IMyDogCardProps) => {
-  const registeredTime =
-    registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
+  const { dogId, dogName, registeredDate, status } = dogData;
+  const [year, month, day] = registeredDate.map(String);
+  const registeredTime = registeredDate && formatDate(year, month, day, "dot");
   const setDogId = useSetRecoilState(dogIdState);
   const CURRENT_DOG_ID = useLocalStorageValue<string>("CURRENT-DOG-ID");
   const { memberId } = useParams();
@@ -122,6 +120,7 @@ const MyDogCard = ({
       onFocus={handleFocus}
       className={isActive ? "active" : ""}
       id={dogId}
+      onClick={onClick}
     >
       <DogDeleteButton
         isOpen={isOpen}
