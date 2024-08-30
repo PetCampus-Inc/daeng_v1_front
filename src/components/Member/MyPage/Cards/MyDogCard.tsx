@@ -5,9 +5,9 @@ import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
-import { useSetLocalStorage } from "hooks/common/useLocalStorage";
+import { useLocalStorageValue, useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
-import { memo, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { dogIdState } from "store/member";
@@ -46,6 +46,7 @@ const MyDogCard = ({
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const setDogId = useSetRecoilState(dogIdState);
+  const CURRENT_DOG_ID = useLocalStorageValue<string>("CURRENT-DOG-ID");
   const { memberId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
@@ -106,6 +107,12 @@ const MyDogCard = ({
     setStoredValue({ key: "CURRENT-DOG-ID", value: dogId });
     onCardFocus(dogId);
   };
+
+  useEffect(() => {
+    if (CURRENT_DOG_ID) {
+      onCardFocus(CURRENT_DOG_ID);
+    }
+  }, []);
 
   return (
     <S.MyDogCard
