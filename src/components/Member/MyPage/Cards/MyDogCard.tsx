@@ -5,8 +5,9 @@ import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
+import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { dogIdState } from "store/member";
@@ -26,6 +27,8 @@ interface IMyDogCardProps {
   profileUri: string | null;
   status: string;
   dogLength: number;
+  onCardFocus: (dogId: string) => void;
+  isActive: boolean;
 }
 
 const MyDogCard = ({
@@ -36,7 +39,9 @@ const MyDogCard = ({
   registeredDate,
   profileUri,
   status,
-  dogLength
+  dogLength,
+  onCardFocus,
+  isActive
 }: IMyDogCardProps) => {
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
@@ -46,6 +51,7 @@ const MyDogCard = ({
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
+  const setStoredValue = useSetLocalStorage();
   const isProfile = profileUri === null;
 
   const openInvalidInputPopup = () =>
@@ -96,8 +102,9 @@ const MyDogCard = ({
     showToast("강아지가 삭제되었습니다", "bottom");
   };
 
-  const handleCardFocus = () => {
-    divRef.current?.focus();
+  const handleFocus = () => {
+    setStoredValue({ key: "CURRENT-DOG-ID", value: dogId });
+    onCardFocus(dogId);
   };
 
   return (
@@ -105,7 +112,9 @@ const MyDogCard = ({
       isprofilestring={isProfile ? "true" : "false"}
       tabIndex={dogLength}
       ref={divRef}
-      onClick={handleCardFocus}
+      onFocus={handleFocus}
+      className={isActive ? "active" : ""}
+      id={dogId}
     >
       <DogDeleteButton
         isOpen={isOpen}
@@ -129,10 +138,10 @@ const MyDogCard = ({
           <DogNotfoundIcon />
         </S.BgIconBox>
       ) : (
-        <S.MyDogImg src={profileUri} alt="my-dog" />
+        <S.MyDogImg src={profileUri ?? ""} alt="my-dog" />
       )}
     </S.MyDogCard>
   );
 };
 
-export default MyDogCard;
+export default memo(MyDogCard);

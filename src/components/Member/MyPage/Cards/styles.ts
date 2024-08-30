@@ -28,7 +28,7 @@ export const MyDogCard = styled(Card)<ICardStyleProps>`
     background-color: ${theme.colors.gray_4};
     `}
 
-  &:focus::before {
+  &.active::before {
     content: "";
     position: absolute;
     border-radius: 16px;

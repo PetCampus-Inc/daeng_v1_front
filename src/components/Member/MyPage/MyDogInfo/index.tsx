@@ -3,7 +3,7 @@ import { DOG_STATUS, STORAGE_KEY } from "constants/memebrDogStatus";
 import { DragCarousel } from "components/common/Carousel/DragCarousel ";
 import useDogRejected from "components/Member/MyPage/hooks/useDogRejected";
 import { useToggle } from "hooks/common/useToggle";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IEnrollmentStatus } from "types/member/enrollment.types";
 import { IDoglist, IMemberInfo } from "types/member/main.types";
 
@@ -18,6 +18,7 @@ interface MemberInfoProps {
 }
 
 const MyDogInfo = ({ data }: MemberInfoProps) => {
+  const [activeDogId, setActiveDogId] = useState("");
   const { isOpen, toggle } = useToggle();
   const { doglist } = data;
   const dogDeniedStatus = doglist.filter((el) => el.status === DOG_STATUS.APPROVAL_DENIED);
@@ -33,31 +34,9 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     setInitialVisit
   } = useDogRejected();
 
-  const renderMyDogCard = (dog: IDoglist) => (
-    <MyDogCard
-      key={dog.dogName}
-      dogId={dog.dogId}
-      isOpen={isOpen}
-      dogName={dog.dogName}
-      schoolInfo={dog.schoolName}
-      registeredDate={dog.registeredDate && dog.registeredDate.map(String)}
-      profileUri={dog.dogProfile && dog.dogProfile}
-      status={dog.status}
-      dogLength={doglist.length}
-    />
-  );
-
-  const renderWaitingCard = (dog: IDoglist) => (
-    <WaitingCard key={dog.dogName} dogName={dog.dogName} registeredDate={dog.registeredDate} />
-  );
-
-  const renderRejectedCard = (dog: IEnrollmentStatus | IDoglist) => (
-    <RejectedCard
-      key={dog.dogName}
-      dogName={dog.dogName}
-      registeredDate={dog.registeredDate.map(Number)}
-    />
-  );
+  const handleCardFocus = (dogId: string) => {
+    setActiveDogId(dogId);
+  };
 
   const approvalDeniedDogSetting = useCallback(async () => {
     // 이미 데이터가 삭제된 경우 함수 호출 방지
@@ -74,6 +53,34 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       return await removeApprovalDeniedDog();
     }
   }, [VISIT_MYPAGE, dogDeniedStatus.length, isDeleteSuccessful]);
+
+  const renderMyDogCard = (dog: IDoglist) => (
+    <MyDogCard
+      key={dog.dogName}
+      dogId={dog.dogId}
+      isOpen={isOpen}
+      dogName={dog.dogName}
+      schoolInfo={dog.schoolName}
+      registeredDate={dog.registeredDate && dog.registeredDate.map(String)}
+      profileUri={dog.dogProfile && dog.dogProfile}
+      status={dog.status}
+      dogLength={doglist.length}
+      isActive={dog.dogId === activeDogId}
+      onCardFocus={handleCardFocus}
+    />
+  );
+
+  const renderWaitingCard = (dog: IDoglist) => (
+    <WaitingCard key={dog.dogName} dogName={dog.dogName} registeredDate={dog.registeredDate} />
+  );
+
+  const renderRejectedCard = (dog: IEnrollmentStatus | IDoglist) => (
+    <RejectedCard
+      key={dog.dogName}
+      dogName={dog.dogName}
+      registeredDate={dog.registeredDate.map(Number)}
+    />
+  );
 
   useEffect(() => {
     if (dogDeniedStatus.length <= 0) {
