@@ -5,20 +5,20 @@ import { useAlertSetting } from "components/Admin/MyPage/AlertSetting/context/Al
 import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import useGetNewAlarm from "hooks/api/admin/alarm";
+import { useGetNewAlarm } from "hooks/api/admin/alarm";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
-  const { alertSettings, isAllOn, toggleAll, toggleIndividual } = useAlertSetting();
+  const { alertSettings, isAllOn } = useAlertSetting();
   const { adminId } = useAdminInfo();
   //FIXME: data.newalarm 으로 수정 확인
   const { data } = useGetNewAlarm(adminId);
   const { role } = useAdminInfo();
   const currentSteps =
     role === "ROLE_OWNER" ? ADMIN_NOTIFICATION_STEP : ADMIN_NOTIFICATION_STEP.slice(0, 3);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState("");
 
   return (
     <>
@@ -31,9 +31,9 @@ const AdminNotificationPage = () => {
                 key={item}
                 paddingBottom={10}
                 position="relative"
-                onClick={() => setCurrentStep(index)}
+                onClick={() => setCurrentStep(item)}
               >
-                <Text typo="body1_18_B" color={index === currentStep ? "darkBlack" : "gray_3"}>
+                <Text typo="body1_18_B" color={item === currentStep ? "darkBlack" : "gray_3"}>
                   {item}
                 </Text>
                 <Box
@@ -42,7 +42,7 @@ const AdminNotificationPage = () => {
                   right={0}
                   left={0}
                   borderBottom={2}
-                  borderColor={index === currentStep ? "darkBlack" : "transparent"}
+                  borderColor={item === currentStep ? "darkBlack" : "transparent"}
                 />
                 {index !== 0 && data && (
                   <Box position="absolute" top={-5} right={-8}>
@@ -54,7 +54,7 @@ const AdminNotificationPage = () => {
           </Box>
         </nav>
         {data ? (
-          <NotificationList currentStep={currentStep} name="김똑똑" />
+          <NotificationList currentStep={currentStep} />
         ) : (
           <Box display="flex" justify="center" pt={80}>
             <Text typo="label2_14_R" color="gray_2">

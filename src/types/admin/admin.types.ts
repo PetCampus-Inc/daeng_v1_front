@@ -72,8 +72,8 @@ export interface IAlarmReq {
   adminId: number;
   pageable: {
     page: number;
-    size: 10;
-    sort: [""];
+    size?: 10;
+    sort?: [""];
   };
 }
 

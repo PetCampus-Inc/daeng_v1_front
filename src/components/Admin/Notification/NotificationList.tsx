@@ -1,13 +1,24 @@
 import { ADMIN_NOTIFICATION } from "constants/adminNotification";
 
 import { Box, Text } from "components/common";
+import { useGetAlarms } from "hooks/api/admin/alarm";
 
 interface Props {
-  currentStep: number;
-  name: string;
+  currentStep: string;
 }
 
-const NotificationList = ({ currentStep, name }: Props) => {
+const NotificationList = ({ currentStep }: Props) => {
+  const req = {
+    alarmId: 0,
+    category: "",
+    adminId: 1,
+    pageable: {
+      page: 0
+    }
+  };
+  const { data } = useGetAlarms(req);
+  const name = "";
+
   return (
     <Box gap={10} display="flex" direction="column">
       {ADMIN_NOTIFICATION.management.map((item, index) => (
