@@ -1,8 +1,13 @@
+import { PATH } from "constants/path";
+
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import NoticeActiveIcon from "assets/svg/notice-active-icon";
+import NoticeIcon from "assets/svg/notice-icon";
 import PencilIcon from "assets/svg/pencil-icon";
 import SettingWhiteIcon from "assets/svg/setting-white-icon";
+import useGetNewAlarm from "hooks/api/admin/alarm";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,9 +20,6 @@ import {
   TextButton,
   HeaderArea
 } from "./styles";
-import { PATH } from "constants/path";
-import useGetNewAlarm from "hooks/api/admin/alarm";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 /*
 header type
@@ -50,7 +52,6 @@ const Header = ({
 }: Props) => {
   const navigate = useNavigate();
   const { adminId } = useAdminInfo();
-  //FIXME: 비활성화 아이콘 수정하기
   const { data } = useGetNewAlarm(Number(adminId));
 
   const click = handleClick ? handleClick : () => navigate(-1);
@@ -69,7 +70,7 @@ const Header = ({
                   navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
-                {data ? <NoticeActiveIcon /> : <ArrowDownIcon w="24" h="24" />}
+                {data ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}
@@ -95,7 +96,7 @@ const Header = ({
                   navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
-                {data ? <NoticeActiveIcon /> : <ArrowDownIcon w="24" h="24" />}
+                {data ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}

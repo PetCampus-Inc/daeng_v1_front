@@ -65,3 +65,40 @@ export interface ISchoolInfoEdit {
 export interface INewAlarm {
   newAlarm: boolean;
 }
+
+export interface IAlarmReq {
+  alarmId: number;
+  category: string;
+  adminId: number;
+  pageable: {
+    page: number;
+    size: 10;
+    sort: [""];
+  };
+}
+
+export interface IAlarmTicketResponse {
+  ticketType: string;
+  allRoundTicket: number;
+  currentRoundTicket: number;
+  monthlyTicketNumber: number;
+  ticketStartDate: string; //array?
+  ticketExpirationDate: string; //array?
+  attendanceDays: string[];
+  ticketHistory: string[];
+}
+
+export interface IGetAlarm {
+  alarmId: number;
+  dogId: number;
+  dogName: string;
+  contentType: string;
+  attendanceId: number;
+  teacherId: number;
+  teacherName: string;
+  schoolName: string;
+  createdDate: number[]; //string?
+  read: boolean; //확인필요
+  hasNext: boolean;
+  ticketResponse: IAlarmTicketResponse[];
+}

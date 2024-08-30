@@ -7,7 +7,9 @@ import type {
   ITeacherSignUpInfo,
   AdminAuthType,
   AdminLoginInfo,
-  INewAlarm
+  INewAlarm,
+  IAlarmReq,
+  IGetAlarm
 } from "types/admin/admin.types";
 
 // 아이디 중복확인
@@ -96,6 +98,25 @@ export const handleGetNewAlarm = async (adminId: number) => {
     url,
     params: {
       adminId
+    }
+  });
+  return data;
+};
+
+//알림 가져오기
+export const handleGetAlarm = async (req: IAlarmReq) => {
+  const url = `admin/alarm`;
+  const { data } = await request<IGetAlarm>({
+    url,
+    params: {
+      alarmId: req.alarmId,
+      category: req.category,
+      adminId: req.adminId,
+      pageable: {
+        page: req.pageable.page,
+        size: 10,
+        sort: [""]
+      }
     }
   });
   return data;

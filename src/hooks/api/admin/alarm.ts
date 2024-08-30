@@ -1,5 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { handleGetNewAlarm } from "apis/admin/admin.api";
+import { handleGetAlarm, handleGetNewAlarm } from "apis/admin/admin.api";
+import { IAlarmReq } from "types/admin/admin.types";
 
 const useGetNewAlarm = (adminId: number) => {
   return useSuspenseQuery({
@@ -9,3 +10,10 @@ const useGetNewAlarm = (adminId: number) => {
 };
 
 export default useGetNewAlarm;
+
+const useGetAlarms = (param: IAlarmReq) => {
+  return useSuspenseQuery({
+    queryKey: ["getAlarms"],
+    queryFn: () => handleGetAlarm(param)
+  });
+};

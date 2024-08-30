@@ -5,10 +5,9 @@ import { useAlertSetting } from "components/Admin/MyPage/AlertSetting/context/Al
 import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
+import useGetNewAlarm from "hooks/api/admin/alarm";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
-import useGetNewAlarm from "hooks/api/admin/alarm";
-import { handleGetNewAlarm } from "apis/admin/admin.api";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
