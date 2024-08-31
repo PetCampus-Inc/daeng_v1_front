@@ -187,3 +187,8 @@ export interface IMemberProfile {
   nickName: string;
   relation: string;
 }
+
+export interface DogProfileReq {
+  dogId: number;
+  profileUrl: string;
+}
