@@ -15,7 +15,8 @@ import type {
   IMemberProfilePostInfo,
   DogVaccination,
   MemberDogInfoData,
-  MemberDogInfoReq
+  MemberDogInfoReq,
+  DogProfileReq
 } from "types/member/main.types";
 
 // 멤버 로그인
@@ -238,6 +239,16 @@ export const handlePostMemberProfile = async (req: IMemberProfile): Promise<void
     dogProfileUri: req.dogProfileUri,
     nickName: req.nickName,
     relation: req.relation
+  });
+  return data;
+};
+
+// 강아지 승인 후 초기 프로필 설정 (두번째 강아지 이후)
+export const handlePostDogProfile = async (req: DogProfileReq) => {
+  const url = `member/dog/profile`;
+  const { data } = await authAxios.post(url, {
+    dogId: req.dogId,
+    profileUrl: req.profileUrl
   });
   return data;
 };
