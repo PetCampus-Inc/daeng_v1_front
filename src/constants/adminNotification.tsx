@@ -19,6 +19,21 @@ interface NotificationItem {
 
 export const ADMIN_NOTIFICATION_STEP = ["전체", "출석부", "강아지 관리", "유치원 운영"] as const;
 
+export const handleChangeType = (value: string) => {
+  switch (value) {
+    case "전체":
+      return "";
+    case "출석부":
+      return "ATTENDANCE";
+    case "강아지 관리":
+      return "CARE";
+    case "유치원 운영":
+      return "MANAGEMENT";
+    default:
+      return "";
+  }
+};
+
 export const ADMIN_NOTIFICATION = {
   attendance: [
     {

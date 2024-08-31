@@ -1,4 +1,4 @@
-import { ADMIN_NOTIFICATION } from "constants/adminNotification";
+import { ADMIN_NOTIFICATION, handleChangeType } from "constants/adminNotification";
 
 import { Box, Text } from "components/common";
 import { useGetAlarms } from "hooks/api/admin/alarm";
@@ -8,15 +8,16 @@ interface Props {
 }
 
 const NotificationList = ({ currentStep }: Props) => {
+  const alarmType = handleChangeType("currentStep");
   const req = {
     alarmId: 0,
-    category: "",
+    category: alarmType,
     adminId: 1,
     pageable: {
       page: 0
     }
   };
-  const { data } = useGetAlarms(req);
+  // const { data } = useGetAlarms(req);
   const name = "";
 
   return (

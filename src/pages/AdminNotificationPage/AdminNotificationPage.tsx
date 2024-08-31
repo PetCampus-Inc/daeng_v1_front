@@ -18,7 +18,7 @@ const AdminNotificationPage = () => {
   const { role } = useAdminInfo();
   const currentSteps =
     role === "ROLE_OWNER" ? ADMIN_NOTIFICATION_STEP : ADMIN_NOTIFICATION_STEP.slice(0, 3);
-  const [currentStep, setCurrentStep] = useState("");
+  const [currentStep, setCurrentStep] = useState("전체");
 
   return (
     <>
@@ -53,7 +53,7 @@ const AdminNotificationPage = () => {
             ))}
           </Box>
         </nav>
-        {data ? (
+        {currentStep === "전체" ? (
           <NotificationList currentStep={currentStep} />
         ) : (
           <Box display="flex" justify="center" pt={80}>
