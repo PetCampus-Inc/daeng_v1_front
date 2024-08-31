@@ -311,5 +311,5 @@ export const usePostDogProfile = () => {
     }
   });
 
-  return { mutatDogProfile: mutate };
+  return { mutateDogProfile: mutate };
 };
