@@ -100,5 +100,5 @@ export interface IGetAlarm {
   createdDate: number[]; //string?
   read: boolean; //확인필요
   hasNext: boolean;
-  ticketResponse: IAlarmTicketResponse[];
+  ticketResponse: IAlarmTicketResponse;
 }
