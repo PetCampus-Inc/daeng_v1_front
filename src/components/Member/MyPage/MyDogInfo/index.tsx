@@ -42,11 +42,12 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
     setActiveDogId(dogId);
   };
 
+  // FIXME 강아지 선택될 경우 해당 강아지가 앞으로 나오도록 작업필요!
   const updateDoglist = () => {
     if (CURRENT_DOG_ID) {
       const currentDog = upDateDoglist.filter((el) => el.dogId === CURRENT_DOG_ID);
-      const removeDogs = upDateDoglist.filter((el) => el.dogId !== CURRENT_DOG_ID);
-      setUpDatsDoglist([...currentDog, ...removeDogs]);
+      const dogs = upDateDoglist.filter((el) => el.dogId !== CURRENT_DOG_ID);
+      setUpDatsDoglist([...currentDog, ...dogs]);
     }
   };
 
