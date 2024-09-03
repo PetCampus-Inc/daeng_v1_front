@@ -106,7 +106,7 @@ export const handleGetNewAlarm = async (adminId: number) => {
 //알림 가져오기
 export const handleGetAlarm = async (req: IAlarmReq) => {
   const url = `admin/alarm`;
-  const { data } = await request<IGetAlarm>({
+  const { data } = await request<IGetAlarm[]>({
     url,
     params: {
       alarmId: req.alarmId,

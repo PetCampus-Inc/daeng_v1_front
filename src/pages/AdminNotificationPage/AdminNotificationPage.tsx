@@ -14,12 +14,11 @@ import { Role } from "types/common/role.types";
 const AdminNotificationPage = () => {
   const { alertSettings, isAllOn } = useAlertSetting();
   const { adminId } = useAdminInfo();
-  //FIXME: data.newalarm 으로 수정 확인
   const { data } = useGetNewAlarm(adminId);
   const { role } = useAdminInfo();
   const currentSteps =
     role === Role.ROLE_OWNER ? ADMIN_NOTIFICATION_STEP : ADMIN_NOTIFICATION_STEP.slice(0, 3);
-  const [currentStep, setCurrentStep] = useState("전체");
+  const [currentStep, setCurrentStep] = useState(String(ADMIN_NOTIFICATION_STEP[0]));
 
   return (
     <>
@@ -54,7 +53,7 @@ const AdminNotificationPage = () => {
             ))}
           </Box>
         </nav>
-        {currentStep === "전체" ? (
+        {data.newAlarm ? (
           <NotificationList currentStep={currentStep} adminId={adminId} role={role} />
         ) : (
           <Box display="flex" justify="center" pt={80}>
