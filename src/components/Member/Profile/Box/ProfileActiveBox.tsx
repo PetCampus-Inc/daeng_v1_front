@@ -2,9 +2,14 @@ import GalleryBasicIcon from "assets/svg/gallery-basic-icon";
 
 import * as S from "../styles";
 
-const ProfileActiveBox = () => {
+interface ProfileActiveBoxProps {
+  htmlFor: string;
+  onClick?: () => void;
+}
+
+const ProfileActiveBox = ({ htmlFor, onClick }: ProfileActiveBoxProps) => {
   return (
-    <S.ActiveBox className="active">
+    <S.ActiveBox htmlFor={htmlFor} onClick={onClick} className="active">
       <GalleryBasicIcon className="GalleryIcon" />
       <S.BackDropBorder />
       <S.BackDrop />
