@@ -10,7 +10,7 @@ const AddDogProfile = () => {
   const [isDogActive, setDogIsActive] = useState(false);
   return (
     <>
-      <Flex direction="column" marginBottom="14">
+      <Flex direction="column" mb={32}>
         <Text as="h3" typo="title2_20_B" color="gray_1">
           강아지 프로필을 추가해 주세요
         </Text>
@@ -18,7 +18,7 @@ const AddDogProfile = () => {
           강아지 프로필 사진을 등록해야 홈 이용이 가능합니다
         </Text>
       </Flex>
-      <Flex gap="20" marginBottom="14">
+      <Flex gap="20" mb={14}>
         <ProfileUploadBox
           type={TYPE_NAME.DOG}
           isActive={isDogActive}
