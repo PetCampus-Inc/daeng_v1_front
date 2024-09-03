@@ -41,13 +41,24 @@ export const RoleSelectWrapper = styled(Flex)`
   width: 100%;
 `;
 
-export const ProfileBox = styled.label<StyleProps>`
+export const ProfileBox = styled.div<StyleProps>`
   position: relative;
   width: 100%;
   max-width: ${({ w }) => (w ? `${w}px` : "160px")};
+  height: ${({ h }) => (h ? `${h}px` : "160px")};
+  border-radius: 40px;
 `;
 
-// TODO UploadProfileButton, UploadProfileBox 하나의 스타일로 통일 시키기
+export const ProfileLabel = styled.label`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  cursor: pointer;
+`;
+
 export const UploadProfileButton = styled.button<StyleProps>`
   cursor: pointer;
   display: flex;
@@ -72,7 +83,7 @@ export const UploadProfileButton = styled.button<StyleProps>`
 
   &:focus {
     .active {
-      display: block;
+      display: flex;
     }
   }
 `;
@@ -94,16 +105,6 @@ export const UploadProfileBox = styled.div<StyleProps>`
     position: relative;
     z-index: 1;
   }
-
-  .active {
-    display: none;
-  }
-
-  &:focus {
-    .active {
-      display: block;
-    }
-  }
 `;
 
 export const PencilIconBox = styled.button`
@@ -120,7 +121,20 @@ export const PencilIconBox = styled.button`
   border: 2px solid ${({ theme }) => theme.colors.white};
 `;
 
-export const ActiveBox = styled.div``;
+export const ActiveBox = styled.label`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+
+  & > svg {
+    z-index: 1;
+  }
+`;
 
 export const BackDropBorder = styled.div`
   position: absolute;
