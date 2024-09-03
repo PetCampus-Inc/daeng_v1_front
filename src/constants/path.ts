@@ -93,7 +93,6 @@ const PUBLIC_PATH = {
   HOME: "/home",
   LOGIN: `/${LOGIN}`,
   SIGNUP: `/${SIGNUP}`,
-  NATIVE_LOGIN: `/${LOGIN}/oauth2/native-redirect`,
   REDIRECT: "/login/oauth2/code/:provider", // 소셜 로그인 리다이렉트
   UNREGISTER: "/unregister", // 회원탈퇴 페이지
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지
