@@ -1,11 +1,12 @@
 /**
- * 견주 마이페이지 승인 거부 시 사용되는 localStorage key를 관리합니다.
+ * 견주 마이페이지에서 사용되는 localStorage key를 관리합니다.
  */
 export const STORAGE_KEY = {
   VISIT_MYPAGE: "VISIT-MYPAGE",
   ENROLLMENT_FORM_ID: "ENROLLMENT-FORM-ID",
   APPROVAL_DENIED: "APPROVAL-DENIED",
-  DOG_ENROLLMENT_DATA: "DOG-ENROLLMENT-DATA"
+  DOG_ENROLLMENT_DATA: "DOG-ENROLLMENT-DATA",
+  CURRENT_DOG_ID: "CURRENT-DOG-ID"
 };
 
 /**
