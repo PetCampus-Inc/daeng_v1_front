@@ -2,13 +2,15 @@ import { PATH } from "constants/path";
 
 import * as Pages from "pages";
 import { Suspense } from "react";
-import { RouteObject, redirect } from "react-router-dom";
-import { ACCESS_TOKEN_KEY } from "store/auth";
+import { RouteObject } from "react-router-dom";
+import PrivateRouter from "routes/PrivateRouter";
+import { Role } from "types/common/role.types";
 
 const MemberRoutes = (): RouteObject[] => {
   return [
     {
       path: PATH.ROOT,
+      element: <PrivateRouter roles={[Role.ROLE_MEMBER]} />,
       children: [
         {
           index: true,
@@ -119,11 +121,7 @@ const MemberRoutes = (): RouteObject[] => {
             </Suspense>
           )
         }
-      ],
-      loader: () => {
-        if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
-        return null;
-      }
+      ]
     }
   ];
 };
