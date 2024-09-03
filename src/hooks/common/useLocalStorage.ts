@@ -1,94 +1,111 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
+const isWindowUndefined = typeof window === "undefined";
+const LOCAL_STORAGE_CHANGE_EVENT = "local-storage-change";
+
+/**
+ * `localStorage`의 값을 React 상태로 관리하는 커스텀 훅입니다.
+ *
+ * - `localStorage`에서 값을 읽어와 상태로 관리
+ * - 상태 변경 시, 자동으로 `localStorage`에 저장
+ * - 다른 탭/창에서의 `localStorage` 변경 감지 및 상태 동기화
+ *
+ * @template T - 저장할 값의 타입
+ * @param keyName `localStorage`에서 사용할 키 이름
+ * @param defaultValue `localStorage`에 값이 없을 때 사용할 기본값
+ * @returns `stateful` 값과, 이를 업데이트하는 함수를 튜플로 반환합니다.
+ */
 export const useLocalStorage = <T>(keyName: string, defaultValue: T) => {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+  const readValue = useCallback((): T => {
+    if (isWindowUndefined) return defaultValue;
+
     try {
-      const value = window.localStorage.getItem(keyName);
-      if (value !== null) {
-        return JSON.parse(value) as T;
-      } else {
-        window.localStorage.setItem(keyName, JSON.stringify(defaultValue));
-        return defaultValue;
-      }
-    } catch (err) {
-      console.error("Error reading localStorage key “" + keyName + "”: ", err);
+      const item = localStorage.getItem(keyName);
+      return item ? parseStoredValue(item) : defaultValue;
+    } catch (error) {
+      console.error(`Error reading localStorage key "${keyName}":`, error);
       return defaultValue;
     }
-  });
+  }, [defaultValue, keyName]);
 
-  const setValue = useCallback(
-    (newValue: T) => {
-      try {
-        window.localStorage.setItem(keyName, JSON.stringify(newValue));
-        setStoredValue(newValue);
-      } catch (err) {
-        console.error("Error setting localStorage key “" + keyName + "”: ", err);
-      }
-    },
-    [keyName]
-  );
+  const [storedValue, setStoredValue] = useState<T>(readValue);
+
+  const setValue = (value: T | ((val: T) => T)) => {
+    if (isWindowUndefined) return;
+
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const serializedValue =
+        typeof valueToStore === "string" ? valueToStore : JSON.stringify(valueToStore);
+
+      localStorage.setItem(keyName, serializedValue);
+      setStoredValue(valueToStore);
+
+      dispatchEvent(new Event(LOCAL_STORAGE_CHANGE_EVENT));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    setStoredValue(readValue());
+  }, [readValue]);
+
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent | Event) => {
+      if ("key" in event && event.key === keyName) setStoredValue(readValue());
+    };
+
+    addEventListener("storage", handleStorageChange);
+    addEventListener(LOCAL_STORAGE_CHANGE_EVENT, handleStorageChange);
+
+    return () => {
+      removeEventListener("storage", handleStorageChange);
+      removeEventListener(LOCAL_STORAGE_CHANGE_EVENT, handleStorageChange);
+    };
+  }, [keyName, defaultValue, readValue]);
 
   return [storedValue, setValue] as const;
 };
 
-// 로컬 스토리지에서 값을 가져오는 훅
-export const useLocalStorageValue = <T>(
-  keyName: string,
-  defaultValue: T | null = null
-): T | null => {
-  const [storedValue, setStoredValue] = useState<T | null>(() => {
+/**
+ * `localStorage`에서 특정 값을 삭제하는 훅
+ *
+ * - `localStorage`에서 특정 키의 값을 삭제
+ * - 삭제 후, `localStorage`의 변경 이벤트를 발생시켜 상태 동기화
+ *
+ * @param keyName `localStorage`에서 삭제할 키 이름
+ * @returns 로컬 스토리지 값 삭제 함수
+ */
+export const useResetLocalStorage = (keyName: string) =>
+  useCallback(() => {
+    if (isWindowUndefined) return;
+
     try {
-      const value = window.localStorage.getItem(keyName);
-      if (value !== null) {
-        return JSON.parse(value) as T;
-      } else {
-        window.localStorage.setItem(keyName, JSON.stringify(defaultValue));
-        return defaultValue;
-      }
-    } catch (err) {
-      console.error("Error reading localStorage key “" + keyName + "”: ", err);
-      return defaultValue;
-    }
-  });
-
-  return storedValue;
-};
-
-// 로컬 스토리지에 값을 설정하는 훅
-export const useSetLocalStorage = () => {
-  const setStoredValue = useCallback(<T>({ key, value }: { key: string; value: T }) => {
-    try {
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (err) {
-      console.error("Error setting localStorage key “" + key + "”: ", err);
-    }
-  }, []);
-
-  return setStoredValue;
-};
-
-// 로컬 스토리지에서 특정 값을 삭제하는 훅
-export const useResetLocalStorage = (keyName: string) => {
-  const resetStoredValue = useCallback(() => {
-    try {
-      window.localStorage.removeItem(keyName);
-    } catch (err) {
-      console.error("Error resetting localStorage key “" + keyName + "”: ", err);
+      localStorage.removeItem(keyName);
+      window.dispatchEvent(new Event(LOCAL_STORAGE_CHANGE_EVENT));
+    } catch (error) {
+      console.error(`Error resetting localStorage key “${keyName}”:`, error);
     }
   }, [keyName]);
 
-  return resetStoredValue;
-};
-
 // 로컬 스토리지를 초기화하는 훅
-export const useLocalStorageClear = () => {
-  const clearStorage = useCallback(() => {
+export const useLocalStorageClear = () =>
+  useCallback(() => {
+    if (isWindowUndefined) return;
+
     try {
-      window.localStorage.clear();
-    } catch (err) {
-      console.error("Error clearing localStorage: ", err);
+      localStorage.clear();
+    } catch (error) {
+      console.error("Error clearing localStorage: ", error);
     }
   }, []);
 
-  return clearStorage;
+const parseStoredValue = <T>(value: string): T => {
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    console.error("Error parsing stored value:", error);
+    throw error;
+  }
 };
