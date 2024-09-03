@@ -1,5 +1,3 @@
-import { Role } from "types/common/role.types";
-
 export type SocialProvider = "KAKAO" | "GOOGLE" | "APPLE";
 
 export interface SocialAuthData {
@@ -9,8 +7,6 @@ export interface SocialAuthData {
 }
 
 export interface MemberAuthData {
-  memberId: number;
-  role: Role;
+  dogId: string;
   schoolName: string;
-  enrollmentFormId: number;
 }
