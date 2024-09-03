@@ -18,17 +18,11 @@ interface IDogInfoProps {
 
 const DogDetailInfoEdit = ({ requiredItems }: IDogInfoProps) => {
   const { register, watch, setValue } = useFormContext();
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
       <Card>
-        <ProfileUploadBox
-          type={TYPE_NAME.DOG}
-          fileRef={fileInputRef}
-          fileName={FILE_NAME.PROFILE_COMMON}
-          mode="edit"
-        />
+        <ProfileUploadBox type={TYPE_NAME.DOG} fileName={FILE_NAME.PROFILE_COMMON} mode="edit" />
       </Card>
       <Card>
         <Text>이름</Text>

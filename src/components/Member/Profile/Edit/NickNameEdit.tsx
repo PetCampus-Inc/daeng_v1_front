@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
 const NickNameEdit = () => {
-  const { register, getValues, setValue } = useFormContext();
+  const { register, getValues } = useFormContext();
   return (
     <>
       <TextInput

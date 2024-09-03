@@ -18,8 +18,6 @@ const SaveDogProfileButton = () => {
   const { s3ProfileData, uploadFiles } = useUploadProfile();
   const { mutateDogProfile } = usePostDogProfile();
 
-  // const isAllFilled = Object.values(profileData).every((el: null | undefined) => el ?? false);
-
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);
   };
@@ -49,7 +47,6 @@ const SaveDogProfileButton = () => {
       profileUrl: s3ProfileData[0]
     };
     mutateDogProfile(requestData);
-    console.log("requestData", requestData);
   };
 
   useEffect(() => {

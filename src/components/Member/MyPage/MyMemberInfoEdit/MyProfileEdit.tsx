@@ -12,7 +12,6 @@ import RoleEditButton from "../Buttons/RoleEditButton";
 
 const MyProfileEdit = () => {
   const { register } = useFormContext();
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isShowRoles, setIsShowRoles] = useState(false);
   const handleShowRoles = () => {
     setIsShowRoles((prev) => !prev);
@@ -21,12 +20,7 @@ const MyProfileEdit = () => {
   return (
     <S.MyProfileWrapper isShowRoles={isShowRoles}>
       <S.ProfileBox>
-        <ProfileUploadBox
-          type={TYPE_NAME.MEMBER}
-          fileRef={fileInputRef}
-          fileName={FILE_NAME.PROFILE_MEMBER}
-          mode="edit"
-        />
+        <ProfileUploadBox type={TYPE_NAME.MEMBER} fileName={FILE_NAME.PROFILE_MEMBER} mode="edit" />
       </S.ProfileBox>
       <S.MyDogName>
         <TextInput
