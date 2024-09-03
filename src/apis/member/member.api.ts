@@ -24,10 +24,7 @@ export const postMemberLogin = async (
 ): Promise<{ data: MemberAuthData; accessToken: string }> => {
   const url = `member/firebase/login`;
 
-  const response = await authAxios.post<Response<MemberAuthData>>(url, {
-    idToken: req.idToken,
-    deviceId: req.deviceId
-  });
+  const response = await authAxios.post<Response<MemberAuthData>>(url, req);
 
   const accessToken = response.headers["authorization"];
   return { data: response.data.data, accessToken };

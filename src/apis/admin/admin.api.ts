@@ -1,5 +1,6 @@
 import axios from "axios";
-import { request } from "libs/AuthAxios/request";
+import authAxios from "libs/AuthAxios";
+import { request, Response } from "libs/AuthAxios/request";
 
 import type {
   IOwnerSignUpInfo,
@@ -17,18 +18,19 @@ export const getCheckId = async (id: string): Promise<number> => {
 };
 
 // 관리자 로그인
-export const postAdminLogin = async (req: AdminLoginInfo): Promise<AdminAuthType> => {
+export const postAdminLogin = async (
+  req: AdminLoginInfo
+): Promise<{ data: AdminAuthType; accessToken: string }> => {
   const url = `admin/login`;
-  const { data } = await request<AdminAuthType>({
-    url,
-    method: "POST",
-    data: {
-      id: req.inputId,
-      pwd: req.inputPw,
-      fcmToken: req.fcmToken
-    }
-  });
-  return data;
+  const body = {
+    id: req.inputId,
+    pwd: req.inputPw,
+    fcmToken: req.fcmToken
+  };
+  const response = await authAxios.post<Response<AdminAuthType>>(url, body);
+
+  const accessToken = response.headers["authorization"];
+  return { data: response.data.data, accessToken };
 };
 
 // 사업자번호 확인 api
