@@ -7,15 +7,19 @@ import HomeHeader from "components/Home/HomeHeader";
 import HomeImageAlbum from "components/Home/HomeImageAlbum";
 import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
+import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRecoilState } from "recoil";
+import { AUTH_MEMBER_ID } from "store/auth";
 import { dogIdState } from "store/member";
 
 const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
+  const CURRENT_DOG_ID = useLocalStorageValue<string | null>("CURRENT-DOG-ID");
+  const MEMBER_ID = useLocalStorageValue<string>(AUTH_MEMBER_ID);
 
-  const defaultDogId = 2;
-  const memberId = 2;
+  const defaultDogId = Number(CURRENT_DOG_ID);
+  const memberId = Number(MEMBER_ID);
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
   const { data } = useGetHomeInfo(memberId, dogId);
