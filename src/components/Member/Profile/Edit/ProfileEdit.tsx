@@ -20,16 +20,18 @@ const ProfileEdit = ({ profile, handleFileChange, registerText, type }: ProfileE
   const { profileUri } = getValues();
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.ProfileBox htmlFor={registerText} w="107">
-        <S.UploadProfileBox br="40" aria-label="uploadProfileButton">
-          <S.UploadImage
-            src={profile[0] ? profile[0].thumbnail : profileUri}
-            alt={`${type}-profile`}
-          />
-        </S.UploadProfileBox>
-        <S.PencilIconBox>
-          <PencilBrownNormalIcon />
-        </S.PencilIconBox>
+      <S.ProfileBox w="107" h="108">
+        <S.ProfileLabel htmlFor={registerText}>
+          <S.UploadProfileBox br="40" aria-label="uploadProfileButton">
+            <S.UploadImage
+              src={profile[0] ? profile[0].thumbnail : profileUri}
+              alt={`${type}-profile`}
+            />
+          </S.UploadProfileBox>
+          <S.PencilIconBox>
+            <PencilBrownNormalIcon />
+          </S.PencilIconBox>
+        </S.ProfileLabel>
       </S.ProfileBox>
 
       <S.StyledHiddenUpload
