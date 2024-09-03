@@ -1,6 +1,22 @@
 import { ApprovalStatus } from "types/common/status.types";
 
 /**
+ * 유저 타입
+ * - ADMIN: 관리자
+ * - MEMBER: 견주
+ * - GUEST: 게스트
+ */
+export const User = {
+  /** 관리자 */
+  ADMIN: "ADMIN",
+  /** 견주 */
+  MEMBER: "MEMBER",
+  /** 게스트 */
+  GUEST: "GUEST"
+} as const;
+export type User = (typeof User)[keyof typeof User];
+
+/**
  * 멤버 역할 타입
  * - ROLE_MEMBER: 회원
  * - ROLE_ANONYMOUS: 비회원
