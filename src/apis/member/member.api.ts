@@ -1,7 +1,7 @@
 import authAxios from "libs/AuthAxios";
 import { request, Response } from "libs/AuthAxios/request";
 import { PrecautionData } from "types/admin/attendance.type";
-import { MemberAuthData, MemberLoginData } from "types/member/auth.types";
+import { MemberAuthData, SocialAuthData } from "types/member/auth.types";
 
 import type {
   DogsDataType,
@@ -20,7 +20,7 @@ import type {
 
 // 멤버 로그인
 export const postMemberLogin = async (
-  req: MemberLoginData
+  req: SocialAuthData
 ): Promise<{ data: MemberAuthData; accessToken: string }> => {
   const url = `member/firebase/login`;
 
