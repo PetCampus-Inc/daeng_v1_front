@@ -7,6 +7,6 @@ export interface SocialAuthData {
 }
 
 export interface MemberAuthData {
-  dogId: string;
+  dogId: number;
   schoolName: string;
 }

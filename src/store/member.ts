@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 interface ISchool {
   schoolName: string;
@@ -10,8 +13,13 @@ export const memberEnrollmentSchoolAtom = atom<ISchool | null>({
   default: null
 });
 
-// FIXME: selector로 변경 필요!!
-export const dogIdState = atom<number | null>({
-  key: "dogId",
-  default: null
+interface DogData {
+  dogId: number;
+  schoolName: string;
+}
+
+export const dogState = atom<DogData | null>({
+  key: "dogState",
+  default: null,
+  effects: [persistAtom]
 });
