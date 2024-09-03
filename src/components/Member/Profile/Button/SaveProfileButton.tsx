@@ -3,17 +3,20 @@ import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File"
 import { BottomButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
+import { useEffect, useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
+// FIXME dirtyFields 사용하지 않는데 해당 상태 추가 안 하면 버튼 활성 안 되는 이슈 해결하기
 const SaveProfileButton = () => {
   const {
     handleSubmit,
     getValues,
-    formState: { isValid }
+    formState: { isDirty, dirtyFields }
   } = useFormContext();
-  const { convertProfileUri, uploadFiles } = useUploadProfile();
+  const [shouldSubmit, setShouldSubmit] = useState(false);
+  const { s3ProfileData, convertProfileUri, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
   const memberProfileData = getValues();
@@ -26,16 +29,16 @@ const SaveProfileButton = () => {
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: TYPE_NAME.MEMBER,
-      id: memberProfileData.memberId,
-      files: memberProfileData.memberProfileUri,
+      id: data.memberId,
+      files: data.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
     };
 
     const dogParams = {
       name: TYPE_NAME.DOG,
-      id: memberProfileData.dogId,
-      files: memberProfileData.dogProfileUri,
+      id: data.dogId,
+      files: data.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
     };
@@ -44,34 +47,36 @@ const SaveProfileButton = () => {
 
     await uploadFiles(params, {
       onSuccess: () => {
-        submitMemberProfile(data);
+        setShouldSubmit(true);
       }
     });
   };
 
-  // TODO 어뎁터 데이터에 추가하기
-  const getSubmitFormData = (data: FieldValues) => {
-    return {
-      memberId: data.memberId,
-      dogId: data.dogId,
+  const submitProfile = () => {
+    const requestData = {
+      memberId: memberProfileData.memberId,
+      dogId: memberProfileData.dogId,
       memberProfileUri: convertProfileUri(FILE_NAME.PROFILE_MEMBER),
       dogProfileUri: convertProfileUri(FILE_NAME.PROFILE_DOG),
-      nickName: data.nickName,
-      relation: data.relation
+      nickName: memberProfileData.nickName,
+      relation: memberProfileData.relation
     };
-  };
-
-  const submitMemberProfile = (data: FieldValues) => {
-    const requestData = getSubmitFormData(data);
     mutateMemberProfile(requestData);
   };
+
+  useEffect(() => {
+    if (shouldSubmit) {
+      submitProfile();
+      setShouldSubmit(false);
+    }
+  }, [s3ProfileData, shouldSubmit]);
 
   return (
     <S.SavaProfileButton>
       <BottomButton
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
-        disabled={!isValid || !isAllFilled}
+        disabled={!isAllFilled || !isDirty}
       >
         프로필 완성하기
       </BottomButton>
