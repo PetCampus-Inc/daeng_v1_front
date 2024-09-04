@@ -11,8 +11,8 @@ import { PATH } from "./path";
 export interface NotificationItem {
   id: string;
   title: string | ((name: string) => string);
-  text: string | ((expired: string) => string);
-  path: string | ((dogId: number, params: string) => string);
+  text: string | ((params: string) => string);
+  path: string | ((dogId: number) => string);
   icon: React.ReactNode;
   subtext?: string | ((expired: string) => string);
 }
@@ -62,20 +62,24 @@ export const ADMIN_NOTIFICATION = {
       id: "TICKET_EXPIRED",
       title: (dogName: string) => `${dogName}의 이용권이 만료되었어요 이용권을 갱신해 주세요!`,
       text: "이용권 갱신은 원장님만 가능해요",
-      subtext: (ticketType: string, ticketStartDate?: string, allRoundTicket?: number) =>
-        ticketType === "MONTHLY"
-          ? `[시작일: ${ticketStartDate}]`
-          : `[만료된 이용권 정보:회차권 ${allRoundTicket}회]`,
+      subtext: (params: {
+        ticketType: string;
+        ticketStartDate?: string;
+        allRoundTicket?: number;
+      }) =>
+        params.ticketType === "MONTHLY"
+          ? `[시작일: ${params.ticketStartDate}]`
+          : `[만료된 이용권 정보:회차권 ${params.allRoundTicket}회]`,
       path: (dogId: number) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },
     {
       id: "TICKET_UPDATE",
       title: (dogName: string) => `${dogName}의 이용권이 갱신되었어요!`,
-      text: (ticketType: string, ticketStartDate?: string, allRoundTicket?: number) =>
-        ticketType === "MONTHLY"
-          ? `[시작일:${ticketStartDate}]`
-          : `[갱신된 이용권 정보:회차권 ${allRoundTicket}회]`,
+      text: (params: { ticketType: string; ticketStartDate?: string; allRoundTicket?: number }) =>
+        params.ticketType === "MONTHLY"
+          ? `[시작일:${params.ticketStartDate}]`
+          : `[갱신된 이용권 정보:회차권 ${params.allRoundTicket}회]`,
       path: (dogId: number) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },

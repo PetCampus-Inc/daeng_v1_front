@@ -6,6 +6,7 @@ import {
 
 import { Box, Text } from "components/common";
 import { useGetAlarms } from "hooks/api/admin/alarm";
+import { useNavigate } from "react-router-dom";
 import { IAlarmTicketResponse, IGetAlarm } from "types/admin/admin.types";
 import { Role } from "types/common/role.types";
 
@@ -18,6 +19,7 @@ interface Props {
 type NotificationCategory = keyof typeof ADMIN_NOTIFICATION;
 
 const NotificationList = ({ currentStep, adminId, role }: Props) => {
+  const navigate = useNavigate();
   const alarmType = handleChangeType(currentStep);
   const req = {
     alarmId: 0,
@@ -80,7 +82,17 @@ const NotificationList = ({ currentStep, adminId, role }: Props) => {
   return (
     <Box gap={10} display="flex" direction="column">
       {getAlarmItems().map((item, index) => (
-        <Box key={index} display="flex" gap={12} padding={12} borderBottom={1} borderColor="gray_5">
+        <Box
+          key={index}
+          display="flex"
+          gap={12}
+          padding={12}
+          borderBottom={1}
+          borderColor="gray_5"
+          onClick={() =>
+            navigate(`${typeof item.path === "function" ? item.path(item.dogId) : item.path}`)
+          }
+        >
           <Box width="29px" height="29px">
             {item.icon}
           </Box>
