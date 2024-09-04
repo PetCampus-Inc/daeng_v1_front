@@ -41,10 +41,10 @@ import type {
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
-export const useGetHomeInfo = (memberId: number, dogId: number) => {
+export const useGetHomeInfo = (dogId: number) => {
   return useSuspenseQuery<HomeDataType, unknown, HomeInfoType>({
-    queryKey: QUERY_KEY.HOME(memberId, dogId),
-    queryFn: () => handleGetHomeInfo(memberId, dogId),
+    queryKey: QUERY_KEY.HOME(dogId),
+    queryFn: () => handleGetHomeInfo(dogId),
     select: (res) => {
       const updatedImageList = res.imageList?.map((imageArray) =>
         imageArray.map((image) => ({
@@ -63,21 +63,21 @@ export const useGetHomeInfo = (memberId: number, dogId: number) => {
 };
 
 // 견주 홈 - 강아지 리스트
-export const useGetDogs = (memberId: number) => {
+export const useGetDogs = () => {
   return useQuery({
-    queryKey: QUERY_KEY.DOGS(memberId),
-    queryFn: () => handleGetDogs(memberId),
+    queryKey: QUERY_KEY.DOGS,
+    queryFn: handleGetDogs,
     staleTime: 60000
   });
 };
 
 // 견주 홈 - 강아지 리스트 프리패칭
-export const usePrefetchDogs = (memberId: number) => {
+export const usePrefetchDogs = () => {
   const queryClient = useQueryClient();
   return () =>
     queryClient.prefetchQuery({
-      queryKey: QUERY_KEY.DOGS(memberId),
-      queryFn: () => handleGetDogs(memberId),
+      queryKey: QUERY_KEY.DOGS,
+      queryFn: handleGetDogs,
       staleTime: 60000
     });
 };
@@ -101,10 +101,10 @@ export const useGetMainAlbum = (req: IMainAlbum) => {
 };
 
 // 견주 정보
-export const useGetMemberInfo = (memberId: string) => {
+export const useGetMemberInfo = () => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_INFO(memberId),
-    queryFn: () => handleGetMemberInfo(memberId)
+    queryKey: QUERY_KEY.MEMBER_INFO,
+    queryFn: () => handleGetMemberInfo()
   });
 };
 
@@ -116,12 +116,10 @@ export const useGetMemberSchoolInfo = (dogId: string) => {
 };
 
 // 마이페이지 - 견주 프로필 조회
-export const useGetMemberProfileInfo = (memberId?: string) => {
-  if (!memberId) throw new Error("memberId is required");
-
+export const useGetMemberProfileInfo = () => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_PROFILE_INFO,
-    queryFn: () => handleGetMemberProfileInfo(memberId),
+    queryFn: () => handleGetMemberProfileInfo(),
     select: (data) => {
       const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, data.memberGender);
 
@@ -147,12 +145,12 @@ export const usePostMemberProfileInfo = () => {
 };
 
 // 견주 가입신청서 취소
-export const usePostMemberDogEnrollment = (memberId: string) => {
+export const usePostMemberDogEnrollment = () => {
   const queryClient = useQueryClient();
   const enrollMemberDogMutation = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
       console.log("성공");
     },
     onError: (err) => {
@@ -164,12 +162,12 @@ export const usePostMemberDogEnrollment = (memberId: string) => {
 };
 
 // 강아지 삭제
-export const usePostMemberDogDelete = (memberId: string) => {
+export const usePostMemberDogDelete = () => {
   const queryClient = useQueryClient();
   const memberDogDeleteMutation = useMutation({
-    mutationFn: (dogId: string) => handlePostMemberDogDelete(memberId, dogId),
+    mutationFn: (dogId: string) => handlePostMemberDogDelete(dogId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
     }
   });
 
@@ -274,10 +272,10 @@ export const usePostMemberDogPickDrop = (dogId: number) => {
 };
 
 // 회원 가입승인후 초기 견주, 강아지 프로필을 설정 데이터 조회
-export const useGetMemberProfile = (memberId: number) => {
+export const useGetMemberProfile = () => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_PROFILE(memberId),
-    queryFn: () => handleGetMemberProfile(memberId)
+    queryKey: QUERY_KEY.MEMBER_PROFILE,
+    queryFn: () => handleGetMemberProfile()
   });
 };
 // 회원 가입승인후 초기 견주, 강아지 프로필을 설정

@@ -1,11 +1,8 @@
-import { QUERY_KEY } from "constants/queryKey";
-
 import { useSuspenseQuery, type UseSuspenseQueryResult } from "@tanstack/react-query";
 import { handleGetDogInfoAgenda, handleGetDogInfoRecord } from "apis/member/dogs";
 import { format } from "date-fns/format";
+import { AgendaStatus } from "types/common/status.types";
 import { convertArrayToDate } from "utils/date";
-
-import type { AgendaStatus } from "types/member/dogs";
 
 export const useDogInfoAgenda = (dogId: number, date?: string) => {
   return useSuspenseQuery({

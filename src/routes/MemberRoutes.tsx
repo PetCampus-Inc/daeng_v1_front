@@ -9,8 +9,8 @@ import { Role } from "types/common/role.types";
 const MemberRoutes = (): RouteObject[] => {
   return [
     {
-      path: PATH.ROOT,
       element: <PrivateRouter roles={[Role.ROLE_MEMBER]} />,
+      path: PATH.ROOT,
       children: [
         {
           index: true,
@@ -33,7 +33,7 @@ const MemberRoutes = (): RouteObject[] => {
           element: <Pages.AgendaPage />
         },
         {
-          path: PATH.MEMBER_MY_PAGE(),
+          path: PATH.MEMBER_MY_PAGE,
           element: (
             <Suspense>
               <Pages.MemberMyPage />
@@ -41,7 +41,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_PAGE(),
+          path: PATH.MEMBER_MY_INFO_PAGE,
           element: (
             <Suspense>
               <Pages.MemberMyInfoPage />
@@ -49,7 +49,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_EDIT_PAGE(),
+          path: PATH.MEMBER_MY_INFO_EDIT_PAGE,
           element: (
             <Suspense>
               <Pages.MemberMyInfoEditPage />
@@ -65,7 +65,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_SCHOOL_SEARCH(),
+          path: PATH.MEMBER_MY_SCHOOL_SEARCH,
           element: (
             <Suspense>
               <Pages.MemberSchoolSearchPage />
@@ -73,7 +73,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_ENROLLMENT(),
+          path: PATH.MEMBER_MY_ENROLLMENT,
           element: (
             <Suspense>
               <Pages.MemberEnrollmentFormDogAddPage />
@@ -105,7 +105,6 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          // path: PATH.MEMBER_PROFILE_EDIT_PAGE(),
           path: PATH.MEMBER_PROFILE_EDIT_PAGE,
           element: (
             <Suspense>

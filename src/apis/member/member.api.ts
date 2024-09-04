@@ -31,26 +31,17 @@ export const postMemberLogin = async (
 };
 
 // 견주 홈 - 메인
-export const handleGetHomeInfo = async (memberId: number, dogId: number): Promise<HomeDataType> => {
+export const handleGetHomeInfo = async (dogId: number): Promise<HomeDataType> => {
   const url = `/member/main`;
-  const { data } = await request<HomeDataType>({
-    url,
-    params: {
-      memberId,
-      dogId
-    }
-  });
+  const { data } = await request<HomeDataType>({ url, params: { dogId } });
 
   return data;
 };
 
 // 견주 홈 - 강아지 리스트
-export const handleGetDogs = async (memberId: number): Promise<DogsDataType[]> => {
+export const handleGetDogs = async (): Promise<DogsDataType[]> => {
   const url = `/member/main/dogs`;
-  const { data } = await request<DogsDataType[]>({
-    url,
-    params: { memberId }
-  });
+  const { data } = await request<DogsDataType[]>({ url });
   return data;
 };
 
@@ -68,24 +59,16 @@ export const handleGetAlbum = async (req: IMainAlbum): Promise<ImageList[][]> =>
 };
 
 // 견주 정보
-export const handleGetMemberInfo = async (memberId: string): Promise<IMemberInfo> => {
+export const handleGetMemberInfo = async (): Promise<IMemberInfo> => {
   const url = `/member/mypage`;
-  const { data } = await authAxios.get(url, {
-    params: {
-      memberId
-    }
-  });
+  const { data } = await authAxios.get(url);
   return data.data;
 };
 
 // 견주 상세 정보
-export const handleGetMemberProfileInfo = async (memberId: string): Promise<IMemberProfileInfo> => {
+export const handleGetMemberProfileInfo = async (): Promise<IMemberProfileInfo> => {
   const url = `/member/info`;
-  const { data } = await authAxios.get(url, {
-    params: {
-      memberId
-    }
-  });
+  const { data } = await authAxios.get(url);
   return data.data;
 };
 
@@ -96,8 +79,8 @@ export const handlePostMemberDogEnrollment = async (enrollmentFormId: string): P
 };
 
 // 강아지 삭제하기
-export const handlePostMemberDogDelete = async (memberId: string, dogId: string): Promise<void> => {
-  const url = `/member/delete/dog?memberId=${memberId}&dogId=${dogId}`;
+export const handlePostMemberDogDelete = async (dogId: string): Promise<void> => {
+  const url = `/member/delete/dog?dogId=${dogId}`;
   return await authAxios.post(url);
 };
 
@@ -107,7 +90,6 @@ export const handleMemberInfoResult = async (
 ): Promise<IMemberProfilePostInfo> => {
   const url = `/member/info`;
   const { data } = await authAxios.post(url, {
-    memberId: req.memberId,
     memberName: req.memberName,
     memberGender: req.memberGender,
     memberProfileUri: req.memberProfileUri,
@@ -219,8 +201,8 @@ export const handlePostMemberAgreement = async (
 };
 
 // 회원 가입승인후 초기 견주, 강아지 프로필 설정 데이터 조회
-export const handleGetMemberProfile = async (memberId: number) => {
-  const url = `member/main/profile?memberId=${memberId}`;
+export const handleGetMemberProfile = async () => {
+  const url = `member/main/profile`;
   const { data } = await authAxios.get(url);
   return data.data;
 };
@@ -229,7 +211,6 @@ export const handleGetMemberProfile = async (memberId: number) => {
 export const handlePostMemberProfile = async (req: IMemberProfile): Promise<void> => {
   const url = `member/main/profile`;
   const { data } = await authAxios.post(url, {
-    memberId: req.memberId,
     dogId: req.dogId,
     memberProfileUri: req.memberProfileUri,
     dogProfileUri: req.dogProfileUri,

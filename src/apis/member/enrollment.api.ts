@@ -10,43 +10,31 @@ import type {
 import type { IMemberSchoolInfo } from "types/member/school.types";
 
 export interface IEnrollmentProps {
-  memberId: string;
   schoolId: number;
   requestUrl?: string;
 }
 
 /**
  * @description 견주 가입 신청 폼 데이터 반환 - 앱에서 견주 가입 신청 페이지에 접근합니다.
- * @param {number, string} schoolId, memberId
+ * @param {number, string} schoolId
  */
 export const handleGetEnrollment = async ({
-  schoolId,
-  memberId
+  schoolId
 }: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll`;
-  const { data } = await authAxios.get(url, {
-    params: {
-      schoolId,
-      memberId
-    }
-  });
+  const { data } = await authAxios.get(url, { params: { schoolId } });
   return data.data;
 };
 
 /**
  * @description 견주 가입 신청 URL 반환 - url 로 견주 가입 신청 페이지에 접근합니다.
- * @param {string, string} requestUrl, memberId
+ * @param {string, string} requestUrl
  */
 export const handleGetEnrollmentUrl = async ({
-  requestUrl,
-  memberId
+  requestUrl
 }: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll/${requestUrl}`;
-  const { data } = await authAxios.get(url, {
-    params: {
-      memberId
-    }
-  });
+  const { data } = await authAxios.get(url);
   return data.data;
 };
 
