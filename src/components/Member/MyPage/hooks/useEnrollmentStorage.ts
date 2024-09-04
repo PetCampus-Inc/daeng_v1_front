@@ -22,15 +22,6 @@ export const useEnrollmentStorage = () => {
     useLocalStorageValue(STORAGE_KEY.DOG_ENROLLMENT_DATA) || []; // 데이터
   const resetStoradEnrollmentValue = useResetLocalStorage(STORAGE_KEY.DOG_ENROLLMENT_DATA);
 
-  const getTodayDate = () => {
-    const today = new Date();
-    const year = today.getFullYear().toString();
-    const month = (today.getMonth() + 1).toString().padStart(2, "0");
-    const day = today.getDate().toString().padStart(2, "0");
-
-    return [year, month, day];
-  };
-
   // localStorage에 데이터 저장
   const createStorageEnrollment = (enrollmentFormId: string, dogName: string) => {
     const enrollmentDataArr: DogEnrollment | DogEnrollment[] = [...storageEnrollmentDatas];
@@ -40,8 +31,7 @@ export const useEnrollmentStorage = () => {
         ...enrollmentDataArr,
         {
           enrollmentFormId: String(enrollmentFormId),
-          dogName: dogName,
-          registeredDate: getTodayDate()
+          dogName: dogName
         }
       ];
       setDogEnrollment({
