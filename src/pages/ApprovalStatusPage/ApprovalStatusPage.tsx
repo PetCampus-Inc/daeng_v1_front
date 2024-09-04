@@ -1,44 +1,35 @@
+import { SCHOOL_NAME_KEY } from "constants/storage";
+
 import { Layout } from "components/common";
-import ApprovalStatus from "components/SignUp/ApprovalStatus";
-import { useLocation } from "react-router-dom";
-import { ApprovalPageStatus, UserType } from "types/common/approval.types";
-import { isUserType } from "utils/is";
+import ApprovalStatusView from "components/SignUp/ApprovalStatus";
+import { useLocalStorage } from "hooks/common/useLocalStorage";
+import { useTokenHandler } from "hooks/common/useTokenHandler";
+import { User } from "types/common/role.types";
+import { type ApprovalStatus } from "types/common/status.types";
+import { isApproval } from "utils/is";
 
 type StatusViewOption = {
-  [key in ApprovalPageStatus]: React.ComponentType<{
-    type: UserType;
-    schoolName: string;
-    userId?: number;
-  }>;
+  [key in ApprovalStatus]?: React.ComponentType<{ user: User; schoolName: string }>;
 };
 
 const statusViews: StatusViewOption = {
-  pending: ApprovalStatus.ApprovalPending,
-  denied: ApprovalStatus.ApprovalFailed,
-  approved: ApprovalStatus.ApprovalSuccess,
-  register: ApprovalStatus.RegisterSuccess
+  APPROVED: ApprovalStatusView.ApprovalSuccess,
+  APPROVAL_PENDING: ApprovalStatusView.ApprovalPending,
+  APPROVAL_DENIED: ApprovalStatusView.ApprovalFailed
 };
 
-interface ApprovalStatusPageState {
-  userId?: number;
-  type: UserType;
-  status: ApprovalPageStatus;
-  schoolName: string;
-}
-
 export default function ApprovalStatusPage() {
-  const location = useLocation();
-  const { userId, type, status, schoolName }: ApprovalStatusPageState = location.state;
+  const { role, user } = useTokenHandler();
+  const [schoolName] = useLocalStorage<string | null>(SCHOOL_NAME_KEY, null);
 
-  if (!isUserType(type) || !status || !schoolName || !statusViews[status]) {
-    throw new Error("잘못된 접근입니다");
-  }
+  if (!isApproval(role) || !schoolName) throw new Error("잘못 된 접근입니다.");
 
-  const StatusComponent = statusViews[status];
+  const StatusComponent = statusViews[role];
+  if (!StatusComponent) throw new Error("잘못 된 접근입니다.");
 
   return (
     <Layout bgColor="white" px={16} pt={76}>
-      <StatusComponent userId={userId} type={type} schoolName={schoolName} />
+      <StatusComponent user={user} schoolName={schoolName} />
     </Layout>
   );
 }
