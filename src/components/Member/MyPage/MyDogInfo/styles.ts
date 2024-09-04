@@ -1,4 +1,3 @@
-import Slider from "react-slick";
 import styled from "styled-components";
 
 export const DogInfoContainer = styled.section`
@@ -29,10 +28,9 @@ export const MyDogInfoList = styled.section`
   padding: 0 1rem;
 `;
 
-export const CarouselSlider = styled(Slider)`
-  .slick-track {
-    display: flex;
-    gap: 0.75rem;
-    padding: 0 0.25rem;
+export const DragCarouselWrapper = styled.div`
+  width: 100%;
+  & > div > div {
+    padding: 0 1.5rem;
   }
 `;
