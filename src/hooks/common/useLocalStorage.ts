@@ -35,10 +35,7 @@ export const useLocalStorage = <T>(keyName: string, defaultValue: T) => {
 
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
-      const serializedValue =
-        typeof valueToStore === "string" ? valueToStore : JSON.stringify(valueToStore);
-
-      localStorage.setItem(keyName, serializedValue);
+      localStorage.setItem(keyName, JSON.stringify(valueToStore));
       setStoredValue(valueToStore);
 
       dispatchEvent(new Event(CUSTOM_STORAGE_EVENT));
@@ -102,9 +99,7 @@ export const useSetLocalStorage = () =>
     if (isWindowUndefined) return;
 
     try {
-      const serializedValue = typeof value === "string" ? value : JSON.stringify(value);
-
-      localStorage.setItem(keyName, serializedValue);
+      localStorage.setItem(keyName, JSON.stringify(value));
       dispatchEvent(createStorageEvent(keyName));
     } catch (error) {
       console.error(`Error resetting localStorage key “${keyName}”:`, error);
