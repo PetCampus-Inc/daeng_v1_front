@@ -27,7 +27,6 @@ export interface Attend {
  */
 export interface AttendReq {
   schoolId: number;
-  adminId: number;
   attendanceIdList: number[];
 }
 

@@ -15,7 +15,7 @@ const MenuCard = () => {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
-  const { refetch } = useGetNewEnrollment(2, 1); // FIXME: adminId, schoolId 로그인 정보에서 가져오기
+  const { refetch } = useGetNewEnrollment(1); // FIXME: adminId, schoolId 로그인 정보에서 가져오기
   const setNewEnrollmentList = useSetRecoilState(newEnrollmentListAtom);
 
   const handleTouch = (index: number) => {

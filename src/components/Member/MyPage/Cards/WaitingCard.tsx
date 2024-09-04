@@ -3,7 +3,6 @@ import DogWaitingIcon from "assets/svg/dog-waiting-icon";
 import { useGetMemberInfo, usePostMemberDogEnrollment } from "hooks/api/member/member";
 import { useGetSchoolInfoList } from "hooks/api/member/school";
 import useGetWaitingOwnersList from "hooks/api/useGetWaitingOwnersList";
-import { useParams } from "react-router-dom";
 
 import * as S from "./styles";
 
@@ -13,8 +12,7 @@ interface IWaitingCardProps {
 }
 
 const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
-  const { memberId } = useParams();
-  const { data: memberInfo } = useGetMemberInfo(String(memberId));
+  const { data: memberInfo } = useGetMemberInfo();
   const approvalPendingDog = memberInfo.doglist.filter(
     (dog) => dog.status && dog.status === "APPROVAL_PENDING"
   );
@@ -24,7 +22,7 @@ const WaitingCard = ({ dogName, registeredDate }: IWaitingCardProps) => {
   const { data: waitingOwnersList } = useGetWaitingOwnersList(
     Number(getSchoolInfoList[0].schoolId)
   );
-  const mutateMemberDogEnrollment = usePostMemberDogEnrollment(String(memberId));
+  const mutateMemberDogEnrollment = usePostMemberDogEnrollment();
 
   const handleCancelApproval = () => {
     const approvalPendingDogName = approvalPendingDog?.map((dog) => dog.dogName)[0];

@@ -5,8 +5,8 @@ import PolicySetting from "components/Admin/MyPage/PolicySetting";
 import { Box, Flex, Layout, Text } from "components/common";
 import { Button } from "components/common/Button";
 import Header from "components/common/Header";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import useStep from "hooks/common/useStep";
+import { useTokenHandler } from "hooks/common/useTokenHandler";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const AdminSettingPage = () => {
   const { currentStep, setStep } = useStep(3);
   //FIXME: 업데이트 유무 리팩토링 필요!
   const [isNeedUpdate, setIsNeedUpdate] = useState(false);
-  const { role } = useAdminInfo();
+  const { role } = useTokenHandler();
 
   return (
     <>

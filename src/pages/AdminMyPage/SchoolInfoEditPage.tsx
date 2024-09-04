@@ -5,20 +5,18 @@ import Header from "components/common/Header";
 import Postcode from "components/common/Postcode";
 import AddressModifyBottomSheet from "components/SignUp/modal/AddressModifyBottomSheet";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { formatSchoolNumber } from "utils/formatter";
 
 import { BottomButton } from "../../components/common/Button";
 import { PreventLeaveModal } from "../../components/common/Modal";
-import { useState } from "react";
 
 const SchoolInfoEditPage = () => {
   const [isPhoneDirty, setIsPhoneDirty] = useState(false);
-  const { adminId } = useAdminInfo();
-  const { data } = useGetPrincipalInfo(adminId);
+  const { data } = useGetPrincipalInfo();
   const overlay = useOverlay();
   const navigate = useNavigate();
   const { handleSubmit, register, setValue, watch, getFieldState } = useForm();

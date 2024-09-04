@@ -6,7 +6,7 @@ import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
@@ -36,11 +36,10 @@ const MyDogCard = ({
   //TODO 기능 추가에 따른 컴포넌트 분리 및 리팩토링 필요
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
-  const { memberId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
-  const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
+  const mutateMemberDogDelete = usePostMemberDogDelete();
 
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
@@ -62,7 +61,7 @@ const MyDogCard = ({
         title="등록된 유치원이 없어요"
         subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
         actionText="가입하기"
-        actionFn={() => navigate(PATH.MEMBER_MY_SCHOOL_SEARCH(String(memberId)))}
+        actionFn={() => navigate(PATH.MEMBER_MY_SCHOOL_SEARCH)}
       />
     ));
 

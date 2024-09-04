@@ -6,18 +6,16 @@ import { useContext } from "react";
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 import DeleteCareDogModal from "../modal/DeleteCareDogModal";
 
-const DeleteDogButton = ({ adminId }: { adminId?: number }) => {
+const DeleteDogButton = () => {
   const overlay = useOverlay();
   const { mutateDeleteCareDogs } = useDeleteCareDogs();
 
   const selectIdsContext = useContext(SelectedIdsContext);
   const selectedDogId = Array.from(selectIdsContext?.selectedIds ?? []);
 
-  if (!adminId) throw new Error("adminId가 없습니다!");
-
   const handleSubmit = () => {
-    console.log({ adminId, selectedDogId });
-    mutateDeleteCareDogs({ adminId, selectedDogId });
+    console.log({ selectedDogId });
+    mutateDeleteCareDogs({ selectedDogId });
   };
 
   const openPopup = () =>

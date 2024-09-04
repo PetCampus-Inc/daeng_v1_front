@@ -84,7 +84,6 @@ export interface IMemberProfileInfo extends IResponse {
 }
 
 export interface IMemberProfilePostInfo {
-  memberId: string;
   memberName: string;
   memberGender: string;
   memberProfileUri?: string;

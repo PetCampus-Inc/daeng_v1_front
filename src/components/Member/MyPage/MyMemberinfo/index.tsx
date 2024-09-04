@@ -10,8 +10,9 @@ import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import CirclesItems from "./CirclesItem";
 import * as S from "./styles";
 
-const MyInfo = ({ memberId }: { memberId: string }) => {
-  const { data } = useGetMemberProfileInfo(memberId);
+const MyInfo = () => {
+  const { data } = useGetMemberProfileInfo();
+
   return (
     <S.MyInfoContainer>
       <CirclesItems />

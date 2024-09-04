@@ -1,5 +1,6 @@
+import { ACCESS_TOKEN_KEY } from "constants/storage";
+
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig, isAxiosError } from "axios";
-import { ACCESS_TOKEN_KEY } from "store/auth";
 
 interface AuthAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
