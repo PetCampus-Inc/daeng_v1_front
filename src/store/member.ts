@@ -13,13 +13,8 @@ export const memberEnrollmentSchoolAtom = atom<ISchool | null>({
   default: null
 });
 
-interface DogData {
-  dogId: number;
-  schoolName: string;
-}
-
-export const dogState = atom<DogData | null>({
-  key: "dogState",
+export const dogIdState = atom<number | null>({
+  key: "dogIdState",
   default: null,
   effects: [persistAtom]
 });
