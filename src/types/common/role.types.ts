@@ -55,6 +55,7 @@ export type AdminRole = (typeof AdminRole)[keyof typeof AdminRole];
  * - ApprovalStatus: 승인 상태
  */
 export const Role = {
+  ROLE_GUEST: "ROLE_GUEST",
   ...MemberRole,
   ...AdminRole,
   ...ApprovalStatus

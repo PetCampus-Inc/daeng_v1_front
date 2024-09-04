@@ -9,9 +9,9 @@ export const useTokenHandler = () => {
   const [accessToken, setAccessToken] = useLocalStorage<string | null>(ACCESS_TOKEN_KEY, null);
 
   const role = useMemo(() => {
-    if (!accessToken) return Role.ROLE_ANONYMOUS;
+    if (!accessToken) return Role.ROLE_GUEST;
     const role = extractRoleByToken(accessToken);
-    return role ? role : Role.ROLE_ANONYMOUS;
+    return role ? role : Role.ROLE_GUEST;
   }, [accessToken]);
 
   const user = useMemo(() => {
