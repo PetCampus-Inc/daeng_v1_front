@@ -69,21 +69,18 @@ const MEMBER_PATH = {
   ALBUM: "/album",
   AGENDA: (dogId?: number) => `/agenda/${dogId ?? ":dogId"}`,
 
-  MEMBER_MY_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}`,
-  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}/profile`,
-  MEMBER_MY_INFO_EDIT_PAGE: (memberId?: string) =>
-    `/${MYPAGE}/${memberId ?? ":memberId"}/profile/edit`,
+  MEMBER_MY_PAGE: `/${MYPAGE}"}`,
+  MEMBER_MY_INFO_PAGE: `/${MYPAGE}"}/profile`,
+  MEMBER_MY_INFO_EDIT_PAGE: `/${MYPAGE}/profile/edit`,
   MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/${MYPAGE}/dog/${dogId ?? ":dogId"}/school`,
-  MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
-    `/${MYPAGE}/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
-  MEMBER_MY_ENROLLMENT: (memberId?: string) =>
-    `/${MYPAGE}/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
+  MEMBER_MY_SCHOOL_SEARCH: `/${MYPAGE}/dog/school/search`, // 견주 유치원 검색
+  MEMBER_MY_ENROLLMENT: `/${MYPAGE}/dog/enrollment`, // 강아지 추가
 
   MEMBER_DOG_INFO_PAGE: (dogId?: number) => `/dog-info/${dogId ?? ":dogId"}`, // 강아지 상세정보
   MEMBER_DOG_INFO_EDIT_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
   MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
-  // MEMBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
+  // MEMBER_PROFILE_EDIT_PAGE: `/profile/edit`, // 온보딩 후 초기 프로필 설정
   MEMBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
   MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
 };
