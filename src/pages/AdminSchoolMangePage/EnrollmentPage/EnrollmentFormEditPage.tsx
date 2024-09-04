@@ -6,7 +6,7 @@ import PickDropInfo from "components/Admin/EnrollmentForm/EditForm/PickDropInfo"
 import PolicyInfo from "components/Admin/EnrollmentForm/EditForm/PolicyInfo";
 import TicketInfo from "components/Admin/EnrollmentForm/EditForm/TicketInfo";
 import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
-import SubmitButton from "components/Admin/EnrollmentForm/Stepper/SubmitButton";
+import { NavigationButton } from "components/Admin/EnrollmentForm/Stepper/NavigationButton";
 import {
   Container,
   TopWrapper,
@@ -92,8 +92,9 @@ const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
               </Content>
             </ContentWrapper>
             <ButtonContainer>
+              type="EDIT"
               <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
-              <SubmitButton type="EDIT" onNextStep={onNextStep} />
+              <NavigationButton onNextStep={onNextStep} />
             </ButtonContainer>
           </FormProvider>
         </Container>
