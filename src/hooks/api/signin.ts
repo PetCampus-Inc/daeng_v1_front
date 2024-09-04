@@ -4,8 +4,9 @@ import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
 import { postMemberLogin } from "apis/member/member.api";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
-import { useRoleBasedNavigate } from "hooks/common/useRoleBasedNavigate";
+import { useRoleBasedPath } from "hooks/common/useRoleBasedPath";
 import usePostNativeMessage from "hooks/native/useNativeMessage";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { adminInfoState } from "store/admin";
 import { dogIdState } from "store/member";
@@ -19,7 +20,8 @@ import { extractRoleByToken, removeBearerPrefix } from "utils/token";
  * 로컬 스토리지에 AccessToken를 저장하고, Role 상태에 따라 페이지가 이동됩니다.
  */
 export const useAdminLogin = () => {
-  const redirect = useRoleBasedNavigate();
+  const navigate = useNavigate();
+  const getRoleBasedPath = useRoleBasedPath();
   const postMessage = usePostNativeMessage();
 
   const setLocalStorage = useSetLocalStorage();
@@ -28,6 +30,7 @@ export const useAdminLogin = () => {
   const handleLoginSuccess = (response: { data: AdminAuthType; accessToken: string }) => {
     const accessToken = removeBearerPrefix(response.accessToken);
     const role = extractRoleByToken(accessToken);
+    if (!role) throw new Error("로그인 실패");
 
     setAdmin(response.data);
     setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
@@ -35,7 +38,8 @@ export const useAdminLogin = () => {
 
     postMessage("LOGIN_SUCCESS", null);
 
-    redirect();
+    const basedPath = getRoleBasedPath(role);
+    navigate(basedPath, { replace: true });
   };
 
   const { mutate } = useMutation({
@@ -53,7 +57,8 @@ export const useAdminLogin = () => {
  * 로컬 스토리지에 AccessToken를 저장하고, Role 값에 따라 페이지가 이동됩니다.
  */
 export const useMemberLogin = () => {
-  const redirect = useRoleBasedNavigate();
+  const navigate = useNavigate();
+  const getRoleBasedPath = useRoleBasedPath();
   const postMessage = usePostNativeMessage();
 
   const setLocalStorage = useSetLocalStorage();
@@ -62,6 +67,7 @@ export const useMemberLogin = () => {
   const handleLoginSuccess = (response: { data: MemberAuthData; accessToken: string }) => {
     const accessToken = removeBearerPrefix(response.accessToken);
     const role = extractRoleByToken(accessToken);
+    if (!role) throw new Error("로그인 실패");
 
     setDogId(response.data.dogId);
     setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
@@ -69,7 +75,8 @@ export const useMemberLogin = () => {
 
     postMessage("LOGIN_SUCCESS", null);
 
-    redirect();
+    const basedPath = getRoleBasedPath(role);
+    navigate(basedPath, { replace: true });
   };
 
   const { mutate } = useMutation({
