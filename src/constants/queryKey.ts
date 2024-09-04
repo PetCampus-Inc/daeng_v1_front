@@ -30,7 +30,7 @@ const MEMBER_QUERY_KEY = {
   SCHOOL_INFO_LIST: ["shcollInfoList"], // 마이페이지 견주의 강아지 유치원 정보
   MEMBER_MAIN_DOG_LIST: ["memberMainDogInfo"], // 견주의 강아지 리스트 (업데이트)
   MEMBER_SCHOOL_INFO: (dogId: string) => ["memberSchoolInfo", dogId], // 유치원 정보
-  MEMBER_INFO: (memberId: string) => ["memberInfo", memberId], // 견주 정보 데이터
+  MEMBER_INFO: ["memberInfo"], // 견주 정보 데이터
   MEMBER_MAIN_DOG_INFO: (memberId: string) => ["memberMainDogInfo", memberId], // 견주의 강아지 리스트
   MEMBER_PROFILE_INFO: ["memberProfileInfo"], // 견주의 상제 정보 데이터
   MEMBER_PHONE_NUMBER: (dogId: number) => ["phoneNumber", dogId], // 견주 전화번호
@@ -39,12 +39,14 @@ const MEMBER_QUERY_KEY = {
   DOG_SHCOOL_INFO: ["memberDogSchoolInfo"], // 강아지 유치원 정보
   HOME: (memberId: number, dogId: number) => ["home", memberId, dogId], // 견주 홈 메인
   DOGS: (memberId: number) => ["dogs", memberId], // 견주 홈 강아지 리스트
-  AGENDA: (dogId: number, date?: string) => ["agenda", dogId, date] // 견주 홈 강아지 알림장
+  AGENDA: (dogId: number, date?: string) => ["agenda", dogId, date], // 견주 홈 강아지 알림장
+  MEMBER_ENROLLMENT_STATUS: ["memberEnrollmentStatus"] // 강아지 가입신청 상태 확인
 };
 
 export const QUERY_KEY = {
   ...ADMIN_QUERY_KEY,
   ...MEMBER_QUERY_KEY,
   ENROLLMENT: (schoolId: number, memberId: string) => ["enrollment", schoolId, memberId], // 견주 가입신청서 조회
+  DOG_ENROLLMENT: (dogId: string, schoolId: number) => ["dogEnrollment", dogId, schoolId], // 유치원 재등록 가입신청서
   BREED: (searchText?: string) => ["breed", searchText] // 견종 검색
 };

@@ -4,6 +4,7 @@ import { request } from "libs/AuthAxios/request";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
 import type {
   EnrollmentDataType,
+  EnrollmentDogDataType,
   EnrollmentInfoType,
   IDogEnrollmentInfo
 } from "types/member/enrollment.types";
@@ -13,6 +14,11 @@ export interface IEnrollmentProps {
   memberId: string;
   schoolId: number;
   requestUrl?: string;
+}
+
+export interface MemberDogEnrollmentProps {
+  dogId: string;
+  schoolId: number;
 }
 
 /**
@@ -124,5 +130,23 @@ export const handlePostMemberDogSchool = async (dogId: string): Promise<void> =>
 export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
   const url = `member/dog/enrollment?dogId=${dogId}`;
   const { data } = await authAxios.get(url);
+  return data.data;
+};
+
+/**
+ * @description 유치원 재등록 가입 신청서 보기 - 유치원 재등록 시 가입 신청서를 보여줍니다.
+ * @param {number, string} dogId, schoolId
+ */
+export const handleGetMemberDogEnrollment = async ({
+  dogId,
+  schoolId
+}: MemberDogEnrollmentProps): Promise<EnrollmentDogDataType> => {
+  const url = `member/school/enroll`;
+  const { data } = await authAxios.get(url, {
+    params: {
+      dogId,
+      schoolId
+    }
+  });
   return data.data;
 };
