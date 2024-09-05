@@ -1,15 +1,15 @@
-import { NativeActionResponse, NativeAction } from "types/native/action.types";
+import { NativeEventResponse, NativeEventType } from "types/native/event.types";
 import { NativeMessageResponse, NativeMessageType } from "types/native/message.types";
-import { isNativeActionResponse } from "utils/is/nativeAction";
+import { isNativeEventResponse } from "utils/is/nativeEvent";
 import { isNativeMessageResponse } from "utils/is/nativeMessage";
 
 type NativeMessageCallback = (event: NativeMessageResponse<NativeMessageType<"Response">>) => void;
-type NativeActionCallback = (event: NativeActionResponse<NativeAction>) => void;
+type NativeEventCallback = (event: NativeEventResponse<NativeEventType>) => void;
 
 class NativeReceiver {
   private static instance: NativeReceiver | null = null;
   private messageCallbacks: Set<NativeMessageCallback> = new Set();
-  private actionCallbacks: Map<string, NativeActionCallback> = new Map();
+  private eventCallbacks: Map<string, NativeEventCallback> = new Map();
 
   private constructor() {
     const receiver = navigator.userAgent.includes("Android") ? document : window;
@@ -31,12 +31,12 @@ class NativeReceiver {
     this.messageCallbacks.delete(callback);
   }
 
-  public registerActionCallback(requestId: string, callback: NativeActionCallback): void {
-    this.actionCallbacks.set(requestId, callback);
+  public registerEventCallback(requestId: string, callback: NativeEventCallback): void {
+    this.eventCallbacks.set(requestId, callback);
   }
 
-  public unregisterActionCallback(requestId: string): void {
-    this.actionCallbacks.delete(requestId);
+  public unregisterEventCallback(requestId: string): void {
+    this.eventCallbacks.delete(requestId);
   }
 
   private handleMessage = (event: MessageEvent): void => {
@@ -46,8 +46,8 @@ class NativeReceiver {
 
       if (isNativeMessageResponse(message)) {
         this.messageCallbacks.forEach((callback) => callback(message));
-      } else if (isNativeActionResponse(message)) {
-        const callback = this.actionCallbacks.get(message.id);
+      } else if (isNativeEventResponse(message)) {
+        const callback = this.eventCallbacks.get(message.id);
         if (callback) callback(message);
       }
     } catch (error) {

@@ -13,17 +13,17 @@ export interface NativeMessageMap {
 
 export type NativeMessageType<T extends keyof NativeMessageMap> = keyof NativeMessageMap[T];
 
-export type NativeMessageData<
+export type NativeMessagePayload<
   T extends keyof NativeMessageMap,
   K extends keyof NativeMessageMap[T]
 > = NativeMessageMap[T][K];
 
 export type NativeMessageRequest<T extends NativeMessageType<"Request">> = {
   type: T;
-  data: NativeMessageData<"Request", T>;
+  payload: NativeMessagePayload<"Request", T>;
 };
 
 export type NativeMessageResponse<T extends NativeMessageType<"Response">> = {
   type: T;
-  data: NativeMessageData<"Response", T>;
+  payload: NativeMessagePayload<"Response", T>;
 };
