@@ -1,46 +1,29 @@
-interface CoreMessage {
+export interface NativeMessageMap {
   Request: {
     GO_BACK: null;
-    GET_ID_TOKEN: null;
-    GET_DEVICE_ID: null;
+    LOGIN_SUCCESS: null;
+    LOGOUT: null;
+    REFRESH_TOKEN: null;
   };
   Response: {
-    ERROR: string;
-    GO_BACK: null;
-    GET_ID_TOKEN: string;
-    GET_DEVICE_ID: string;
+    NEW_NOTIFICATION: string;
+    PUSH_NOTIFICATION: string;
   };
 }
 
-interface DeviceActionMessage {
-  Request: {
-    CALL: string;
-    SAVE_IMAGE: string | string[];
-    SELECT_IMAGE: null;
-    LAUNCH_CAMERA: null;
-  };
-  Response: {
-    CALL: null;
-    SAVE_IMAGE: boolean;
-    SELECT_IMAGE: string[] | boolean;
-    LAUNCH_CAMERA: string;
-  };
-}
+export type NativeMessageType<T extends keyof NativeMessageMap> = keyof NativeMessageMap[T];
 
-export interface MessageData {
-  Request: CoreMessage["Request"] & DeviceActionMessage["Request"];
-  Response: CoreMessage["Response"] & DeviceActionMessage["Response"];
-}
+export type NativeMessagePayload<
+  T extends keyof NativeMessageMap,
+  K extends keyof NativeMessageMap[T]
+> = NativeMessageMap[T][K];
 
-export interface MessageType {
-  Request: keyof MessageData["Request"];
-  Response: keyof MessageData["Response"];
-}
-
-export type MessageDataType = {
-  Request: MessageData["Request"][MessageType["Request"]];
-  Response: MessageData["Response"][MessageType["Response"]];
+export type NativeMessageRequest<T extends NativeMessageType<"Request">> = {
+  type: T;
+  payload: NativeMessagePayload<"Request", T>;
 };
 
-export type NativeMessage<T extends MessageType["Response"] = MessageType["Response"]> =
-  T extends unknown ? { type: T; data: MessageData["Response"][T] } : never;
+export type NativeMessageResponse<T extends NativeMessageType<"Response">> = {
+  type: T;
+  payload: NativeMessagePayload<"Response", T>;
+};
