@@ -1,7 +1,7 @@
-import { STORAGE_KEY } from "constants/memebrDogStatus";
+import { STORAGE_KEY } from "constants/memberDogStatus";
 
 import {
-  useLocalStorageValue,
+  useLocalStorage,
   useResetLocalStorage,
   useSetLocalStorage
 } from "hooks/common/useLocalStorage";
@@ -18,9 +18,11 @@ export interface DogEnrollment {
  */
 export const useEnrollmentStorage = () => {
   const setDogEnrollment = useSetLocalStorage(); // 생성
-  const storageEnrollmentDatas: DogEnrollment[] =
-    useLocalStorageValue(STORAGE_KEY.DOG_ENROLLMENT_DATA) || []; // 데이터
-  const resetStoradEnrollmentValue = useResetLocalStorage(STORAGE_KEY.DOG_ENROLLMENT_DATA);
+  const [storageEnrollmentDatas] = useLocalStorage<DogEnrollment[]>(
+    STORAGE_KEY.DOG_ENROLLMENT_DATA,
+    []
+  ); // 데이터
+  const resetStoredEnrollmentValue = useResetLocalStorage(STORAGE_KEY.DOG_ENROLLMENT_DATA);
 
   // localStorage에 데이터 저장
   const createStorageEnrollment = (enrollmentFormId: string, dogName: string) => {
@@ -34,10 +36,7 @@ export const useEnrollmentStorage = () => {
           dogName: dogName
         }
       ];
-      setDogEnrollment({
-        key: STORAGE_KEY.DOG_ENROLLMENT_DATA,
-        value: updateEnrollmentData
-      });
+      setDogEnrollment(STORAGE_KEY.DOG_ENROLLMENT_DATA, updateEnrollmentData);
     }
   };
 
@@ -48,14 +47,11 @@ export const useEnrollmentStorage = () => {
     );
 
     if (removeEnrollmentData.length === 0) {
-      resetStoradEnrollmentValue();
+      resetStoredEnrollmentValue();
       return;
     }
 
-    setDogEnrollment({
-      key: STORAGE_KEY.DOG_ENROLLMENT_DATA,
-      value: removeEnrollmentData
-    });
+    setDogEnrollment(STORAGE_KEY.DOG_ENROLLMENT_DATA, removeEnrollmentData);
   };
 
   return { storageEnrollmentDatas, createStorageEnrollment, removeStorageEnrollment };

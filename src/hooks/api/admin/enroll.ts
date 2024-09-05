@@ -1,4 +1,4 @@
-import { DOG_STATUS } from "constants/memebrDogStatus";
+import { DOG_STATUS } from "constants/memberDogStatus";
 import { PATH } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 

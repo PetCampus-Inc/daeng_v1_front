@@ -9,10 +9,8 @@ import {
   handleGetMemberDogEnrollment,
   handlePostEnrollment
 } from "apis/member/enrollment.api";
-import { useLocalStorageValue, useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { Adapter } from "libs/adapters";
 import { EnrollmentFormAdapter } from "libs/adapters/ServerToFormAdapter";
-import { useState } from "react";
 
 import type {
   EnrollmentInfoType,
