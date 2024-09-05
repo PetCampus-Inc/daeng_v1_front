@@ -63,22 +63,6 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_SCHOOL_SEARCH(),
-          element: (
-            <Suspense>
-              <Pages.MemberSchoolSearchPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_MY_ENROLLMENT(),
-          element: (
-            <Suspense>
-              <Pages.MemberEnrollmentFormDogAddPage />
-            </Suspense>
-          )
-        },
-        {
           path: PATH.MEMBER_DOG_INFO_EDIT_PAGE(),
           element: (
             <Suspense>
@@ -116,6 +100,14 @@ const MemberRoutes = (): RouteObject[] => {
           element: (
             <Suspense>
               <Pages.MemberAddDogProfileEditPage />
+            </Suspense>
+          )
+        },
+        {
+          path: PATH.MEMBER_ENROLLMENT_PAGE,
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentPage />
             </Suspense>
           )
         }

@@ -103,7 +103,7 @@ export const useGetMainAlbum = (req: IMainAlbum) => {
 // 견주 정보
 export const useGetMemberInfo = (memberId: string) => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_INFO(memberId),
+    queryKey: QUERY_KEY.MEMBER_INFO,
     queryFn: () => handleGetMemberInfo(memberId)
   });
 };
@@ -147,20 +147,19 @@ export const usePostMemberProfileInfo = () => {
 };
 
 // 견주 가입신청서 취소
-export const usePostMemberDogEnrollment = (memberId: string) => {
+export const usePostMemberDogEnrollment = () => {
   const queryClient = useQueryClient();
-  const enrollMemberDogMutation = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
-      console.log("성공");
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
     },
-    onError: (err) => {
-      console.log(err);
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
-  return enrollMemberDogMutation.mutate;
+  return { mutateCancelEnrollment: mutate };
 };
 
 // 강아지 삭제
@@ -169,7 +168,7 @@ export const usePostMemberDogDelete = (memberId: string) => {
   const memberDogDeleteMutation = useMutation({
     mutationFn: (dogId: string) => handlePostMemberDogDelete(memberId, dogId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO(memberId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
     }
   });
 

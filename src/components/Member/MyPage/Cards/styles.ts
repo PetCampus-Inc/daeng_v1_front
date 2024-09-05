@@ -5,6 +5,7 @@ interface ICardStyleProps {
   pr?: string;
   textColor?: string;
   bgColor?: string;
+  isprofilestring?: string;
 }
 
 export const Card = styled.div`
@@ -12,12 +13,21 @@ export const Card = styled.div`
   position: relative;
   border-radius: 16px;
   width: 100%;
-  max-width: 100%; //176px
+  min-width: 11rem; //176px
   height: 0;
   padding-bottom: 216px;
 `;
 
-export const MyDogCard = styled(Card)`
+export const MyDogCard = styled(Card)<ICardStyleProps>`
+  ${({ isprofilestring, theme }) =>
+    isprofilestring == "true" &&
+    `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: ${theme.colors.gray_4};
+    `}
+
   &:focus::before {
     content: "";
     position: absolute;
@@ -38,6 +48,7 @@ export const MyDogCard = styled(Card)`
     bottom: 0;
     background: linear-gradient(transparent, ${({ theme }) => theme.colors.black});
     opacity: 0.45;
+    display: ${({ isprofilestring }) => (isprofilestring == "true" ? "none" : "block")};
   }
 `;
 
@@ -103,11 +114,19 @@ export const MyDogImg = styled.img`
 export const DogName = styled.h3<ICardStyleProps>`
   ${({ theme }) => theme.typo.title2_20_B};
   color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
+
+  &.colorGray1 {
+    color: ${({ theme }) => theme.colors.gray_1};
+  }
 `;
 
 export const DateText = styled.span<ICardStyleProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
   color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
+
+  &.colorGray1 {
+    color: ${({ theme }) => theme.colors.gray_1};
+  }
 `;
 
 export const CancelApprovalButton = styled.button`
@@ -139,7 +158,7 @@ export const CancelApprovalButton = styled.button`
 const StatusBoxStyle = css`
   position: relative;
   overflow: hidden;
-  padding: 0.39rem 0.5rem 0.25rem;
+  padding: 0.39rem 0.5rem;
   border-radius: 50px;
   display: flex;
   align-items: center;

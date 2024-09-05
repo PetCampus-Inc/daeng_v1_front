@@ -60,16 +60,15 @@ export { default as AgendaPage } from "./AgendaPage/AgendaPage";
 
 /* My Page */
 export { default as MemberMyPage } from "./MemberPage/MemberMyPage";
-export { default as MemberEnrollmentFormDogAddPage } from "./MemberPage/MemberEnrollmentFormDogAddPage";
 export { default as MemberEnrollmentDogInfoPage } from "./MemberPage/MemberEnrollmentDogInfoPage";
 export { default as MemberMyInfoPage } from "./MemberPage/MemberMyInfoPage";
 export { default as MemberMyInfoEditPage } from "./MemberPage/MemberMyInfoEditPage";
 export { default as MemberSchoolInfoPage } from "./MemberPage/MemberSchoolInfoPage";
-export { default as MemberSchoolSearchPage } from "./MemberPage/MemberSchoolSearchPage";
 export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
 export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEditPage";
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
 export { default as MemberAddDogProfileEditPage } from "./MemberPage/MemberAddDogProfileEditPage";
+export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFunnel";
 
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";
