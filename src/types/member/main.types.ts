@@ -51,7 +51,7 @@ export interface ImageList {
   createdTime: number[];
   size: number;
 }
-interface IDoglist {
+export interface IDoglist {
   dogId: string;
   dogName: string;
   dogProfile: string;
@@ -61,6 +61,13 @@ interface IDoglist {
   registeredDate: number[];
   dropOutDate: number[];
 }
+
+export interface IDogRejected {
+  enrollmentFormId?: number;
+  dogName: string;
+  registeredDate?: number[];
+}
+
 export interface IMemberInfo extends IResponse {
   memberId: string;
   memberName: string;
@@ -112,16 +119,15 @@ export interface VaccinationUri {
   comment: string | null;
   createdTime: number[];
 }
-
 export interface MemberDogInfoData {
   dogId: number;
   dogName: string;
-  dogGender: DogGenderType;
-  dogSize: DogSizeType;
+  dogGender: DogGenderType | string;
+  dogSize: DogSizeType | string;
   breedId: number;
   breedName: string;
   birthDate: number[];
-  neutralization: NeutralizationType;
+  neutralization: NeutralizationType | string;
   allergyDisease: string;
   vaccination: VaccinationType;
   profileUri: string;
@@ -130,7 +136,7 @@ export interface MemberDogInfoData {
   pickDropType: string;
   pickDropMemo: string;
   member: IMemberProfilePostInfo;
-  dogMemo: string;
+  dogMemo: string | null;
 }
 
 export interface DogVaccination {

@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
+interface StyleProps {
+  top?: number;
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const TopWrapper = styled.div`
+export const TopWrapper = styled.div<StyleProps>`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  top: 5vh;
+  top: ${({ top }) => (top === 0 ? "0vh" : top ? `${top}vh` : "5vh")};
   padding: 28px 0;
   gap: 12px;
 

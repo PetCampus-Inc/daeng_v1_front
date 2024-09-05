@@ -1,8 +1,10 @@
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useFormContext } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import { FormButton, FormButtonWrapper, FormPrevButton } from "styles/StyleModule";
 
+import MemberSubmitButton from "./MemberSubmitButton";
 import * as S from "./styles";
 import SubmitButton from "./SubmitButton";
 
@@ -16,6 +18,9 @@ interface NavigationProps {
 const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: NavigationProps) => {
   const { setFocus } = useFormContext();
   const overlay = useOverlay();
+  const isMypage = useLocation()
+    .pathname.split("/")
+    .some((url) => url === "mypage");
 
   const isFirstStep = currentStep === 0;
   const isLastStep = currentStep === stepsLength - 1;
@@ -47,7 +52,8 @@ const Navigation = ({ currentStep, stepsLength, nextStep, prevStep }: Navigation
       <FormButtonWrapper>
         {!isFirstStep && !isLastStep && <FormPrevButton onClick={prevStep}>이전</FormPrevButton>}
         {!isLastStep && <FormButton onClick={nextStep}>다음</FormButton>}
-        {isLastStep && <SubmitButton openPopup={openInvalidInputPopup} />}
+        {isLastStep && !isMypage && <SubmitButton openPopup={openInvalidInputPopup} />}
+        {isLastStep && isMypage && <MemberSubmitButton openPopup={openInvalidInputPopup} />}
       </FormButtonWrapper>
     </S.ButtonContainer>
   );

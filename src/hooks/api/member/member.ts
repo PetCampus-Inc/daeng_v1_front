@@ -147,18 +147,17 @@ export const usePostMemberProfileInfo = () => {
 // 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = () => {
   const queryClient = useQueryClient();
-  const enrollMemberDogMutation = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
-      console.log("성공");
     },
-    onError: (err) => {
-      console.log(err);
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
-  return enrollMemberDogMutation.mutate;
+  return { mutateCancelEnrollment: mutate };
 };
 
 // 강아지 삭제
