@@ -47,37 +47,39 @@ authAxios.interceptors.response.use(
     if (isAxiosError(error)) {
       const originalRequest = error.config as AuthAxiosRequestConfig;
 
-      if (
-        !originalRequest._retry &&
-        (error.code === "TOKEN-401-1" || error.code === "TOKEN-410-1")
-      ) {
-        originalRequest._retry = true;
+      if (!originalRequest._retry) {
+        if (error.code === "TOKEN-401-1" || error.code === "TOKEN-401-2") {
+          originalRequest._retry = true;
 
-        // 토큰 발행중일 경우 대기
-        if (isTokenRefreshing) {
-          return new Promise((resolve) => {
-            addRefreshSubscriber((token: string) => {
-              originalRequest.headers.Authorization = token;
-              resolve(authAxios(originalRequest));
+          // 토큰 발행중일 경우 대기
+          if (isTokenRefreshing) {
+            return new Promise((resolve) => {
+              addRefreshSubscriber((token: string) => {
+                originalRequest.headers.Authorization = token;
+                resolve(authAxios(originalRequest));
+              });
             });
-          });
-        }
+          }
 
-        isTokenRefreshing = true;
+          isTokenRefreshing = true;
 
-        try {
-          // 액세스 토큰 재발행 후 요청 재전송
-          const newAccessToken = await refreshToken();
-          onTokenRefreshed(newAccessToken);
+          try {
+            // 액세스 토큰 재발행 후 요청 재전송
+            const newAccessToken = await refreshToken();
+            onTokenRefreshed(newAccessToken);
 
-          originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+            originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 
-          return authAxios(originalRequest);
-        } catch (refreshError) {
-          // 리프레시 토큰 만료 시, 로그아웃 처리
+            return authAxios(originalRequest);
+          } catch (refreshError) {
+            // 리프레시 토큰 검증 실패 시 로그아웃
+            logout();
+          } finally {
+            isTokenRefreshing = false;
+          }
+        } else if (error.code === "TOKEN-401-3") {
+          // 액세스 토큰을 찾을 수 없는 경우 로그아웃
           logout();
-        } finally {
-          isTokenRefreshing = false;
         }
       }
     }
