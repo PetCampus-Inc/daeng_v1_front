@@ -29,6 +29,7 @@ const PickDropInfo = () => {
             <AdminTitle
               name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PICKDROP_NOTICE}`}
               control={control}
+              noToggle
               hasBadge
             >
               픽드랍 안내
