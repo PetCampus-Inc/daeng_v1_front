@@ -1,8 +1,10 @@
 import { ACCESS_TOKEN_KEY } from "constants/storage";
 
 import axios, { AxiosInstance, InternalAxiosRequestConfig, isAxiosError } from "axios";
+import { setLocalStorage } from "hooks/common/useLocalStorage";
 import { logout } from "hooks/common/useLogout";
-import { refreshToken } from "utils/token";
+import { postNativeMessage } from "hooks/native/useNativeMessage";
+import { refreshToken, removeBearerPrefix } from "utils/token";
 
 interface AuthAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
@@ -42,7 +44,22 @@ authAxios.interceptors.request.use(
 );
 
 authAxios.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const authHeader = response.headers["authorization"];
+
+    if (authHeader) {
+      const newToken = removeBearerPrefix(authHeader);
+      const item = localStorage.getItem(ACCESS_TOKEN_KEY);
+      const token = item ? JSON.parse(item) : null;
+
+      if (token !== newToken) {
+        postNativeMessage("REFRESH_TOKEN", null);
+        setLocalStorage(ACCESS_TOKEN_KEY, newToken);
+      }
+    }
+
+    return response;
+  },
   async (error: unknown) => {
     if (isAxiosError(error)) {
       const originalRequest = error.config as AuthAxiosRequestConfig;
