@@ -94,17 +94,7 @@ export const useResetLocalStorage = (keyName: string) =>
  *
  * @returns `localStorage` 저장 함수
  */
-export const useSetLocalStorage = () =>
-  useCallback(<T>(keyName: string, value: T) => {
-    if (isWindowUndefined) return;
-
-    try {
-      localStorage.setItem(keyName, JSON.stringify(value));
-      dispatchEvent(createStorageEvent(keyName));
-    } catch (error) {
-      console.error(`Error resetting localStorage key “${keyName}”:`, error);
-    }
-  }, []);
+export const useSetLocalStorage = () => useCallback(setLocalStorage, []);
 
 /**
  * `localStorage`를 초기화하는 훅
@@ -127,6 +117,17 @@ const parseStoredValue = <T>(value: string): T => {
   } catch (error) {
     console.error("Error parsing stored value:", error);
     throw error;
+  }
+};
+
+export const setLocalStorage = <T>(key: string, value: T) => {
+  if (isWindowUndefined) return;
+
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    dispatchEvent(createStorageEvent(key));
+  } catch (error) {
+    console.error(`Error setting localStorage key "${key}":`, error);
   }
 };
 
