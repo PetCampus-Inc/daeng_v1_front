@@ -36,7 +36,7 @@ export const useAdminLogin = () => {
     setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
     if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
 
-    postMessage("LOGIN_SUCCESS", null);
+    postMessage("REFRESH_TOKEN", null);
 
     const basedPath = getRoleBasedPath(role);
     navigate(basedPath, { replace: true });
@@ -73,7 +73,7 @@ export const useMemberLogin = () => {
     setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
     if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
 
-    postMessage("LOGIN_SUCCESS", null);
+    postMessage("REFRESH_TOKEN", null);
 
     const basedPath = getRoleBasedPath(role);
     navigate(basedPath, { replace: true });
