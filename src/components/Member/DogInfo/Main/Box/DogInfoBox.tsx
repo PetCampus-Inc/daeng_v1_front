@@ -1,5 +1,4 @@
 import { FIELD } from "constants/field";
-import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 import { PATH } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
@@ -46,7 +45,10 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
           borderRadius="circle"
         >
           <img
-            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={
+              data.profileUri ??
+              "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
             alt="dog-profile"
           />
         </S.ImageBox>
@@ -54,7 +56,7 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
           <S.TopInfoBox>
             <S.Title>
               <S.DogName>{data.dogName}</S.DogName>
-              <S.DogSize>{ITEM_ENGLISH_TO_KOREAN[data.dogSize]}</S.DogSize>
+              <S.DogSize>{data.dogSize}</S.DogSize>
             </S.Title>
             <S.Editbutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}>
               <span>수정</span>
@@ -64,7 +66,7 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
           <Flex wrap="wrap" gap="8">
             <InfoText
               icon={<GirlNormalIcon />}
-              text={`${ITEM_ENGLISH_TO_KOREAN[data.dogGender]} / 중성화 ${data.neutralization === "NEUTERED" ? "O" : "X"}`}
+              text={`${data.dogGender} / 중성화 ${data.neutralization === "NEUTERED" ? "O" : "X"}`}
             />
 
             <InfoText icon={<CalendarIcon />} text={DOG_BIRETH} />
