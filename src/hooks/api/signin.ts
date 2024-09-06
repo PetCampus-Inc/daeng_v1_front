@@ -2,7 +2,7 @@ import { ACCESS_TOKEN_KEY, SCHOOL_NAME_KEY } from "constants/storage";
 
 import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
-import { postMemberLogin } from "apis/member/member.api";
+import { postMemberLogin, postMemberSuperLogin } from "apis/member/member.api";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useRoleBasedPath } from "hooks/common/useRoleBasedPath";
 import usePostNativeMessage from "hooks/native/useNativeMessage";
@@ -81,6 +81,37 @@ export const useMemberLogin = () => {
 
   const { mutate } = useMutation({
     mutationFn: postMemberLogin,
+    onSuccess: handleLoginSuccess,
+    throwOnError: false,
+    retry: 0
+  });
+
+  return { mutateLogin: mutate };
+};
+
+/** 웹 환경 개발용 멤버 로그인 */
+export const useMemberSuperLogin = () => {
+  const navigate = useNavigate();
+  const getRoleBasedPath = useRoleBasedPath();
+
+  const setLocalStorage = useSetLocalStorage();
+  const setDogId = useSetRecoilState(dogIdState);
+
+  const handleLoginSuccess = (response: { data: MemberAuthData; accessToken: string }) => {
+    const accessToken = removeBearerPrefix(response.accessToken);
+    const role = extractRoleByToken(accessToken);
+    if (!role) throw new Error("로그인 실패");
+
+    setDogId(response.data.dogId);
+    setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
+    if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
+
+    const basedPath = getRoleBasedPath(role);
+    navigate(basedPath, { replace: true });
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: postMemberSuperLogin,
     onSuccess: handleLoginSuccess,
     throwOnError: false,
     retry: 0

@@ -3,10 +3,12 @@ import { PATH } from "constants/path";
 import { Box, Flex, Layout, Text } from "components/common";
 import LoginButtonGroup from "components/SignIn/LoginButtonGroup";
 import { StyledButton } from "components/SignIn/styles";
+import { useMemberSuperLogin } from "hooks/api/signin";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { mutateLogin } = useMemberSuperLogin();
 
   return (
     <Layout px={16} pt={76}>
@@ -19,11 +21,11 @@ const LoginPage = () => {
       </Text>
       <LoginButtonGroup />
       <Flex align="center" justify="center">
-        <Link to={"서비스 체험하기"}>
-          <Text typo="label2_14_B" color="gray_1">
-            서비스 체험하기
-          </Text>
-        </Link>
+        {/* <Link to={"서비스 체험하기"} > */}
+        <Text typo="label2_14_B" color="gray_1" onClick={() => mutateLogin({ memberId: 1 })}>
+          서비스 체험하기
+        </Text>
+        {/* </Link> */}
       </Flex>
       <Box position="absolute" left={16} right={16} bottom={24}>
         <Flex direction="column" align="center" gap={8}>

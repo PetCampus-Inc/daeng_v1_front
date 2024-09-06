@@ -30,6 +30,18 @@ export const postMemberLogin = async (
   return { data: response.data.data, accessToken };
 };
 
+// 멤버 개발용 로그인
+export const postMemberSuperLogin = async (req: {
+  memberId: number;
+}): Promise<{ data: MemberAuthData; accessToken: string }> => {
+  const url = `member/super-login`;
+
+  const response = await authAxios.post<Response<MemberAuthData>>(url, req);
+
+  const accessToken = response.headers["authorization"];
+  return { data: response.data.data, accessToken };
+};
+
 // 견주 홈 - 메인
 export const handleGetHomeInfo = async (dogId: number): Promise<HomeDataType> => {
   const url = `/member/main`;
