@@ -52,7 +52,8 @@ const Header = ({
 }: Props) => {
   const navigate = useNavigate();
   const { adminId } = useAdminInfo();
-  const { data } = useGetNewAlarm(Number(adminId));
+  // const { data } = useGetNewAlarm(Number(adminId));
+  const isNewAlarm = "true";
 
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
@@ -70,7 +71,7 @@ const Header = ({
                   navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
-                {data ? <NoticeActiveIcon /> : <NoticeIcon />}
+                {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}
@@ -96,7 +97,7 @@ const Header = ({
                   navigate(PATH.ADMIN_NOTIFICATION_PAGE);
                 }}
               >
-                {data ? <NoticeActiveIcon /> : <NoticeIcon />}
+                {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}
