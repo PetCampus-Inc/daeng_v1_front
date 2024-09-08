@@ -5,15 +5,13 @@ import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
 import { useGetCareDogList } from "hooks/api/admin/care";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useRouteLoaderData } from "react-router-dom";
 import caredogLoader from "routes/caredogLoader";
 
 const AttendCarePage = () => {
-  const { adminId } = useAdminInfo();
   const initialData = useRouteLoaderData("caredog") as Awaited<ReturnType<typeof caredogLoader>>;
 
-  const { data } = useGetCareDogList(adminId, initialData);
+  const { data } = useGetCareDogList(initialData);
 
   const isFirstVisit = data.some((dog) => dog.adminName === null);
   const isEmptyDog = data.length === 0;

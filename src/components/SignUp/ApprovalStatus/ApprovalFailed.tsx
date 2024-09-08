@@ -1,23 +1,27 @@
 import { PATH } from "constants/path";
+import { SCHOOL_NAME_KEY } from "constants/storage";
 
 import DogRejectedBgIcon from "assets/svg/dog-rejected-bg-icon";
 import { Box, Flex, Text, Button } from "components/common";
+import { useResetLocalStorage } from "hooks/common/useLocalStorage";
 import { useNavigate } from "react-router-dom";
-import { UserType } from "types/common/approval.types";
+import { User } from "types/common/role.types";
 
 import { StyledImgWrapper } from "./styles";
 
 interface ApprovalFailedProps {
-  type?: UserType;
-  schoolName?: string;
+  user: User;
+  schoolName: string;
 }
 
-export default function ApprovalFailed({ type, schoolName }: ApprovalFailedProps) {
+export default function ApprovalFailed({ user, schoolName }: ApprovalFailedProps) {
   const navigate = useNavigate();
+  const removeSchoolName = useResetLocalStorage(SCHOOL_NAME_KEY);
 
   const handleConfirm = () => {
-    if (type === "admin") navigate(PATH.ADMIN_SIGNUP, { replace: true });
-    if (type === "member") navigate(PATH.SIGNUP, { replace: true });
+    removeSchoolName();
+    if (user === User.ADMIN) navigate(PATH.ADMIN_SIGNUP, { replace: true });
+    if (user === User.MEMBER) navigate(PATH.SIGNUP, { replace: true });
   };
 
   return (

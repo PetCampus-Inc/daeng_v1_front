@@ -40,28 +40,32 @@ const ProfileUploadBox = ({
     }
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const FileList = e.target.files;
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
 
-    if (!FileList) {
+    if (!fileList) {
       showToast("업로드할 파일이 없습니다.", "ownerNav");
       return;
     }
 
     // 파일 변경 없을 경우
-    if (FileList.length <= 0) {
+    if (fileList.length <= 0) {
       if (!isActive && setIsActive) setIsActive(true);
       return;
     }
 
-    if (FileList) {
-      const newFiles = Array.from(FileList);
-      const fileArray = await Promise.all(newFiles.map(getFilePreview));
-
-      setProfile([...fileArray]);
-      setValue(fileName, [...newFiles]);
+    if (fileList) {
+      updateFilePreview(fileList);
       if (mode === "create" && setIsActive) setIsActive(true);
     }
+  };
+
+  const updateFilePreview = async (fileList: FileList) => {
+    const newFiles = Array.from(fileList);
+    const fileArray = await Promise.all(newFiles.map(getFilePreview));
+
+    setProfile([...fileArray]);
+    setValue(fileName, [...newFiles]);
   };
 
   return (
@@ -81,9 +85,7 @@ const ProfileUploadBox = ({
       {mode === "edit" && (
         <ProfileEdit
           profile={profile}
-          fileInputRef={fileRef}
           handleFileChange={handleFileChange}
-          handleClick={handleClick}
           registerText={fileName}
           type={type}
         />

@@ -18,8 +18,8 @@ export { default as ApprovalStatusPage } from "./ApprovalStatusPage/ApprovalStat
 export { default as AttendancePage } from "./AdminAttendancePage/AttendancePage";
 export { default as AttendCareDeletePage } from "./AdminAttendCarePage/AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogDetailGalleryPage/DogGalleryPage";
-export { default as DogInfoPage } from "./AdminDogDetailPage/DogInfoPage";
-export { default as NewTicketPage } from "./DogNewTicketPage/NewTicketPage";
+export { default as DogDetailInfoPage } from "./AdminDogDetailInfoPage/DogDetailInfoPage";
+export { default as NewTicketPage } from "./AdminNewTicketPage/NewTicketPage";
 
 /* Admin AttendCare Page */
 export { default as AttendCarePage } from "./AdminAttendCarePage/AttendCarePage";
@@ -49,7 +49,6 @@ export { default as AdminDeleteCompletePage } from "./AdminMyPage/AdminDeleteCom
 /* Login Page */
 export { default as LoginPage } from "./LoginPage/LoginPage";
 export { default as RedirectPage } from "./RedirectPage/RedirectPage";
-export { default as NativeRedirectPage } from "./RedirectPage/NativeRedirectPage";
 
 /* SignUp Page */
 export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";
@@ -61,16 +60,15 @@ export { default as AgendaPage } from "./AgendaPage/AgendaPage";
 
 /* My Page */
 export { default as MemberMyPage } from "./MemberPage/MemberMyPage";
-export { default as MemberEnrollmentFormDogAddPage } from "./MemberPage/MemberEnrollmentFormDogAddPage";
 export { default as MemberEnrollmentDogInfoPage } from "./MemberPage/MemberEnrollmentDogInfoPage";
 export { default as MemberMyInfoPage } from "./MemberPage/MemberMyInfoPage";
 export { default as MemberMyInfoEditPage } from "./MemberPage/MemberMyInfoEditPage";
 export { default as MemberSchoolInfoPage } from "./MemberPage/MemberSchoolInfoPage";
-export { default as MemberSchoolSearchPage } from "./MemberPage/MemberSchoolSearchPage";
 export { default as MemberDogInfoPage } from "./MemberPage/MemberDogInfoPage";
 export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEditPage";
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
 export { default as MemberAddDogProfileEditPage } from "./MemberPage/MemberAddDogProfileEditPage";
+export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFunnel";
 
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";

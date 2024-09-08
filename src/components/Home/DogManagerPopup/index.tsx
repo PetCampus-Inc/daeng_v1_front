@@ -8,13 +8,9 @@ import { DogAvatar, DogItem, ListContent, Name } from "./styles";
 import { BottomSheet, type BottomSheetProps } from "../../common/BottomSheet";
 import { Img } from "../styles";
 
-interface PopupProps extends BottomSheetProps {
-  memberId: number;
-}
-
-const DogManagerPopup = ({ isOpen, close, memberId }: PopupProps) => {
+const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
   const [selectedDogId, setSelectedDogId] = useRecoilState(dogIdState);
-  const { data: dogList } = useGetDogs(memberId);
+  const { data: dogList } = useGetDogs();
 
   const getIsActive = (id: number) => selectedDogId === id;
 

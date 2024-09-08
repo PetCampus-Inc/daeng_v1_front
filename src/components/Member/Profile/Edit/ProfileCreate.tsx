@@ -52,12 +52,11 @@ const ProfileCreate = ({
       </S.ProfileBox>
 
       <S.StyledHiddenUpload
-        {...register(registerText, { required: true })}
+        {...register(registerText, { required: true, onChange: (e) => handleFileChange(e, type) })}
         id="uploadProfile"
         type="file"
         ref={fileInputRef}
         accept={ACCEPT_FILE_TYPE.IMAGE}
-        onChange={(e) => handleFileChange(e, type)}
       />
       <Text as="span" typo="body2_16_R" color="gray_2">
         {type === TYPE_NAME.MEMBER ? "내 프로필" : "강아지 프로필"}

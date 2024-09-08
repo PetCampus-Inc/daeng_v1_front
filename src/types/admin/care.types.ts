@@ -2,7 +2,6 @@ import type { Poop } from "./attendance.type";
 import type { Nullable } from "../helper.types";
 
 export interface ICareDogProps {
-  adminId: number;
   selectedDogId: number[];
 }
 
@@ -27,7 +26,6 @@ export interface IReqGallery {
 
 export interface ICareTempSave {
   agendaId: number;
-  adminId: number;
   dogId: number;
   agendaNote: string;
   snack: string;

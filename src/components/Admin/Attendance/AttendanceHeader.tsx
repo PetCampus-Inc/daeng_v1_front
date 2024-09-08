@@ -1,6 +1,7 @@
 import FootIcon from "assets/svg/foot-icon";
 import { Flex, Text } from "components/common";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
+import { useTokenHandler } from "hooks/common/useTokenHandler";
 import { useSearchParams } from "react-router-dom";
 
 import { AttendanceButton, FootButton } from "./styles";
@@ -14,7 +15,8 @@ export function AttendanceHeader({ isFocused, mode }: AttendanceHeaderProps) {
   const [_, setSearchParams] = useSearchParams();
   const isAttendMode = mode === "attend";
 
-  const { schoolName, adminName, role: adminRole } = useAdminInfo();
+  const { schoolName, adminName } = useAdminInfo();
+  const { role: adminRole } = useTokenHandler();
 
   const handlerModeChange = () => {
     if (isAttendMode) {

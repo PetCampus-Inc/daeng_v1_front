@@ -1,10 +1,10 @@
 import type { CSSProperties } from "react";
 
-import type { ColorKeys } from "styles/types";
+import type { ColorKeys, ShadowKeys, TypoKeys } from "styles/types";
 
-export type SizeType = string | "full" | "fit" | "min" | "max" | "auto";
+export type SizeType = string | number | "full" | "fit" | "min" | "max" | "auto";
 export type SpaceType = number | string;
-export type RadiusType = string | number | "rectangle" | "circle";
+export type RadiusType = string | number | "rectangle" | "circle" | "full";
 
 export type DisplayProps = {
   display?: CSSProperties["display"];
@@ -93,7 +93,6 @@ export type TextStyleProps = {
   textAlign?: CSSProperties["textAlign"];
   lineHeight?: CSSProperties["lineHeight"];
   letterSpacing?: CSSProperties["letterSpacing"];
-  whiteSpace?: CSSProperties["whiteSpace"];
   textOverflow?: CSSProperties["textOverflow"];
   wordBreak?: CSSProperties["wordBreak"];
   textDecoration?: CSSProperties["textDecoration"];
@@ -113,8 +112,15 @@ export type RadiusProps = {
   radius?: RadiusType;
 };
 
+export type WrapProps = {
+  whiteSpace?: CSSProperties["whiteSpace"];
+  textWrap?: CSSProperties["textWrap"];
+};
+
 export type OtherProps = {
   overflow?: CSSProperties["overflow"];
   overflowX?: CSSProperties["overflowX"];
   overflowY?: CSSProperties["overflowY"];
+  shadow?: ShadowKeys;
+  typo?: TypoKeys;
 };

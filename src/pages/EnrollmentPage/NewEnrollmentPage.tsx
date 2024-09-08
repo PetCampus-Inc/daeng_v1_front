@@ -8,27 +8,22 @@ import MemberInfo from "components/Enrollment/Form/MemberInfo";
 import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
 import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
 import TicketInfo from "components/Enrollment/Form/TicketInfo";
+import MemberDogInfo from "components/Enrollment/MemberDogInfoForm/DogInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
-import { AUTH_MEMBER_ID } from "store/auth";
 import { isEmpty } from "utils/is";
 
 interface EnrollmentProps {
   schoolId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.
-  isMemberAddDog?: boolean; // MEMO: 마이페이지에서 강아지 추가할 경우
 }
 
-const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
-  // FIXME: memberId가 없을 경우 예외처리 필요
-  const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID) ?? "";
-
-  const { data } = useGetEnrollment({ memberId, schoolId: schoolId ?? -1 });
+const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
+  const { data } = useGetEnrollment({ schoolId: schoolId ?? -1 });
   const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
 
   const methods = useForm({
@@ -37,20 +32,14 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
     defaultValues: { ...defaultFormValues, ...rest }
   });
 
-  const visibleSteps = (isMemberAddDog ? MEMBER_DOG_ADD_ENROLL_STEP : MEMBER_ENROLL_STEP).filter(
-    (step) => step.isVisible(pickDropState)
-  );
+  const visibleSteps = MEMBER_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));
   const maxSteps = visibleSteps.length;
 
   const { currentStep, nextStep, prevStep, setStep } = useStep(maxSteps - 1);
 
-  const currentTitle = isMemberAddDog
-    ? MEMBER_DOG_ADD_ENROLL_STEP[currentStep].title
-    : MEMBER_ENROLL_STEP[currentStep].title;
+  const currentTitle = MEMBER_ENROLL_STEP[currentStep].title;
 
-  const currentSubtitle = isMemberAddDog
-    ? MEMBER_DOG_ADD_ENROLL_STEP[currentStep].subtitle
-    : MEMBER_ENROLL_STEP[currentStep].subtitle;
+  const currentSubtitle = MEMBER_ENROLL_STEP[currentStep].subtitle;
 
   const indicators = visibleSteps.map((step) => step.indicator);
 
@@ -84,11 +73,9 @@ const NewEnrollmentPage = ({ schoolId, isMemberAddDog }: EnrollmentProps) => {
           </S.TopWrapper>
           <FormProvider {...methods}>
             <S.ContentWrapper>
-              {!isMemberAddDog && (
-                <S.Content $isVisible={currentStep === 0}>
-                  <MemberInfo requiredItems={requiredItemList} />
-                </S.Content>
-              )}
+              <S.Content $isVisible={currentStep === 0}>
+                <MemberInfo requiredItems={requiredItemList} />
+              </S.Content>
               <S.Content $isVisible={currentStep === 1}>
                 <DogInfo requiredItems={requiredItemList} />
               </S.Content>

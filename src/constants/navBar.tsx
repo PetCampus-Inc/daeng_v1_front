@@ -71,7 +71,7 @@ export const MENU_ITEMS = {
     {
       id: 1,
       text: "마이페이지",
-      path: (memberId: string) => PATH.MEMBER_MY_PAGE(memberId),
+      path: PATH.MEMBER_MY_PAGE,
       blackImage: <MyPageDogBlack />,
       colorImage: <MyPageDog />
     }

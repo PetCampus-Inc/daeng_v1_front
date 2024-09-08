@@ -2,35 +2,25 @@ import { FIELD } from "constants/field";
 
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
-import KeyboardCompleteButton from "components/Member/MyPage/Buttons/KeyboardCompleteButton";
 import SaveButton from "components/Member/MyPage/Buttons/SaveButton";
 import { PageContainer } from "components/Member/MyPage/Container/styles";
 import MyInfoEdit from "components/Member/MyPage/MyMemberInfoEdit/MyInfoEdit";
 import MyProfileEdit from "components/Member/MyPage/MyMemberInfoEdit/MyProfileEdit";
 import { ContentContainer } from "components/Member/MyPage/styles";
-import { useGetEnrollment } from "hooks/api/member/enroll";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
-import { useBlocker, useParams } from "react-router-dom";
-import { getLabelForValue } from "utils/formatter";
+import { useBlocker } from "react-router-dom";
 
 const MemberMyInfoEditPage = () => {
-  const { memberId } = useParams();
-  const { data } = useGetEnrollment({ memberId: "1", schoolId: 2 });
-  const { data: memberData } = useGetMemberProfileInfo(memberId);
-
-  // FIXME: `useGetMemberProfileInfo` select 단에서 데이터 가공해주면 좋을 것 같습니다.
-  const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, memberData.memberGender);
+  const { data: memberData } = useGetMemberProfileInfo();
+  const { memberProfileUri } = memberData;
 
   const methods = useForm({
     mode: "onBlur",
-    defaultValues: { ...memberData, memberGender: formatMemberGender }
+    defaultValues: { ...memberData, profileUri: memberProfileUri }
   });
 
-  const { requiredItemList } = data;
   const blocker = useBlocker(() => methods.formState.isDirty);
-
-  if (!memberId) throw new Error("memberId가 없습니다.");
 
   return (
     <>
@@ -42,13 +32,13 @@ const MemberMyInfoEditPage = () => {
         />
       ) : null}
       <Header type="text" text="프로필 수정" transparent />
-      <PageContainer pt="1" color="br_5">
+      <PageContainer pt="1" backgroundColor="br_5">
         <FormProvider {...methods}>
           <MyProfileEdit />
           <ContentContainer px="1.5" py="1" height="auto">
-            <MyInfoEdit requiredItems={requiredItemList} />
+            <MyInfoEdit />
           </ContentContainer>
-          <SaveButton memberId={memberId} />
+          <SaveButton />
         </FormProvider>
         {/* <KeyboardCompleteButton
           memberData={memberData}

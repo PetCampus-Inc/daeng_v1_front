@@ -1,8 +1,13 @@
+import authAxios from "libs/AuthAxios";
 import { request } from "libs/AuthAxios/request";
 
 import type { MemberFormData } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
-import type { EnrollmentDataType } from "types/member/enrollment.types";
+import type {
+  EnrollmentDataType,
+  IEnrollmentDeleteData,
+  IEnrollmentStatus
+} from "types/member/enrollment.types";
 
 /**
  * @description 견주 가입신청서 보기 - 승인 대기중인 견주의 가입신청서를 보여줍니다.
@@ -35,4 +40,38 @@ export const handlePostAdminForm = async (req: AdminEnrollmentInfoType) => {
     method: "POST",
     data: { ...req }
   });
+};
+
+// NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
+/**
+ * @description 가입신청서 상태 정보 반환 - 견주가 작성한 가입신청서 상태를 확인할 수 있습니다.
+ * @param {IEnrollmentStatus} enrollmentFormIds
+ * @returns
+ */
+export const handleGetEnrollmentStatus = async (
+  enrollmentFormIds: string[]
+): Promise<IEnrollmentStatus[]> => {
+  if (!Array.isArray(enrollmentFormIds)) return (enrollmentFormIds = []);
+
+  const req = enrollmentFormIds.map(async (id) => {
+    const url = `admin/enrollment/status?enrollmentFormId=${id}`;
+    const { data } = await authAxios.get(url);
+    return data.data;
+  });
+
+  return await Promise.all(req);
+};
+
+// NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
+/**
+ * @description 가입싱천서 삭제 - 가입신청서를 완전히 삭제합니다.
+ * @param {IEnrollmentDeleteData} enrollmentFormId
+ * @returns
+ */
+export const handleDeleteEnrollment = async (
+  enrollmentFormId: string
+): Promise<IEnrollmentDeleteData> => {
+  const url = `admin/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await authAxios.post(url);
+  return data.data;
 };

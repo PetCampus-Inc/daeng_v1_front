@@ -8,6 +8,11 @@ export const SIGNUP_PATH = {
   가입신청서_작성: "form" as const
 };
 
+export const MEMBER_ENROLLMENT_PATH = {
+  유치원_검색: "search" as const,
+  가입신청서_작성: "form" as const
+};
+
 export const ADMIN_SIGNUP_PATH = {
   역할_선택: "role" as const,
   유치원_검색: "search" as const,
@@ -32,7 +37,7 @@ const ADMIN_PATH = {
   ADMIN_LOGIN: `/${ADMIN}/${LOGIN}`,
   ADMIN_SIGNUP: `/${ADMIN}/${SIGNUP}`,
   ADMIN_ATTENDANCE: `/${ADMIN}/attendance`, // 출석부
-  ADMIN_ATTENDANCE_INFO: (dogId?: string) => `/${ADMIN}/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
+  ADMIN_ATTENDANCE_INFO: (dogId?: number) => `/${ADMIN}/attendance/${dogId ?? ":dogId"}`, // 출석부 강아지 상세정보
   ADMIN_ATTENDANCE_INFO_GALLERY: (dogId?: string) =>
     `/${ADMIN}/attendance/${dogId ?? ":dogId"}/gallery`, // 출석부 강아지 갤러리
   ADMIN_ATTENDANCE_INFO_NEW_TICKET: (dogId?: number) =>
@@ -69,13 +74,10 @@ const MEMBER_PATH = {
   ALBUM: "/album",
   AGENDA: (dogId?: number) => `/agenda/${dogId ?? ":dogId"}`,
 
-  MEMBER_MY_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}`,
-  MEMBER_MY_INFO_PAGE: (memberId?: string) => `/${MYPAGE}/${memberId ?? ":memberId"}/profile`,
-  MEMBER_MY_INFO_EDIT_PAGE: (memberId?: string) =>
-    `/${MYPAGE}/${memberId ?? ":memberId"}/profile/edit`,
+  MEMBER_MY_PAGE: `/${MYPAGE}"}`,
+  MEMBER_MY_INFO_PAGE: `/${MYPAGE}"}/profile`,
+  MEMBER_MY_INFO_EDIT_PAGE: `/${MYPAGE}/profile/edit`,
   MEMBER_MY_SCHOOL_INFO: (dogId?: string) => `/${MYPAGE}/dog/${dogId ?? ":dogId"}/school`,
-  MEMBER_MY_SCHOOL_SEARCH: (memberId?: string) =>
-    `/${MYPAGE}/${memberId ?? ":memberId"}/dog/school/search`, // 견주 유치원 검색
   MEMBER_MY_ENROLLMENT: (memberId?: string) =>
     `/${MYPAGE}/${memberId ?? ":memberId"}/dog/enrollment`, // 강아지 추가
 
@@ -83,9 +85,10 @@ const MEMBER_PATH = {
   MEMBER_DOG_INFO_EDIT_PAGE: (dogId?: string) => `/dog-info/${dogId ?? ":dogId"}/edit`, // 강아지 가입정보 수정
   MEMBER_DOG_ENROLLMENT_INFO_PAGE: (dogId?: string) =>
     `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`, // 강아지 가입신청서 보기 (read only)
-  // MEMBER_PROFILE_EDIT_PAGE: (memberId?: string) => `/profile/${memberId ?? ":memberId"}/edit`, // 온보딩 후 초기 프로필 설정
+  // MEMBER_PROFILE_EDIT_PAGE: `/profile/edit`, // 온보딩 후 초기 프로필 설정
   MEMBER_PROFILE_EDIT_PAGE: `/profile`, // 온보딩 후 초기 프로필 설정
-  MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog` // 추가된 강아지 홈 프사 설정
+  MEMBER_ADD_DOG_PROFILE_EDIT_PAGE: `/profile/dog`, // 추가된 강아지 홈 프사 설정
+  MEMBER_ENROLLMENT_PAGE: `/${MYPAGE}/enrollment` // 강아지 추가, 유치원 재가입 페이지
 };
 
 const PUBLIC_PATH = {
@@ -93,7 +96,6 @@ const PUBLIC_PATH = {
   HOME: "/home",
   LOGIN: `/${LOGIN}`,
   SIGNUP: `/${SIGNUP}`,
-  NATIVE_LOGIN: `/${LOGIN}/oauth2/native-redirect`,
   REDIRECT: "/login/oauth2/code/:provider", // 소셜 로그인 리다이렉트
   UNREGISTER: "/unregister", // 회원탈퇴 페이지
   UNREGISTER_SUCCESS: "/unregister/success", // 회원탈퇴 성공 페이지

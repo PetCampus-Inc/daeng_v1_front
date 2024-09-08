@@ -3,8 +3,10 @@ import { QUERY_KEY } from "constants/queryKey";
 import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import {
   IEnrollmentProps,
+  MemberDogEnrollmentProps,
   handleGetBreed,
   handleGetEnrollment,
+  handleGetMemberDogEnrollment,
   handlePostEnrollment
 } from "apis/member/enrollment.api";
 import { Adapter } from "libs/adapters";
@@ -17,10 +19,10 @@ import type {
 } from "types/member/enrollment.types";
 
 // 가입신청서 조회
-export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
+export const useGetEnrollment = ({ schoolId }: IEnrollmentProps) => {
   return useSuspenseQuery<EnrollmentDataType, Error, EnrollmentFormDataType>({
-    queryKey: QUERY_KEY.ENROLLMENT(schoolId, memberId),
-    queryFn: () => handleGetEnrollment({ schoolId, memberId }),
+    queryKey: QUERY_KEY.ENROLLMENT(schoolId),
+    queryFn: () => handleGetEnrollment({ schoolId }),
     refetchOnWindowFocus: false,
     select: (data) => {
       const fromData = Adapter.from(data).to<EnrollmentDataType, EnrollmentFormDataType>((item) => {
@@ -30,6 +32,14 @@ export const useGetEnrollment = ({ memberId, schoolId }: IEnrollmentProps) => {
 
       return { ...fromData, pickDropState: data.pickDropState };
     }
+  });
+};
+
+// 강아지 유치원 재등록 가입신청서 조회
+export const useGetMemberDogEnrollment = ({ dogId, schoolId }: MemberDogEnrollmentProps) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.DOG_ENROLLMENT(dogId, schoolId),
+    queryFn: () => handleGetMemberDogEnrollment({ dogId, schoolId })
   });
 };
 

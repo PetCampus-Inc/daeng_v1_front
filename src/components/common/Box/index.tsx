@@ -2,7 +2,11 @@ import { forwardRef, type ReactElement, type ElementType } from "react";
 
 import { StyledBox } from "./styles";
 
-import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "../../../styles/system";
+import type {
+  PolymorphicComponentPropsWithRef,
+  PolymorphicRef,
+  WrapProps
+} from "../../../styles/system";
 import type {
   DisplayProps,
   BorderProps,
@@ -25,6 +29,7 @@ export type BoxOptions = DisplayProps &
   TextStyleProps &
   BorderProps &
   RadiusProps &
+  WrapProps &
   OtherProps;
 
 type BoxProps<C extends ElementType> = PolymorphicComponentPropsWithRef<C, BoxOptions>;

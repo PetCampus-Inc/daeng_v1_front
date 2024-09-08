@@ -1,55 +1,45 @@
-import { PATH } from "constants/path";
+import { ACCESS_TOKEN_KEY, SCHOOL_NAME_KEY } from "constants/storage";
 
 import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
-import { postMemberLogin } from "apis/member/member.api";
-import { useLocalStorageClear, useSetLocalStorage } from "hooks/common/useLocalStorage";
+import { postMemberLogin, postMemberSuperLogin } from "apis/member/member.api";
+import { useSetLocalStorage } from "hooks/common/useLocalStorage";
+import { useRoleBasedPath } from "hooks/common/useRoleBasedPath";
+import usePostNativeMessage from "hooks/native/useNativeMessage";
 import { useNavigate } from "react-router-dom";
-import { ACCESS_TOKEN_KEY, AUTH_KEY, AUTH_MEMBER_ID } from "store/auth";
+import { useSetRecoilState } from "recoil";
+import { adminInfoState } from "store/admin";
+import { dogIdState } from "store/member";
 import { AdminAuthType } from "types/admin/admin.types";
-import { Role } from "types/common/role.types";
-import { ApprovalStatus } from "types/common/status.types";
 import { MemberAuthData } from "types/member/auth.types";
-import { isAdmin, isApproval } from "utils/is";
-
-const ROLE_MAP: { [key in ApprovalStatus]: string } = {
-  APPROVED: "approved",
-  APPROVAL_PENDING: "pending",
-  APPROVAL_DENIED: "denied",
-  APPROVAL_CANCEL: "cancel"
-};
+import { isApproval } from "utils/is";
+import { extractRoleByToken, removeBearerPrefix } from "utils/token";
 
 /**
  * 관리자(원장님/선생님)의 로그인을 처리합니다. 로그인 성공 시,
- * 로컬 스토리지에 AccessToken 및 MemberID를 저장하고, Role 상태에 따라 페이지가 이동됩니다.
+ * 로컬 스토리지에 AccessToken를 저장하고, Role 상태에 따라 페이지가 이동됩니다.
  */
 export const useAdminLogin = () => {
   const navigate = useNavigate();
-  const setStorage = useSetLocalStorage();
-  const clearStorage = useLocalStorageClear();
+  const getRoleBasedPath = useRoleBasedPath();
+  const postMessage = usePostNativeMessage();
 
-  const handleLoginSuccess = (response: AdminAuthType) => {
-    const { adminId, role, schoolName } = response;
+  const setLocalStorage = useSetLocalStorage();
+  const setAdmin = useSetRecoilState(adminInfoState);
 
-    clearStorage();
-    setStorage({ key: AUTH_KEY, value: response });
+  const handleLoginSuccess = (response: { data: AdminAuthType; accessToken: string }) => {
+    const accessToken = removeBearerPrefix(response.accessToken);
+    const role = extractRoleByToken(accessToken);
+    if (!role) throw new Error("로그인 실패");
 
-    if (isAdmin(role)) navigate(PATH.ADMIN_ATTENDANCE, { replace: true });
-    // else if (role === Role.WITHDRAWN) navigate(PATH.ADMIN_LOGIN, { replace: true });
-    // else if (role === Role.APPROVAL_CANCEL)
-    //   navigate(PATH.ADMIN_SIGNUP_SCHOOL_SEARCH, { replace: true, state: { adminId, schoolName } });
-    else if (isApproval(role)) {
-      const status = ROLE_MAP[role];
-      navigate(PATH.APPROVAL_STATUS, {
-        replace: true,
-        state: {
-          userId: adminId,
-          type: "admin",
-          schoolName: schoolName,
-          status: status
-        }
-      });
-    }
+    setAdmin(response.data);
+    setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
+    if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
+
+    postMessage("REFRESH_TOKEN", null);
+
+    const basedPath = getRoleBasedPath(role);
+    navigate(basedPath, { replace: true });
   };
 
   const { mutate } = useMutation({
@@ -64,38 +54,68 @@ export const useAdminLogin = () => {
 
 /**
  * 멤버(견주)의 로그인을 처리합니다. 로그인 성공 시,
- * 로컬 스토리지에 AccessToken 및 MemberID를 저장하고, Role 상태에 따라 페이지가 이동됩니다.
+ * 로컬 스토리지에 AccessToken를 저장하고, Role 값에 따라 페이지가 이동됩니다.
  */
 export const useMemberLogin = () => {
   const navigate = useNavigate();
-  const setStorage = useSetLocalStorage();
-  const clearStorage = useLocalStorageClear();
+  const getRoleBasedPath = useRoleBasedPath();
+  const postMessage = usePostNativeMessage();
+
+  const setLocalStorage = useSetLocalStorage();
+  const setDogId = useSetRecoilState(dogIdState);
 
   const handleLoginSuccess = (response: { data: MemberAuthData; accessToken: string }) => {
-    const { memberId, role, schoolName } = response.data;
+    const accessToken = removeBearerPrefix(response.accessToken);
+    const role = extractRoleByToken(accessToken);
+    if (!role) throw new Error("로그인 실패");
 
-    clearStorage();
-    setStorage({ key: ACCESS_TOKEN_KEY, value: response.accessToken });
-    setStorage({ key: AUTH_MEMBER_ID, value: memberId });
+    setDogId(response.data.dogId);
+    setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
+    if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
 
-    if (role === Role.ROLE_ANONYMOUS) navigate(PATH.SIGNUP, { replace: true });
-    else if (role === Role.ROLE_MEMBER) navigate(PATH.ROOT, { replace: true });
-    // else if (role === Role.WITHDRAWN) navigate(PATH.LOGIN, { replace: true });
-    // else if (role === Role.APPROVAL_CANCEL) navigate(PATH.MEMBER_SCHOOL_SEARCH, { replace: true });
-    else if (isApproval(role)) {
-      const status = ROLE_MAP[role];
-      navigate(PATH.APPROVAL_STATUS, {
-        replace: true,
-        state: {
-          userId: memberId,
-          type: "member",
-          schoolName: schoolName,
-          status: status
-        }
-      });
-    }
+    postMessage("REFRESH_TOKEN", null);
+
+    const basedPath = getRoleBasedPath(role);
+    navigate(basedPath, { replace: true });
   };
 
-  const { mutate } = useMutation({ mutationFn: postMemberLogin, onSuccess: handleLoginSuccess });
+  const { mutate } = useMutation({
+    mutationFn: postMemberLogin,
+    onSuccess: handleLoginSuccess,
+    throwOnError: false,
+    retry: 0
+  });
+
+  return { mutateLogin: mutate };
+};
+
+/** 웹 환경 개발용 멤버 로그인 */
+export const useMemberSuperLogin = () => {
+  const navigate = useNavigate();
+  const getRoleBasedPath = useRoleBasedPath();
+
+  const setLocalStorage = useSetLocalStorage();
+  const setDogId = useSetRecoilState(dogIdState);
+
+  const handleLoginSuccess = (response: { data: MemberAuthData; accessToken: string }) => {
+    const accessToken = removeBearerPrefix(response.accessToken);
+    const role = extractRoleByToken(accessToken);
+    if (!role) throw new Error("로그인 실패");
+
+    setDogId(response.data.dogId);
+    setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
+    if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
+
+    const basedPath = getRoleBasedPath(role);
+    navigate(basedPath, { replace: true });
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: postMemberSuperLogin,
+    onSuccess: handleLoginSuccess,
+    throwOnError: false,
+    retry: 0
+  });
+
   return { mutateLogin: mutate };
 };

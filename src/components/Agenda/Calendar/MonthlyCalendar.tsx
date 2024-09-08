@@ -5,21 +5,22 @@ import { Box, Text } from "components/common";
 import { format, isSameDay, parseISO } from "date-fns";
 import React, { useCallback, useEffect, useRef } from "react";
 import Calendar, { type OnArgs } from "react-calendar";
-import { getClosestValidDate } from "utils/date";
 
 import { StyledMonthlyCalendar, GoToTodayButton } from "./styles";
 
+import type { DogInfoRecordType } from "hooks/api/admin/dogs";
 import type { Value } from "react-calendar/dist/cjs/shared/types";
-import type { DogInfoRecord } from "types/member/dogs";
 
 const ATTEND_DAYS = ["2024-07-17", "2024-07-17", "2024-07-21", "2024-07-23"];
 
 interface MonthlyCalendarProps {
-  data: DogInfoRecord[];
+  attendData?: DogInfoRecordType[];
   today: Date;
   onDateChange: (newDate: Value) => void;
   onTodayClick: () => void;
-  activeDate: Date | null;
+  date: Date | null;
+  activeStartDate: Date | null;
+  onActiveStartDateChange: (arg: OnArgs) => void;
   onOpenMonthPicker: () => void;
   headerRef: React.RefObject<HTMLDivElement>;
 }
@@ -51,33 +52,23 @@ const TileContent = ({ date, view, today }: { date: Date; view: string; today: D
  * Monthly Calendar
  * -----------------------------------------------------------------------------------------------*/
 
+// FIXME: api 수정이 안돼서 하드코딩함 지워주세요~
 const USER_REGISTRATION_DATE = parseISO("2024-06-28");
 
 export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
   const {
-    data,
+    attendData,
     today,
-    activeDate,
+    date,
     onDateChange,
+    activeStartDate,
+    onActiveStartDateChange,
     onTodayClick,
     onOpenMonthPicker,
     headerRef: calendarRef
   } = props;
 
   const todayButtonRef = useRef<HTMLButtonElement>(null);
-
-  const handleActiveDateChange = ({ view, activeStartDate }: OnArgs) => {
-    // month가 변경될 때 activeDate를 변경해 표시범위를 조정
-    if (view === "month" && activeStartDate) {
-      // 가입일 이후, 오늘 이전의 가장 가까운 날짜로 activeDate를 변경
-      const selectableDate = getClosestValidDate({
-        date: activeStartDate,
-        maxDate: today,
-        minDate: USER_REGISTRATION_DATE
-      });
-      onDateChange(selectableDate);
-    }
-  };
 
   const adjustTodayButtonPosition = useCallback(() => {
     // "오늘" 버튼을 캘린더 타이틀 위치에 정확히 위치하도록 설정
@@ -108,10 +99,10 @@ export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
   return (
     <StyledMonthlyCalendar ref={calendarRef}>
       <Calendar
-        value={activeDate}
+        value={date}
         onChange={onDateChange}
-        activeStartDate={activeDate || undefined}
-        onActiveStartDateChange={handleActiveDateChange}
+        activeStartDate={activeStartDate || undefined}
+        onActiveStartDateChange={(args: OnArgs) => onActiveStartDateChange(args)}
         formatDay={(locale, date) => format(date, "d")}
         formatWeekday={(locale, date) => format(date, "E")}
         formatMonthYear={(locale, date) => format(date, "yyyy. MM")}

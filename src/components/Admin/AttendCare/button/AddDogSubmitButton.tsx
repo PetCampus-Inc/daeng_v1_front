@@ -5,11 +5,7 @@ import { useOverlay } from "hooks/common/useOverlay";
 
 import { useSelectedDogs } from "../hooks/useSelectedDogs";
 
-type AddDogSubmitButtonProps = {
-  adminId?: number;
-};
-
-const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
+const AddDogSubmitButton = () => {
   const overlay = useOverlay();
 
   const openBlockingPopup = () =>
@@ -27,13 +23,12 @@ const AddDogSubmitButton = ({ adminId }: AddDogSubmitButtonProps) => {
   // FIXME: 고려해야할 점) mutation 후 onSuccess가 실행되지 않았을 때 adminName으로 본인일 시에 핸들링 필요..!!
   const { mutateCreateCareDogs } = useCreateCareDogs({ openBlockingPopup });
 
-  if (!adminId) throw new Error("adminId가 없습니다!");
   const [selectedDogs, _] = useSelectedDogs();
 
   const selectedDogId = selectedDogs.map((dog) => dog.attendanceId);
 
   const handleSubmit = () => {
-    mutateCreateCareDogs({ adminId, selectedDogId });
+    mutateCreateCareDogs({ selectedDogId });
   };
 
   return (

@@ -1,7 +1,6 @@
-import type { IconSize } from "./types";
+import type { IconProps } from "./types";
 
-interface Props extends IconSize {
-  className?: string;
+interface Props extends Omit<IconProps, "color"> {
   colorScheme?:
     | "gray_1"
     | "gray_2"
@@ -13,7 +12,7 @@ interface Props extends IconSize {
     | "none";
 }
 
-const ArrowRightIcon = ({ className = "", w = "24", h = w, colorScheme = "none" }: Props) => {
+const ArrowRightIcon = ({ w = "24", h = w, colorScheme = "none" }: Props) => {
   const colorMap = new Map<string, string>([
     ["gray_1", "#525252"],
     ["gray_2", "#858585"],
@@ -26,7 +25,6 @@ const ArrowRightIcon = ({ className = "", w = "24", h = w, colorScheme = "none" 
   ]);
   return (
     <svg
-      className={className}
       width={w}
       height={h}
       viewBox="0 0 24 24"

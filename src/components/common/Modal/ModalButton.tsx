@@ -5,7 +5,7 @@ import { useModal } from "../BottomSheet/BottomSheetContext";
 
 export type ColorKeysScheme = "primary" | "red";
 
-export interface TicketInfo {
+export interface ModalButtonProps {
   actionText: string;
   closeText?: string;
   actionFn: () => void | Promise<void>;
@@ -13,7 +13,7 @@ export interface TicketInfo {
   colorScheme?: ColorKeysScheme;
 }
 
-export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, TicketInfo {}
+export interface Props extends ButtonHTMLAttributes<HTMLButtonElement>, ModalButtonProps {}
 
 export const ModalButton = ({
   closeText,
@@ -22,7 +22,7 @@ export const ModalButton = ({
   actionFn,
   colorScheme = "primary",
   ...props
-}: ModalButtonProps) => {
+}: Props) => {
   const modal = useModal();
 
   const defaultCloseFn = closeFn ? closeFn : modal?.onClose;

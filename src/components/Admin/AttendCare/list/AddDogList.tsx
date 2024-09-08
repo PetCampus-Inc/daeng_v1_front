@@ -8,14 +8,8 @@ import AddDogCard from "../card/AddDogCard";
 import EmptyCard from "../empty/EmptyDog";
 import { useSelectedDogs } from "../hooks/useSelectedDogs";
 
-type AddDogList = {
-  adminId?: number;
-};
-
-const AddDogList = ({ adminId }: AddDogList) => {
-  if (!adminId) throw new Error("adminId가 없습니다!");
-
-  const { data, isFetchedAfterMount } = useGetNewCareDogs(adminId);
+const AddDogList = () => {
+  const { data, isFetchedAfterMount } = useGetNewCareDogs();
   const [selectedDogs, dispatch] = useSelectedDogs();
 
   const addDog = (dog: ICareDogInfo) => {

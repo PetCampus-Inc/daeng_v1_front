@@ -2,28 +2,25 @@ import type { QueryClient } from "@tanstack/react-query";
 
 import { PATH } from "constants/path";
 
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
+import { useTokenHandler } from "hooks/common/useTokenHandler";
 import * as Pages from "pages";
 import { Suspense } from "react";
 import { RouteObject, redirect } from "react-router-dom";
 import caredogLoader from "routes/caredogLoader";
-import { AUTH_KEY } from "store/auth";
-
-import AdminAuthRouter from "./AdminAuthRouter";
-import AuthProvider from "./AuthProvider";
-
-import type { AdminAuthType } from "types/admin/admin.types";
+import PrivateRouter from "routes/PrivateRouter";
+import { Role } from "types/common/role.types";
 
 const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject[] => {
-  const auth = useLocalStorageValue<AdminAuthType | null>(AUTH_KEY, null);
+  const { role } = useTokenHandler();
 
   return [
     {
       path: PATH.ADMIN,
       element: (
-        <AuthProvider>
-          <AdminAuthRouter />
-        </AuthProvider>
+        <PrivateRouter
+          roles={[Role.ROLE_OWNER, Role.ROLE_TEACHER]}
+          redirectPath={PATH.ADMIN_LOGIN}
+        />
       ),
       children: [
         {
@@ -41,7 +38,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               path: PATH.ADMIN_ATTENDANCE_INFO(),
               element: (
                 <Suspense>
-                  <Pages.DogInfoPage />
+                  <Pages.DogDetailInfoPage />
                 </Suspense>
               )
             },
@@ -69,7 +66,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
             {
               index: true,
               id: "caredog",
-              loader: () => caredogLoader({ adminId: auth?.adminId, queryClient }),
+              loader: () => caredogLoader({ queryClient }),
               element: (
                 <Suspense>
                   <Pages.AttendCarePage />
@@ -127,7 +124,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
         {
           // NOTE: 원장 권한의 페이지
           path: PATH.ADMIN_SCHOOL_MANAGE,
-          element: <AdminAuthRouter isOwnerOnly />,
+          element: <PrivateRouter roles={[Role.ROLE_OWNER]} redirectPath={PATH.ADMIN_ATTENDANCE} />,
           children: [
             {
               index: true,
@@ -211,7 +208,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
             {
               index: true,
               element:
-                auth?.role === "ROLE_OWNER" ? (
+                role === Role.ROLE_OWNER ? (
                   <Suspense>
                     <Pages.PrincipalMyPage />
                   </Suspense>

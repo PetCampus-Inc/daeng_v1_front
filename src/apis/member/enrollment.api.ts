@@ -4,49 +4,43 @@ import { request } from "libs/AuthAxios/request";
 import type { IBreedInfo, ISchoolInfo } from "types/admin/school.types";
 import type {
   EnrollmentDataType,
+  EnrollmentDogDataType,
   EnrollmentInfoType,
   IDogEnrollmentInfo
 } from "types/member/enrollment.types";
 import type { IMemberSchoolInfo } from "types/member/school.types";
 
 export interface IEnrollmentProps {
-  memberId: string;
   schoolId: number;
   requestUrl?: string;
 }
 
+export interface MemberDogEnrollmentProps {
+  dogId: string;
+  schoolId: number;
+}
+
 /**
  * @description 견주 가입 신청 폼 데이터 반환 - 앱에서 견주 가입 신청 페이지에 접근합니다.
- * @param {number, string} schoolId, memberId
+ * @param {number, string} schoolId
  */
 export const handleGetEnrollment = async ({
-  schoolId,
-  memberId
+  schoolId
 }: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll`;
-  const { data } = await authAxios.get(url, {
-    params: {
-      schoolId,
-      memberId
-    }
-  });
+  const { data } = await authAxios.get(url, { params: { schoolId } });
   return data.data;
 };
 
 /**
  * @description 견주 가입 신청 URL 반환 - url 로 견주 가입 신청 페이지에 접근합니다.
- * @param {string, string} requestUrl, memberId
+ * @param {string, string} requestUrl
  */
 export const handleGetEnrollmentUrl = async ({
-  requestUrl,
-  memberId
+  requestUrl
 }: IEnrollmentProps): Promise<EnrollmentDataType> => {
   const url = `school/member/enroll/${requestUrl}`;
-  const { data } = await authAxios.get(url, {
-    params: {
-      memberId
-    }
-  });
+  const { data } = await authAxios.get(url);
   return data.data;
 };
 
@@ -124,5 +118,23 @@ export const handlePostMemberDogSchool = async (dogId: string): Promise<void> =>
 export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
   const url = `member/dog/enrollment?dogId=${dogId}`;
   const { data } = await authAxios.get(url);
+  return data.data;
+};
+
+/**
+ * @description 유치원 재등록 가입 신청서 보기 - 유치원 재등록 시 가입 신청서를 보여줍니다.
+ * @param {number, string} dogId, schoolId
+ */
+export const handleGetMemberDogEnrollment = async ({
+  dogId,
+  schoolId
+}: MemberDogEnrollmentProps): Promise<EnrollmentDogDataType> => {
+  const url = `member/school/enroll`;
+  const { data } = await authAxios.get(url, {
+    params: {
+      dogId,
+      schoolId
+    }
+  });
   return data.data;
 };

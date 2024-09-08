@@ -12,8 +12,6 @@ import {
   handleDeleteDog,
   handleGetAttendDogs,
   handleGetAttendSearchDogs,
-  handleGetDogDetail,
-  handleGetDogInfoRecord,
   handleGetSearchDogs,
   handlePostAttend,
   handleSortCharge,
@@ -21,7 +19,6 @@ import {
   handleSortPayment
 } from "apis/admin/attendance.api";
 import { SORT_OPTIONS, type SortOptions } from "components/Admin/Attendance";
-import { format } from "date-fns";
 import showToast from "utils/showToast";
 
 export const useGetAttendDogList = (schoolId: number) => {
@@ -84,12 +81,10 @@ export const useCallMember = (dogId: number) => {
  */
 export const useDogListAndSortedList = ({
   sortName,
-  schoolId,
-  adminId
+  schoolId
 }: {
   sortName: SortOptions;
   schoolId: number;
-  adminId: number;
 }) => {
   const fetchSortedDogs = async () => {
     switch (sortName) {
@@ -100,14 +95,14 @@ export const useDogListAndSortedList = ({
       case SORT_OPTIONS.DATE:
         return await handleSortDate(schoolId);
       case SORT_OPTIONS.CHARGE:
-        return await handleSortCharge(schoolId, adminId);
+        return await handleSortCharge(schoolId);
       default:
         return await handleGetSearchDogs(schoolId);
     }
   };
 
   return useQuery({
-    queryKey: [QUERY_KEY.ATTENDANCE_LIST_SORTNAME, sortName, schoolId, adminId],
+    queryKey: [QUERY_KEY.ATTENDANCE_LIST_SORTNAME, sortName, schoolId],
     queryFn: fetchSortedDogs,
     /**
      * keepPreviousData를 사용하여 이전 데이터를 유지
@@ -116,31 +111,5 @@ export const useDogListAndSortedList = ({
     placeholderData: keepPreviousData,
     gcTime: 5 * 60 * 1000,
     staleTime: 1 * 60 * 1000
-  });
-};
-
-// 강아지 상세 - 강아지 정보 조회
-export const useGetDogDetail = (dogId: number) => {
-  return useSuspenseQuery({
-    queryKey: ["dogDetail", dogId],
-    queryFn: () => handleGetDogDetail(dogId),
-    staleTime: 1000 * 60 * 60,
-    select: (data) => {
-      const { member, ...dogInfo } = data;
-      return {
-        dogInfo,
-        memberInfo: member
-      };
-    }
-  });
-};
-
-// 강아지 상세 - 등원기록 조회
-export const useGetDogInfoRecord = (dogId: number, date?: string) => {
-  return useSuspenseQuery({
-    queryKey: ["dogInfoRecord", dogId, date],
-    queryFn: () => handleGetDogInfoRecord(dogId, date),
-    select: (data) => data.map((item) => format(item.date.join("-"), "yyyy-MM-dd")),
-    staleTime: 1000 * 60 * 60
   });
 };
