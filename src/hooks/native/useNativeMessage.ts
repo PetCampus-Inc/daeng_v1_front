@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { NativeMessageType, NativeMessagePayload } from "types/native/message.types";
 
-export const postMessage = <T extends NativeMessageType<"Request">>(
+export const postNativeMessage = <T extends NativeMessageType<"Request">>(
   type: T,
   data: NativeMessagePayload<"Request", T>
 ) => {
@@ -10,8 +10,8 @@ export const postMessage = <T extends NativeMessageType<"Request">>(
   window.ReactNativeWebView.postMessage(message);
 };
 
-const usePostMessage = () => {
-  return useCallback(postMessage, []);
+const useNativeMessage = () => {
+  return useCallback(postNativeMessage, []);
 };
 
-export default usePostMessage;
+export default useNativeMessage;

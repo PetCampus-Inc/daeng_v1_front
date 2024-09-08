@@ -1,7 +1,6 @@
 export interface NativeMessageMap {
   Request: {
     GO_BACK: null;
-    LOGIN_SUCCESS: null;
     LOGOUT: null;
     REFRESH_TOKEN: null;
   };

@@ -1,4 +1,4 @@
-import { DOG_STATUS } from "constants/memebrDogStatus";
+import { DOG_STATUS } from "constants/memberDogStatus";
 import { PATH } from "constants/path";
 
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
@@ -7,7 +7,7 @@ import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 import { formatDate } from "utils/formatter";
@@ -41,11 +41,10 @@ const MyDogCard = ({
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const setDogId = useSetRecoilState(dogIdState);
-  const { memberId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
-  const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
+  const mutateMemberDogDelete = usePostMemberDogDelete();
   const isProfile = profileUri === null;
 
   const openInvalidInputPopup = () =>

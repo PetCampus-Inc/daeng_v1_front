@@ -3,10 +3,8 @@ import { Role } from "types/common/role.types";
 import type { Nullable } from "../helper.types";
 
 export type AdminAuthType = {
-  adminId: number;
   adminName: string;
   schoolId: number;
-  role: Role;
   schoolName: string;
 };
 

@@ -20,12 +20,12 @@ const SubmitButton = ({ type, onNextStep, onOpenPopup }: SubmitButtonProps) => {
   const { handleSubmit } = useFormContext();
 
   const setStep = useSetRecoilState(currentStepState);
-  const { adminId, schoolId } = useAdminInfo();
+  const { schoolId } = useAdminInfo();
 
   const text = type === "EDIT" ? "수정 완료" : "가입 신청서 등록";
 
   const onSubmit = (data: FieldValues) => {
-    const requestData = { ...data, adminId, schoolId };
+    const requestData = { ...data, schoolId };
     const saveData = Adapter.from(requestData).to<FieldValues, AdminEnrollmentInfoType>((item) =>
       new AdminFormToServerAdapter(item).adapt()
     );

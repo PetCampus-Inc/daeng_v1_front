@@ -5,7 +5,6 @@ import PhoneIcon from "assets/svg/phone-icon";
 import { Box, Flex } from "components/common";
 import { WideButton, XSmallButton } from "components/common/Button/Templates";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 
 import CallSchoolBottomSheet from "./Modal/CallSchoolBottomSheet";
@@ -17,8 +16,7 @@ interface Props {
 }
 
 const SchoolInfoCard = ({ isPrevSchool }: Props) => {
-  const { adminId } = useAdminInfo();
-  const { data } = useGetTeacherInfo(adminId);
+  const { data } = useGetTeacherInfo();
 
   const overlay = useOverlay();
 

@@ -11,11 +11,11 @@ import { MainList } from "./List/MainList";
 import { RootContainer, ScrollableContent } from "./styles";
 
 export function AttendanceMain() {
-  const { schoolId, adminId } = useAdminInfo();
+  const { schoolId } = useAdminInfo();
   const { searchText, isFocused } = MainSearchContext.useSearchContext();
   const sortName = useRecoilValue(sortOptionState);
 
-  const { data: dogList } = useDogListAndSortedList({ sortName, schoolId, adminId });
+  const { data: dogList } = useDogListAndSortedList({ sortName, schoolId });
   const { data: searchList } = useDogSearchQuery(schoolId, searchText);
 
   const data = searchText ? searchList : dogList;

@@ -1,6 +1,6 @@
 import { SocialAuthData, SocialProvider } from "types/member/auth.types";
 
-export interface NativeEventMap {
+export interface NativeActionMap {
   CALL: {
     request: string;
     response: null;
@@ -39,19 +39,19 @@ export interface NativeEventMap {
   };
 }
 
-export type NativeEventType = keyof NativeEventMap;
+export type NativeAction = keyof NativeActionMap;
 
-export type NativeEventPayload<T extends NativeEventType> = NativeEventMap[T];
+export type NativeActionPayload<T extends NativeAction> = NativeActionMap[T];
 
-export type NativeEventRequest<T extends NativeEventType> = {
+export type NativeActionRequest<T extends NativeAction> = {
   id: string;
-  type: T;
-  payload: NativeEventPayload<T>["request"];
+  action: T;
+  payload: NativeActionPayload<T>["request"];
 };
 
-export type NativeEventResponse<T extends NativeEventType> = {
+export type NativeActionResponse<T extends NativeAction> = {
   id: string;
   status: "SUCCESS" | "ERROR";
-  type: T;
-  payload: NativeEventPayload<T>["response"];
+  action: T;
+  payload: NativeActionPayload<T>["response"];
 };

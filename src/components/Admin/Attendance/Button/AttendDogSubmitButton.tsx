@@ -5,14 +5,12 @@ import { useSearchParams } from "react-router-dom";
 import { useAttendanceModeContext } from "../hooks/useAttendanceModeContext";
 
 interface AttendDogSubmitButtonProps {
-  adminId: number;
   schoolId: number;
   onSubmitStart: () => void;
   onSubmitEnd: () => void;
 }
 
 const AttendDogSubmitButton = ({
-  adminId,
   schoolId,
   onSubmitStart,
   onSubmitEnd
@@ -26,7 +24,7 @@ const AttendDogSubmitButton = ({
   const handlePostAttend = () => {
     onSubmitStart();
     mutateAttend(
-      { adminId, schoolId, attendanceIdList: selectedDogIds },
+      { schoolId, attendanceIdList: selectedDogIds },
       {
         onSuccess: () => {
           setSearchParams({});

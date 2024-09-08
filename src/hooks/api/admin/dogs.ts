@@ -15,10 +15,10 @@ import {
 } from "apis/admin/attendance.api";
 import { format } from "date-fns/format";
 import { Adapter, DataFormatAdapter } from "libs/adapters";
+import { AgendaStatus } from "types/common/status.types";
 import { convertArrayToDate } from "utils/date";
 
 import type { DogInfoDetailData } from "types/admin/attendance.type";
-import type { AgendaStatus } from "types/member/dogs";
 
 const STALE_TIME = 1000 * 60 * 60;
 
