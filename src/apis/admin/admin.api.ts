@@ -114,8 +114,8 @@ export const handleGetAlarm = async (req: IAlarmReq) => {
       adminId: req.adminId,
       pageable: {
         page: req.pageable.page,
-        size: 10,
-        sort: [""]
+        size: req.pageable.size,
+        sort: req.pageable.sort
       }
     }
   });

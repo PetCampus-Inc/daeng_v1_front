@@ -26,7 +26,9 @@ const NotificationList = ({ currentStep, adminId, role }: Props) => {
     category: alarmType,
     adminId: adminId,
     pageable: {
-      page: 0
+      page: 0,
+      size: 10,
+      sort: [""]
     }
   };
   const { data } = useGetAlarms(req);
@@ -103,11 +105,15 @@ const NotificationList = ({ currentStep, adminId, role }: Props) => {
                 : item.title}
             </Text>
             <Text typo="label2_14_R" color="gray_1">
-              {typeof item.text === "function" ? item.text(item.ticketType) : item.text}
+              {typeof item.text === "function"
+                ? item.text(item.ticketType, item.ticketExpirationDate, item.ticketStartDate)
+                : item.text}
             </Text>
             {item.subtext && (
               <Text typo="label2_14_R" color="gray_2">
-                {typeof item.subtext === "function" ? item.subtext(item.dogName) : item.subtext}
+                {typeof item.subtext === "function"
+                  ? item.subtext(item.ticketType, item.ticketStartDate, item.allRoundTicket)
+                  : item.subtext}
               </Text>
             )}
             <Text typo="caption1_12_R" color="gray_3">
