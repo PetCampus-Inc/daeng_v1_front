@@ -8,7 +8,7 @@ import type { NewTicketReq } from "types/admin/attendance.type";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 import type { EnrollmentInfoType } from "types/member/enrollment.types";
 
-// 기본 어댑터
+// 기본 어댑터 test
 abstract class BaseAdapter {
   protected value: FieldValues;
 
