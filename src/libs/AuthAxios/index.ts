@@ -10,6 +10,11 @@ interface AuthAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
 
+export const publicAxios: AxiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_SERVER_HOST,
+  withCredentials: true
+});
+
 export const authAxios: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_HOST,
   withCredentials: true
@@ -26,16 +31,19 @@ const onTokenRefreshed = (token: string) => {
 
 authAxios.interceptors.request.use(
   (config) => {
-    const exceptionPath = ["admin/login", "member/firebase/login", "auth/reissue"];
+    const exceptionPath = [
+      "admin/login",
+      "member/super-login",
+      "member/firebase/login",
+      "auth/reissue"
+    ];
 
-    // 로그인/리프레시 요청이 아닌 경우, 헤더에 액세스 토큰 추가
+    // 예외 URL이 아닌 경우, 헤더에 액세스 토큰 추가
     if (config.url && !exceptionPath.includes(config.url)) {
       const item = localStorage.getItem(ACCESS_TOKEN_KEY);
-      const token = item ? JSON.parse(item) : null;
 
-      if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
-      }
+      const token = item ? JSON.parse(item) : null;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
 
     return config;
@@ -49,6 +57,7 @@ authAxios.interceptors.response.use(
 
     if (authHeader) {
       const newToken = removeBearerPrefix(authHeader);
+
       const item = localStorage.getItem(ACCESS_TOKEN_KEY);
       const token = item ? JSON.parse(item) : null;
 
@@ -64,8 +73,9 @@ authAxios.interceptors.response.use(
     if (isAxiosError(error)) {
       const originalRequest = error.config as AuthAxiosRequestConfig;
 
-      if (!originalRequest._retry) {
-        if (error.code === "TOKEN-401-1" || error.code === "TOKEN-401-2") {
+      const code = error.response?.data.code;
+      if (code === "TOKEN-401-2") {
+        if (!originalRequest._retry) {
           originalRequest._retry = true;
 
           // 토큰 발행중일 경우 대기
@@ -80,24 +90,18 @@ authAxios.interceptors.response.use(
 
           isTokenRefreshing = true;
 
-          try {
-            // 액세스 토큰 재발행 후 요청 재전송
-            const newAccessToken = await refreshToken();
-            onTokenRefreshed(newAccessToken);
+          // 액세스 토큰 재발행 후 요청 재전송
+          const newAccessToken = await refreshToken();
+          onTokenRefreshed(newAccessToken);
 
-            originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          isTokenRefreshing = false;
 
-            return authAxios(originalRequest);
-          } catch (refreshError) {
-            // 리프레시 토큰 검증 실패 시 로그아웃
-            logout();
-          } finally {
-            isTokenRefreshing = false;
-          }
-        } else if (error.code === "TOKEN-401-3") {
-          // 액세스 토큰을 찾을 수 없는 경우 로그아웃
-          logout();
+          return authAxios(originalRequest);
         }
+      } else if (code === "TOKEN-401-1" || code === "TOKEN-401-3") {
+        // 액세스 토큰이 만료 되었거나, 찾을 수 없을 경우 로그아웃
+        logout();
       }
     }
 
