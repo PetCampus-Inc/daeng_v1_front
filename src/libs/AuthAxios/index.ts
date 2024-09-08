@@ -43,7 +43,7 @@ authAxios.interceptors.request.use(
       const item = localStorage.getItem(ACCESS_TOKEN_KEY);
 
       const token = item ? JSON.parse(item) : null;
-      config.headers["Authorization"] = `Bearer ${token}`;
+      if (token) config.headers["Authorization"] = `Bearer ${token}`;
     }
 
     return config;
