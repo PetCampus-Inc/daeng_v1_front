@@ -17,7 +17,7 @@ export const useTeacherSinUp = () => {
   return { mutateTeacherSignUp: mutate };
 };
 
-// 선생님 회원가입 요청 취소
+// 선생님 회원가입 요청 취소 test
 export const useTeacherSignUpCancel = () => {
   const { mutate } = useMutation({
     mutationFn: postTeacherSignUpCancel
