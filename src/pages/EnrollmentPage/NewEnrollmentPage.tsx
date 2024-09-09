@@ -1,4 +1,4 @@
-import { MEMBER_DOG_ADD_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
+import { MEMBER_ENROLL_STEP } from "constants/step";
 
 import { Layout } from "components/common";
 import Header from "components/common/Header";
@@ -8,7 +8,6 @@ import MemberInfo from "components/Enrollment/Form/MemberInfo";
 import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
 import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
 import TicketInfo from "components/Enrollment/Form/TicketInfo";
-import MemberDogInfo from "components/Enrollment/MemberDogInfoForm/DogInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
@@ -134,5 +133,8 @@ const defaultFormValues = {
   emergencyPhoneNumber: "",
   allergyDisease: "",
   dogName: "",
-  newBreed: ""
+  newBreed: "",
+  year: "2001",
+  month: "01",
+  day: "01"
 };
