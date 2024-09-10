@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { Text } from "components/common";
 import Badge, { BadgeProps } from "components/common/Badge";
@@ -30,7 +30,9 @@ const MainDogCard = ({ info }: { info: ICareDogInfo }) => {
   return (
     <CardContainer
       key={info.dogId}
-      onClick={() => navigate(PATH.ADMIN_CARE_NOTICE(`${info.dogId}?dog_name=${info.dogName}`))}
+      onClick={() =>
+        navigate(routes.admin.care.notice.dynamic(`${info.dogId}?dog_name=${info.dogName}`))
+      }
     >
       <ListItemImg size="sm">
         <img

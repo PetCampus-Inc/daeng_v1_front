@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { Box, Flex, Layout, Text } from "components/common";
 import LoginButtonGroup from "components/SignIn/LoginButtonGroup";
@@ -33,7 +33,7 @@ const LoginPage = () => {
             <Link to={"이용약관"}>이용약관</Link> |{" "}
             <Link to={"개인정보 처리 방침"}>개인정보 처리 방침</Link>
           </Text>
-          <StyledButton bg="primaryColor" onClick={() => navigate(PATH.ADMIN_LOGIN)}>
+          <StyledButton bg="primaryColor" onClick={() => navigate(routes.admin.login.root)}>
             <Text typo="label1_16_B" color="white">
               관리자로 시작하기
             </Text>

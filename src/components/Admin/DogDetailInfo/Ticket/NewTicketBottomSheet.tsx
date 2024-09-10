@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { Box, Flex } from "components/common";
 import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
@@ -48,7 +48,7 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: NewTicketBottomSheetProps
   const handleNavigate = () => {
     // 쿼리 파라미터를 유지한 채로 이동합니다
     // /admin/attendance/11/new-ticket?dog_name=%EC%A0%9C%EC%8B%9C%EC%B9%B4&ticket_status=true&tab=ticket
-    const path = `${PATH.ADMIN_ATTENDANCE_INFO_NEW_TICKET(info.dogId)}${search}`;
+    const path = `${routes.admin.attendance.newTicket.dynamic(info.dogId)}${search}`;
     navigate(path);
   };
 

@@ -1,5 +1,5 @@
 import { DOG_STATUS } from "constants/memberDogStatus";
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
@@ -68,7 +68,7 @@ const MyDogCard = ({
         subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
         actionText="가입하기"
         actionFn={() => {
-          navigate(PATH.MEMBER_ENROLLMENT_PAGE);
+          navigate(routes.member.mypage.enrollment.root);
           setDogId(Number(dogId));
         }}
       />
@@ -118,7 +118,7 @@ const MyDogCard = ({
         ) : (
           <GotoSchoolInfoButton
             schoolInfo={schoolInfo}
-            onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}
+            onClick={() => navigate(routes.member.mypage.dog.school.dynamic(dogId))}
           />
         )}
         <S.DateText className={isProfile ? "colorGray1" : ""}>{registeredTime} 등록</S.DateText>

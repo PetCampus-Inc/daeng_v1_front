@@ -1,5 +1,5 @@
 import { MENU_ITEMS } from "constants/navBar";
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import usePathParams from "hooks/common/usePathParams";
 import { useTokenHandler } from "hooks/common/useTokenHandler";
@@ -14,7 +14,7 @@ const AdminNavbar = () => {
   const { role } = useTokenHandler();
 
   const menuItems = useMemo(() => {
-    if (!path.includes(PATH.ADMIN)) {
+    if (!path.includes(routes.admin.root)) {
       return;
     }
     if (role === AdminRole.ROLE_TEACHER) {

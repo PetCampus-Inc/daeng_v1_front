@@ -1,4 +1,4 @@
-import { MEMBER_ENROLLMENT_PATH } from "constants/path";
+import { MEMBER_ENROLLMENT_PATH } from "constants/funnelPath";
 
 import { useFunnel } from "hooks/common/useFunnel";
 import MemberDogCreateEnrollmentPage from "pages/EnrollmentPage/MemberDogCreateEnrollmentPage";

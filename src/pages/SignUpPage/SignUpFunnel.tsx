@@ -1,4 +1,4 @@
-import { SIGNUP_PATH } from "constants/path";
+import { SIGNUP_PATH } from "constants/funnelPath";
 
 import { useFunnel } from "hooks/common/useFunnel";
 import { Suspense, useEffect } from "react";

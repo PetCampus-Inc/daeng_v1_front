@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { BottomButton } from "components/common/Button";
 import { useContext, useState } from "react";
@@ -35,7 +35,7 @@ const SubmitButton = () => {
 
     await uploadFiles(params, {
       onSuccess: () => {
-        navigate(PATH.ADMIN_CARE, { replace: true });
+        navigate(routes.admin.care.root, { replace: true });
       }
     });
   };

@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import BuildingIcon from "assets/svg/building-icon";
@@ -58,7 +58,7 @@ const InfoCard = <T extends AdminRole>({ data, role }: InfoCardProps<T>) => {
 
   const moreInfoText = isOwner ? "유치원 정보 수정" : "유치원 정보";
   const handleMoreInfoClick = () => {
-    const path = isOwner ? PATH.ADMIN_MY_SCHOOL_INFO_EDIT : PATH.ADMIN_MY_SCHOOL_INFO;
+    const path = isOwner ? routes.admin.mypage.school.edit.root : routes.admin.mypage.school.root;
     navigate(path);
   };
 

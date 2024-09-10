@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 import { SCHOOL_NAME_KEY } from "constants/storage";
 
 import DogRejectedBgIcon from "assets/svg/dog-rejected-bg-icon";
@@ -20,8 +20,8 @@ export default function ApprovalFailed({ user, schoolName }: ApprovalFailedProps
 
   const handleConfirm = () => {
     removeSchoolName();
-    if (user === User.ADMIN) navigate(PATH.ADMIN_SIGNUP, { replace: true });
-    if (user === User.MEMBER) navigate(PATH.SIGNUP, { replace: true });
+    if (user === User.ADMIN) navigate(routes.admin.signup.root, { replace: true });
+    if (user === User.MEMBER) navigate(routes.signup.root, { replace: true });
   };
 
   return (
