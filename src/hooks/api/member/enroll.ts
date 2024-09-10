@@ -45,30 +45,8 @@ export const useGetMemberDogEnrollment = ({ dogId, schoolId }: MemberDogEnrollme
 
 // 견주 가입신청서 등록
 export const usePostEnrollment = () => {
-  const setEnrollmentFormId = useSetLocalStorage();
-  const storageEnrollmentIds: string[] = useLocalStorageValue("ENROLLMENT_FORM_ID") || [];
   const { mutate } = useMutation({
-    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData),
-    onSuccess: (enrollmentFormId) => {
-      // 데이터 배열 형식으로 저장
-      // let enrollmentIdArr: string[] = [];
-      // try {
-      //   enrollmentIdArr = storageEnrollmentIds;
-      // } catch (err) {
-      //   console.log(err);
-      // }
-      // //parseStorageEnrollmentId가 배열이 아닌 경우
-      // if (!Array.isArray(enrollmentIdArr)) {
-      //   enrollmentIdArr = [];
-      // }
-      // if (!enrollmentIdArr.includes(String(enrollmentFormId))) {
-      //   const updateEnrollmentIds = [...enrollmentIdArr, String(enrollmentFormId)];
-      //   setEnrollmentFormId({
-      //     key: "ENROLLMENT_FORM_ID",
-      //     value: updateEnrollmentIds
-      //   });
-      // }
-    }
+    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData)
   });
 
   return { mutateEnrollment: mutate };
