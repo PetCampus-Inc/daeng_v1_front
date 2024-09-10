@@ -1,14 +1,14 @@
-import { DOG_STATUS } from "constants/memebrDogStatus";
+import { DOG_STATUS } from "constants/memberDogStatus";
 import { PATH } from "constants/path";
 
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
-import { useLocalStorageValue, useSetLocalStorage } from "hooks/common/useLocalStorage";
+import { useLocalStorage, useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import { memo, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 import { IDoglist } from "types/member/main.types";
@@ -40,17 +40,17 @@ const MyDogCard = ({
   onClick,
   isActive
 }: IMyDogCardProps) => {
+  const divRef = useRef<HTMLDivElement>(null);
+  const setDogId = useSetRecoilState(dogIdState);
+  const navigate = useNavigate();
+  const overlay = useOverlay();
+  const mutateMemberDogDelete = usePostMemberDogDelete();
+  const setStoredValue = useSetLocalStorage();
+  const [CURRENT_DOG_ID] = useLocalStorage<string>("CURRENT-DOG-ID", "");
+
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
   const registeredTime = registeredDate && formatDate(year, month, day, "dot");
-  const setDogId = useSetRecoilState(dogIdState);
-  const CURRENT_DOG_ID = useLocalStorageValue<string>("CURRENT-DOG-ID");
-  const { memberId } = useParams();
-  const navigate = useNavigate();
-  const overlay = useOverlay();
-  const divRef = useRef<HTMLDivElement>(null);
-  const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
-  const setStoredValue = useSetLocalStorage();
   const isProfile = profileUri === null;
 
   const openInvalidInputPopup = () =>
@@ -102,7 +102,7 @@ const MyDogCard = ({
   };
 
   const handleFocus = () => {
-    setStoredValue({ key: "CURRENT-DOG-ID", value: dogId });
+    setStoredValue("CURRENT-DOG-ID", dogId);
     onCardFocus(dogId);
   };
 

@@ -1,6 +1,5 @@
 import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
 import { useCreateCareDogs } from "hooks/api/admin/care";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { styled } from "styled-components";
 
@@ -31,11 +30,10 @@ const AddCaredogBottomSheet = ({
   });
   const [selectedDogs, _] = useSelectedDogs();
 
-  const { adminId } = useAdminInfo();
   const selectedDogId = selectedDogs.map((dog) => dog.attendanceId);
 
   const handleSubmit = () => {
-    mutateCreateCareDogs({ adminId, selectedDogId });
+    mutateCreateCareDogs({ selectedDogId });
   };
 
   return (
@@ -47,7 +45,7 @@ const AddCaredogBottomSheet = ({
           관리할 강아지 목록에 추가할 강아지를 선택해 주세요
         </BottomSheet.Subtitle>
         <ListWrapper>
-          <AddDogList adminId={adminId} />
+          <AddDogList />
         </ListWrapper>
         <BottomSheet.Button
           actionText="선택 완료"

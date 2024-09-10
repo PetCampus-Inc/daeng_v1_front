@@ -1,6 +1,7 @@
 import { ADMIN_SIGNUP_PATH, PATH } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
+import SchoolRegistrationCompletePage from "pages/SignUpPage/SchoolRegistrationCompletePage";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -19,13 +20,14 @@ export interface ITeacherInfo {
   adminId?: number;
 }
 
-const { 역할_선택, 유치원_검색, 유치원_등록, 회원정보_입력, 계정설정 } = ADMIN_SIGNUP_PATH;
+const { 역할_선택, 유치원_검색, 유치원_등록, 회원정보_입력, 계정설정, 유치원_등록완료 } =
+  ADMIN_SIGNUP_PATH;
 
 const AdminSignUpFunnel = () => {
   const navigate = useNavigate();
 
   const [Funnel, state, setState] = useFunnel(
-    [역할_선택, 유치원_검색, 유치원_등록, 회원정보_입력, 계정설정] as const,
+    [역할_선택, 유치원_검색, 유치원_등록, 회원정보_입력, 계정설정, 유치원_등록완료] as const,
     {
       initialStep: 역할_선택,
       stepQueryKey: "step"
@@ -60,34 +62,16 @@ const AdminSignUpFunnel = () => {
   };
 
   // 계정 설정 단계 처리
-  const handleAccountSettingStep = (data: ITeacherInfo) => {
+  // FIXME: 로그인 로직으로 변경해야 함
+  const handleAccountSettingStep = () => {
     if (state.role === Role.ROLE_TEACHER) {
-      navigate(PATH.APPROVAL_STATUS, {
-        replace: true,
-        state: {
-          type: "admin",
-          status: "pending",
-          userId: data.adminId,
-          schoolName: data.schoolName
-        }
-      });
+      navigate(PATH.APPROVAL_STATUS);
     } else {
       setState((prev) => ({
         ...prev,
         step: 유치원_등록
       }));
     }
-  };
-
-  const handleRegisterSchool = (schoolName: string) => {
-    navigate(PATH.APPROVAL_STATUS, {
-      replace: true,
-      state: {
-        type: "admin",
-        status: "register",
-        schoolName: schoolName
-      }
-    });
   };
 
   useEffect(() => {
@@ -134,7 +118,12 @@ const AdminSignUpFunnel = () => {
         </Funnel.Step>
         {/* role: OWNER인 경우 */}
         <Funnel.Step name={유치원_등록}>
-          <EnrollSchoolPage onNextStep={handleRegisterSchool} />
+          <EnrollSchoolPage
+            onNextStep={() => setState((prev) => ({ ...prev, step: 유치원_등록완료 }))}
+          />
+        </Funnel.Step>
+        <Funnel.Step name={유치원_등록완료}>
+          <SchoolRegistrationCompletePage />
         </Funnel.Step>
       </Funnel>
     </FormProvider>

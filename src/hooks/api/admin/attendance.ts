@@ -81,12 +81,10 @@ export const useCallMember = (dogId: number) => {
  */
 export const useDogListAndSortedList = ({
   sortName,
-  schoolId,
-  adminId
+  schoolId
 }: {
   sortName: SortOptions;
   schoolId: number;
-  adminId: number;
 }) => {
   const fetchSortedDogs = async () => {
     switch (sortName) {
@@ -97,14 +95,14 @@ export const useDogListAndSortedList = ({
       case SORT_OPTIONS.DATE:
         return await handleSortDate(schoolId);
       case SORT_OPTIONS.CHARGE:
-        return await handleSortCharge(schoolId, adminId);
+        return await handleSortCharge(schoolId);
       default:
         return await handleGetSearchDogs(schoolId);
     }
   };
 
   return useQuery({
-    queryKey: [QUERY_KEY.ATTENDANCE_LIST_SORTNAME, sortName, schoolId, adminId],
+    queryKey: [QUERY_KEY.ATTENDANCE_LIST_SORTNAME, sortName, schoolId],
     queryFn: fetchSortedDogs,
     /**
      * keepPreviousData를 사용하여 이전 데이터를 유지

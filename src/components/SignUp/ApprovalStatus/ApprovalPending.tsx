@@ -7,19 +7,16 @@ import { BasicModal } from "components/common/Modal";
 import { useTeacherSignUpCancel } from "hooks/api/signup";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
-import { UserType } from "types/common/approval.types";
+import { User } from "types/common/role.types";
 
 import { StyledImgWrapper } from "./styles";
 
 interface ApprovalSuccessProps {
-  type: UserType;
+  user: User;
   schoolName: string;
-  userId?: number;
 }
 
-export default function ApprovalPending({ userId, type, schoolName }: ApprovalSuccessProps) {
-  if (!userId) throw new Error("User ID가 없습니다");
-
+export default function ApprovalPending({ user, schoolName }: ApprovalSuccessProps) {
   const navigate = useNavigate();
   const overlay = useOverlay();
 
@@ -27,11 +24,11 @@ export default function ApprovalPending({ userId, type, schoolName }: ApprovalSu
 
   const handleConfirm = () => navigate(PATH.ADMIN_LOGIN);
   const handleCancel = () => {
-    if (type === "admin")
-      mutateTeacherSignUpCancel(userId, {
+    if (user === User.ADMIN)
+      mutateTeacherSignUpCancel(undefined, {
         onSuccess: () => navigate(PATH.ADMIN_LOGIN)
       });
-    // else if (type === "member") mutateMemberSignUpCancel(userId, { onSuccess: () => navigate() });
+    // else if (type === User.MEMBER) mutateMemberSignUpCancel(userId, { onSuccess: () => navigate() });
   };
 
   const openCancelPopup = () =>
@@ -53,7 +50,7 @@ export default function ApprovalPending({ userId, type, schoolName }: ApprovalSu
         <Text as="h2" typo="title1_24_B" color="darkBlack">
           <Text as="em" typo="inherit" color="primaryColor">
             {schoolName} 유치원 <br />
-            {type === "member" ? "가입 " : ""}승인 신청
+            {user === User.MEMBER ? "가입 " : ""}승인 신청
           </Text>
           이 완료되었습니다
         </Text>

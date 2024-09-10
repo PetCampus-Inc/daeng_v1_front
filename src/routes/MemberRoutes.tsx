@@ -2,12 +2,14 @@ import { PATH } from "constants/path";
 
 import * as Pages from "pages";
 import { Suspense } from "react";
-import { RouteObject, redirect } from "react-router-dom";
-import { ACCESS_TOKEN_KEY } from "store/auth";
+import { RouteObject } from "react-router-dom";
+import PrivateRouter from "routes/PrivateRouter";
+import { Role } from "types/common/role.types";
 
 const MemberRoutes = (): RouteObject[] => {
   return [
     {
+      element: <PrivateRouter roles={[Role.ROLE_MEMBER]} />,
       path: PATH.ROOT,
       children: [
         {
@@ -31,7 +33,7 @@ const MemberRoutes = (): RouteObject[] => {
           element: <Pages.AgendaPage />
         },
         {
-          path: PATH.MEMBER_MY_PAGE(),
+          path: PATH.MEMBER_MY_PAGE,
           element: (
             <Suspense>
               <Pages.MemberMyPage />
@@ -39,7 +41,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_PAGE(),
+          path: PATH.MEMBER_MY_INFO_PAGE,
           element: (
             <Suspense>
               <Pages.MemberMyInfoPage />
@@ -47,7 +49,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_EDIT_PAGE(),
+          path: PATH.MEMBER_MY_INFO_EDIT_PAGE,
           element: (
             <Suspense>
               <Pages.MemberMyInfoEditPage />
@@ -87,7 +89,6 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          // path: PATH.MEMBER_PROFILE_EDIT_PAGE(),
           path: PATH.MEMBER_PROFILE_EDIT_PAGE,
           element: (
             <Suspense>
@@ -102,20 +103,8 @@ const MemberRoutes = (): RouteObject[] => {
               <Pages.MemberAddDogProfileEditPage />
             </Suspense>
           )
-        },
-        {
-          path: PATH.MEMBER_ENROLLMENT_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberEnrollmentPage />
-            </Suspense>
-          )
         }
-      ],
-      loader: () => {
-        if (!localStorage.getItem(ACCESS_TOKEN_KEY)) return redirect(PATH.LOGIN);
-        return null;
-      }
+      ]
     }
   ];
 };

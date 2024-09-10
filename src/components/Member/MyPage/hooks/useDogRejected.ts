@@ -1,11 +1,11 @@
-import { STORAGE_KEY } from "constants/memebrDogStatus";
+import { STORAGE_KEY } from "constants/memberDogStatus";
 
 import {
   DogEnrollment,
   useEnrollmentStorage
 } from "components/Member/MyPage/hooks/useEnrollmentStorage";
 import {
-  useLocalStorageValue,
+  useLocalStorage,
   useResetLocalStorage,
   useSetLocalStorage
 } from "hooks/common/useLocalStorage";
@@ -15,7 +15,7 @@ import { useDeleteEnrollment, useGetEnrollmentStatus } from "../../../../hooks/a
 
 /**
  * 강아지 추가 승인 거부할 경우 상태 관리를 관리합니다.
- * @returns VISIT_MYPAGE, initialVisit, isDeleteSuccessful, setInitialVisit, saveStorageData, resetStoradVisitPathIdValue, removeApprovalDeniedDog
+ * @returns VISIT_MYPAGE, initialVisit, isDeleteSuccessful, setInitialVisit, saveStorageData, resetStoredVisitPathIdValue, removeApprovalDeniedDog
  */
 
 export const useDogRejected = () => {
@@ -23,12 +23,12 @@ export const useDogRejected = () => {
   const [initialVisit, setInitialVisit] = useState(false);
   const [isDeleteSuccessful, setIsDeleteSuccessful] = useState(false);
   const setStoredValue = useSetLocalStorage();
-  const resetStoradVisitPathIdValue = useResetLocalStorage(STORAGE_KEY.VISIT_MYPAGE);
-  const resetStoradEnrollmentValue = useResetLocalStorage(STORAGE_KEY.DOG_ENROLLMENT_DATA);
+  const resetStoredVisitPathIdValue = useResetLocalStorage(STORAGE_KEY.VISIT_MYPAGE);
+  const resetStoredEnrollmentValue = useResetLocalStorage(STORAGE_KEY.DOG_ENROLLMENT_DATA);
 
   const { mutateDeleteEnrollment } = useDeleteEnrollment();
 
-  const VISIT_MYPAGE = useLocalStorageValue<string>(STORAGE_KEY.VISIT_MYPAGE);
+  const [VISIT_MYPAGE] = useLocalStorage(STORAGE_KEY.VISIT_MYPAGE, false);
 
   const { storageEnrollmentDatas } = useEnrollmentStorage(); // localStorage에서 가져오는 데이터
 
@@ -39,24 +39,24 @@ export const useDogRejected = () => {
   // localStorage 데이터 저장
   const saveStorageData = useCallback(
     (key: string, value: boolean | DogEnrollment[]) => {
-      setStoredValue({ key: key, value: value });
+      setStoredValue(key, value);
     },
     [setStoredValue]
   );
 
-  // locaStorage 데이터 업데이트
+  // localStorage 데이터 업데이트
   const updateStorageData = useCallback(
     (newDogs: DogEnrollment[]) => {
       if (newDogs.length <= 0) {
         // newDogs 데이터가 없을 경우 초기화
-        resetStoradEnrollmentValue();
+        resetStoredEnrollmentValue();
         setDogDatas([]);
       } else {
         saveStorageData(STORAGE_KEY.DOG_ENROLLMENT_DATA, newDogs);
         setDogDatas(newDogs);
       }
     },
-    [resetStoradEnrollmentValue, saveStorageData]
+    [resetStoredEnrollmentValue, saveStorageData]
   );
 
   // ApprovalDenied 강아지 삭제 & localStorage에 데이터 업데이트
@@ -85,7 +85,7 @@ export const useDogRejected = () => {
       );
 
       updateStorageData(updateEnrollmentDatas); // data update
-      resetStoradVisitPathIdValue(); // mypage path reset
+      resetStoredVisitPathIdValue(); // mypage path reset
       setIsDeleteSuccessful(true); // isDeleteSuccessful reset
     } catch (error) {
       console.error(error);
@@ -96,7 +96,7 @@ export const useDogRejected = () => {
     approvalDeniedDogs,
     storageEnrollmentDatas,
     mutateDeleteEnrollment,
-    resetStoradVisitPathIdValue,
+    resetStoredVisitPathIdValue,
     updateStorageData
   ]);
 
@@ -113,7 +113,7 @@ export const useDogRejected = () => {
     isDeleteSuccessful,
     setInitialVisit,
     saveStorageData,
-    resetStoradVisitPathIdValue,
+    resetStoredVisitPathIdValue,
     removeApprovalDeniedDog
   };
 };

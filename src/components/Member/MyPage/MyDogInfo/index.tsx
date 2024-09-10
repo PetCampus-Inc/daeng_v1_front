@@ -1,4 +1,4 @@
-import { DOG_STATUS, STORAGE_KEY } from "constants/memebrDogStatus";
+import { DOG_STATUS, STORAGE_KEY } from "constants/memberDogStatus";
 
 import { DragCarousel } from "components/common/Carousel/DragCarousel ";
 import useDogRejected from "components/Member/MyPage/hooks/useDogRejected";
@@ -31,7 +31,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   const {
     VISIT_MYPAGE,
     saveStorageData,
-    resetStoradVisitPathIdValue,
+    resetStoredVisitPathIdValue,
     removeApprovalDeniedDog,
     initialVisit,
     isDeleteSuccessful,
@@ -65,7 +65,14 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       approvalDeniedDogSettingCalled.current = true;
       return await removeApprovalDeniedDog();
     }
-  }, [VISIT_MYPAGE, dogDeniedStatus.length, isDeleteSuccessful]);
+  }, [
+    VISIT_MYPAGE,
+    dogDeniedStatus.length,
+    isDeleteSuccessful,
+    removeApprovalDeniedDog,
+    saveStorageData,
+    setInitialVisit
+  ]);
 
   const renderMyDogCard = (dog: IDoglist) => (
     <MyDogCard
@@ -95,7 +102,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
   useEffect(() => {
     if (dogDeniedStatus.length <= 0) {
-      resetStoradVisitPathIdValue();
+      resetStoredVisitPathIdValue();
       return;
     }
 

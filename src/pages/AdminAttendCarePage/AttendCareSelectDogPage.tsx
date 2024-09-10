@@ -5,15 +5,13 @@ import SelectDogList from "components/Admin/AttendCare/list/SelectDogList";
 import { Box, Flex, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { useGetCareDogList } from "hooks/api/admin/care";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useRouteLoaderData } from "react-router-dom";
 import caredogLoader from "routes/caredogLoader";
 
 const AttendCareSelectDogPage = () => {
   const initialData = useRouteLoaderData("caredog") as Awaited<ReturnType<typeof caredogLoader>>;
 
-  const { adminId } = useAdminInfo();
-  const { data } = useGetCareDogList(adminId, initialData);
+  const { data } = useGetCareDogList(initialData);
 
   return (
     <>

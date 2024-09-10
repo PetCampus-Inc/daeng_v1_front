@@ -1,14 +1,10 @@
 import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import { FormProvider, useForm } from "react-hook-form";
-import { AUTH_MEMBER_ID } from "store/auth";
 import { PageContainer } from "styles/StyleModule";
 
 import SaveProfileButton from "../../components/Member/Profile/Button/SaveProfileButton";
 
 const MemberProfileEditPage = () => {
-  const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID);
-  // const { data } = useGetMemberProfile(Number(memberId));
   //TODO 작업 이후 삭제 필요
   const data = {
     memberId: 1,

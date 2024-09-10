@@ -18,18 +18,18 @@ import showToast from "utils/showToast";
 
 import type { ICareDogInfo, IPastAgenda } from "types/admin/care.types";
 
-export const useGetCareDogList = (adminId: number, initialData: ICareDogInfo[]) => {
+export const useGetCareDogList = (initialData: ICareDogInfo[]) => {
   return useSuspenseQuery<ICareDogInfo[]>({
     queryKey: QUERY_KEY.CARE_DOG_LIST,
-    queryFn: () => handleGetCareDogs(adminId),
+    queryFn: () => handleGetCareDogs(),
     initialData
   });
 };
 
-export const useGetNewCareDogs = (adminId: number) => {
+export const useGetNewCareDogs = () => {
   return useSuspenseQuery<ICareDogInfo[]>({
     queryKey: QUERY_KEY.NEW_CARE_DOG_LIST,
-    queryFn: () => handleGetNewCareDogs(adminId)
+    queryFn: () => handleGetNewCareDogs()
   });
 };
 

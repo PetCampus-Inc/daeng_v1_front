@@ -7,25 +7,22 @@ import HomeHeader from "components/Home/HomeHeader";
 import HomeImageAlbum from "components/Home/HomeImageAlbum";
 import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
+import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRecoilState } from "recoil";
-import { AUTH_MEMBER_ID } from "store/auth";
 import { dogIdState } from "store/member";
 
 const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
-  const CURRENT_DOG_ID = useLocalStorageValue<string | null>("CURRENT-DOG-ID");
-  const MEMBER_ID = useLocalStorageValue<string>(AUTH_MEMBER_ID);
+  const CURRENT_DOG_ID = useLocalStorage<string | null>("CURRENT-DOG-ID", "");
 
   const defaultDogId = Number(CURRENT_DOG_ID);
-  const memberId = Number(MEMBER_ID);
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
-  const { data } = useGetHomeInfo(memberId, dogId);
+  const { data } = useGetHomeInfo(dogId);
 
   const overlay = useOverlay();
-  const prefetchDogs = usePrefetchDogs(memberId);
+  const prefetchDogs = usePrefetchDogs();
 
   const handleHeaderClick = () => {
     prefetchDogs(); // 먼저 프리패치 실행
@@ -33,9 +30,7 @@ const HomePage = () => {
   };
 
   const openDogManagerPopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <DogManagerPopup isOpen={isOpen} close={close} memberId={memberId} />
-    ));
+    overlay.open(({ isOpen, close }) => <DogManagerPopup isOpen={isOpen} close={close} />);
 
   const dogInfo = {
     dogName: data.dogName,

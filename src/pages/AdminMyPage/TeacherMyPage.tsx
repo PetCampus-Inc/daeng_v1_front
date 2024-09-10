@@ -7,14 +7,12 @@ import TeacherProfile from "components/Admin/MyPage/TeacherProfile/index";
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminRole } from "types/common/role.types";
 
 const TeacherMyPage = () => {
-  const { adminId } = useAdminInfo();
-  const { data } = useGetTeacherInfo(adminId);
+  const { data } = useGetTeacherInfo();
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 

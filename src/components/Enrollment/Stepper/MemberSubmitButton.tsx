@@ -56,7 +56,7 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
 
   // member - 강아지 추가 및 유치원 재등록
   const onSubmitMember = (data: FieldValues) => {
-    const { memberId, dogName } = getValues();
+    const { dogName } = getValues();
     const requestData = getSubmitFormInfo(data);
     const memberData = getMemberData();
     const reqData = { ...requestData, ...memberData };
@@ -64,7 +64,7 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     mutateEnrollment(reqData, {
       onSuccess: (enrollmentFormId) => {
         queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
-        navigate(PATH.MEMBER_MY_PAGE(memberId));
+        navigate(PATH.MEMBER_MY_PAGE);
 
         createStorageEnrollment(String(enrollmentFormId), dogName);
       }

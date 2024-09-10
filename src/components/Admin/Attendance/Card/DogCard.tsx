@@ -1,8 +1,6 @@
-import { PATH } from "constants/path";
-
 import AlertFilledIcon from "assets/svg/alert-filled-icon";
 import CalendarIcon from "assets/svg/calendar";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
+import { useTokenHandler } from "hooks/common/useTokenHandler";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { padToTwoDigits } from "utils/date";
@@ -20,7 +18,7 @@ import type { Attendance } from "types/admin/attendance.type";
 
 export function DogCard({ info }: { info: Attendance }) {
   const navigate = useNavigate();
-  const { role: adminRole } = useAdminInfo();
+  const { role: adminRole } = useTokenHandler();
 
   const ticketStatus = useMemo(() => checkTicketStatus(info), [info]);
 

@@ -9,7 +9,7 @@ import { useFormContext } from "react-hook-form";
 
 import type { IMemberProfilePostInfo } from "types/member/main.types";
 
-const SaveButton = ({ memberId }: { memberId: string }) => {
+const SaveButton = () => {
   const {
     getValues,
     handleSubmit,
@@ -23,7 +23,6 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
   const getFormValues = (): IMemberProfilePostInfo => {
     const formData = getValues();
     return {
-      memberId,
       memberName: formData[FIELD.MEMBER_NAME],
       memberGender: formData[FIELD.MEMBER_GENDER] === "여" ? "FEMALE" : "MALE",
       memberProfileUri: formData[FILE_NAME.PROFILE_MEMBER],
@@ -50,7 +49,6 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
   const uploadProfileFiles = async (profileUri: FileList) => {
     const memberParam = {
       name: TYPE_NAME.MEMBER,
-      id: Number(memberId),
       files: profileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
@@ -58,11 +56,12 @@ const SaveButton = ({ memberId }: { memberId: string }) => {
 
     const params = [memberParam];
 
-    await uploadFiles(params, {
-      onSuccess: () => {
-        setShouldSubmit(true);
-      }
-    });
+    // FIXME: 파일 업로드 로직 MemberID 없도록 변경해야 함
+    // await uploadFiles(params, {
+    //   onSuccess: () => {
+    //     setShouldSubmit(true);
+    //   }
+    // });
   };
 
   const onSubmit = () => {

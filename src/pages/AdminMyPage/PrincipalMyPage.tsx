@@ -7,14 +7,12 @@ import { CardContainer, ContentContainer } from "components/Admin/MyPage/styles"
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminRole } from "types/common/role.types";
 
 const PrincipalMyPage = () => {
-  const { adminId } = useAdminInfo();
-  const { data } = useGetPrincipalInfo(adminId);
+  const { data } = useGetPrincipalInfo();
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
