@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import CalendarIcon from "assets/svg/calendar";
 import { Box, Flex, Text } from "components/common";
@@ -21,7 +21,7 @@ const AlbumHeader = ({ dogId, dogName }: AlbumHeaderProps) => {
           {dogName ?? ""} 사진을 모아서 볼 수 있어요
         </Text>
       </Flex>
-      <LinkButton to={PATH.ALBUM}>
+      <LinkButton to={routes.member.album.root}>
         <CalendarIcon w="40" h="40" rx="20" />
       </LinkButton>
     </Box>

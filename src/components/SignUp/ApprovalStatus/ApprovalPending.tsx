@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import DogWaitingBgIcon from "assets/svg/dog-waiting-bg-icon";
 import { Box, Flex, Text, Button } from "components/common";
@@ -22,11 +22,11 @@ export default function ApprovalPending({ user, schoolName }: ApprovalSuccessPro
 
   const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel();
 
-  const handleConfirm = () => navigate(PATH.ADMIN_LOGIN);
+  const handleConfirm = () => navigate(routes.admin.login.root);
   const handleCancel = () => {
     if (user === User.ADMIN)
       mutateTeacherSignUpCancel(undefined, {
-        onSuccess: () => navigate(PATH.ADMIN_LOGIN)
+        onSuccess: () => navigate(routes.admin.login.root)
       });
     // else if (type === User.MEMBER) mutateMemberSignUpCancel(userId, { onSuccess: () => navigate() });
   };

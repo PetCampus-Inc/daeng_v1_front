@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import ListIconSmallRound from "assets/svg/list-icon-small-round";
@@ -70,7 +70,9 @@ const MemberWaitingCard = ({ data }: IOwnerWaitingCard) => {
               denyFunc={denyFunc}
             />
           </S.UpperWrapper>
-          <S.LinkToEnrollment to={PATH.ADMIN_MEMBER_FORM(`${enrollmentFormId}?${params}`)}>
+          <S.LinkToEnrollment
+            to={routes.admin.school.enrollment.memberForms.dynamic(`${enrollmentFormId}?${params}`)}
+          >
             <S.TextWrapper>
               <ListIconSmallRound />
               <p>가입신청서 보기</p>

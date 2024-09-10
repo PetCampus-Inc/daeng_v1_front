@@ -1,5 +1,5 @@
 import { DOG_STATUS } from "constants/memberDogStatus";
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -76,7 +76,7 @@ export const useCreateAdminEnrollment = () => {
   const mutateForm = useMutation({
     mutationFn: (enrollmentData: AdminEnrollmentInfoType) => handlePostAdminForm(enrollmentData),
     onSuccess: () => {
-      navigate(PATH.ADMIN_ENROLLMENT);
+      navigate(routes.admin.school.enrollment.root);
       showToast("가입신청서 등록이 완료되었습니다", "bottom");
     },
     throwOnError: true

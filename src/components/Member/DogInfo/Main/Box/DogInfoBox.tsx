@@ -1,5 +1,5 @@
 import { FIELD } from "constants/field";
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import CalendarIcon from "assets/svg/calendar";
@@ -58,7 +58,9 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
               <S.DogName>{data.dogName}</S.DogName>
               <S.DogSize>{data.dogSize}</S.DogSize>
             </S.Title>
-            <S.Editbutton onClick={() => navigate(PATH.MEMBER_DOG_INFO_EDIT_PAGE(String(dogId)))}>
+            <S.Editbutton
+              onClick={() => navigate(routes.member.dogInfo.edit.dynamic(String(dogId)))}
+            >
               <span>수정</span>
               <ArrowRightIcon />
             </S.Editbutton>
@@ -76,7 +78,7 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
       </S.DogInfoBox>
 
       <S.GotoEnrollButton
-        onClick={() => navigate(PATH.MEMBER_DOG_ENROLLMENT_INFO_PAGE(String(dogId)))}
+        onClick={() => navigate(routes.member.dogInfo.enrollment.dynamic(String(dogId)))}
       >
         <span>{data.dogName}의 가입신청서</span>
         <ArrowRightIcon />

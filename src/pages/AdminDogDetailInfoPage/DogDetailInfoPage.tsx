@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import GalleryIcon from "assets/svg/gallery-icon";
 import { Notice } from "components/Admin/DogDetailInfo";
@@ -50,7 +50,7 @@ export default function DogInfoPage() {
       <Header
         type="text"
         text={`${searchParams.get("dog_name")}의 상세 정보`}
-        handleClick={() => navigate(PATH.ADMIN_ATTENDANCE)}
+        handleClick={() => navigate(routes.admin.attendance.root)}
         rightElement={
           <GalleryIcon
             handleTouch={() => {

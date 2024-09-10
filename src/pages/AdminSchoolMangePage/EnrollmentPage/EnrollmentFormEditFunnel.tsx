@@ -1,4 +1,4 @@
-import { ADMIN_EDIT_FORM_PATH } from "constants/path";
+import { ADMIN_EDIT_FORM_PATH } from "constants/funnelPath";
 
 import { useFunnel } from "hooks/common/useFunnel";
 import { useEffect } from "react";
