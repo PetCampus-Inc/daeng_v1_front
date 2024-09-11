@@ -97,7 +97,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: routes.member.profile.root,
+          path: routes.member.profile.dog.root,
           element: (
             <Suspense>
               <Pages.MemberAddDogProfileEditPage />
