@@ -103,6 +103,14 @@ const MemberRoutes = (): RouteObject[] => {
               <Pages.MemberAddDogProfileEditPage />
             </Suspense>
           )
+        },
+        {
+          path: routes.member.mypage.enrollment.root,
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentPage />
+            </Suspense>
+          )
         }
       ]
     }

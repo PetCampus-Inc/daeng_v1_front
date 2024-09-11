@@ -302,7 +302,7 @@ export const usePostDogProfile = () => {
   const { mutate } = useMutation({
     mutationFn: (req: DogProfileReq) => handlePostDogProfile(req),
     onSuccess: () => {
-      navigate(PATH.ROOT);
+      navigate(routes.root);
     },
     onError: () => {
       showToast("프로필 등록을 실패했습니다. 다시 시도해주세요", "bottom");
