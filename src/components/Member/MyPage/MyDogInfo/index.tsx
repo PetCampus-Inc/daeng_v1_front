@@ -2,7 +2,7 @@ import { DOG_STATUS, STORAGE_KEY } from "constants/memberDogStatus";
 
 import { DragCarousel } from "components/common/Carousel/DragCarousel ";
 import useDogRejected from "components/Member/MyPage/hooks/useDogRejected";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
+import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useToggle } from "hooks/common/useToggle";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { IEnrollmentStatus } from "types/member/enrollment.types";
@@ -23,7 +23,7 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   const [activeDogId, setActiveDogId] = useState("");
   const [upDateDoglist, setUpDatsDoglist] = useState([...doglist]);
   const { isOpen, toggle } = useToggle();
-  const CURRENT_DOG_ID = useLocalStorageValue<string>("CURRENT-DOG-ID");
+  const CURRENT_DOG_ID = useLocalStorage<string>("CURRENT-DOG-ID", "");
 
   const dogDeniedStatus = doglist.filter((el) => el.status === DOG_STATUS.APPROVAL_DENIED);
   const approvalDeniedDogSettingCalled = useRef(false); // 함수 호출 추적
@@ -44,11 +44,12 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
 
   // FIXME 강아지 선택될 경우 해당 강아지가 앞으로 나오도록 작업필요!
   const updateDoglist = () => {
-    if (CURRENT_DOG_ID) {
-      const currentDog = upDateDoglist.filter((el) => el.dogId === CURRENT_DOG_ID);
-      const dogs = upDateDoglist.filter((el) => el.dogId !== CURRENT_DOG_ID);
-      setUpDatsDoglist([...currentDog, ...dogs]);
-    }
+    // if (CURRENT_DOG_ID) {
+    //   const currentDog = upDateDoglist.filter((el) => el.dogId === CURRENT_DOG_ID);
+    //   const dogs = upDateDoglist.filter((el) => el.dogId !== CURRENT_DOG_ID);
+    //   setUpDatsDoglist([...currentDog, ...dogs]);
+    // }
+    console.log("얍");
   };
 
   const approvalDeniedDogSetting = useCallback(async () => {

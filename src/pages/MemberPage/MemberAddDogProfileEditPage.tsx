@@ -1,11 +1,11 @@
 import AddDogProfile from "components/Member/Profile/AddDogProfile";
 import SaveDogProfileButton from "components/Member/Profile/Button/SaveDogProfileButton";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
+import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { FormProvider, useForm } from "react-hook-form";
 import { PageContainer } from "styles/StyleModule";
 
 const MemberAddDogProfileEditPage = () => {
-  const CURRENT_DOG_ID = useLocalStorageValue<string>("CURRENT-DOG-ID");
+  const CURRENT_DOG_ID = useLocalStorage<string>("CURRENT-DOG-ID", "");
 
   const methods = useForm({
     mode: "onChange",
