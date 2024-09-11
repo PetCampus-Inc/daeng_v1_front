@@ -5,6 +5,8 @@ import useDogRejected from "components/Member/MyPage/hooks/useDogRejected";
 import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useToggle } from "hooks/common/useToggle";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { dogProfileList } from "store/member";
 import { IEnrollmentStatus } from "types/member/enrollment.types";
 import { IDoglist, IMemberInfo } from "types/member/main.types";
 
@@ -22,6 +24,8 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
   const { doglist } = data;
   const [activeDogId, setActiveDogId] = useState("");
   const [upDateDoglist, setUpDatsDoglist] = useState([...doglist]);
+
+  const [dogProfile, setDogProfile] = useRecoilState(dogProfileList);
   const { isOpen, toggle } = useToggle();
   const CURRENT_DOG_ID = useLocalStorage<string>("CURRENT-DOG-ID", "");
 
@@ -111,6 +115,17 @@ const MyDogInfo = ({ data }: MemberInfoProps) => {
       approvalDeniedDogSetting();
     }
   }, [dogDeniedStatus, initialVisit]);
+
+  useEffect(() => {
+    const uploadDogProfile = doglist
+      .filter((dog) => dog.dogId && dog.status !== DOG_STATUS.APPROVAL_PENDING)
+      .map((dog) => ({
+        dogId: dog.dogId,
+        dogProfile: dog.dogProfile
+      }));
+
+    setDogProfile(uploadDogProfile);
+  }, [doglist]);
 
   return (
     <S.DogInfoContainer>

@@ -8,6 +8,11 @@ interface ISchool {
   schoolId: number;
 }
 
+interface DogProfileList {
+  dogId: string;
+  dogProfile: string;
+}
+
 const IS_REJECTED = localStorage.getItem("IS_REJECTED");
 
 export const memberEnrollmentSchoolAtom = atom<ISchool | null>({
@@ -27,4 +32,10 @@ export const dogIdState = atom<number | null>({
   key: "dogIdState",
   default: null,
   effects: [persistAtom]
+});
+
+// 강아지 프로필사진 여부 확인
+export const dogProfileList = atom<DogProfileList[]>({
+  key: "dogProfileList",
+  default: []
 });
