@@ -1,4 +1,5 @@
-import { ADMIN_SIGNUP_PATH, PATH } from "constants/path";
+import { ADMIN_SIGNUP_PATH } from "constants/funnelPath";
+import { routes } from "constants/path";
 
 import { useFunnel } from "hooks/common/useFunnel";
 import SchoolRegistrationCompletePage from "pages/SignUpPage/SchoolRegistrationCompletePage";
@@ -65,7 +66,7 @@ const AdminSignUpFunnel = () => {
   // FIXME: 로그인 로직으로 변경해야 함
   const handleAccountSettingStep = () => {
     if (state.role === Role.ROLE_TEACHER) {
-      navigate(PATH.APPROVAL_STATUS);
+      navigate(routes.approval.root);
     } else {
       setState((prev) => ({
         ...prev,

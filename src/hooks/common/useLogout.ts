@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { postNativeMessage } from "hooks/native/useNativeMessage";
 import { publicAxios } from "libs/AuthAxios";
@@ -17,7 +17,7 @@ export const logout = async () => {
 
   // TODO: 로그인 인증 관련 스토리지 값만 삭제하도록 변경
   localStorage.clear();
-  location.href = PATH.LOGIN;
+  location.href = routes.login.root;
 };
 
 export default function useLogout() {

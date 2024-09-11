@@ -61,7 +61,7 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
               <Controller
                 name={FIELD.PICKDROP_INFO_TERM}
                 control={control}
-                rules={{ required: requiredItems?.get(FIELD_KEYS.ABANDONMENT_INFO) }}
+                rules={{ required: requiredItems?.get(FIELD_KEYS.PICKDROP_INFO) }}
                 render={({ field: { ref, ...field } }) => (
                   <Checkbox
                     label="동의합니다"

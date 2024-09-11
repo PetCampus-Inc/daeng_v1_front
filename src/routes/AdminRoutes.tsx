@@ -1,6 +1,6 @@
 import type { QueryClient } from "@tanstack/react-query";
 
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { useTokenHandler } from "hooks/common/useTokenHandler";
 import * as Pages from "pages";
@@ -15,27 +15,27 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
 
   return [
     {
-      path: PATH.ADMIN,
+      path: routes.admin.root,
       element: (
         <PrivateRouter
           roles={[Role.ROLE_OWNER, Role.ROLE_TEACHER]}
-          redirectPath={PATH.ADMIN_LOGIN}
+          redirectPath={routes.admin.login.root}
         />
       ),
       children: [
         {
           index: true,
-          loader: () => redirect(PATH.ADMIN_ATTENDANCE)
+          loader: () => redirect(routes.admin.attendance.root)
         },
         {
-          path: PATH.ADMIN_ATTENDANCE,
+          path: routes.admin.attendance.root,
           children: [
             {
               index: true,
               element: <Pages.AttendancePage />
             },
             {
-              path: PATH.ADMIN_ATTENDANCE_INFO(),
+              path: routes.admin.attendance.info.dynamic(),
               element: (
                 <Suspense>
                   <Pages.DogDetailInfoPage />
@@ -43,7 +43,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_ATTENDANCE_INFO_NEW_TICKET(),
+              path: routes.admin.attendance.newTicket.dynamic(),
               element: (
                 <Suspense>
                   <Pages.NewTicketPage />
@@ -51,7 +51,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_ATTENDANCE_INFO_GALLERY(),
+              path: routes.admin.attendance.gallery.dynamic(),
               element: (
                 <Suspense>
                   <Pages.DogGalleryPage />
@@ -61,7 +61,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           ]
         },
         {
-          path: PATH.ADMIN_CARE,
+          path: routes.admin.care.root,
           children: [
             {
               index: true,
@@ -74,25 +74,24 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: "delete",
+              path: routes.admin.care.delete.root,
               element: <Pages.AttendCareDeletePage />
             },
             {
-              path: "gallery",
-
+              path: routes.admin.care.gallery.root,
               children: [
                 {
                   index: true,
                   element: <Pages.AttendCareGallery type="main" />
                 },
                 {
-                  path: PATH.ADMIN_CARE_GALLERY_SELECT,
+                  path: routes.admin.care.gallery.select.root,
                   element: <Pages.AttendCareSelectDog />
                 }
               ]
             },
             {
-              path: PATH.ADMIN_CARE_NOTICE(),
+              path: routes.admin.care.notice.dynamic(),
               element: (
                 <Suspense>
                   <Pages.AttendCareNoticePage />
@@ -100,13 +99,13 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_CARE_INFO_GALLERY(),
+              path: routes.admin.care.gallery.dynamic(),
               element: <Pages.AttendCareGallery type="info" />
             }
           ]
         },
         {
-          path: PATH.ADMIN_CHAT,
+          path: routes.admin.chat.root,
           element: (
             <Suspense>
               <Pages.Chat />
@@ -114,7 +113,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           )
         },
         {
-          path: PATH.ADMIN_NOTIFICATION_PAGE,
+          path: routes.admin.notification.root,
           element: (
             <Suspense>
               <Pages.AdminNotificationPage />
@@ -123,8 +122,10 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
         },
         {
           // NOTE: 원장 권한의 페이지
-          path: PATH.ADMIN_SCHOOL_MANAGE,
-          element: <PrivateRouter roles={[Role.ROLE_OWNER]} redirectPath={PATH.ADMIN_ATTENDANCE} />,
+          path: routes.admin.school.root,
+          element: (
+            <PrivateRouter roles={[Role.ROLE_OWNER]} redirectPath={routes.admin.attendance.root} />
+          ),
           children: [
             {
               index: true,
@@ -135,7 +136,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_TEACHER_MANAGE,
+              path: routes.admin.school.teacher.root,
               element: (
                 <Suspense>
                   <Pages.TeacherManagePage />
@@ -143,7 +144,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_ENROLLMENT,
+              path: routes.admin.school.enrollment.root,
               children: [
                 {
                   index: true,
@@ -154,7 +155,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   )
                 },
                 {
-                  path: PATH.ADMIN_MEMBER_FORM(),
+                  path: routes.admin.school.enrollment.memberForms.dynamic(),
                   element: (
                     <Suspense>
                       <Pages.MemberEnrollmentFormDetailPage />
@@ -162,7 +163,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   )
                 },
                 {
-                  path: PATH.ADMIN_FORMS,
+                  path: routes.admin.school.enrollment.ownerForms.root,
                   children: [
                     {
                       index: true,
@@ -173,7 +174,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                       )
                     },
                     {
-                      path: PATH.ADMIN_EDIT_FORM(),
+                      path: routes.admin.school.enrollment.ownerForms.edit.dynamic(),
                       element: (
                         <Suspense>
                           <Pages.EnrollmentFormEditPage />
@@ -181,7 +182,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                       )
                     },
                     {
-                      path: PATH.ADMIN_FORM(),
+                      path: routes.admin.school.enrollment.ownerForms.dynamic(),
                       element: (
                         <Suspense>
                           <Pages.EnrollmentFormDetailPage />
@@ -191,7 +192,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   ]
                 },
                 {
-                  path: PATH.ADMIN_CREATE_FORM,
+                  path: routes.admin.school.enrollment.new.root,
                   element: (
                     <Suspense>
                       <Pages.EnrollmentFormCreatePage />
@@ -203,7 +204,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
           ]
         },
         {
-          path: PATH.ADMIN_MY_PAGE,
+          path: routes.admin.mypage.root,
           children: [
             {
               index: true,
@@ -219,7 +220,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                 )
             },
             {
-              path: PATH.ADMIN_MY_SCHOOL_INFO,
+              path: routes.admin.mypage.school.root,
               element: (
                 <Suspense>
                   <Pages.SchoolInfoPage />
@@ -227,7 +228,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_MY_SCHOOL_INFO_EDIT,
+              path: routes.admin.mypage.school.edit.root,
               element: (
                 <Suspense>
                   <Pages.SchoolInfoEditPage />
@@ -235,7 +236,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_MY_PAGE_SETTING,
+              path: routes.admin.mypage.setting.root,
               element: (
                 <Suspense>
                   <Pages.AdminSettingPage />
@@ -243,7 +244,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
-              path: PATH.ADMIN_MY_PAGE_DELETE_COMPLETE,
+              path: routes.admin.mypage.deleteComplete.root,
               element: (
                 <Suspense>
                   <Pages.AdminDeleteCompletePage />

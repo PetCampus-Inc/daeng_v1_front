@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import AddCIcon from "assets/svg/add-c-icon";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const AddMyDogCard = () => {
     <S.AddMyDogCard
       role="button"
       onClick={() => {
-        navigate(PATH.MEMBER_ENROLLMENT_PAGE);
+        navigate(routes.member.mypage.enrollment.root);
         setDogId(null); // dogId 초기화
       }}
     >

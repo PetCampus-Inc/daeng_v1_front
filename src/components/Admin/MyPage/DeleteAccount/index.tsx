@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
@@ -51,7 +51,7 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
 
   const onSubmit = () => {
     // FIXME 탈퇴
-    navigate(PATH.ADMIN_MY_PAGE_DELETE_COMPLETE);
+    navigate(routes.admin.mypage.deleteComplete.root);
     return;
   };
 

@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import Header from "components/common/Header";
 import MyInfo from "components/Member/MyPage/MyMemberinfo";
@@ -14,7 +14,7 @@ const MemberMyInfoPage = () => {
       <Header
         type="edit"
         text="내프로필"
-        actionFn={() => navigate(PATH.MEMBER_MY_INFO_EDIT_PAGE)}
+        actionFn={() => navigate(routes.member.mypage.profile.edit.root)}
         transparent
       />
       <PageContainer pt="1" color="br_5">

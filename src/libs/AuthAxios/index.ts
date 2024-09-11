@@ -43,7 +43,7 @@ authAxios.interceptors.request.use(
       const item = localStorage.getItem(ACCESS_TOKEN_KEY);
 
       const token = item ? JSON.parse(item) : null;
-      config.headers["Authorization"] = `Bearer ${token}`;
+      if (token) config.headers["Authorization"] = `Bearer ${token}`;
     }
 
     return config;
@@ -99,7 +99,7 @@ authAxios.interceptors.response.use(
 
           return authAxios(originalRequest);
         }
-      } else if (code === "TOKEN-401-1" || code === "TOKEN-401-3") {
+      } else if (code === "TOKEN-401-1" || code === "TOKEN-401-3" || code === "TOKEN-401-4") {
         // 액세스 토큰이 만료 되었거나, 찾을 수 없을 경우 로그아웃
         logout();
       }

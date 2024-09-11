@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { useOverlay } from "hooks/common/useOverlay";
 import React, { useCallback } from "react";
@@ -17,7 +17,7 @@ const CareOptionDropdown = () => {
     ));
 
   const CARE_OPTIONS: { [key: string]: () => void } = {
-    "관리 강아지 삭제": () => navigate(PATH.ADMIN_CARE + "/delete"),
+    "관리 강아지 삭제": () => navigate(routes.admin.care.delete.root),
     "알림장 일괄 전송": openSchedulerPopup
   };
 

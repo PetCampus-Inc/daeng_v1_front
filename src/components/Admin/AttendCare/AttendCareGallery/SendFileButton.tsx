@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { BottomButton } from "components/common/Button";
 import { useState } from "react";
@@ -31,7 +31,7 @@ const SendFileButton = ({ type }: Props) => {
         files: data?.files,
         comment: data?.comment
       });
-      navigate(PATH.ADMIN_CARE_GALLERY_SELECT);
+      navigate(routes.admin.care.gallery.select.root);
       return;
     }
 
@@ -55,7 +55,7 @@ const SendFileButton = ({ type }: Props) => {
 
       await uploadFiles(params, {
         onSuccess: () => {
-          navigate(PATH.ADMIN_CARE_NOTICE(dogId), { replace: true });
+          navigate(routes.admin.care.notice.dynamic(dogId), { replace: true });
         }
       });
     }

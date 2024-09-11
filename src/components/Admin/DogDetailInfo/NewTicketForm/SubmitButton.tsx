@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { Box } from "components/common";
 import { WideButton } from "components/common/Button/Templates";
@@ -17,7 +17,7 @@ const SubmitButton = ({ dogId }: { dogId: number }) => {
   const handleNavigate = () => {
     // 쿼리 파라미터를 유지한 채로 이동합니다
     // /admin/attendance/11?dog_name=%EC%A0%9C%EC%8B%9C%EC%B9%B4&ticket_status=true&tab=ticket
-    const path = `${PATH.ADMIN_ATTENDANCE_INFO(dogId)}${search}`;
+    const path = `${routes.admin.attendance.info.dynamic(dogId)}${search}`;
     navigate(path, { replace: true });
   };
 

@@ -1,5 +1,5 @@
 import { FIELD } from "constants/field";
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -206,7 +206,7 @@ export const usePostMemberDogDetailInfo = (dogId: number) => {
     mutationFn: handlePostMemberDogDetailInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_DOG_DETAIL_INFO(dogId) });
-      navigate(PATH.MEMBER_DOG_INFO_PAGE(dogId), { replace: true });
+      navigate(routes.member.dogInfo.dynamic(dogId), { replace: true });
       setTimeout(() => {
         showToast("수정이 완료되었습니다.", "bottom");
       }, 100);
@@ -286,7 +286,7 @@ export const usePostMemberProfile = () => {
   const { mutate } = useMutation({
     mutationFn: (req: IMemberProfile) => handlePostMemberProfile(req),
     onSuccess: () => {
-      navigate(PATH.ROOT);
+      navigate(routes.root);
     },
     onError: () => {
       showToast("프로필 등록을 실패했습니다. 다시 시도해주세요", "bottom");

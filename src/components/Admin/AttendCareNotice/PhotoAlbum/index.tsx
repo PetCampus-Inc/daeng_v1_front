@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import MainSendCard from "components/Admin/AttendCare/button/MainSendCard";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,7 +13,7 @@ const PhotoAlbum = () => {
     <>
       <MainSendCard
         text="견주에게 사진과 코멘트를 남겨 보세요"
-        onClick={() => navigate(PATH.ADMIN_CARE_INFO_GALLERY(Number(dogId)))}
+        onClick={() => navigate(routes.admin.care.gallery.dynamic(dogId))}
       />
       <S.Container>
         <S.SentPhotosText>전송된 사진</S.SentPhotosText>
