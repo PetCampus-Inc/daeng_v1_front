@@ -103,6 +103,7 @@ const MyDogCard = ({
 
   const handleFocus = () => {
     setStoredValue("CURRENT-DOG-ID", dogId);
+    setDogId(Number(dogId));
     onCardFocus(dogId);
   };
 
