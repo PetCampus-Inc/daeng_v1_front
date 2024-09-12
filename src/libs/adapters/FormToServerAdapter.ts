@@ -129,7 +129,6 @@ export class MemberFormToServerAdapter extends MemberAdapter {
     return {
       schoolFormId: this.value.schoolFormId,
       dogId: this.value.dogId || 0,
-      memberId: this.value.member.memberId,
       memberName: this.value[FIELD.MEMBER_NAME] || "",
       memberGender: this.getMemberGender || "",
       address: this.value[FIELD.MEMBER_ADDRESS] || "",
@@ -163,7 +162,6 @@ export class AdminFormToServerAdapter extends AdminAdapter {
   adapt(): AdminEnrollmentInfoType {
     return {
       schoolId: this.value.schoolId,
-      adminId: this.value.adminId,
       formName: "",
       openDays: this.value[FIELD.OPEN_DAYS] || [],
       priceInfo: this.value[FIELD.PRICE_INFO] || "",

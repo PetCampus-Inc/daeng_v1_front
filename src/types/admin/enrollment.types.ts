@@ -84,10 +84,9 @@ interface ISchoolFormResponse {
   member: Nullable<MemberDtoType>;
 }
 
-// 원장 가입신청서 등록
+/** 원장 가입신청서 등록 Request 타입 */
 export interface AdminEnrollmentInfoType {
   schoolId: number;
-  adminId: number;
   formName: string;
   requiredItemList: number[];
   priceInfo: string;
@@ -99,7 +98,7 @@ export interface AdminEnrollmentInfoType {
   limitsInfo: string;
   accidentInfo: string;
   abandonmentInfo: string;
-  pickDropState: TPickDropState | "";
+  pickDropState: string;
   pickDropInfo: string;
   pickDropNotice: string;
 }
