@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import NewSignUpIcon from "assets/svg/new-sign-up-icon";
 import TeacherManagementIcon from "assets/svg/teacher-management-icon";
@@ -15,7 +15,7 @@ const MenuCard = () => {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
-  const { refetch } = useGetNewEnrollment(2, 1); // FIXME: adminId, schoolId 로그인 정보에서 가져오기
+  const { refetch } = useGetNewEnrollment(1); // FIXME: adminId, schoolId 로그인 정보에서 가져오기
   const setNewEnrollmentList = useSetRecoilState(newEnrollmentListAtom);
 
   const handleTouch = (index: number) => {
@@ -43,7 +43,7 @@ const MenuCard = () => {
           setIsOpened(true);
           return;
         }
-        navigate(PATH.ADMIN_ENROLLMENT);
+        navigate(routes.admin.school.enrollment.root);
       })
       .catch((error) => {
         showToast("정보를 불러오는 데 실패했습니다. 다시 시도해주세요", "bottom");

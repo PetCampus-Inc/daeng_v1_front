@@ -1,5 +1,5 @@
-import { DOG_STATUS } from "constants/memebrDogStatus";
-import { PATH } from "constants/path";
+import { DOG_STATUS } from "constants/memberDogStatus";
+import { routes } from "constants/path";
 
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
@@ -7,7 +7,7 @@ import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 import { formatDate } from "utils/formatter";
@@ -41,11 +41,10 @@ const MyDogCard = ({
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
   const setDogId = useSetRecoilState(dogIdState);
-  const { memberId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
-  const mutateMemberDogDelete = usePostMemberDogDelete(String(memberId));
+  const mutateMemberDogDelete = usePostMemberDogDelete();
   const isProfile = profileUri === null;
 
   const openInvalidInputPopup = () =>
@@ -69,7 +68,7 @@ const MyDogCard = ({
         subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
         actionText="가입하기"
         actionFn={() => {
-          navigate(PATH.MEMBER_ENROLLMENT_PAGE);
+          navigate(routes.member.mypage.enrollment.root);
           setDogId(Number(dogId));
         }}
       />
@@ -119,7 +118,7 @@ const MyDogCard = ({
         ) : (
           <GotoSchoolInfoButton
             schoolInfo={schoolInfo}
-            onClick={() => navigate(PATH.MEMBER_MY_SCHOOL_INFO(dogId))}
+            onClick={() => navigate(routes.member.mypage.dog.school.dynamic(dogId))}
           />
         )}
         <S.DateText className={isProfile ? "colorGray1" : ""}>{registeredTime} 등록</S.DateText>

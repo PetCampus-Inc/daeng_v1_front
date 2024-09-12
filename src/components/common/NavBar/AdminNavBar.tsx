@@ -1,9 +1,9 @@
 import { MENU_ITEMS } from "constants/navBar";
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import usePathParams from "hooks/common/usePathParams";
+import { useTokenHandler } from "hooks/common/useTokenHandler";
 import { memo, useMemo } from "react";
-import { useAuth } from "routes/AuthProvider";
 import { AdminRole } from "types/common/role.types";
 
 import * as S from "./styles";
@@ -11,11 +11,10 @@ import * as S from "./styles";
 // FIXME: routes가 변경될 때 마다 매번 새로 그려지고 있습니다. 함수호출을 줄일 수 있는 방법을 찾아야합니다.
 const AdminNavbar = () => {
   const path: string = usePathParams();
-  const adminContext = useAuth();
-  const role = adminContext?.auth?.role;
+  const { role } = useTokenHandler();
 
   const menuItems = useMemo(() => {
-    if (!path.includes(PATH.ADMIN)) {
+    if (!path.includes(routes.admin.root)) {
       return;
     }
     if (role === AdminRole.ROLE_TEACHER) {

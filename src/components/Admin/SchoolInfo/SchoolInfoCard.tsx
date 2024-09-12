@@ -8,7 +8,6 @@ import { Box, Flex } from "components/common";
 import { WideButton, XSmallButton } from "components/common/Button/Templates";
 import { useSchoolResigned } from "hooks/api/admin/mypage";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
 import { AUTH_KEY } from "store/auth";

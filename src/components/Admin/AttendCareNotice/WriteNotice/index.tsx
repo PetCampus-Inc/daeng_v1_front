@@ -3,7 +3,6 @@ import PoopStatusIcon from "assets/svg/poop-status-icon";
 import PoopBox from "components/common/PoopBox";
 import TextArea from "components/common/TextArea";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { debounce } from "lodash";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
@@ -15,7 +14,6 @@ import SaveOrSendButton from "../SaveOrSendButton";
 import { NoticeItemContainer } from "../styles";
 
 const WriteNotice = () => {
-  const { adminId } = useAdminInfo();
   const dogId = useLocation().pathname.split("/").pop();
 
   const { data } = useGetAgendaSaved(Number(dogId));
@@ -33,7 +31,6 @@ const WriteNotice = () => {
 
     return {
       agendaId: data.agendaId,
-      adminId: adminId,
       dogId: Number(dogId),
       agendaNote,
       snack,

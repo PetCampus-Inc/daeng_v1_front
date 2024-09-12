@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -19,7 +19,7 @@ export const useOwnerProfileEdit = () => {
   const ownerProfileEditMutation = useMutation({
     mutationFn: (newData: IAdminProfileEdit) => handleOwnerProfileEdit(newData),
     onSuccess: () => {
-      navigate(PATH.ADMIN_MY_PAGE);
+      navigate(routes.admin.mypage.root);
       showToast("수정 완료되었습니다", "bottom");
     },
     throwOnError: true

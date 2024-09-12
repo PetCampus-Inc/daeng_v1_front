@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { Box, Flex, Text } from "components/common";
 import { MoreButton } from "components/common/Button/Templates";
@@ -28,7 +28,9 @@ const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
         {images && (
           <MoreButton
             onClick={() =>
-              navigate(`${PATH.ALBUM}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`)
+              navigate(
+                `${routes.member.album.root}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`
+              )
             }
             typo="body2_16_R"
             iconSize={24}

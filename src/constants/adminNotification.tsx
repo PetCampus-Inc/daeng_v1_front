@@ -6,7 +6,7 @@ import DogFilledIcon from "assets/svg/dog-filled-icon";
 import ListYellowCircleIcon from "assets/svg/list-yellow-circle-icon";
 import SendAlarmIcon from "assets/svg/send-alarm";
 
-import { PATH } from "./path";
+import { routes } from "./path";
 
 export interface NotificationItem {
   id: string;
@@ -86,7 +86,7 @@ export const ADMIN_NOTIFICATION = {
       id: "NEW_DOG",
       title: "신규 가입된 강아지가 있어요!",
       text: "신규 가입 강아지의 가입 정보를 확인해 보세요",
-      path: PATH.ADMIN_ATTENDANCE,
+      // path: routes.ADMIN_ATTENDANCE,
       icon: <AddBrownIcon />
     }
   ] as NotificationItem[],

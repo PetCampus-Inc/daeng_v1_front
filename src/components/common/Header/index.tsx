@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import ArrowLeftIcon from "assets/svg/arrow-left-icon";
@@ -68,7 +68,7 @@ const Header = ({
               </TextButton>
               <IconWrapper
                 onClick={() => {
-                  navigate(PATH.ADMIN_NOTIFICATION_PAGE);
+                  navigate(routes.admin.notification.root);
                 }}
               >
                 {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}
@@ -94,7 +94,7 @@ const Header = ({
               <TitleText className="start">{text}</TitleText>
               <IconWrapper
                 onClick={() => {
-                  navigate(PATH.ADMIN_NOTIFICATION_PAGE);
+                  navigate(routes.admin.notification.root);
                 }}
               >
                 {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}

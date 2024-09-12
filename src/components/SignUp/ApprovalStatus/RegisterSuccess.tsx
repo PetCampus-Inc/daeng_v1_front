@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import RegisterSchoolIcon from "assets/svg/register-school-icon";
 import { Box, Text, Button } from "components/common";
@@ -9,7 +9,7 @@ import { StyledImgWrapper } from "./styles";
 export default function RegisterSuccess({ schoolName }: { schoolName?: string }) {
   const navigate = useNavigate();
 
-  const handleConfirm = () => navigate(PATH.ADMIN_ATTENDANCE, { replace: true });
+  const handleConfirm = () => navigate(routes.admin.attendance.root, { replace: true });
 
   return (
     <>

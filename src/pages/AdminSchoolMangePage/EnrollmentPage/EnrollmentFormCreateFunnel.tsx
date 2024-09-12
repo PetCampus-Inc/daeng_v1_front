@@ -1,4 +1,4 @@
-import { ADMIN_CREATE_FORM_PATH } from "constants/path";
+import { ADMIN_CREATE_FORM_PATH } from "constants/funnelPath";
 
 import { useFunnel } from "hooks/common/useFunnel";
 

@@ -9,11 +9,10 @@ import MyProfileEdit from "components/Member/MyPage/MyMemberInfoEdit/MyProfileEd
 import { ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
-import { useBlocker, useParams } from "react-router-dom";
+import { useBlocker } from "react-router-dom";
 
 const MemberMyInfoEditPage = () => {
-  const { memberId } = useParams();
-  const { data: memberData } = useGetMemberProfileInfo(memberId);
+  const { data: memberData } = useGetMemberProfileInfo();
   const { memberProfileUri } = memberData;
 
   const methods = useForm({
@@ -22,8 +21,6 @@ const MemberMyInfoEditPage = () => {
   });
 
   const blocker = useBlocker(() => methods.formState.isDirty);
-
-  if (!memberId) throw new Error("memberId가 없습니다.");
 
   return (
     <>
@@ -41,7 +38,7 @@ const MemberMyInfoEditPage = () => {
           <ContentContainer px="1.5" py="1" height="auto">
             <MyInfoEdit />
           </ContentContainer>
-          <SaveButton memberId={memberId} />
+          <SaveButton />
         </FormProvider>
         {/* <KeyboardCompleteButton
           memberData={memberData}

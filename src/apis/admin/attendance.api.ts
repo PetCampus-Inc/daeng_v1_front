@@ -17,14 +17,7 @@ import type {
 
 export const handleGetSearchDogs = async (schoolId: number, searchText?: string) => {
   const url = `admin/attendance/dog/search`;
-  const { data } = await request<Attendance[]>({
-    url,
-    params: {
-      schoolId,
-      searchText
-    }
-  });
-
+  const { data } = await request<Attendance[]>({ url, params: { schoolId, searchText } });
   return data;
 };
 
@@ -34,11 +27,8 @@ export const handleSortPayment = async (schoolId: number): Promise<Attendance[]>
   return data;
 };
 
-export const handleSortCharge = async (
-  schoolId: number,
-  adminId: number
-): Promise<Attendance[]> => {
-  const url = `admin/attendance/dog/sort/charge?schoolId=${schoolId}&adminId=${adminId}`;
+export const handleSortCharge = async (schoolId: number): Promise<Attendance[]> => {
+  const url = `admin/attendance/dog/sort/charge?schoolId=${schoolId}`;
   const { data } = await request<Attendance[]>({ url });
   return data;
 };
@@ -107,7 +97,6 @@ export const handlePostAttend = async (req: AttendReq) => {
     method: "POST",
     data: {
       schoolId: req.schoolId,
-      adminId: req.adminId,
       attendanceIdList: req.attendanceIdList
     }
   });

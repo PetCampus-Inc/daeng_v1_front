@@ -15,13 +15,12 @@ const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
 
   const defaultDogId = 2;
-  const memberId = 2;
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
-  const { data } = useGetHomeInfo(memberId, dogId);
+  const { data } = useGetHomeInfo(dogId);
 
   const overlay = useOverlay();
-  const prefetchDogs = usePrefetchDogs(memberId);
+  const prefetchDogs = usePrefetchDogs();
 
   const handleHeaderClick = () => {
     prefetchDogs(); // 먼저 프리패치 실행
@@ -29,9 +28,7 @@ const HomePage = () => {
   };
 
   const openDogManagerPopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <DogManagerPopup isOpen={isOpen} close={close} memberId={memberId} />
-    ));
+    overlay.open(({ isOpen, close }) => <DogManagerPopup isOpen={isOpen} close={close} />);
 
   const dogInfo = {
     dogName: data.dogName,

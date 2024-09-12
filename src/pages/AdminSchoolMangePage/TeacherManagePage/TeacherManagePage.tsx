@@ -5,14 +5,12 @@ import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import useGetTeacherList from "hooks/api/useGetTeacherList";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 
 const TeacherManagePage = () => {
   const [isEditable, setIsEditable] = useState(false);
 
-  const { adminId } = useAdminInfo();
-  const { data } = useGetTeacherList(adminId);
+  const { data } = useGetTeacherList();
   if (!data) return <div>로딩중..</div>;
 
   return (

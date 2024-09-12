@@ -13,7 +13,7 @@ import { EmptyList } from "./List/EmptyList";
 import { RootContainer, ScrollableContent } from "./styles";
 
 export function AttendanceMode() {
-  const { schoolId, adminId } = useAdminInfo();
+  const { schoolId } = useAdminInfo();
   const { data: dogList } = useGetAttendDogList(schoolId);
 
   const { searchText, isFocused } = ModeSearchContext.useSearchContext();
@@ -40,7 +40,6 @@ export function AttendanceMode() {
       </RootContainer>
       <AttendDogSubmitButton
         schoolId={schoolId}
-        adminId={adminId}
         onSubmitStart={() => setIsSubmitting(true)}
         onSubmitEnd={() => setIsSubmitting(false)}
       />

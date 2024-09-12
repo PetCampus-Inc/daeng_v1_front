@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
@@ -18,18 +18,18 @@ import showToast from "utils/showToast";
 
 import type { ICareDogInfo, IPastAgenda } from "types/admin/care.types";
 
-export const useGetCareDogList = (adminId: number, initialData: ICareDogInfo[]) => {
+export const useGetCareDogList = (initialData: ICareDogInfo[]) => {
   return useSuspenseQuery<ICareDogInfo[]>({
     queryKey: QUERY_KEY.CARE_DOG_LIST,
-    queryFn: () => handleGetCareDogs(adminId),
+    queryFn: () => handleGetCareDogs(),
     initialData
   });
 };
 
-export const useGetNewCareDogs = (adminId: number) => {
+export const useGetNewCareDogs = () => {
   return useSuspenseQuery<ICareDogInfo[]>({
     queryKey: QUERY_KEY.NEW_CARE_DOG_LIST,
-    queryFn: () => handleGetNewCareDogs(adminId)
+    queryFn: () => handleGetNewCareDogs()
   });
 };
 
@@ -49,7 +49,7 @@ export const useCreateCareDogs = ({
     if (!data.length) {
       // 추가 요청 성공
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
-      navigate(PATH.ADMIN_CARE);
+      navigate(routes.admin.care.root);
       // 강아지 추가 팝업 닫기
       closeRootPopup?.();
       return;
@@ -107,7 +107,7 @@ export const useDeleteCareDogs = () => {
     mutationFn: handleDeleteCareDogs,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.NEW_CARE_DOG_LIST });
-      navigate(PATH.ADMIN_CARE);
+      navigate(routes.admin.care.root);
       showToast("관리 강아지 목록에서 삭제되었습니다", "bottom");
     }
   });

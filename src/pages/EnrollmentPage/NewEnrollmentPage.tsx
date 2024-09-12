@@ -1,4 +1,4 @@
-import { MEMBER_DOG_ADD_ENROLL_STEP, MEMBER_ENROLL_STEP } from "constants/step";
+import { MEMBER_ENROLL_STEP } from "constants/step";
 
 import { Layout } from "components/common";
 import Header from "components/common/Header";
@@ -8,16 +8,13 @@ import MemberInfo from "components/Enrollment/Form/MemberInfo";
 import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
 import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
 import TicketInfo from "components/Enrollment/Form/TicketInfo";
-import MemberDogInfo from "components/Enrollment/MemberDogInfoForm/DogInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
 import { useGetEnrollment } from "hooks/api/member/enroll";
-import { useLocalStorageValue } from "hooks/common/useLocalStorage";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
-import { AUTH_MEMBER_ID } from "store/auth";
 import { isEmpty } from "utils/is";
 
 interface EnrollmentProps {
@@ -25,10 +22,7 @@ interface EnrollmentProps {
 }
 
 const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
-  // FIXME: memberId가 없을 경우 예외처리 필요
-  const memberId = useLocalStorageValue<string>(AUTH_MEMBER_ID) ?? "1";
-
-  const { data } = useGetEnrollment({ memberId, schoolId: schoolId ?? -1 });
+  const { data } = useGetEnrollment({ schoolId: schoolId ?? -1 });
   const { requiredItemList, pickDropState, roundTicketNumber, monthlyTicketNumber, ...rest } = data;
 
   const methods = useForm({
@@ -139,5 +133,8 @@ const defaultFormValues = {
   emergencyPhoneNumber: "",
   allergyDisease: "",
   dogName: "",
-  newBreed: ""
+  newBreed: "",
+  year: "2001",
+  month: "01",
+  day: "01"
 };

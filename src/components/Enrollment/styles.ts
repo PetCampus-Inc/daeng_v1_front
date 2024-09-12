@@ -13,7 +13,6 @@ export const TopWrapper = styled.div<StyleProps>`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  top: ${({ top }) => (top === 0 ? "0vh" : top ? `${top}vh` : "5vh")};
   padding: 28px 0;
   gap: 12px;
 

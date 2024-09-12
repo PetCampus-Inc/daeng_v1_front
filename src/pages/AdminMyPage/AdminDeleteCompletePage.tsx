@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import { Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
@@ -18,7 +18,7 @@ const AdminDeleteCompletePage = () => {
         </Text>
         <Text color="gray_3">똑독 유치원에서 다시 만날 날을 기다릴게요</Text>
       </Layout>
-      <BottomButton onClick={() => navigate(PATH.LOGIN)}>로그인 화면으로 이동</BottomButton>
+      <BottomButton onClick={() => navigate(routes.login.root)}>로그인 화면으로 이동</BottomButton>
     </>
   );
 };

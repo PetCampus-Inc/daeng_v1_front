@@ -11,21 +11,21 @@ import MyPageDogBlack from "assets/svg/my-page-dog-black";
 import SchoolBlack from "assets/svg/school-black";
 import School from "assets/svg/school-icon";
 
-import { PATH } from "./path";
+import { routes } from "./path";
 
 export const MENU_ITEMS = {
   admin: [
     {
       id: 0,
       text: "출석부",
-      path: PATH.ADMIN_ATTENDANCE,
+      path: routes.admin.attendance.root,
       blackImage: <AttendanceBlackIcon />,
       colorImage: <AttendanceIcon />
     },
     {
       id: 1,
       text: "강아지 관리",
-      path: PATH.ADMIN_CARE,
+      path: routes.admin.care.root,
       blackImage: <CheckBoardBlack />,
       colorImage: <CheckBoard />
     },
@@ -33,21 +33,21 @@ export const MENU_ITEMS = {
     {
       id: 3,
       text: "채팅",
-      path: PATH.ADMIN_CHAT,
+      path: routes.admin.chat.root,
       blackImage: <ChatBlack />,
       colorImage: <Chat />
     },
     {
       id: 2,
       text: "유치원 운영",
-      path: PATH.ADMIN_SCHOOL_MANAGE,
+      path: routes.admin.school.root,
       blackImage: <SchoolBlack />,
       colorImage: <School />
     },
     {
       id: 4,
       text: "마이페이지",
-      path: PATH.ADMIN_MY_PAGE,
+      path: routes.admin.mypage.root,
       blackImage: <MyPageDogBlack />,
       colorImage: <MyPageDog />
     }
@@ -64,14 +64,14 @@ export const MENU_ITEMS = {
     {
       id: 0,
       text: "홈",
-      path: PATH.ROOT,
+      path: routes.root,
       blackImage: <HomeBlack />,
       colorImage: <HomeBrown />
     },
     {
       id: 1,
       text: "마이페이지",
-      path: (memberId: string) => PATH.MEMBER_MY_PAGE(memberId),
+      path: routes.member.mypage.root,
       blackImage: <MyPageDogBlack />,
       colorImage: <MyPageDog />
     }

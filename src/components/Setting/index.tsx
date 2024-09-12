@@ -1,19 +1,20 @@
+import { routes } from "constants/path";
+
 import ArrowRightRound from "assets/svg/arrow-right-round-icon";
 
 import * as S from "./styles";
-import { PATH } from "../../constants/path";
 
 const SettingInfo = () => {
   return (
     <S.SettingList>
       <S.SettingItem>
-        <S.GotoPageButton to={PATH.SETTING_NOTIFICATION}>
+        <S.GotoPageButton to={routes.setting.notification.root}>
           <S.Text>알림 설정</S.Text>
           <ArrowRightRound />
         </S.GotoPageButton>
       </S.SettingItem>
       <S.SettingItem>
-        <S.GotoPageButton to={PATH.POLICY}>
+        <S.GotoPageButton to={routes.policy.root}>
           <S.Text>정책</S.Text>
           <ArrowRightRound />
         </S.GotoPageButton>
@@ -29,7 +30,7 @@ const SettingInfo = () => {
         </S.ButtomBox>
       </S.SettingItem>
       <S.SettingItem>
-        <S.GotoPageButton to={PATH.UNREGISTER}>
+        <S.GotoPageButton to={routes.unregister.root}>
           <S.Text>탈퇴하기</S.Text>
           <ArrowRightRound />
         </S.GotoPageButton>
