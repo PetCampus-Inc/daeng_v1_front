@@ -1,5 +1,6 @@
 import { Text } from "components/common";
 import { useAdminLogin } from "hooks/api/signin";
+import useNativeAction from "hooks/native/useNativeAction";
 import { type FieldValues, useFormContext } from "react-hook-form";
 import { isCustomError } from "utils/is";
 
@@ -8,12 +9,14 @@ import { StyledButton } from "../styles";
 const SubmitButton = () => {
   const { handleSubmit, setError } = useFormContext();
   const { mutateLogin } = useAdminLogin();
+  const { getFcmToken } = useNativeAction();
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
+    const fcmToken = await getFcmToken();
     const req = {
       inputId: data.inputId,
       inputPw: data.inputPw,
-      fcmToken: "fcmToken" // FIXME: RN에서 받아와야함
+      fcmToken
     };
 
     mutateLogin(req, {
