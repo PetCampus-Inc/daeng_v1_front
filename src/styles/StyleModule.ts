@@ -138,3 +138,29 @@ export const Img = styled.img`
   height: 100%;
   object-fit: cover;
 `;
+
+export const OverlayContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+`;
+
+export const OverlayWrapper = styled.div`
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 2rem);
+  aspect-ratio: 3 / 5;
+  background-color: ${({ theme }) => theme.colors.black};
+  border-radius: 12px;
+  overflow: hidden;
+
+  overscroll-behavior: contain;
+`;
