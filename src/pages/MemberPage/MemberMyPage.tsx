@@ -14,7 +14,7 @@ const MemberMyPage = () => {
   return (
     <>
       <Header type="setting" text="마이페이지" transparent />
-      <Layout>
+      <Layout type="main">
         <PageContainer
           pt="4"
           imageUrl={
@@ -29,8 +29,8 @@ const MemberMyPage = () => {
           </ContentContainer>
         </PageContainer>
         <LogOutButton />
+        <NavBar />
       </Layout>
-      <NavBar />
     </>
   );
 };
