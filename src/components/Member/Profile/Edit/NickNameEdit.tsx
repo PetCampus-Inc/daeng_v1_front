@@ -5,13 +5,13 @@ import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
 const NickNameEdit = () => {
-  const { register, getValues } = useFormContext();
+  const { register } = useFormContext();
   return (
     <>
       <TextInput
-        {...register(FIELD.NICK_NAME, { required: true })}
         register={register}
-        defaultValue={getValues(FIELD.DOG_NAME)}
+        name={FIELD.NICK_NAME}
+        required={true}
         placeholder="닉네임을 입력해주세요"
         css={InputStyle}
         className="defaultValue"
