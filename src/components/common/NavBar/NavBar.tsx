@@ -4,8 +4,6 @@ import { memo, useCallback } from "react";
 
 import * as S from "./styles";
 
-// FIXME: routes가 변경될 때 마다 매번 새로 그려지고 있습니다. 함수호출을 줄일 수 있는 방법을 찾아야합니다.
-// MEMO: mypage 경우 url로 id를 넘겨주는 것보다 마이페이지에서 로컬스토리지에 저장된 memberId를 사용하는 게 좋을 것 같습니다.
 const Navbar = () => {
   const isCurrentPath = useCallback(
     (path: string) => {
