@@ -9,7 +9,7 @@ export const useRoleBasedPath = () => {
     if (isAdmin(role)) return routes.admin.attendance.root;
     else if (isMember(role)) return routes.root;
     else if (isApproval(role)) return routes.approval.root;
-    else if (role === Role.ROLE_ANONYMOUS) return routes.login.root;
+    else if (role === Role.ROLE_ANONYMOUS) return routes.signup.root;
     else return routes.login.root;
   }, []);
 };
