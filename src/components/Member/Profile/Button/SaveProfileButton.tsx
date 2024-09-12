@@ -49,10 +49,8 @@ const SaveProfileButton = () => {
     });
   };
 
-  // TODO 어뎁터 데이터에 추가하기
   const getSubmitFormData = (data: FieldValues) => {
     return {
-      memberId: data.memberId,
       dogId: data.dogId,
       memberProfileUri: convertProfileUri(FILE_NAME.PROFILE_MEMBER),
       dogProfileUri: convertProfileUri(FILE_NAME.PROFILE_DOG),
