@@ -1,3 +1,4 @@
+import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
@@ -11,6 +12,7 @@ import {
 } from "apis/member/enrollment.api";
 import { Adapter } from "libs/adapters";
 import { EnrollmentFormAdapter } from "libs/adapters/ServerToFormAdapter";
+import { useNavigate } from "react-router-dom";
 
 import type {
   EnrollmentInfoType,
@@ -45,8 +47,11 @@ export const useGetMemberDogEnrollment = ({ dogId, schoolId }: MemberDogEnrollme
 
 // 견주 가입신청서 등록
 export const usePostEnrollment = () => {
+  const navigate = useNavigate();
+
   const { mutate } = useMutation({
-    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData)
+    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData),
+    onSuccess: () => navigate(routes.approval.root)
   });
 
   return { mutateEnrollment: mutate };
