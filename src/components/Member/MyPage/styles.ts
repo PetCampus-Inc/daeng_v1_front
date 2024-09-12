@@ -21,4 +21,5 @@ export const CardContainer = styled.div`
   height: 100%;
   border-top: 0.5rem solid ${({ theme }) => theme.colors.gray_5};
   background-color: ${({ theme }) => theme.colors.white};
+  margin-bottom: 7rem;
 `;
