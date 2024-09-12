@@ -6,7 +6,6 @@ interface UploadParams {
   files: FileList; // 파일 형식
   path: string; // s3 path 설정
   accept: string; // 파일 형식
-  id: number; // member, dog 인지 구분
   name: string;
 }
 
@@ -23,9 +22,9 @@ const useUploadProfile = () => {
     options?: UploadAndCreateAlbumOptions
   ) => {
     const uploadPromises = paramsArray.map(async (params) => {
-      const { files, path, accept, id, name } = params;
+      const { files, path, accept, name } = params;
 
-      const profileParams = { files, path: `${path}/${name}/${id}`, accept, id, name };
+      const profileParams = { files, path: `${path}/${name}/`, accept, name };
 
       if (!files || files.length === 0) {
         showToast("업로드할 파일이 없습니다.", "ownerNav");

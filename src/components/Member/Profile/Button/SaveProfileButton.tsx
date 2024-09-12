@@ -26,7 +26,6 @@ const SaveProfileButton = () => {
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: TYPE_NAME.MEMBER,
-      id: memberProfileData.memberId,
       files: memberProfileData.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
@@ -34,7 +33,6 @@ const SaveProfileButton = () => {
 
     const dogParams = {
       name: TYPE_NAME.DOG,
-      id: memberProfileData.dogId,
       files: memberProfileData.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
