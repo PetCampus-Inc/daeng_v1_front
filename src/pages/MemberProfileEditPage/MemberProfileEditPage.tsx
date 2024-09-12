@@ -7,7 +7,6 @@ import SaveProfileButton from "../../components/Member/Profile/Button/SaveProfil
 const MemberProfileEditPage = () => {
   //TODO 작업 이후 삭제 필요
   const data = {
-    memberId: 1,
     dogId: 1,
     memberProfileUri: "",
     dogProfileUri: "",

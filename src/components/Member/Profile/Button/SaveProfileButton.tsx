@@ -54,7 +54,6 @@ const SaveProfileButton = () => {
 
   const submitProfile = () => {
     const requestData = {
-      memberId: memberProfileData.memberId,
       dogId: memberProfileData.dogId,
       memberProfileUri: convertProfileUri(FILE_NAME.PROFILE_MEMBER),
       dogProfileUri: convertProfileUri(FILE_NAME.PROFILE_DOG),
