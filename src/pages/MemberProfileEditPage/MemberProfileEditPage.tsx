@@ -8,11 +8,10 @@ import SaveProfileButton from "../../components/Member/Profile/Button/SaveProfil
 const MemberProfileEditPage = () => {
   const { data } = useGetMemberProfileInfo();
 
-  const { relation, ...rest } = data;
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { relation: "호칭선택", ...rest }
+    defaultValues: { ...data, relation: "호칭선택" }
   });
 
   return (
