@@ -1,11 +1,15 @@
-import { NativeMessage } from "types/native/message.types";
-import { isNativeMessage, isValidMessageData } from "utils/is";
+import { NativeEventResponse, NativeEventType } from "types/native/event.types";
+import { NativeMessageResponse, NativeMessageType } from "types/native/message.types";
+import { isNativeEventResponse } from "utils/is/nativeEvent";
+import { isNativeMessageResponse } from "utils/is/nativeMessage";
 
-type EventCallback = (event: NativeMessage) => void;
+type NativeMessageCallback = (event: NativeMessageResponse<NativeMessageType<"Response">>) => void;
+type NativeEventCallback = (event: NativeEventResponse<NativeEventType>) => void;
 
 class NativeReceiver {
   private static instance: NativeReceiver | null = null;
-  private callbacks: Set<EventCallback> = new Set();
+  private messageCallbacks: Set<NativeMessageCallback> = new Set();
+  private eventCallbacks: Map<string, NativeEventCallback> = new Map();
 
   private constructor() {
     const receiver = navigator.userAgent.includes("Android") ? document : window;
@@ -19,29 +23,33 @@ class NativeReceiver {
     return NativeReceiver.instance;
   }
 
-  public registerCallback(callback: EventCallback): void {
-    this.callbacks.add(callback);
+  public registerCallback(callback: NativeMessageCallback): void {
+    this.messageCallbacks.add(callback);
   }
 
-  public unregisterCallback(callback: EventCallback): void {
-    this.callbacks.delete(callback);
+  public unregisterCallback(callback: NativeMessageCallback): void {
+    this.messageCallbacks.delete(callback);
+  }
+
+  public registerEventCallback(requestId: string, callback: NativeEventCallback): void {
+    this.eventCallbacks.set(requestId, callback);
+  }
+
+  public unregisterEventCallback(requestId: string): void {
+    this.eventCallbacks.delete(requestId);
   }
 
   private handleMessage = (event: MessageEvent): void => {
     if (typeof event.data !== "string" || event.data.includes("webpackHotUpdate")) return;
-
     try {
       const message = JSON.parse(event.data);
 
-      if (!isNativeMessage(message)) {
-        throw new Error("[Native 통신 오류]: 메시지 타입 오류");
+      if (isNativeMessageResponse(message)) {
+        this.messageCallbacks.forEach((callback) => callback(message));
+      } else if (isNativeEventResponse(message)) {
+        const callback = this.eventCallbacks.get(message.id);
+        if (callback) callback(message);
       }
-
-      if (!isValidMessageData(message)) {
-        throw new Error(`[Native 통신 오류]: 데이터 타입 오류 (${message})`);
-      }
-
-      this.callbacks.forEach((callback) => callback(message));
     } catch (error) {
       console.error("[Native 통신 오류]:", error);
     }

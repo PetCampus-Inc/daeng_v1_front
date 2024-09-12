@@ -11,10 +11,10 @@ import { PATH } from "./path";
 export interface NotificationItem {
   id: string;
   title: string | ((name: string) => string);
-  text: string | ((params: string) => string);
+  text: string | ((main: string, date?: string, ticket?: string) => string);
   path: string | ((dogId: number) => string);
   icon: React.ReactNode;
-  subtext?: string | ((expired: string) => string);
+  subtext?: string | ((main: string, date?: string, ticket?: number) => string);
 }
 
 export const ADMIN_NOTIFICATION_STEP = ["전체", "출석부", "강아지 관리", "유치원 운영"] as const;
@@ -47,14 +47,10 @@ export const ADMIN_NOTIFICATION = {
     {
       id: "PENDING_TICKET",
       title: (dogName: string) => `${dogName}의 이용권 만료일이 임박했어요`,
-      text: (params: {
-        ticketType: string;
-        ticketExpirationDate?: string;
-        currentRoundTicket?: number;
-      }) =>
-        params.ticketType === "MONTHLY"
-          ? `[만료 ${params.ticketExpirationDate}일 전]`
-          : `[잔여 횟수:${params.currentRoundTicket}회]`,
+      text: (ticketType: string, ticketExpirationDate?: string, currentRoundTicket?: number) =>
+        ticketType === "MONTHLY"
+          ? `[만료 ${ticketExpirationDate}일 전]`
+          : `[잔여 횟수:${currentRoundTicket}회]`,
       path: (dogId: number) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <CalendarExpireIcon rx={14} w={28} h={28} />
     },
@@ -62,14 +58,10 @@ export const ADMIN_NOTIFICATION = {
       id: "TICKET_EXPIRED",
       title: (dogName: string) => `${dogName}의 이용권이 만료되었어요 이용권을 갱신해 주세요!`,
       text: "이용권 갱신은 원장님만 가능해요",
-      subtext: (params: {
-        ticketType: string;
-        ticketStartDate?: string;
-        allRoundTicket?: number;
-      }) =>
-        params.ticketType === "MONTHLY"
-          ? `[시작일: ${params.ticketStartDate}]`
-          : `[만료된 이용권 정보:회차권 ${params.allRoundTicket}회]`,
+      subtext: (ticketType: string, ticketStartDate?: string, allRoundTicket?: number) =>
+        ticketType === "MONTHLY"
+          ? `[시작일: ${ticketStartDate}]`
+          : `[만료된 이용권 정보:회차권 ${allRoundTicket}회]`,
       path: (dogId: number) => PATH.ADMIN_ATTENDANCE_INFO(dogId),
       icon: <SendAlarmIcon borderStyle="50%" w={28} h={28} />
     },
