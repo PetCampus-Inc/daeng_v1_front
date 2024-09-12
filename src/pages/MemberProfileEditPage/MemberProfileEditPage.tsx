@@ -11,7 +11,7 @@ const MemberProfileEditPage = () => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...data }
+    defaultValues: { ...data, dogProfileUri: "", nickName: "", relation: "", dogId: 0 }
   });
 
   return (
