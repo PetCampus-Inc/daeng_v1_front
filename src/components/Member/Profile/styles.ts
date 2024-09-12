@@ -12,15 +12,25 @@ interface StyleProps {
   typo?: string;
 }
 
-export const RoleEditButton = styled.input<StyleProps>`
+export const RoleEditButton = styled.button<StyleProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 112px;
   min-height: 49px;
-  ${({ theme }) => theme.typo.body2_16_R};
-  color: ${({ color, theme }) => theme.colors[color || "gray_3"]};
   background-color: ${({ theme, bg }) => theme.colors[bg || "gray_4"]};
   border: 0;
   border-radius: 8px;
   cursor: pointer;
+
+  & > span {
+    ${({ theme }) => theme.typo.body2_16_R};
+    color: ${({ color, theme }) => theme.colors[color || "gray_3"]};
+  }
+`;
+
+export const RoleEditinput = styled.input<StyleProps>`
+  display: none;
 `;
 
 export const RoleSelectButton = styled(Button)`

@@ -25,13 +25,19 @@ const RoleEdit = () => {
   return (
     <S.RoleEditContainer>
       <S.RoleEditButton
-        type="button"
         onClick={handleShowRoles}
-        {...register(FIELD.RELATION, { required: true })}
-        value={currentRelation ? currentRelation : "호칭선택"}
         color={currentRelation ? "gray_1" : "gray_3"}
         bg={currentRelation ? "white" : "gray_4"}
+      >
+        <span>{currentRelation ? currentRelation : "호칭선택"}</span>
+      </S.RoleEditButton>
+
+      <S.RoleEditinput
+        id="roleEdit"
+        value={currentRelation ? currentRelation : ""}
+        {...register(FIELD.RELATION, { required: true })}
       />
+
       {isShowRoles && (
         <S.RoleSelectWrapper direction="column">
           {notSelectedRelation.map((item, idx) => (

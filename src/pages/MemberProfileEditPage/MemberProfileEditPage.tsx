@@ -11,7 +11,7 @@ const MemberProfileEditPage = () => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...data, relation: "호칭선택" }
+    defaultValues: { ...data }
   });
 
   return (
