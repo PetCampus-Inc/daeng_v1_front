@@ -26,7 +26,6 @@ interface IMyDogCardProps {
   profileUri: string | null;
   dogLength: number;
   onCardFocus: (dogId: string) => void;
-  onClick: () => void;
   isActive: boolean;
 }
 
@@ -37,7 +36,6 @@ const MyDogCard = ({
   profileUri,
   dogLength,
   onCardFocus,
-  onClick,
   isActive
 }: IMyDogCardProps) => {
   const divRef = useRef<HTMLDivElement>(null);
@@ -85,14 +83,14 @@ const MyDogCard = ({
       <BasicModal
         isOpen={isOpen}
         close={close}
-        actionFn={() => {
-          close();
-          handleDeleteDog();
-        }}
         title={`${dogName}를 삭제 하시겠습니까?`}
         subtitle={"해당 강아지의 모든 정보가 초기화 됩니다"}
         closeText={"취소"}
         actionText={"삭제"}
+        actionFn={() => {
+          close();
+          handleDeleteDog();
+        }}
       />
     ));
 
@@ -115,13 +113,12 @@ const MyDogCard = ({
 
   return (
     <S.MyDogCard
-      isprofilestring={isProfile ? "true" : "false"}
-      tabIndex={dogLength}
-      ref={divRef}
-      onFocus={handleFocus}
-      className={isActive ? "active" : ""}
       id={dogId}
-      onClick={onClick}
+      ref={divRef}
+      tabIndex={dogLength}
+      className={isActive ? "active" : ""}
+      isprofilestring={isProfile ? "true" : "false"}
+      onFocus={handleFocus}
     >
       <DogDeleteButton
         isOpen={isOpen}
