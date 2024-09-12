@@ -92,6 +92,7 @@ const SaveButton = () => {
     <BottomButton
       onClick={handleSubmit(handleSubmitData)}
       disabled={!isDirty || !isValid || isSubmitting}
+      position="relative"
     >
       수정 완료
     </BottomButton>

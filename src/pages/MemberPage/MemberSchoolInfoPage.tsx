@@ -1,9 +1,9 @@
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import SchoolInfo from "components/Member/SchoolInfo";
 import PreviousSchoolInfo from "components/Member/SchoolInfo/PreviousSchoolInfo";
 import { useGetMemberSchoolInfo } from "hooks/api/member/member";
 import { useParams } from "react-router-dom";
-import { PageContainer } from "styles/StyleModule";
 
 const MemberSchoolInfoPage = () => {
   const { dogId } = useParams();
@@ -12,7 +12,7 @@ const MemberSchoolInfoPage = () => {
   return (
     <>
       <Header type="text" text="유치원 상세정보" />
-      <PageContainer pt="2" color="gray_5">
+      <Layout pt="calc(5vh + 2rem)" px="1rem" bg="gray_5">
         <SchoolInfo data={data} />
         {data.pastDogSchoolList &&
           data.pastDogSchoolList.map((item) => (
@@ -24,7 +24,7 @@ const MemberSchoolInfoPage = () => {
               dropOutDate={item.dropOutDate}
             />
           ))}
-      </PageContainer>
+      </Layout>
     </>
   );
 };

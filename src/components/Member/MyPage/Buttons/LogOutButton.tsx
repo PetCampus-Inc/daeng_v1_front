@@ -13,7 +13,7 @@ const LogOutButton = () => {
     ));
 
   return (
-    <BottomButton colorScheme="gray_4" position="relative" wrapPb={115} onClick={openPopup}>
+    <BottomButton colorScheme="gray_4" position="relative" wrapPb={28} onClick={openPopup}>
       로그아웃
     </BottomButton>
   );
