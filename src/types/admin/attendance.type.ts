@@ -78,7 +78,6 @@ interface Vaccination {
 }
 
 interface Member {
-  memberId: null;
   memberProfileUri: null;
   memberName: string;
   memberGender: null;
