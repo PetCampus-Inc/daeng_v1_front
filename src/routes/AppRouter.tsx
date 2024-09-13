@@ -47,6 +47,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               element: <Pages.SignUpPage />
             },
             {
+              path: routes.member.profile.root,
+              element: (
+                <Suspense>
+                  <Pages.MemberProfileEditPage />
+                </Suspense>
+              )
+            },
+            {
               path: routes.approval.root,
               element: <Pages.ApprovalStatusPage />
             },

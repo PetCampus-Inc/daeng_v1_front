@@ -5,8 +5,8 @@ import { Box, Flex, Text, Button } from "components/common";
 import { MoreButton } from "components/common/Button/Templates";
 import { BasicModal } from "components/common/Modal";
 import { useTeacherSignUpCancel } from "hooks/api/signup";
+import useLogout from "hooks/common/useLogout";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useNavigate } from "react-router-dom";
 import { User } from "types/common/role.types";
 
 import { StyledImgWrapper } from "./styles";
@@ -17,17 +17,14 @@ interface ApprovalSuccessProps {
 }
 
 export default function ApprovalPending({ user, schoolName }: ApprovalSuccessProps) {
-  const navigate = useNavigate();
   const overlay = useOverlay();
+  const logout = useLogout();
 
   const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel();
 
-  const handleConfirm = () => navigate(routes.admin.login.root);
+  const handleConfirm = () => logout();
   const handleCancel = () => {
-    if (user === User.ADMIN)
-      mutateTeacherSignUpCancel(undefined, {
-        onSuccess: () => navigate(routes.admin.login.root)
-      });
+    if (user === User.ADMIN) mutateTeacherSignUpCancel(undefined, { onSuccess: logout });
     // else if (type === User.MEMBER) mutateMemberSignUpCancel(userId, { onSuccess: () => navigate() });
   };
 

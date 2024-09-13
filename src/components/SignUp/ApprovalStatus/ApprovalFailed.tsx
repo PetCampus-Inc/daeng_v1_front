@@ -3,26 +3,18 @@ import { SCHOOL_NAME_KEY } from "constants/storage";
 
 import DogRejectedBgIcon from "assets/svg/dog-rejected-bg-icon";
 import { Box, Flex, Text, Button } from "components/common";
-import { useResetLocalStorage } from "hooks/common/useLocalStorage";
-import { useNavigate } from "react-router-dom";
-import { User } from "types/common/role.types";
+import useLogout from "hooks/common/useLogout";
 
 import { StyledImgWrapper } from "./styles";
 
 interface ApprovalFailedProps {
-  user: User;
   schoolName: string;
 }
 
-export default function ApprovalFailed({ user, schoolName }: ApprovalFailedProps) {
-  const navigate = useNavigate();
-  const removeSchoolName = useResetLocalStorage(SCHOOL_NAME_KEY);
+export default function ApprovalFailed({ schoolName }: ApprovalFailedProps) {
+  const logout = useLogout();
 
-  const handleConfirm = () => {
-    removeSchoolName();
-    if (user === User.ADMIN) navigate(routes.admin.signup.root, { replace: true });
-    if (user === User.MEMBER) navigate(routes.signup.root, { replace: true });
-  };
+  const handleConfirm = () => logout();
 
   return (
     <>
