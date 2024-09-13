@@ -20,7 +20,6 @@ export type RelationType = "MOTHER" | "FATHER" | "SISTER" | "BROTHER" | "FRIEND"
 
 // 가입신청서 조회 - 멤버 정보
 export type MemberDtoType = {
-  memberId: number;
   memberProfileUri: string;
   memberName: string;
   memberGender: string;
@@ -36,7 +35,6 @@ export type MemberDtoType = {
 // (견주가 작성한) 가입신청서 조회
 export interface MemberFormData {
   enrollmentFormId: number;
-  memberId: number;
   memberName: string;
   memberGender: TMemberGender;
   address: string;

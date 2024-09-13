@@ -26,7 +26,6 @@ const SaveProfileButton = () => {
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: TYPE_NAME.MEMBER,
-      id: memberProfileData.memberId,
       files: memberProfileData.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
@@ -34,7 +33,6 @@ const SaveProfileButton = () => {
 
     const dogParams = {
       name: TYPE_NAME.DOG,
-      id: memberProfileData.dogId,
       files: memberProfileData.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
@@ -52,7 +50,6 @@ const SaveProfileButton = () => {
   // TODO 어뎁터 데이터에 추가하기
   const getSubmitFormData = (data: FieldValues) => {
     return {
-      memberId: data.memberId,
       dogId: data.dogId,
       memberProfileUri: convertProfileUri(FILE_NAME.PROFILE_MEMBER),
       dogProfileUri: convertProfileUri(FILE_NAME.PROFILE_DOG),

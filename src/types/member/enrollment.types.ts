@@ -121,7 +121,6 @@ export interface MemberDtoType {
   addressDetail: string;
   emergencyPhoneNumber: string;
   memberGender: MemberGenderType;
-  memberId: number;
   memberName: string;
   memberProfileUri: string;
   nickName: string;
@@ -204,7 +203,6 @@ export interface ISchoolFormResponse {
 // 강아지 가입 신청서
 export interface IDogEnrollmentInfo extends IResponse {
   enrollmentFormId: number;
-  memberId: number;
   memberName: string;
   memberGender: string;
   address: string;
