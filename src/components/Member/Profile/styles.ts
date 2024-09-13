@@ -12,7 +12,7 @@ interface StyleProps {
   typo?: string;
 }
 
-export const RoleEditButton = styled.input<StyleProps>`
+export const RoleEditButton = styled.button<StyleProps>`
   min-width: 112px;
   min-height: 49px;
   ${({ theme }) => theme.typo.body2_16_R};
@@ -21,6 +21,10 @@ export const RoleEditButton = styled.input<StyleProps>`
   border: 0;
   border-radius: 8px;
   cursor: pointer;
+`;
+
+export const RoleEditInput = styled.input`
+  display: none;
 `;
 
 export const RoleSelectButton = styled(Button)`
@@ -171,7 +175,7 @@ export const StyledHiddenUpload = styled.input`
   display: none;
 `;
 
-export const SavaProfileButton = styled.div`
+export const SaveProfileButton = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;

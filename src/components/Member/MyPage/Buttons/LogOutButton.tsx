@@ -1,6 +1,5 @@
 import LogoutModal from "components/Admin/MyPage/modal/LogoutModal";
 import { BottomButton } from "components/common/Button";
-import { BottomButtonWrapper } from "components/Member/MyPage/styles";
 import useLogout from "hooks/common/useLogout";
 import { useOverlay } from "hooks/common/useOverlay";
 
@@ -14,11 +13,9 @@ const LogOutButton = () => {
     ));
 
   return (
-    <BottomButtonWrapper>
-      <BottomButton colorScheme="gray_4" onClick={openPopup}>
-        로그아웃
-      </BottomButton>
-    </BottomButtonWrapper>
+    <BottomButton colorScheme="gray_4" position="relative" wrapPb={28} onClick={openPopup}>
+      로그아웃
+    </BottomButton>
   );
 };
 

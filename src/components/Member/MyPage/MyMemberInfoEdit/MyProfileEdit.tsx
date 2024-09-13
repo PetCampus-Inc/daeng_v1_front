@@ -3,7 +3,7 @@ import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
 import { TextInput } from "components/common";
 import ProfileUploadBox from "components/Member/Profile/Box/ProfileUploadBox";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 

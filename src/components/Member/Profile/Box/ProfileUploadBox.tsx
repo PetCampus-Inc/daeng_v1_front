@@ -1,5 +1,5 @@
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
@@ -18,15 +18,23 @@ interface ProfileUploadProps {
   type: string;
   isActive?: boolean;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  fileRef?: React.RefObject<HTMLInputElement>;
   fileName: string;
   mode: Mode;
 }
 
-const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: ProfileUploadProps) => {
+const ProfileUploadBox = ({
+  type,
+  isActive,
+  setIsActive,
+  fileName,
+  mode,
+  fileRef
+}: ProfileUploadProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
-  const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
 
     if (!fileList) {
@@ -36,7 +44,7 @@ const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: Profi
 
     // 파일 변경 없을 경우
     if (fileList.length <= 0) {
-      setIsActive && setIsActive(true);
+      setIsActive?.(true);
       return;
     }
 
@@ -44,7 +52,7 @@ const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: Profi
       updateFilePreview(fileList);
       if (mode === "create" && setIsActive) setIsActive(true);
     }
-  }, []);
+  };
 
   const updateFilePreview = async (fileList: FileList) => {
     const newFiles = Array.from(fileList);
@@ -61,6 +69,7 @@ const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: Profi
           isActive={isActive}
           setIsActive={setIsActive}
           profile={profile}
+          fileInputRef={fileRef}
           handleFileChange={handleFileChange}
           registerText={fileName}
           type={type}

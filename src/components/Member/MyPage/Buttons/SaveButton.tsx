@@ -56,12 +56,11 @@ const SaveButton = () => {
 
     const params = [memberParam];
 
-    // FIXME: 파일 업로드 로직 MemberID 없도록 변경해야 함
-    // await uploadFiles(params, {
-    //   onSuccess: () => {
-    //     setShouldSubmit(true);
-    //   }
-    // });
+    await uploadFiles(params, {
+      onSuccess: () => {
+        setShouldSubmit(true);
+      }
+    });
   };
 
   const onSubmit = () => {
@@ -92,6 +91,7 @@ const SaveButton = () => {
     <BottomButton
       onClick={handleSubmit(handleSubmitData)}
       disabled={!isDirty || !isValid || isSubmitting}
+      position="relative"
     >
       수정 완료
     </BottomButton>

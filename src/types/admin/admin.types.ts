@@ -47,7 +47,6 @@ export interface AdminLoginInfo {
 
 export interface IOwnerProfileEdit {
   imageUrl: string;
-  adminId: number;
   adminName: string;
   phoneNumber: string;
 }

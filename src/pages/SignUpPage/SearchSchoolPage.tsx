@@ -1,7 +1,10 @@
+import { SCHOOL_NAME_KEY } from "constants/storage";
+
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { StyledButton } from "components/SignIn/styles";
 import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInputBox";
+import { setLocalStorage, useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { memo, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { schoolIdAtom } from "store/form";
@@ -15,7 +18,7 @@ interface SearchSchoolPageProps {
 // TODO: useFormProvider 이용!!
 const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
   const schoolId = useRecoilValue(schoolIdAtom);
-
+  const setLocalStorage = useSetLocalStorage();
   const [searchText, setSearchText] = useState("");
 
   return (
@@ -35,7 +38,10 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
           <StyledButton
             type="button"
             bg="primaryColor"
-            onClick={() => onNextStep(schoolId ?? -1)}
+            onClick={() => {
+              onNextStep(schoolId ?? -1);
+              setLocalStorage(SCHOOL_NAME_KEY, searchText);
+            }}
             disabled={!schoolId || !searchText}
           >
             <Text

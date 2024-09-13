@@ -7,7 +7,6 @@ import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import BreedInput from "components/Enrollment/Input/BreedInput";
 import ProfileUploadBox from "components/Member/Profile/Box/ProfileUploadBox";
-import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import { Card, Text } from "./styles";

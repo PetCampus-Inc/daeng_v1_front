@@ -4,7 +4,7 @@ import AddCIcon from "assets/svg/add-c-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
-import { ChangeEvent, MouseEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import ProfileActiveBox from "../Box/ProfileActiveBox";
@@ -14,6 +14,7 @@ interface ProfileCreateProps {
   isActive?: boolean;
   setIsActive?: (isActive: boolean) => void;
   profile: IFile[];
+  fileInputRef?: React.LegacyRef<HTMLInputElement> | null;
   handleFileChange: (e: ChangeEvent<HTMLInputElement>, type: string) => void;
   registerText: string;
   type: string;
@@ -23,6 +24,7 @@ const ProfileCreate = ({
   isActive,
   setIsActive,
   profile,
+  fileInputRef,
   handleFileChange,
   registerText,
   type
@@ -31,14 +33,11 @@ const ProfileCreate = ({
   const { register } = useFormContext();
 
   const handleClickTarget = () => {
-    const target = divRef?.current;
-    if (target) {
-      target.focus();
-    }
+    divRef?.current?.focus();
   };
 
   const handleActive = () => {
-    isActive && setIsActive && setIsActive(false);
+    isActive && setIsActive?.(false);
   };
 
   return (
@@ -47,9 +46,7 @@ const ProfileCreate = ({
         <S.UploadProfileButton
           id={type}
           onClick={handleClickTarget}
-          onBlur={() => {
-            setIsActive && setIsActive(true);
-          }}
+          onBlur={() => setIsActive?.(true)}
           ref={divRef}
           aria-label="uploadProfileButton"
         >
@@ -76,6 +73,7 @@ const ProfileCreate = ({
           required: true,
           onChange: (e) => handleFileChange(e, type)
         })}
+        ref={fileInputRef && fileInputRef}
         id={registerText}
         type="file"
         accept={ACCEPT_FILE_TYPE.IMAGE}
