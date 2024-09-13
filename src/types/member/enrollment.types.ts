@@ -121,7 +121,6 @@ export interface MemberDtoType {
   addressDetail: string;
   emergencyPhoneNumber: string;
   memberGender: MemberGenderType;
-  memberId: number;
   memberName: string;
   memberProfileUri: string;
   nickName: string;
@@ -149,36 +148,38 @@ export interface EnrollmentFormDataType {
   member: MemberDtoType;
 }
 
-// 가입신청서 등록 & 재등록
+/** 가입신청서 등록 시 Request 타입 */
 export interface EnrollmentInfoType extends MemberDtoInfoType {
   dogId: number;
   schoolFormId: number;
   dogName: string;
-  dogGender: DogGenderType | "";
-  dogSize: DogSizeType | "";
+  dogGender: string;
+  dogSize: string;
   breedId: number;
   newBreed: string;
   birthDate: string;
-  neutralization: NeutralizationType | "";
-  vaccination: VaccinationType | "";
+  neutralization: string;
+  vaccination: string;
   vaccinationUri: string[];
   allergyDisease: string;
-  ticketType: TicketType | "";
+  ticketType: string;
   roundTicketNumber: number;
   monthlyTicketNumber: number;
   attendanceDays: string[];
-  pickDropRequest: PickDropRequestType | "";
-  pickDropType: PickDropType | "";
+  pickDropRequest: string;
+  pickDropType: string;
   pickDropMemo: string;
   agreementList: number[];
 }
 
-type MemberDtoInfoType = Omit<
-  MemberDtoType,
-  "memberGender" | "nickName" | "memberProfileUri" | "relation"
-> & {
-  memberGender: MemberGenderType | "";
-};
+interface MemberDtoInfoType {
+  memberName: string;
+  memberGender: string;
+  phoneNumber: string;
+  emergencyPhoneNumber: string;
+  address: string;
+  addressDetail: string;
+}
 
 export interface ISchoolFormResponse {
   schoolFormId: number;
@@ -202,7 +203,6 @@ export interface ISchoolFormResponse {
 // 강아지 가입 신청서
 export interface IDogEnrollmentInfo extends IResponse {
   enrollmentFormId: number;
-  memberId: number;
   memberName: string;
   memberGender: string;
   address: string;

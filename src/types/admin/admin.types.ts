@@ -47,7 +47,6 @@ export interface AdminLoginInfo {
 
 export interface IAdminProfileEdit {
   imageUrl: string;
-  adminId: number;
   adminName: string;
   phoneNumber: string;
 }

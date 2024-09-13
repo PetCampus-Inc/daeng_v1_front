@@ -184,7 +184,7 @@ const member = {
       },
       /** 강아지 추가 */
       enrollment: {
-        dynamic: (memberId?: Parameter) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`
+        dynamic: `/mypage/dog/enrollment`
       }
     }
   },
