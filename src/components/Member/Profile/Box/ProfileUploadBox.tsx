@@ -1,5 +1,5 @@
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
@@ -18,7 +18,7 @@ interface ProfileUploadProps {
   type: string;
   isActive?: boolean;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
-  fileRef: React.RefObject<HTMLInputElement>;
+  fileRef?: React.RefObject<HTMLInputElement>;
   fileName: string;
   mode: Mode;
 }
@@ -27,18 +27,12 @@ const ProfileUploadBox = ({
   type,
   isActive,
   setIsActive,
-  fileRef,
   fileName,
-  mode
+  mode,
+  fileRef
 }: ProfileUploadProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
-
-  const handleClick = () => {
-    if (fileRef && fileRef.current) {
-      mode === "create" && isActive ? setIsActive && setIsActive(false) : fileRef.current.click();
-    }
-  };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
@@ -50,7 +44,7 @@ const ProfileUploadBox = ({
 
     // 파일 변경 없을 경우
     if (fileList.length <= 0) {
-      if (!isActive && setIsActive) setIsActive(true);
+      setIsActive?.(true);
       return;
     }
 
@@ -77,7 +71,6 @@ const ProfileUploadBox = ({
           profile={profile}
           fileInputRef={fileRef}
           handleFileChange={handleFileChange}
-          handleClick={handleClick}
           registerText={fileName}
           type={type}
         />
