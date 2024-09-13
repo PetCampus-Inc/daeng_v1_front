@@ -14,6 +14,7 @@ interface ProfileCreateProps {
   isActive?: boolean;
   setIsActive?: (isActive: boolean) => void;
   profile: IFile[];
+  fileInputRef?: React.LegacyRef<HTMLInputElement> | null;
   handleFileChange: (e: ChangeEvent<HTMLInputElement>, type: string) => void;
   registerText: string;
   type: string;
@@ -23,6 +24,7 @@ const ProfileCreate = ({
   isActive,
   setIsActive,
   profile,
+  fileInputRef,
   handleFileChange,
   registerText,
   type
@@ -71,6 +73,7 @@ const ProfileCreate = ({
           required: true,
           onChange: (e) => handleFileChange(e, type)
         })}
+        ref={fileInputRef && fileInputRef}
         id={registerText}
         type="file"
         accept={ACCEPT_FILE_TYPE.IMAGE}

@@ -18,11 +18,19 @@ interface ProfileUploadProps {
   type: string;
   isActive?: boolean;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  fileRef?: React.RefObject<HTMLInputElement>;
   fileName: string;
   mode: Mode;
 }
 
-const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: ProfileUploadProps) => {
+const ProfileUploadBox = ({
+  type,
+  isActive,
+  setIsActive,
+  fileName,
+  mode,
+  fileRef
+}: ProfileUploadProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
@@ -61,6 +69,7 @@ const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: Profi
           isActive={isActive}
           setIsActive={setIsActive}
           profile={profile}
+          fileInputRef={fileRef}
           handleFileChange={handleFileChange}
           registerText={fileName}
           type={type}
