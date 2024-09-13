@@ -8,10 +8,17 @@ import SaveProfileButton from "../../components/Member/Profile/Button/SaveProfil
 const MemberProfileEditPage = () => {
   const { data } = useGetMemberProfileInfo();
 
+  const defaultValues = {
+    memberProfileUri: data.memberProfileUri,
+    dogProfileUri: "",
+    nickName: data.memberProfileUri,
+    relation: data.memberProfileUri
+  };
+
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...data, dogProfileUri: "", nickName: "", relation: "", dogId: 0 }
+    defaultValues: { ...defaultValues }
   });
 
   return (
