@@ -1,25 +1,19 @@
 import XCircleIcon from "assets/svg/x-circle-icon";
-import {
-  StyledThumbImg,
-  StyledThumb,
-  StyledDeleteButton,
-  InnerShadow,
-  StyledText
-} from "components/Admin/AttendCare/AttendCareGallery/upload/styles";
 import { Box } from "components/common";
 import { useOverlay } from "hooks/common/useOverlay";
 
 import PreviewPopup from "./PreviewPopup";
+import { StyledThumb, StyledText, Img, InnerShadow, StyledDeleteButton } from "./styles";
 
-import type { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload/types";
+import type { IFile } from "./types";
 
-interface TumbnailProps {
+interface ThumbnailProps {
   file: IFile;
   index: number;
   onRemove?: (index: number) => void;
 }
 
-export const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
+export const Thumbnail = ({ file, index, onRemove }: ThumbnailProps) => {
   const overlay = useOverlay();
   const openPopup = () =>
     overlay.open(({ isOpen, close }) => <PreviewPopup isOpen={isOpen} close={close} data={file} />);
@@ -29,7 +23,7 @@ export const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
       <StyledThumb>
         <Box as="button" width="100%" height="100%" onClick={openPopup}>
           <InnerShadow />
-          <StyledThumbImg src={file.thumbnail} alt={`preview-${index}`} />
+          <Img src={file.thumbnail} alt={`preview-${index}`} />
           {file.duration && <StyledText>{file.duration}</StyledText>}
         </Box>
       </StyledThumb>
