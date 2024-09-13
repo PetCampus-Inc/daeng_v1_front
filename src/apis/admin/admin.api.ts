@@ -88,13 +88,10 @@ export const postTeacherSignUpCancel = async () => {
 };
 
 //새로운 알림 여부
-export const handleGetNewAlarm = async (adminId: number) => {
+export const handleGetNewAlarm = async () => {
   const url = `admin/alarm/new`;
   const { data } = await request<INewAlarm>({
-    url,
-    params: {
-      adminId
-    }
+    url
   });
   return data;
 };
@@ -107,7 +104,6 @@ export const handleGetAlarm = async (req: IAlarmReq) => {
     params: {
       alarmId: req.alarmId,
       category: req.category,
-      adminId: req.adminId,
       pageable: {
         page: req.pageable.page,
         size: req.pageable.size,

@@ -12,19 +12,16 @@ import { Role } from "types/common/role.types";
 
 interface Props {
   currentStep: string;
-  adminId: number;
-  role: string;
 }
 
 type NotificationCategory = keyof typeof ADMIN_NOTIFICATION;
 
-const NotificationList = ({ currentStep, adminId, role }: Props) => {
+const NotificationList = ({ currentStep }: Props) => {
   const navigate = useNavigate();
   const alarmType = handleChangeType(currentStep);
   const req = {
     alarmId: 0,
     category: alarmType,
-    adminId: adminId,
     pageable: {
       page: 0,
       size: 10,
@@ -63,14 +60,14 @@ const NotificationList = ({ currentStep, adminId, role }: Props) => {
   const getAlarmItems = () => {
     const filteredAlarms = getFilteredAlarms();
 
-    if (currentStep === "전체" && role === Role.ROLE_OWNER) {
+    if (currentStep === "전체" && Role.ROLE_OWNER) {
       return filteredAlarms.filter(
         (alarm) =>
           ADMIN_NOTIFICATION.attendance.includes(alarm) ||
           ADMIN_NOTIFICATION.care.includes(alarm) ||
           ADMIN_NOTIFICATION.management.includes(alarm)
       );
-    } else if (currentStep === "전체" && role === Role.ROLE_TEACHER) {
+    } else if (currentStep === "전체" && Role.ROLE_TEACHER) {
       return filteredAlarms.filter(
         (alarm) =>
           ADMIN_NOTIFICATION.attendance.includes(alarm) || ADMIN_NOTIFICATION.care.includes(alarm)

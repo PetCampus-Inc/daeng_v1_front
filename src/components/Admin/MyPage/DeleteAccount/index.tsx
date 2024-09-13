@@ -4,7 +4,6 @@ import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
 import { useDeleteOwner, useDeleteTeacher } from "hooks/api/admin/mypage";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/common/role.types";
@@ -25,7 +24,6 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   const { mutateDeleteTeacher } = useDeleteTeacher();
   const { mutateDeleteOwner } = useDeleteOwner();
   const navigate = useNavigate();
-  const { adminId } = useAdminInfo();
   const [contents, setContents] = useState({
     1: false,
     2: false,
@@ -55,8 +53,8 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
 
   const onSubmit = () => {
     if (isAllChecked) {
-      role === Role.ROLE_OWNER ? mutateDeleteOwner(adminId) : mutateDeleteTeacher(adminId);
-      navigate(PATH.ADMIN_MY_PAGE_DELETE_COMPLETE);
+      role === Role.ROLE_OWNER ? mutateDeleteOwner : mutateDeleteTeacher;
+      navigate(routes.admin.mypage.deleteComplete.root);
     }
     return;
   };

@@ -33,7 +33,7 @@ export const useTeacherProfileEdit = () => {
   const teacherProfileEditMutation = useMutation({
     mutationFn: (newData: IAdminProfileEdit) => handleTeacherProfileEdit(newData),
     onSuccess: () => {
-      navigate(PATH.ADMIN_MY_PAGE);
+      navigate(routes.admin.mypage.root);
       showToast("수정 완료되었습니다", "bottom");
     },
     throwOnError: true
@@ -47,7 +47,7 @@ export const useSchoolInfoEdit = () => {
   const schoolInfoEditMutation = useMutation({
     mutationFn: (newData: ISchoolInfoEdit) => handleSchoolInfoEdit(newData),
     onSuccess: () => {
-      navigate(PATH.ADMIN_MY_PAGE);
+      navigate(routes.admin.mypage.root);
       showToast("유치원 정보가 수정되었습니다", "bottom");
     },
     throwOnError: true
@@ -57,8 +57,11 @@ export const useSchoolInfoEdit = () => {
 
 //선생님 유치원 끊기
 export const useSchoolResigned = () => {
+  const navigate = useNavigate();
+
   const { mutate } = useMutation({
-    mutationFn: handlePostSchoolResigned
+    mutationFn: () => handlePostSchoolResigned(),
+    onSuccess: () => navigate(routes.admin.login.root)
   });
 
   return { mutateSchoolResigned: mutate };
@@ -66,8 +69,11 @@ export const useSchoolResigned = () => {
 
 //원장 탈퇴
 export const useDeleteOwner = () => {
+  const navigate = useNavigate();
+
   const { mutate } = useMutation({
-    mutationFn: handleDeleteOwner
+    mutationFn: () => handleDeleteOwner(),
+    onSuccess: () => navigate(routes.admin.mypage.deleteComplete.root)
   });
 
   return { mutateDeleteOwner: mutate };

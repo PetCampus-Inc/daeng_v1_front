@@ -67,7 +67,6 @@ export interface INewAlarm {
 export interface IAlarmReq {
   alarmId: number;
   category: string;
-  adminId: number;
   pageable: {
     page: number;
     size?: number;

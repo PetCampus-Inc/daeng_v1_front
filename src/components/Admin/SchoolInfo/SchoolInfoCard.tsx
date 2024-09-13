@@ -1,5 +1,3 @@
-import { PATH } from "constants/path";
-
 import Calendar from "assets/svg/calendar";
 import Map from "assets/svg/map-pin-icon";
 import Phone from "assets/svg/phone-basic";
@@ -9,9 +7,6 @@ import { WideButton, XSmallButton } from "components/common/Button/Templates";
 import { useSchoolResigned } from "hooks/api/admin/mypage";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useNavigate } from "react-router-dom";
-import { AUTH_KEY } from "store/auth";
-import showToast from "utils/showToast";
 
 import CallSchoolBottomSheet from "./Modal/CallSchoolBottomSheet";
 import DisconnectModal from "./Modal/DisconnectModal";
@@ -22,11 +17,8 @@ interface Props {
 }
 
 const SchoolInfoCard = ({ isPrevSchool }: Props) => {
-  const { adminId } = useAdminInfo();
-  const { data } = useGetTeacherInfo(adminId);
+  const { data } = useGetTeacherInfo();
   const { mutateSchoolResigned } = useSchoolResigned();
-  const navigate = useNavigate();
-  console.log(adminId);
 
   const overlay = useOverlay();
 
@@ -42,19 +34,7 @@ const SchoolInfoCard = ({ isPrevSchool }: Props) => {
 
   const openDisconnectPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <DisconnectModal
-        isOpen={isOpen}
-        close={close}
-        action={() => {
-          mutateSchoolResigned(adminId, {
-            onSuccess: () => {
-              window.localStorage.removeItem(AUTH_KEY);
-              navigate(PATH.LOGIN);
-              showToast("유치원 탈퇴가 완료되었습니다", "bottom");
-            }
-          });
-        }}
-      />
+      <DisconnectModal isOpen={isOpen} close={close} action={mutateSchoolResigned} />
     ));
 
   return (

@@ -6,18 +6,17 @@ import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { useGetNewAlarm } from "hooks/api/admin/alarm";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { Role } from "types/common/role.types";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
   const { alertSettings, isAllOn } = useAlertSetting();
-  const { adminId } = useAdminInfo();
-  const { data } = useGetNewAlarm(adminId);
-  const { role } = useAdminInfo();
-  const currentSteps =
-    role === Role.ROLE_OWNER ? ADMIN_NOTIFICATION_STEP : ADMIN_NOTIFICATION_STEP.slice(0, 3);
+  const { data } = useGetNewAlarm();
+
+  const currentSteps = Role.ROLE_OWNER
+    ? ADMIN_NOTIFICATION_STEP
+    : ADMIN_NOTIFICATION_STEP.slice(0, 3);
   const [currentStep, setCurrentStep] = useState(String(ADMIN_NOTIFICATION_STEP[0]));
 
   return (
@@ -54,7 +53,7 @@ const AdminNotificationPage = () => {
           </Box>
         </nav>
         {data.newAlarm ? (
-          <NotificationList currentStep={currentStep} adminId={adminId} role={role} />
+          <NotificationList currentStep={currentStep} />
         ) : (
           <Box display="flex" justify="center" pt={80}>
             <Text typo="label2_14_R" color="gray_2">

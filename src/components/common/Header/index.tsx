@@ -7,7 +7,6 @@ import NoticeIcon from "assets/svg/notice-icon";
 import PencilIcon from "assets/svg/pencil-icon";
 import SettingWhiteIcon from "assets/svg/setting-white-icon";
 import { useGetNewAlarm } from "hooks/api/admin/alarm";
-import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -51,7 +50,6 @@ const Header = ({
   shadow
 }: Props) => {
   const navigate = useNavigate();
-  const { adminId } = useAdminInfo();
   // const { data } = useGetNewAlarm(Number(adminId));
   const isNewAlarm = "true";
 
