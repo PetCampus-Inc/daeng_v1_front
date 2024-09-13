@@ -3,6 +3,7 @@ import { routes } from "constants/path";
 import NewSignUpIcon from "assets/svg/new-sign-up-icon";
 import TeacherManagementIcon from "assets/svg/teacher-management-icon";
 import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -12,11 +13,12 @@ import showToast from "utils/showToast";
 import * as S from "./styles";
 
 const MenuCard = () => {
-  const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isOpened, setIsOpened] = useState(false);
-  const { refetch } = useGetNewEnrollment(1);
+  const { schoolId } = useAdminInfo();
+  const { refetch } = useGetNewEnrollment(schoolId);
   const setNewEnrollmentList = useSetRecoilState(newEnrollmentListAtom);
+  const navigate = useNavigate();
 
   const handleTouch = (index: number) => {
     setActiveIndex(index === activeIndex ? -1 : index);
@@ -73,7 +75,6 @@ const MenuCard = () => {
         </S.Card>
       ))}
     </S.CardContainer>
-    // TODO : 캐러셀 모달 만들어주기
   );
 };
 
