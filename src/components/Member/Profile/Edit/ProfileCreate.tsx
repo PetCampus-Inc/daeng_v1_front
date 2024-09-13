@@ -31,14 +31,11 @@ const ProfileCreate = ({
   const { register } = useFormContext();
 
   const handleClickTarget = () => {
-    const target = divRef?.current;
-    if (target) {
-      target.focus();
-    }
+    divRef?.current?.focus();
   };
 
   const handleActive = () => {
-    isActive && setIsActive && setIsActive(false);
+    isActive && setIsActive?.(true);
   };
 
   return (
@@ -47,9 +44,7 @@ const ProfileCreate = ({
         <S.UploadProfileButton
           id={type}
           onClick={handleClickTarget}
-          onBlur={() => {
-            setIsActive && setIsActive(true);
-          }}
+          onBlur={() => setIsActive?.(true)}
           ref={divRef}
           aria-label="uploadProfileButton"
         >
