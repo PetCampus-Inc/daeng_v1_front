@@ -21,7 +21,7 @@ export default function ApprovalSuccess({ user, schoolName }: ApprovalSuccessPro
   const handleConfirm = () => {
     removeSchoolName();
     if (user === User.ADMIN) navigate(routes.admin.attendance.root, { replace: true });
-    else if (user === User.MEMBER) navigate(routes.root, { replace: true });
+    else if (user === User.MEMBER) navigate(routes.member.profile.root, { replace: true });
   };
 
   return (
