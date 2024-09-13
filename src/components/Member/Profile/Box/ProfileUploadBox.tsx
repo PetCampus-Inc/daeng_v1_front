@@ -26,7 +26,7 @@ const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: Profi
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
-  const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
 
     if (!fileList) {
@@ -36,7 +36,7 @@ const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: Profi
 
     // 파일 변경 없을 경우
     if (fileList.length <= 0) {
-      setIsActive && setIsActive(true);
+      setIsActive?.(true);
       return;
     }
 
@@ -44,7 +44,7 @@ const ProfileUploadBox = ({ type, isActive, setIsActive, fileName, mode }: Profi
       updateFilePreview(fileList);
       if (mode === "create" && setIsActive) setIsActive(true);
     }
-  }, []);
+  };
 
   const updateFilePreview = async (fileList: FileList) => {
     const newFiles = Array.from(fileList);
