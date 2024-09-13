@@ -32,7 +32,7 @@ const RoleEdit = () => {
         <span>{currentRelation ? currentRelation : "호칭선택"}</span>
       </S.RoleEditButton>
 
-      <S.RoleEditinput
+      <S.RoleEditInput
         id="roleEdit"
         value={currentRelation ? currentRelation : ""}
         {...register(FIELD.RELATION, { required: true })}
