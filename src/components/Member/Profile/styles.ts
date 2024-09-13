@@ -175,7 +175,7 @@ export const StyledHiddenUpload = styled.input`
   display: none;
 `;
 
-export const SavaProfileButton = styled.div`
+export const SaveProfileButton = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;

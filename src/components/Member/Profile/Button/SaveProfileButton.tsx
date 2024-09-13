@@ -3,6 +3,7 @@ import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File"
 import { BottomButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
+import { useEffect, useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
@@ -12,9 +13,10 @@ const SaveProfileButton = () => {
   const {
     handleSubmit,
     getValues,
-    formState: { isDirty, dirtyFields }
+    formState: { isDirty }
   } = useFormContext();
-  const { convertProfileUri, uploadFiles } = useUploadProfile();
+  const [shouldSubmit, setShouldSubmit] = useState(false);
+  const { s3ProfileData, convertProfileUri, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
   const memberProfileData = getValues();
   const isAllFilled = Object.values(memberProfileData).every((el: null | undefined) => el ?? false);
@@ -26,52 +28,55 @@ const SaveProfileButton = () => {
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: TYPE_NAME.MEMBER,
-      files: memberProfileData.memberProfileUri,
+      files: data.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
     };
 
     const dogParams = {
       name: TYPE_NAME.DOG,
-      files: memberProfileData.dogProfileUri,
+      files: data.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
     };
 
     const params = [memberParams, dogParams];
-
     await uploadFiles(params, {
       onSuccess: () => {
-        submitMemberProfile(data);
+        setShouldSubmit(true);
       }
     });
   };
 
-  const getSubmitFormData = (data: FieldValues) => {
-    return {
-      dogId: data.dogId,
+  const submitProfile = () => {
+    const requestData = {
+      dogId: memberProfileData.dogId ?? 1,
       memberProfileUri: convertProfileUri(FILE_NAME.PROFILE_MEMBER),
       dogProfileUri: convertProfileUri(FILE_NAME.PROFILE_DOG),
-      nickName: data.nickName,
-      relation: data.relation
+      nickName: memberProfileData.nickName,
+      relation: memberProfileData.relation
     };
-  };
-
-  const submitMemberProfile = (data: FieldValues) => {
-    const requestData = getSubmitFormData(data);
     mutateMemberProfile(requestData);
   };
 
+  useEffect(() => {
+    if (shouldSubmit) {
+      submitProfile();
+      setShouldSubmit(false);
+    }
+  }, [s3ProfileData, shouldSubmit]);
+
   return (
-    <S.SavaProfileButton>
+    <S.SaveProfileButton>
       <BottomButton
+        type="submit"
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
         disabled={!isAllFilled || !isDirty}
       >
         프로필 완성하기
       </BottomButton>
-    </S.SavaProfileButton>
+    </S.SaveProfileButton>
   );
 };
 
