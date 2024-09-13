@@ -35,7 +35,7 @@ const ProfileCreate = ({
   };
 
   const handleActive = () => {
-    isActive && setIsActive?.(true);
+    isActive && setIsActive?.(false);
   };
 
   return (
