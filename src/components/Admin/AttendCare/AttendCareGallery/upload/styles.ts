@@ -1,8 +1,7 @@
-export {
-  StyledDeleteButton,
-  StyledThumbImg,
-  InnerShadow
-} from "components/common/ImageUpload/styles";
+export { StyledDeleteButton, InnerShadow } from "components/common/ImageUpload/styles";
+
+export { Img } from "styles/StyleModule";
+
 import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 import { remCalc } from "utils/calculator";
