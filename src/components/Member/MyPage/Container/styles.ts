@@ -1,3 +1,4 @@
+import { Layout } from "components/common";
 import styled from "styled-components";
 
 import type { ColorKeys } from "styles/types";
@@ -21,4 +22,8 @@ export const PageContainer = styled.div.withConfig({
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+export const LayoutContainer = styled(Layout)`
+  height: 100%;
 `;

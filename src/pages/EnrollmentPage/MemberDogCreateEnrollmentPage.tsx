@@ -123,7 +123,6 @@ const defaultFormValues = {
   pickDropNotice: "",
   pickDropInfo: "",
   member: {
-    memberId: 0,
     memberProfileUri: "",
     memberName: "",
     memberGender: "",

@@ -1,9 +1,7 @@
-import { FIELD } from "constants/field";
-
+import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
 import SaveButton from "components/Member/MyPage/Buttons/SaveButton";
-import { PageContainer } from "components/Member/MyPage/Container/styles";
 import MyInfoEdit from "components/Member/MyPage/MyMemberInfoEdit/MyInfoEdit";
 import MyProfileEdit from "components/Member/MyPage/MyMemberInfoEdit/MyProfileEdit";
 import { ContentContainer } from "components/Member/MyPage/styles";
@@ -32,7 +30,7 @@ const MemberMyInfoEditPage = () => {
         />
       ) : null}
       <Header type="text" text="프로필 수정" transparent />
-      <PageContainer pt="1" backgroundColor="br_5">
+      <Layout pt="calc(5vh + 1rem)" bg="br_5">
         <FormProvider {...methods}>
           <MyProfileEdit />
           <ContentContainer px="1.5" py="1" height="auto">
@@ -45,7 +43,7 @@ const MemberMyInfoEditPage = () => {
           handleBlur={handleBlur}
           isFocusing={isFocusing}
         /> */}
-      </PageContainer>
+      </Layout>
     </>
   );
 };

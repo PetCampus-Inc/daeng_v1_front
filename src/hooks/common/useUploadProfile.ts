@@ -24,7 +24,7 @@ const useUploadProfile = () => {
     const uploadPromises = paramsArray.map(async (params) => {
       const { files, path, accept, name } = params;
 
-      const profileParams = { files, path: `${path}/${name}/`, accept, name };
+      const profileParams = { files, path: `${path}/${name}`, accept, name };
 
       if (!files || files.length === 0) {
         showToast("업로드할 파일이 없습니다.", "ownerNav");

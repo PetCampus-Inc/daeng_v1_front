@@ -1,9 +1,9 @@
+import { LayoutContainer } from "components/Member/MyPage/Container/styles";
 import OnboardingProfile from "components/Member/Profile/OnboardingProfile";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { dogIdState } from "store/member";
-import { PageContainer } from "styles/StyleModule";
 
 import SaveProfileButton from "../../components/Member/Profile/Button/SaveProfileButton";
 
@@ -26,12 +26,12 @@ const MemberProfileEditPage = () => {
   });
 
   return (
-    <PageContainer ph="1.5" pt="4" pb="4" color="BGray">
+    <LayoutContainer pt="calc(5vh + 4rem)" px="1.5rem" pb="calc(7vh + 4rem)" bg="BGray">
       <FormProvider {...methods}>
         <OnboardingProfile />
         <SaveProfileButton />
       </FormProvider>
-    </PageContainer>
+    </LayoutContainer>
   );
 };
 

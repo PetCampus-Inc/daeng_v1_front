@@ -7,7 +7,7 @@ import Profile from "./Onboarding/Profile";
 const OnboardingProfile = () => {
   return (
     <>
-      <Flex direction="column" marginBottom="14">
+      <Flex direction="column" marginBottom="2.375rem">
         <Text as="h3" typo="title2_20_B" color="gray_1">
           프로필을 만들어주세요
         </Text>
@@ -18,7 +18,7 @@ const OnboardingProfile = () => {
           닉네임을 입력해 주세요
         </Text>
       </Flex>
-      <Flex gap="20" marginBottom="14">
+      <Flex gap="20" marginBottom="2.375rem">
         <Profile />
       </Flex>
       <Flex direction="column" gap="4">

@@ -4,15 +4,12 @@ import { ApprovalStatus } from "types/common/status.types";
  * 유저 타입
  * - ADMIN: 관리자
  * - MEMBER: 견주
- * - GUEST: 게스트
  */
 export const User = {
   /** 관리자 */
   ADMIN: "ADMIN",
   /** 견주 */
-  MEMBER: "MEMBER",
-  /** 게스트 */
-  GUEST: "GUEST"
+  MEMBER: "MEMBER"
 } as const;
 export type User = (typeof User)[keyof typeof User];
 

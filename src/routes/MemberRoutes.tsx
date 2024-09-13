@@ -92,14 +92,6 @@ const MemberRoutes = (): RouteObject[] => {
           path: routes.member.profile.root,
           element: (
             <Suspense>
-              <Pages.MemberProfileEditPage />
-            </Suspense>
-          )
-        },
-        {
-          path: routes.member.profile.root,
-          element: (
-            <Suspense>
               <Pages.MemberAddDogProfileEditPage />
             </Suspense>
           )

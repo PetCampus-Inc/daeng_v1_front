@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_KEY, SCHOOL_NAME_KEY } from "constants/storage";
+import { ACCESS_TOKEN_KEY, SCHOOL_NAME_KEY, USER_TYPE_KEY } from "constants/storage";
 
 import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
@@ -11,6 +11,7 @@ import { useSetRecoilState } from "recoil";
 import { adminInfoState } from "store/admin";
 import { dogIdState } from "store/member";
 import { AdminAuthType } from "types/admin/admin.types";
+import { User } from "types/common/role.types";
 import { MemberAuthData } from "types/member/auth.types";
 import { isApproval } from "utils/is";
 import { extractRoleByToken, removeBearerPrefix } from "utils/token";
@@ -34,6 +35,7 @@ export const useAdminLogin = () => {
 
     setAdmin(response.data);
     setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
+    setLocalStorage(USER_TYPE_KEY, User.ADMIN);
     if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
 
     postMessage("REFRESH_TOKEN", null);
@@ -71,6 +73,7 @@ export const useMemberLogin = () => {
 
     setDogId(response.data.dogId);
     setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
+    setLocalStorage(USER_TYPE_KEY, User.MEMBER);
     if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
 
     postMessage("REFRESH_TOKEN", null);
@@ -104,6 +107,7 @@ export const useMemberSuperLogin = () => {
 
     setDogId(response.data.dogId);
     setLocalStorage(ACCESS_TOKEN_KEY, accessToken);
+    setLocalStorage(USER_TYPE_KEY, User.MEMBER);
     if (isApproval(role)) setLocalStorage(SCHOOL_NAME_KEY, response.data.schoolName);
 
     const basedPath = getRoleBasedPath(role);
