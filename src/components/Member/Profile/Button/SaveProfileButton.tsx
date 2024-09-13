@@ -7,15 +7,15 @@ import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
+// FIXME dirtyFields 사용하지 않는데 해당 상태 추가 안 하면 버튼 활성 안 되는 이슈 해결하기
 const SaveProfileButton = () => {
   const {
     handleSubmit,
     getValues,
-    formState: { isValid }
+    formState: { isDirty, dirtyFields }
   } = useFormContext();
   const { convertProfileUri, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
-
   const memberProfileData = getValues();
   const isAllFilled = Object.values(memberProfileData).every((el: null | undefined) => el ?? false);
 
@@ -67,7 +67,7 @@ const SaveProfileButton = () => {
       <BottomButton
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
-        disabled={!isValid || !isAllFilled}
+        disabled={!isAllFilled || !isDirty}
       >
         프로필 완성하기
       </BottomButton>
