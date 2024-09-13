@@ -5,7 +5,7 @@ interface IconProps {
   w?: number | string;
   h?: number | string;
 }
-type ColorKeysScheme = "gray" | "brown" | "black";
+type ColorKeysScheme = "gray" | "brown" | "black" | "darkGray";
 
 const XCircleIcon = ({
   className = "",
@@ -17,7 +17,8 @@ const XCircleIcon = ({
   const colorMap = new Map<string, string[]>([
     ["gray", ["#B5B5B5", "#E9E9E9"]],
     ["brown", ["#956F4C", "#EEE3D9"]],
-    ["black", ["#292929", "#E9E9E9"]]
+    ["black", ["#292929", "#E9E9E9"]],
+    ["darkGray", ["#525252", "#F6F6F6"]]
   ]);
 
   return (
@@ -30,7 +31,6 @@ const XCircleIcon = ({
       className={className}
     >
       <circle
-        className="icon-circle"
         cx="12.311"
         cy="12.365"
         r="8.096"
