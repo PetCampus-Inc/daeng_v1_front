@@ -57,7 +57,7 @@ const SaveDogProfileButton = () => {
   }, [s3ProfileData, shouldSubmit]);
 
   return (
-    <S.SavaProfileButton>
+    <S.SaveProfileButton>
       <BottomButton
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
@@ -65,7 +65,7 @@ const SaveDogProfileButton = () => {
       >
         프로필 완성하기
       </BottomButton>
-    </S.SavaProfileButton>
+    </S.SaveProfileButton>
   );
 };
 
