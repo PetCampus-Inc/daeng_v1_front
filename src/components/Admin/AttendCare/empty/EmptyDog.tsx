@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import RightArrow from "assets/svg/arrow-right-icon";
 import DogFilledIcon from "assets/svg/dog-filled-icon";
@@ -12,7 +12,7 @@ const EmptyDog = () => {
     <>
       <DogFilledIcon w={40} h={40} rx={8} aria-hidden="true" />
       <LinkText>
-        <Link to={PATH.ADMIN_ATTENDANCE}>
+        <Link to={routes.admin.attendance.root}>
           출석 진행 하기 <RightArrow w={"20"} h={"20"} aria-hidden="true" />
         </Link>
       </LinkText>

@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 import { ADMIN_READ_FORM_STEP } from "constants/step";
 
 import DogInfo from "components/Admin/EnrollmentForm/ReadForm/DogInfo";
@@ -68,7 +68,10 @@ const EnrollmentFormDetailPage = () => {
         type="text"
         text="미리보기"
         rightElement={
-          <EditButton type="button" onClick={() => navigate(PATH.ADMIN_EDIT_FORM(formId))}>
+          <EditButton
+            type="button"
+            onClick={() => navigate(routes.admin.school.enrollment.ownerForms.edit.dynamic(formId))}
+          >
             수정
           </EditButton>
         }

@@ -2,8 +2,8 @@ import { ACCESS_TOKEN_KEY } from "constants/storage";
 
 import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useMemo } from "react";
-import { User, Role } from "types/common/role.types";
-import { extractRoleByToken, extractUserByToken } from "utils/token";
+import { Role } from "types/common/role.types";
+import { extractRoleByToken } from "utils/token";
 
 export const useTokenHandler = () => {
   const [accessToken, setAccessToken] = useLocalStorage<string | null>(ACCESS_TOKEN_KEY, null);
@@ -14,15 +14,8 @@ export const useTokenHandler = () => {
     return role ? role : Role.ROLE_GUEST;
   }, [accessToken]);
 
-  const user = useMemo(() => {
-    if (!accessToken) return User.GUEST;
-    const user = extractUserByToken(accessToken);
-    return user ? user : User.GUEST;
-  }, [accessToken]);
-
   return {
     role,
-    user,
     accessToken,
     setAccessToken
   };

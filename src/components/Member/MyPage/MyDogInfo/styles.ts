@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-export const DogInfoContainer = styled.section`
-  background-color: ${({ theme }) => theme.colors.white};
-`;
+export const DogInfoContainer = styled.section``;
 
 export const TitleBox = styled.div`
   display: flex;

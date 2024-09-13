@@ -1,6 +1,6 @@
 import type { QueryClient } from "@tanstack/react-query";
 
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import ApiErrorBoundary from "ApiErrorBoundary";
 import App from "App";
@@ -31,10 +31,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
       children: [
         {
           id: "root",
-          path: PATH.ROOT,
+          path: routes.root,
           children: [
             {
-              path: PATH.LOGIN,
+              path: routes.login.root,
               index: true,
               element: (
                 <Suspense>
@@ -43,27 +43,35 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             },
             {
-              path: PATH.SIGNUP,
+              path: routes.signup.root,
               element: <Pages.SignUpPage />
             },
             {
-              path: PATH.APPROVAL_STATUS,
+              path: routes.member.profile.root,
+              element: (
+                <Suspense>
+                  <Pages.MemberProfileEditPage />
+                </Suspense>
+              )
+            },
+            {
+              path: routes.approval.root,
               element: <Pages.ApprovalStatusPage />
             },
             {
-              path: PATH.ADMIN_LOGIN,
+              path: routes.admin.login.root,
               element: <Pages.AdminLoginPage />
             },
             {
-              path: PATH.ADMIN_SIGNUP,
+              path: routes.admin.signup.root,
               element: <Pages.AdminSignupPage />
             },
+            // {
+            //   path: routes.redirect.root,
+            //   element: <Pages.RedirectPage />
+            // },
             {
-              path: PATH.REDIRECT,
-              element: <Pages.RedirectPage />
-            },
-            {
-              path: PATH.UNREGISTER,
+              path: routes.unregister.root,
               element: (
                 <Suspense>
                   <Pages.UnregisterPage />
@@ -71,7 +79,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             },
             {
-              path: PATH.UNREGISTER_SUCCESS,
+              path: routes.unregister.success.root,
               element: (
                 <Suspense>
                   <Pages.UnregisterSuccessPage />
@@ -79,7 +87,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             },
             {
-              path: PATH.POLICY,
+              path: routes.policy.root,
               element: (
                 <Suspense>
                   <Pages.PolicyPage />

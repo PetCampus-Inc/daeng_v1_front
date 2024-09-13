@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 import { SCHOOL_NAME_KEY } from "constants/storage";
 
 import DogApprovalBgIcon from "assets/svg/dog-approval-bg-icon";
@@ -20,8 +20,8 @@ export default function ApprovalSuccess({ user, schoolName }: ApprovalSuccessPro
 
   const handleConfirm = () => {
     removeSchoolName();
-    if (user === User.ADMIN) navigate(PATH.ADMIN_ATTENDANCE, { replace: true });
-    else if (user === User.MEMBER) navigate(PATH.ROOT, { replace: true });
+    if (user === User.ADMIN) navigate(routes.admin.attendance.root, { replace: true });
+    else if (user === User.MEMBER) navigate(routes.member.profile.root, { replace: true });
   };
 
   return (

@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import FootIcon from "assets/svg/foot-icon";
@@ -55,7 +55,7 @@ const DogNote = ({ data }: DogNoteProps) => {
     <NoteContainer className="grid-left">
       <SpringBound />
       <NoteContent>
-        <Flex gap="8" role="button" onClick={() => navigate(PATH.MEMBER_DOG_INFO_PAGE(dogId))}>
+        <Flex gap="8" role="button" onClick={() => navigate(routes.member.dogInfo.dynamic(dogId))}>
           <ProfileWrapper>
             <Img src={data?.dogProfile} alt={`${data?.dogName}의 프로필`} />
           </ProfileWrapper>

@@ -1,4 +1,4 @@
-import { PATH } from "constants/path";
+import { routes } from "constants/path";
 
 import * as Pages from "pages";
 import { Suspense } from "react";
@@ -10,7 +10,7 @@ const MemberRoutes = (): RouteObject[] => {
   return [
     {
       element: <PrivateRouter roles={[Role.ROLE_MEMBER]} />,
-      path: PATH.ROOT,
+      path: routes.root,
       children: [
         {
           index: true,
@@ -21,7 +21,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.ALBUM,
+          path: routes.member.album.root,
           element: (
             <Suspense>
               <Pages.ImageAlbumPage />
@@ -29,11 +29,11 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.AGENDA(),
+          path: routes.member.agenda.dynamic(),
           element: <Pages.AgendaPage />
         },
         {
-          path: PATH.MEMBER_MY_PAGE,
+          path: routes.member.mypage.root,
           element: (
             <Suspense>
               <Pages.MemberMyPage />
@@ -41,7 +41,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_PAGE,
+          path: routes.member.mypage.profile.root,
           element: (
             <Suspense>
               <Pages.MemberMyInfoPage />
@@ -49,7 +49,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_INFO_EDIT_PAGE,
+          path: routes.member.mypage.profile.edit.root,
           element: (
             <Suspense>
               <Pages.MemberMyInfoEditPage />
@@ -57,7 +57,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_MY_SCHOOL_INFO(),
+          path: routes.member.mypage.dog.school.dynamic(),
           element: (
             <Suspense>
               <Pages.MemberSchoolInfoPage />
@@ -65,7 +65,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_DOG_INFO_EDIT_PAGE(),
+          path: routes.member.dogInfo.edit.dynamic(),
           element: (
             <Suspense>
               <Pages.MemberDogInfoEditPage />
@@ -73,7 +73,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_DOG_ENROLLMENT_INFO_PAGE(),
+          path: routes.member.dogInfo.enrollment.dynamic(),
           element: (
             <Suspense>
               <Pages.MemberEnrollmentDogInfoPage />
@@ -81,7 +81,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_DOG_INFO_PAGE(),
+          path: routes.member.dogInfo.dynamic(),
           element: (
             <Suspense>
               <Pages.MemberDogInfoPage />
@@ -89,15 +89,7 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: PATH.MEMBER_PROFILE_EDIT_PAGE,
-          element: (
-            <Suspense>
-              <Pages.MemberProfileEditPage />
-            </Suspense>
-          )
-        },
-        {
-          path: PATH.MEMBER_ADD_DOG_PROFILE_EDIT_PAGE,
+          path: routes.member.profile.root,
           element: (
             <Suspense>
               <Pages.MemberAddDogProfileEditPage />

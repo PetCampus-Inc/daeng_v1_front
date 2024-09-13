@@ -1,7 +1,7 @@
+import { LayoutContainer } from "components/Member/MyPage/Container/styles";
 import AddDogProfile from "components/Member/Profile/AddDogProfile";
 import SaveProfileButton from "components/Member/Profile/Button/SaveProfileButton";
 import { FormProvider, useForm } from "react-hook-form";
-import { PageContainer } from "styles/StyleModule";
 
 const MemberAddDogProfileEditPage = () => {
   const methods = useForm({
@@ -11,12 +11,12 @@ const MemberAddDogProfileEditPage = () => {
   });
 
   return (
-    <PageContainer ph="1.5" pt="4" pb="4" color="BGray">
+    <LayoutContainer pt="calc(5vh + 4rem)" px="1.5rem" pb="calc(7vh + 4rem)" bg="BGray">
       <FormProvider {...methods}>
         <AddDogProfile />
         <SaveProfileButton />
       </FormProvider>
-    </PageContainer>
+    </LayoutContainer>
   );
 };
 
