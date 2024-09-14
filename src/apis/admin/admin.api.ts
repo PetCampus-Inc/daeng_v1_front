@@ -7,7 +7,10 @@ import type {
   ITeacherSignUpData,
   ITeacherSignUpInfo,
   AdminAuthType,
-  AdminLoginInfo
+  AdminLoginInfo,
+  INewAlarm,
+  IAlarmReq,
+  IGetAlarm
 } from "types/admin/admin.types";
 
 // 아이디 중복확인
@@ -82,4 +85,31 @@ export const postTeacherSignUp = async (req: ITeacherSignUpInfo): Promise<ITeach
 export const postTeacherSignUpCancel = async () => {
   const url = `admin/cancel/teacher/approval`;
   return await request<void>({ url, method: "POST" });
+};
+
+//새로운 알림 여부
+export const handleGetNewAlarm = async () => {
+  const url = `admin/alarm/new`;
+  const { data } = await request<INewAlarm>({
+    url
+  });
+  return data;
+};
+
+//알림 가져오기
+export const handleGetAlarm = async (req: IAlarmReq) => {
+  const url = `admin/alarm`;
+  const { data } = await request<IGetAlarm[]>({
+    url,
+    params: {
+      alarmId: req.alarmId,
+      category: req.category,
+      pageable: {
+        page: req.pageable.page,
+        size: req.pageable.size,
+        sort: req.pageable.sort
+      }
+    }
+  });
+  return data;
 };

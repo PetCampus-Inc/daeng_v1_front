@@ -4,6 +4,7 @@ import Phone from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import { Box, Flex } from "components/common";
 import { WideButton, XSmallButton } from "components/common/Button/Templates";
+import { useSchoolResigned } from "hooks/api/admin/mypage";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 
@@ -17,6 +18,7 @@ interface Props {
 
 const SchoolInfoCard = ({ isPrevSchool }: Props) => {
   const { data } = useGetTeacherInfo();
+  const { mutateSchoolResigned } = useSchoolResigned();
 
   const overlay = useOverlay();
 
@@ -32,14 +34,7 @@ const SchoolInfoCard = ({ isPrevSchool }: Props) => {
 
   const openDisconnectPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <DisconnectModal
-        isOpen={isOpen}
-        close={close}
-        action={() => {
-          console.log("유치원 연결 끊기");
-          close();
-        }}
-      />
+      <DisconnectModal isOpen={isOpen} close={close} action={mutateSchoolResigned} />
     ));
 
   return (

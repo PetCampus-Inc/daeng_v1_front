@@ -1,5 +1,5 @@
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import showToast from "utils/showToast";
 import { getFilePreview } from "utils/thumb";
@@ -18,48 +18,53 @@ interface ProfileUploadProps {
   type: string;
   isActive?: boolean;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
-  fileRef?: React.RefObject<HTMLInputElement>;
+  fileRef: React.RefObject<HTMLInputElement>;
   fileName: string;
   mode: Mode;
+  onClick?: () => void;
 }
 
 const ProfileUploadBox = ({
   type,
   isActive,
   setIsActive,
+  fileRef,
   fileName,
   mode,
-  fileRef
+  onClick
 }: ProfileUploadProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const fileList = e.target.files;
+  const handleClick = () => {
+    if (fileRef && fileRef.current) {
+      mode === "create" && isActive ? setIsActive && setIsActive(false) : fileRef.current.click();
+    }
+    onClick && onClick();
+  };
 
-    if (!fileList) {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const FileList = e.target.files;
+
+    if (!FileList) {
       showToast("업로드할 파일이 없습니다.", "ownerNav");
       return;
     }
 
     // 파일 변경 없을 경우
-    if (fileList.length <= 0) {
-      setIsActive?.(true);
+    if (FileList.length <= 0) {
+      if (!isActive && setIsActive) setIsActive(true);
       return;
     }
 
-    if (fileList) {
-      updateFilePreview(fileList);
+    if (FileList) {
+      const newFiles = Array.from(FileList);
+      const fileArray = await Promise.all(newFiles.map(getFilePreview));
+
+      setProfile([...fileArray]);
+      setValue(fileName, [...newFiles]);
       if (mode === "create" && setIsActive) setIsActive(true);
     }
-  };
-
-  const updateFilePreview = async (fileList: FileList) => {
-    const newFiles = Array.from(fileList);
-    const fileArray = await Promise.all(newFiles.map(getFilePreview));
-
-    setProfile([...fileArray]);
-    setValue(fileName, [...newFiles]);
   };
 
   return (
@@ -71,6 +76,7 @@ const ProfileUploadBox = ({
           profile={profile}
           fileInputRef={fileRef}
           handleFileChange={handleFileChange}
+          handleClick={handleClick}
           registerText={fileName}
           type={type}
         />
@@ -78,7 +84,9 @@ const ProfileUploadBox = ({
       {mode === "edit" && (
         <ProfileEdit
           profile={profile}
+          fileInputRef={fileRef}
           handleFileChange={handleFileChange}
+          handleClick={handleClick}
           registerText={fileName}
           type={type}
         />
