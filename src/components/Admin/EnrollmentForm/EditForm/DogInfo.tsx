@@ -1,12 +1,12 @@
 import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { TextInput } from "components/common";
-import ImageUpload from "components/common/ImageUpload";
 import SearchInputField from "components/common/Input/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import AdminTitle from "components/common/Title/AdminTitle";
+import { ImageUploadInput } from "components/Enrollment/ImageUpload/ImageUploadInput";
 import { useFormContext } from "react-hook-form";
 
 import { Card, Caption } from "../styles";
@@ -86,7 +86,7 @@ const DogInfo = () => {
         </AdminTitle>
         <SingleRadio radiosText={["했어요", "안했어요"]} disabled />
         <Caption>접종을 한 견주가 예방접종 증명서를 업로드 하는 칸이에요</Caption>
-        <ImageUpload disabled />
+        <ImageUploadInput disabled />
       </Card>
       <Card>
         <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ALLERGY_DISEASE}`} control={control}>

@@ -12,7 +12,7 @@ interface UploadParams {
 interface UploadAndCreateAlbumOptions {
   onSuccess?: () => void;
 }
-
+// FIXME s3ProfileData 데이터 구조 수정 필요
 const useUploadProfile = () => {
   const [s3ProfileData, setS3ProfileData] = useState<string[]>([]);
   const { uploadToS3 } = useS3Upload();

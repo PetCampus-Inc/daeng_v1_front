@@ -7,14 +7,14 @@ import { useFormContext } from "react-hook-form";
 import * as S from "../styles";
 
 const RoleEdit = () => {
-  const [currentRelation, setCurrentRelation] = useState<string>("");
+  const [currentRelation, setCurrentRelation] = useState<string | null>(null);
   const [isShowRoles, setIsShowRoles] = useState(false);
   const { register, setValue } = useFormContext();
   const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.relation !== currentRelation);
 
   const handleSelectedRelation = (relation: string) => {
     setCurrentRelation(RELATION_DATA[relation]);
-    setValue(FIELD.RELATION, relation);
+    setValue(FIELD.RELATION, relation, { shouldDirty: true });
     setIsShowRoles(false);
   };
 
@@ -25,13 +25,19 @@ const RoleEdit = () => {
   return (
     <S.RoleEditContainer>
       <S.RoleEditButton
-        type="button"
         onClick={handleShowRoles}
-        {...register(FIELD.RELATION, { required: true })}
-        value={currentRelation ? currentRelation : "호칭선택"}
         color={currentRelation ? "gray_1" : "gray_3"}
         bg={currentRelation ? "white" : "gray_4"}
+      >
+        <span>{currentRelation ? currentRelation : "호칭선택"}</span>
+      </S.RoleEditButton>
+
+      <S.RoleEditInput
+        id="roleEdit"
+        value={currentRelation ? currentRelation : ""}
+        {...register(FIELD.RELATION, { required: true })}
       />
+
       {isShowRoles && (
         <S.RoleSelectWrapper direction="column">
           {notSelectedRelation.map((item, idx) => (

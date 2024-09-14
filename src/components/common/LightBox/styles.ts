@@ -1,16 +1,5 @@
 import styled from "styled-components";
-
-export const OverlayContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 11;
-`;
+export { OverlayContainer } from "styles/StyleModule";
 
 export const OverlayWrapper = styled.div`
   position: fixed;

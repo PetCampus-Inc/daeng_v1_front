@@ -1,12 +1,12 @@
 import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { DateInput, TextInput } from "components/common";
-import ImageUpload from "components/common/ImageUpload";
 import SearchInputField from "components/common/Input/SearchInputField";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
-import { useFormContext } from "react-hook-form";
+import { ImageUploadInput } from "components/Enrollment/ImageUpload/ImageUploadInput";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Card } from "../styles";
 interface DogInfoProps {
@@ -14,7 +14,7 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ item }: DogInfoProps) => {
-  const { register } = useFormContext();
+  const { register, control } = useFormContext();
   return (
     <>
       <Card>
@@ -72,7 +72,11 @@ const DogInfo = ({ item }: DogInfoProps) => {
           isPreviewMode
           disabled
         />
-        <ImageUpload disabled />
+        <Controller
+          name={FIELD.VACCINATION_URL}
+          control={control}
+          render={({ field }) => <ImageUploadInput ref={field.ref} disabled />}
+        />
       </Card>
       <Card>
         <Title isRequired={item?.get(FIELD_KEYS.ALLERGY_DISEASE)}>알러지 및 질병 유무</Title>

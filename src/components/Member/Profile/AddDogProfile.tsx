@@ -2,13 +2,12 @@ import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import ProfileUploadBox from "./Box/ProfileUploadBox";
 
 const AddDogProfile = () => {
   const [isDogActive, setDogIsActive] = useState(false);
-  const dogFileInputRef = useRef<HTMLInputElement | null>(null);
   return (
     <>
       <Flex direction="column" marginBottom="2.375rem">
@@ -24,7 +23,6 @@ const AddDogProfile = () => {
           type={TYPE_NAME.DOG}
           isActive={isDogActive}
           setIsActive={setDogIsActive}
-          fileRef={dogFileInputRef}
           fileName={FILE_NAME.PROFILE_DOG}
           mode="create"
         />

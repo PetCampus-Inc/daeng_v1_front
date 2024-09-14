@@ -1,19 +1,25 @@
 import XCircleIcon from "assets/svg/x-circle-icon";
+import {
+  Img,
+  StyledThumb,
+  StyledDeleteButton,
+  InnerShadow,
+  StyledText
+} from "components/Admin/AttendCare/AttendCareGallery/upload/styles";
 import { Box } from "components/common";
 import { useOverlay } from "hooks/common/useOverlay";
 
 import PreviewPopup from "./PreviewPopup";
-import { StyledThumb, StyledText, Img, InnerShadow, StyledDeleteButton } from "./styles";
 
-import type { IFile } from "./types";
+import type { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload/types";
 
-interface ThumbnailProps {
+interface TumbnailProps {
   file: IFile;
   index: number;
   onRemove?: (index: number) => void;
 }
 
-export const Thumbnail = ({ file, index, onRemove }: ThumbnailProps) => {
+export const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
   const overlay = useOverlay();
   const openPopup = () =>
     overlay.open(({ isOpen, close }) => <PreviewPopup isOpen={isOpen} close={close} data={file} />);
