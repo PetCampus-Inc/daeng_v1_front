@@ -13,7 +13,7 @@ import * as S from "./styles";
 
 const MenuCard = () => {
   const { schoolId } = useAdminInfo();
-  const { refetch } = useGetNewEnrollment(schoolId);
+  const { data } = useGetNewEnrollment(schoolId);
 
   const navigate = useNavigate();
   const overlay = useOverlay();
@@ -21,8 +21,6 @@ const MenuCard = () => {
   /** 신규가입 메뉴 클릭*/
   const handleNewEnrollment = async () => {
     try {
-      const { data } = await refetch();
-
       if (data?.simpleSchoolFormList.length === 0) {
         overlay.open(({ isOpen, close }) => (
           <NewEnrollmentFormBottomSheet
