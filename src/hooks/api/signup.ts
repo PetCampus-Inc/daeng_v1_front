@@ -7,6 +7,7 @@ import {
   postTeacherSignUpCancel
 } from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/enrollment.api";
+import useLogout from "hooks/common/useLogout";
 
 // 선생님 회원가입 요청
 export const useTeacherSinUp = () => {
@@ -19,8 +20,10 @@ export const useTeacherSinUp = () => {
 
 // 선생님 회원가입 요청 취소
 export const useTeacherSignUpCancel = () => {
+  const logout = useLogout();
   const { mutate } = useMutation({
-    mutationFn: postTeacherSignUpCancel
+    mutationFn: postTeacherSignUpCancel,
+    onSuccess: logout
   });
 
   return { mutateTeacherSignUpCancel: mutate };

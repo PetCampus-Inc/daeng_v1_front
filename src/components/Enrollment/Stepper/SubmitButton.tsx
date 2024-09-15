@@ -4,7 +4,6 @@ import { getFieldStep } from "constants/step";
 import { usePostEnrollment } from "hooks/api/member/enroll";
 import { Adapter, MemberFormToServerAdapter } from "libs/adapters";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 import { FormButton } from "styles/StyleModule";
@@ -16,8 +15,6 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   const { mutateEnrollment } = usePostEnrollment();
   const setStep = useSetRecoilState(currentStepState);
 
-  const navigate = useNavigate();
-
   const getSubmitFormInfo = (data: FieldValues) => {
     return Adapter.from(data).to<FieldValues, EnrollmentInfoType>((item) =>
       new MemberFormToServerAdapter(item).adapt()
@@ -27,9 +24,7 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   // 신규 가입신청서
   const onSubmit = (data: FieldValues) => {
     const requestData = getSubmitFormInfo(data);
-    mutateEnrollment(requestData, {
-      onSuccess: () => navigate(routes.login.root)
-    });
+    mutateEnrollment(requestData);
   };
 
   const onInvalid = (errors: FieldErrors) => {
