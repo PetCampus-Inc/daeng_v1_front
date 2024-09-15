@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Control, useFieldArray } from "react-hook-form";
 
 type TicketFieldArrayProps = {
@@ -12,9 +13,12 @@ const useTicketFieldArray = ({ control, fieldName, defaultValues }: TicketFieldA
     name: fieldName
   });
 
-  if (fields.length === 0 && defaultValues.length > 0) {
-    append(defaultValues.map((value) => ({ value })));
-  }
+  useEffect(() => {
+    if (fields.length === 0 && defaultValues.length > 0) {
+      remove();
+      append(defaultValues.map((value) => ({ value })));
+    }
+  }, [fields, append, remove, defaultValues]);
 
   return { fields, append, remove };
 };
