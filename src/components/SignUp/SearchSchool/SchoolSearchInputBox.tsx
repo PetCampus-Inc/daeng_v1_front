@@ -67,7 +67,7 @@ const SchoolSearchInputBox = ({ searchText, setSearchText }: SchoolSearchInputBo
           setSearchText(e.target.value);
         }}
       />
-      {data && showDropdown && <SchoolListDropdown list={data} handleSelected={handleItemSelect} />}
+      {data && showDropdown && <SchoolListDropdown list={data} onSelect={handleItemSelect} />}
     </Flex>
   );
 };
