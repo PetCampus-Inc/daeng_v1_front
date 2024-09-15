@@ -19,8 +19,10 @@ import {
   handlePostMemoDogVaccination,
   handlePostMemberProfile,
   handlePostMemoDogAllergy,
-  handlePostMemoDogPickdrop
+  handlePostMemoDogPickdrop,
+  handleCancelMemberEnrollment
 } from "apis/member/member.api";
+import useLogout from "hooks/common/useLogout";
 import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
 import { getISOString } from "utils/date";
@@ -145,12 +147,30 @@ export const usePostMemberProfileInfo = () => {
 };
 
 // 견주 가입신청서 취소
+export const useCancelMemberEnrollment = () => {
+  const logout = useLogout();
+
+  const { mutate } = useMutation({
+    mutationFn: handleCancelMemberEnrollment,
+    onSuccess: logout,
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return { mutateCancelEnrollment: mutate };
+};
+
+// 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = () => {
+  const logout = useLogout();
   const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      logout();
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
