@@ -61,6 +61,17 @@ export const postOwnerSignUp = async (req: IOwnerSignUpInfo) => {
   });
 };
 
+// 선생님 재가입
+export const postTeacherReApproval = async (schoolId: number): Promise<ITeacherSignUpData> => {
+  const url = `admin/submit/teacher/approval/re`;
+  const { data } = await request<ITeacherSignUpData>({
+    url,
+    method: "POST",
+    data: { schoolId }
+  });
+  return data;
+};
+
 // 선생님 회원가입
 export const postTeacherSignUp = async (req: ITeacherSignUpInfo): Promise<ITeacherSignUpData> => {
   const url = `admin/submit/teacher/approval`;

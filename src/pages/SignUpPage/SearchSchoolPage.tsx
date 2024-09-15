@@ -15,10 +15,11 @@ export interface SelectedSchool {
 
 interface SearchSchoolPageProps {
   type: User;
+  btnText?: string;
   onNextStep: (id: number) => void;
 }
 
-const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
+const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) => {
   const setLocalStorage = useSetLocalStorage();
   const [selectedSchool, setSelectedSchool] = useState<SelectedSchool | null>(null);
 
@@ -51,7 +52,7 @@ const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
             disabled={!selectedSchool}
           >
             <Text className={selectedSchool ? "" : "inactive"} typo="label1_16_B" color="white">
-              다음
+              {btnText ? btnText : "다음"}
             </Text>
           </StyledButton>
         </Box>

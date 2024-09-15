@@ -24,10 +24,6 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
       ),
       children: [
         {
-          index: true,
-          loader: () => redirect(routes.admin.attendance.root)
-        },
-        {
           path: routes.admin.attendance.root,
           children: [
             {

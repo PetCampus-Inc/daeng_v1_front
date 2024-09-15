@@ -1,13 +1,28 @@
+import { routes } from "constants/path";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getCheckId,
   postOwnerSignUp,
   postRegistrationNumber,
+  postTeacherReApproval,
   postTeacherSignUp,
   postTeacherSignUpCancel
 } from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/enrollment.api";
 import useLogout from "hooks/common/useLogout";
+import { useNavigate } from "react-router-dom";
+
+// 선생님 재가입
+export const useTeacherReApproval = () => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: postTeacherReApproval,
+    onSuccess: () => navigate(routes.approval.root)
+  });
+
+  return { mutateTeacherReApproval: mutate };
+};
 
 // 선생님 회원가입 요청
 export const useTeacherSinUp = () => {
@@ -20,10 +35,8 @@ export const useTeacherSinUp = () => {
 
 // 선생님 회원가입 요청 취소
 export const useTeacherSignUpCancel = () => {
-  const logout = useLogout();
   const { mutate } = useMutation({
-    mutationFn: postTeacherSignUpCancel,
-    onSuccess: logout
+    mutationFn: postTeacherSignUpCancel
   });
 
   return { mutateTeacherSignUpCancel: mutate };
