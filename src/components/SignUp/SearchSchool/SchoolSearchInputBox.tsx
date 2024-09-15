@@ -2,43 +2,50 @@ import { Flex } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
 import { useGetSchool } from "hooks/api/signup";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
-import { type RefObject, useCallback, useEffect, useRef, useState } from "react";
-import { useRecoilState } from "recoil";
-import { schoolIdAtom } from "store/form";
+import { ChangeEvent, type RefObject, useCallback, useRef, useState } from "react";
 
 import SchoolListDropdown from "./SchoolListDropdown";
 
 interface SchoolSearchInputBoxProps {
-  searchText: string;
-  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  onSelect?: (id: number, name: string) => void;
+  onClear?: () => void;
 }
 
-const SchoolSearchInputBox = ({ searchText, setSearchText }: SchoolSearchInputBoxProps) => {
+const SchoolSearchInputBox = ({ onSelect, onClear }: SchoolSearchInputBoxProps) => {
   const contentRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
-  const [schoolId, setSchoolId] = useRecoilState(schoolIdAtom);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>("");
 
   const { data } = useGetSchool(searchQuery);
 
-  const handleSearch = (value: string) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    onClear?.();
+  };
+
+  const handleInputSearch = (value: string) => {
     setSearchQuery(value);
     setShowDropdown(true);
+    onClear?.();
   };
 
-  const handleClear = () => {
-    setSearchText("");
+  const handleInputClear = () => {
     setSearchQuery("");
-    setSchoolId(null);
     setShowDropdown(false);
+    setInputValue("");
+    onClear?.();
   };
 
-  const handleItemSelect = useCallback((id: number, name: string) => {
-    setSchoolId(id);
-    setSearchText(name);
-    setShowDropdown(false);
-  }, []);
+  const handleItemSelect = useCallback(
+    (id: number, name: string) => {
+      setInputValue(name);
+      setShowDropdown(false);
+      onSelect?.(id, name);
+    },
+    [onSelect]
+  );
 
   useClickOutSide({
     enabled: showDropdown,
@@ -46,26 +53,23 @@ const SchoolSearchInputBox = ({ searchText, setSearchText }: SchoolSearchInputBo
     onClickOutside: () => setShowDropdown(false)
   });
 
-  useEffect(
-    function handleDropdown() {
-      const shouldCloseDropdown = !searchText || schoolId;
-      setShowDropdown(!shouldCloseDropdown);
-    },
-    [searchText, schoolId]
-  );
+  // useEffect(
+  //   function handleDropdown() {
+  //     const shouldCloseDropdown = !searchText || schoolId;
+  //     setShowDropdown(!shouldCloseDropdown);
+  //   },
+  //   [searchText, schoolId]
+  // );
 
   return (
     <Flex ref={contentRef} direction="column" gap={8}>
       <SearchInputField
         name="schoolSearch"
         placeholder="검색어를 입력해주세요"
-        value={searchText}
-        onSearch={handleSearch}
-        onClear={handleClear}
-        onChange={(e) => {
-          setSchoolId(null);
-          setSearchText(e.target.value);
-        }}
+        value={inputValue}
+        onSearch={handleInputSearch}
+        onClear={handleInputClear}
+        onChange={handleInputChange}
       />
       {data && showDropdown && <SchoolListDropdown list={data} onSelect={handleItemSelect} />}
     </Flex>
