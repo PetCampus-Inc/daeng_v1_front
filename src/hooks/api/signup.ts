@@ -10,7 +10,6 @@ import {
   postTeacherSignUpCancel
 } from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/enrollment.api";
-import useLogout from "hooks/common/useLogout";
 import { useNavigate } from "react-router-dom";
 
 // 선생님 재가입
@@ -35,9 +34,7 @@ export const useTeacherSinUp = () => {
 
 // 선생님 회원가입 요청 취소
 export const useTeacherSignUpCancel = () => {
-  const { mutate } = useMutation({
-    mutationFn: postTeacherSignUpCancel
-  });
+  const { mutate } = useMutation({ mutationFn: postTeacherSignUpCancel });
 
   return { mutateTeacherSignUpCancel: mutate };
 };

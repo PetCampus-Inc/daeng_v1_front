@@ -148,11 +148,8 @@ export const usePostMemberProfileInfo = () => {
 
 // 견주 가입신청서 취소
 export const useCancelMemberEnrollment = () => {
-  const logout = useLogout();
-
   const { mutate } = useMutation({
     mutationFn: handleCancelMemberEnrollment,
-    onSuccess: logout,
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
