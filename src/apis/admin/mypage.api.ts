@@ -55,7 +55,6 @@ export const handleTeacherProfileEdit = async (req: IAdminProfileEdit) => {
     method: "POST",
     data: {
       imageUrl: req.imageUrl,
-      adminId: req.adminId,
       adminName: req.adminName,
       phoneNumber: req.phoneNumber
     }
