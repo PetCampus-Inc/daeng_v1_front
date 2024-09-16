@@ -1,13 +1,15 @@
-export type IconProps = {
-  borderStyle?: string;
-};
+import { IconProps } from "./types";
 
-const SendAlarmIcon = ({ borderStyle = "" }: IconProps) => {
+export type Props = {
+  borderStyle?: string;
+} & IconProps;
+
+const SendAlarmIcon = ({ borderStyle = "", w = "20", h = "20" }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      width={w}
+      height={h}
       fill="none"
       viewBox="0 0 20 20"
       style={{ borderRadius: `${borderStyle}` }}

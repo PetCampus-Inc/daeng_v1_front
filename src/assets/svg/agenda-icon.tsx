@@ -1,10 +1,18 @@
-interface Props {
+import type { IconProps } from "./types";
+
+type Props = {
   className?: string;
   bg?: boolean;
   colorScheme?: "gray" | "yellow";
-}
+} & IconProps;
 
-const AgendaIcon = ({ className = "", bg = false, colorScheme = "yellow" }: Props) => {
+const AgendaIcon = ({
+  className = "",
+  bg = false,
+  colorScheme = "yellow",
+  w = "40",
+  h = "40"
+}: Props) => {
   const colorMap = new Map<string, string>([
     ["gray", "#E9E9E9"],
     ["yellow", "#FFF7E1"]
@@ -13,8 +21,8 @@ const AgendaIcon = ({ className = "", bg = false, colorScheme = "yellow" }: Prop
   return (
     <svg
       className={className}
-      width="40"
-      height="40"
+      width={w}
+      height={h}
       viewBox="0 0 40 40"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

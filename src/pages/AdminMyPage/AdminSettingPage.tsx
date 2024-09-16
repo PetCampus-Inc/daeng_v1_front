@@ -1,5 +1,6 @@
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import AlertSetting from "components/Admin/MyPage/AlertSetting";
+import { AlertSettingProvider } from "components/Admin/MyPage/AlertSetting/context/AlertSettingProvider";
 import DeleteAccount from "components/Admin/MyPage/DeleteAccount";
 import PolicySetting from "components/Admin/MyPage/PolicySetting";
 import { Box, Flex, Layout, Text } from "components/common";
@@ -93,7 +94,11 @@ const AdminSettingPage = () => {
           </Layout>
         </>
       )}
-      {currentStep === 1 && <AlertSetting setStep={setStep} role={role} />}
+      {currentStep === 1 && (
+        <AlertSettingProvider>
+          <AlertSetting setStep={setStep} role={role} />
+        </AlertSettingProvider>
+      )}
       {currentStep === 2 && <PolicySetting setStep={setStep} />}
       {currentStep === 3 && <DeleteAccount setStep={setStep} role={role} />}
     </>

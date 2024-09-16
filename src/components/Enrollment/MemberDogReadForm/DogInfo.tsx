@@ -3,20 +3,20 @@ import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 
 import { TextInput } from "components/common";
-import ImageUpload from "components/common/ImageUpload";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { padToTwoDigits } from "utils/date";
 import { handlePreventDefault } from "utils/preventDefault";
 
 import { Caption, Card } from "./styles";
+import { ImageUploadInput } from "../ImageUpload/ImageUploadInput";
 import BreedInput from "../Input/BreedInput";
 
 const DogInfo = () => {
-  const { register, watch, setValue } = useFormContext();
+  const { control, register, watch, setValue } = useFormContext();
   const [birthYear, birthMonth, birthDay] = watch(FIELD.BIRTHDAY);
 
   const dogBirthData = {
@@ -123,7 +123,11 @@ const DogInfo = () => {
             예방접종 파일 첨부
           </Title>
           <Caption>최근 1년 내 접종 기록 증명을 위해 jpg, png 형태로 업로드해 주세요</Caption>
-          <ImageUpload />
+          <Controller
+            name={FIELD.VACCINATION_URL}
+            control={control}
+            render={({ field }) => <ImageUploadInput ref={field.ref} disabled />}
+          />
         </Card>
       )}
       <Card>

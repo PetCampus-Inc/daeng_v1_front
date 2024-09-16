@@ -21,6 +21,7 @@ interface ProfileUploadProps {
   fileRef: React.RefObject<HTMLInputElement>;
   fileName: string;
   mode: Mode;
+  onClick?: () => void;
 }
 
 const ProfileUploadBox = ({
@@ -29,7 +30,8 @@ const ProfileUploadBox = ({
   setIsActive,
   fileRef,
   fileName,
-  mode
+  mode,
+  onClick
 }: ProfileUploadProps) => {
   const { setValue } = useFormContext();
   const [profile, setProfile] = useState<IFile[]>([]);
@@ -38,34 +40,31 @@ const ProfileUploadBox = ({
     if (fileRef && fileRef.current) {
       mode === "create" && isActive ? setIsActive && setIsActive(false) : fileRef.current.click();
     }
+    onClick && onClick();
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const fileList = e.target.files;
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const FileList = e.target.files;
 
-    if (!fileList) {
+    if (!FileList) {
       showToast("업로드할 파일이 없습니다.", "ownerNav");
       return;
     }
 
     // 파일 변경 없을 경우
-    if (fileList.length <= 0) {
+    if (FileList.length <= 0) {
       if (!isActive && setIsActive) setIsActive(true);
       return;
     }
 
-    if (fileList) {
-      updateFilePreview(fileList);
+    if (FileList) {
+      const newFiles = Array.from(FileList);
+      const fileArray = await Promise.all(newFiles.map(getFilePreview));
+
+      setProfile([...fileArray]);
+      setValue(fileName, [...newFiles]);
       if (mode === "create" && setIsActive) setIsActive(true);
     }
-  };
-
-  const updateFilePreview = async (fileList: FileList) => {
-    const newFiles = Array.from(fileList);
-    const fileArray = await Promise.all(newFiles.map(getFilePreview));
-
-    setProfile([...fileArray]);
-    setValue(fileName, [...newFiles]);
   };
 
   return (
@@ -85,7 +84,9 @@ const ProfileUploadBox = ({
       {mode === "edit" && (
         <ProfileEdit
           profile={profile}
+          fileInputRef={fileRef}
           handleFileChange={handleFileChange}
+          handleClick={handleClick}
           registerText={fileName}
           type={type}
         />

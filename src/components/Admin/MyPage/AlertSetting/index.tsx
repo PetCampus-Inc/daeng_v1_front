@@ -4,9 +4,9 @@ import SchoolIcon from "assets/svg/school-icon";
 import { Box } from "components/common";
 import Header from "components/common/Header";
 import Toggle from "components/common/Toggle/Toggle";
-import { useState } from "react";
 import { Role } from "types/common/role.types";
 
+import { useAlertSetting } from "./context/AlertSettingProvider";
 import * as S from "./styles";
 
 interface AlertSettingProps {
@@ -21,29 +21,7 @@ type AlertSettings = {
 };
 
 const AlertSetting = ({ setStep, role }: AlertSettingProps) => {
-  const [alertSettings, setAlertSettings] = useState({
-    attendance: false,
-    careDog: false,
-    school: false
-  });
-
-  const isAllOn = Object.values(alertSettings).every(Boolean);
-
-  const toggleAll = () => {
-    const newState = !isAllOn;
-    setAlertSettings({
-      attendance: newState,
-      careDog: newState,
-      school: newState
-    });
-  };
-
-  const toggleIndividual = (key: keyof AlertSettings) => {
-    setAlertSettings((prev) => ({
-      ...prev,
-      [key]: !prev[key]
-    }));
-  };
+  const { alertSettings, isAllOn, toggleAll, toggleIndividual } = useAlertSetting();
 
   const alretItem = (icon: any, text: string, subText: string, stateKey: keyof AlertSettings) => (
     <S.SettingItem type="notification" margintop="0.5rem">
