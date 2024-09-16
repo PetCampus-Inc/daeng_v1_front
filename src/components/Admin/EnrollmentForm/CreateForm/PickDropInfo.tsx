@@ -79,7 +79,7 @@ const PickDropInfo = () => {
               픽드랍 유의사항
             </AdminTitle>
             <TextArea
-              {...register(FIELD.PICKDROP_MEMO, { required: true })}
+              {...register(FIELD.PICKDROP_INFO, { required: true })}
               placeholder="픽드랍 유의사항을 입력해 주세요"
             />
             <Stack>
