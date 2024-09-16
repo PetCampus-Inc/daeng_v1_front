@@ -1,12 +1,12 @@
 import { FIELD_KEYS } from "constants/field";
 
 import { TextInput } from "components/common";
-import ImageUpload from "components/common/ImageUpload";
 import SearchInputField from "components/common/Input/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
+import { ImageUploadInput } from "components/Enrollment/ImageUpload/ImageUploadInput";
 
 import { Card } from "../styles";
 interface DogInfoProps {
@@ -63,7 +63,7 @@ const DogInfo = ({ item }: DogInfoProps) => {
           isPreviewMode
           disabled
         />
-        <ImageUpload disabled />
+        <ImageUploadInput disabled />
       </Card>
       <Card>
         <Title isRequired={item?.get(FIELD_KEYS.ALLERGY_DISEASE)}>알러지 및 질병 유무</Title>

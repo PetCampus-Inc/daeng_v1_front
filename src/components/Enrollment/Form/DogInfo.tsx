@@ -2,14 +2,14 @@ import { daysArray, monthsArray, yearsArray } from "constants/date";
 import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { TextInput } from "components/common";
-import ImageUpload from "components/common/ImageUpload";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import TextArea from "components/common/TextArea";
 import Title from "components/common/Title";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Caption, Card } from "./styles";
+import { ImageUploadInput } from "../ImageUpload/ImageUploadInput";
 import BreedInput from "../Input/BreedInput";
 
 interface DogInfoProps {
@@ -17,7 +17,9 @@ interface DogInfoProps {
 }
 
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
-  const { register, watch, setValue } = useFormContext();
+  const { register, watch, setValue, control } = useFormContext();
+
+  console.log(control);
 
   return (
     <>
@@ -101,7 +103,18 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
             예방접종 파일 첨부
           </Title>
           <Caption>최근 1년 내 접종 기록 증명을 위해 jpg, png 형태로 업로드해 주세요</Caption>
-          <ImageUpload />
+          <Controller
+            name={FIELD.VACCINATION_URL}
+            control={control}
+            rules={{ required: requiredItems?.get(FIELD_KEYS.VACCINATION_URL) }}
+            render={({ field }) => (
+              <ImageUploadInput
+                ref={field.ref}
+                value={field.value || []}
+                onChange={field.onChange}
+              />
+            )}
+          />
         </Card>
       )}
       <Card>

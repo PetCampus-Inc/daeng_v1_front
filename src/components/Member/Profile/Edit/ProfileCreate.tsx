@@ -16,6 +16,7 @@ interface ProfileCreateProps {
   profile: IFile[];
   fileInputRef?: React.LegacyRef<HTMLInputElement> | null;
   handleFileChange: (e: ChangeEvent<HTMLInputElement>, type: string) => void;
+  handleClick?: () => void;
   registerText: string;
   type: string;
 }
