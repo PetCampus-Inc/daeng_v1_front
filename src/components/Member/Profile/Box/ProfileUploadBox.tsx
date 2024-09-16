@@ -18,7 +18,7 @@ interface ProfileUploadProps {
   type: string;
   isActive?: boolean;
   setIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
-  fileRef: React.RefObject<HTMLInputElement>;
+  fileRef?: React.RefObject<HTMLInputElement>;
   fileName: string;
   mode: Mode;
   onClick?: () => void;
@@ -84,7 +84,6 @@ const ProfileUploadBox = ({
       {mode === "edit" && (
         <ProfileEdit
           profile={profile}
-          fileInputRef={fileRef}
           handleFileChange={handleFileChange}
           handleClick={handleClick}
           registerText={fileName}
