@@ -19,8 +19,6 @@ interface DogInfoProps {
 const DogInfo = ({ requiredItems }: DogInfoProps) => {
   const { register, watch, setValue, control } = useFormContext();
 
-  console.log(control);
-
   return (
     <>
       <Card>
