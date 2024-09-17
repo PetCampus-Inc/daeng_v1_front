@@ -84,7 +84,13 @@ export const handleGetMemberProfileInfo = async (): Promise<IMemberProfileInfo> 
   return data.data;
 };
 
-// 승인 대기 중 가입신청서 승인 취소 (강아지 추가 취소)
+// 견주 가입신청서 승인 취소 (승인 대기중)
+export const handleCancelMemberEnrollment = async (): Promise<void> => {
+  const url = `/member/cancel/enrollmentForm`;
+  return await authAxios.post(url);
+};
+
+// 견주 가입신청서 승인 취소 (강아지 추가 취소)
 export const handlePostMemberDogEnrollment = async (enrollmentFormId: string): Promise<void> => {
   const url = `/member/cancel/enrollmentForm?enrollmentFormId=${enrollmentFormId}`;
   return await authAxios.post(url);

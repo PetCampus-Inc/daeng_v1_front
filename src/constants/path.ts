@@ -50,7 +50,11 @@ const admin = {
   },
   /** 회원 가입 */
   signup: {
-    root: `/admin/signup`
+    root: `/admin/signup`,
+    /** 선생님 재가입 */
+    rejoin: {
+      root: `/signup/rejoin`
+    }
   },
   /** 출석부 */
   attendance: {

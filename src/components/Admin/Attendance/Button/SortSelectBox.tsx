@@ -6,11 +6,23 @@ import { SortOptionsBottomSheet } from "../Dialog/SortOptionsBottomSheet";
 
 import type { SortOptions } from "../constant";
 
-export function SortSelectBox({ sortName }: { sortName: SortOptions }) {
+interface SortSelectBoxProps {
+  sortName: SortOptions;
+  onSelect?: (sortName: SortOptions) => void;
+}
+
+export function SortSelectBox({ sortName, onSelect }: SortSelectBoxProps) {
   const overlay = useOverlay();
 
   const openPopup = () =>
-    overlay.open(({ isOpen, close }) => <SortOptionsBottomSheet isOpen={isOpen} close={close} />);
+    overlay.open(({ isOpen, close }) => (
+      <SortOptionsBottomSheet
+        sortName={sortName}
+        isOpen={isOpen}
+        close={close}
+        onSelect={onSelect}
+      />
+    ));
 
   return (
     <SelectBox onClick={openPopup}>

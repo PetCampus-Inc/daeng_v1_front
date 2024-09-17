@@ -1,9 +1,11 @@
+import { routes } from "constants/path";
 import { SCHOOL_NAME_KEY, USER_TYPE_KEY } from "constants/storage";
 
 import { Layout } from "components/common";
 import ApprovalStatusView from "components/SignUp/ApprovalStatus";
 import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useTokenHandler } from "hooks/common/useTokenHandler";
+import { Navigate } from "react-router-dom";
 import { User } from "types/common/role.types";
 import { type ApprovalStatus } from "types/common/status.types";
 import { isApproval } from "utils/is";
@@ -23,10 +25,10 @@ export default function ApprovalStatusPage() {
   const [user] = useLocalStorage<User | null>(USER_TYPE_KEY, null);
   const [schoolName] = useLocalStorage<string | null>(SCHOOL_NAME_KEY, null);
 
-  if (!isApproval(role) || !user || !schoolName) throw new Error("잘못 된 접근입니다.");
+  if (!isApproval(role) || !user || !schoolName) return <Navigate to={routes.login.root} />;
 
   const StatusComponent = statusViews[role];
-  if (!StatusComponent) throw new Error("잘못 된 접근입니다.");
+  if (!StatusComponent) return <Navigate to={routes.login.root} />;
 
   return (
     <Layout bgColor="white" px={16} pt={76}>

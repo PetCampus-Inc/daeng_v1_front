@@ -4,52 +4,55 @@ import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
 import { StyledButton } from "components/SignIn/styles";
 import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInputBox";
-import { setLocalStorage, useSetLocalStorage } from "hooks/common/useLocalStorage";
+import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { memo, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { schoolIdAtom } from "store/form";
-import { Role } from "types/common/role.types";
+import { User } from "types/common/role.types";
+
+export interface SelectedSchool {
+  id: number;
+  name: string;
+}
 
 interface SearchSchoolPageProps {
-  type: typeof Role.ROLE_TEACHER | typeof Role.ROLE_MEMBER;
+  type: User;
+  btnText?: string;
   onNextStep: (id: number) => void;
 }
 
-// TODO: useFormProvider 이용!!
-const SearchSchoolPage = ({ type, onNextStep }: SearchSchoolPageProps) => {
-  const schoolId = useRecoilValue(schoolIdAtom);
+const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) => {
   const setLocalStorage = useSetLocalStorage();
-  const [searchText, setSearchText] = useState("");
+  const [selectedSchool, setSelectedSchool] = useState<SelectedSchool | null>(null);
+
+  const handleSelect = (id: number, name: string) => setSelectedSchool({ id, name });
+  const handleClear = () => setSelectedSchool(null);
+  const handleNextClick = () => {
+    if (!selectedSchool) return;
+    onNextStep(selectedSchool.id);
+    setLocalStorage(SCHOOL_NAME_KEY, selectedSchool.name);
+  };
 
   return (
     <>
       <Header type="back" />
       <Layout pt={60} px={16} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
-          안녕하세요 {type === Role.ROLE_TEACHER ? "선생님" : "견주님"}
+          안녕하세요 {type === User.ADMIN ? "선생님" : "견주님"}
           <br />
           어떤 유치원을 찾고 계시나요?
         </Text>
         <Box mt={70}>
-          <SchoolSearchInputBox searchText={searchText} setSearchText={setSearchText} />
+          <SchoolSearchInputBox onSelect={handleSelect} onClear={handleClear} />
         </Box>
 
         <Box position="absolute" left={16} right={16} bottom={24}>
           <StyledButton
             type="button"
             bg="primaryColor"
-            onClick={() => {
-              onNextStep(schoolId ?? -1);
-              setLocalStorage(SCHOOL_NAME_KEY, searchText);
-            }}
-            disabled={!schoolId || !searchText}
+            onClick={handleNextClick}
+            disabled={!selectedSchool}
           >
-            <Text
-              className={schoolId && searchText ? "" : "inactive"}
-              typo="label1_16_B"
-              color="white"
-            >
-              다음
+            <Text className={selectedSchool ? "" : "inactive"} typo="label1_16_B" color="white">
+              {btnText ? btnText : "다음"}
             </Text>
           </StyledButton>
         </Box>

@@ -73,9 +73,13 @@ export const useAdminEnrollment = (formId: string, mode: Mode) => {
 // 원장 가입신청서 저장
 export const useCreateAdminEnrollment = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const mutateForm = useMutation({
     mutationFn: (enrollmentData: AdminEnrollmentInfoType) => handlePostAdminForm(enrollmentData),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.NEW_ENROLLMENT_LIST });
+
       navigate(routes.admin.school.enrollment.root);
       showToast("가입신청서 등록이 완료되었습니다", "bottom");
     },

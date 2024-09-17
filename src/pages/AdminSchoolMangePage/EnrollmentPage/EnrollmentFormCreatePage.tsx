@@ -48,7 +48,18 @@ const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => 
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
   const { dirtyFields } = useFormState({ control: methods.control });
-  const blocker = useBlocker(() => !isEmpty(dirtyFields));
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    const currentStep = new URLSearchParams(currentLocation.search).get("step");
+    const nextStep = new URLSearchParams(nextLocation.search).get("step");
+
+    if (
+      (currentStep === "form" && nextStep === "submit") ||
+      (currentStep === "submit" && nextStep === "form")
+    )
+      return false;
+
+    return !isEmpty(dirtyFields);
+  });
 
   return (
     <>
