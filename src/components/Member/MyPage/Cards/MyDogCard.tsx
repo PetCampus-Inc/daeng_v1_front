@@ -10,7 +10,7 @@ import { useOverlay } from "hooks/common/useOverlay";
 import { memo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { dogIdState } from "store/member";
+import { dogIdState, dogProfileList } from "store/member";
 import { IDoglist } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
@@ -39,12 +39,13 @@ const MyDogCard = ({
   isActive
 }: IMyDogCardProps) => {
   const divRef = useRef<HTMLDivElement>(null);
+  const setDogProfile = useSetRecoilState(dogProfileList);
   const setDogId = useSetRecoilState(dogIdState);
   const navigate = useNavigate();
   const overlay = useOverlay();
   const mutateMemberDogDelete = usePostMemberDogDelete();
   const setStoredValue = useSetLocalStorage();
-  const [CURRENT_DOG_ID] = useLocalStorage<string>("CURRENT-DOG-ID", "");
+  const [CURRENT_DOG_ID] = useLocalStorage<string>("CURRENT-DOG-ID", "", true);
 
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
@@ -104,6 +105,10 @@ const MyDogCard = ({
     setDogId(Number(dogId));
     onCardFocus(dogId);
   };
+
+  useEffect(() => {
+    setDogProfile([{ dogId: dogId, dogProfile: profileUri ?? "" }]);
+  }, [isActive]);
 
   useEffect(() => {
     if (CURRENT_DOG_ID) {
