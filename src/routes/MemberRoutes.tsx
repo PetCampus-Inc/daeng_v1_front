@@ -65,6 +65,14 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
+          path: routes.member.mypage.enrollment.root,
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentPage />
+            </Suspense>
+          )
+        },
+        {
           path: routes.member.dogInfo.edit.dynamic(),
           element: (
             <Suspense>

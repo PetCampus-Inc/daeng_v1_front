@@ -1,17 +1,20 @@
+import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import Slider from "react-slick";
 
+import * as S from "./styles";
 import SimpleMembershipApplication from "../SimpleMembershipApplication";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useRecoilValue } from "recoil";
-import { newEnrollmentListAtom } from "store/admin";
-
-import * as S from "./styles";
 
 const MACarousel = () => {
-  const list = useRecoilValue(newEnrollmentListAtom)?.simpleSchoolFormList;
+  const { schoolId } = useAdminInfo();
+  const { data, isLoading } = useGetNewEnrollment(schoolId);
 
+  if (isLoading || !data || data?.simpleSchoolFormList.length === 0) return <div>로딩중...</div>;
+
+  const list = data.simpleSchoolFormList;
   const settings = {
     dots: true,
     infinite: true,
@@ -20,8 +23,6 @@ const MACarousel = () => {
     slidesToScroll: 1,
     arrows: false
   };
-
-  if (!list) return <div>로딩중...</div>;
 
   return (
     <S.Container>

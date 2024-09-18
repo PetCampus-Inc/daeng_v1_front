@@ -19,7 +19,6 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   const { uploadToS3 } = useS3Upload();
   const { mutateEnrollment } = usePostEnrollment();
   const setStep = useSetRecoilState(currentStepState);
-
   const navigate = useNavigate();
 
   const uploadImages = async (files: FileList, dogId: string) => {
@@ -41,11 +40,17 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
   };
 
   const onSubmit = async (data: FieldValues) => {
-    const files = data.vaccinationUri.map((item: ImageFile) => item.file);
-    const imageUrls = await uploadImages(files, data.dogId);
+    let imageUrls;
+    if (data.vaccination === "했어요" && data.vaccinationUri) {
+      const files = data.vaccinationUri.map((item: ImageFile) => item.file);
+      imageUrls = await uploadImages(files, data.dogId);
+    }
+
     const formData = getFormData({ ...data, vaccinationUri: imageUrls });
+
+    console.log(formData);
     mutateEnrollment(formData, {
-      onSuccess: () => navigate(routes.login.root),
+      onSuccess: () => navigate(routes.approval.root),
       onError: () => showToast("제출 중 오류가 발생했습니다. 다시 시도해주세요.", "ownerNav")
     });
   };

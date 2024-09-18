@@ -4,6 +4,7 @@ export { default as AdminLoginPage } from "./LoginPage/AdminLoginPage";
 
 /* Admin SignUp Page */
 export { default as AdminSignupPage } from "./SignUpPage/AdminSignUpFunnel";
+export { default as TeacherReJoinPage } from "./SignUpPage/TeacherReJoinPage";
 
 /* Admin Chat Page */
 export { default as Chat } from "./ChatPage/Chat";
