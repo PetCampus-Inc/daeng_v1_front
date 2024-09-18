@@ -3,7 +3,7 @@ import { css, styled } from "styled-components";
 
 interface ICardStyleProps {
   mb?: string;
-  pr?: string;
+  $pr?: string;
   textColor?: string;
   bgColor?: string;
   isprofilestring?: string;
@@ -72,7 +72,7 @@ export const GotoSchoolInfoButton = styled.button<ICardStyleProps>`
   ${StatusBoxStyle}
 
   & > span {
-    padding-right: ${({ pr }) => (pr ? pr : "0.4375rem")};
+    padding-right: ${({ $pr }) => ($pr ? $pr : "0.4375rem")};
   }
 
   & > svg {

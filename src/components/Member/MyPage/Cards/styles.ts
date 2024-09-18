@@ -3,8 +3,8 @@ import { css, styled } from "styled-components";
 interface ICardStyleProps {
   mb?: string;
   pr?: string;
-  textcolor?: string;
-  bgcolor?: string;
+  $textcolor?: string;
+  $bgcolor?: string;
 }
 
 export const Card = styled.div`
@@ -114,7 +114,7 @@ export const MyDogImg = styled.img`
 
 export const DogName = styled.h3<ICardStyleProps>`
   ${({ theme }) => theme.typo.title2_20_B};
-  color: ${({ textcolor }) => (textcolor ? textcolor : ({ theme }) => theme.colors.white)};
+  color: ${({ $textcolor }) => ($textcolor ? $textcolor : ({ theme }) => theme.colors.white)};
 
   &.colorGray1 {
     color: ${({ theme }) => theme.colors.gray_1};
@@ -123,7 +123,7 @@ export const DogName = styled.h3<ICardStyleProps>`
 
 export const DateText = styled.span<ICardStyleProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ textcolor }) => (textcolor ? textcolor : ({ theme }) => theme.colors.white)};
+  color: ${({ $textcolor }) => ($textcolor ? $textcolor : ({ theme }) => theme.colors.white)};
 
   &.colorGray1 {
     color: ${({ theme }) => theme.colors.gray_1};
@@ -213,10 +213,10 @@ export const DeleteButton = styled.button`
 
 export const CurrentStatusBox = styled.div<ICardStyleProps>`
   ${StatusBoxStyle};
-  background-color: ${({ bgcolor }) => (bgcolor ? bgcolor : "transparent")};
+  background-color: ${({ $bgcolor }) => ($bgcolor ? $bgcolor : "transparent")};
 
   &::before {
-    display: ${({ bgcolor }) => (bgcolor ? "none" : "unset")};
+    display: ${({ $bgcolor }) => ($bgcolor ? "none" : "unset")};
   }
 `;
 

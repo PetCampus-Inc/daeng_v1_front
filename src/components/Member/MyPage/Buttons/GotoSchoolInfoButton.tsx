@@ -11,7 +11,7 @@ interface ISchoolInfoButtonProps {
 
 const GotoSchoolInfoButton = ({ onClick, isOpen, pr, schoolInfo }: ISchoolInfoButtonProps) => {
   return (
-    <S.GotoSchoolInfoButton pr={pr} onClick={onClick}>
+    <S.GotoSchoolInfoButton $pr={pr} onClick={onClick}>
       {schoolInfo ? (
         <>
           <span>{schoolInfo} 유치원</span>
