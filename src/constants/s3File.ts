@@ -12,12 +12,14 @@ export const ACCEPT_FILE_TYPE = {
 };
 
 export const TYPE_NAME = {
+  ADMIN: "admin",
   MEMBER: "member",
   DOG: "dog",
   VACCINATION: "vaccination"
 };
 
 export const FILE_NAME = {
+  PROFILE_ADMIN: "adminProfileUri",
   PROFILE_MEMBER: "memberProfileUri",
   PROFILE_DOG: "dogProfileUri",
   PROFILE_COMMON: "profilUri",

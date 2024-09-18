@@ -45,9 +45,56 @@ export interface AdminLoginInfo {
   fcmToken: string;
 }
 
-export interface IOwnerProfileEdit {
+export interface IAdminProfileEdit {
   imageUrl: string;
-  adminId: number;
   adminName: string;
   phoneNumber: string;
+}
+
+export interface ISchoolInfoEdit {
+  adminId: number;
+  schoolId: number;
+  schoolName: string;
+  phoneNumber: string;
+  address: string;
+}
+
+export interface INewAlarm {
+  newAlarm: boolean;
+}
+
+export interface IAlarmReq {
+  alarmId: number;
+  category: string;
+  pageable: {
+    page: number;
+    size?: number;
+    sort?: string[];
+  };
+}
+
+export interface IAlarmTicketResponse {
+  ticketType: string;
+  allRoundTicket: number;
+  currentRoundTicket: number;
+  monthlyTicketNumber: number;
+  ticketStartDate: string; //array?
+  ticketExpirationDate: string; //array?
+  attendanceDays: string[];
+  ticketHistory: string[];
+}
+
+export interface IGetAlarm {
+  alarmId: number;
+  dogId: number;
+  dogName: string;
+  contentType: string;
+  attendanceId: number;
+  teacherId: number;
+  teacherName: string;
+  schoolName: string;
+  createdDate: number[]; //string?
+  read: boolean; //확인필요
+  hasNext: boolean;
+  ticketResponse: IAlarmTicketResponse;
 }

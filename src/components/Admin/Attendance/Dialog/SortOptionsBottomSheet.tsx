@@ -1,14 +1,20 @@
-import { useRecoilState } from "recoil";
-import { sortOptionState } from "store/form";
 import { ConfirmButton } from "styles/StyleModule";
 
 import { ListItem, ListWrapper } from "./styles";
 import { BottomSheet, type BottomSheetProps } from "../../../common/BottomSheet";
-import { SORT_OPTIONS } from "../constant";
+import { SORT_OPTIONS, SortOptions } from "../constant";
 
-export function SortOptionsBottomSheet({ isOpen, close }: BottomSheetProps) {
-  const [sortName, setSortName] = useRecoilState(sortOptionState);
+interface SortOptionsBottomSheetProps extends BottomSheetProps {
+  sortName: SortOptions;
+  onSelect?: (sortName: SortOptions) => void;
+}
 
+export function SortOptionsBottomSheet({
+  sortName,
+  isOpen,
+  close,
+  onSelect
+}: SortOptionsBottomSheetProps) {
   return (
     <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
@@ -17,7 +23,7 @@ export function SortOptionsBottomSheet({ isOpen, close }: BottomSheetProps) {
           <ListItem
             className={sortName === SORT_OPTIONS.REGISTERED ? "active" : ""}
             onClick={async () => {
-              setSortName(SORT_OPTIONS.REGISTERED);
+              onSelect?.(SORT_OPTIONS.REGISTERED);
               close();
             }}
           >
@@ -26,7 +32,7 @@ export function SortOptionsBottomSheet({ isOpen, close }: BottomSheetProps) {
           <ListItem
             className={sortName === SORT_OPTIONS.PAYMENT ? "active" : ""}
             onClick={async () => {
-              setSortName(SORT_OPTIONS.PAYMENT);
+              onSelect?.(SORT_OPTIONS.PAYMENT);
               close();
             }}
           >
@@ -35,7 +41,7 @@ export function SortOptionsBottomSheet({ isOpen, close }: BottomSheetProps) {
           <ListItem
             className={sortName === SORT_OPTIONS.DATE ? "active" : ""}
             onClick={async () => {
-              setSortName(SORT_OPTIONS.DATE);
+              onSelect?.(SORT_OPTIONS.DATE);
               close();
             }}
           >
@@ -44,7 +50,7 @@ export function SortOptionsBottomSheet({ isOpen, close }: BottomSheetProps) {
           <ListItem
             className={sortName === SORT_OPTIONS.CHARGE ? "active" : ""}
             onClick={async () => {
-              setSortName(SORT_OPTIONS.CHARGE);
+              onSelect?.(SORT_OPTIONS.CHARGE);
               close();
             }}
           >

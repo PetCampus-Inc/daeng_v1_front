@@ -13,17 +13,12 @@ const useTicketFieldArray = ({ control, fieldName, defaultValues }: TicketFieldA
     name: fieldName
   });
 
-  // 초기값 설정
   useEffect(() => {
-    if (fields.length === 0) {
-      append(
-        defaultValues.map((value) => ({
-          value
-        }))
-      );
+    if (fields.length === 0 && defaultValues.length > 0) {
+      remove();
+      append(defaultValues.map((value) => ({ value })));
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [fields, append, remove, defaultValues]);
 
   return { fields, append, remove };
 };

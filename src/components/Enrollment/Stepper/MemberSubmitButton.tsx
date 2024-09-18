@@ -30,19 +30,11 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
   };
 
   const getMemberData = () => {
-    const {
-      memberId,
-      memberName,
-      memberGender,
-      address,
-      addressDetail,
-      phoneNumber,
-      emergencyPhoneNumber
-    } = getValues();
+    const { memberName, memberGender, address, addressDetail, phoneNumber, emergencyPhoneNumber } =
+      getValues();
 
     // FIXME: fileUrl 추가 필요
     const memberData = {
-      memberId: memberId,
       memberName: memberName,
       memberGender: memberGender as MemberGenderType,
       address: address || "",

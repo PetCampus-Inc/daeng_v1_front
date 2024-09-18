@@ -1,23 +1,23 @@
-import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File";
+import { ACCEPT_FILE_TYPE, TYPE_NAME, PATHS } from "constants/s3File";
 
 import { BottomButton } from "components/common/Button";
 import { usePostMemberProfile } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
+import { useEffect, useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
+// FIXME 데이터 적용은 되고 있는데 강아지 프로필 사진을 제외한 나머지 데이터가 api와 연동되지 않는거 같아 확인 필요
 const SaveProfileButton = () => {
   const {
     handleSubmit,
     getValues,
-    formState: { isValid }
+    formState: { isValid, isDirty }
   } = useFormContext();
-  const { convertProfileUri, uploadFiles } = useUploadProfile();
+  const [shouldSubmit, setShouldSubmit] = useState(false);
+  const { s3ProfileData, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
-
-  const memberProfileData = getValues();
-  const isAllFilled = Object.values(memberProfileData).every((el: null | undefined) => el ?? false);
 
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);
@@ -26,56 +26,58 @@ const SaveProfileButton = () => {
   const uploadProfileFiles = async (data: FieldValues) => {
     const memberParams = {
       name: TYPE_NAME.MEMBER,
-      id: memberProfileData.memberId,
-      files: memberProfileData.memberProfileUri,
+      files: data.memberProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
     };
 
     const dogParams = {
       name: TYPE_NAME.DOG,
-      id: memberProfileData.dogId,
-      files: memberProfileData.dogProfileUri,
+      files: data.dogProfileUri,
       accept: ACCEPT_FILE_TYPE.IMAGE,
       path: PATHS.PROFILE
     };
 
     const params = [memberParams, dogParams];
-
     await uploadFiles(params, {
       onSuccess: () => {
-        submitMemberProfile(data);
+        setShouldSubmit(true);
       }
     });
   };
 
-  // TODO 어뎁터 데이터에 추가하기
-  const getSubmitFormData = (data: FieldValues) => {
-    return {
-      memberId: data.memberId,
-      dogId: data.dogId,
-      memberProfileUri: convertProfileUri(FILE_NAME.PROFILE_MEMBER),
-      dogProfileUri: convertProfileUri(FILE_NAME.PROFILE_DOG),
-      nickName: data.nickName,
-      relation: data.relation
+  const submitProfile = () => {
+    const formData = getValues();
+    // FIXME 구조 나중에 개선하기
+    const [memberProfileUri, dogProfileUri] = s3ProfileData;
+    const requestData = {
+      dogId: formData.dogId,
+      memberProfileUri: memberProfileUri,
+      dogProfileUri: dogProfileUri,
+      nickName: formData.nickName,
+      relation: formData.relation
     };
-  };
-
-  const submitMemberProfile = (data: FieldValues) => {
-    const requestData = getSubmitFormData(data);
     mutateMemberProfile(requestData);
   };
 
+  useEffect(() => {
+    if (shouldSubmit) {
+      submitProfile();
+      setShouldSubmit(false);
+    }
+  }, [s3ProfileData, shouldSubmit]);
+
   return (
-    <S.SavaProfileButton>
+    <S.SaveProfileButton>
       <BottomButton
+        type="submit"
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
-        disabled={!isValid || !isAllFilled}
+        disabled={!isDirty || !isValid}
       >
         프로필 완성하기
       </BottomButton>
-    </S.SavaProfileButton>
+    </S.SaveProfileButton>
   );
 };
 

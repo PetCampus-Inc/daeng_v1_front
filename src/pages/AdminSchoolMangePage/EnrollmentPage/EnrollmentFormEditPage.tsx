@@ -92,7 +92,6 @@ const EnrollmentFormEditPage = ({ onNextStep }: EnrollmentFormEditProps) => {
               </Content>
             </ContentWrapper>
             <ButtonContainer>
-              type="EDIT"
               <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
               <NavigationButton onNextStep={onNextStep} />
             </ButtonContainer>

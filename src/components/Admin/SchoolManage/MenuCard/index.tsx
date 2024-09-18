@@ -2,78 +2,60 @@ import { routes } from "constants/path";
 
 import NewSignUpIcon from "assets/svg/new-sign-up-icon";
 import TeacherManagementIcon from "assets/svg/teacher-management-icon";
+import NewEnrollmentFormBottomSheet from "components/Admin/SchoolManage/NewEnrollmentFormBottomSheet";
 import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
-import { useEffect, useState } from "react";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { newEnrollmentListAtom } from "store/admin";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
 const MenuCard = () => {
+  const { schoolId } = useAdminInfo();
+  const { data } = useGetNewEnrollment(schoolId);
+
   const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const [isOpened, setIsOpened] = useState(false);
-  const { refetch } = useGetNewEnrollment(1); // FIXME: adminId, schoolId 로그인 정보에서 가져오기
-  const setNewEnrollmentList = useSetRecoilState(newEnrollmentListAtom);
+  const overlay = useOverlay();
 
-  const handleTouch = (index: number) => {
-    setActiveIndex(index === activeIndex ? -1 : index);
-  };
-
-  useEffect(() => {
-    switch (activeIndex) {
-      case 0:
-        handleNewEnrollment();
-        break;
-      case 1:
-        handleTeacherManage();
-        break;
+  /** 신규가입 메뉴 클릭*/
+  const handleNewEnrollment = async () => {
+    try {
+      if (data?.simpleSchoolFormList.length === 0) {
+        overlay.open(({ isOpen, close }) => (
+          <NewEnrollmentFormBottomSheet
+            isOpen={isOpen}
+            close={close}
+            onConfirm={handleCreateEnrollment}
+          />
+        ));
+      } else navigate(routes.admin.school.enrollment.root);
+    } catch (error) {
+      showToast("정보를 불러오는 데 실패했습니다. 다시 시도해주세요", "bottom");
     }
-  }, [activeIndex]);
-
-  // 신규 가입 버튼 동작
-  const handleNewEnrollment = () => {
-    refetch()
-      .then((data) => {
-        if (!data) return;
-        setNewEnrollmentList(data.data || null);
-        if (data.data?.simpleSchoolFormList.length === 0) {
-          setIsOpened(true);
-          return;
-        }
-        navigate(routes.admin.school.enrollment.root);
-      })
-      .catch((error) => {
-        showToast("정보를 불러오는 데 실패했습니다. 다시 시도해주세요", "bottom");
-      });
   };
 
-  // 선생님 관리 버튼 동작
-  const handleTeacherManage = () => {
-    navigate("teacher");
-  };
+  /** 선생님 관리 메뉴 클릭 */
+  const handleTeacherManage = () => navigate(routes.admin.school.teacher.root);
 
-  const menuCardItems = [
-    { text: "신규가입", icon: <NewSignUpIcon /> },
-    { text: "선생님 관리", icon: <TeacherManagementIcon /> }
-  ];
+  /** 가입신청서 신규 등록 */
+  const handleCreateEnrollment = () => navigate(routes.admin.school.enrollment.new.root);
 
   return (
     <S.CardContainer>
-      {menuCardItems.map((menuItem, index) => (
-        <S.Card
-          onClick={() => handleTouch(index)}
-          key={menuItem.text}
-          className={index === activeIndex ? "active" : ""}
-        >
-          {menuItem.text}
-          <S.IconWrapper>{menuItem.icon}</S.IconWrapper>
-        </S.Card>
-      ))}
+      <S.Card onClick={handleNewEnrollment}>
+        신규가입
+        <S.IconWrapper>
+          <NewSignUpIcon />
+        </S.IconWrapper>
+      </S.Card>
+      <S.Card onClick={handleTeacherManage}>
+        선생님 관리
+        <S.IconWrapper>
+          <TeacherManagementIcon />
+        </S.IconWrapper>
+      </S.Card>
     </S.CardContainer>
-    // TODO : 캐러셀 모달 만들어주기
   );
 };
 

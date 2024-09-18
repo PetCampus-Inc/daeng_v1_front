@@ -66,6 +66,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               path: routes.admin.signup.root,
               element: <Pages.AdminSignupPage />
             },
+            {
+              path: routes.admin.signup.rejoin.root,
+              element: <Pages.TeacherReJoinPage />
+            },
             // {
             //   path: routes.redirect.root,
             //   element: <Pages.RedirectPage />

@@ -27,7 +27,6 @@ export interface ImageListType extends Omit<ImageList, "createdTime"> {
 }
 
 export interface HomeDataType {
-  memberId: number;
   memberNickname: string;
   role: typeof Role.ROLE_MEMBER;
   memberProfileUri: string;
@@ -69,7 +68,6 @@ export interface IDogRejected {
 }
 
 export interface IMemberInfo extends IResponse {
-  memberId: string;
   memberName: string;
   memberNickName: string;
   memberProfileUri: string;
@@ -78,7 +76,6 @@ export interface IMemberInfo extends IResponse {
 }
 
 export interface IMemberProfileInfo extends IResponse {
-  memberId: string;
   memberName: string;
   memberProfileUri: string;
   memberGender: MemberGenderType;
@@ -165,7 +162,6 @@ export interface MemberDogInfoFormData
 }
 
 export type DogsDataType = {
-  memberId: number;
   dogId: number;
   dogName: string;
   imageUri: string;
@@ -179,7 +175,6 @@ export interface IMemberDogSchoolInfo {
 }
 
 export interface IMemberProfile {
-  memberId: number;
   dogId: number;
   memberProfileUri: string;
   dogProfileUri: string;

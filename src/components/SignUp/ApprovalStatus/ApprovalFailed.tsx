@@ -1,20 +1,35 @@
 import { routes } from "constants/path";
-import { SCHOOL_NAME_KEY } from "constants/storage";
 
 import DogRejectedBgIcon from "assets/svg/dog-rejected-bg-icon";
 import { Box, Flex, Text, Button } from "components/common";
-import useLogout from "hooks/common/useLogout";
+import { useCancelMemberEnrollment } from "hooks/api/member/member";
+import { useTeacherSignUpCancel } from "hooks/api/signup";
+import { useNavigate } from "react-router-dom";
+import { User } from "types/common/role.types";
 
 import { StyledImgWrapper } from "./styles";
 
 interface ApprovalFailedProps {
+  user: User;
   schoolName: string;
 }
 
-export default function ApprovalFailed({ schoolName }: ApprovalFailedProps) {
-  const logout = useLogout();
+export default function ApprovalFailed({ user, schoolName }: ApprovalFailedProps) {
+  const navigate = useNavigate();
 
-  const handleConfirm = () => logout();
+  const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel();
+  const { mutateCancelEnrollment } = useCancelMemberEnrollment();
+
+  const handleConfirm = () => {
+    if (user === User.ADMIN)
+      mutateTeacherSignUpCancel(undefined, {
+        onSuccess: () => navigate(routes.admin.signup.rejoin.root)
+      });
+    else if (user === User.MEMBER)
+      mutateCancelEnrollment(undefined, {
+        onSuccess: () => navigate(routes.signup.root)
+      });
+  };
 
   return (
     <>

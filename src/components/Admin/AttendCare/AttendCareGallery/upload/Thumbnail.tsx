@@ -1,6 +1,6 @@
 import XCircleIcon from "assets/svg/x-circle-icon";
 import {
-  StyledThumbImg,
+  Img,
   StyledThumb,
   StyledDeleteButton,
   InnerShadow,
@@ -29,7 +29,7 @@ export const Thumbnail = ({ file, index, onRemove }: TumbnailProps) => {
       <StyledThumb>
         <Box as="button" width="100%" height="100%" onClick={openPopup}>
           <InnerShadow />
-          <StyledThumbImg src={file.thumbnail} alt={`preview-${index}`} />
+          <Img src={file.thumbnail} alt={`preview-${index}`} />
           {file.duration && <StyledText>{file.duration}</StyledText>}
         </Box>
       </StyledThumb>
