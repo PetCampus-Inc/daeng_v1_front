@@ -121,8 +121,7 @@ const MyDogCard = ({
       id={dogId}
       ref={divRef}
       tabIndex={dogLength}
-      className={isActive ? "active" : ""}
-      isprofilestring={isProfile ? "true" : "false"}
+      className={`${isActive ? "active" : ""} ${isProfile ? "notProfile" : ""}`}
       onFocus={handleFocus}
     >
       <DogDeleteButton
