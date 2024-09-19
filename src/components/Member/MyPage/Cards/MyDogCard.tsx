@@ -1,4 +1,4 @@
-import { DOG_STATUS } from "constants/memberDogStatus";
+import { DOG_STATUS, STORAGE_KEY } from "constants/memberDogStatus";
 import { routes } from "constants/path";
 
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
@@ -45,7 +45,7 @@ const MyDogCard = ({
   const overlay = useOverlay();
   const mutateMemberDogDelete = usePostMemberDogDelete();
   const setStoredValue = useSetLocalStorage();
-  const [CURRENT_DOG_ID] = useLocalStorage<string>("CURRENT-DOG-ID", "", true);
+  const [CURRENT_DOG_ID] = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "", true);
 
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
@@ -101,7 +101,7 @@ const MyDogCard = ({
   };
 
   const handleFocus = () => {
-    setStoredValue("CURRENT-DOG-ID", dogId);
+    setStoredValue(STORAGE_KEY.CURRENT_DOG_ID, dogId);
     setDogId(Number(dogId));
     onCardFocus(dogId);
   };

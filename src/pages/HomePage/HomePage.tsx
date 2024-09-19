@@ -1,3 +1,5 @@
+import { STORAGE_KEY } from "constants/memberDogStatus";
+
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
@@ -14,7 +16,7 @@ import { dogIdState } from "store/member";
 
 const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
-  const CURRENT_DOG_ID = useLocalStorage<string | null>("CURRENT-DOG-ID", "");
+  const CURRENT_DOG_ID = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "");
 
   const defaultDogId = Number(CURRENT_DOG_ID);
 
