@@ -7,9 +7,10 @@ import { useFormContext } from "react-hook-form";
 import * as S from "../styles";
 
 const RoleEdit = () => {
-  const [currentRelation, setCurrentRelation] = useState<string | null>(null);
+  const { register, setValue, getValues } = useFormContext();
+  const relation = getValues(FIELD.RELATION);
+  const [currentRelation, setCurrentRelation] = useState<string>(relation);
   const [isShowRoles, setIsShowRoles] = useState(false);
-  const { register, setValue } = useFormContext();
   const notSelectedRelation = RELATION_DATA_ARR.filter((item) => item.relation !== currentRelation);
 
   const handleSelectedRelation = (relation: string) => {

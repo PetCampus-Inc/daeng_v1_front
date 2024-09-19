@@ -9,7 +9,7 @@ import {
   useResetLocalStorage,
   useSetLocalStorage
 } from "hooks/common/useLocalStorage";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDeleteEnrollment, useGetEnrollmentStatus } from "../../../../hooks/api/admin/enroll";
 
@@ -37,30 +37,24 @@ export const useDogRejected = () => {
   );
 
   // localStorage 데이터 저장
-  const saveStorageData = useCallback(
-    (key: string, value: boolean | DogEnrollment[]) => {
-      setStoredValue(key, value);
-    },
-    [setStoredValue]
-  );
+  const saveStorageData = (key: string, value: boolean | DogEnrollment[]) => {
+    setStoredValue(key, value);
+  };
 
   // localStorage 데이터 업데이트
-  const updateStorageData = useCallback(
-    (newDogs: DogEnrollment[]) => {
-      if (newDogs.length <= 0) {
-        // newDogs 데이터가 없을 경우 초기화
-        resetStoredEnrollmentValue();
-        setDogDatas([]);
-      } else {
-        saveStorageData(STORAGE_KEY.DOG_ENROLLMENT_DATA, newDogs);
-        setDogDatas(newDogs);
-      }
-    },
-    [resetStoredEnrollmentValue, saveStorageData]
-  );
+  const updateStorageData = (newDogs: DogEnrollment[]) => {
+    if (newDogs.length <= 0) {
+      // newDogs 데이터가 없을 경우 초기화
+      resetStoredEnrollmentValue();
+      setDogDatas([]);
+    } else {
+      saveStorageData(STORAGE_KEY.DOG_ENROLLMENT_DATA, newDogs);
+      setDogDatas(newDogs);
+    }
+  };
 
   // ApprovalDenied 강아지 삭제 & localStorage에 데이터 업데이트
-  const removeApprovalDeniedDog = useCallback(async () => {
+  const removeApprovalDeniedDog = async () => {
     if (
       (storageEnrollmentDatas.length === 0 || approvalDeniedDogs.length === 0) &&
       isDeleteSuccessful
@@ -89,16 +83,8 @@ export const useDogRejected = () => {
       setIsDeleteSuccessful(true); // isDeleteSuccessful reset
     } catch (error) {
       console.error(error);
-      return;
     }
-  }, [
-    isDeleteSuccessful,
-    approvalDeniedDogs,
-    storageEnrollmentDatas,
-    mutateDeleteEnrollment,
-    resetStoredVisitPathIdValue,
-    updateStorageData
-  ]);
+  };
 
   // storageEnrollmentDatas에 따라 DogDatas에 데이터 전달
   useEffect(() => {
