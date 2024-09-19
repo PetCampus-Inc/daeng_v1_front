@@ -49,7 +49,6 @@ export const useEnrollmentStorage = () => {
 
     if (removeEnrollmentData.length === 0) {
       resetStoredEnrollmentValue();
-      return;
     }
 
     setDogEnrollment(STORAGE_KEY.DOG_ENROLLMENT_DATA, removeEnrollmentData);
