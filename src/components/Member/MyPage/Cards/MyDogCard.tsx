@@ -7,7 +7,7 @@ import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
 import { useLocalStorage, useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
-import { memo, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { dogIdState, dogProfileList } from "store/member";
@@ -152,4 +152,4 @@ const MyDogCard = ({
   );
 };
 
-export default memo(MyDogCard);
+export default MyDogCard;
