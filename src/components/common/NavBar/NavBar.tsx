@@ -9,7 +9,7 @@ import * as S from "./styles";
 
 const Navbar = () => {
   // 마이페이지에서 프로필 없는 강아지 선택 후 홈 선택할 경우 프로필 등록 페이지 이동합니다.
-  // FIXME 효율적인 다른 방식이 있는지 좀 더 알아보겠습니다!
+  // FIXME 마이페이지에서 dog 선택시 navbar가 리렌더링 되어 다른 방안 찾아보기!
   const dogProfile = useRecoilValue(dogProfileList);
   const selectedDogId = useRecoilValue(dogIdState);
 

@@ -85,6 +85,7 @@ export const handleGetMemberProfileInfo = async (): Promise<IMemberProfileInfo> 
   return data.data;
 };
 
+// FIXME 견주 가입신청서 승인 취소 (승인 대기중),(강아지 추가 취소) 차이점이 무엇인지??
 // 견주 가입신청서 승인 취소 (승인 대기중)
 export const handleCancelMemberEnrollment = async (): Promise<void> => {
   const url = `/member/cancel/enrollmentForm`;
@@ -93,14 +94,18 @@ export const handleCancelMemberEnrollment = async (): Promise<void> => {
 
 // 견주 가입신청서 승인 취소 (강아지 추가 취소)
 export const handlePostMemberDogEnrollment = async (enrollmentFormId: string): Promise<void> => {
-  const url = `/member/cancel/enrollmentForm?enrollmentFormId=${enrollmentFormId}`;
-  return await authAxios.post(url);
+  const url = `/member/cancel/enrollmentForm`;
+  return await authAxios.post(url, {
+    enrollmentFormId: enrollmentFormId
+  });
 };
 
 // 강아지 삭제하기
 export const handlePostMemberDogDelete = async (dogId: string): Promise<void> => {
-  const url = `/member/delete/dog?dogId=${dogId}`;
-  return await authAxios.post(url);
+  const url = `/member/delete/dog`;
+  return await authAxios.post(url, {
+    dogId: dogId
+  });
 };
 
 // 견주 상세 정보 수정
