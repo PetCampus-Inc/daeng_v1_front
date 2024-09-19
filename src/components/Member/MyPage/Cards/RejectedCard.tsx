@@ -12,9 +12,9 @@ const RejectedCard = ({ dogName, registeredDate }: IDogRejected) => {
   return (
     <S.RejectedCard>
       <S.InfoTextBox>
-        <S.DogName $textcolor={themeConfig.colors.gray_1}>{dogName}</S.DogName>
-        <S.CurrentStatusBox $bgcolor={themeConfig.colors.red_1}>승인 거절</S.CurrentStatusBox>
-        <S.DateText $textcolor={themeConfig.colors.gray_1}>{registeredTime} 제출</S.DateText>
+        <S.DogName textcolor={themeConfig.colors.gray_1}>{dogName}</S.DogName>
+        <S.CurrentStatusBox bgcolor={themeConfig.colors.red_1}>승인 거절</S.CurrentStatusBox>
+        <S.DateText textcolor={themeConfig.colors.gray_1}>{registeredTime} 제출</S.DateText>
       </S.InfoTextBox>
       <S.BgIconBox>
         <DogRejectedIcon />
