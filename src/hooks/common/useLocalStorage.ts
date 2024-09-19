@@ -13,7 +13,7 @@ const CUSTOM_STORAGE_EVENT = "storage-change";
  * @template T - 저장할 값의 타입
  * @param keyName `localStorage`에서 사용할 키 이름
  * @param defaultValue `localStorage`에 값이 없을 때 사용할 기본값
- * @param isNotUpdate 값이 자주 변경 되는 경우 true로 설정해 무한 루프를 막습니다.
+ * @param isNotUpdate 값이 자주 변경 되는 경우 true로 설정해 무한 루프를 막습니다. // FIXME 해당 매개변수 삭제 후 견주 마이페이지는 다른 hook으로 관리하기 (지은)
  * @returns `stateful` 값과, 이를 업데이트하는 함수를 튜플로 반환합니다.
  */
 export const useLocalStorage = <T>(keyName: string, defaultValue: T, isNotUpdate?: boolean) => {

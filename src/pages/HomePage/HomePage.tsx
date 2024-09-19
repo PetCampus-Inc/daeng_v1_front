@@ -18,7 +18,8 @@ const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
   const CURRENT_DOG_ID = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "");
 
-  const defaultDogId = Number(CURRENT_DOG_ID);
+  // FIXME selectedDogId, CURRENT_DOG_ID 데이터가 없을 경우 예외 처리 필요
+  const defaultDogId = Number(CURRENT_DOG_ID) ?? 1;
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
   const { data } = useGetHomeInfo(dogId);
