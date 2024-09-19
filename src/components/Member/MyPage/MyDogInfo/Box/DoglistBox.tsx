@@ -39,7 +39,7 @@ const DoglistBox = ({ doglist, isOpen }: DoglistBoxProps) => {
     });
   };
 
-  const approvalDeniedDogSetting = useCallback(async () => {
+  const approvalDeniedDogSetting = async () => {
     // 이미 데이터가 삭제된 경우 함수 호출 방지
     if (approvalDeniedDogSettingCalled.current || dogDeniedStatus.length <= 0 || isDeleteSuccessful)
       return;
@@ -52,14 +52,7 @@ const DoglistBox = ({ doglist, isOpen }: DoglistBoxProps) => {
       approvalDeniedDogSettingCalled.current = true;
       await removeApprovalDeniedDog();
     }
-  }, [
-    VISIT_MYPAGE,
-    dogDeniedStatus.length,
-    isDeleteSuccessful,
-    removeApprovalDeniedDog,
-    saveStorageData,
-    setInitialVisit
-  ]);
+  };
 
   useEffect(() => {
     if (dogDeniedStatus.length <= 0) {
