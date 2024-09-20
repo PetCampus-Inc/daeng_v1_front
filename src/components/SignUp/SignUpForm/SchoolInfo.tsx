@@ -163,6 +163,7 @@ const SchoolInfo = () => {
         </Flex>
         <ButtonInput
           name="registrationNumber"
+          label="인증하기"
           register={register}
           placeholder="사업자 등록번호를 입력해 주세요"
           onChange={(e) => {
