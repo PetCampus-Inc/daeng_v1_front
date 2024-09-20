@@ -10,12 +10,13 @@ import {
   postTeacherSignUpCancel
 } from "apis/admin/admin.api";
 import { handleGetSchool } from "apis/member/enrollment.api";
+import { useBaseMutation } from "hooks/api/base";
 import { useNavigate } from "react-router-dom";
 
 // 선생님 재가입
 export const useTeacherReApproval = () => {
   const navigate = useNavigate();
-  const { mutate } = useMutation({
+  const { mutate } = useBaseMutation({
     mutationFn: postTeacherReApproval,
     onSuccess: () => navigate(routes.approval.root)
   });
@@ -25,7 +26,7 @@ export const useTeacherReApproval = () => {
 
 // 선생님 회원가입 요청
 export const useTeacherSinUp = () => {
-  const { mutate } = useMutation({
+  const { mutate } = useBaseMutation({
     mutationFn: postTeacherSignUp
   });
 
@@ -34,14 +35,14 @@ export const useTeacherSinUp = () => {
 
 // 선생님 회원가입 요청 취소
 export const useTeacherSignUpCancel = () => {
-  const { mutate } = useMutation({ mutationFn: postTeacherSignUpCancel });
+  const { mutate } = useBaseMutation({ mutationFn: postTeacherSignUpCancel });
 
   return { mutateTeacherSignUpCancel: mutate };
 };
 
 // 원장님 회원가입 요청
 export const useOwnerSinUp = () => {
-  const { mutate } = useMutation({
+  const { mutate } = useBaseMutation({
     mutationFn: postOwnerSignUp
   });
 
@@ -61,8 +62,9 @@ export const useGetSchool = (searchText: string) => {
 
 // 아이디 중복 확인
 export const useCheckId = () => {
-  const { mutate } = useMutation({
-    mutationFn: getCheckId
+  const { mutate } = useBaseMutation({
+    mutationFn: getCheckId,
+    throwOnError: false
   });
 
   return { mutateCheckId: mutate };
@@ -71,7 +73,8 @@ export const useCheckId = () => {
 // 사업자 등록번호 확인
 export const useCheckRegNum = () => {
   const { mutate } = useMutation({
-    mutationFn: postRegistrationNumber
+    mutationFn: postRegistrationNumber,
+    throwOnError: false
   });
 
   return { mutateCheckRegNum: mutate };
