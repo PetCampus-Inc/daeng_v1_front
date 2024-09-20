@@ -1,6 +1,5 @@
 import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 
-import { isAxiosError } from "axios";
 import { ButtonInput, Flex, PasswordInput, Text } from "components/common";
 import { useCheckId } from "hooks/api/signup";
 import { useEffect, useState } from "react";
@@ -37,6 +36,7 @@ const AccountInfo = () => {
 
   const handleCheckId = () => {
     const idValue = getValues("id");
+
     mutateCheckId(idValue, {
       onSuccess: (res) => {
         if (res === 200) {
@@ -45,12 +45,8 @@ const AccountInfo = () => {
         }
       },
       onError: (error) => {
-        if (isAxiosError(error) && error.response) {
-          if (error.response.status === 409) {
-            setError("id", { type: "manual", message: "이미 사용중인 ID입니다." });
-            setIsValidId(false);
-          }
-        }
+        setError("id", { type: "manual", message: error.message });
+        setIsValidId(false);
       }
     });
   };
@@ -76,13 +72,14 @@ const AccountInfo = () => {
         <ButtonInput
           key="id"
           name="id"
+          label="중복확인"
           register={register}
           placeholder="영문 소문자, 숫자포함 6~12자"
           handleClick={handleCheckId}
           rules={{
             pattern: { value: ID_REGEX, message: "영문 소문자와 숫자 포함, 6~12자로 입력해주세요." }
           }}
-          enabled={!errors.id && !idFieldState.invalid && idFieldState.isDirty}
+          enabled={idFieldState.isDirty && !isValidId}
           required
         />
       </Flex>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import authAxios from "libs/AuthAxios";
-import { request, Response } from "libs/AuthAxios/request";
+import { request } from "libs/AuthAxios/request";
+import { ApiResponse } from "types/Response.type";
 
 import type {
   IOwnerSignUpInfo,
@@ -30,7 +31,7 @@ export const postAdminLogin = async (
     pwd: req.inputPw,
     fcmToken: req.fcmToken
   };
-  const response = await authAxios.post<Response<AdminAuthType>>(url, body);
+  const response = await authAxios.post<ApiResponse<AdminAuthType>>(url, body);
 
   const accessToken = response.headers["authorization"];
   return { data: response.data.data, accessToken };

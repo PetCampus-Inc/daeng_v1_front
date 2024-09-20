@@ -8,12 +8,16 @@ import {
   NativeActionPayload
 } from "types/native/action.types";
 import { isNativeActionResponse } from "utils/is/nativeAction";
+import showToast from "utils/showToast";
 import { v4 as uuidv4 } from "uuid";
 
 const useNativeAction = () => {
   const postAction = useCallback(
     <T extends NativeAction>({ id, action, payload }: NativeActionRequest<T>) => {
-      if (!window.ReactNativeWebView) return;
+      if (!window.ReactNativeWebView) {
+        showToast("앱에서만 사용할 수 있는 기능입니다.", "bottom", 1000);
+        return;
+      }
       const message = JSON.stringify({ id, action, payload });
       window.ReactNativeWebView.postMessage(message);
     },
