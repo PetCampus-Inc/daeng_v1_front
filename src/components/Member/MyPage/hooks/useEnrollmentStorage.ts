@@ -20,7 +20,8 @@ export const useEnrollmentStorage = () => {
   const setDogEnrollment = useSetLocalStorage(); // 생성
   const [storageEnrollmentDatas] = useLocalStorage<DogEnrollment[]>(
     STORAGE_KEY.DOG_ENROLLMENT_DATA,
-    []
+    [],
+    true
   ); // 데이터
   const resetStoredEnrollmentValue = useResetLocalStorage(STORAGE_KEY.DOG_ENROLLMENT_DATA);
 
@@ -48,7 +49,6 @@ export const useEnrollmentStorage = () => {
 
     if (removeEnrollmentData.length === 0) {
       resetStoredEnrollmentValue();
-      return;
     }
 
     setDogEnrollment(STORAGE_KEY.DOG_ENROLLMENT_DATA, removeEnrollmentData);

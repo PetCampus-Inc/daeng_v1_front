@@ -3,9 +3,8 @@ import { css, styled } from "styled-components";
 interface ICardStyleProps {
   mb?: string;
   pr?: string;
-  textColor?: string;
-  bgColor?: string;
-  isprofilestring?: string;
+  textcolor?: string;
+  bgcolor?: string;
 }
 
 export const Card = styled.div`
@@ -19,16 +18,7 @@ export const Card = styled.div`
 `;
 
 export const MyDogCard = styled(Card)<ICardStyleProps>`
-  ${({ isprofilestring, theme }) =>
-    isprofilestring == "true" &&
-    `
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: ${theme.colors.gray_4};
-    `}
-
-  &:focus::before {
+  &.active::before {
     content: "";
     position: absolute;
     border-radius: 16px;
@@ -48,7 +38,18 @@ export const MyDogCard = styled(Card)<ICardStyleProps>`
     bottom: 0;
     background: linear-gradient(transparent, ${({ theme }) => theme.colors.black});
     opacity: 0.45;
-    display: ${({ isprofilestring }) => (isprofilestring == "true" ? "none" : "block")};
+    display: "block";
+  }
+
+  &.notProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: ${({ theme }) => theme.colors.gray_4};
+  }
+
+  &.notProfile::after {
+    display: none;
   }
 `;
 
@@ -111,18 +112,22 @@ export const MyDogImg = styled.img`
   object-fit: cover;
 `;
 
-export const DogName = styled.h3<ICardStyleProps>`
+export const DogName = styled.h3.withConfig({
+  shouldForwardProp: (prop) => !["mb", "pr", "textcolor", "bgcolor"].includes(prop)
+})<ICardStyleProps>`
   ${({ theme }) => theme.typo.title2_20_B};
-  color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
+  color: ${({ textcolor }) => (textcolor ? textcolor : ({ theme }) => theme.colors.white)};
 
   &.colorGray1 {
     color: ${({ theme }) => theme.colors.gray_1};
   }
 `;
 
-export const DateText = styled.span<ICardStyleProps>`
+export const DateText = styled.span.withConfig({
+  shouldForwardProp: (prop) => !["mb", "pr", "textcolor", "bgcolor"].includes(prop)
+})<ICardStyleProps>`
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ textColor }) => (textColor ? textColor : ({ theme }) => theme.colors.white)};
+  color: ${({ textcolor }) => (textcolor ? textcolor : ({ theme }) => theme.colors.white)};
 
   &.colorGray1 {
     color: ${({ theme }) => theme.colors.gray_1};
@@ -210,12 +215,14 @@ export const DeleteButton = styled.button`
   z-index: 1;
 `;
 
-export const CurrentStatusBox = styled.div<ICardStyleProps>`
+export const CurrentStatusBox = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["md", "pr", "textcolor", "bgcolor"].includes(prop)
+})<ICardStyleProps>`
   ${StatusBoxStyle};
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
+  background-color: ${({ bgcolor }) => (bgcolor ? bgcolor : "transparent")};
 
   &::before {
-    display: ${({ bgColor }) => (bgColor ? "none" : "unset")};
+    display: ${({ bgcolor }) => (bgcolor ? "none" : "unset")};
   }
 `;
 

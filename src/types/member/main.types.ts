@@ -10,7 +10,6 @@ import type {
   VaccinationType
 } from "./enrollment.types";
 import type { Nullable } from "types/helper.types";
-import type { IResponse } from "types/Response.type";
 
 export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
 export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
@@ -67,7 +66,7 @@ export interface IDogRejected {
   registeredDate?: number[];
 }
 
-export interface IMemberInfo extends IResponse {
+export interface IMemberInfo {
   memberName: string;
   memberNickName: string;
   memberProfileUri: string;
@@ -75,7 +74,7 @@ export interface IMemberInfo extends IResponse {
   doglist: IDoglist[];
 }
 
-export interface IMemberProfileInfo extends IResponse {
+export interface IMemberProfileInfo {
   memberName: string;
   memberProfileUri: string;
   memberGender: MemberGenderType;
@@ -180,4 +179,9 @@ export interface IMemberProfile {
   dogProfileUri: string;
   nickName: string;
   relation: string;
+}
+
+export interface DogProfileReq {
+  dogId: number;
+  profileUrl: string;
 }

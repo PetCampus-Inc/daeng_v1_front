@@ -1,7 +1,8 @@
 import authAxios from "libs/AuthAxios";
-import { request, Response } from "libs/AuthAxios/request";
+import { request } from "libs/AuthAxios/request";
 import { PrecautionData } from "types/admin/attendance.type";
 import { MemberAuthData, SocialAuthData } from "types/member/auth.types";
+import { ApiResponse } from "types/Response.type";
 
 import type {
   DogsDataType,
@@ -15,7 +16,8 @@ import type {
   IMemberProfilePostInfo,
   DogVaccination,
   MemberDogInfoData,
-  MemberDogInfoReq
+  MemberDogInfoReq,
+  DogProfileReq
 } from "types/member/main.types";
 
 // 멤버 로그인
@@ -24,7 +26,7 @@ export const postMemberLogin = async (
 ): Promise<{ data: MemberAuthData; accessToken: string }> => {
   const url = `member/firebase/login`;
 
-  const response = await authAxios.post<Response<MemberAuthData>>(url, req);
+  const response = await authAxios.post<ApiResponse<MemberAuthData>>(url, req);
 
   const accessToken = response.headers["authorization"];
   return { data: response.data.data, accessToken };
@@ -36,7 +38,7 @@ export const postMemberSuperLogin = async (req: {
 }): Promise<{ data: MemberAuthData; accessToken: string }> => {
   const url = `member/super-login`;
 
-  const response = await authAxios.post<Response<MemberAuthData>>(url, req);
+  const response = await authAxios.post<ApiResponse<MemberAuthData>>(url, req);
 
   const accessToken = response.headers["authorization"];
   return { data: response.data.data, accessToken };
@@ -84,6 +86,7 @@ export const handleGetMemberProfileInfo = async (): Promise<IMemberProfileInfo> 
   return data.data;
 };
 
+// FIXME 견주 가입신청서 승인 취소 (승인 대기중),(강아지 추가 취소) 차이점이 무엇인지??
 // 견주 가입신청서 승인 취소 (승인 대기중)
 export const handleCancelMemberEnrollment = async (): Promise<void> => {
   const url = `/member/cancel/enrollmentForm`;
@@ -98,8 +101,10 @@ export const handlePostMemberDogEnrollment = async (enrollmentFormId: string): P
 
 // 강아지 삭제하기
 export const handlePostMemberDogDelete = async (dogId: string): Promise<void> => {
-  const url = `/member/delete/dog?dogId=${dogId}`;
-  return await authAxios.post(url);
+  const url = `/member/delete/dog`;
+  return await authAxios.post(url, {
+    dogId: dogId
+  });
 };
 
 // 견주 상세 정보 수정
@@ -234,6 +239,16 @@ export const handlePostMemberProfile = async (req: IMemberProfile): Promise<void
     dogProfileUri: req.dogProfileUri,
     nickName: req.nickName,
     relation: req.relation
+  });
+  return data;
+};
+
+// 강아지 승인 후 초기 프로필 설정 (두번째 강아지 이후)
+export const handlePostDogProfile = async (req: DogProfileReq) => {
+  const url = `member/dog/profile`;
+  const { data } = await authAxios.post(url, {
+    dogId: req.dogId,
+    profileUrl: req.profileUrl
   });
   return data;
 };

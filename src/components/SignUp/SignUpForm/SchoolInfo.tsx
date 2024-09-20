@@ -163,6 +163,7 @@ const SchoolInfo = () => {
         </Flex>
         <ButtonInput
           name="registrationNumber"
+          label="인증하기"
           register={register}
           placeholder="사업자 등록번호를 입력해 주세요"
           onChange={(e) => {
@@ -174,7 +175,7 @@ const SchoolInfo = () => {
             pattern: REGISTRATION_REGEX
           }}
           enabled={
-            !errors.registrationNumber && !regNumFieldState.invalid && regNumFieldState.isTouched
+            !errors.registrationNumber && !regNumFieldState.invalid && regNumFieldState.isDirty
           }
           required
         />

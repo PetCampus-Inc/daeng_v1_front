@@ -4,6 +4,7 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig, isAxiosError } from "
 import { setLocalStorage } from "hooks/common/useLocalStorage";
 import { logout } from "hooks/common/useLogout";
 import { postNativeMessage } from "hooks/native/useNativeMessage";
+import { isApiErrorResponse } from "utils/is";
 import { refreshToken, removeBearerPrefix } from "utils/token";
 
 interface AuthAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -70,10 +71,11 @@ authAxios.interceptors.response.use(
     return response;
   },
   async (error: unknown) => {
-    if (isAxiosError(error)) {
+    if (isAxiosError(error) && error.response && isApiErrorResponse(error.response.data)) {
       const originalRequest = error.config as AuthAxiosRequestConfig;
+      const { data } = error.response;
 
-      const code = error.response?.data.code;
+      const code = data.code;
       if (code === "TOKEN-401-2") {
         if (!originalRequest._retry) {
           originalRequest._retry = true;
@@ -103,6 +105,8 @@ authAxios.interceptors.response.use(
         // 액세스 토큰이 만료 되었거나, 찾을 수 없을 경우 로그아웃
         logout();
       }
+
+      return Promise.reject(error.response.data);
     }
 
     return Promise.reject(error);
