@@ -175,7 +175,7 @@ const SchoolInfo = () => {
             pattern: REGISTRATION_REGEX
           }}
           enabled={
-            !errors.registrationNumber && !regNumFieldState.invalid && regNumFieldState.isTouched
+            !errors.registrationNumber && !regNumFieldState.invalid && regNumFieldState.isDirty
           }
           required
         />

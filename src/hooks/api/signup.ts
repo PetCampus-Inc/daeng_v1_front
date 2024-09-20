@@ -12,6 +12,7 @@ import {
 import { handleGetSchool } from "apis/member/enrollment.api";
 import { useBaseMutation } from "hooks/api/base";
 import { useNavigate } from "react-router-dom";
+import showToast from "utils/showToast";
 
 // 선생님 재가입
 export const useTeacherReApproval = () => {
@@ -43,7 +44,9 @@ export const useTeacherSignUpCancel = () => {
 // 원장님 회원가입 요청
 export const useOwnerSinUp = () => {
   const { mutate } = useBaseMutation({
-    mutationFn: postOwnerSignUp
+    mutationFn: postOwnerSignUp,
+    onError: () => showToast("중복된 정보가 있습니다.", "bottom"),
+    throwOnError: false
   });
 
   return { mutateOwnerSignUp: mutate };
