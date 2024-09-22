@@ -5,23 +5,20 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const DogGalleryPage = () => {
-  const [mode, setMode] = useState<"view" | "edit">("view");
-  const changeMode = () => {
-    setMode((prev) => (prev === "view" ? "edit" : "view"));
-  };
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  const changeMode = () => setIsEditing((prev) => !prev);
+
   return (
     <>
-      {mode === "view" ? (
-        <Header
-          type="text"
-          text={"사진 앨범"}
-          rightElement={<HeaderButton onClick={changeMode}>저장</HeaderButton>}
-        />
-      ) : (
-        <Header type="text" text={"저장"} handleClick={changeMode} />
-      )}
-      <Layout pt="32">
-        <GridAlbum mode={mode} />
+      <Header
+        type="text"
+        text={isEditing ? "항목 선택" : "사진 앨범"}
+        handleClick={isEditing ? changeMode : undefined}
+        rightElement={!isEditing && <HeaderButton onClick={changeMode}>선택</HeaderButton>}
+      />
+      <Layout>
+        <GridAlbum isEditing={isEditing} />
       </Layout>
     </>
   );
