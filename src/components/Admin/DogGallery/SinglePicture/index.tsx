@@ -1,23 +1,46 @@
+import PlayIcon from "assets/svg/play-icon";
+
 import * as S from "./styles";
 
 interface ISinglePictureProps {
-  picture: string;
-  mode: "view" | "edit";
+  src: string;
+  isVideo?: boolean;
+  isEditing?: boolean;
+  onClick?: (url: string) => void;
+  onSelect?: (url: string) => void;
 }
 
-const SinglePicture = ({ picture, mode }: ISinglePictureProps) => {
-  const handleTouch = () => {
-    if (mode === "edit") {
-      // 선택하기
-    } else if (mode === "view") {
-      // TODO: 확대 보기 열기
-    }
-  };
+const SinglePicture = ({
+  src,
+  isVideo = false,
+  isEditing,
+  onClick,
+  onSelect
+}: ISinglePictureProps) => {
+  /** 클릭 이벤트 */
+  const handleClick = () => isEditing || onClick?.(src);
+
+  /** 이미지 선택 이벤트 */
+  const handleSelect = () => onSelect?.(src);
 
   return (
-    <button onClick={handleTouch}>
-      <S.SinglePictureImg src={picture} />
-    </button>
+    <S.Container onClick={handleClick} data-edit-mode={isEditing}>
+      {/* 이미지 */}
+      <S.Image src={src} />
+
+      {/* 이미지 선택 체크박스 */}
+      {isEditing && (
+        <S.CheckboxWrap data-edit-mode={isEditing}>
+          <input type="checkbox" onChange={handleSelect} />
+        </S.CheckboxWrap>
+      )}
+
+      {isVideo && (
+        <S.VideoIconWrap>
+          <PlayIcon w={16} h={16} />
+        </S.VideoIconWrap>
+      )}
+    </S.Container>
   );
 };
 
