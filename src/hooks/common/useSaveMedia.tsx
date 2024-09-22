@@ -1,6 +1,5 @@
 import useNativeAction from "hooks/native/useNativeAction";
-import { useCallback, useMemo, useState } from "react";
-import { throttle } from "utils/helper";
+import { useCallback, useState } from "react";
 
 interface SaveMediaOptions {
   onSuccess?: () => void;
@@ -16,14 +15,6 @@ export const useSaveMedia = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { saveMedia: saveNativeMedia } = useNativeAction();
-
-  const throttledUpdateProgress = useMemo(
-    () =>
-      throttle((progress) => {
-        setProgress(progress);
-      }, 700),
-    []
-  );
 
   /**
    * 이미지 및 동영상 저장 함수
@@ -46,12 +37,8 @@ export const useSaveMedia = () => {
           await saveNativeMedia(url);
 
           const percentCompleted = Math.round(((index + 1) * 100) / urlList.length);
-          throttledUpdateProgress(percentCompleted);
+          setProgress(percentCompleted);
         }
-
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 300);
 
         setProgress(100);
         options?.onSuccess?.();
@@ -59,11 +46,13 @@ export const useSaveMedia = () => {
         const message = error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.";
         options?.onError?.(message);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
         options?.onSettled?.();
       }
     },
-    [saveNativeMedia, throttledUpdateProgress]
+    [saveNativeMedia]
   );
 
   return { saveMedia, isLoading, progress, total, currentIndex };
