@@ -5,6 +5,7 @@ import * as S from "./styles";
 interface ISinglePictureProps {
   src: string;
   isVideo?: boolean;
+  selected?: boolean;
   isEditing?: boolean;
   onClick?: (url: string) => void;
   onSelect?: (url: string) => void;
@@ -13,6 +14,7 @@ interface ISinglePictureProps {
 const SinglePicture = ({
   src,
   isVideo = false,
+  selected,
   isEditing,
   onClick,
   onSelect
@@ -31,7 +33,7 @@ const SinglePicture = ({
       {/* 이미지 선택 체크박스 */}
       {isEditing && (
         <S.CheckboxWrap data-edit-mode={isEditing}>
-          <input type="checkbox" onChange={handleSelect} />
+          <input type="checkbox" checked={selected} onChange={handleSelect} />
         </S.CheckboxWrap>
       )}
 
