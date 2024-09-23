@@ -74,12 +74,14 @@ const AccountInfo = () => {
           name="id"
           label="중복확인"
           register={register}
+          autoFocus
           placeholder="영문 소문자, 숫자포함 6~12자"
           handleClick={handleCheckId}
           rules={{
             pattern: { value: ID_REGEX, message: "영문 소문자와 숫자 포함, 6~12자로 입력해주세요." }
           }}
-          enabled={idFieldState.isDirty && !isValidId}
+          btnHidden={isValidId}
+          enabled={id && idFieldState.isDirty && !isValidId}
           required
         />
       </Flex>

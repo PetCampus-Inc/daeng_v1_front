@@ -23,6 +23,8 @@ const PersonalInfo = () => {
         </Flex>
         <TextInput
           name="name"
+          autoFocus
+          inputMode="text"
           register={register}
           rules={{
             maxLength: { value: 10, message: "이름은 10자 이내로 입력해주세요" }
@@ -40,6 +42,7 @@ const PersonalInfo = () => {
 
         <TextInput
           name="phoneNumber"
+          inputMode="tel"
           register={register}
           rules={{
             pattern: {

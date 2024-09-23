@@ -104,6 +104,7 @@ const SchoolInfo = () => {
           name="schoolName"
           register={register}
           placeholder="유치원 이름을 입력해 주세요"
+          autoFocus
           rules={{
             maxLength: 20
           }}
@@ -116,6 +117,7 @@ const SchoolInfo = () => {
         </Text>
         <TextInput
           name="schoolPhoneNumber"
+          inputMode="tel"
           register={register}
           placeholder="유치원 연락처를 입력해 주세요"
           rules={{
@@ -165,6 +167,7 @@ const SchoolInfo = () => {
           name="registrationNumber"
           label="인증하기"
           register={register}
+          inputMode="numeric"
           placeholder="사업자 등록번호를 입력해 주세요"
           onChange={(e) => {
             handleChangeBusinessNumber("registrationNumber")(e);
