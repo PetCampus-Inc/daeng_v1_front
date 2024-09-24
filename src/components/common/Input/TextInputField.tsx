@@ -26,11 +26,24 @@ const TextInputField = forwardRef(function TextInputField(
 ) {
   const registerProps = name && register && register(name, { required, ...rules });
 
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.pattern) {
+      const regex = new RegExp(`${props.pattern}`);
+      const currentValue = event.target.value;
+
+      if (!regex.test(currentValue)) {
+        event.target.value = currentValue.slice(0, -1);
+        event.preventDefault();
+      }
+    }
+  };
+
   return (
     <S.Input
       ref={ref}
       {...registerProps}
       className={(props.defaultValue ?? props.value) !== props.value ? "default" : ""}
+      onInput={handleInput}
       css={css}
       {...props}
     />

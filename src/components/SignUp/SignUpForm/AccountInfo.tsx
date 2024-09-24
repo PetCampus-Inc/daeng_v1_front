@@ -75,6 +75,7 @@ const AccountInfo = () => {
           label="중복확인"
           register={register}
           autoFocus
+          pattern="^[a-z0-9]*&"
           placeholder="영문 소문자, 숫자포함 6~12자"
           handleClick={handleCheckId}
           rules={{
