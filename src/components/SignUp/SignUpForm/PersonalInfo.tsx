@@ -11,6 +11,9 @@ const PersonalInfo = () => {
     const value = e.target.value;
     const formattedValue = formatPhoneNumber(value);
     setValue(field, formattedValue);
+
+    // 정규식 테스트 통과 시 블러 처리
+    if (PHONE_REGEX.test(formattedValue)) e.target.blur();
   };
 
   return (
