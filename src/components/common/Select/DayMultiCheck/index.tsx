@@ -1,14 +1,13 @@
 import { WEEKDAYS } from "constants/date";
+import { FIELD } from "constants/field";
 
 import { ChangeEvent, useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-import { ISelect } from "../select.type";
 import * as S from "../styles";
 
-interface IDayMultiCheck
-  extends ISelect,
-    Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> {
+interface IDayMultiCheck extends React.InputHTMLAttributes<HTMLInputElement> {
+  caption?: string;
   openDays?: string[];
   defaultSelect?: string[];
   isPreviewMode?: boolean;
@@ -28,22 +27,29 @@ const DayMultiCheck = ({
   ...props
 }: IDayMultiCheck) => {
   const { register, watch, setValue } = useFormContext();
-  const [isAvailable, setIsAvailable] = useState(true);
+  const selectedDays = watch(FIELD.OPEN_DAYS);
+
+  const ticketType = watch(FIELD.TICKET_TYPE);
+  const roundTicketNumber = watch(FIELD.ROUND_TICKET_NUMBER);
+
+  const isRoundTicket = ticketType === "회차권";
 
   useEffect(() => {
-    if (name && watch(name) && watch(name).length <= 1) {
-      setIsAvailable(false);
-    }
-  }, [name && watch(name)]);
+    if (isRoundTicket) setValue(FIELD.OPEN_DAYS, [""]);
+  }, [setValue, isRoundTicket, roundTicketNumber]);
 
-  const handleTouch = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.checked && !isAvailable) {
-      e.preventDefault();
-      e.stopPropagation();
-      name && setValue(name, [e.target.value]);
-    } else {
-      setIsAvailable(true);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+
+    const limitDay = Number(roundTicketNumber.replace("회", ""));
+
+    if (!checked && selectedDays.length === 1) {
+      e.target.checked = true;
+      return;
+    } else if (isRoundTicket && selectedDays.length >= limitDay) {
+      e.target.checked = false;
     }
+    register(FIELD.OPEN_DAYS).onChange(e);
   };
 
   return (
@@ -55,8 +61,9 @@ const DayMultiCheck = ({
             <S.DayCheckInput
               id={day}
               type="checkbox"
-              {...register(`${name}`, { required: isRequired, onChange: handleTouch })}
+              {...register(`${name}`, { required: isRequired })}
               value={day}
+              onChange={handleChange}
               defaultChecked={defaultSelect?.includes(day)}
               disabled={props.disabled ? props.disabled : openDays && !openDays?.includes(day)}
               className={openDays && openDays?.includes(day) ? "open-day" : ""}
