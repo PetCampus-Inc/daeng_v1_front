@@ -13,6 +13,7 @@ import type {
 
 export interface InputFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "required"> {
+  regex?: RegExp;
   name?: string;
   css?: CSSProp;
   register?: UseFormRegister<FieldValues>;
@@ -21,18 +22,18 @@ export interface InputFieldProps
 }
 
 const TextInputField = forwardRef(function TextInputField(
-  { css, rules, register, required, name, ...props }: InputFieldProps,
+  { css, rules, regex, register, required, name, ...props }: InputFieldProps,
   ref?: ForwardedRef<HTMLInputElement>
 ) {
   const registerProps = name && register && register(name, { required, ...rules });
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.pattern) {
-      const regex = new RegExp(`${props.pattern}`);
+    if (regex) {
       const currentValue = event.target.value;
 
       if (!regex.test(currentValue)) {
-        event.target.value = currentValue.slice(0, -1);
+        const lastValidValue = currentValue.slice(0, -1);
+        event.target.value = lastValidValue;
         event.preventDefault();
       }
     }
