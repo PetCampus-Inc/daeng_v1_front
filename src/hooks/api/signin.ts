@@ -3,6 +3,7 @@ import { ACCESS_TOKEN_KEY, SCHOOL_NAME_KEY, USER_TYPE_KEY } from "constants/stor
 import { useMutation } from "@tanstack/react-query";
 import { postAdminLogin } from "apis/admin/admin.api";
 import { postMemberLogin, postMemberSuperLogin } from "apis/member/member.api";
+import { useBaseMutation } from "hooks/api/base";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useRoleBasedPath } from "hooks/common/useRoleBasedPath";
 import usePostNativeMessage from "hooks/native/useNativeMessage";
@@ -44,7 +45,7 @@ export const useAdminLogin = () => {
     navigate(basedPath, { replace: true });
   };
 
-  const { mutate } = useMutation({
+  const { mutate } = useBaseMutation({
     mutationFn: postAdminLogin,
     onSuccess: handleLoginSuccess,
     throwOnError: false,
@@ -82,7 +83,7 @@ export const useMemberLogin = () => {
     navigate(basedPath, { replace: true });
   };
 
-  const { mutate } = useMutation({
+  const { mutate } = useBaseMutation({
     mutationFn: postMemberLogin,
     onSuccess: handleLoginSuccess,
     throwOnError: false,

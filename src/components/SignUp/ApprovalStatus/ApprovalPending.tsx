@@ -1,9 +1,8 @@
-import { routes } from "constants/path";
-
 import DogWaitingBgIcon from "assets/svg/dog-waiting-bg-icon";
 import { Box, Flex, Text, Button } from "components/common";
 import { MoreButton } from "components/common/Button/Templates";
 import { BasicModal } from "components/common/Modal";
+import { useCancelMemberEnrollment } from "hooks/api/member/member";
 import { useTeacherSignUpCancel } from "hooks/api/signup";
 import useLogout from "hooks/common/useLogout";
 import { useOverlay } from "hooks/common/useOverlay";
@@ -21,11 +20,12 @@ export default function ApprovalPending({ user, schoolName }: ApprovalSuccessPro
   const logout = useLogout();
 
   const { mutateTeacherSignUpCancel } = useTeacherSignUpCancel();
+  const { mutateCancelEnrollment } = useCancelMemberEnrollment();
 
   const handleConfirm = () => logout();
   const handleCancel = () => {
     if (user === User.ADMIN) mutateTeacherSignUpCancel(undefined, { onSuccess: logout });
-    // else if (type === User.MEMBER) mutateMemberSignUpCancel(userId, { onSuccess: () => navigate() });
+    else if (user === User.MEMBER) mutateCancelEnrollment(undefined, { onSuccess: logout });
   };
 
   const openCancelPopup = () =>

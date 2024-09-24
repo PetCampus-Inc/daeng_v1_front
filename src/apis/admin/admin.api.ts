@@ -1,6 +1,7 @@
 import axios from "axios";
 import authAxios from "libs/AuthAxios";
-import { request, Response } from "libs/AuthAxios/request";
+import { request } from "libs/AuthAxios/request";
+import { ApiResponse } from "types/Response.type";
 
 import type {
   IOwnerSignUpInfo,
@@ -30,7 +31,7 @@ export const postAdminLogin = async (
     pwd: req.inputPw,
     fcmToken: req.fcmToken
   };
-  const response = await authAxios.post<Response<AdminAuthType>>(url, body);
+  const response = await authAxios.post<ApiResponse<AdminAuthType>>(url, body);
 
   const accessToken = response.headers["authorization"];
   return { data: response.data.data, accessToken };
@@ -62,6 +63,17 @@ export const postOwnerSignUp = async (req: IOwnerSignUpInfo) => {
       registrationNumber: req.registrationNumber
     }
   });
+};
+
+// 선생님 재가입
+export const postTeacherReApproval = async (schoolId: number): Promise<ITeacherSignUpData> => {
+  const url = `admin/submit/teacher/approval/re`;
+  const { data } = await request<ITeacherSignUpData>({
+    url,
+    method: "POST",
+    data: { schoolId }
+  });
+  return data;
 };
 
 // 선생님 회원가입

@@ -1,5 +1,3 @@
-import type { IResponse } from "types/Response.type";
-
 export const NeutralizationType = {
   NEUTERED: "NEUTERED",
   NOT_NEUTERED: "NOT_NEUTERED"
@@ -201,7 +199,7 @@ export interface ISchoolFormResponse {
 }
 
 // 강아지 가입 신청서
-export interface IDogEnrollmentInfo extends IResponse {
+export interface IDogEnrollmentInfo {
   enrollmentFormId: number;
   memberName: string;
   memberGender: string;

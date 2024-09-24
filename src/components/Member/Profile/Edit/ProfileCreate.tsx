@@ -4,7 +4,7 @@ import AddCIcon from "assets/svg/add-c-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
-import { ChangeEvent, MouseEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import ProfileActiveBox from "../Box/ProfileActiveBox";

@@ -4,8 +4,8 @@ import { css, styled } from "styled-components";
 interface ICardStyleProps {
   mb?: string;
   pr?: string;
-  textColor?: string;
-  bgColor?: string;
+  textcolor?: string;
+  bgcolor?: string;
   isprofilestring?: string;
 }
 
@@ -68,7 +68,9 @@ export const DeleteButton = styled.button`
   z-index: 1;
 `;
 
-export const GotoSchoolInfoButton = styled.button<ICardStyleProps>`
+export const GotoSchoolInfoButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !["md", "pr", "textcolor", "bgcolor"].includes(prop)
+})<ICardStyleProps>`
   ${StatusBoxStyle}
 
   & > span {

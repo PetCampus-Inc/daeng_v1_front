@@ -2,7 +2,7 @@ import { useMemberLogin } from "hooks/api/signin";
 import useNativeAction from "hooks/native/useNativeAction";
 import { SocialProvider } from "types/member/auth.types";
 import { getPlatform } from "utils/cross-browsing";
-import { isCustomError } from "utils/is";
+import showToast from "utils/showToast";
 
 import { ButtonWrapper, StyledButton, StyledImage, StyledText } from "./styles";
 
@@ -16,10 +16,7 @@ const LoginButtonGroup = () => {
     const authData = await socialLogin(provider);
 
     mutateLogin(authData, {
-      onError: (error) => {
-        if (!isCustomError(error)) throw error;
-        console.error(error);
-      }
+      onError: (error) => showToast(error.message, "bottom")
     });
   };
 

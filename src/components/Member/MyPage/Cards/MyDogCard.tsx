@@ -1,15 +1,17 @@
-import { DOG_STATUS } from "constants/memberDogStatus";
+import { DOG_STATUS, STORAGE_KEY } from "constants/memberDogStatus";
 import { routes } from "constants/path";
 
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
+import { useLocalStorage, useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { dogIdState } from "store/member";
+import { dogIdState, dogProfileList } from "store/member";
+import { IDoglist } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
 
@@ -18,33 +20,36 @@ import DogDeleteButton from "../Buttons/DogDeleteButton";
 import GotoSchoolInfoButton from "../Buttons/GotoSchoolInfoButton";
 
 interface IMyDogCardProps {
-  dogId: string;
+  dogData: IDoglist;
   isOpen: boolean;
-  dogName: string;
   schoolInfo: string;
-  registeredDate: string[];
   profileUri: string | null;
-  status: string;
   dogLength: number;
+  onCardFocus: (dogId: string) => void;
+  isActive: boolean;
 }
 
 const MyDogCard = ({
-  dogId,
+  dogData,
   isOpen,
-  dogName,
   schoolInfo,
-  registeredDate,
   profileUri,
-  status,
-  dogLength
+  dogLength,
+  onCardFocus,
+  isActive
 }: IMyDogCardProps) => {
-  const registeredTime =
-    registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
+  const divRef = useRef<HTMLDivElement>(null);
+  const setDogProfile = useSetRecoilState(dogProfileList);
   const setDogId = useSetRecoilState(dogIdState);
   const navigate = useNavigate();
   const overlay = useOverlay();
-  const divRef = useRef<HTMLDivElement>(null);
   const mutateMemberDogDelete = usePostMemberDogDelete();
+  const setStoredValue = useSetLocalStorage();
+  const [CURRENT_DOG_ID] = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "", true);
+
+  const { dogId, dogName, registeredDate, status } = dogData;
+  const [year, month, day] = registeredDate.map(String);
+  const registeredTime = registeredDate && formatDate(year, month, day, "dot");
   const isProfile = profileUri === null;
 
   const openInvalidInputPopup = () =>
@@ -79,14 +84,14 @@ const MyDogCard = ({
       <BasicModal
         isOpen={isOpen}
         close={close}
-        actionFn={() => {
-          close();
-          handleDeleteDog();
-        }}
         title={`${dogName}를 삭제 하시겠습니까?`}
         subtitle={"해당 강아지의 모든 정보가 초기화 됩니다"}
         closeText={"취소"}
         actionText={"삭제"}
+        actionFn={() => {
+          close();
+          handleDeleteDog();
+        }}
       />
     ));
 
@@ -95,16 +100,29 @@ const MyDogCard = ({
     showToast("강아지가 삭제되었습니다", "bottom");
   };
 
-  const handleCardFocus = () => {
-    divRef.current?.focus();
+  const handleFocus = () => {
+    setStoredValue(STORAGE_KEY.CURRENT_DOG_ID, dogId);
+    setDogId(Number(dogId));
+    onCardFocus(dogId);
   };
+
+  useEffect(() => {
+    setDogProfile([{ dogId: dogId, dogProfile: profileUri ?? "" }]);
+  }, [isActive]);
+
+  useEffect(() => {
+    if (CURRENT_DOG_ID) {
+      onCardFocus(CURRENT_DOG_ID);
+    }
+  }, []);
 
   return (
     <S.MyDogCard
-      isprofilestring={isProfile ? "true" : "false"}
-      tabIndex={dogLength}
+      id={dogId}
       ref={divRef}
-      onClick={handleCardFocus}
+      tabIndex={dogLength}
+      className={`${isActive ? "active" : ""} ${isProfile ? "notProfile" : ""}`}
+      onFocus={handleFocus}
     >
       <DogDeleteButton
         isOpen={isOpen}
@@ -128,7 +146,7 @@ const MyDogCard = ({
           <DogNotfoundIcon />
         </S.BgIconBox>
       ) : (
-        <S.MyDogImg src={profileUri} alt="my-dog" />
+        <S.MyDogImg src={profileUri ?? ""} alt="my-dog" />
       )}
     </S.MyDogCard>
   );

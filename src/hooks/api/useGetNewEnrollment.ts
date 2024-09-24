@@ -6,8 +6,7 @@ import { getNewEnrollment } from "apis/admin/school.api";
 const useGetNewEnrollment = (schoolId: number) => {
   return useQuery({
     queryKey: QUERY_KEY.NEW_ENROLLMENT_LIST,
-    queryFn: () => getNewEnrollment(schoolId),
-    enabled: false
+    queryFn: () => getNewEnrollment(schoolId)
   });
 };
 

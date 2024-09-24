@@ -65,6 +65,14 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
+          path: routes.member.mypage.enrollment.root,
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentPage />
+            </Suspense>
+          )
+        },
+        {
           path: routes.member.dogInfo.edit.dynamic(),
           element: (
             <Suspense>
@@ -92,7 +100,23 @@ const MemberRoutes = (): RouteObject[] => {
           path: routes.member.profile.root,
           element: (
             <Suspense>
+              <Pages.MemberProfileEditPage />
+            </Suspense>
+          )
+        },
+        {
+          path: routes.member.profile.dog.root,
+          element: (
+            <Suspense>
               <Pages.MemberAddDogProfileEditPage />
+            </Suspense>
+          )
+        },
+        {
+          path: routes.member.mypage.enrollment.root,
+          element: (
+            <Suspense>
+              <Pages.MemberEnrollmentPage />
             </Suspense>
           )
         }

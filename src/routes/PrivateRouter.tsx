@@ -1,3 +1,5 @@
+import { routes } from "constants/path";
+
 import { useRoleBasedPath } from "hooks/common/useRoleBasedPath";
 import { useTokenHandler } from "hooks/common/useTokenHandler";
 import { Navigate, Outlet } from "react-router-dom";
@@ -20,5 +22,5 @@ export default function PrivateRouter({ roles, redirectPath }: PrivateRouterProp
     접근가능여부: roles.includes(role),
     리다이렉트경로: basedPath
   });
-  return roles.includes(role) ? <Outlet /> : <Navigate to={redirectPath ?? basedPath} />;
+  return roles.includes(role) ? <Outlet /> : <Navigate to={redirectPath ?? routes.login.root} />;
 }

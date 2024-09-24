@@ -2,7 +2,6 @@ import { Text } from "components/common";
 import { useAdminLogin } from "hooks/api/signin";
 import useNativeAction from "hooks/native/useNativeAction";
 import { type FieldValues, useFormContext } from "react-hook-form";
-import { isCustomError } from "utils/is";
 
 import { StyledButton } from "../styles";
 
@@ -20,19 +19,14 @@ const SubmitButton = () => {
     };
 
     mutateLogin(req, {
-      onError: (error) => {
-        if (!isCustomError(error)) throw error;
-
-        // FIXME: 에러코드 변경 예정
-        if (error?.data.code === "ADMIN-404-1") {
+      onError: ({ code, message }) => {
+        if (code === "ADMIN-404-1") setError("inputId", { type: "manual", message });
+        else if (code === "AUTH-401-1") setError("inputPw", { type: "manual", message });
+        else {
+          // TODO: API 호출 전에 처리해야 함
           setError("inputId", {
             type: "manual",
-            message: "잘못된 아이디입니다."
-          });
-        } else if (error?.data.code === "AUTH-401-1") {
-          setError("inputPw", {
-            type: "manual",
-            message: "잘못된 비밀번호입니다."
+            message: "아이디 또는 패스워드 형식이 맞지 않습니다."
           });
         }
       }
