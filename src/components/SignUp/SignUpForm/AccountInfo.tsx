@@ -2,15 +2,17 @@ import { ID_REGEX, PW_REGEX } from "constants/validCheck";
 
 import { ButtonInput, Flex, PasswordInput, Text } from "components/common";
 import { useCheckId } from "hooks/api/signup";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 const AccountInfo = () => {
   const {
     register,
+    unregister,
     watch,
     getFieldState,
     getValues,
+    setValue,
     setError,
     clearErrors,
     formState: { errors }
@@ -18,17 +20,21 @@ const AccountInfo = () => {
 
   const id = watch("id");
   const idFieldState = getFieldState("id");
+  const isValidId = watch("idValid");
   const password = watch("pwd");
-
-  const [isValidId, setIsValidId] = useState<boolean>(false);
 
   const { mutateCheckId } = useCheckId();
 
   useEffect(() => {
-    if (idFieldState.isDirty) {
-      setIsValidId(false);
-    }
-  }, [id, idFieldState.isDirty]);
+    register("idValid", { required: true, value: false });
+    return () => unregister("idValid");
+  }, [register, unregister]);
+
+  const handleChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+    register("id").onChange(e);
+    setValue("idValid", false);
+    clearErrors("id");
+  };
 
   const handlePasswordChange = async () => {
     clearErrors("pwd");
@@ -41,12 +47,12 @@ const AccountInfo = () => {
       onSuccess: (res) => {
         if (res === 200) {
           clearErrors("id");
-          setIsValidId(true);
+          setValue("idValid", true);
         }
       },
       onError: (error) => {
         setError("id", { type: "manual", message: error.message });
-        setIsValidId(false);
+        setValue("idValid", false);
       }
     });
   };
@@ -78,10 +84,14 @@ const AccountInfo = () => {
           regex={/^[a-z0-9]*$/}
           placeholder="영문 소문자, 숫자포함 6~12자"
           handleClick={handleCheckId}
+          onChange={handleChangeId}
           rules={{
-            pattern: { value: ID_REGEX, message: "영문 소문자와 숫자 포함, 6~12자로 입력해주세요." }
+            pattern: {
+              value: ID_REGEX,
+              message: "영문 소문자와 숫자 포함, 6~12자로 입력해주세요."
+            }
           }}
-          btnHidden={isValidId}
+          btnHidden={isValidId || !!errors.id}
           enabled={id && idFieldState.isDirty && !isValidId}
           required
         />
@@ -135,7 +145,7 @@ const AccountInfo = () => {
           rules={{
             validate: (value) => value === password || "비밀번호가 일치하지 않습니다."
           }}
-          placeholder="영문 대소문자, 숫자포함 8~20자  "
+          placeholder="영문 대소문자, 숫자포함 8~20자"
           className={errors.confirmPwd ? "error-input" : ""}
           required
         />
