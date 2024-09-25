@@ -4,18 +4,16 @@ import { ACCEPT_FILE_TYPE, FILE_NAME, TYPE_NAME, PATHS } from "constants/s3File"
 import { BottomButton } from "components/common/Button";
 import { usePostMemberDogDetailInfo } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { type MemberDogInfoReq } from "types/member/main.types";
 import { getKeyForLabel } from "utils/formatter";
 
 const SaveButton = ({ dogId }: { dogId: number }) => {
-  const {
-    getValues,
-    handleSubmit,
-    formState: { isDirty, isValid, isSubmitting }
-  } = useFormContext();
+  const { getValues, handleSubmit } = useFormContext();
 
-  const { convertProfileUri, uploadFiles } = useUploadProfile();
+  const [shouldSubmit, setShouldSubmit] = useState(false);
+  const { s3ProfileData, uploadFiles } = useUploadProfile();
   const { mutatePostDogDetailInfo } = usePostMemberDogDetailInfo(dogId);
 
   const getFormValues = (): MemberDogInfoReq => {
@@ -52,27 +50,33 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
     };
 
     const params = [dogParams];
-
+    onSubmit();
     await uploadFiles(params, {
       onSuccess: () => {
-        onSubmit();
+        setShouldSubmit(true);
       }
     });
   };
 
   const onSubmit = () => {
     const formData = getFormValues();
+    const { profileUri } = formData;
+    const [dogProfileUri] = s3ProfileData;
     const requestData = Object.assign(formData, {
-      profileUri: convertProfileUri(TYPE_NAME.DOG)
+      profileUri: typeof profileUri === "string" ? profileUri : dogProfileUri
     });
     mutatePostDogDetailInfo(requestData);
   };
 
+  useEffect(() => {
+    if (shouldSubmit) {
+      onSubmit();
+      setShouldSubmit(false);
+    }
+  }, [s3ProfileData, shouldSubmit]);
+
   return (
-    <BottomButton
-      onClick={handleSubmit(handleSubmitData)}
-      disabled={!isDirty || !isValid || isSubmitting}
-    >
+    <BottomButton onClick={handleSubmit(handleSubmitData)} position="relative">
       수정 완료
     </BottomButton>
   );
