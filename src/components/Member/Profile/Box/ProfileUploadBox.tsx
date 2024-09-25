@@ -62,7 +62,7 @@ const ProfileUploadBox = ({
       const fileArray = await Promise.all(newFiles.map(getFilePreview));
 
       setProfile([...fileArray]);
-      setValue(fileName, [...newFiles]);
+      setValue(fileName, [...newFiles], { shouldValidate: true });
       if (mode === "create" && setIsActive) setIsActive(true);
     }
   };

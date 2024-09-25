@@ -8,16 +8,18 @@ import { FieldValues, useFormContext } from "react-hook-form";
 
 import * as S from "../styles";
 
-// FIXME 데이터 적용은 되고 있는데 강아지 프로필 사진을 제외한 나머지 데이터가 api와 연동되지 않는거 같아 확인 필요
 const SaveProfileButton = () => {
   const {
     handleSubmit,
     getValues,
-    formState: { isValid, isDirty }
+    formState: { isValid }
   } = useFormContext();
   const [shouldSubmit, setShouldSubmit] = useState(false);
   const { s3ProfileData, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
+
+  const allValues = getValues();
+  const isAllFilled = Object.values(allValues).every((value) => value);
 
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);
@@ -73,7 +75,7 @@ const SaveProfileButton = () => {
         type="submit"
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
-        disabled={!isDirty || !isValid}
+        disabled={!isAllFilled || !isValid}
       >
         프로필 완성하기
       </BottomButton>
