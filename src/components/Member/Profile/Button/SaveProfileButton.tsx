@@ -5,6 +5,7 @@ import { usePostMemberProfile } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
 import { useEffect, useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
+import showToast from "utils/showToast";
 
 import * as S from "../styles";
 
@@ -54,8 +55,8 @@ const SaveProfileButton = () => {
     const [memberProfileUri, dogProfileUri] = s3ProfileData;
     const requestData = {
       dogId: formData.dogId,
-      memberProfileUri: memberProfileUri,
-      dogProfileUri: dogProfileUri,
+      memberProfileUri: memberProfileUri ?? "",
+      dogProfileUri: dogProfileUri ?? "",
       nickName: formData.nickName,
       relation: formData.relation
     };
