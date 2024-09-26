@@ -22,7 +22,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       dogId,
       dogName: formData[FIELD.DOG_NAME],
       dogGender: formData[FIELD.DOG_GENDER] === "암컷" ? "FEMALE" : "MALE",
-      dogSize: getKeyForLabel(FIELD.DOG_SIZE, formData[FIELD.DOG_SIZE]) || "",
+      dogSize: getKeyForLabel(FIELD.DOG_SIZE, formData[FIELD.DOG_SIZE]),
       breedId: formData[FIELD.BREED_ID],
       newBreed: formData[FIELD.NEW_BREED],
       profileUri: formData[FILE_NAME.PROFILE_COMMON],
@@ -66,6 +66,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       profileUri: typeof profileUri === "string" ? profileUri : dogProfileUri
     });
     mutatePostDogDetailInfo(requestData);
+    console.log("requestData", requestData);
   };
 
   useEffect(() => {
@@ -77,7 +78,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
 
   return (
     <BottomButton onClick={handleSubmit(handleSubmitData)} position="relative">
-      수정 완료
+      수정 완료1
     </BottomButton>
   );
 };
