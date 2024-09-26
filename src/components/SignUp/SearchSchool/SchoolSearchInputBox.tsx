@@ -1,7 +1,8 @@
-import { Flex } from "components/common";
+import { Button, Flex } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
 import { useGetSchool } from "hooks/api/signup";
 import { useClickOutSide } from "hooks/common/useClickOutSide";
+import { useKeyboardAwareView } from "hooks/common/useKeyboardAwareView";
 import { ChangeEvent, type RefObject, useCallback, useRef, useState } from "react";
 
 import SchoolListDropdown from "./SchoolListDropdown";
@@ -19,6 +20,7 @@ const SchoolSearchInputBox = ({ onSelect, onClear }: SchoolSearchInputBoxProps) 
   const [inputValue, setInputValue] = useState<string>("");
 
   const { data } = useGetSchool(searchQuery);
+  const { isKeyboardOpen, style } = useKeyboardAwareView();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -72,6 +74,11 @@ const SchoolSearchInputBox = ({ onSelect, onClear }: SchoolSearchInputBoxProps) 
         onChange={handleInputChange}
       />
       {data && showDropdown && <SchoolListDropdown list={data} onSelect={handleItemSelect} />}
+      {isKeyboardOpen && (
+        <Button style={style} disabled={!inputValue} onClick={() => handleInputSearch(inputValue)}>
+          검색
+        </Button>
+      )}
     </Flex>
   );
 };

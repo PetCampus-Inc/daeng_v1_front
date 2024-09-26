@@ -63,7 +63,6 @@ const AdminSignUpFunnel = () => {
   };
 
   // 계정 설정 단계 처리
-  // FIXME: 로그인 로직으로 변경해야 함
   const handleAccountSettingStep = () => {
     if (state.role === Role.ROLE_TEACHER) {
       navigate(routes.approval.root);
