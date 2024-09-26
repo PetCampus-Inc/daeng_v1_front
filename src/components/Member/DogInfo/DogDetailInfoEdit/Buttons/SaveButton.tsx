@@ -66,7 +66,6 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       profileUri: typeof profileUri === "string" ? profileUri : dogProfileUri
     });
     mutatePostDogDetailInfo(requestData);
-    console.log("requestData", requestData);
   };
 
   useEffect(() => {
@@ -78,7 +77,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
 
   return (
     <BottomButton onClick={handleSubmit(handleSubmitData)} position="relative">
-      수정 완료1
+      수정 완료
     </BottomButton>
   );
 };
