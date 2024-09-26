@@ -7,13 +7,14 @@ type ButtonInputProps = {
   label?: string;
   handleClick?: () => void;
   enabled?: boolean;
+  btnHidden?: boolean;
 } & InputFieldProps;
 
 const ButtonInputField = forwardRef(function ButtonInputField(
   props: ButtonInputProps,
   ref?: ForwardedRef<HTMLInputElement>
 ) {
-  const { handleClick, enabled, label, ...rest } = props;
+  const { handleClick, enabled, label, btnHidden, ...rest } = props;
 
   return (
     <StyledInputWrapper>
@@ -21,6 +22,7 @@ const ButtonInputField = forwardRef(function ButtonInputField(
       <StyledButtonWrapper>
         <StyledConfirmButton
           type="button"
+          data-state-hidden={btnHidden}
           onClick={handleClick}
           disabled={!enabled}
           className={enabled ? "" : "inactive"}

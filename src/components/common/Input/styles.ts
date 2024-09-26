@@ -158,6 +158,10 @@ export const StyledConfirmButton = styled.button`
     color: ${({ theme }) => theme.colors.gray_3};
   }
 
+  &[data-state-hidden="true"] {
+    display: none;
+  }
+
   transition:
     background-color 0.2s ease-out,
     color 0.2s ease-out;
