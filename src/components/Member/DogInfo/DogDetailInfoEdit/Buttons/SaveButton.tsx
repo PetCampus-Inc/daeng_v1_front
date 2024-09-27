@@ -24,7 +24,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
       dogGender: formData[FIELD.DOG_GENDER] === "암컷" ? "FEMALE" : "MALE",
       dogSize: getKeyForLabel(FIELD.DOG_SIZE, formData[FIELD.DOG_SIZE]),
       breedId: formData[FIELD.BREED_ID],
-      newBreed: formData[FIELD.NEW_BREED],
+      newBreed: formData[FIELD.NEW_BREED] ?? "",
       profileUri: formData[FILE_NAME.PROFILE_COMMON],
       birthDate: `${formData["year"]}-${formData["month"]}-${formData["day"]}`,
       neutralization: formData[FIELD.NEUTRALIZATION] === "했어요" ? "NEUTERED" : "NOT_NEUTERED"
