@@ -3,7 +3,7 @@ import { SIGNUP_PATH } from "constants/funnelPath";
 import { useFunnel } from "hooks/common/useFunnel";
 import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MemberRole } from "types/common/role.types";
+import { User } from "types/common/role.types";
 
 import SearchSchoolPage from "./SearchSchoolPage";
 import EnrollmentPage from "../EnrollmentPage/NewEnrollmentPage";
@@ -30,7 +30,7 @@ const SignUpFunnel = () => {
     <Funnel>
       <Funnel.Step name={유치원_검색}>
         <SearchSchoolPage
-          type={MemberRole.ROLE_MEMBER}
+          type={User.MEMBER}
           onNextStep={(schoolId) =>
             setState((prev) => ({ ...prev, step: 가입신청서_작성, schoolId }))
           }

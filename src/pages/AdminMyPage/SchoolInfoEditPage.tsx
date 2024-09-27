@@ -4,6 +4,7 @@ import { Flex, Layout, SearchInput, Text, TextInput } from "components/common";
 import Header from "components/common/Header";
 import Postcode from "components/common/Postcode";
 import AddressModifyBottomSheet from "components/SignUp/modal/AddressModifyBottomSheet";
+import { useSchoolInfoEdit } from "hooks/api/admin/mypage";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useState } from "react";
@@ -20,6 +21,7 @@ const SchoolInfoEditPage = () => {
   const overlay = useOverlay();
   const navigate = useNavigate();
   const { handleSubmit, register, setValue, watch, getFieldState } = useForm();
+  const { schoolInfoEditMutation } = useSchoolInfoEdit();
   const watchAddress = watch("schoolAddress", "");
   const watchSchoolName = watch("newSchoolName");
   const watchSchoolAddressDetail = watch("schoolAddressDetail");
@@ -77,7 +79,14 @@ const SchoolInfoEditPage = () => {
   };
 
   const onSubmit = handleSubmit((data) => {
-    const req = {};
+    const req = {
+      adminId: data.adminId,
+      schoolId: data.schoolId,
+      schoolName: data.newSchoolName,
+      phoneNumber: data.newSchoolNumber,
+      address: data.schoolAddress
+    };
+    schoolInfoEditMutation(req);
   });
 
   return (

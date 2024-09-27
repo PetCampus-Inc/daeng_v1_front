@@ -19,8 +19,11 @@ import {
   handlePostMemoDogVaccination,
   handlePostMemberProfile,
   handlePostMemoDogAllergy,
-  handlePostMemoDogPickdrop
+  handlePostMemoDogPickdrop,
+  handlePostDogProfile,
+  handleCancelMemberEnrollment
 } from "apis/member/member.api";
+import useLogout from "hooks/common/useLogout";
 import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
 import { getISOString } from "utils/date";
@@ -37,7 +40,8 @@ import type {
   IMemberProfilePostInfo,
   MemberDogInfoData,
   MemberDogInfoFormData,
-  DogVaccination
+  DogVaccination,
+  DogProfileReq
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -145,12 +149,27 @@ export const usePostMemberProfileInfo = () => {
 };
 
 // 견주 가입신청서 취소
+export const useCancelMemberEnrollment = () => {
+  const { mutate } = useMutation({
+    mutationFn: handleCancelMemberEnrollment,
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return { mutateCancelEnrollment: mutate };
+};
+
+// 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = () => {
+  const logout = useLogout();
   const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      logout();
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
@@ -277,6 +296,7 @@ export const useGetMemberProfile = () => {
     queryFn: () => handleGetMemberProfile()
   });
 };
+
 // 회원 가입승인후 초기 견주, 강아지 프로필을 설정
 export const usePostMemberProfile = () => {
   const navigate = useNavigate();
@@ -291,4 +311,20 @@ export const usePostMemberProfile = () => {
   });
 
   return { mutateMemberProfile: mutate };
+};
+
+// 강아지 승인 후 초기 프로필 설정 (두번째 강아지 이후)
+export const usePostDogProfile = () => {
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: (req: DogProfileReq) => handlePostDogProfile(req),
+    onSuccess: () => {
+      navigate(routes.root);
+    },
+    onError: () => {
+      showToast("프로필 등록을 실패했습니다. 다시 시도해주세요", "bottom");
+    }
+  });
+
+  return { mutateDogProfile: mutate };
 };

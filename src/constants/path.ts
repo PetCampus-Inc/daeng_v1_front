@@ -17,7 +17,18 @@ const common = {
   },
   /** 서비스 정책 */
   policy: {
-    root: "/policy "
+    /** 이용약관 */
+    usage: {
+      root: "/policy/usage"
+    },
+    /** 개인정보 처리 방침 */
+    privacy: {
+      root: "/policy/privacy"
+    },
+    /** 서비스 정책 */
+    service: {
+      root: "/policy/service"
+    }
   },
   /** 승인 상태 */
   approval: {
@@ -50,7 +61,11 @@ const admin = {
   },
   /** 회원 가입 */
   signup: {
-    root: `/admin/signup`
+    root: `/admin/signup`,
+    /** 선생님 재가입 */
+    rejoin: {
+      root: `/signup/rejoin`
+    }
   },
   /** 출석부 */
   attendance: {
@@ -184,7 +199,7 @@ const member = {
       },
       /** 강아지 추가 */
       enrollment: {
-        dynamic: (memberId?: Parameter) => `/mypage/${memberId ?? ":memberId"}/dog/enrollment`
+        dynamic: `/mypage/dog/enrollment`
       }
     }
   },

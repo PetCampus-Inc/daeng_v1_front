@@ -1,3 +1,5 @@
+import { STORAGE_KEY } from "constants/memberDogStatus";
+
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
@@ -7,14 +9,17 @@ import HomeHeader from "components/Home/HomeHeader";
 import HomeImageAlbum from "components/Home/HomeImageAlbum";
 import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
+import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 
 const HomePage = () => {
   const [selectedDogId] = useRecoilState(dogIdState);
+  const CURRENT_DOG_ID = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "");
 
-  const defaultDogId = 2;
+  // FIXME selectedDogId, CURRENT_DOG_ID 데이터가 없을 경우 예외 처리 필요
+  const defaultDogId = Number(CURRENT_DOG_ID) ?? 1;
 
   const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
   const { data } = useGetHomeInfo(dogId);

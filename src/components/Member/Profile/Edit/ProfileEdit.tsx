@@ -11,25 +11,35 @@ import * as S from "../styles";
 interface ProfileEditProps {
   profile: IFile[];
   handleFileChange: (e: ChangeEvent<HTMLInputElement>, type: string) => void;
+  handleClick?: () => void;
   registerText: string;
   type: string;
 }
 
-const ProfileEdit = ({ profile, handleFileChange, registerText, type }: ProfileEditProps) => {
+const ProfileEdit = ({
+  profile,
+  handleFileChange,
+  handleClick,
+  registerText,
+  type
+}: ProfileEditProps) => {
+  // FIXME label 태그에 onClick 넣어도 상관 없는지 확인 필요
   const { register, getValues } = useFormContext();
   const { profileUri } = getValues();
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.ProfileBox htmlFor={registerText} w="107">
-        <S.UploadProfileBox br="40" aria-label="uploadProfileButton">
-          <S.UploadImage
-            src={profile[0] ? profile[0].thumbnail : profileUri}
-            alt={`${type}-profile`}
-          />
-        </S.UploadProfileBox>
-        <S.PencilIconBox>
-          <PencilBrownNormalIcon />
-        </S.PencilIconBox>
+      <S.ProfileBox w="107" h="108">
+        <S.ProfileLabel htmlFor={registerText} onClick={handleClick}>
+          <S.UploadProfileBox br="40" aria-label="uploadProfileButton">
+            <S.UploadImage
+              src={profile[0] ? profile[0].thumbnail : profileUri}
+              alt={`${type}-profile`}
+            />
+          </S.UploadProfileBox>
+          <S.PencilIconBox>
+            <PencilBrownNormalIcon />
+          </S.PencilIconBox>
+        </S.ProfileLabel>
       </S.ProfileBox>
 
       <S.StyledHiddenUpload

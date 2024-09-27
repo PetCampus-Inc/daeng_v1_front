@@ -47,6 +47,14 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               element: <Pages.SignUpPage />
             },
             {
+              path: routes.member.profile.root,
+              element: (
+                <Suspense>
+                  <Pages.MemberProfileEditPage />
+                </Suspense>
+              )
+            },
+            {
               path: routes.approval.root,
               element: <Pages.ApprovalStatusPage />
             },
@@ -57,6 +65,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             {
               path: routes.admin.signup.root,
               element: <Pages.AdminSignupPage />
+            },
+            {
+              path: routes.admin.signup.rejoin.root,
+              element: <Pages.TeacherReJoinPage />
             },
             // {
             //   path: routes.redirect.root,
@@ -79,10 +91,26 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             },
             {
-              path: routes.policy.root,
+              path: routes.policy.service.root,
               element: (
                 <Suspense>
-                  <Pages.PolicyPage />
+                  <Pages.ServicePolicyPage />
+                </Suspense>
+              )
+            },
+            {
+              path: routes.policy.privacy.root,
+              element: (
+                <Suspense>
+                  <Pages.PrivacyPolicyPage />
+                </Suspense>
+              )
+            },
+            {
+              path: routes.policy.usage.root,
+              element: (
+                <Suspense>
+                  <Pages.UsagePolicyPage />
                 </Suspense>
               )
             }

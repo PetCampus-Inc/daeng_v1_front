@@ -12,11 +12,11 @@ import { themeConfig } from "styles/themeConfig";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
+      retry: 0,
       throwOnError: true
     },
     mutations: {
-      retry: 1,
+      retry: 0,
       throwOnError: true
     }
   }

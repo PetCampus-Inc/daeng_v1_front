@@ -3,6 +3,7 @@ import { routes } from "constants/path";
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
+import { useDeleteOwner, useDeleteTeacher } from "hooks/api/admin/mypage";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/common/role.types";
@@ -20,6 +21,9 @@ type ContentCheck = {
 };
 
 const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
+  const { mutateDeleteTeacher } = useDeleteTeacher();
+  const { mutateDeleteOwner } = useDeleteOwner();
+  const navigate = useNavigate();
   const [contents, setContents] = useState({
     1: false,
     2: false,
@@ -47,11 +51,11 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
     }));
   };
 
-  const navigate = useNavigate();
-
   const onSubmit = () => {
-    // FIXME 탈퇴
-    navigate(routes.admin.mypage.deleteComplete.root);
+    if (isAllChecked) {
+      role === Role.ROLE_OWNER ? mutateDeleteOwner : mutateDeleteTeacher;
+      navigate(routes.admin.mypage.deleteComplete.root);
+    }
     return;
   };
 

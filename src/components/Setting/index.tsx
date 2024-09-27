@@ -14,7 +14,7 @@ const SettingInfo = () => {
         </S.GotoPageButton>
       </S.SettingItem>
       <S.SettingItem>
-        <S.GotoPageButton to={routes.policy.root}>
+        <S.GotoPageButton to={routes.policy.service.root}>
           <S.Text>정책</S.Text>
           <ArrowRightRound />
         </S.GotoPageButton>

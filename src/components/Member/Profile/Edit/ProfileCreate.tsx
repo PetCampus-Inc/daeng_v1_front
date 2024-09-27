@@ -4,7 +4,7 @@ import AddCIcon from "assets/svg/add-c-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { Flex } from "components/common/Flex";
 import { Text } from "components/common/Text";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 import ProfileActiveBox from "../Box/ProfileActiveBox";
@@ -13,10 +13,10 @@ import * as S from "../styles";
 interface ProfileCreateProps {
   isActive?: boolean;
   setIsActive?: (isActive: boolean) => void;
-  handleClick: (type: string) => void;
   profile: IFile[];
-  fileInputRef: React.LegacyRef<HTMLInputElement> | null;
+  fileInputRef?: React.LegacyRef<HTMLInputElement> | null;
   handleFileChange: (e: ChangeEvent<HTMLInputElement>, type: string) => void;
+  handleClick?: () => void;
   registerText: string;
   type: string;
 }
@@ -24,38 +24,59 @@ interface ProfileCreateProps {
 const ProfileCreate = ({
   isActive,
   setIsActive,
-  handleClick,
   profile,
   fileInputRef,
   handleFileChange,
   registerText,
   type
 }: ProfileCreateProps) => {
+  const divRef = useRef<HTMLButtonElement>(null);
   const { register } = useFormContext();
+
+  const handleClickTarget = () => {
+    divRef?.current?.focus();
+  };
+
+  const handleActive = () => {
+    isActive && setIsActive?.(false);
+  };
+
   return (
     <Flex align="center" direction="column" justify="center" gap="12" width="100%">
-      <S.ProfileBox htmlFor="uploadProfile">
+      <S.ProfileBox>
         <S.UploadProfileButton
-          onClick={() => handleClick(type)}
-          onBlur={() => setIsActive && setIsActive(true)}
+          id={type}
+          onClick={handleClickTarget}
+          onBlur={() => setIsActive?.(true)}
+          ref={divRef}
           aria-label="uploadProfileButton"
         >
           {profile.length > 0 ? (
             <>
-              <S.UploadImage src={profile[0].thumbnail} alt={`${type}-profile`} />
-              {!isActive && <ProfileActiveBox />}
+              <S.UploadImage
+                onClick={handleActive}
+                src={profile[0].thumbnail}
+                alt={`${type}-profile`}
+              />
+              {!isActive && <ProfileActiveBox htmlFor={registerText} />}
             </>
           ) : (
-            <AddCIcon />
+            <>
+              <S.ProfileLabel htmlFor={registerText} />
+              <AddCIcon />
+            </>
           )}
         </S.UploadProfileButton>
       </S.ProfileBox>
 
       <S.StyledHiddenUpload
-        {...register(registerText, { required: true, onChange: (e) => handleFileChange(e, type) })}
-        id="uploadProfile"
+        {...register(registerText, {
+          required: true,
+          onChange: (e) => handleFileChange(e, type)
+        })}
+        ref={fileInputRef && fileInputRef}
+        id={registerText}
         type="file"
-        ref={fileInputRef}
         accept={ACCEPT_FILE_TYPE.IMAGE}
       />
       <Text as="span" typo="body2_16_R" color="gray_2">

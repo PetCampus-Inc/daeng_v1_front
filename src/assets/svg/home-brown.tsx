@@ -6,14 +6,14 @@ const HomeBrown = () => {
         fill="#E4CAB1"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M16.056 16.867a2.667 2.667 0 0 0-2.667 2.666v4H5.514c-.364 0-.66.36-.66.8 0 .443.296.8.66.8h21.082c.364 0 .659-.357.659-.8 0-.44-.295-.8-.66-.8h-7.873v-4a2.667 2.667 0 0 0-2.666-2.666"
         fill="#C8A584"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M15.998 5.187a1.6 1.6 0 0 0-.857.213L5.44 11a1.6 1.6 0 1 0 1.6 2.772L15.998 8.6l8.957 5.172a1.6 1.6 0 0 0 1.6-2.772l-9.699-5.6a1.6 1.6 0 0 0-.858-.213"
         fill="#956F4C"
       />

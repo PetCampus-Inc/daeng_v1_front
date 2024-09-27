@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Role } from "types/common/role.types";
 import { ApprovalStatus } from "types/common/status.types";
+import { ApiErrorResponse } from "types/Response.type";
 
 type ValidatorFunction<T> = (v: unknown) => v is T;
 
@@ -30,24 +29,17 @@ export const isEmpty = (obj: object): boolean => {
   return Object.keys(obj).length === 0;
 };
 
-interface CustomError {
-  status: number;
-  data: {
-    status: number;
-    message: string;
-    code: string;
-  };
-}
-
-export function isCustomError(error: any): error is CustomError {
+/**
+ * `ApiErrorResponse` 객체인지 확인합니다.
+ * @param error
+ * @returns {boolean}
+ */
+export function isApiErrorResponse(error: unknown): error is ApiErrorResponse {
   return (
     typeof error === "object" &&
     error !== null &&
-    typeof error.status === "number" &&
-    typeof error.data === "object" &&
-    error.data !== null &&
-    typeof error.data.status === "number" &&
-    typeof error.data.message === "string" &&
-    typeof error.data.code === "string"
+    "status" in error &&
+    "message" in error &&
+    "code" in error
   );
 }

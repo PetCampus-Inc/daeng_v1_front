@@ -5,18 +5,18 @@ import { Layout } from "components/common";
 import ButtonBadge from "components/common/Badge/ButtonBadge";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
+import { useDeleteEnrollment } from "hooks/api/admin/enroll";
+import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { newEnrollmentListAtom } from "store/admin";
-import { INewEnrollmentList, ISimpleSchoolFormList } from "types/admin/school.types";
 import showToast from "utils/showToast";
 
 const EnrollmentFormListPage = () => {
-  const navigate = useNavigate();
   const [isEditable, setIsEditable] = useState(false);
   const [selectedList, setSelectedList] = useState<number[]>([]);
-  const [data, setData] = useRecoilState(newEnrollmentListAtom);
+  const { schoolId } = useAdminInfo();
+  const { data } = useGetNewEnrollment(schoolId);
+  const { mutateDeleteEnrollment } = useDeleteEnrollment();
 
   if (!data) {
     return <>로딩중..</>;
@@ -24,26 +24,6 @@ const EnrollmentFormListPage = () => {
 
   const handleTouch = () => {
     //TODO: 삭제 API 연동하기
-    const filteredData: ISimpleSchoolFormList[] = data.simpleSchoolFormList.filter(
-      (item) => !selectedList.includes(item.schoolFormId)
-    );
-
-    setData((prev: INewEnrollmentList | null) => {
-      if (!prev) {
-        return prev;
-      } else {
-        return {
-          ...prev,
-          simpleSchoolFormList: [
-            ...filteredData.map((item) => ({
-              schoolFormId: item.schoolFormId,
-              schoolFormName: item.schoolFormName,
-              createdDate: item.createdDate
-            }))
-          ]
-        };
-      }
-    });
     setIsEditable(false);
     setSelectedList([]);
   };
@@ -59,7 +39,6 @@ const EnrollmentFormListPage = () => {
               type={isEditable ? "cancel" : "delete"}
               handleTouch={() => {
                 if (data.simpleSchoolFormList.length <= 1) {
-                  // TODO: 한 개일 땐 삭제할 수 없다는 토스트 띄우기
                   showToast("최소 1개는 갖고 있어야합니다.", "bottom");
                   return;
                 }

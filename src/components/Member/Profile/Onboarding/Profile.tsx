@@ -10,24 +10,36 @@ const Profile = () => {
   const myFileInputRef = useRef<HTMLInputElement>(null);
   const dogFileInputRef = useRef<HTMLInputElement>(null);
 
+  const profileDatas = [
+    {
+      type: TYPE_NAME.MEMBER,
+      isActive: isMyActive,
+      setIsActive: setIsMyActive,
+      fileName: FILE_NAME.PROFILE_MEMBER,
+      fileRef: myFileInputRef
+    },
+    {
+      type: TYPE_NAME.DOG,
+      isActive: isDogActive,
+      setIsActive: setIsDogActive,
+      fileName: FILE_NAME.PROFILE_DOG,
+      fileRef: dogFileInputRef
+    }
+  ];
+
   return (
     <>
-      <ProfileUploadBox
-        type={TYPE_NAME.MEMBER}
-        isActive={isMyActive}
-        setIsActive={setIsMyActive}
-        fileRef={myFileInputRef}
-        fileName={FILE_NAME.PROFILE_MEMBER}
-        mode="create"
-      />
-      <ProfileUploadBox
-        type={TYPE_NAME.DOG}
-        isActive={isDogActive}
-        setIsActive={setIsDogActive}
-        fileRef={dogFileInputRef}
-        fileName={FILE_NAME.PROFILE_DOG}
-        mode="create"
-      />
+      {profileDatas.map((item) => (
+        <ProfileUploadBox
+          key={item.type}
+          type={item.type}
+          isActive={item.isActive}
+          setIsActive={item.setIsActive}
+          fileName={item.fileName}
+          fileRef={item.fileRef}
+          mode="create"
+        />
+      ))}
     </>
   );
 };

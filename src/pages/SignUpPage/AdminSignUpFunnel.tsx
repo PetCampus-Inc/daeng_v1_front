@@ -6,7 +6,7 @@ import SchoolRegistrationCompletePage from "pages/SignUpPage/SchoolRegistrationC
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Role } from "types/common/role.types";
+import { Role, User } from "types/common/role.types";
 
 import AccountSettingPage from "./AccountSettingPage";
 import AdminInfoPage from "./AdminInfoPage";
@@ -63,7 +63,6 @@ const AdminSignUpFunnel = () => {
   };
 
   // 계정 설정 단계 처리
-  // FIXME: 로그인 로직으로 변경해야 함
   const handleAccountSettingStep = () => {
     if (state.role === Role.ROLE_TEACHER) {
       navigate(routes.approval.root);
@@ -97,7 +96,7 @@ const AdminSignUpFunnel = () => {
         {/* role: TEACHER인 경우 */}
         <Funnel.Step name={유치원_검색}>
           <SearchSchoolPage
-            type={Role.ROLE_TEACHER}
+            type={User.ADMIN}
             onNextStep={(schoolId) =>
               setState((prev) => ({
                 ...prev,

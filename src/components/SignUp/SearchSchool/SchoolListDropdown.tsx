@@ -5,10 +5,10 @@ import type { ISchoolInfo } from "types/admin/school.types";
 
 interface SchoolListDropdownProps {
   list: ISchoolInfo[];
-  handleSelected: (id: number, name: string) => void;
+  onSelect: (id: number, name: string) => void;
 }
 
-const SchoolListDropdown = ({ list, handleSelected }: SchoolListDropdownProps) => {
+const SchoolListDropdown = ({ list, onSelect }: SchoolListDropdownProps) => {
   if (list.length === 0) {
     return (
       <Box borderRadius="rectangle" border={1} borderColor="gray_4" bg="white">
@@ -27,7 +27,7 @@ const SchoolListDropdown = ({ list, handleSelected }: SchoolListDropdownProps) =
   return (
     <Box as="ul" borderRadius="rectangle" border={1} borderColor="gray_4" bg="white">
       {list.map((item) => (
-        <ListItem key={item.schoolId} onClick={() => handleSelected(item.schoolId, item.name)}>
+        <ListItem key={item.schoolId} onClick={() => onSelect(item.schoolId, item.name)}>
           <Text typo="body2_16_R" color="gray_1">
             {item.name}
           </Text>

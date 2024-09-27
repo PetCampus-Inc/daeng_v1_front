@@ -3,8 +3,10 @@ import { routes } from "constants/path";
 import ArrowDownIcon from "assets/svg/arrow-down-icon";
 import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import NoticeActiveIcon from "assets/svg/notice-active-icon";
+import NoticeIcon from "assets/svg/notice-icon";
 import PencilIcon from "assets/svg/pencil-icon";
 import SettingWhiteIcon from "assets/svg/setting-white-icon";
+import { useGetNewAlarm } from "hooks/api/admin/alarm";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -48,6 +50,8 @@ const Header = ({
   shadow
 }: Props) => {
   const navigate = useNavigate();
+  // const { data } = useGetNewAlarm(Number(adminId));
+  const isNewAlarm = "true";
 
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
@@ -65,7 +69,7 @@ const Header = ({
                   navigate(routes.admin.notification.root);
                 }}
               >
-                <NoticeActiveIcon />
+                {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}
@@ -91,7 +95,7 @@ const Header = ({
                   navigate(routes.admin.notification.root);
                 }}
               >
-                <NoticeActiveIcon />
+                {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}

@@ -8,6 +8,7 @@ import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { dogIdState } from "store/member";
+import { User } from "types/common/role.types";
 
 const MemberEnrollmentFunnel = () => {
   const dogId = useRecoilValue(dogIdState);
@@ -32,7 +33,7 @@ const MemberEnrollmentFunnel = () => {
     <Funnel>
       <Funnel.Step name={유치원_검색}>
         <SearchSchoolPage
-          type="ROLE_MEMBER"
+          type={User.MEMBER}
           onNextStep={(schoolId) =>
             setState((prev) => ({ ...prev, step: 가입신청서_작성, schoolId }))
           }

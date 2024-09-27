@@ -28,7 +28,7 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...defaultFormValues, ...rest }
+    defaultValues: { ...defaultFormValues, ...rest, openDays: [""] }
   });
 
   const visibleSteps = MEMBER_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));
@@ -48,8 +48,8 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
     openDays: rest.openDays
   };
 
-  const { dirtyFields } = useFormState({ control: methods.control });
-  const blocker = useBlocker(() => !isEmpty(dirtyFields));
+  const { dirtyFields, isSubmitSuccessful } = useFormState({ control: methods.control });
+  const blocker = useBlocker(() => !isSubmitSuccessful && !isEmpty(dirtyFields));
 
   return (
     <>
@@ -116,7 +116,6 @@ const defaultFormValues = {
   pickDropNotice: "",
   pickDropInfo: "",
   member: {
-    memberId: 0,
     memberProfileUri: "",
     memberName: "",
     memberGender: "",
