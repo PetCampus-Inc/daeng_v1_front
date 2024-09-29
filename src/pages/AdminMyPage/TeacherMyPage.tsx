@@ -25,7 +25,7 @@ const TeacherMyPage = () => {
         handleClick={() => (isEditing ? setIsEditing(false) : navigate("setting"))}
       />
       {isEditing ? (
-        <EditProfile teacherData={data} />
+        <EditProfile />
       ) : (
         <>
           <PageContainer

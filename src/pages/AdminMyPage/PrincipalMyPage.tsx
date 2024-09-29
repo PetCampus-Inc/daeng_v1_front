@@ -25,7 +25,7 @@ const PrincipalMyPage = () => {
         handleClick={() => (isEditing ? setIsEditing(false) : navigate("setting"))}
       />
       {isEditing ? (
-        <EditProfile principalData={data} />
+        <EditProfile />
       ) : (
         <>
           <PageContainer
