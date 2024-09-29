@@ -52,7 +52,6 @@ export interface IAdminProfileEdit {
 }
 
 export interface ISchoolInfoEdit {
-  adminId: number;
   schoolId: number;
   schoolName: string;
   phoneNumber: string;

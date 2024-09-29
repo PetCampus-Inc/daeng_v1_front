@@ -45,7 +45,7 @@ export const useTeacherProfileEdit = () => {
 export const useSchoolInfoEdit = () => {
   const navigate = useNavigate();
   const schoolInfoEditMutation = useMutation({
-    mutationFn: (newData: ISchoolInfoEdit) => handleSchoolInfoEdit(newData),
+    mutationFn: handleSchoolInfoEdit,
     onSuccess: () => {
       navigate(routes.admin.mypage.root);
       showToast("유치원 정보가 수정되었습니다", "bottom");

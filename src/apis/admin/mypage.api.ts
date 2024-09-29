@@ -24,7 +24,6 @@ export const handleSchoolInfoEdit = async (req: ISchoolInfoEdit) => {
     url,
     method: "POST",
     data: {
-      adminId: req.adminId,
       schoolId: req.schoolId,
       schoolName: req.schoolName,
       phoneNumber: req.phoneNumber,
