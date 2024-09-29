@@ -10,7 +10,7 @@ interface UploadToS3Props {
   /** 업로드할 파일의 확장자 제한 */
   accept?: string[] | string;
   /** 업로드할 파일리스트 */
-  files: FileList | null;
+  files: File[] | FileList | null;
   /** s3 버킷 경로 */
   path: string;
 }
