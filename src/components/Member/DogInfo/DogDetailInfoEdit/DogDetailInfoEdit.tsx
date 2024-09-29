@@ -48,7 +48,7 @@ const DogDetailInfoEdit = ({ requiredItems }: IDogInfoProps) => {
       <Card>
         <Text>견종</Text>
         <BreedInput
-          name={FIELD.BREED_NAME}
+          name={FIELD.NEW_BREED}
           register={register}
           setValue={setValue}
           watch={watch}
