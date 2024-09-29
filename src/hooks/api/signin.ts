@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { adminInfoState } from "store/admin";
 import { dogIdState } from "store/member";
-import { AdminAuthType } from "types/admin/admin.types";
+import { AdminProfile } from "types/admin/admin.types";
 import { User } from "types/common/role.types";
 import { MemberAuthData } from "types/member/auth.types";
 import { isApproval } from "utils/is";
@@ -29,7 +29,7 @@ export const useAdminLogin = () => {
   const setLocalStorage = useSetLocalStorage();
   const setAdmin = useSetRecoilState(adminInfoState);
 
-  const handleLoginSuccess = (response: { data: AdminAuthType; accessToken: string }) => {
+  const handleLoginSuccess = (response: { data: AdminProfile; accessToken: string }) => {
     const accessToken = removeBearerPrefix(response.accessToken);
     const role = extractRoleByToken(accessToken);
     if (!role) throw new Error("로그인 실패");
