@@ -1,14 +1,21 @@
 import PlayIcon from "assets/svg/play-icon";
+import { MediaViewModal } from "components/Admin/DogGallery/SinglePicture/MediaViewModal";
+import { useOverlay } from "hooks/common/useOverlay";
 
+import { AlbumCheckBox } from "./AlbumCheckBox";
 import * as S from "./styles";
 
-interface ISinglePictureProps {
+export interface AlbumImage {
+  imageId: number;
+  imageUrl: string;
+}
+
+interface SinglePictureProps {
   src: string;
   isVideo?: boolean;
   selected?: boolean;
   isEditing?: boolean;
-  onClick?: (url: string) => void;
-  onSelect?: (url: string) => void;
+  onSelect?: (src: string) => void;
 }
 
 const SinglePicture = ({
@@ -16,14 +23,22 @@ const SinglePicture = ({
   isVideo = false,
   selected,
   isEditing,
-  onClick,
   onSelect
-}: ISinglePictureProps) => {
-  /** 클릭 이벤트 */
-  const handleClick = () => isEditing || onClick?.(src);
+}: SinglePictureProps) => {
+  const overlay = useOverlay();
 
-  /** 이미지 선택 이벤트 */
+  /** 클릭 핸들러 */
+  const handleClick = () => isEditing || openMediaViewModal();
+
+  /** 이미지 선택 핸들러 */
   const handleSelect = () => onSelect?.(src);
+
+  /** 모달 열기 */
+  const openMediaViewModal = () => {
+    overlay.open(({ isOpen, close }) => (
+      <MediaViewModal isOpen={isOpen} close={close} src={src} isVideo={isVideo} />
+    ));
+  };
 
   return (
     <S.Container onClick={handleClick} data-edit-mode={isEditing}>
@@ -32,11 +47,12 @@ const SinglePicture = ({
 
       {/* 이미지 선택 체크박스 */}
       {isEditing && (
-        <S.CheckboxWrap data-edit-mode={isEditing}>
-          <input type="checkbox" checked={selected} onChange={handleSelect} />
-        </S.CheckboxWrap>
+        <S.CheckBoxWrap>
+          <AlbumCheckBox checked={selected} onChange={handleSelect} />
+        </S.CheckBoxWrap>
       )}
 
+      {/* 비디오 아이콘 */}
       {isVideo && (
         <S.VideoIconWrap>
           <PlayIcon w={16} h={16} />
