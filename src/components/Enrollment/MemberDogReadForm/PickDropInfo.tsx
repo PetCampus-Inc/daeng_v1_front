@@ -9,13 +9,13 @@ import Title from "components/common/Title";
 import { Label } from "components/common/Title/style";
 import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { handlePreventDefault } from "utils/preventDefault";
+import { getLabelForValue } from "utils/formatter";
 
 import { Card, Stack } from "./styles";
 
 const PickDropInfo = () => {
-  const { register, control, watch, setValue } = useFormContext();
-  const pickDropRequest = watch(FIELD.PICKDROP_REQUEST);
+  const { register, control, setValue, getValues } = useFormContext();
+  const pickDropRequest = getValues(FIELD.PICKDROP_REQUEST);
 
   useEffect(() => {
     setValue(FIELD.PICKDROP_INFO_TERM, true);
@@ -26,7 +26,13 @@ const PickDropInfo = () => {
     if (pickDropRequest === "미신청") {
       setValue(FIELD.PICKDROP_REQUEST, "신청");
     }
-  }, [pickDropRequest, setValue, watch]);
+  }, [pickDropRequest, setValue, getValues]);
+
+  const formatPickdropRequest = getLabelForValue(
+    FIELD.PICKDROP_REQUEST,
+    getValues(FIELD.PICKDROP_REQUEST)
+  );
+  const formatPickdropType = getLabelForValue(FIELD.PICKDROP_TYPE, getValues(FIELD.PICKDROP_TYPE));
 
   return (
     <>
@@ -42,8 +48,7 @@ const PickDropInfo = () => {
           name={FIELD.PICKDROP_REQUEST}
           radiosText={["신청", "미신청"]}
           isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_REQUEST)}
-          defaultSelect={pickDropRequest === "REQUEST" ? "신청" : "미신청"}
-          preventDefaultClick={handlePreventDefault}
+          defaultSelect={formatPickdropRequest}
         />
       </Card>
       {pickDropRequest === "신청" && (
@@ -56,8 +61,7 @@ const PickDropInfo = () => {
               name={FIELD.PICKDROP_TYPE}
               radiosText={["편도", "왕복"]}
               isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_TYPE)}
-              defaultSelect={watch(FIELD.PICKDROP_TYPE) === "ONE_WAY" ? "편도" : "왕복"}
-              preventDefaultClick={handlePreventDefault}
+              defaultSelect={formatPickdropType}
             />
           </Card>
           <Card>
@@ -79,7 +83,7 @@ const PickDropInfo = () => {
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
             <TextArea
               {...register(FIELD.PICKDROP_INFO)}
-              isChecked={watch(FIELD.PICKDROP_INFO_TERM)}
+              isChecked={getValues(FIELD.PICKDROP_INFO_TERM)}
               disabled
             />
             <Stack>

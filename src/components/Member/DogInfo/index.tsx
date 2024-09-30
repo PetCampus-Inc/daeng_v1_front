@@ -55,7 +55,7 @@ const DogInfo = ({ dogId }: { dogId: number }) => {
   };
 
   return (
-    <Flex direction="column" gap={24} pt={28} px={16}>
+    <Flex direction="column" gap={24} py={28} px={16}>
       <DogInfoBox data={data} dogId={dogId} />
 
       <DogMemoBox
