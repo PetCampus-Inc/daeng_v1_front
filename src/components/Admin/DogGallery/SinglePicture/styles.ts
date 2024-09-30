@@ -52,5 +52,8 @@ export const VideoIconWrap = styled.div`
   position: absolute;
   bottom: 4px;
   right: 4px;
-  opacity: 0.8;
+
+  svg {
+    filter: drop-shadow(0 0 10px ${({ theme }) => theme.colors.black});
+  }
 `;
