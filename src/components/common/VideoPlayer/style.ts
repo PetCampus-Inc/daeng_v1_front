@@ -4,6 +4,7 @@ import { hexToRGBA } from "utils/color";
 export const Container = styled.div`
   position: relative;
   height: 100%;
+  width: 100%;
 `;
 
 export const Video = styled.video`
