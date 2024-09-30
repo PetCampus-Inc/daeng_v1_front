@@ -14,7 +14,7 @@ export const getFilePreview = (file: File): Promise<IFile> => {
   });
 };
 
-const getVideoThumb = (file: File): Promise<IFile> => {
+export const getVideoThumb = (file: File): Promise<IFile> => {
   return new Promise((resolve, reject) => {
     const videoElement = document.createElement("video");
     videoElement.muted = true;
