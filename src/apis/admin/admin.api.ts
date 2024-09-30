@@ -10,7 +10,9 @@ import type {
   AdminLoginInfo,
   INewAlarm,
   IAlarmReq,
-  IGetAlarm
+  IGetAlarm,
+  AdminDogImageRequest,
+  AdminDogImageResponse
 } from "types/admin/admin.types";
 
 // 아이디 중복확인
@@ -122,5 +124,11 @@ export const handleGetAlarm = async (req: IAlarmReq) => {
       }
     }
   });
+  return data;
+};
+
+export const fetchDogImage = async (req: AdminDogImageRequest): Promise<AdminDogImageResponse> => {
+  const url = `admin/dog/album`;
+  const { data } = await request<AdminDogImageResponse>({ url, params: req });
   return data;
 };
