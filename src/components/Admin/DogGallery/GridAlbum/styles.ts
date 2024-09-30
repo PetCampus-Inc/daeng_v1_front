@@ -5,8 +5,13 @@ export const GridAlbumContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
   gap: 3rem;
   padding: 2rem 0 7rem;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
   .inner {
     gap: 0.6rem;
