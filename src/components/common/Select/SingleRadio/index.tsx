@@ -3,9 +3,9 @@ import { useFormContext, Controller } from "react-hook-form";
 
 import * as S from "../styles";
 
-import type { ISelect } from "../select.type";
-
-interface ISingleRadio extends ISelect {
+interface ISingleRadio {
+  name?: string;
+  caption?: string;
   radiosText: string[];
   disabled?: boolean;
   defaultSelect?: string;

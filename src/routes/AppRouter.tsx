@@ -91,10 +91,26 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             },
             {
-              path: routes.policy.root,
+              path: routes.policy.service.root,
               element: (
                 <Suspense>
-                  <Pages.PolicyPage />
+                  <Pages.ServicePolicyPage />
+                </Suspense>
+              )
+            },
+            {
+              path: routes.policy.privacy.root,
+              element: (
+                <Suspense>
+                  <Pages.PrivacyPolicyPage />
+                </Suspense>
+              )
+            },
+            {
+              path: routes.policy.usage.root,
+              element: (
+                <Suspense>
+                  <Pages.UsagePolicyPage />
                 </Suspense>
               )
             }

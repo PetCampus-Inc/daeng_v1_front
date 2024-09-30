@@ -144,13 +144,13 @@ export interface DogVaccination {
 export interface MemberDogInfoReq {
   dogId: number;
   dogName: string;
-  dogGender: DogGenderType | "";
-  dogSize: DogSizeType | "";
+  dogGender: DogGenderType;
+  dogSize?: DogSizeType;
   breedId: number;
   newBreed: string;
-  profileUri: string | "";
+  profileUri: string;
   birthDate: string;
-  neutralization: NeutralizationType | "";
+  neutralization: NeutralizationType;
 }
 
 export interface MemberDogInfoFormData

@@ -48,8 +48,13 @@ const AccountSettingPage = ({ type, info, onNextStep }: IStepProps) => {
 
       mutateTeacherSignUp(req, {
         onSuccess: (res) => {
-          mutateLogin({ inputId: data.id, inputPw: data.pwd, fcmToken });
-          onNextStep?.({ role: res.role, adminId: res.adminId, schoolName: res.schoolName });
+          mutateLogin(
+            { inputId: data.id, inputPw: data.pwd, fcmToken },
+            {
+              onSuccess: () =>
+                onNextStep?.({ role: res.role, adminId: res.adminId, schoolName: res.schoolName })
+            }
+          );
         }
       });
     } else {

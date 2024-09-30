@@ -4,48 +4,41 @@ import { useMutation } from "@tanstack/react-query";
 import {
   handleDeleteOwner,
   handleDeleteTeacher,
-  handleOwnerProfileEdit,
+  updateAdminProfile,
   handlePostSchoolResigned,
-  handleSchoolInfoEdit,
-  handleTeacherProfileEdit
+  handleSchoolInfoEdit
 } from "apis/admin/mypage.api";
 import { useNavigate } from "react-router-dom";
-import { IAdminProfileEdit, ISchoolInfoEdit } from "types/admin/admin.types";
+import { useSetRecoilState } from "recoil";
+import { adminInfoState } from "store/admin";
 import showToast from "utils/showToast";
 
 //원장 프로필 수정
-export const useOwnerProfileEdit = () => {
-  const navigate = useNavigate();
-  const ownerProfileEditMutation = useMutation({
-    mutationFn: (newData: IAdminProfileEdit) => handleOwnerProfileEdit(newData),
-    onSuccess: () => {
-      navigate(routes.admin.mypage.root);
-      showToast("수정 완료되었습니다", "bottom");
-    },
-    throwOnError: true
-  });
-  return { ownerProfileEditMutation: ownerProfileEditMutation.mutate };
-};
+export const useAdminProfileUpdate = () => {
+  const setAdmin = useSetRecoilState(adminInfoState);
 
-//선생님 프로필 수정
-export const useTeacherProfileEdit = () => {
-  const navigate = useNavigate();
-  const teacherProfileEditMutation = useMutation({
-    mutationFn: (newData: IAdminProfileEdit) => handleTeacherProfileEdit(newData),
-    onSuccess: () => {
-      navigate(routes.admin.mypage.root);
+  const { mutate } = useMutation({
+    mutationFn: updateAdminProfile,
+    onSuccess: (_, { adminName, phoneNumber, imageUrl }) => {
+      setAdmin((prev) => ({
+        ...prev,
+        adminName,
+        phoneNumber,
+        profileUri: imageUrl
+      }));
+
       showToast("수정 완료되었습니다", "bottom");
     },
     throwOnError: true
   });
-  return { teacherProfileEditMutation: teacherProfileEditMutation.mutate };
+  return { updateAdminProfileMutate: mutate };
 };
 
 //원장 유치원 정보 수정
 export const useSchoolInfoEdit = () => {
   const navigate = useNavigate();
   const schoolInfoEditMutation = useMutation({
-    mutationFn: (newData: ISchoolInfoEdit) => handleSchoolInfoEdit(newData),
+    mutationFn: handleSchoolInfoEdit,
     onSuccess: () => {
       navigate(routes.admin.mypage.root);
       showToast("유치원 정보가 수정되었습니다", "bottom");

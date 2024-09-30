@@ -25,6 +25,7 @@ const MemberDogInfoEditPage = () => {
     mode: "onBlur",
     shouldUnregister: false,
     defaultValues: {
+      newBreed: data.breedName,
       year: dogBirth.year,
       month: dogBirth.month,
       day: dogBirth.day,

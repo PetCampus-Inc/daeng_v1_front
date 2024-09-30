@@ -28,7 +28,7 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...defaultFormValues, ...rest }
+    defaultValues: { ...defaultFormValues, ...rest, openDays: [""] }
   });
 
   const visibleSteps = MEMBER_ENROLL_STEP.filter((step) => step.isVisible(pickDropState));

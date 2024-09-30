@@ -36,6 +36,7 @@ const SearchInputField = forwardRef(function SearchInputField(
     <StyledInputWrapper>
       <TextInputField
         type="search"
+        inputMode="search"
         ref={ref}
         name={name}
         value={value}
