@@ -7,6 +7,7 @@ import TeacherProfile from "components/Admin/MyPage/TeacherProfile/index";
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
 import useGetTeacherInfo from "hooks/api/useGetTeacherInfo";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminRole } from "types/common/role.types";
@@ -15,6 +16,8 @@ const TeacherMyPage = () => {
   const { data } = useGetTeacherInfo();
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
+
+  const { profileUri } = useAdminInfo();
 
   return (
     <>
@@ -28,18 +31,16 @@ const TeacherMyPage = () => {
         <EditProfile />
       ) : (
         <>
-          <PageContainer
-            pt="7"
-            imageUrl={
-              data && data.profileUri
-                ? data.profileUri
-                : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          >
+          <PageContainer pt="7" imageUrl={profileUri}>
             {/* TODO: data.imageURL 없는 경우 기본 이미지 url로 연결 */}
             <ContentContainer>
               {data && (
-                <TeacherProfile data={data} setIsEditing={setIsEditing} isEditing={isEditing} />
+                <TeacherProfile
+                  data={data}
+                  profileUri={profileUri}
+                  setIsEditing={setIsEditing}
+                  isEditing={isEditing}
+                />
               )}
               <CardContainer>
                 <InfoCard data={data} role={AdminRole.ROLE_TEACHER} />

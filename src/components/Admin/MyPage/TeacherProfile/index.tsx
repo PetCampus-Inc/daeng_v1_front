@@ -1,27 +1,22 @@
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import { Flex } from "components/common";
+
 import * as S from "./styles";
 
 import type { ITeacherInfo } from "types/admin/mypage.types";
-import ArrowRightIcon from "assets/svg/arrow-right-icon";
 
 interface TeacherInfoProps {
   data: ITeacherInfo;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   isEditing: boolean;
+  profileUri: string;
 }
 
-const TeacherProfile = ({ data, setIsEditing, isEditing }: TeacherInfoProps) => {
+const TeacherProfile = ({ data, profileUri, setIsEditing, isEditing }: TeacherInfoProps) => {
   return (
     <>
       <S.ProfileWrapper>
-        <S.ProfileImage
-          src={
-            data.profileUri
-              ? data.profileUri
-              : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-          alt="dog-image"
-        />
+        <S.ProfileImage src={profileUri} alt="dog-image" />
         <S.ProfileDetail>
           <S.DetailItem>
             <S.PrimaryColorButton onClick={() => setIsEditing(!isEditing)}>
