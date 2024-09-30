@@ -91,12 +91,19 @@ export const VideoPlayer = (props: VideoHTMLAttributes<HTMLVideoElement>) => {
       }
     };
 
+    const handlePause = () => {
+      setIsPlaying(false);
+      setIsShowController(true);
+    };
+
     video.addEventListener("timeupdate", updateProgress);
     video.addEventListener("play", handleLoadedVideo);
+    video.addEventListener("pause", handlePause);
 
     return () => {
       video.removeEventListener("timeupdate", updateProgress);
       video.removeEventListener("play", handleLoadedVideo);
+      video.removeEventListener("pause", handlePause);
     };
   }, [isLoaded]);
 
