@@ -16,7 +16,9 @@ const PrincipalProfile = ({ data, setIsEditing, isEditing, profileUri }: Princip
   return (
     <>
       <S.ProfileWrapper>
-        <S.ProfileImage src={profileUri} alt="dog-image" />
+        <S.ProfileImageWrap>
+          <S.Image src={profileUri} />
+        </S.ProfileImageWrap>
         {/* TODO: data.imageURL 없는 경우 기본 이미지 url로 연결 */}
 
         <S.ProfileDetail>

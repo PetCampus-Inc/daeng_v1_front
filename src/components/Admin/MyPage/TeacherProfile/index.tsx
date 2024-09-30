@@ -16,7 +16,10 @@ const TeacherProfile = ({ data, profileUri, setIsEditing, isEditing }: TeacherIn
   return (
     <>
       <S.ProfileWrapper>
-        <S.ProfileImage src={profileUri} alt="dog-image" />
+        <S.ProfileImageWrap>
+          <S.Image src={profileUri} />
+        </S.ProfileImageWrap>
+
         <S.ProfileDetail>
           <S.DetailItem>
             <S.PrimaryColorButton onClick={() => setIsEditing(!isEditing)}>

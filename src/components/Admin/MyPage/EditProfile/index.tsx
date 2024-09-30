@@ -56,6 +56,7 @@ const EditProfile = () => {
         files: [data.profileUri],
         path: "profile"
       });
+      if (!imageUrl) throw new Error("이미지 업로드 중 오류 발생");
 
       const formData = {
         imageUrl,
