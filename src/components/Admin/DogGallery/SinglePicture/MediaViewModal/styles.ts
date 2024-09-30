@@ -2,11 +2,16 @@ import styled from "styled-components";
 import { hexToRGBA } from "utils/color";
 
 export const Container = styled.div`
+  position: relative;
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 11;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   width: 90%;
   aspect-ratio: 0.7;
