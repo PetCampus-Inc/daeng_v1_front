@@ -4,7 +4,7 @@ import { ButtonInput, Flex, SearchInput, Text, TextInput } from "components/comm
 import Postcode from "components/common/Postcode";
 import { useCheckRegNum } from "hooks/api/signup";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { formatBusinessNumber, formatSchoolNumber } from "utils/formatter";
 
@@ -13,6 +13,7 @@ import AddressModifyBottomSheet from "../modal/AddressModifyBottomSheet";
 const SchoolInfo = () => {
   const {
     register,
+    unregister,
     setValue,
     watch,
     getFieldState,
@@ -22,20 +23,18 @@ const SchoolInfo = () => {
     formState: { errors }
   } = useFormContext();
 
-  const regNum = watch("registrationNumber");
+  const isValidRegNumber = watch("regNumberValid");
+  const regNumber = watch("registrationNumber");
   const regNumFieldState = getFieldState("registrationNumber");
   const watchAddress = watch("schoolAddress", "");
-
-  const [isValidRegNum, setIsValidRegNum] = useState<boolean>(false);
 
   const { mutateCheckRegNum } = useCheckRegNum();
   const overlay = useOverlay();
 
   useEffect(() => {
-    if (regNumFieldState.isDirty) {
-      setIsValidRegNum(false);
-    }
-  }, [regNum, regNumFieldState.isDirty]);
+    register("regNumberValid", { required: true, value: false });
+    return () => unregister("regNumberValid");
+  }, [register, unregister]);
 
   const handleValid = () => {
     const schoolNum = getValues("registrationNumber").replace(/-/g, "");
@@ -43,8 +42,9 @@ const SchoolInfo = () => {
       onSuccess: (res) => {
         if (res === "01") {
           clearErrors("registrationNumber");
-          setIsValidRegNum(true);
+          setValue("regNumberValid", true);
         } else {
+          setValue("regNumberValid", false);
           setError("registrationNumber", {
             type: "manual",
             message: "올바르지 않은 사업자 등록 번호입니다."
@@ -104,6 +104,7 @@ const SchoolInfo = () => {
           name="schoolName"
           register={register}
           placeholder="유치원 이름을 입력해 주세요"
+          autoFocus
           rules={{
             maxLength: 20
           }}
@@ -116,6 +117,7 @@ const SchoolInfo = () => {
         </Text>
         <TextInput
           name="schoolPhoneNumber"
+          inputMode="tel"
           register={register}
           placeholder="유치원 연락처를 입력해 주세요"
           rules={{
@@ -155,7 +157,7 @@ const SchoolInfo = () => {
               {errors.registrationNumber.message?.toString()}
             </Text>
           )}
-          {isValidRegNum && !errors.registrationNumber && (
+          {isValidRegNumber && !errors.registrationNumber && (
             <Text as="span" typo="caption1_12_R" color="green">
               인증되었습니다.
             </Text>
@@ -163,9 +165,13 @@ const SchoolInfo = () => {
         </Flex>
         <ButtonInput
           name="registrationNumber"
+          label="인증하기"
           register={register}
+          inputMode="numeric"
+          btnHidden={isValidRegNumber}
           placeholder="사업자 등록번호를 입력해 주세요"
           onChange={(e) => {
+            setValue("regNumberValid", false);
             handleChangeBusinessNumber("registrationNumber")(e);
             register("registrationNumber").onChange(e);
           }}
@@ -173,9 +179,7 @@ const SchoolInfo = () => {
           rules={{
             pattern: REGISTRATION_REGEX
           }}
-          enabled={
-            !errors.registrationNumber && !regNumFieldState.invalid && regNumFieldState.isTouched
-          }
+          enabled={regNumber && !isValidRegNumber && regNumFieldState.isDirty}
           required
         />
       </Flex>

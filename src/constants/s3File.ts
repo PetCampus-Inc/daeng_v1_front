@@ -22,6 +22,6 @@ export const FILE_NAME = {
   PROFILE_ADMIN: "adminProfileUri",
   PROFILE_MEMBER: "memberProfileUri",
   PROFILE_DOG: "dogProfileUri",
-  PROFILE_COMMON: "profilUri",
+  PROFILE_COMMON: "profileUri",
   VACCINATION: "vaccinationUri"
 };

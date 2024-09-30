@@ -1,5 +1,3 @@
-import { IResponse } from "types/Response.type";
-
 export interface IPastDogSchoolList {
   schoolName: string;
   schoolNumber: string;
@@ -18,7 +16,7 @@ export interface ITicket {
   ticketHistory: string[];
 }
 
-export interface IMemberSchoolInfo extends IResponse {
+export interface IMemberSchoolInfo {
   schoolId: number;
   schoolName: string;
   schoolNumber: string;

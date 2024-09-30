@@ -2,11 +2,13 @@ import { Role } from "types/common/role.types";
 
 import type { Nullable } from "../helper.types";
 
-export type AdminAuthType = {
+export interface AdminProfile {
   adminName: string;
+  phoneNumber: string;
+  profileUri: string;
   schoolId: number;
   schoolName: string;
-};
+}
 
 export interface ITeacherSignUpData {
   adminId: number;
@@ -45,14 +47,13 @@ export interface AdminLoginInfo {
   fcmToken: string;
 }
 
-export interface IAdminProfileEdit {
-  imageUrl: string;
+export interface AdminProfileUpdate {
   adminName: string;
   phoneNumber: string;
+  imageUrl: string;
 }
 
 export interface ISchoolInfoEdit {
-  adminId: number;
   schoolId: number;
   schoolName: string;
   phoneNumber: string;

@@ -17,7 +17,18 @@ const common = {
   },
   /** 서비스 정책 */
   policy: {
-    root: "/policy "
+    /** 이용약관 */
+    usage: {
+      root: "/policy/usage"
+    },
+    /** 개인정보 처리 방침 */
+    privacy: {
+      root: "/policy/privacy"
+    },
+    /** 서비스 정책 */
+    service: {
+      root: "/policy/service"
+    }
   },
   /** 승인 상태 */
   approval: {

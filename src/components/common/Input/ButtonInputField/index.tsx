@@ -4,15 +4,17 @@ import { StyledButtonWrapper, StyledConfirmButton, StyledInputWrapper } from "..
 import TextInputField, { InputFieldProps } from "../TextInputField";
 
 type ButtonInputProps = {
+  label?: string;
   handleClick?: () => void;
   enabled?: boolean;
+  btnHidden?: boolean;
 } & InputFieldProps;
 
 const ButtonInputField = forwardRef(function ButtonInputField(
   props: ButtonInputProps,
   ref?: ForwardedRef<HTMLInputElement>
 ) {
-  const { handleClick, enabled, ...rest } = props;
+  const { handleClick, enabled, label, btnHidden, ...rest } = props;
 
   return (
     <StyledInputWrapper>
@@ -20,11 +22,12 @@ const ButtonInputField = forwardRef(function ButtonInputField(
       <StyledButtonWrapper>
         <StyledConfirmButton
           type="button"
+          data-state-hidden={btnHidden}
           onClick={handleClick}
           disabled={!enabled}
           className={enabled ? "" : "inactive"}
         >
-          중복확인
+          {label}
         </StyledConfirmButton>
       </StyledButtonWrapper>
     </StyledInputWrapper>

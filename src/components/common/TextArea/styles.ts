@@ -14,7 +14,8 @@ export const TextAreaInput = styled.textarea.withConfig({
 
   padding: 12px 18px;
   border-radius: 8px;
-  border: 1px solid ${(props) => (props.$isChecked ? props.theme.colors.br_2 : props.theme.colors.gray_4)};
+  border: 1px solid
+    ${(props) => (props.$isChecked ? props.theme.colors.br_2 : props.theme.colors.gray_4)};
 
   ${({ theme }) => theme.typo.label1_16_R};
   color: ${(props) =>
@@ -30,12 +31,13 @@ export const TextAreaInput = styled.textarea.withConfig({
   outline-offset: 2px;
   overflow-y: hidden;
 
-  transition: color, border-color 0.2s ease-out;
+  transition:
+    color,
+    border-color 0.2s ease-out;
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.gray_3};
   }
-
 
   &:focus {
     outline: none;
@@ -62,4 +64,5 @@ export const TextAreaInput = styled.textarea.withConfig({
     border: 1px solid ${props.theme.colors.br_2};
     color: ${props.theme.colors.primaryColor};
     `}
+  }
 `;

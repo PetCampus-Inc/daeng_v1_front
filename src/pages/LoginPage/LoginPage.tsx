@@ -30,8 +30,8 @@ const LoginPage = () => {
       <Box position="absolute" left={16} right={16} bottom={24}>
         <Flex direction="column" align="center" gap={8}>
           <Text typo="label2_14_M" color="gray_2">
-            <Link to={"이용약관"}>이용약관</Link> |{" "}
-            <Link to={"개인정보 처리 방침"}>개인정보 처리 방침</Link>
+            <Link to={routes.policy.usage.root}>이용약관</Link> |{" "}
+            <Link to={routes.policy.privacy.root}>개인정보 처리 방침</Link>
           </Text>
           <StyledButton bg="primaryColor" onClick={() => navigate(routes.admin.login.root)}>
             <Text typo="label1_16_B" color="white">

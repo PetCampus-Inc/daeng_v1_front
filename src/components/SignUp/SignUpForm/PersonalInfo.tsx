@@ -11,6 +11,9 @@ const PersonalInfo = () => {
     const value = e.target.value;
     const formattedValue = formatPhoneNumber(value);
     setValue(field, formattedValue);
+
+    // 정규식 테스트 통과 시 블러 처리
+    if (PHONE_REGEX.test(formattedValue)) e.target.blur();
   };
 
   return (
@@ -23,6 +26,8 @@ const PersonalInfo = () => {
         </Flex>
         <TextInput
           name="name"
+          autoFocus
+          inputMode="text"
           register={register}
           rules={{
             maxLength: { value: 10, message: "이름은 10자 이내로 입력해주세요" }
@@ -40,6 +45,7 @@ const PersonalInfo = () => {
 
         <TextInput
           name="phoneNumber"
+          inputMode="tel"
           register={register}
           rules={{
             pattern: {

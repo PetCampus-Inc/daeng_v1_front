@@ -1,12 +1,13 @@
 import axios from "axios";
 import authAxios from "libs/AuthAxios";
-import { request, Response } from "libs/AuthAxios/request";
+import { request } from "libs/AuthAxios/request";
+import { ApiResponse } from "types/Response.type";
 
 import type {
   IOwnerSignUpInfo,
   ITeacherSignUpData,
   ITeacherSignUpInfo,
-  AdminAuthType,
+  AdminProfile,
   AdminLoginInfo,
   INewAlarm,
   IAlarmReq,
@@ -25,14 +26,14 @@ export const getCheckId = async (id: string): Promise<number> => {
 // 관리자 로그인
 export const postAdminLogin = async (
   req: AdminLoginInfo
-): Promise<{ data: AdminAuthType; accessToken: string }> => {
+): Promise<{ data: AdminProfile; accessToken: string }> => {
   const url = `admin/login`;
   const body = {
     id: req.inputId,
     pwd: req.inputPw,
     fcmToken: req.fcmToken
   };
-  const response = await authAxios.post<Response<AdminAuthType>>(url, body);
+  const response = await authAxios.post<ApiResponse<AdminProfile>>(url, body);
 
   const accessToken = response.headers["authorization"];
   return { data: response.data.data, accessToken };

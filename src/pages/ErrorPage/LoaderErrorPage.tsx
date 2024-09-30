@@ -5,10 +5,10 @@ import { ErrorPageLayout } from "components/Error";
 import { useRouteError } from "react-router-dom";
 import { Img } from "styles/StyleModule";
 
-import type { IError } from "types/Response.type";
+import type { ApiErrorResponse } from "types/Response.type";
 
 const LoaderErrorPage = () => {
-  const error = useRouteError() as IError;
+  const error = useRouteError() as ApiErrorResponse;
 
   if (process.env.NODE_ENV === "development") console.log("에러로깅: ", error);
 
@@ -29,7 +29,7 @@ const LoaderErrorPage = () => {
           <Img src={ErrorDogSvg} alt={"에러 알림 강아지"} />
         </picture>
         <Text typo="body2_16_R" color="gray_2">
-          {`${error?.data.code} error`}
+          {`${error.code} error`}
         </Text>
       </Box>
     </ErrorPageLayout>

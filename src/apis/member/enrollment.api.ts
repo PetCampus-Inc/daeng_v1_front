@@ -106,8 +106,12 @@ export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolI
  * @param {string} dogId
  */
 export const handlePostMemberDogSchool = async (dogId: string): Promise<void> => {
-  const url = `member/dog/school?dogId=${dogId}`;
-  const { data } = await authAxios.post(url);
+  const url = `member/dog/school`;
+  const { data } = await authAxios.post(url, {
+    params: {
+      dogId
+    }
+  });
   return data;
 };
 
@@ -116,8 +120,12 @@ export const handlePostMemberDogSchool = async (dogId: string): Promise<void> =>
  * @param {number} dogId
  */
 export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
-  const url = `member/dog/enrollment?dogId=${dogId}`;
-  const { data } = await authAxios.get(url);
+  const url = `member/dog/enrollment`;
+  const { data } = await authAxios.get(url, {
+    params: {
+      dogId
+    }
+  });
   return data.data;
 };
 
