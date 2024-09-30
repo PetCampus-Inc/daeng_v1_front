@@ -50,7 +50,7 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
     };
 
     const params = [dogParams];
-    onSubmit();
+
     await uploadFiles(params, {
       onSuccess: () => {
         setShouldSubmit(true);
