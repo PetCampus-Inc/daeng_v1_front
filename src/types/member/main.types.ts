@@ -58,6 +58,7 @@ export interface IDoglist {
   schoolName: string;
   registeredDate: number[];
   dropOutDate: number[];
+  enrollmentFormId: number;
 }
 
 export interface IDogRejected {
