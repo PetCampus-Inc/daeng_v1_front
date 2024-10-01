@@ -1,13 +1,8 @@
-import { routes } from "constants/path";
-import { QUERY_KEY } from "constants/queryKey";
 import { getFieldStep } from "constants/step";
 
-import { useQueryClient } from "@tanstack/react-query";
-import { useEnrollmentStorage } from "components/Member/MyPage/hooks/useEnrollmentStorage";
 import { usePostMemberEnrollment } from "hooks/api/member/enroll";
 import { Adapter, MemberFormToServerAdapter } from "libs/adapters";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 import { FormButton } from "styles/StyleModule";
@@ -15,11 +10,8 @@ import { FormButton } from "styles/StyleModule";
 import type { EnrollmentInfoType, MemberGenderType } from "types/member/enrollment.types";
 
 const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const { handleSubmit, getValues } = useFormContext();
   const { mutateMemberEnrollment } = usePostMemberEnrollment();
-  const { createStorageEnrollment } = useEnrollmentStorage();
 
   const setStep = useSetRecoilState(currentStepState);
 
@@ -48,16 +40,11 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
 
   // member - 강아지 추가 및 유치원 재등록
   const onSubmitMember = (data: FieldValues) => {
-    const { dogName } = getValues();
     const requestData = getSubmitFormInfo(data);
     const memberData = getMemberData();
     const reqData = { ...requestData, ...memberData };
 
-    mutateMemberEnrollment(reqData, {
-      onSuccess: (enrollmentFormId) => {
-        createStorageEnrollment(String(enrollmentFormId), dogName);
-      }
-    });
+    mutateMemberEnrollment(reqData, {});
   };
 
   const onInvalid = (errors: FieldErrors) => {
