@@ -91,7 +91,7 @@ export const useDeleteMemebrEnrollment = () => {
   const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: number) => handleDeleteMemberEnrollment(enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
     }
   });
 

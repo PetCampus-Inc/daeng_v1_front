@@ -107,7 +107,7 @@ export const useGetMainAlbum = (req: IMainAlbum) => {
 // 견주 정보
 export const useGetMemberInfo = () => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_INFO,
+    queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO,
     queryFn: () => handleGetMemberInfo()
   });
 };
@@ -168,7 +168,7 @@ export const usePostMemberDogEnrollment = () => {
   const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: number) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
       // FIXME logout을 넣으신 이유가 궁금합니다!
       // logout();
     },
@@ -186,7 +186,7 @@ export const usePostMemberDogDelete = () => {
   const memberDogDeleteMutation = useMutation({
     mutationFn: (dogId: string) => handlePostMemberDogDelete(dogId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
     }
   });
 
