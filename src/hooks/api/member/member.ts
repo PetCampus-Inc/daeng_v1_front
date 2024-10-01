@@ -1,6 +1,7 @@
 import { FIELD } from "constants/field";
 import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
+import { RELATION_DATA } from "constants/relation";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
@@ -60,7 +61,9 @@ export const useGetHomeInfo = (dogId: number) => {
       return {
         ...res,
         attendanceDate: res.attendanceDate?.join("-"),
-        imageList: updatedImageList
+        imageList: updatedImageList,
+        // FIXME RELATION_DATA 사용하지 않고 ITEM에 추가해 사용하기
+        relation: RELATION_DATA[res.relation]
       };
     }
   });
