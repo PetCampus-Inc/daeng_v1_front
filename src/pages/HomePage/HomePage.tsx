@@ -1,4 +1,5 @@
 import { STORAGE_KEY } from "constants/memberDogStatus";
+import { routes } from "constants/path";
 
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
@@ -11,18 +12,21 @@ import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
 import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [selectedDogId] = useRecoilState(dogIdState);
-  const CURRENT_DOG_ID = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "");
+  const CURRENT_DOG_ID = useLocalStorage(STORAGE_KEY.CURRENT_DOG_ID, 0);
 
+  const defaultDogId = Number(CURRENT_DOG_ID);
+
+  const dogId = selectedDogId && selectedDogId !== 0 ? selectedDogId : defaultDogId;
   // FIXME selectedDogId, CURRENT_DOG_ID 데이터가 없을 경우 예외 처리 필요
-  const defaultDogId = Number(CURRENT_DOG_ID) ?? 1;
-
-  const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
-  const { data } = useGetHomeInfo(dogId);
+  const { data } = useGetHomeInfo(dogId ? dogId : 1);
 
   const overlay = useOverlay();
   const prefetchDogs = usePrefetchDogs();
@@ -39,6 +43,13 @@ const HomePage = () => {
     dogName: data.dogName,
     dogId: data.dogId
   };
+
+  useLayoutEffect(() => {
+    // dogProfile 데이터가 없을 경우
+    if (!data.dogProfile) {
+      navigate(routes.member.profile.dog.root);
+    }
+  }, []);
 
   return (
     <>
