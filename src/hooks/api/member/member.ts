@@ -318,11 +318,13 @@ export const usePostMemberProfile = () => {
 };
 
 // 강아지 승인 후 초기 프로필 설정 (두번째 강아지 이후)
-export const usePostDogProfile = () => {
+export const usePostDogProfile = (dogId: number) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: (req: DogProfileReq) => handlePostDogProfile(req),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.HOME(dogId) });
       navigate(routes.root);
     },
     onError: () => {
