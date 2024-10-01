@@ -6,15 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import SaveProfileButton from "../../components/Member/Profile/Button/SaveProfileButton";
 
 const MemberProfileEditPage = () => {
-  // const { data } = useGetMemberProfile();
-
-  const data = {
-    dogId: 1,
-    memberProfileUri: "",
-    dogProfileUri: "",
-    dogName: "거튼이",
-    relation: ""
-  };
+  const { data } = useGetMemberProfile();
 
   const { dogName, ...rest } = data;
 
