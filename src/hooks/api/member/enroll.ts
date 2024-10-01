@@ -65,7 +65,7 @@ export const usePostMemberEnrollment = () => {
   const { mutate } = useMutation({
     mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
       navigate(routes.member.mypage.root);
     }
   });
