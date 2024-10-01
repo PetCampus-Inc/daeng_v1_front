@@ -33,18 +33,6 @@ export default function DogInfoPage() {
     });
   };
 
-  // useEffect(() => {
-  //   if (!searchParams.get("tab")) {
-  //     setSearchParams(
-  //       (prev) => {
-  //         prev.set("tab", currentTab);
-  //         return prev;
-  //       },
-  //       { replace: true }
-  //     );
-  //   }
-  // }, []);
-
   return (
     <>
       <Header
@@ -54,7 +42,7 @@ export default function DogInfoPage() {
         rightElement={
           <GalleryIcon
             handleTouch={() => {
-              navigate("gallery");
+              navigate(routes.admin.attendance.gallery.dynamic(dogId));
             }}
           />
         }

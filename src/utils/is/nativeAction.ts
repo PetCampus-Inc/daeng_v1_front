@@ -9,7 +9,7 @@ const responsePayloadSchema: ResponsePayloadSchemaType = {
   CALL: z.null(),
   SELECT_IMAGE: z.array(z.string()),
   LAUNCH_CAMERA: z.string(),
-  SAVE_IMAGE: z.null(),
+  SAVE_MEDIA: z.null(),
   FCM_TOKEN: z.string(),
   SOCIAL_LOGIN: z.object({ idToken: z.string(), deviceId: z.string(), fcmToken: z.string() }),
   GET_SECURITY_STORAGE: z.string(),
@@ -34,8 +34,12 @@ export function isNativeActionResponse<T extends NativeAction>(
     typeof action === "string" && NATIVE_ACTION_RESPONSE.includes(action as NativeAction);
   const isStatus = status === "SUCCESS" || status === "ERROR";
 
-  const schema = responsePayloadSchema[action];
-  const isActionResponsePayload = schema ? schema.safeParse(payload).success : false;
+  let isResponsePayload = false;
+  if (status === "ERROR") isResponsePayload = typeof payload === "string";
+  else {
+    const schema = responsePayloadSchema[action];
+    isResponsePayload = schema ? schema.safeParse(payload).success : false;
+  }
 
-  return typeof id === "string" && isAction && isStatus && isActionResponsePayload;
+  return typeof id === "string" && isAction && isStatus && isResponsePayload;
 }
