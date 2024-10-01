@@ -41,7 +41,7 @@ const MemberEnrollmentFunnel = () => {
       </Funnel.Step>
       <Funnel.Step name={가입신청서_작성}>
         <Suspense>
-          {dogId ? (
+          {dogId && dogId !== 0 ? (
             // 유치원 재가입
             <MemberSchoolReEnrollmentPage schoolId={state.schoolId} dogId={dogId} />
           ) : (

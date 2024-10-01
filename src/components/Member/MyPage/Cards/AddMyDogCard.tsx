@@ -16,7 +16,7 @@ const AddMyDogCard = () => {
       role="button"
       onClick={() => {
         navigate(routes.member.mypage.enrollment.root);
-        setDogId(null); // dogId 초기화
+        setDogId(0); // dogId 초기화
       }}
     >
       <AddCIcon className="addIcon" />
