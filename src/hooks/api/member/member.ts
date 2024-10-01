@@ -166,10 +166,11 @@ export const usePostMemberDogEnrollment = () => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
+    mutationFn: (enrollmentFormId: number) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
-      logout();
+      // FIXME logout을 넣으신 이유가 궁금합니다!
+      // logout();
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");

@@ -4,7 +4,7 @@ import { getFieldStep } from "constants/step";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useEnrollmentStorage } from "components/Member/MyPage/hooks/useEnrollmentStorage";
-import { usePostEnrollment } from "hooks/api/member/enroll";
+import { usePostMemberEnrollment } from "hooks/api/member/enroll";
 import { Adapter, MemberFormToServerAdapter } from "libs/adapters";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { handleSubmit, getValues } = useFormContext();
-  const { mutateEnrollment } = usePostEnrollment();
+  const { mutateMemberEnrollment } = usePostMemberEnrollment();
   const { createStorageEnrollment } = useEnrollmentStorage();
 
   const setStep = useSetRecoilState(currentStepState);
@@ -53,11 +53,8 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     const memberData = getMemberData();
     const reqData = { ...requestData, ...memberData };
 
-    mutateEnrollment(reqData, {
+    mutateMemberEnrollment(reqData, {
       onSuccess: (enrollmentFormId) => {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
-        navigate(routes.member.mypage.root);
-
         createStorageEnrollment(String(enrollmentFormId), dogName);
       }
     });
