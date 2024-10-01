@@ -1,11 +1,10 @@
-import { DOG_STATUS, STORAGE_KEY } from "constants/memberDogStatus";
+import { DOG_STATUS } from "constants/memberDogStatus";
 import { routes } from "constants/path";
 
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
-import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +41,6 @@ const MyDogCard = ({
   const [selectedDogId, setDogId] = useRecoilState(dogIdState);
   const setDogEnrollmentStatus = useSetRecoilState(dogEnrollmentStatus);
   const mutateMemberDogDelete = usePostMemberDogDelete();
-  const setStoredValue = useSetLocalStorage();
 
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
@@ -102,7 +100,6 @@ const MyDogCard = ({
   };
 
   const handleFocus = () => {
-    setStoredValue(STORAGE_KEY.CURRENT_DOG_ID, dogId);
     setDogId(Number(dogId));
     onCardFocus(dogId);
   };
