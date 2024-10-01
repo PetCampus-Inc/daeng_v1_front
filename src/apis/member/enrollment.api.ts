@@ -145,9 +145,7 @@ export const handleGetMemberDogEnrollment = async ({
  * @returns
  */
 export const handleDeleteMemberEnrollment = async (enrollmentFormId: number): Promise<void> => {
-  const url = `/member/delete/enrollment`;
-  const { data } = await authAxios.post(url, {
-    enrollmentFormId: enrollmentFormId
-  });
+  const url = `/member/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await authAxios.post(url);
   return data.data;
 };
