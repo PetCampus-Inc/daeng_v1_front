@@ -7,11 +7,13 @@ import SearchSchoolPage from "pages/SignUpPage/SearchSchoolPage";
 import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { dogIdState } from "store/member";
+import { dogIdState, dogEnrollmentStatus } from "store/member";
 import { User } from "types/common/role.types";
 
 const MemberEnrollmentFunnel = () => {
   const dogId = useRecoilValue(dogIdState);
+  const enrollmentStatus = useRecoilValue(dogEnrollmentStatus);
+
   const { 유치원_검색, 가입신청서_작성 } = MEMBER_ENROLLMENT_PATH;
   const funnelSteps = [유치원_검색, 가입신청서_작성] as const;
 
@@ -41,7 +43,7 @@ const MemberEnrollmentFunnel = () => {
       </Funnel.Step>
       <Funnel.Step name={가입신청서_작성}>
         <Suspense>
-          {dogId && dogId !== 0 ? (
+          {dogId && enrollmentStatus?.status === "RE_SCHOOL" ? (
             // 유치원 재가입
             <MemberSchoolReEnrollmentPage schoolId={state.schoolId} dogId={dogId} />
           ) : (

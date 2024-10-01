@@ -9,8 +9,8 @@ import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { dogIdState } from "store/member";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { dogEnrollmentStatus, dogIdState } from "store/member";
 import { IDoglist } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
@@ -40,6 +40,7 @@ const MyDogCard = ({
   const overlay = useOverlay();
   const divRef = useRef<HTMLDivElement>(null);
   const [selectedDogId, setDogId] = useRecoilState(dogIdState);
+  const setDogEnrollmentStatus = useSetRecoilState(dogEnrollmentStatus);
   const mutateMemberDogDelete = usePostMemberDogDelete();
   const setStoredValue = useSetLocalStorage();
 
@@ -89,6 +90,7 @@ const MyDogCard = ({
         actionText="가입하기"
         actionFn={() => {
           navigate(routes.member.mypage.enrollment.root);
+          setDogEnrollmentStatus({ status: "RE_SCHOOL" });
           setDogId(Number(dogId));
         }}
       />
