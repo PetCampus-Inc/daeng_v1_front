@@ -4,6 +4,7 @@ import { routes } from "constants/path";
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
+import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
 import DogManagerPopup from "components/Home/DogManagerPopup";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
@@ -54,6 +55,7 @@ const HomePage = () => {
   return (
     <>
       <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} />
+      {data.enrollmentFormStatus === "DROP_OUT" && <DisconnectionNotice />}
       <Layout type="main">
         <Box bgColor="white" py={32} px={16}>
           <HomeHeader data={data} />
