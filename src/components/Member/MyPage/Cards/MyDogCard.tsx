@@ -5,12 +5,12 @@ import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
 import { usePostMemberDogDelete } from "hooks/api/member/member";
-import { useLocalStorage, useSetLocalStorage } from "hooks/common/useLocalStorage";
+import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { dogIdState, dogProfileList } from "store/member";
+import { useRecoilState } from "recoil";
+import { dogIdState } from "store/member";
 import { IDoglist } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
 import showToast from "utils/showToast";
@@ -26,7 +26,6 @@ interface IMyDogCardProps {
   profileUri: string | null;
   dogLength: number;
   onCardFocus: (dogId: string) => void;
-  isActive: boolean;
 }
 
 const MyDogCard = ({
@@ -35,23 +34,21 @@ const MyDogCard = ({
   schoolInfo,
   profileUri,
   dogLength,
-  onCardFocus,
-  isActive
+  onCardFocus
 }: IMyDogCardProps) => {
-  const divRef = useRef<HTMLDivElement>(null);
-  const setDogProfile = useSetRecoilState(dogProfileList);
-  const setDogId = useSetRecoilState(dogIdState);
   const navigate = useNavigate();
   const overlay = useOverlay();
+  const divRef = useRef<HTMLDivElement>(null);
+  const [selectedDogId, setDogId] = useRecoilState(dogIdState);
   const mutateMemberDogDelete = usePostMemberDogDelete();
   const setStoredValue = useSetLocalStorage();
-  const [CURRENT_DOG_ID] = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "", true);
 
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
   const registeredTime = registeredDate && formatDate(year, month, day, "dot");
   const isProfile = profileUri === null;
 
+  // 한 마리만 있을 때 삭제할 경우
   const openInvalidInputPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <AlertBottomSheet
@@ -64,21 +61,7 @@ const MyDogCard = ({
       />
     ));
 
-  const openAlertPopup = () =>
-    overlay.open(({ isOpen, close }) => (
-      <AlertBottomSheet
-        isOpen={isOpen}
-        close={close}
-        title="등록된 유치원이 없어요"
-        subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
-        actionText="가입하기"
-        actionFn={() => {
-          navigate(routes.member.mypage.enrollment.root);
-          setDogId(Number(dogId));
-        }}
-      />
-    ));
-
+  // 강아지 삭제할 경우F
   const openDeleteDogPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <BasicModal
@@ -95,6 +78,22 @@ const MyDogCard = ({
       />
     ));
 
+  // 유치원 끊긴 강아지 유치원 정보를 보려고 할 떄
+  const openAlertPopup = () =>
+    overlay.open(({ isOpen, close }) => (
+      <AlertBottomSheet
+        isOpen={isOpen}
+        close={close}
+        title="등록된 유치원이 없어요"
+        subtitle="새로운 유치원 가입을 원하시면 가입을 진행해 주세요"
+        actionText="가입하기"
+        actionFn={() => {
+          navigate(routes.member.mypage.enrollment.root);
+          setDogId(Number(dogId));
+        }}
+      />
+    ));
+
   const handleDeleteDog = () => {
     mutateMemberDogDelete(dogId);
     showToast("강아지가 삭제되었습니다", "bottom");
@@ -107,12 +106,8 @@ const MyDogCard = ({
   };
 
   useEffect(() => {
-    setDogProfile([{ dogId: dogId, dogProfile: profileUri ?? "" }]);
-  }, [isActive]);
-
-  useEffect(() => {
-    if (CURRENT_DOG_ID) {
-      onCardFocus(CURRENT_DOG_ID);
+    if (selectedDogId) {
+      onCardFocus(String(selectedDogId));
     }
   }, []);
 
@@ -121,7 +116,7 @@ const MyDogCard = ({
       id={dogId}
       ref={divRef}
       tabIndex={dogLength}
-      className={`${isActive ? "active" : ""} ${isProfile ? "notProfile" : ""}`}
+      className={`${selectedDogId === Number(dogId) ? "active" : ""} ${isProfile ? "notProfile" : ""}`}
       onFocus={handleFocus}
     >
       <DogDeleteButton

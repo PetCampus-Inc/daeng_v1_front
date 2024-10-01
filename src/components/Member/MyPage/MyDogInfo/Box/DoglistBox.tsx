@@ -14,11 +14,9 @@ interface DoglistBoxProps {
 }
 
 const DoglistBox = ({ doglist, isOpen }: DoglistBoxProps) => {
-  const [activeDogId, setActiveDogId] = useState("");
   const [upDateDoglist, setUpDateDoglist] = useState([...doglist]);
-  console.log("doglist", doglist);
+
   const handleCardFocus = (dogId: string) => {
-    setActiveDogId(dogId);
     setUpDateDoglist((prevDoglist) => {
       const currentDog = prevDoglist.find((dog) => dog.dogId === dogId);
       const remainDogs = prevDoglist.filter((dog) => dog.dogId !== dogId);
@@ -44,7 +42,6 @@ const DoglistBox = ({ doglist, isOpen }: DoglistBoxProps) => {
               profileUri={dog.dogProfile && dog.dogProfile}
               dogLength={doglist.length}
               isOpen={isOpen}
-              isActive={dog.dogId === activeDogId}
               onCardFocus={handleCardFocus}
             />
           );
@@ -74,6 +71,7 @@ const DoglistBox = ({ doglist, isOpen }: DoglistBoxProps) => {
           );
         }
       })}
+
       <AddMyDogCard />
     </>
   );
