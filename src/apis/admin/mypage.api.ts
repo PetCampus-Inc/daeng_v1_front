@@ -1,5 +1,5 @@
 import { request } from "libs/AuthAxios/request";
-import { IAdminProfileEdit, ISchoolInfoEdit } from "types/admin/admin.types";
+import { AdminProfileUpdate, ISchoolInfoEdit } from "types/admin/admin.types";
 
 import type { IOwnerInfo, ITeacherInfo } from "types/admin/mypage.types";
 
@@ -24,7 +24,6 @@ export const handleSchoolInfoEdit = async (req: ISchoolInfoEdit) => {
     url,
     method: "POST",
     data: {
-      adminId: req.adminId,
       schoolId: req.schoolId,
       schoolName: req.schoolName,
       phoneNumber: req.phoneNumber,
@@ -33,32 +32,10 @@ export const handleSchoolInfoEdit = async (req: ISchoolInfoEdit) => {
   });
 };
 
-//원장 프로필 수정
-export const handleOwnerProfileEdit = async (req: IAdminProfileEdit) => {
+/** `POST` 관리자 프로필 업데이트 API */
+export const updateAdminProfile = async (data: AdminProfileUpdate) => {
   const url = `admin/owner/profile`;
-  return await request<void>({
-    url,
-    method: "POST",
-    data: {
-      imageUrl: req.imageUrl,
-      adminName: req.adminName,
-      phoneNumber: req.phoneNumber
-    }
-  });
-};
-
-//선생님 프로필 수정
-export const handleTeacherProfileEdit = async (req: IAdminProfileEdit) => {
-  const url = `admin/teacher/profile`;
-  return await request<void>({
-    url,
-    method: "POST",
-    data: {
-      imageUrl: req.imageUrl,
-      adminName: req.adminName,
-      phoneNumber: req.phoneNumber
-    }
-  });
+  return await request<void>({ url, method: "POST", data });
 };
 
 //선생님 유치원 끊기

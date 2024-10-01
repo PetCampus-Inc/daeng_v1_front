@@ -68,7 +68,7 @@ const useNativeAction = () => {
   return useMemo(
     () => ({
       call: (number: string) => nativeRequest("CALL", number),
-      saveImage: (uri: string) => nativeRequest("SAVE_IMAGE", uri),
+      saveMedia: (uri: string) => nativeRequest("SAVE_MEDIA", uri),
       selectImage: () => nativeRequest("SELECT_IMAGE"),
       launchCamera: () => nativeRequest("LAUNCH_CAMERA"),
       getFcmToken: () => nativeRequest("FCM_TOKEN"),

@@ -6,6 +6,7 @@ import Postcode from "components/common/Postcode";
 import AddressModifyBottomSheet from "components/SignUp/modal/AddressModifyBottomSheet";
 import { useSchoolInfoEdit } from "hooks/api/admin/mypage";
 import useGetPrincipalInfo from "hooks/api/useGetPrincipalInfo";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -18,13 +19,13 @@ import { PreventLeaveModal } from "../../components/common/Modal";
 const SchoolInfoEditPage = () => {
   const [isPhoneDirty, setIsPhoneDirty] = useState(false);
   const { data } = useGetPrincipalInfo();
+  const { schoolId } = useAdminInfo();
   const overlay = useOverlay();
   const navigate = useNavigate();
   const { handleSubmit, register, setValue, watch, getFieldState } = useForm();
   const { schoolInfoEditMutation } = useSchoolInfoEdit();
+
   const watchAddress = watch("schoolAddress", "");
-  const watchSchoolName = watch("newSchoolName");
-  const watchSchoolAddressDetail = watch("schoolAddressDetail");
   const schoolNameFieldState = getFieldState("newSchoolName");
   const addressFieldState = getFieldState("schoolAddress");
   const detailAddressFieldState = getFieldState("schoolAddressDetail");
@@ -80,8 +81,7 @@ const SchoolInfoEditPage = () => {
 
   const onSubmit = handleSubmit((data) => {
     const req = {
-      adminId: data.adminId,
-      schoolId: data.schoolId,
+      schoolId: schoolId,
       schoolName: data.newSchoolName,
       phoneNumber: data.newSchoolNumber,
       address: data.schoolAddress

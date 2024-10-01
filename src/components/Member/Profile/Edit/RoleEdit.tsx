@@ -15,7 +15,7 @@ const RoleEdit = () => {
 
   const handleSelectedRelation = (relation: string) => {
     setCurrentRelation(RELATION_DATA[relation]);
-    setValue(FIELD.RELATION, relation, { shouldDirty: true });
+    setValue(FIELD.RELATION, relation, { shouldValidate: true });
     setIsShowRoles(false);
   };
 
@@ -36,7 +36,10 @@ const RoleEdit = () => {
       <S.RoleEditInput
         id="roleEdit"
         value={currentRelation ? currentRelation : ""}
-        {...register(FIELD.RELATION, { required: true })}
+        {...register(FIELD.RELATION, {
+          required: true,
+          validate: (value) => value !== "호칭선택"
+        })}
       />
 
       {isShowRoles && (

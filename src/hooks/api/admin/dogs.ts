@@ -4,8 +4,10 @@ import {
   useQuery,
   useQueryClient,
   useSuspenseQuery,
+  useInfiniteQuery,
   type UseSuspenseQueryResult
 } from "@tanstack/react-query";
+import { fetchDogImage } from "apis/admin/admin.api";
 import {
   handleGetDogDetail,
   handleGetDogInfoAgenda,
@@ -15,6 +17,7 @@ import {
 } from "apis/admin/attendance.api";
 import { format } from "date-fns/format";
 import { Adapter, DataFormatAdapter } from "libs/adapters";
+import { AdminDogImageRequest } from "types/admin/admin.types";
 import { AgendaStatus } from "types/common/status.types";
 import { convertArrayToDate } from "utils/date";
 
@@ -150,4 +153,16 @@ export const usePostMemo = () => {
   });
 
   return { mutateMemo: mutate };
+};
+
+export const useGetDogImage = ({ dogId, size = 20 }: AdminDogImageRequest) => {
+  return useInfiniteQuery({
+    queryKey: ["dogImage", dogId],
+    queryFn: ({ pageParam }) => fetchDogImage({ dogId, page: pageParam, size }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const { hasNext, currentPage } = lastPage;
+      return hasNext ? currentPage : undefined;
+    }
+  });
 };

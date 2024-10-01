@@ -43,6 +43,7 @@ export const RoleSelectWrapper = styled(Flex)`
   margin-top: 6px;
   gap: 6px;
   width: 100%;
+  z-index: 1;
 `;
 
 export const ProfileBox = styled.div<StyleProps>`

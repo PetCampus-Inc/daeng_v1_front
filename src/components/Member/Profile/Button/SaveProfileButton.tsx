@@ -5,19 +5,22 @@ import { usePostMemberProfile } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
 import { useEffect, useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
+import showToast from "utils/showToast";
 
 import * as S from "../styles";
 
-// FIXME 데이터 적용은 되고 있는데 강아지 프로필 사진을 제외한 나머지 데이터가 api와 연동되지 않는거 같아 확인 필요
 const SaveProfileButton = () => {
   const {
     handleSubmit,
     getValues,
-    formState: { isValid, isDirty }
+    formState: { isValid }
   } = useFormContext();
   const [shouldSubmit, setShouldSubmit] = useState(false);
   const { s3ProfileData, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
+
+  const allValues = getValues();
+  const isAllFilled = Object.values(allValues).every((value) => value);
 
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);
@@ -52,8 +55,8 @@ const SaveProfileButton = () => {
     const [memberProfileUri, dogProfileUri] = s3ProfileData;
     const requestData = {
       dogId: formData.dogId,
-      memberProfileUri: memberProfileUri,
-      dogProfileUri: dogProfileUri,
+      memberProfileUri: memberProfileUri ?? "",
+      dogProfileUri: dogProfileUri ?? "",
       nickName: formData.nickName,
       relation: formData.relation
     };
@@ -73,7 +76,7 @@ const SaveProfileButton = () => {
         type="submit"
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
-        disabled={!isDirty || !isValid}
+        disabled={!isAllFilled || !isValid}
       >
         프로필 완성하기
       </BottomButton>

@@ -7,11 +7,13 @@ import type {
   IOwnerSignUpInfo,
   ITeacherSignUpData,
   ITeacherSignUpInfo,
-  AdminAuthType,
+  AdminProfile,
   AdminLoginInfo,
   INewAlarm,
   IAlarmReq,
-  IGetAlarm
+  IGetAlarm,
+  AdminDogImageRequest,
+  AdminDogImageResponse
 } from "types/admin/admin.types";
 
 // 아이디 중복확인
@@ -24,14 +26,14 @@ export const getCheckId = async (id: string): Promise<number> => {
 // 관리자 로그인
 export const postAdminLogin = async (
   req: AdminLoginInfo
-): Promise<{ data: AdminAuthType; accessToken: string }> => {
+): Promise<{ data: AdminProfile; accessToken: string }> => {
   const url = `admin/login`;
   const body = {
     id: req.inputId,
     pwd: req.inputPw,
     fcmToken: req.fcmToken
   };
-  const response = await authAxios.post<ApiResponse<AdminAuthType>>(url, body);
+  const response = await authAxios.post<ApiResponse<AdminProfile>>(url, body);
 
   const accessToken = response.headers["authorization"];
   return { data: response.data.data, accessToken };
@@ -123,5 +125,11 @@ export const handleGetAlarm = async (req: IAlarmReq) => {
       }
     }
   });
+  return data;
+};
+
+export const fetchDogImage = async (req: AdminDogImageRequest): Promise<AdminDogImageResponse> => {
+  const url = `admin/dog/album`;
+  const { data } = await request<AdminDogImageResponse>({ url, params: req });
   return data;
 };
