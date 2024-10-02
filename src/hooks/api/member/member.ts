@@ -49,11 +49,18 @@ export const useGetHomeInfo = (dogId: number) => {
 };
 
 // 견주 홈 - 강아지 리스트
-export const useGetDogs = () => {
+export const useGetDogs = (selectedId?: string) => {
   return useQuery({
     queryKey: QUERY_KEY.DOGS,
     queryFn: handleGetDogs,
-    staleTime: 60000
+    staleTime: 60000,
+    select: (data) => {
+      return data.sort((a, b) => {
+        if (a.dogId.toString() === selectedId) return -1;
+        if (b.dogId.toString() === selectedId) return 1;
+        return 0;
+      });
+    }
   });
 };
 
