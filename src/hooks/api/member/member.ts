@@ -165,15 +165,12 @@ export const useCancelMemberEnrollment = () => {
 
 // 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = () => {
-  const logout = useLogout();
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: (enrollmentFormId: number) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
-      // FIXME logout을 넣으신 이유가 궁금합니다!
-      // logout();
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
