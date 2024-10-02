@@ -1,4 +1,4 @@
-import { DOG_STATUS, STORAGE_KEY } from "constants/memberDogStatus";
+import { STORAGE_KEY } from "constants/memberDogStatus";
 
 import DogRejectedIcon from "assets/svg/dog-rejected-icon";
 import { useDeleteMemebrEnrollment } from "hooks/api/member/enroll";
@@ -17,7 +17,6 @@ const RejectedCard = ({ dogName, registeredDate, enrollmentFormId }: IDogRejecte
   const { mutateDeleteMemebrEnrollment } = useDeleteMemebrEnrollment();
   const setStoredValue = useSetLocalStorage();
   const resetStoredVisitPathIdValue = useResetLocalStorage(STORAGE_KEY.VISIT_MYPAGE);
-  // const VISIT_MYPAGE = localStorage.getItem(STORAGE_KEY.VISIT_MYPAGE);
 
   const [year, month, day] = registeredDate ? registeredDate : [];
   const registeredTime = formatDate(String(year), String(month), String(day), "dot");

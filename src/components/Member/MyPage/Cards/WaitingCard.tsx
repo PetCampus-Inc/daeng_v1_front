@@ -19,7 +19,7 @@ const WaitingCard = ({ dogName, registeredDate, enrollmentFormId }: IWaitingCard
   const [year, month, day] = registeredDate && registeredDate.map(String);
   const registeredTime = formatDate(year, month, day, "dot");
 
-  const handleCancelApproval = async (enrollmentFormId: number) => {
+  const handleCancelApproval = (enrollmentFormId: number) => {
     if (enrollmentFormId) {
       mutateCancelEnrollment(enrollmentFormId, {
         onSuccess: () => {

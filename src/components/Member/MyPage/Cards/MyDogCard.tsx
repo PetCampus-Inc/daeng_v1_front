@@ -60,7 +60,7 @@ const MyDogCard = ({
       />
     ));
 
-  // 강아지 삭제할 경우F
+  // 강아지 삭제할 경우
   const openDeleteDogPopup = () =>
     overlay.open(({ isOpen, close }) => (
       <BasicModal
