@@ -30,7 +30,7 @@ const MEMBER_QUERY_KEY = {
   SCHOOL_INFO_LIST: ["shcollInfoList"], // 마이페이지 견주의 강아지 유치원 정보
   MEMBER_MAIN_DOG_LIST: ["memberMainDogInfo"], // 견주의 강아지 리스트 (업데이트)
   MEMBER_SCHOOL_INFO: (dogId: string) => ["memberSchoolInfo", dogId], // 유치원 정보
-  MEMBER_MYPAGE_MAIN_INFO: ["memberMainMypageInfo"], // 마이페이지 견주 정보 데이터
+  MEMBER_MYPAGE_MAIN_INFO: ["memberMypageMainInfo"], // 마이페이지 견주 정보 데이터
   MEMBER_MAIN_DOG_INFO: ["memberMainDogInfo"], // 견주의 강아지 리스트
   MEMBER_PROFILE_INFO: ["memberProfileInfo"], // 견주의 상제 정보 데이터
   MEMBER_PHONE_NUMBER: (dogId: number) => ["phoneNumber", dogId], // 견주 전화번호
