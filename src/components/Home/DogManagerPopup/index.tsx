@@ -1,4 +1,5 @@
 import AddCIcon from "assets/svg/add-c-icon";
+import PlaceholderImg from "assets/images/placeholder-dog.png";
 import { Box, Flex, Text } from "components/common";
 import { useGetDogs } from "hooks/api/member/member";
 import { useRecoilState } from "recoil";
@@ -10,7 +11,7 @@ import { BottomSheet, type BottomSheetProps } from "../../common/BottomSheet";
 
 const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
   const [selectedDogId, setSelectedDogId] = useRecoilState(dogIdState);
-  const { data: dogList } = useGetDogs();
+  const { data: dogList } = useGetDogs(selectedDogId?.toString());
 
   const getIsActive = (id: number) => selectedDogId === id;
 
@@ -18,6 +19,8 @@ const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
     setSelectedDogId(dogId);
     close();
   };
+
+  console.log(selectedDogId);
 
   return (
     <BottomSheet isOpen={isOpen} close={close}>
@@ -34,7 +37,7 @@ const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
               onClick={() => handleSelectDog(item.dogId)}
             >
               <DogAvatar className="dog-avatar">
-                <Img src={item.imageUri} />
+                <Img src={PlaceholderImg} />
               </DogAvatar>
               <Name className="dog-name">{item.dogName}</Name>
             </DogItem>
