@@ -1,7 +1,7 @@
 import BoneIcon from "assets/svg/bone-icon";
 import PoopStatusIcon from "assets/svg/poop-status-icon";
 import { Flex, Text } from "components/common";
-import PoopBox from "components/common/PoopBox";
+import PoopStatusGroup from "components/common/PoopStatusGroup";
 import { format } from "date-fns";
 import { useDogInfoAgenda } from "hooks/api/member/dogs";
 import { useSearchParams } from "react-router-dom";
@@ -38,7 +38,7 @@ export const AgendaView = ({ data }: { data: DogInfoAgenda }) => {
         <Text typo="label2_14_R" color="darkBlack">
           {data.poopMemo}
         </Text>
-        <PoopBox selected={data.poop} variant="sm" />
+        <PoopStatusGroup selected={data.poop} readOnly />
       </Flex>
     </Flex>
   );

@@ -1,6 +1,6 @@
 import { DailyAgendaStatus } from "components/Admin/DogDetailInfo/AttendanceRecord/DailyAgenda/DailyAgendaStatus";
 import { Flex, Text } from "components/common";
-import PoopBox from "components/common/PoopBox";
+import PoopStatusGroup from "components/common/PoopStatusGroup";
 import { useGetDogInfoAgenda } from "hooks/api/admin/dogs";
 import { DogInfoAgendaData } from "types/admin/attendance.type";
 import { AGENDA_STATUS } from "types/member/dogs";
@@ -39,7 +39,7 @@ export function DailyAgenda({ dogId, date }: DailyNoticeProps) {
       <Flex direction={"column"} gap={12}>
         <Text as={"p"} typo={"label1_16_B"} color={"darkBlack"}>
           배변 상태
-          <PoopBox selected={data.poop} variant={"sm"} />
+          <PoopStatusGroup selected={data.poop} />
         </Text>
         <Text as={"p"} typo={"label1_16_R"} color={"gray_1"}>
           {data.poopMemo ? data.poopMemo : "전달 사항이 없습니다."}
