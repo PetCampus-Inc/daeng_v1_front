@@ -21,6 +21,7 @@ const SelectDogList = ({ data, type }: Props) => {
           key={item.attendanceId}
           dogId={item.dogId}
           dogName={item.dogName}
+          profileUri={item.profileUri}
           selectId={item[selectId]}
           isChecked={selectIdsContext?.selectedIds.has(item[selectId])}
           toggleId={selectIdsContext?.toggleId}
