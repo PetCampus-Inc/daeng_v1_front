@@ -1,4 +1,5 @@
-import type { Poop } from "./attendance.type";
+import { PoopStatus } from "types/member/dogs";
+
 import type { Nullable } from "../helper.types";
 
 export interface ICareDogProps {
@@ -29,7 +30,7 @@ export interface ICareTempSave {
   dogId: number;
   agendaNote: string;
   snack: string;
-  poop: Poop;
+  poop: PoopStatus;
   poopMemo: string;
 }
 

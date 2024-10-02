@@ -112,14 +112,6 @@ export interface DogInfoAgendaData {
   dateTime: LocalDateTime;
 }
 
-export enum Poop {
-  HARD = "HARD",
-  HEALTHY = "HEALTHY",
-  NOT_BROWN = "NOT_BROWN",
-  WATERY = "WATERY",
-  WARNING = "WARNING"
-}
-
 /**
  * @description 출석부 강아지 상세 - 이용권 정보 Dto
  */
