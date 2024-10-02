@@ -1,7 +1,7 @@
 import BoneIcon from "assets/svg/bone-icon";
 import PoopStatusIcon from "assets/svg/poop-status-icon";
+import { Textarea } from "components/common";
 import PoopBox from "components/common/PoopBox";
-import TextArea from "components/common/TextArea";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
 import { debounce } from "lodash";
 import { useForm } from "react-hook-form";
@@ -90,7 +90,7 @@ const WriteNotice = () => {
       <LastNoticeButton />
       <NoticeItemContainer>
         알림장
-        <TextArea
+        <Textarea
           {...methods.register("agendaNote")}
           placeholder="오늘 하루 강아지와 관련된 내용을 작성해 주세요"
           defaultValue={data.agendaNote}
@@ -98,7 +98,7 @@ const WriteNotice = () => {
       </NoticeItemContainer>
       <NoticeItemContainer>
         간식
-        <TextArea
+        <Textarea
           {...methods.register("snackInfo")}
           placeholder="오늘 급여한 간식에 대해 적어 주세요"
           defaultValue={data.snack}
@@ -107,7 +107,7 @@ const WriteNotice = () => {
       <NoticeItemContainer>
         배변 상태
         <PoopBox selected={Poop.HARD} />
-        <TextArea
+        <Textarea
           {...methods.register("poopMemo")}
           placeholder="오늘 하루 강아지 배변 상태에 대해 작성해 주세요"
           defaultValue={data.poopMemo}

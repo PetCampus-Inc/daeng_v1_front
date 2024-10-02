@@ -1,5 +1,4 @@
-import { Flex, Text } from "components/common";
-import TextArea from "components/common/TextArea";
+import { Flex, Text, Textarea } from "components/common";
 import { useFormContext } from "react-hook-form";
 
 const CommentBox = () => {
@@ -9,7 +8,7 @@ const CommentBox = () => {
       <Text as="p" typo="body2_16_R" color="black">
         코멘트
       </Text>
-      <TextArea
+      <Textarea
         {...register("comment")}
         placeholder="코멘트를 입력해주세요"
         maxLength={300}

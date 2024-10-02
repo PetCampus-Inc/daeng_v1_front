@@ -4,7 +4,7 @@ import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 import { Checkbox } from "components/common";
 import SingleRadio from "components/common/Select/SingleRadio";
 import { Caption } from "components/common/Select/styles";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { Label } from "components/common/Title/style";
 import { useEffect } from "react";
@@ -38,7 +38,7 @@ const PickDropInfo = () => {
     <>
       <Card>
         <Label>픽드랍 안내</Label>
-        <TextArea {...register(FIELD.PICKDROP_NOTICE)} disabled />
+        <Textarea {...register(FIELD.PICKDROP_NOTICE)} disabled />
       </Card>
       <Card>
         <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_REQUEST)}>
@@ -68,7 +68,7 @@ const PickDropInfo = () => {
             <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_MEMO)}>
               픽드랍 메모
             </Title>
-            <TextArea
+            <Textarea
               {...register(FIELD.PICKDROP_MEMO, {
                 required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.PICKDROP_MEMO)
               })}
@@ -81,7 +81,7 @@ const PickDropInfo = () => {
               픽드랍 유의사항
             </Title>
             <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-            <TextArea
+            <Textarea
               {...register(FIELD.PICKDROP_INFO)}
               isChecked={getValues(FIELD.PICKDROP_INFO_TERM)}
               disabled

@@ -3,6 +3,7 @@ export interface NativeMessageMap {
     GO_BACK: null;
     LOGOUT: null;
     REFRESH_TOKEN: null;
+    CONSOLE: object;
   };
   Response: {
     NEW_NOTIFICATION: string;

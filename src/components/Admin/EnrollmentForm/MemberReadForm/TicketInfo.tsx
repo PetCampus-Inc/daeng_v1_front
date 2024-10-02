@@ -3,7 +3,7 @@ import { AgreementsListType, FIELD, FIELD_KEYS } from "constants/field";
 import { Checkbox } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import SingleRadio from "components/common/Select/SingleRadio";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { useFormContext } from "react-hook-form";
 
@@ -36,7 +36,7 @@ const TicketInfo = ({ ticket, item, agreements }: TicketInfoProps) => {
     <>
       <Card>
         <Label>가격 안내</Label>
-        <TextArea {...register(FIELD.PRICE_INFO)} disabled />
+        <Textarea {...register(FIELD.PRICE_INFO)} disabled />
       </Card>
       <Card>
         <Title isRequired={item?.get(FIELD_KEYS.TICKET_TYPE)}>이용권 종류</Title>
@@ -83,7 +83,7 @@ const TicketInfo = ({ ticket, item, agreements }: TicketInfoProps) => {
       <Card>
         <Title isRequired={item?.get(FIELD_KEYS.TICKET_INFO)}>유의사항</Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해주세요 </Caption>
-        <TextArea
+        <Textarea
           {...register(FIELD.TICKET_INFO)}
           isChecked={agreements[FIELD.TICKET_INFO_TERM]}
           disabled

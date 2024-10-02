@@ -1,7 +1,7 @@
 import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import AdminTitle from "components/common/Title/AdminTitle";
 import { useFormContext } from "react-hook-form";
 
@@ -20,7 +20,7 @@ const PolicyInfo = () => {
         >
           이용 제한 유의 사항
         </AdminTitle>
-        <TextArea
+        <Textarea
           {...register(FIELD.LIMITS_INFO, { required: true })}
           placeholder="이용 제한 관련 유의사항을 입력해 주세요"
         />
@@ -36,7 +36,7 @@ const PolicyInfo = () => {
         >
           상해 유의사항
         </AdminTitle>
-        <TextArea
+        <Textarea
           {...register(FIELD.ACCIDENT_INFO, { required: true })}
           placeholder="상해 관련 유의사항을 입력해 주세요"
         />
@@ -52,7 +52,7 @@ const PolicyInfo = () => {
         >
           유기 유의사항
         </AdminTitle>
-        <TextArea
+        <Textarea
           {...register(FIELD.ABANDONMENT_INFO, { required: true })}
           placeholder="유기 관련 유의사항을 입력해 주세요"
         />
