@@ -4,7 +4,7 @@ import { TextInput } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { ImageUploadInput } from "components/Enrollment/ImageUpload/ImageUploadInput";
 
@@ -67,7 +67,7 @@ const DogInfo = ({ item }: DogInfoProps) => {
       </Card>
       <Card>
         <Title isRequired={item?.get(FIELD_KEYS.ALLERGY_DISEASE)}>알러지 및 질병 유무</Title>
-        <TextArea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." readOnly />
+        <Textarea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." readOnly />
       </Card>
     </>
   );

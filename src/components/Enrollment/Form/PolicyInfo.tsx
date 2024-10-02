@@ -1,7 +1,7 @@
 import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox } from "components/common";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
@@ -59,7 +59,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
           이용 제한 유의 사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea {...register(FIELD.LIMITS_INFO)} isChecked={watchTerms[0]} disabled />
+        <Textarea {...register(FIELD.LIMITS_INFO)} isChecked={watchTerms[0]} disabled />
         <S.Stack>
           <Controller
             name={FIELD.LIMITS_INFO_TERM}
@@ -84,7 +84,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
           상해 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea {...register(FIELD.ACCIDENT_INFO)} isChecked={watchTerms[1]} disabled />
+        <Textarea {...register(FIELD.ACCIDENT_INFO)} isChecked={watchTerms[1]} disabled />
         <S.Stack>
           <Controller
             name={FIELD.ACCIDENT_INFO_TERM}
@@ -109,7 +109,7 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
           유기 유의사항
         </Title>
         <S.Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</S.Caption>
-        <TextArea {...register(FIELD.ABANDONMENT_INFO)} isChecked={watchTerms[2]} disabled />
+        <Textarea {...register(FIELD.ABANDONMENT_INFO)} isChecked={watchTerms[2]} disabled />
         <S.Stack>
           <Controller
             name={FIELD.ABANDONMENT_INFO_TERM}

@@ -5,7 +5,7 @@ import { ITEM_ENGLISH_TO_KOREAN } from "constants/item";
 import { TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { Caption, Card } from "components/Enrollment/Form/styles";
 import { useEffect } from "react";
@@ -117,7 +117,7 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
         <Title isRequired={requiredItems?.get(FIELD_KEYS.ALLERGY_DISEASE)}>
           알러지 및 질병 유무
         </Title>
-        <TextArea
+        <Textarea
           placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
           {...register(FIELD.ALLERGY_DISEASE, {
             required: requiredItems?.get(FIELD_KEYS.ALLERGY_DISEASE)
