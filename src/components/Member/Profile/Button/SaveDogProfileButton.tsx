@@ -16,7 +16,8 @@ const SaveDogProfileButton = () => {
   } = useFormContext();
   const [shouldSubmit, setShouldSubmit] = useState(false);
   const { s3ProfileData, uploadFiles } = useUploadProfile();
-  const { mutateDogProfile } = usePostDogProfile();
+  const { dogId } = getValues();
+  const { mutateDogProfile } = usePostDogProfile(dogId);
 
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);

@@ -146,3 +146,14 @@ export const handleGetMemberDogEnrollment = async ({
   });
   return data.data;
 };
+
+/**
+ * @description 가입싱천서 삭제 - 견주 본인의 가입신청서를 삭제합니다.
+ * @param  enrollmentFormId
+ * @returns
+ */
+export const handleDeleteMemberEnrollment = async (enrollmentFormId: number): Promise<void> => {
+  const url = `/member/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await authAxios.post(url);
+  return data.data;
+};

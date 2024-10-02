@@ -1,25 +1,22 @@
-import { routes } from "constants/path";
-import { QUERY_KEY } from "constants/queryKey";
 import { getFieldStep } from "constants/step";
 
-import { useQueryClient } from "@tanstack/react-query";
-import { useEnrollmentStorage } from "components/Member/MyPage/hooks/useEnrollmentStorage";
-import { usePostEnrollment } from "hooks/api/member/enroll";
+import { usePostMemberEnrollment } from "hooks/api/member/enroll";
+import { useS3Upload } from "hooks/common/useS3";
 import { Adapter, MemberFormToServerAdapter } from "libs/adapters";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { currentStepState } from "store/form";
 import { FormButton } from "styles/StyleModule";
+import showToast from "utils/showToast";
+
+import { ImageFile } from "../ImageUpload/ImageUploadInput";
 
 import type { EnrollmentInfoType, MemberGenderType } from "types/member/enrollment.types";
 
 const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const { handleSubmit, getValues } = useFormContext();
-  const { mutateEnrollment } = usePostEnrollment();
-  const { createStorageEnrollment } = useEnrollmentStorage();
+  const { uploadToS3 } = useS3Upload();
+  const { mutateMemberEnrollment } = usePostMemberEnrollment();
 
   const setStep = useSetRecoilState(currentStepState);
 
@@ -29,11 +26,22 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
     );
   };
 
+  const uploadImages = async (files: FileList, dogId: string) => {
+    const params = {
+      files,
+      accept: ["image/*"],
+      path: `vaccination/${dogId}`
+    };
+
+    return await uploadToS3(params, {
+      onError: () => showToast("사진 업로드에 실패했습니다. 다시 시도해주세요.", "ownerNav")
+    });
+  };
+
   const getMemberData = () => {
     const { memberName, memberGender, address, addressDetail, phoneNumber, emergencyPhoneNumber } =
       getValues();
 
-    // FIXME: fileUrl 추가 필요
     const memberData = {
       memberName: memberName,
       memberGender: memberGender as MemberGenderType,
@@ -47,19 +55,19 @@ const MemberSubmitButton = ({ openPopup }: { openPopup: (field: string) => void 
   };
 
   // member - 강아지 추가 및 유치원 재등록
-  const onSubmitMember = (data: FieldValues) => {
-    const { dogName } = getValues();
-    const requestData = getSubmitFormInfo(data);
+  const onSubmitMember = async (data: FieldValues) => {
     const memberData = getMemberData();
-    const reqData = { ...requestData, ...memberData };
 
-    mutateEnrollment(reqData, {
-      onSuccess: (enrollmentFormId) => {
-        queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
-        navigate(routes.member.mypage.root);
+    let imageUrls;
+    if (data.vaccination === "했어요" && data.vaccinationUri) {
+      const files = data.vaccinationUri.map((item: ImageFile) => item.file);
+      imageUrls = await uploadImages(files, data.dogId);
+    }
 
-        createStorageEnrollment(String(enrollmentFormId), dogName);
-      }
+    const formData = getSubmitFormInfo({ ...data, ...memberData, vaccinationUri: imageUrls });
+
+    mutateMemberEnrollment(formData, {
+      onError: () => showToast("제출 중 오류가 발생했습니다. 다시 시도해주세요.", "ownerNav")
     });
   };
 
