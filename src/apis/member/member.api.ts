@@ -94,7 +94,7 @@ export const handleCancelMemberEnrollment = async (): Promise<void> => {
 };
 
 // 견주 가입신청서 승인 취소 (강아지 추가 취소)
-export const handlePostMemberDogEnrollment = async (enrollmentFormId: string): Promise<void> => {
+export const handlePostMemberDogEnrollment = async (enrollmentFormId: number): Promise<void> => {
   const url = `/member/cancel/enrollmentForm/${enrollmentFormId}`;
   return await authAxios.post(url);
 };

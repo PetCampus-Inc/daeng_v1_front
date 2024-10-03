@@ -35,6 +35,7 @@ export interface HomeDataType {
   status: Nullable<TAttendanceStatus>;
   relation: string;
   attendanceStatus: TAttendanceStatus;
+  enrollmentFormStatus: TDogStatus;
   attendanceDate: number[];
   todayAgendaStatus: TAgendaStatus;
   schoolName: Nullable<string>;
@@ -58,6 +59,7 @@ export interface IDoglist {
   schoolName: string;
   registeredDate: number[];
   dropOutDate: number[];
+  enrollmentFormId: number;
 }
 
 export interface IDogRejected {

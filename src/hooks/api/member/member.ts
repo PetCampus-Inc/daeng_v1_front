@@ -1,6 +1,7 @@
 import { FIELD } from "constants/field";
 import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
+import { RELATION_DATA } from "constants/relation";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
@@ -60,7 +61,9 @@ export const useGetHomeInfo = (dogId: number) => {
       return {
         ...res,
         attendanceDate: res.attendanceDate?.join("-"),
-        imageList: updatedImageList
+        imageList: updatedImageList,
+        // FIXME RELATION_DATA 사용하지 않고 ITEM에 추가해 사용하기
+        relation: RELATION_DATA[res.relation]
       };
     }
   });
@@ -107,7 +110,7 @@ export const useGetMainAlbum = (req: IMainAlbum) => {
 // 견주 정보
 export const useGetMemberInfo = () => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_INFO,
+    queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO,
     queryFn: () => handleGetMemberInfo()
   });
 };
@@ -162,14 +165,12 @@ export const useCancelMemberEnrollment = () => {
 
 // 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = () => {
-  const logout = useLogout();
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
+    mutationFn: (enrollmentFormId: number) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
-      logout();
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
@@ -185,7 +186,7 @@ export const usePostMemberDogDelete = () => {
   const memberDogDeleteMutation = useMutation({
     mutationFn: (dogId: string) => handlePostMemberDogDelete(dogId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
     }
   });
 
@@ -314,11 +315,13 @@ export const usePostMemberProfile = () => {
 };
 
 // 강아지 승인 후 초기 프로필 설정 (두번째 강아지 이후)
-export const usePostDogProfile = () => {
+export const usePostDogProfile = (dogId: number) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: (req: DogProfileReq) => handlePostDogProfile(req),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.HOME(dogId) });
       navigate(routes.root);
     },
     onError: () => {

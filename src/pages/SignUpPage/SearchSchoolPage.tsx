@@ -2,10 +2,12 @@ import { SCHOOL_NAME_KEY } from "constants/storage";
 
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
+import { PreventLeaveModal } from "components/common/Modal";
 import { StyledButton } from "components/SignIn/styles";
 import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInputBox";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { memo, useState } from "react";
+import { useBlocker } from "react-router-dom";
 import { User } from "types/common/role.types";
 
 export interface SelectedSchool {
@@ -31,8 +33,17 @@ const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) 
     setLocalStorage(SCHOOL_NAME_KEY, selectedSchool.name);
   };
 
+  const blocker = useBlocker(() => !!selectedSchool);
+
   return (
     <>
+      {blocker.state === "blocked" ? (
+        <PreventLeaveModal
+          isOpen={true}
+          close={() => blocker.reset()}
+          action={() => blocker.proceed()}
+        />
+      ) : null}
       <Header type="back" />
       <Layout pt={60} px={16} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">

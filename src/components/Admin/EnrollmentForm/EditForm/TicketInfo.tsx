@@ -3,7 +3,7 @@ import { FIELD, FIELD_KEYS } from "constants/field";
 import { Checkbox } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import MultiCheck from "components/common/Select/MultiCheck";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import AdminTitle from "components/common/Title/AdminTitle";
 import { useFormContext } from "react-hook-form";
 
@@ -24,7 +24,7 @@ const TicketInfo = () => {
           가격 안내
         </AdminTitle>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
-        <TextArea
+        <Textarea
           {...register(FIELD.PRICE_INFO, { required: true })}
           placeholder="원장님이 입력한 가격안내 내용이 보이게 됩니다."
         />
@@ -85,7 +85,7 @@ const TicketInfo = () => {
         >
           유의사항
         </AdminTitle>
-        <TextArea
+        <Textarea
           {...register(FIELD.TICKET_INFO, { required: true })}
           placeholder="유의사항을 입력해 주세요"
         />

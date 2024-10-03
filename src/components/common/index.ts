@@ -10,3 +10,5 @@ export * from "./Accordion";
 export * from "./Checkbox";
 export * from "./FullHeight";
 export * from "./Button";
+export * from "./VideoPlayer";
+export * from "./Textarea";

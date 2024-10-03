@@ -99,3 +99,24 @@ export interface IGetAlarm {
   hasNext: boolean;
   ticketResponse: IAlarmTicketResponse;
 }
+
+export interface AdminDogImageRequest {
+  dogId: number;
+  page?: number;
+  size?: number;
+}
+
+export interface AdminDogImageResponse {
+  totalPage: number;
+  totalElement: number;
+  currentPage: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  list: AdminDogImage[];
+}
+
+export interface AdminDogImage {
+  imageId: number;
+  imageUrl: string;
+  createdAt: string;
+}

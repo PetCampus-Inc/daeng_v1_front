@@ -1,27 +1,28 @@
-import { STORAGE_KEY } from "constants/memberDogStatus";
+import { routes } from "constants/path";
 
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
+import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
 import DogManagerPopup from "components/Home/DogManagerPopup";
 import HomeDashboard from "components/Home/HomeDashboard";
 import HomeHeader from "components/Home/HomeHeader";
 import HomeImageAlbum from "components/Home/HomeImageAlbum";
 import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
-import { useLocalStorage } from "hooks/common/useLocalStorage";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useLayoutEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [selectedDogId] = useRecoilState(dogIdState);
-  const CURRENT_DOG_ID = useLocalStorage<string>(STORAGE_KEY.CURRENT_DOG_ID, "");
+  // FIXME selectedDogId 데이터가 없을 경우 예외 처리 필요
+  const defaultDogId = 1;
 
-  // FIXME selectedDogId, CURRENT_DOG_ID 데이터가 없을 경우 예외 처리 필요
-  const defaultDogId = Number(CURRENT_DOG_ID) ?? 1;
-
-  const dogId = selectedDogId !== null ? selectedDogId : defaultDogId;
+  const dogId = selectedDogId ? selectedDogId : defaultDogId;
   const { data } = useGetHomeInfo(dogId);
 
   const overlay = useOverlay();
@@ -40,9 +41,17 @@ const HomePage = () => {
     dogId: data.dogId
   };
 
+  useLayoutEffect(() => {
+    // dogProfile 데이터가 없을 경우
+    if (!data.dogProfile) {
+      navigate(routes.member.profile.dog.root);
+    }
+  }, []);
+
   return (
     <>
       <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} />
+      {data.enrollmentFormStatus === "DROP_OUT" && <DisconnectionNotice />}
       <Layout type="main">
         <Box bgColor="white" py={32} px={16}>
           <HomeHeader data={data} />
