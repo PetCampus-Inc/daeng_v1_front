@@ -15,7 +15,7 @@ import { WeeklyCalendar } from "./WeeklyCalendar";
 import type { Value } from "react-calendar/dist/cjs/shared/types";
 import type { OnArgs } from "react-calendar/dist/esm";
 
-export const Calendar = ({ id }: { id: number }) => {
+export const Calendar = ({ dogId }: { dogId: number }) => {
   const today = new Date();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -24,7 +24,7 @@ export const Calendar = ({ id }: { id: number }) => {
   const [date, setDate] = useState<Date | null>(currentDate);
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(currentDate);
 
-  // const { data } = useDogInfoRecord(id);
+  // const { data } = useDogInfoRecord(dogId);
 
   const [expanded, setExpanded] = useState(false);
   const [showMonthPicker, setShowMonthPicker] = useState(false);
@@ -58,7 +58,7 @@ export const Calendar = ({ id }: { id: number }) => {
         const selectableDate = getClosestValidDate({
           date: activeStartDate,
           maxDate: today,
-          minDate: parseISO("2024-06-28") // FIXME: API 수정 후 지워주세요~~
+          minDate: parseISO("2024-06-28") // FIXME: API 수정 후 지워주세요
         });
         setDate(selectableDate);
         const formattedDate = format(selectableDate, "yyyy-MM-dd");
@@ -101,7 +101,7 @@ export const Calendar = ({ id }: { id: number }) => {
 
   return (
     <CalendarSection>
-      <Box bgColor="white" pt={28} radius="0px 0px 20px 20px" overflow="hidden">
+      <Box bgColor="white" pt={28} radius="0px 0px 20px 20px" overflow="hdogIdden">
         {expanded ? (
           <MonthlyCalendar attendData={data} {...calendarProps} />
         ) : (

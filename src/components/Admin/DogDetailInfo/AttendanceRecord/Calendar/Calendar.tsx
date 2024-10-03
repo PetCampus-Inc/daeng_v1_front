@@ -2,9 +2,10 @@ import { MonthPicker } from "components/Agenda/Calendar/MonthPicker";
 import { CalendarSection } from "components/Agenda/Calendar/styles";
 import { Box } from "components/common";
 import { format, parse, parseISO } from "date-fns";
-import { useGetDogInfoRecord } from "hooks/api/admin/dogs";
+import { DogInfoRecordType, useGetDogInfoRecord } from "hooks/api/admin/dogs";
 import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { AgendaStatus } from "types/common/status.types";
 import { getClosestValidDate } from "utils/date";
 
 import { MonthlyCalendar } from "./MonthlyCalendar";
@@ -21,7 +22,7 @@ export function Calendar({ dogId }: { dogId: number }) {
   const [date, setDate] = useState<Date | null>(currentDate);
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(currentDate);
 
-  const { data: attendData } = useGetDogInfoRecord(dogId);
+  // const { data: attendData } = useGetDogInfoRecord(dogId);
 
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const calendarHeaderRef = useRef<HTMLDivElement>(null);
@@ -88,7 +89,7 @@ export function Calendar({ dogId }: { dogId: number }) {
   return (
     <CalendarSection>
       <Box bgColor="white" pt={28} overflow="hidden">
-        <MonthlyCalendar attendData={attendData} {...calendarProps} />
+        <MonthlyCalendar attendData={mock} {...calendarProps} />
         <MonthPicker
           isOpen={showMonthPicker}
           onClose={handleCloseMonthPicker}
@@ -100,3 +101,21 @@ export function Calendar({ dogId }: { dogId: number }) {
     </CalendarSection>
   );
 }
+
+const mock: DogInfoRecordType[] = [
+  {
+    date: "2024-06-28",
+    status: AgendaStatus.NOT_YET,
+    registeredDate: "2024-06-28"
+  },
+  {
+    date: "2024-06-29",
+    status: AgendaStatus.NOT_YET,
+    registeredDate: "2024-06-28"
+  },
+  {
+    date: "2024-06-30",
+    status: AgendaStatus.NOT_YET,
+    registeredDate: "2024-06-28"
+  }
+];
