@@ -28,7 +28,7 @@ export function ImageAlbum({ dogInfo, images }: HomeImageAlbumProps) {
         </Text>
         {images && (
           <MoreButton
-            onClick={() => navigate(routes.member.album.dynamic(`${dogId}?dogName=${dogName}`))}
+            onClick={() => navigate(routes.member.album.dynamic(dogId), { state: { dogName } })}
             typo="body2_16_R"
             iconSize={24}
             iconColorScheme="gray_1"

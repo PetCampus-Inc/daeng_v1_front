@@ -7,14 +7,15 @@ import ViewTabs from "components/Album/ViewTabs";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { Suspense, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function PhotoAlbum() {
   const [mode, setMode] = useState<GalleryViewType>(GALLERY_VIEW.PHOTO);
 
   const { dogId } = useParams<{ dogId: string }>();
-  const [searchParams] = useSearchParams();
-  const dogName = searchParams.get("dogName");
+  const { state } = useLocation();
+
+  const { dogName } = state;
 
   return (
     <>
