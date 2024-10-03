@@ -10,7 +10,7 @@ import type { ApiErrorResponse } from "types/Response.type";
 const LoaderErrorPage = () => {
   const error = useRouteError() as ApiErrorResponse;
 
-  if (process.env.NODE_ENV === "development") console.log("에러로깅: ", error);
+  if (process.env.NODE_ENV === "development") console.log("[🚨ERROR]: ", error);
 
   return (
     <ErrorPageLayout>
