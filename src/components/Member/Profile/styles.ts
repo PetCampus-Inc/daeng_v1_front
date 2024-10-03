@@ -23,12 +23,34 @@ export const RoleEditButton = styled.button<StyleProps>`
   cursor: pointer;
 `;
 
-export const RoleEditInput = styled.input`
+export const RoleSelectLabel = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  min-height: 49px;
+  ${({ theme }) => theme.typo.body2_16_R};
+  color: ${({ theme }) => theme.colors.gray_3};
+  background-color: ${({ theme }) => theme.colors.gray_4};
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  min-height: 49px;
+`;
+
+export const RadioInput = styled.input`
   display: none;
+
+  &:checked + label {
+    background-color: ${({ theme }) => theme.colors.br_4};
+    border: 1px solid ${({ theme }) => theme.colors.br_3};
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
 `;
 
 export const RoleSelectButton = styled(Button)`
-  max-width: 112px;
+  width: 100%;
   min-height: 49px;
 `;
 
@@ -37,9 +59,8 @@ export const RoleEditContainer = styled.div`
 `;
 
 export const RoleSelectWrapper = styled(Flex)`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   margin-top: 6px;
   gap: 6px;
   width: 100%;
