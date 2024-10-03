@@ -1,14 +1,13 @@
 import CloseIcon from "assets/svg/x-circle-icon";
-import ProgressScreen from "components/Home/ImageCommentSidler/ProgressScreen";
+import { AlbumCheckbox, Box } from "components/common";
+import { Arrows } from "components/common/LightBox";
 import { motion } from "framer-motion";
-import { useFileDownload } from "hooks/common/useS3";
 import { useState } from "react";
 import Slider from "react-slick";
+import { useRecoilState } from "recoil";
+import { type ImageListType, selectedImagesState } from "store/images";
 import { dialogAnimationVariants } from "styles/foundations/animation";
 
-import Arrows from "./Arrows";
-import SaveOptionDropdown from "./Dropdown/SaveOptionDropdown";
-import CommentBox from "./Options/CommentBox";
 import {
   SlideWrapper,
   SliderContainer,
@@ -19,24 +18,20 @@ import {
   OverlayContainer,
   OverlayWrapper
 } from "./styles";
-import { Text } from "../Text";
+import { Text } from "../../common/Text";
 
-import type { ImageListType } from "../Carousel/types";
-
-interface CarouselLightBoxProps {
+interface SaveModeLightBoxProps {
   images: ImageListType[];
-  close: () => void;
+  onClose: () => void;
   currentSlide: number;
 }
 
-export const CarouselLightBox = ({ images, close, currentSlide }: CarouselLightBoxProps) => {
+export const SaveModeLightBox = ({ images, onClose, currentSlide }: SaveModeLightBoxProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(currentSlide);
-  const [totalFiles, setTotalFiles] = useState<number>(0);
-  const { isLoading, progress, downloaded, downloadFile } = useFileDownload();
+  const [selectedImages, setSelectedImages] = useRecoilState(selectedImagesState);
 
   const isPrevDisabled = currentIndex === 0;
   const isNextDisabled = currentIndex === images.length - 1;
-  const currentImage = images[currentIndex];
 
   const settings = {
     initialSlide: currentSlide,
@@ -51,6 +46,20 @@ export const CarouselLightBox = ({ images, close, currentSlide }: CarouselLightB
     prevArrow: <Arrows position="prev" isDisabled={isPrevDisabled} />
   };
 
+  const handleToggleImg = (imageId: number, imageUri: string) => {
+    setSelectedImages((prev) => {
+      const newMap = new Map(prev);
+      if (newMap.has(imageId)) {
+        newMap.delete(imageId);
+      } else {
+        newMap.set(imageId, imageUri);
+      }
+      return newMap;
+    });
+  };
+
+  const isSelected = selectedImages.has(images[currentIndex].imageId);
+
   return (
     <OverlayContainer
       as={motion.div}
@@ -60,18 +69,17 @@ export const CarouselLightBox = ({ images, close, currentSlide }: CarouselLightB
       variants={dialogAnimationVariants}
     >
       <OverlayWrapper>
-        <SliderContainer>
-          {isLoading && (
-            <ProgressScreen progress={progress} currentIdx={downloaded} totalFiles={totalFiles} />
-          )}
+        <SliderContainer checked={isSelected}>
           <SliderHeader>
-            <SaveOptionDropdown
-              currentImage={currentImage}
-              allImages={images}
-              setTotalFiles={setTotalFiles}
-              downloadFile={downloadFile}
-            />
-            <button type="button" onClick={close}>
+            <Box position="absolute" top={12} left={12}>
+              <AlbumCheckbox
+                checked={isSelected}
+                onChange={() =>
+                  handleToggleImg(images[currentIndex].imageId, images[currentIndex].imageUri)
+                }
+              />
+            </Box>
+            <button type="button" onClick={onClose}>
               <CloseIcon colorScheme="black" w={31} h={31} opacity={0.7} />
             </button>
           </SliderHeader>
@@ -90,7 +98,6 @@ export const CarouselLightBox = ({ images, close, currentSlide }: CarouselLightB
             </SlideIndex>
           </SlideIndexWrapper>
         </SliderContainer>
-        {images[0].comment && <CommentBox comment={images[0].comment} />}
       </OverlayWrapper>
     </OverlayContainer>
   );

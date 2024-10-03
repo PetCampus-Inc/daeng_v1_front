@@ -1,4 +1,4 @@
-import { CommentText, CommentTextWrapper } from "components/Home/ImageCommentSidler/styles";
+import { CommentText, CommentTextWrapper } from "components/Home/ImageComment/styles";
 import styled from "styled-components";
 import { replaceNewline } from "utils/formatter";
 

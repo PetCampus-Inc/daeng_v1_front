@@ -2,25 +2,25 @@ import DownloadIcon from "assets/svg/download-icon";
 import MultiplePhotoSaveIcon from "assets/svg/multiple-photo-save-icon";
 import PhotoSaveIcon from "assets/svg/photo-save-icon";
 import { Dropdown } from "components/common/Dropdown";
-import { IconWrapper } from "components/Home/ImageCommentSidler/styles";
+import { IconButton, IconWrapper } from "components/Home/ImageComment/styles";
 import { css } from "styled-components";
 
-import type { ImageListType } from "components/common/Carousel/types";
+import type { ImageListType } from "./CommentCarouselLightBox";
 import type { DownloadFileFunction, DownloadProps } from "hooks/common/useS3";
 
-export interface SaveOptionProps {
+interface SaveSectionProps {
   setTotalFiles: React.Dispatch<React.SetStateAction<number>>;
   currentImage: ImageListType;
   allImages: ImageListType[];
   downloadFile: DownloadFileFunction<void, Error, DownloadProps>;
 }
 
-const SaveOptionDropdown = ({
+export function SaveButton({
   setTotalFiles,
   downloadFile,
   currentImage,
   allImages
-}: SaveOptionProps) => {
+}: SaveSectionProps) {
   const saveOptions = [
     {
       label: "이 사진만 저장",
@@ -49,10 +49,12 @@ const SaveOptionDropdown = ({
   ];
 
   return (
-    <Dropdown customStyle={"width: fit-content"}>
+    <Dropdown customStyle={"width: max-content"}>
       <Dropdown.Content>
         <Dropdown.Trigger>
-          <DownloadIcon colorScheme="black" w={20} h={20} opacity={0.7} hasRect />
+          <DownloadButton>
+            <DownloadIcon />
+          </DownloadButton>
         </Dropdown.Trigger>
         <Dropdown.List customStyle={DropdownListStyle}>
           {saveOptions.map((opt, idx) => (
@@ -65,11 +67,22 @@ const SaveOptionDropdown = ({
       </Dropdown.Content>
     </Dropdown>
   );
-};
+}
 
-export default SaveOptionDropdown;
+const DownloadButton = ({
+  isOpen,
+  children,
+  ...props
+}: {
+  isOpen?: boolean;
+  children: React.ReactNode;
+}) => (
+  <IconButton type="button" data-state={isOpen ? "active" : "inactive"} {...props}>
+    {children}
+  </IconButton>
+);
 
 const DropdownListStyle = css`
-  right: 0.625rem;
-  top: 2.5rem;
+  right: 1rem;
+  top: 3.2rem;
 `;

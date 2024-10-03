@@ -7,11 +7,9 @@ import { arrowVariants } from "styles/foundations/animation";
 interface ArrowsProps {
   position: "next" | "prev";
   isDisabled: boolean;
-  currentSlide?: number;
-  slideCount?: number;
 }
 
-const Arrows = ({ position, isDisabled, currentSlide, slideCount, ...props }: ArrowsProps) => {
+export function Arrows({ position, isDisabled, ...props }: ArrowsProps) {
   return (
     <AnimatePresence mode="wait">
       {!isDisabled && (
@@ -33,9 +31,7 @@ const Arrows = ({ position, isDisabled, currentSlide, slideCount, ...props }: Ar
       )}
     </AnimatePresence>
   );
-};
-
-export default Arrows;
+}
 
 const ArrowButton = styled.button<{ position: "next" | "prev" }>`
   position: absolute;

@@ -1,20 +1,38 @@
-import styled from "styled-components";
-export { OverlayContainer } from "styles/StyleModule";
+import styled, { css } from "styled-components";
+
+export const OverlayContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+`;
 
 export const OverlayWrapper = styled.div`
   position: fixed;
   width: calc(100% - 2rem);
 `;
 
-export const SliderContainer = styled.div`
+export const SliderContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !["checked"].includes(prop)
+})<{ checked?: boolean }>`
   position: relative;
   aspect-ratio: 5 / 7;
-
-  background-color: ${({ theme }) => theme.colors.darkBlack};
   border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.darkBlack};
   overflow: hidden;
-
   overscroll-behavior: contain;
+  z-index: 1;
+
+  ${({ theme, checked }) =>
+    checked &&
+    css`
+      box-shadow: 0 0 0 4px ${theme.colors.primary_3};
+    `}
 `;
 
 export const SliderHeader = styled.div`
