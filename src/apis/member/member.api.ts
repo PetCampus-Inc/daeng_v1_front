@@ -8,7 +8,6 @@ import type {
   DogsDataType,
   HomeDataType,
   ImageList,
-  IMainAlbum,
   IMemberDogSchoolInfo,
   IMemberInfo,
   IMemberProfile,
@@ -59,17 +58,23 @@ export const handleGetDogs = async (): Promise<DogsDataType[]> => {
   return data;
 };
 
-// 견주 홈 - 사진앨범
-export const handleGetAlbum = async (req: IMainAlbum): Promise<ImageList[][]> => {
+/**
+ * GET v0/member/main/album
+ * 견주 홈 - 앨범
+ */
+interface MainAlbum {
+  dogId: number;
+  date?: string;
+}
+export const handleGetAlbum = async (req: MainAlbum): Promise<ImageList[][]> => {
   const url = `/member/main/album`;
-  const { data } = await request<ImageList[][]>({
-    url,
+  const { data } = await authAxios.get(url, {
     params: {
       dogId: req.dogId,
       date: req.date
     }
   });
-  return data;
+  return data.data;
 };
 
 // 견주 정보
