@@ -1,4 +1,5 @@
 const transitionProperty = {
+  all: "all",
   common: "background-color, border-color, color, fill, stroke, opacity, box-shadow, transform",
   colors: "background-color, border-color, color, fill, stroke",
   dimensions: "width, height",
