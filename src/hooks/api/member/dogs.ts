@@ -1,8 +1,9 @@
 import { useSuspenseQuery, type UseSuspenseQueryResult } from "@tanstack/react-query";
 import { handleGetDogInfoAgenda, handleGetDogInfoRecord } from "apis/member/dogs";
 import { format } from "date-fns/format";
-import { AgendaStatus } from "types/common/status.types";
-import { convertArrayToDate } from "utils/date";
+import { getDateFromArray } from "utils/date";
+
+import type { AgendaStatus } from "types/common/status.types";
 
 export const useDogInfoAgenda = (dogId: number, date?: string) => {
   return useSuspenseQuery({
@@ -30,9 +31,9 @@ export const useDogInfoRecord = (
     select: (data) =>
       data.map((item) => {
         return {
-          date: format(convertArrayToDate(item.date), "yyyy-MM-dd"),
+          date: format(getDateFromArray(item.date), "yyyy-MM-dd"),
           status: item.status,
-          registeredDate: format(convertArrayToDate(item.registeredDate), "yyyy-MM-dd")
+          registeredDate: format(getDateFromArray(item.registeredDate), "yyyy-MM-dd")
         };
       }),
     retryOnMount: false,

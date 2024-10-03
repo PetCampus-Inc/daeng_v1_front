@@ -14,7 +14,7 @@ import { useGetMemberDogEnrollment } from "hooks/api/member/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 import { isEmpty } from "utils/is";
 
 interface EnrollmentProps {
@@ -43,8 +43,8 @@ const MemberSchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
   const [dogyear, dogMonth, dogDay] = dogBirthDate;
   const dogBirth = {
     year: dogyear ? dogyear : "",
-    month: dogMonth ? padToTwoDigits(Number(dogMonth)) : "",
-    day: dogDay ? padToTwoDigits(Number(dogDay)) : ""
+    month: dogMonth ? getPadString(Number(dogMonth)) : "",
+    day: dogDay ? getPadString(Number(dogDay)) : ""
   };
 
   const methods = useForm({

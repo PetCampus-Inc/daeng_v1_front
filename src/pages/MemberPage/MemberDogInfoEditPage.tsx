@@ -6,7 +6,7 @@ import DogDetailInfoEdit from "components/Member/DogInfo/DogDetailInfoEdit/DogDe
 import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 
 const MemberDogInfoEditPage = () => {
   const { dogId } = useParams();
@@ -17,8 +17,8 @@ const MemberDogInfoEditPage = () => {
 
   const dogBirth = {
     year: year,
-    month: padToTwoDigits(month),
-    day: padToTwoDigits(day)
+    month: getPadString(month),
+    day: getPadString(day)
   };
 
   const methods = useForm({
