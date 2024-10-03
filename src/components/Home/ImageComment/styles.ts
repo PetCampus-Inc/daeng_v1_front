@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { hexToRGBA } from "utils/color";
 
 export const SliderContainer = styled.div`
@@ -10,7 +10,7 @@ export const SliderContainer = styled.div`
   overscroll-behavior: contain;
 `;
 
-export const ImageShadow = styled.div`
+export const InnerShadow = styled.div`
   position: absolute;
   top: 0;
   width: 100%;
@@ -106,22 +106,20 @@ export const IconButton = styled.button`
   height: 1.5rem;
   justify-content: center;
   align-items: center;
-
   border-radius: 50%;
-  border: 1px solid ${({ theme }) => hexToRGBA(theme.colors.white, 0.8)};
-  background-color: ${({ theme }) => hexToRGBA(theme.colors.white, 0.8)};
 
-  &.active {
+  &[data-state="inactive"] {
+    border: 1px solid ${({ theme }) => hexToRGBA(theme.colors.white, 0.8)};
+    background-color: ${({ theme }) => hexToRGBA(theme.colors.white, 0.8)};
+  }
+
+  &[data-state="active"] {
     border: 1px solid ${({ theme }) => hexToRGBA(theme.colors.white, 0.6)};
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  transition: background-color 0.1s ease-out;
-`;
-
-export const ButtonGroup = styled.div`
-  display: flex;
-  gap: 0.75rem;
+  transition: ${({ theme }) =>
+    `${theme.transition.property.colors} ${theme.transition.duration["ultra-fast"]} ${theme.transition.easing["ease-in-out"]}`};
 `;
 
 export const SliderHeader = styled.div`
@@ -151,7 +149,6 @@ export const CommentBoxWrapper = styled.div`
   gap: 0.625rem;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.white};
-  // backdrop-filter: blur(2px);
   opacity: 0.65;
 
   &::before,
@@ -194,11 +191,6 @@ export const CommentText = styled.pre`
   padding: 0 0.25rem;
 `;
 
-export const DropdownListStyle = css`
-  right: 1rem;
-  top: 3.2rem;
-`;
-
 export const IconWrapper = styled.span`
   display: flex;
   align-items: center;
@@ -209,7 +201,7 @@ export const IconWrapper = styled.span`
   border-radius: 50%;
 `;
 
-export const Dimmer = styled.div`
+export const Dimmed = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;

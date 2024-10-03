@@ -4,20 +4,21 @@ import { Box, Flex, Text } from "components/common";
 import { MoreButton } from "components/common/Button/Templates";
 import { useNavigate } from "react-router-dom";
 
-import ImageSlider from "./ImageAlbumSlider/ImageSlider";
+import { ImageSlider } from "./ImageSlider";
 
-import type { ImageListType } from "types/member/main.types";
+import type { ImageList } from "types/member/main.types";
 
 interface HomeImageAlbumProps {
   dogInfo: {
     dogName: string;
     dogId: number;
   };
-  images?: ImageListType[][];
+  images?: ImageList[][];
 }
 
-const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
+export function ImageAlbum({ dogInfo, images }: HomeImageAlbumProps) {
   const navigate = useNavigate();
+  const { dogId, dogName } = dogInfo;
 
   return (
     <Box display="flex" direction="column" mt={40} gap={8}>
@@ -27,11 +28,7 @@ const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
         </Text>
         {images && (
           <MoreButton
-            onClick={() =>
-              navigate(
-                `${routes.member.album.root}?dogId=${dogInfo.dogId}&dogName=${dogInfo.dogName}`
-              )
-            }
+            onClick={() => navigate(routes.member.album.dynamic(`${dogId}?dogName=${dogName}`))}
             typo="body2_16_R"
             iconSize={24}
             iconColorScheme="gray_1"
@@ -43,6 +40,4 @@ const HomeImageAlbum = ({ dogInfo, images }: HomeImageAlbumProps) => {
       <ImageSlider images={images} />
     </Box>
   );
-};
-
-export default HomeImageAlbum;
+}

@@ -8,7 +8,7 @@ import SingleRadio from "components/common/Select/SingleRadio";
 import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { Controller, useFormContext } from "react-hook-form";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 import { getLabelForValue } from "utils/formatter";
 
 import { Caption, Card } from "./styles";
@@ -22,8 +22,8 @@ const DogInfo = () => {
   const [birthYear, birthMonth, birthDay] = getValues(FIELD.BIRTHDAY).map(String);
   const dogBirthData = {
     year: birthYear,
-    month: padToTwoDigits(birthMonth),
-    day: padToTwoDigits(birthDay)
+    month: getPadString(birthMonth),
+    day: getPadString(birthDay)
   };
   const formatDogGender = getLabelForValue(FIELD.DOG_GENDER, dogGender);
   const formatDogSize = getLabelForValue(FIELD.DOG_SIZE, dogSize);

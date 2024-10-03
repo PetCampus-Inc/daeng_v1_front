@@ -1,11 +1,11 @@
 import { Box, Text, Progress, type ProgressTemplateProps } from "components/common";
 
-import { Dimmer } from "./styles";
+import { Dimmed } from "./styles";
 
-const ProgressScreen = ({ currentIdx, totalFiles, progress }: ProgressTemplateProps) => {
+export function ProgressScreen({ currentIdx, totalFiles, progress }: ProgressTemplateProps) {
   return (
     <>
-      <Dimmer />
+      <Dimmed />
       <Box
         position="absolute"
         width="70%"
@@ -27,6 +27,4 @@ const ProgressScreen = ({ currentIdx, totalFiles, progress }: ProgressTemplatePr
       </Box>
     </>
   );
-};
-
-export default ProgressScreen;
+}

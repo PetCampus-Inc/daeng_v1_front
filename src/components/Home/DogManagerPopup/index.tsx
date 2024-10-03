@@ -3,10 +3,10 @@ import { Box, Flex, Text } from "components/common";
 import { useGetDogs } from "hooks/api/member/member";
 import { useRecoilState } from "recoil";
 import { dogIdState } from "store/member";
+import { Img } from "styles/StyleModule";
 
 import { DogAvatar, DogItem, ListContent, Name } from "./styles";
 import { BottomSheet, type BottomSheetProps } from "../../common/BottomSheet";
-import { Img } from "../styles";
 
 const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
   const [selectedDogId, setSelectedDogId] = useRecoilState(dogIdState);
@@ -15,8 +15,8 @@ const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
   const getIsActive = (id: number) => selectedDogId === id;
 
   const handleSelectDog = (dogId: number) => {
-    close();
     setSelectedDogId(dogId);
+    close();
   };
 
   return (

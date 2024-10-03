@@ -11,14 +11,14 @@ interface SliderDotsProps {
   prevNextDotClassName?: string;
 }
 
-const SliderDots: React.FC<SliderDotsProps> = ({
+export function SliderDots({
   dots,
   numDotsToShow,
   dotWidth,
   dotContainerClassName = "custom-dots slick-dots",
   activeDotClassName = "slick-active",
   prevNextDotClassName = "small"
-}) => {
+}: SliderDotsProps) {
   const [minIndex, setMinIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
   const [breakPointActiveIndex, setBreakPointActiveIndex] = useState(0);
@@ -193,6 +193,4 @@ const SliderDots: React.FC<SliderDotsProps> = ({
       </DotWrapper>
     </DotContainer>
   );
-};
-
-export default SliderDots;
+}

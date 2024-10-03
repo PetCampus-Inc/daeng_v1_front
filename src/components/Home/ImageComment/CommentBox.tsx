@@ -2,8 +2,7 @@ import { replaceNewline } from "utils/formatter";
 
 import { CommentBoxWrapper, CommentText, CommentTextWrapper } from "./styles";
 
-const CommentBox = ({ comment }: { comment?: string }) => {
-  if (!comment) return null;
+export function CommentBox({ comment }: { comment: string }) {
   return (
     <CommentBoxWrapper>
       <CommentTextWrapper>
@@ -11,6 +10,4 @@ const CommentBox = ({ comment }: { comment?: string }) => {
       </CommentTextWrapper>
     </CommentBoxWrapper>
   );
-};
-
-export default CommentBox;
+}

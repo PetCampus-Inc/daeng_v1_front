@@ -7,12 +7,10 @@ interface CommentButtonProps {
   onClick: () => void;
 }
 
-const CommentButton = ({ isOpen, onClick }: CommentButtonProps) => {
+export function CommentButton({ isOpen, onClick }: CommentButtonProps) {
   return (
-    <IconButton type="button" onClick={onClick} className={isOpen ? "active" : ""}>
+    <IconButton type="button" onClick={onClick} data-state={isOpen ? "active" : "inactive"}>
       <Chat />
     </IconButton>
   );
-};
-
-export default CommentButton;
+}
