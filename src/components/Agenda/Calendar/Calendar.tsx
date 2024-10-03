@@ -45,7 +45,7 @@ export const Calendar = ({ dogId }: { dogId: number }) => {
       setActiveStartDate(date);
       const formattedDate = format(date, "yyyy-MM-dd");
       searchParams.set("date", formattedDate);
-      setSearchParams(searchParams);
+      setSearchParams(searchParams, { replace: true });
     }
   };
 
@@ -63,7 +63,7 @@ export const Calendar = ({ dogId }: { dogId: number }) => {
         setDate(selectableDate);
         const formattedDate = format(selectableDate, "yyyy-MM-dd");
         searchParams.set("date", formattedDate);
-        setSearchParams(searchParams);
+        setSearchParams(searchParams, { replace: true });
       }
     }
   };
