@@ -2,38 +2,34 @@ import DownloadIcon from "assets/svg/download-icon";
 import { XSmallButton } from "components/common/Button/Templates";
 import { css } from "styled-components";
 
-interface SaveButtonProps {
+interface SaveModeButtonProps {
   isSaveMode: boolean;
-  handleSaveMode: () => void;
+  onToggleMode: () => void;
 }
 
-const SaveButton = ({ isSaveMode, handleSaveMode }: SaveButtonProps) => {
+export function SaveModeButton({ isSaveMode, onToggleMode }: SaveModeButtonProps) {
   return (
     <>
       {isSaveMode ? (
         <XSmallButton
           colorScheme="gray_5"
           typo="caption1_12_R"
-          css={{ height: "24px" }}
-          onClick={handleSaveMode}
+          css={{ height: "24px", padding: 0 }}
+          onClick={onToggleMode}
         >
           취소
         </XSmallButton>
       ) : (
-        <XSmallButton colorScheme="white" onClick={handleSaveMode} css={DefaultButtonStyle}>
+        <XSmallButton colorScheme="white" onClick={onToggleMode} css={DefaultButtonStyle}>
           <DownloadIcon />
         </XSmallButton>
       )}
     </>
   );
-};
-
-export default SaveButton;
+}
 
 const DefaultButtonStyle = css`
   background-color: transparent;
-
-  padding: 0px 8px;
-
+  padding: 0px;
   height: 24px;
 `;
