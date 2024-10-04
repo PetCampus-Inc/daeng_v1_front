@@ -50,6 +50,8 @@ const DogInfo = () => {
           name={FIELD.DOG_GENDER}
           radiosText={["수컷", "암컷"]}
           defaultSelect={formatDogGender}
+          isPreviewMode
+          disabled
         />
       </Card>
 
@@ -61,6 +63,8 @@ const DogInfo = () => {
             caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
             radiosText={["소형견", "중형견", "대형견"]}
             defaultSelect={formatDogSize}
+            isPreviewMode
+            disabled
           />
         </Card>
       )}
@@ -95,6 +99,8 @@ const DogInfo = () => {
           name={FIELD.NEUTRALIZATION}
           radiosText={["했어요", "안했어요"]}
           defaultSelect={formatNeutralization}
+          isPreviewMode
+          disabled
         />
       </Card>
       <Card>
@@ -105,6 +111,8 @@ const DogInfo = () => {
           name={FIELD.VACCINATION}
           radiosText={["했어요", "안했어요"]}
           defaultSelect={formatVaccination}
+          isPreviewMode
+          disabled
         />
       </Card>
       {getValues(FIELD.VACCINATION) === "했어요" && (
