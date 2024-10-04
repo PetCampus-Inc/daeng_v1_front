@@ -61,7 +61,10 @@ const DogNote = ({ data }: DogNoteProps) => {
             overflow="hidden"
           >
             <Img
-              src={process.env.REACT_APP_CLIENT_BASE_URL + "images/placeholder-image.png"}
+              src={
+                data.dogProfile ||
+                process.env.REACT_APP_CLIENT_BASE_URL + "images/placeholder-image.png"
+              }
               alt={`${data?.dogName}의 프로필`}
             />
           </Box>
@@ -79,7 +82,7 @@ const DogNote = ({ data }: DogNoteProps) => {
           <FootButton type="button" className={attendanceClass}>
             <FootIcon w="25" h="21" />
           </FootButton>
-          <Flex direction="column" align="flex-end">
+          <Flex direction="column" align="flex-end" justify="center">
             <Text typo="body2_16_B" color={attendanceStatus ? "gray_1" : "gray_3"}>
               {attendanceText}
             </Text>
