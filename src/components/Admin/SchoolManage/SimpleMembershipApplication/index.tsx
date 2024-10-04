@@ -54,7 +54,7 @@ const SimpleMembershipApplication = ({
           <S.Date>{dateString} 작성됨</S.Date>
         </S.TextWrapper>
       </S.LeftBox>
-      <ArrowRightIcon w={16} />
+      <ArrowRightIcon size={16} />
     </S.Container>
   );
 };

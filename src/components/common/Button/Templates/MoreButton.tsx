@@ -29,7 +29,7 @@ export const MoreButton = ({
       paddingBlock={0}
       paddingInline={0}
       gap={0}
-      rightAddon={<ArrowRightIcon colorScheme={iconColorScheme} w={iconSize} h={iconSize} />}
+      rightAddon={<ArrowRightIcon colorScheme={iconColorScheme} size={iconSize} />}
       {...props}
     >
       <a>{children}</a>

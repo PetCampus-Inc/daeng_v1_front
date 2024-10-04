@@ -24,8 +24,8 @@ export function Arrows({ position, isDisabled, ...props }: ArrowsProps) {
           exit="hidden"
           variants={arrowVariants}
         >
-          {position === "next" && <ArrowRightIcon w="30" h="30" />}
-          {position === "prev" && <ArrowLeftIcon w="30" h="30" />}
+          {position === "next" && <ArrowRightIcon size={30} />}
+          {position === "prev" && <ArrowLeftIcon size={30} />}
           <SrOnly>{position} slide</SrOnly>
         </ArrowButton>
       )}
