@@ -15,11 +15,6 @@ export interface IEnrollmentProps {
   requestUrl?: string;
 }
 
-export interface MemberDogEnrollmentProps {
-  dogId: string;
-  schoolId: number;
-}
-
 /**
  * @description 견주 가입 신청 폼 데이터 반환 - 앱에서 견주 가입 신청 페이지에 접근합니다.
  * @param {number, string} schoolId
@@ -136,7 +131,10 @@ export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollm
 export const handleGetMemberDogEnrollment = async ({
   dogId,
   schoolId
-}: MemberDogEnrollmentProps): Promise<EnrollmentDogDataType> => {
+}: {
+  dogId: number;
+  schoolId: number;
+}): Promise<EnrollmentDogDataType> => {
   const url = `member/school/enroll`;
   const { data } = await authAxios.get(url, {
     params: {

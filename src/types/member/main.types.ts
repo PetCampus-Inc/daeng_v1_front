@@ -149,7 +149,8 @@ export interface MemberDogInfoFormData
 export type DogsDataType = {
   dogId: number;
   dogName: string;
-  imageUri: string;
+  dogProfile: string;
+  schoolId: number;
 };
 
 export interface IMemberDogSchoolInfo {

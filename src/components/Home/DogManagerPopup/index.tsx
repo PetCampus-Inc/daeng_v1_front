@@ -1,6 +1,10 @@
+import { routes } from "constants/path";
+
+import PlaceholderImg from "assets/images/placeholder-dog.png";
 import AddCIcon from "assets/svg/add-c-icon";
 import { Box, Flex, Text } from "components/common";
 import { useGetDogs } from "hooks/api/member/member";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { dogIdState } from "store/member";
 import { Img } from "styles/StyleModule";
@@ -8,9 +12,10 @@ import { Img } from "styles/StyleModule";
 import { DogAvatar, DogItem, ListContent, Name } from "./styles";
 import { BottomSheet, type BottomSheetProps } from "../../common/BottomSheet";
 
-const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
+export const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
   const [selectedDogId, setSelectedDogId] = useRecoilState(dogIdState);
-  const { data: dogList } = useGetDogs();
+  const { data: dogList } = useGetDogs(selectedDogId?.toString());
+  const navigate = useNavigate();
 
   const getIsActive = (id: number) => selectedDogId === id;
 
@@ -34,12 +39,18 @@ const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
               onClick={() => handleSelectDog(item.dogId)}
             >
               <DogAvatar className="dog-avatar">
-                <Img src={item.imageUri} />
+                <Img src={item.dogProfile || PlaceholderImg} />
               </DogAvatar>
               <Name className="dog-name">{item.dogName}</Name>
             </DogItem>
           ))}
-          <Box display="flex" direction="column" position="relative" align="center">
+          <Box
+            onClick={() => navigate(routes.member.mypage.enrollment.root)}
+            display="flex"
+            direction="column"
+            position="relative"
+            align="center"
+          >
             <DogAvatar>
               <AddCIcon />
             </DogAvatar>
@@ -52,5 +63,3 @@ const DogManagerPopup = ({ isOpen, close }: BottomSheetProps) => {
     </BottomSheet>
   );
 };
-
-export default DogManagerPopup;

@@ -25,7 +25,7 @@ interface EnrollmentProps {
 // 유치원 재가입신청 페이지
 const MemberSchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
   const { data } = useGetMemberDogEnrollment({
-    dogId: String(dogId),
+    dogId,
     schoolId: schoolId ?? -1
   });
 

@@ -4,7 +4,6 @@ import { QUERY_KEY } from "constants/queryKey";
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
   IEnrollmentProps,
-  MemberDogEnrollmentProps,
   handleDeleteMemberEnrollment,
   handleGetBreed,
   handleGetEnrollment,
@@ -39,10 +38,17 @@ export const useGetEnrollment = ({ schoolId }: IEnrollmentProps) => {
 };
 
 // 강아지 유치원 재등록 가입신청서 조회
-export const useGetMemberDogEnrollment = ({ dogId, schoolId }: MemberDogEnrollmentProps) => {
+export const useGetMemberDogEnrollment = ({
+  dogId,
+  schoolId
+}: {
+  dogId: number;
+  schoolId: number;
+}) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.DOG_ENROLLMENT(dogId, schoolId),
-    queryFn: () => handleGetMemberDogEnrollment({ dogId, schoolId })
+    queryFn: () => handleGetMemberDogEnrollment({ dogId, schoolId }),
+    refetchOnWindowFocus: false
   });
 };
 

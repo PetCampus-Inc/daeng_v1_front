@@ -5,7 +5,7 @@ import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
 import { Dashboard } from "components/Home/Dashboard/Dashboard";
 import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
-import DogManagerPopup from "components/Home/DogManagerPopup";
+import { DogManagerPopup } from "components/Home/DogManagerPopup";
 import { ImageAlbum } from "components/Home/ImageAlbum/ImageAlbum";
 import { ImageComment } from "components/Home/ImageComment/ImageComment";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
