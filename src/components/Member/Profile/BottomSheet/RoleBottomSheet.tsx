@@ -2,6 +2,7 @@ import { FIELD } from "constants/field";
 import { RELATION_DATA_ARR } from "constants/relation";
 
 import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
+import { Flex } from "components/common/Flex";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 import * as S from "../styles";
@@ -16,8 +17,11 @@ const RoleBottomSheet = ({ title, close, isOpen, actionFn, register }: RoleBotto
   return (
     <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
-        <BottomSheet.Control />
-        <BottomSheet.Title>{title}</BottomSheet.Title>
+        <Flex justify="space-between" align="center" mb="16px">
+          <BottomSheet.Title>{title}</BottomSheet.Title>
+          <BottomSheet.Control />
+        </Flex>
+
         <S.RoleSelectWrapper direction="column">
           {RELATION_DATA_ARR.map((item, idx) => (
             <div
