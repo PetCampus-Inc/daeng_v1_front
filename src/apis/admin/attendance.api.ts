@@ -130,7 +130,7 @@ export const handlePostDogMemo = async (req: { dogId: number; memo: string }): P
 export const handleGetDogInfoRecord = async (
   dogId: number,
   date?: string
-): Promise<DogInfoRecordData[]> => {
+): Promise<DogInfoRecordData> => {
   const url = `admin/attendance/dog/info/record`;
   const { data } = await authAxios.get(url, {
     params: {

@@ -1,3 +1,5 @@
+import type { LocalDate } from "types/helper.types";
+
 export const AGENDA_STATUS = {
   NOT_YET: "NOT_YET",
   COMPLETE: "COMPLETE",
@@ -33,7 +35,6 @@ export interface DogInfoAgenda {
  * 등원기록
  */
 export interface DogInfoRecord {
-  date: number[];
-  status: AgendaStatus;
-  registeredDate: number[];
+  date: LocalDate[];
+  registeredDate: LocalDate;
 }

@@ -15,10 +15,8 @@ import {
   handleGetPrecautions,
   handlePostDogMemo
 } from "apis/admin/attendance.api";
-import { format } from "date-fns/format";
 import { Adapter, DataFormatAdapter } from "libs/adapters";
 import { AdminDogImageRequest } from "types/admin/admin.types";
-import { AgendaStatus } from "types/common/status.types";
 import { getDateFromArray } from "utils/date";
 
 import type { DogInfoDetailData } from "types/admin/attendance.type";
@@ -74,25 +72,22 @@ export const useGetDogDetail = (dogId: number) => {
 
 // 강아지 상세 - 등원기록 조회
 export type DogInfoRecordType = {
-  date: string;
-  status: AgendaStatus;
-  registeredDate: string;
+  date: Date[];
+  registeredDate: Date;
 };
 export const useGetDogInfoRecord = (
   dogId: number,
   date?: string
-): UseSuspenseQueryResult<DogInfoRecordType[]> => {
+): UseSuspenseQueryResult<DogInfoRecordType> => {
   return useSuspenseQuery({
     queryKey: ["dogInfoRecord", dogId, date],
     queryFn: () => handleGetDogInfoRecord(dogId, date),
-    select: (data) =>
-      data.map((item) => {
-        return {
-          date: format(getDateFromArray(item.date), "yyyy-MM-dd"),
-          status: item.status,
-          registeredDate: "" // FIXME: API 수정 후 지우기
-        };
-      }),
+    select: (data) => {
+      return {
+        date: data.date.map((day) => getDateFromArray(day)),
+        registeredDate: getDateFromArray(data.registeredDate)
+      };
+    },
     retryOnMount: false,
     refetchOnWindowFocus: false
   });
@@ -103,9 +98,9 @@ export const useGetDogInfoAgenda = (dogId: number, date?: string) => {
   return useQuery({
     queryKey: ["dogInfoAgenda", dogId, date],
     queryFn: () => handleGetDogInfoAgenda(dogId, date),
-    throwOnError: false, // FIXME: 운영환경에선 지우세요!
     retryOnMount: false,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    throwOnError: false
   });
 };
 
