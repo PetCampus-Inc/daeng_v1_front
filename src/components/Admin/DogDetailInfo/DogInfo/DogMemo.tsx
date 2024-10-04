@@ -1,9 +1,8 @@
 import PencilIcon from "assets/svg/pencil-icon";
 import { ModalWithTextAreaContent } from "components/Admin/DogDetailInfo/DogInfo/styles";
-import { Flex, Text } from "components/common";
+import { Flex, Text, Textarea, type TextareaProps } from "components/common";
 import { Modal, type ModalProps } from "components/common/Modal";
 import { type ModalButtonProps } from "components/common/Modal/ModalButton";
-import TextArea, { type TextAreaProps } from "components/common/TextArea";
 import { usePostMemo } from "hooks/api/admin/dogs";
 import { useOverlay } from "hooks/common/useOverlay";
 import { FormProvider, useForm, type FieldValues, type UseFormRegister } from "react-hook-form";
@@ -36,7 +35,7 @@ export function DogMemo({ memo, dogId }: MemoProps) {
   const openMemoDialog = () =>
     overlay.open(({ isOpen, close }) => (
       <FormProvider {...methods}>
-        <TextAreaModal
+        <TextareaModal
           isOpen={isOpen}
           close={close}
           actionText="저장"
@@ -60,8 +59,7 @@ export function DogMemo({ memo, dogId }: MemoProps) {
           <PencilIcon />
         </button>
       </Flex>
-      <TextArea
-        resizable={false}
+      <Textarea
         placeholder="메모를 입력해주세요"
         onClick={openMemoDialog}
         value={memo || ""}
@@ -71,12 +69,12 @@ export function DogMemo({ memo, dogId }: MemoProps) {
   );
 }
 
-interface TextAreaModalProps extends ModalProps, ModalButtonProps, TextAreaProps {
+interface TextareaModalProps extends ModalProps, ModalButtonProps, TextareaProps {
   name: string;
   register: UseFormRegister<FieldValues>;
 }
 
-const TextAreaModal = ({
+const TextareaModal = ({
   isOpen,
   close,
   closeText,
@@ -86,11 +84,11 @@ const TextAreaModal = ({
   defaultValue,
   placeholder,
   register
-}: TextAreaModalProps) => {
+}: TextareaModalProps) => {
   return (
     <Modal isOpen={isOpen} close={close}>
       <ModalWithTextAreaContent>
-        <TextArea
+        <Textarea
           {...register(name)}
           rows={4}
           autoResize={false}

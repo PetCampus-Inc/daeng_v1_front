@@ -5,6 +5,7 @@ import { isSameDay, format, isToday, parseISO } from "date-fns";
 import { ko } from "date-fns/locale";
 import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
+import { getDateFromArray } from "utils/date";
 
 import {
   DayTile,

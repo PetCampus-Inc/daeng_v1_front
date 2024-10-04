@@ -6,7 +6,7 @@ export const CalendarSection = styled.section`
   border-radius: 0px 0px 20px 20px;
   overflow: hidden;
 
-  margin-bottom: 40px;
+  margin-bottom: 20px; // 사진앨범 페이지 마다 약간 다름
 `;
 
 // MonthlyCalendar Style
@@ -16,17 +16,24 @@ export const StyledMonthlyCalendar = styled.div`
   justify-content: center;
   width: 100%;
 
-  /* React Calendar Custom Styling */
   .react-calendar {
     width: 100%;
     border: none;
   }
 
-  /* Navigation Styling */
+  /* 네비 영역 */
   .react-calendar__navigation {
+    display: flex;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
     margin-bottom: ${remCalc(14)};
+    height: 44px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
 
     button:enabled:hover,
     button:enabled:focus {
@@ -39,44 +46,40 @@ export const StyledMonthlyCalendar = styled.div`
     }
 
     .react-calendar__navigation__label {
-      flex-grow: 0 !important;
+      flex-grow: 0.1 !important;
       min-width: 70px;
-
+      font-family: "Pretendard Variable";
       ${({ theme }) => theme.typo.label1_16_B};
       color: ${({ theme }) => theme.colors.primaryColor};
-      font-family: "Pretendard Variable";
     }
   }
 
-  /* Weekday Headers Styling */
+  /* WeekDays 영역 */
   .react-calendar__month-view__weekdays {
-    border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
     padding-inline: 16px;
+    padding-block-end: 8px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
+    text-transform: uppercase;
+    text-align: center;
 
-    .react-calendar__month-view__weekdays__weekday {
-      abbr {
-        color: ${({ theme }) => theme.colors.gray_1};
-        ${({ theme }) => theme.typo.label2_14_M};
-        font-weight: 600;
-        font-family: "Pretendard Variable";
-        text-decoration: none;
-      }
+    .react-calendar__month-view__weekdays__weekday abbr {
+      color: ${({ theme }) => theme.colors.gray_1};
+      ${({ theme }) => theme.typo.label2_14_M};
+      font-weight: 600;
+    }
 
-      &--weekend {
-        abbr[title="Sun"] {
-          color: ${({ theme }) => theme.colors.red_1};
-        }
-      }
+    .react-calendar__month-view__weekdays__weekday--weekend abbr[title="Sun"] {
+      color: ${({ theme }) => theme.colors.red_1};
     }
   }
 
-  /* Day Tiles Styling */
+  /* days 영역 */
   .react-calendar__month-view__days {
     gap: 12px 0;
     margin-block: 14px;
     padding-inline: 16px;
 
-    .react-calendar__tile.react-calendar__month-view__days__day {
+    .react-calendar__tile {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -86,37 +89,35 @@ export const StyledMonthlyCalendar = styled.div`
       height: 100%;
       padding: 4px 0 6px;
 
+      /* 날짜 텍스트를 위한 스타일 */
       abbr {
-        color: ${({ theme }) => theme.colors.gray_1};
         ${({ theme }) => theme.typo.label1_16_R};
         font-weight: 500;
         font-size: 0.9rem;
         font-family: "Pretendard Variable";
+        color: ${({ theme }) => theme.colors.gray_1};
+      }
+      span {
+        line-height: 1.1;
       }
 
+      /* 이웃 날짜를 위한스타일 */
       &.react-calendar__month-view__days__day--neighboringMonth {
         abbr {
           color: ${({ theme }) => theme.colors.gray_3};
         }
       }
 
-      &.react-calendar__tile:enabled:hover,
-      &.react-calendar__tile:enabled:focus,
-      &.react-calendar__tile--now {
-        background: none;
+      /* 오늘 날짜 스타일 */
+      &--now {
+        background-color: transparent;
       }
 
-      &.react-calendar__tile--active,
-      &.react-calendar__tile--range,
-      &.react-calendar__tile--rangeStart,
-      &.react-calendar__tile--rangeEnd,
-      &.react-calendar__tile--rangeBothEnds {
-        background-color: ${({ theme }) => theme.colors.yellow_3} !important;
+      /* 선택된 날짜 스타일 */
+      &--active,
+      &--hasActive {
+        background-color: ${({ theme }) => theme.colors.yellow_3};
         border-radius: 12px;
-
-        abbr {
-          color: ${({ theme }) => theme.colors.primaryColor};
-        }
       }
 
       &:disabled {
@@ -145,24 +146,22 @@ export const MonthPickerWrapper = styled.div`
   z-index: 10;
 `;
 
-// Month Picker Calendar
 export const MonthPickerCalendar = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: center;
   position: relative;
+  justify-content: center;
+  width: 100%;
 
-  /* React Calendar Custom Styling */
   .react-calendar {
     width: 100%;
-    border: none;
-    padding-bottom: ${remCalc(14)};
+    // padding-bottom: ${remCalc(14)};
   }
 
-  /* Navigation Styling */
+  /* 네비 영역 */
   .react-calendar__navigation {
     display: flex;
     justify-content: center;
+    margin-bottom: ${remCalc(20)};
 
     button {
       display: flex;
@@ -170,20 +169,15 @@ export const MonthPickerCalendar = styled.div`
       justify-content: center;
     }
 
-    button.react-calendar__navigation__label {
-      ${({ theme }) => theme.typo.label1_16_B};
-      color: ${({ theme }) => theme.colors.primaryColor};
-      font-family: "Pretendard Variable";
+    .react-calendar__navigation__label {
       flex-grow: 0.3 !important;
+      font-family: "Pretendard Variable";
+      ${({ theme }) => theme.typo.label1_16_B};
+      color: ${({ theme }) => theme.colors.darkBlack};
     }
   }
 
-  /* Container Styling */
-  .react-calendar__viewContainer {
-    margin-top: ${remCalc(24)};
-  }
-
-  /* Months Styling */
+  /* Months 영역 */
   .react-calendar__year-view__months {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr);
@@ -204,11 +198,7 @@ export const MonthPickerCalendar = styled.div`
       font-family: "Pretendard Variable";
     }
 
-    &.react-calendar__tile--active,
-    &.react-calendar__tile--range,
-    &.react-calendar__tile--rangeStart,
-    &.react-calendar__tile--rangeEnd,
-    &.react-calendar__tile--rangeBothEnds {
+    &.react-calendar__tile--active {
       background-color: ${({ theme }) => theme.colors.primary_3};
 
       abbr {
@@ -216,7 +206,7 @@ export const MonthPickerCalendar = styled.div`
       }
     }
 
-    &.react-calendar__tile:disabled {
+    &:disabled {
       abbr {
         color: ${({ theme }) => theme.colors.gray_4};
       }

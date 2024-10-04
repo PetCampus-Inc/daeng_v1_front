@@ -13,8 +13,9 @@ export const ListContent = styled.div`
 export const DogItem = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   align-items: center;
+  position: relative;
+  gap: 8px;
 
   &.active {
     & > .dog-avatar {

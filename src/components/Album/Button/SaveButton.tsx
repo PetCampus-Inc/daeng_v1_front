@@ -2,7 +2,7 @@ import { ProgressTemplate } from "components/common";
 import { BottomButton } from "components/common/Button";
 import { useFileDownload } from "hooks/common/useS3";
 
-import { useSelectedImages } from "../context/SelectedImageProvider";
+import { useSelectedImages } from "../hooks/SelectedImageProvider";
 
 const SaveButton = () => {
   const { imageMap, selectedImgIds } = useSelectedImages();

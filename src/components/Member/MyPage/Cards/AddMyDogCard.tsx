@@ -3,20 +3,20 @@ import { routes } from "constants/path";
 import AddCIcon from "assets/svg/add-c-icon";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { dogIdState } from "store/member";
+import { dogEnrollmentStatus } from "store/member";
 
 import * as S from "./styles";
 
 const AddMyDogCard = () => {
   const navigate = useNavigate();
-  const setDogId = useSetRecoilState(dogIdState);
+  const setDogEnrollmentStatus = useSetRecoilState(dogEnrollmentStatus);
 
   return (
     <S.AddMyDogCard
       role="button"
       onClick={() => {
         navigate(routes.member.mypage.enrollment.root);
-        setDogId(null); // dogId 초기화
+        setDogEnrollmentStatus({ status: "CREATE" });
       }}
     >
       <AddCIcon className="addIcon" />

@@ -2,7 +2,7 @@ import { routes } from "constants/path";
 
 import CalendarIcon from "assets/svg/calendar";
 import { Box, Flex, Text } from "components/common";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface AlbumHeaderProps {
@@ -11,6 +11,7 @@ interface AlbumHeaderProps {
 }
 
 const AlbumHeader = ({ dogId, dogName }: AlbumHeaderProps) => {
+  const navigation = useNavigate();
   return (
     <Box display="flex" justify="space-between" pb={8} borderBottom={1} borderColor="gray_5">
       <Flex direction="column" gap={4}>
@@ -21,7 +22,9 @@ const AlbumHeader = ({ dogId, dogName }: AlbumHeaderProps) => {
           {dogName ?? ""} 사진을 모아서 볼 수 있어요
         </Text>
       </Flex>
-      <LinkButton to={routes.member.album.root}>
+      <LinkButton
+        onClick={() => navigation(routes.member.album.date.dynamic(dogId), { state: { dogName } })}
+      >
         <CalendarIcon w="40" h="40" rx="20" />
       </LinkButton>
     </Box>
@@ -30,7 +33,7 @@ const AlbumHeader = ({ dogId, dogName }: AlbumHeaderProps) => {
 
 export default AlbumHeader;
 
-const LinkButton = styled(Link)`
+const LinkButton = styled.button`
   display: flex;
   height: fit-content;
 `;

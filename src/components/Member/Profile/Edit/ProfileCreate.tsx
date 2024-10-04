@@ -32,7 +32,6 @@ const ProfileCreate = ({
 }: ProfileCreateProps) => {
   const divRef = useRef<HTMLButtonElement>(null);
   const { register } = useFormContext();
-
   const handleClickTarget = () => {
     divRef?.current?.focus();
   };
@@ -74,7 +73,7 @@ const ProfileCreate = ({
           required: true,
           onChange: (e) => handleFileChange(e, type)
         })}
-        ref={fileInputRef && fileInputRef}
+        ref={fileInputRef}
         id={registerText}
         type="file"
         accept={ACCEPT_FILE_TYPE.IMAGE}

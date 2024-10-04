@@ -2,27 +2,20 @@ import { routes } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import FootIcon from "assets/svg/foot-icon";
-import { Flex, Text } from "components/common";
+import { Box, Flex, Text } from "components/common";
 import { useNavigate } from "react-router-dom";
+import { AttendanceStatus } from "types/common/status.types";
 import { getDaysAgo } from "utils/date";
 
-import {
-  CardContainer,
-  FootButton,
-  Img,
-  NoteContainer,
-  NoteContent,
-  ProfileWrapper,
-  SpringBound
-} from "./styles";
+import { CardContainer, FootButton, Img, NoteContainer, NoteContent, SpringBound } from "./styles";
 
-import type { HomeInfoType, TAttendanceStatus } from "types/member/main.types";
+import type { HomeDataType } from "types/member/main.types";
 
 interface DogNoteProps {
-  data: HomeInfoType;
+  data: HomeDataType;
 }
 
-const getAttendanceClass = (status?: TAttendanceStatus) => {
+const getAttendanceClass = (status?: AttendanceStatus) => {
   switch (status) {
     case "ATTENDED":
       return "active";
@@ -33,12 +26,15 @@ const getAttendanceClass = (status?: TAttendanceStatus) => {
   }
 };
 
-const getAttendanceText = (status?: TAttendanceStatus, attendanceDate?: string) => {
+const getAttendanceText = (status?: AttendanceStatus, attendanceDate?: number[]) => {
   switch (status) {
     case "ATTENDED":
       return "출석완료";
     case "NOT_ATTENDED":
-      return `${getDaysAgo(attendanceDate ?? "")} 출석`;
+      if (!attendanceDate) {
+        return "등원기록 없음";
+      }
+      return `${getDaysAgo(attendanceDate)} 출석`;
     default:
       return "등원기록 없음";
   }
@@ -56,9 +52,22 @@ const DogNote = ({ data }: DogNoteProps) => {
       <SpringBound />
       <NoteContent>
         <Flex gap="8" role="button" onClick={() => navigate(routes.member.dogInfo.dynamic(dogId))}>
-          <ProfileWrapper>
-            <Img src={data?.dogProfile} alt={`${data?.dogName}의 프로필`} />
-          </ProfileWrapper>
+          <Box
+            display="inline-block"
+            width="44px"
+            height="44px"
+            radius="16px"
+            bgColor="gray_4"
+            overflow="hidden"
+          >
+            <Img
+              src={
+                data.dogProfile ||
+                process.env.REACT_APP_CLIENT_BASE_URL + "images/placeholder-image.png"
+              }
+              alt={`${data?.dogName}의 프로필`}
+            />
+          </Box>
           <Flex direction="column" grow="1">
             <Text typo="title2_20_B" color="darkBlack">
               {dogName}
@@ -73,13 +82,13 @@ const DogNote = ({ data }: DogNoteProps) => {
           <FootButton type="button" className={attendanceClass}>
             <FootIcon w="25" h="21" />
           </FootButton>
-          <Flex direction="column" align="flex-end">
+          <Flex direction="column" align="flex-end" justify="center">
             <Text typo="body2_16_B" color={attendanceStatus ? "gray_1" : "gray_3"}>
               {attendanceText}
             </Text>
             {attendanceStatus && attendanceDate && (
               <Text typo="label2_14_R" color="gray_2">
-                {attendanceDate?.replace(/-/g, ".")}
+                {attendanceDate.join(".")}
               </Text>
             )}
           </Flex>

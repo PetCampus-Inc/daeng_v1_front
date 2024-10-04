@@ -11,10 +11,14 @@ export type DisplayProps = {
 };
 
 export type SizeProps = {
+  w?: SizeType;
   width?: SizeType;
   maxWidth?: SizeType;
   minWidth?: SizeType;
+  h?: SizeType;
   height?: SizeType;
+  maxHeight?: SizeType;
+  minHeight?: SizeType;
 };
 
 export type SpacingProps = {

@@ -19,7 +19,7 @@ import { format } from "date-fns/format";
 import { Adapter, DataFormatAdapter } from "libs/adapters";
 import { AdminDogImageRequest } from "types/admin/admin.types";
 import { AgendaStatus } from "types/common/status.types";
-import { convertArrayToDate } from "utils/date";
+import { getDateFromArray } from "utils/date";
 
 import type { DogInfoDetailData } from "types/admin/attendance.type";
 
@@ -88,7 +88,7 @@ export const useGetDogInfoRecord = (
     select: (data) =>
       data.map((item) => {
         return {
-          date: format(convertArrayToDate(item.date), "yyyy-MM-dd"),
+          date: format(getDateFromArray(item.date), "yyyy-MM-dd"),
           status: item.status,
           registeredDate: "" // FIXME: API 수정 후 지우기
         };

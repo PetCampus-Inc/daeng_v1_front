@@ -117,7 +117,7 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
           ]
         },
         ...AdminRoutes({ queryClient }),
-        ...MemberRoutes()
+        ...MemberRoutes({ queryClient })
       ]
     }
   ]);

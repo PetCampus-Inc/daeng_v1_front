@@ -11,14 +11,14 @@ export const StyledMonthlyCalendar = styled.div`
 
   .react-calendar {
     width: 100%;
-    border: none;
   }
 
   /* 네비 영역 */
   .react-calendar__navigation {
     display: flex;
     justify-content: center;
-    margin-bottom: ${remCalc(24)};
+    margin-bottom: ${remCalc(14)};
+    height: 44px;
 
     button {
       display: flex;

@@ -9,10 +9,11 @@ import { useOverlay } from "hooks/common/useOverlay";
 
 import { BoxContainer } from "./styles";
 
-import type { HomeInfoType, TAgendaStatus } from "types/member/main.types";
+import type { AgendaStatus } from "types/common/status.types";
+import type { HomeDataType } from "types/member/main.types";
 
 interface DogCardProps {
-  data: Pick<HomeInfoType, "todayAgendaStatus">;
+  data: Pick<HomeDataType, "todayAgendaStatus">;
 }
 
 const HighlightText = ({ children }: PropsWithChildren) => (
@@ -21,7 +22,7 @@ const HighlightText = ({ children }: PropsWithChildren) => (
   </Text>
 );
 
-const statusConfig: Record<TAgendaStatus, { message: string; iconColor: "gray" | "yellow" }> = {
+const statusConfig: Record<AgendaStatus, { message: string; iconColor: "gray" | "yellow" }> = {
   COMPLETE: {
     message: "알림장이\\n도착했어요",
     iconColor: "yellow"

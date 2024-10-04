@@ -6,18 +6,15 @@ import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import { useLocation } from "react-router-dom";
 
 const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
-  console.log("error발생!!!!!", error);
-
   if (
     isAxiosError<{
       errorCode: string;
       message: string;
     }>(error)
   ) {
-    const responseBody = error.response?.data;
-
     // responseBody의 status code에 따른 에러로깅, 에러 페이지를 보여준다.
-    console.log("Handling Axios error", responseBody);
+    if (process.env.NODE_ENV === "development")
+      console.log("[🚨SERVER ERROR]: ", error.response?.data);
 
     return <SomethingWrongPage resetErrorBoundary={resetErrorBoundary} error={undefined} />;
   } else {

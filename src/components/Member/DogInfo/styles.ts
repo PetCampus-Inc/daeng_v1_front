@@ -183,6 +183,7 @@ export const Editbutton = styled.button`
 
 export const GotoEnrollButton = styled.button`
   background-color: ${({ theme }) => theme.colors.gray_3};
+  color: ${({ theme }) => theme.colors.black};
   position: absolute;
   width: 100%;
   bottom: 0;

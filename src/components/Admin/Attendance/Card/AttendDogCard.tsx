@@ -22,7 +22,7 @@ export function AttendDogCard({
         <S.ImageWrapper>
           <S.Image src={dogProfileUri} alt={dogName + " 이미지"} />
         </S.ImageWrapper>
-        <S.DogName>{dogName}</S.DogName>
+        <S.DogName typo="body2_16_B">{dogName}</S.DogName>
       </S.Stack>
       <S.FootButton type="button" className={isSelected ? "" : "active"}>
         <FootIcon />

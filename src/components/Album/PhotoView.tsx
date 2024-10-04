@@ -1,16 +1,15 @@
 import { Flex } from "components/common";
-import HomeImageCommentSlider from "components/Home/HomeImageCommentSlider";
+import { ImageComment } from "components/Home/ImageComment/ImageComment";
+import { useGetMainAlbum } from "hooks/api/member/member";
 
-import type { ImageListType } from "types/member/main.types";
+export default function PhotoView({ dogId }: { dogId: number }) {
+  const { data: imageList } = useGetMainAlbum({ dogId });
 
-const PhotoView = ({ imageList }: { imageList: ImageListType[][] }) => {
   return (
-    <Flex direction="column" gap={32}>
+    <Flex direction="column" gap={24}>
       {imageList.map((images) => (
-        <HomeImageCommentSlider images={images} />
+        <ImageComment images={images} />
       ))}
     </Flex>
   );
-};
-
-export default PhotoView;
+}

@@ -5,10 +5,10 @@ import { REQUIRED_ITEMS_DOG_MAP } from "constants/requiredItemsMap";
 import { TextInput } from "components/common";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { Controller, useFormContext } from "react-hook-form";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 import { getLabelForValue } from "utils/formatter";
 
 import { Caption, Card } from "./styles";
@@ -22,8 +22,8 @@ const DogInfo = () => {
   const [birthYear, birthMonth, birthDay] = getValues(FIELD.BIRTHDAY).map(String);
   const dogBirthData = {
     year: birthYear,
-    month: padToTwoDigits(birthMonth),
-    day: padToTwoDigits(birthDay)
+    month: getPadString(birthMonth),
+    day: getPadString(birthDay)
   };
   const formatDogGender = getLabelForValue(FIELD.DOG_GENDER, dogGender);
   const formatDogSize = getLabelForValue(FIELD.DOG_SIZE, dogSize);
@@ -50,6 +50,8 @@ const DogInfo = () => {
           name={FIELD.DOG_GENDER}
           radiosText={["수컷", "암컷"]}
           defaultSelect={formatDogGender}
+          isPreviewMode
+          disabled
         />
       </Card>
 
@@ -61,6 +63,8 @@ const DogInfo = () => {
             caption="~7kg 소형견 / ~ 15kg 중형견 / 15kg 이상 대형견"
             radiosText={["소형견", "중형견", "대형견"]}
             defaultSelect={formatDogSize}
+            isPreviewMode
+            disabled
           />
         </Card>
       )}
@@ -95,6 +99,8 @@ const DogInfo = () => {
           name={FIELD.NEUTRALIZATION}
           radiosText={["했어요", "안했어요"]}
           defaultSelect={formatNeutralization}
+          isPreviewMode
+          disabled
         />
       </Card>
       <Card>
@@ -105,6 +111,8 @@ const DogInfo = () => {
           name={FIELD.VACCINATION}
           radiosText={["했어요", "안했어요"]}
           defaultSelect={formatVaccination}
+          isPreviewMode
+          disabled
         />
       </Card>
       {getValues(FIELD.VACCINATION) === "했어요" && (
@@ -126,7 +134,7 @@ const DogInfo = () => {
           <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ALLERGY_DISEASE)}>
             알러지 및 질병 유무
           </Title>
-          <TextArea
+          <Textarea
             placeholder="알러지나 질병이 있다면 상세히 입력해주세요."
             {...register(FIELD.ALLERGY_DISEASE, {
               required: REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.ALLERGY_DISEASE)

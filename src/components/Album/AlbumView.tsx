@@ -1,13 +1,14 @@
 import { Flex } from "components/common";
+import { useGetMainAlbum } from "hooks/api/member/member";
 import { useCallback, useState } from "react";
 
 import SaveButton from "./Button/SaveButton";
-import { SelectedImageProvider } from "./context/SelectedImageProvider";
+import { SelectedImageProvider } from "./hooks/SelectedImageProvider";
 import AlbumSlide from "./Slide/AlbumSlide";
 
-import type { ImageListType } from "types/member/main.types";
+const AlbumView = ({ dogId }: { dogId: number }) => {
+  const { data: imageList } = useGetMainAlbum({ dogId });
 
-const AlbumView = ({ imageList }: { imageList: ImageListType[][] }) => {
   const [saveModes, setSaveModes] = useState<Record<number, boolean>>({});
 
   const toggleSaveMode = useCallback((albumId: number) => {

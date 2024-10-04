@@ -110,7 +110,7 @@ export const useDeleteEnrollment = () => {
     mutationFn: (enrollmentFormId: string) =>
       handleDeleteEnrollment(enrollmentFormId && enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
       console.log("가입신청서 삭제 성공");
     },
     onError: (error) => {

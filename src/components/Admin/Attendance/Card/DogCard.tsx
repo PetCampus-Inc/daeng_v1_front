@@ -3,7 +3,7 @@ import CalendarIcon from "assets/svg/calendar";
 import { useTokenHandler } from "hooks/common/useTokenHandler";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 import {
   getMonthlyTicketStatus,
   getRoundTicketStatus,
@@ -74,7 +74,7 @@ function checkTicketStatus(info: Attendance): TicketStatus {
 
 function getTicketStatusText(info: Attendance): string {
   if (info.monthlyTicket) {
-    const [year, month, day] = padToTwoDigits(info.monthlyTicket);
+    const [year, month, day] = getPadString(info.monthlyTicket);
     return `${year}.${month}.${day} 만료`;
   } else {
     return `잔여 ${info.currentRounds}/${info.allRounds}회`;

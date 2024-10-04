@@ -9,45 +9,35 @@ import type {
   RelationType,
   VaccinationType
 } from "./enrollment.types";
-import type { Nullable } from "types/helper.types";
+import type { ImageType } from "types/common/field.types";
+import type { AttendanceStatus, AgendaStatus } from "types/common/status.types";
+import type { LocalDate, Nullable } from "types/helper.types";
 
-export type TAttendanceStatus = "ATTENDED" | "NOT_ATTENDED";
-export type TAgendaStatus = "COMPLETE" | "NOT_YET" | "WRITING";
-export type TImageType = "IMAGE" | "PROFILE";
 export type TDogStatus = "ENROLLED" | "DROP_OUT" | "APPROVAL_PENDING";
 
-export interface HomeInfoType extends Omit<HomeDataType, "attendanceDate" | "imageList"> {
-  attendanceDate: string;
-  imageList?: ImageListType[][];
-}
-
-export interface ImageListType extends Omit<ImageList, "createdTime"> {
-  createdTime: string;
-}
-
 export interface HomeDataType {
-  memberNickname: string;
+  memberNickname: Nullable<string>;
   role: typeof Role.ROLE_MEMBER;
-  memberProfileUri: string;
+  memberProfileUri: Nullable<string>;
   dogId: number;
   dogName: string;
   dogProfile: string;
-  status: Nullable<TAttendanceStatus>;
+  status: Nullable<AttendanceStatus>;
   relation: string;
-  attendanceStatus: TAttendanceStatus;
-  attendanceDate: number[];
-  todayAgendaStatus: TAgendaStatus;
-  schoolName: Nullable<string>;
-  imageList: Nullable<ImageList[][]>;
+  attendanceStatus: AttendanceStatus;
+  enrollmentFormStatus: TDogStatus;
+  attendanceDate: LocalDate;
+  todayAgendaStatus: AgendaStatus;
+  schoolName: null;
+  imageList: ImageList[][];
 }
 
 export interface ImageList {
   imageId: number;
   imageUri: string;
-  imageType: TImageType;
+  imageType: ImageType;
   comment?: string;
-  createdTime: number[];
-  size: number;
+  createdTime: LocalDate;
 }
 export interface IDoglist {
   dogId: string;
@@ -58,6 +48,7 @@ export interface IDoglist {
   schoolName: string;
   registeredDate: number[];
   dropOutDate: number[];
+  enrollmentFormId: number;
 }
 
 export interface IDogRejected {
@@ -96,11 +87,6 @@ export interface IMemberProfilePostInfo {
   phoneNumber: string;
   emergencyPhoneNumber: string;
   relation: string;
-}
-
-export interface IMainAlbum {
-  dogId: number;
-  date?: string;
 }
 
 export interface IDogMemoInfo {
@@ -163,7 +149,8 @@ export interface MemberDogInfoFormData
 export type DogsDataType = {
   dogId: number;
   dogName: string;
-  imageUri: string;
+  dogProfile: string;
+  schoolId: number;
 };
 
 export interface IMemberDogSchoolInfo {

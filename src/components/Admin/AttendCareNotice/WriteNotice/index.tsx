@@ -4,7 +4,7 @@ import BoneIcon from "assets/svg/bone-icon";
 import PoopStatusIcon from "assets/svg/poop-status-icon";
 import { Button, Field, Flex } from "components/common";
 import PoopStatusGroup from "components/common/PoopStatusGroup";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
 import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -112,7 +112,7 @@ const WriteNotice = () => {
           control={control}
           name="agendaNote"
           render={({ field }) => (
-            <TextArea {...field} placeholder="오늘 하루 강아지와 관련된 내용을 작성해 주세요" />
+            <Textarea {...field} placeholder="오늘 하루 강아지와 관련된 내용을 작성해 주세요" />
           )}
         />
       </Field>
@@ -122,7 +122,7 @@ const WriteNotice = () => {
           control={control}
           name="snack"
           render={({ field }) => (
-            <TextArea {...field} placeholder="오늘 급여한 간식에 대해 적어 주세요" />
+            <Textarea {...field} placeholder="오늘 급여한 간식에 대해 적어 주세요" />
           )}
         />
       </Field>
@@ -138,7 +138,7 @@ const WriteNotice = () => {
             control={control}
             name="poopMemo"
             render={({ field }) => (
-              <TextArea {...field} placeholder="오늘 하루 강아지 배변 상태에 대해 작성해 주세요" />
+              <Textarea {...field} placeholder="오늘 하루 강아지 배변 상태에 대해 작성해 주세요" />
             )}
           />
         </Flex>

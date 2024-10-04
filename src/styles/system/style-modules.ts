@@ -62,10 +62,16 @@ export const getBorderRadiusStyle = (radiusValue?: RadiusType): string | undefin
 
 // Style functions
 export const getSizeStyle = (props: SizeProps) => css`
-  width: ${parseSize(props.width)};
-  height: ${parseSize(props.height)};
+  width: ${props.w || parseSize(props.width)};
+  height: ${props.h || parseSize(props.height)};
   max-width: ${parseSize(props.maxWidth)};
   min-width: ${parseSize(props.minWidth)};
+  max-height: ${parseSize(props.maxHeight)};
+  min-height: ${parseSize(props.minHeight)};
+`;
+
+export const getDisplayStyle = (props: DisplayProps) => css`
+  display: ${props.display};
 `;
 
 export const getMarginStyle = (props: SpacingProps) => css`

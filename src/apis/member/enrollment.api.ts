@@ -15,11 +15,6 @@ export interface IEnrollmentProps {
   requestUrl?: string;
 }
 
-export interface MemberDogEnrollmentProps {
-  dogId: string;
-  schoolId: number;
-}
-
 /**
  * @description 견주 가입 신청 폼 데이터 반환 - 앱에서 견주 가입 신청 페이지에 접근합니다.
  * @param {number, string} schoolId
@@ -136,7 +131,10 @@ export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollm
 export const handleGetMemberDogEnrollment = async ({
   dogId,
   schoolId
-}: MemberDogEnrollmentProps): Promise<EnrollmentDogDataType> => {
+}: {
+  dogId: number;
+  schoolId: number;
+}): Promise<EnrollmentDogDataType> => {
   const url = `member/school/enroll`;
   const { data } = await authAxios.get(url, {
     params: {
@@ -144,5 +142,16 @@ export const handleGetMemberDogEnrollment = async ({
       schoolId
     }
   });
+  return data.data;
+};
+
+/**
+ * @description 가입싱천서 삭제 - 견주 본인의 가입신청서를 삭제합니다.
+ * @param  enrollmentFormId
+ * @returns
+ */
+export const handleDeleteMemberEnrollment = async (enrollmentFormId: number): Promise<void> => {
+  const url = `/member/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
+  const { data } = await authAxios.post(url);
   return data.data;
 };
