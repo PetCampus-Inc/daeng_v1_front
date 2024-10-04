@@ -47,6 +47,7 @@ const AddDogList = () => {
             dogId={item.dogId}
             dogName={item.dogName}
             adminName={item.adminName}
+            profileUri={item.profileUri}
             isChecked={selectedDogs.some((dog) => dog.dogId === item.dogId)}
             onClick={() => addDog(item)}
           />

@@ -18,6 +18,7 @@ const AddDogAvatar = () => {
           key={dog.dogId}
           id={dog.dogId}
           name={dog.dogName}
+          src={dog.profileUri}
           handleClick={() => removeDog(dog.dogId)}
         />
       ))}

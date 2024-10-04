@@ -1,17 +1,6 @@
-import { themeConfig } from "styles/themeConfig";
-import { POOP_STATUS, type PoopStatus } from "types/member/dogs";
-
-const PoopWarning = ({ poop }: { poop?: PoopStatus }) => {
-  const isSelected = poop && poop === POOP_STATUS.WARNING;
-
+const PoopWarning = () => {
   return (
-    <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect
-        width="62"
-        height="62"
-        rx="8"
-        fill={isSelected ? themeConfig.colors.yellow_3 : "#F6F6F6"}
-      />
+    <svg viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect
         x="46.5"
         y="26.2852"
@@ -19,7 +8,7 @@ const PoopWarning = ({ poop }: { poop?: PoopStatus }) => {
         height="31"
         rx="2"
         transform="rotate(90 46.5 26.2852)"
-        fill={isSelected ? themeConfig.colors.red_1 : "#E9E9E9"}
+        fill="currentColor"
       />
       <rect
         x="35.8672"
@@ -28,7 +17,7 @@ const PoopWarning = ({ poop }: { poop?: PoopStatus }) => {
         height="30"
         rx="2"
         transform="rotate(-180 35.8672 46)"
-        fill={isSelected ? themeConfig.colors.red_1 : "#E9E9E9"}
+        fill="currentColor"
       />
     </svg>
   );
