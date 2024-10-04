@@ -7,6 +7,7 @@ import { StyledButton } from "components/SignIn/styles";
 import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInputBox";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { memo, useState } from "react";
+import { useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
 import { User } from "types/common/role.types";
 
@@ -24,6 +25,7 @@ interface SearchSchoolPageProps {
 const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) => {
   const setLocalStorage = useSetLocalStorage();
   const [selectedSchool, setSelectedSchool] = useState<SelectedSchool | null>(null);
+  const [isNextClicked, setIsNextClicked] = useState(false);
 
   const handleSelect = (id: number, name: string) => setSelectedSchool({ id, name });
   const handleClear = () => setSelectedSchool(null);
@@ -33,7 +35,7 @@ const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) 
     setLocalStorage(SCHOOL_NAME_KEY, selectedSchool.name);
   };
 
-  const blocker = useBlocker(() => !!selectedSchool);
+  const blocker = useBlocker(() => !!selectedSchool && !isNextClicked);
 
   return (
     <>
@@ -59,7 +61,10 @@ const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) 
           <StyledButton
             type="button"
             bg="primaryColor"
-            onClick={handleNextClick}
+            onClick={() => {
+              handleNextClick();
+              setIsNextClicked(true);
+            }}
             disabled={!selectedSchool}
           >
             <Text className={selectedSchool ? "" : "inactive"} typo="label1_16_B" color="white">
