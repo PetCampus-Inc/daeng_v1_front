@@ -39,7 +39,7 @@ export function DailyAgenda({ dogId, date }: DailyNoticeProps) {
       <Flex direction={"column"} gap={12}>
         <Text as={"p"} typo={"label1_16_B"} color={"darkBlack"}>
           배변 상태
-          <PoopStatusGroup selected={data.poop} />
+          <PoopStatusGroup selected={data.poop} readOnly />
         </Text>
         <Text as={"p"} typo={"label1_16_R"} color={"gray_1"}>
           {data.poopMemo ? data.poopMemo : "전달 사항이 없습니다."}
