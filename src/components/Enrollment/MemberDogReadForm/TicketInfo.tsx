@@ -44,6 +44,8 @@ const TicketInfo = ({ ticket }: TicketInfoProps) => {
           name={FIELD.TICKET_TYPE}
           radiosText={["정기권", "회차권"]}
           defaultSelect={formatTickeyType}
+          isPreviewMode
+          disabled
         />
       </Card>
       {selectedTicketType &&
@@ -57,6 +59,8 @@ const TicketInfo = ({ ticket }: TicketInfoProps) => {
               name={FIELD.MONTHLY_TICKET_NUMBER}
               radiosText={monthlyTicketText}
               defaultSelect={`${getValues(FIELD.ENROLLMENT_MONTHLY_TICKET_NUMBER)}주`}
+              isPreviewMode
+              disabled
             />
           </Card>
         ) : (
@@ -68,12 +72,19 @@ const TicketInfo = ({ ticket }: TicketInfoProps) => {
               name={FIELD.ROUND_TICKET_NUMBER}
               radiosText={roundTicketText}
               defaultSelect={`${getValues(FIELD.ENROLLMENT_ROUND_TICKET_NUMBER)}회`}
+              isPreviewMode
+              disabled
             />
           </Card>
         ))}
       <Card>
         <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.OPEN_DAYS)}>등원 요일 선택</Title>
-        <DayMultiCheck name={FIELD.ATTENDANCE_DAYS} />
+        <DayMultiCheck
+          name={FIELD.ATTENDANCE_DAYS}
+          openDays={ticket?.openDays}
+          disabled
+          isPreviewMode
+        />
       </Card>
       <Card>
         <Title isRequired={REQUIRED_ITEMS_DOG_MAP?.get(FIELD_KEYS.TICKET_INFO)}>유의사항</Title>

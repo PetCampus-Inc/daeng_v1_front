@@ -32,6 +32,8 @@ const MemberInfo = () => {
           name={FIELD.MEMBER_GENDER}
           radiosText={["남", "여"]}
           defaultSelect={formatMemberGender}
+          isPreviewMode
+          disabled
         />
       </Card>
 
