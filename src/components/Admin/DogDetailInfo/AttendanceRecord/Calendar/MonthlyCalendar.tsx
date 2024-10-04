@@ -41,8 +41,8 @@ export function MonthlyCalendar(props: MonthlyCalendarProps) {
 
   const todayButtonRef = useRef<HTMLButtonElement>(null);
 
+  /** "오늘" 버튼을 캘린더 타이틀 위치에 정확히 위치하도록 설정 */
   const adjustTodayButtonPosition = useCallback(() => {
-    // "오늘" 버튼을 캘린더 타이틀 위치에 정확히 위치하도록 설정
     if (calendarRef.current && todayButtonRef.current) {
       const calendarNavigation = calendarRef.current.querySelector(".react-calendar__navigation");
       const todayButton = todayButtonRef.current;
@@ -116,7 +116,7 @@ const TileContent = ({
   return (
     <>
       {isSameDay(date, today) && <TileText>오늘</TileText>}
-      {attendData.some((data) => isSameDay(parseISO(data.date), date)) && <Dot />}
+      {attendData.some((day) => isSameDay(parseISO(day.date), date)) && <Dot />}
     </>
   );
 };

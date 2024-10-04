@@ -8,7 +8,7 @@ const AlbumCheckbox = forwardRef(function AlbumCheckbox(
   ref
 ) {
   return (
-    <Box as="label" htmlFor={props.id} position="absolute" top={8} right={8}>
+    <Box as="label" htmlFor={props.id}>
       <HiddenCheckbox
         type="checkbox"
         ref={ref as React.RefObject<HTMLInputElement>}

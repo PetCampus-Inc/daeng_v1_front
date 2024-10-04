@@ -10,11 +10,8 @@ import { StyledMonthlyCalendar, GoToTodayButton } from "./styles";
 
 import type { DogInfoRecordType } from "hooks/api/admin/dogs";
 import type { Value } from "react-calendar/dist/cjs/shared/types";
-
-const ATTEND_DAYS = ["2024-07-17", "2024-07-17", "2024-07-21", "2024-07-23"];
-
 interface MonthlyCalendarProps {
-  attendData?: DogInfoRecordType[];
+  attendData: DogInfoRecordType[];
   today: Date;
   onDateChange: (newDate: Value) => void;
   onTodayClick: () => void;
@@ -26,36 +23,13 @@ interface MonthlyCalendarProps {
 }
 
 /* -------------------------------------------------------------------------------------------------
- * MonthTile
- * -----------------------------------------------------------------------------------------------*/
-
-const TileContent = ({ date, view, today }: { date: Date; view: string; today: Date }) => {
-  if (view !== "month") return null;
-
-  return (
-    <>
-      {isSameDay(date, today) && (
-        <Text typo="caption1_12_R" color="primaryColor">
-          오늘
-        </Text>
-      )}
-      {ATTEND_DAYS.some((day) => isSameDay(new Date(day), date)) && (
-        <Box as="span" color="br_3">
-          <FootIcon w={15} h={12} />
-        </Box>
-      )}
-    </>
-  );
-};
-
-/* -------------------------------------------------------------------------------------------------
  * Monthly Calendar
  * -----------------------------------------------------------------------------------------------*/
 
 // FIXME: api 수정이 안돼서 하드코딩함 지워주세요~
 const USER_REGISTRATION_DATE = parseISO("2024-06-28");
 
-export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
+export function MonthlyCalendar(props: MonthlyCalendarProps) {
   const {
     attendData,
     today,
@@ -70,8 +44,8 @@ export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
 
   const todayButtonRef = useRef<HTMLButtonElement>(null);
 
+  /** "오늘" 버튼을 캘린더 타이틀 위치에 정확히 위치하도록 설정 */
   const adjustTodayButtonPosition = useCallback(() => {
-    // "오늘" 버튼을 캘린더 타이틀 위치에 정확히 위치하도록 설정
     if (calendarRef.current && todayButtonRef.current) {
       const calendarNavigation = calendarRef.current.querySelector(".react-calendar__navigation");
       const todayButton = todayButtonRef.current;
@@ -118,11 +92,46 @@ export const MonthlyCalendar = (props: MonthlyCalendarProps) => {
         minDetail="year"
         view="month"
         onDrillUp={onOpenMonthPicker}
-        tileContent={({ date, view }) => <TileContent date={date} view={view} today={today} />}
+        tileContent={({ date, view }) => (
+          <TileContent attendData={attendData} date={date} view={view} today={today} />
+        )}
       />
       <GoToTodayButton type="button" ref={todayButtonRef} onClick={onTodayClick}>
         오늘
       </GoToTodayButton>
     </StyledMonthlyCalendar>
+  );
+}
+
+/* -------------------------------------------------------------------------------------------------
+ * MonthTile
+ * -----------------------------------------------------------------------------------------------*/
+
+const TileContent = ({
+  attendData,
+  date,
+  view,
+  today
+}: {
+  attendData: DogInfoRecordType[];
+  date: Date;
+  view: string;
+  today: Date;
+}) => {
+  if (view !== "month") return null;
+
+  return (
+    <>
+      {isSameDay(date, today) && (
+        <Text typo="caption1_12_R" color="primaryColor">
+          오늘
+        </Text>
+      )}
+      {attendData.some((day) => isSameDay(parseISO(day.date), date)) && (
+        <Box as="span" color="br_3">
+          <FootIcon w={15} h={12} />
+        </Box>
+      )}
+    </>
   );
 };

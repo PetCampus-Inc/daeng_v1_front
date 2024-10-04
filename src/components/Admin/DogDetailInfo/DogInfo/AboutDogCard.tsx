@@ -14,7 +14,7 @@ import { XSmallButton } from "components/common/Button/Templates";
 import { differenceInMonths, format } from "date-fns";
 import { FIELD_MAPPING } from "libs/adapters";
 import { Img } from "styles/StyleModule";
-import { convertArrayToDate } from "utils/date";
+import { getDateFromArray } from "utils/date";
 
 import type { DogDetailInfo } from "hooks/api/admin/dogs";
 
@@ -23,7 +23,7 @@ interface AboutDogCardProps {
 }
 
 export function AboutDogCard({ data }: AboutDogCardProps) {
-  const formatBirthDate = format(convertArrayToDate(data.birthDate), "yyyy.MM.dd");
+  const formatBirthDate = format(getDateFromArray(data.birthDate), "yyyy.MM.dd");
   const monthsDifference = differenceInMonths(new Date(), new Date(formatBirthDate));
 
   const showTags =

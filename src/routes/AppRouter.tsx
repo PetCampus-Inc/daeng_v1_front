@@ -12,7 +12,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import AdminRoutes from "./AdminRoutes";
 import MemberRoutes from "./MemberRoutes";
-import TestPage from "pages/TestPage";
 
 const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
   const router = createBrowserRouter([
@@ -114,15 +113,11 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
                   <Pages.UsagePolicyPage />
                 </Suspense>
               )
-            },
-            {
-              path: "test",
-              element: <TestPage />
             }
           ]
         },
         ...AdminRoutes({ queryClient }),
-        ...MemberRoutes()
+        ...MemberRoutes({ queryClient })
       ]
     }
   ]);

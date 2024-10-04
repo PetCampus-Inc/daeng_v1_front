@@ -1,7 +1,7 @@
 import { format } from "date-fns";
-import useGetMainAlbum from "hooks/api/member/useGetMainAlbum";
+import { useGetMainAlbum } from "hooks/api/member/member";
 import { ErrorBoundary } from "react-error-boundary";
-import { getSimpleRelativeTimeString } from "utils/date";
+import { getRelativeTime } from "utils/date";
 
 import * as S from "./styles";
 
@@ -20,7 +20,7 @@ const FlexPhotosWithTime = () => {
               console.log(arr);
               return (
                 <S.TimeAndPhotoContainer>
-                  {getSimpleRelativeTimeString(arr[0].createdTime)}
+                  {getRelativeTime(arr[0].createdTime)}
                   <S.ImageFlexWrapper>
                     {arr.map((item: ImageList) => {
                       return (
