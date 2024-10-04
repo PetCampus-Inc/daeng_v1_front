@@ -2,7 +2,6 @@ import { DailyAgendaStatus } from "components/Admin/DogDetailInfo/AttendanceReco
 import { Flex, Text } from "components/common";
 import PoopBox from "components/common/PoopBox";
 import { useGetDogInfoAgenda } from "hooks/api/admin/dogs";
-import { DogInfoAgendaData } from "types/admin/attendance.type";
 import { AGENDA_STATUS } from "types/member/dogs";
 
 interface DailyNoticeProps {
@@ -10,7 +9,7 @@ interface DailyNoticeProps {
   date: string;
 }
 export function DailyAgenda({ dogId, date }: DailyNoticeProps) {
-  // const { data } = useGetDogInfoAgenda(dogId, date);
+  const { data } = useGetDogInfoAgenda(dogId, date);
 
   if (!data || data.status !== AGENDA_STATUS.COMPLETE) {
     return <DailyAgendaStatus status={data?.status} />;
@@ -48,15 +47,3 @@ export function DailyAgenda({ dogId, date }: DailyNoticeProps) {
     </>
   );
 }
-
-const data: DogInfoAgendaData = {
-  agendaId: 7,
-  agendaNote: "오랜만에 왓네요~^^",
-  snack: "왕뼈다귀",
-  poop: "WATERY",
-  poopMemo: "응가가 조금 묽어요",
-  dogId: 1,
-  dogProfileUri: "",
-  status: "COMPLETE",
-  dateTime: [2024, 8, 12, 2, 49, 4, 977386000]
-};
