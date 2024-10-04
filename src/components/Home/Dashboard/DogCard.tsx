@@ -1,3 +1,4 @@
+import { routes } from "constants/path";
 import type { PropsWithChildren } from "react";
 
 import AgendaIcon from "assets/svg/agenda-icon";
@@ -6,6 +7,7 @@ import SpeakerIcon from "assets/svg/speaker-icon";
 import { Box, Flex, Text } from "components/common";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useNavigate } from "react-router-dom";
 
 import { BoxContainer } from "./styles";
 
@@ -13,7 +15,7 @@ import type { AgendaStatus } from "types/common/status.types";
 import type { HomeDataType } from "types/member/main.types";
 
 interface DogCardProps {
-  data: Pick<HomeDataType, "todayAgendaStatus">;
+  data: HomeDataType;
 }
 
 const HighlightText = ({ children }: PropsWithChildren) => (
@@ -38,6 +40,7 @@ const statusConfig: Record<AgendaStatus, { message: string; iconColor: "gray" | 
 };
 
 const DogCard = ({ data }: DogCardProps) => {
+  const navigate = useNavigate();
   const overlay = useOverlay();
 
   const { message, iconColor } = statusConfig[data.todayAgendaStatus];
@@ -58,7 +61,10 @@ const DogCard = ({ data }: DogCardProps) => {
 
   return (
     <>
-      <BoxContainer className="grid-top-right">
+      <BoxContainer
+        className="grid-top-right"
+        onClick={() => navigate(routes.member.agenda.dynamic(data.dogId))}
+      >
         <Flex display="inline-flex" direction="column" gap="14">
           <Box paddingInline={2}>
             <AgendaIcon bg colorScheme={iconColor} />
@@ -85,7 +91,7 @@ const DogCard = ({ data }: DogCardProps) => {
               공지
             </Text>
           </Flex>
-          <ArrowRightIcon w="24" colorScheme="gray_2" />
+          <ArrowRightIcon size={24} colorScheme="gray_2" />
         </Flex>
       </BoxContainer>
     </>
