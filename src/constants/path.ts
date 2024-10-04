@@ -203,7 +203,7 @@ const member = {
       },
       /** 강아지 추가 */
       enrollment: {
-        dynamic: `/mypage/dog/enrollment`
+        root: `/mypage/dog/enrollment` // TODO: 어디에 사용되는 주소인지?
       }
     }
   },
