@@ -1,11 +1,11 @@
 import type { IconProps } from "./types";
 
-const ArrowLeftIcon = ({ w = "24", h = "24" }: IconProps) => {
+const ArrowLeftIcon = ({ size = 24 }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={w}
-      height={h}
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="currentColor"
     >

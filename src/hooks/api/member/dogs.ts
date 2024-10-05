@@ -1,41 +1,38 @@
-import { useSuspenseQuery, type UseSuspenseQueryResult } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery, type UseSuspenseQueryResult } from "@tanstack/react-query";
 import { handleGetDogInfoAgenda, handleGetDogInfoRecord } from "apis/member/dogs";
-import { format } from "date-fns/format";
 import { getDateFromArray } from "utils/date";
 
-import type { AgendaStatus } from "types/common/status.types";
-
+/** 알림장 조회 */
 export const useDogInfoAgenda = (dogId: number, date?: string) => {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: ["dogAgenda", dogId, date],
     queryFn: () => handleGetDogInfoAgenda(dogId, date),
     // 마운트시에 요청 보내지 않음
     retryOnMount: false,
     // 윈도우 포커스시에 새로고침하지 않음
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    throwOnError: false
   });
 };
 
 export type DogInfoRecordType = {
-  date: string;
-  status: AgendaStatus;
-  registeredDate: string;
+  date: Date[];
+  registeredDate: Date;
 };
+/** 등원 기록 조회 */
 export const useDogInfoRecord = (
   dogId: number,
   date?: string
-): UseSuspenseQueryResult<DogInfoRecordType[]> => {
+): UseSuspenseQueryResult<DogInfoRecordType> => {
   return useSuspenseQuery({
     queryKey: ["dogRecord", dogId, date],
     queryFn: () => handleGetDogInfoRecord(dogId, date),
-    select: (data) =>
-      data.map((item) => {
-        return {
-          date: format(getDateFromArray(item.date), "yyyy-MM-dd"),
-          status: item.status,
-          registeredDate: format(getDateFromArray(item.registeredDate), "yyyy-MM-dd")
-        };
-      }),
+    select: (data) => {
+      return {
+        date: data.date.map((day) => getDateFromArray(day)),
+        registeredDate: getDateFromArray(data.registeredDate)
+      };
+    },
     retryOnMount: false,
     refetchOnWindowFocus: false
   });

@@ -28,7 +28,7 @@ const PrincipalProfile = ({ data, setIsEditing, isEditing, profileUri }: Princip
             </S.PrimaryColorButton>
             <Flex justify="center" align="center">
               <S.Text className="name">{data.adminName} 원장님</S.Text>
-              <ArrowRightIcon colorScheme="darkBlack" w="24" />
+              <ArrowRightIcon size={24} colorScheme="darkBlack" />
             </Flex>
             <S.Text className="number">{data.phoneNumber}</S.Text>
             <S.Text className="id">{data.id}</S.Text>

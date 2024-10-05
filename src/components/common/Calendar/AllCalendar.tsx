@@ -1,72 +1,161 @@
+import ArrowDownIcon from "assets/svg/arrow-down-icon";
+import ArrowLeftIcon from "assets/svg/arrow-left-icon";
+import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import FootIcon from "assets/svg/foot-icon";
-import { format } from "date-fns";
-import { useGetDogInfoRecord } from "hooks/api/admin/dogs";
-import moment from "moment";
-import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { isSameDay } from "date-fns";
+import { useRef, useState } from "react";
 
-import * as S from "./styles";
+import { MonthPicker } from "./month-picker";
+import * as MonthlyPrimitive from "./monthly-calendar";
+import { ToggleViewButton } from "./styles";
+import * as Styled from "./styles";
+import { useAdjustButton } from "./useAdjustButton";
+import { useCalendar } from "./useCalendar";
+import * as WeeklyPrimitive from "./weekly-calendar";
+import { Box } from "../Box";
+import { Flex } from "../Flex";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import type { TileContentProps } from "./monthly-calendar";
+import type { CalendarProps } from "./types";
+import type { Value } from "react-calendar/dist/esm/shared/types";
 
-// FIXME: API 수정 후 타입에러 해결나는거 해결하고 반영하겠습니다.
-const Calendar = () => {
-  const today = new Date();
-  const [date, setDate] = useState<Value>(today);
-  const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { dogId } = useParams();
-  const { data: attendDay } = useGetDogInfoRecord(Number(dogId));
+/**
+ * weekly & monthly view를 지원하는 캘린더
+ */
+export function AllCalendar({ minDate, tileDate }: CalendarProps) {
+  const {
+    value,
+    activeStartDate,
+    today,
+    handleDateChange,
+    handleActiveStartDateChange,
+    handleTodayClick
+  } = useCalendar({ minDate });
 
-  const handleDateChange = (newDate: Value) => {
-    setDate(newDate);
-    const formattedDate = format(`${newDate}`, "yyyy-MM-dd");
-    searchParams.set("date", formattedDate);
-    setSearchParams(searchParams);
+  const [expanded, setExpanded] = useState(false);
+  const [showMonthPicker, setShowMonthPicker] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  const setTodayButtonRef = useAdjustButton(calendarRef);
+
+  const toggleExpanded = () => setExpanded((prev) => !prev);
+  const handleOpenMonthPicker = () => setShowMonthPicker(true);
+  const handleCloseMonthPicker = () => setShowMonthPicker(false);
+
+  /** MonthPicker 월 변경 함수 */
+  const handleMonthChange = (date: Value) => {
+    handleDateChange(date);
+    setShowMonthPicker(false);
   };
 
-  const handleTodayClick = () => {
-    const today = new Date();
-    setActiveStartDate(today);
-    setDate(today);
+  const calendarProps = {
+    value,
+    activeStartDate,
+    today,
+    tileDate,
+    minDate,
+    onDateChange: handleDateChange,
+    onActiveStartDateChange: handleActiveStartDateChange,
+    onTodayClick: handleTodayClick,
+    onOpenMonthPicker: handleOpenMonthPicker,
+    calendarRef
   };
 
   return (
-    <S.CalendarWrapper>
-      {/*<S.StyledCalendar*/}
-      {/*  value={date}*/}
-      {/*  onChange={handleDateChange}*/}
-      {/*  activeStartDate={activeStartDate === null ? undefined : activeStartDate}*/}
-      {/*  onActiveStartDateChange={({ activeStartDate }: { activeStartDate: Date | null }) =>*/}
-      {/*    setActiveStartDate(activeStartDate)*/}
-      {/*  }*/}
-      {/*  formatDay={(locale: any, date: moment.MomentInput) => moment(date).format("D")}*/}
-      {/*  formatYear={(locale: any, date: moment.MomentInput) => moment(date).format("YYYY")}*/}
-      {/*  formatMonthYear={(locale: any, date: moment.MomentInput) => moment(date).format("YYYY. MM")}*/}
-      {/*  calendarType="gregory"*/}
-      {/*  showNeighboringMonth={false}*/}
-      {/*  next2Label={null}*/}
-      {/*  prev2Label={null}*/}
-      {/*  minDetail="year"*/}
-      {/*  tileContent={({ date, view }: { date: Date; view: string }) => {*/}
-      {/*    const html = [];*/}
-      {/*    if (*/}
-      {/*      view === "month" &&*/}
-      {/*      date.getMonth() === today.getMonth() &&*/}
-      {/*      date.getDate() === today.getDate()*/}
-      {/*    ) {*/}
-      {/*      html.push(<S.Today key={"today"}>오늘</S.Today>);*/}
-      {/*    }*/}
-      {/*    if (attendDay.find((x) => x === moment(date).format("YYYY-MM-DD"))) {*/}
-      {/*      html.push(<FootIcon className="footIcon" key={moment(date).format("YYYY-MM-DD")} />);*/}
-      {/*    }*/}
-      {/*    return <>{html}</>;*/}
-      {/*  }}*/}
-      {/*/>*/}
-      <S.Date onClick={handleTodayClick}>오늘</S.Date>
-    </S.CalendarWrapper>
+    <Box bgColor="white" pt={28} radius="0px 0px 20px 20px" overflow="hidden">
+      {expanded ? (
+        <Styled.MonthlyCalendar
+          as={MonthlyPrimitive.MonthlyCalendar}
+          variant="member"
+          prevLabel={
+            <Box
+              w={26}
+              h={26}
+              m={8}
+              display="flex"
+              align="center"
+              justify="center"
+              bgColor="yellow_3"
+              color="primaryColor"
+              radius="circle"
+            >
+              <ArrowLeftIcon size={24} />
+            </Box>
+          }
+          nextLabel={
+            <Box
+              w={26}
+              h={26}
+              m={8}
+              display="flex"
+              align="center"
+              justify="center"
+              bgColor="yellow_3"
+              color="primaryColor"
+              radius="circle"
+            >
+              <ArrowRightIcon size={24} />
+            </Box>
+          }
+          renderTileContent={TileContent}
+          renderTodayButton={
+            <Styled.GoToTodayButton
+              ref={setTodayButtonRef}
+              variant="member"
+              type="button"
+              onClick={handleTodayClick}
+            >
+              오늘
+            </Styled.GoToTodayButton>
+          }
+          {...calendarProps}
+        />
+      ) : (
+        <Styled.WeeklyCalendar
+          as={WeeklyPrimitive.WeeklyCalendar}
+          renderTodayButton={
+            <Styled.GoToTodayButton variant="member" type="button" onClick={handleTodayClick}>
+              오늘
+            </Styled.GoToTodayButton>
+          }
+          {...calendarProps}
+        />
+      )}
+      <ToggleViewButton type="button" onClick={toggleExpanded} expand={expanded}>
+        {expanded ? "닫기" : "펼쳐보기"}
+        <Flex align="center">
+          <ArrowDownIcon w={20} h={20} />
+        </Flex>
+      </ToggleViewButton>
+      <MonthPicker
+        isOpen={showMonthPicker}
+        onClose={handleCloseMonthPicker}
+        value={value}
+        minDate={minDate}
+        onMonthChange={handleMonthChange}
+        anchorRef={calendarRef}
+      />
+    </Box>
   );
-};
+}
 
-export default Calendar;
+const TileContent = ({ tileDate, date, view, today }: TileContentProps) => {
+  if (view !== "month" || !tileDate || tileDate.length === 0) return null;
+
+  const isToday = isSameDay(date, today);
+  const hasEvent = tileDate.some((day) => isSameDay(day, date));
+
+  if (isToday) {
+    return <Styled.TileText variant="member">오늘</Styled.TileText>;
+  }
+
+  if (hasEvent) {
+    return (
+      <Styled.Dot variant="member">
+        <FootIcon w={15} h={12} />
+      </Styled.Dot>
+    );
+  }
+
+  return null;
+};

@@ -9,14 +9,15 @@ import {
   isSameDay,
   parse
 } from "date-fns";
-import { LocalDate } from "types/helper.types";
+
+import type { LocalDate } from "types/helper.types";
 
 /**
  * 날짜 배열을 Date 객체로 변환합니다.
- * @param {number[]} dateArray - [년, 월, 일] 또는 [년, 월, 일, 시, 분, 초, 밀리초] 형식의 배열
+ * @param {LocalDate} dateArray - [년, 월, 일] 또는 [년, 월, 일, 시, 분, 초, 밀리초] 형식의 배열
  * @returns {Date} 변환된 Date 객체
  */
-export function getDateFromArray(dateArray: number[]): Date {
+export function getDateFromArray(dateArray: LocalDate): Date {
   const [year, month, day, hours = 0, minutes = 0, seconds = 0, milliseconds = 0] = dateArray;
   return new Date(year, month - 1, day, hours, minutes, seconds, milliseconds);
 }
