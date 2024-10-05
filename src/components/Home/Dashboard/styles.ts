@@ -3,9 +3,31 @@ import { dragNone } from "styles/StyleModule";
 import { remCalc } from "utils/calculator";
 import { hexToRGBA } from "utils/color";
 
-import { ImgWrapperStyle } from "../styles";
-
 export { Img } from "styles/StyleModule";
+
+export const StyledDashboard = styled.div`
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: ${remCalc(14)};
+
+  // selector로 직접 css 적용!
+
+  & > .grid-left {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+  }
+
+  & > .grid-top-right {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+
+  & > .grid-bottom-right {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+`;
 
 export const BoxContainer = styled.section`
   min-width: 132px;
@@ -108,12 +130,4 @@ export const FootButton = styled.button`
       color: ${({ theme }) => theme.colors.br_2};
     }
   }
-`;
-
-export const ProfileWrapper = styled.div`
-  width: 44px;
-  height: 44px;
-
-  border-radius: 16px;
-  ${ImgWrapperStyle}
 `;

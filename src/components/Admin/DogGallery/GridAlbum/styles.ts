@@ -1,35 +1,41 @@
 import styled from "styled-components";
 
 export const GridAlbumContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 1.8rem;
-  padding: 0 0.1rem;
+  height: 100%;
+  gap: 3rem;
+  padding: 2rem 0 7rem;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
   .inner {
     gap: 0.6rem;
   }
 `;
 
+export const GridAlbumSection = styled.div``;
+
 export const GridPictures = styled.div`
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 4px;
+  width: 100%;
 `;
 
-export const TextContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0 0.5rem;
-`;
-export const DateText = styled.span`
-  ${({ theme }) => theme.typo.label1_16_B};
-  color: ${({ theme }) => theme.colors.darkBlack};
-`;
+export const ButtonWrapper = styled.div`
+  position: fixed;
+  background-color: ${(props) => props.theme.colors.white};
+  bottom: 0;
+  width: 100%;
+  padding: 0.8rem 1rem 2rem;
+  transition: all 140ms ease-in-out;
+  transform: translateY(100%);
 
-export const CountText = styled.span`
-  ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ theme }) => theme.colors.gray_2};
+  &[data-state-active="true"] {
+    transform: translateY(0);
+  }
 `;

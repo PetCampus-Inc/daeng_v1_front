@@ -1,3 +1,5 @@
+import type { QueryClient } from "@tanstack/react-query";
+
 import { routes } from "constants/path";
 
 import * as Pages from "pages";
@@ -6,7 +8,7 @@ import { RouteObject } from "react-router-dom";
 import PrivateRouter from "routes/PrivateRouter";
 import { Role } from "types/common/role.types";
 
-const MemberRoutes = (): RouteObject[] => {
+const MemberRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject[] => {
   return [
     {
       element: <PrivateRouter roles={[Role.ROLE_MEMBER]} />,
@@ -21,12 +23,12 @@ const MemberRoutes = (): RouteObject[] => {
           )
         },
         {
-          path: routes.member.album.root,
-          element: (
-            <Suspense>
-              <Pages.ImageAlbumPage />
-            </Suspense>
-          )
+          path: routes.member.album.dynamic(),
+          element: <Pages.PhotoAlbumPage />
+        },
+        {
+          path: routes.member.album.date.dynamic(),
+          element: <Pages.DateAlbumPage />
         },
         {
           path: routes.member.agenda.dynamic(),

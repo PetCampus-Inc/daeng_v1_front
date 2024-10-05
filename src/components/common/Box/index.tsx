@@ -21,11 +21,12 @@ import type {
 } from "../../../styles/system";
 
 export type BoxOptions = DisplayProps &
+  DisplayProps &
   SizeProps &
   SpacingProps &
   ColorProps &
   PositionProps &
-  FlexBoxProps &
+  Omit<FlexBoxProps, "display"> &
   TextStyleProps &
   BorderProps &
   RadiusProps &

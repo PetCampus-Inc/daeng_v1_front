@@ -1,10 +1,10 @@
 import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
 
-import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
   IEnrollmentProps,
-  MemberDogEnrollmentProps,
+  handleDeleteMemberEnrollment,
   handleGetBreed,
   handleGetEnrollment,
   handleGetMemberDogEnrollment,
@@ -38,10 +38,17 @@ export const useGetEnrollment = ({ schoolId }: IEnrollmentProps) => {
 };
 
 // 강아지 유치원 재등록 가입신청서 조회
-export const useGetMemberDogEnrollment = ({ dogId, schoolId }: MemberDogEnrollmentProps) => {
+export const useGetMemberDogEnrollment = ({
+  dogId,
+  schoolId
+}: {
+  dogId: number;
+  schoolId: number;
+}) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.DOG_ENROLLMENT(dogId, schoolId),
-    queryFn: () => handleGetMemberDogEnrollment({ dogId, schoolId })
+    queryFn: () => handleGetMemberDogEnrollment({ dogId, schoolId }),
+    refetchOnWindowFocus: false
   });
 };
 
@@ -57,6 +64,21 @@ export const usePostEnrollment = () => {
   return { mutateEnrollment: mutate };
 };
 
+// 견주 마이페이지 가입신청서 등록 - 재등록, 재가입
+export const usePostMemberEnrollment = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { mutate } = useMutation({
+    mutationFn: (enrollmentData: EnrollmentInfoType) => handlePostEnrollment(enrollmentData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
+      navigate(routes.member.mypage.root);
+    }
+  });
+
+  return { mutateMemberEnrollment: mutate };
+};
+
 // 견종 검색
 export const useGetBreed = (inputValue: string) => {
   return useQuery({
@@ -67,4 +89,17 @@ export const useGetBreed = (inputValue: string) => {
     staleTime: 60 * 1000, // 1분동안 캐시된 데이터 사용
     gcTime: 5 * 60 * 1000 // 비활성 캐시는 5분동안 유지
   });
+};
+
+// 견주 마이페이지 가입신청서 삭제
+export const useDeleteMemebrEnrollment = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (enrollmentFormId: number) => handleDeleteMemberEnrollment(enrollmentFormId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
+    }
+  });
+
+  return { mutateDeleteMemebrEnrollment: mutate };
 };

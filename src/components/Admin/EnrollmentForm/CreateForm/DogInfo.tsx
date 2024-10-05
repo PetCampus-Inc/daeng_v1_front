@@ -4,7 +4,7 @@ import { TextInput } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
 import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import AdminTitle from "components/common/Title/AdminTitle";
 import { ImageUploadInput } from "components/Enrollment/ImageUpload/ImageUploadInput";
 import { useFormContext } from "react-hook-form";
@@ -94,7 +94,7 @@ const DogInfo = () => {
         <AdminTitle name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ALLERGY_DISEASE}`} control={control}>
           알러지 및 질병 유무
         </AdminTitle>
-        <TextArea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
+        <Textarea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
       </Card>
     </>
   );

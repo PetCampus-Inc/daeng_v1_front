@@ -41,14 +41,16 @@ const DayMultiCheck = ({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target;
 
-    const limitDay = Number(roundTicketNumber.replace("회", ""));
-
     if (!checked && selectedDays.length === 1) {
       e.target.checked = true;
       return;
-    } else if (isRoundTicket && selectedDays.length >= limitDay) {
+    } else if (
+      isRoundTicket &&
+      selectedDays.length >= Number(roundTicketNumber.replace("회", ""))
+    ) {
       e.target.checked = false;
     }
+
     register(FIELD.OPEN_DAYS).onChange(e);
   };
 

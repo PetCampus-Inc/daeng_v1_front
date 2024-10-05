@@ -12,7 +12,7 @@ interface Props extends Omit<IconProps, "color"> {
     | "none";
 }
 
-const ArrowRightIcon = ({ w = "24", h = w, colorScheme = "none" }: Props) => {
+const ArrowRightIcon = ({ size = 24, colorScheme = "none" }: Props) => {
   const colorMap = new Map<string, string>([
     ["gray_1", "#525252"],
     ["gray_2", "#858585"],
@@ -25,8 +25,8 @@ const ArrowRightIcon = ({ w = "24", h = w, colorScheme = "none" }: Props) => {
   ]);
   return (
     <svg
-      width={w}
-      height={h}
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill={colorMap.get(colorScheme)}
       xmlns="http://www.w3.org/2000/svg"

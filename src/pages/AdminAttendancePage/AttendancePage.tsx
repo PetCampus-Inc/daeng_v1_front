@@ -7,7 +7,7 @@ import {
   MainSearchContext,
   ModeSearchContext
 } from "components/Admin/Attendance";
-import { Box, Layout } from "components/common";
+import { Box, Flex, Layout } from "components/common";
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
 import { Suspense, useMemo } from "react";
@@ -47,11 +47,12 @@ function AttendanceContent({ mode }: { mode: string | null }) {
   );
 
   return (
-    <>
+    <Flex direction="column" height="100%">
       <Box px={16}>
         <AttendanceHeader {...headerProps} mode={mode} />
         <AttendanceSearch {...searchProps} />
       </Box>
+
       {mode !== "attend" ? (
         <Suspense fallback={<div>출석부 로딩중...</div>}>
           <AttendanceMain />
@@ -63,6 +64,6 @@ function AttendanceContent({ mode }: { mode: string | null }) {
           </Suspense>
         </AttendanceModeProvider>
       )}
-    </>
+    </Flex>
   );
 }

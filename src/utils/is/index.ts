@@ -30,6 +30,25 @@ export const isEmpty = (obj: object): boolean => {
 };
 
 /**
+ * 두 객체가 같은지 확인합니다.
+ * @param obj1
+ * @param obj2
+ * @returns {boolean}
+ */
+export const isEqual = (obj1: object, obj2: object): boolean => {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+};
+
+/**
+ * 오브젝트의 모든 값이 null또는 ""이 아닌지 확인합니다.
+ * @param obj 검사할 오브젝트
+ * @returns {boolean} 모든 값이 null이 아니면 true, 하나라도 null이면 false
+ */
+export const isNotEmptyValues = (obj: Record<string, any>): boolean => {
+  return Object.values(obj).every((value) => value !== null && value !== "");
+};
+
+/**
  * `ApiErrorResponse` 객체인지 확인합니다.
  * @param error
  * @returns {boolean}

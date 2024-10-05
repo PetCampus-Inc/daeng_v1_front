@@ -1,6 +1,7 @@
 import { FIELD } from "constants/field";
 import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
+import { RELATION_DATA } from "constants/relation";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
@@ -26,16 +27,11 @@ import {
 import useLogout from "hooks/common/useLogout";
 import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
-import { getISOString } from "utils/date";
 import { getLabelForValue } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import type {
   HomeDataType,
-  HomeInfoType,
-  ImageList,
-  ImageListType,
-  IMainAlbum,
   IMemberProfile,
   IMemberProfilePostInfo,
   MemberDogInfoData,
@@ -46,32 +42,25 @@ import type {
 
 // 견주 홈 - 메인
 export const useGetHomeInfo = (dogId: number) => {
-  return useSuspenseQuery<HomeDataType, unknown, HomeInfoType>({
+  return useSuspenseQuery({
     queryKey: QUERY_KEY.HOME(dogId),
-    queryFn: () => handleGetHomeInfo(dogId),
-    select: (res) => {
-      const updatedImageList = res.imageList?.map((imageArray) =>
-        imageArray.map((image) => ({
-          ...image,
-          createdTime: getISOString(image.createdTime)
-        }))
-      );
-
-      return {
-        ...res,
-        attendanceDate: res.attendanceDate?.join("-"),
-        imageList: updatedImageList
-      };
-    }
+    queryFn: () => handleGetHomeInfo(dogId)
   });
 };
 
 // 견주 홈 - 강아지 리스트
-export const useGetDogs = () => {
+export const useGetDogs = (selectedId?: string) => {
   return useQuery({
     queryKey: QUERY_KEY.DOGS,
     queryFn: handleGetDogs,
-    staleTime: 60000
+    staleTime: 60000,
+    select: (data) => {
+      return data.sort((a, b) => {
+        if (a.dogId.toString() === selectedId) return -1;
+        if (b.dogId.toString() === selectedId) return 1;
+        return 0;
+      });
+    }
   });
 };
 
@@ -87,27 +76,19 @@ export const usePrefetchDogs = () => {
 };
 
 // 견주 홈 - 사진 앨범
-export const useGetMainAlbum = (req: IMainAlbum) => {
-  return useSuspenseQuery<ImageList[][], unknown, ImageListType[][]>({
+export const useGetMainAlbum = (req: { dogId: number; date?: string }) => {
+  return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_MAIN_ALBUM(req.dogId, req.date),
     queryFn: () => handleGetAlbum(req),
     gcTime: 1000 * 60 * 60,
-    staleTime: 1000 * 60 * 60,
-    select: (res) => {
-      return res.map((imageArray) =>
-        imageArray.map((image) => ({
-          ...image,
-          createdTime: getISOString(image.createdTime)
-        }))
-      );
-    }
+    staleTime: 1000 * 60 * 60
   });
 };
 
 // 견주 정보
 export const useGetMemberInfo = () => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_INFO,
+    queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO,
     queryFn: () => handleGetMemberInfo()
   });
 };
@@ -162,14 +143,12 @@ export const useCancelMemberEnrollment = () => {
 
 // 견주 가입신청서 취소
 export const usePostMemberDogEnrollment = () => {
-  const logout = useLogout();
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: (enrollmentFormId: string) => handlePostMemberDogEnrollment(enrollmentFormId),
+    mutationFn: (enrollmentFormId: number) => handlePostMemberDogEnrollment(enrollmentFormId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
-      logout();
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
@@ -185,7 +164,7 @@ export const usePostMemberDogDelete = () => {
   const memberDogDeleteMutation = useMutation({
     mutationFn: (dogId: string) => handlePostMemberDogDelete(dogId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_INFO });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
     }
   });
 
@@ -314,11 +293,13 @@ export const usePostMemberProfile = () => {
 };
 
 // 강아지 승인 후 초기 프로필 설정 (두번째 강아지 이후)
-export const usePostDogProfile = () => {
+export const usePostDogProfile = (dogId: number) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: (req: DogProfileReq) => handlePostDogProfile(req),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.HOME(dogId) });
       navigate(routes.root);
     },
     onError: () => {

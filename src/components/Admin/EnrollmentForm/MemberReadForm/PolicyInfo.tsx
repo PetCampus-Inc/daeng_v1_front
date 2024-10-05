@@ -1,7 +1,7 @@
 import { type AgreementsListType, FIELD_KEYS, FIELD } from "constants/field";
 
 import { Checkbox } from "components/common";
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
 import { useFormContext } from "react-hook-form";
 
@@ -30,7 +30,7 @@ const PolicyInfo = ({ item, agreements }: PolicyInfoProps) => {
           이용 제한 유의 사항
         </Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</Caption>
-        <TextArea
+        <Textarea
           {...register(FIELD.LIMITS_INFO)}
           isChecked={agreements[FIELD.LIMITS_INFO_TERM]}
           disabled
@@ -44,7 +44,7 @@ const PolicyInfo = ({ item, agreements }: PolicyInfoProps) => {
           상해 유의사항
         </Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</Caption>
-        <TextArea
+        <Textarea
           {...register(FIELD.ACCIDENT_INFO)}
           isChecked={agreements[FIELD.ACCIDENT_INFO_TERM]}
           disabled
@@ -58,7 +58,7 @@ const PolicyInfo = ({ item, agreements }: PolicyInfoProps) => {
           유기 유의사항
         </Title>
         <Caption>내용을 자세히 읽고 동의 여부를 체크해 주세요</Caption>
-        <TextArea
+        <Textarea
           {...register(FIELD.ABANDONMENT_INFO)}
           isChecked={agreements[FIELD.ABANDONMENT_INFO_TERM]}
           disabled

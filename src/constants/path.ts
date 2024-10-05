@@ -171,7 +171,11 @@ const admin = {
 const member = {
   /** 앨범 */
   album: {
-    root: "/album"
+    dynamic: (dogId?: Parameter) => `/album/${dogId ?? ":dogId"}`,
+    /** 날짜별 사진앨범 */
+    date: {
+      dynamic: (dogId?: Parameter) => `/album/date-view/${dogId ?? ":dogId"}`
+    }
   },
   /** 알림장 */
   agenda: {
@@ -199,7 +203,7 @@ const member = {
       },
       /** 강아지 추가 */
       enrollment: {
-        dynamic: `/mypage/dog/enrollment`
+        root: `/mypage/dog/enrollment` // TODO: 어디에 사용되는 주소인지?
       }
     }
   },

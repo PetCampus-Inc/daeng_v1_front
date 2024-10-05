@@ -25,10 +25,7 @@ const PreviousInfoGuideBottomSheet = ({ isOpen, close }: BottomSheetProps) => {
             >
               <Flex gap={8} align="center">
                 <Box width="44px" height="44px" borderRadius="circle" overflow="hidden">
-                  <Img
-                    src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="강아지 이미지"
-                  />
+                  <Img src={dog.profileUri} alt="강아지 이미지" />
                 </Box>
                 <Text typo="body2_16_B" color="darkBlack">
                   {dog.dogName}

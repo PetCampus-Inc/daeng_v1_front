@@ -7,7 +7,7 @@ import { Text } from "components/common/Text";
 import { useCreateNewTicket } from "hooks/api/admin/ticket";
 import { useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 
 import { calculateRenewal } from "./newTicket";
 import { TicketCard } from "./TicketCard";
@@ -34,7 +34,7 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: NewTicketBottomSheetProps
         ticketType: newTicketData.ticketType,
         roundTicketNumber: newTicketData.allRoundTicket,
         monthlyTicketNumber: newTicketData.monthlyTicketNumber,
-        startDate: padToTwoDigits(newTicketData.ticketStartDate).join("-"),
+        startDate: getPadString(newTicketData.ticketStartDate).join("-"),
         attendanceDays: newTicketData.attendanceDays ?? []
       },
       {

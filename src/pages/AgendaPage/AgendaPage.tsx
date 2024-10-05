@@ -12,12 +12,12 @@ const Agenda = () => {
       <Header type="text" text="알림장" />
       <Layout bgColor="BGray" pb={40}>
         <Suspense fallback={<div>로딩중...</div>}>
-          <Calendar id={Number(dogId)} />
+          <Calendar dogId={Number(dogId)} />
         </Suspense>
         <Box mx={16} mt={40}>
-          {/* <Suspense fallback={<div>로딩중...</div>}>
+          <Suspense fallback={<div>로딩중...</div>}>
             <DailyAgenda id={Number(dogId)} />
-          </Suspense> */}
+          </Suspense>
         </Box>
       </Layout>
     </>

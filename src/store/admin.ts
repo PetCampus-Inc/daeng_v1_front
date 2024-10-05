@@ -1,11 +1,19 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
-import { AdminAuthType } from "types/admin/admin.types";
+import { AdminProfile } from "types/admin/admin.types";
 
 const { persistAtom } = recoilPersist();
 
-export const adminInfoState = atom<AdminAuthType | null>({
+export const defaultAdminProfile: AdminProfile = {
+  adminName: "",
+  phoneNumber: "",
+  profileUri: "",
+  schoolId: 0,
+  schoolName: ""
+};
+
+export const adminInfoState = atom<AdminProfile>({
   key: "adminInfo",
-  default: null,
+  default: defaultAdminProfile,
   effects: [persistAtom]
 });

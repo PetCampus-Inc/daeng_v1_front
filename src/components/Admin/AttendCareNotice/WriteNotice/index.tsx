@@ -1,64 +1,80 @@
+import { routes } from "constants/path";
+
 import BoneIcon from "assets/svg/bone-icon";
 import PoopStatusIcon from "assets/svg/poop-status-icon";
-import PoopBox from "components/common/PoopBox";
-import TextArea from "components/common/TextArea";
+import { Button, Field, Flex } from "components/common";
+import PoopStatusGroup from "components/common/PoopStatusGroup";
+import { Textarea } from "components/common";
 import { useGetAgendaSaved, useSendAgenda, useTempSaveCareDog } from "hooks/api/admin/care";
-import { debounce } from "lodash";
-import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
-import { Poop } from "types/admin/attendance.type";
+import { useMemo } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import { PoopStatus } from "types/member/dogs";
+import { isNotEmptyValues } from "utils/is";
 
 import * as S from "./styles";
 import LastNoticeButton from "../LastNoticeButton";
-import SaveOrSendButton from "../SaveOrSendButton";
-import { NoticeItemContainer } from "../styles";
+
+interface AgendaFormValue {
+  agendaNote: string;
+  snack: string;
+  poop: PoopStatus;
+  poopMemo: string;
+}
 
 const WriteNotice = () => {
-  const dogId = useLocation().pathname.split("/").pop();
+  const { dogId } = useParams();
+  const navigate = useNavigate();
+  const { data: savedData } = useGetAgendaSaved(Number(dogId));
+  const { mutateTempSaveCareDog, isTempSavePending } = useTempSaveCareDog();
+  const { mutateSendAgenda, isSendAgendaPending } = useSendAgenda();
+  const isPending = isTempSavePending || isSendAgendaPending;
 
-  const { data } = useGetAgendaSaved(Number(dogId));
-  const { mutateTempSaveCareDog } = useTempSaveCareDog();
-  const { mutateSendAgenda } = useSendAgenda();
+  const defaultValues = useMemo(
+    () => ({
+      agendaNote: savedData.agendaNote,
+      snack: savedData.snack,
+      poopMemo: savedData.poopMemo,
+      poop: savedData.poop
+    }),
+    [savedData]
+  );
 
-  const methods = useForm({
-    mode: "onChange"
+  const { control, watch, handleSubmit } = useForm<AgendaFormValue>({
+    mode: "onChange",
+    defaultValues
   });
 
-  const agendaData = () => {
-    const agendaNote = methods.getValues("agendaNote");
-    const snack = methods.getValues("snackInfo");
-    const poopMemo = methods.getValues("poopMemo");
+  const formValues = watch();
+  const isValid = isNotEmptyValues(formValues);
 
-    return {
-      agendaId: data.agendaId,
-      dogId: Number(dogId),
-      agendaNote,
-      snack,
-      poop: Poop.HARD,
-      poopMemo
-    };
-  };
+  const handleSuccess = () => navigate(routes.admin.care.root);
 
-  const handleTempSave = debounce(() => {
-    mutateTempSaveCareDog(agendaData());
-  }, 1000);
+  const handleSendOrSave = (type: "SEND" | "TEMP_SAVE") =>
+    handleSubmit((data) => {
+      const formData = {
+        ...data,
+        agendaId: savedData.agendaId,
+        dogId: Number(dogId)
+      };
 
-  const handleSend = debounce(() => {
-    mutateSendAgenda(agendaData());
-  }, 1000);
+      type === "SEND"
+        ? mutateSendAgenda(formData, { onSuccess: handleSuccess })
+        : mutateTempSaveCareDog(formData, { onSuccess: handleSuccess });
+    });
 
-  if (data?.status === "COMPLETE") {
+  if (savedData?.status === "COMPLETE") {
     return (
       <S.CompleteNoteContainer>
         <S.NoteSpring />
         <S.NoteInnerContainer>
           <S.NoteTitleWrapper>
             <S.NoteText className="title main">전송된 알림장</S.NoteText>
-            <S.NoteText className="date">{data.dateTime}</S.NoteText>
+            <S.NoteText className="date">{savedData.dateTime}</S.NoteText>
           </S.NoteTitleWrapper>
 
           <S.NoteText className="content">
-            {data.agendaNote ?? "알림장 내용이 없습니다."}
+            {savedData.agendaNote ?? "알림장 내용이 없습니다."}
           </S.NoteText>
           <S.NoteContentFlexBox>
             <S.NoteText className="title content">
@@ -66,7 +82,7 @@ const WriteNotice = () => {
               간식
             </S.NoteText>
             <S.NoteText className="content">
-              {data.snack ?? "간식 관련 내용이 없습니다."}
+              {savedData.snack ?? "간식 관련 내용이 없습니다."}
             </S.NoteText>
           </S.NoteContentFlexBox>
 
@@ -75,10 +91,12 @@ const WriteNotice = () => {
               <PoopStatusIcon />
               배변 상태
             </S.NoteText>
+
             <S.NoteText className="content">
-              {data.poopMemo ?? "배변 상태 관련 내용이 없습니다."}.
+              {savedData.poopMemo ?? "배변 상태 관련 내용이 없습니다."}.
             </S.NoteText>
-            <PoopBox selected={data.poop} />
+
+            <PoopStatusGroup selected={savedData.poop} readOnly />
           </S.NoteContentFlexBox>
         </S.NoteInnerContainer>
       </S.CompleteNoteContainer>
@@ -88,32 +106,62 @@ const WriteNotice = () => {
   return (
     <S.FlexContainer>
       <LastNoticeButton />
-      <NoticeItemContainer>
-        알림장
-        <TextArea
-          {...methods.register("agendaNote")}
-          placeholder="오늘 하루 강아지와 관련된 내용을 작성해 주세요"
-          defaultValue={data.agendaNote}
+
+      <Field label="알림장">
+        <Controller
+          control={control}
+          name="agendaNote"
+          render={({ field }) => (
+            <Textarea {...field} placeholder="오늘 하루 강아지와 관련된 내용을 작성해 주세요" />
+          )}
         />
-      </NoticeItemContainer>
-      <NoticeItemContainer>
-        간식
-        <TextArea
-          {...methods.register("snackInfo")}
-          placeholder="오늘 급여한 간식에 대해 적어 주세요"
-          defaultValue={data.snack}
+      </Field>
+
+      <Field label="간식">
+        <Controller
+          control={control}
+          name="snack"
+          render={({ field }) => (
+            <Textarea {...field} placeholder="오늘 급여한 간식에 대해 적어 주세요" />
+          )}
         />
-      </NoticeItemContainer>
-      <NoticeItemContainer>
-        배변 상태
-        <PoopBox selected={Poop.HARD} />
-        <TextArea
-          {...methods.register("poopMemo")}
-          placeholder="오늘 하루 강아지 배변 상태에 대해 작성해 주세요"
-          defaultValue={data.poopMemo}
-        />
-      </NoticeItemContainer>
-      <SaveOrSendButton save={handleTempSave} send={handleSend} />
+      </Field>
+
+      <Field label="배변 상태">
+        <Flex direction="column" gap={24}>
+          <Controller
+            control={control}
+            name="poop"
+            render={({ field }) => <PoopStatusGroup selected={field.value} {...field} />}
+          />
+          <Controller
+            control={control}
+            name="poopMemo"
+            render={({ field }) => (
+              <Textarea {...field} placeholder="오늘 하루 강아지 배변 상태에 대해 작성해 주세요" />
+            )}
+          />
+        </Flex>
+      </Field>
+
+      <Flex gap={6} mt={52}>
+        <Button
+          colorScheme="br_4"
+          style={{ flex: 1 }}
+          disabled={isPending}
+          onClick={handleSendOrSave("TEMP_SAVE")}
+        >
+          임시저장
+        </Button>
+
+        <Button
+          style={{ flex: 2 }}
+          onClick={handleSendOrSave("SEND")}
+          disabled={isPending || !isValid}
+        >
+          전송하기
+        </Button>
+      </Flex>
     </S.FlexContainer>
   );
 };

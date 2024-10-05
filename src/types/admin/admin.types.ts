@@ -2,11 +2,13 @@ import { Role } from "types/common/role.types";
 
 import type { Nullable } from "../helper.types";
 
-export type AdminAuthType = {
+export interface AdminProfile {
   adminName: string;
+  phoneNumber: string;
+  profileUri: string;
   schoolId: number;
   schoolName: string;
-};
+}
 
 export interface ITeacherSignUpData {
   adminId: number;
@@ -45,14 +47,13 @@ export interface AdminLoginInfo {
   fcmToken: string;
 }
 
-export interface IAdminProfileEdit {
-  imageUrl: string;
+export interface AdminProfileUpdate {
   adminName: string;
   phoneNumber: string;
+  imageUrl: string;
 }
 
 export interface ISchoolInfoEdit {
-  adminId: number;
   schoolId: number;
   schoolName: string;
   phoneNumber: string;
@@ -97,4 +98,25 @@ export interface IGetAlarm {
   read: boolean; //확인필요
   hasNext: boolean;
   ticketResponse: IAlarmTicketResponse;
+}
+
+export interface AdminDogImageRequest {
+  dogId: number;
+  page?: number;
+  size?: number;
+}
+
+export interface AdminDogImageResponse {
+  totalPage: number;
+  totalElement: number;
+  currentPage: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  list: AdminDogImage[];
+}
+
+export interface AdminDogImage {
+  imageId: number;
+  imageUrl: string;
+  createdAt: string;
 }

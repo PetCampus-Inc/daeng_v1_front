@@ -1,7 +1,7 @@
-import TextArea from "components/common/TextArea";
+import { Textarea } from "components/common/Textarea";
 import styled from "styled-components";
 
-export const TextAreaBox = styled(TextArea)`
+export const TextAreaBox = styled(Textarea)`
   &.grayArea {
     background-color: ${({ theme }) => theme.colors.gray_5};
     border: 1px solid ${({ theme }) => theme.colors.gray_5};

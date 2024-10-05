@@ -4,6 +4,7 @@ import PhoneIcon from "assets/svg/phone-icon";
 import { BottomContainer, UpperContainer } from "components/Admin/DogDetailInfo/DogInfo/styles";
 import { Box, Flex, Text } from "components/common";
 import { XSmallButton } from "components/common/Button";
+import useNativeAction from "hooks/native/useNativeAction";
 
 import type { DogInfoDetailData } from "types/admin/attendance.type";
 
@@ -14,6 +15,8 @@ interface AboutOwnerProps {
 // TODO: 전화 걸기 기능 추가
 // TODO: 예방 접종 파일 열람 페이지 추가
 export function AboutOwnerCard({ data }: AboutOwnerProps) {
+  const { call } = useNativeAction();
+
   return (
     <Flex direction={"column"} gap={12}>
       <Text typo={"body1_18_B"} color={"gray_1"}>
@@ -34,7 +37,7 @@ export function AboutOwnerCard({ data }: AboutOwnerProps) {
             <XSmallButton
               typo="caption1_12_B"
               colorScheme="yellow_3"
-              onClick={() => window.open(`tel:${data.phoneNumber}`)}
+              onClick={() => call(data.phoneNumber)}
               leftAddon={<PhoneIcon color={"transparent"} />}
             >
               전화 걸기

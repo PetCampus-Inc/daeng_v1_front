@@ -1,4 +1,5 @@
 import CallBottomSheet from "components/common/BottomSheet/CallBottomSheet";
+import useNativeAction from "hooks/native/useNativeAction";
 import { memo } from "react";
 
 import type { ISchoolCallInfo } from "types/admin/mypage.types";
@@ -10,11 +11,12 @@ interface CallSchoolBottomSheetProps {
 }
 
 const CallSchoolBottomSheet = memo(({ info, isOpen, close }: CallSchoolBottomSheetProps) => {
+  const { call } = useNativeAction();
+
   if (!info || info.schoolName === undefined || info.schoolNumber === undefined) return null;
 
-  const handleCallMember = (info: ISchoolCallInfo) => {
-    console.log(info.schoolNumber);
-    // TODO: 해당 유치원 전화번호가 입력된 전화앱으로 바로 이동.
+  const handleCallMember = () => {
+    if (info.schoolNumber) call(info.schoolNumber);
     close();
   };
 
@@ -24,7 +26,7 @@ const CallSchoolBottomSheet = memo(({ info, isOpen, close }: CallSchoolBottomShe
       schoolName={info.schoolName}
       phoneNumber={info.schoolNumber}
       close={close}
-      handleCall={() => handleCallMember(info)}
+      handleCall={handleCallMember}
     />
   );
 });

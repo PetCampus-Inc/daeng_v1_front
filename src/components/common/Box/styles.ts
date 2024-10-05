@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
   getBorderStyle,
   getColorStyle,
+  getDisplayStyle,
   getFlexStyle,
   getMarginStyle,
   getPaddingStyle,
@@ -17,10 +18,14 @@ export const StyledBox = styled.div.withConfig({
   shouldForwardProp: (prop) =>
     ![
       "display",
+      "w",
       "width",
+      "h",
       "height",
       "maxWidth",
       "minWidth",
+      "maxHeight",
+      "minHeight",
       "m",
       "margin",
       "mt",
@@ -92,8 +97,12 @@ export const StyledBox = styled.div.withConfig({
       "shadow"
     ].includes(prop)
 })<BoxOptions>`
+  ${(props) => getDisplayStyle(props)};
   ${(props) => getSizeStyle(props)};
-  ${(props) => getFlexStyle(props)};
+  ${(props) => {
+    const { display, ...flexProps } = props;
+    return getFlexStyle(flexProps);
+  }}
   ${(props) => getMarginStyle(props)};
   ${(props) => getPaddingStyle(props)};
   ${(props) => getBorderStyle(props)};

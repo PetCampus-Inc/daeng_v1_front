@@ -3,7 +3,7 @@ import CalendarIcon from "assets/svg/calendar";
 import { useTokenHandler } from "hooks/common/useTokenHandler";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 import {
   getMonthlyTicketStatus,
   getRoundTicketStatus,
@@ -40,10 +40,7 @@ export function DogCard({ info }: { info: Attendance }) {
   return (
     <S.CardContainer onClick={handleCardClick}>
       <S.ImageWrapper isExpired={ticketStatus.isExpired}>
-        <S.Image
-          src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt={`${info.dogName}의 프로필 사진`}
-        />
+        <S.Image src={info.dogProfileUri} alt={`${info.dogName}의 프로필 사진`} />
       </S.ImageWrapper>
       <S.InfoWrapper>
         <S.DogName typo="body2_16_B" isExpired={ticketStatus.isExpired}>
@@ -77,7 +74,7 @@ function checkTicketStatus(info: Attendance): TicketStatus {
 
 function getTicketStatusText(info: Attendance): string {
   if (info.monthlyTicket) {
-    const [year, month, day] = padToTwoDigits(info.monthlyTicket);
+    const [year, month, day] = getPadString(info.monthlyTicket);
     return `${year}.${month}.${day} 만료`;
   } else {
     return `잔여 ${info.currentRounds}/${info.allRounds}회`;
