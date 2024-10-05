@@ -494,8 +494,9 @@ export const ToggleViewButton = styled.button.withConfig({
 
 // Month Picker Container
 export const MonthPickerContainer = styled.div`
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 // Month Picker Wrapper

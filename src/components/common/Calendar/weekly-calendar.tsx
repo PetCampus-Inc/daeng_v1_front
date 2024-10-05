@@ -96,8 +96,8 @@ export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
   if (!value || !activeStartDate) return null;
 
   return (
-    <Box as="div" px={16}>
-      <StyledWeeklyHeader ref={calendarRef}>
+    <Box as="div" px={16} ref={calendarRef}>
+      <StyledWeeklyHeader className="react-calendar__navigation">
         <StyledWeeklyTitle onClick={onOpenMonthPicker}>
           <Text typo="label1_16_B" color="primaryColor">
             {format(activeStartDate, "yyyy. MM", { locale: ko })}

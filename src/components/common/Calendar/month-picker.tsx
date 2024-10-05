@@ -41,6 +41,7 @@ export const MonthPicker = ({
   anchorRef
 }: MonthPickerProps) => {
   const popupRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef<{ topOffset: number } | null>(null);
 
   // 외부 클릭 감지 시 MonthPicker 닫기
   useClickOutSide({
@@ -52,19 +53,30 @@ export const MonthPicker = ({
   useEffect(() => {
     // MonthPicker가 캘린더 타이틀 위치에 정확히 위치하도록 설정
     if (isOpen && popupRef.current && anchorRef.current) {
-      const calendarNavigation = anchorRef.current;
-      const popupNavigation = popupRef.current.querySelector(".react-calendar__navigation");
+      if (!positionRef.current) {
+        const calendarNavigation = anchorRef.current.querySelector(".react-calendar__navigation");
+        if (calendarNavigation) {
+          const calendarRect = calendarNavigation.getBoundingClientRect();
 
-      if (calendarNavigation && popupNavigation) {
-        const calendarRect = calendarNavigation.getBoundingClientRect();
-        const popupRect = popupRef.current.getBoundingClientRect();
+          // 부모의 부모 요소의 paddingTop을 계산
+          const grandParentElement = popupRef.current.parentElement?.parentElement;
+          const grandParentStyle = grandParentElement ? getComputedStyle(grandParentElement) : null;
+          const grandParentPaddingTop = grandParentStyle
+            ? parseFloat(grandParentStyle.paddingTop) || 0
+            : 0;
 
-        const topOffset = calendarRect.top - popupRect.top;
+          // .react-calendar__navigation의 height를 가져옴 (44px로 설정된 height 값)
+          const navigationHeight = parseFloat(getComputedStyle(calendarNavigation).height) || 44;
 
-        const popupStyle = getComputedStyle(popupRef.current);
-        const paddingTop = parseFloat(popupStyle.paddingTop);
+          // calendarRect.top - 캘린더 navigation의 높이 - 부모의 부모 요소의 paddingTop의 절반
+          const topOffset = calendarRect.top - navigationHeight - grandParentPaddingTop / 2;
+          positionRef.current = { topOffset };
+        }
+      }
 
-        popupRef.current.style.transform = `translateY(${topOffset - paddingTop}px)`;
+      // 이미 계산된 위치를 사용
+      if (positionRef.current && popupRef.current) {
+        popupRef.current.style.top = `${positionRef.current.topOffset}px`;
       }
     }
   }, [isOpen, anchorRef]);
@@ -93,7 +105,7 @@ export const MonthPicker = ({
               next2Label={null}
             />
           </MonthPickerCalendar>
-          {/* 닫기 버튼*/}
+          {/* 닫기 버튼 */}
           <ControlWrapper>
             <ControlButton type="button" onClick={onClose}>
               <XIcon />
