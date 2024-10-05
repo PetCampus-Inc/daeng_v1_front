@@ -32,8 +32,8 @@ export function useCalendar({ minDate }: UseCalendarProps) {
     }
   };
   /** 캘린더 활성 날짜 변경 함수 */
-  const handleActiveStartDateChange = ({ activeStartDate, view }: OnArgs) => {
-    if (!activeStartDate) {
+  const handleActiveStartDateChange = ({ activeStartDate, action, view }: OnArgs) => {
+    if (!activeStartDate || action === "drillUp") {
       return;
     }
     setActiveStartDate(activeStartDate);
