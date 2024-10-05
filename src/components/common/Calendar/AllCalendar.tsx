@@ -69,8 +69,9 @@ export function AllCalendar({ minDate, tileDate }: CalendarProps) {
           variant="member"
           prevLabel={
             <Box
-              w={20}
-              h={20}
+              w={26}
+              h={26}
+              m={8}
               display="flex"
               align="center"
               justify="center"
@@ -78,13 +79,14 @@ export function AllCalendar({ minDate, tileDate }: CalendarProps) {
               color="primaryColor"
               radius="circle"
             >
-              <ArrowLeftIcon size={20} />
+              <ArrowLeftIcon size={24} />
             </Box>
           }
           nextLabel={
             <Box
-              w={20}
-              h={20}
+              w={26}
+              h={26}
+              m={8}
               display="flex"
               align="center"
               justify="center"
@@ -92,7 +94,7 @@ export function AllCalendar({ minDate, tileDate }: CalendarProps) {
               color="primaryColor"
               radius="circle"
             >
-              <ArrowRightIcon size={20} />
+              <ArrowRightIcon size={24} />
             </Box>
           }
           renderTileContent={TileContent}
@@ -149,9 +151,9 @@ const TileContent = ({ tileDate, date, view, today }: TileContentProps) => {
 
   if (hasEvent) {
     return (
-      <Box as="span" color="br_3">
+      <Styled.Dot variant="member">
         <FootIcon w={15} h={12} />
-      </Box>
+      </Styled.Dot>
     );
   }
 

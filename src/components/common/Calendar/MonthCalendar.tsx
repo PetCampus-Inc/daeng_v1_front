@@ -65,38 +65,24 @@ export function MonthCalendar({ minDate, tileDate, variant = "member" }: MonthCa
         variant={variant}
         prevLabel={
           variant === "admin" ? (
-            <ArrowLeftIcon size={24} />
+            <Styled.NavigationButton bgColor="white">
+              <ArrowLeftIcon size={24} color="darkBlack" />
+            </Styled.NavigationButton>
           ) : (
-            <Box
-              w={20}
-              h={20}
-              display="flex"
-              align="center"
-              justify="center"
-              bgColor="yellow_3"
-              color="primaryColor"
-              radius="circle"
-            >
-              <ArrowLeftIcon size={20} />
-            </Box>
+            <Styled.NavigationButton bgColor="yellow_3" color="primaryColor">
+              <ArrowLeftIcon size={24} />
+            </Styled.NavigationButton>
           )
         }
         nextLabel={
           variant === "admin" ? (
-            <ArrowRightIcon size={24} />
+            <Styled.NavigationButton bgColor="white">
+              <ArrowRightIcon size={24} />
+            </Styled.NavigationButton>
           ) : (
-            <Box
-              w={20}
-              h={20}
-              display="flex"
-              align="center"
-              justify="center"
-              bgColor="yellow_3"
-              color="primaryColor"
-              radius="circle"
-            >
-              <ArrowRightIcon size={20} />
-            </Box>
+            <Styled.NavigationButton bgColor="yellow_3" color="primaryColor">
+              <ArrowRightIcon size={24} />
+            </Styled.NavigationButton>
           )
         }
         renderTileContent={(props: TileContentProps) => TileContent({ ...props, variant })}

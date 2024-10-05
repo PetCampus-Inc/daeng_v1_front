@@ -99,11 +99,11 @@ export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
     <Box as="div" px={16} ref={calendarRef}>
       <StyledWeeklyHeader className="react-calendar__navigation">
         <StyledWeeklyTitle onClick={onOpenMonthPicker}>
-          <Text typo="label1_16_B" color="primaryColor">
+          <Text typo="body1_18_B" color="primaryColor">
             {format(activeStartDate, "yyyy. MM", { locale: ko })}
           </Text>
-          <NavigationButton>
-            <ArrowDownIcon w={20} h={20} />
+          <NavigationButton bgColor="yellow_3" color="primaryColor" ml={12}>
+            <ArrowDownIcon w={24} h={24} />
           </NavigationButton>
         </StyledWeeklyTitle>
         {renderTodayButton && renderTodayButton}
@@ -162,7 +162,7 @@ const WeekView = ({
           <Text
             as="abbr"
             title={`${WEEK_DAYS[day.getDay()]}`}
-            typo="label2_14_M"
+            typo="label1_16_M"
             color="inherit"
             textDecoration="none"
             className={day.getDay() === 0 ? "weekday sunday" : "weekday"}
@@ -178,7 +178,7 @@ const WeekView = ({
             ) : (
               tileDate?.some((date) => isSameDay(date, day)) && (
                 <Box as="span" color="br_3" key="footIcon">
-                  <FootIcon w={15} h={12} />
+                  <FootIcon w={15} h={13} />
                 </Box>
               )
             )}

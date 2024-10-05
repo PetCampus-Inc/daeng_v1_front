@@ -2,6 +2,7 @@ import styled, { css, RuleSet } from "styled-components";
 import { remCalc } from "utils/calculator";
 
 import type { CalendarVariants } from "./types";
+import { Box } from "../Box";
 
 const sharedStyles = {
   admin: {
@@ -10,11 +11,13 @@ const sharedStyles = {
       top: 50%;
       left: 50%;
       transform: translateX(-50%);
-      ${({ theme }) => theme.typo.caption1_10_R};
+      ${({ theme }) => theme.typo.caption1_12_R};
+      font-size: 13px;
+      line-height: 1.6;
       color: ${({ theme }) => theme.colors.br_2};
-      line-height: 1.2;
     `,
     dot: css`
+      margin-top: 1px;
       background-color: ${({ theme }) => theme.colors.br_2};
       border-radius: 50%;
       width: 0.3rem;
@@ -31,15 +34,15 @@ const sharedStyles = {
 
       max-width: 52px;
       width: 100%;
-      height: 24px;
+      height: 26px;
 
       position: absolute;
-      right: 36px;
+      right: 26px;
 
-      font-size: 0.8rem;
-      letter-spacing: 0.015rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.01rem;
       line-height: 1.25rem;
-      font-weight: 800;
+      font-weight: 700;
       font-family: "Pretendard Variable";
 
       background-color: ${({ theme }) => theme.colors.yellow_3};
@@ -50,10 +53,12 @@ const sharedStyles = {
   member: {
     tileText: css`
       ${({ theme }) => theme.typo.caption1_12_R};
+      font-size: 13px;
       color: ${({ theme }) => theme.colors.br_2};
       line-height: 1.2;
     `,
     dot: css`
+      margin-top: 1px;
       color: ${({ theme }) => theme.colors.br_3};
     `,
     todayButton: css`
@@ -63,15 +68,15 @@ const sharedStyles = {
 
       max-width: 52px;
       width: 100%;
-      height: 24px;
+      height: 26px;
 
       position: absolute;
-      right: 36px;
+      right: 26px;
 
-      font-size: 0.8rem;
-      letter-spacing: 0.015rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.01rem;
       line-height: 1.25rem;
-      font-weight: 800;
+      font-weight: 700;
       font-family: "Pretendard Variable";
 
       background-color: ${({ theme }) => theme.colors.primary_2};
@@ -105,6 +110,9 @@ const calendarVariants = {
         justify-content: center;
         align-content: center;
       }
+      .react-calendar__navigation__arrow {
+        color: ${({ theme }) => theme.colors.darkBlack};
+      }
 
       button:enabled:hover,
       button:enabled:focus {
@@ -117,9 +125,9 @@ const calendarVariants = {
       }
 
       .react-calendar__navigation__label {
-        flex-grow: 0.1 !important;
+        flex-grow: 0.15 !important;
         font-family: "Pretendard Variable";
-        ${({ theme }) => theme.typo.label1_16_B};
+        ${({ theme }) => theme.typo.body1_18_B};
         color: ${({ theme }) => theme.colors.darkBlack};
       }
     }
@@ -131,8 +139,6 @@ const calendarVariants = {
 
     /* WeekDays 영역 */
     .react-calendar__month-view__weekdays {
-      margin-bottom: ${remCalc(18)};
-      text-transform: uppercase;
       text-align: center;
 
       .react-calendar__month-view__weekdays__weekday {
@@ -141,7 +147,7 @@ const calendarVariants = {
 
       .react-calendar__month-view__weekdays__weekday abbr {
         color: ${({ theme }) => theme.colors.gray_1};
-        ${({ theme }) => theme.typo.label2_14_B};
+        ${({ theme }) => theme.typo.label1_16_M};
       }
 
       .react-calendar__month-view__weekdays__weekday--weekend abbr[title="Sun"] {
@@ -165,10 +171,8 @@ const calendarVariants = {
         abbr {
           margin-top: -0.2em;
           grid-row: 2;
-          ${({ theme }) => theme.typo.label2_14_M};
           font-family: "Pretendard Variable";
-          font-size: small;
-          line-height: 1;
+          ${({ theme }) => theme.typo.label1_16_M};
           color: ${({ theme }) => theme.colors.gray_1};
           z-index: 1;
         }
@@ -252,10 +256,10 @@ const calendarVariants = {
       }
 
       .react-calendar__navigation__label {
-        flex-grow: 0.1 !important;
+        flex-grow: 0.15 !important;
         min-width: 70px;
         font-family: "Pretendard Variable";
-        ${({ theme }) => theme.typo.label1_16_B};
+        ${({ theme }) => theme.typo.body1_18_B};
         color: ${({ theme }) => theme.colors.primaryColor};
       }
     }
@@ -270,7 +274,7 @@ const calendarVariants = {
 
       .react-calendar__month-view__weekdays__weekday abbr {
         color: ${({ theme }) => theme.colors.gray_1};
-        ${({ theme }) => theme.typo.label2_14_M};
+        ${({ theme }) => theme.typo.label1_16_M};
       }
 
       .react-calendar__month-view__weekdays__weekday--weekend abbr[title="Sun"] {
@@ -296,12 +300,9 @@ const calendarVariants = {
 
         /* 날짜 텍스트를 위한 스타일 */
         abbr {
-          ${({ theme }) => theme.typo.label2_14_M};
+          ${({ theme }) => theme.typo.label1_16_M};
           font-family: "Pretendard Variable";
           color: ${({ theme }) => theme.colors.gray_1};
-        }
-        span {
-          line-height: 1.1;
         }
 
         /* 이웃 날짜를 위한스타일 */
@@ -390,16 +391,13 @@ export const StyledWeeklyHeader = styled.div`
 export const StyledWeeklyTitle = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  margin-left: 20px;
 `;
 
-export const NavigationButton = styled.button`
-  width: 20px;
-  height: 20px;
-  color: ${({ theme }) => theme.colors.primaryColor};
-  background-color: ${({ theme }) => theme.colors.yellow_3};
+export const NavigationButton = styled(Box)`
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -461,7 +459,8 @@ export const DayContent = styled.span`
 
   & > .today {
     color: ${({ theme }) => theme.colors.br_2};
-    ${({ theme }) => theme.typo.caption1_12_R};
+    ${({ theme }) => theme.typo.label2_14_R};
+    font-size: 13px;
     line-height: normal;
   }
 `;
@@ -479,16 +478,9 @@ export const ToggleViewButton = styled.button.withConfig({
   justify-content: center;
   gap: 4px;
 
-  & > span {
-    display: flex;
-    align-items: center;
-  }
-
-  & > span > svg {
+  & > div > svg {
     transform: ${({ expand }) => (expand ? "rotate(180deg)" : "rotate(0deg)")};
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 0.15s;
+    transition: all ease-in-out 0.2s;
   }
 `;
 
@@ -504,7 +496,7 @@ export const MonthPickerWrapper = styled.div`
   position: absolute;
   background-color: white;
   border-radius: 8px;
-  padding: 20px 18px 30px;
+  padding: 26px 18px 30px;
   box-shadow: ${({ theme }) => theme.shadows.smallMenu};
   z-index: 10;
 `;
@@ -533,9 +525,9 @@ export const MonthPickerCalendar = styled.div`
     }
 
     .react-calendar__navigation__label {
-      flex-grow: 0.3 !important;
+      flex-grow: 0.5 !important;
       font-family: "Pretendard Variable";
-      ${({ theme }) => theme.typo.label1_16_B};
+      ${({ theme }) => theme.typo.body1_18_B};
       color: ${({ theme }) => theme.colors.darkBlack};
     }
   }
