@@ -49,25 +49,30 @@ const EditProfile = () => {
   };
 
   const onSubmit = handleSubmit(async (data) => {
-    if (!(data.profileUri instanceof File)) return;
+    let imageUrl = profileUri;
 
-    try {
-      const [imageUrl] = await uploadToS3({
-        files: [data.profileUri],
-        path: "profile"
-      });
-      if (!imageUrl) throw new Error("이미지 업로드 중 오류 발생");
+    if (data.profileUri instanceof File) {
+      try {
+        const [uploadedImageUrl] = await uploadToS3({
+          files: [data.profileUri],
+          path: "profile"
+        });
+        if (!uploadedImageUrl) throw new Error("이미지 업로드 중 오류 발생");
 
-      const formData = {
-        imageUrl,
-        adminName: data.adminName,
-        phoneNumber: data.phoneNumber
-      };
-
-      updateAdminProfileMutate(formData);
-    } catch (error) {
-      showToast("프로필 업로드 중 오류가 발생했습니다.", "bottom");
+        imageUrl = uploadedImageUrl;
+      } catch (error) {
+        showToast("프로필 업로드 중 오류가 발생했습니다.", "bottom");
+        return;
+      }
     }
+
+    const formData = {
+      imageUrl,
+      adminName: data.adminName,
+      phoneNumber: data.phoneNumber
+    };
+
+    updateAdminProfileMutate(formData);
   });
 
   return (

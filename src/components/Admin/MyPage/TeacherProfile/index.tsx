@@ -4,6 +4,7 @@ import { Flex } from "components/common";
 import * as S from "./styles";
 
 import type { ITeacherInfo } from "types/admin/mypage.types";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 interface TeacherInfoProps {
   data: ITeacherInfo;
@@ -13,6 +14,8 @@ interface TeacherInfoProps {
 }
 
 const TeacherProfile = ({ data, profileUri, setIsEditing, isEditing }: TeacherInfoProps) => {
+  const { adminName, phoneNumber } = useAdminInfo();
+
   return (
     <>
       <S.ProfileWrapper>
@@ -26,10 +29,10 @@ const TeacherProfile = ({ data, profileUri, setIsEditing, isEditing }: TeacherIn
               프로필 수정
             </S.PrimaryColorButton>
             <Flex justify="center" align="center">
-              <S.Text className="name">{data.adminName} 선생님</S.Text>
+              <S.Text className="name">{adminName} 선생님</S.Text>
               <ArrowRightIcon size={24} colorScheme="darkBlack" />
             </Flex>
-            <S.Text className="number">{data.phoneNumber}</S.Text>
+            <S.Text className="number">{phoneNumber}</S.Text>
             <S.Text className="id">{data.id}</S.Text>
           </S.DetailItem>
         </S.ProfileDetail>
