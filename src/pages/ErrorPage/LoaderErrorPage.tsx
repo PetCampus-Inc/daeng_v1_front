@@ -1,6 +1,6 @@
 import ErrorDogSvg from "assets/images/error-dog.svg";
 import ErrorDogWebp from "assets/images/error-dog.webp";
-import { Flex, Text, Box } from "components/common";
+import { Flex, Text, Box, Button } from "components/common";
 import { ErrorPageLayout } from "components/Error";
 import { useRouteError } from "react-router-dom";
 import { Img } from "styles/StyleModule";
@@ -31,7 +31,11 @@ const LoaderErrorPage = () => {
         <Text typo="body2_16_R" color="gray_2">
           {`${error.code} error`}
         </Text>
-        <button onClick={() => alert(error.message)}>메세지 보기</button>
+        <Box position="absolute" top="1rem" right="1rem">
+          <Button px={12} onClick={() => alert(error.message)}>
+            메세지 보기
+          </Button>
+        </Box>
       </Box>
     </ErrorPageLayout>
   );
