@@ -61,8 +61,7 @@ const EnrollmentFormListPage = () => {
         {isEditable && (
           <BottomButton
             disabled={
-              selectedList.length > 0 &&
-              !(selectedList.length === data?.simpleSchoolFormList.length)
+              selectedList.length === 0 || selectedList.length === data?.simpleSchoolFormList.length
             }
             onClick={handleTouch}
           >
