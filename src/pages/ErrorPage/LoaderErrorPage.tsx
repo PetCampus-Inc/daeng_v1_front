@@ -31,11 +31,6 @@ const LoaderErrorPage = () => {
         <Text typo="body2_16_R" color="gray_2">
           {`${error.code} error`}
         </Text>
-        <Box position="absolute" top="1rem" right="1rem">
-          <Button px={12} onClick={() => alert(error.message)}>
-            메세지 보기
-          </Button>
-        </Box>
       </Box>
     </ErrorPageLayout>
   );
