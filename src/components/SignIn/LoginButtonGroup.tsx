@@ -1,5 +1,5 @@
 import { useMemberLogin } from "hooks/api/signin";
-import useNativeAction from "hooks/native/useNativeAction";
+import { nativeBridge } from "libs/webviewBridge";
 import { SocialProvider } from "types/member/auth.types";
 import { getPlatform } from "utils/cross-browsing";
 import showToast from "utils/showToast";
@@ -9,15 +9,17 @@ import { ButtonWrapper, StyledButton, StyledImage, StyledText } from "./styles";
 const LoginButtonGroup = () => {
   const isIOS = /iP(hone|ad|od)|iOS/.test(getPlatform());
 
-  const { socialLogin } = useNativeAction();
   const { mutateLogin } = useMemberLogin();
 
   const handleLogin = (provider: SocialProvider) => async () => {
-    const authData = await socialLogin(provider);
+    try {
+      const idToken = await nativeBridge.socialLogin(provider);
+      const fcmToken = await nativeBridge.getFcmToken();
 
-    mutateLogin(authData, {
-      onError: (error) => showToast(error.message, "bottom")
-    });
+      mutateLogin({ idToken, fcmToken });
+    } catch (_) {
+      showToast("로그인에 실패했습니다. 잠시후 다시 시도해주세요.", "bottom");
+    }
   };
 
   return (
@@ -25,7 +27,7 @@ const LoginButtonGroup = () => {
       <StyledButton
         type="button"
         aria-label="카카오로 계속하기"
-        onClick={handleLogin("KAKAO")}
+        onClick={handleLogin("kakao")}
         bg="#FEE500"
       >
         <StyledImage src="images/kakao-logo.png" alt="kakao-logo" />
@@ -37,7 +39,7 @@ const LoginButtonGroup = () => {
       <StyledButton
         type="button"
         aria-label="구글로 계속하기"
-        onClick={handleLogin("GOOGLE")}
+        onClick={handleLogin("google")}
         bg="white"
         borderColor="#CCCCCC"
       >
@@ -51,7 +53,7 @@ const LoginButtonGroup = () => {
         <StyledButton
           type="button"
           aria-label="Apple로 로그인"
-          onClick={handleLogin("APPLE")}
+          onClick={handleLogin("apple")}
           bg="black"
           borderColor="black"
         >

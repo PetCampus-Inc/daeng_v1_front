@@ -1,8 +1,7 @@
-export type SocialProvider = "KAKAO" | "GOOGLE" | "APPLE";
+export type SocialProvider = "kakao" | "google" | "apple";
 
 export interface SocialAuthData {
   idToken: string;
-  deviceId: string;
   fcmToken: string;
 }
 
