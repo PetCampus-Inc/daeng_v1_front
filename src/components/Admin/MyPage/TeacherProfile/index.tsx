@@ -7,12 +7,11 @@ import type { ITeacherInfo } from "types/admin/mypage.types";
 
 interface TeacherInfoProps {
   data: ITeacherInfo;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  isEditing: boolean;
   profileUri: string;
+  onEdit: () => void;
 }
 
-const TeacherProfile = ({ data, profileUri, setIsEditing, isEditing }: TeacherInfoProps) => {
+const TeacherProfile = ({ data, profileUri, onEdit }: TeacherInfoProps) => {
   return (
     <>
       <S.ProfileWrapper>
@@ -22,10 +21,8 @@ const TeacherProfile = ({ data, profileUri, setIsEditing, isEditing }: TeacherIn
 
         <S.ProfileDetail>
           <S.DetailItem>
-            <S.PrimaryColorButton onClick={() => setIsEditing(!isEditing)}>
-              프로필 수정
-            </S.PrimaryColorButton>
-            <Flex justify="center" align="center">
+            <S.PrimaryColorButton onClick={onEdit}>프로필 수정</S.PrimaryColorButton>
+            <Flex justify="center" align="center" onClick={onEdit}>
               <S.Text className="name">{data.adminName} 선생님</S.Text>
               <ArrowRightIcon size={24} colorScheme="darkBlack" />
             </Flex>

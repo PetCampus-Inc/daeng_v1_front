@@ -38,8 +38,7 @@ const TeacherMyPage = () => {
                 <TeacherProfile
                   data={data}
                   profileUri={profileUri}
-                  setIsEditing={setIsEditing}
-                  isEditing={isEditing}
+                  onEdit={() => setIsEditing(true)}
                 />
               )}
               <CardContainer>
