@@ -22,5 +22,5 @@ export default function PrivateRouter({ roles, redirectPath }: PrivateRouterProp
     접근가능여부: roles.includes(role),
     리다이렉트경로: basedPath
   });
-  return roles.includes(role) ? <Outlet /> : <Navigate to={redirectPath ?? routes.login.root} />;
+  return roles.includes(role) ? <Outlet /> : <Navigate to={redirectPath || basedPath} />;
 }
