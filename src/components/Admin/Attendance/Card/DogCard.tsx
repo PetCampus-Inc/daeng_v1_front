@@ -1,3 +1,4 @@
+import DefaultDogImage from "assets/images/placeholder-dog.png";
 import AlertFilledIcon from "assets/svg/alert-filled-icon";
 import CalendarIcon from "assets/svg/calendar";
 import { useTokenHandler } from "hooks/common/useTokenHandler";
@@ -19,6 +20,7 @@ import type { Attendance } from "types/admin/attendance.type";
 export function DogCard({ info }: { info: Attendance }) {
   const navigate = useNavigate();
   const { role: adminRole } = useTokenHandler();
+  const dogProfileUri = info.dogProfileUri || DefaultDogImage;
 
   const ticketStatus = useMemo(() => checkTicketStatus(info), [info]);
 
@@ -40,7 +42,7 @@ export function DogCard({ info }: { info: Attendance }) {
   return (
     <S.CardContainer onClick={handleCardClick}>
       <S.ImageWrapper isExpired={ticketStatus.isExpired}>
-        <S.Image src={info.dogProfileUri} alt={`${info.dogName}의 프로필 사진`} />
+        <S.Image src={dogProfileUri} alt={`${info.dogName}의 프로필 사진`} />
       </S.ImageWrapper>
       <S.InfoWrapper>
         <S.DogName typo="body2_16_B" isExpired={ticketStatus.isExpired}>
