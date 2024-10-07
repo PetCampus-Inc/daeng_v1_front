@@ -1,5 +1,6 @@
 import { routes } from "constants/path";
 
+import DefaultDogProfileImage from "assets/images/placeholder-dog.png";
 import { Text } from "components/common";
 import Badge, { BadgeProps } from "components/common/Badge";
 import { useNavigate } from "react-router-dom";
@@ -26,18 +27,19 @@ const MainDogCard = ({ info }: { info: ICareDogInfo }) => {
   };
 
   const { variant, text } = agendaWritingOptions(info.agendaWriting);
+  const dogProfileImage = info.profileUri || DefaultDogProfileImage;
 
   return (
     <CardContainer
       key={info.dogId}
       onClick={() =>
         navigate(routes.admin.care.notice.dynamic(info.dogId), {
-          state: { dogName: info.dogName, profileUri: info.profileUri }
+          state: { dogName: info.dogName, profileUri: dogProfileImage }
         })
       }
     >
       <ListItemImg size="sm">
-        <img src={info.profileUri} alt="dog" />
+        <img src={dogProfileImage} alt="dog" />
       </ListItemImg>
       <Text typo="body2_16_B" color="darkBlack">
         {info.dogName}
