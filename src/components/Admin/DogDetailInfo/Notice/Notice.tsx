@@ -19,10 +19,9 @@ export function Notice({ dogId }: { dogId: number }) {
 
   const findObject = (id: number) => {
     const object = data.agreements.find((obj) => Object.prototype.hasOwnProperty.call(obj, id));
-    if (object) {
-      return Object.values(object)[0];
-    }
-    return "";
+    const date = object ? Object.values(object)[0] : undefined;
+
+    return date && date !== "null" ? `${date} 동의` : "동의 내역 없음";
   };
 
   return (
@@ -66,7 +65,7 @@ export function Notice({ dogId }: { dogId: number }) {
               </Flex>
 
               <Text typo={"caption1_12_R"} color={"gray_3"}>
-                {findObject(item.id)} 동의
+                {findObject(item.id)}
               </Text>
             </Flex>
           </Box>

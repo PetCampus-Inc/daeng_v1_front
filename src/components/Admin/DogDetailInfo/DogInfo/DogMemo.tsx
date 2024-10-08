@@ -37,7 +37,10 @@ export function DogMemo({ memo, dogId }: MemoProps) {
       <FormProvider {...methods}>
         <TextareaModal
           isOpen={isOpen}
-          close={close}
+          close={() => {
+            methods.reset();
+            close();
+          }}
           actionText="저장"
           closeText="취소"
           name="memo"
