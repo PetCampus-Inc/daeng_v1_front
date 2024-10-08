@@ -14,7 +14,7 @@ import { useGetMemberDogEnrollment } from "hooks/api/member/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 import { isEmpty } from "utils/is";
 
 interface EnrollmentProps {
@@ -25,7 +25,7 @@ interface EnrollmentProps {
 // 유치원 재가입신청 페이지
 const MemberSchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
   const { data } = useGetMemberDogEnrollment({
-    dogId: String(dogId),
+    dogId,
     schoolId: schoolId ?? -1
   });
 
@@ -43,8 +43,8 @@ const MemberSchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
   const [dogyear, dogMonth, dogDay] = dogBirthDate;
   const dogBirth = {
     year: dogyear ? dogyear : "",
-    month: dogMonth ? padToTwoDigits(Number(dogMonth)) : "",
-    day: dogDay ? padToTwoDigits(Number(dogDay)) : ""
+    month: dogMonth ? getPadString(Number(dogMonth)) : "",
+    day: dogDay ? getPadString(Number(dogDay)) : ""
   };
 
   const methods = useForm({
@@ -73,6 +73,7 @@ const MemberSchoolReEnrollmentPage = ({ schoolId, dogId }: EnrollmentProps) => {
   const indicators = visibleSteps.map((step) => step.indicator);
 
   const ticket = {
+    ticketType: rest.ticketType,
     roundTicketNumber,
     monthlyTicketNumber,
     openDays: rest.openDays

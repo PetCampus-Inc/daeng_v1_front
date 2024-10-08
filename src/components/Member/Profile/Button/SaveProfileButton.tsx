@@ -19,9 +19,6 @@ const SaveProfileButton = () => {
   const { s3ProfileData, uploadFiles } = useUploadProfile();
   const { mutateMemberProfile } = usePostMemberProfile();
 
-  const allValues = getValues();
-  const isAllFilled = Object.values(allValues).every((value) => value);
-
   const handleSubmitProfile = (data: FieldValues) => {
     uploadProfileFiles(data);
   };
@@ -76,7 +73,7 @@ const SaveProfileButton = () => {
         type="submit"
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
-        disabled={!isAllFilled || !isValid}
+        disabled={!isValid}
       >
         프로필 완성하기
       </BottomButton>

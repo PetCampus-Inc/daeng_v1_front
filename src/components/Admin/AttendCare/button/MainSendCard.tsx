@@ -29,7 +29,7 @@ const MainSendCard = ({ text, onClick }: MainSendCardProps) => {
         </CardTitleWrapper>
       </Stack>
       <ButtonWrapper type="button">
-        <ArrowRightIcon w="23" h="23" />
+        <ArrowRightIcon size={24} />
       </ButtonWrapper>
     </SendCardContainer>
   );

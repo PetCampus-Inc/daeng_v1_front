@@ -16,6 +16,7 @@ export function AttendanceSearchList({ data }: { data: Attend[] }) {
       {data.map((item) => (
         <AttendDogCard
           key={item.dogId}
+          dogProfileUri={item.dogProfileUri}
           attendanceId={item.attendanceId}
           dogName={item.dogName}
           onClick={() => add(item)}

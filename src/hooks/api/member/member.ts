@@ -27,16 +27,11 @@ import {
 import useLogout from "hooks/common/useLogout";
 import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
-import { getISOString } from "utils/date";
 import { getLabelForValue } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import type {
   HomeDataType,
-  HomeInfoType,
-  ImageList,
-  ImageListType,
-  IMainAlbum,
   IMemberProfile,
   IMemberProfilePostInfo,
   MemberDogInfoData,
@@ -47,34 +42,25 @@ import type {
 
 // 견주 홈 - 메인
 export const useGetHomeInfo = (dogId: number) => {
-  return useSuspenseQuery<HomeDataType, unknown, HomeInfoType>({
+  return useSuspenseQuery({
     queryKey: QUERY_KEY.HOME(dogId),
-    queryFn: () => handleGetHomeInfo(dogId),
-    select: (res) => {
-      const updatedImageList = res.imageList?.map((imageArray) =>
-        imageArray.map((image) => ({
-          ...image,
-          createdTime: getISOString(image.createdTime)
-        }))
-      );
-
-      return {
-        ...res,
-        attendanceDate: res.attendanceDate?.join("-"),
-        imageList: updatedImageList,
-        // FIXME RELATION_DATA 사용하지 않고 ITEM에 추가해 사용하기
-        relation: RELATION_DATA[res.relation]
-      };
-    }
+    queryFn: () => handleGetHomeInfo(dogId)
   });
 };
 
 // 견주 홈 - 강아지 리스트
-export const useGetDogs = () => {
+export const useGetDogs = (selectedId?: string) => {
   return useQuery({
     queryKey: QUERY_KEY.DOGS,
     queryFn: handleGetDogs,
-    staleTime: 60000
+    staleTime: 60000,
+    select: (data) => {
+      return data.sort((a, b) => {
+        if (a.dogId.toString() === selectedId) return -1;
+        if (b.dogId.toString() === selectedId) return 1;
+        return 0;
+      });
+    }
   });
 };
 
@@ -90,20 +76,12 @@ export const usePrefetchDogs = () => {
 };
 
 // 견주 홈 - 사진 앨범
-export const useGetMainAlbum = (req: IMainAlbum) => {
-  return useSuspenseQuery<ImageList[][], unknown, ImageListType[][]>({
+export const useGetMainAlbum = (req: { dogId: number; date?: string }) => {
+  return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_MAIN_ALBUM(req.dogId, req.date),
     queryFn: () => handleGetAlbum(req),
     gcTime: 1000 * 60 * 60,
-    staleTime: 1000 * 60 * 60,
-    select: (res) => {
-      return res.map((imageArray) =>
-        imageArray.map((image) => ({
-          ...image,
-          createdTime: getISOString(image.createdTime)
-        }))
-      );
-    }
+    staleTime: 1000 * 60 * 60
   });
 };
 

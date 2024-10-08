@@ -37,7 +37,7 @@ const WaitingCard = ({ dogName, registeredDate, enrollmentFormId }: IWaitingCard
       </S.InfoTextBox>
       <S.CancelApprovalButton onClick={() => handleCancelApproval(enrollmentFormId)}>
         <S.DateText>{registeredTime} 제출 | 승인 취소</S.DateText>
-        <ArrowRightIcon w={19} />
+        <ArrowRightIcon size={18} />
       </S.CancelApprovalButton>
       <S.BgIconBox>
         <DogWaitingIcon />

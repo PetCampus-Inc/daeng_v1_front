@@ -14,6 +14,14 @@ import { DropdownContext } from "./DropdownContext";
 
 type DropdownTriggerProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
+/**
+ * DropdownTrigger
+ * 자식 엘리먼트에 자동으로 isOpen 상태를 주입합니다.
+ * @param props
+ * @param props.children ReactNode. 유효한 React 엘리먼트인 경우, isOpen prop이 자동으로 주입됩니다.
+ * @param props.onClick 클릭 이벤트 핸들러. Dropdown의 toggle 함수와 함께 실행됩니다.
+ * @param ref 전달된 ref 객체. 없으면 내부적으로 생성된 ref가 사용됩니다.
+ */
 const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
   (props: DropdownTriggerProps, ref) => {
     const { children, onClick, ...rest } = props;
@@ -48,7 +56,7 @@ const DropdownTrigger = forwardRef<HTMLButtonElement, DropdownTriggerProps>(
         {Children.map(children, (child) => {
           return isValidElement(child)
             ? cloneElement(child as ReactElement, {
-                $isOpen: dropdownContext?.isOpen
+                isOpen: dropdownContext?.isOpen ?? false
               })
             : child;
         })}

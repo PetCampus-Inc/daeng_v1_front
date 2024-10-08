@@ -76,6 +76,7 @@ export const RootContainer = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "isFocus"
 })<{ isFocus: boolean }>`
   display: flex;
+  flex: 1;
   flex-direction: column;
   overflow: hidden;
   padding-inline: 16px;

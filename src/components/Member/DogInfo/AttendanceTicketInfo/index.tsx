@@ -1,26 +1,30 @@
-import { Flex } from "components/common";
-import AllCalendar from "components/common/Calendar/AllCalendar";
+import { Box, Flex, Text } from "components/common";
+import { MonthCalendar } from "components/common/Calendar";
+import { useGetDogInfoRecord } from "hooks/api/admin/dogs";
 
-import * as S from "./styles";
 import TicketInfo from "./TicketInfo";
 
-interface IProps {
-  dogId: number;
-}
-
-const AttendanceTicketInfo = ({ dogId }: IProps) => {
+const AttendanceTicketInfo = ({ dogId }: { dogId: number }) => {
   // FIXME useGetMemberDogEnrollmemntInfo와 useGetMemberSchoolInfo 불러오는 데이터가 달라 확인 필요
-  return (
-    <Flex direction="column" gap={42} pt={14} px={16}>
-      <section>
-        <S.DogDetailInfoText className="big">출결</S.DogDetailInfoText>
-        <AllCalendar />
-      </section>
+  const { data } = useGetDogInfoRecord(dogId);
 
-      <section>
-        <S.DogDetailInfoText className="big">이용권 정보</S.DogDetailInfoText>
+  return (
+    <Flex direction="column" gap={42} pt={24} px={16} pb={48}>
+      <Flex direction="column" gap={12}>
+        <Text typo="body1_18_B" color="gray_1">
+          출결
+        </Text>
+        <Box radius={12} overflow="hidden">
+          <MonthCalendar variant="member" minDate={data.registeredDate} tileDate={data.date} />
+        </Box>
+      </Flex>
+
+      <Flex direction="column" gap={12}>
+        <Text typo="body1_18_B" color="gray_1">
+          이용권 정보
+        </Text>
         <TicketInfo dogId={dogId} />
-      </section>
+      </Flex>
     </Flex>
   );
 };

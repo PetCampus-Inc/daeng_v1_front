@@ -29,7 +29,7 @@ const CardTitle = ({ handleClick, text }: { handleClick: () => void; text: strin
       <MoreButton
         p={0}
         onClick={handleClick}
-        rightAddon={<ArrowRightIcon w={"20"} h={"20"} colorScheme="gray_3" />}
+        rightAddon={<ArrowRightIcon size={20} colorScheme="gray_3" />}
       >
         {text}
       </MoreButton>
@@ -66,7 +66,13 @@ const InfoCard = <T extends AdminRole>({ data, role }: InfoCardProps<T>) => {
     { title: data.schoolName, icon: <SchoolIcon /> },
     { title: data.schoolNumber, icon: <PhoneIcon /> },
     {
-      title: isOwner ? (data as IOwnerInfo)?.address : (data as ITeacherInfo)?.schoolAddress,
+      title: isOwner
+        ? (data as IOwnerInfo)?.address +
+          ((data as IOwnerInfo)?.addressDetail ? " " + (data as IOwnerInfo)?.addressDetail : "")
+        : (data as ITeacherInfo)?.schoolAddress +
+          ((data as ITeacherInfo)?.schoolAddressDetail
+            ? " " + (data as ITeacherInfo)?.schoolAddressDetail
+            : ""),
       icon: <MapIcon />
     },
     {

@@ -54,4 +54,5 @@ export const Item = styled.div`
   gap: 4px;
   ${({ theme }) => theme.typo.label2_14_R};
   color: ${({ theme }) => theme.colors.gray_2};
+  white-space: nowrap;
 `;

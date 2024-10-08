@@ -1,5 +1,5 @@
 import { Box } from "components/common";
-import { padToTwoDigits } from "utils/date";
+import { getPadString } from "utils/date";
 
 import { Cell, TableContainer, TableRow, TableHeader } from "./styles";
 
@@ -32,9 +32,9 @@ export function PastTicketCard({ data }: PastTicketCardProps) {
           <TableRow>
             <Cell>{ticketInfo(ticket)}</Cell>
             <Cell>
-              {ticket.ticketStartDate && padToTwoDigits(ticket.ticketStartDate).join(".")}
+              {ticket.ticketStartDate && getPadString(ticket.ticketStartDate).join(".")}
               {ticket.ticketExpirationDate &&
-                " - " + padToTwoDigits(ticket.ticketExpirationDate).join(".")}
+                " - " + getPadString(ticket.ticketExpirationDate).join(".")}
             </Cell>
           </TableRow>
         </Box>

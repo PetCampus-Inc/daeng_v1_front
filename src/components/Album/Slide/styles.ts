@@ -23,13 +23,9 @@ export const SlideWrapper = styled.div.withConfig({
   cursor: pointer;
 `;
 
-export const Dimmer = styled.div`
+export const Dimmed = styled.div`
   width: 100%;
   height: 100%;
-
   position: absolute;
-
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
 `;
-
-export const Checkbox = styled.div``;

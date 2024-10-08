@@ -131,7 +131,7 @@ export const useTempSaveCareDog = () => {
   const tempSaveCareDog = useMutation({
     mutationFn: handleTempSaveCareDog,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_TEMP_SAVE });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_AGENDA_SAVED });
       showToast("임시 저장되었습니다", "bottom");
     },
     onError: () => {
@@ -139,7 +139,10 @@ export const useTempSaveCareDog = () => {
     }
   });
 
-  return { mutateTempSaveCareDog: tempSaveCareDog.mutate };
+  return {
+    mutateTempSaveCareDog: tempSaveCareDog.mutate,
+    isTempSavePending: tempSaveCareDog.isPending
+  };
 };
 
 // 강아지 알림장 정보 가져오기
@@ -156,7 +159,7 @@ export const useSendAgenda = () => {
   const sendAgenda = useMutation({
     mutationFn: handleSendAgenda,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_TEMP_SAVE });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_AGENDA_SAVED });
       showToast("알림장 전송이 완료되었습니다", "bottom");
     },
     onError: () => {
@@ -164,7 +167,7 @@ export const useSendAgenda = () => {
     }
   });
 
-  return { mutateSendAgenda: sendAgenda.mutate };
+  return { mutateSendAgenda: sendAgenda.mutate, isSendAgendaPending: sendAgenda.isPending };
 };
 
 // 강아지 지난 알림장 정보 가져오기

@@ -1,3 +1,4 @@
+import DefaultDogProfileImage from "assets/images/placeholder-dog.png";
 import ArrowLeftSquare from "assets/svg/arrow-left-square-icon";
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
 import CloseIcon from "assets/svg/x-circle-icon";
@@ -88,14 +89,12 @@ export function AttendanceAvatar() {
 }
 
 function AvatarItem({ dog, onRemove }: { dog: Attend; onRemove: (id: number) => void }) {
+  const profileUri = dog.dogProfileUri || DefaultDogProfileImage;
   return (
     <S.Avatar>
       <S.AvatarWrapper>
         <S.AvatarImgWrapper>
-          <S.Image
-            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt={`${dog.dogName} 이미지`}
-          />
+          <S.Image src={profileUri} alt={`${dog.dogName} 이미지`} />
         </S.AvatarImgWrapper>
         <S.Name>{dog.dogName}</S.Name>
         <S.RemoveButton onClick={() => onRemove(dog.dogId)}>

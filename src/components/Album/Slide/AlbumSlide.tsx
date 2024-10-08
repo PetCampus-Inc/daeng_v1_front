@@ -1,19 +1,19 @@
-import { DragCarousel, Flex, Text } from "components/common";
+import { Box, DragCarousel, Flex, Text } from "components/common";
 import { AlbumCheckbox } from "components/common";
 import { useOverlay } from "hooks/common/useOverlay";
 import { Img } from "styles/StyleModule";
 import { getTimeAgo } from "utils/date";
 
 import CommentBox from "./CommentBox";
-import SaveButton from "./SaveButton";
-import { Dimmer, SlideWrapper } from "./styles";
-import { useSelectedImages } from "../context/SelectedImageProvider";
-import LightBoxPopup from "../LightBoxPopup";
+import { SaveModeButton } from "./SaveModeButton";
+import { Dimmed, SlideWrapper } from "./styles";
+import { useSelectedImages } from "../hooks/SelectedImageProvider";
+import { CommentCarouselLightBoxPopup } from "../LightBox/CommentCarouselLightBoxPopup";
 
-import type { ImageListType } from "types/member/main.types";
+import type { ImageList } from "types/member/main.types";
 
 interface AlbumSlidProps {
-  images: ImageListType[];
+  images: ImageList[];
   saveMode: boolean;
   toggleSaveMode: () => void;
 }
@@ -25,7 +25,12 @@ const AlbumSlide = ({ images, saveMode, toggleSaveMode }: AlbumSlidProps) => {
 
   const openLightBoxPopup = (currentSlide: number) =>
     overlay.open(({ isOpen, close }) => (
-      <LightBoxPopup isOpen={isOpen} close={close} images={images} currentSlide={currentSlide} />
+      <CommentCarouselLightBoxPopup
+        isOpen={isOpen}
+        onClose={close}
+        images={images}
+        currentSlide={currentSlide}
+      />
     ));
 
   const handleSaveMode = () => {
@@ -40,7 +45,7 @@ const AlbumSlide = ({ images, saveMode, toggleSaveMode }: AlbumSlidProps) => {
           <Text typo="body2_16_R" color="darkBlack">
             {getTimeAgo(images[0].createdTime)}
           </Text>
-          <SaveButton isSaveMode={saveMode} handleSaveMode={handleSaveMode} />
+          <SaveModeButton isSaveMode={saveMode} onToggleMode={handleSaveMode} />
         </Flex>
         <DragCarousel gap={8}>
           {images.map((item, index) => (
@@ -58,8 +63,10 @@ const AlbumSlide = ({ images, saveMode, toggleSaveMode }: AlbumSlidProps) => {
             >
               {saveMode && (
                 <>
-                  <Dimmer />
-                  <AlbumCheckbox checked={selectedImgIds.has(item.imageId)} />
+                  <Dimmed />
+                  <Box position="absolute" top={8} right={8}>
+                    <AlbumCheckbox checked={selectedImgIds.has(item.imageId)} />
+                  </Box>
                 </>
               )}
               <Img src={item.imageUri} alt={`${item.imageId} + 번째 강아지 사진`} />

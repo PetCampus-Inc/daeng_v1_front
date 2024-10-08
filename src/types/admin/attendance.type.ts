@@ -93,8 +93,8 @@ interface Member {
  * @description 출석부 강아지 상세 - 강아지 등원기록 Dto
  */
 export interface DogInfoRecordData {
-  date: LocalDate;
-  status: AgendaStatus;
+  date: LocalDate[];
+  registeredDate: LocalDate;
 }
 
 /**
@@ -110,14 +110,6 @@ export interface DogInfoAgendaData {
   dogProfileUri: string;
   status: AgendaStatus;
   dateTime: LocalDateTime;
-}
-
-export enum Poop {
-  HARD = "HARD",
-  HEALTHY = "HEALTHY",
-  NOT_BROWN = "NOT_BROWN",
-  WATERY = "WATERY",
-  WARNING = "WARNING"
 }
 
 /**

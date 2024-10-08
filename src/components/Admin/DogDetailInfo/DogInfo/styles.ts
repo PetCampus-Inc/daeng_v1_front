@@ -23,6 +23,7 @@ export const TagsWrapper = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray_5};
   overflow-x: scroll;
   scrollbar-width: none;
+  -ms-overflow-style: none;
 `;
 export const DetailItem = styled.div`
   display: flex;

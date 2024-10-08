@@ -56,7 +56,8 @@ export { default as SignUpPage } from "./SignUpPage/SignUpFunnel";
 
 /* Home Page */
 export { default as HomePage } from "./HomePage/HomePage";
-export { default as ImageAlbumPage } from "./ImageAlbumPage/ImageAlbumPage";
+export { default as PhotoAlbumPage } from "./PhotoAlbumPage/PhotoAlbum";
+export { default as DateAlbumPage } from "./DateAlbumPage/DateAlbum";
 export { default as AgendaPage } from "./AgendaPage/AgendaPage";
 
 /* My Page */

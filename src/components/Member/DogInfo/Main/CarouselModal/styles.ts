@@ -2,6 +2,8 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 export const CarouselSlider = styled(Slider)`
+  overflow: hidden;
+  border-radius: 0.8rem;
   .slick-slide {
     height: 519px;
   }
@@ -25,7 +27,6 @@ export const CarouselSlider = styled(Slider)`
 `;
 
 export const CarouselBox = styled.div`
-  border-radius: 0.8rem;
   overflow: hidden;
   position: relative;
   width: 100%;

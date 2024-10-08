@@ -1,6 +1,6 @@
 import Badge from "components/common/Badge";
 import { BottomSheet, type BottomSheetProps } from "components/common/BottomSheet";
-import PoopBox from "components/common/PoopBox";
+import PoopStatusGroup from "components/common/PoopStatusGroup";
 import { format } from "date-fns";
 import { Suspense, useState } from "react";
 import { IPastAgenda } from "types/admin/care.types";
@@ -47,7 +47,7 @@ const PastAgendaBottomSheet = ({ isOpen, close, data }: PastAgendaBottomSheetPro
                     {title}
                     <Badge text="오늘 알림장에 붙여넣기" variant="brown" />
                   </S.TitleAndButton>
-                  {index === 2 && <PoopBox selected={data[selectedIndex]?.poop} />}
+                  {index === 2 && <PoopStatusGroup selected={data[selectedIndex]?.poop} readOnly />}
                   <S.TextSpan>{data && data[selectedIndex]?.agendaNote}</S.TextSpan>
                 </S.AgendaItem>
               );

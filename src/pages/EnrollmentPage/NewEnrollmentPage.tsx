@@ -42,8 +42,12 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
 
   const indicators = visibleSteps.map((step) => step.indicator);
 
+  // 회차권 오름차순 정렬
+  const sortedRoundTicketNumber = roundTicketNumber.sort((a, b) => a - b);
+
   const ticket = {
-    roundTicketNumber,
+    ticketType: rest.ticketType,
+    roundTicketNumber: sortedRoundTicketNumber,
     monthlyTicketNumber,
     openDays: rest.openDays
   };

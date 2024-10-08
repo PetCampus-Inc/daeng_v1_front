@@ -37,16 +37,17 @@ const MEMBER_QUERY_KEY = {
   MEMBER_AGREEMENT_INFO: (agreementId: number) => ["memberAgreementInfo", agreementId], // 유의사항 동의 정보
   MEMBER_PROFILE: ["memberProfile"], // 프로필 설정
   DOG_SHCOOL_INFO: ["memberDogSchoolInfo"], // 강아지 유치원 정보
-  HOME: (dogId: number) => ["home", dogId], // 견주 홈 메인
+  HOME: (dogId?: number) => ["home", dogId], // 견주 홈 메인
   DOGS: ["dogs"], // 견주 홈 강아지 리스트
   AGENDA: (dogId: number, date?: string) => ["agenda", dogId, date], // 견주 홈 강아지 알림장
-  MEMBER_ENROLLMENT_STATUS: ["memberEnrollmentStatus"] // 강아지 가입신청 상태 확인
+  MEMBER_ENROLLMENT_STATUS: ["memberEnrollmentStatus"], // 강아지 가입신청 상태 확인
+  ALBUM: (dogId: number, date?: string) => ["album", dogId, date] // 견주 홈 강아지 앨범
 };
 
 export const QUERY_KEY = {
   ...ADMIN_QUERY_KEY,
   ...MEMBER_QUERY_KEY,
   ENROLLMENT: (schoolId: number) => ["enrollment", schoolId], // 견주 가입신청서 조회
-  DOG_ENROLLMENT: (dogId: string, schoolId: number) => ["dogEnrollment", dogId, schoolId], // 유치원 재등록 가입신청서
+  DOG_ENROLLMENT: (dogId: number, schoolId: number) => ["dogEnrollment", dogId, schoolId], // 유치원 재등록 가입신청서
   BREED: (searchText?: string) => ["breed", searchText] // 견종 검색
 };

@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { formatSchoolNumber } from "utils/formatter";
+import { isEmpty } from "utils/is";
 
 import { BottomButton } from "../../components/common/Button";
 import { PreventLeaveModal } from "../../components/common/Modal";
@@ -22,13 +23,22 @@ const SchoolInfoEditPage = () => {
   const { schoolId } = useAdminInfo();
   const overlay = useOverlay();
   const navigate = useNavigate();
-  const { handleSubmit, register, setValue, watch, getFieldState } = useForm();
+  const {
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    getFieldState,
+    formState: { dirtyFields }
+  } = useForm();
   const { schoolInfoEditMutation } = useSchoolInfoEdit();
 
   const watchAddress = watch("schoolAddress", "");
   const schoolNameFieldState = getFieldState("newSchoolName");
   const addressFieldState = getFieldState("schoolAddress");
   const detailAddressFieldState = getFieldState("schoolAddressDetail");
+
+  const isDirty = !isEmpty(dirtyFields) || isPhoneDirty;
 
   const openModal = () => {
     if (
@@ -84,7 +94,8 @@ const SchoolInfoEditPage = () => {
       schoolId: schoolId,
       schoolName: data.newSchoolName,
       phoneNumber: data.newSchoolNumber,
-      address: data.schoolAddress
+      address: data.schoolAddress,
+      addressDetail: data.schoolAddressDetail
     };
     schoolInfoEditMutation(req);
   });
@@ -145,7 +156,7 @@ const SchoolInfoEditPage = () => {
               name="schoolAddressDetail"
               className="defaultValue"
               register={register}
-              defaultValue={data.address}
+              defaultValue={data.addressDetail}
               required
             />
           </Flex>
@@ -159,17 +170,7 @@ const SchoolInfoEditPage = () => {
             <TextInput placeholder={data.registrationNumber} disabled />
           </Flex>
         </Flex>
-        <BottomButton
-          disabled={
-            !schoolNameFieldState.isDirty &&
-            !isPhoneDirty &&
-            !addressFieldState.isTouched &&
-            !detailAddressFieldState.isDirty
-          }
-          wrapColor="white"
-          type="submit"
-          onClick={onSubmit}
-        >
+        <BottomButton disabled={!isDirty} wrapColor="white" type="submit" onClick={onSubmit}>
           수정 완료
         </BottomButton>
       </Layout>

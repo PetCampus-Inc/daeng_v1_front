@@ -31,14 +31,12 @@ const PrincipalMyPage = () => {
       ) : (
         <>
           <PageContainer pt="7" imageUrl={profileUri}>
-            {/* TODO: data.imageURL 없는 경우 기본 이미지 url로 연결 */}
             <ContentContainer>
               {data && (
                 <PrincipalProfile
                   data={data}
                   profileUri={profileUri}
-                  setIsEditing={setIsEditing}
-                  isEditing={isEditing}
+                  onEdit={() => setIsEditing(true)}
                 />
               )}
               <CardContainer>
