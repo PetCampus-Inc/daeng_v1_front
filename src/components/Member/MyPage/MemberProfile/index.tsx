@@ -1,6 +1,7 @@
 import { routes } from "constants/path";
 import { RELATION_DATA } from "constants/relation";
 
+import placeholderImg from "assets/images/placeholder-dog.png";
 import ArrowRightSquare from "assets/svg/arrow-right-square-icon";
 import { IMemberInfo } from "types/member/main.types";
 
@@ -14,7 +15,7 @@ const MemberProfile = ({ data }: MemberInfoProps) => {
   return (
     <S.ProfileWrapper>
       <S.ProfileBox>
-        <S.ProfileImage src={`${data.memberProfileUri ?? ""}`} alt="member-image" />
+        <S.ProfileImage src={`${data.memberProfileUri ?? placeholderImg}`} alt="member-image" />
       </S.ProfileBox>
       <S.ProfileDetail>
         <S.DetailItem>

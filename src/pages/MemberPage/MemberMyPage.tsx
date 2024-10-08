@@ -1,3 +1,4 @@
+import placeholderImg from "assets/images/placeholder-dog.png";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
@@ -15,7 +16,7 @@ const MemberMyPage = () => {
     <>
       <Header type="setting" text="마이페이지" transparent />
       <Layout type="main">
-        <PageContainer pt="4" imageUrl={data.memberProfileUri}>
+        <PageContainer pt="4" imageUrl={data.memberProfileUri ?? placeholderImg}>
           <ContentContainer>
             <MemberProfile data={data} />
             <CardContainer>
