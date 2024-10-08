@@ -12,6 +12,7 @@ export const PoopStatusRadioWrap = styled.label`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
   gap: 0.4rem;
 
