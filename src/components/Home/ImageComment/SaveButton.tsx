@@ -6,19 +6,18 @@ import { css } from "styled-components";
 
 import { IconButton, IconWrapper } from "./styles";
 
-import type { DownloadFileFunction, DownloadProps } from "hooks/common/useS3";
 import type { ImageList } from "types/member/main.types";
 
 interface SaveSectionProps {
   setTotalFiles: React.Dispatch<React.SetStateAction<number>>;
   currentImage: ImageList;
   allImages: ImageList[];
-  downloadFile: DownloadFileFunction<void, Error, DownloadProps>;
+  onDownload: (uri: string | string[]) => void;
 }
 
 export function SaveButton({
   setTotalFiles,
-  downloadFile,
+  onDownload,
   currentImage,
   allImages
 }: SaveSectionProps) {
@@ -32,7 +31,7 @@ export function SaveButton({
       ),
       onClick: () => {
         setTotalFiles(1);
-        downloadFile({ urls: currentImage.imageUri });
+        onDownload(currentImage.imageUri);
       }
     },
     {
@@ -44,7 +43,7 @@ export function SaveButton({
       ),
       onClick: () => {
         setTotalFiles(allImages.length);
-        downloadFile({ urls: allImages.map((image) => image.imageUri) });
+        onDownload(allImages.map((image) => image.imageUri));
       }
     }
   ];

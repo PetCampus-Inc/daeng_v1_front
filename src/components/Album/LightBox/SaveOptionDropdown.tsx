@@ -6,18 +6,17 @@ import { IconButton, IconWrapper } from "components/Home/ImageComment/styles";
 import { css } from "styled-components";
 
 import type { ImageListType } from "./CommentCarouselLightBox";
-import type { DownloadFileFunction, DownloadProps } from "hooks/common/useS3";
 
 interface SaveSectionProps {
   setTotalFiles: React.Dispatch<React.SetStateAction<number>>;
   currentImage: ImageListType;
   allImages: ImageListType[];
-  downloadFile: DownloadFileFunction<void, Error, DownloadProps>;
+  onDownload: (uri: string | string[]) => void;
 }
 
 export function SaveButton({
   setTotalFiles,
-  downloadFile,
+  onDownload,
   currentImage,
   allImages
 }: SaveSectionProps) {
@@ -31,7 +30,7 @@ export function SaveButton({
       ),
       onClick: () => {
         setTotalFiles(1);
-        downloadFile({ urls: currentImage.imageUri });
+        onDownload(currentImage.imageUri);
       }
     },
     {
@@ -43,7 +42,7 @@ export function SaveButton({
       ),
       onClick: () => {
         setTotalFiles(allImages.length);
-        downloadFile({ urls: allImages.map((image) => image.imageUri) });
+        onDownload(allImages.map((image) => image.imageUri));
       }
     }
   ];

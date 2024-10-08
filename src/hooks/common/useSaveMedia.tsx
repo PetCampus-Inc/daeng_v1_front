@@ -1,5 +1,6 @@
 import useNativeAction from "hooks/native/useNativeAction";
 import { useCallback, useState } from "react";
+import showToast from "utils/showToast";
 
 interface SaveMediaOptions {
   onSuccess?: () => void;
@@ -41,6 +42,7 @@ export const useSaveMedia = () => {
         }
 
         setProgress(100);
+        showToast("사진이 저장되었습니다", "bottom");
         options?.onSuccess?.();
       } catch (error) {
         const message = error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.";
