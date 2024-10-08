@@ -58,6 +58,7 @@ export interface ISchoolInfoEdit {
   schoolName: string;
   phoneNumber: string;
   address: string;
+  addressDetail: string;
 }
 
 export interface INewAlarm {
