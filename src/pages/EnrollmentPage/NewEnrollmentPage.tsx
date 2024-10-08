@@ -46,6 +46,7 @@ const NewEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   const sortedRoundTicketNumber = roundTicketNumber.sort((a, b) => a - b);
 
   const ticket = {
+    ticketType: rest.ticketType,
     roundTicketNumber: sortedRoundTicketNumber,
     monthlyTicketNumber,
     openDays: rest.openDays

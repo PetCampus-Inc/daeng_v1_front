@@ -9,12 +9,11 @@ import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 interface PrincipalInfoProps {
   data: IOwnerInfo;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  isEditing: boolean;
   profileUri: string;
+  onEdit?: () => void;
 }
 
-const PrincipalProfile = ({ data, setIsEditing, isEditing, profileUri }: PrincipalInfoProps) => {
+const PrincipalProfile = ({ data, profileUri, onEdit }: PrincipalInfoProps) => {
   const { adminName, phoneNumber } = useAdminInfo();
 
   return (
@@ -27,10 +26,8 @@ const PrincipalProfile = ({ data, setIsEditing, isEditing, profileUri }: Princip
 
         <S.ProfileDetail>
           <S.DetailItem>
-            <S.PrimaryColorButton onClick={() => setIsEditing(!isEditing)}>
-              프로필 수정
-            </S.PrimaryColorButton>
-            <Flex justify="center" align="center">
+            <S.PrimaryColorButton onClick={onEdit}>프로필 수정</S.PrimaryColorButton>
+            <Flex justify="center" align="center" onClick={onEdit}>
               <S.Text className="name">{adminName} 원장님</S.Text>
               <ArrowRightIcon size={24} colorScheme="darkBlack" />
             </Flex>

@@ -12,6 +12,7 @@ import { Card, Stack, Label } from "./styles";
 
 interface TicketInfoProps {
   ticket?: {
+    ticketType: string[];
     roundTicketNumber: number[];
     monthlyTicketNumber: number[];
     openDays: string[];
@@ -26,6 +27,9 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
   const roundTicketText = ticket?.roundTicketNumber?.map((number) => `${number}회`) || [];
   const monthlyTicketText = ticket?.monthlyTicketNumber?.map((number) => `${number}주`) || [];
 
+  const ticketRadioText =
+    ticket?.ticketType.map((type) => (type === "ROUND" ? "회차권" : "정기권")) || [];
+
   return (
     <>
       <Card>
@@ -37,7 +41,7 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
         <Caption>회차권과 정기권 중 원하시는 이용권 종류를 선택해 주세요</Caption>
         <SingleRadio
           name={FIELD.TICKET_TYPE}
-          radiosText={["정기권", "회차권"]}
+          radiosText={ticketRadioText}
           isRequired={requiredItems?.get(FIELD_KEYS.TICKET_TYPE)}
         />
       </Card>
