@@ -72,7 +72,10 @@ const SchoolInfoCard = ({ isPrevSchool }: Props) => {
               <Map isGray={isPrevSchool} />
             </S.IconWrapper>
             <S.ListTitle isPrevSchool={isPrevSchool}>
-              {data && data.schoolAddress ? data.schoolAddress : ""}
+              {data && data.schoolAddress
+                ? data.schoolAddress +
+                  (data.schoolAddressDetail ? " " + data.schoolAddressDetail : "")
+                : ""}
             </S.ListTitle>
           </S.InfoList>
           <S.InfoList>

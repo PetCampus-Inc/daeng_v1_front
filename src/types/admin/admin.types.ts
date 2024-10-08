@@ -30,6 +30,7 @@ export interface IOwnerSignUpInfo {
   schoolName: string;
   schoolPhoneNumber: string;
   schoolAddress: string;
+  schoolAddressDetail: string;
   registrationNumber: string;
 }
 
@@ -58,6 +59,7 @@ export interface ISchoolInfoEdit {
   schoolName: string;
   phoneNumber: string;
   address: string;
+  addressDetail: string;
 }
 
 export interface INewAlarm {

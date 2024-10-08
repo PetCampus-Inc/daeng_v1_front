@@ -4,15 +4,18 @@ import { Flex } from "components/common";
 import * as S from "./styles";
 
 import type { IOwnerInfo } from "types/admin/mypage.types";
+import { useEffect } from "react";
+import { useAdminInfo } from "hooks/common/useAdminInfo";
 
 interface PrincipalInfoProps {
   data: IOwnerInfo;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  isEditing: boolean;
   profileUri: string;
+  onEdit?: () => void;
 }
 
-const PrincipalProfile = ({ data, setIsEditing, isEditing, profileUri }: PrincipalInfoProps) => {
+const PrincipalProfile = ({ data, profileUri, onEdit }: PrincipalInfoProps) => {
+  const { adminName, phoneNumber } = useAdminInfo();
+
   return (
     <>
       <S.ProfileWrapper>
@@ -23,14 +26,12 @@ const PrincipalProfile = ({ data, setIsEditing, isEditing, profileUri }: Princip
 
         <S.ProfileDetail>
           <S.DetailItem>
-            <S.PrimaryColorButton onClick={() => setIsEditing(!isEditing)}>
-              프로필 수정
-            </S.PrimaryColorButton>
-            <Flex justify="center" align="center">
-              <S.Text className="name">{data.adminName} 원장님</S.Text>
+            <S.PrimaryColorButton onClick={onEdit}>프로필 수정</S.PrimaryColorButton>
+            <Flex justify="center" align="center" onClick={onEdit}>
+              <S.Text className="name">{adminName} 원장님</S.Text>
               <ArrowRightIcon size={24} colorScheme="darkBlack" />
             </Flex>
-            <S.Text className="number">{data.phoneNumber}</S.Text>
+            <S.Text className="number">{phoneNumber}</S.Text>
             <S.Text className="id">{data.id}</S.Text>
           </S.DetailItem>
         </S.ProfileDetail>

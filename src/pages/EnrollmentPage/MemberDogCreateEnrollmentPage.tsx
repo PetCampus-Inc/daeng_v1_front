@@ -51,6 +51,7 @@ const MemberDogCreateEnrollmentPage = ({ schoolId }: EnrollmentProps) => {
   const indicators = visibleSteps.map((step) => step.indicator);
 
   const ticket = {
+    ticketType: rest.ticketType,
     roundTicketNumber,
     monthlyTicketNumber,
     openDays: rest.openDays

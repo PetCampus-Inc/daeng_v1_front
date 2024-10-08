@@ -66,7 +66,13 @@ const InfoCard = <T extends AdminRole>({ data, role }: InfoCardProps<T>) => {
     { title: data.schoolName, icon: <SchoolIcon /> },
     { title: data.schoolNumber, icon: <PhoneIcon /> },
     {
-      title: isOwner ? (data as IOwnerInfo)?.address : (data as ITeacherInfo)?.schoolAddress,
+      title: isOwner
+        ? (data as IOwnerInfo)?.address +
+          ((data as IOwnerInfo)?.addressDetail ? " " + (data as IOwnerInfo)?.addressDetail : "")
+        : (data as ITeacherInfo)?.schoolAddress +
+          ((data as ITeacherInfo)?.schoolAddressDetail
+            ? " " + (data as ITeacherInfo)?.schoolAddressDetail
+            : ""),
       icon: <MapIcon />
     },
     {

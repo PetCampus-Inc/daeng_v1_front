@@ -34,6 +34,7 @@ const EnrollSchoolPage = ({ onNextStep }: IStepProps) => {
       schoolName: data.schoolName,
       schoolPhoneNumber: data.schoolPhoneNumber,
       schoolAddress: data.schoolAddress,
+      schoolAddressDetail: data.schoolAddressDetail,
       registrationNumber: data.registrationNumber
     };
 

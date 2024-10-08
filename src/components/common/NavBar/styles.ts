@@ -29,6 +29,18 @@ export const NavItem = styled.li`
   justify-content: center;
 `;
 
+export const NavButton = styled.button.withConfig({
+  shouldForwardProp: (prop) => !["padding"].includes(prop)
+})<{ pb: number }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 100%;
+  padding: ${(props) => `8px 0 ${props.pb + "px"}`};
+`;
+
 export const NavLink = styled(Link).withConfig({
   displayName: "Nav",
   shouldForwardProp: (prop) => !["padding"].includes(prop)
