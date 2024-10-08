@@ -27,7 +27,8 @@ export const handleSchoolInfoEdit = async (req: ISchoolInfoEdit) => {
       schoolId: req.schoolId,
       schoolName: req.schoolName,
       phoneNumber: req.phoneNumber,
-      address: req.address
+      address: req.address,
+      addressDetail: req.addressDetail
     }
   });
 };

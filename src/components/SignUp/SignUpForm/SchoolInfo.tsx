@@ -145,6 +145,12 @@ const SchoolInfo = () => {
           readOnly
           required
         />
+        <TextInput
+          name="schoolAddressDetail"
+          register={register}
+          placeholder="상세주소를 입력해 주세요"
+          autoFocus
+        />
       </Flex>
 
       <Flex direction="column" gap={8}>

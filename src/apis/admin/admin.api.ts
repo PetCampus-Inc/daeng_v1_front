@@ -62,6 +62,7 @@ export const postOwnerSignUp = async (req: IOwnerSignUpInfo) => {
       schoolName: req.schoolName,
       schoolPhoneNumber: req.schoolPhoneNumber,
       schoolAddress: req.schoolAddress,
+      schoolAddressDetail: req.schoolAddressDetail,
       registrationNumber: req.registrationNumber
     }
   });
