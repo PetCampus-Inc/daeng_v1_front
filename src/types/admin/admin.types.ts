@@ -30,6 +30,7 @@ export interface IOwnerSignUpInfo {
   schoolName: string;
   schoolPhoneNumber: string;
   schoolAddress: string;
+  schoolAddressDetail: string;
   registrationNumber: string;
 }
 
