@@ -32,7 +32,10 @@ const RoleBottomSheet = ({ title, close, isOpen, actionFn, register }: RoleBotto
               }}
             >
               <S.RadioInput
-                {...register(FIELD.RELATION, { required: true })}
+                {...register(FIELD.RELATION, {
+                  required: true,
+                  validate: (value) => value !== "호칭선택"
+                })}
                 type="radio"
                 id={item.type}
                 value={item.type}
