@@ -10,7 +10,11 @@ import { type MemberDogInfoReq } from "types/member/main.types";
 import { getKeyForLabel } from "utils/formatter";
 
 const SaveButton = ({ dogId }: { dogId: number }) => {
-  const { getValues, handleSubmit } = useFormContext();
+  const {
+    getValues,
+    handleSubmit,
+    formState: { isDirty, isValid }
+  } = useFormContext();
 
   const [shouldSubmit, setShouldSubmit] = useState(false);
   const { s3ProfileData, uploadFiles } = useUploadProfile();
@@ -76,7 +80,11 @@ const SaveButton = ({ dogId }: { dogId: number }) => {
   }, [s3ProfileData, shouldSubmit]);
 
   return (
-    <BottomButton onClick={handleSubmit(handleSubmitData)} position="relative">
+    <BottomButton
+      onClick={handleSubmit(handleSubmitData)}
+      disabled={!isDirty || !isValid}
+      position="relative"
+    >
       수정 완료
     </BottomButton>
   );
