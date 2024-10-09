@@ -1,6 +1,6 @@
 const ADMIN_QUERY_KEY = {
-  ADMIN_ENROLLMENT: (formId: string) => ["enrollment", formId], // 원장 가입신청서 조회
-  MEMBER_ENROLLMENT: (formId: string) => ["enrollment", formId], // 견주가 쓴 가입신청서 조회
+  ADMIN_ENROLLMENT: (formId: number) => ["enrollment", formId], // 원장 가입신청서 조회
+  MEMBER_ENROLLMENT: (formId: number) => ["enrollment", formId], // 견주가 쓴 가입신청서 조회
   NEW_ENROLLMENT_LIST: ["newEnrollment"], // 웑장 새로운 가입신청서 리스트 조회
   MEMBER_WAITING_LIST: ["WaitingMemberList"], // 가입신청 대기 중인 견주 리스트
   TEACHER_LIST: ["teacherList"], // 선생님 리스트 조회
