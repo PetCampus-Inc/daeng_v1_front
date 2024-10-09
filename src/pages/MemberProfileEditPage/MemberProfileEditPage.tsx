@@ -13,7 +13,7 @@ const MemberProfileEditPage = () => {
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...rest, nickName: dogName, dogName: dogName }
+    defaultValues: { ...rest, nickName: dogName, dogName: dogName, relation: "호칭선택" }
   });
 
   return (
