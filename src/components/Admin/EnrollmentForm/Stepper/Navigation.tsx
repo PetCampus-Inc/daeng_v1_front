@@ -1,18 +1,16 @@
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay/useOverlay";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, useFormContext } from "react-hook-form";
 import { FormButton, FormButtonWrapper, FormPrevButton } from "styles/StyleModule";
 
 import SubmitButton from "./SubmitButton";
-
-import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
 interface NavigationProps {
   currentStep: number;
   stepsLength: number;
   nextStep: () => void;
   prevStep: () => void;
-  onNextStep?: (formInfo: AdminEnrollmentInfoType) => void;
+  onNextStep?: (formInfo: FieldValues) => void;
 }
 
 const Navigation = ({
