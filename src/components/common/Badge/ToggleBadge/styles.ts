@@ -1,19 +1,16 @@
 import styled from "styled-components";
 
-export const ToggleBox = styled.label`
+export const ToggleBox = styled.div`
   min-width: 50px;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
-
   cursor: pointer;
   user-select: none;
   outline: none;
-
   letter-spacing: 0;
 `;
 
@@ -31,45 +28,39 @@ export const HiddenCheckbox = styled.input`
   border-radius: 50%;
 `;
 
-const Item = styled.span<{
-  readOnly: boolean;
-}>`
+export const Item = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== "isChecked"
+})<{ isChecked?: boolean }>`
   align-self: center;
   z-index: 1;
   pointer-events: none;
-
   padding: 1px 12px;
-
   ${({ theme }) => theme.typo.caption1_12_R};
-  color: ${({ theme, readOnly }) => (readOnly ? theme.colors.gray_4 : theme.colors.br_4)};
-  background-color: ${({ theme, readOnly }) => readOnly && theme.colors.gray_5};
-  border: 1px solid ${({ theme, readOnly }) => (readOnly ? theme.colors.gray_4 : theme.colors.br_4)};
+  border: 1px solid ${({ theme }) => theme.colors.br_4};
 
-  &.active {
-    color: ${({ theme }) => theme.colors.primaryColor};
-    background-color: ${({ theme }) => theme.colors.br_4};
-    border: 1px solid ${({ theme }) => theme.colors.br_4};
-  }
+  color: ${({ theme, isChecked }) => (isChecked ? theme.colors.primaryColor : theme.colors.br_4)};
+  background-color: ${({ theme, isChecked }) =>
+    isChecked ? theme.colors.br_4 : theme.colors.transparent};
 
   transition:
-    color,
+    color 0.2s ease-out,
     background-color 0.2s ease-out;
 `;
 
 export const LeftItem = styled(Item)`
-  -webkit-border-top-left-radius: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -moz-border-radius-topleft: 8px;
-  -moz-border-radius-bottomleft: 8px;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
+
+  /* readOnly 스타일을 LeftItem에만 적용 */
+  input[readonly] ~ & {
+    color: ${({ theme }) => theme.colors.gray_4};
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    border-color: ${({ theme }) => theme.colors.gray_4};
+    cursor: not-allowed;
+  }
 `;
 
 export const RightItem = styled(Item)`
-  -webkit-border-top-right-radius: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -moz-border-radius-topright: 8px;
-  -moz-border-radius-bottomright: 8px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 `;
