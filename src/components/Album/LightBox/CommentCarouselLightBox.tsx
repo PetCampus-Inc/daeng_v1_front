@@ -1,4 +1,5 @@
 import CloseIcon from "assets/svg/x-circle-icon";
+import { VideoPlayer } from "components/common";
 import { Arrows } from "components/common/LightBox";
 import { ProgressScreen } from "components/Home/ImageComment/ProgressScreen";
 import { motion } from "framer-motion";
@@ -45,6 +46,7 @@ export const CommentCarouselLightBox = ({
   const isPrevDisabled = currentIndex === 0;
   const isNextDisabled = currentIndex === images.length - 1;
   const currentImage = images[currentIndex];
+  const isVideo = currentImage.imageUri.endsWith("mp4");
 
   const settings = {
     initialSlide: currentSlide,
@@ -86,7 +88,11 @@ export const CommentCarouselLightBox = ({
           <Slider {...settings}>
             {images.map((item, index) => (
               <SlideWrapper key={`slide-${item.imageId}-${index}`}>
-                <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
+                {isVideo ? (
+                  <VideoPlayer src={item.imageUri} />
+                ) : (
+                  <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
+                )}
               </SlideWrapper>
             ))}
           </Slider>

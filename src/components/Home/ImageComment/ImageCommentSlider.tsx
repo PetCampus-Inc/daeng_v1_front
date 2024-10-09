@@ -1,9 +1,10 @@
+import { Image } from "components/common/Image";
 import React from "react";
 import Slider from "react-slick";
 
 import { CommentBox } from "./CommentBox";
 import { SliderDots } from "./SliderDots";
-import { SlideWrapper, Image, SliderContainer, SlideIndex } from "./styles";
+import { SlideWrapper, SliderContainer, SlideIndex } from "./styles";
 
 import type { ImageList } from "types/member/main.types";
 

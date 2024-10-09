@@ -1,7 +1,7 @@
 import { Box, DragCarousel, Flex, Text } from "components/common";
 import { AlbumCheckbox } from "components/common";
+import { Image } from "components/common/Image";
 import { useOverlay } from "hooks/common/useOverlay";
-import { Img } from "styles/StyleModule";
 import { getTimeAgo } from "utils/date";
 
 import CommentBox from "./CommentBox";
@@ -69,7 +69,7 @@ const AlbumSlide = ({ images, saveMode, toggleSaveMode }: AlbumSlidProps) => {
                   </Box>
                 </>
               )}
-              <Img src={item.imageUri} alt={`${item.imageId} + 번째 강아지 사진`} />
+              <Image src={item.imageUri} alt={`${item.imageId} + 번째 강아지 사진`} />
             </SlideWrapper>
           ))}
         </DragCarousel>
