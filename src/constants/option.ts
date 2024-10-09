@@ -1,5 +1,3 @@
-export const INIT_COUNTER = 2;
-
 export const GALLERY_VIEW = {
   PHOTO: "photo",
   ALBUM: "album"

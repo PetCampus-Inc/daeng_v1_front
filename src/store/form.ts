@@ -1,5 +1,3 @@
-import { INIT_COUNTER } from "constants/option";
-
 import { atom } from "recoil";
 
 export const currentStepState = atom({
@@ -19,5 +17,5 @@ export const imagePreviewAtom = atom<ImageFile[]>({
 
 export const ticketCounterState = atom<number>({
   key: "ticketCounter",
-  default: INIT_COUNTER
+  default: 2
 });
