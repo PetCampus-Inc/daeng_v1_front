@@ -1,5 +1,6 @@
 import { ACCEPT_FILE_TYPE } from "constants/s3File";
 
+import placeholderImg from "assets/images/placeholder-dog.png";
 import PencilBrownNormalIcon from "assets/svg/pencil-brown-normal-icon";
 import { IFile } from "components/Admin/AttendCare/AttendCareGallery/upload";
 import { Flex } from "components/common/Flex";
@@ -32,7 +33,7 @@ const ProfileEdit = ({
         <S.ProfileLabel htmlFor={registerText} onClick={handleClick}>
           <S.UploadProfileBox br="40" aria-label="uploadProfileButton">
             <S.UploadImage
-              src={profile[0] ? profile[0].thumbnail : profileUri}
+              src={profile[0] ? profile[0].thumbnail : (profileUri ?? placeholderImg)}
               alt={`${type}-profile`}
             />
           </S.UploadProfileBox>

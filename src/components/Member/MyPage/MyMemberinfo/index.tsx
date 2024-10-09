@@ -1,6 +1,7 @@
 import { GENDER_DATA } from "constants/gender";
 import { RELATION_DATA } from "constants/relation";
 
+import placeholderImg from "assets/images/placeholder-dog.png";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import ListNormalIcon from "assets/svg/list-normal-icon";
 import MapPinFootNormalIcon from "assets/svg/map-pin-foot-normal-icon";
@@ -22,7 +23,7 @@ const MyInfo = () => {
       </S.TitleBox>
       <S.UserProfile>
         <S.ImgageBox>
-          <S.Image src={data.memberProfileUri} alt="member-profile" />
+          <S.Image src={data.memberProfileUri ?? placeholderImg} alt="member-profile" />
         </S.ImgageBox>
         <S.UserName>
           {data.nickName}의 {RELATION_DATA[data.relation]}
