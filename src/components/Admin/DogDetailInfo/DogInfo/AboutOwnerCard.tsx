@@ -3,8 +3,9 @@ import BasicPhoneIcon from "assets/svg/phone-basic";
 import PhoneIcon from "assets/svg/phone-icon";
 import { BottomContainer, UpperContainer } from "components/Admin/DogDetailInfo/DogInfo/styles";
 import { Box, Flex, Text } from "components/common";
+import CallBottomSheet from "components/common/BottomSheet/CallBottomSheet";
 import { XSmallButton } from "components/common/Button";
-import useNativeAction from "hooks/native/useNativeAction";
+import { useOverlay } from "hooks/common/useOverlay";
 
 import type { DogInfoDetailData } from "types/admin/attendance.type";
 
@@ -15,7 +16,13 @@ interface AboutOwnerProps {
 // TODO: 전화 걸기 기능 추가
 // TODO: 예방 접종 파일 열람 페이지 추가
 export function AboutOwnerCard({ data }: AboutOwnerProps) {
-  const { call } = useNativeAction();
+  const overlay = useOverlay();
+
+  const handleCallClick = (phoneNumber: string) => {
+    overlay.open((options) => (
+      <CallBottomSheet dogName={data.memberName} phoneNumber={phoneNumber} {...options} />
+    ));
+  };
 
   return (
     <Flex direction={"column"} gap={12}>
@@ -37,7 +44,7 @@ export function AboutOwnerCard({ data }: AboutOwnerProps) {
             <XSmallButton
               typo="caption1_12_B"
               colorScheme="yellow_3"
-              onClick={() => call(data.phoneNumber)}
+              onClick={() => handleCallClick(data.phoneNumber)}
               leftAddon={<PhoneIcon color={"transparent"} />}
             >
               전화 걸기
@@ -52,7 +59,7 @@ export function AboutOwnerCard({ data }: AboutOwnerProps) {
               <XSmallButton
                 typo="caption1_12_B"
                 colorScheme="yellow_3"
-                onClick={() => window.open(`tel:${data.phoneNumber}`)}
+                onClick={() => handleCallClick(data.emergencyNumber ?? "")}
                 leftAddon={<PhoneIcon color={"transparent"} />}
               >
                 전화 걸기
