@@ -53,6 +53,7 @@ export const usePostMemberAgreement = (agreementId: number) => {
     mutationFn: (dogId: number) => handlePostMemberAgreement(dogId, agreementId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_AGREEMENT_INFO(agreementId) });
+      queryClient.invalidateQueries({ queryKey: ["getPrecautions"] });
     }
   });
   return memberAgreementMutation.mutate;
