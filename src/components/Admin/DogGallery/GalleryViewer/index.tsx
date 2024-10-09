@@ -1,7 +1,8 @@
 // GalleryViewer.tsx
 import { Text } from "components/common";
-import React from "react";
 
+import MediaDisplay from "./MediaDisplay";
+import MediaThumbnailGallery from "./MediaThumbnailGallery";
 import * as S from "./styles";
 
 interface MediaItem {
@@ -38,46 +39,3 @@ const GalleryViewer = () => {
 };
 
 export default GalleryViewer;
-
-// MediaDisplay 컴포넌트
-interface MediaDisplayProps {
-  src: string;
-  isVideo: boolean;
-}
-
-const MediaDisplay: React.FC<MediaDisplayProps> = ({ src, isVideo }) => (
-  <S.DisplayContainer>
-    {isVideo ? <video src={src} controls /> : <S.DisplayMedia src={src} alt="Main Display" />}
-  </S.DisplayContainer>
-);
-
-// MediaThumbnailGallery 컴포넌트
-interface MediaThumbnailGalleryProps {
-  items: MediaItem[];
-  selectedIndex: number;
-}
-
-const MediaThumbnailGallery: React.FC<MediaThumbnailGalleryProps> = ({ items, selectedIndex }) => (
-  <S.ThumbnailContainer>
-    <S.ThumbnailItemContainer>
-      {items.map((item, index) => (
-        <S.Thumbnail key={index} src={item.src} isSelected={index === selectedIndex} />
-      ))}
-    </S.ThumbnailItemContainer>
-    <MediaIndicator totalItems={5} currentIndex={3} />
-  </S.ThumbnailContainer>
-);
-
-// MediaIndicator 컴포넌트
-interface MediaIndicatorProps {
-  totalItems: number;
-  currentIndex: number;
-}
-
-const MediaIndicator: React.FC<MediaIndicatorProps> = ({ totalItems, currentIndex }) => (
-  <S.IndicatorContainer>
-    <Text typo="label1_16_B">
-      {totalItems}장 중 {currentIndex + 1}번
-    </Text>
-  </S.IndicatorContainer>
-);
