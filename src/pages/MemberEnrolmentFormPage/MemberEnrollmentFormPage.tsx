@@ -1,10 +1,12 @@
 import { MEMBER_ENROLL_STEP } from "constants/step";
 
-import DogInfo from "components/Admin/EnrollmentForm/MemberReadForm/DogInfo";
-import MemberInfo from "components/Admin/EnrollmentForm/MemberReadForm/MemberInfo";
-import PickDropInfo from "components/Admin/EnrollmentForm/MemberReadForm/PickDropInfo";
-import PolicyInfo from "components/Admin/EnrollmentForm/MemberReadForm/PolicyInfo";
-import TicketInfo from "components/Admin/EnrollmentForm/MemberReadForm/TicketInfo";
+import {
+  DogInfo,
+  MemberInfo,
+  PickDropInfo,
+  PolicyInfo,
+  TicketInfo
+} from "components/Admin/EnrollmentForm/DetailForm";
 import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
 import {
   Container,
@@ -21,15 +23,14 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
 
-const MemberEnrollmentFormDetailPage = () => {
-  const { formId } = useParams();
+export default function MemberEnrollmentFormPage() {
+  const { formId } = useParams<{ formId: string }>();
+  const { data } = useGetMemberEnrollment(Number(formId));
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const memberName = queryParams.get("member_name");
 
-  if (!formId) throw new Error("잘못된 formId 입니다");
-
-  const { data } = useGetMemberEnrollment(formId);
   const { requiredItemList, agreements, ...rest } = data;
 
   const methods = useForm({
@@ -88,6 +89,4 @@ const MemberEnrollmentFormDetailPage = () => {
       </Layout>
     </>
   );
-};
-
-export default MemberEnrollmentFormDetailPage;
+}
