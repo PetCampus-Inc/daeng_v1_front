@@ -216,7 +216,8 @@ const member = {
     },
     /** 유치원 가입신청서 */
     enrollment: {
-      dynamic: (dogId?: Parameter) => `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`
+      dynamic: (dogId?: Parameter, enrollmentFormId?: Parameter) =>
+        `/dog-info/${dogId ?? ":dogId"}/enrollment/${enrollmentFormId ?? ":enrollmentFormId"}/detail`
     }
   },
   /** 온보딩 후 초기 프로필 설정 */

@@ -69,7 +69,11 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
       </S.DogInfoBox>
 
       <S.GotoEnrollButton
-        onClick={() => navigate(routes.member.dogInfo.enrollment.dynamic(String(dogId)))}
+        onClick={() =>
+          navigate(
+            routes.member.dogInfo.enrollment.dynamic(String(dogId), String(data.enrollmentFormId))
+          )
+        }
       >
         <span>{data.dogName}의 가입신청서</span>
         <ArrowRightIcon />
