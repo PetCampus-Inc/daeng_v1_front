@@ -13,3 +13,9 @@ export const ExclamationMark = styled.div`
   background-color: ${({ theme }) => theme.colors.gray_5};
   z-index: -1;
 `;
+
+export const CheckboxWrapper = styled.div`
+  & > div > label > span:first-of-type {
+    flex-shrink: 0;
+  }
+`;

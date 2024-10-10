@@ -64,34 +64,36 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   };
 
   const renderCheckboxItem = (key: keyof ContentCheck, text: string, marginTop: number) => (
-    <Box
-      width="100%"
-      border={1}
-      borderRadius={8}
-      borderColor={contents[key] ? "transparent" : "gray_4"}
-      backgroundColor={contents[key] ? "br_5" : "white"}
-      padding={12}
-      marginTop={marginTop}
-    >
-      <Checkbox
-        onChange={() => checkIndividual(key)}
-        isChecked={contents[key]}
-        variant="default"
-        label={
-          <Text color="gray_1">
-            {text.split(/(<.*?>)/g).map((segment, index) =>
-              /<.*?>/.test(segment) ? (
-                <Text key={index} color="primaryColor">
-                  {segment.replace(/<|>/g, "")}
-                </Text>
-              ) : (
-                segment
-              )
-            )}
-          </Text>
-        }
-      />
-    </Box>
+    <S.CheckboxWrapper>
+      <Box
+        width="100%"
+        border={1}
+        borderRadius={8}
+        borderColor={contents[key] ? "transparent" : "gray_4"}
+        backgroundColor={contents[key] ? "br_5" : "white"}
+        padding={12}
+        marginTop={marginTop}
+      >
+        <Checkbox
+          onChange={() => checkIndividual(key)}
+          isChecked={contents[key]}
+          variant="default"
+          label={
+            <Text color="gray_1">
+              {text.split(/(<.*?>)/g).map((segment, index) =>
+                /<.*?>/.test(segment) ? (
+                  <Text key={index} color="primaryColor">
+                    {segment.replace(/<|>/g, "")}
+                  </Text>
+                ) : (
+                  segment
+                )
+              )}
+            </Text>
+          }
+        />
+      </Box>
+    </S.CheckboxWrapper>
   );
 
   return (
@@ -117,26 +119,29 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
           15
         )}
         {renderCheckboxItem(3, "계정 삭제 후 <7일>간 다시 가입할 수 없어요", 15)}
-        <Box
-          width="100%"
-          border={1}
-          borderRadius={8}
-          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_4" : "white"}`}
-          padding={12}
-          marginTop={60}
-        >
-          <Checkbox
-            onChange={checkAll}
-            isChecked={isAllChecked}
-            variant="default"
-            label={
-              <Text color={`${isAllChecked ? "primaryColor" : "gray_1"}`}>
-                위 안내사항에 모두 동의해요
-              </Text>
-            }
-          />
-        </Box>
+        <S.CheckboxWrapper>
+          <Box
+            width="100%"
+            border={1}
+            borderRadius={8}
+            borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
+            backgroundColor={`${isAllChecked ? "br_4" : "white"}`}
+            padding={12}
+            marginTop={60}
+          >
+            <Checkbox
+              onChange={checkAll}
+              isChecked={isAllChecked}
+              variant="default"
+              label={
+                <Text color={`${isAllChecked ? "primaryColor" : "gray_1"}`}>
+                  위 안내사항에 모두 동의해요
+                </Text>
+              }
+            />
+          </Box>
+        </S.CheckboxWrapper>
+
         <BottomButton onClick={onSubmit} disabled={!isAllChecked}>
           탈퇴하기
         </BottomButton>
