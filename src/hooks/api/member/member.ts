@@ -115,11 +115,16 @@ export const useGetMemberProfileInfo = () => {
 
 // 마이페이지 - 견주 프로필 수정
 export const usePostMemberProfileInfo = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (req: IMemberProfilePostInfo) => handleMemberInfoResult(req),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_INFO });
+      navigate(routes.member.mypage.profile.root);
+      setTimeout(() => {
+        showToast("수정이 완료되었습니다.", "bottom");
+      }, 100);
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");

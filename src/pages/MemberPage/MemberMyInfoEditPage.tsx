@@ -6,7 +6,7 @@ import MyInfoEdit from "components/Member/MyPage/MyMemberInfoEdit/MyInfoEdit";
 import MyProfileEdit from "components/Member/MyPage/MyMemberInfoEdit/MyProfileEdit";
 import { ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberProfileInfo } from "hooks/api/member/member";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
 
 const MemberMyInfoEditPage = () => {
@@ -18,7 +18,8 @@ const MemberMyInfoEditPage = () => {
     defaultValues: { ...memberData, profileUri: memberProfileUri }
   });
 
-  const blocker = useBlocker(() => methods.formState.isDirty);
+  const { isSubmitSuccessful } = useFormState({ control: methods.control });
+  const blocker = useBlocker(() => !isSubmitSuccessful && methods.formState.isDirty);
 
   return (
     <>
