@@ -46,7 +46,7 @@ const MemberDogInfoEditPage = () => {
           action={() => blocker.proceed()}
         />
       ) : null}
-      <Header type="text" text={`${data.dogName}의 가입정보 수정1`} />
+      <Header type="text" text={`${data.dogName}의 가입정보 수정`} />
       <Layout pt={44} bgColor="white">
         <FormProvider {...methods}>
           <DogDetailInfoEdit />
