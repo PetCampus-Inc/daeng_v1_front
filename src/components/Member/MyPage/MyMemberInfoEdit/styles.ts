@@ -1,17 +1,12 @@
 import { styled } from "styled-components";
-interface MyInfoEditProps {
-  isShowRoles?: boolean;
-}
 
-export const MyProfileWrapper = styled.section.withConfig({
-  shouldForwardProp: (prop) => prop !== "isShowRoles"
-})<MyInfoEditProps>`
+export const MyProfileWrapper = styled.section`
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(112px, auto));
   gap: 12px 4px;
   justify-content: center;
-  margin-bottom: ${(props) => (props.isShowRoles ? "21px" : "82px")};
+  margin-bottom: 82px;
 `;
 
 export const ProfileEditWrapper = styled.section`
