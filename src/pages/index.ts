@@ -71,6 +71,7 @@ export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEdit
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
 export { default as MemberAddDogProfileEditPage } from "./MemberPage/MemberAddDogProfileEditPage";
 export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFunnel";
+export { default as MemberSettingPage } from "./MemberPage/MemberSettingPage";
 
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";
