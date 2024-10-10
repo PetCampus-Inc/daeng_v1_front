@@ -34,7 +34,7 @@ const MemberSettingPage = () => {
               onClick={() => setStep(1)}
             >
               <Text typo="body2_16_R" color="gray_1">
-                알림 설정1
+                알림 설정
               </Text>
               <ArrowRightIcon colorScheme="gray_3" size={20} />
             </Box>
