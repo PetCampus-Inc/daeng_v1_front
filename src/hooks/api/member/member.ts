@@ -22,16 +22,15 @@ import {
   handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop,
   handlePostDogProfile,
-  handleCancelMemberEnrollment
+  handleCancelMemberEnrollment,
+  handleDeleteMember
 } from "apis/member/member.api";
-import useLogout from "hooks/common/useLogout";
 import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
 import { getLabelForValue } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import type {
-  HomeDataType,
   IMemberProfile,
   IMemberProfilePostInfo,
   MemberDogInfoData,
@@ -313,4 +312,13 @@ export const usePostDogProfile = (dogId: number) => {
   });
 
   return { mutateDogProfile: mutate };
+};
+
+//회원 탈퇴
+export const useDeleteMember = () => {
+  const { mutate } = useMutation({
+    mutationFn: handleDeleteMember
+  });
+
+  return { mutateDeleteMember: mutate };
 };
