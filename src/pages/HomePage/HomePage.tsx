@@ -23,8 +23,7 @@ const HomePage = () => {
   const defaultDogId = 1;
 
   const dogId = selectedDogId ? selectedDogId : defaultDogId;
-  const { data } = useGetHomeInfo(dogId);
-
+  const { data, isFetching } = useGetHomeInfo(dogId);
   const overlay = useOverlay();
   const prefetchDogs = usePrefetchDogs();
 
@@ -42,11 +41,11 @@ const HomePage = () => {
   };
 
   useLayoutEffect(() => {
-    // dogProfile 데이터가 없을 경우
-    if (!data.dogProfile) {
+    // dogProfile 데이터가 없을 경우 프로필 설정 페이지로 강제 이동
+    if (!isFetching && !data.dogProfile) {
       navigate(routes.member.profile.dog.root);
     }
-  }, []);
+  }, [data.dogProfile, isFetching, navigate]);
 
   return (
     <>

@@ -106,10 +106,8 @@ export const handlePostMemberDogEnrollment = async (enrollmentFormId: number): P
 
 // 강아지 삭제하기
 export const handlePostMemberDogDelete = async (dogId: string): Promise<void> => {
-  const url = `/member/delete/dog`;
-  return await authAxios.post(url, {
-    dogId: dogId
-  });
+  const url = `/member/delete/dog?dogId=${dogId}`;
+  return await authAxios.post(url);
 };
 
 // 견주 상세 정보 수정

@@ -94,7 +94,8 @@ const SchoolInfoEditPage = () => {
       schoolId: schoolId,
       schoolName: data.newSchoolName,
       phoneNumber: data.newSchoolNumber,
-      address: data.schoolAddress
+      address: data.schoolAddress,
+      addressDetail: data.schoolAddressDetail
     };
     schoolInfoEditMutation(req);
   });
@@ -155,7 +156,7 @@ const SchoolInfoEditPage = () => {
               name="schoolAddressDetail"
               className="defaultValue"
               register={register}
-              defaultValue={data.address}
+              defaultValue={data.addressDetail}
               required
             />
           </Flex>

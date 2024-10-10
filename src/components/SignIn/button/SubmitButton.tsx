@@ -8,14 +8,14 @@ import { StyledButton } from "../styles";
 const SubmitButton = () => {
   const { handleSubmit, setError } = useFormContext();
   const { mutateLogin } = useAdminLogin();
-  const { getFcmToken } = useNativeAction();
+  // const { getFcmToken } = useNativeAction();
 
   const onSubmit = async (data: FieldValues) => {
-    const fcmToken = await getFcmToken();
+    // const fcmToken = await getFcmToken();
     const req = {
       inputId: data.inputId,
       inputPw: data.inputPw,
-      fcmToken
+      fcmToken: "string"
     };
 
     mutateLogin(req, {

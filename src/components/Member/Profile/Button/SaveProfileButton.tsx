@@ -5,7 +5,6 @@ import { usePostMemberProfile } from "hooks/api/member/member";
 import useUploadProfile from "hooks/common/useUploadProfile";
 import { useEffect, useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
-import showToast from "utils/showToast";
 
 import * as S from "../styles";
 
@@ -13,7 +12,7 @@ const SaveProfileButton = () => {
   const {
     handleSubmit,
     getValues,
-    formState: { isValid }
+    formState: { isValid, dirtyFields }
   } = useFormContext();
   const [shouldSubmit, setShouldSubmit] = useState(false);
   const { s3ProfileData, uploadFiles } = useUploadProfile();
@@ -73,7 +72,7 @@ const SaveProfileButton = () => {
         type="submit"
         onClick={handleSubmit(handleSubmitProfile)}
         wrapColor="transparent"
-        disabled={!isValid}
+        disabled={!isValid || !dirtyFields.relation} // FIXME dirtyFields로 강제 감지 (더 나은 방식으로 수정 필요)}
       >
         프로필 완성하기
       </BottomButton>
