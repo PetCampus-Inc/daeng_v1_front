@@ -12,7 +12,7 @@ export const Card = styled.div`
   position: relative;
   border-radius: 16px;
   width: 100%;
-  min-width: 11rem; //176px
+  max-width: 11rem; //176px
   height: 0;
   padding-bottom: 216px;
 `;
