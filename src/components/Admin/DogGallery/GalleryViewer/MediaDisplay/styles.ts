@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const DisplayContainer = styled.div`
-  margin-top: 2rem;
-  height: calc(100% - 18%);
+  height: calc(100vh - 48px - 180px);
+  margin-bottom: 1rem;
 `;
 
 export const DisplayMedia = styled.img`
