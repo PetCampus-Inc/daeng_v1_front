@@ -162,17 +162,6 @@ export const ActiveBox = styled.label`
   }
 `;
 
-export const BackDropBorder = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border: 5px solid ${({ theme }) => theme.colors.primary_4};
-  border-radius: 40px;
-  z-index: 1;
-`;
-
 export const BackDrop = styled.div`
   position: absolute;
   background-color: ${({ theme }) => theme.colors.black};

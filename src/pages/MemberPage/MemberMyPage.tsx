@@ -1,3 +1,4 @@
+import placeholderImg from "assets/images/placeholder-dog.png";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
@@ -7,7 +8,6 @@ import MemberProfile from "components/Member/MyPage/MemberProfile";
 import MyDogInfo from "components/Member/MyPage/MyDogInfo";
 import { CardContainer, ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberInfo } from "hooks/api/member/member";
-
 const MemberMyPage = () => {
   const { data } = useGetMemberInfo();
 
@@ -15,7 +15,7 @@ const MemberMyPage = () => {
     <>
       <Header type="setting" text="마이페이지" transparent />
       <Layout type="main">
-        <PageContainer pt="4" imageUrl={data.memberProfileUri}>
+        <PageContainer pt="4" imageUrl={data.memberProfileUri ?? placeholderImg}>
           <ContentContainer>
             <MemberProfile data={data} />
             <CardContainer>

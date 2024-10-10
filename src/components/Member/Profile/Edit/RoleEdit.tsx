@@ -10,7 +10,7 @@ import * as S from "../styles";
 
 const RoleEdit = () => {
   const overlay = useOverlay();
-  const { register, setValue, getValues } = useFormContext();
+  const { register, getValues } = useFormContext();
   const [currentRelation, setCurrentRelation] = useState<string>(getValues(FIELD.RELATION));
 
   const openRoleSelectPopup = () =>
@@ -26,17 +26,16 @@ const RoleEdit = () => {
 
   const handleSelectedRelation = (relation: string) => {
     setCurrentRelation(RELATION_DATA[relation]);
-    setValue(FIELD.RELATION, relation, { shouldValidate: true });
   };
 
   return (
     <S.RoleEditContainer>
       <S.RoleEditButton
         onClick={openRoleSelectPopup}
-        color={currentRelation ? "gray_1" : "gray_3"}
-        bg={currentRelation ? "white" : "gray_4"}
+        color={currentRelation === "호칭선택" ? "gray_3" : "gray_1"}
+        bg={currentRelation === "호칭선택" ? "gray_4" : "white"}
       >
-        <span>{currentRelation ? currentRelation : "호칭선택"}</span>
+        <span>{currentRelation}</span>
       </S.RoleEditButton>
     </S.RoleEditContainer>
   );
