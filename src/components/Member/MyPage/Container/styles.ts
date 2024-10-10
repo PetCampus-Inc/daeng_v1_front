@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 import type { ColorKeys } from "styles/types";
 
+export const LayoutContainer = styled(Layout)`
+  height: calc(100% - 78px); // Layout height -48px 제거
+`;
+
 export const PageContainer = styled.div.withConfig({
   shouldForwardProp: (prop) => !["pt", "imageUrl", "backgroundColor"].includes(prop)
 })<{
@@ -22,8 +26,4 @@ export const PageContainer = styled.div.withConfig({
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-export const LayoutContainer = styled(Layout)`
-  height: 100%;
 `;
