@@ -1,5 +1,6 @@
 import { routes } from "constants/path";
 
+import ExclamationMarkIcon from "assets/svg/exclamationMark-icon";
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
@@ -7,6 +8,8 @@ import { useDeleteMember } from "hooks/api/member/member";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/common/role.types";
+
+import * as S from "./styles";
 
 interface DeleteAccountProps {
   setStep: (step: number) => void;
@@ -66,7 +69,7 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
       border={1}
       borderRadius={8}
       borderColor={contents[key] ? "transparent" : "gray_4"}
-      backgroundColor={contents[key] ? "br_5" : "transparent"}
+      backgroundColor={contents[key] ? "br_5" : "white"}
       padding={12}
       marginTop={marginTop}
     >
@@ -119,7 +122,7 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
           border={1}
           borderRadius={8}
           borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_4" : "transparent"}`}
+          backgroundColor={`${isAllChecked ? "br_4" : "white"}`}
           padding={12}
           marginTop={60}
         >
@@ -137,6 +140,9 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
         <BottomButton onClick={onSubmit} disabled={!isAllChecked}>
           탈퇴하기
         </BottomButton>
+        <S.ExclamationMark>
+          <ExclamationMarkIcon />
+        </S.ExclamationMark>
       </Layout>
     </>
   );
