@@ -34,12 +34,12 @@ export { default as AdminSettingPage } from "./AdminMyPage/AdminSettingPage";
 export { default as SchoolInfoEditPage } from "./AdminMyPage/SchoolInfoEditPage";
 export { default as TeacherManagePage } from "./AdminSchoolMangePage/TeacherManagePage/TeacherManagePage";
 export { default as SchoolManageEnrollmentPage } from "./AdminSchoolMangePage/EnrollmentPage/SchoolManageEnrollmentPage";
-export { default as EnrollmentFormDetailPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormDetailPage";
-export { default as EnrollmentFormEditPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormEditFunnel";
-export { default as EnrollmentFormCreatePage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormCreateFunnel";
+export { default as EnrollmentFormReadPage } from "./AdminEnrollmentFormReadPage/EnrollmentFormReadPage";
+export { default as EnrollmentFormEditPage } from "./AdminEnrollmentFormEditPage/EnrollmentFormEditFunnel";
+export { default as EnrollmentFormCreatePage } from "./AdminEnrollmentFormCreatePage/EnrollmentFormCreateFunnel";
 export { default as EnrollmentFormListPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormListPage";
-export { default as EnrollmentFormSubmitPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormSubmitPage";
-export { default as MemberEnrollmentFormDetailPage } from "./EnrollmentPage/MemberEnrollmentFormDetailPage";
+export { default as EnrollmentFormSubmitPage } from "./AdminEnrollmentFromSubmitPage/EnrollmentFormSubmitPage";
+export { default as EnrollmentFormDetailPage } from "./MemberEnrolmentFormPage/MemberEnrollmentFormPage";
 
 /* Admin My Page */
 export { default as PrincipalMyPage } from "./AdminMyPage/PrincipalMyPage";

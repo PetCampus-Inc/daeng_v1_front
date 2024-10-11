@@ -50,7 +50,6 @@ const Header = ({
   shadow
 }: Props) => {
   const navigate = useNavigate();
-  // const { data } = useGetNewAlarm(Number(adminId));
   const isNewAlarm = "true";
 
   const click = handleClick ? handleClick : () => navigate(-1);

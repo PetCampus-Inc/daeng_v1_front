@@ -1,15 +1,13 @@
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, useFormContext } from "react-hook-form";
 
 import SubmitButton from "./SubmitButton";
-
-import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
 
 export const NavigationButton = ({
   onNextStep
 }: {
-  onNextStep?: (formInfo: AdminEnrollmentInfoType) => void;
+  onNextStep?: (formInfo: FieldValues) => void;
 }) => {
   const { setFocus } = useFormContext();
 

@@ -7,20 +7,18 @@ type TicketFieldArrayProps = {
   defaultValues: number[];
 };
 
-const useTicketFieldArray = ({ control, fieldName, defaultValues }: TicketFieldArrayProps) => {
-  const { fields, append, remove } = useFieldArray({
+export function useTicketFieldArray({ control, fieldName, defaultValues }: TicketFieldArrayProps) {
+  const { fields, append, remove, replace } = useFieldArray({
     control,
-    name: fieldName
+    name: fieldName,
+    shouldUnregister: false
   });
 
   useEffect(() => {
     if (fields.length === 0 && defaultValues.length > 0) {
-      remove();
-      append(defaultValues.map((value) => ({ value })));
+      replace(defaultValues.map((value) => ({ value })));
     }
-  }, [fields, append, remove, defaultValues]);
+  }, [fields.length, replace, defaultValues]);
 
   return { fields, append, remove };
-};
-
-export default useTicketFieldArray;
+}

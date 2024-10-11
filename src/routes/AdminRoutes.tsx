@@ -157,7 +157,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   path: routes.admin.school.enrollment.memberForms.dynamic(),
                   element: (
                     <Suspense>
-                      <Pages.MemberEnrollmentFormDetailPage />
+                      <Pages.EnrollmentFormDetailPage />
                     </Suspense>
                   )
                 },
@@ -184,7 +184,7 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                       path: routes.admin.school.enrollment.ownerForms.dynamic(),
                       element: (
                         <Suspense>
-                          <Pages.EnrollmentFormDetailPage />
+                          <Pages.EnrollmentFormReadPage />
                         </Suspense>
                       )
                     }
