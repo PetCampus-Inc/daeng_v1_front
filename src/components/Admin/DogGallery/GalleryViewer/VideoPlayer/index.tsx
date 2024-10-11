@@ -7,6 +7,7 @@ import * as S from "./style";
 
 interface VideoPlayerProps extends VideoHTMLAttributes<HTMLVideoElement> {
   onProgressUpdate?: (progress: number) => void;
+  key?: number; // key 속성을 추가하여 렌더링 유도
 }
 
 export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) => {
@@ -14,21 +15,15 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<string>("00:00");
   const [duration, setDuration] = useState<string>("00:00"); // 전체 재생 시간 저장
-  const [isShowController, setIsShowController] = useState<boolean>(true);
 
   /** 재생/중지 토글 */
   const handlePlayToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (videoRef.current) isPlaying ? pause() : play();
-    setIsShowController(true);
   };
-
-  /** 슬라이더 컨트롤러 클릭 시, 이벤트 전파 중지 */
-  const handleStopPropagation = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation();
 
   /** 비디오 재생 */
   const play = () => {
@@ -54,8 +49,6 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
     return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   };
 
-  /** 컨트롤러 숨김 */
-
   /** 비디오 재생 타임 업데이트 */
   useEffect(() => {
     const video = videoRef.current;
@@ -69,7 +62,7 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
       setCurrentTime(formatTime(video.currentTime));
     };
 
-    // 비디오 메타데이터 로드 시, 전체 길이 설정
+    /** 비디오 메타데이터 로드 시, 전체 길이 설정 */
     const handleLoadedMetadata = () => {
       if (!isLoaded) {
         setIsLoaded(true);
@@ -94,11 +87,18 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
     };
   }, [props.src]);
 
+  /** 선택된 미디어가 변경될 때마다 상태 초기화 */
   useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [isPlaying, isShowController]);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    setIsPlaying(false);
+    setCurrentTime("00:00");
+    setDuration("00:00");
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  }, [props.key]);
 
   return (
     <S.Container>

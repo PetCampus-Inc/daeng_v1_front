@@ -108,9 +108,17 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
           {mediaItems.map((item, index) => (
             <S.MainMediaDisplay key={item.imageId}>
               {item.isVideo ? (
-                <VideoPlayer src={item.imageUrl} onProgressUpdate={handleVideoProgress} />
+                <VideoPlayer
+                  key={selectedMedia.imageId} // 고유 식별자 사용
+                  src={item.imageUrl}
+                  onProgressUpdate={handleVideoProgress}
+                />
               ) : (
-                <S.SelectedMediaImage src={item.imageUrl} alt={`Media ${index + 1}`} />
+                <S.SelectedMediaImage
+                  onClick={handleDisplayClick}
+                  src={item.imageUrl}
+                  alt={`Media ${index + 1}`}
+                />
               )}
             </S.MainMediaDisplay>
           ))}
