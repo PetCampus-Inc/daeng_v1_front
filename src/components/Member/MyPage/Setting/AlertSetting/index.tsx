@@ -46,7 +46,7 @@ const AlertSetting = ({ setStep, role }: AlertSettingProps) => {
           <Toggle isOn={isAllOn} onToggle={toggleAll} />
         </S.TopWrapper>
         <S.SettingList>
-          {alretItem(<DogIcon />, "등록 알림1", "강아지 등록 정보, 이용권, 유의사항 등", "careDog")}
+          {alretItem(<DogIcon />, "등록 알림", "강아지 등록 정보, 이용권, 유의사항 등", "careDog")}
           {alretItem(<FootRoundIcon />, "활동 알림", "알림장, 채팅, 사진", "activity")}
         </S.SettingList>
       </Box>
