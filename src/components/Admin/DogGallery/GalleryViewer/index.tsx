@@ -57,9 +57,9 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
             return (
               <S.ThumbnailItemContainer
                 key={imageId}
-                isSelected={index === currentIndex}
+                $isSelected={index === currentIndex}
                 onClick={() => onClick(index)}
-                ref={index === currentIndex ? selectedThumbnailRef : null} // Assign ref to selected item
+                ref={index === currentIndex ? selectedThumbnailRef : null}
               >
                 {isVideo ? <ThumbnailVideo uri={imageUrl} /> : <img src={imageUrl} />}
               </S.ThumbnailItemContainer>

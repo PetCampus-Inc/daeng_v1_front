@@ -46,12 +46,12 @@ export const ThumbnailItemsList = styled.div`
   }
 `;
 
-export const ThumbnailItemContainer = styled.div<{ isSelected: boolean }>`
+export const ThumbnailItemContainer = styled.div<{ $isSelected: boolean }>`
   width: 3.5rem;
   height: 4.5rem;
   display: flex;
-  padding-left: ${({ isSelected }) => (isSelected ? "6px" : "0")};
-  padding-right: ${({ isSelected }) => (isSelected ? "6px" : "0")};
+  padding-left: ${({ $isSelected }) => ($isSelected ? "6px" : "0")};
+  padding-right: ${({ $isSelected }) => ($isSelected ? "6px" : "0")};
   img {
     width: 100%;
     object-fit: cover;
