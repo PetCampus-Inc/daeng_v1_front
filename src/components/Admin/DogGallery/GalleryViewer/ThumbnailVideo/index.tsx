@@ -37,7 +37,7 @@ const ThumbnaiVideo = ({ uri, progress = 0 }: ThumbnailItemProps) => {
   return (
     <>
       <S.VideoContainer>
-        {progress > 0 ? <S.VideoProgressBar progress={progress} /> : ""}
+        {progress > 0 ? <S.VideoProgressBar $progress={progress} /> : ""}
         <S.Video src={imageSrc} />
       </S.VideoContainer>
     </>

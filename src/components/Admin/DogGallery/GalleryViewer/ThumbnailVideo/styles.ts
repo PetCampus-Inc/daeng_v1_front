@@ -9,10 +9,10 @@ export const Video = styled.img`
   width: 100%;
 `;
 
-export const VideoProgressBar = styled.div<{ progress: number }>`
+export const VideoProgressBar = styled.div<{ $progress: number }>`
   position: absolute;
   bottom: 0;
-  left: ${({ progress }) => progress}%;
+  left: ${({ $progress }) => $progress}%;
   width: 10%;
   height: 100px;
   background-color: #f6f6f6;
