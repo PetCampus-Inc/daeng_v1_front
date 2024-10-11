@@ -2,10 +2,17 @@ import { routes } from "constants/path";
 
 import { Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UnregisterSuccessPage = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate(routes.login.root);
+    }, 3000);
+  }, []);
 
   return (
     <>
