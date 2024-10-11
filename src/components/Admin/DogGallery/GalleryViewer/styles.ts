@@ -34,20 +34,16 @@ export const ThumbnailListWrapper = styled.div`
 `;
 
 export const ThumbnailItemsList = styled.div`
-  display: flex;
-  overflow-x: auto;  
+  display: inline-flex;
+  overflow: hidden;
   padding-bottom: 0;
-  position: absolute;
-
-  left:48%;
-  translateX(-48%);
-  & > :last-child {
-    padding-right: calc(100% - 78%);
-  }
+  padding-left: calc(50% - 1.7rem);
+  padding-right: calc(50% - 1.7rem);
+  gap: 4px;
 `;
 
 export const ThumbnailItemContainer = styled.div<{ $isSelected: boolean }>`
-  width: 3.5rem;
+  width: 3.4rem;
   height: 4.5rem;
   display: flex;
   padding-left: ${({ $isSelected }) => ($isSelected ? "6px" : "0")};
@@ -58,6 +54,5 @@ export const ThumbnailItemContainer = styled.div<{ $isSelected: boolean }>`
     height
   }
   flex: 1;
-  margin-right: 4px;
-  transition: all 0.2s;
+  transition: all .2s;
 `;
