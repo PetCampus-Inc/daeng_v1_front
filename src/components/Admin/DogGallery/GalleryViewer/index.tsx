@@ -1,7 +1,9 @@
 import { Text } from "components/common";
+import { useOverlay } from "hooks/common/useOverlay";
 import { useRef, useEffect } from "react";
 import { useState } from "react";
 
+import MediaDetailPopup from "./MediaDetailPopup";
 import * as S from "./styles";
 import ThumbnailVideo from "./ThumbnailVideo";
 import { VideoPlayer } from "./VideoPlayer";
@@ -16,6 +18,8 @@ interface GalleryProps {
 
 // 전체 Gallery 컴포넌트
 const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: GalleryProps) => {
+  const overlay = useOverlay();
+
   const [progress, setProgress] = useState<number>(0);
   const currentIndex =
     mediaItems.findIndex((media) => media.imageId === selectedMedia.imageId) ?? 0;
@@ -40,10 +44,24 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
     }
   }, [currentIndex]);
 
+  const handleDisplayClick = () => {
+    if (selectedMedia.isVideo) {
+      return;
+    }
+
+    overlay.open(({ isOpen, close }) => (
+      <MediaDetailPopup
+        isOpen={isOpen}
+        close={close}
+        uri={selectedMedia.imageUrl}
+      ></MediaDetailPopup>
+    ));
+  };
+
   return (
     <S.GalleryWrapper>
       {/* 선택된 미디어 영역 */}
-      <S.MainMediaDisplay>
+      <S.MainMediaDisplay onClick={handleDisplayClick}>
         {selectedMedia.isVideo ? (
           <VideoPlayer src={selectedMedia.imageUrl} onProgressUpdate={handleVideoProgress} />
         ) : (
