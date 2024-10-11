@@ -4,7 +4,7 @@ import { Checkbox, ToggleLabel } from "components/common";
 import SingleRadio from "components/common/Select/SingleRadio";
 import { Textarea } from "components/common/Textarea";
 import { useEffect } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, Form, useFormContext } from "react-hook-form";
 
 import { Card, Caption, Stack } from "../styles";
 
@@ -24,7 +24,7 @@ export function PickDropInfo() {
   }, [pickDropState]);
 
   return (
-    <>
+    <Form control={control}>
       <Card>
         <ToggleLabel showBadge>픽드랍 운영</ToggleLabel>
         <SingleRadio name={FIELD.PICKDROP_STATE} radiosText={["운영", "미운영"]} isRequired />
@@ -42,7 +42,6 @@ export function PickDropInfo() {
           <Card>
             <Controller
               name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PICKDROP_REQUEST}`}
-              control={control}
               render={({ field }) => (
                 <ToggleLabel showToggle {...field}>
                   픽드랍 신청
@@ -54,7 +53,6 @@ export function PickDropInfo() {
           <Card>
             <Controller
               name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PICKDROP_TYPE}`}
-              control={control}
               render={({ field }) => (
                 <ToggleLabel showToggle {...field}>
                   픽드랍 유형
@@ -66,7 +64,6 @@ export function PickDropInfo() {
           <Card>
             <Controller
               name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PICKDROP_MEMO}`}
-              control={control}
               render={({ field }) => (
                 <ToggleLabel showToggle {...field}>
                   픽드랍 메모
@@ -81,7 +78,6 @@ export function PickDropInfo() {
           <Card>
             <Controller
               name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.PICKDROP_INFO}`}
-              control={control}
               render={({ field }) => (
                 <ToggleLabel showBadge showToggle {...field}>
                   픽드랍 유의사항
@@ -98,6 +94,6 @@ export function PickDropInfo() {
           </Card>
         </>
       )}
-    </>
+    </Form>
   );
 }

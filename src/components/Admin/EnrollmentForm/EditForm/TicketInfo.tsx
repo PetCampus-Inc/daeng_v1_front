@@ -5,7 +5,7 @@ import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import MultiCheck from "components/common/Select/MultiCheck";
 import { Textarea } from "components/common/Textarea";
 import { useEffect } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, Form, useFormContext } from "react-hook-form";
 
 import { Card, Caption, Stack } from "../styles";
 import { TicketType } from "../TicketType/TicketType";
@@ -30,7 +30,7 @@ export function TicketInfo() {
   }, [isMonthlySelected, isRoundSelected]);
 
   return (
-    <>
+    <Form control={control}>
       <Card>
         <ToggleLabel showBadge>가격 안내</ToggleLabel>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
@@ -42,7 +42,6 @@ export function TicketInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.TICKET_TYPE}`}
-          control={control}
           render={({ field }) => (
             <ToggleLabel showBadge showToggle {...field}>
               이용권 종류
@@ -56,7 +55,6 @@ export function TicketInfo() {
         <Card>
           <Controller
             name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MONTHLY_TICKET_NUMBER}`}
-            control={control}
             render={({ field }) => (
               <ToggleLabel showBadge showToggle {...field}>
                 정기권 유형
@@ -76,7 +74,6 @@ export function TicketInfo() {
         <Card>
           <Controller
             name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ROUND_TICKET_NUMBER}`}
-            control={control}
             render={({ field }) => (
               <ToggleLabel showBadge showToggle {...field}>
                 회차권 유형
@@ -95,7 +92,6 @@ export function TicketInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.OPEN_DAYS}`}
-          control={control}
           render={({ field }) => (
             <ToggleLabel showBadge showToggle {...field}>
               등원 요일 선택
@@ -108,7 +104,6 @@ export function TicketInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.TICKET_INFO}`}
-          control={control}
           render={({ field }) => (
             <ToggleLabel showBadge showToggle {...field}>
               유의사항
@@ -123,6 +118,6 @@ export function TicketInfo() {
           <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
-    </>
+    </Form>
   );
 }

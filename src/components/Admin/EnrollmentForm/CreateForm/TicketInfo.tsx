@@ -1,13 +1,12 @@
 import { FIELD, FIELD_KEYS } from "constants/field";
 
-import { Checkbox } from "components/common";
+import { Checkbox, ToggleLabel } from "components/common";
 import DayMultiCheck from "components/common/Select/DayMultiCheck";
 import MultiCheck from "components/common/Select/MultiCheck";
 import { Textarea } from "components/common/Textarea";
 import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, Form, useFormContext } from "react-hook-form";
 
-import { Label } from "../Label/Label";
 import { Card, Caption, Stack } from "../styles";
 import { TicketType } from "../TicketType/TicketType";
 
@@ -31,11 +30,9 @@ export function TicketInfo() {
   }, [isMonthlySelected, isRoundSelected]);
 
   return (
-    <>
+    <Form control={control}>
       <Card>
-        <Label control={control} showBadge>
-          가격 안내
-        </Label>
+        <ToggleLabel showBadge>가격 안내</ToggleLabel>
         <Caption>견주에게 안내할 가격 내용을 입력해 주세요</Caption>
         <Textarea
           {...register(FIELD.PRICE_INFO, { required: true })}
@@ -43,25 +40,27 @@ export function TicketInfo() {
         />
       </Card>
       <Card>
-        <Label
+        <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.TICKET_TYPE}`}
-          control={control}
-          showBadge
-        >
-          이용권 종류
-        </Label>
+          render={({ field }) => (
+            <ToggleLabel showBadge showToggle {...field}>
+              이용권 종류
+            </ToggleLabel>
+          )}
+        />
         <Caption>복수 선택이 가능해요</Caption>
         <MultiCheck name={FIELD.TICKET_TYPE} radiosText={["정기권", "회차권"]} isRequired />
       </Card>
       {isMonthlySelected && (
         <Card>
-          <Label
+          <Controller
             name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MONTHLY_TICKET_NUMBER}`}
-            control={control}
-            showBadge
-          >
-            정기권 유형
-          </Label>
+            render={({ field }) => (
+              <ToggleLabel showBadge showToggle {...field}>
+                정기권 유형
+              </ToggleLabel>
+            )}
+          />
           <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
           <TicketType
             ticketType="MONTHLY"
@@ -73,13 +72,14 @@ export function TicketInfo() {
       )}
       {isRoundSelected && (
         <Card>
-          <Label
+          <Controller
             name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ROUND_TICKET_NUMBER}`}
-            control={control}
-            showBadge
-          >
-            회차권 유형
-          </Label>
+            render={({ field }) => (
+              <ToggleLabel showBadge showToggle {...field}>
+                회차권 유형
+              </ToggleLabel>
+            )}
+          />
           <Caption>최대 6개까지 추가 가능하며, 최소 1개의 선택지가 있어야해요</Caption>
           <TicketType
             ticketType="ROUND"
@@ -90,20 +90,26 @@ export function TicketInfo() {
         </Card>
       )}
       <Card>
-        <Label name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.OPEN_DAYS}`} control={control} showBadge>
-          등원 요일 선택
-        </Label>
+        <Controller
+          name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.OPEN_DAYS}`}
+          render={({ field }) => (
+            <ToggleLabel showBadge showToggle {...field}>
+              등원 요일 선택
+            </ToggleLabel>
+          )}
+        />
         <Caption>유치원 휴무날처럼 견주가 신청하면 안 되는 요일을 해제해 주세요</Caption>
         <DayMultiCheck name={FIELD.OPEN_DAYS} defaultChecked isRequired />
       </Card>
       <Card>
-        <Label
+        <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.TICKET_INFO}`}
-          control={control}
-          showBadge
-        >
-          유의사항
-        </Label>
+          render={({ field }) => (
+            <ToggleLabel showBadge showToggle {...field}>
+              유의사항
+            </ToggleLabel>
+          )}
+        />
         <Textarea
           {...register(FIELD.TICKET_INFO, { required: true })}
           placeholder="유의사항을 입력해 주세요"
@@ -112,6 +118,6 @@ export function TicketInfo() {
           <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
-    </>
+    </Form>
   );
 }
