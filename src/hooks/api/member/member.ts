@@ -169,6 +169,10 @@ export const usePostMemberDogDelete = () => {
     mutationFn: (dogId: string) => handlePostMemberDogDelete(dogId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
+      showToast("강아지가 삭제되었습니다", "bottom");
+    },
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
