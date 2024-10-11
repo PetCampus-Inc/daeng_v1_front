@@ -72,7 +72,6 @@ export const VideoPlayer = (props: VideoHTMLAttributes<HTMLVideoElement>) => {
     };
 
     const handlePause = () => {
-      console.log("pause");
       setIsPlaying(false);
     };
 

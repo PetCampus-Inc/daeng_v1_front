@@ -8,42 +8,35 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import showToast from "utils/showToast";
 
-interface MediaItem {
-  imageId: number;
-  imageUrl: string;
-  isVideo: boolean;
-}
-
-interface ImageItem {
-  imageId: number;
-  imageUrl: string;
-}
+import type { MediaItem, ImageItem } from "components/Admin/DogGallery/GalleryViewer/types";
 
 const DogGalleryViewerPage = () => {
-  const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null); // 선택된 미디어 객체 상태
+  const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
   const { saveMedia, isLoading, total, currentIndex, progress } = useSaveMedia();
   const location = useLocation();
-  const { imageList, createdAt, imageId } = location.state || {};
+  const { imageList, createdAt, selectedImageId } = location.state || {};
 
   // imageList를 MediaItem[] 형태로 변환하여 상태에 저장
   const [mediaList, setMediaList] = useState<MediaItem[]>([]);
 
   useEffect(() => {
-    const convertedMediaList = imageList.map((image: ImageItem) => ({
-      ...image,
-      isVideo: image.imageUrl.endsWith(".mp4") // isVideo 속성을 imageUrl을 통해 판별
-    }));
-    setMediaList(convertedMediaList);
+    if (imageList) {
+      const convertedMediaList = imageList?.map((image: ImageItem) => ({
+        ...image,
+        isVideo: image.imageUrl.endsWith(".mp4") // isVideo 속성을 imageUrl을 통해 판별
+      }));
+      setMediaList(convertedMediaList);
 
-    const selected = convertedMediaList.find((media: MediaItem) => {
-      return Number(media.imageId) === Number(imageId);
-    });
+      const selected = convertedMediaList.find(
+        (media: MediaItem) => Number(media.imageId) === Number(selectedImageId)
+      );
 
-    setSelectedMedia(selected ?? null);
-  }, [imageList, imageId]);
+      setSelectedMedia(selected ?? convertedMediaList[0]);
+    }
+  }, [imageList, selectedImageId]);
 
   const savePhotoOrVideo = () => {
-    saveMedia([selectedMedia?.imageUrl ?? ""], {
+    saveMedia([...(selectedMedia?.imageUrl ? [selectedMedia.imageUrl] : [])], {
       onSuccess: () => {
         showToast("사진이 저장되었습니다.", "gallery");
       },
@@ -53,7 +46,7 @@ const DogGalleryViewerPage = () => {
 
   return selectedMedia ? (
     <>
-      {isLoading ?? (
+      {isLoading && (
         <ProgressScreen currentIdx={currentIndex} totalFiles={total} progress={progress} />
       )}
       <Header
@@ -65,9 +58,7 @@ const DogGalleryViewerPage = () => {
         <GalleryViewer
           mediaItems={mediaList}
           selectedMedia={selectedMedia}
-          onChangeSelected={(item: MediaItem) => {
-            setSelectedMedia(item);
-          }}
+          onChangeSelected={setSelectedMedia}
         />
       </Layout>
     </>

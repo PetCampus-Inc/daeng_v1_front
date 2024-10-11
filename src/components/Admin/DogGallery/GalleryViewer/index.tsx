@@ -1,15 +1,12 @@
 import { Text } from "components/common";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 import * as S from "./styles";
 import ThumbnailVideo from "./ThumbnailVideo";
 import { VideoPlayer } from "./VideoPlayer";
 
-interface MediaItem {
-  imageId: number;
-  imageUrl: string;
-  isVideo: boolean;
-}
+import type { MediaItem } from "components/Admin/DogGallery/GalleryViewer/types";
+
 interface GalleryProps {
   mediaItems: MediaItem[];
   selectedMedia: MediaItem;
@@ -18,13 +15,12 @@ interface GalleryProps {
 
 // 전체 Gallery 컴포넌트
 const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: GalleryProps) => {
-  const initialIndex = mediaItems.findIndex((media) => media.imageId === selectedMedia.imageId);
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const currentIndex =
+    mediaItems.findIndex((media) => media.imageId === selectedMedia.imageId) ?? 0;
 
   const selectedThumbnailRef = useRef<HTMLDivElement | null>(null);
 
-  const onClick = (index: number) => {
-    setCurrentIndex(index);
+  const handleClick = (index: number) => {
     onChangeSelected?.(mediaItems[index]);
   };
 
@@ -58,7 +54,7 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
               <S.ThumbnailItemContainer
                 key={imageId}
                 $isSelected={index === currentIndex}
-                onClick={() => onClick(index)}
+                onClick={() => handleClick(index)}
                 ref={index === currentIndex ? selectedThumbnailRef : null}
               >
                 {isVideo ? <ThumbnailVideo uri={imageUrl} /> : <img src={imageUrl} />}
