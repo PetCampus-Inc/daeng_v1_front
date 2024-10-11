@@ -12,6 +12,8 @@ import showToast from "utils/showToast";
 import * as S from "./styles";
 import SinglePicture from "../SinglePicture";
 
+import type { AdminDogImage } from "types/admin/admin.types";
+
 interface GridAlbumProps {
   dogId: number;
   isEditing: boolean;
@@ -60,9 +62,18 @@ const GridAlbum = ({ dogId, isEditing }: GridAlbumProps) => {
   };
 
   /** 사진 클릭 핸들러 */
-  const handleClick = (imageId: number) => {
-    const url = `${routes.admin.attendance.galleryViewer.dynamic(dogId)}?imageId=${imageId}`;
-    navigate(url);
+
+  const handleClick = (
+    selectedImageId: number,
+    createdAt: string,
+    imageList: Omit<AdminDogImage, "createdAt">[]
+  ) => {
+    if (selectedImageId === null) return;
+
+    const url = `${routes.admin.attendance.galleryViewer.dynamic(dogId)}`;
+    navigate(url, {
+      state: { imageList, createdAt, selectedImageId }
+    });
   };
 
   /** `저장하기` 버튼 클릭 핸들러 */
@@ -132,7 +143,7 @@ const GridAlbum = ({ dogId, isEditing }: GridAlbumProps) => {
                     selected={isSelected}
                     isEditing={isEditing}
                     onSelect={handleSelect}
-                    onClick={() => handleClick(imageId)}
+                    onClick={() => handleClick(imageId, date, imageList)}
                   />
                 );
               })}
