@@ -1,5 +1,3 @@
-import type { Dispatch, SetStateAction } from "react";
-
 import Portal from "components/common/Portal";
 import DaumPostcode, { Address } from "react-daum-postcode";
 
@@ -7,15 +5,11 @@ import { Container } from "./styles";
 import { BottomSheetProps } from "../BottomSheet/BottomSheet";
 import Header from "../Header";
 
-import type { FieldValues, UseFormSetValue } from "react-hook-form";
-
 interface PostcodeProps extends BottomSheetProps {
-  field: string;
-  setValue: UseFormSetValue<FieldValues>;
-  setIsAddressActive?: Dispatch<SetStateAction<boolean>>;
+  onComplete: (value: string) => void;
 }
 
-const Postcode = ({ isOpen, close, field, setValue, setIsAddressActive }: PostcodeProps) => {
+const Postcode = ({ isOpen, close, onComplete }: PostcodeProps) => {
   if (!isOpen) return null;
 
   const complete = (data: Address) => {
@@ -31,16 +25,20 @@ const Postcode = ({ isOpen, close, field, setValue, setIsAddressActive }: Postco
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    setValue(field, fullAddress);
-    setIsAddressActive?.(true);
-    close();
+
+    onComplete(fullAddress);
   };
 
   return (
     <Portal>
       <Container>
         <Header type="text" text="주소 검색" handleClick={close} />
-        <DaumPostcode autoClose onComplete={complete} style={{ width: "100%", height: "100%" }} />
+        <DaumPostcode
+          autoClose
+          onComplete={complete}
+          onClose={close}
+          style={{ width: "100%", height: "100%" }}
+        />
       </Container>
     </Portal>
   );
