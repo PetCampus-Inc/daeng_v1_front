@@ -77,7 +77,7 @@ const EnrollmentFormReadPage = () => {
           </EditButton>
         }
       />
-      <Layout type="main" bgColor="BGray" px={16} pb={40}>
+      <Layout type="detail" bgColor="BGray" px={16} pb={36}>
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -97,7 +97,6 @@ const EnrollmentFormReadPage = () => {
           </FormProvider>
         </Container>
       </Layout>
-      <AdminNavBar />
     </>
   );
 };
