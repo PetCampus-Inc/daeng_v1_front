@@ -18,7 +18,7 @@ const MemberMyPage = () => {
   return (
     <>
       <LayoutContainer type="main">
-        <PageContainer pt="1" imageUrl={data.memberProfileUri ?? placeholderImg}>
+        <PageContainer pt="2" imageUrl={data.memberProfileUri ?? placeholderImg}>
           <Header
             type="setting"
             text="마이페이지"
