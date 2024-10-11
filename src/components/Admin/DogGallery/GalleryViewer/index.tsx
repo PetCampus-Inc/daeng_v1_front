@@ -1,5 +1,6 @@
 import { Text } from "components/common";
 import { useRef, useEffect } from "react";
+import { useState } from "react";
 
 import * as S from "./styles";
 import ThumbnailVideo from "./ThumbnailVideo";
@@ -15,6 +16,7 @@ interface GalleryProps {
 
 // 전체 Gallery 컴포넌트
 const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: GalleryProps) => {
+  const [progress, setProgress] = useState<number>(0);
   const currentIndex =
     mediaItems.findIndex((media) => media.imageId === selectedMedia.imageId) ?? 0;
 
@@ -22,6 +24,10 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
 
   const handleClick = (index: number) => {
     onChangeSelected?.(mediaItems[index]);
+  };
+
+  const handleVideoProgress = (newProgress: number) => {
+    setProgress(newProgress);
   };
 
   useEffect(() => {
@@ -39,7 +45,7 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
       {/* 선택된 미디어 영역 */}
       <S.MainMediaDisplay>
         {selectedMedia.isVideo ? (
-          <VideoPlayer src={selectedMedia.imageUrl} />
+          <VideoPlayer src={selectedMedia.imageUrl} onProgressUpdate={handleVideoProgress} />
         ) : (
           <S.SelectedMediaImage src={selectedMedia.imageUrl} alt="Main Display" />
         )}
@@ -57,7 +63,11 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
                 onClick={() => handleClick(index)}
                 ref={index === currentIndex ? selectedThumbnailRef : null}
               >
-                {isVideo ? <ThumbnailVideo uri={imageUrl} /> : <img src={imageUrl} />}
+                {isVideo ? (
+                  <ThumbnailVideo uri={imageUrl} progress={index === currentIndex ? progress : 0} />
+                ) : (
+                  <img src={imageUrl} />
+                )}
               </S.ThumbnailItemContainer>
             );
           })}

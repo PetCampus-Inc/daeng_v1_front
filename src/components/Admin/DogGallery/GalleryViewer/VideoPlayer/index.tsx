@@ -5,11 +5,16 @@ import { useCallback, useEffect, useRef, useState, VideoHTMLAttributes } from "r
 
 import * as S from "./style";
 
-export const VideoPlayer = (props: VideoHTMLAttributes<HTMLVideoElement>) => {
+interface VideoPlayerProps extends VideoHTMLAttributes<HTMLVideoElement> {
+  onProgressUpdate?: (progress: number) => void;
+}
+
+export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<string>("00:00");
   const [duration, setDuration] = useState<string>("00:00"); // 전체 재생 시간 저장
@@ -58,6 +63,9 @@ export const VideoPlayer = (props: VideoHTMLAttributes<HTMLVideoElement>) => {
 
     // 비디오 재생 타임 업데이트
     const updateProgress = () => {
+      const progress = (video.currentTime / video.duration) * 100;
+      onProgressUpdate?.(progress); // Update progress through callback
+
       setCurrentTime(formatTime(video.currentTime));
     };
 
@@ -102,9 +110,9 @@ export const VideoPlayer = (props: VideoHTMLAttributes<HTMLVideoElement>) => {
           <S.TimeDisplay>
             {/* 재생 여부에 따라 화살표 일시정시 표시 */}
             {isPlaying ? (
-              <PlayIcon w={20} h={20} circle={false} color="white" />
-            ) : (
               <PauseIcon w={20} h={20} circle={false} color="white" />
+            ) : (
+              <PlayIcon w={20} h={20} circle={false} color="white" />
             )}
             {currentTime} / {duration}
           </S.TimeDisplay>

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { hexToRGBA } from "utils/color";
 
 export const Container = styled.div`
   position: relative;

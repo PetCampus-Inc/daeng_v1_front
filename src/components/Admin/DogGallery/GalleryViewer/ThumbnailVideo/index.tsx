@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { getVideoThumb } from "utils/thumb";
 
+import * as S from "./styles";
+
 interface ThumbnailItemProps {
   handleClick?: (index: number) => void;
   uri: string;
+  progress?: number;
 }
 
-const ThumbnaiVideo = ({ uri }: ThumbnailItemProps) => {
+const ThumbnaiVideo = ({ uri, progress = 0 }: ThumbnailItemProps) => {
   const [imageSrc, setImageSrc] = useState<string>(uri);
 
   /** 비디오 썸네일 로드 */
@@ -31,7 +34,14 @@ const ThumbnaiVideo = ({ uri }: ThumbnailItemProps) => {
     loadSrc();
   }, [uri]);
 
-  return <img src={imageSrc} />;
+  return (
+    <>
+      <S.VideoContainer>
+        {progress > 0 ? <S.VideoProgressBar progress={progress} /> : ""}
+        <S.Video src={imageSrc} />
+      </S.VideoContainer>
+    </>
+  );
 };
 
 export default ThumbnaiVideo;
