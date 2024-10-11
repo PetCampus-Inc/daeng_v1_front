@@ -12,7 +12,7 @@ interface PolicyInfoProps {
   requiredItems?: Map<number, boolean>;
 }
 
-const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
+export function PolicyInfo({ requiredItems }: PolicyInfoProps) {
   const { control, register, setValue, watch } = useFormContext();
   const allChecked = watch("all");
   const watchTerms = watch([
@@ -128,6 +128,4 @@ const PolicyInfo = ({ requiredItems }: PolicyInfoProps) => {
       </S.Card>
     </>
   );
-};
-
-export default PolicyInfo;
+}

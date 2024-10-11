@@ -20,7 +20,7 @@ interface TicketInfoProps {
   requiredItems?: Map<number, boolean>;
 }
 
-const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
+export function TicketInfo({ ticket, requiredItems }: TicketInfoProps) {
   const { control, register, watch } = useFormContext();
 
   const selectedTicketType = watch(FIELD.TICKET_TYPE);
@@ -103,6 +103,4 @@ const TicketInfo = ({ ticket, requiredItems }: TicketInfoProps) => {
       </Card>
     </>
   );
-};
-
-export default TicketInfo;
+}
