@@ -1,11 +1,13 @@
 import { routes } from "constants/path";
 import { ADMIN_READ_FORM_STEP } from "constants/step";
 
-import DogInfo from "components/Admin/EnrollmentForm/ReadForm/DogInfo";
-import MemberInfo from "components/Admin/EnrollmentForm/ReadForm/MemberInfo";
-import PickDropInfo from "components/Admin/EnrollmentForm/ReadForm/PickDropInfo";
-import PolicyInfo from "components/Admin/EnrollmentForm/ReadForm/PolicyInfo";
-import TicketInfo from "components/Admin/EnrollmentForm/ReadForm/TicketInfo";
+import {
+  DogInfo,
+  MemberInfo,
+  PickDropInfo,
+  PolicyInfo,
+  TicketInfo
+} from "components/Admin/EnrollmentForm/ReadForm";
 import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
 import {
   Container,
@@ -24,12 +26,11 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-const EnrollmentFormDetailPage = () => {
-  const { formId } = useParams();
-  if (!formId) throw new Error("잘못된 formId 입니다");
+const EnrollmentFormReadPage = () => {
+  const { formId } = useParams<{ formId: string }>();
   const navigate = useNavigate();
 
-  const { data, isLoading } = useAdminEnrollment(formId, "READ");
+  const { data, isLoading } = useAdminEnrollment(Number(formId), "READ");
   const {
     requiredItemList,
     roundTicketNumber,
@@ -41,7 +42,7 @@ const EnrollmentFormDetailPage = () => {
 
   const methods = useForm({
     mode: "onBlur",
-    shouldUnregister: false,
+    shouldUnregister: true,
     defaultValues: { ticketType: ticketType[0], pickDropRequest: "신청", ...rest }
   });
 
@@ -76,7 +77,7 @@ const EnrollmentFormDetailPage = () => {
           </EditButton>
         }
       />
-      <Layout bgColor="BGray" px={16} pb={40}>
+      <Layout type="detail" bgColor="BGray" px={16} pb={36}>
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -96,9 +97,8 @@ const EnrollmentFormDetailPage = () => {
           </FormProvider>
         </Container>
       </Layout>
-      <AdminNavBar />
     </>
   );
 };
 
-export default EnrollmentFormDetailPage;
+export default EnrollmentFormReadPage;

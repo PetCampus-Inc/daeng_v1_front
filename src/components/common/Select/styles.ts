@@ -127,8 +127,3 @@ export const DeleteButton = styled.button`
     color: ${({ theme }) => theme.colors.gray_4};
   }
 `;
-
-export const RadioWrapper = styled.div`
-  position: relative;
-  flex: 1;
-`;

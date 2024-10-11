@@ -1,18 +1,18 @@
-import { INIT_COUNTER } from "constants/option";
-
 import AddIcon from "assets/svg/add-icon";
 import { Modal } from "components/common/Modal";
-import EditableRadioGroup from "components/common/Select/EditableRadioGroup";
 import { useOverlay } from "hooks/common/useOverlay";
-import useTicketFieldArray from "hooks/common/useTicketFieldArray";
 import React from "react";
 import { useRecoilCallback } from "recoil";
 import { ticketCounterState } from "store/form";
 
-import * as S from "./styles";
-import TicketCounterBottomSheet from "../FormModal/TicketCounterBottomSheet";
+import { CounterBottomSheet } from "./CounterBottomSheet";
+import * as Styled from "./styles";
+import { TicketGroup } from "./TicketGroup";
+import { useTicketFieldArray } from "./useTicketFieldArray";
 
 import type { Control } from "react-hook-form";
+
+const INIT_COUNTER = 2;
 
 type TicketTypeProps = {
   control: Control;
@@ -21,7 +21,7 @@ type TicketTypeProps = {
   defaultValues?: number[];
 };
 
-const TicketType = React.memo(
+export const TicketType = React.memo(
   ({ control, name, ticketType, defaultValues = [] }: TicketTypeProps) => {
     const FIELD_NAME = name;
     const MAX_ITEMS = 6;
@@ -41,7 +41,6 @@ const TicketType = React.memo(
       ({ set, snapshot }) =>
         async () => {
           const counter = await snapshot.getPromise(ticketCounterState);
-
           if (fields.length < MAX_ITEMS) {
             append({ value: counter });
             overlay.close();
@@ -50,7 +49,7 @@ const TicketType = React.memo(
             alert("더 이상 추가할 수 없습니다.");
           }
         },
-      []
+      [fields]
     );
 
     const handleRemove = (index: number) => {
@@ -63,7 +62,7 @@ const TicketType = React.memo(
 
     const openTicketCounter = () =>
       overlay.open(({ isOpen, close }) => (
-        <TicketCounterBottomSheet
+        <CounterBottomSheet
           isOpen={isOpen}
           close={close}
           ticketType={ticketType}
@@ -87,24 +86,22 @@ const TicketType = React.memo(
 
     return (
       <>
-        <EditableRadioGroup
+        <TicketGroup
           control={control}
           suffix={TIMES}
           name={FIELD_NAME}
           fields={fields}
           remove={handleRemove}
         />
-        <S.AddButton
+        <Styled.AddButton
           type="button"
           onClick={openTicketCounter}
           disabled={fields.length >= MAX_ITEMS}
         >
           <AddIcon />
           {TICKET_TYPE} 직접 추가
-        </S.AddButton>
+        </Styled.AddButton>
       </>
     );
   }
 );
-
-export default TicketType;

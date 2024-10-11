@@ -1,60 +1,68 @@
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
 
-import DogInfo from "components/Admin/EnrollmentForm/CreateForm/DogInfo";
-import MemberInfo from "components/Admin/EnrollmentForm/CreateForm/MemberInfo";
-import PickDropInfo from "components/Admin/EnrollmentForm/CreateForm/PickDropInfo";
-import PolicyInfo from "components/Admin/EnrollmentForm/CreateForm/PolicyInfo";
-import TicketInfo from "components/Admin/EnrollmentForm/CreateForm/TicketInfo";
+import {
+  MemberInfo,
+  DogInfo,
+  TicketInfo,
+  PolicyInfo,
+  PickDropInfo
+} from "components/Admin/EnrollmentForm/EditForm";
 import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
-import Navigation from "components/Admin/EnrollmentForm/Stepper/Navigation";
+import { NavigationButton } from "components/Admin/EnrollmentForm/Stepper/NavigationButton";
 import {
   Container,
   TopWrapper,
   TitleWrapper,
   Title,
   SubTitle,
-  ContentWrapper,
   Content,
+  ContentWrapper,
   ButtonContainer,
   HelperText
 } from "components/Admin/EnrollmentForm/styles";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
+import { useAdminEnrollment } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
-import { FormProvider, useForm, useFormState } from "react-hook-form";
-import { useBlocker } from "react-router-dom";
+import { FieldValues, FormProvider, useForm, useFormState } from "react-hook-form";
+import { useBlocker, useParams } from "react-router-dom";
 import { isEmpty } from "utils/is";
 
-import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
-
-interface EnrollmentFormCreateProps {
-  onNextStep?: (formInfo: AdminEnrollmentInfoType) => void;
+interface EnrollmentFormEditProps {
+  formValues?: FieldValues;
+  onNextStep?: (formInfo: FieldValues) => void;
 }
 
-const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => {
+export default function EnrollmentFormEditPage({
+  formValues,
+  onNextStep
+}: EnrollmentFormEditProps) {
+  const { formId } = useParams<{ formId: string }>();
+  const { data } = useAdminEnrollment(Number(formId), "EDIT");
+
   const methods = useForm({
     mode: "onBlur",
-    shouldUnregister: false,
-    defaultValues: {
-      ticketType: []
-    }
+    defaultValues: formValues ?? data,
+    shouldFocusError: false,
+    shouldUnregister: false // umount 시 값 유지
   });
 
   const currentSteps = ADMIN_CREATE_FORM_STEP;
-  const { currentStep, nextStep, prevStep, setStep } = useStep(currentSteps.length - 1);
+  const { currentStep, setStep } = useStep(currentSteps.length - 1);
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
 
   const { dirtyFields } = useFormState({ control: methods.control });
+
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
     const currentStep = new URLSearchParams(currentLocation.search).get("step");
     const nextStep = new URLSearchParams(nextLocation.search).get("step");
 
     if (
-      (currentStep === "form" && nextStep === "submit") ||
-      (currentStep === "submit" && nextStep === "form")
+      (currentStep === "edit" && nextStep === "submit") ||
+      (currentStep === "submit" && nextStep === "edit")
     )
       return false;
 
@@ -70,8 +78,8 @@ const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => 
           action={() => blocker.proceed()}
         />
       ) : null}
-      <Header type="text" text="가입신청서" />
-      <Layout bg="BGray" px={16}>
+      <Header type="text" text="가입신청서 수정" />
+      <Layout bgColor="BGray" px={16} pb={36}>
         <Container>
           <TopWrapper>
             <TitleWrapper>
@@ -99,20 +107,12 @@ const EnrollmentFormCreatePage = ({ onNextStep }: EnrollmentFormCreateProps) => 
               </Content>
             </ContentWrapper>
             <ButtonContainer>
-              <HelperText>작성된 신청서로 견주가 가입 신청을 해요</HelperText>
-              <Navigation
-                currentStep={currentStep}
-                stepsLength={currentSteps.length}
-                nextStep={nextStep}
-                prevStep={prevStep}
-                onNextStep={onNextStep}
-              />
+              <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
+              <NavigationButton onNextStep={onNextStep} />
             </ButtonContainer>
           </FormProvider>
         </Container>
       </Layout>
     </>
   );
-};
-
-export default EnrollmentFormCreatePage;
+}

@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import EnrollmentFormEditPage from "./EnrollmentFormEditPage";
-import EnrollmentFormSubmitPage from "./EnrollmentFormSubmitPage";
+import EnrollmentFormSubmitPage from "../AdminEnrollmentFromSubmitPage/EnrollmentFormSubmitPage";
 
-import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
+import type { FieldValues } from "react-hook-form";
 
 const EnrollmentFormEditFunnel = () => {
   const { 가입신청서_수정, 가입신청서_제출 } = ADMIN_EDIT_FORM_PATH;
@@ -17,7 +17,7 @@ const EnrollmentFormEditFunnel = () => {
     initialStep: 가입신청서_수정,
     stepQueryKey: "step"
   }).withState<{
-    formInfo?: AdminEnrollmentInfoType;
+    formValue?: FieldValues;
   }>({});
 
   const navigate = useNavigate();
@@ -25,23 +25,24 @@ const EnrollmentFormEditFunnel = () => {
   useEffect(() => {
     // 새로고침 시 초기 스텝으로 이동
     navigate(`?step=${가입신청서_수정}`, { replace: true });
-  }, [navigate]);
+  }, []);
 
   return (
     <Funnel>
       <Funnel.Step name={가입신청서_수정}>
         <EnrollmentFormEditPage
-          onNextStep={(formInfo) =>
+          formValues={state.formValue}
+          onNextStep={(formValue) =>
             setState((prev) => ({
               ...prev,
               step: 가입신청서_제출,
-              formInfo
+              formValue
             }))
           }
         />
       </Funnel.Step>
       <Funnel.Step name={가입신청서_제출}>
-        <EnrollmentFormSubmitPage formInfo={state.formInfo} />
+        <EnrollmentFormSubmitPage formValue={state.formValue} />
       </Funnel.Step>
     </Funnel>
   );
