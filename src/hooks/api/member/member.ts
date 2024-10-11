@@ -172,10 +172,10 @@ export const usePostMemberDogDelete = () => {
 };
 
 // 강아지 가입신청서 보기 (read only)
-export const useGetMemberDogEnrollmentInfo = (dogId: number) => {
+export const useGetMemberDogEnrollmentInfo = (enrollmentFormId: number) => {
   return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_DOG_ENROLLMENT_INFO(dogId),
-    queryFn: () => handleGetDogEnrollment(dogId)
+    queryKey: QUERY_KEY.MEMBER_DOG_ENROLLMENT_INFO(enrollmentFormId),
+    queryFn: () => handleGetDogEnrollment(enrollmentFormId)
   });
 };
 

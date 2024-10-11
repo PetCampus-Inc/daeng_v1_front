@@ -7,6 +7,7 @@ import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
 import { FormProvider, useForm } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
 import { getPadString } from "utils/date";
+import { isEmpty } from "utils/is";
 
 const MemberDogInfoEditPage = () => {
   const { dogId } = useParams();
@@ -33,7 +34,8 @@ const MemberDogInfoEditPage = () => {
     }
   });
 
-  const blocker = useBlocker(() => methods.formState.isDirty);
+  const { dirtyFields, isSubmitSuccessful } = methods.formState;
+  const blocker = useBlocker(() => !isSubmitSuccessful && !isEmpty(dirtyFields));
 
   return (
     <>

@@ -12,13 +12,12 @@ import * as S from "components/Enrollment/styles";
 import { useGetMemberDogEnrollmentInfo } from "hooks/api/member/member";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
-interface EnrollmentProps {
-  dogId?: number; // MEMO: 강아지 상세 정보에서 제공
-}
+const EnrollmentDogDetail = () => {
+  const { enrollmentFormId } = useParams();
 
-const EnrollmentDogDetail = ({ dogId }: EnrollmentProps) => {
-  const { data } = useGetMemberDogEnrollmentInfo(Number(dogId));
+  const { data } = useGetMemberDogEnrollmentInfo(Number(enrollmentFormId));
   const { schoolFormResponse, ...rest } = data;
 
   const methods = useForm({
