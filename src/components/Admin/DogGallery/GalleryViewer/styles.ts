@@ -9,9 +9,23 @@ export const GalleryWrapper = styled.div`
   height: 100%;
 `;
 
-export const MainMediaDisplay = styled.div`
+export const MainMediaDisplayWrapper = styled.div`
+  overflow: hidden;
+  width: 100%;
   height: calc(100vh - 48px - 180px);
   margin-bottom: 1rem;
+`;
+
+export const MainMediaDisplayList = styled.div`
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+`;
+
+export const MainMediaDisplay = styled.div`
+  flex: 0 0 100%;
+  height: 100%;
 `;
 
 export const SelectedMediaImage = styled.img`
@@ -51,8 +65,8 @@ export const ThumbnailItemContainer = styled.div<{ $isSelected: boolean }>`
   img {
     width: 100%;
     object-fit: cover;
-    height
+    height: 100%;
   }
   flex: 1;
-  transition: all .2s;
+  transition: all 0.2s;
 `;

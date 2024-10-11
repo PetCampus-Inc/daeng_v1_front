@@ -1,7 +1,6 @@
 import { Text } from "components/common";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useRef, useEffect } from "react";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 
 import MediaDetailPopup from "./MediaDetailPopup";
 import * as S from "./styles";
@@ -25,6 +24,10 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
     mediaItems.findIndex((media) => media.imageId === selectedMedia.imageId) ?? 0;
 
   const selectedThumbnailRef = useRef<HTMLDivElement | null>(null);
+  const startXRef = useRef<number | null>(null);
+  const endXRef = useRef<number | null>(null);
+  const [offset, setOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const handleClick = (index: number) => {
     onChangeSelected?.(mediaItems[index]);
@@ -58,16 +61,61 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
     ));
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startXRef.current = e.touches[0].clientX;
+    setIsDragging(true);
+  };
+
+  const handleTouchEnd = () => {
+    if (startXRef.current !== null && endXRef.current !== null) {
+      const diff = startXRef.current - endXRef.current;
+      if (diff > 50) {
+        // 왼쪽으로 스와이프 - 다음 미디어로 이동
+        if (currentIndex < mediaItems.length - 1) {
+          handleClick(currentIndex + 1);
+        }
+      } else if (diff < -50) {
+        // 오른쪽으로 스와이프 - 이전 미디어로 이동
+        if (currentIndex > 0) {
+          handleClick(currentIndex - 1);
+        }
+      }
+    }
+    setOffset(0);
+    setIsDragging(false);
+    startXRef.current = null;
+    endXRef.current = null;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging && startXRef.current !== null) {
+      endXRef.current = e.touches[0].clientX;
+      const moveOffset = endXRef.current - startXRef.current;
+      setOffset(moveOffset);
+    }
+  };
+
   return (
     <S.GalleryWrapper>
       {/* 선택된 미디어 영역 */}
-      <S.MainMediaDisplay onClick={handleDisplayClick}>
-        {selectedMedia.isVideo ? (
-          <VideoPlayer src={selectedMedia.imageUrl} onProgressUpdate={handleVideoProgress} />
-        ) : (
-          <S.SelectedMediaImage src={selectedMedia.imageUrl} alt="Main Display" />
-        )}
-      </S.MainMediaDisplay>
+      <S.MainMediaDisplayWrapper>
+        <S.MainMediaDisplayList
+          style={{ transform: `translateX(calc(${-currentIndex * 100}% + ${offset}px))` }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {mediaItems.map((item, index) => (
+            <S.MainMediaDisplay key={item.imageId}>
+              {item.isVideo ? (
+                <VideoPlayer src={item.imageUrl} onProgressUpdate={handleVideoProgress} />
+              ) : (
+                <S.SelectedMediaImage src={item.imageUrl} alt={`Media ${index + 1}`} />
+              )}
+            </S.MainMediaDisplay>
+          ))}
+        </S.MainMediaDisplayList>
+      </S.MainMediaDisplayWrapper>
 
       {/* 미디어 리스트 영역 */}
       <S.ThumbnailListWrapper>
