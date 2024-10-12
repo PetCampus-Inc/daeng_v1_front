@@ -38,6 +38,7 @@ interface Props {
   rightElement?: React.ReactNode;
   transparent?: boolean;
   shadow?: boolean;
+  position?: "absolute" | "relative"; // 기본 fixed
 }
 
 const Header = ({
@@ -47,7 +48,8 @@ const Header = ({
   text,
   rightElement,
   transparent,
-  shadow
+  shadow,
+  position
 }: Props) => {
   const navigate = useNavigate();
   const isNewAlarm = "true";
@@ -55,7 +57,7 @@ const Header = ({
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
     <>
-      <Container className={transparent ? "transparent" : ""}>
+      <Container className={`${transparent ? "transparent" : ""} ${position ? position : ""}`}>
         <HeaderWrapper className={transparent || shadow ? "transparent" : ""}>
           {type === "main" && (
             <TextWrapper>

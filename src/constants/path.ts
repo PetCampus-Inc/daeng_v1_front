@@ -188,6 +188,14 @@ const member = {
   /** 마이페이지 */
   mypage: {
     root: `/mypage`,
+    /** 설정 페이지 */
+    setting: {
+      root: `/setting`
+    },
+    /** 계정 탈퇴 완료 */
+    deleteComplete: {
+      root: `/mypage/delete-complete`
+    },
     /** 프로필 */
     profile: {
       root: `/mypage/profile`,

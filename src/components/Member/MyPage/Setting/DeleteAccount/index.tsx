@@ -4,12 +4,13 @@ import ExclamationMarkIcon from "assets/svg/exclamationMark-icon";
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
-import { useDeleteOwner, useDeleteTeacher } from "hooks/api/admin/mypage";
+import { useDeleteMember } from "hooks/api/member/member";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/common/role.types";
 
 import * as S from "./styles";
+
 interface DeleteAccountProps {
   setStep: (step: number) => void;
   role: string;
@@ -23,8 +24,7 @@ type ContentCheck = {
 };
 
 const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
-  const { mutateDeleteTeacher } = useDeleteTeacher();
-  const { mutateDeleteOwner } = useDeleteOwner();
+  const { mutateDeleteMember } = useDeleteMember();
   const navigate = useNavigate();
   const [contents, setContents] = useState({
     1: false,
@@ -34,7 +34,9 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   });
 
   const isAllChecked =
-    role === Role.ROLE_OWNER ? Object.values(contents).every(Boolean) : contents[1] && contents[2];
+    role === Role.ROLE_MEMBER || role === Role.ROLE_GUEST
+      ? Object.values(contents).every(Boolean)
+      : contents[1] && contents[2] && contents[3];
 
   const checkAll = () => {
     const newState = !isAllChecked;
@@ -55,8 +57,8 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
 
   const onSubmit = () => {
     if (isAllChecked) {
-      role === Role.ROLE_OWNER ? mutateDeleteOwner : mutateDeleteTeacher;
-      navigate(routes.admin.mypage.deleteComplete.root);
+      // mutateDeleteMember; // FIXME 탈퇴 기능 추가 필요
+      navigate(routes.unregister.success.root);
     }
     return;
   };
@@ -108,21 +110,15 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
         </Flex>
         {renderCheckboxItem(
           1,
-          "지금까지 주고받은 채팅내역, 알림장, 사진앨범 등의 모든 기록이 <영구 삭제>되며 복구할 수 없어요",
+          "지금까지 주고받은 채팅내역, 알림장, 사진앨범 등의 모든  활동 기록이 <영구 삭제>되며 복구할 수 없어요",
           30
         )}
         {renderCheckboxItem(
           2,
-          "탈퇴 후 사용했던 소셜 아이디로 <재가입 시 신규회원으로 가입> 돼요",
+          "탈퇴 후 사용했던 소셜 아이디로 <재가입 시 신규 회원으로 가입> 돼요",
           15
         )}
-        {role === Role.ROLE_OWNER &&
-          renderCheckboxItem(
-            3,
-            "원장님이 등록한 유치원의 <활동 기록>과 <정보>, 가입된 <회원 및 교사 정보>는 모두 <초기화>되고 복구되지 않아요",
-            15
-          )}
-        {role === Role.ROLE_OWNER && renderCheckboxItem(4, "모든 <개인 정보>가 삭제돼요", 15)}
+        {renderCheckboxItem(3, "계정 삭제 후 <7일>간 다시 가입할 수 없어요", 15)}
         <S.CheckboxWrapper>
           <Box
             width="100%"

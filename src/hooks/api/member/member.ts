@@ -22,16 +22,15 @@ import {
   handlePostMemoDogAllergy,
   handlePostMemoDogPickdrop,
   handlePostDogProfile,
-  handleCancelMemberEnrollment
+  handleCancelMemberEnrollment,
+  handleDeleteMember
 } from "apis/member/member.api";
-import useLogout from "hooks/common/useLogout";
 import { Adapter, DogInfoFormAdapter } from "libs/adapters";
 import { useNavigate } from "react-router-dom";
 import { getLabelForValue } from "utils/formatter";
 import showToast from "utils/showToast";
 
 import type {
-  HomeDataType,
   IMemberProfile,
   IMemberProfilePostInfo,
   MemberDogInfoData,
@@ -115,11 +114,16 @@ export const useGetMemberProfileInfo = () => {
 
 // 마이페이지 - 견주 프로필 수정
 export const usePostMemberProfileInfo = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (req: IMemberProfilePostInfo) => handleMemberInfoResult(req),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_PROFILE_INFO });
+      navigate(routes.member.mypage.profile.root);
+      setTimeout(() => {
+        showToast("수정이 완료되었습니다.", "bottom");
+      }, 100);
     },
     onError: () => {
       showToast("실패했습니다. 다시 시도해주세요", "bottom");
@@ -165,6 +169,10 @@ export const usePostMemberDogDelete = () => {
     mutationFn: (dogId: string) => handlePostMemberDogDelete(dogId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
+      showToast("강아지가 삭제되었습니다", "bottom");
+    },
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 
@@ -308,4 +316,13 @@ export const usePostDogProfile = (dogId: number) => {
   });
 
   return { mutateDogProfile: mutate };
+};
+
+//회원 탈퇴
+export const useDeleteMember = () => {
+  const { mutate } = useMutation({
+    mutationFn: handleDeleteMember
+  });
+
+  return { mutateDeleteMember: mutate };
 };

@@ -21,9 +21,13 @@ export const DeleteDogButton = styled.button`
 `;
 
 export const MyDogInfoList = styled.section`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
   padding: 0 1rem;
+  & > div {
+    min-width: 100%;
+  }
 `;
 
 export const DragCarouselWrapper = styled.div`

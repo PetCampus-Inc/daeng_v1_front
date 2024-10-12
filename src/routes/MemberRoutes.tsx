@@ -121,6 +121,14 @@ const MemberRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObjec
               <Pages.MemberEnrollmentPage />
             </Suspense>
           )
+        },
+        {
+          path: routes.member.mypage.setting.root,
+          element: (
+            <Suspense>
+              <Pages.MemberSettingPage />
+            </Suspense>
+          )
         }
       ]
     }
