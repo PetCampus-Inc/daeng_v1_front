@@ -16,7 +16,7 @@ interface DogInfoProps {
   requiredItems?: Map<number, boolean>;
 }
 
-const DogInfo = ({ requiredItems }: DogInfoProps) => {
+export function DogInfo({ requiredItems }: DogInfoProps) {
   const { register, watch, setValue, control } = useFormContext();
 
   return (
@@ -128,6 +128,4 @@ const DogInfo = ({ requiredItems }: DogInfoProps) => {
       </Card>
     </>
   );
-};
-
-export default DogInfo;
+}

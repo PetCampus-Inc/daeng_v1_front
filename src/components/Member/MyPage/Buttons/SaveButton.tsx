@@ -72,12 +72,7 @@ const SaveButton = () => {
       memberProfileUri: s3ProfileData[0] || memberProfileUri
     };
 
-    mutateProfileInfo(requestData, {
-      onSuccess() {
-        // 요청 성공 시 defaultValues로 초기화
-        reset();
-      }
-    });
+    mutateProfileInfo(requestData);
   };
 
   useEffect(() => {

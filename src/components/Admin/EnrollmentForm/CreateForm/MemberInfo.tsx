@@ -21,7 +21,7 @@ export function MemberInfo() {
             </ToggleLabel>
           )}
         />
-        <TextInput name="null" placeholder="견주 이름을 입력하는 칸이에요" disabled />
+        <TextInput placeholder="견주 이름을 입력하는 칸이에요" disabled />
       </Card>
       <Card>
         <Controller
@@ -32,7 +32,7 @@ export function MemberInfo() {
             </ToggleLabel>
           )}
         />
-        <SingleRadio name="null" radiosText={["남", "여"]} disabled />
+        <SingleRadio radiosText={["남", "여"]} disabled />
       </Card>
       <Card>
         <Controller
@@ -43,7 +43,7 @@ export function MemberInfo() {
             </ToggleLabel>
           )}
         />
-        <SearchInputField name="null" placeholder="주소를 입력하는 칸이에요" disabled />
+        <SearchInputField placeholder="주소를 입력하는 칸이에요" disabled />
       </Card>
       <Card>
         <Controller
@@ -54,7 +54,7 @@ export function MemberInfo() {
             </ToggleLabel>
           )}
         />
-        <TextInput name="null" placeholder="견주가 연락처를 입력하는 칸이에요" disabled />
+        <TextInput placeholder="견주가 연락처를 입력하는 칸이에요" disabled />
       </Card>
       <Card>
         <Controller
@@ -65,7 +65,7 @@ export function MemberInfo() {
             </ToggleLabel>
           )}
         />
-        <TextInput name="null" placeholder="견주가 비상연락처를 입력하는 칸이에요" disabled />
+        <TextInput placeholder="견주가 비상연락처를 입력하는 칸이에요" disabled />
       </Card>
     </Form>
   );

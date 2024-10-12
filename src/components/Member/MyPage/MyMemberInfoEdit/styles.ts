@@ -1,23 +1,19 @@
 import { styled } from "styled-components";
-interface MyInfoEditProps {
-  isShowRoles?: boolean;
-}
 
-export const MyProfileWrapper = styled.section.withConfig({
-  shouldForwardProp: (prop) => prop !== "isShowRoles"
-})<MyInfoEditProps>`
+export const MyProfileWrapper = styled.section`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, minmax(112px, auto));
-  gap: 12px 4px;
+  grid-template-columns: repeat(2, minmax(112px, auto));
+  gap: 0.75rem 0.9375rem;
   justify-content: center;
-  margin-bottom: ${(props) => (props.isShowRoles ? "21px" : "82px")};
+  margin-bottom: 5.125rem;
+  padding: 0 1.25rem;
 `;
 
 export const ProfileEditWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2rem;
 `;
 
 export const ProfileBox = styled.div`
@@ -31,7 +27,7 @@ export const ProfileEditBox = styled.div`
   position: relative;
   width: 107px;
   height: 0;
-  padding-bottom: 107px;
+  padding-bottom: 6.6875rem;
 `;
 
 export const UserImage = styled.img`
@@ -60,7 +56,7 @@ export const ProfileEditButton = styled.button`
 
 export const MyDogName = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   align-items: center;
   color: ${({ theme }) => theme.colors.gray_1};
   ${({ theme }) => theme.typo.body2_16_R};

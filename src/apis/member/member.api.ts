@@ -255,3 +255,10 @@ export const handlePostDogProfile = async (req: DogProfileReq) => {
   });
   return data;
 };
+
+// FIXME 회원 탈퇴 기능 추가 필요
+// 회원 탈퇴
+export const handleDeleteMember = async () => {
+  const url = `member/delete/member`;
+  return await authAxios.post(url);
+};

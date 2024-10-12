@@ -43,7 +43,7 @@ const MyInfo = () => {
             </S.IconCircle>
             이름
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.memberName ? data.memberName : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.memberName ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -58,7 +58,7 @@ const MyInfo = () => {
             </S.IconCircle>
             성별
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.memberGender ? GENDER_DATA[data.memberGender] : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.memberGender ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -73,7 +73,7 @@ const MyInfo = () => {
             </S.IconCircle>
             연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.phoneNumber ? data.phoneNumber : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.phoneNumber ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -88,7 +88,7 @@ const MyInfo = () => {
             </S.IconCircle>
             비상연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.emergencyPhoneNumber ? data.emergencyPhoneNumber : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.emergencyPhoneNumber ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem className="address">
           <S.MyInfoTitle>
@@ -104,7 +104,7 @@ const MyInfo = () => {
             주소
           </S.MyInfoTitle>
           <S.MyInfoText>
-            {data.addressDetail && data.address ? `${data.addressDetail} ${data.address}` : ""}
+            {data.addressDetail && data.address ? `${data.address} ${data.addressDetail}` : ""}
           </S.MyInfoText>
         </S.MyInfoItem>
       </S.MyInfoList>

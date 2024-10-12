@@ -1,6 +1,8 @@
 import { DOG_STATUS } from "constants/memberDogStatus";
 import { routes } from "constants/path";
+import { QUERY_KEY } from "constants/queryKey";
 
+import { useQueryClient } from "@tanstack/react-query";
 import DogNotfoundIcon from "assets/svg/dog-notfound-icon";
 import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import { BasicModal } from "components/common/Modal";
@@ -10,9 +12,8 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { dogEnrollmentStatus, dogIdState } from "store/member";
-import { IDoglist } from "types/member/main.types";
+import { IDoglist, IMemberInfo } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
-import showToast from "utils/showToast";
 
 import * as S from "./styles";
 import DogDeleteButton from "../Buttons/DogDeleteButton";
@@ -37,10 +38,17 @@ const MyDogCard = ({
 }: IMyDogCardProps) => {
   const navigate = useNavigate();
   const overlay = useOverlay();
+  const queryClient = useQueryClient();
   const divRef = useRef<HTMLDivElement>(null);
   const [selectedDogId, setDogId] = useRecoilState(dogIdState);
   const setDogEnrollmentStatus = useSetRecoilState(dogEnrollmentStatus);
   const mutateMemberDogDelete = usePostMemberDogDelete();
+
+  const cacheMemberData = queryClient.getQueryData(
+    QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO
+  ) as IMemberInfo;
+  const { doglist } = cacheMemberData;
+  const enrolledDogs = doglist.filter((el) => el.status === "ENROLLED");
 
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
@@ -95,8 +103,12 @@ const MyDogCard = ({
     ));
 
   const handleDeleteDog = () => {
-    mutateMemberDogDelete(dogId);
-    showToast("강아지가 삭제되었습니다", "bottom");
+    mutateMemberDogDelete(dogId, {
+      onSuccess: () => {
+        // 삭제 성공 시 첫번째 강아지로 select
+        setDogId(Number(doglist[0].dogId));
+      }
+    });
   };
 
   const handleFocus = () => {
@@ -108,7 +120,7 @@ const MyDogCard = ({
     if (selectedDogId) {
       onCardFocus(String(selectedDogId));
     }
-  }, []);
+  }, [selectedDogId]);
 
   return (
     <S.MyDogCard
@@ -120,7 +132,9 @@ const MyDogCard = ({
     >
       <DogDeleteButton
         isOpen={isOpen}
-        onClick={dogLength <= 1 ? openInvalidInputPopup : openDeleteDogPopup}
+        onClick={
+          dogLength <= 1 || enrolledDogs.length <= 1 ? openInvalidInputPopup : openDeleteDogPopup
+        }
       />
 
       <S.InfoTextBox>

@@ -3,9 +3,6 @@ import { MEMBER_DOG_ADD_ENROLL_STEP } from "constants/step";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
-import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
-import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
-import TicketInfo from "components/Enrollment/Form/TicketInfo";
 import MemberDogInfo from "components/Enrollment/MemberDogInfoForm/DogInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
@@ -16,6 +13,7 @@ import { FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker } from "react-router-dom";
 import { getPadString } from "utils/date";
 import { isEmpty } from "utils/is";
+import { PickDropInfo, PolicyInfo, TicketInfo } from "components/Enrollment/NewForm";
 
 interface EnrollmentProps {
   schoolId?: number; // MEMO: 회원가입 과정 중에 제공하고 있음.

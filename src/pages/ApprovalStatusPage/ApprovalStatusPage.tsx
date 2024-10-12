@@ -31,7 +31,7 @@ export default function ApprovalStatusPage() {
   if (!StatusComponent) return <Navigate to={routes.login.root} />;
 
   return (
-    <Layout bgColor="white" px={16} pt={76}>
+    <Layout type="page" bgColor="white" px={16} pt={76}>
       <StatusComponent user={user} schoolName={schoolName} />
     </Layout>
   );

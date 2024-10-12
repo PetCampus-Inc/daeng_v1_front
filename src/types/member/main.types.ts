@@ -103,6 +103,7 @@ export interface VaccinationUri {
 }
 export interface MemberDogInfoData {
   dogId: number;
+  enrollmentFormId: number;
   dogName: string;
   dogGender: DogGenderType | string;
   dogSize: DogSizeType | string;

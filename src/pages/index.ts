@@ -19,6 +19,7 @@ export { default as ApprovalStatusPage } from "./ApprovalStatusPage/ApprovalStat
 export { default as AttendancePage } from "./AdminAttendancePage/AttendancePage";
 export { default as AttendCareDeletePage } from "./AdminAttendCarePage/AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogDetailGalleryPage/DogGalleryPage";
+export { default as DogGalleryViewerPage } from "./DogGalleryViewerPage/DogGalleryViewerPage";
 export { default as DogDetailInfoPage } from "./AdminDogDetailInfoPage/DogDetailInfoPage";
 export { default as NewTicketPage } from "./AdminNewTicketPage/NewTicketPage";
 
@@ -71,6 +72,7 @@ export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEdit
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
 export { default as MemberAddDogProfileEditPage } from "./MemberPage/MemberAddDogProfileEditPage";
 export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFunnel";
+export { default as MemberSettingPage } from "./MemberPage/MemberSettingPage";
 
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";

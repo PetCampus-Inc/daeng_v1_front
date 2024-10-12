@@ -1,6 +1,5 @@
 import { css, styled } from "styled-components";
 import { getColorStyle, getPaddingStyle } from "styles/system";
-import { themeConfig } from "styles/themeConfig";
 
 import type { LayoutProps } from ".";
 
@@ -27,6 +26,7 @@ export const StyledContainer = styled.div.withConfig({
 
   position: relative;
   overflow: auto;
+  width: 100%;
 
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -40,14 +40,18 @@ export const StyledContainer = styled.div.withConfig({
   ${({ type }) =>
     type === "main" &&
     css`
-      width: 100%;
       height: calc(100% - 78px - 48px);
     `}
 
   ${({ type }) =>
     type === "detail" &&
     css`
-      width: 100%;
       height: calc(100% - 48px);
+    `}
+
+      ${({ type }) =>
+    type === "page" &&
+    css`
+      height: 100%;
     `}
 `;

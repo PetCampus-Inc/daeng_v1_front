@@ -7,7 +7,7 @@ import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import { Textarea } from "components/common/Textarea";
 import Title from "components/common/Title";
-import { Caption, Card } from "components/Enrollment/Form/styles";
+import { Caption, Card } from "components/Enrollment/NewForm/styles";
 import { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
