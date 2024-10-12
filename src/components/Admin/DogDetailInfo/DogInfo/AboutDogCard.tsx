@@ -1,18 +1,23 @@
+import { routes } from "constants/path";
+
 import BoyIcon from "assets/svg/boy-icon";
 import CalendarIcon from "assets/svg/calendar";
 import DogCardIcon from "assets/svg/dog-card-icon";
 import DogCircleIcon from "assets/svg/dog-circle-icon";
 import GirlIcon from "assets/svg/girl-icon";
+import PencilIcon from "assets/svg/pencil-icon";
 import {
   CardWrapper,
   MainBottomContainer,
-  TagsWrapper
+  TagsWrapper,
+  EditIconButton
 } from "components/Admin/DogDetailInfo/DogInfo/styles";
 import { Box, Flex, Text } from "components/common";
 import Badge from "components/common/Badge";
 import { XSmallButton } from "components/common/Button/Templates";
-import { differenceInMonths, format } from "date-fns";
+import { differenceInMonths, format, parse } from "date-fns";
 import { FIELD_MAPPING } from "libs/adapters";
+import { useNavigate } from "react-router-dom";
 import { Img } from "styles/StyleModule";
 import { getDateFromArray } from "utils/date";
 
@@ -23,8 +28,15 @@ interface AboutDogCardProps {
 }
 
 export function AboutDogCard({ data }: AboutDogCardProps) {
+  const navigate = useNavigate();
+
   const formatBirthDate = format(getDateFromArray(data.birthDate), "yyyy.MM.dd");
-  const monthsDifference = differenceInMonths(new Date(), new Date(formatBirthDate));
+  const birthDate = parse(formatBirthDate, "yyyy.MM.dd", new Date());
+  const monthsDifference = differenceInMonths(new Date(), birthDate);
+
+  const years = Math.floor(monthsDifference / 12);
+  const months = monthsDifference % 12;
+  const ageString = years > 0 ? `${years}년 ${months}개월` : `${months}개월`;
 
   const showTags =
     data.vaccination === FIELD_MAPPING["vaccination"].VACCINATED ||
@@ -53,6 +65,11 @@ export function AboutDogCard({ data }: AboutDogCardProps) {
                 </Text>
               </Box>
             </Flex>
+            <EditIconButton
+              onClick={() => navigate(routes.admin.attendance.info.form.dynamic(data.dogId))}
+            >
+              <PencilIcon />
+            </EditIconButton>
           </Flex>
           <Flex gap={8}>
             <Box
@@ -87,7 +104,7 @@ export function AboutDogCard({ data }: AboutDogCardProps) {
             textWrap="nowrap"
           >
             <CalendarIcon w={24} h={24} rx={12} />
-            {`${formatBirthDate} [${monthsDifference}개월]`}
+            {`${formatBirthDate} [${ageString}]`}
           </Box>
         </Flex>
       </CardWrapper>

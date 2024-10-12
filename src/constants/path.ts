@@ -72,7 +72,10 @@ const admin = {
     root: `/admin/attendance`,
     /** 강아지 상세정보 */
     info: {
-      dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}`
+      dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}`,
+      form: {
+        dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}/form`
+      }
     },
     /** 강아지 갤러리 */
     gallery: {
