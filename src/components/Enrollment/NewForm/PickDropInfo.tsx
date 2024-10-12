@@ -13,7 +13,7 @@ interface PickDropInfoProps {
   requiredItems: Map<number, boolean>;
 }
 
-const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
+export function PickDropInfo({ requiredItems }: PickDropInfoProps) {
   const { register, control, watch } = useFormContext();
   return (
     <>
@@ -76,6 +76,4 @@ const PickDropInfo = ({ requiredItems }: PickDropInfoProps) => {
       )}
     </>
   );
-};
-
-export default PickDropInfo;
+}

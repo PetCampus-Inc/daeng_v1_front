@@ -7,7 +7,6 @@ import Postcode from "components/common/Postcode";
 import SingleRadio from "components/common/Select/SingleRadio";
 import Title from "components/common/Title";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { formatPhoneNumber } from "utils/formatter";
 
@@ -16,9 +15,9 @@ interface MemberInfoProps {
   requiredItems: Map<number, boolean>;
 }
 
-const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
+export function MemberInfo({ requiredItems }: MemberInfoProps) {
   const { register, setValue, watch } = useFormContext();
-  const [isAddressActive, setIsAddressActive] = useState(false);
+
   const overlay = useOverlay();
 
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,24 +26,21 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
     setValue(field, formattedValue);
   };
 
-  const watchAddress = watch(FIELD.MEMBER_ADDRESS, "");
-
   const handleClear = () => {
     setValue(FIELD.MEMBER_ADDRESS, "");
     setValue(FIELD.MEMBER_ADDRESS_DETAIL, "");
-    setIsAddressActive(false);
   };
 
-  const openPopup = () =>
+  const handleCompletePostCode = (value: string) => {
+    setValue(FIELD.MEMBER_ADDRESS, value);
+  };
+
+  const openAddressSearchPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <Postcode
-        isOpen={isOpen}
-        close={close}
-        field={FIELD.MEMBER_ADDRESS}
-        setValue={setValue}
-        setIsAddressActive={setIsAddressActive}
-      />
+      <Postcode isOpen={isOpen} close={close} onComplete={handleCompletePostCode} />
     ));
+
+  const watchAddress = watch(FIELD.MEMBER_ADDRESS, "");
 
   return (
     <>
@@ -66,17 +62,18 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
         <SearchInputField
           name={FIELD.MEMBER_ADDRESS}
           register={register}
-          onSearch={openPopup}
-          onClick={openPopup}
+          onSearch={openAddressSearchPopup}
+          onClick={openAddressSearchPopup}
           onClear={handleClear}
           value={watchAddress}
           required={requiredItems?.get(FIELD_KEYS.MEMBER_ADDRESS)}
           readOnly
           placeholder="주소를 입력해주세요"
         />
-        {isAddressActive && (
+        {watchAddress && (
           <TextInput
             name={FIELD.MEMBER_ADDRESS_DETAIL}
+            required={requiredItems?.get(FIELD_KEYS.MEMBER_ADDRESS)}
             register={register}
             placeholder="상세 주소를 입력해주세요"
           />
@@ -106,6 +103,4 @@ const MemberInfo = ({ requiredItems }: MemberInfoProps) => {
       </Card>
     </>
   );
-};
-
-export default MemberInfo;
+}

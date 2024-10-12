@@ -48,7 +48,6 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
 
     const formData = getFormData({ ...data, vaccinationUri: imageUrls });
 
-    console.log(formData);
     mutateEnrollment(formData, {
       onSuccess: () => navigate(routes.approval.root),
       onError: () => showToast("제출 중 오류가 발생했습니다. 다시 시도해주세요.", "ownerNav")
@@ -57,7 +56,6 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
 
   const onInvalid = (errors: FieldErrors) => {
     const firstErrorField = Object.keys(errors)[0];
-    console.log(firstErrorField);
     const step = getFieldStep({ field: firstErrorField, enable: true });
 
     if (step !== undefined) {

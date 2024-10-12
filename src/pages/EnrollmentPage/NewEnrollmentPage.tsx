@@ -3,11 +3,13 @@ import { MEMBER_ENROLL_STEP } from "constants/step";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
-import DogInfo from "components/Enrollment/Form/DogInfo";
-import MemberInfo from "components/Enrollment/Form/MemberInfo";
-import PickDropInfo from "components/Enrollment/Form/PickDropInfo";
-import PolicyInfo from "components/Enrollment/Form/PolicyInfo";
-import TicketInfo from "components/Enrollment/Form/TicketInfo";
+import {
+  DogInfo,
+  MemberInfo,
+  PickDropInfo,
+  PolicyInfo,
+  TicketInfo
+} from "components/Enrollment/NewForm";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import Navigation from "components/Enrollment/Stepper/Navigation";
 import * as S from "components/Enrollment/styles";
