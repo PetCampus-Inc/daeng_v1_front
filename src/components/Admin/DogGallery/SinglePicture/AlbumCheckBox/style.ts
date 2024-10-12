@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { hexToRGBA } from "utils/color";
 
-export const StyledAlbumCheckBox = styled.div`
+export const StyledAlbumCheckBox = styled.label`
   display: block;
   width: 24px;
   height: 24px;

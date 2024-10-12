@@ -68,7 +68,7 @@ const GridAlbum = ({ dogId, isEditing }: GridAlbumProps) => {
     createdAt: string,
     imageList: Omit<AdminDogImage, "createdAt">[]
   ) => {
-    if (selectedImageId === null) return;
+    if (selectedImageId === null || isEditing) return;
 
     const url = `${routes.admin.attendance.galleryViewer.dynamic(dogId)}`;
     navigate(url, {

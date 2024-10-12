@@ -36,12 +36,6 @@ export const Container = styled.label`
   }
 `;
 
-export const CheckBoxWrap = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-`;
-
 export const Image = styled.img`
   object-fit: cover;
   width: 100%;

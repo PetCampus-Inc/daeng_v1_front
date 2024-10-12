@@ -1,6 +1,9 @@
+import ExpandIcon from "assets/svg/expand-icon";
 import { MediaViewModal } from "components/Admin/DogGallery/SinglePicture/MediaViewModal";
+import { Box } from "components/common";
 import { Image } from "components/common/Image";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useState } from "react";
 
 import { AlbumCheckBox } from "./AlbumCheckBox";
 import * as S from "./styles";
@@ -19,33 +22,46 @@ interface SinglePictureProps {
 }
 
 const SinglePicture = ({ uri, selected, isEditing, onSelect, onClick }: SinglePictureProps) => {
-  const overlay = useOverlay();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const isVideo = uri.endsWith(".mp4");
 
-  /** 이미지 클릭 핸들러 */
-  const handleClick = () => (isEditing ? openMediaViewModal() : onClick?.());
-
   /** 이미지 선택 핸들러 */
-  const handleSelect = () => onSelect?.(uri);
+  const handleSelect = () => {
+    console.log(uri);
+    onSelect?.(uri);
+  };
 
-  /** 프리뷰 모달 열기 */
-  const openMediaViewModal = () => {
-    overlay.open(({ isOpen, close }) => (
-      <MediaViewModal isOpen={isOpen} close={close} src={uri} isVideo={isVideo} />
-    ));
+  const handleExpand = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsOpen(true);
   };
 
   return (
-    <S.Container onClick={handleClick} data-edit-mode={isEditing}>
+    <S.Container onClick={onClick} data-edit-mode={isEditing}>
       {/* 이미지 */}
       <Image src={uri} ratio="1/1" />
 
       {/* 이미지 선택 체크박스 */}
       {isEditing && (
-        <S.CheckBoxWrap>
-          <AlbumCheckBox checked={selected} onChange={handleSelect} />
-        </S.CheckBoxWrap>
+        <>
+          <Box position="absolute" top={8} right={8}>
+            <AlbumCheckBox checked={selected} onChange={handleSelect} />
+          </Box>
+          <Box position="absolute" bottom={4} left={4} onClick={handleExpand}>
+            <ExpandIcon />
+          </Box>
+        </>
       )}
+
+      <MediaViewModal
+        isOpen={isOpen}
+        close={() => setIsOpen(false)}
+        src={uri}
+        selected={selected}
+        isVideo={isVideo}
+        onChange={handleSelect}
+      />
     </S.Container>
   );
 };
