@@ -17,9 +17,10 @@ interface SinglePictureProps {
   selected?: boolean;
   isEditing?: boolean;
   onSelect?: (src: string) => void;
+  onClick?: () => void;
 }
 
-const SinglePicture = ({ uri, selected, isEditing, onSelect }: SinglePictureProps) => {
+const SinglePicture = ({ uri, selected, isEditing, onSelect, onClick }: SinglePictureProps) => {
   const overlay = useOverlay();
   const [imageSrc, setImageSrc] = useState<string>(uri);
 
@@ -27,7 +28,7 @@ const SinglePicture = ({ uri, selected, isEditing, onSelect }: SinglePictureProp
   const isVideo = uri.endsWith(".mp4");
 
   /** 이미지 클릭 핸들러 */
-  const handleClick = () => isEditing || openMediaViewModal();
+  const handleClick = () => (isEditing ? openMediaViewModal() : onClick?.());
 
   /** 이미지 선택 핸들러 */
   const handleSelect = () => onSelect?.(uri);

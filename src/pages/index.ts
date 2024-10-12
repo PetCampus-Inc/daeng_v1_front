@@ -19,6 +19,7 @@ export { default as ApprovalStatusPage } from "./ApprovalStatusPage/ApprovalStat
 export { default as AttendancePage } from "./AdminAttendancePage/AttendancePage";
 export { default as AttendCareDeletePage } from "./AdminAttendCarePage/AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogDetailGalleryPage/DogGalleryPage";
+export { default as DogGalleryViewerPage } from "./DogGalleryViewerPage/DogGalleryViewerPage";
 export { default as DogDetailInfoPage } from "./AdminDogDetailInfoPage/DogDetailInfoPage";
 export { default as NewTicketPage } from "./AdminNewTicketPage/NewTicketPage";
 

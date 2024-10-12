@@ -54,6 +54,14 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
                   <Pages.DogGalleryPage />
                 </Suspense>
               )
+            },
+            {
+              path: routes.admin.attendance.galleryViewer.dynamic(),
+              element: (
+                <Suspense>
+                  <Pages.DogGalleryViewerPage />
+                </Suspense>
+              )
             }
           ]
         },

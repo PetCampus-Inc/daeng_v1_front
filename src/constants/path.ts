@@ -78,6 +78,10 @@ const admin = {
     gallery: {
       dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}/gallery`
     },
+    /** 강아지 갤러리 확대 보기*/
+    galleryViewer: {
+      dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}/gallery-viewer`
+    },
     /** 새 이용권 */
     newTicket: {
       dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}/new-ticket`
