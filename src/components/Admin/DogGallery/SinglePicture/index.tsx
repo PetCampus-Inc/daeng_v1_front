@@ -40,7 +40,7 @@ const SinglePicture = ({ uri, selected, isEditing, onSelect, onClick }: SinglePi
   return (
     <S.Container onClick={onClick} data-edit-mode={isEditing}>
       {/* 이미지 */}
-      <Image src={uri} ratio="1/1" />
+      <Image src={uri} ratio="1/1" showVideoIcon />
 
       {/* 이미지 선택 체크박스 */}
       {isEditing && (

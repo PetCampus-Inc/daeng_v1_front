@@ -7,9 +7,10 @@ import { getVideoThumb } from "utils/thumb";
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   ratio?: string;
+  showVideoIcon?: boolean;
 }
 
-export const Image = ({ src, ratio, ...props }: ImageProps) => {
+export const Image = ({ src, ratio, showVideoIcon, ...props }: ImageProps) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   const getVideoThumbnail = useCallback(async () => {
@@ -40,7 +41,7 @@ export const Image = ({ src, ratio, ...props }: ImageProps) => {
   return (
     <>
       <StyledImage src={imageSrc} ratio={ratio} {...props} /> {/* 비디오 아이콘 */}
-      {src.endsWith(".mp4") && (
+      {src.endsWith(".mp4") && showVideoIcon && (
         <Box position="absolute" bottom={4} right={4}>
           <PlayIcon w={18} h={18} />
         </Box>
