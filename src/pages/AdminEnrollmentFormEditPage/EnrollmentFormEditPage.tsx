@@ -28,6 +28,7 @@ import useStep from "hooks/common/useStep";
 import { FieldValues, FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
 import { isEmpty } from "utils/is";
+import { useEffect } from "react";
 
 interface EnrollmentFormEditProps {
   formValues?: FieldValues;
@@ -69,6 +70,15 @@ export default function EnrollmentFormEditPage({
     return !isEmpty(dirtyFields);
   });
 
+  const handleNextStep = (formInfo: FieldValues) => {
+    methods.reset(formInfo);
+    onNextStep && onNextStep(formInfo);
+  };
+
+  useEffect(() => {
+    methods.reset();
+  }, [currentStep]);
+
   return (
     <>
       {blocker.state === "blocked" ? (
@@ -108,7 +118,7 @@ export default function EnrollmentFormEditPage({
             </ContentWrapper>
             <ButtonContainer>
               <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
-              <NavigationButton onNextStep={onNextStep} />
+              <NavigationButton onNextStep={handleNextStep} />
             </ButtonContainer>
           </FormProvider>
         </Container>
