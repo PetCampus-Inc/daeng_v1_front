@@ -182,7 +182,7 @@ interface MemberDtoInfoType {
 export interface ISchoolFormResponse {
   schoolFormId: number;
   schoolFormName: string;
-  requiredItemList: Map<number, boolean>;
+  requiredItemList: number[];
   priceInfo: string;
   ticketType: string[];
   roundTicketNumber: number[];
@@ -199,7 +199,7 @@ export interface ISchoolFormResponse {
 }
 
 // 강아지 가입 신청서
-export interface IDogEnrollmentInfo {
+export interface DogEnrollmentInfo {
   enrollmentFormId: number;
   memberName: string;
   memberGender: string;
@@ -221,7 +221,7 @@ export interface IDogEnrollmentInfo {
   enrollmentTicketType: string;
   enrollmentRoundTicketNumber: number;
   enrollmentMonthlyTicketNumber: number;
-  attendanceDays: string[]; // MEMO API 명세서엔 string으로 되어있음
+  attendanceDays: string[];
   pickDropRequest: PickDropRequestType;
   pickDropType: string;
   pickDropMemo: string;
@@ -232,20 +232,6 @@ export interface IDogEnrollmentInfo {
 export interface BreedData {
   breedId: number;
   breedName: string;
-}
-
-export interface IEnrollmentStatus {
-  enrollmentFormId: number;
-  memberName: string;
-  dogName: string;
-  status: string;
-  registeredDate: number[];
-}
-
-export interface IEnrollmentDeleteData {
-  adminId: number;
-  teacherName: string;
-  phoneNumber: string;
 }
 
 // 유치원 재등록 시 기본적으로 제공되는 정보
