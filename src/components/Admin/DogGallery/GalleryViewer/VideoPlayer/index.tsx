@@ -1,29 +1,29 @@
 import PauseIcon from "assets/svg/pause-icon";
 import PlayIcon from "assets/svg/play-icon";
-import { Box } from "components/common/Box";
 import { useCallback, useEffect, useRef, useState, VideoHTMLAttributes } from "react";
 
 import * as S from "./style";
 
 interface VideoPlayerProps extends VideoHTMLAttributes<HTMLVideoElement> {
   onProgressUpdate?: (progress: number) => void;
-  key?: number; // key 속성을 추가하여 렌더링 유도
+  mediaKey?: number; // key 속성을 추가하여 렌더링 유도
 }
 
 export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<string>("00:00");
   const [duration, setDuration] = useState<string>("00:00"); // 전체 재생 시간 저장
 
   /** 재생/중지 토글 */
-  const handlePlayToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    if (videoRef.current) isPlaying ? pause() : play();
-  };
+  const handlePlayToggle = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      if (videoRef.current) isPlaying ? pause() : play();
+    },
+    [isPlaying]
+  );
 
   /** 비디오 재생 */
   const play = () => {
@@ -39,7 +39,6 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
       videoRef.current.pause();
       setIsPlaying(false);
     }
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
   };
 
   /** 시간 포맷 */
@@ -64,11 +63,6 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
 
     /** 비디오 메타데이터 로드 시, 전체 길이 설정 */
     const handleLoadedMetadata = () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
-        video.pause();
-      }
-
       setDuration(formatTime(video.duration));
     };
 
@@ -96,9 +90,7 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
     setIsPlaying(false);
     setCurrentTime("00:00");
     setDuration("00:00");
-
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  }, [props.key]);
+  }, [props.mediaKey]);
 
   return (
     <S.Container>
