@@ -14,7 +14,7 @@ export const Container = styled.div`
   align-items: center;
 
   width: 90%;
-  aspect-ratio: 0.7;
+  height: 70%;
   background-color: ${({ theme }) => hexToRGBA(theme.colors.black, 0.7)};
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
