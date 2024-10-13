@@ -10,7 +10,7 @@ interface ThumbnailItemProps {
 }
 
 const ThumbnaiVideo = ({ uri, progress = 0 }: ThumbnailItemProps) => {
-  const [imageSrc, setImageSrc] = useState<string>(uri);
+  const [imageSrc, setImageSrc] = useState(uri);
 
   /** 비디오 썸네일 로드 */
   useEffect(() => {

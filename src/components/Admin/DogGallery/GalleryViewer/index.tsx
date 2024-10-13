@@ -19,7 +19,7 @@ interface GalleryProps {
 const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: GalleryProps) => {
   const overlay = useOverlay();
 
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState(0);
   const currentIndex =
     mediaItems.findIndex((media) => media.imageId === selectedMedia.imageId) ?? 0;
 
@@ -109,7 +109,7 @@ const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: Gal
             <S.MainMediaDisplay key={item.imageId}>
               {item.isVideo ? (
                 <VideoPlayer
-                  key={selectedMedia.imageId} // 고유 식별자 사용
+                  mediaKey={selectedMedia.imageId} // 고유 식별자 사용
                   src={item.imageUrl}
                   onProgressUpdate={handleVideoProgress}
                 />
