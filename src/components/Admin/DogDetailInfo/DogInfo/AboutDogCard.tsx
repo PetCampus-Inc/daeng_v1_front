@@ -12,6 +12,7 @@ import {
   TagsWrapper,
   EditIconButton
 } from "components/Admin/DogDetailInfo/DogInfo/styles";
+import { MediaItem } from "components/Admin/DogGallery/GalleryViewer/types";
 import { Box, Flex, Text } from "components/common";
 import Badge from "components/common/Badge";
 import { XSmallButton } from "components/common/Button/Templates";
@@ -42,6 +43,21 @@ export function AboutDogCard({ data }: AboutDogCardProps) {
     data.vaccination === FIELD_MAPPING["vaccination"].VACCINATED ||
     data.neutralization === FIELD_MAPPING["neutralization"].NEUTERED ||
     data.pickDropRequest === FIELD_MAPPING["pickDropRequest"].REQUEST;
+
+  const handleVaccinationOpen = () => {
+    if (!data.vaccinationUri) return;
+    const selectedImageId = data.vaccinationUri[0].imageId;
+
+    const imageList: MediaItem[] = data.vaccinationUri.map((image) => ({
+      imageId: image.imageId,
+      imageUrl: image.imageUri,
+      isVideo: image.imageUri.endsWith(".mp4")
+    }));
+
+    navigate(routes.admin.attendance.galleryViewer.dynamic(data.dogId), {
+      state: { imageList, selectedImageId, title: "예방 접종 파일" }
+    });
+  };
 
   return (
     <Box shadow="card" borderRadius="20px">
@@ -133,7 +149,7 @@ export function AboutDogCard({ data }: AboutDogCardProps) {
               typo="caption1_12_B"
               colorScheme="yellow_3"
               disabled={!data.vaccinationUri}
-              onClick={() => console.log("파일 열기")}
+              onClick={handleVaccinationOpen}
             >
               파일 열람
             </XSmallButton>
