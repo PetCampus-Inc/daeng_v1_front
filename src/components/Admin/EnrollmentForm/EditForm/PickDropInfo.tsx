@@ -4,12 +4,12 @@ import { Checkbox, ToggleLabel } from "components/common";
 import SingleRadio from "components/common/Select/SingleRadio";
 import { Textarea } from "components/common/Textarea";
 import { useEffect } from "react";
-import { Controller, Form, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Card, Caption, Stack } from "../styles";
 
 export function PickDropInfo() {
-  const { register, control, watch, unregister } = useFormContext();
+  const { register, watch, unregister } = useFormContext();
   const pickDropState = watch(FIELD.PICKDROP_STATE);
 
   useEffect(() => {
@@ -24,10 +24,10 @@ export function PickDropInfo() {
   }, [pickDropState]);
 
   return (
-    <Form control={control}>
+    <>
       <Card>
         <ToggleLabel showBadge>픽드랍 운영</ToggleLabel>
-        <SingleRadio name="pickDropState" radiosText={["운영", "미운영"]} isRequired />
+        <SingleRadio name={FIELD.PICKDROP_STATE} radiosText={["운영", "미운영"]} isRequired />
       </Card>
       {pickDropState === "운영" && (
         <>
@@ -94,6 +94,6 @@ export function PickDropInfo() {
           </Card>
         </>
       )}
-    </Form>
+    </>
   );
 }

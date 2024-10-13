@@ -2,15 +2,15 @@ import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox, ToggleLabel } from "components/common";
 import { Textarea } from "components/common/Textarea";
-import { Controller, Form, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Card, Stack } from "../styles";
 
 export function PolicyInfo() {
-  const { register, control } = useFormContext();
+  const { register } = useFormContext();
 
   return (
-    <Form control={control}>
+    <>
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.LIMITS_INFO}`}
@@ -62,6 +62,6 @@ export function PolicyInfo() {
           <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
-    </Form>
+    </>
   );
 }

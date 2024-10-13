@@ -6,15 +6,13 @@ import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import { Textarea } from "components/common/Textarea";
 import { ImageUploadInput } from "components/Enrollment/ImageUpload/ImageUploadInput";
-import { Controller, Form, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import { Card, Caption } from "../styles";
 
 export function DogInfo() {
-  const { control } = useFormContext();
-
   return (
-    <Form control={control}>
+    <>
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_NAME}`}
@@ -113,6 +111,6 @@ export function DogInfo() {
         />
         <Textarea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
       </Card>
-    </Form>
+    </>
   );
 }
