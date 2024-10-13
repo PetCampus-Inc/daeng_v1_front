@@ -13,7 +13,7 @@ export function Navigation({ currentStep, stepsLength, nextStep, prevStep }: Nav
 
   return (
     <Flex width="full" mt={4} mx={4} gap={4}>
-      {/* {!isFirstStep && !isLastStep && (
+      {!isFirstStep && !isLastStep && (
         <WideButton onClick={prevStep} colorScheme="br_4" css={{ flex: 1 }}>
           이전
         </WideButton>
@@ -22,7 +22,7 @@ export function Navigation({ currentStep, stepsLength, nextStep, prevStep }: Nav
         <WideButton onClick={nextStep} css={{ flex: 3 }}>
           다음
         </WideButton>
-      )} */}
+      )}
       <WideButton type="submit">가입 신청서 등록</WideButton>
     </Flex>
   );

@@ -5,21 +5,9 @@ import { Textarea } from "components/common/Textarea";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { Card, Stack } from "../styles";
-import { useEffect } from "react";
-
-const logFocusBlur = (fieldName: string, eventType: "focus" | "blur") => {
-  console.log(`${eventType} event on ${fieldName} at ${new Date().toISOString()}`);
-};
 
 export function PolicyInfo() {
   const { register } = useFormContext();
-
-  useEffect(() => {
-    console.log("PolicyInfo component mounted");
-    return () => {
-      console.log("PolicyInfo component will unmount");
-    };
-  }, []);
 
   return (
     <>
@@ -36,8 +24,6 @@ export function PolicyInfo() {
         <Textarea
           {...register(FIELD.LIMITS_INFO, { required: true })}
           placeholder="이용 제한 관련 유의사항을 입력해 주세요"
-          onFocus={() => logFocusBlur(FIELD.LIMITS_INFO, "focus")}
-          onBlur={() => logFocusBlur(FIELD.LIMITS_INFO, "blur")}
         />
         <Stack>
           <Checkbox label="동의합니다" disabled />
@@ -56,8 +42,6 @@ export function PolicyInfo() {
         <Textarea
           {...register(FIELD.ACCIDENT_INFO, { required: true })}
           placeholder="상해 관련 유의사항을 입력해 주세요"
-          onFocus={() => logFocusBlur(FIELD.LIMITS_INFO, "focus")}
-          onBlur={() => logFocusBlur(FIELD.LIMITS_INFO, "blur")}
         />
         <Stack>
           <Checkbox label="동의합니다" disabled />
@@ -76,8 +60,6 @@ export function PolicyInfo() {
         <Textarea
           {...register(FIELD.ABANDONMENT_INFO, { required: true })}
           placeholder="유기 관련 유의사항을 입력해 주세요"
-          onFocus={() => logFocusBlur(FIELD.LIMITS_INFO, "focus")}
-          onBlur={() => logFocusBlur(FIELD.LIMITS_INFO, "blur")}
         />
         <Stack>
           <Checkbox label="동의합니다" disabled />

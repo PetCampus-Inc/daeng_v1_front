@@ -144,7 +144,6 @@ abstract class SchoolFormBase<T extends FieldValues> extends DataFormatAdapter<T
 
   /** requiredItemList 반환하는 함수 */
   protected get requiredItemList(): number[] {
-    console.log(this.value[FIELD.REQUEST_ITEMS]);
     return this.value[FIELD.REQUEST_ITEMS]
       .map((item: boolean, idx: number) => (item ? idx : null))
       .filter((id: number | null): id is number => id !== null);
