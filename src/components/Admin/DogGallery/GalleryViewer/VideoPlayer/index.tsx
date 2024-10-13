@@ -9,7 +9,7 @@ interface VideoPlayerProps extends VideoHTMLAttributes<HTMLVideoElement> {
   mediaKey?: number; // key 속성을 추가하여 렌더링 유도
 }
 
-export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) => {
+export const VideoPlayer = ({ onProgressUpdate, mediaKey, ...props }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -90,7 +90,7 @@ export const VideoPlayer = ({ onProgressUpdate, ...props }: VideoPlayerProps) =>
     setIsPlaying(false);
     setCurrentTime("00:00");
     setDuration("00:00");
-  }, [props.mediaKey]);
+  }, [mediaKey]);
 
   return (
     <S.Container>

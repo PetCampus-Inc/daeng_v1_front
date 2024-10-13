@@ -8,8 +8,6 @@ export const Container = styled.div`
 
 export const VideoWrapper = styled.div`
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 `;
 
 export const Video = styled.video`
