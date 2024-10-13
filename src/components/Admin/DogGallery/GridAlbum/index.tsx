@@ -72,7 +72,7 @@ const GridAlbum = ({ dogId, isEditing }: GridAlbumProps) => {
 
     const url = `${routes.admin.attendance.galleryViewer.dynamic(dogId)}`;
     navigate(url, {
-      state: { imageList, createdAt, selectedImageId }
+      state: { imageList, selectedImageId, title: createdAt }
     });
   };
 
