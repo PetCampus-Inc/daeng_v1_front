@@ -2,10 +2,18 @@ import { routes } from "constants/path";
 
 import { Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminDeleteCompletePage = () => {
   const navigate = useNavigate();
+
+  // 3초 이상 머물 경우 강제로 로그인 화면으로 이동
+  useEffect(() => {
+    setTimeout(() => {
+      navigate(routes.login.root);
+    }, 3000);
+  }, []);
 
   return (
     <>

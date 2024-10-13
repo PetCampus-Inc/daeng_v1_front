@@ -1,21 +1,31 @@
-import { Layout } from "components/common";
+import { routes } from "constants/path";
+
+import placeholderImg from "assets/images/placeholder-dog.png";
 import Header from "components/common/Header";
 import { NavBar } from "components/common/NavBar";
 import LogOutButton from "components/Member/MyPage/Buttons/LogOutButton";
-import { PageContainer } from "components/Member/MyPage/Container/styles";
+import { LayoutContainer, PageContainer } from "components/Member/MyPage/Container/styles";
 import MemberProfile from "components/Member/MyPage/MemberProfile";
 import MyDogInfo from "components/Member/MyPage/MyDogInfo";
 import { CardContainer, ContentContainer } from "components/Member/MyPage/styles";
 import { useGetMemberInfo } from "hooks/api/member/member";
+import { useNavigate } from "react-router-dom";
 
 const MemberMyPage = () => {
+  const navigate = useNavigate();
   const { data } = useGetMemberInfo();
 
   return (
     <>
-      <Header type="setting" text="마이페이지" transparent />
-      <Layout type="main">
-        <PageContainer pt="4" imageUrl={data.memberProfileUri}>
+      <LayoutContainer type="main">
+        <PageContainer pt="2" imageUrl={data.memberProfileUri ?? placeholderImg}>
+          <Header
+            type="setting"
+            text="마이페이지"
+            position="absolute"
+            handleClick={() => navigate(routes.member.mypage.setting.root)}
+            transparent
+          />
           <ContentContainer>
             <MemberProfile data={data} />
             <CardContainer>
@@ -25,7 +35,7 @@ const MemberMyPage = () => {
         </PageContainer>
         <LogOutButton />
         <NavBar />
-      </Layout>
+      </LayoutContainer>
     </>
   );
 };

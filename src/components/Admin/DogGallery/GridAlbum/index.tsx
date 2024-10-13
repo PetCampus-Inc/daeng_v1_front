@@ -1,13 +1,18 @@
+import { routes } from "constants/path";
+
 import { Button, Flex, ProgressTemplate, Text } from "components/common";
 import { BasicModal } from "components/common/Modal";
 import { useGetDogImage } from "hooks/api/admin/dogs";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useSaveMedia } from "hooks/common/useSaveMedia";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 import SinglePicture from "../SinglePicture";
+
+import type { AdminDogImage } from "types/admin/admin.types";
 
 interface GridAlbumProps {
   dogId: number;
@@ -34,6 +39,7 @@ const GridAlbum = ({ dogId, isEditing }: GridAlbumProps) => {
   const { data, hasNextPage, fetchNextPage, isLoading: isGetLoading } = useGetDogImage({ dogId });
   const { saveMedia, isLoading, total, currentIndex, progress } = useSaveMedia();
   const overlay = useOverlay();
+  const navigate = useNavigate();
 
   /** 사진 데이터 맵핑 */
   const dateMappingImages: ImageData = useMemo(() => {
@@ -53,6 +59,21 @@ const GridAlbum = ({ dogId, isEditing }: GridAlbumProps) => {
       setSelectedImages((prev) => prev.filter((item) => item !== url));
     else if (selectedImages.length < 20) setSelectedImages((prev) => [...prev, url]);
     else showToast("최대 20장까지 선택이 가능합니다", "gallery");
+  };
+
+  /** 사진 클릭 핸들러 */
+
+  const handleClick = (
+    selectedImageId: number,
+    createdAt: string,
+    imageList: Omit<AdminDogImage, "createdAt">[]
+  ) => {
+    if (selectedImageId === null || isEditing) return;
+
+    const url = `${routes.admin.attendance.galleryViewer.dynamic(dogId)}`;
+    navigate(url, {
+      state: { imageList, selectedImageId, title: createdAt }
+    });
   };
 
   /** `저장하기` 버튼 클릭 핸들러 */
@@ -122,6 +143,7 @@ const GridAlbum = ({ dogId, isEditing }: GridAlbumProps) => {
                     selected={isSelected}
                     isEditing={isEditing}
                     onSelect={handleSelect}
+                    onClick={() => handleClick(imageId, date, imageList)}
                   />
                 );
               })}

@@ -14,9 +14,9 @@ const DogGalleryPage = () => {
     <>
       <Header
         type="text"
-        text={isEditing ? "항목 선택" : "사진 앨범"}
+        text={isEditing ? "저장" : "사진 앨범"}
         handleClick={isEditing ? changeMode : undefined}
-        rightElement={!isEditing && <HeaderButton onClick={changeMode}>선택</HeaderButton>}
+        rightElement={!isEditing && <HeaderButton onClick={changeMode}>저장</HeaderButton>}
       />
       <Layout>
         <GridAlbum dogId={Number(dogId)} isEditing={isEditing} />

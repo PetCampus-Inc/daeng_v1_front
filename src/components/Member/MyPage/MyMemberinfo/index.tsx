@@ -1,6 +1,7 @@
 import { GENDER_DATA } from "constants/gender";
 import { RELATION_DATA } from "constants/relation";
 
+import placeholderImg from "assets/images/placeholder-dog.png";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import ListNormalIcon from "assets/svg/list-normal-icon";
 import MapPinFootNormalIcon from "assets/svg/map-pin-foot-normal-icon";
@@ -22,7 +23,7 @@ const MyInfo = () => {
       </S.TitleBox>
       <S.UserProfile>
         <S.ImgageBox>
-          <S.Image src={data.memberProfileUri} alt="member-profile" />
+          <S.Image src={data.memberProfileUri ?? placeholderImg} alt="member-profile" />
         </S.ImgageBox>
         <S.UserName>
           {data.nickName}의 {RELATION_DATA[data.relation]}
@@ -42,7 +43,7 @@ const MyInfo = () => {
             </S.IconCircle>
             이름
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.memberName ? data.memberName : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.memberName ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -57,7 +58,7 @@ const MyInfo = () => {
             </S.IconCircle>
             성별
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.memberGender ? GENDER_DATA[data.memberGender] : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.memberGender ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -72,7 +73,7 @@ const MyInfo = () => {
             </S.IconCircle>
             연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.phoneNumber ? data.phoneNumber : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.phoneNumber ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem>
           <S.MyInfoTitle>
@@ -87,7 +88,7 @@ const MyInfo = () => {
             </S.IconCircle>
             비상연락처
           </S.MyInfoTitle>
-          <S.MyInfoText>{data.emergencyPhoneNumber ? data.emergencyPhoneNumber : ""}</S.MyInfoText>
+          <S.MyInfoText>{data.emergencyPhoneNumber ?? ""}</S.MyInfoText>
         </S.MyInfoItem>
         <S.MyInfoItem className="address">
           <S.MyInfoTitle>
@@ -103,7 +104,7 @@ const MyInfo = () => {
             주소
           </S.MyInfoTitle>
           <S.MyInfoText>
-            {data.addressDetail && data.address ? `${data.addressDetail} ${data.address}` : ""}
+            {data.addressDetail && data.address ? `${data.address} ${data.addressDetail}` : ""}
           </S.MyInfoText>
         </S.MyInfoItem>
       </S.MyInfoList>

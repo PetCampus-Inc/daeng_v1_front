@@ -55,9 +55,13 @@ const SchoolInfoEditPage = () => {
     }
   };
 
+  const handleCompleteAddress = (value: string) => {
+    setValue("schoolAddress", value);
+  };
+
   const openPostCodePopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <Postcode isOpen={isOpen} close={close} field={"schoolAddress"} setValue={setValue} />
+      <Postcode isOpen={isOpen} close={close} onComplete={handleCompleteAddress} />
     ));
 
   const handleAddressFieldClick = () => {

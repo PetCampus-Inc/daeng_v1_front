@@ -65,6 +65,6 @@ export const EditButton = styled.button`
   color: ${({ theme }) => theme.colors.gray_1};
 `;
 
-export { Card, Stack, Caption } from "components/Enrollment/Form/styles";
+export { Card, Stack, Caption } from "components/Enrollment/NewForm/styles";
 export { Label } from "components/common/Title/style";
 export { Content } from "components/Enrollment/styles";

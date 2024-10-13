@@ -1,8 +1,9 @@
-import PlayIcon from "assets/svg/play-icon";
+import ExpandIcon from "assets/svg/expand-icon";
 import { MediaViewModal } from "components/Admin/DogGallery/SinglePicture/MediaViewModal";
+import { Box } from "components/common";
+import { Image } from "components/common/Image";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useEffect, useState } from "react";
-import { getVideoThumb } from "utils/thumb";
+import { useState } from "react";
 
 import { AlbumCheckBox } from "./AlbumCheckBox";
 import * as S from "./styles";
@@ -17,72 +18,47 @@ interface SinglePictureProps {
   selected?: boolean;
   isEditing?: boolean;
   onSelect?: (src: string) => void;
+  onClick?: () => void;
 }
 
-const SinglePicture = ({ uri, selected, isEditing, onSelect }: SinglePictureProps) => {
-  const overlay = useOverlay();
-  const [imageSrc, setImageSrc] = useState<string>(uri);
-
-  // TODO: 추후 보완이 필요해 보임
+const SinglePicture = ({ uri, selected, isEditing, onSelect, onClick }: SinglePictureProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const isVideo = uri.endsWith(".mp4");
-
-  /** 이미지 클릭 핸들러 */
-  const handleClick = () => isEditing || openMediaViewModal();
 
   /** 이미지 선택 핸들러 */
   const handleSelect = () => onSelect?.(uri);
 
-  /** 프리뷰 모달 열기 */
-  const openMediaViewModal = () => {
-    overlay.open(({ isOpen, close }) => (
-      <MediaViewModal isOpen={isOpen} close={close} src={uri} isVideo={isVideo} />
-    ));
+  const handleExpand = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsOpen(true);
   };
 
-  /** 비디오 썸네일 로드 */
-  useEffect(() => {
-    const loadSrc = async () => {
-      if (isVideo) {
-        try {
-          const response = await fetch(uri);
-          const blob = await response.blob();
-
-          const fileName = "video.mp4";
-          const fileType = "video/mp4";
-          const file = new File([blob], fileName, { type: fileType });
-
-          const videoThumb = await getVideoThumb(file);
-          setImageSrc(videoThumb.thumbnail);
-        } catch (error) {
-          console.error(error);
-          setImageSrc(uri);
-        }
-      } else {
-        setImageSrc(uri);
-      }
-    };
-
-    loadSrc();
-  }, [uri, isVideo]);
-
   return (
-    <S.Container onClick={handleClick} data-edit-mode={isEditing}>
+    <S.Container onClick={onClick} data-edit-mode={isEditing}>
       {/* 이미지 */}
-      <S.Image src={imageSrc} />
+      <Image src={uri} ratio="1/1" showVideoIcon />
 
       {/* 이미지 선택 체크박스 */}
       {isEditing && (
-        <S.CheckBoxWrap>
-          <AlbumCheckBox checked={selected} onChange={handleSelect} />
-        </S.CheckBoxWrap>
+        <>
+          <Box position="absolute" top={8} right={8}>
+            <AlbumCheckBox checked={selected} onChange={handleSelect} />
+          </Box>
+          <Box position="absolute" bottom={4} left={4} onClick={handleExpand}>
+            <ExpandIcon />
+          </Box>
+        </>
       )}
 
-      {/* 비디오 아이콘 */}
-      {isVideo && (
-        <S.VideoIconWrap>
-          <PlayIcon w={22} h={22} />
-        </S.VideoIconWrap>
-      )}
+      <MediaViewModal
+        isOpen={isOpen}
+        close={() => setIsOpen(false)}
+        src={uri}
+        selected={selected}
+        isVideo={isVideo}
+        onChange={handleSelect}
+      />
     </S.Container>
   );
 };

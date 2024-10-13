@@ -13,7 +13,7 @@ import type {
  * @description 견주 가입신청서 보기 - 승인 대기중인 견주의 가입신청서를 보여줍니다.
  * @param {string} formId
  */
-export const handleGetMemberEnrollmentForm = async (formId: string): Promise<MemberFormData> => {
+export const handleGetMemberEnrollmentForm = async (formId: number): Promise<MemberFormData> => {
   const url = `admin/enrollment/${formId}`;
   const { data } = await request<MemberFormData>({ url });
   return data;
@@ -21,9 +21,9 @@ export const handleGetMemberEnrollmentForm = async (formId: string): Promise<Mem
 
 /**
  * @description 작성한 가입신청서 미리보기 폼 데이터 반환 - 원장이 작성한 가입신청서 미리보기 페이지를 반환합니다.
- * @param {string} formId
+ * @param {number} formId
  */
-export const handleGetAdminForm = async (formId: string): Promise<EnrollmentDataType> => {
+export const handleGetAdminForm = async (formId: number): Promise<EnrollmentDataType> => {
   const url = `school/form/list/${formId}`;
   const { data } = await request<EnrollmentDataType>({ url });
   return data;

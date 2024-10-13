@@ -11,7 +11,6 @@ const ProfileActiveBox = ({ htmlFor, onClick }: ProfileActiveBoxProps) => {
   return (
     <S.ActiveBox htmlFor={htmlFor} onClick={onClick} className="active">
       <GalleryBasicIcon className="GalleryIcon" />
-      <S.BackDropBorder />
       <S.BackDrop />
     </S.ActiveBox>
   );

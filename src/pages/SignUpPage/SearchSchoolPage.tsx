@@ -1,3 +1,4 @@
+import { routes } from "constants/path";
 import { SCHOOL_NAME_KEY } from "constants/storage";
 
 import { Box, Layout, Text } from "components/common";
@@ -7,8 +8,7 @@ import { StyledButton } from "components/SignIn/styles";
 import SchoolSearchInputBox from "components/SignUp/SearchSchool/SchoolSearchInputBox";
 import { useSetLocalStorage } from "hooks/common/useLocalStorage";
 import { memo, useState } from "react";
-import { useFormState } from "react-hook-form";
-import { useBlocker } from "react-router-dom";
+import { useBlocker, useNavigate } from "react-router-dom";
 import { User } from "types/common/role.types";
 
 export interface SelectedSchool {
@@ -23,6 +23,7 @@ interface SearchSchoolPageProps {
 }
 
 const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) => {
+  const navigate = useNavigate();
   const setLocalStorage = useSetLocalStorage();
   const [selectedSchool, setSelectedSchool] = useState<SelectedSchool | null>(null);
   const [isNextClicked, setIsNextClicked] = useState(false);
@@ -33,6 +34,12 @@ const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) 
     if (!selectedSchool) return;
     onNextStep(selectedSchool.id);
     setLocalStorage(SCHOOL_NAME_KEY, selectedSchool.name);
+  };
+
+  const handleBackClick = () => {
+    // 첫 진입 페이지일 경우 뒤로가기 시 로그인 페이지로 이동
+    if (window.history.length <= 3) navigate(routes.login.root);
+    else navigate(-1);
   };
 
   const blocker = useBlocker(() => !!selectedSchool && !isNextClicked);
@@ -46,7 +53,7 @@ const SearchSchoolPage = ({ type, onNextStep, btnText }: SearchSchoolPageProps) 
           action={() => blocker.proceed()}
         />
       ) : null}
-      <Header type="back" />
+      <Header type="back" handleClick={handleBackClick} />
       <Layout pt={60} px={16} pb={24}>
         <Text typo="title1_24_B" color="darkBlack">
           안녕하세요 {type === User.ADMIN ? "선생님" : "견주님"}

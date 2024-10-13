@@ -112,13 +112,15 @@ export const handlePostMemberDogSchool = async (dogId: string): Promise<void> =>
 
 /**
  * @description 강아지 가입 신청서 보기 - 강아지의 가입신청서를 보여줍니다.
- * @param {number} dogId
+ * @param {number} enrollmentFormId
  */
-export const handleGetDogEnrollment = async (dogId: number): Promise<IDogEnrollmentInfo> => {
+export const handleGetDogEnrollment = async (
+  enrollmentFormId: number
+): Promise<IDogEnrollmentInfo> => {
   const url = `member/dog/enrollment`;
   const { data } = await authAxios.get(url, {
     params: {
-      dogId
+      enrollmentFormId
     }
   });
   return data.data;

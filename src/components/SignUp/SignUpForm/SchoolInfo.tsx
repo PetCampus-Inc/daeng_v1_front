@@ -67,10 +67,6 @@ const SchoolInfo = () => {
       setValue(field, formattedValue);
     };
 
-  const handleClear = () => {
-    setValue("schoolAddress", "");
-  };
-
   const handleAddressFieldClick = () => {
     if (watchAddress.length > 0) {
       openAddressModifyPopup();
@@ -79,9 +75,17 @@ const SchoolInfo = () => {
     }
   };
 
+  const handleClearAddress = () => {
+    setValue("schoolAddress", "");
+  };
+
+  const handleCompleteAddress = (value: string) => {
+    setValue("schoolAddress", value);
+  };
+
   const openPostCodePopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <Postcode isOpen={isOpen} close={close} field={"schoolAddress"} setValue={setValue} />
+      <Postcode isOpen={isOpen} close={close} onComplete={handleCompleteAddress} />
     ));
 
   const openAddressModifyPopup = () =>
@@ -140,7 +144,7 @@ const SchoolInfo = () => {
           placeholder="주소를 검색해 주세요"
           onSearch={openPostCodePopup}
           onClick={handleAddressFieldClick}
-          onClear={handleClear}
+          onClear={handleClearAddress}
           value={watchAddress}
           readOnly
           required

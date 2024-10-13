@@ -105,7 +105,7 @@ export const useKeyboardAwareView = (): UseKeyboardAwareViewResult => {
     transform: state.isKeyboardOpen ? `translateY(${state.translateY}px)` : "none",
     transition: isIOS
       ? `bottom ${KEYBOARD_ANIMATION_DURATION}ms cubic-bezier(${KEYBOARD_ANIMATION_BEZIER.join(",")}), transform 0.1s ease-out`
-      : "bottom 0.1s ease-out", // iOS가 아닌 경우 애니메이션 없음
+      : "bottom 0.1s ease-out",
     opacity: state.isKeyboardOpen ? 1 : 0,
     pointerEvents: state.isKeyboardOpen ? "auto" : "none",
     borderRadius: "0"
@@ -114,5 +114,5 @@ export const useKeyboardAwareView = (): UseKeyboardAwareViewResult => {
   return { ...state, style: fixedElStyle };
 };
 
-const KEYBOARD_ANIMATION_DURATION = 300;
+const KEYBOARD_ANIMATION_DURATION = 400;
 const KEYBOARD_ANIMATION_BEZIER = [0.41, 0.75, 0.82, 1];

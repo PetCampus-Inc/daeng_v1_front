@@ -1,4 +1,5 @@
 import BasicPhoneIcon from "assets/svg/phone-basic";
+import useNativeAction from "hooks/native/useNativeAction";
 
 import { BottomSheet, type BottomSheetProps } from "../index";
 import { CallSubtitle } from "../styles";
@@ -7,19 +8,23 @@ interface CallBottomSheetProps extends BottomSheetProps {
   dogName?: string;
   schoolName?: string;
   phoneNumber: string;
-  handleCall: () => void;
 }
 
 const CallBottomSheet = ({
   dogName,
   schoolName,
   phoneNumber,
-  close,
-  isOpen,
-  handleCall
+  ...bottomSheetProps
 }: CallBottomSheetProps) => {
+  const { call } = useNativeAction();
+
+  const handleCallClick = () => {
+    call(phoneNumber);
+    close();
+  };
+
   return (
-    <BottomSheet isOpen={isOpen} close={close}>
+    <BottomSheet {...bottomSheetProps}>
       <BottomSheet.Content>
         <BottomSheet.Control />
         <BottomSheet.Title>
@@ -27,7 +32,7 @@ const CallBottomSheet = ({
           {dogName ? <span>{dogName} 견주</span> : <span>{schoolName} 유치원</span>}
         </BottomSheet.Title>
         <CallSubtitle>{phoneNumber}</CallSubtitle>
-        <BottomSheet.Button actionText="전화 걸기" actionFn={handleCall} />
+        <BottomSheet.Button actionText="전화 걸기" actionFn={handleCallClick} />
       </BottomSheet.Content>
     </BottomSheet>
   );

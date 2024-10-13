@@ -106,10 +106,8 @@ export const handlePostMemberDogEnrollment = async (enrollmentFormId: number): P
 
 // 강아지 삭제하기
 export const handlePostMemberDogDelete = async (dogId: string): Promise<void> => {
-  const url = `/member/delete/dog`;
-  return await authAxios.post(url, {
-    dogId: dogId
-  });
+  const url = `/member/delete/dog?dogId=${dogId}`;
+  return await authAxios.post(url);
 };
 
 // 견주 상세 정보 수정
@@ -256,4 +254,11 @@ export const handlePostDogProfile = async (req: DogProfileReq) => {
     profileUrl: req.profileUrl
   });
   return data;
+};
+
+// FIXME 회원 탈퇴 기능 추가 필요
+// 회원 탈퇴
+export const handleDeleteMember = async () => {
+  const url = `member/delete/member`;
+  return await authAxios.post(url);
 };

@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "components/common";
-import { useFileDownload } from "hooks/common/useS3";
+import { useSaveMedia } from "hooks/common/useSaveMedia";
 import { useState } from "react";
 import { getTimeAgo } from "utils/date";
 
@@ -20,7 +20,7 @@ export function ImageComment({ images }: ImageCommentProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [totalFiles, setTotalFiles] = useState(0);
-  const { isLoading, progress, downloaded, downloadFile } = useFileDownload();
+  const { saveMedia, isLoading, currentIndex: downloaded, progress } = useSaveMedia();
 
   if (!images) return <EmptySlide />;
 
@@ -54,7 +54,7 @@ export function ImageComment({ images }: ImageCommentProps) {
             currentImage={currentImage}
             allImages={images}
             setTotalFiles={setTotalFiles}
-            downloadFile={downloadFile}
+            onDownload={saveMedia}
           />
         </Flex>
       </SliderHeader>

@@ -17,8 +17,6 @@ const MyInfoEdit = () => {
   const { register, setValue } = useFormContext();
   const overlay = useOverlay.useOverlay();
 
-  const addressStreet = FIELD.MEMBER_ADDRESS;
-
   const handleChangeNumber = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const formattedValue = formatPhoneNumber(value);
@@ -26,13 +24,17 @@ const MyInfoEdit = () => {
   };
 
   const handleClear = () => {
-    setValue(addressStreet, "");
+    setValue(FIELD.MEMBER_ADDRESS, "");
     setValue(FIELD.MEMBER_ADDRESS_DETAIL, "", { shouldDirty: true, shouldValidate: true });
+  };
+
+  const handleCompleteAddress = (value: string) => {
+    setValue(FIELD.MEMBER_ADDRESS, value);
   };
 
   const openPopup = () =>
     overlay.open(({ isOpen, close }) => (
-      <Postcode isOpen={isOpen} close={close} field={addressStreet} setValue={setValue} />
+      <Postcode isOpen={isOpen} close={close} onComplete={handleCompleteAddress} />
     ));
 
   return (
@@ -61,7 +63,7 @@ const MyInfoEdit = () => {
           주소
         </Text>
         <SearchInputField
-          name={addressStreet}
+          name={FIELD.MEMBER_ADDRESS}
           register={register}
           onSearch={openPopup}
           onClick={openPopup}

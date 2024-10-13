@@ -224,7 +224,33 @@ export const CarouselContainer = styled.div`
   overflow-x: auto;
 `;
 
-export const DragCarouselWrapper = styled.div``;
+export const DragCarouselWrapper = styled.div`
+  & > div {
+    overflow-x: auto;
+    touch-action: unset;
+    padding-bottom: 0.625rem;
+  }
+
+  /**스크롤 디자인 */
+  & > div::-webkit-scrollbar {
+    height: 0.375rem;
+  }
+
+  & > div::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.gray_3};
+    border-radius: 8px;
+  }
+
+  & > div::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.colors.gray_4};
+    border-radius: 8px;
+  }
+
+  & > div::-webkit-scrollbar-button,
+  & > div::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+`;
 
 export const CarouselCard = styled.div`
   position: relative;

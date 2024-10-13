@@ -19,8 +19,10 @@ export { default as ApprovalStatusPage } from "./ApprovalStatusPage/ApprovalStat
 export { default as AttendancePage } from "./AdminAttendancePage/AttendancePage";
 export { default as AttendCareDeletePage } from "./AdminAttendCarePage/AttendCareDeletePage";
 export { default as DogGalleryPage } from "./DogDetailGalleryPage/DogGalleryPage";
+export { default as DogGalleryViewerPage } from "./DogGalleryViewerPage/DogGalleryViewerPage";
 export { default as DogDetailInfoPage } from "./AdminDogDetailInfoPage/DogDetailInfoPage";
 export { default as NewTicketPage } from "./AdminNewTicketPage/NewTicketPage";
+export { default as DogInfoFormPage } from "./AdminDogDetailInfoPage/DogInfoFormPage";
 
 /* Admin AttendCare Page */
 export { default as AttendCarePage } from "./AdminAttendCarePage/AttendCarePage";
@@ -34,12 +36,12 @@ export { default as AdminSettingPage } from "./AdminMyPage/AdminSettingPage";
 export { default as SchoolInfoEditPage } from "./AdminMyPage/SchoolInfoEditPage";
 export { default as TeacherManagePage } from "./AdminSchoolMangePage/TeacherManagePage/TeacherManagePage";
 export { default as SchoolManageEnrollmentPage } from "./AdminSchoolMangePage/EnrollmentPage/SchoolManageEnrollmentPage";
-export { default as EnrollmentFormDetailPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormDetailPage";
-export { default as EnrollmentFormEditPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormEditFunnel";
-export { default as EnrollmentFormCreatePage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormCreateFunnel";
+export { default as EnrollmentFormReadPage } from "./AdminEnrollmentFormReadPage/EnrollmentFormReadPage";
+export { default as EnrollmentFormEditPage } from "./AdminEnrollmentFormEditPage/EnrollmentFormEditFunnel";
+export { default as EnrollmentFormCreatePage } from "./AdminEnrollmentFormCreatePage/EnrollmentFormCreateFunnel";
 export { default as EnrollmentFormListPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormListPage";
-export { default as EnrollmentFormSubmitPage } from "./AdminSchoolMangePage/EnrollmentPage/EnrollmentFormSubmitPage";
-export { default as MemberEnrollmentFormDetailPage } from "./EnrollmentPage/MemberEnrollmentFormDetailPage";
+export { default as EnrollmentFormSubmitPage } from "./AdminEnrollmentFromSubmitPage/EnrollmentFormSubmitPage";
+export { default as EnrollmentFormDetailPage } from "./MemberEnrolmentFormPage/MemberEnrollmentFormPage";
 
 /* Admin My Page */
 export { default as PrincipalMyPage } from "./AdminMyPage/PrincipalMyPage";
@@ -71,6 +73,7 @@ export { default as MemberDogInfoEditPage } from "./MemberPage/MemberDogInfoEdit
 export { default as MemberProfileEditPage } from "./MemberProfileEditPage/MemberProfileEditPage";
 export { default as MemberAddDogProfileEditPage } from "./MemberPage/MemberAddDogProfileEditPage";
 export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFunnel";
+export { default as MemberSettingPage } from "./MemberPage/MemberSettingPage";
 
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";

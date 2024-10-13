@@ -1,16 +1,16 @@
 import { ProgressTemplate } from "components/common";
 import { BottomButton } from "components/common/Button";
-import { useFileDownload } from "hooks/common/useS3";
+import { useSaveMedia } from "hooks/common/useSaveMedia";
 
 import { useSelectedImages } from "../hooks/SelectedImageProvider";
 
 const SaveButton = () => {
   const { imageMap, selectedImgIds } = useSelectedImages();
-  const { isLoading, progress, downloaded, downloadFile } = useFileDownload();
+  const { saveMedia, isLoading, currentIndex: downloaded, progress } = useSaveMedia();
 
   const handleDownload = () => {
     const urls = Array.from(imageMap.values());
-    downloadFile({ urls });
+    saveMedia(urls);
   };
 
   return (

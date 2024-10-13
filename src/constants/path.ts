@@ -72,11 +72,18 @@ const admin = {
     root: `/admin/attendance`,
     /** 강아지 상세정보 */
     info: {
-      dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}`
+      dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}`,
+      form: {
+        dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}/form`
+      }
     },
     /** 강아지 갤러리 */
     gallery: {
       dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}/gallery`
+    },
+    /** 강아지 갤러리 확대 보기*/
+    galleryViewer: {
+      dynamic: (dogId?: Parameter) => `/admin/attendance/${dogId ?? ":dogId"}/gallery-viewer`
     },
     /** 새 이용권 */
     newTicket: {
@@ -184,6 +191,14 @@ const member = {
   /** 마이페이지 */
   mypage: {
     root: `/mypage`,
+    /** 설정 페이지 */
+    setting: {
+      root: `/setting`
+    },
+    /** 계정 탈퇴 완료 */
+    deleteComplete: {
+      root: `/mypage/delete-complete`
+    },
     /** 프로필 */
     profile: {
       root: `/mypage/profile`,
@@ -216,7 +231,8 @@ const member = {
     },
     /** 유치원 가입신청서 */
     enrollment: {
-      dynamic: (dogId?: Parameter) => `/dog-info/${dogId ?? ":dogId"}/enrollment/detail`
+      dynamic: (dogId?: Parameter, enrollmentFormId?: Parameter) =>
+        `/dog-info/${dogId ?? ":dogId"}/enrollment/${enrollmentFormId ?? ":enrollmentFormId"}/detail`
     }
   },
   /** 온보딩 후 초기 프로필 설정 */

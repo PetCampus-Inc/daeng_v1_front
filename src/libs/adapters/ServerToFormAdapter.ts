@@ -228,15 +228,13 @@ export class AdminFormDetailAdapter extends AdminFormAdapter {
 
 export class AdminFormEditAdapter extends AdminFormAdapter {
   get getRequiredItemList(): boolean[] {
-    const maxNumber = Math.max(...this.value[FIELD.REQUEST_ITEMS]);
-    const itemList = new Array(maxNumber + 1).fill(false);
-
-    this.value[FIELD.REQUEST_ITEMS].forEach((number) => {
-      if (number <= maxNumber) {
-        itemList[number] = true;
+    const totalItems = Math.max(...this.value[FIELD.REQUEST_ITEMS]);
+    const itemList = new Array(totalItems + 1).fill(false);
+    this.value[FIELD.REQUEST_ITEMS].forEach((field) => {
+      if (field <= totalItems) {
+        itemList[field] = true;
       }
     });
-
     return itemList;
   }
 

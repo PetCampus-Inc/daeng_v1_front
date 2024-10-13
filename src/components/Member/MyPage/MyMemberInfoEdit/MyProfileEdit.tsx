@@ -3,7 +3,6 @@ import { FILE_NAME, TYPE_NAME } from "constants/s3File";
 
 import { TextInput } from "components/common";
 import ProfileUploadBox from "components/Member/Profile/Box/ProfileUploadBox";
-import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { css } from "styled-components";
 
@@ -12,13 +11,9 @@ import RoleEditButton from "../Buttons/RoleEditButton";
 
 const MyProfileEdit = () => {
   const { register } = useFormContext();
-  const [isShowRoles, setIsShowRoles] = useState(false);
-  const handleShowRoles = () => {
-    setIsShowRoles((prev) => !prev);
-  };
 
   return (
-    <S.MyProfileWrapper isShowRoles={isShowRoles}>
+    <S.MyProfileWrapper>
       <S.ProfileBox>
         <ProfileUploadBox type={TYPE_NAME.MEMBER} fileName={FILE_NAME.PROFILE_MEMBER} mode="edit" />
       </S.ProfileBox>
@@ -32,7 +27,7 @@ const MyProfileEdit = () => {
         />
         의
       </S.MyDogName>
-      <RoleEditButton isShowRoles={isShowRoles} handleShowRoles={handleShowRoles} />
+      <RoleEditButton />
     </S.MyProfileWrapper>
   );
 };

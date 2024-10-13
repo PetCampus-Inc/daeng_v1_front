@@ -1,5 +1,6 @@
 import { routes } from "constants/path";
 
+import ExclamationMarkIcon from "assets/svg/exclamationMark-icon";
 import { Box, Checkbox, Flex, Layout, Text } from "components/common";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
@@ -8,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/common/role.types";
 
+import * as S from "./styles";
 interface DeleteAccountProps {
   setStep: (step: number) => void;
   role: string;
@@ -60,34 +62,36 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
   };
 
   const renderCheckboxItem = (key: keyof ContentCheck, text: string, marginTop: number) => (
-    <Box
-      width="100%"
-      border={1}
-      borderRadius={8}
-      borderColor={contents[key] ? "transparent" : "gray_4"}
-      backgroundColor={contents[key] ? "br_5" : "transparent"}
-      padding={12}
-      marginTop={marginTop}
-    >
-      <Checkbox
-        onChange={() => checkIndividual(key)}
-        isChecked={contents[key]}
-        variant="default"
-        label={
-          <Text color="gray_1">
-            {text.split(/(<.*?>)/g).map((segment, index) =>
-              /<.*?>/.test(segment) ? (
-                <Text key={index} color="primaryColor">
-                  {segment.replace(/<|>/g, "")}
-                </Text>
-              ) : (
-                segment
-              )
-            )}
-          </Text>
-        }
-      />
-    </Box>
+    <S.CheckboxWrapper>
+      <Box
+        width="100%"
+        border={1}
+        borderRadius={8}
+        borderColor={contents[key] ? "transparent" : "gray_4"}
+        backgroundColor={contents[key] ? "br_5" : "white"}
+        padding={12}
+        marginTop={marginTop}
+      >
+        <Checkbox
+          onChange={() => checkIndividual(key)}
+          isChecked={contents[key]}
+          variant="default"
+          label={
+            <Text color="gray_1">
+              {text.split(/(<.*?>)/g).map((segment, index) =>
+                /<.*?>/.test(segment) ? (
+                  <Text key={index} color="primaryColor">
+                    {segment.replace(/<|>/g, "")}
+                  </Text>
+                ) : (
+                  segment
+                )
+              )}
+            </Text>
+          }
+        />
+      </Box>
+    </S.CheckboxWrapper>
   );
 
   return (
@@ -119,29 +123,35 @@ const DeleteAccount = ({ setStep, role }: DeleteAccountProps) => {
             15
           )}
         {role === Role.ROLE_OWNER && renderCheckboxItem(4, "모든 <개인 정보>가 삭제돼요", 15)}
-        <Box
-          width="100%"
-          border={1}
-          borderRadius={8}
-          borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
-          backgroundColor={`${isAllChecked ? "br_4" : "transparent"}`}
-          padding={12}
-          marginTop={60}
-        >
-          <Checkbox
-            onChange={checkAll}
-            isChecked={isAllChecked}
-            variant="default"
-            label={
-              <Text color={`${isAllChecked ? "primaryColor" : "gray_1"}`}>
-                위 안내사항에 모두 동의해요
-              </Text>
-            }
-          />
-        </Box>
+        <S.CheckboxWrapper>
+          <Box
+            width="100%"
+            border={1}
+            borderRadius={8}
+            borderColor={`${isAllChecked ? "transparent" : "gray_4"}`}
+            backgroundColor={`${isAllChecked ? "br_4" : "white"}`}
+            padding={12}
+            marginTop={60}
+          >
+            <Checkbox
+              onChange={checkAll}
+              isChecked={isAllChecked}
+              variant="default"
+              label={
+                <Text color={`${isAllChecked ? "primaryColor" : "gray_1"}`}>
+                  위 안내사항에 모두 동의해요
+                </Text>
+              }
+            />
+          </Box>
+        </S.CheckboxWrapper>
+
         <BottomButton onClick={onSubmit} disabled={!isAllChecked}>
           탈퇴하기
         </BottomButton>
+        <S.ExclamationMark>
+          <ExclamationMarkIcon />
+        </S.ExclamationMark>
       </Layout>
     </>
   );

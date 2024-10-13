@@ -9,7 +9,7 @@ export const Container = styled.div`
   z-index: 99;
 
   position: fixed;
-  padding-top: 20%;
+  padding-top: 40px;
   background-color: ${(props) => props.theme.colors.white};
   justify-content: space-evenly;
 `;

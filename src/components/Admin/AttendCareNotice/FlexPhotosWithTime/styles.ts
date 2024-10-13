@@ -1,26 +1,19 @@
+import { Image } from "components/common/Image";
 import styled from "styled-components";
 
-export const FlexBox = styled.div`
+export const ImageList = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-export const TimeAndPhotoContainer = styled.div`
-  display: flex;
-  gap: 0.5rem;
-
-  color: ${({ theme }) => theme.colors.gray_2};
-  text-align: start;
-  ${({ theme }) => theme.typo.body2_16_R};
-`;
-
-export const ImageFlexWrapper = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  flex-grow: 1;
-`;
-
-export const ImageBlock = styled.button`
-  border-radius: 8px;
+export const StyledImage = styled.div`
+  border-radius: 0.5rem;
+  max-width: 25%;
+  overflow: hidden;
 `;

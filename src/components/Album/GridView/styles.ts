@@ -1,5 +1,4 @@
 import styled from "styled-components";
-export { Img } from "styles/StyleModule";
 
 export const Grid = styled.div`
   width: 100%;
