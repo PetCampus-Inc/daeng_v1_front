@@ -13,9 +13,13 @@ export class Adapter {
 }
 
 export class DataFormatAdapter<T extends Record<string, any>> {
-  constructor(private data: T) {}
+  protected value: T;
 
-  private convertBe2Fe<K extends FieldKey>(field: K, value: BeFieldType<K>): FeFieldType<K> {
+  constructor(value: T) {
+    this.value = value;
+  }
+
+  protected convertBe2Fe<K extends FieldKey>(field: K, value: BeFieldType<K>): FeFieldType<K> {
     if (!(field in FIELD_MAPPING) || !(value in FIELD_MAPPING[field])) {
       throw new Error(`Invalid field or value: field=${field}, value=${String(value)}`);
     }
@@ -35,7 +39,7 @@ export class DataFormatAdapter<T extends Record<string, any>> {
 
   toFrontend(): { [K in keyof T]: K extends FieldKey ? FeFieldType<K> : T[K] } {
     const result: Partial<{ [K in keyof T]: K extends FieldKey ? FeFieldType<K> : T[K] }> = {};
-    for (const [key, value] of Object.entries(this.data)) {
+    for (const [key, value] of Object.entries(this.value)) {
       if (key in FIELD_MAPPING && typeof value === "string") {
         result[key as keyof T] = this.convertBe2Fe(
           key as FieldKey,
@@ -50,7 +54,7 @@ export class DataFormatAdapter<T extends Record<string, any>> {
 
   toBackend(): { [K in keyof T]: K extends FieldKey ? BeFieldType<K> : T[K] } {
     const result: Partial<{ [K in keyof T]: K extends FieldKey ? BeFieldType<K> : T[K] }> = {};
-    for (const [key, value] of Object.entries(this.data)) {
+    for (const [key, value] of Object.entries(this.value)) {
       if (key in FIELD_MAPPING && typeof value === "string") {
         result[key as keyof T] = this.convertFe2Be(
           key as FieldKey,
