@@ -26,10 +26,7 @@ const SinglePicture = ({ uri, selected, isEditing, onSelect, onClick }: SinglePi
   const isVideo = uri.endsWith(".mp4");
 
   /** 이미지 선택 핸들러 */
-  const handleSelect = () => {
-    console.log(uri);
-    onSelect?.(uri);
-  };
+  const handleSelect = () => onSelect?.(uri);
 
   const handleExpand = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
