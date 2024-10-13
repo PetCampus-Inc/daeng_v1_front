@@ -1,5 +1,6 @@
 import { MEMBER_ENROLL_STEP } from "constants/step";
 
+import { Indicator } from "components/Admin/EnrollmentForm";
 import {
   DogInfo,
   MemberInfo,
@@ -7,7 +8,6 @@ import {
   PolicyInfo,
   TicketInfo
 } from "components/Admin/EnrollmentForm/DetailForm";
-import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
 import {
   Container,
   TopWrapper,
@@ -23,6 +23,9 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useLocation, useParams } from "react-router-dom";
 
+/**
+ * 견주 가입신청서 보기
+ */
 export default function MemberEnrollmentFormPage() {
   const { formId } = useParams<{ formId: string }>();
   const { data } = useGetMemberEnrollment(Number(formId));

@@ -1,6 +1,7 @@
 import { routes } from "constants/path";
 import { ADMIN_READ_FORM_STEP } from "constants/step";
 
+import { Indicator } from "components/Admin/EnrollmentForm";
 import {
   DogInfo,
   MemberInfo,
@@ -8,7 +9,6 @@ import {
   PolicyInfo,
   TicketInfo
 } from "components/Admin/EnrollmentForm/ReadForm";
-import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
 import {
   Container,
   TopWrapper,
@@ -20,17 +20,19 @@ import {
 } from "components/Admin/EnrollmentForm/styles";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
-import { AdminNavBar } from "components/common/NavBar";
-import { type FormAdaptedData, useAdminEnrollment } from "hooks/api/admin/enroll";
+import { type FormAdaptedData, useGetSchoolForm } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
+/**
+ * 유치원 가입신청서 미리보기
+ */
 const EnrollmentFormReadPage = () => {
   const { formId } = useParams<{ formId: string }>();
   const navigate = useNavigate();
 
-  const { data, isLoading } = useAdminEnrollment(Number(formId), "READ");
+  const { data, isLoading } = useGetSchoolForm(Number(formId), "READ");
   const {
     requiredItemList,
     roundTicketNumber,
