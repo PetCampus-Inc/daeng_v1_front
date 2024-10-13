@@ -2,14 +2,14 @@ import { routes } from "constants/path";
 
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import ListIconSmallRound from "assets/svg/list-icon-small-round";
+import { Flex, Text } from "components/common";
 import { AnimatePresence } from "framer-motion";
-import { useApproveFormMutation, useDenyFormMutation } from "hooks/api/useApproveDenyMutation";
+import { useApproveFormMutation, useDenyFormMutation } from "hooks/api/admin/school";
 import { useState } from "react";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
-import ApproveDenyButton from "../ApproveDenyButton";
-import { TextWrapper, Name, Contour, PhoneNum } from "../TeacherInfo/styles";
+import { ApproveDenyButton } from "../../ApproveDenyButton";
 
 import type { IWaitingOwnerInfo } from "types/admin/school.types";
 
@@ -17,7 +17,7 @@ interface IOwnerWaitingCard {
   data: IWaitingOwnerInfo;
 }
 
-const MemberWaitingCard = ({ data }: IOwnerWaitingCard) => {
+export function MemberWaitingCard({ data }: IOwnerWaitingCard) {
   const { dogName, memberName, enrollmentFormId } = data;
   const [isShow, setIsShow] = useState(true);
   const mutateApproveForm = useApproveFormMutation();
@@ -59,11 +59,17 @@ const MemberWaitingCard = ({ data }: IOwnerWaitingCard) => {
           key={enrollmentFormId}
         >
           <S.UpperWrapper>
-            <TextWrapper>
-              <Name>{memberName}</Name>
-              <Contour>|</Contour>
-              <PhoneNum>{dogName}</PhoneNum>
-            </TextWrapper>
+            <Flex align="center" gap={10}>
+              <Text as="p" typo="label2_14_M" color="gray_1">
+                {memberName}
+              </Text>
+              <Text as="p" color="gray_4">
+                |
+              </Text>
+              <Text as="p" typo="label2_14_R" color="gray_2">
+                {dogName}
+              </Text>
+            </Flex>
             <ApproveDenyButton
               setIsShow={setIsShow}
               approveFunc={approveFunc}
@@ -83,6 +89,4 @@ const MemberWaitingCard = ({ data }: IOwnerWaitingCard) => {
       )}
     </AnimatePresence>
   );
-};
-
-export default MemberWaitingCard;
+}

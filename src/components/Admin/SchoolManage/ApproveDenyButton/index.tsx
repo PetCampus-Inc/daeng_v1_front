@@ -9,7 +9,7 @@ interface IApproveDenyButton {
   denyFunc: () => void;
 }
 
-const ApproveDenyButton = ({ setIsShow, approveFunc, denyFunc }: IApproveDenyButton) => {
+export function ApproveDenyButton({ setIsShow, approveFunc, denyFunc }: IApproveDenyButton) {
   const [firstButtonVisible, setFirstButtonVisible] = useState(true);
   const [secondButtonVisible, setSecondButtonVisible] = useState(true);
 
@@ -69,6 +69,4 @@ const ApproveDenyButton = ({ setIsShow, approveFunc, denyFunc }: IApproveDenyBut
       )}
     </S.ButtonWrapper>
   );
-};
-
-export default ApproveDenyButton;
+}

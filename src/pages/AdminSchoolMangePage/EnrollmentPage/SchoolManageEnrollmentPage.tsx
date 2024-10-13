@@ -1,8 +1,7 @@
 import { routes } from "constants/path";
 
 import ListIcon from "assets/svg/list-icon";
-import MACarousel from "components/Admin/SchoolManage/MACarousel";
-import OwnerWaitingList from "components/Admin/SchoolManage/MemberWaitingList";
+import { MemberWaitingList, SchoolFormSlide } from "components/Admin/SchoolManage/Enrollment";
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
@@ -19,8 +18,8 @@ const SchoolManageEnrollmentPage = () => {
           icon={<ListIcon />}
           handleClick={() => navigate(routes.admin.school.enrollment.ownerForms.root)}
         />
-        <MACarousel />
-        <OwnerWaitingList />
+        <SchoolFormSlide />
+        <MemberWaitingList />
       </Layout>
     </>
   );

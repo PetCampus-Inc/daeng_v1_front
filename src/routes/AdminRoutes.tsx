@@ -6,7 +6,7 @@ import { AlertSettingProvider } from "components/Admin/MyPage/AlertSetting/conte
 import { useTokenHandler } from "hooks/common/useTokenHandler";
 import * as Pages from "pages";
 import { Suspense } from "react";
-import { RouteObject, redirect } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import caredogLoader from "routes/caredogLoader";
 import PrivateRouter from "routes/PrivateRouter";
 import { Role } from "types/common/role.types";
@@ -75,11 +75,11 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
         },
         {
           path: routes.admin.care.root,
+          id: "caredog",
+          loader: () => caredogLoader({ queryClient }),
           children: [
             {
               index: true,
-              id: "caredog",
-              loader: () => caredogLoader({ queryClient }),
               element: (
                 <Suspense>
                   <Pages.AttendCarePage />
