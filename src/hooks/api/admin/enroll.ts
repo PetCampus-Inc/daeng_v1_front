@@ -68,7 +68,7 @@ export const useCreateSchoolForm = () => {
 // 유치원 가입신청서 삭제
 export const useDeleteSchoolForm = () => {
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: handleDeleteEnrollmentForm,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.SCHOOL_ENROLLMENT_LIST });
@@ -78,13 +78,26 @@ export const useDeleteSchoolForm = () => {
     }
   });
 
-  return { mutateDeleteEnrollment: mutate };
+  // FIXME: api Params가 단일값만 가능해서 배열도 처리할 수 있도록 임시 조치함
+  // 백엔드 API 수정 후에 제거 필요!!
+  const mutateDeleteEnrollments = async (ids: number[]) => {
+    try {
+      for (const id of ids) {
+        await mutateAsync(id);
+      }
+    } catch (error) {
+      console.log("가입신청서 일괄 삭제 실패", error);
+    }
+  };
+
+  return { mutateDeleteEnrollments };
 };
 
 // 유치원 가입신청서 목록 조회
 export const useGetSchoolFormList = (schoolId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.SCHOOL_ENROLLMENT_LIST,
-    queryFn: () => handleGetSchoolForm(schoolId)
+    queryFn: () => handleGetSchoolForm(schoolId),
+    staleTime: 5 * 60 * 1000
   });
 };
