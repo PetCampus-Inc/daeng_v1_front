@@ -1,22 +1,23 @@
-import { DOG_STATUS } from "constants/memberDogStatus";
 import { QUERY_KEY } from "constants/queryKey";
 
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import {
-  handleDeleteEnrollment,
+  handleCreateEnrollmentForm,
+  handleDeleteEnrollmentForm,
   handleGetAdminForm,
-  handleGetEnrollmentStatus,
   handleGetMemberEnrollmentForm,
-  handlePostAdminForm
+  handleGetSchoolForm
 } from "apis/admin/enrollment.api";
 import { Adapter } from "libs/adapters";
 import {
-  AdminFormDetailAdapter,
-  AdminFormEditAdapter,
-  MemberFormAdapter
+  SchoolFormDetailAdapter,
+  EditSchoolFormAdapter,
+  MemberForm2FeForAdminAdapter,
+  type SchoolFormReadType,
+  type SchoolFormEditType
 } from "libs/adapters/ServerToFormAdapter";
 
-import type { AdminEnrollmentInfoType, MemberFormData } from "types/admin/enrollment.types";
+import type { MemberFormData } from "types/admin/enrollment.types";
 import type { EnrollmentDataType } from "types/member/enrollment.types";
 
 // 견주 가입신청서 조회
@@ -25,85 +26,52 @@ export const useGetMemberEnrollment = (formId: number) => {
     queryKey: QUERY_KEY.MEMBER_ENROLLMENT(formId),
     queryFn: () => handleGetMemberEnrollmentForm(formId),
     select: (data) =>
-      Adapter.from(data).to((item: MemberFormData) => {
-        const adapterInstance = new MemberFormAdapter(item);
-        return adapterInstance.adapt();
-      })
+      Adapter.from(data).to((item: MemberFormData) =>
+        new MemberForm2FeForAdminAdapter(item).adapt()
+      )
   });
 };
 
-export type FormAdaptedData<Mode extends "READ" | "EDIT"> = Omit<
-  EnrollmentDataType,
-  "requiredItemList" | "pickDropState" | "roundTicketNumber" | "monthlyTicketNumber" | "ticketType"
-> & {
-  requiredItemList: Mode extends "READ" ? Map<number, boolean> : boolean[];
-  pickDropState: string;
-  ticketType: string[];
-  roundTicketNumber: Mode extends "READ"
-    ? number[]
-    : {
-        value: number;
-      }[];
-  monthlyTicketNumber: Mode extends "READ"
-    ? number[]
-    : {
-        value: number;
-      }[];
-};
-
+export type FormAdaptedData<Mode extends "READ" | "EDIT"> = Mode extends "READ"
+  ? SchoolFormReadType
+  : SchoolFormEditType;
 type Mode = "READ" | "EDIT";
 
-// 원장 가입신청서 조회, 수정
-export const useAdminEnrollment = (formId: number, mode: Mode) => {
+// 유치원 가입신청서 조회, 수정
+export const useGetSchoolForm = (formId: number, mode: Mode) => {
   return useSuspenseQuery<EnrollmentDataType, Error, FormAdaptedData<typeof mode>>({
-    queryKey: QUERY_KEY.ADMIN_ENROLLMENT(formId),
+    queryKey: QUERY_KEY.SCHOOL_ENROLLMENT(formId),
     queryFn: () => handleGetAdminForm(formId),
     select: (data) =>
       Adapter.from(data).to((item: EnrollmentDataType) => {
         const adapterInstance =
-          mode === "READ" ? new AdminFormDetailAdapter(item) : new AdminFormEditAdapter(item);
+          mode === "READ" ? new SchoolFormDetailAdapter(item) : new EditSchoolFormAdapter(item);
         return adapterInstance.adapt();
       })
   });
 };
 
-// 원장 가입신청서 저장
-export const useCreateAdminEnrollment = () => {
+// 유치원 가입신청서 저장
+export const useCreateSchoolForm = () => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationFn: (enrollmentData: AdminEnrollmentInfoType) => handlePostAdminForm(enrollmentData),
+    mutationFn: handleCreateEnrollmentForm,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.NEW_ENROLLMENT_LIST });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.SCHOOL_ENROLLMENT_LIST });
     }
   });
 
   return { mutateForm: mutate };
 };
 
-// 가입 신청서 상태를 확인
-export const useGetEnrollmentStatus = (enrollmentFormIds: string[]) => {
-  return useSuspenseQuery({
-    queryKey: QUERY_KEY.MEMBER_ENROLLMENT_STATUS,
-    queryFn: () => handleGetEnrollmentStatus(enrollmentFormIds && enrollmentFormIds),
-    select: (data) => {
-      const deleteDog = data.filter((dog) => dog.status === DOG_STATUS.APPROVAL_DENIED);
-
-      // deleteDog 데이터만 반환하기
-      return deleteDog.length > 0 ? [...deleteDog] : [];
-    }
-  });
-};
-
-// 가입신청서 삭제
-export const useDeleteEnrollment = () => {
+// 유치원 가입신청서 삭제
+export const useDeleteSchoolForm = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: (enrollmentFormId: string) =>
-      handleDeleteEnrollment(enrollmentFormId && enrollmentFormId),
+    mutationFn: handleDeleteEnrollmentForm,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO });
-      console.log("가입신청서 삭제 성공");
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY.SCHOOL_ENROLLMENT_LIST });
     },
     onError: (error) => {
       console.log("가입신청서 삭제 실패", error);
@@ -111,4 +79,12 @@ export const useDeleteEnrollment = () => {
   });
 
   return { mutateDeleteEnrollment: mutate };
+};
+
+// 유치원 가입신청서 목록 조회
+export const useGetSchoolFormList = (schoolId: number) => {
+  return useSuspenseQuery({
+    queryKey: QUERY_KEY.SCHOOL_ENROLLMENT_LIST,
+    queryFn: () => handleGetSchoolForm(schoolId)
+  });
 };

@@ -56,10 +56,9 @@ export const useGetDogDetail = (dogId: number) => {
     queryFn: () => handleGetDogDetail(dogId),
     staleTime: STALE_TIME,
     select: (data) => {
-      const formattedData = Adapter.from(data).to<typeof data, DogDetailInfo>((item) => {
-        const adapterInstance = new DataFormatAdapter(item);
-        return adapterInstance.toFrontend();
-      });
+      const formattedData = Adapter.from(data).to<typeof data, DogDetailInfo>((item) =>
+        new DataFormatAdapter(item).toFrontend()
+      );
       const { member, ...dogInfo } = formattedData;
 
       return {

@@ -6,7 +6,7 @@ import type {
   EnrollmentDataType,
   EnrollmentDogDataType,
   EnrollmentInfoType,
-  IDogEnrollmentInfo
+  DogEnrollmentInfo
 } from "types/member/enrollment.types";
 import type { IMemberSchoolInfo } from "types/member/school.types";
 
@@ -116,7 +116,7 @@ export const handlePostMemberDogSchool = async (dogId: string): Promise<void> =>
  */
 export const handleGetDogEnrollment = async (
   enrollmentFormId: number
-): Promise<IDogEnrollmentInfo> => {
+): Promise<DogEnrollmentInfo> => {
   const url = `member/dog/enrollment`;
   const { data } = await authAxios.get(url, {
     params: {
