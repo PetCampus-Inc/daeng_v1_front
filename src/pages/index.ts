@@ -22,6 +22,7 @@ export { default as DogGalleryPage } from "./DogDetailGalleryPage/DogGalleryPage
 export { default as DogGalleryViewerPage } from "./DogGalleryViewerPage/DogGalleryViewerPage";
 export { default as DogDetailInfoPage } from "./AdminDogDetailInfoPage/DogDetailInfoPage";
 export { default as NewTicketPage } from "./AdminNewTicketPage/NewTicketPage";
+export { default as DogInfoFormPage } from "./AdminDogDetailInfoPage/DogInfoFormPage";
 
 /* Admin AttendCare Page */
 export { default as AttendCarePage } from "./AdminAttendCarePage/AttendCarePage";

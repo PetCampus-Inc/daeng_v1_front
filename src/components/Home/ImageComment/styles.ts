@@ -27,12 +27,6 @@ export const SlideWrapper = styled.div`
   aspect-ratio: 1 / 1;
 `;
 
-export const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
 export const SlideIndex = styled.span`
   position: absolute;
   display: inline-flex;

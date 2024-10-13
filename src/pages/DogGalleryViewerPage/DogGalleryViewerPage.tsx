@@ -14,7 +14,7 @@ const DogGalleryViewerPage = () => {
   const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
   const { saveMedia, isLoading, total, currentIndex, progress } = useSaveMedia();
   const location = useLocation();
-  const { imageList, createdAt, selectedImageId } = location.state || {};
+  const { imageList, title, selectedImageId } = location.state || {};
 
   // imageList를 MediaItem[] 형태로 변환하여 상태에 저장
   const [mediaList, setMediaList] = useState<MediaItem[]>([]);
@@ -51,7 +51,7 @@ const DogGalleryViewerPage = () => {
       )}
       <Header
         type="text"
-        text={createdAt}
+        text={title}
         rightElement={<HeaderButton onClick={savePhotoOrVideo}>저장</HeaderButton>}
       />
       <Layout>

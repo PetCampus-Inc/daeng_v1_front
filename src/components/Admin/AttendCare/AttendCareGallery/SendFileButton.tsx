@@ -19,11 +19,14 @@ interface Props {
 
 const SendFileButton = ({ type }: Props) => {
   const { dogId } = useParams<{ dogId: string }>();
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, getValues } = useFormContext();
   const setGalleryImg = useSetRecoilState(galleryImgState);
   const [totalFiles, setTotalFiles] = useState(0);
   const { uploadFiles } = useUploadAndCreateAlbum();
   const navigate = useNavigate();
+
+  const filesValue = getValues("files") ?? [];
+  const hasFile = filesValue.length > 0;
 
   const onSubmit = async (data: FieldValues) => {
     if (type === "main") {
@@ -62,7 +65,7 @@ const SendFileButton = ({ type }: Props) => {
   };
 
   return (
-    <BottomButton type="submit" onClick={handleSubmit(onSubmit)}>
+    <BottomButton type="submit" disabled={!hasFile} onClick={handleSubmit(onSubmit)}>
       전송하기
     </BottomButton>
   );

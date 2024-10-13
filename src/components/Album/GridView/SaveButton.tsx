@@ -1,6 +1,6 @@
 import { ProgressTemplate } from "components/common";
 import { BottomButton } from "components/common/Button";
-import { useFileDownload } from "hooks/common/useS3";
+import { useSaveMedia } from "hooks/common/useSaveMedia";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { activeGroupIdState, canSaveSelector, selectedImagesState } from "store/images";
 
@@ -11,19 +11,16 @@ export function SaveButton() {
   const resetSelectedImages = useResetRecoilState(selectedImagesState);
   const resetActiveGroupId = useResetRecoilState(activeGroupIdState);
 
-  const { isLoading, progress, downloaded, downloadFile } = useFileDownload();
+  const { saveMedia, progress, isLoading, currentIndex: downloaded } = useSaveMedia();
 
   const handleSaveClick = () => {
     const urls = Array.from(selectedImages.values());
-    downloadFile(
-      { urls },
-      {
-        onSuccess: () => {
-          resetSelectedImages();
-          resetActiveGroupId();
-        }
+    saveMedia(urls, {
+      onSuccess: () => {
+        resetSelectedImages();
+        resetActiveGroupId();
       }
-    );
+    });
   };
 
   if (activeGroupId === null) return null;

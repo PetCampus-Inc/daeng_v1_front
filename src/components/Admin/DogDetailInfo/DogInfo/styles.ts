@@ -83,3 +83,5 @@ export const ModalWithTextAreaContent = styled.div`
   flex-direction: column;
   gap: 20px;
 `;
+
+export const EditIconButton = styled.button``;

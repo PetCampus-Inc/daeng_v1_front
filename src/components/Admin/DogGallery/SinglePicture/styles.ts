@@ -36,24 +36,8 @@ export const Container = styled.label`
   }
 `;
 
-export const CheckBoxWrap = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-`;
-
 export const Image = styled.img`
   object-fit: cover;
   width: 100%;
   aspect-ratio: 1/1;
-`;
-
-export const VideoIconWrap = styled.div`
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-
-  svg {
-    filter: drop-shadow(0 0 10px ${({ theme }) => theme.colors.black});
-  }
 `;

@@ -1,4 +1,5 @@
 import CloseIcon from "assets/svg/x-circle-icon";
+import { AlbumCheckBox } from "components/Admin/DogGallery/SinglePicture/AlbumCheckBox";
 import { FloatingOverlay } from "components/common/FloatingOverlay";
 import { ModalProps } from "components/common/Modal";
 import Portal from "components/common/Portal";
@@ -8,10 +9,19 @@ import * as S from "./styles";
 
 interface MediaViewModalProps extends ModalProps {
   src: string;
+  selected?: boolean;
   isVideo?: boolean;
+  onChange?: (src: string) => void;
 }
 
-export const MediaViewModal = ({ src, isVideo, isOpen, close }: MediaViewModalProps) => {
+export const MediaViewModal = ({
+  src,
+  isVideo,
+  isOpen,
+  close,
+  selected,
+  onChange
+}: MediaViewModalProps) => {
   return (
     <Portal>
       {isOpen && (
@@ -24,6 +34,10 @@ export const MediaViewModal = ({ src, isVideo, isOpen, close }: MediaViewModalPr
             </S.CloseButton>
 
             {isVideo ? <VideoPlayer src={src} /> : <S.Image src={src} />}
+
+            <S.CheckBoxWrap>
+              <AlbumCheckBox checked={selected} onChange={() => onChange?.(src)} />
+            </S.CheckBoxWrap>
           </S.Container>
         </>
       )}

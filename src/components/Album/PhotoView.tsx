@@ -7,8 +7,8 @@ export default function PhotoView({ dogId }: { dogId: number }) {
 
   return (
     <Flex direction="column" gap={24}>
-      {imageList.map((images) => (
-        <ImageComment images={images} />
+      {imageList.map((images, idx) => (
+        <ImageComment key={idx} images={images} />
       ))}
     </Flex>
   );
