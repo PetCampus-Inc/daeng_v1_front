@@ -1,8 +1,9 @@
 import CloseIcon from "assets/svg/x-circle-icon";
+import { VideoPlayer } from "components/common";
 import { Arrows } from "components/common/LightBox";
 import { ProgressScreen } from "components/Home/ImageComment/ProgressScreen";
 import { motion } from "framer-motion";
-import { useFileDownload } from "hooks/common/useS3";
+import { useSaveMedia } from "hooks/common/useSaveMedia";
 import { useState } from "react";
 import Slider from "react-slick";
 import { dialogAnimationVariants } from "styles/foundations/animation";
@@ -40,11 +41,12 @@ export const CommentCarouselLightBox = ({
 }: CarouselLightBoxProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(currentSlide);
   const [totalFiles, setTotalFiles] = useState<number>(0);
-  const { isLoading, progress, downloaded, downloadFile } = useFileDownload();
+  const { saveMedia, progress, isLoading, currentIndex: downloaded } = useSaveMedia();
 
   const isPrevDisabled = currentIndex === 0;
   const isNextDisabled = currentIndex === images.length - 1;
   const currentImage = images[currentIndex];
+  const isVideo = currentImage.imageUri.endsWith("mp4");
 
   const settings = {
     initialSlide: currentSlide,
@@ -77,7 +79,7 @@ export const CommentCarouselLightBox = ({
               currentImage={currentImage}
               allImages={images}
               setTotalFiles={setTotalFiles}
-              downloadFile={downloadFile}
+              onDownload={saveMedia}
             />
             <button type="button" onClick={onClose}>
               <CloseIcon colorScheme="black" w={31} h={31} opacity={0.7} />
@@ -86,7 +88,11 @@ export const CommentCarouselLightBox = ({
           <Slider {...settings}>
             {images.map((item, index) => (
               <SlideWrapper key={`slide-${item.imageId}-${index}`}>
-                <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
+                {isVideo ? (
+                  <VideoPlayer src={item.imageUri} />
+                ) : (
+                  <Image src={item.imageUri} alt={`Slide ${index + 1}`} />
+                )}
               </SlideWrapper>
             ))}
           </Slider>

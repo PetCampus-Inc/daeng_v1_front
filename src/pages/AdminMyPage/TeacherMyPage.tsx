@@ -43,10 +43,10 @@ const TeacherMyPage = () => {
               )}
               <CardContainer>
                 <InfoCard data={data} role={AdminRole.ROLE_TEACHER} />
+                <LogOutButton />
               </CardContainer>
             </ContentContainer>
           </PageContainer>
-          <LogOutButton />
 
           <AdminNavBar />
         </>

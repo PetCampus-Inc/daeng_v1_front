@@ -41,10 +41,10 @@ const PrincipalMyPage = () => {
               )}
               <CardContainer>
                 <InfoCard data={data} role={AdminRole.ROLE_OWNER} />
+                <LogOutButton />
               </CardContainer>
             </ContentContainer>
           </PageContainer>
-          <LogOutButton />
 
           <AdminNavBar />
         </>

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { getVideoThumb } from "utils/thumb";
+import { Image } from "components/common/Image";
 
 import * as S from "./styles";
 
@@ -9,39 +8,15 @@ interface ThumbnailItemProps {
   progress?: number;
 }
 
-const ThumbnaiVideo = ({ uri, progress = 0 }: ThumbnailItemProps) => {
-  const [imageSrc, setImageSrc] = useState(uri);
-
-  /** 비디오 썸네일 로드 */
-  useEffect(() => {
-    const loadSrc = async () => {
-      try {
-        const response = await fetch(uri);
-        const blob = await response.blob();
-
-        const fileName = "video.mp4";
-        const fileType = "video/mp4";
-        const file = new File([blob], fileName, { type: fileType });
-
-        const videoThumb = await getVideoThumb(file);
-        setImageSrc(videoThumb.thumbnail);
-      } catch (error) {
-        console.error(error);
-        setImageSrc(uri);
-      }
-    };
-
-    loadSrc();
-  }, [uri]);
-
+const ThumbnailVideo = ({ uri, progress = 0 }: ThumbnailItemProps) => {
   return (
     <>
       <S.VideoContainer>
         {progress > 0 ? <S.VideoProgressBar $progress={progress} /> : ""}
-        <S.Video src={imageSrc} />
+        <Image src={uri} />
       </S.VideoContainer>
     </>
   );
 };
 
-export default ThumbnaiVideo;
+export default ThumbnailVideo;

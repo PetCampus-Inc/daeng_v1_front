@@ -127,16 +127,21 @@ export const getRelativeTime = (timestampArray: number[]): string => {
     Math.floor(nanosecond / 1000000)
   );
   const now = new Date();
-  const duration = intervalToDuration({ start: date, end: now });
 
-  if (duration.hours === 0 && duration.minutes !== undefined) {
-    if (duration.minutes === 0) return "방금 전";
-    return `${duration.minutes}분 전`;
+  const minutesDiff = differenceInMinutes(now, date);
+  const hoursDiff = differenceInHours(now, date);
+  const daysDiff = differenceInDays(now, date);
+
+  if (daysDiff > 0) {
+    return format(date, "yyyy.MM.dd");
   }
-  if (duration.hours !== undefined && duration.hours > 0) {
-    return `${duration.hours}시간 전`;
+  if (hoursDiff > 0) {
+    return `${hoursDiff}시간 전`;
   }
-  return format(date, "yyyy.MM.dd");
+  if (minutesDiff > 0) {
+    return `${minutesDiff}분 전`;
+  }
+  return "방금 전";
 };
 
 /**

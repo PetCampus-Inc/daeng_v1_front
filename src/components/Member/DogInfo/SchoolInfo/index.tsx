@@ -35,10 +35,9 @@ const SchoolInfo = ({ dogId }: IProps) => {
     const object = memberPrecautions.agreements.find((obj) =>
       Object.prototype.hasOwnProperty.call(obj, id)
     );
-    if (object) {
-      return Object.values(object)[0];
-    }
-    return "";
+    const date = object ? Object.values(object)[0] : undefined;
+
+    return date && date !== "null" ? `${date} 동의` : "동의 내역 없음";
   };
 
   const openMemberAgreement = async (agreementId: number, title: string, icon: ReactNode) => {
@@ -98,16 +97,6 @@ const SchoolInfo = ({ dogId }: IProps) => {
               전화 걸기
             </YellowThickButton>
           </DetailItem>
-          <DetailItem className="row">
-            <TextWrapper>
-              <BasicPhoneIcon />
-              {schoolData.phoneNumber}
-            </TextWrapper>
-            <YellowThickButton onClick={() => openCallPopup()}>
-              <PhoneIcon />
-              전화 걸기
-            </YellowThickButton>
-          </DetailItem>
           <DetailItem>
             <TextWrapper>
               <MapPinIcon />
@@ -134,7 +123,7 @@ const SchoolInfo = ({ dogId }: IProps) => {
                   재동의 필요
                 </YellowThickButton>
               ) : (
-                <S.FlexText className="date">{findObject(item.id)} 동의</S.FlexText>
+                <S.FlexText className="date">{findObject(item.id)}</S.FlexText>
               )}
             </S.InnerFlexWrapper>
           </S.List>

@@ -40,6 +40,14 @@ const AdminRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObject
               )
             },
             {
+              path: routes.admin.attendance.info.form.dynamic(),
+              element: (
+                <Suspense>
+                  <Pages.DogInfoFormPage />
+                </Suspense>
+              )
+            },
+            {
               path: routes.admin.attendance.newTicket.dynamic(),
               element: (
                 <Suspense>

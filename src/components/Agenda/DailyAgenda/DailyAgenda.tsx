@@ -38,7 +38,7 @@ export const AgendaView = ({ data }: { data: DogInfoAgenda }) => {
         <Text typo="label2_14_R" color="darkBlack">
           {data.poopMemo}
         </Text>
-        <PoopStatusGroup selected={data.poop} readOnly />
+        <PoopStatusGroup selected={data.poop} size="s" readOnly />
       </Flex>
     </Flex>
   );

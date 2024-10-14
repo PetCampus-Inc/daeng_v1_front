@@ -11,12 +11,14 @@ import { POOP_STATUS, type PoopStatus } from "types/member/dogs";
 import * as S from "./styles";
 
 interface PoopStatusGroupProps {
+  size?: "s" | "l";
   selected?: PoopStatus;
   readOnly?: boolean;
   onChange?: (status: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PoopStatusGroup = ({
+  size = "l",
   selected = POOP_STATUS.HARD,
   readOnly,
   onChange
@@ -37,7 +39,7 @@ const PoopStatusGroup = ({
             />
           </S.PoopStatusRadio>
 
-          <Text typo="label2_14_R" whiteSpace="nowrap">
+          <Text typo={size === "s" ? "caption1_12_R" : "label2_14_R"} whiteSpace="nowrap">
             {label}
           </Text>
         </S.PoopStatusRadioWrap>

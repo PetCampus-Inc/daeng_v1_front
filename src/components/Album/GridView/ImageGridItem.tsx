@@ -1,7 +1,8 @@
 import ExpandIcon from "assets/svg/expand-icon";
 import { AlbumCheckbox, Box } from "components/common";
+import { Image } from "components/common/Image";
 
-import { GridItem, GridItemButton, IconContainer, Img } from "./styles";
+import { GridItem, GridItemButton, IconContainer } from "./styles";
 
 import type { ImageList } from "types/member/main.types";
 
@@ -39,7 +40,7 @@ export function ImageGridItem({
             <AlbumCheckbox checked={isSelected} />
           </Box>
         )}
-        <Img src={image.imageUri} />
+        <Image src={image.imageUri} ratio="1/1" />
         <IconContainer
           onClick={(e) => {
             e.stopPropagation();
