@@ -3,28 +3,29 @@ import { routes } from "constants/path";
 import ApplicationBrownIcon from "assets/svg/application-brown-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import YellowApplication from "assets/svg/yellow-application";
+import { Box, Flex, Text } from "components/common";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ISimpleSchoolFormList } from "types/admin/school.types";
+import { convertDateArrayToString } from "utils/date";
 
 import * as S from "./styles";
 
-interface ISimpleMembershipApplicationProps {
+import type { SchoolFormList } from "types/admin/enrollment.types";
+
+interface SchoolFormCardProps {
   isUsed?: boolean;
-  data: ISimpleSchoolFormList;
+  data: SchoolFormList;
   isEditable?: boolean;
   setSelectedList?: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const SimpleMembershipApplication = ({
+export function SchoolFormCard({
   isUsed = false,
   data,
   isEditable = false,
   setSelectedList
-}: ISimpleMembershipApplicationProps) => {
+}: SchoolFormCardProps) {
   const navigate = useNavigate();
-
-  const dateString = data.createdDate.map((num: number) => (num < 10 ? "0" + num : num)).join("-");
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
@@ -43,20 +44,22 @@ const SimpleMembershipApplication = ({
   };
 
   return (
-    <S.Container onClick={() => handleTouch()} $isUsed={isUsed} $isSelected={isSelected}>
-      <S.LeftBox>
+    <S.ItemCard onClick={() => handleTouch()} $isUsed={isUsed} $isSelected={isSelected}>
+      <Flex align="center">
         <S.Image>{isUsed ? <YellowApplication /> : <ApplicationBrownIcon />}</S.Image>
-        <S.TextWrapper>
-          <S.Title>{data.schoolFormName}</S.Title>
-          <S.MiddleText>
+        <Box display="flex" direction="column" textAlign="left" ml={16} gap={2}>
+          <Text as="p" typo="body2_16_B" color="gray_1" whiteSpace="nowrap">
+            {data.schoolFormName}
+          </Text>
+          <Text as="p" typo="label2_14_R" color="gray_2" whiteSpace="nowrap">
             {isUsed ? "현재 사용중인 신청서에요" : "이전에 작성된 신청서에요"}
-          </S.MiddleText>
-          <S.Date>{dateString} 작성됨</S.Date>
-        </S.TextWrapper>
-      </S.LeftBox>
+          </Text>
+          <Text typo="caption1_12_R" color="gray_3" whiteSpace="nowrap">
+            {convertDateArrayToString(data.createdDate)} 작성됨
+          </Text>
+        </Box>
+      </Flex>
       <ArrowRightIcon size={16} />
-    </S.Container>
+    </S.ItemCard>
   );
-};
-
-export default SimpleMembershipApplication;
+}

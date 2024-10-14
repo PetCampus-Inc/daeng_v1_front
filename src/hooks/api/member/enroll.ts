@@ -11,7 +11,7 @@ import {
   handlePostEnrollment
 } from "apis/member/enrollment.api";
 import { Adapter } from "libs/adapters";
-import { EnrollmentFormAdapter } from "libs/adapters/ServerToFormAdapter";
+import { MemberForm2FeAdapter } from "libs/adapters/ServerToFormAdapter";
 import { useNavigate } from "react-router-dom";
 
 import type {
@@ -28,7 +28,7 @@ export const useGetEnrollment = ({ schoolId }: IEnrollmentProps) => {
     refetchOnWindowFocus: false,
     select: (data) => {
       const fromData = Adapter.from(data).to<EnrollmentDataType, EnrollmentFormDataType>((item) => {
-        const adapterInstance = new EnrollmentFormAdapter(item);
+        const adapterInstance = new MemberForm2FeAdapter(item);
         return adapterInstance.adapt();
       });
 

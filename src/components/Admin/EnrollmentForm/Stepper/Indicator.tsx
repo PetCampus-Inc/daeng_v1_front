@@ -6,7 +6,7 @@ interface IndicatorProps {
   goToStep: (step: number) => void;
 }
 
-const Indicator = ({ currentStep, indicators, goToStep }: IndicatorProps) => {
+export function Indicator({ currentStep, indicators, goToStep }: IndicatorProps) {
   return (
     <IndicatorContainer>
       {indicators.map((step, index) => (
@@ -16,6 +16,4 @@ const Indicator = ({ currentStep, indicators, goToStep }: IndicatorProps) => {
       ))}
     </IndicatorContainer>
   );
-};
-
-export default Indicator;
+}

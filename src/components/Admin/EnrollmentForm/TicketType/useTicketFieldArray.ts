@@ -1,15 +1,22 @@
 import { useEffect } from "react";
-import { Control, useFieldArray } from "react-hook-form";
+import {
+  type FieldArrayWithId,
+  type FieldValues,
+  type UseFieldArrayReplace,
+  useFieldArray
+} from "react-hook-form";
+
+export interface ExtendedFieldArrayWithId extends FieldArrayWithId {
+  value?: number;
+}
 
 type TicketFieldArrayProps = {
-  control: Control;
   fieldName: string;
   defaultValues: number[];
 };
 
-export function useTicketFieldArray({ control, fieldName, defaultValues }: TicketFieldArrayProps) {
-  const { fields, append, remove, replace } = useFieldArray({
-    control,
+export function useTicketFieldArray({ fieldName, defaultValues }: TicketFieldArrayProps) {
+  const { fields, replace, remove } = useFieldArray({
     name: fieldName,
     shouldUnregister: false
   });
@@ -20,5 +27,14 @@ export function useTicketFieldArray({ control, fieldName, defaultValues }: Ticke
     }
   }, [fields.length, replace, defaultValues]);
 
-  return { fields, append, remove };
+  const sortedAppend = (value: number) => appendSorted(value)(fields, replace);
+
+  return { fields, append: sortedAppend, remove };
 }
+
+const appendSorted =
+  (value: number) =>
+  (fields: ExtendedFieldArrayWithId[], replace: UseFieldArrayReplace<FieldValues, string>) => {
+    const newFields = [...fields, { value }].sort((a, b) => (a.value ?? 0) - (b.value ?? 0));
+    replace(newFields);
+  };

@@ -1,25 +1,19 @@
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
 
 import {
+  Indicator,
+  Navigation,
+  useAlertPopup,
+  useFormHandlers
+} from "components/Admin/EnrollmentForm";
+import {
   DogInfo,
   MemberInfo,
   PickDropInfo,
   PolicyInfo,
   TicketInfo
 } from "components/Admin/EnrollmentForm/CreateForm";
-import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
-import Navigation from "components/Admin/EnrollmentForm/Stepper/Navigation";
-import {
-  Container,
-  TopWrapper,
-  TitleWrapper,
-  Title,
-  SubTitle,
-  ContentWrapper,
-  Content,
-  ButtonContainer,
-  HelperText
-} from "components/Admin/EnrollmentForm/styles";
+import * as Styled from "components/Admin/EnrollmentForm/styles";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
@@ -30,7 +24,7 @@ import { isEmpty } from "utils/is";
 
 interface EnrollmentFormCreateProps {
   formValues?: FieldValues;
-  onNextStep?: (formInfo: FieldValues) => void;
+  onNextStep: (formInfo: FieldValues) => void;
 }
 
 export default function EnrollmentFormCreatePage({
@@ -40,6 +34,7 @@ export default function EnrollmentFormCreatePage({
   const methods = useForm({
     mode: "onBlur",
     defaultValues: formValues,
+    shouldFocusError: false, // 에러시 포커스 해제
     shouldUnregister: false
   });
 
@@ -48,6 +43,14 @@ export default function EnrollmentFormCreatePage({
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
+
+  const openAlertPopup = useAlertPopup();
+  const { onSubmit, onInvalid } = useFormHandlers(
+    onNextStep,
+    openAlertPopup,
+    methods.setFocus,
+    setStep
+  );
 
   const { dirtyFields } = useFormState({ control: methods.control });
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
@@ -73,45 +76,46 @@ export default function EnrollmentFormCreatePage({
         />
       ) : null}
       <Header type="text" text="가입신청서" />
-      <Layout bg="BGray" px={16}>
-        <Container>
-          <TopWrapper>
-            <TitleWrapper>
-              <Title>{currentTitle}</Title>
-              <SubTitle>{currentSubtitle}</SubTitle>
-            </TitleWrapper>
+      <Layout bgColor="BGray" px={16} pb={42}>
+        <Styled.Container>
+          <Styled.TopWrapper>
+            <Styled.TitleWrapper>
+              <Styled.Title>{currentTitle}</Styled.Title>
+              <Styled.SubTitle>{currentSubtitle}</Styled.SubTitle>
+            </Styled.TitleWrapper>
             <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
-          </TopWrapper>
+          </Styled.TopWrapper>
           <FormProvider {...methods}>
-            <ContentWrapper>
-              <Content $isVisible={currentStep === 0}>
-                <MemberInfo />
-              </Content>
-              <Content $isVisible={currentStep === 1}>
-                <DogInfo />
-              </Content>
-              <Content $isVisible={currentStep === 2}>
-                <TicketInfo />
-              </Content>
-              <Content $isVisible={currentStep === 3}>
-                <PolicyInfo />
-              </Content>
-              <Content $isVisible={currentStep === 4}>
-                <PickDropInfo />
-              </Content>
-            </ContentWrapper>
-            <ButtonContainer>
-              <HelperText>작성된 신청서로 견주가 가입 신청을 해요</HelperText>
-              <Navigation
-                currentStep={currentStep}
-                stepsLength={currentSteps.length}
-                nextStep={nextStep}
-                prevStep={prevStep}
-                onNextStep={onNextStep}
-              />
-            </ButtonContainer>
+            <form onSubmit={methods.handleSubmit(onSubmit, onInvalid)}>
+              <Styled.ContentWrapper>
+                <Styled.Content $isVisible={currentStep === 0}>
+                  <MemberInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 1}>
+                  <DogInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 2}>
+                  <TicketInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 3}>
+                  <PolicyInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 4}>
+                  <PickDropInfo />
+                </Styled.Content>
+              </Styled.ContentWrapper>
+              <Styled.ButtonContainer>
+                <Styled.HelperText>작성된 신청서로 견주가 가입 신청을 해요</Styled.HelperText>
+                <Navigation
+                  currentStep={currentStep}
+                  stepsLength={currentSteps.length}
+                  nextStep={nextStep}
+                  prevStep={prevStep}
+                />
+              </Styled.ButtonContainer>
+            </form>
           </FormProvider>
-        </Container>
+        </Styled.Container>
       </Layout>
     </>
   );

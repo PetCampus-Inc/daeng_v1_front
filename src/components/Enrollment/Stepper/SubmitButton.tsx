@@ -3,7 +3,7 @@ import { getFieldStep } from "constants/step";
 
 import { usePostEnrollment } from "hooks/api/member/enroll";
 import { useS3Upload } from "hooks/common/useS3";
-import { Adapter, MemberFormToServerAdapter } from "libs/adapters";
+import { Adapter, CreateMemberForm2BeAdapter } from "libs/adapters";
 import { FieldValues, useFormContext, type FieldErrors } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -35,7 +35,7 @@ const SubmitButton = ({ openPopup }: { openPopup: (field: string) => void }) => 
 
   const getFormData = (data: FieldValues) => {
     return Adapter.from(data).to<FieldValues, EnrollmentInfoType>((item) =>
-      new MemberFormToServerAdapter(item).adapt()
+      new CreateMemberForm2BeAdapter(item).adapt()
     );
   };
 

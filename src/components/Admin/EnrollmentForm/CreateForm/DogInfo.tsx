@@ -6,18 +6,17 @@ import SelectNumber from "components/common/Select/SelectNumber";
 import SingleRadio from "components/common/Select/SingleRadio";
 import { Textarea } from "components/common/Textarea";
 import { ImageUploadInput } from "components/Enrollment/ImageUpload/ImageUploadInput";
-import { Controller, Form, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import { Card, Caption } from "../styles";
 
 export function DogInfo() {
-  const { control } = useFormContext();
-
   return (
-    <Form control={control}>
+    <>
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_NAME}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle readOnly>
               이름
@@ -29,6 +28,7 @@ export function DogInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_GENDER}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle readOnly>
               성별
@@ -40,6 +40,7 @@ export function DogInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.DOG_SIZE}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle readOnly>
               크기
@@ -55,6 +56,7 @@ export function DogInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.BREED_ID}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle readOnly>
               견종
@@ -66,6 +68,7 @@ export function DogInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.BIRTHDAY}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle readOnly>
               생일
@@ -81,6 +84,7 @@ export function DogInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.NEUTRALIZATION}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle>
               중성화 여부
@@ -92,6 +96,7 @@ export function DogInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.VACCINATION}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle>
               예방접종 여부
@@ -105,6 +110,7 @@ export function DogInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ALLERGY_DISEASE}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle>
               알러지 및 질병 유무
@@ -113,6 +119,6 @@ export function DogInfo() {
         />
         <Textarea placeholder="알러지나 질병이 있다면 상세히 입력해주세요." disabled />
       </Card>
-    </Form>
+    </>
   );
 }

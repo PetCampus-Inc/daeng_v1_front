@@ -2,6 +2,13 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+export const Text = styled.p`
+  margin-top: 45%;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme }) => theme.typo.body2_16_R};
+`;
+
 export const CardContainer = styled(motion.div)`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.white};

@@ -4,14 +4,13 @@ import WaitingTeacherList from "components/Admin/SchoolManage/TeacherList/Waitin
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
-import useGetTeacherList from "hooks/api/useGetTeacherList";
+import { useGetTeacherList } from "hooks/api/admin/school";
 import { useState } from "react";
 
 const TeacherManagePage = () => {
   const [isEditable, setIsEditable] = useState(false);
 
   const { data } = useGetTeacherList();
-  if (!data) return <div>로딩중..</div>;
 
   return (
     <>

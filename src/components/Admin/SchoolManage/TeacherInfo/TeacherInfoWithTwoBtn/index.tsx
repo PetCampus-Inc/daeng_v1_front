@@ -1,12 +1,9 @@
 import { AnimatePresence } from "framer-motion";
-import {
-  useApproveTeacherMutation,
-  useDenyTeacherMutation
-} from "hooks/api/useApproveDenyMutation";
+import { useApproveTeacherMutation, useDenyTeacherMutation } from "hooks/api/admin/school";
 import { useState } from "react";
 import { ITeacherInfo } from "types/admin/school.types";
 
-import ApproveDenyButton from "../../ApproveDenyButton";
+import { ApproveDenyButton } from "../../ApproveDenyButton";
 import * as S from "../styles";
 
 interface TeacherInfoWithTwoBtnProps {

@@ -1,77 +1,55 @@
 import authAxios from "libs/AuthAxios";
-import { request } from "libs/AuthAxios/request";
 
-import type { MemberFormData } from "types/admin/enrollment.types";
+import type { MemberFormData, SchoolFormList } from "types/admin/enrollment.types";
 import type { AdminEnrollmentInfoType } from "types/admin/enrollment.types";
-import type {
-  EnrollmentDataType,
-  IEnrollmentDeleteData,
-  IEnrollmentStatus
-} from "types/member/enrollment.types";
+import type { EnrollmentDataType } from "types/member/enrollment.types";
 
 /**
  * @description 견주 가입신청서 보기 - 승인 대기중인 견주의 가입신청서를 보여줍니다.
- * @param {string} formId
+ * @param {number} formId
  */
 export const handleGetMemberEnrollmentForm = async (formId: number): Promise<MemberFormData> => {
   const url = `admin/enrollment/${formId}`;
-  const { data } = await request<MemberFormData>({ url });
-  return data;
+  const { data } = await authAxios.get(url);
+  return data.data;
 };
 
 /**
- * @description 작성한 가입신청서 미리보기 폼 데이터 반환 - 원장이 작성한 가입신청서 미리보기 페이지를 반환합니다.
+ * @description 가입신청서 목록 - 원장이 작성한 가입신청서 목록을 보여줍니다.
+ * @param {number} schoolId
+ */
+export const handleGetSchoolForm = async (schoolId: number): Promise<SchoolFormList[]> => {
+  const url = `school/form/list`;
+  const { data } = await authAxios.get(url, { params: { schoolId } });
+  return data.data;
+};
+
+/**
+ * @description 가입신청서 미리보기 - 원장이 작성한 가입신청서 미리보기 페이지를 반환합니다.
  * @param {number} formId
  */
 export const handleGetAdminForm = async (formId: number): Promise<EnrollmentDataType> => {
   const url = `school/form/list/${formId}`;
-  const { data } = await request<EnrollmentDataType>({ url });
-  return data;
+  const { data } = await authAxios.get(url);
+  return data.data;
 };
 
 /**
- * @description 유치원 가입신청서 폼 저장 - 원장이 작성한 가입신청서를 저장합니다.
+ * @description 가입신청서 등록 - 원장이 작성한 가입신청서를 저장합니다.
  * @param {AdminEnrollmentInfoType} req
  */
-export const handlePostAdminForm = async (req: AdminEnrollmentInfoType) => {
-  const url = `school/form`;
-  return await request({
-    url,
-    method: "POST",
+export const handleCreateEnrollmentForm = async (req: AdminEnrollmentInfoType): Promise<void> => {
+  const url = "school/form";
+  return await authAxios.post(url, {
     data: { ...req }
   });
 };
 
-// NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
 /**
- * @description 가입신청서 상태 정보 반환 - 견주가 작성한 가입신청서 상태를 확인할 수 있습니다.
- * @param {IEnrollmentStatus} enrollmentFormIds
- * @returns
+ * @description 가입신청서 삭제 - 원장의 가입신청서를 삭제합니다.
+ * @param {number} schoolFormId
  */
-export const handleGetEnrollmentStatus = async (
-  enrollmentFormIds: string[]
-): Promise<IEnrollmentStatus[]> => {
-  if (!Array.isArray(enrollmentFormIds)) return (enrollmentFormIds = []);
-
-  const req = enrollmentFormIds.map(async (id) => {
-    const url = `admin/enrollment/status?enrollmentFormId=${id}`;
-    const { data } = await authAxios.get(url);
-    return data.data;
-  });
-
-  return await Promise.all(req);
-};
-
-// NOTE 해당 함수들 admin에서 관리하는게 맞는지...?
-/**
- * @description 가입싱천서 삭제 - 가입신청서를 완전히 삭제합니다.
- * @param {IEnrollmentDeleteData} enrollmentFormId
- * @returns
- */
-export const handleDeleteEnrollment = async (
-  enrollmentFormId: string
-): Promise<IEnrollmentDeleteData> => {
-  const url = `admin/delete/enrollment?enrollmentFormId=${enrollmentFormId}`;
-  const { data } = await authAxios.post(url);
-  return data.data;
+export const handleDeleteEnrollmentForm = async (schoolFormId: number): Promise<void> => {
+  const url = "admin/delete/enrollment";
+  return await authAxios.post(url, null, { params: { schoolFormId } });
 };

@@ -1,7 +1,7 @@
 import { FIELD } from "./field";
 
 import type { NonEmptyArray } from "types/helper.types";
-import type { PickDropRequestType, PickDropStateType } from "types/member/enrollment.types";
+import type { PickDropStateType } from "types/member/enrollment.types";
 
 export const MEMBER_ENROLL_STEP = [
   {
@@ -92,7 +92,7 @@ export const MEMBER_DOG_INFO_ENROLL_STEP = [
     title: "픽드랍 정보를 입력해 주세요",
     subtitle: "견주가 볼 가입신청서 화면이에요",
     indicator: "픽드랍",
-    isVisible: (status: PickDropRequestType) => status === "REQUEST"
+    isVisible: (status: PickDropStateType) => status === "RUNNING"
   }
 ];
 

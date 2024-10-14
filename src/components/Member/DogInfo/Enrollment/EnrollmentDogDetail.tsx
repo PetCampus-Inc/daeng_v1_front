@@ -1,12 +1,14 @@
 import { MEMBER_DOG_INFO_ENROLL_STEP } from "constants/step";
 
+import {
+  DogInfo,
+  MemberInfo,
+  PickDropInfo,
+  PolicyInfo,
+  TicketInfo
+} from "components/Admin/EnrollmentForm/DetailForm";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
-import DogInfo from "components/Enrollment/MemberDogReadForm/DogInfo";
-import MemberInfo from "components/Enrollment/MemberDogReadForm/MemberInfo";
-import PickDropInfo from "components/Enrollment/MemberDogReadForm/PickDropInfo";
-import PolicyInfo from "components/Enrollment/MemberDogReadForm/PolicyInfo";
-import TicketInfo from "components/Enrollment/MemberDogReadForm/TicketInfo";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import * as S from "components/Enrollment/styles";
 import { useGetMemberDogEnrollmentInfo } from "hooks/api/member/member";
@@ -14,33 +16,39 @@ import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
+/**
+ * 강아지 가입신청서 보기
+ */
 const EnrollmentDogDetail = () => {
-  const { enrollmentFormId } = useParams();
+  const { enrollmentFormId } = useParams<{ enrollmentFormId: string }>();
 
   const { data } = useGetMemberDogEnrollmentInfo(Number(enrollmentFormId));
-  const { schoolFormResponse, ...rest } = data;
+
+  const { requiredItemList, agreements, ...rest } = data;
 
   const methods = useForm({
     mode: "onChange",
     shouldUnregister: false,
-    defaultValues: { ...rest, ...schoolFormResponse }
+    defaultValues: rest
   });
 
   const visibleSteps = MEMBER_DOG_INFO_ENROLL_STEP.filter((step) =>
-    step.isVisible(data.pickDropRequest)
+    step.isVisible(data.schoolFormResponse.pickDropState)
   );
   const maxSteps = visibleSteps.length;
-
   const { currentStep, setStep } = useStep(maxSteps - 1);
-
   const currentTitle = MEMBER_DOG_INFO_ENROLL_STEP[currentStep].title;
   const currentSubtitle = MEMBER_DOG_INFO_ENROLL_STEP[currentStep].subtitle;
-
   const indicators = visibleSteps.map((step) => step.indicator);
 
-  const ticket = {
-    roundTicketNumber: schoolFormResponse.roundTicketNumber,
-    monthlyTicketNumber: schoolFormResponse.monthlyTicketNumber
+  const ticketInfo = {
+    ticketType: rest.enrollmentTicketType,
+    roundTicketNumber: rest.roundTicketNumber,
+    monthlyTicketNumber: rest.monthlyTicketNumber,
+    enrollmentRoundTicketNumber: rest.enrollmentRoundTicketNumber,
+    enrollmentMonthlyTicketNumber: rest.enrollmentMonthlyTicketNumber,
+    openDays: rest.openDays,
+    attendanceDays: rest.attendanceDays
   };
 
   return (
@@ -57,21 +65,15 @@ const EnrollmentDogDetail = () => {
           </S.TopWrapper>
           <FormProvider {...methods}>
             <S.ContentWrapper>
-              <S.Content $isVisible={currentStep === 0}>
-                <MemberInfo />
-              </S.Content>
-              <S.Content $isVisible={currentStep === 1}>
-                <DogInfo />
-              </S.Content>
-              <S.Content $isVisible={currentStep === 2}>
-                <TicketInfo ticket={ticket} />
-              </S.Content>
-              <S.Content $isVisible={currentStep === 3}>
-                <PolicyInfo />
-              </S.Content>
-              <S.Content $isVisible={currentStep === 4}>
-                <PickDropInfo />
-              </S.Content>
+              {currentStep === 0 && <MemberInfo item={requiredItemList} />}
+              {currentStep === 1 && <DogInfo item={requiredItemList} />}
+              {currentStep === 2 && (
+                <TicketInfo item={requiredItemList} ticket={ticketInfo} agreements={agreements} />
+              )}
+              {currentStep === 3 && <PolicyInfo item={requiredItemList} agreements={agreements} />}
+              {currentStep === 4 && (
+                <PickDropInfo item={requiredItemList} agreements={agreements} />
+              )}
             </S.ContentWrapper>
           </FormProvider>
         </S.Container>

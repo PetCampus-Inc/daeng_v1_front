@@ -52,6 +52,19 @@ export function getPadString(input: number | number[]): string | string[] {
 }
 
 /**
+ * [yyyy, m, dd] 형식을 yyyy-mm-dd 형식의 문자열로 변환합니다.
+ * @param {LocalDate} dateArray - [yyyy, m, dd] 형식의 날짜 배열
+ * @returns {string} yyyy-mm-dd 형식의 문자열
+ */
+export const convertDateArrayToString = (dateArray: LocalDate): string => {
+  const [yyyy, mm, dd] = getPadString([dateArray[0], dateArray[1], dateArray[2]]) as string[];
+
+  const date = new Date(`${yyyy}-${mm}-${dd}`);
+
+  return format(date, "yyyy-MM-dd");
+};
+
+/**
  * Date 객체를 ISO 8601(YYYY-MM-DD) 형식의 문자열로 변환합니다.
  * @param {Date} date - 변환할 Date 객체
  * @returns {string} ISO 8601(YYYY-MM-DD) 형식의 문자열

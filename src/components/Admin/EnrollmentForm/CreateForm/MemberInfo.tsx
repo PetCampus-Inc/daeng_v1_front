@@ -3,18 +3,17 @@ import { FIELD, FIELD_KEYS } from "constants/field";
 import { TextInput, ToggleLabel } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
 import SingleRadio from "components/common/Select/SingleRadio";
-import { Controller, Form, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import { Card } from "../styles";
 
 export function MemberInfo() {
-  const { control } = useFormContext();
-
   return (
-    <Form control={control}>
+    <>
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_NAME}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} readOnly showToggle>
               이름
@@ -26,6 +25,7 @@ export function MemberInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_GENDER}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle>
               성별
@@ -37,6 +37,7 @@ export function MemberInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_ADDRESS}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} readOnly showToggle>
               주소
@@ -48,6 +49,7 @@ export function MemberInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_PHONE}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} readOnly showToggle>
               연락처
@@ -59,6 +61,7 @@ export function MemberInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.EMERGENCY_NUMBER}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel {...field} showToggle>
               비상 연락처
@@ -67,6 +70,6 @@ export function MemberInfo() {
         />
         <TextInput placeholder="견주가 비상연락처를 입력하는 칸이에요" disabled />
       </Card>
-    </Form>
+    </>
   );
 }

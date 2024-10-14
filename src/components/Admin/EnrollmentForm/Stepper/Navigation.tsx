@@ -1,56 +1,29 @@
-import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
-import { useOverlay } from "hooks/common/useOverlay/useOverlay";
-import { FieldValues, useFormContext } from "react-hook-form";
-import { FormButton, FormButtonWrapper, FormPrevButton } from "styles/StyleModule";
-
-import SubmitButton from "./SubmitButton";
+import { Flex, WideButton } from "components/common";
 
 interface NavigationProps {
   currentStep: number;
   stepsLength: number;
   nextStep: () => void;
   prevStep: () => void;
-  onNextStep?: (formInfo: FieldValues) => void;
 }
 
-const Navigation = ({
-  currentStep,
-  stepsLength,
-  nextStep,
-  prevStep,
-  onNextStep
-}: NavigationProps) => {
-  const { setFocus } = useFormContext();
-  const overlay = useOverlay();
-
+export function Navigation({ currentStep, stepsLength, nextStep, prevStep }: NavigationProps) {
   const isFirstStep = currentStep === 0;
   const isLastStep = currentStep === stepsLength - 1;
 
-  const openAlertPopup = (field: string) =>
-    overlay.open(({ isOpen, close }) => (
-      <AlertBottomSheet
-        isOpen={isOpen}
-        close={() => {
-          close();
-          setFocus(field);
-        }}
-        title="입력을 하지 않은 필수 항목이 있어요"
-        subtitle="유의사항에 동의하지 않으면 가입이 어려워요"
-        actionText="확인"
-        actionFn={() => {
-          close();
-          setFocus(field);
-        }}
-      />
-    ));
-
   return (
-    <FormButtonWrapper>
-      {!isFirstStep && !isLastStep && <FormPrevButton onClick={prevStep}>이전</FormPrevButton>}
-      {!isLastStep && <FormButton onClick={nextStep}>다음</FormButton>}
-      {isLastStep && <SubmitButton onNextStep={onNextStep} onOpenPopup={openAlertPopup} />}
-    </FormButtonWrapper>
+    <Flex width="full" mt={4} mx={4} gap={4}>
+      {!isFirstStep && !isLastStep && (
+        <WideButton onClick={prevStep} colorScheme="br_4" css={{ flex: 1 }}>
+          이전
+        </WideButton>
+      )}
+      {!isLastStep && (
+        <WideButton onClick={nextStep} css={{ flex: 3 }}>
+          다음
+        </WideButton>
+      )}
+      <WideButton type="submit">가입 신청서 등록</WideButton>
+    </Flex>
   );
-};
-
-export default Navigation;
+}

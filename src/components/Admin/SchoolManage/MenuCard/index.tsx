@@ -3,7 +3,7 @@ import { routes } from "constants/path";
 import NewSignUpIcon from "assets/svg/new-sign-up-icon";
 import TeacherManagementIcon from "assets/svg/teacher-management-icon";
 import NewEnrollmentFormBottomSheet from "components/Admin/SchoolManage/NewEnrollmentFormBottomSheet";
-import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
+import { useGetSchoolFormList } from "hooks/api/admin/enroll";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ import * as S from "./styles";
 
 const MenuCard = () => {
   const { schoolId } = useAdminInfo();
-  const { data } = useGetNewEnrollment(schoolId);
+  const { data } = useGetSchoolFormList(schoolId);
 
   const navigate = useNavigate();
   const overlay = useOverlay();
@@ -21,7 +21,7 @@ const MenuCard = () => {
   /** 신규가입 메뉴 클릭*/
   const handleNewEnrollment = async () => {
     try {
-      if (data?.simpleSchoolFormList.length === 0) {
+      if (data.length === 0) {
         overlay.open(({ isOpen, close }) => (
           <NewEnrollmentFormBottomSheet
             isOpen={isOpen}

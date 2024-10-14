@@ -3,7 +3,7 @@ import { FIELD, FIELD_KEYS } from "constants/field";
 import { TextInput, ToggleLabel } from "components/common";
 import SearchInputField from "components/common/Input/SearchInputField";
 import SingleRadio from "components/common/Select/SingleRadio";
-import { Controller, Form, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Card } from "../styles";
 
@@ -11,7 +11,7 @@ export function MemberInfo() {
   const { control } = useFormContext();
 
   return (
-    <Form control={control}>
+    <>
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.MEMBER_NAME}`}
@@ -67,6 +67,6 @@ export function MemberInfo() {
         />
         <TextInput placeholder="견주가 비상연락처를 입력하는 칸이에요" disabled />
       </Card>
-    </Form>
+    </>
   );
 }

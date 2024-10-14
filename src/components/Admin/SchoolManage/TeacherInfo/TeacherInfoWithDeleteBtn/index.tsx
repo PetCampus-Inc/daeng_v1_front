@@ -1,7 +1,7 @@
 import ButtonBadge from "components/common/Badge/ButtonBadge";
 import { Modal } from "components/common/Modal";
 import { AnimatePresence } from "framer-motion";
-import useTeacherDeleteMutation from "hooks/api/useTeacherDeleteMutation";
+import { useTeacherDeleteMutation } from "hooks/api/admin/school";
 import { useState } from "react";
 import { ITeacherInfo } from "types/admin/school.types";
 import showToast from "utils/showToast";

@@ -1,7 +1,5 @@
-import { FIELD } from "constants/field";
 import { routes } from "constants/path";
 import { QUERY_KEY } from "constants/queryKey";
-import { RELATION_DATA } from "constants/relation";
 
 import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { handleGetDogEnrollment, handleGetSchoolInfo } from "apis/member/enrollment.api";
@@ -25,9 +23,14 @@ import {
   handleCancelMemberEnrollment,
   handleDeleteMember
 } from "apis/member/member.api";
-import { Adapter, DogInfoFormAdapter } from "libs/adapters";
+import {
+  Adapter,
+  DataFormatAdapter,
+  DogInfoFormAdapter,
+  MemberForm2FeForAdminAdapter
+} from "libs/adapters";
 import { useNavigate } from "react-router-dom";
-import { getLabelForValue } from "utils/formatter";
+import { MemberFormData } from "types/admin/enrollment.types";
 import showToast from "utils/showToast";
 
 import type {
@@ -36,7 +39,8 @@ import type {
   MemberDogInfoData,
   MemberDogInfoFormData,
   DogVaccination,
-  DogProfileReq
+  DogProfileReq,
+  IMemberProfileInfo
 } from "types/member/main.types";
 
 // 견주 홈 - 메인
@@ -100,14 +104,15 @@ export const useGetMemberSchoolInfo = (dogId: string) => {
 };
 
 // 마이페이지 - 견주 프로필 조회
+export type ProfileInfo = ReturnType<DataFormatAdapter<IMemberProfileInfo>["toFrontend"]>;
 export const useGetMemberProfileInfo = () => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_PROFILE_INFO,
     queryFn: () => handleGetMemberProfileInfo(),
     select: (data) => {
-      const formatMemberGender = getLabelForValue(FIELD.MEMBER_GENDER, data.memberGender);
-
-      return { ...data, memberGender: formatMemberGender };
+      return Adapter.from(data).to<typeof data, ProfileInfo>((item) =>
+        new DataFormatAdapter(item).toFrontend()
+      );
     }
   });
 };
@@ -179,11 +184,15 @@ export const usePostMemberDogDelete = () => {
   return memberDogDeleteMutation.mutate;
 };
 
-// 강아지 가입신청서 보기 (read only)
+// 강아지 가입신청서 조회
 export const useGetMemberDogEnrollmentInfo = (enrollmentFormId: number) => {
   return useSuspenseQuery({
     queryKey: QUERY_KEY.MEMBER_DOG_ENROLLMENT_INFO(enrollmentFormId),
-    queryFn: () => handleGetDogEnrollment(enrollmentFormId)
+    queryFn: () => handleGetDogEnrollment(enrollmentFormId),
+    select: (data) =>
+      Adapter.from(data).to((item: MemberFormData) =>
+        new MemberForm2FeForAdminAdapter(item).adapt()
+      )
   });
 };
 

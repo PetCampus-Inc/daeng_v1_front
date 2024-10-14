@@ -12,21 +12,10 @@ export interface IBreedInfo {
   }[];
 }
 
-export interface ISimpleEnrollmentFormList {
+export interface MemberFormList {
   enrollmentFormId: number;
   memberName: string;
   dogName: string;
-}
-
-export interface ISimpleSchoolFormList {
-  schoolFormId: number;
-  schoolFormName: string;
-  createdDate: number[];
-}
-
-export interface INewEnrollmentList {
-  simpleEnrollmentFormList: ISimpleEnrollmentFormList[];
-  simpleSchoolFormList: ISimpleSchoolFormList[];
 }
 
 export interface ITeacherInfo {

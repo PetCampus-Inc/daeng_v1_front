@@ -15,7 +15,7 @@ const SubmitButton = () => {
     const req = {
       inputId: data.inputId,
       inputPw: data.inputPw,
-      fcmToken: "string"
+      fcmToken: "123"
     };
 
     mutateLogin(req, {

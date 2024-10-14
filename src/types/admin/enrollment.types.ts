@@ -1,4 +1,5 @@
-import type { Nullable } from "types/helper.types";
+import type { LocalDate, Nullable } from "types/helper.types";
+import type { PickDropStateType } from "types/member/enrollment.types";
 
 export type TNeutralization = "NEUTERED" | "NOT_NEUTERED";
 export type TVaccination = "VACCINATED" | "NOT_VACCINATED";
@@ -76,13 +77,13 @@ interface ISchoolFormResponse {
   limitsInfo: string;
   accidentInfo: string;
   abandonmentInfo: string;
-  pickDropState: TPickDropState;
+  pickDropState: PickDropStateType;
   pickDropNotice: string;
   pickDropInfo: string;
   member: Nullable<MemberDtoType>;
 }
 
-/** 원장 가입신청서 등록 Request 타입 */
+/** 유치원 가입신청서 등록 Request 타입 */
 export interface AdminEnrollmentInfoType {
   schoolId: number;
   formName: string;
@@ -99,4 +100,11 @@ export interface AdminEnrollmentInfoType {
   pickDropState: string;
   pickDropInfo: string;
   pickDropNotice: string;
+}
+
+/** 유치원 가입신청서 목록 */
+export interface SchoolFormList {
+  schoolFormId: number;
+  schoolFormName: string;
+  createdDate: LocalDate;
 }

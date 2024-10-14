@@ -1,38 +1,27 @@
 import { ADMIN_CREATE_FORM_STEP } from "constants/step";
 
+import { Indicator, useAlertPopup, useFormHandlers } from "components/Admin/EnrollmentForm";
 import {
-  MemberInfo,
   DogInfo,
-  TicketInfo,
+  MemberInfo,
+  PickDropInfo,
   PolicyInfo,
-  PickDropInfo
+  TicketInfo
 } from "components/Admin/EnrollmentForm/EditForm";
-import Indicator from "components/Admin/EnrollmentForm/Stepper/Indicator";
-import { NavigationButton } from "components/Admin/EnrollmentForm/Stepper/NavigationButton";
-import {
-  Container,
-  TopWrapper,
-  TitleWrapper,
-  Title,
-  SubTitle,
-  Content,
-  ContentWrapper,
-  ButtonContainer,
-  HelperText
-} from "components/Admin/EnrollmentForm/styles";
-import { Layout } from "components/common";
+import * as Styled from "components/Admin/EnrollmentForm/styles";
+import { Layout, WideButton } from "components/common";
 import Header from "components/common/Header";
 import { PreventLeaveModal } from "components/common/Modal";
-import { useAdminEnrollment } from "hooks/api/admin/enroll";
+import { useGetSchoolForm } from "hooks/api/admin/enroll";
 import useStep from "hooks/common/useStep";
-import { FieldValues, FormProvider, useForm, useFormState } from "react-hook-form";
+import { type FieldValues, FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
 import { isEmpty } from "utils/is";
 import { useEffect } from "react";
 
 interface EnrollmentFormEditProps {
   formValues?: FieldValues;
-  onNextStep?: (formInfo: FieldValues) => void;
+  onNextStep: (formInfo: FieldValues) => void;
 }
 
 export default function EnrollmentFormEditPage({
@@ -40,7 +29,7 @@ export default function EnrollmentFormEditPage({
   onNextStep
 }: EnrollmentFormEditProps) {
   const { formId } = useParams<{ formId: string }>();
-  const { data } = useAdminEnrollment(Number(formId), "EDIT");
+  const { data } = useGetSchoolForm(Number(formId), "EDIT");
 
   const methods = useForm({
     mode: "onBlur",
@@ -54,6 +43,14 @@ export default function EnrollmentFormEditPage({
   const currentTitle = currentSteps[currentStep].title;
   const currentSubtitle = currentSteps[currentStep].subtitle;
   const indicators: string[] = currentSteps.map((s) => s.indicator);
+
+  const openAlertPopup = useAlertPopup();
+  const { onSubmit, onInvalid } = useFormHandlers(
+    onNextStep,
+    openAlertPopup,
+    methods.setFocus,
+    setStep
+  );
 
   const { dirtyFields } = useFormState({ control: methods.control });
 
@@ -89,39 +86,41 @@ export default function EnrollmentFormEditPage({
         />
       ) : null}
       <Header type="text" text="가입신청서 수정" />
-      <Layout bgColor="BGray" px={16} pb={36}>
-        <Container>
-          <TopWrapper>
-            <TitleWrapper>
-              <Title>{currentTitle}</Title>
-              <SubTitle>{currentSubtitle}</SubTitle>
-            </TitleWrapper>
+      <Layout bgColor="BGray" px={16} pb={42}>
+        <Styled.Container>
+          <Styled.TopWrapper>
+            <Styled.TitleWrapper>
+              <Styled.Title>{currentTitle}</Styled.Title>
+              <Styled.SubTitle>{currentSubtitle}</Styled.SubTitle>
+            </Styled.TitleWrapper>
             <Indicator indicators={indicators} currentStep={currentStep} goToStep={setStep} />
-          </TopWrapper>
+          </Styled.TopWrapper>
           <FormProvider {...methods}>
-            <ContentWrapper>
-              <Content $isVisible={currentStep === 0}>
-                <MemberInfo />
-              </Content>
-              <Content $isVisible={currentStep === 1}>
-                <DogInfo />
-              </Content>
-              <Content $isVisible={currentStep === 2}>
-                <TicketInfo />
-              </Content>
-              <Content $isVisible={currentStep === 3}>
-                <PolicyInfo />
-              </Content>
-              <Content $isVisible={currentStep === 4}>
-                <PickDropInfo />
-              </Content>
-            </ContentWrapper>
-            <ButtonContainer>
-              <HelperText>변경된 내용으로 새로 저장 돼요</HelperText>
-              <NavigationButton onNextStep={handleNextStep} />
-            </ButtonContainer>
+            <form onSubmit={methods.handleSubmit(onSubmit, onInvalid)}>
+              <Styled.ContentWrapper>
+                <Styled.Content $isVisible={currentStep === 0}>
+                  <MemberInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 1}>
+                  <DogInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 2}>
+                  <TicketInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 3}>
+                  <PolicyInfo />
+                </Styled.Content>
+                <Styled.Content $isVisible={currentStep === 4}>
+                  <PickDropInfo />
+                </Styled.Content>
+              </Styled.ContentWrapper>
+              <Styled.ButtonContainer>
+                <Styled.HelperText>변경된 내용으로 새로 저장 돼요</Styled.HelperText>
+                <WideButton type="submit">수정 완료</WideButton>
+              </Styled.ButtonContainer>
+            </form>
           </FormProvider>
-        </Container>
+        </Styled.Container>
       </Layout>
     </>
   );

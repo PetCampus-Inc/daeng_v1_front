@@ -10,19 +10,16 @@ import * as Styled from "./styles";
 import { TicketGroup } from "./TicketGroup";
 import { useTicketFieldArray } from "./useTicketFieldArray";
 
-import type { Control } from "react-hook-form";
-
 const INIT_COUNTER = 2;
 
 type TicketTypeProps = {
-  control: Control;
   name: string;
   ticketType: "ROUND" | "MONTHLY";
   defaultValues?: number[];
 };
 
 export const TicketType = React.memo(
-  ({ control, name, ticketType, defaultValues = [] }: TicketTypeProps) => {
+  ({ name, ticketType, defaultValues = [] }: TicketTypeProps) => {
     const FIELD_NAME = name;
     const MAX_ITEMS = 6;
     const MIN_ITEMS = 1;
@@ -30,7 +27,6 @@ export const TicketType = React.memo(
     const TIMES = ticketType === "ROUND" ? "회" : "주";
 
     const { fields, append, remove } = useTicketFieldArray({
-      control,
       fieldName: FIELD_NAME,
       defaultValues
     });
@@ -42,7 +38,7 @@ export const TicketType = React.memo(
         async () => {
           const counter = await snapshot.getPromise(ticketCounterState);
           if (fields.length < MAX_ITEMS) {
-            append({ value: counter });
+            append(counter);
             overlay.close();
             set(ticketCounterState, INIT_COUNTER);
           } else {
@@ -86,13 +82,7 @@ export const TicketType = React.memo(
 
     return (
       <>
-        <TicketGroup
-          control={control}
-          suffix={TIMES}
-          name={FIELD_NAME}
-          fields={fields}
-          remove={handleRemove}
-        />
+        <TicketGroup suffix={TIMES} name={FIELD_NAME} fields={fields} remove={handleRemove} />
         <Styled.AddButton
           type="button"
           onClick={openTicketCounter}

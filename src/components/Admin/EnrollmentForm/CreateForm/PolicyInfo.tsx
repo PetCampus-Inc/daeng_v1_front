@@ -2,18 +2,19 @@ import { FIELD, FIELD_KEYS } from "constants/field";
 
 import { Checkbox, ToggleLabel } from "components/common";
 import { Textarea } from "components/common/Textarea";
-import { Controller, Form, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { Card, Stack } from "../styles";
 
 export function PolicyInfo() {
-  const { register, control } = useFormContext();
+  const { register } = useFormContext();
 
   return (
-    <Form control={control}>
+    <>
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.LIMITS_INFO}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel showBadge showToggle {...field}>
               이용 제한 유의 사항
@@ -31,6 +32,7 @@ export function PolicyInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ACCIDENT_INFO}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel showBadge showToggle {...field}>
               상해 유의사항
@@ -48,6 +50,7 @@ export function PolicyInfo() {
       <Card>
         <Controller
           name={`${FIELD.REQUEST_ITEMS}.${FIELD_KEYS.ABANDONMENT_INFO}`}
+          defaultValue={true}
           render={({ field }) => (
             <ToggleLabel showBadge showToggle {...field}>
               유기 유의사항
@@ -62,6 +65,6 @@ export function PolicyInfo() {
           <Checkbox label="동의합니다" disabled />
         </Stack>
       </Card>
-    </Form>
+    </>
   );
 }

@@ -1,12 +1,10 @@
-import SimpleMembershipApplication from "components/Admin/SchoolManage/SimpleMembershipApplication";
-import { ListContainer } from "components/Admin/SchoolManage/SimpleMembershipApplication/styles";
+import { SchoolFormCard } from "components/Admin/SchoolManage/Enrollment";
 import TitleWithIcon from "components/Admin/SchoolManage/TitleWithIcon";
-import { Layout } from "components/common";
+import { Flex, Layout } from "components/common";
 import ButtonBadge from "components/common/Badge/ButtonBadge";
 import { BottomButton } from "components/common/Button";
 import Header from "components/common/Header";
-import { useDeleteEnrollment } from "hooks/api/admin/enroll";
-import useGetNewEnrollment from "hooks/api/useGetNewEnrollment";
+import { useDeleteSchoolForm, useGetSchoolFormList } from "hooks/api/admin/enroll";
 import { useAdminInfo } from "hooks/common/useAdminInfo";
 import { useState } from "react";
 import showToast from "utils/showToast";
@@ -15,15 +13,11 @@ const EnrollmentFormListPage = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [selectedList, setSelectedList] = useState<number[]>([]);
   const { schoolId } = useAdminInfo();
-  const { data } = useGetNewEnrollment(schoolId);
-  const { mutateDeleteEnrollment } = useDeleteEnrollment();
+  const { data } = useGetSchoolFormList(schoolId);
+  const { mutateDeleteEnrollments } = useDeleteSchoolForm();
 
-  if (!data) {
-    return <>로딩중..</>;
-  }
-
-  const handleTouch = () => {
-    //TODO: 삭제 API 연동하기
+  const handleTouch = async () => {
+    await mutateDeleteEnrollments(selectedList);
     setIsEditable(false);
     setSelectedList([]);
   };
@@ -38,7 +32,7 @@ const EnrollmentFormListPage = () => {
             <ButtonBadge
               type={isEditable ? "cancel" : "delete"}
               handleTouch={() => {
-                if (data.simpleSchoolFormList.length <= 1) {
+                if (data.length <= 1) {
                   showToast("최소 1개는 갖고 있어야합니다.", "bottom");
                   return;
                 }
@@ -47,9 +41,9 @@ const EnrollmentFormListPage = () => {
             />
           }
         />
-        <ListContainer>
-          {data.simpleSchoolFormList.map((item, index) => (
-            <SimpleMembershipApplication
+        <Flex direction="column" gap={16}>
+          {data.map((item, index) => (
+            <SchoolFormCard
               key={item.schoolFormId}
               data={item}
               isUsed={index === 0 ? true : false}
@@ -57,12 +51,11 @@ const EnrollmentFormListPage = () => {
               setSelectedList={setSelectedList}
             />
           ))}
-        </ListContainer>
+        </Flex>
         {isEditable && (
           <BottomButton
-            disabled={
-              selectedList.length === 0 || selectedList.length === data?.simpleSchoolFormList.length
-            }
+            position="fixed"
+            disabled={selectedList.length === 0 || selectedList.length === data?.length}
             onClick={handleTouch}
           >
             삭제

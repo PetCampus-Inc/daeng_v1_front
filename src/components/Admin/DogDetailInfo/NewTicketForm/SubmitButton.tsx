@@ -3,7 +3,7 @@ import { routes } from "constants/path";
 import { Box } from "components/common";
 import { WideButton } from "components/common/Button/Templates";
 import { useCreateNewTicket } from "hooks/api/admin/ticket";
-import { Adapter, NewTicketFormToServerAdapter } from "libs/adapters";
+import { Adapter, NewTicketForm2BeAdapter } from "libs/adapters";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { NewTicketReq } from "types/admin/attendance.type";
@@ -23,7 +23,7 @@ const SubmitButton = ({ dogId }: { dogId: number }) => {
 
   const onSubmit = (data: FieldValues) => {
     const requestData = Adapter.from(data).to<FieldValues, NewTicketReq>((item) =>
-      new NewTicketFormToServerAdapter(item).adapt()
+      new NewTicketForm2BeAdapter(item).adapt()
     );
     mutateNewTicket(requestData, {
       onSuccess: () => handleNavigate()
