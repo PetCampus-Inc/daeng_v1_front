@@ -17,15 +17,14 @@ export const MainMediaDisplayWrapper = styled.div`
 `;
 
 export const MainMediaDisplayList = styled.div`
-  display: flex;
-  transition: transform 0.5s ease;
   width: 100%;
   height: 100%;
 `;
 
-export const MainMediaDisplay = styled.div`
+export const MainMediaDisplay = styled.div<{ $isVideo: boolean }>`
   flex: 0 0 100%;
   height: 100%;
+  transform: ${({ $isVideo }) => ($isVideo ? "translateY(50%)" : "none")};
 `;
 
 export const SelectedMediaImage = styled.img`
