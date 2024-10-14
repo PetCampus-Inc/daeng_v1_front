@@ -13,11 +13,14 @@ const LoginButtonGroup = () => {
   const { mutateLogin } = useMemberLogin();
 
   const handleLogin = (provider: SocialProvider) => async () => {
-    const authData = await socialLogin(provider);
-
-    mutateLogin(authData, {
-      onError: (error) => showToast(error.message, "bottom")
-    });
+    try {
+      const authData = await socialLogin(provider);
+      mutateLogin(authData, {
+        onError: (error) => showToast(error.message, "bottom")
+      });
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
