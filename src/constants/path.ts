@@ -150,7 +150,7 @@ const admin = {
   },
   /** 알림 */
   notification: {
-    root: `/admin/"notification`
+    root: `/admin/notification`
   },
   /** 마이페이지 */
   mypage: {
