@@ -83,14 +83,6 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
               )
             },
             {
-              path: routes.policy.service.root,
-              element: (
-                <Suspense>
-                  <Pages.ServicePolicyPage />
-                </Suspense>
-              )
-            },
-            {
               path: routes.policy.privacy.root,
               element: (
                 <Suspense>

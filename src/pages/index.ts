@@ -81,5 +81,4 @@ export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";
 
 /* Policy Page */
 export { default as PrivacyPolicyPage } from "./PolicyPage/PrivacyPolicyPage";
-export { default as ServicePolicyPage } from "./PolicyPage/ServicePolicyPage";
 export { default as UsagePolicyPage } from "./PolicyPage/UsagePolicyPage";
