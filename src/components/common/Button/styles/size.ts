@@ -23,7 +23,7 @@ const MediumSize = css`
 
 const LargeSizes = css`
   padding-inline: 0px;
-  padding-block: 11px;
+  padding-block: 12px;
 `;
 
 export const SIZE_MAP: Record<ButtonSizeSet, CSSProp> = {
