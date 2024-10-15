@@ -60,7 +60,7 @@ const sharedStyles = {
     `,
     toggle: css`
       width: 100%;
-      padding: 0.375rem 2.625rem;
+      padding: 0.5rem 3rem;
       -webkit-tap-highlight-color: transparent;
     `,
     divider: css`
