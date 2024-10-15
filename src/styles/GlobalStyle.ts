@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-// import "./CalendarStyle";
 
 export const GlobalStyle = createGlobalStyle`
 ${reset}
@@ -89,7 +88,7 @@ input::-webkit-search-results-decoration{
 }
 
 button {
-background: inherit; 
+background: initial;
 border:none; 
 box-shadow:none;
 border-radius:0; 
