@@ -24,10 +24,6 @@ const common = {
     /** 개인정보 처리 방침 */
     privacy: {
       root: "/policy/privacy"
-    },
-    /** 서비스 정책 */
-    service: {
-      root: "/policy/service"
     }
   },
   /** 승인 상태 */
@@ -150,7 +146,7 @@ const admin = {
   },
   /** 알림 */
   notification: {
-    root: `/admin/"notification`
+    root: `/admin/notification`
   },
   /** 마이페이지 */
   mypage: {

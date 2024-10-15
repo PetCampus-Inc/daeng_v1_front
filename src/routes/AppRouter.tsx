@@ -75,26 +75,10 @@ const AppRouter = ({ queryClient }: { queryClient: QueryClient }) => {
             //   element: <Pages.RedirectPage />
             // },
             {
-              path: routes.unregister.root,
-              element: (
-                <Suspense>
-                  <Pages.UnregisterPage />
-                </Suspense>
-              )
-            },
-            {
               path: routes.unregister.success.root,
               element: (
                 <Suspense>
                   <Pages.UnregisterSuccessPage />
-                </Suspense>
-              )
-            },
-            {
-              path: routes.policy.service.root,
-              element: (
-                <Suspense>
-                  <Pages.ServicePolicyPage />
                 </Suspense>
               )
             },

@@ -74,15 +74,11 @@ export { default as MemberProfileEditPage } from "./MemberProfileEditPage/Member
 export { default as MemberAddDogProfileEditPage } from "./MemberPage/MemberAddDogProfileEditPage";
 export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFunnel";
 export { default as MemberSettingPage } from "./MemberPage/MemberSettingPage";
+export { default as UnregisterSuccessPage } from "./MemberPage/UnregisterSuccessPage";
 
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";
-export { default as SettingPage } from "./MyPage/SettingPage";
-export { default as UnregisterPage } from "./MyPage/UnregisterPage";
-export { default as SettingNotificationPage } from "./MyPage/SettingNotificationPage";
-export { default as UnregisterSuccessPage } from "./MyPage/UnregisterSuccessPage";
 
 /* Policy Page */
 export { default as PrivacyPolicyPage } from "./PolicyPage/PrivacyPolicyPage";
-export { default as ServicePolicyPage } from "./PolicyPage/ServicePolicyPage";
 export { default as UsagePolicyPage } from "./PolicyPage/UsagePolicyPage";
