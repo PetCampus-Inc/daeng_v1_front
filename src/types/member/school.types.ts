@@ -22,6 +22,7 @@ export interface IMemberSchoolInfo {
   schoolNumber: string;
   ticket: ITicket;
   schoolAddress: string;
+  schoolAddressDetail: string;
   registeredDate: number[];
   pastDogSchoolList?: IPastDogSchoolList[];
 }
