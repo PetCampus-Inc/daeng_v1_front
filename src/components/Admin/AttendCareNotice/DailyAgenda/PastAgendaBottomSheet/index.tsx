@@ -3,12 +3,12 @@ import { BottomSheet, type BottomSheetProps } from "components/common/BottomShee
 import PoopStatusGroup from "components/common/PoopStatusGroup";
 import { format } from "date-fns";
 import { Suspense, useState } from "react";
-import { IPastAgenda } from "types/admin/care.types";
+import { PastAgenda } from "types/admin/care.types";
 
 import * as S from "./styles";
 
 interface PastAgendaBottomSheetProps extends BottomSheetProps {
-  data: IPastAgenda[];
+  data: PastAgenda[];
 }
 
 const PastAgendaBottomSheet = ({ isOpen, close, data }: PastAgendaBottomSheetProps) => {

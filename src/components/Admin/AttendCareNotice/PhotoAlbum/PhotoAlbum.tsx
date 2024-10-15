@@ -11,11 +11,8 @@ import * as S from "./styles";
 
 import type { ImageList } from "types/member/main.types";
 
-interface FlexPhotosWithTimeProps {
-  dogId: number;
-}
-
-const FlexPhotosWithTime = ({ dogId }: FlexPhotosWithTimeProps) => {
+// FIXME: 1. 사진 가져오는 api 수정 2. ui 변경
+export function PhotoAlbum({ dogId }: { dogId: number }) {
   const { data } = useGetMainAlbum({ dogId, date: format(new Date(), "yyyy-MM-dd") });
   const overlay = useOverlay();
 
@@ -35,27 +32,27 @@ const FlexPhotosWithTime = ({ dogId }: FlexPhotosWithTimeProps) => {
     <Flex direction="column" gap={28}>
       {!data
         ? "사진이 없습니다"
-        : data.map((arr: ImageList[]) => (
-            <Flex key={arr[0].imageId} direction="column" gap={8}>
-              <Text color="gray_2" typo="body2_16_R">
-                {getRelativeTime(arr[0].createdTime)}
-              </Text>
+        : Array.from({ length: 5 })
+            .flatMap(() => data)
+            .map((arr: ImageList[], idx: number) => (
+              <Flex key={`${arr[0].imageId}-${idx}`} direction="column" gap={8}>
+                <Text color="gray_2" typo="body2_16_R">
+                  {getRelativeTime(arr[0].createdTime)}
+                </Text>
 
-              <S.ImageList>
-                {arr.map((item: ImageList, index: number) => (
-                  <S.StyledImage key={item.imageId}>
-                    <Image
-                      src={item.imageUri}
-                      ratio="1/1"
-                      onClick={() => handleImageClick(arr, index)}
-                    />
-                  </S.StyledImage>
-                ))}
-              </S.ImageList>
-            </Flex>
-          ))}
+                <S.ImageList>
+                  {arr.map((item: ImageList, index: number) => (
+                    <S.StyledImage key={`${item.imageId}-${index}`}>
+                      <Image
+                        src={item.imageUri}
+                        ratio="1/1"
+                        onClick={() => handleImageClick(arr, index)}
+                      />
+                    </S.StyledImage>
+                  ))}
+                </S.ImageList>
+              </Flex>
+            ))}
     </Flex>
   );
-};
-
-export default FlexPhotosWithTime;
+}

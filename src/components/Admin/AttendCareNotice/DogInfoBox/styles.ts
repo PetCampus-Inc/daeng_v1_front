@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  position: sticky;
   width: 100%;
-  background: linear-gradient(0deg, rgba(255, 255, 255) 0%, rgba(255, 240, 200) 100%);
   padding: 2rem 0;
 
   display: flex;
