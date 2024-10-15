@@ -48,7 +48,11 @@ const MyDogCard = ({
     QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO
   ) as IMemberInfo;
   const { doglist } = cacheMemberData;
-  const enrolledDogs = doglist.filter((el) => el.status === "ENROLLED");
+
+  // 등록, 유칭원 끊긴 강아지
+  const validDogs = doglist.filter(
+    (el) => el.status === DOG_STATUS.ENROLLED || el.schoolName === DOG_STATUS.DROP_OUT
+  );
 
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
@@ -133,7 +137,7 @@ const MyDogCard = ({
       <DogDeleteButton
         isOpen={isOpen}
         onClick={
-          dogLength <= 1 || enrolledDogs.length <= 1 ? openInvalidInputPopup : openDeleteDogPopup
+          dogLength <= 1 || validDogs.length <= 1 ? openInvalidInputPopup : openDeleteDogPopup
         }
       />
 
