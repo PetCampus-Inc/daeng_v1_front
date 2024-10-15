@@ -4,7 +4,7 @@ import Header from "components/common/Header";
 import { Tabs } from "components/common/Tabs";
 import { useGetCachedCareDog } from "hooks/api/admin/care";
 import { Suspense } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { AgendaView } from "./AgendaView";
@@ -14,9 +14,11 @@ const AttendCareNoticePage = () => {
   const { dogId } = useParams();
   const { data } = useGetCachedCareDog(Number(dogId));
 
+  const { state } = useLocation();
+
   return (
     <Layout type="page">
-      <Tabs.Root variant="toggle" defaultValue="agenda">
+      <Tabs.Root variant="toggle" defaultValue={state?.tab === "album" ? "album" : "agenda"}>
         <StickyHeader>
           <Gradient>
             <Header type="text" text={`${data.dogName} 상세페이지`} transparent />
