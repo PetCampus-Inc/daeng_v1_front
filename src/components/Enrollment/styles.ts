@@ -13,17 +13,14 @@ export const TopWrapper = styled.div<StyleProps>`
   display: inline-flex;
   flex-direction: column;
   position: sticky;
-  padding: 28px 0;
+  padding: 28px 0 16px;
   gap: 12px;
-
-  background-color: ${({ theme }) => theme.colors.BGray};
   z-index: 1;
 `;
 
 export const TitleWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
-
   gap: 3px;
 `;
 
