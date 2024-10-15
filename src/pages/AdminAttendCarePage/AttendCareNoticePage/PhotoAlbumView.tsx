@@ -15,8 +15,10 @@ export function PhotoAlbumView() {
         text="견주에게 사진과 코멘트를 남겨 보세요"
         onClick={() => navigate(routes.admin.care.gallery.dynamic(dogId))}
       />
-      <Flex direction="column" gap={20} pt={32}>
-        <Text typo="body2_16_B">전송된 사진</Text>
+      <Flex direction="column" gap={16} pt={32}>
+        <Text typo="body2_16_B" color="gray_1">
+          전송된 사진
+        </Text>
         <PhotoAlbum dogId={Number(dogId)} />
       </Flex>
     </Box>
