@@ -1,14 +1,7 @@
 import { useEffect } from "react";
-import {
-  type FieldArrayWithId,
-  type FieldValues,
-  type UseFieldArrayReplace,
-  useFieldArray
-} from "react-hook-form";
+import { type FieldValues, type UseFieldArrayReplace, useFieldArray } from "react-hook-form";
 
-export interface ExtendedFieldArrayWithId extends FieldArrayWithId {
-  value?: number;
-}
+import type { ExtendedFieldArrayWithId } from "./types";
 
 type TicketFieldArrayProps = {
   fieldName: string;
