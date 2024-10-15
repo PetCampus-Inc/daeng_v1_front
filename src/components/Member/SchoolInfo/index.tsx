@@ -7,28 +7,27 @@ import AlertBottomSheet from "components/common/BottomSheet/AlertBottomSheet";
 import CallSchoolBottomSheet from "components/common/BottomSheet/CallBottomSheet/CallSchoolBottomSheet";
 import { WideButton } from "components/common/Button";
 import { BasicModal } from "components/common/Modal";
+import { useGetMemberSchoolInfo } from "hooks/api/member/member";
 import { usePostMemberDogSchool } from "hooks/api/member/school";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useNavigate, useParams } from "react-router-dom";
-import { IMemberSchoolInfo } from "types/member/school.types";
 import { formatDate } from "utils/formatter";
 import { remainingDays } from "utils/remainingDays";
 import showToast from "utils/showToast";
 
 import * as S from "./styles";
 
-interface ISchoolInfoProps {
-  data: IMemberSchoolInfo;
-}
-
-const SchoolInfo = ({ data }: ISchoolInfoProps) => {
+// TODO title, text 공통 컴포넌트로 관리하기
+const SchoolInfo = () => {
   const { dogId } = useParams();
   const navigate = useNavigate();
   const overlay = useOverlay();
+  const { data } = useGetMemberSchoolInfo(String(dogId));
   const mutateMemberDogSchoolDelete = usePostMemberDogSchool(String(dogId));
   const registeredDate = data.registeredDate?.map((el) => String(el));
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
+
   const schoolCallInfo = {
     schoolName: data.schoolName,
     schoolNumber: data.schoolNumber
@@ -106,48 +105,50 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
 
   return (
     <S.CardContainer>
-      <S.CardTitle>{`${schoolCallInfo.schoolName ?? ""} 유치원`}</S.CardTitle>
-      <S.InfoContainer>
-        <S.InfoList>
-          <S.IconWrapper>
-            <Phone />
-          </S.IconWrapper>
-          <S.ListTitle>{schoolCallInfo.schoolNumber ?? ""}</S.ListTitle>
-          <S.YellowThickButton onClick={openCallPopup}>
-            <PhoneIcon />
-            전화 걸기
-          </S.YellowThickButton>
-        </S.InfoList>
-        <S.InfoList>
-          <S.IconWrapper>
-            <List />
-          </S.IconWrapper>
-          <S.ListTitle>이용권 : {ticketInfo(data.ticket.ticketType) ?? ""}</S.ListTitle>
-        </S.InfoList>
-        <S.InfoList>
-          <S.IconWrapper>
-            <Map />
-          </S.IconWrapper>
-          <S.ListTitle>{`${data.schoolAddress ?? ""} ${data.schoolAddressDetail ?? ""}`}</S.ListTitle>
-        </S.InfoList>
-        <S.InfoList>
-          <S.IconWrapper>
-            <Calendar />
-          </S.IconWrapper>
-          <S.ListTitle>{registeredTime ?? ""} 등록</S.ListTitle>
-        </S.InfoList>
-      </S.InfoContainer>
-      <WideButton
-        mt={8}
-        colorScheme="gray_4"
-        onClick={
-          tickeyRemainingDays > 0 || data.ticket.currentRoundTicket > 0
-            ? openAlertPopup
-            : openDisconnectPopup
-        }
-      >
-        유치원 연결 끊기
-      </WideButton>
+      <S.CardBox>
+        <S.CardTitle>{`${schoolCallInfo.schoolName ?? ""} 유치원`}</S.CardTitle>
+        <S.InfoContainer>
+          <S.InfoList>
+            <S.IconWrapper>
+              <Phone />
+            </S.IconWrapper>
+            <S.ListTitle>{schoolCallInfo.schoolNumber ?? ""}</S.ListTitle>
+            <S.YellowThickButton onClick={openCallPopup}>
+              <PhoneIcon />
+              전화 걸기
+            </S.YellowThickButton>
+          </S.InfoList>
+          <S.InfoList>
+            <S.IconWrapper>
+              <List />
+            </S.IconWrapper>
+            <S.ListTitle>이용권 : {ticketInfo(data.ticket.ticketType) ?? ""}</S.ListTitle>
+          </S.InfoList>
+          <S.InfoList>
+            <S.IconWrapper>
+              <Map />
+            </S.IconWrapper>
+            <S.ListTitle>{`${data.schoolAddress ?? ""} ${data.schoolAddressDetail ?? ""}`}</S.ListTitle>
+          </S.InfoList>
+          <S.InfoList>
+            <S.IconWrapper>
+              <Calendar />
+            </S.IconWrapper>
+            <S.ListTitle>{registeredTime ?? ""} 등록</S.ListTitle>
+          </S.InfoList>
+        </S.InfoContainer>
+        <WideButton
+          mt={8}
+          colorScheme="gray_4"
+          onClick={
+            tickeyRemainingDays > 0 || data.ticket.currentRoundTicket > 0
+              ? openAlertPopup
+              : openDisconnectPopup
+          }
+        >
+          유치원 연결 끊기
+        </WideButton>
+      </S.CardBox>
     </S.CardContainer>
   );
 };
