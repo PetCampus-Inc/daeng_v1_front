@@ -36,7 +36,7 @@ const MemberSettingPage = () => {
               <Text typo="body2_16_R" color="gray_1">
                 알림 설정
               </Text>
-              <ArrowRightIcon colorScheme="gray_3" size={20} />
+              <ArrowRightIcon color="gray_3" size={20} />
             </Box>
             <Box
               display="flex"
@@ -50,7 +50,7 @@ const MemberSettingPage = () => {
               <Text typo="body2_16_R" color="gray_1">
                 정책
               </Text>
-              <ArrowRightIcon colorScheme="gray_3" size={20} />
+              <ArrowRightIcon color="gray_3" size={20} />
             </Box>
             <Box
               display="flex"
@@ -89,7 +89,7 @@ const MemberSettingPage = () => {
               <Text typo="body2_16_R" color="gray_1">
                 탈퇴하기
               </Text>
-              <ArrowRightIcon colorScheme="gray_3" size={20} />
+              <ArrowRightIcon color="gray_3" size={20} />
             </Box>
           </Layout>
         </>

@@ -76,7 +76,7 @@ const DogNote = ({ data }: DogNoteProps) => {
               자세히 보기
             </Text>
           </Flex>
-          <ArrowRightIcon size={24} colorScheme="gray_1" />
+          <ArrowRightIcon size={24} color="gray_1" />
         </Flex>
         <CardContainer>
           <FootButton type="button" className={attendanceClass}>
