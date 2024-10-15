@@ -32,27 +32,25 @@ export function PhotoAlbum({ dogId }: { dogId: number }) {
     <Flex direction="column" gap={28}>
       {!data
         ? "사진이 없습니다"
-        : Array.from({ length: 5 })
-            .flatMap(() => data)
-            .map((arr: ImageList[], idx: number) => (
-              <Flex key={`${arr[0].imageId}-${idx}`} direction="column" gap={8}>
-                <Text color="gray_2" typo="body2_16_R">
-                  {getRelativeTime(arr[0].createdTime)}
-                </Text>
+        : data.map((arr: ImageList[], idx: number) => (
+            <Flex key={`${arr[0].imageId}-${idx}`} direction="column" gap={8}>
+              <Text color="gray_2" typo="body2_16_R">
+                {getRelativeTime(arr[0].createdTime)}
+              </Text>
 
-                <S.ImageList>
-                  {arr.map((item: ImageList, index: number) => (
-                    <S.StyledImage key={`${item.imageId}-${index}`}>
-                      <Image
-                        src={item.imageUri}
-                        ratio="1/1"
-                        onClick={() => handleImageClick(arr, index)}
-                      />
-                    </S.StyledImage>
-                  ))}
-                </S.ImageList>
-              </Flex>
-            ))}
+              <S.ImageList>
+                {arr.map((item: ImageList, index: number) => (
+                  <S.StyledImage key={`${item.imageId}-${index}`}>
+                    <Image
+                      src={item.imageUri}
+                      ratio="1/1"
+                      onClick={() => handleImageClick(arr, index)}
+                    />
+                  </S.StyledImage>
+                ))}
+              </S.ImageList>
+            </Flex>
+          ))}
     </Flex>
   );
 }
