@@ -2,23 +2,28 @@ import DogCircleIcon from "assets/svg/dog-circle-icon";
 import { Calendar, DailyAgenda } from "components/Admin/DogDetailInfo/AttendanceRecord";
 import { Box } from "components/common";
 import { format, parseISO } from "date-fns";
+import { useGetCachedDogDetail } from "hooks/api/admin/dogs";
 import { Suspense } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { Img } from "styles/StyleModule";
 
 export function AttendanceRecord({ dogId }: { dogId: number }) {
   const [searchParams] = useSearchParams();
   const date = searchParams.get("date") || format(new Date(), "yyyy-MM-dd");
   const today = format(parseISO(date), "M월 d일");
 
+  const { data } = useGetCachedDogDetail(dogId);
+
   return (
     <>
       <TopContainer>
         <ProfileImgWrapper>
-          {/* TODO: 프로필사진 받아오기*/}
-          {/*<Img src={} />*/}
-          <DogCircleIcon w={52} h={52} colorScheme={"gray"} />
+          <Image
+            src={
+              data.profileUri ??
+              process.env.REACT_APP_CLIENT_BASE_URL + "images/placeholder-image.png"
+            }
+          />
         </ProfileImgWrapper>
       </TopContainer>
       <Suspense fallback={<div>캘린더 로딩중...</div>}>
@@ -39,6 +44,9 @@ export function AttendanceRecord({ dogId }: { dogId: number }) {
 AttendanceRecord.Skeleton = () => <div>등원기록 스켈레톤...</div>;
 
 const TopContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 7vh;
   min-height: 59px;
   border-radius: 20px 20px 0 0;
@@ -49,10 +57,16 @@ const ProfileImgWrapper = styled.div`
   position: relative;
   width: 52px;
   height: 52px;
-  margin: 0 auto;
   border-radius: 50%;
+  overflow: hidden;
   transform: translateY(3vh);
   z-index: 2;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const AgendaContainer = styled.div`
