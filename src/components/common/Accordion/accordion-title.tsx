@@ -26,7 +26,7 @@ export const AccordionTitle = ({ children }: { children: React.ReactNode }) => {
         expand={expanded}
       >
         {children}
-        <ArrowDownIcon w="24" h="24" />
+        <ArrowDownIcon size={24} />
       </StyledTitleButton>
     </StyledTitleContainer>
   );

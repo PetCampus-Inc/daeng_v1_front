@@ -103,7 +103,7 @@ export const WeeklyCalendar = (props: WeeklyCalendarProps) => {
             {format(activeStartDate, "yyyy. MM", { locale: ko })}
           </Text>
           <NavigationButton bgColor="yellow_3" color="primaryColor" ml={12}>
-            <ArrowDownIcon w={24} h={24} />
+            <ArrowDownIcon size={24} />
           </NavigationButton>
         </StyledWeeklyTitle>
         {renderTodayButton && renderTodayButton}

@@ -1,13 +1,15 @@
+import { themeConfig } from "styles/themeConfig";
+
 import type { IconProps } from "./types";
 
-const ArrowLeftIcon = ({ size = 24 }: IconProps) => {
+const ArrowLeftIcon = ({ size = 24, color = "darkBlack" }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="currentColor"
+      fill={themeConfig.colors[color]}
     >
       <path
         fillRule="evenodd"
