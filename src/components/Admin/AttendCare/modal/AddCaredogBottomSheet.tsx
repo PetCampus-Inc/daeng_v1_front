@@ -7,7 +7,7 @@ import AlertAlreadySelectedModal from "./AlertAlreadySelectedModal";
 import { useSelectedDogs } from "../hooks/useSelectedDogs";
 import AddDogList from "../list/AddDogList";
 
-interface IAddCaredogBottomSheetProps extends BottomSheetProps {
+interface AddCaredogBottomSheetProps extends BottomSheetProps {
   openGuide: () => void;
 }
 
@@ -15,7 +15,7 @@ const AddCaredogBottomSheet = ({
   isOpen,
   close: closeAddCareDogPopup,
   openGuide
-}: IAddCaredogBottomSheetProps) => {
+}: AddCaredogBottomSheetProps) => {
   const overlay = useOverlay();
 
   const openBlocking = () =>

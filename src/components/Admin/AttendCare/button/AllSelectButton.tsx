@@ -3,12 +3,12 @@ import { useContext } from "react";
 
 import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
-import type { ICareDogInfo } from "types/admin/care.types";
+import type { CareDogInfo } from "types/admin/care.types";
 
 // FIXME: 버튼에서 data를 읽어야하는게 이상하긴하당.. 괜찮나? 재사용성은 떨어지는듯..^^
 
 interface AllSelectButtonProps {
-  data: ICareDogInfo[];
+  data: CareDogInfo[];
 }
 
 const AllSelectButton = ({ data }: AllSelectButtonProps) => {
@@ -17,7 +17,7 @@ const AllSelectButton = ({ data }: AllSelectButtonProps) => {
   // 선택된 항목의 수가 전체 데이터의 수와 같은지 여부를 확인
   const isAllSelected = selectIdsContext?.selectedIds.size === data.length;
 
-  const handleClick = (data: ICareDogInfo[]) => {
+  const handleClick = (data: CareDogInfo[]) => {
     selectIdsContext?.selectAll(data);
   };
 

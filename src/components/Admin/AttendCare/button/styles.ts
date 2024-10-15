@@ -7,6 +7,7 @@ export const SendCardContainer = styled.div`
   padding: 20px 16px;
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.gray_5};
 
   box-shadow: ${({ theme }) => theme.shadows.card};
 `;

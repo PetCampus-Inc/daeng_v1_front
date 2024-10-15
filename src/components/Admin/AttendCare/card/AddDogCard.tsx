@@ -20,7 +20,7 @@ const AddDogCard = React.memo(
     const isCared = !!adminName;
 
     return (
-      <ListItem key={dogId}>
+      <ListItem key={dogId} onClick={onClick}>
         <ListItemWrapper>
           <ListItemImg size="md">
             <img src={profileUri} alt="dog" />
