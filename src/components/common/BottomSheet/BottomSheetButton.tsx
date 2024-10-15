@@ -1,7 +1,8 @@
 import { type ButtonHTMLAttributes, useContext } from "react";
 
 import { BottomSheetContext } from "./BottomSheetContext";
-import { ActionButton, ButtonGroup, CloseButton } from "./styles";
+import { ButtonGroup } from "./styles";
+import { WideButton } from "../Button";
 export interface BottomSheetButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   actionText: string;
   closeText?: string;
@@ -26,13 +27,13 @@ export const BottomSheetButton = ({
   return (
     <ButtonGroup>
       {closeText && closeFn && (
-        <CloseButton onClick={defaultCloseFn} {...props}>
+        <WideButton colorScheme="gray_3" onClick={defaultCloseFn} {...props}>
           {closeText}
-        </CloseButton>
+        </WideButton>
       )}
-      <ActionButton onClick={actionFn} {...props}>
+      <WideButton onClick={actionFn} {...props}>
         {actionText}
-      </ActionButton>
+      </WideButton>
     </ButtonGroup>
   );
 };

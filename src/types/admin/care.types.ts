@@ -1,23 +1,21 @@
-import { PoopStatus } from "types/member/dogs";
-
 import type { Nullable } from "../helper.types";
+import type { AgendaStatus } from "types/common/status.types";
+import type { PoopStatus } from "types/member/dogs";
 
 export interface ICareDogProps {
   selectedDogId: number[];
 }
 
-export interface ICareDogInfo {
+export interface CareDogInfo {
   attendanceId: number;
   dogId: number;
   dogName: string;
   adminName: Nullable<string>;
   profileUri: string;
   lastPhotoTime: Nullable<string>;
-  agendaWriting: TAgendaWriting;
+  agendaWriting: AgendaStatus;
   conflicted: boolean;
 }
-
-export type TAgendaWriting = "COMPLETE" | "NOT_YET" | "WRITING";
 
 export interface IReqGallery {
   dogIdList: number[];
@@ -25,7 +23,7 @@ export interface IReqGallery {
   comment?: string;
 }
 
-export interface ICareTempSave {
+export interface CareTempSave {
   agendaId: number;
   dogId: number;
   agendaNote: string;
@@ -34,7 +32,7 @@ export interface ICareTempSave {
   poopMemo: string;
 }
 
-export interface IPastAgenda extends ICareTempSave {
+export interface PastAgenda extends CareTempSave {
   dateTime: number[];
-  status: TAgendaWriting;
+  status: AgendaStatus;
 }

@@ -113,7 +113,6 @@ export const useGetPrecautions = (dogId: number) => {
 };
 
 // 강아지 상세 - 메모 작성
-
 export const usePostMemo = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({

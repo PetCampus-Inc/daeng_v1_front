@@ -4,7 +4,7 @@ import PoopNotBrown from "assets/svg/poop-not-brown";
 import PoopWarning from "assets/svg/poop-warning";
 import PoopWatery from "assets/svg/poop-watery";
 import { Text } from "components/common/Text";
-import { ChangeEvent } from "react";
+import { ChangeEvent, forwardRef } from "react";
 import { colors } from "styles/foundations/colors";
 import { POOP_STATUS, type PoopStatus } from "types/member/dogs";
 
@@ -17,36 +17,38 @@ interface PoopStatusGroupProps {
   onChange?: (status: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PoopStatusGroup = ({
-  size = "l",
-  selected = POOP_STATUS.HARD,
-  readOnly,
-  onChange
-}: PoopStatusGroupProps) => {
-  return (
-    <S.PoopStatusFieldSet>
-      {poopStatus.map(({ status, label, icon, activeColor }) => (
-        <S.PoopStatusRadioWrap key={status}>
-          <S.PoopStatusRadio color={activeColor}>
-            {icon}
-            <input
-              type="radio"
-              name="poop-status"
-              disabled={readOnly}
-              value={status}
-              defaultChecked={selected === status}
-              onChange={onChange}
-            />
-          </S.PoopStatusRadio>
+const PoopStatusGroup = forwardRef<HTMLInputElement, PoopStatusGroupProps>(
+  ({ size = "l", selected = POOP_STATUS.HARD, readOnly, onChange }, ref) => {
+    return (
+      <S.PoopStatusFieldSet>
+        {poopStatus.map(({ status, label, icon, activeColor }) => (
+          <S.PoopStatusRadioWrap key={status}>
+            <S.PoopStatusRadio color={activeColor}>
+              {icon}
+              <input
+                ref={ref}
+                type="radio"
+                name="poop-status"
+                disabled={readOnly}
+                value={status}
+                defaultChecked={selected === status}
+                onChange={onChange}
+              />
+            </S.PoopStatusRadio>
 
-          <Text typo={size === "s" ? "caption1_12_R" : "label2_14_R"} whiteSpace="nowrap">
-            {label}
-          </Text>
-        </S.PoopStatusRadioWrap>
-      ))}
-    </S.PoopStatusFieldSet>
-  );
-};
+            <Text
+              typo={size === "s" ? "caption1_12_R" : "label2_14_R"}
+              color={readOnly ? "gray_3" : "gray_2"}
+              whiteSpace="nowrap"
+            >
+              {label}
+            </Text>
+          </S.PoopStatusRadioWrap>
+        ))}
+      </S.PoopStatusFieldSet>
+    );
+  }
+);
 
 const poopStatus = [
   {

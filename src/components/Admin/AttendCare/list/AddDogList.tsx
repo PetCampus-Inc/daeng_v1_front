@@ -1,7 +1,7 @@
 import { Box } from "components/common";
 import { useGetNewCareDogs } from "hooks/api/admin/care";
 import { useEffect } from "react";
-import { ICareDogInfo } from "types/admin/care.types";
+import { CareDogInfo } from "types/admin/care.types";
 
 import { ListContainer, ListTitle, ListWrapper } from "./styles";
 import AddDogCard from "../card/AddDogCard";
@@ -12,7 +12,7 @@ const AddDogList = () => {
   const { data, isFetchedAfterMount } = useGetNewCareDogs();
   const [selectedDogs, dispatch] = useSelectedDogs();
 
-  const addDog = (dog: ICareDogInfo) => {
+  const addDog = (dog: CareDogInfo) => {
     dispatch({ type: "ADD_DOG", payload: dog });
   };
 
@@ -26,13 +26,12 @@ const AddDogList = () => {
 
       dispatch({ type: "SET_DOGS", payload: updatedSelectedDogs });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isFetchedAfterMount]);
 
   if (!data)
     // 관리할 강아지가 없는 경우
     return (
-      <Box mt={50} mb={50} textAlign="center">
+      <Box mt={56} mb={40} textAlign="center">
         <EmptyCard />
       </Box>
     );

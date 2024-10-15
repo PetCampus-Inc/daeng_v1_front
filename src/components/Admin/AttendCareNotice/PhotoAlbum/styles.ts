@@ -1,4 +1,3 @@
-import { Image } from "components/common/Image";
 import styled from "styled-components";
 
 export const ImageList = styled.div`

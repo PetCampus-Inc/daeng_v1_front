@@ -16,9 +16,9 @@ export const StyledBottomSheet = styled(motion.div)`
 export const Content = styled.div.withConfig({
   shouldForwardProp: (prop) => !["css"].includes(prop)
 })<{ css?: CSSProp }>`
-  padding-top: ${remCalc(16)};
-  padding-bottom: ${remCalc(42)};
-  padding-inline: ${remCalc(16)};
+  padding-top: ${remCalc(18)};
+  padding-bottom: ${remCalc(16)};
+  padding-inline: ${remCalc(18)};
 
   ${({ css }) => css};
 `;
@@ -27,50 +27,18 @@ export const Control = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 0.3rem;
+  margin-right: ${remCalc(2)};
 `;
 
 export const ControlButton = styled.button`
   display: inline-flex;
   border-radius: 50%;
+  color: ${({ theme }) => theme.colors.darkBlack};
+  transition: background-color 0.2s ease-in-out;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_5};
   }
-
-  transition: background-color 0.2s ease-in-out;
-`;
-
-const BaseButton = styled.button`
-  display: flex;
-  width: 100%;
-  padding: 0.688rem;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 8px;
-`;
-
-export const ActionButton = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.colors.primaryColor};
-  color: ${({ theme }) => theme.colors.white};
-  ${({ theme }) => theme.typo.label1_16_B};
-
-  &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray_4};
-    color: ${({ theme }) => theme.colors.gray_2};
-  }
-
-  transition:
-    color,
-    background-color 0.2s ease-in-out;
-`;
-
-export const CloseButton = styled(BaseButton)`
-  background-color: ${({ theme }) => theme.colors.gray_4};
-  color: ${({ theme }) => theme.colors.gray_2};
-
-  ${({ theme }) => theme.typo.body2_16_R};
 `;
 
 export const ButtonGroup = styled.div`
@@ -88,7 +56,6 @@ export const Title = styled.p.withConfig({
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 0.5rem;
 
   ${({ variant, theme }) => (variant === "title" ? theme.typo.title2_20_B : theme.typo.body1_18_B)};
   color: ${({ theme }) => theme.colors.darkBlack};

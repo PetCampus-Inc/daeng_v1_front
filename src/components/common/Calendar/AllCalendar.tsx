@@ -124,7 +124,7 @@ export function AllCalendar({ minDate, tileDate }: CalendarProps) {
       <ToggleViewButton type="button" onClick={toggleExpanded} expand={expanded}>
         {expanded ? "닫기" : "펼쳐보기"}
         <Flex align="center">
-          <ArrowDownIcon w={20} h={20} />
+          <ArrowDownIcon size={20} />
         </Flex>
       </ToggleViewButton>
       <MonthPicker

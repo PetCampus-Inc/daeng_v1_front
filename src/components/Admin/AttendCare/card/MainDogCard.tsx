@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom";
 
 import { CardContainer, ListItemImg, ListItemTime } from "./styles";
 
-import type { ICareDogInfo, TAgendaWriting } from "types/admin/care.types";
+import type { CareDogInfo } from "types/admin/care.types";
+import type { AgendaStatus } from "types/common/status.types";
 
-const MainDogCard = ({ info }: { info: ICareDogInfo }) => {
+const MainDogCard = ({ info }: { info: CareDogInfo }) => {
   const navigate = useNavigate();
   const agendaWritingOptions = (
-    agendaWriting: TAgendaWriting
+    agendaWriting: AgendaStatus
   ): { variant: BadgeProps["variant"]; text: string } => {
     switch (agendaWriting) {
       case "WRITING":

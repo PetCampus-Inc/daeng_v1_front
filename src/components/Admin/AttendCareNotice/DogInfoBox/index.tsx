@@ -6,7 +6,7 @@ import * as S from "./styles";
 
 interface DogInfoBoxProps {
   dogName: string;
-  profileUri: string;
+  profileUri?: string;
 }
 
 const DogInfoBox = ({ dogName, profileUri }: DogInfoBoxProps) => {
@@ -14,9 +14,12 @@ const DogInfoBox = ({ dogName, profileUri }: DogInfoBoxProps) => {
 
   return (
     <S.Container>
-      <S.Image src={profileUri} alt="dog-image" />
+      <S.Image
+        src={profileUri ?? process.env.REACT_APP_CLIENT_BASE_URL + "images/placeholder-image.png"}
+        alt="dog-image"
+      />
       <span>{dogName}</span>
-      <SmallButton onClick={() => navigate("/admin/chat")} leftAddon={<Chat />} gap={8}>
+      <SmallButton onClick={() => navigate("/admin/chat")} leftAddon={<Chat size={26} />} gap={6}>
         채팅하기
       </SmallButton>
     </S.Container>

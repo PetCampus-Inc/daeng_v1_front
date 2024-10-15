@@ -17,8 +17,6 @@ import useStep from "hooks/common/useStep";
 import { type FieldValues, FormProvider, useForm, useFormState } from "react-hook-form";
 import { useBlocker, useParams } from "react-router-dom";
 import { isEmpty } from "utils/is";
-import { useEffect } from "react";
-
 interface EnrollmentFormEditProps {
   formValues?: FieldValues;
   onNextStep: (formInfo: FieldValues) => void;
@@ -67,15 +65,6 @@ export default function EnrollmentFormEditPage({
     return !isEmpty(dirtyFields);
   });
 
-  const handleNextStep = (formInfo: FieldValues) => {
-    methods.reset(formInfo);
-    onNextStep && onNextStep(formInfo);
-  };
-
-  useEffect(() => {
-    methods.reset();
-  }, [currentStep]);
-
   return (
     <>
       {blocker.state === "blocked" ? (
@@ -86,7 +75,7 @@ export default function EnrollmentFormEditPage({
         />
       ) : null}
       <Header type="text" text="가입신청서 수정" />
-      <Layout bgColor="BGray" px={16} pb={42}>
+      <Layout bgColor="BGray" px={16} pb={18}>
         <Styled.Container>
           <Styled.TopWrapper>
             <Styled.TitleWrapper>

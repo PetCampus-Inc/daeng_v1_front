@@ -10,7 +10,7 @@ export const TopWrapper = styled.div`
   flex-direction: column;
   position: sticky;
   top: 0;
-  padding: 28px 0;
+  padding: 28px 0 16px;
   gap: 12px;
 
   background-color: ${({ theme }) => theme.colors.BGray};

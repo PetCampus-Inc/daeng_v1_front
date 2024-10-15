@@ -42,20 +42,20 @@ export const getColorScheme = (scheme: ButtonColorScheme) => {
 
   return css`
     color: ${theme.colors[color]};
-    background-color: ${colorScheme.base};
+    background: ${colorScheme.base};
     border: 1px solid transparent;
 
     &:hover {
-      background-color: ${colorScheme.light};
+      background: ${colorScheme.light};
     }
 
     &:active {
-      background-color: ${colorScheme.dark};
+      background: ${colorScheme.dark};
     }
 
     &:disabled {
       cursor: not-allowed;
-      background-color: ${theme.colors.gray_4};
+      background: ${theme.colors.gray_4};
       color: ${theme.colors.gray_2};
     }
   `;

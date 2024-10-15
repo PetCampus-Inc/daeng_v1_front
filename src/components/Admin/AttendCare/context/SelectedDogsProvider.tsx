@@ -1,18 +1,18 @@
 import React, { createContext, useReducer, useMemo, type PropsWithChildren } from "react";
 
-import type { ICareDogInfo } from "types/admin/care.types";
+import type { CareDogInfo } from "types/admin/care.types";
 
 type Action =
-  | { type: "ADD_DOG"; payload: ICareDogInfo }
+  | { type: "ADD_DOG"; payload: CareDogInfo }
   | { type: "REMOVE_DOG"; payload: number }
-  | { type: "SET_DOGS"; payload: ICareDogInfo[] };
+  | { type: "SET_DOGS"; payload: CareDogInfo[] };
 
-export type SelectedDogsContextProps = [ICareDogInfo[], React.Dispatch<Action>];
+export type SelectedDogsContextProps = [CareDogInfo[], React.Dispatch<Action>];
 
 const noOpDispatch: React.Dispatch<Action> = () => undefined;
 export const SelectedDogsContext = createContext<SelectedDogsContextProps>([[], noOpDispatch]);
 
-const selectedDogsReducer = (state: ICareDogInfo[], action: Action) => {
+const selectedDogsReducer = (state: CareDogInfo[], action: Action) => {
   switch (action.type) {
     case "ADD_DOG": {
       const dogIndex = state.findIndex((dog) => dog.dogId === action.payload.dogId);

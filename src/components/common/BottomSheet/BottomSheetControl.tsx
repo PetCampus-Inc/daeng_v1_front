@@ -13,7 +13,7 @@ export const BottomSheetControl = () => {
   return (
     <Control>
       <ControlButton type="button" onClick={() => bottomSheetContext?.onClose()}>
-        <XIcon />
+        <XIcon size={24} />
       </ControlButton>
     </Control>
   );

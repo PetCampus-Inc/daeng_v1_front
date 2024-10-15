@@ -1,12 +1,10 @@
 import CloseIcon from "assets/svg/x-circle-icon";
 import { Box, Flex } from "components/common";
-import { Controller, FieldArrayWithId } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import * as Styled from "./styles";
 
-export interface ExtendedFieldArrayWithId extends FieldArrayWithId {
-  value?: number;
-}
+import type { ExtendedFieldArrayWithId } from "./types";
 
 interface TicketGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;

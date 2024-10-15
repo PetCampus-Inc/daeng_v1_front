@@ -63,7 +63,7 @@ const Header = ({
             <TextWrapper>
               <TextButton type="button" onClick={handleClick}>
                 <TitleText className="start">{text}</TitleText>
-                <ArrowDownIcon w="24" h="24" />
+                <ArrowDownIcon size={24} />
               </TextButton>
               <IconWrapper
                 onClick={() => {

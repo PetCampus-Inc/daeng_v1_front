@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { remCalc } from "utils/calculator";
 
 export const AddButton = styled.button`
   display: flex;
@@ -44,13 +45,6 @@ export const TextWrapper = styled.div`
   width: 100%;
   position: relative;
   text-align: center;
-
-  margin-top: 8px;
-`;
-
-export const Title = styled.p`
-  ${({ theme }) => theme.typo.body1_18_B};
-  color: ${({ theme }) => theme.colors.darkBlack};
 `;
 
 export const ErrorMessage = styled.p`
@@ -63,12 +57,13 @@ export const ErrorMessage = styled.p`
 `;
 
 export const Counter = styled.div`
-  min-width: 146px;
-  height: 48px;
+  min-width: ${remCalc(200)};
+  min-height: ${remCalc(54)};
   display: inline-flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   text-align: center;
+  padding-inline: ${remCalc(8)};
 
   border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.gray_4};
@@ -76,9 +71,7 @@ export const Counter = styled.div`
 `;
 
 export const Text = styled.p`
-  min-width: 37px;
-
-  ${({ theme }) => theme.typo.body2_16_R};
+  ${({ theme }) => theme.typo.body1_18_R};
   color: ${({ theme }) => theme.colors.black};
 
   & > span {
@@ -86,14 +79,24 @@ export const Text = styled.p`
   }
 `;
 
-export const Button = styled.button`
-  padding-top: 3px;
-
+export const CounterButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: ${remCalc(10)};
+  padding: 3px;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.gray_5};
   color: ${({ theme }) => theme.colors.gray_5};
 
   &:active {
-    color: ${({ theme }) => theme.colors.gray_4};
+    background-color: ${({ theme }) => theme.colors.gray_4};
+    transform: scale(0.95);
   }
+
+  transition: ${({ theme }) => theme.transition.property.common}
+    ${({ theme }) => theme.transition.duration.normal}
+    ${({ theme }) => theme.transition.easing["ease-in"]};
 `;
 
 export const Item = styled.label`
