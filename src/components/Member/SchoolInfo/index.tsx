@@ -39,11 +39,6 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
       <CallSchoolBottomSheet info={schoolCallInfo} isOpen={isOpen} close={close} />
     ));
 
-  const monthlyTicketRemainingDays = remainingDays(
-    data.ticket.ticketStartDate,
-    data.ticket.monthlyTicketNumber
-  );
-
   const tickeyRemainingDays = remainingDays(
     data.ticket.ticketStartDate,
     data.ticket.monthlyTicketNumber
@@ -55,7 +50,6 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
         isOpen={isOpen}
         close={close}
         actionFn={() => {
-          console.log("유치원 연결 끊기");
           close();
           handleDeleteSchool();
         }}
@@ -95,27 +89,30 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
   };
 
   const ticketInfo = (ticketType: string) => {
+    const monthlyTicketRemainingDays = remainingDays(
+      data.ticket.ticketStartDate,
+      data.ticket.monthlyTicketNumber
+    );
+
     switch (ticketType) {
       case "ROUND":
         return `회차권_${data.ticket.allRoundTicket}회 (잔여 ${data.ticket.currentRoundTicket}회)`;
       case "MONTHLY":
         return `정기권_${data.ticket.monthlyTicketNumber}주 (${
-          remainingDays(data.ticket.ticketStartDate, data.ticket.monthlyTicketNumber) > 0
-            ? `만료 ${remainingDays}일 전`
-            : `만료`
+          monthlyTicketRemainingDays > 0 ? `만료 ${monthlyTicketRemainingDays}일 전` : `만료`
         })`;
     }
   };
 
   return (
     <S.CardContainer>
-      <S.CardTitle>{schoolCallInfo ? `${schoolCallInfo.schoolName} 유치원` : ""}</S.CardTitle>
+      <S.CardTitle>{`${schoolCallInfo.schoolName ?? ""} 유치원`}</S.CardTitle>
       <S.InfoContainer>
         <S.InfoList>
           <S.IconWrapper>
             <Phone />
           </S.IconWrapper>
-          <S.ListTitle>{schoolCallInfo ? schoolCallInfo.schoolNumber : ""}</S.ListTitle>
+          <S.ListTitle>{schoolCallInfo.schoolNumber ?? ""}</S.ListTitle>
           <S.YellowThickButton onClick={openCallPopup}>
             <PhoneIcon />
             전화 걸기
@@ -125,19 +122,19 @@ const SchoolInfo = ({ data }: ISchoolInfoProps) => {
           <S.IconWrapper>
             <List />
           </S.IconWrapper>
-          <S.ListTitle>이용권 : {ticketInfo(data.ticket.ticketType)}</S.ListTitle>
+          <S.ListTitle>이용권 : {ticketInfo(data.ticket.ticketType) ?? ""}</S.ListTitle>
         </S.InfoList>
         <S.InfoList>
           <S.IconWrapper>
             <Map />
           </S.IconWrapper>
-          <S.ListTitle>{data.schoolAddress}</S.ListTitle>
+          <S.ListTitle>{`${data.schoolAddress ?? ""} ${data.schoolAddressDetail ?? ""}`}</S.ListTitle>
         </S.InfoList>
         <S.InfoList>
           <S.IconWrapper>
             <Calendar />
           </S.IconWrapper>
-          <S.ListTitle>{registeredTime} 등록</S.ListTitle>
+          <S.ListTitle>{registeredTime ?? ""} 등록</S.ListTitle>
         </S.InfoList>
       </S.InfoContainer>
       <WideButton
