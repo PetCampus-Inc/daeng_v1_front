@@ -67,7 +67,7 @@ const Header = ({
               </TextButton>
               <IconWrapper
                 onClick={() => {
-                  navigate(routes.setting.root);
+                  navigate(routes.member.notification.root);
                 }}
               >
                 {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}

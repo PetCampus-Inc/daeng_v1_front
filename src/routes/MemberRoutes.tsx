@@ -129,6 +129,14 @@ const MemberRoutes = ({ queryClient }: { queryClient: QueryClient }): RouteObjec
               <Pages.MemberSettingPage />
             </Suspense>
           )
+        },
+        {
+          path: routes.member.notification.root,
+          element: (
+            <Suspense>
+              <Pages.MemberNotificationPage />
+            </Suspense>
+          )
         }
       ]
     }

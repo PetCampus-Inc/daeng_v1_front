@@ -1,3 +1,5 @@
+import { root } from "../../.eslintrc.cjs";
+
 type Parameter = string | number;
 
 /** 공용 */
@@ -217,6 +219,10 @@ const member = {
         root: `/mypage/dog/enrollment` // TODO: 어디에 사용되는 주소인지?
       }
     }
+  },
+  /** 알림 페이지 */
+  notification: {
+    root: `/member/notification`
   },
   /** 강아지 상세정보 */
   dogInfo: {

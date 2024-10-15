@@ -76,6 +76,9 @@ export { default as MemberEnrollmentPage } from "./MemberPage/MemberEnrollmentFu
 export { default as MemberSettingPage } from "./MemberPage/MemberSettingPage";
 export { default as UnregisterSuccessPage } from "./MemberPage/UnregisterSuccessPage";
 
+/* Notification Page */
+export { default as MemberNotificationPage } from "./MemberNotificationPage/MemberNotificationPage";
+
 /* Common Page */
 export { default as NotFoundPage } from "./ErrorPage/NotFoundPage";
 

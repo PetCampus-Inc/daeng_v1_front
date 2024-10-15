@@ -262,3 +262,10 @@ export const handleDeleteMember = async () => {
   const url = `member/delete/member`;
   return await authAxios.post(url);
 };
+
+// 새로운 알림 여부
+export const handleGetMemberNewAlarm = async (dogId: number) => {
+  const url = `member/alarm/new?dogId=${dogId}`;
+  const { data } = await authAxios.get(url);
+  return data.data;
+};
