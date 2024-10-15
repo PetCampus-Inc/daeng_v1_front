@@ -1,21 +1,32 @@
 import ArrowLeftIcon from "assets/svg/arrow-left-icon";
 import ArrowRightIcon from "assets/svg/arrow-right-icon";
 import { AnimatePresence, motion } from "framer-motion";
+import { useMemo } from "react";
 import styled from "styled-components";
 import { arrowVariants } from "styles/foundations/animation";
 
-interface ArrowsProps {
+import type { CustomArrowProps } from "react-slick";
+
+interface ArrowsProps extends CustomArrowProps {
   position: "next" | "prev";
-  isDisabled: boolean;
 }
 
-export function Arrows({ position, isDisabled, ...props }: ArrowsProps) {
+export function Arrows({ position, currentSlide, slideCount, ...props }: ArrowsProps) {
+  const isDisabled = useMemo(() => {
+    switch (position) {
+      case "next":
+        return slideCount && currentSlide === slideCount - 1;
+      case "prev":
+        return currentSlide === 0;
+    }
+  }, [position, currentSlide, slideCount]);
+
   return (
     <AnimatePresence mode="wait">
       {!isDisabled && (
         <ArrowButton
           {...props}
-          className=""
+          className={""}
           type="button"
           as={motion.button}
           position={position}
@@ -23,6 +34,7 @@ export function Arrows({ position, isDisabled, ...props }: ArrowsProps) {
           animate="visible"
           exit="hidden"
           variants={arrowVariants}
+          aria-label={`${position === "next" ? "다음" : "이전"} 슬라이드`}
         >
           {position === "next" && <ArrowRightIcon size={30} color="gray_4" />}
           {position === "prev" && <ArrowLeftIcon size={30} color="gray_4" />}
