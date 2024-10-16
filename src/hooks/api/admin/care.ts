@@ -16,10 +16,10 @@ import {
 import { useNavigate } from "react-router-dom";
 import showToast from "utils/showToast";
 
-import type { ICareDogInfo, IPastAgenda } from "types/admin/care.types";
+import type { CareDogInfo, PastAgenda } from "types/admin/care.types";
 
-export const useGetCareDogList = (initialData: ICareDogInfo[]) => {
-  return useSuspenseQuery<ICareDogInfo[]>({
+export const useGetCareDogList = (initialData: CareDogInfo[]) => {
+  return useSuspenseQuery<CareDogInfo[]>({
     queryKey: QUERY_KEY.CARE_DOG_LIST,
     queryFn: () => handleGetCareDogs(),
     initialData
@@ -27,7 +27,7 @@ export const useGetCareDogList = (initialData: ICareDogInfo[]) => {
 };
 
 export const useGetNewCareDogs = () => {
-  return useSuspenseQuery<ICareDogInfo[]>({
+  return useSuspenseQuery<CareDogInfo[]>({
     queryKey: QUERY_KEY.NEW_CARE_DOG_LIST,
     queryFn: () => handleGetNewCareDogs()
   });
@@ -45,7 +45,7 @@ export const useCreateCareDogs = ({
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const onSuccess = (data: ICareDogInfo[]) => {
+  const onSuccess = (data: CareDogInfo[]) => {
     if (!data.length) {
       // 추가 요청 성공
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.CARE_DOG_LIST });
@@ -60,7 +60,7 @@ export const useCreateCareDogs = ({
       // 추가 요청 실패
       // 이미 선택된 강아지 팝업 열기
       openBlockingPopup();
-      const currentDogs = queryClient.getQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST);
+      const currentDogs = queryClient.getQueryData<CareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST);
       if (currentDogs) {
         const updatedDogs = currentDogs.map((existingDog) => {
           const newDogData = data.find(
@@ -68,7 +68,7 @@ export const useCreateCareDogs = ({
           );
           return newDogData ? { ...existingDog, ...newDogData } : existingDog;
         });
-        queryClient.setQueryData<ICareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, updatedDogs);
+        queryClient.setQueryData<CareDogInfo[]>(QUERY_KEY.NEW_CARE_DOG_LIST, updatedDogs);
       }
     } else {
       // 추가 요청 성공, but 이전 기록이 있는 강아지
@@ -94,7 +94,7 @@ export const useCreateCareDogs = ({
 
 export const useGetCachedCareDogInfo = () => {
   const queryClient = useQueryClient();
-  const cachedData = queryClient.getQueryData<ICareDogInfo[]>(QUERY_KEY.CACHED_CARE_DOG_INFO);
+  const cachedData = queryClient.getQueryData<CareDogInfo[]>(QUERY_KEY.CACHED_CARE_DOG_INFO);
   const removeCachedData = () =>
     queryClient.removeQueries({ queryKey: QUERY_KEY.CACHED_CARE_DOG_INFO, exact: true });
   return { data: cachedData ? cachedData : null, removeCachedData };
@@ -147,7 +147,7 @@ export const useTempSaveCareDog = () => {
 
 // 강아지 알림장 정보 가져오기
 export const useGetAgendaSaved = (dogId: number) => {
-  return useSuspenseQuery<IPastAgenda>({
+  return useSuspenseQuery<PastAgenda>({
     queryKey: QUERY_KEY.CARE_DOG_AGENDA_SAVED,
     queryFn: () => handleGetAgenda(dogId)
   });
@@ -173,12 +173,12 @@ export const useSendAgenda = () => {
 // 강아지 지난 알림장 정보 가져오기
 export const useGetPastAgenda = (dogId: number) => {
   const queryClient = useQueryClient();
-  const cachedData = queryClient.getQueryData<IPastAgenda[]>([
+  const cachedData = queryClient.getQueryData<PastAgenda[]>([
     ...QUERY_KEY.CARE_DOG_PAST_AGENDA,
     dogId
   ]);
 
-  return useSuspenseQuery<IPastAgenda[]>({
+  return useSuspenseQuery<PastAgenda[]>({
     queryKey: QUERY_KEY.CARE_DOG_PAST_AGENDA,
     queryFn: () => handleGetPastAgenda(dogId),
     gcTime: 5 * 60 * 1000,

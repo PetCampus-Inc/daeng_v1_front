@@ -1,11 +1,11 @@
 import { Text } from "components/common";
 import { Checkbox } from "components/common";
 import { memo } from "react";
-import { ICareDogInfo } from "types/admin/care.types";
+import { CareDogInfo } from "types/admin/care.types";
 
 import { CardCheckboxWrapper, CardContainer, ListItemImg } from "./styles";
 
-type Attendance = Pick<ICareDogInfo, "dogId" | "dogName">;
+type Attendance = Pick<CareDogInfo, "dogId" | "dogName">;
 
 interface Props extends Attendance {
   selectId: number;

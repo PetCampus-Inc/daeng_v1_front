@@ -3,14 +3,14 @@ import {
   differenceInHours,
   differenceInMinutes,
   format,
-  intervalToDuration,
   isAfter,
   isBefore,
   isSameDay,
   parse
 } from "date-fns";
+import { ko } from "date-fns/locale";
 
-import type { LocalDate } from "types/helper.types";
+import type { LocalDate, LocalDateTime } from "types/helper.types";
 
 /**
  * 날짜 배열을 Date 객체로 변환합니다.
@@ -63,6 +63,20 @@ export const convertDateArrayToString = (dateArray: LocalDate): string => {
 
   return format(date, "yyyy-MM-dd");
 };
+
+/**
+ * 날짜 배열을 한국어 형식의 문자열로 포맷팅합니다.
+ *
+ * @param dateArray - 날짜와 시간을 나타내는 배열 [연도, 월, 일, 시, 분, 초]
+ * @returns "M월 D일 HH:mm" 형식의 포맷팅된 문자열
+ */
+export function getKoDateArray(dateArray: LocalDateTime) {
+  const [year, month, day, hour, minute] = dateArray;
+
+  const date = new Date(year, month - 1, day, hour, minute);
+
+  return format(date, "M월 d일 HH:mm", { locale: ko });
+}
 
 /**
  * Date 객체를 ISO 8601(YYYY-MM-DD) 형식의 문자열로 변환합니다.

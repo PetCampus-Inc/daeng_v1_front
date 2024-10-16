@@ -14,7 +14,7 @@ export const PoopStatusRadioWrap = styled.label`
   justify-content: center;
   overflow: hidden;
 
-  gap: 0.4rem;
+  gap: 0.3rem;
 
   &:has(input[type="radio"]:checked) {
     span {
@@ -23,23 +23,22 @@ export const PoopStatusRadioWrap = styled.label`
   }
 `;
 
-export const PoopStatusRadio = styled.div`
+export const PoopStatusRadio = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "color"
+})`
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 100%;
   aspect-ratio: 1/1;
   border-radius: 0.4rem;
-  background-color: ${({ theme }) => theme.colors.gray_4};
   transition: all 140ms ease-in-out;
 
-  &:has(input[type="radio"]:checked) {
-    background-color: ${({ theme }) => theme.colors.yellow_3};
+  background-color: ${({ theme }) => theme.colors.gray_4};
 
-    svg {
-      color: ${({ color }) => color};
-    }
+  svg {
+    width: 100%;
+    color: ${({ theme }) => theme.colors.gray_3};
   }
 
   &:active {
@@ -47,9 +46,26 @@ export const PoopStatusRadio = styled.div`
     opacity: 0.9;
   }
 
-  svg {
-    width: 100%;
-    color: ${({ theme }) => theme.colors.gray_3};
+  &:has(input[type="radio"]:disabled) {
+    background-color: ${({ theme }) => theme.colors.gray_5};
+    cursor: not-allowed;
+
+    svg {
+      color: ${({ theme }) => theme.colors.gray_4};
+    }
+
+    &:active {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  &:has(input[type="radio"]:checked) {
+    background-color: ${({ theme }) => theme.colors.yellow_3};
+
+    svg {
+      color: ${({ color }) => color};
+    }
   }
 
   input {

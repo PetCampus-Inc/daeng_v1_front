@@ -47,7 +47,6 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: NewTicketBottomSheetProps
 
   const handleNavigate = () => {
     // 쿼리 파라미터를 유지한 채로 이동합니다
-    // /admin/attendance/11/new-ticket?dog_name=%EC%A0%9C%EC%8B%9C%EC%B9%B4&ticket_status=true&tab=ticket
     const path = `${routes.admin.attendance.newTicket.dynamic(info.dogId)}${search}`;
     navigate(path);
   };
@@ -56,7 +55,7 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: NewTicketBottomSheetProps
     <BottomSheet isOpen={isOpen} close={close}>
       <BottomSheet.Content>
         <BottomSheet.Control />
-        <Box marginBlock={12}>
+        <Box mb={14}>
           <Text as="p" typo="title2_20_B" color="darkBlack">
             갱신될 이용권 내역이에요
           </Text>
@@ -64,8 +63,7 @@ const NewTicketBottomSheet = ({ isOpen, close, info }: NewTicketBottomSheetProps
         <TicketCard dogId={info.dogId} data={newTicketData} />
         <Flex direction="column" gap={8} marginTop="12%">
           <Text as="p" typo="label2_14_R" color="gray_2" textAlign="center" whiteSpace="pre-wrap">
-            위의 갱신될 이용권 내역을 확인해보시고 수정을 원하시는 경우, 수정하기 버튼을 수정
-            페이지로 이동해주세요
+            {`위의 갱신될 이용권 내역을 확인해보시고 수정을 원하시는 경우,\n수정하기 버튼을 수정 페이지로 이동해주세요`}
           </Text>
           <Flex gap={8} width="full">
             <WideButton colorScheme="br_5" onClick={handleNavigate}>

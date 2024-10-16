@@ -20,7 +20,7 @@ export const PageContainer = styled.div.withConfig({
     `linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), url(${imageUrl}) lightgray 50% / cover no-repeat`};
   background-color: ${({ backgroundColor, theme }) =>
     backgroundColor && theme.colors[backgroundColor]};
-  width: 100vw;
+  width: 100%;
   background-size: cover;
 
   &::-webkit-scrollbar {

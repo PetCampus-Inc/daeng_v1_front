@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ICareDogInfo } from "types/admin/care.types";
+import { CareDogInfo } from "types/admin/care.types";
 
 import { MainDogGrid } from "./styles";
 import SelectDogCard from "../card/SelectDogCard";
@@ -7,7 +7,7 @@ import { SelectedIdsContext } from "../context/SelectedIdsProvider";
 
 interface Props {
   type: "delete" | "select";
-  data: ICareDogInfo[];
+  data: CareDogInfo[];
 }
 
 const SelectDogList = ({ data, type }: Props) => {

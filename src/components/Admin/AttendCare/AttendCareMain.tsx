@@ -1,7 +1,7 @@
 import { routes } from "constants/path";
 
 import { useNavigate } from "react-router-dom";
-import { ICareDogInfo } from "types/admin/care.types";
+import { CareDogInfo } from "types/admin/care.types";
 
 import AddDogButton from "./AttendCareMain/AddDogButton";
 import CareOptionDropdown from "./AttendCareMain/CareOptionDropdown";
@@ -10,7 +10,7 @@ import MainDogList from "./list/MainDogList";
 import { ButtonWrapper } from "./styles";
 
 interface AttendCareMainProps {
-  data: ICareDogInfo[];
+  data: CareDogInfo[];
 }
 
 const AttendCareMain = ({ data }: AttendCareMainProps) => {
