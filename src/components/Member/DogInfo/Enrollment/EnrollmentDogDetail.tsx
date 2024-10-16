@@ -12,6 +12,7 @@ import Header from "components/common/Header";
 import Indicator from "components/Enrollment/Stepper/Indicator";
 import * as S from "components/Enrollment/styles";
 import { useGetMemberDogEnrollmentInfo } from "hooks/api/member/member";
+import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
 import useStep from "hooks/common/useStep";
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -22,8 +23,10 @@ import { useParams } from "react-router-dom";
 const EnrollmentDogDetail = () => {
   const { enrollmentFormId } = useParams<{ enrollmentFormId: string }>();
 
-  const { data } = useGetMemberDogEnrollmentInfo(Number(enrollmentFormId));
+  // 유치원 끊긴 강아지 여부 및 UI 표시
+  const { isDisconnected, disconnectedItem } = useDogDisconnected();
 
+  const { data } = useGetMemberDogEnrollmentInfo(Number(enrollmentFormId));
   const { requiredItemList, agreements, ...rest } = data;
 
   const methods = useForm({
@@ -54,7 +57,8 @@ const EnrollmentDogDetail = () => {
   return (
     <>
       <Header type="text" text={`${data.dogName}의 가입신청서`} />
-      <Layout bgColor="BGray" px={16} pb={40}>
+      {disconnectedItem()}
+      <Layout bgColor="BGray" px={16} pb={40} isDisconnected={isDisconnected}>
         <S.Container>
           <S.TopWrapper>
             <S.TitleWrapper>

@@ -3,6 +3,7 @@ import { ACCEPT_FILE_TYPE, PATHS } from "constants/s3File";
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { DragCarousel, Flex } from "components/common";
 import { CarouselModal } from "components/Member/DogInfo/Main/CarouselModal";
+import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
 import { useOverlay } from "hooks/common/useOverlay";
 import { ChangeEvent, useRef } from "react";
 import { useFormContext } from "react-hook-form";
@@ -23,7 +24,8 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
   const { register } = useFormContext();
   const { uploadFiles } = useUploadVaccintion(dogId);
 
-  const MAX_FILE_COUNT = 30;
+  // 유치원 끊긴 강아지 여부 및 UI 표시
+  const { isDisconnected } = useDogDisconnected();
 
   const formatCreatedTime = (time: number[]) => {
     const [year, day, month] = time.slice(0, 10);
@@ -46,7 +48,9 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
   };
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const MAX_FILE_COUNT = 30;
     const vaccinationFileList = e.target.files;
+
     if (vaccinationFileList) {
       const newFiles = Array.from(vaccinationFileList);
       if (vaccinationUri && vaccinationUri.length + newFiles.length > MAX_FILE_COUNT) {
@@ -79,9 +83,11 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
           </S.Icon>
           <S.DogMoreInfo>예방접종 파일</S.DogMoreInfo>
         </Flex>
-        <S.DogMoreInfoEditButton onClick={handleFileInputClick}>
-          추가 업로드
-        </S.DogMoreInfoEditButton>
+        {!isDisconnected && (
+          <S.DogMoreInfoEditButton onClick={handleFileInputClick}>
+            추가 업로드
+          </S.DogMoreInfoEditButton>
+        )}
       </S.TopInfoBox>
 
       <S.CarouselContainer>
