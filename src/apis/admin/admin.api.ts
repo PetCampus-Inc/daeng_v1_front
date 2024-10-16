@@ -103,12 +103,10 @@ export const postTeacherSignUpCancel = async () => {
 };
 
 //새로운 알림 여부
-export const handleGetNewAlarm = async () => {
-  const url = `admin/alarm/new`;
-  const { data } = await request<INewAlarm>({
-    url
-  });
-  return data;
+export const handleGetNewAlarm = async (adminId: number) => {
+  const url = `admin/alarm/new?adminId=${adminId}`;
+  const { data } = await authAxios.get(url);
+  return data.data;
 };
 
 //알림 가져오기

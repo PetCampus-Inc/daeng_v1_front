@@ -5,14 +5,16 @@ import { useAlertSetting } from "components/Admin/MyPage/AlertSetting/context/Al
 import NotificationList from "components/Admin/Notification/NotificationList";
 import { Box, Layout, Text } from "components/common";
 import Header from "components/common/Header";
-import { useGetNewAlarm } from "hooks/api/admin/alarm";
 import { useState } from "react";
 import { Role } from "types/common/role.types";
+import { useGetNewAlarm } from "hooks/api/admin/alarm";
 
 //FIXME: 전달 데이터 수정 필요
 const AdminNotificationPage = () => {
   const { alertSettings, isAllOn } = useAlertSetting();
-  const { data } = useGetNewAlarm();
+  //////// adminId 넣어줘야함 useAdminInfo api에 추가 필요
+  const adminId = 1;
+  const { data } = useGetNewAlarm(adminId);
 
   const currentSteps = Role.ROLE_OWNER
     ? ADMIN_NOTIFICATION_STEP
@@ -43,7 +45,7 @@ const AdminNotificationPage = () => {
                   borderBottom={2}
                   borderColor={item === currentStep ? "darkBlack" : "transparent"}
                 />
-                {index !== 0 && data && (
+                {index !== 0 && data.newAlarm && (
                   <Box position="absolute" top={-5} right={-8}>
                     <EllipseOrangeIcon />
                   </Box>

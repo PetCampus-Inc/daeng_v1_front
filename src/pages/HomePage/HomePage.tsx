@@ -8,6 +8,7 @@ import DisconnectionNotice from "components/Home/DisconnectionNotice/Disconnecti
 import { DogManagerPopup } from "components/Home/DogManagerPopup";
 import { ImageAlbum } from "components/Home/ImageAlbum/ImageAlbum";
 import { ImageComment } from "components/Home/ImageComment/ImageComment";
+import { useGetMemberNewAlarm } from "hooks/api/member/alarm";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useLayoutEffect } from "react";
@@ -23,6 +24,7 @@ const HomePage = () => {
   const defaultDogId = 1;
 
   const dogId = selectedDogId ? selectedDogId : defaultDogId;
+  const { data: alarm } = useGetMemberNewAlarm(dogId);
   const { data, isFetching } = useGetHomeInfo(dogId);
   const overlay = useOverlay();
   const prefetchDogs = usePrefetchDogs();
@@ -49,7 +51,12 @@ const HomePage = () => {
 
   return (
     <>
-      <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} />
+      <Header
+        type="main"
+        text={data?.dogName}
+        handleClick={handleHeaderClick}
+        isNewAlarm={alarm.newAlarm}
+      />
       {data.enrollmentFormStatus === "DROP_OUT" && <DisconnectionNotice />}
       <Layout type="main">
         <Box bgColor="white" py={32} px={16}>

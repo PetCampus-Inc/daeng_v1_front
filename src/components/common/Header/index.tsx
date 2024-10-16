@@ -39,6 +39,7 @@ interface Props {
   transparent?: boolean;
   shadow?: boolean;
   position?: "absolute" | "relative"; // 기본 fixed
+  isNewAlarm?: boolean;
 }
 
 const Header = ({
@@ -49,10 +50,13 @@ const Header = ({
   rightElement,
   transparent,
   shadow,
-  position
+  position,
+  isNewAlarm
 }: Props) => {
   const navigate = useNavigate();
-  const isNewAlarm = "true";
+  ////// FIXME 어드민아이디 받아와서 수정
+  const adminId = 1;
+  const { data } = useGetNewAlarm(adminId);
 
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
@@ -70,7 +74,7 @@ const Header = ({
                   navigate(routes.member.notification.root);
                 }}
               >
-                {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}
+                {isNewAlarm === true ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}
@@ -96,7 +100,7 @@ const Header = ({
                   navigate(routes.admin.notification.root);
                 }}
               >
-                {isNewAlarm === "true" ? <NoticeActiveIcon /> : <NoticeIcon />}
+                {data.newAlarm === true ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}
