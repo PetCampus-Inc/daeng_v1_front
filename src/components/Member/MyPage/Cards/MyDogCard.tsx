@@ -49,9 +49,12 @@ const MyDogCard = ({
   ) as IMemberInfo;
   const { doglist } = cacheMemberData;
 
-  // 등록, 유칭원 끊긴 강아지
+  // 등록, 유치원 끊긴 강아지
   const validDogs = doglist.filter(
-    (el) => el.status === DOG_STATUS.ENROLLED || el.schoolName === DOG_STATUS.DROP_OUT
+    (el) =>
+      el.status === DOG_STATUS.ENROLLED ||
+      el.schoolName === DOG_STATUS.DROP_OUT ||
+      el.schoolName === DOG_STATUS.DIS_CONNECTED
   );
 
   const { dogId, dogName, registeredDate, status } = dogData;
