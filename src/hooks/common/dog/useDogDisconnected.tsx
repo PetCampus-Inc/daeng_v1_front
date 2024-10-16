@@ -1,10 +1,4 @@
-import { QUERY_KEY } from "constants/queryKey";
-
-import { useQueryClient } from "@tanstack/react-query";
 import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
-import { useRecoilState } from "recoil";
-import { dogIdState } from "store/member";
-import { HomeDataType } from "types/member/main.types";
 
 import { useLocalStorage, useSetLocalStorage } from "../useLocalStorage";
 
@@ -15,16 +9,8 @@ import { useLocalStorage, useSetLocalStorage } from "../useLocalStorage";
 export const useDogDisconnected = () => {
   const DOG_DIS_CONNECTIED = "DOG-DIS-CONNECTIED";
 
-  const queryClient = useQueryClient();
   const setStorage = useSetLocalStorage();
-  const [selectedDogId] = useRecoilState(dogIdState);
-  const [storageDisconnected] = useLocalStorage(DOG_DIS_CONNECTIED, false);
-
-  const cacheDogData =
-    (queryClient.getQueryData(QUERY_KEY.HOME(Number(selectedDogId))) as HomeDataType) ?? "";
-
-  // disconnected
-  const isDisconnected = cacheDogData ? cacheDogData.disconnected : storageDisconnected;
+  const [isDisconnected] = useLocalStorage(DOG_DIS_CONNECTIED, false);
 
   // disconnected localStorage에 저장
   const setStorageDisconnected = (data: boolean) => {
