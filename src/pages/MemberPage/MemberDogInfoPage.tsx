@@ -2,6 +2,7 @@ import { MEMBER_DOG_INFO_STEP } from "constants/step";
 
 import { Flex, Layout } from "components/common";
 import Header from "components/common/Header";
+import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
 import DogInfo from "components/Member/DogInfo";
 import AttendanceTicketInfo from "components/Member/DogInfo/AttendanceTicketInfo";
 import SchoolInfo from "components/Member/DogInfo/SchoolInfo";
@@ -23,12 +24,12 @@ const MemberDogInfoPage = () => {
   const { data } = useGetMemberDogDetailInfo(Number(dogId));
 
   // 유치원 끊긴 강아지 여부 및 UI 표시
-  const { isDisconnected, disconnectedItem } = useDogDisconnected();
+  const { isDisconnected } = useDogDisconnected();
 
   return (
     <>
       <Header type="text" text={`${data.dogName}의 상세정보`} shadow={true} />
-      {disconnectedItem()}
+      {isDisconnected && <DisconnectionNotice />}
       <Layout pt={36} bgColor="white" isDisconnected={isDisconnected}>
         <Flex direction="column" height="full">
           <nav>
