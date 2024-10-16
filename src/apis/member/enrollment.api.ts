@@ -101,12 +101,8 @@ export const handleGetSchoolInfo = async (dogId: string): Promise<IMemberSchoolI
  * @param {string} dogId
  */
 export const handlePostMemberDogSchool = async (dogId: string): Promise<void> => {
-  const url = `member/dog/school`;
-  const { data } = await authAxios.post(url, {
-    params: {
-      dogId
-    }
-  });
+  const url = `member/dog/school?dogId=${dogId}`;
+  const { data } = await authAxios.post(url);
   return data;
 };
 
