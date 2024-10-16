@@ -9,6 +9,7 @@ import { DogManagerPopup } from "components/Home/DogManagerPopup";
 import { ImageAlbum } from "components/Home/ImageAlbum/ImageAlbum";
 import { ImageComment } from "components/Home/ImageComment/ImageComment";
 import { useGetHomeInfo, usePrefetchDogs } from "hooks/api/member/member";
+import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
 import { useOverlay } from "hooks/common/useOverlay";
 import { useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,9 @@ import { Img } from "styles/StyleModule";
 const HomePage = () => {
   const navigate = useNavigate();
   const [selectedDogId] = useRecoilState(dogIdState);
+
+  // 유치원 끊긴 강아지 여부 및 UI 표시
+  const { setStorageDisconnected } = useDogDisconnected();
   // FIXME selectedDogId 데이터가 없을 경우 예외 처리 필요
   const defaultDogId = 1;
 
@@ -45,13 +49,16 @@ const HomePage = () => {
     if (!isFetching && !data.dogProfile) {
       navigate(routes.member.profile.dog.root);
     }
+
+    // 강아지 disconnected localStorage에 저장
+    setStorageDisconnected(data.disconnected);
   }, [data.dogProfile, isFetching, navigate]);
 
   return (
     <>
       <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} />
-      {data.enrollmentFormStatus === "DROP_OUT" && <DisconnectionNotice />}
-      <Layout type="main">
+      {data.disconnected && <DisconnectionNotice />}
+      <Layout type="main" isDisconnected={data.disconnected}>
         <Box bgColor="white" py={32} px={16}>
           <Box as="hgroup" display="flex" direction="column" gap={4} px={10} mb={16 + 5}>
             <Flex align="center" gap="4">
