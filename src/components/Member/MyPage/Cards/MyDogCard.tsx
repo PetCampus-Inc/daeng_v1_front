@@ -53,8 +53,8 @@ const MyDogCard = ({
   const validDogs = doglist.filter(
     (el) =>
       el.status === DOG_STATUS.ENROLLED ||
-      el.schoolName === DOG_STATUS.DROP_OUT ||
-      el.schoolName === DOG_STATUS.DIS_CONNECTED
+      el.status === DOG_STATUS.DROP_OUT ||
+      el.status === DOG_STATUS.DIS_CONNECTED
   );
 
   const { dogId, dogName, registeredDate, status } = dogData;
@@ -139,9 +139,7 @@ const MyDogCard = ({
     >
       <DogDeleteButton
         isOpen={isOpen}
-        onClick={
-          dogLength <= 1 || validDogs.length <= 1 ? openInvalidInputPopup : openDeleteDogPopup
-        }
+        onClick={validDogs.length <= 1 ? openInvalidInputPopup : openDeleteDogPopup}
       />
 
       <S.InfoTextBox>
