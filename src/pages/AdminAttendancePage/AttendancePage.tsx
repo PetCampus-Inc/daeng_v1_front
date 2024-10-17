@@ -10,15 +10,20 @@ import {
 import { Box, Flex, Layout } from "components/common";
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
+import { useGetNewAlarm } from "hooks/api/admin/alarm";
 import { Suspense, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function AttendancePage() {
   const [searchParams] = useSearchParams();
   const mode = searchParams.get("mode");
+  //FIXME 어드민 아이디 수정
+  const adminId = 1;
+  const { data } = useGetNewAlarm(adminId);
+
   return (
     <>
-      <Header type="notice" text="출석부" />
+      <Header type="notice" text="출석부" isNewAlarm={data.newAlarm} />
       <Layout type="main" bgColor="BGray" pt={32}>
         {mode !== "attend" ? (
           <MainSearchContext.SearchContextProvider>

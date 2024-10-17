@@ -4,6 +4,7 @@ import AttendCareEmpty from "components/Admin/AttendCare/AttendCareMain/AttendCa
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import { AdminNavBar } from "components/common/NavBar";
+import { useGetNewAlarm } from "hooks/api/admin/alarm";
 import { useGetCareDogList } from "hooks/api/admin/care";
 import { useRouteLoaderData } from "react-router-dom";
 import caredogLoader from "routes/caredogLoader";
@@ -12,13 +13,16 @@ const AttendCarePage = () => {
   const initialData = useRouteLoaderData("caredog") as Awaited<ReturnType<typeof caredogLoader>>;
 
   const { data } = useGetCareDogList(initialData);
+  //FIXME 어드민 아이디 수정
+  const adminId = 1;
+  const { data: alarm } = useGetNewAlarm(adminId);
 
   const isFirstVisit = data.some((dog) => dog.adminName === null);
   const isEmptyDog = data.length === 0;
 
   return (
     <>
-      <Header type="notice" text="강아지 관리" />
+      <Header type="notice" text="강아지 관리" isNewAlarm={alarm.newAlarm} />
       <Layout type="main" bgColor={isFirstVisit ? "white" : "BGray"} pt={32} px={16}>
         {isFirstVisit ? (
           <AttendCareInit />

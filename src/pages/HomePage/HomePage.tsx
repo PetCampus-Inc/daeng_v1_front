@@ -51,12 +51,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Header
-        type="main"
-        text={data?.dogName}
-        handleClick={handleHeaderClick}
-        isNewAlarm={alarm.newAlarm}
-      />
+      <Header type="main" text={data?.dogName} handleClick={handleHeaderClick} isNewAlarm={alarm} />
       {data.enrollmentFormStatus === "DROP_OUT" && <DisconnectionNotice />}
       <Layout type="main">
         <Box bgColor="white" py={32} px={16}>

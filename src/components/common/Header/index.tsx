@@ -6,7 +6,6 @@ import NoticeActiveIcon from "assets/svg/notice-active-icon";
 import NoticeIcon from "assets/svg/notice-icon";
 import PencilIcon from "assets/svg/pencil-icon";
 import SettingWhiteIcon from "assets/svg/setting-white-icon";
-import { useGetNewAlarm } from "hooks/api/admin/alarm";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -54,10 +53,6 @@ const Header = ({
   isNewAlarm
 }: Props) => {
   const navigate = useNavigate();
-  ////// FIXME 어드민아이디 받아와서 수정
-  const adminId = 1;
-  const { data } = useGetNewAlarm(adminId);
-
   const click = handleClick ? handleClick : () => navigate(-1);
   return (
     <>
@@ -100,7 +95,7 @@ const Header = ({
                   navigate(routes.admin.notification.root);
                 }}
               >
-                {data.newAlarm === true ? <NoticeActiveIcon /> : <NoticeIcon />}
+                {isNewAlarm === true ? <NoticeActiveIcon /> : <NoticeIcon />}
               </IconWrapper>
             </TextWrapper>
           )}
