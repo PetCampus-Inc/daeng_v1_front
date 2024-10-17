@@ -6,6 +6,7 @@ import { formatDate } from "utils/formatter";
 
 import * as S from "./styles";
 
+// TODO title, text 공통 컴포넌트로 관리하기
 const PreviousSchoolInfo = ({
   schoolName,
   schoolNumber,
@@ -19,23 +20,23 @@ const PreviousSchoolInfo = ({
     dropOutDateStr[2],
     "dot"
   );
+
   return (
-    <>
-      <S.Title>이전 유치원 내역</S.Title>
-      <S.CardContainer className="previous">
+    <S.CardContainer className="previous">
+      <S.CardBox>
         <S.CardTitle>{schoolName ? `${schoolName} 유치원` : ""} </S.CardTitle>
         <S.InfoContainer>
           <S.InfoList>
             <S.IconWrapper className="previous">
               <Phone />
             </S.IconWrapper>
-            <S.ListTitle>{schoolNumber ? schoolNumber : ""}</S.ListTitle>
+            <S.ListTitle>{schoolNumber ?? ""}</S.ListTitle>
           </S.InfoList>
           <S.InfoList>
             <S.IconWrapper className="previous">
               <Map />
             </S.IconWrapper>
-            <S.ListTitle>{schoolAddress ? schoolAddress : ""}</S.ListTitle>
+            <S.ListTitle>{schoolAddress ?? ""}</S.ListTitle>
           </S.InfoList>
           <S.InfoList>
             <S.IconWrapper className="previous">
@@ -44,8 +45,8 @@ const PreviousSchoolInfo = ({
             <S.ListTitle>{dropOutDateTime} 등록</S.ListTitle>
           </S.InfoList>
         </S.InfoContainer>
-      </S.CardContainer>
-    </>
+      </S.CardBox>
+    </S.CardContainer>
   );
 };
 

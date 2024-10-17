@@ -1,11 +1,9 @@
 import { styled } from "styled-components";
 
 export const CardContainer = styled.div`
-  padding: 20px 16px;
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: ${({ theme }) => theme.shadows.card};
-  margin-bottom: 4.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 
   &.previous {
     p {
@@ -17,15 +15,17 @@ export const CardContainer = styled.div`
   }
 `;
 
+export const CardBox = styled.div`
+  padding: 20px 16px;
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: ${({ theme }) => theme.shadows.card};
+  margin-bottom: 4.25rem;
+`;
+
 export const CardTitle = styled.p`
   ${({ theme }) => theme.typo.label1_16_B};
   color: ${({ theme }) => theme.colors.darkBlack};
-`;
-
-export const Title = styled.p`
-  color: ${({ theme }) => theme.colors.darkBlack};
-  ${({ theme }) => theme.typo.body2_16_B};
-  padding-bottom: 0.75rem;
 `;
 
 export const InfoContainer = styled.div`
