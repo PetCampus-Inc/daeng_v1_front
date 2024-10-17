@@ -13,8 +13,8 @@ import Indicator from "components/Enrollment/Stepper/Indicator";
 import * as S from "components/Enrollment/styles";
 import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
 import { useGetMemberDogEnrollmentInfo } from "hooks/api/member/member";
-import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
 import useStep from "hooks/common/useStep";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
@@ -24,7 +24,7 @@ import { useParams } from "react-router-dom";
 const EnrollmentDogDetail = () => {
   const { enrollmentFormId } = useParams<{ enrollmentFormId: string }>();
 
-  // 유치원 끊긴 강아지 여부 및 UI 표시
+  // 유치원 끊긴 강아지 여부
   const { isDisconnected } = useDogDisconnected();
 
   const { data } = useGetMemberDogEnrollmentInfo(Number(enrollmentFormId));

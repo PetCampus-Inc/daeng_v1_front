@@ -6,7 +6,7 @@ import CalendarIcon from "assets/svg/calendar";
 import DogCardIcon from "assets/svg/dog-card-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import { Flex } from "components/common";
-import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { useNavigate } from "react-router-dom";
 import { MemberDogInfoFormData } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
@@ -22,7 +22,7 @@ interface DogInfoProps {
 const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
   const navigate = useNavigate();
 
-  // 유치원 끊긴 강아지 여부 및 UI 표시
+  // 유치원 끊긴 강아지 여부
   const { isDisconnected } = useDogDisconnected();
 
   const DOG_BIRETH = formatDate(

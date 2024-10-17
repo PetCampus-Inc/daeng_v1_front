@@ -1,4 +1,4 @@
-import { useLocalStorage, useSetLocalStorage } from "../useLocalStorage";
+import { useLocalStorage, useSetLocalStorage } from "hooks/common/useLocalStorage";
 
 /**
  * 유치원 연결이 끊긴 강아지 여부를 확인 합니다.

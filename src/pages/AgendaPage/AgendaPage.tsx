@@ -2,14 +2,14 @@ import { Calendar, DailyAgenda } from "components/Agenda";
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
-import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { Suspense } from "react";
 import { useParams } from "react-router-dom";
 
 const Agenda = () => {
   const { dogId } = useParams<{ dogId: string }>();
 
-  // 유치원 끊긴 강아지 여부 및 UI 표시
+  // 유치원 끊긴 강아지 여부
   const { isDisconnected } = useDogDisconnected();
 
   return (

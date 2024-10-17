@@ -1,7 +1,7 @@
 import AllergyChartIcon from "assets/svg/allergy-chart-icon";
 import CarIcon from "assets/svg/car-icon";
 import { Flex } from "components/common/Flex";
-import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 
 import * as S from "../../styles";
 
@@ -13,7 +13,7 @@ interface DogMemoProps {
 }
 
 const DogMemoBox = ({ type, memo, title, openPopup }: DogMemoProps) => {
-  // 유치원 끊긴 강아지 여부 및 UI 표시
+  // 유치원 끊긴 강아지 여부
   const { isDisconnected } = useDogDisconnected();
   const memoData = memo ? memo : "";
 

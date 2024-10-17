@@ -7,14 +7,14 @@ import ViewTabs from "components/Album/ViewTabs";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
 import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
-import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { Suspense, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 export default function PhotoAlbum() {
   const [mode, setMode] = useState<GalleryViewType>(GALLERY_VIEW.PHOTO);
 
-  // 유치원 끊긴 강아지 여부 및 UI 표시
+  // 유치원 끊긴 강아지 여부
   const { isDisconnected } = useDogDisconnected();
 
   const { dogId } = useParams<{ dogId: string }>();

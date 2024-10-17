@@ -3,8 +3,8 @@ import { ACCEPT_FILE_TYPE, PATHS } from "constants/s3File";
 import VaccinationFileIcon from "assets/svg/vaccination-file-icon";
 import { DragCarousel, Flex } from "components/common";
 import { CarouselModal } from "components/Member/DogInfo/Main/CarouselModal";
-import { useDogDisconnected } from "hooks/common/dog/useDogDisconnected";
 import { useOverlay } from "hooks/common/useOverlay";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { ChangeEvent, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { VaccinationUri } from "types/member/main.types";
@@ -24,7 +24,7 @@ const VaccinationBox = ({ dogId, vaccinationUri }: VaccinationProps) => {
   const { register } = useFormContext();
   const { uploadFiles } = useUploadVaccintion(dogId);
 
-  // 유치원 끊긴 강아지 여부 및 UI 표시
+  // 유치원 끊긴 강아지 여부
   const { isDisconnected } = useDogDisconnected();
 
   const formatCreatedTime = (time: number[]) => {
