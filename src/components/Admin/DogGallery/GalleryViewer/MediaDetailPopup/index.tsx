@@ -20,7 +20,7 @@ const MediaDetailPopup = ({ isOpen, close, uri }: MediaDetailPopupProps) => {
           <S.Wrapper>
             <S.FloatingOverlay onClick={handleOverlayClose}>
               <S.DetailsImgBox>
-                <img src={uri} />
+                <img src={uri} alt="Detailed View" />
               </S.DetailsImgBox>
             </S.FloatingOverlay>
           </S.Wrapper>

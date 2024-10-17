@@ -12,19 +12,24 @@ export const GalleryWrapper = styled.div`
 export const MainMediaDisplayWrapper = styled.div`
   overflow: hidden;
   width: 100%;
-  height: calc(100vh - 48px - 180px);
   margin-bottom: 1rem;
 `;
 
 export const MainMediaDisplayList = styled.div`
   width: 100%;
   height: 100%;
+  .slick-slide {
+    img {
+      height: calc(100vh - 48px - 180px);
+      object-fit: cover;
+    }
+  }
 `;
 
 export const MainMediaDisplay = styled.div<{ $isVideo: boolean }>`
   flex: 0 0 100%;
   height: 100%;
-  transform: ${({ $isVideo }) => ($isVideo ? "translateY(50%)" : "none")};
+  // transform: ${({ $isVideo }) => ($isVideo ? "translateY(50%)" : "none")};
 `;
 
 export const SelectedMediaImage = styled.img`
@@ -56,7 +61,7 @@ export const ThumbnailItemsList = styled.div`
 `;
 
 export const ThumbnailItemContainer = styled.div<{ $isSelected: boolean }>`
-  width: 3.4rem;
+  width: 4rem;
   height: 4.5rem;
   display: flex;
   padding-left: ${({ $isSelected }) => ($isSelected ? "6px" : "0")};
