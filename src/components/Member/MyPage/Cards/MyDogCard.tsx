@@ -139,7 +139,7 @@ const MyDogCard = ({
     >
       <DogDeleteButton
         isOpen={isOpen}
-        onClick={validDogs.length <= 1 ? openInvalidInputPopup : openDeleteDogPopup}
+        onClick={validDogs.length > 1 ? openDeleteDogPopup : openInvalidInputPopup}
       />
 
       <S.InfoTextBox>
