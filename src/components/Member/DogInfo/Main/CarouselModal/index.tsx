@@ -31,8 +31,8 @@ export const CarouselModal = ({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    nextArrow: <Arrows position="next" isDisabled={false} />,
-    prevArrow: <Arrows position="prev" isDisabled={false} />
+    nextArrow: <Arrows position="next" />,
+    prevArrow: <Arrows position="prev" />
   };
 
   return (

@@ -2,24 +2,27 @@ import DogInfoBox from "components/Admin/AttendCareNotice/DogInfoBox";
 import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { Tabs } from "components/common/Tabs";
+import { useGetCachedCareDog } from "hooks/api/admin/care";
 import { Suspense } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { AgendaView } from "./AgendaView";
 import { PhotoAlbumView } from "./PhotoAlbumView";
 
 const AttendCareNoticePage = () => {
+  const { dogId } = useParams();
+  const { data } = useGetCachedCareDog(Number(dogId));
+
   const { state } = useLocation();
-  const { dogName, profileUri } = state;
 
   return (
     <Layout type="page">
-      <Tabs.Root variant="toggle" defaultValue="agenda">
+      <Tabs.Root variant="toggle" defaultValue={state?.tab === "album" ? "album" : "agenda"}>
         <StickyHeader>
           <Gradient>
-            <Header type="text" text={`${dogName} 상세페이지`} transparent />
-            <DogInfoBox dogName={dogName} profileUri={profileUri} />
+            <Header type="text" text={`${data.dogName} 상세페이지`} transparent />
+            <DogInfoBox dogName={data.dogName} profileUri={data.profileUri} />
           </Gradient>
           <Box bgColor="white" px={16}>
             <Tabs.List>
@@ -32,12 +35,12 @@ const AttendCareNoticePage = () => {
         <Box bgColor="white" px={16} pb={16}>
           <Tabs.Content value="agenda">
             <Suspense fallback={<AgendaView.Skeleton />}>
-              <AgendaView />
+              <AgendaView dogId={Number(dogId)} />
             </Suspense>
           </Tabs.Content>
           <Tabs.Content value="album">
             <Suspense>
-              <PhotoAlbumView />
+              <PhotoAlbumView dogId={Number(dogId)} />
             </Suspense>
           </Tabs.Content>
         </Box>

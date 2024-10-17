@@ -43,8 +43,6 @@ export const CommentCarouselLightBox = ({
   const [totalFiles, setTotalFiles] = useState<number>(0);
   const { saveMedia, progress, isLoading, currentIndex: downloaded } = useSaveMedia();
 
-  const isPrevDisabled = currentIndex === 0;
-  const isNextDisabled = currentIndex === images.length - 1;
   const currentImage = images[currentIndex];
   const isVideo = currentImage.imageUri.endsWith("mp4");
 
@@ -57,8 +55,8 @@ export const CommentCarouselLightBox = ({
     beforeChange: (_: never, newIndex: number) => {
       setCurrentIndex(newIndex);
     },
-    nextArrow: <Arrows position="next" isDisabled={isNextDisabled} />,
-    prevArrow: <Arrows position="prev" isDisabled={isPrevDisabled} />
+    nextArrow: <Arrows position="next" />,
+    prevArrow: <Arrows position="prev" />
   };
 
   return (

@@ -1,7 +1,7 @@
 import { routes } from "constants/path";
 
 import { BottomButton } from "components/common/Button";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { galleryImgState } from "store/images";
@@ -13,7 +13,6 @@ import useUploadAndCreateAlbum from "../hooks/useUploadAndCreateAlbum";
 const SubmitButton = () => {
   const selectIdsContext = useContext(SelectedIdsContext);
   const selectedDogIds = Array.from(selectIdsContext?.selectedIds ?? []);
-  const [totalFiles, setTotalFiles] = useState(0);
   const galleryData = useRecoilValue(galleryImgState);
   const { uploadFiles } = useUploadAndCreateAlbum();
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ const SubmitButton = () => {
       showToast("업로드할 파일이 없습니다.", "ownerNav");
       return;
     }
-    setTotalFiles(galleryData.files.length);
 
     const params = {
       files: galleryData.files,

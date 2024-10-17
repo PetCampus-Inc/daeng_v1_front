@@ -1,7 +1,6 @@
 import { routes } from "constants/path";
 
 import { BottomButton } from "components/common/Button";
-import { useState } from "react";
 import { FieldValues, useFormContext } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -21,7 +20,6 @@ const SendFileButton = ({ type }: Props) => {
   const { dogId } = useParams<{ dogId: string }>();
   const { handleSubmit, getValues } = useFormContext();
   const setGalleryImg = useSetRecoilState(galleryImgState);
-  const [totalFiles, setTotalFiles] = useState(0);
   const { uploadFiles } = useUploadAndCreateAlbum();
   const navigate = useNavigate();
 
@@ -46,8 +44,6 @@ const SendFileButton = ({ type }: Props) => {
 
       if (!dogId) throw new Error("dogId is required");
 
-      setTotalFiles(data.files.length);
-
       const params = {
         files: data.files,
         accept: ["image/*", "video/*"],
@@ -58,7 +54,10 @@ const SendFileButton = ({ type }: Props) => {
 
       await uploadFiles(params, {
         onSuccess: () => {
-          navigate(routes.admin.care.notice.dynamic(dogId), { replace: true });
+          navigate(routes.admin.care.notice.dynamic(dogId), {
+            state: { tab: "album" },
+            replace: true
+          });
         }
       });
     }

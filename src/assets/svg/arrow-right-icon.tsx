@@ -1,40 +1,20 @@
+import { themeConfig } from "styles/themeConfig";
+
 import type { IconProps } from "./types";
 
-interface Props extends Omit<IconProps, "color"> {
-  colorScheme?:
-    | "gray_1"
-    | "gray_2"
-    | "gray_3"
-    | "gray_4"
-    | "gray_5"
-    | "black"
-    | "darkBlack"
-    | "none";
-}
-
-const ArrowRightIcon = ({ size = 24, colorScheme = "none" }: Props) => {
-  const colorMap = new Map<string, string>([
-    ["gray_1", "#525252"],
-    ["gray_2", "#858585"],
-    ["gray_3", "#B5B5B5"],
-    ["gray_4", "#E9E9E9"],
-    ["gray_5", "#F6F6F6"],
-    ["black", "#000000"],
-    ["darkBlack", "#292929"],
-    ["none", "currentColor"]
-  ]);
+const ArrowRightIcon = ({ size = 24, color = "darkBlack" }: IconProps) => {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
-      fill={colorMap.get(colorScheme)}
+      viewBox="0 0 30 30"
+      fill={themeConfig.colors[color]}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M8.5353 5.39299C8.92583 5.00247 9.55899 5.00247 9.94952 5.39299L15.6008 11.0443C15.6027 11.0461 15.6046 11.048 15.6065 11.05C15.997 11.4405 15.997 12.0736 15.6065 12.4642L9.94967 18.121C9.55914 18.5115 8.92598 18.5115 8.53545 18.121C8.14493 17.7305 8.14493 17.0973 8.53545 16.7068L13.4852 11.7571L8.5353 6.8072C8.14478 6.41668 8.14478 5.78352 8.5353 5.39299Z"
+        d="M11.3661 23.2761C11.8543 23.7643 12.6458 23.7642 13.1339 23.2761L20.198 16.212C20.2004 16.2097 20.2028 16.2073 20.2052 16.2049C20.6933 15.7167 20.6933 14.9253 20.2052 14.4371L13.1341 7.36606C12.646 6.87791 11.8545 6.87791 11.3663 7.36606C10.8782 7.85422 10.8782 8.64567 11.3663 9.13383L17.5535 15.321L11.3662 21.5083C10.878 21.9965 10.878 22.7879 11.3661 23.2761Z"
       />
     </svg>
   );

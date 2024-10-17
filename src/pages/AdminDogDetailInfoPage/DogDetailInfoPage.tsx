@@ -6,7 +6,7 @@ import { Box, Layout } from "components/common";
 import Header from "components/common/Header";
 import { Tabs } from "components/common/Tabs";
 import { useDogInfoData } from "hooks/api/admin/dogs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Suspense } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";

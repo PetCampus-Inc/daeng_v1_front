@@ -1,21 +1,22 @@
-import { MediaViewModal } from "components/Admin/DogGallery/SinglePicture/MediaViewModal";
 import { CommentCarouselLightBoxPopup } from "components/Album/LightBox/CommentCarouselLightBoxPopup";
 import { Flex, Text } from "components/common";
-import { Image } from "components/common/Image";
 import { format } from "date-fns";
 import { useGetMainAlbum } from "hooks/api/member/member";
 import { useOverlay } from "hooks/common/useOverlay";
 import { getRelativeTime } from "utils/date";
 
-import * as S from "./styles";
+import { ImageGrid } from "./ImageGrid";
 
 import type { ImageList } from "types/member/main.types";
 
-// FIXME: 1. 사진 가져오는 api 수정 2. ui 변경
 export function PhotoAlbum({ dogId }: { dogId: number }) {
-  const { data } = useGetMainAlbum({ dogId, date: format(new Date(), "yyyy-MM-dd") });
+  const { data } = useGetMainAlbum({
+    dogId,
+    date: format(new Date(), "yyyy-MM-dd")
+  });
   const overlay = useOverlay();
 
+  /** 사진 클릭 핸들러 */
   const handleImageClick = (images: ImageList[], currentIndex: number) => {
     overlay.open(({ isOpen, close }) => (
       <CommentCarouselLightBoxPopup
@@ -27,30 +28,24 @@ export function PhotoAlbum({ dogId }: { dogId: number }) {
     ));
   };
 
-  // TODO: 사진 없는 경우 디자인 수정
+  // FIXME: Empty 화면 디자인 수정 필요!!
+  if (!data || data.length === 0) {
+    return <Text>전송된 사진이 없습니다</Text>;
+  }
+
   return (
     <Flex direction="column" gap={28}>
-      {!data
-        ? "사진이 없습니다"
-        : data.map((arr: ImageList[], idx: number) => (
-            <Flex key={`${arr[0].imageId}-${idx}`} direction="column" gap={8}>
-              <Text color="gray_2" typo="body2_16_R">
-                {getRelativeTime(arr[0].createdTime)}
-              </Text>
+      {data.map((items: ImageList[]) => (
+        <Flex key={items[0].imageId} direction="column" gap={8}>
+          {/* 날짜 */}
+          <Text color="gray_2" typo="body2_16_R">
+            {getRelativeTime(items[0].createdTime)}
+          </Text>
 
-              <S.ImageList>
-                {arr.map((item: ImageList, index: number) => (
-                  <S.StyledImage key={`${item.imageId}-${index}`}>
-                    <Image
-                      src={item.imageUri}
-                      ratio="1/1"
-                      onClick={() => handleImageClick(arr, index)}
-                    />
-                  </S.StyledImage>
-                ))}
-              </S.ImageList>
-            </Flex>
-          ))}
+          {/* 사진 그리드 */}
+          <ImageGrid items={items} onImageClick={handleImageClick} />
+        </Flex>
+      ))}
     </Flex>
   );
 }
