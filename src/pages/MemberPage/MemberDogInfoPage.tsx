@@ -2,6 +2,7 @@ import { MEMBER_DOG_INFO_STEP } from "constants/step";
 
 import { Flex, Layout } from "components/common";
 import Header from "components/common/Header";
+import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
 import DogInfo from "components/Member/DogInfo";
 import AttendanceTicketInfo from "components/Member/DogInfo/AttendanceTicketInfo";
 import SchoolInfo from "components/Member/DogInfo/SchoolInfo";
@@ -12,6 +13,7 @@ import {
   NavWrapper
 } from "components/Member/DogInfo/styles";
 import { useGetMemberDogDetailInfo } from "hooks/api/member/member";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -21,10 +23,14 @@ const MemberDogInfoPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const { data } = useGetMemberDogDetailInfo(Number(dogId));
 
+  // 유치원 끊긴 강아지 여부
+  const { isDisconnected } = useDogDisconnected();
+
   return (
     <>
       <Header type="text" text={`${data.dogName}의 상세정보`} shadow={true} />
-      <Layout pt={36} bgColor="white">
+      {isDisconnected && <DisconnectionNotice />}
+      <Layout pt={36} bgColor="white" isDisconnected={isDisconnected}>
         <Flex direction="column" height="full">
           <nav>
             <NavWrapper>

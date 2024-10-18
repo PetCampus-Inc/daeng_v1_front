@@ -26,6 +26,7 @@ export interface HomeDataType {
   relation: string;
   attendanceStatus: AttendanceStatus;
   enrollmentFormStatus: TDogStatus;
+  disconnected: boolean;
   attendanceDate: LocalDate;
   todayAgendaStatus: AgendaStatus;
   schoolName: null;

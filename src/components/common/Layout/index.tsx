@@ -5,7 +5,8 @@ import { StyledContainer } from "./styles";
 import type { ColorProps, SpacingProps } from "styles/system";
 
 export interface LayoutProps extends ColorProps, SpacingProps {
-  type?: "main" | "detail" | "page";
+  type?: "main" | "detail" | "page" | "disconnected";
+  isDisconnected?: boolean; // - disconnected 유치원 연결 끊긴 강아지 UI 표시 (with disconnected)
 }
 
 /**
@@ -13,9 +14,14 @@ export interface LayoutProps extends ColorProps, SpacingProps {
  * @param {string} detail - 상세 페이지에서 사용 (with Header)
  * @param {string} page - height 100%
  */
-export const Layout = ({ type = "detail", children, ...props }: PropsWithChildren<LayoutProps>) => {
+export const Layout = ({
+  type = "detail",
+  children,
+  isDisconnected,
+  ...props
+}: PropsWithChildren<LayoutProps>) => {
   return (
-    <StyledContainer type={type} {...props}>
+    <StyledContainer className={isDisconnected ? "disconnected" : ""} type={type} {...props}>
       {children}
     </StyledContainer>
   );

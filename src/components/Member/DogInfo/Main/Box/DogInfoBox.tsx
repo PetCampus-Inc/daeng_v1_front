@@ -6,6 +6,7 @@ import CalendarIcon from "assets/svg/calendar";
 import DogCardIcon from "assets/svg/dog-card-icon";
 import GirlNormalIcon from "assets/svg/girl-normal-icon";
 import { Flex } from "components/common";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { useNavigate } from "react-router-dom";
 import { MemberDogInfoFormData } from "types/member/main.types";
 import { formatDate } from "utils/formatter";
@@ -20,6 +21,9 @@ interface DogInfoProps {
 
 const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
   const navigate = useNavigate();
+
+  // 유치원 끊긴 강아지 여부
+  const { isDisconnected } = useDogDisconnected();
 
   const DOG_BIRETH = formatDate(
     String(data[FIELD.BIRTHDAY][0]),
@@ -49,12 +53,14 @@ const DogInfoBox = ({ data, dogId }: DogInfoProps) => {
               <S.DogName>{data.dogName}</S.DogName>
               <S.DogSize>{data.dogSize}</S.DogSize>
             </S.Title>
-            <S.Editbutton
-              onClick={() => navigate(routes.member.dogInfo.edit.dynamic(String(dogId)))}
-            >
-              <span>수정</span>
-              <ArrowRightIcon />
-            </S.Editbutton>
+            {!isDisconnected && (
+              <S.Editbutton
+                onClick={() => navigate(routes.member.dogInfo.edit.dynamic(String(dogId)))}
+              >
+                <span>수정</span>
+                <ArrowRightIcon />
+              </S.Editbutton>
+            )}
           </S.TopInfoBox>
           <Flex wrap="wrap" gap="8">
             <InfoText

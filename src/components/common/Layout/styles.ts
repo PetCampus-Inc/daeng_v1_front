@@ -41,12 +41,18 @@ export const StyledContainer = styled.div.withConfig({
     type === "main" &&
     css`
       height: calc(100% - 78px - 48px);
+      &.disconnected {
+        height: calc(100% - 78px - 48px - 48px);
+      }
     `}
 
   ${({ type }) =>
     type === "detail" &&
     css`
       height: calc(100% - 48px);
+      &.disconnected {
+        height: calc(100% - 48px - 48px);
+      }
     `}
 
       ${({ type }) =>

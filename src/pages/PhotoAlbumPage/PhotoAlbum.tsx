@@ -6,11 +6,16 @@ import PhotoView from "components/Album/PhotoView";
 import ViewTabs from "components/Album/ViewTabs";
 import { Layout } from "components/common";
 import Header from "components/common/Header";
+import DisconnectionNotice from "components/Home/DisconnectionNotice/DisconnectionNotice";
+import { useDogDisconnected } from "hooks/member/useDogDisconnected";
 import { Suspense, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 export default function PhotoAlbum() {
   const [mode, setMode] = useState<GalleryViewType>(GALLERY_VIEW.PHOTO);
+
+  // 유치원 끊긴 강아지 여부
+  const { isDisconnected } = useDogDisconnected();
 
   const { dogId } = useParams<{ dogId: string }>();
   const { state } = useLocation();
@@ -20,7 +25,8 @@ export default function PhotoAlbum() {
   return (
     <>
       <Header type="text" text="사진 앨범" />
-      <Layout px={16} pb={36} pt={42} bgColor="white">
+      {isDisconnected && <DisconnectionNotice />}
+      <Layout px={16} pb={36} pt={42} bgColor="white" isDisconnected={isDisconnected}>
         <Suspense fallback={<PhotoAlbum.Skeleton />}>
           <AlbumHeader dogId={Number(dogId)} dogName={dogName} />
           <ViewTabs mode={mode} setMode={setMode} />
