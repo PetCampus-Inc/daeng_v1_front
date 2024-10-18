@@ -66,22 +66,22 @@ export function MonthCalendar({ minDate, tileDate, variant = "member" }: MonthCa
         prevLabel={
           variant === "admin" ? (
             <Styled.NavigationButton bgColor="white">
-              <ArrowLeftIcon size={24} color="darkBlack" />
+              <ArrowLeftIcon size={24} color="current" />
             </Styled.NavigationButton>
           ) : (
             <Styled.NavigationButton bgColor="yellow_3" color="primaryColor">
-              <ArrowLeftIcon size={24} />
+              <ArrowLeftIcon size={24} color="current" />
             </Styled.NavigationButton>
           )
         }
         nextLabel={
           variant === "admin" ? (
             <Styled.NavigationButton bgColor="white">
-              <ArrowRightIcon size={24} />
+              <ArrowRightIcon size={24} color="current" />
             </Styled.NavigationButton>
           ) : (
             <Styled.NavigationButton bgColor="yellow_3" color="primaryColor">
-              <ArrowRightIcon size={24} />
+              <ArrowRightIcon size={24} color="current" />
             </Styled.NavigationButton>
           )
         }

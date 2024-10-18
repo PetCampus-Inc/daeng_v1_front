@@ -69,6 +69,36 @@ export const useGetDogDetail = (dogId: number) => {
   });
 };
 
+// 강아지 상세 - 캐시된 강아지 정보 조회
+export const useGetCachedDogDetail = (dogId: number) => {
+  const queryClient = useQueryClient();
+
+  return useSuspenseQuery<DogInfoDetailData, Error>({
+    queryKey: ["careDogDetail", dogId],
+    queryFn: async () => {
+      // 1. 캐시된 데이터 찾기
+      const cachedDogInfo = queryClient.getQueryData<DogInfoDetailData>(["dogInfoDetail", dogId]);
+
+      if (cachedDogInfo) {
+        return cachedDogInfo;
+      }
+
+      // 2. 캐시에 없다면 강아지 정보 페이지 API 다시 호출
+      const updatedDogInfo = await handleGetDogDetail(dogId);
+
+      if (updatedDogInfo) {
+        // 강아지 정보 페이지 캐시 업데이트
+        queryClient.setQueryData(["dogInfoDetail", dogId], updatedDogInfo);
+        return updatedDogInfo;
+      }
+
+      // 3. 새로운 데이터에도 없는경우(e.g. 강아지 삭제) 에러 throw
+      throw new Error(`데이터가 존재하지 않습니다. dogId: ${dogId}`);
+    },
+    staleTime: 5 * 60 * 1000 // 5분 동안 fresh 상태 유지
+  });
+};
+
 // 강아지 상세 - 등원기록 조회
 export type DogInfoRecordType = {
   date: Date[];

@@ -91,7 +91,7 @@ const DogCard = ({ data }: DogCardProps) => {
               공지
             </Text>
           </Flex>
-          <ArrowRightIcon size={24} colorScheme="gray_2" />
+          <ArrowRightIcon size={24} color="gray_2" />
         </Flex>
       </BoxContainer>
     </>

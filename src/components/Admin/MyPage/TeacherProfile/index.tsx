@@ -27,7 +27,7 @@ const TeacherProfile = ({ data, profileUri, onEdit }: TeacherInfoProps) => {
             <S.PrimaryColorButton onClick={onEdit}>프로필 수정</S.PrimaryColorButton>
             <Flex justify="center" align="center" onClick={onEdit}>
               <S.Text className="name">{adminName} 선생님</S.Text>
-              <ArrowRightIcon size={24} colorScheme="darkBlack" />
+              <ArrowRightIcon size={24} color="darkBlack" />
             </Flex>
             <S.Text className="number">{phoneNumber}</S.Text>
             <S.Text className="id">{data.id}</S.Text>

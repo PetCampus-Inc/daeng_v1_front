@@ -99,8 +99,8 @@ export const MonthPicker = ({
               formatYear={(locale, value) => format(value, "yyyy")}
               minDate={minDate}
               maxDate={new Date()}
-              prevLabel={<ArrowLeftIcon w={20} />}
-              nextLabel={<ArrowRightIcon w={20} />}
+              prevLabel={<ArrowLeftIcon size={20} />}
+              nextLabel={<ArrowRightIcon size={20} />}
               prev2Label={null}
               next2Label={null}
             />

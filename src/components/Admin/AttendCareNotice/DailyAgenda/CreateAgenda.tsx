@@ -31,10 +31,10 @@ export function CreateAgenda({ savedData }: { savedData: PastAgenda }) {
 
   const defaultValues = useMemo(
     () => ({
-      agendaNote: savedData.agendaNote,
-      snack: savedData.snack,
-      poopMemo: savedData.poopMemo,
-      poop: savedData.poop
+      agendaNote: savedData.agendaNote ?? "",
+      snack: savedData.snack ?? "",
+      poopMemo: savedData.poopMemo ?? "",
+      poop: savedData.poop ?? ""
     }),
     [savedData]
   );

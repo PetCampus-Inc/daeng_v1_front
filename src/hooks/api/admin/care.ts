@@ -26,6 +26,38 @@ export const useGetCareDogList = (initialData: CareDogInfo[]) => {
   });
 };
 
+// 강아지 관리 상세 - 캐시된 강아지 목록 조회
+export const useGetCachedCareDog = (dogId: number) => {
+  const queryClient = useQueryClient();
+
+  return useSuspenseQuery<CareDogInfo, Error>({
+    queryKey: ["careDogDetail", dogId],
+    queryFn: async () => {
+      // 1. 캐시된 리스트 데이터 찾기
+      const cachedList = queryClient.getQueryData<CareDogInfo[]>(QUERY_KEY.CARE_DOG_LIST);
+      const cachedDog = cachedList?.find((dog) => dog.dogId === dogId);
+
+      if (cachedDog) {
+        return cachedDog;
+      }
+
+      // 2. 캐시에 없다면 메인 페이지 API 다시 호출
+      const updatedList = await handleGetCareDogs();
+      const updatedDog = updatedList.find((dog) => dog.dogId === dogId);
+
+      if (updatedDog) {
+        // 메인 페이지 캐시 업데이트
+        queryClient.setQueryData(QUERY_KEY.CARE_DOG_LIST, updatedList);
+        return updatedDog;
+      }
+
+      // 3. 새로운 리스트에서도 없는경우(e.g. 강아지 삭제) 에러 throw
+      throw new Error(`데이터가 존재하지 않습니다. dogId: ${dogId}`);
+    },
+    staleTime: 5 * 60 * 1000 // 5분 동안 fresh 상태 유지
+  });
+};
+
 export const useGetNewCareDogs = () => {
   return useSuspenseQuery<CareDogInfo[]>({
     queryKey: QUERY_KEY.NEW_CARE_DOG_LIST,
@@ -115,11 +147,16 @@ export const useDeleteCareDogs = () => {
   return { mutateDeleteCareDogs: deleteCareDogsMutation.mutate };
 };
 
+// 강아지 사진 전송
 export const useCreateAlbum = () => {
+  const queryClient = useQueryClient();
   const createAlbumMutation = useMutation({
     mutationFn: handlePostAlbum,
     onSuccess: () => {
-      showToast("사진이 전송이 완료되었습니다", "ownerNav");
+      showToast("사진이 전송이 완료되었습니다", "bottom");
+      queryClient.invalidateQueries({
+        queryKey: ["mainAlbum"] // 사진 앨범 쿼리 무효화
+      });
     }
   });
   return { mutateAlbum: createAlbumMutation.mutate };

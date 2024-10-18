@@ -30,9 +30,6 @@ export const SaveModeLightBox = ({ images, onClose, currentSlide }: SaveModeLigh
   const [currentIndex, setCurrentIndex] = useState<number>(currentSlide);
   const [selectedImages, setSelectedImages] = useRecoilState(selectedImagesState);
 
-  const isPrevDisabled = currentIndex === 0;
-  const isNextDisabled = currentIndex === images.length - 1;
-
   const settings = {
     initialSlide: currentSlide,
     infinite: false,
@@ -42,8 +39,8 @@ export const SaveModeLightBox = ({ images, onClose, currentSlide }: SaveModeLigh
     beforeChange: (_: never, newIndex: number) => {
       setCurrentIndex(newIndex);
     },
-    nextArrow: <Arrows position="next" isDisabled={isNextDisabled} />,
-    prevArrow: <Arrows position="prev" isDisabled={isPrevDisabled} />
+    nextArrow: <Arrows position="next" />,
+    prevArrow: <Arrows position="prev" />
   };
 
   const handleToggleImg = (imageId: number, imageUri: string) => {

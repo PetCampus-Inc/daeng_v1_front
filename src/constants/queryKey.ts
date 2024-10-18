@@ -25,7 +25,7 @@ const ADMIN_QUERY_KEY = {
 };
 
 const MEMBER_QUERY_KEY = {
-  MEMBER_MAIN_ALBUM: (dogId: number, date?: string) => ["mainAlbum", dogId, date], // 멤버 메인 앨범
+  MEMBER_MAIN_ALBUM: (dogId?: number, date?: string) => ["mainAlbum", dogId, date], // 멤버 메인 앨범
   MEMBER_DOG_DETAIL_INFO: (dogId: number) => ["memberDogDetail", dogId], // 강아지 상세 정보
   MEMBER_DOG_ENROLLMENT_INFO: (dogId: number) => ["memberDogEnrollmentinfo", dogId], // 강아지 가입 신청서 (read only)
   SCHOOL_INFO_LIST: ["shcollInfoList"], // 마이페이지 견주의 강아지 유치원 정보

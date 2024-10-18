@@ -16,7 +16,6 @@ interface GalleryProps {
   onChangeSelected?: (item: MediaItem) => void;
 }
 
-// 전체 Gallery 컴포넌트
 const GalleryViewer = ({ mediaItems = [], selectedMedia, onChangeSelected }: GalleryProps) => {
   const overlay = useOverlay();
   const sliderRef = useRef<Slider | null>(null);
