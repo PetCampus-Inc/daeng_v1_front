@@ -2,6 +2,7 @@ export interface IPastDogSchoolList {
   schoolName: string;
   schoolNumber: string;
   schoolAddress: string;
+  schoolAddressDetail: string;
   dropOutDate: number[];
 }
 
@@ -22,6 +23,7 @@ export interface IMemberSchoolInfo {
   schoolNumber: string;
   ticket: ITicket;
   schoolAddress: string;
+  schoolAddressDetail: string;
   registeredDate: number[];
-  pastDogSchoolList?: IPastDogSchoolList[];
+  pastDogSchoolList: IPastDogSchoolList[];
 }

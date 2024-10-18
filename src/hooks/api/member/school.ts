@@ -7,6 +7,7 @@ import {
   handleGetMemberDogSchool,
   handlePostMemberAgreement
 } from "apis/member/member.api";
+import showToast from "utils/showToast";
 
 export const useGetSchoolInfoList = (searchText: string) => {
   return useSuspenseQuery({
@@ -24,8 +25,8 @@ export const usePostMemberDogSchool = (dogId: string) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_SCHOOL_INFO(dogId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEY.MEMBER_MAIN_DOG_LIST });
     },
-    onError: (err) => {
-      console.log(err);
+    onError: () => {
+      showToast("실패했습니다. 다시 시도해주세요", "bottom");
     }
   });
 

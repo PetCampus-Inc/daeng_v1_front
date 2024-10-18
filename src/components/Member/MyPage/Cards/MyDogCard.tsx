@@ -48,7 +48,14 @@ const MyDogCard = ({
     QUERY_KEY.MEMBER_MYPAGE_MAIN_INFO
   ) as IMemberInfo;
   const { doglist } = cacheMemberData;
-  const enrolledDogs = doglist.filter((el) => el.status === "ENROLLED");
+
+  // 등록, 유치원 끊긴 강아지
+  const validDogs = doglist.filter(
+    (el) =>
+      el.status === DOG_STATUS.ENROLLED ||
+      el.status === DOG_STATUS.DROP_OUT ||
+      el.status === DOG_STATUS.DIS_CONNECTED
+  );
 
   const { dogId, dogName, registeredDate, status } = dogData;
   const [year, month, day] = registeredDate.map(String);
@@ -132,14 +139,14 @@ const MyDogCard = ({
     >
       <DogDeleteButton
         isOpen={isOpen}
-        onClick={
-          dogLength <= 1 || enrolledDogs.length <= 1 ? openInvalidInputPopup : openDeleteDogPopup
-        }
+        onClick={validDogs.length > 1 ? openDeleteDogPopup : openInvalidInputPopup}
       />
 
       <S.InfoTextBox>
         <S.DogName className={isProfile ? "colorGray1" : ""}>{dogName}</S.DogName>
-        {status === DOG_STATUS.DROP_OUT || status === DOG_STATUS.APPROVAL_CANCEL ? (
+        {status === DOG_STATUS.DROP_OUT ||
+        status === DOG_STATUS.APPROVAL_CANCEL ||
+        status === DOG_STATUS.DIS_CONNECTED ? (
           <GotoSchoolInfoButton pr="0" onClick={openAlertPopup} />
         ) : (
           <GotoSchoolInfoButton
