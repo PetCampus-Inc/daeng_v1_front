@@ -10,7 +10,7 @@ import { BasicModal } from "components/common/Modal";
 import { useGetMemberSchoolInfo } from "hooks/api/member/member";
 import { usePostMemberDogSchool } from "hooks/api/member/school";
 import { useOverlay } from "hooks/common/useOverlay";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { formatDate } from "utils/formatter";
 import { remainingDays } from "utils/remainingDays";
 import showToast from "utils/showToast";
@@ -18,12 +18,12 @@ import showToast from "utils/showToast";
 import * as S from "./styles";
 
 // TODO title, text 공통 컴포넌트로 관리하기
-const SchoolInfo = () => {
-  const { dogId } = useParams();
+const SchoolInfo = ({ dogId }: { dogId: string }) => {
   const navigate = useNavigate();
   const overlay = useOverlay();
-  const { data } = useGetMemberSchoolInfo(String(dogId));
-  const mutateMemberDogSchoolDelete = usePostMemberDogSchool(String(dogId));
+  const { data } = useGetMemberSchoolInfo(dogId);
+  const mutateMemberDogSchoolDelete = usePostMemberDogSchool(dogId);
+
   const registeredDate = data.registeredDate?.map((el) => String(el));
   const registeredTime =
     registeredDate && formatDate(registeredDate[0], registeredDate[1], registeredDate[2], "dot");
@@ -79,7 +79,7 @@ const SchoolInfo = () => {
     ));
 
   const handleDeleteSchool = () => {
-    mutateMemberDogSchoolDelete(String(dogId), {
+    mutateMemberDogSchoolDelete(dogId, {
       onSuccess: () => {
         navigate(-1);
         showToast("유치원과 연결이 끊어졌습니다", "bottom");
@@ -106,7 +106,7 @@ const SchoolInfo = () => {
   return (
     <S.CardContainer>
       <S.CardBox>
-        <S.CardTitle>{`${schoolCallInfo.schoolName ?? ""} 유치원`}</S.CardTitle>
+        <S.CardTitle>{`${schoolCallInfo.schoolName ?? ""}`} 유치원</S.CardTitle>
         <S.InfoContainer>
           <S.InfoList>
             <S.IconWrapper>

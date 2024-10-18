@@ -11,6 +11,7 @@ const PreviousSchoolInfo = ({
   schoolName,
   schoolNumber,
   schoolAddress,
+  schoolAddressDetail,
   dropOutDate
 }: IPastDogSchoolList) => {
   const dropOutDateStr = dropOutDate.map((el) => String(el));
@@ -22,31 +23,29 @@ const PreviousSchoolInfo = ({
   );
 
   return (
-    <S.CardContainer className="previous">
-      <S.CardBox>
-        <S.CardTitle>{schoolName ? `${schoolName} 유치원` : ""} </S.CardTitle>
-        <S.InfoContainer>
-          <S.InfoList>
-            <S.IconWrapper className="previous">
-              <Phone />
-            </S.IconWrapper>
-            <S.ListTitle>{schoolNumber ?? ""}</S.ListTitle>
-          </S.InfoList>
-          <S.InfoList>
-            <S.IconWrapper className="previous">
-              <Map />
-            </S.IconWrapper>
-            <S.ListTitle>{schoolAddress ?? ""}</S.ListTitle>
-          </S.InfoList>
-          <S.InfoList>
-            <S.IconWrapper className="previous">
-              <Calendar />
-            </S.IconWrapper>
-            <S.ListTitle>{dropOutDateTime} 등록</S.ListTitle>
-          </S.InfoList>
-        </S.InfoContainer>
-      </S.CardBox>
-    </S.CardContainer>
+    <S.CardBox>
+      <S.CardTitle>{`${schoolName ?? ""}`} 유치원 </S.CardTitle>
+      <S.InfoContainer>
+        <S.InfoList>
+          <S.IconWrapper className="previous">
+            <Phone />
+          </S.IconWrapper>
+          <S.ListTitle>{schoolNumber ?? ""}</S.ListTitle>
+        </S.InfoList>
+        <S.InfoList>
+          <S.IconWrapper className="previous">
+            <Map />
+          </S.IconWrapper>
+          <S.ListTitle>{`${schoolAddress ?? ""} ${schoolAddressDetail ?? ""}`}</S.ListTitle>
+        </S.InfoList>
+        <S.InfoList>
+          <S.IconWrapper className="previous">
+            <Calendar />
+          </S.IconWrapper>
+          <S.ListTitle>{dropOutDateTime} 탈퇴</S.ListTitle>
+        </S.InfoList>
+      </S.InfoContainer>
+    </S.CardBox>
   );
 };
 

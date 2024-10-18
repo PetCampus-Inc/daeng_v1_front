@@ -4,8 +4,11 @@ export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  margin-bottom: 4.25rem;
 
   &.previous {
+    margin-bottom: 0;
+    margin-top: 0.75rem;
     p {
       color: ${({ theme }) => theme.colors.gray_2};
     }
@@ -20,7 +23,6 @@ export const CardBox = styled.div`
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: ${({ theme }) => theme.shadows.card};
-  margin-bottom: 4.25rem;
 `;
 
 export const CardTitle = styled.p`
