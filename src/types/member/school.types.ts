@@ -2,6 +2,7 @@ export interface IPastDogSchoolList {
   schoolName: string;
   schoolNumber: string;
   schoolAddress: string;
+  schoolAddressDetail: string;
   dropOutDate: number[];
 }
 
